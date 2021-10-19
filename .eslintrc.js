@@ -21,7 +21,7 @@ module.exports = {
   ],
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx'] }],
-    'no-use-before-define': 'warn',
+    'no-use-before-define': 'off',
     'linebreak-style': 0,
     // 'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     // 'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
