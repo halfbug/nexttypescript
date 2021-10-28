@@ -27,7 +27,7 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
+const Button = ({
   primary = false,
   size = 'medium',
   backgroundColor,
@@ -43,7 +43,15 @@ export const Button = ({
       {...props}
     >
       {label}
-      999
     </button>
   );
 };
+
+Button.defaultProps = {
+  primary: false,
+  backgroundColor: '',
+  size: 'small',
+  onClick: null,
+};
+
+export default Button;

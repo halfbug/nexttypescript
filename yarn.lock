@@ -7337,7 +7337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^2.4.0":
+"eslint-import-resolver-typescript@npm:^2.4.0, eslint-import-resolver-typescript@npm:^2.5.0":
   version: 2.5.0
   resolution: "eslint-import-resolver-typescript@npm:2.5.0"
   dependencies:
@@ -8653,6 +8653,7 @@ fsevents@^1.2.7:
     eslint: ^7.32.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-next: 11.1.2
+    eslint-import-resolver-typescript: ^2.5.0
     eslint-plugin-import: ^2.25.2
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-react: ^7.26.1
