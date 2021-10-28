@@ -35,12 +35,15 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'eol-last': 'warn',
+    'import/no-extraneous-dependencies': 'warn',
+    'import/extensions': 'off',
   },
   settings: {
     'import/resolver': {
       node: {
         moduleDirectory: ['node_modules', '/'],
       },
+      typescript: {},
     },
   },
 };
