@@ -1,5 +1,6 @@
 import React from 'react';
-import './button.css';
+// import styles from '../../../styles/Button.module.scss';
+import styles from 'styles/Button.module.scss';
 
 interface ButtonProps {
   /**
@@ -34,7 +35,7 @@ const Button = ({
   label,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const mode = primary ? styles['storybook-button--primary'] : styles['storybook-button--secondary'];
   return (
     <button
       type="button"
