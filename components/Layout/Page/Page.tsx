@@ -8,17 +8,18 @@ interface PageProps {
   onLogin: () => void;
   onLogout: () => void;
   onCreateAccount: () => void;
+  children: {}
 }
 
 const Page = ({
-  user, onLogin, onLogout, onCreateAccount,
+  user, onLogin, onLogout, onCreateAccount, children,
 }: PageProps) => (
   <article>
     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />
 
     <section>
       <h2>Overview</h2>
-
+      {children}
     </section>
   </article>
 );
