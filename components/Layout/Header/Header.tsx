@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 
-import Button from 'components/Buttons/Button/Button';
+// import Button from 'components/Buttons/Button/Button';
 // import './header.css';
 
 interface HeaderProps {
