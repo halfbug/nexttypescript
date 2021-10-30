@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 
 interface DialogueProps {
   show : boolean,
-  children: React.ReactChildren
+  children: React.ReactNode
 }
 
 /**
