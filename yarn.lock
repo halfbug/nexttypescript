@@ -9406,6 +9406,7 @@ fsevents@^1.2.7:
     identity-obj-proxy: ^3.0.0
     jest: ^27.2.5
     next: 11.1.2
+    next-images: ^1.8.2
     node-sass: ^6.0.1
     prettier: 2.4.1
     react: 17.0.2
@@ -12578,6 +12579,18 @@ fsevents@^1.2.7:
   version: 2.1.0
   resolution: "nested-error-stacks@npm:2.1.0"
   checksum: 206ee736f9eb83489cc093d43e7d3024255ec93c66a31eaee58ca14d5ad9d925d813494725dcf5dec264e70cd8430167b7f82a2d00b0dd099f83c78d9ca650fd
+  languageName: node
+  linkType: hard
+
+"next-images@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "next-images@npm:1.8.2"
+  dependencies:
+    file-loader: ^6.2.0
+    url-loader: ^4.1.0
+  peerDependencies:
+    webpack: ^4.0.0 || ^5.0.0
+  checksum: 508a695115232d79733c86646c5dbe1eb37d5d21b235a0e79e7430150578f9f7715aca8babbbd921a5363cef48574deb4a5db5770079c7f47c9db8e652753ee8
   languageName: node
   linkType: hard
 
@@ -17085,7 +17098,7 @@ typescript@4.4.4:
   languageName: node
   linkType: hard
 
-"url-loader@npm:^4.1.1":
+"url-loader@npm:^4.1.0, url-loader@npm:^4.1.1":
   version: 4.1.1
   resolution: "url-loader@npm:4.1.1"
   dependencies:
