@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 // import Button from '../../Buttons/Button/Button';
 import {Container} from 'react-bootstrap';
-import HeadLogo from "../../../assets/images/Logo.png";
+import HeadLogo from "../../../assets/images/Logo.svg";
 import styles from 'styles/Step0.module.scss';
 // import Cart from "assets/images/cart.svg";
 // import Face from "../../../assets/images/dollarface.svg";
