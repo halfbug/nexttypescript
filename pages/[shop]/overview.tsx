@@ -2,11 +2,11 @@ import React from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Page from '../components/Layout/Page/Page';
-import useInstallation from '../hooks/useInstallation';
+import Page from 'components/Layout/Page/Page';
+import useInstallation from 'hooks/useInstallation';
 // import useStore from 'hooks/useStore';
 
-const Home: NextPage = () => {
+const ShopMain: NextPage = () => {
   const { query: { shop, ins } } = useRouter();
   const { installationDialogue } = useInstallation(ins);
   // const { merchantStore } = useStore(sci || undefined);
@@ -22,4 +22,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default ShopMain;

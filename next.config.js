@@ -8,14 +8,17 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  env: {
+    BE_URL: process.env.BE_URL,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"]
+      use: ['@svgr/webpack'],
     });
 
     return config;
-  }
+  },
   // webpack(config) {
   //   config.module.rules.push({
   //     test: /\.(svg|png)$/, // Your extension
