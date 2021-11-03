@@ -22,8 +22,7 @@ const Step0 = ({ show }:IStep0Props) => {
         <Row className="my-4">
           <Col>
             <h3 className="font-weight-bold">Welcome to</h3>
-            {/* <img src={HeadLogo.src} className={styles.welcome__img} alt="" /> */}
-            <HeadLogo/>
+            <HeadLogo />
           </Col>
         </Row>
         <Row className="my-3">
@@ -46,8 +45,7 @@ const Step0 = ({ show }:IStep0Props) => {
         <Row className="mt-3 mx-5">
           <Col xs={1}> </Col>
           <Col xs={2} className="mx-2">
-            {/* <img src={Cart.src} alt="cart" /> */}
-            <Cart/>
+            <Cart />
           </Col>
           <Col xs={7}>
             <p className="text-start">
@@ -70,7 +68,7 @@ const Step0 = ({ show }:IStep0Props) => {
           <Col xs={1}> </Col>
           <Col xs={2} className="mx-2">
             {/* <img src={Face.src} alt="icon" /> */}
-            <Face/>
+            <Face />
           </Col>
           <Col xs={7}>
             <p className="text-start">
