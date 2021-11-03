@@ -1,0 +1,22 @@
+// @use "sass:map";
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/utilities";
+// @import "./globals.scss";
+
+.welcome {
+	text-align: center;
+	h3 {
+		font-weight: 600;
+	}
+	&__img {
+		height: 1.5rem;
+	}
+
+	hr {
+		height: 0.625rem;
+		opacity: 5;
+		margin: 0rem;
+		margin-top: -0.625rem;
+	}
+}
