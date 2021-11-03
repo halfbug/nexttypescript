@@ -14,7 +14,6 @@ interface IStep0Props {
 }
 
 const Step0 = ({ show }:IStep0Props) => {
-  console.log('welcome component');
   return (
     <Dialogue show={show}>
       {/* <div className={styles.WelcomeModal}> */}
