@@ -1,84 +1,22 @@
-.WelcomeModal {
-    // width: 85vw;
-    // height: 48vw;
-    background-color: rgb(255, 255, 255);
-    border-radius: 0.5vw;
-    margin-top: 1.2vw;
-  }
-  .headText,
-  .recommendationText,
-  .shoppingCartText,
-  .bottomText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .headText span {
-    font-size: 1.4vw;
-    font-weight: 600;
-  }
-  .headText img {
-    width: 20vw;
-  }
-  .recommendationText span {
-    font-size: 1.2vw;
-    font-weight: 500;
-    width: 35vw;
-    text-align: center;
-  }
-  .shoppingCartCon {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 34vw;
-  }
-  .shoppingCartCon .emoji {
-    font-size: 4vw;
-    margin-right: 2vw;
-  }
-  .shoppingCartCon span {
-    font-size: 1vw;
-  }
-  .bottomTextCon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .bottomTextCon span {
-    font-size: 1.2vw;
-    font-weight: bold;
-    z-index: 1;
-  }
-  .bottomTextCon div {
-    background: linear-gradient(
-      270deg,
-      #fee750 0%,
-      #f4dec4 45.31%,
-      #ccb2f9 94.79%,
-      #ccb2f9 100%
-    );
-    width: 105%;
-    height: 0.8vw;
-    margin-top: -0.8vw;
-  }
-  .btnCon {
-    // background-image: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%);
-    background-color: white;
-    width: 12vw;
-    height: 2.6vw;
-    padding: 1px;
-    border-radius: 0.2vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2.5vw;
-  }
-  // button {
-  //   background-color: white;
-  //   border: 1px solid white;
-  //   width: 100%;
-  //   height: 100%;
-  //   font-weight: bold;
-  //   border-radius: 0.2vw !important;
-  //   font-size: 1.2vw;
-  // }
+// @use "sass:map";
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/utilities";
+// @import "./globals.scss";
+
+.welcome {
+	text-align: center;
+	h3 {
+		font-weight: 600;
+	}
+	&__img {
+		height: 1.5rem;
+	}
+
+	hr {
+		height: 0.625rem;
+		opacity: 5;
+		margin: 0rem;
+		margin-top: -0.625rem;
+	}
+}

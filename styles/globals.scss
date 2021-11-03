@@ -15,6 +15,12 @@
 $font-family-sans-serif: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
 	"Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
+$font-size-base: 0.75rem !default;
+$display-font-weight: 400 !default;
+$font-weight-light: 400 !default;
+$font-weight-normal: 500 !default;
+$font-weight-bold: 600 !default;
+$font-weight-bolder: 700 !default;
 // Required
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/mixins";
@@ -25,3 +31,8 @@ $font-family-sans-serif: Montserrat, system-ui, -apple-system, "Segoe UI", Robot
 @import "../node_modules/bootstrap/scss/type";
 // etc
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+$brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+.brand--gradiant {
+	background: $brand-gradiant;
+}
