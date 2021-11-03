@@ -4,8 +4,8 @@ import Dialogue from 'components/Layout/Dialogue/dialogue';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from 'styles/Step0.module.scss';
 import HeadLogo from 'assets/images/Logo.svg';
-import Cart from 'assets/images/cart.png';
-import Face from 'assets/images/face.png';
+import Cart from 'assets/images/cart.svg';
+import Face from 'assets/images/face.svg';
 
 // console.log('🚀 ~ file: step0.tsx ~ line 8 ~ Cart', Cart);
 
@@ -22,7 +22,8 @@ const Step0 = ({ show }:IStep0Props) => {
         <Row className="my-4">
           <Col>
             <h3 className="font-weight-bold">Welcome to</h3>
-            <img src={HeadLogo.src} className={styles.welcome__img} alt="" />
+            {/* <img src={HeadLogo.src} className={styles.welcome__img} alt="" /> */}
+            <HeadLogo/>
           </Col>
         </Row>
         <Row className="my-3">
@@ -45,7 +46,8 @@ const Step0 = ({ show }:IStep0Props) => {
         <Row className="mt-3 mx-5">
           <Col xs={1}> </Col>
           <Col xs={2} className="mx-2">
-            <img src={Cart.src} alt="cart" />
+            {/* <img src={Cart.src} alt="cart" /> */}
+            <Cart/>
           </Col>
           <Col xs={7}>
             <p className="text-start">
@@ -67,7 +69,8 @@ const Step0 = ({ show }:IStep0Props) => {
         <Row className="mt-3 mx-5">
           <Col xs={1}> </Col>
           <Col xs={2} className="mx-2">
-            <img src={Face.src} alt="icon" />
+            {/* <img src={Face.src} alt="icon" /> */}
+            <Face/>
           </Col>
           <Col xs={7}>
             <p className="text-start">
