@@ -7,6 +7,7 @@ module.exports = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
+    // prependData: '@import "./globals.scss";',
   },
   env: {
     BE_URL: process.env.BE_URL,

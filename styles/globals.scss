@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
-// @import "../node_modules/bootstrap/scss/bootstrap";
+// @import "~/bootstrap/scss/bootstrap";
 // body {
 // 	padding: 0;
 // 	margin: 0;
@@ -7,7 +7,7 @@
 // 		Droid Sans, Helvetica Neue, sans-serif;
 // }
 // Required
-@import "../node_modules/bootstrap/scss/functions";
+@import "~bootstrap/scss/functions";
 
 // Default variable overrides
 // $body-bg: #000;
@@ -16,23 +16,27 @@ $font-family-sans-serif: Montserrat, system-ui, -apple-system, "Segoe UI", Robot
 	"Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
 $font-size-base: 0.75rem !default;
+$small-font-size: .675em !default;
+
+$sub-sup-font-size: .55em !default;
+
 $display-font-weight: 400 !default;
 $font-weight-light: 400 !default;
 $font-weight-normal: 500 !default;
 $font-weight-bold: 600 !default;
 $font-weight-bolder: 700 !default;
 // Required
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
 // Optional Bootstrap components here
-@import "../node_modules/bootstrap/scss/root";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
 // etc
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
-$brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+@import "./variables.scss";
 .brand--gradiant {
 	background: $brand-gradiant;
 }

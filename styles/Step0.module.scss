@@ -1,13 +1,9 @@
-// @use "sass:map";
-// @import "~bootstrap/scss/functions";
-// @import "~bootstrap/scss/variables";
-// @import "~bootstrap/scss/utilities";
-// @import "./globals.scss";
-
+@import "./variables.scss";
 .welcome {
-	text-align: center;
+	@extend .text-center;
+
 	h3 {
-		font-weight: 600;
+		@extend .fw-bold;
 	}
 	&__img {
 		height: 1.5rem;

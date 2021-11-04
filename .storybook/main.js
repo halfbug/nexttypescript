@@ -23,7 +23,27 @@ module.exports = {
       ...(config.resolve.modules || []),
       path.resolve(__dirname, ".."),
     ];
-
+    // config.module.rules.push({
+    //   test: /\.svg$/,
+    //   use: ['@svgr/webpack'],
+    // });
+    // config.module.rules.push({
+    //   test: /\.s[ac]ss$/i,
+    //   use: [
+    //     'style-loader',
+    //     {
+    //       loader: 'css-loader',
+    //       options: {
+    //         importLoaders: 1,
+    //         modules: true,
+    //         localIdentName: '[local]___[hash:base64:5]',
+    //         exclude: [path.resolve(__dirname, '../styles/globals.scss')], //not to make it module because it is imported in global
+    //       },
+    //     },
+    //     'sass-loader',
+    //   ],
+    //   include: path.resolve(__dirname, '../styles'),
+    // });
     return config;
   },
   // webpackFinal: async config => {

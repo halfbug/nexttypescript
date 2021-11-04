@@ -31,20 +31,20 @@ module.exports = {
     // SCSS 
     newConfig.module.rules.push({
       test: /\.(s*)css$/,
-      loaders: ['style-loader', {
+      loaders: ['style-loader',{
+        loader: 'sass-loader',
+        options: {
+          prependData: '@import "./globals.scss";',
+        },
+      }, {
         loader: 'css-loader',
         options: {
           importLoaders: 1,
           modules: true,
         }
-      }, {
-        loader: 'sass-loader',
-        options: {
-          prependData: '@import "../styles/global.scss";',
-        },
-      },
+      }, 
     ],
-      include: path.resolve(__dirname, '../styles/globals.scss'),
+      include: path.resolve(__dirname, 'styles'),
     });
     
     // If you are using CSS Modules, check out the setup from Justin (justincy)

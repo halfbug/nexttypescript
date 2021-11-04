@@ -21,7 +21,7 @@ const Header = ({
         <h1>Groupshop</h1>
       </div>
       <div>
-        <Button size="small" label="Log out" />
+        {/* <Button size="small" label="Log out" /> */}
         {/* {user ? (
           <Button size="small" onClick={onLogout} label="Log out" />
         ) : (

@@ -1,8 +1,7 @@
 import React from 'react';
-// import styles from '../../../styles/Button.module.scss';
 import styles from 'styles/Button.module.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
@@ -10,15 +9,15 @@ interface ButtonProps {
   /**
    * What background color to use
    */
-  backgroundColor?: string;
+  // type?: ButtonHTMLAttributes<HTMLButtonElement>.type;
   /**
    * How large should the button be?
    */
-  size?: 'small' | 'medium' | 'large';
+  // size?: 'small' | 'medium' | 'large';
   /**
    * Button contents
    */
-  label: string;
+   children: string;
   /**
    * Optional click handler
    */
@@ -29,30 +28,43 @@ interface ButtonProps {
  * Primary UI component for user interaction
  */
 const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
+  // primary = false,
+  // size = 'medium',
+  // type = 'button',
+  children,
+  onClick,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? styles['storybook-button--primary'] : styles['storybook-button--secondary'];
+  console.log('inbutton');
+  // const mode = primary ?
+  // styles['storybook-button--primary'] : styles['storybook-button--secondary'];
   return (
     <button
+      // variant="outline-primary"
+      className={styles.onboarding__button}
+      // eslint-disable-next-line react/button-has-type
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
+      // type="button"
+      // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      // style={{ backgroundColor }}
       {...props}
+      onClick={onClick}
     >
-      {label}
+      <span>
+        <span>
+          {children}
+        </span>
+      </span>
     </button>
   );
 };
 
 Button.defaultProps = {
   primary: false,
-  backgroundColor: '',
-  size: 'small',
+  // backgroundColor: '',
+  // size: 'small',
   onClick: null,
+  // type: 'button',
 };
 
 export default Button;

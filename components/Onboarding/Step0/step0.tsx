@@ -6,6 +6,7 @@ import styles from 'styles/Step0.module.scss';
 import HeadLogo from 'assets/images/Logo.svg';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
+import Button from 'components/Buttons/Button/Button';
 
 // console.log('🚀 ~ file: step0.tsx ~ line 8 ~ Cart', Cart);
 
@@ -20,7 +21,7 @@ const Step0 = ({ show }:IStep0Props) => (
       <Row className="my-4">
         <Col>
           <h3 className="font-weight-bold">Welcome to</h3>
-          <HeadLogo className={styles.welcome__img} />
+          <HeadLogo />
         </Col>
       </Row>
       <Row className="my-3">
@@ -94,14 +95,14 @@ const Step0 = ({ show }:IStep0Props) => (
           </p>
           <hr className="brand--gradiant mx-2" />
         </Col>
-        <Col xs={3} md={4}>&nbsp; </Col>
-      </Row>
-      <Row>
         <Col xs={3} md={4}> </Col>
-        <Col xs={6} md={4} className="mx-2">
-          <p>GET STARTED</p>
+      </Row>
+      <Row className="m-5 justify-content-center">
+        {/* <Col xs={3} md={4}> </Col> */}
+        <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
+          <Button>GET STARTED</Button>
         </Col>
-        <Col xs={3} md={4}>&nbsp; </Col>
+        {/* <Col xs={3} md={4}>&nbsp; </Col> */}
       </Row>
     </Container>
     {/* </div> */}
