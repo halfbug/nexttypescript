@@ -1,0 +1,18 @@
+@import "./variables.scss";
+.welcome {
+	@extend .text-center;
+
+	h1, h4 {
+		@extend .fw-bold;
+	}
+	&__img {
+		height: 1.5rem;
+	}
+
+	hr {
+		height: 0.625rem;
+		opacity: 5;
+		margin: 0rem;
+		margin-top: -0.625rem;
+	}
+	  }

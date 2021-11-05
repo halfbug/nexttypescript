@@ -15,14 +15,18 @@ export default function BrandInfo() {
 
       </Row>
       <Row>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
+        <Col xs={9}>
+          <Form.Group className="" controlId="formBasicEmail">
+            <Form.Control type="email" placeholder="Enter email" />
+          </Form.Group>
+        </Col>
+        <Col xs={3}>
+          <Form.Text className="text-muted align-baseline">
             0/20
           </Form.Text>
-        </Form.Group>
+        </Col>
       </Row>
-      <Row><h4>Upload your logo</h4></Row>
+      <Row className="mt-3"><h4>Upload your logo</h4></Row>
       <Row>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Group controlId="formFileLg" className="mb-3">

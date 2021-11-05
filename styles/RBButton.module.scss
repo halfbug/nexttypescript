@@ -1,0 +1,17 @@
+@import "./variables.scss";
+
+.rb__button {
+	color: black !important;
+    background: white;
+	@extend .px-4;
+    border-radius: 10px;
+
+    &:hover {
+        background: #515055;
+        color: white !important;
+    }
+    &:focus {
+        background: #403F43;
+        color: white !important;
+    }
+}

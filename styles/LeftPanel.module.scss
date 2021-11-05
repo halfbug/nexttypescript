@@ -3,5 +3,17 @@
 		background-image: url("../assets/images/defineyoubrandimgbg.png");
 		background-size: 80% 100% cover;
 		background-repeat: no-repeat;
-        
+		&:first-child {  
+			@extend .pt-5;
+		}
+		// h1{
+		// 	@extend .mx-5;
+		// }
+    	p {
+			font-family: Mulish;
+			font-style: normal;
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 20px;
+			}  
 	}

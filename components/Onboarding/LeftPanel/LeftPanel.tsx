@@ -10,10 +10,8 @@ export interface ILeftPanelProps {
 export default function LeftPanel({ heading, content }: ILeftPanelProps) {
   return (
     <Col md={3} className={styles.leftbar}>
-      {/* <Row> */}
       <h1>{heading}</h1>
-      <p>{content}</p>
-      {/* </Row> */}
+      <p className="m-5">{content}</p>
     </Col>
   );
 }
