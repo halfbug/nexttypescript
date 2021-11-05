@@ -19,7 +19,7 @@ const Dialogue = ({
         // onHide={handleClose}
     backdrop="static"
     keyboard={false}
-    size="lg"
+    size="xl"
     fullscreen="md-down"
     centered
   >
