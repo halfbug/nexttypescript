@@ -15,7 +15,7 @@ interface IStep0Props {
 }
 
 const Step0 = ({ show }:IStep0Props) => (
-  <Dialogue show={show}>
+  <Dialogue show={show} size="lg">
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
       <Row className="my-4">

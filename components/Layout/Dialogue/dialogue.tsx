@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 
 interface DialogueProps {
   show : boolean,
-  children: React.ReactNode
+  children: React.ReactNode,
+  size? : 'xl' | 'sm' | 'lg' | undefined,
 }
 
 /**
@@ -13,13 +14,14 @@ interface DialogueProps {
 const Dialogue = ({
   show,
   children,
+  size = 'xl',
 }: DialogueProps) => (
   <Modal
     show={show}
         // onHide={handleClose}
     backdrop="static"
     keyboard={false}
-    size="xl"
+    size={size}
     fullscreen="md-down"
     centered
   >
@@ -39,7 +41,7 @@ const Dialogue = ({
 
 );
 Dialogue.defaultProps = {
-
+  size: 'xl',
 };
 
 export default Dialogue;
