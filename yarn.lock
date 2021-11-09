@@ -10876,6 +10876,7 @@ fsevents@^1.2.7:
     prettier: 2.4.1
     react: 17.0.2
     react-bootstrap: ^2.0.1
+    react-bootstrap-icons: ^1.6.1
     react-dom: 17.0.2
     react-test-renderer: ^17.0.2
     sass: ^1.43.4
@@ -15748,6 +15749,17 @@ fsevents@^1.2.7:
   peerDependencies:
     webpack: ^4.0.0 || ^5.0.0
   checksum: 51cc1b0d0e8c37c4336b5318f3b2c9c51d6998ad6f56ea09612afcfefc9c1f596341309e934a744ae907177f28efc9f1654eacd62151e82853fcc6d37450e795
+  languageName: node
+  linkType: hard
+
+"react-bootstrap-icons@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "react-bootstrap-icons@npm:1.6.1"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^16.8.6 || ^17
+  checksum: a3cc168cb98accabc437ded46cd58190fedaafd86dfc4835cd918793c431b6180ad058a0cb6b91dc627352c2f56370ee14b41bbea07e35fca2ec31515f3c092b
   languageName: node
   linkType: hard
 

@@ -2,16 +2,16 @@
 
 .rb__button {
 	color: black !important;
-    background: white;
+    background: white!important;
 	@extend .px-4;
-    border-radius: 10px;
+    border-radius: 10px!important;
 
     &:hover {
-        background: #515055;
+        background: #515055!important;
         color: white !important;
     }
     &:focus {
-        background: #403F43;
+        background: #403F43 !important;
         color: white !important;
     }
 }
