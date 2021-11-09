@@ -4,11 +4,43 @@ import {
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
+import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+
+interface IValues {
+  brandName: string;
+}
 
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
+
+  const validationSchema = yup.object({
+    brandName: yup
+      .string()
+      .required('Brand Name is required.')
+      .min(5, 'Too Short please give least five characters')
+      .max(20, 'Too Long !! only 20 characters allowed.'),
+
+  });
+  const {
+    handleSubmit, values, handleChange, touched, errors,
+  }: FormikProps<IValues> = useFormik<IValues>({
+    initialValues: {
+      brandName: '',
+    },
+    validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: (valz, { validateForm }:FormikHelpers<IValues>) => {
+      if (validateForm) validateForm(valz);
+      setParams({ ins: 2 });
+      console.log(valz);
+      // setTimeout(() => resetForm(), 5000);
+    },
+  });
+
   return (
-    <Form>
+    <Form noValidate onSubmit={handleSubmit}>
       <Row><h4>Enter your brand name</h4></Row>
       <Row>
         <h6>
@@ -18,13 +50,25 @@ export default function BrandInfo() {
       </Row>
       <Row>
         <Col xs={9}>
-          <Form.Group className="" controlId="formBasicEmail">
-            <Form.Control type="email" placeholder="Enter email" />
+          <Form.Group className="" controlId="brandNamevalidation">
+            <Form.Control
+              type="text"
+              name="brandName"
+              value={values.brandName}
+              onChange={handleChange}
+              isInvalid={touched.brandName && !!errors.brandName}
+              placeholder="Brand Name ..."
+            />
+
+            <Form.Control.Feedback type="invalid">
+              {errors.brandName}
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
         <Col xs={3}>
           <Form.Text className="text-muted align-baseline">
-            0/20
+            {values.brandName.length}
+            /20
           </Form.Text>
         </Col>
       </Row>
@@ -61,7 +105,8 @@ export default function BrandInfo() {
           <span className="text-muted">1/4</span>
         </Col>
         <Col xs={4} className="d-flex justify-content-end">
-          <Button onClick={() => setParams({ ins: 2 })}> Next </Button>
+          <Button type="submit"> Next </Button>
+          {/* onClick={() => setParams({ ins: 2 })} */}
         </Col>
 
       </Row>

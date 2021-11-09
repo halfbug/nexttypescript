@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import styles from 'styles/Button.module.scss';
 
-export interface ButtonProps {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Is this the principal call to action on the page?
    */
@@ -9,7 +11,7 @@ export interface ButtonProps {
   /**
    * What background color to use
    */
-  // type?: ButtonHTMLAttributes<HTMLButtonElement>.type;
+  //  type?: ButtonHTMLAttributes<HTMLButtonElement>.type;
   /**
    * How large should the button be?
    */
@@ -30,7 +32,7 @@ export interface ButtonProps {
 const Button = ({
   // primary = false,
   // size = 'medium',
-  // type = 'button',
+  type,
   children,
   onClick,
   ...props
@@ -43,7 +45,7 @@ const Button = ({
       // variant="outline-primary"
       className={styles.onboarding__button}
       // eslint-disable-next-line react/button-has-type
-      type="button"
+      // type={props.type}
       // type="button"
       // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       // style={{ backgroundColor }}
