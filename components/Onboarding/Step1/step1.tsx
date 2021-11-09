@@ -14,16 +14,17 @@ interface IStep0Props {
 
 const Step1 = ({ show }: IStep0Props) => (
   <Dialogue show={show}>
+    <ProgressBar progress="25" />
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
-      <ProgressBar progressWidth="20%" />
+
       <Row className="my-4">
         <LeftPanel
           heading="Define your brand"
           content="Make your brand stand out by adding your brand name, logo, and
           industry."
         />
-        <Col className="text-sm-start" md={9}>
+        <Col className="text-sm-start mt-3" md={8}>
           <BrandInfo />
         </Col>
       </Row>

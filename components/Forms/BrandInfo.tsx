@@ -3,8 +3,10 @@ import {
   Form, Row, Col, InputGroup,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
+import useQueryString from 'hooks/useQueryString';
 
 export default function BrandInfo() {
+  const [, setParams] = useQueryString();
   return (
     <Form>
       <Row><h4>Enter your brand name</h4></Row>
@@ -51,12 +53,17 @@ export default function BrandInfo() {
         </InputGroup>
       </Row>
       <Row />
-      <Row className="m-5 justify-content-center">
-        {/* <Col xs={3} md={4}> </Col> */}
-        <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
-          <Button>GET STARTED</Button>
+      <Row className="mt-5 justify-content-center">
+        <Col xs={4}>
+          {/* <Button>Previous</Button> */}
         </Col>
-        {/* <Col xs={3} md={4}>&nbsp; </Col> */}
+        <Col xs={4} className="text-center">
+          <span className="text-muted">1/4</span>
+        </Col>
+        <Col xs={4} className="d-flex justify-content-end">
+          <Button onClick={() => setParams({ ins: 2 })}> Next </Button>
+        </Col>
+
       </Row>
 
     </Form>

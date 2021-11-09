@@ -1,19 +1,21 @@
 @import "./variables.scss";
-	.leftbar {
-		background-image: url("../assets/images/defineyoubrandimgbg.png");
-		background-size: 80% 100% cover;
-		background-repeat: no-repeat;
-		&:first-child {  
-			@extend .pt-5;
-		}
-		// h1{
-		// 	@extend .mx-5;
-		// }
-    	p {
-			font-family: Mulish;
-			font-style: normal;
-			font-weight: 600;
-			font-size: 16px;
-			line-height: 20px;
-			}  
+.leftbar {
+	background-image: url("../assets/images/defineyoubrandimgbg.png");
+	background-size: 80% 100% cover;
+	background-repeat: no-repeat;
+	@extend .text-start, .border-end, .me-3;
+	&:first-child {
+		@extend .pt-5;
 	}
+	// h1{
+	// 	@extend .mx-5;
+	// }
+	p {
+		@extend .text-start;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
+	}
+}

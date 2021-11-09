@@ -8,6 +8,7 @@ import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 // console.log('🚀 ~ file: step0.tsx ~ line 8 ~ Cart', Cart);
 
@@ -20,7 +21,7 @@ const Step0 = ({ show }:IStep0Props) => {
 
   return (
     <Dialogue show={show} size="lg">
-      {/* <div className={styles.WelcomeModal}> */}
+      <ProgressBar progress="100" />
       <Container className={styles.welcome}>
         <Row className="my-4">
           <Col>
@@ -101,7 +102,7 @@ const Step0 = ({ show }:IStep0Props) => {
           </Col>
           <Col xs={3} md={4}> </Col>
         </Row>
-        <Row className="m-5 justify-content-center">
+        <Row className="mt-5 justify-content-center">
           {/* <Col xs={3} md={4}> </Col> */}
           <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
             <Button onClick={() => setParams({ ins: 1 })}>GET STARTED</Button>
@@ -109,7 +110,7 @@ const Step0 = ({ show }:IStep0Props) => {
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>
       </Container>
-      {/* </div> */}
+
     </Dialogue>
   );
 };

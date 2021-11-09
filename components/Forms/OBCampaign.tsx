@@ -5,10 +5,12 @@ import {
 import Button from 'components/Buttons/Button/Button';
 import Exclaim from 'assets/images/exclaimation.svg';
 import RBButton from 'components/Buttons/RoundedButton/RBButton';
+import useQueryString from 'hooks/useQueryString';
 
 export default function OBCampaign() {
+  const [, setParams] = useQueryString();
   return (
-    <Col className="text-sm-start" md={9}>
+    <Col className="text-sm-start" md={8}>
 
       <Form>
         <Row className="mt-3"><h4>Name your Groupshop campaign</h4></Row>
@@ -76,16 +78,19 @@ export default function OBCampaign() {
           <Col xs={2} className="text-right">
             <RBButton>Enable</RBButton>
           </Col>
-          <Col xs={10} className="text-left">
+          <Col xs={9} className="text-left">
             <RBButton>Disable</RBButton>
           </Col>
         </Row>
         <Row className="mt-5">
-          <Col xs={6} className="text-left">
-            <Button>Previous</Button>
+          <Col xs={4}>
+            <Button onClick={() => setParams({ ins: 1 })}>Previous</Button>
           </Col>
-          <Col xs={6} className="text-right">
-            <Button>Next</Button>
+          <Col xs={4} className="text-center">
+            <span className="text-muted">2/4</span>
+          </Col>
+          <Col xs={4} className="d-flex justify-content-end">
+            <Button onClick={() => setParams({ ins: 3 })}> Next </Button>
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>

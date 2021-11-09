@@ -1,20 +1,26 @@
 import React from 'react';
-import HeadLogo from 'assets/images/Logo.svg';
+import SmallLogo from 'assets/images/logosmall.svg';
+import styles from 'styles/Progressbar.module.scss';
+import Slogo from 'assets/images/small-logo.png';
 
-const ProgressBar = ({ progressWidth }:any) => (
-  <>
-    <span
-      style={{
-        background:
-              'linear-gradient(270deg, #FEE750 0%, #F4DEC4 25.31%, #CCB2F9 44.79%, #CCB2F9 50%, #CCB2F9 55.21%, #F4DEC4 80.31% , #FEE750 100% )',
-        width: progressWidth,
-      }}
-    >
-      <HeadLogo />
-      <HeadLogo />
-      <HeadLogo />
-    </span>
-  </>
+console.log('🚀 ~ file: ProgressBar.tsx ~ line 3 ~ SmallLogo', SmallLogo);
+
+const ProgressBar = ({ progress }:any) => (
+  <div
+    className={[styles.progressbar, styles[`progressbar--${progress}`]].join(' ')}
+
+  >
+    <div style={{
+      backgroundImage: `url(${Slogo.src})`,
+      width: '100%',
+      height: '18px',
+      backgroundRepeat: 'repeat-x',
+      backgroundSize: 'auto',
+      backgroundPosition: 'center',
+    }}
+    />
+  </div>
+
 );
 
 export default ProgressBar;

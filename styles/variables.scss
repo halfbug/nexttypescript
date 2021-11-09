@@ -6,3 +6,40 @@
 @import "~bootstrap/scss/utilities/api";
 
 $brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+
+$brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+
+.brand-gradiat-repeat {
+	background: rgb(227 227 227);
+	background-image: -moz-linear-gradient(
+		90deg,
+		rgba(204, 178, 249, 1) 0%,
+		rgba(204, 178, 249, 0.9360119047619048) 15%,
+		rgba(244, 222, 196, 1) 30%,
+		rgba(254, 231, 80, 1) 50%,
+		rgba(244, 222, 196, 1) 70%,
+		rgba(204, 178, 249, 0.9416141456582633) 85%,
+		rgba(204, 178, 249, 1) 100%
+	);
+	background-image: -webkit-linear-gradient(
+		90deg,
+		rgba(204, 178, 249, 1) 0%,
+		rgba(204, 178, 249, 0.9360119047619048) 15%,
+		rgba(244, 222, 196, 1) 30%,
+		rgba(254, 231, 80, 1) 50%,
+		rgba(244, 222, 196, 1) 70%,
+		rgba(204, 178, 249, 0.9416141456582633) 85%,
+		rgba(204, 178, 249, 1) 100%
+	);
+	background-image: linear-gradient(
+		90deg,
+		rgba(204, 178, 249, 1) 0%,
+		rgba(204, 178, 249, 0.9360119047619048) 15%,
+		rgba(244, 222, 196, 1) 30%,
+		rgba(254, 231, 80, 1) 50%,
+		rgba(244, 222, 196, 1) 70%,
+		rgba(204, 178, 249, 0.9416141456582633) 85%,
+		rgba(204, 178, 249, 1) 100%
+	);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ccb2f9", endColorstr="#ccb2f9", GradientType=1);
+}
