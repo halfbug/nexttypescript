@@ -8,6 +8,7 @@ import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
+import Button2 from 'components/Buttons/Button2/Button2';
 
 interface IValues {
   campaignName: string;
@@ -125,7 +126,18 @@ export default function OBCampaign() {
           </Form.Control.Feedback>
         </Row>
         <Row className="mt-3 justify-content-center">
-          <Col><button type="button" onClick={() => setParams({ ins: '2a' })}>Edit products/collections</button></Col>
+          <Col>
+            <Button2
+              onClick={() => setParams({ ins: '2a' })}
+              variant="outline-secondary"
+            >
+              Edit products/collections
+            </Button2>
+            {/* <button
+            type="button"
+            onClick={() => setParams({ ins: '2a' })}>
+            Edit products/collections</button> */}
+          </Col>
         </Row>
         <Row className="m-2 justify-content-center">
           <Col className="text-muted">25 product(s)/2 collection(s) selected</Col>
