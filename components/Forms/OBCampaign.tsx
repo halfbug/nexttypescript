@@ -6,23 +6,72 @@ import Button from 'components/Buttons/Button/Button';
 import Exclaim from 'assets/images/exclaimation.svg';
 import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import useQueryString from 'hooks/useQueryString';
+import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+
+interface IValues {
+  campaignName: string;
+  inlineRadio: string;
+}
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
+
+  const validationSchema = yup.object({
+    campaignName: yup
+      .string()
+      .required('Campaign Name is required.')
+      .min(5, 'Too Short please give least five characters')
+      .max(20, 'Too Long !! only 20 characters allowed.'),
+    inlineRadio: yup
+      .string()
+      .required('Select product options'),
+  });
+
+  const {
+    handleSubmit, values, handleChange, touched, errors,
+  }: FormikProps<IValues> = useFormik<IValues>({
+    initialValues: {
+      campaignName: '',
+      inlineRadio: '',
+    },
+    validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: (valz, { validateForm }:FormikHelpers<IValues>) => {
+      console.log(valz);
+      if (validateForm) validateForm(valz);
+      setParams({ ins: 3 });
+      // setTimeout(() => resetForm(), 5000);
+    },
+  });
+  console.log(errors);
+
   return (
     <Col className="text-sm-start" md={8}>
 
-      <Form>
+      <Form noValidate onSubmit={handleSubmit}>
         <Row className="mt-3"><h4>Name your Groupshop campaign</h4></Row>
         <Row>
           <Col xs={9}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Enter email" />
+            <Form.Group className="mb-3" controlId="campainNameValidation">
+              <Form.Control
+                type="email"
+                placeholder="My first campaign..."
+                name="campaignName"
+                value={values.campaignName}
+                onChange={handleChange}
+                isInvalid={touched.campaignName && !!errors.campaignName}
+              />
+              <Form.Control.Feedback type="invalid">
+                {errors.campaignName}
+              </Form.Control.Feedback>
             </Form.Group>
           </Col>
           <Col xs={3}>
             <Form.Text className="text-muted">
-              0/20
+              {values.campaignName.length}
+              /20
             </Form.Text>
           </Col>
         </Row>
@@ -41,14 +90,20 @@ export default function OBCampaign() {
             <Form.Check
               inline
               label="Best sellers"
+              onChange={handleChange}
               type="radio"
-              name="inline-radio-1"
+              name="inlineRadio"
+              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
+              value="bestseller"
             />
             <Form.Check
               inline
+              onChange={handleChange}
               label="Newest products"
               type="radio"
-              name="inline-radio-1"
+              name="inlineRadio"
+              value="newproducts"
+              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
             />
           </Col>
         </Row>
@@ -57,13 +112,20 @@ export default function OBCampaign() {
             <Form.Check
               inline
               label="Specific products/collections (up to 80 products)"
+              onChange={handleChange}
               type="radio"
-              name="inline-radio-1"
+              name="inlineRadio"
+              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
+              value=""
             />
+
           </Col>
+          <Form.Control.Feedback type="invalid">
+            {errors.inlineRadio}
+          </Form.Control.Feedback>
         </Row>
         <Row className="mt-3 justify-content-center">
-          <Col><button type="button">Edit products/collections</button></Col>
+          <Col><button type="button" onClick={() => setParams({ ins: '2a' })}>Edit products/collections</button></Col>
         </Row>
         <Row className="m-2 justify-content-center">
           <Col className="text-muted">25 product(s)/2 collection(s) selected</Col>
@@ -90,7 +152,8 @@ export default function OBCampaign() {
             <span className="text-muted">2/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button onClick={() => setParams({ ins: 3 })}> Next </Button>
+            <Button type="submit"> Next </Button>
+            {/* onClick={() => setParams({ ins: 3 })} */}
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>
