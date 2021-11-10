@@ -6,6 +6,7 @@ import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
+import UploadLogo from 'components/Buttons/uploadButton';
 
 interface IValues {
   brandName: string;
@@ -74,12 +75,10 @@ export default function BrandInfo() {
       </Row>
       <Row className="mt-3"><h4>Upload your logo</h4></Row>
       <Row>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Large file input example</Form.Label>
-            <Form.Control type="file" size="lg" />
-          </Form.Group>
-          <Form.Text className="text-muted">
+
+        <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
+          <UploadLogo />
+          <Form.Text className="text-muted p-2 align-self-center">
             Under 5 MB (Formats: PNG, JPG, JPEG)
           </Form.Text>
         </Form.Group>
