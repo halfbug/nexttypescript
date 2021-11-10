@@ -5,7 +5,7 @@
 	height: 5.4rem;
 	background-color: #fcfcfc;
 	border-style: dashed !important;
-	// position: relative;
+	position: relative;
 	label {
 		@extend .text-center;
 		font-size: $small-font-size;
@@ -18,8 +18,10 @@
 
 	&--progress {
 		height: 5px;
-		// position: absolute;
-		// top: 2px;
+		position: absolute;
+		bottom: 0;
+
+		width: 100%;
 	}
 
 	img {
