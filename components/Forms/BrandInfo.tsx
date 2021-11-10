@@ -7,6 +7,7 @@ import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import UploadLogo from 'components/Buttons/uploadButton';
+import { StoreContext } from 'store/store.context';
 
 interface IValues {
   brandName: string;
@@ -14,6 +15,9 @@ interface IValues {
 
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
+
+  const { store } = React.useContext(StoreContext);
+  console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);
 
   const validationSchema = yup.object({
     brandName: yup

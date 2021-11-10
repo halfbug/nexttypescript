@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -6,6 +6,8 @@ import Page from 'components/Layout/Page/Page';
 import useInstallation from 'hooks/useInstallation';
 import { useQuery } from '@apollo/client';
 import { GET_STORE } from 'store/store.graphql';
+
+import { StoreContext } from 'store/store.context';
 
 const ShopMain: NextPage = () => {
   const { query: { shop, ins } } = useRouter();
@@ -18,6 +20,17 @@ const ShopMain: NextPage = () => {
   console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
   console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
   const { installationDialogue } = useInstallation(ins);
+
+  const { dispatch } = useContext(StoreContext);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({ type: 'UPDATE_STORE', payload: data?.storeName });
+    }
+    // return () => {
+    //   cleanup
+    // }
+  }, [data]);
 
   return (
     <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
