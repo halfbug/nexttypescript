@@ -9,14 +9,12 @@ import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import Button2 from 'components/Buttons/Button2/Button2';
-
-interface IValues {
-  campaignName: string;
-  inlineRadio: string;
-}
+import { StoreContext } from 'store/store.context';
+import { ICampaign } from 'types/store';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
+  const { store, dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
     campaignName: yup
@@ -24,29 +22,32 @@ export default function OBCampaign() {
       .required('Campaign Name is required.')
       .min(5, 'Too Short please give least five characters')
       .max(20, 'Too Long !! only 20 characters allowed.'),
-    inlineRadio: yup
+    productSelectionCriteria: yup
       .string()
       .required('Select product options'),
   });
 
   const {
     handleSubmit, values, handleChange, touched, errors,
-  }: FormikProps<IValues> = useFormik<IValues>({
+  }: FormikProps<ICampaign> = useFormik<ICampaign>({
     initialValues: {
       campaignName: '',
-      inlineRadio: '',
+      productSelectionCriteria: '',
+      joinExisting: false,
     },
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (valz, { validateForm }:FormikHelpers<IValues>) => {
-      console.log(valz);
+    onSubmit: (valz, { validateForm }:FormikHelpers<ICampaign>) => {
+      console.log('....', valz);
       if (validateForm) validateForm(valz);
+      dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: valz } });
       setParams({ ins: 3 });
       // setTimeout(() => resetForm(), 5000);
     },
   });
   console.log(errors);
+  console.log(store);
 
   return (
     <Col className="text-sm-start" md={8}>
@@ -71,7 +72,7 @@ export default function OBCampaign() {
           </Col>
           <Col xs={3}>
             <Form.Text className="text-muted">
-              {values.campaignName.length}
+              {values.campaignName?.length}
               /20
             </Form.Text>
           </Col>
@@ -93,8 +94,8 @@ export default function OBCampaign() {
               label="Best sellers"
               onChange={handleChange}
               type="radio"
-              name="inlineRadio"
-              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
+              name="productSelectionCriteria"
+              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
               value="bestseller"
             />
             <Form.Check
@@ -102,9 +103,9 @@ export default function OBCampaign() {
               onChange={handleChange}
               label="Newest products"
               type="radio"
-              name="inlineRadio"
+              name="productSelectionCriteria"
               value="newproducts"
-              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
+              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
             />
           </Col>
         </Row>
@@ -115,14 +116,14 @@ export default function OBCampaign() {
               label="Specific products/collections (up to 80 products)"
               onChange={handleChange}
               type="radio"
-              name="inlineRadio"
-              isInvalid={touched.inlineRadio && !!errors.inlineRadio}
+              name="productSelectionCriteria"
+              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
               value=""
             />
 
           </Col>
           <Form.Control.Feedback type="invalid">
-            {errors.inlineRadio}
+            {errors.productSelectionCriteria}
           </Form.Control.Feedback>
         </Row>
         <Row className="mt-3 justify-content-center">

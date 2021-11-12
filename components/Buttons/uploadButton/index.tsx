@@ -4,9 +4,13 @@ import { Form, ProgressBar } from 'react-bootstrap';
 import CloudUp from 'assets/images/cloud-icon.svg';
 
 export interface IUploadLogoProps {
+ // setFieldValue: (text:string, text:string)=>void;
+  // eslint-disable-next-line no-unused-vars
+  setFieldValue(name:string, loc:string):any;
+  // setFieldValue: any;
 }
 
-export default function UploadLogo() {
+export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
   const front = React.useRef(null);
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -18,8 +22,11 @@ export default function UploadLogo() {
     console.log(e.target.files);
     try {
       if (e.target.files) {
-        const files = Array.from(e.target.files);
+        const files:any = Array.from(e.target.files);
         // const formData = new FormData();
+        // const { name }:string = files[0];
+        console.log('..................', files[0]);
+        setFieldValue('logoImage', 'someImage.jpg');
 
         setlogo(URL.createObjectURL(files[0]));
       }
@@ -34,7 +41,8 @@ export default function UploadLogo() {
         <input
           accept="image/png, image/jpg, image/jpeg"
           className="d-none"
-          id="logo"
+          id="logoImage"
+          name="logoImage"
           multiple={false}
           type="file"
           ref={front}
