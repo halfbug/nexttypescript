@@ -21,4 +21,28 @@ const UPDATE_STORE = gql`
   }
 `;
 
-export { GET_STORE, UPDATE_STORE };
+const TOTAL_PRODUCTS = gql`
+query TotalProducts($shop: String!) {
+  TotalProducts(shop: $shop) {
+    count
+  }
+}
+`;
+
+const GET_COLLECTIONS = gql`
+query Collections($shop: String!) {
+  collections(shop: $shop) {
+    title
+    id
+    productsCount
+    products{
+      id
+      title
+      featuredImage
+    }
+  }
+}
+`;
+export {
+  GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS, GET_COLLECTIONS,
+};

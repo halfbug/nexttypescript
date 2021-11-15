@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import { ChevronRight } from 'react-bootstrap-icons';
 import useQueryString from 'hooks/useQueryString';
+import { StoreContext } from 'store/store.context';
 import Layout from './Layout';
 
 interface IScreen1Props {
@@ -15,7 +16,8 @@ interface IScreen1Props {
 
 const Screen1 = ({ show }: IScreen1Props) => {
   const [, setParams] = useQueryString();
-
+  const { store } = React.useContext(StoreContext);
+  console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
   return (
     <Dialogue show={show} size="lg">
       <Layout>
@@ -30,7 +32,9 @@ const Screen1 = ({ show }: IScreen1Props) => {
                   <div className="fw-bold">
                     <Form.Check type="checkbox" inline />
 
-                    All Products (725)
+                    All Products (
+                    {store.totalProducts}
+                    )
 
                   </div>
                 </div>
@@ -47,32 +51,25 @@ const Screen1 = ({ show }: IScreen1Props) => {
         <Row className="m-0">
           <Col xs={12} className="m-0 p-0">
             <ListGroup as="ol" className="">
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start mt-4"
-              >
-                <div className=" p-2 ms-2 me-auto">
-                  <div className="fw-bold">
-                    <Form.Check type="checkbox" inline />
-                    {' '}
-                    Summer Sale (21)
+              { store.collections?.map(({ title, productsCount }) => (
+                <ListGroup.Item
+                  as="li"
+                  className="d-flex justify-content-between align-items-start mt-4"
+                >
+                  <div className=" p-2 ms-2 me-auto">
+                    <div className="fw-bold">
+                      <Form.Check type="checkbox" inline />
+                      {title}
+                      {' '}
+                      (
+                      {productsCount}
+                      )
+                    </div>
                   </div>
-                </div>
-                <ChevronRight />
-              </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className=" p-2 ms-2 me-auto">
-                  <div className="fw-bold">
-                    <Form.Check type="checkbox" inline />
-                    {' '}
-                    Christmas (42)
-                  </div>
-                </div>
-                <ChevronRight />
-              </ListGroup.Item>
+                  <ChevronRight />
+                </ListGroup.Item>
+              ))}
+
             </ListGroup>
           </Col>
         </Row>

@@ -23,7 +23,7 @@ interface IValues {
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
 
-  const [addBI, { data, loading, error }] = useMutation<IStore, IStore | null>(UPDATE_STORE);
+  const [addBI, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
   // console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);

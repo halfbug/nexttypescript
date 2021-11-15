@@ -8,13 +8,13 @@ import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
-import Button2 from 'components/Buttons/Button2/Button2';
 import { StoreContext } from 'store/store.context';
 import { ICampaign } from 'types/store';
+import ProductButton from 'components/Buttons/ProductButton';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
-  const { store, dispatch } = React.useContext(StoreContext);
+  const { dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
     campaignName: yup
@@ -46,8 +46,6 @@ export default function OBCampaign() {
       // setTimeout(() => resetForm(), 5000);
     },
   });
-  console.log(errors);
-  console.log(store);
 
   return (
     <Col className="text-sm-start" md={8}>
@@ -126,23 +124,7 @@ export default function OBCampaign() {
             {errors.productSelectionCriteria}
           </Form.Control.Feedback>
         </Row>
-        <Row className="mt-3 justify-content-center">
-          <Col>
-            <Button2
-              onClick={() => setParams({ ins: '2a' })}
-              variant="outline-secondary"
-            >
-              Edit products/collections
-            </Button2>
-            {/* <button
-            type="button"
-            onClick={() => setParams({ ins: '2a' })}>
-            Edit products/collections</button> */}
-          </Col>
-        </Row>
-        <Row className="m-2 justify-content-center">
-          <Col className="text-muted">25 product(s)/2 collection(s) selected</Col>
-        </Row>
+        <ProductButton />
         <Row className="mt-3">
           <Col xs={8}><h4>Allow customers to join existing Groupshop pages</h4></Col>
           <Col className="text-left"><Exclaim /></Col>
