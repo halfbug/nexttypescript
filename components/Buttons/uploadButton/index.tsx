@@ -19,13 +19,13 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
   const [feedback, setfeedback] = React.useState<null | string>(null);
   const [logo, setlogo] = React.useState<null | string>(null);
   const handleImageUpload = (e: any) => {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     try {
       if (e.target.files) {
         const files:any = Array.from(e.target.files);
         // const formData = new FormData();
         // const { name }:string = files[0];
-        console.log('..................', files[0]);
+        // console.log('..................', files[0]);
         setFieldValue('logoImage', 'someImage.jpg');
 
         setlogo(URL.createObjectURL(files[0]));

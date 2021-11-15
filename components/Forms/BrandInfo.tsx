@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import {
   Form, Row, Col, InputGroup,
@@ -8,6 +9,9 @@ import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import UploadLogo from 'components/Buttons/uploadButton';
 import { StoreContext } from 'store/store.context';
+import { useMutation } from '@apollo/client';
+import { UPDATE_STORE } from 'store/store.graphql';
+import { IStore } from 'types/store';
 
 interface IValues {
   brandName: string;
@@ -19,8 +23,10 @@ interface IValues {
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
 
+  const [addBI, { data, loading, error }] = useMutation<IStore, IStore | null>(UPDATE_STORE);
+  // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
-  console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);
+  // console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);
 
   const validationSchema = yup.object({
     brandName: yup
@@ -41,11 +47,25 @@ export default function BrandInfo() {
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (valz, { validateForm }:FormikHelpers<IValues>) => {
+    onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
+      const { brandName, industry, logoImage } = valz;
+
+      await addBI({
+        variables: {
+          updateStoreInput: {
+            id: store.id,
+            shop: store.shop,
+            brandName,
+            industry,
+            logoImage,
+            installationStep: 2,
+          },
+        },
+      });
       dispatch({ type: 'UPDATE_STORE', payload: valz });
       setParams({ ins: 2 });
-      console.log(valz);
+      // console.log(valz);
       // setTimeout(() => resetForm(), 5000);
     },
   });

@@ -11,10 +11,12 @@ query StoreName($shop: String!) {
 `;
 
 const UPDATE_STORE = gql`
-  mutation UpdateStore($text: String!) {
-    updateStore(text: $text) {
-      id
-      text
+  mutation UpdateStore($updateStoreInput: UpdateStoreInput!) {
+    updateStore(updateStoreInput: $updateStoreInput) {
+    id
+    shop
+    brandName
+    installationStep
     }
   }
 `;
