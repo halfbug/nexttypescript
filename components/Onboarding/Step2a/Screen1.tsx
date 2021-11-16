@@ -1,13 +1,15 @@
 import React from 'react';
-import RBButton from 'components/Buttons/RoundedButton/RBButton';
+// import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 // import { Row } from 'react-bootstrap';
 import {
-  Col, Form, ListGroup, Row,
+  Col, Form, ListGroup, Row, Button,
 } from 'react-bootstrap';
 import { ChevronRight } from 'react-bootstrap-icons';
 import useQueryString from 'hooks/useQueryString';
 import { StoreContext } from 'store/store.context';
+import Styles from 'styles/Screen1.module.scss';
+import IconButton from 'components/Buttons/IconButton';
 import Layout from './Layout';
 
 interface IScreen1Props {
@@ -26,11 +28,11 @@ const Screen1 = ({ show }: IScreen1Props) => {
             <ListGroup as="ol">
               <ListGroup.Item
                 as="li"
-                className="d-flex justify-content-between align-items-start"
+                className="d-flex justify-content-between align-items-center"
               >
                 <div className="ms-2 me-auto p-2">
                   <div className="fw-bold">
-                    <Form.Check type="checkbox" inline />
+                    { store?.totalProducts && store?.totalProducts < 80 && <Form.Check type="checkbox" inline className="fs-4" />}
 
                     All Products (
                     {store.totalProducts}
@@ -44,29 +46,34 @@ const Screen1 = ({ show }: IScreen1Props) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} className="mt-3">
-            <h3>Collections</h3>
+          <Col xs={12} className="mt-5">
+            <h4>Collections</h4>
           </Col>
         </Row>
         <Row className="m-0">
-          <Col xs={12} className="m-0 p-0">
+          <Col xs={12} className={Styles.screen1__scroll}>
             <ListGroup as="ol" className="">
               { store.collections?.map(({ title, productsCount }) => (
                 <ListGroup.Item
                   as="li"
-                  className="d-flex justify-content-between align-items-start mt-4"
+                  className="d-flex justify-content-between align-items-center mt-3 rounded-3 border border-1"
                 >
                   <div className=" p-2 ms-2 me-auto">
-                    <div className="fw-bold">
-                      <Form.Check type="checkbox" inline />
-                      {title}
-                      {' '}
-                      (
-                      {productsCount}
-                      )
+                    <div className="fw-bold d-flex align-items-center">
+                      <Form.Check type="checkbox" inline className="fs-4" />
+                      <p className="m-0">
+                        {title}
+                        {' '}
+                        (
+                        {' '}
+                        {productsCount}
+                        {' '}
+                        )
+                      </p>
                     </div>
                   </div>
-                  <ChevronRight />
+                  <IconButton icon={<ChevronRight />} onClick={() => setParams({ ins: '2b' })} />
+
                 </ListGroup.Item>
               ))}
 
@@ -75,10 +82,16 @@ const Screen1 = ({ show }: IScreen1Props) => {
         </Row>
         <Row className="mt-4">
           <Col xs={6} className="text-end">
-            <RBButton onClick={() => setParams({ ins: 2 })}>Go Back</RBButton>
+            {/* <RBButton >Go Back</RBButton> */}
+            <Button variant="outline-primary" size="lg" className="rounded-pill" onClick={() => setParams({ ins: 2 })}>
+              Go Back
+            </Button>
           </Col>
           <Col xs={6} className="text-start">
-            <RBButton>Save</RBButton>
+            {/* <RBButton>Save</RBButton> */}
+            <Button variant="primary" size="lg" className="rounded-pill">
+              Save
+            </Button>
           </Col>
         </Row>
 

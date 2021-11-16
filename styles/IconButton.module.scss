@@ -1,0 +1,18 @@
+@import "./variables.scss";
+
+.iconButton {
+	color: $primary !important;
+	background-color: transparent !important;
+	border: none;
+	@extend .rounded, .px-0, .fs-5;
+	min-width: 2.3rem !important;
+
+	&:hover {
+		color: black !important;
+		@extend .fw-bold, .shadow-sm;
+	}
+
+	&:focus {
+		outline: none !important;
+	}
+}

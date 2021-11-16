@@ -8,27 +8,14 @@
 // 		Droid Sans, Helvetica Neue, sans-serif;
 // }
 // Required
+@import "./variables.scss";
 @import "~bootstrap/scss/functions";
 
-// Default variable overrides
-// $body-bg: #000;
-// $body-color: #111;
-$font-family-sans-serif: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-	"Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// // Default variable overrides
+// // $body-bg: #000;
+// // $body-color: #111;
 
-$font-size-base: 0.75rem !default;
-$small-font-size: .675em !default;
-
-$sub-sup-font-size: .55em !default;
-
-$display-font-weight: 400 !default;
-$font-weight-light: 400 !default;
-$font-weight-normal: 500 !default;
-$font-weight-bold: 600 !default;
-$font-weight-bolder: 700 !default;
-
-$primary: #403f43;
-// Required
+// // Required
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
@@ -39,7 +26,10 @@ $primary: #403f43;
 // etc
 @import "~bootstrap/scss/bootstrap";
 
-@import "./variables.scss";
 .brand--gradiant {
 	background: $brand-gradiant;
+}
+
+button {
+	min-width: 9rem !important;
 }

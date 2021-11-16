@@ -6,8 +6,8 @@ import {
 const Layout = ({ children }:any) => (
   <Container>
     <Row className="border-bottom">
-      <Col className="text-left"><h3>Add products/collections</h3></Col>
-      <Col className="text-end">0 product(s)/1 collection(s) selected</Col>
+      <Col className="text-left" xs={12} md={6}><h3>Add products/collections</h3></Col>
+      <Col className="text-left text-md-end" xs={12} md={6}>0 product(s)/1 collection(s) selected</Col>
     </Row>
     <Row className="mt-3">
       <Form>

@@ -1,4 +1,19 @@
 @import "~bootstrap/scss/functions";
+$font-family-sans-serif: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+	"Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$font-size-base: 0.75rem !default;
+$small-font-size: .675em !default;
+
+$sub-sup-font-size: .55em !default;
+
+$display-font-weight: 400 !default;
+$font-weight-light: 400 !default;
+$font-weight-normal: 500 !default;
+$font-weight-bold: 600 !default;
+$font-weight-bolder: 700 !default;
+
+$primary: #403f43;
 @import "~bootstrap/scss/variables";
 $small-font-size: .675em !default;
 
