@@ -43,6 +43,17 @@ query Collections($shop: String!) {
   }
 }
 `;
+const CREATE_CAMPAIGN = gql`
+  mutation createCampaign($createCampaignInput: CreateCampaignInput!) {
+    createCampaign(createCampaignInput: $createCampaignInput) {
+    id
+    status
+    joinExisting
+    productSelectionCriteria
+    }
+  }
+`;
+
 export {
-  GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS, GET_COLLECTIONS,
+  GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS, GET_COLLECTIONS, CREATE_CAMPAIGN,
 };

@@ -13,9 +13,10 @@ export interface IStore {
   // updateStoreInput?: object;
 }
 export interface ICampaign {
-  campaignName?: string;
+  name?: string;
   productSelectionCriteria?: string;
   joinExisting?:boolean;
+  createCampaignInput?: object;
 }
 
 export interface ICollections{

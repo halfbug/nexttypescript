@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Form, Row, Col,
 } from 'react-bootstrap';
@@ -8,14 +8,17 @@ import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
+import Button2 from 'components/Buttons/Button2/Button2';
 import { StoreContext } from 'store/store.context';
-import { ICampaign } from 'types/store';
-import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { CREATE_CAMPAIGN } from 'store/store.graphql';
+import { ICampaign } from 'types/store';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
+  // eslint-disable-next-line no-unused-vars
+  const [joinBtnVal, setjoinBtnVal] = useState(false);
+
   const [
     addCampaign,
     // eslint-disable-next-line no-unused-vars
@@ -23,8 +26,6 @@ export default function OBCampaign() {
   ] = useMutation<ICampaign, ICampaign | null>(CREATE_CAMPAIGN);
 
   const { store, dispatch } = React.useContext(StoreContext);
-  // eslint-disable-next-line no-unused-vars
-  const [joinBtnVal, setjoinBtnVal] = React.useState(false);
 
   const validationSchema = yup.object({
     name: yup
@@ -69,6 +70,8 @@ export default function OBCampaign() {
       // setTimeout(() => resetForm(), 5000);
     },
   });
+  console.log(errors);
+  console.log(store);
 
   return (
     <Col className="text-sm-start" md={8}>
@@ -147,7 +150,23 @@ export default function OBCampaign() {
             {errors.productSelectionCriteria}
           </Form.Control.Feedback>
         </Row>
-        <ProductButton />
+        <Row className="mt-3 justify-content-center">
+          <Col>
+            <Button2
+              onClick={() => setParams({ ins: '2a' })}
+              variant="outline-secondary"
+            >
+              Edit products/collections
+            </Button2>
+            {/* <button
+            type="button"
+            onClick={() => setParams({ ins: '2a' })}>
+            Edit products/collections</button> */}
+          </Col>
+        </Row>
+        <Row className="m-2 justify-content-center">
+          <Col className="text-muted">25 product(s)/2 collection(s) selected</Col>
+        </Row>
         <Row className="mt-3">
           <Col xs={8}><h4>Allow customers to join existing Groupshop pages</h4></Col>
           <Col className="text-left"><Exclaim /></Col>
@@ -156,15 +175,21 @@ export default function OBCampaign() {
         <Row className="mt-2">
           {/* <Col xs={3} md={4}> </Col> */}
           <Col xs={2} className="text-right">
-            <RBButton>Enable</RBButton>
+            <RBButton>
+              Enable
+
+            </RBButton>
           </Col>
           <Col xs={9} className="text-left">
-            <RBButton>Disable</RBButton>
+            <RBButton>
+              Disable
+
+            </RBButton>
           </Col>
         </Row>
         <Row className="mt-5">
           <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 1 })}>Previous</Button>
+            <Button onClick={() => setParams({ ins: 2 })}>Previous</Button>
           </Col>
           <Col xs={4} className="text-center">
             <span className="text-muted">2/4</span>
