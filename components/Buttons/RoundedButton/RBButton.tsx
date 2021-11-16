@@ -21,8 +21,10 @@ export interface ButtonProps {
   /**
    * Optional click handler
    */
-  onClick?: () => void;
-}
+   onClick?: () => void;
+   // eslint-disable-next-line no-unused-vars
+   onChange?: (arg0: any) => void;
+  }
 
 /**
  * Primary UI component for user interaction
@@ -33,6 +35,7 @@ const RBButton = ({
   // type = 'button',
   children,
   onClick,
+  onChange,
   ...props
 }: ButtonProps) => {
   console.log('inbutton');
@@ -49,6 +52,7 @@ const RBButton = ({
       // style={{ backgroundColor }}
       {...props}
       onClick={onClick}
+      onChange={onChange}
     >
       <span>
         <span>

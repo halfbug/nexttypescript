@@ -7,11 +7,11 @@ import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
-import UploadLogo from 'components/Buttons/UploadButton';
 import { StoreContext } from 'store/store.context';
 import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
+import UploadLogo from 'components/Buttons/uploadButton';
 
 interface IValues {
   brandName: string;

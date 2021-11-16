@@ -7,7 +7,11 @@ import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS, TOTAL_PRODUCTS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 
-export default function ProductButton() {
+interface IProps {
+  disableBtn: boolean;
+}
+
+export default function ProductButton({ disableBtn }:IProps) {
   const [, setParams] = useQueryString();
   const { store, dispatch } = React.useContext(StoreContext);
   console.log('🚀 ~ file: index.tsx ~ line 13 ~ ProductButton ~ store', store);
@@ -48,7 +52,11 @@ export default function ProductButton() {
     <>
       <Row className="mt-3 justify-content-center">
         <Col>
-          <RButton variant="outline-secondary" onClick={handleEditProduct}>
+          <RButton
+            variant="outline-secondary"
+            onClick={handleEditProduct}
+            disabled={disableBtn}
+          >
             Edit products/collections
           </RButton>
 

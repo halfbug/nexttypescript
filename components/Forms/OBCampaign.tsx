@@ -25,6 +25,8 @@ export default function OBCampaign() {
   const { store, dispatch } = React.useContext(StoreContext);
   // eslint-disable-next-line no-unused-vars
   const [joinBtnVal, setjoinBtnVal] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [disableBtn, setdisableBtn] = React.useState(true);
 
   const validationSchema = yup.object({
     name: yup
@@ -43,7 +45,6 @@ export default function OBCampaign() {
     initialValues: {
       name: '',
       productSelectionCriteria: '',
-      joinExisting: joinBtnVal,
     },
     validationSchema,
     validateOnChange: false,
@@ -51,7 +52,7 @@ export default function OBCampaign() {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       console.log('....', valz);
       if (validateForm) validateForm(valz);
-      const { name, productSelectionCriteria, joinExisting } = valz;
+      const { name, productSelectionCriteria } = valz;
 
       await addCampaign({
         variables: {
@@ -59,13 +60,13 @@ export default function OBCampaign() {
             storeId: store.id,
             name,
             productSelectionCriteria,
-            joinExisting,
+            joinExisting: joinBtnVal,
           },
         },
       });
 
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: valz } });
-      setParams({ ins: 3 });
+      // setParams({ ins: 3 });
       // setTimeout(() => resetForm(), 5000);
     },
   });
@@ -118,6 +119,7 @@ export default function OBCampaign() {
               name="productSelectionCriteria"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
               value="bestseller"
+              onClick={() => setdisableBtn(false)}
             />
             <Form.Check
               inline
@@ -127,6 +129,7 @@ export default function OBCampaign() {
               name="productSelectionCriteria"
               value="newproducts"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              onClick={() => setdisableBtn(false)}
             />
           </Col>
         </Row>
@@ -136,6 +139,7 @@ export default function OBCampaign() {
               inline
               label="Specific products/collections (up to 80 products)"
               onChange={handleChange}
+              onClick={() => setdisableBtn(false)}
               type="radio"
               name="productSelectionCriteria"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
@@ -147,7 +151,7 @@ export default function OBCampaign() {
             {errors.productSelectionCriteria}
           </Form.Control.Feedback>
         </Row>
-        <ProductButton />
+        <ProductButton disableBtn={disableBtn} />
         <Row className="mt-3">
           <Col xs={8}><h4>Allow customers to join existing Groupshop pages</h4></Col>
           <Col className="text-left"><Exclaim /></Col>
@@ -156,10 +160,16 @@ export default function OBCampaign() {
         <Row className="mt-2">
           {/* <Col xs={3} md={4}> </Col> */}
           <Col xs={2} className="text-right">
-            <RBButton>Enable</RBButton>
+            <RBButton
+              onClick={() => setjoinBtnVal(true)}
+              // onChange={handleChange}
+            >
+              Enable
+
+            </RBButton>
           </Col>
           <Col xs={9} className="text-left">
-            <RBButton>Disable</RBButton>
+            <RBButton onClick={() => setjoinBtnVal(false)}>Disable</RBButton>
           </Col>
         </Row>
         <Row className="mt-5">
