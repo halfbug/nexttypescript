@@ -56,6 +56,19 @@ const CREATE_CAMPAIGN = gql`
   }
 `;
 
+const GET_PRODUCTS = gql`
+query Collections($productQueryInput: ProductQueryInput!) {
+  products(productQueryInput: $productQueryInput) {
+    id
+    title
+    createdAtShopify
+    featuredImage
+    price
+    currencyCode
+  }
+}
+`;
+
 export {
-  GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS, GET_COLLECTIONS, CREATE_CAMPAIGN,
+  GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS, GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
 };

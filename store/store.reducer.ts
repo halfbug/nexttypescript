@@ -1,7 +1,7 @@
 import { IStore } from 'types/store';
 
 export type StoreAction = {
-  type: 'UPDATE_STEP' | 'UPDATE_STORE' | 'NEW_CAMPAIGN' | 'UPDATE_TOTALPRODUCTS' | 'SET_COLLECTIONS';
+  type: 'UPDATE_STEP' | 'UPDATE_STORE' | 'NEW_CAMPAIGN' | 'UPDATE_TOTALPRODUCTS' | 'SET_COLLECTIONS' | 'SET_PRODUCTS';
   payload: IStore;
 };
 
@@ -26,6 +26,8 @@ export const reducer = (
   if (action.type === 'UPDATE_TOTALPRODUCTS') { return { ...state, totalProducts: action.payload.totalProducts }; }
 
   if (action.type === 'SET_COLLECTIONS') { return { ...state, collections: action.payload.collections }; }
+
+  if (action.type === 'SET_PRODUCTS') { return { ...state, products: action.payload.products }; }
 
   return state;
 };

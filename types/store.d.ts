@@ -10,7 +10,7 @@ export interface IStore {
   newCampaign?: ICampaign;
   totalProducts?: number;
   collections?: ICollection[];
-  // updateStoreInput?: object;
+  products?: IProduct[];
 }
 export interface ICampaign {
   name?: string;

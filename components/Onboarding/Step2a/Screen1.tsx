@@ -9,6 +9,7 @@ import { ChevronRight } from 'react-bootstrap-icons';
 import useQueryString from 'hooks/useQueryString';
 import { StoreContext } from 'store/store.context';
 import { ICollection, IProduct } from 'types/store';
+import IconButton from 'components/Buttons/IconButton';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
@@ -34,10 +35,15 @@ const Screen1 = ({ show }: IScreen1Props) => {
 
   const handleCollectionButton = (id:string) => {
     setview('Detail');
-    const collection = getCollectionById(id);
-    if (collection) { setproducts(collection.products); setTitle(collection.title); }
+    if (id === 'all') {
+      setproducts(store?.products); setTitle('Total Products');
+    } else {
+      const collection = getCollectionById(id);
+      if (collection) { setproducts(collection.products); setTitle(collection.title); }
+    }
   };
   console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
+
   return (
     <Dialogue show={show} size="lg">
       <Layout>
@@ -59,7 +65,8 @@ const Screen1 = ({ show }: IScreen1Props) => {
 
                   </div>
                 </div>
-                <ChevronRight />
+                <IconButton icon={<ChevronRight />} onClick={() => handleCollectionButton('all')} />
+
               </ListGroup.Item>
             </ListGroup>
           </Col>

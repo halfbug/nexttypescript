@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
 import { useQuery } from '@apollo/client';
-import { GET_COLLECTIONS, TOTAL_PRODUCTS } from 'store/store.graphql';
+import { GET_COLLECTIONS, TOTAL_PRODUCTS, GET_PRODUCTS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 
 interface IProps {
@@ -44,6 +44,27 @@ export default function ProductButton({ disableBtn }:IProps) {
     //   cleanup
     // }
   }, [collections.data]);
+
+  const products = useQuery(GET_PRODUCTS, {
+
+    variables: {
+      productQueryInput: {
+        shop: store.shop,
+        sort: -1,
+        limit: 10000,
+      },
+    },
+  });
+
+  React.useEffect(() => {
+    if (products.data) {
+      dispatch({ type: 'SET_PRODUCTS', payload: { products: products.data.products } });
+      console.log(products.data);
+    }
+    // return () => {
+    //   cleanup
+    // }
+  }, [products.data]);
 
   const handleEditProduct = () => {
     setParams({ ins: '2a' });
