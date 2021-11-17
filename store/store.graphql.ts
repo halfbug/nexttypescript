@@ -39,6 +39,8 @@ query Collections($shop: String!) {
       id
       title
       featuredImage
+      price
+      currencyCode
     }
   }
 }

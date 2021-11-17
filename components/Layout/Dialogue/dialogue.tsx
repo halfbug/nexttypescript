@@ -29,9 +29,9 @@ const Dialogue = ({
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header> */}
     <Modal.Body className="p-md-5 mt-3">
-      <div className="mt-5">
-        {children}
-      </div>
+      {/* <div className="mt-5"> */}
+      {children}
+      {/* </div> */}
     </Modal.Body>
     {/* <Modal.Footer>
         <Button variant="secondary">

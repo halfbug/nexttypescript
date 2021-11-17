@@ -9,7 +9,7 @@ export interface IStore {
   industry?: string;
   newCampaign?: ICampaign;
   totalProducts?: number;
-  collections?: ICollections[];
+  collections?: ICollection[];
   // updateStoreInput?: object;
 }
 export interface ICampaign {
@@ -19,15 +19,17 @@ export interface ICampaign {
   createCampaignInput?: object;
 }
 
-export interface ICollections{
+export interface ICollection{
   title:string;
   id: string;
   productsCount: number;
-  products: IProducts[]
+  products: IProduct[]
 }
 
-export interface IProducts{
+export interface IProduct{
   id: string,
   title: string;
   featuredImage: string;
+  price: string;
+  currencyCode: string;
 }

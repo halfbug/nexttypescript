@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 // import { Row } from 'react-bootstrap';
@@ -8,9 +8,10 @@ import {
 import { ChevronRight } from 'react-bootstrap-icons';
 import useQueryString from 'hooks/useQueryString';
 import { StoreContext } from 'store/store.context';
-import Styles from 'styles/Screen1.module.scss';
-import IconButton from 'components/Buttons/IconButton';
+import { ICollection, IProduct } from 'types/store';
 import Layout from './Layout';
+import Collections from './Collections';
+import Products from './Products';
 
 interface IScreen1Props {
   show: boolean,
@@ -19,11 +20,29 @@ interface IScreen1Props {
 const Screen1 = ({ show }: IScreen1Props) => {
   const [, setParams] = useQueryString();
   const { store } = React.useContext(StoreContext);
+  const [view, setview] = useState<'List' | 'Detail' | 'Search'>('List');
+  const [products, setproducts] = useState<IProduct[] | null | undefined>(null);
+  const [title, setTitle] = useState<string | null>(null);
+
+  const getCollectionById = (id:string): ICollection | undefined => store?.collections?.find(
+    (col) => col.id === id,
+  );
+
+  const backToList = () => {
+    setview('List');
+  };
+
+  const handleCollectionButton = (id:string) => {
+    setview('Detail');
+    const collection = getCollectionById(id);
+    if (collection) { setproducts(collection.products); setTitle(collection.title); }
+  };
   console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
   return (
     <Dialogue show={show} size="lg">
       <Layout>
-        <Row className="m-0">
+
+        <Row className={`m-0 ${view !== 'List' ? 'd-none' : ''}`}>
           <Col xs={12} className="m-0 p-0">
             <ListGroup as="ol">
               <ListGroup.Item
@@ -45,41 +64,8 @@ const Screen1 = ({ show }: IScreen1Props) => {
             </ListGroup>
           </Col>
         </Row>
-        <Row>
-          <Col xs={12} className="mt-5">
-            <h4>Collections</h4>
-          </Col>
-        </Row>
-        <Row className="m-0">
-          <Col xs={12} className={Styles.screen1__scroll}>
-            <ListGroup as="ol" className="">
-              { store.collections?.map(({ title, productsCount }) => (
-                <ListGroup.Item
-                  as="li"
-                  className="d-flex justify-content-between align-items-center mt-3 rounded-3 border border-1"
-                >
-                  <div className=" p-2 ms-2 me-auto">
-                    <div className="fw-bold d-flex align-items-center">
-                      <Form.Check type="checkbox" inline className="fs-4" />
-                      <p className="m-0">
-                        {title}
-                        {' '}
-                        (
-                        {' '}
-                        {productsCount}
-                        {' '}
-                        )
-                      </p>
-                    </div>
-                  </div>
-                  <IconButton icon={<ChevronRight />} onClick={() => setParams({ ins: '2b' })} />
-
-                </ListGroup.Item>
-              ))}
-
-            </ListGroup>
-          </Col>
-        </Row>
+        <Collections data={store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view !== 'List' ? 'd-none' : ''}`} />
+        <Products data={products} heading={title} className={`m-0 ${view !== 'Detail' ? 'd-none' : ''} `} handleBackClick={backToList} />
         <Row className="mt-4">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}
