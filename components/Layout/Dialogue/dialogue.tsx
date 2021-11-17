@@ -6,6 +6,7 @@ interface DialogueProps {
   show : boolean,
   children: React.ReactNode,
   size? : 'xl' | 'sm' | 'lg' | undefined,
+  className?: string,
 }
 
 /**
@@ -15,6 +16,7 @@ const Dialogue = ({
   show,
   children,
   size = 'xl',
+  className,
 }: DialogueProps) => (
   <Modal
     show={show}
@@ -28,7 +30,7 @@ const Dialogue = ({
     {/* <Modal.Header>
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header> */}
-    <Modal.Body className="p-md-5 mt-3">
+    <Modal.Body className={className}>
       {/* <div className="mt-5"> */}
       {children}
       {/* </div> */}
@@ -44,6 +46,7 @@ const Dialogue = ({
 );
 Dialogue.defaultProps = {
   size: 'xl',
+  className: 'p-md-5 mt-3',
 };
 
 export default Dialogue;

@@ -4,7 +4,6 @@ import Step0 from 'components/Onboarding/Step0/step0';
 import Step1 from 'components/Onboarding/Step1/step1';
 import Step2 from 'components/Onboarding/Step2/step2';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
-import Screen2 from 'components/Onboarding/Step2a/Screen2';
 import Step3 from 'components/Onboarding/Step3/step3';
 
 const useInstallation = (ins: string | string[] | undefined) => {
@@ -25,10 +24,6 @@ const useInstallation = (ins: string | string[] | undefined) => {
       case '2a':
         return (
           <Screen1 show />
-        );
-      case '2b':
-        return (
-          <Screen2 show />
         );
       case '3':
         return (

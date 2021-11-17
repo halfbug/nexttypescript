@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 // import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
@@ -24,6 +25,7 @@ const Screen1 = ({ show }: IScreen1Props) => {
   const [view, setview] = useState<'List' | 'Detail' | 'Search'>('List');
   const [products, setproducts] = useState<IProduct[] | null | undefined>(null);
   const [title, setTitle] = useState<string | null>(null);
+  const [scollections, setscollections] = useState<ICollection[] | undefined>(undefined);
 
   const getCollectionById = (id:string): ICollection | undefined => store?.collections?.find(
     (col) => col.id === id,
@@ -44,9 +46,27 @@ const Screen1 = ({ show }: IScreen1Props) => {
   };
   console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
 
+  const handleSearch = (e:any) => {
+    const { value } = e.target;
+
+    setview(value.length === 0 ? 'List' : 'Search');
+    const filteredCollections = store?.collections?.filter((col):boolean | undefined => {
+      if (col.title.toLowerCase().includes(value)) return true;
+      return false;
+    });
+    const filteredProducts = store?.products?.filter((prod):boolean | undefined => {
+      if (prod.title.toLowerCase().includes(value)) return true;
+      return false;
+    });
+    setscollections(filteredCollections);
+    setproducts(filteredProducts);
+    setTitle(`Search Results for "${value}"`);
+
+    console.log(e.target.value);
+  };
   return (
-    <Dialogue show={show} size="lg">
-      <Layout>
+    <Dialogue show={show} size="lg" className="p-3 m-0">
+      <Layout handleSearch={handleSearch}>
 
         <Row className={`m-0 ${view !== 'List' ? 'd-none' : ''}`}>
           <Col xs={12} className="m-0 p-0">
@@ -71,8 +91,9 @@ const Screen1 = ({ show }: IScreen1Props) => {
             </ListGroup>
           </Col>
         </Row>
-        <Collections data={store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view !== 'List' ? 'd-none' : ''}`} />
-        <Products data={products} heading={title} className={`m-0 ${view !== 'Detail' ? 'd-none' : ''} `} handleBackClick={backToList} />
+
+        <Products data={products} heading={title} className={`m-0 ${['Search', 'Detail'].includes(view) ? '' : 'd-none'} `} handleBackClick={backToList} />
+        <Collections data={scollections || store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} />
         <Row className="mt-4">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}

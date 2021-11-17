@@ -3,6 +3,7 @@ import { Col, Row, Container } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import { IProduct } from 'types/store';
 import IconButton from 'components/Buttons/IconButton';
+import Styles from 'styles/Screen1.module.scss';
 import ProductCard from './ProductCard';
 
 interface IProductsProps {
@@ -25,7 +26,7 @@ const Products = ({
         {heading}
       </h3>
     </Row>
-    <Row className="bg-light">
+    <Row className={['bg-light', Styles.screen1_products].join(' ')}>
       {data?.map(({
         featuredImage, title, price, currencyCode,
       }) => (

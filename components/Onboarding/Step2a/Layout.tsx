@@ -1,9 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   Container, Row, Col, Form,
 } from 'react-bootstrap';
 
-const Layout = ({ children }:any) => (
+interface ILayoutProps {
+  children: React.ReactNode;
+  handleSearch(e:any): any;
+    // All other props
+  [x:string]: any;
+}
+
+const Layout = ({ children, handleSearch }:ILayoutProps) => (
   <Container>
     <Row className="border-bottom">
       <Col className="text-left" xs={12} md={6}><h3>Add products/collections</h3></Col>
@@ -11,8 +19,8 @@ const Layout = ({ children }:any) => (
     </Row>
     <Row className="mt-3">
       <Form>
-        <Form.Group className="mb-3 " controlId="formBasicEmail">
-          <Form.Control size="lg" className="bg-light pt-2" type="text" placeholder="Search products/collections" />
+        <Form.Group className="mb-3 " controlId="searchField">
+          <Form.Control size="lg" className="bg-light pt-2" type="text" placeholder="Search products/collections" name="searchField" onChange={handleSearch} />
         </Form.Group>
       </Form>
 

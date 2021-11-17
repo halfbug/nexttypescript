@@ -25,12 +25,12 @@ export default function Collections({ data, handleCollectionButton, ...props }: 
         </Col>
       </Row>
       <Row className="m-0">
-        <Col xs={12} className={Styles.screen1__scroll}>
+        <Col xs={12} className={Styles.screen1_collections}>
           <ListGroup as="ol" className="">
             { data?.map(({ title, productsCount, id }) => (
               <ListGroup.Item
                 as="li"
-                className="d-flex justify-content-between align-items-center mt-3 rounded-3 border border-1"
+                className="d-flex justify-content-between align-items-center mt-1 rounded-3 border border-1"
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">

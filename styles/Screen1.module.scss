@@ -2,7 +2,6 @@
 
 .screen1 {
 	&__scroll {
-		height: 190px;
 		@extend .m-0, .p-0, .overflow-auto;
 		/* width */
 		&::-webkit-scrollbar {
@@ -28,5 +27,15 @@
 		// 	height: 20px;
 		// 	width: 20px;
 		// }
+	}
+
+	&_products {
+		max-height: 260px;
+		@extend .screen1__scroll;
+	}
+
+	&_collections {
+		max-height: 150px;
+		@extend .screen1__scroll;
 	}
 }
