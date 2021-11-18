@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
 import {
@@ -12,6 +13,7 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import UploadLogo from 'components/Buttons/uploadButton';
+import axios, { AxiosRequestConfig } from 'axios';
 
 interface IValues {
   brandName: string;
@@ -27,6 +29,17 @@ export default function BrandInfo() {
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
   // console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);
+
+  function handleLogo(file: any) {
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    };
+    console.log(file);
+
+    axios.post('http://localhost:5000/upload', file, config)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
 
   const validationSchema = yup.object({
     brandName: yup
@@ -107,7 +120,8 @@ export default function BrandInfo() {
       <Row>
 
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
-          <UploadLogo setFieldValue={setFieldValue} />
+          {/* // eslint-disable-next-line react/jsx-no-bind */}
+          <UploadLogo handleLogo={handleLogo} />
           <Form.Text className="text-muted p-2 align-self-center">
             Under 5 MB (Formats: PNG, JPG, JPEG)
           </Form.Text>

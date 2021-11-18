@@ -66,7 +66,7 @@ export default function OBCampaign() {
       });
 
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: valz } });
-      // setParams({ ins: 3 });
+      setParams({ ins: 3 });
       // setTimeout(() => resetForm(), 5000);
     },
   });

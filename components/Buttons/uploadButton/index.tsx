@@ -2,15 +2,19 @@ import * as React from 'react';
 import styles from 'styles/UploadLogo.module.scss';
 import { Form, ProgressBar } from 'react-bootstrap';
 import CloudUp from 'assets/images/cloud-icon.svg';
+import axios from 'axios';
 
 export interface IUploadLogoProps {
- // setFieldValue: (text:string, text:string)=>void;
+//  // setFieldValue: (text:string, text:string)=>void;
+//   // eslint-disable-next-line no-unused-vars
+//   // setFieldValue(name:string, loc:string)?: any,
   // eslint-disable-next-line no-unused-vars
-  setFieldValue(name:string, loc:string):any;
-  // setFieldValue: any;
+  handleLogo(files: any): any;
+//   // setFieldValue: any;
 }
 
-export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
+// eslint-disable-next-line no-unused-vars
+export default function UploadLogo({ handleLogo }:IUploadLogoProps) {
   const front = React.useRef(null);
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -26,7 +30,17 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
         // const formData = new FormData();
         // const { name }:string = files[0];
         // console.log('..................', files[0]);
-        setFieldValue('logoImage', 'someImage.jpg');
+        // setFieldValue('logoImage', 'someImage.jpg');
+        // handleLogo(files[0]);
+        const config = {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        };
+        console.log('.......', files[0]);
+        const fd = new FormData();
+        fd.append('file', files[0]);
+        axios.post('http://localhost:5000/upload', fd, config)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
 
         setlogo(URL.createObjectURL(files[0]));
       }

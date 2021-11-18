@@ -26,7 +26,7 @@ export default function Rewards() {
         </Row>
         <Row className="mt-5">
           <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 1 })}>Previous</Button>
+            <Button onClick={() => setParams({ ins: 2 })}>Previous</Button>
           </Col>
           <Col xs={4} className="text-center">
             <span className="text-muted">2/4</span>
