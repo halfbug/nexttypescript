@@ -19,6 +19,11 @@ interface IScreen1Props {
   show: boolean,
 }
 
+type SelectedType = {
+  collections? : ICollection[] ;
+  products? : IProduct[];
+}
+
 const Screen1 = ({ show }: IScreen1Props) => {
   const [, setParams] = useQueryString();
   const { store } = React.useContext(StoreContext);
@@ -26,9 +31,11 @@ const Screen1 = ({ show }: IScreen1Props) => {
   const [products, setproducts] = useState<IProduct[] | null | undefined>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [scollections, setscollections] = useState<ICollection[] | undefined>(undefined);
+  const [campaign, setcampaign] = useState<SelectedType>({ collections: [], products: [] });
 
-  const getCollectionById = (id:string): ICollection | undefined => store?.collections?.find(
-    (col) => col.id === id,
+  const getEntityById = (id:string, entity: string):
+   ICollection | IProduct => store?.[entity]?.find(
+    (col:IProduct | ICollection) => col.id === id,
   );
 
   const backToList = () => {
@@ -40,11 +47,11 @@ const Screen1 = ({ show }: IScreen1Props) => {
     if (id === 'all') {
       setproducts(store?.products); setTitle('Total Products');
     } else {
-      const collection = getCollectionById(id);
+      const collection = getEntityById(id, 'collections') as ICollection;
       if (collection) { setproducts(collection.products); setTitle(collection.title); }
     }
   };
-  console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
+  // console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
 
   const handleSearch = (e:any) => {
     const { value } = e.target;
@@ -64,9 +71,41 @@ const Screen1 = ({ show }: IScreen1Props) => {
 
     console.log(e.target.value);
   };
+
+  const handleChecked = (e: any) => {
+    const { checked, id, name } = e.target;
+    const ncamp = { ...campaign };
+
+    if (checked) {
+      if (name === 'collections') {
+        const entity = getEntityById(id, name) as ICollection;
+        ncamp.products = [...campaign?.products ?? [], ...entity?.products];
+        ncamp?.collections?.push(entity);
+      } else {
+        const entity = getEntityById(id, name) as IProduct;
+        ncamp?.products?.push(entity);
+      }
+    } else if (checked === false) {
+      if (name === 'collections') {
+        ncamp.collections = campaign?.collections?.filter((col) => col.id !== id);
+        const ccol = getEntityById(id, name) as ICollection;
+        ncamp.products = campaign?.products?.filter(
+          (prd) => !ccol?.products.find((ccolprd) => ccolprd.id === prd.id),
+        );
+      } else {
+        ncamp.products = ncamp?.products?.filter((prod) => prod.id !== id);
+      }
+    }
+    setcampaign(ncamp);
+  };
+
+  const isChecked = (id: string):boolean => Boolean(
+    campaign?.products?.find((cprod) => cprod.id === id),
+  );
+  console.log('🚀 ~ file: Screen1.tsx ~ line 35 ~ Screen1 ~ campaign', campaign);
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">
-      <Layout handleSearch={handleSearch}>
+      <Layout handleSearch={handleSearch} campaign={campaign}>
 
         <Row className={`m-0 ${view !== 'List' ? 'd-none' : ''}`}>
           <Col xs={12} className="m-0 p-0">
@@ -92,8 +131,15 @@ const Screen1 = ({ show }: IScreen1Props) => {
           </Col>
         </Row>
 
-        <Products data={products} heading={title} className={`m-0 ${['Search', 'Detail'].includes(view) ? '' : 'd-none'} `} handleBackClick={backToList} />
-        <Collections data={scollections || store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} />
+        <Products
+          data={products}
+          heading={title}
+          className={`m-0 ${['Search', 'Detail'].includes(view) ? '' : 'd-none'} `}
+          handleBackClick={backToList}
+          isChecked={isChecked}
+          handleChecked={handleChecked}
+        />
+        <Collections data={scollections || store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} handleChecked={handleChecked} />
         <Row className="mt-4">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}

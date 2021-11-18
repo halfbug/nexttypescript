@@ -12,11 +12,14 @@ import { ICollection } from 'types/store';
 export interface ICollectionsProps {
     data: ICollection[] | undefined;
     handleCollectionButton(id:string): any;
+    handleChecked(e:any):any;
     // All other props
   [x:string]: any;
 }
 
-export default function Collections({ data, handleCollectionButton, ...props }: ICollectionsProps) {
+export default function Collections({
+  data, handleCollectionButton, handleChecked, ...props
+}: ICollectionsProps) {
   return (
     <Container {...props}>
       <Row>
@@ -31,10 +34,11 @@ export default function Collections({ data, handleCollectionButton, ...props }: 
               <ListGroup.Item
                 as="li"
                 className="d-flex justify-content-between align-items-center mt-1 rounded-3 border border-1"
+                key={id}
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">
-                    <Form.Check type="checkbox" inline className="fs-4" />
+                    <Form.Check type="checkbox" inline className="fs-4" name="collections" id={id} onChange={handleChecked} />
                     <p className="m-0">
                       {title}
                       {' '}

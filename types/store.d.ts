@@ -11,6 +11,7 @@ export interface IStore {
   totalProducts?: number;
   collections?: ICollection[];
   products?: IProduct[];
+  [x:string]: any;
 }
 export interface ICampaign {
   name?: string;

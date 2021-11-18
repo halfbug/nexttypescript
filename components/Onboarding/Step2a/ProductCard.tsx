@@ -1,27 +1,40 @@
 import React from 'react';
-// import { Row } from 'react-bootstrap';
+import Styles from 'styles/Screen1.module.scss';
 import {
   Card, Form, Row, Col,
 } from 'react-bootstrap';
 // import Prod from 'assets/products/Rectangle10.png';
 
-interface IFile {
+export interface IProductCardProps {
     ProdImage: string;
     title: string;
     price: string;
+    id: string;
+    isChecked(id:string):boolean;
+    handleChecked(e:any):any;
+
   }
-const ProductCard = ({ ProdImage, title, price }:IFile) => (
-  <Card className="rounded">
+const ProductCard = ({
+  ProdImage, title, price, id, isChecked, handleChecked,
+}:IProductCardProps) => (
+  <Card className={['rounded-3 my-2', Styles.screen1_card].join(' ')}>
     <Card.Img variant="top" src={ProdImage} />
     <Card.Body>
-      <Card.Title>{title}</Card.Title>
+      <Card.Title title={title} className="text-truncate">{title}</Card.Title>
       <Card.Text>
-        <Row>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Col className="text-left"><Form.Label>{price}</Form.Label></Col>
-            <Col className="text-right"><Form.Check type="checkbox" inline /></Col>
-          </Form.Group>
-        </Row>
+
+        <Form.Group className="d-flex flex-col justify-content-between" controlId={id}>
+          <Form.Label>{price}</Form.Label>
+          <Form.Check
+            type="checkbox"
+            className="fs-4"
+            name="products"
+            id={id}
+            checked={isChecked(id)}
+            onChange={handleChecked}
+          />
+        </Form.Group>
+
       </Card.Text>
     </Card.Body>
   </Card>

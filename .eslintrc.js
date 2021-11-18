@@ -37,7 +37,8 @@ module.exports = {
     'eol-last': 'warn',
     'import/no-extraneous-dependencies': 'warn',
     'import/extensions': 'off',
-    'react/no-unescaped-entities': 'warn'
+    'react/no-unescaped-entities': 'warn',
+    'no-unused-vars': 'warn',
   },
   settings: {
     'import/resolver': {

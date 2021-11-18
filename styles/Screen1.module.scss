@@ -38,4 +38,12 @@
 		max-height: 150px;
 		@extend .screen1__scroll;
 	}
+
+	&_card {
+		min-height: 240px;
+		img {
+			max-height: 150px;
+			object-fit: contain;
+		}
+	}
 }

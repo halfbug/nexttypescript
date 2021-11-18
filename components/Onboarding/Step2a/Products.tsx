@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
@@ -10,12 +11,14 @@ interface IProductsProps {
   data: IProduct[] | undefined | null;
   heading: string | null;
   handleBackClick(): any;
+  isChecked(id: string):boolean;
+  handleChecked(e:any):any;
     // All other props
   [x:string]: any;
 }
 
 const Products = ({
-  data, heading, handleBackClick, ...props
+  data, heading, handleBackClick, isChecked, handleChecked, ...props
 }:IProductsProps) => (
   <Container {...props}>
     <Row>
@@ -28,10 +31,17 @@ const Products = ({
     </Row>
     <Row className={['bg-light', Styles.screen1_products].join(' ')}>
       {data?.map(({
-        featuredImage, title, price, currencyCode,
+        featuredImage, title, price, currencyCode, id,
       }) => (
-        <Col xs={6} md={3}>
-          <ProductCard ProdImage={featuredImage} title={title} price={`${price} ${currencyCode}`} />
+        <Col xs={6} md={4} lg={3}>
+          <ProductCard
+            ProdImage={featuredImage}
+            title={title}
+            price={`${price} ${currencyCode}`}
+            id={id}
+            isChecked={isChecked}
+            handleChecked={handleChecked}
+          />
         </Col>
       ))}
     </Row>
