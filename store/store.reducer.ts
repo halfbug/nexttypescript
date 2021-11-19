@@ -20,7 +20,7 @@ export const reducer = (
 
   if (action.type === 'NEW_CAMPAIGN') {
     console.log(action.payload);
-    return { ...state, newCampaign: action.payload.newCampaign };
+    return { ...state, newCampaign: { ...state.newCampaign, ...action.payload.newCampaign } };
   }
 
   if (action.type === 'UPDATE_TOTALPRODUCTS') { return { ...state, totalProducts: action.payload.totalProducts }; }

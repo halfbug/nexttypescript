@@ -13,12 +13,13 @@ export interface ICollectionsProps {
     data: ICollection[] | undefined;
     handleCollectionButton(id:string): any;
     handleChecked(e:any):any;
+    isChecked(id:string, entity?:string):boolean;
     // All other props
   [x:string]: any;
 }
 
 export default function Collections({
-  data, handleCollectionButton, handleChecked, ...props
+  data, handleCollectionButton, handleChecked, isChecked, ...props
 }: ICollectionsProps) {
   return (
     <Container {...props}>
@@ -38,7 +39,7 @@ export default function Collections({
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">
-                    <Form.Check type="checkbox" inline className="fs-4" name="collections" id={id} onChange={handleChecked} />
+                    <Form.Check type="checkbox" inline className="fs-4" name="collections" id={id} onChange={handleChecked} checked={isChecked(id, 'collections')} />
                     <p className="m-0">
                       {title}
                       {' '}

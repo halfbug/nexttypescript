@@ -16,8 +16,12 @@ export interface IStore {
 export interface ICampaign {
   name?: string;
   productSelectionCriteria?: string;
-  joinExisting?:boolean;
+  joinExisting?:boolean | number;
   createCampaignInput?: object;
+  productsArray?:string[];
+  collections?: ICollection[];
+  products?: IProduct[];
+
 }
 
 export interface ICollection{

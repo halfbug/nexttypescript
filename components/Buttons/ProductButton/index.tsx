@@ -6,6 +6,9 @@ import useQueryString from 'hooks/useQueryString';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS, TOTAL_PRODUCTS, GET_PRODUCTS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
+import { XCircleFill } from 'react-bootstrap-icons';
+import IconButton from '../IconButton';
+import DeleteButton from '../DeleteButton';
 
 interface IProps {
   disableBtn: boolean;
@@ -13,11 +16,15 @@ interface IProps {
 
 export default function ProductButton({ disableBtn }:IProps) {
   const [, setParams] = useQueryString();
-  const { store, dispatch } = React.useContext(StoreContext);
-  console.log('🚀 ~ file: index.tsx ~ line 13 ~ ProductButton ~ store', store);
+  const {
+    store: { shop, newCampaign }, dispatch,
+  } = React.useContext(StoreContext);
+  // console.log('🚀 ~ file: index.tsx ~ line 13 ~ ProductButton ~ store', store);
+  // const { products, collections }:{
+  //   products:IProduct[]|undefined, collections:ICollection[] | undefined} = newCampaign;
   const { data } = useQuery(TOTAL_PRODUCTS, {
 
-    variables: { shop: store.shop },
+    variables: { shop },
   });
 
   React.useEffect(() => {
@@ -30,26 +37,26 @@ export default function ProductButton({ disableBtn }:IProps) {
     // }
   }, [data]);
 
-  const collections = useQuery(GET_COLLECTIONS, {
+  const collectionsql = useQuery(GET_COLLECTIONS, {
 
-    variables: { shop: store.shop },
+    variables: { shop },
   });
 
   React.useEffect(() => {
-    if (collections.data) {
-      dispatch({ type: 'SET_COLLECTIONS', payload: { collections: collections.data.collections } });
-      console.log(collections.data);
+    if (collectionsql.data) {
+      dispatch({ type: 'SET_COLLECTIONS', payload: { collections: collectionsql.data.collections } });
+      console.log(collectionsql.data);
     }
     // return () => {
     //   cleanup
     // }
-  }, [collections.data]);
+  }, [collectionsql.data]);
 
-  const products = useQuery(GET_PRODUCTS, {
+  const productsql = useQuery(GET_PRODUCTS, {
 
     variables: {
       productQueryInput: {
-        shop: store.shop,
+        shop,
         sort: -1,
         limit: 10000,
       },
@@ -57,14 +64,14 @@ export default function ProductButton({ disableBtn }:IProps) {
   });
 
   React.useEffect(() => {
-    if (products.data) {
-      dispatch({ type: 'SET_PRODUCTS', payload: { products: products.data.products } });
-      console.log(products.data);
+    if (productsql.data) {
+      dispatch({ type: 'SET_PRODUCTS', payload: { products: productsql.data.products } });
+      console.log(productsql.data);
     }
     // return () => {
     //   cleanup
     // }
-  }, [products.data]);
+  }, [productsql.data]);
 
   const handleEditProduct = () => {
     setParams({ ins: '2a' });
@@ -83,9 +90,20 @@ export default function ProductButton({ disableBtn }:IProps) {
 
         </Col>
       </Row>
+      { newCampaign?.products && newCampaign?.products?.length > 0 && (
       <Row className="m-2 justify-content-center">
-        {/* <Col className="text-muted">25 product(s)/2 collection(s) selected</Col> */}
+        <Col className="text-muted">
+          {(newCampaign?.products && newCampaign?.products?.length) || 0}
+          {' '}
+          product(s)/
+          {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
+          {' '}
+          collection(s) selected
+          {' '}
+          <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
+        </Col>
       </Row>
+      )}
     </>
   );
 }

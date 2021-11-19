@@ -1,8 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react';
-// import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
-// import { Row } from 'react-bootstrap';
 import {
   Col, Form, ListGroup, Row, Button,
 } from 'react-bootstrap';
@@ -26,13 +24,17 @@ type SelectedType = {
 
 const Screen1 = ({ show }: IScreen1Props) => {
   const [, setParams] = useQueryString();
-  const { store } = React.useContext(StoreContext);
+  const { store, dispatch } = React.useContext(StoreContext);
   const [view, setview] = useState<'List' | 'Detail' | 'Search'>('List');
   const [products, setproducts] = useState<IProduct[] | null | undefined>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [scollections, setscollections] = useState<ICollection[] | undefined>(undefined);
-  const [campaign, setcampaign] = useState<SelectedType>({ collections: [], products: [] });
-
+  const [campaign, setcampaign] = useState<SelectedType | undefined>(
+    {
+      collections: store.newCampaign?.collections ?? [],
+      products: store.newCampaign?.products ?? [],
+    },
+  );
   const getEntityById = (id:string, entity: string):
    ICollection | IProduct => store?.[entity]?.find(
     (col:IProduct | ICollection) => col.id === id,
@@ -51,7 +53,6 @@ const Screen1 = ({ show }: IScreen1Props) => {
       if (collection) { setproducts(collection.products); setTitle(collection.title); }
     }
   };
-  // console.log('🚀 ~ file: Screen1.tsx ~ line 20 ~ Screen1 ~ store', store);
 
   const handleSearch = (e:any) => {
     const { value } = e.target;
@@ -68,8 +69,6 @@ const Screen1 = ({ show }: IScreen1Props) => {
     setscollections(filteredCollections);
     setproducts(filteredProducts);
     setTitle(`Search Results for "${value}"`);
-
-    console.log(e.target.value);
   };
 
   const handleChecked = (e: any) => {
@@ -99,10 +98,33 @@ const Screen1 = ({ show }: IScreen1Props) => {
     setcampaign(ncamp);
   };
 
-  const isChecked = (id: string):boolean => Boolean(
-    campaign?.products?.find((cprod) => cprod.id === id),
-  );
-  console.log('🚀 ~ file: Screen1.tsx ~ line 35 ~ Screen1 ~ campaign', campaign);
+  const isChecked = (id: string, entity?:string):boolean => {
+    if (entity) {
+      return Boolean(
+        campaign?.collections?.find((col) => col.id === id),
+      );
+    }
+    return Boolean(
+      campaign?.products?.find((cprod) => cprod.id === id),
+    );
+  };
+
+  const handleSave = () => {
+    if (campaign?.products && campaign?.products?.length < 81) {
+      dispatch({
+        type: 'NEW_CAMPAIGN',
+        payload: {
+          newCampaign: {
+            products: campaign?.products,
+            collections: campaign?.collections,
+            productsArray: campaign?.products?.map((prod) => prod.id),
+          },
+        },
+      });
+    }
+    setParams({ ins: 2 });
+  };
+
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">
       <Layout handleSearch={handleSearch} campaign={campaign}>
@@ -139,7 +161,12 @@ const Screen1 = ({ show }: IScreen1Props) => {
           isChecked={isChecked}
           handleChecked={handleChecked}
         />
-        <Collections data={scollections || store.collections} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} handleChecked={handleChecked} />
+        <Collections data={scollections || store.collections} isChecked={isChecked} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} handleChecked={handleChecked} />
+
+        <Form.Control.Feedback type="invalid" className={`${campaign?.products && campaign?.products?.length > 80 ? 'd-block' : 'd-none'} text-center`}>
+          you can select only 80 products.
+        </Form.Control.Feedback>
+
         <Row className="mt-4">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}
@@ -149,7 +176,7 @@ const Screen1 = ({ show }: IScreen1Props) => {
           </Col>
           <Col xs={6} className="text-start">
             {/* <RBButton>Save</RBButton> */}
-            <Button variant="primary" size="lg" className="rounded-pill">
+            <Button variant="primary" size="lg" className="rounded-pill" onClick={handleSave}>
               Save
             </Button>
           </Col>

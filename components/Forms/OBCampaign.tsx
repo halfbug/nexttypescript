@@ -1,10 +1,8 @@
 import * as React from 'react';
 import {
-  Form, Row, Col,
+  Form, Row, Col, ToggleButtonGroup, ToggleButton,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
-import Exclaim from 'assets/images/exclaimation.svg';
-import RBButton from 'components/Buttons/RoundedButton/RBButton';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
@@ -12,6 +10,7 @@ import { StoreContext } from 'store/store.context';
 import { ICampaign } from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
+import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { CREATE_CAMPAIGN } from 'store/store.graphql';
 
 export default function OBCampaign() {
@@ -23,11 +22,19 @@ export default function OBCampaign() {
   ] = useMutation<ICampaign, ICampaign | null>(CREATE_CAMPAIGN);
 
   const { store, dispatch } = React.useContext(StoreContext);
-  // eslint-disable-next-line no-unused-vars
-  const [joinBtnVal, setjoinBtnVal] = React.useState(false);
-  // eslint-disable-next-line no-unused-vars
+  // // eslint-disable-next-line no-unused-vars
+  // const [joinBtnVal, setjoinBtnVal] = React.useState(false);
+  // // eslint-disable-next-line no-unused-vars
   const [disableBtn, setdisableBtn] = React.useState(true);
 
+  const campaignInitial = store?.newCampaign ?? {
+
+    name: '',
+    productSelectionCriteria: '',
+    joinExisting: 1,
+  };
+
+  console.log('🚀 ~ file: OBCampaign.tsx ~ line 32 ~ OBCampaign ~ store?.newCampaign', store?.newCampaign);
   const validationSchema = yup.object({
     name: yup
       .string()
@@ -42,35 +49,36 @@ export default function OBCampaign() {
   const {
     handleSubmit, values, handleChange, touched, errors,
   }: FormikProps<ICampaign> = useFormik<ICampaign>({
-    initialValues: {
-      name: '',
-      productSelectionCriteria: '',
-    },
+    initialValues: campaignInitial,
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       console.log('....', valz);
       if (validateForm) validateForm(valz);
-      const { name, productSelectionCriteria } = valz;
-
+      const { name, productSelectionCriteria, joinExisting } = valz;
       await addCampaign({
         variables: {
           createCampaignInput: {
             storeId: store.id,
             name,
             productSelectionCriteria,
-            joinExisting: joinBtnVal,
+            joinExisting: Boolean(joinExisting),
+            products: store?.newCampaign?.productsArray,
           },
         },
       });
 
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: valz } });
       setParams({ ins: 3 });
-      // setTimeout(() => resetForm(), 5000);
     },
   });
 
+  const setValue = (field: string, value: string | number) => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
+  };
+
+  console.log('valuess ------>', values);
   return (
     <Col className="text-sm-start" md={8}>
 
@@ -86,6 +94,7 @@ export default function OBCampaign() {
                 value={values.name}
                 onChange={handleChange}
                 isInvalid={touched.name && !!errors.name}
+                onBlur={(e) => setValue('name', e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.name}
@@ -119,7 +128,8 @@ export default function OBCampaign() {
               name="productSelectionCriteria"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
               value="bestseller"
-              onClick={() => setdisableBtn(false)}
+              onClick={() => setValue('productSelectionCriteria', 'bestseller')}
+              checked={values.productSelectionCriteria === 'bestseller'}
             />
             <Form.Check
               inline
@@ -127,9 +137,10 @@ export default function OBCampaign() {
               label="Newest products"
               type="radio"
               name="productSelectionCriteria"
-              value="newproducts"
+              value="newest"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
-              onClick={() => setdisableBtn(false)}
+              onClick={() => setValue('productSelectionCriteria', 'newest')}
+              checked={values.productSelectionCriteria === 'newest'}
             />
           </Col>
         </Row>
@@ -139,11 +150,12 @@ export default function OBCampaign() {
               inline
               label="Specific products/collections (up to 80 products)"
               onChange={handleChange}
-              onClick={() => setdisableBtn(false)}
+              onClick={() => { setdisableBtn(false); setValue('productSelectionCriteria', 'custom'); }}
               type="radio"
               name="productSelectionCriteria"
               isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
-              value=""
+              value="custom"
+              checked={values.productSelectionCriteria === 'custom'}
             />
 
           </Col>
@@ -153,23 +165,35 @@ export default function OBCampaign() {
         </Row>
         <ProductButton disableBtn={disableBtn} />
         <Row className="mt-3">
-          <Col xs={8}><h4>Allow customers to join existing Groupshop pages</h4></Col>
-          <Col className="text-left"><Exclaim /></Col>
+          <Col xs={12}>
+            <h4>
+              Allow customers to join existing Groupshop pages
+              {' '}
+              {' '}
+              <InfoCircle />
+
+            </h4>
+
+          </Col>
+
         </Row>
         <Row className="text-muted"><h6>When enabled, customers can access discounts from existing Groupshop pages</h6></Row>
         <Row className="mt-2">
           {/* <Col xs={3} md={4}> </Col> */}
-          <Col xs={2} className="text-right">
-            <RBButton
-              onClick={() => setjoinBtnVal(true)}
-              // onChange={handleChange}
-            >
-              Enable
+          <Col xs={12} md={6} className="text-right">
+            <ToggleButtonGroup type="radio" name="joinExisting" value={values.joinExisting}>
+              <ToggleButton variant="outline-primary" className="rounded-pill me-2" id="joinExisting-e" value={1} onChange={handleChange} onClick={() => setValue('joinExisting', 1)}>
+                <Check2Circle className="fs-4" />
+                {' '}
+                Enabled
+              </ToggleButton>
+              <ToggleButton variant="outline-primary" className="rounded-pill" id="joinExisting-d" value={0} onChange={handleChange} onClick={() => setValue('joinExisting', 0)}>
+                <XCircle className="fs-5" />
+                {' '}
+                Disabled
+              </ToggleButton>
 
-            </RBButton>
-          </Col>
-          <Col xs={9} className="text-left">
-            <RBButton onClick={() => setjoinBtnVal(false)}>Disable</RBButton>
+            </ToggleButtonGroup>
           </Col>
         </Row>
         <Row className="mt-5">

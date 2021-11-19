@@ -15,6 +15,7 @@ const initialState: IStore = {
   installationStep: 0,
   logoImage: '',
   industry: '',
+  newCampaign: { products: [], collections: [], productsArray: [] },
 };
 
 export const StoreContext = React.createContext<StoreContextType>(
