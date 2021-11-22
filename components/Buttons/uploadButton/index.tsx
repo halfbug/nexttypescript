@@ -11,12 +11,12 @@ export interface IUploadLogoProps {
 //   // eslint-disable-next-line no-unused-vars
 //   // setFieldValue(name:string, loc:string)?: any,
   // eslint-disable-next-line no-unused-vars
-  handleLogo(files: any): any;
+ // handleLogo(files: any): any;
 //   // setFieldValue: any;
 }
 
 // eslint-disable-next-line no-unused-vars
-export default function UploadLogo({ handleLogo, setFieldValue }:IUploadLogoProps) {
+export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
 

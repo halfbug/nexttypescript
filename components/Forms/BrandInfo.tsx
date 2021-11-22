@@ -29,16 +29,6 @@ export default function BrandInfo() {
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
 
-  function handleLogo(file: any) {
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' },
-    };
-
-    axios.post('http://localhost:5000/upload', file, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
-
   const validationSchema = yup.object({
     brandName: yup
       .string()
@@ -119,7 +109,7 @@ export default function BrandInfo() {
 
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
-          <UploadLogo handleLogo={handleLogo} setFieldValue={setFieldValue} />
+          <UploadLogo setFieldValue={setFieldValue} />
           <Form.Text className="text-muted p-2 align-self-center">
             Under 5 MB (Formats: PNG, JPG, JPEG)
           </Form.Text>
