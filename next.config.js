@@ -11,6 +11,7 @@ module.exports = {
   },
   env: {
     BE_URL: process.env.BE_URL,
+    API_URL: process.env.API_URL,
   },
   webpack(config) {
     config.module.rules.push({

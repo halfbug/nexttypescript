@@ -28,13 +28,11 @@ export default function BrandInfo() {
   const [addBI, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
-  // console.log('🚀 ~ file: [ins].tsx ~ line 25 ~ store', store);
 
   function handleLogo(file: any) {
     const config = {
       headers: { 'content-type': 'multipart/form-data' },
     };
-    console.log(file);
 
     axios.post('http://localhost:5000/upload', file, config)
       .then((res) => console.log(res))
@@ -121,7 +119,7 @@ export default function BrandInfo() {
 
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
-          <UploadLogo handleLogo={handleLogo} />
+          <UploadLogo handleLogo={handleLogo} setFieldValue={setFieldValue} />
           <Form.Text className="text-muted p-2 align-self-center">
             Under 5 MB (Formats: PNG, JPG, JPEG)
           </Form.Text>
