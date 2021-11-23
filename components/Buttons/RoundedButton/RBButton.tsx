@@ -37,31 +37,26 @@ const RBButton = ({
   onClick,
   onChange,
   ...props
-}: ButtonProps) => {
-  console.log('inbutton');
-  // const mode = primary ?
-  // styles['storybook-button--primary'] : styles['storybook-button--secondary'];
-  return (
-    <button
+}: ButtonProps) => (
+  <button
       // variant="outline-primary"
-      className={styles.rb__button}
+    className={styles.rb__button}
       // eslint-disable-next-line react/button-has-type
-      type="button"
+    type="button"
       // type="button"
       // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       // style={{ backgroundColor }}
-      {...props}
-      onClick={onClick}
-      onChange={onChange}
-    >
+    {...props}
+    onClick={onClick}
+    onChange={onChange}
+  >
+    <span>
       <span>
-        <span>
-          {children}
-        </span>
+        {children}
       </span>
-    </button>
-  );
-};
+    </span>
+  </button>
+);
 
 RBButton.defaultProps = {
   primary: false,

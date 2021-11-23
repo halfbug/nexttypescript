@@ -36,30 +36,25 @@ const Button = ({
   children,
   onClick,
   ...props
-}: ButtonProps) => {
-  console.log('inbutton');
-  // const mode = primary ?
-  // styles['storybook-button--primary'] : styles['storybook-button--secondary'];
-  return (
-    <button
+}: ButtonProps) => (
+  <button
       // variant="outline-primary"
-      className={styles.onboarding__button}
+    className={styles.onboarding__button}
       // eslint-disable-next-line react/button-has-type
       // type={props.type}
       // type="button"
       // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
       // style={{ backgroundColor }}
-      {...props}
-      onClick={onClick}
-    >
+    {...props}
+    onClick={onClick}
+  >
+    <span>
       <span>
-        <span>
-          {children}
-        </span>
+        {children}
       </span>
-    </button>
-  );
-};
+    </span>
+  </button>
+);
 
 Button.defaultProps = {
   primary: false,

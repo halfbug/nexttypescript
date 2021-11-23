@@ -22,26 +22,23 @@ export default function OBCampaign() {
   ] = useMutation<ICampaign, ICampaign | null>(CREATE_CAMPAIGN);
 
   const { store, dispatch } = React.useContext(StoreContext);
-  // // eslint-disable-next-line no-unused-vars
-  // const [joinBtnVal, setjoinBtnVal] = React.useState(false);
-  // // eslint-disable-next-line no-unused-vars
+
   const [disableBtn, setdisableBtn] = React.useState(true);
 
   const campaignInitial = store?.newCampaign ?? {
 
     name: '',
-    productSelectionCriteria: '',
+    criteria: '',
     joinExisting: 1,
   };
 
-  console.log('🚀 ~ file: OBCampaign.tsx ~ line 32 ~ OBCampaign ~ store?.newCampaign', store?.newCampaign);
   const validationSchema = yup.object({
     name: yup
       .string()
       .required('Campaign Name is required.')
       .min(5, 'Too Short please give least five characters')
       .max(20, 'Too Long !! only 20 characters allowed.'),
-    productSelectionCriteria: yup
+    criteria: yup
       .string()
       .required('Select product options'),
   });
@@ -54,16 +51,17 @@ export default function OBCampaign() {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
-      console.log('....', valz);
       if (validateForm) validateForm(valz);
-      const { name, productSelectionCriteria, joinExisting } = valz;
+      const { name, criteria, joinExisting } = valz;
+
       await addCampaign({
         variables: {
           createCampaignInput: {
             storeId: store.id,
             name,
-            productSelectionCriteria,
-            joinExisting: Boolean(joinExisting),
+            criteria,
+            // eslint-disable-next-line radix
+            joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             products: store?.newCampaign?.productsArray,
           },
         },
@@ -78,7 +76,6 @@ export default function OBCampaign() {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
 
-  console.log('valuess ------>', values);
   return (
     <Col className="text-sm-start" md={8}>
 
@@ -125,22 +122,22 @@ export default function OBCampaign() {
               label="Best sellers"
               onChange={handleChange}
               type="radio"
-              name="productSelectionCriteria"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
               value="bestseller"
-              onClick={() => setValue('productSelectionCriteria', 'bestseller')}
-              checked={values.productSelectionCriteria === 'bestseller'}
+              onClick={() => setValue('criteria', 'bestseller')}
+              checked={values.criteria === 'bestseller'}
             />
             <Form.Check
               inline
               onChange={handleChange}
               label="Newest products"
               type="radio"
-              name="productSelectionCriteria"
+              name="criteria"
               value="newest"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
-              onClick={() => setValue('productSelectionCriteria', 'newest')}
-              checked={values.productSelectionCriteria === 'newest'}
+              isInvalid={touched.criteria && !!errors.criteria}
+              onClick={() => setValue('criteria', 'newest')}
+              checked={values.criteria === 'newest'}
             />
           </Col>
         </Row>
@@ -150,17 +147,17 @@ export default function OBCampaign() {
               inline
               label="Specific products/collections (up to 80 products)"
               onChange={handleChange}
-              onClick={() => { setdisableBtn(false); setValue('productSelectionCriteria', 'custom'); }}
+              onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
               type="radio"
-              name="productSelectionCriteria"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
               value="custom"
-              checked={values.productSelectionCriteria === 'custom'}
+              checked={values.criteria === 'custom'}
             />
 
           </Col>
           <Form.Control.Feedback type="invalid">
-            {errors.productSelectionCriteria}
+            {errors.criteria}
           </Form.Control.Feedback>
         </Row>
         <ProductButton disableBtn={disableBtn} />
@@ -205,9 +202,9 @@ export default function OBCampaign() {
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
             <Button type="submit"> Next </Button>
-            {/* onClick={() => setParams({ ins: 3 })} */}
+
           </Col>
-          {/* <Col xs={3} md={4}>&nbsp; </Col> */}
+
         </Row>
 
       </Form>

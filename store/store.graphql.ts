@@ -51,7 +51,7 @@ const CREATE_CAMPAIGN = gql`
     id
     status
     joinExisting
-    productSelectionCriteria
+    criteria
     }
   }
 `;

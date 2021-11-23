@@ -33,7 +33,7 @@ export default function OBCampaign() {
       .required('Campaign Name is required.')
       .min(5, 'Too Short please give least five characters')
       .max(20, 'Too Long !! only 20 characters allowed.'),
-    productSelectionCriteria: yup
+    criteria: yup
       .string()
       .required('Select product options'),
   });
@@ -43,7 +43,7 @@ export default function OBCampaign() {
   }: FormikProps<ICampaign> = useFormik<ICampaign>({
     initialValues: {
       name: '',
-      productSelectionCriteria: '',
+      criteria: '',
       joinExisting: joinBtnVal,
     },
     validationSchema,
@@ -52,14 +52,14 @@ export default function OBCampaign() {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       console.log('....', valz);
       if (validateForm) validateForm(valz);
-      const { name, productSelectionCriteria, joinExisting } = valz;
+      const { name, criteria, joinExisting } = valz;
 
       await addCampaign({
         variables: {
           createCampaignInput: {
             storeId: store.id,
             name,
-            productSelectionCriteria,
+            criteria,
             joinExisting,
           },
         },
@@ -70,8 +70,6 @@ export default function OBCampaign() {
       // setTimeout(() => resetForm(), 5000);
     },
   });
-  console.log(errors);
-  console.log(store);
 
   return (
     <Col className="text-sm-start" md={8}>
@@ -118,8 +116,8 @@ export default function OBCampaign() {
               label="Best sellers"
               onChange={handleChange}
               type="radio"
-              name="productSelectionCriteria"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
               value="bestseller"
             />
             <Form.Check
@@ -127,9 +125,9 @@ export default function OBCampaign() {
               onChange={handleChange}
               label="Newest products"
               type="radio"
-              name="productSelectionCriteria"
+              name="criteria"
               value="newproducts"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              isInvalid={touched.criteria && !!errors.criteria}
             />
           </Col>
         </Row>
@@ -140,14 +138,14 @@ export default function OBCampaign() {
               label="Specific products/collections (up to 80 products)"
               onChange={handleChange}
               type="radio"
-              name="productSelectionCriteria"
-              isInvalid={touched.productSelectionCriteria && !!errors.productSelectionCriteria}
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
               value=""
             />
 
           </Col>
           <Form.Control.Feedback type="invalid">
-            {errors.productSelectionCriteria}
+            {errors.criteria}
           </Form.Control.Feedback>
         </Row>
         <Row className="mt-3 justify-content-center">

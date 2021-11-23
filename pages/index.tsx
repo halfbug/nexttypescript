@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const { query: { shop, ins } } = useRouter();
   const { installationDialogue } = useInstallation(ins);
   // const { merchantStore } = useStore(sci || undefined);
-  console.log('inside shop folder');
+
   return (
     <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       dashboard

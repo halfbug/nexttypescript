@@ -19,9 +19,7 @@ export default function ProductButton({ disableBtn }:IProps) {
   const {
     store: { shop, newCampaign }, dispatch,
   } = React.useContext(StoreContext);
-  // console.log('🚀 ~ file: index.tsx ~ line 13 ~ ProductButton ~ store', store);
-  // const { products, collections }:{
-  //   products:IProduct[]|undefined, collections:ICollection[] | undefined} = newCampaign;
+
   const { data } = useQuery(TOTAL_PRODUCTS, {
 
     variables: { shop },
@@ -30,7 +28,6 @@ export default function ProductButton({ disableBtn }:IProps) {
   React.useEffect(() => {
     if (data) {
       dispatch({ type: 'UPDATE_TOTALPRODUCTS', payload: { totalProducts: data.TotalProducts.count } });
-      console.log(data);
     }
     // return () => {
     //   cleanup
@@ -45,7 +42,6 @@ export default function ProductButton({ disableBtn }:IProps) {
   React.useEffect(() => {
     if (collectionsql.data) {
       dispatch({ type: 'SET_COLLECTIONS', payload: { collections: collectionsql.data.collections } });
-      console.log(collectionsql.data);
     }
     // return () => {
     //   cleanup
@@ -66,7 +62,6 @@ export default function ProductButton({ disableBtn }:IProps) {
   React.useEffect(() => {
     if (productsql.data) {
       dispatch({ type: 'SET_PRODUCTS', payload: { products: productsql.data.products } });
-      console.log(productsql.data);
     }
     // return () => {
     //   cleanup
