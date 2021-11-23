@@ -10946,6 +10946,7 @@ fsevents@^1.2.7:
     react: 17.0.2
     react-bootstrap: ^2.0.1
     react-bootstrap-icons: ^1.6.1
+    react-colorful: ^5.5.1
     react-dom: 17.0.2
     react-test-renderer: ^17.0.2
     sass: ^1.43.4
@@ -15889,6 +15890,16 @@ fsevents@^1.2.7:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: aaffa002d9372f692238a29229ff1e991d6d0077f4f83dcdf88ad3106a0737aa56e415a71b91fb585f8532e04f09d3f0fabbc5cd8291137206dc3c1a0d70674f
+  languageName: node
+  linkType: hard
+
+"react-colorful@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "react-colorful@npm:5.5.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: e60811781716e57f0990379eff20d6f22d4d35b9e858c47ecf857c1dc1c1a2274c924ded7248bad5f1e2fbf2aab06e59b12852910c8dee5e6850f8e4df293670
   languageName: node
   linkType: hard
 
