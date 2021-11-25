@@ -178,7 +178,7 @@ export default function Settings() {
             <span className="text-muted">4/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button type="submit"> Next </Button>
+            <Button type="submit"> Publish </Button>
             {/* onClick={() => setParams({ ins: 3 })} */}
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}

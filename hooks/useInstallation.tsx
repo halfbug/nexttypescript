@@ -6,6 +6,7 @@ import Step2 from 'components/Onboarding/Step2/step2';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import Step3 from 'components/Onboarding/Step3/step3';
 import Step4 from 'components/Onboarding/Step4/step4';
+import Step5 from 'components/Onboarding/Step5/step5';
 
 const useInstallation = (ins: string | string[] | undefined) => {
   const installationDialogue = useCallback((): React.ReactNode => {
@@ -33,6 +34,10 @@ const useInstallation = (ins: string | string[] | undefined) => {
       case '4':
         return (
           <Step4 show />
+        );
+      case '5':
+        return (
+          <Step5 show />
         );
       default:
         return (

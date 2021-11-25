@@ -1,0 +1,43 @@
+@import "./variables.scss";
+.welcome {
+  // font-size: 18px;
+  font-weight: 400;
+  .leftbar {
+    @extend .border-end;
+  }  
+  .box{
+    color: black !important;
+    @extend .rounded, .px-0;
+    background-image: $brand-gradiant;
+    box-sizing: border-box;
+    // font-weight: 600;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 2;
+    border: none;
+  
+  }
+	.box div {
+		// align-items: center;
+		background-color: #fff;
+		@extend .rounded;
+		// margin: 0.1rem;
+		white-space: nowrap;
+		display: flex;
+		justify-content: center;
+		height: 98%;
+		// transition: background .5s ease;
+		width: 98%;
+  }
+
+		// .box div {
+		// 	@extend .p-2, .px-3, .fs-6;
+		// }
+    	h1, h5, h6 {
+        @extend .fw-bold;
+            color: black;
+            text-transform: uppercase;
+      }
+    }
