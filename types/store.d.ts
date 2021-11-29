@@ -12,6 +12,7 @@ export interface IStore {
   collections?: ICollection[];
   products?: IProduct[];
   [x:string]: any;
+  settings?: ISettings;
 }
 export interface ICampaign {
   name?: string;
@@ -37,4 +38,11 @@ export interface IProduct{
   featuredImage: string;
   price: string;
   currencyCode: string;
+}
+export interface ISettings{
+  brandColor: string;
+  customColor: string;
+  customBg: string;
+  imageUrl: string;
+  youtubeUrl: string;
 }

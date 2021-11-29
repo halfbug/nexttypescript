@@ -17,10 +17,11 @@ import uploadbtn from 'assets/images/Rectangle500.png';
 import { Eyedropper } from 'react-bootstrap-icons';
 
 interface IValues {
-    brandName: string;
-    industry: string;
-    logoImage: string;
-    // setFieldValue: ()=>void;
+    brandColor: string;
+    customColor: string;
+    customBg: string;
+    imageUrl: string;
+    youtubeUrl: string;
   }
 
 export default function Settings() {
@@ -37,43 +38,47 @@ export default function Settings() {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
-    brandName: yup
+    brandColor: yup
       .string()
-      .required('Brand Name is required.')
-      .min(5, 'Too Short please give least five characters')
-      .max(20, 'Too Long !! only 20 characters allowed.'),
-
+      .required('Brand Color is required.'),
   });
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
-      brandName: '',
-      industry: '',
-      logoImage: '',
+      brandColor: '',
+      customColor: '',
+      customBg: '',
+      imageUrl: '',
+      youtubeUrl: '',
     },
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { brandName, industry, logoImage } = valz;
+      const {
+        brandColor, customColor, customBg, imageUrl, youtubeUrl,
+      } = valz;
 
-      // await addSet({
-      //   variables: {
-      //     updateStoreInput: {
-      //       id: store.id,
-      //       shop: store.shop,
-      //       brandName,
-      //       industry,
-      //       logoImage,
-      //       installationStep: 2,
-      //     },
-      //   },
-      // });
-      // dispatch({ type: 'UPDATE_STORE', payload: valz });
-      setParams({ ins: 2 });
-      // console.log(valz);
+      await addSet({
+        variables: {
+          updateStoreInput: {
+            id: store.id,
+            settings: {
+              brandColor,
+              customColor,
+              customBg,
+              imageUrl,
+              youtubeUrl,
+            },
+            installationStep: 5,
+          },
+        },
+      });
+      dispatch({ type: 'UPDATE_STORE_SETTINGS', payload: { settings: valz } });
+      setParams({ ins: 5 });
+      console.log('SETTINGS VALZ', valz);
       // setTimeout(() => resetForm(), 5000);
     },
   });
@@ -87,18 +92,19 @@ export default function Settings() {
         <Row className="mt-3">
           <Col xs={12}>
             <Form.Group className="form-inline" controlId="brandNamevalidation">
-              <Form.Label htmlFor="exampleColorInput"><span className={[`${styles.input_click}`, 'py-2', 'px-2', 'text-left'].join(' ')}>Click to pick</span></Form.Label>
+              <Form.Label htmlFor="brandColor"><span className={[`${styles.input_click}`, 'py-2', 'px-2', 'text-left'].join(' ')}>Click to pick</span></Form.Label>
               <Form.Control
                 // className={styles.display}
                 type="color"
-                id="exampleColorInput"
-                name="colorPicker"
+                id="brandColor"
+                name="brandColor"
                 defaultValue="#000000"
                 title="Choose your color"
+                onChange={handleChange}
               />
               {' '}
               <Form.Control.Feedback type="invalid">
-                {errors.brandName}
+                {errors.brandColor}
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -115,10 +121,11 @@ export default function Settings() {
                 <Form.Control
                   className="d-none"
                   type="color"
-                  id="customBgColor"
-                  name="customBgColor"
+                  id="customColor"
+                  name="customColor"
                   defaultValue="#000000"
                   title="Choose your color"
+                  onChange={handleChange}
                   ref={front}
                 />
                 <span className={styles.imgbox}>
@@ -132,7 +139,16 @@ export default function Settings() {
               <Form.Group className={styles.display} controlId="bgBanner">
                 <img src={bannerbg.src} alt="cc" />
                 <Form.Control.Feedback type="invalid">
-                  {errors.brandName}
+                  {/* <Form.Control
+                    type=""
+                    id="customBg"
+                    name="customBg"
+                    defaultValue="#000000"
+                    title="Choose your color"
+                    onChange={handleChange}
+                  />
+                  {errors.customBg} */}
+
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -143,14 +159,14 @@ export default function Settings() {
               <Form.Check
                 label="Image"
                 name="group1"
+                value="imageUrl"
                 type="radio"
-                id="cusimage"
               />
               <Form.Check
                 label="Youtube video"
                 name="group1"
+                value="youtubeUrl"
                 type="radio"
-                id="youtube"
               />
 
             </Col>
