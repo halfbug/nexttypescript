@@ -13,6 +13,7 @@ export interface IStore {
   products?: IProduct[];
   [x:string]: any;
   settings?: ISettings;
+  rewards?: string;
 }
 export interface ICampaign {
   name?: string;
