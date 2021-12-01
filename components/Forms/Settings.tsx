@@ -42,7 +42,7 @@ export default function Settings() {
   const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
-
+  console.log(store);
   const validationSchema = yup.object({
     brandColor: yup
       .string()

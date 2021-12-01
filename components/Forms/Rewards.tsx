@@ -4,24 +4,102 @@ import {
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
+import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+import { StoreContext } from 'store/store.context';
+import { useMutation } from '@apollo/client';
+import { ICampaign } from 'types/store';
+import { UPDATE_CAMPAIGN } from 'store/store.graphql';
+
+interface IValues {
+  rewards: string;
+}
 
 export default function Rewards() {
   const [, setParams] = useQueryString();
+  const [addReward, { data, loading, error }] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
+  // if (error) return `Submission error! ${error.message}`;
+  const { store, dispatch } = React.useContext(StoreContext);
+
+  const validationSchema = yup.object({
+    rewards: yup
+      .string()
+      .required('required.'),
+
+  });
+
+  const {
+    handleSubmit, values, handleChange, touched, errors, setFieldValue,
+  }: FormikProps<IValues> = useFormik<IValues>({
+    initialValues: {
+      rewards: '',
+    },
+    validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
+    onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+      if (validateForm) validateForm(valz);
+      const { rewards } = valz;
+      console.log(store);
+      const id = store?.newCampaign?.id;
+      if (id) {
+        await addReward({
+          variables: {
+            updateCampaignInput: {
+              id,
+              rewards,
+            },
+          },
+        });
+      }
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
+      // setParams({ ins: 4 });
+      console.log('@@@@@@@@@@@@', store);
+    },
+  });
+
   return (
     <Col className="text-sm-start" md={8}>
 
-      <Form>
+      <Form noValidate onSubmit={handleSubmit}>
         <Row className="mt-3"><h4>Adjust your target sales volume</h4></Row>
         <Row className="text-muted"><h6>Choose one of our recommended options. You can adjust them later on in the Settings page.</h6></Row>
         <Row className="mt-2">
           <Col>
-            line bars
+            <Form.Check
+              inline
+              label="Reward1"
+              onChange={handleChange}
+              type="radio"
+              name="rewards"
+              isInvalid={touched.rewards && !!errors.rewards}
+              value="reward-1"
+            />
+
           </Col>
           <Col>
-            1
+            <Form.Check
+              inline
+              label="Reward1"
+              onChange={handleChange}
+              type="radio"
+              name="rewards"
+              isInvalid={touched.rewards && !!errors.rewards}
+              value="reward-2"
+            />
+
           </Col>
           <Col>
-            1
+            <Form.Check
+              inline
+              label="Reward1"
+              onChange={handleChange}
+              type="radio"
+              name="rewards"
+              isInvalid={touched.rewards && !!errors.rewards}
+              value="reward-3"
+            />
+
           </Col>
         </Row>
         <Row className="mt-5">
@@ -32,7 +110,7 @@ export default function Rewards() {
             <span className="text-muted">2/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button onClick={() => setParams({ ins: 4 })}> Next </Button>
+            <Button type="submit"> Next </Button>
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>

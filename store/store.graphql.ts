@@ -77,9 +77,22 @@ const UPDATE_STORE_SETTINGS = gql`
 }
   }
 `;
+const UPDATE_CAMPAIGN = gql`
+  mutation updateCampaign(
+    $updateCampaignInput: UpdateCampaignInput!
+    ) {
+    updateCampaign(updateCampaignInput: $updateCampaignInput) {
+    id
+    status
+    joinExisting
+    criteria
+    rewards
+    }
+  }
+`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
-  UPDATE_STORE_SETTINGS,
+  UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN,
 };

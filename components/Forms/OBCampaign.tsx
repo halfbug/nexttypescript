@@ -54,7 +54,7 @@ export default function OBCampaign() {
       if (validateForm) validateForm(valz);
       const { name, criteria, joinExisting } = valz;
 
-      await addCampaign({
+      const campObj:null | any = await addCampaign({
         variables: {
           createCampaignInput: {
             storeId: store.id,
@@ -66,8 +66,9 @@ export default function OBCampaign() {
           },
         },
       });
-
-      dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: valz } });
+      const { id } = campObj.data.createCampaign;
+      const newObj = { ...valz, id };
+      dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: newObj } });
       setParams({ ins: 3 });
     },
   });

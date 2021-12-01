@@ -15,6 +15,7 @@ export interface IStore {
   settings?: ISettings;
 }
 export interface ICampaign {
+  id?: string | null | undefined;
   name?: string;
   criteria?: string;
   joinExisting?: any;
@@ -22,6 +23,7 @@ export interface ICampaign {
   productsArray?:string[];
   collections?: ICollection[];
   products?: IProduct[];
+  rewards?: string;
 
 }
 
