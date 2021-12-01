@@ -108,7 +108,7 @@ export default function Rewards() {
             <span className="text-muted">2/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button onClick={() => setParams({ ins: 3 })}> Next </Button>
+            <Button onClick={() => setParams({ ins: 4 })}> Next </Button>
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>

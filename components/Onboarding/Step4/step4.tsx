@@ -15,7 +15,7 @@ interface IStep4Props {
 const Step4 = ({ show }: IStep4Props) => (
   <Dialogue show={show}>
     {/* <div className={styles.WelcomeModal}> */}
-    <Container className={styles.welcome}>
+    <Container className={styles.ob_settings}>
       <ProgressBar progress="85" />
       <Row className="my-4">
         <LeftPanel

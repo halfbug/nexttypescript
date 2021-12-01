@@ -12,8 +12,10 @@ $font-weight-light: 400 !default;
 $font-weight-normal: 500 !default;
 $font-weight-bold: 600 !default;
 $font-weight-bolder: 700 !default;
+$enable-gradients: true;
 
 $primary: #403f43;
+$secondary: #f3f3f3;
 @import "~bootstrap/scss/variables";
 $small-font-size: .675em !default;
 

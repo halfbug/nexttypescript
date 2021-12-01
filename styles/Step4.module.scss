@@ -1,19 +1,93 @@
 @import "./variables.scss";
-.welcome {
+.ob_settings {
 	@extend .text-center;
-	@extend .fw-bold;
-	.input_click {
-        border: 1px solid grey !important;
-        border-radius: 2px !important;
-        width: 200px !important;
-        background: white !important;
+	// @extend .fw-bold;
+	&__thumbnail {
+		@extend .border-0, .rounded-3, .mx-1;
+		width: 54px;
+		height: 49px;
+	}
+	&__brandcolor {
+		@extend .d-flex, .border, .rounded, .align-items-center;
+
+		input[type=color] {
+			border: 0.05rem solid #3c3c3c;
+			outline: 0;
+			-webkit-appearance: none;
+			width: 84px;
+			height: 30px;
+			padding-left: 10px;
+		}
+	}
+
+	&__bannercolor {
+		button {
+			@extend .ob_settings__thumbnail;
+			min-width: 54px !important;
+			span {
+				font-size: 9px;
+				@extend .text-muted;
+				display: block;
+				// @include gradient-bg('#3c3c3c');
+			}
+		}
+	}
+
+	&__radio {
+		@extend .m-0, .p-0;
+		@extend .ob_settings__thumbnail;
+		&:focus:not(:focus-visible),
+		&:checked,
+		&:active,
+		& .focus-visible:focus:not(:focus-visible) {
+			outline: 0;
+			border: none !important;
+			-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+		}
+		& img {
+			height: 100%;
+		}
+	}
+	&__group input[type=radio]:checked + label::before {
+		background-color: $primary;
+		@extend .px-1, .rounded-pill;
+		content: "✓";
+		position: absolute;
+		color: white;
+		right: -6px;
+		top: -5px;
+	}
+
+	&__uploadbtn {
+		@extend .m-0, .p-0;
+		@extend .border-0, .rounded-3, .mx-1;
+		width: 109px;
+		height: 56px;
+		background-color: $secondary;
+	}
+
+	&_hide {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+		pointer-events: none;
+
+		&:checked {
+			background: url(/assets/images/cart.png) -105px center no-repeat;
+		}
+	}
+	.nput_click {
+		border: 0.05rem solid grey !important;
+		border-radius: 2px !important;
+		width: 200px !important;
+		background: white !important;
 		color: black !important;
 		@extend .fw-bold;
-    }
-	.display{
+	}
+	.display {
 		display: inline !important;
 	}
-	.imgbox{
+	.imgbox {
 		position: relative;
 		text-align: center;
 	}
@@ -26,13 +100,15 @@
 		color: #161414 !important;
 		font-size: 10px;
 		font-weight: normal;
-	  }	
-	.border {
-		border: 1px solid #DDDDDD;
 	}
-	h1, h5, h6 {
+	.border {
+		border: 1px solid #dddddd;
+	}
+	h1,
+	h5,
+	h6 {
 		@extend .fw-bold;
-        color: black;
+		color: black;
 	}
 	&__img {
 		height: 1.5rem;
@@ -44,4 +120,4 @@
 		margin: 0rem;
 		margin-top: -0.625rem;
 	}
-	  }
+}

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import * as React from 'react';
 import styles from 'styles/UploadLogo.module.scss';
 import { Form, ProgressBar } from 'react-bootstrap';
@@ -6,17 +7,20 @@ import axios from 'axios';
 import { StoreContext } from 'store/store.context';
 import { IStore } from 'types/store';
 
-export interface IUploadLogoProps {
+// eslint-disable-next-line import/no-extraneous-dependencies
+import _ from 'lodash';
+
+interface IUploadButtonProps {
  setFieldValue(field: string, value: string): any;
-//   // eslint-disable-next-line no-unused-vars
-//   // setFieldValue(name:string, loc:string)?: any,
-  // eslint-disable-next-line no-unused-vars
- // handleLogo(files: any): any;
-//   // setFieldValue: any;
+ icon? : React.ReactNode;
+ field: string;
+ className?: string;
 }
 
 // eslint-disable-next-line no-unused-vars
-export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
+export default function UploadButton({
+  setFieldValue, icon, field, className,
+}:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
 
@@ -26,6 +30,7 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
   };
   const [feedback, setfeedback] = React.useState<null | string>(null);
   const [logo, setlogo] = React.useState<null | string>(null);
+  const [progress, setprogress] = React.useState<boolean>(false);
   const handleImageUpload = (e: any) => {
     try {
       if (e.target.files) {
@@ -36,13 +41,14 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
         const fd = new FormData();
         const shopName = store.shop.split('.');
         const imgExt = files[0].name.split('.')[1];
-        fd.append('image', files[0], `${shopName[0]}_logo.${imgExt}`);
-
+        fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt}`);
+        setprogress(true);
         axios.post(`${process.env.API_URL}/upload`, fd, config)
           .then((res) => {
             const fileS3Url: string = res.data.data.Location;
 
-            setFieldValue('logoImage', fileS3Url);
+            setFieldValue(field, fileS3Url);
+            setprogress(false);
           })
           .catch((err) => console.log(err));
 
@@ -55,7 +61,7 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
   };
   return (
     <>
-      <Form.Group className={styles['upload-logo']} controlId="brandinfo.uploadbutton" onClick={() => onButtonClick(front)}>
+      <Form.Group className={[styles['upload-logo'], className].join(' ')} controlId="brandinfo.upload-button" onClick={() => onButtonClick(front)}>
         <input
           accept="image/png, image/jpg, image/jpeg"
           className="d-none"
@@ -70,15 +76,11 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
           ? (
             <>
               <img src={logo} alt="logo" />
-              <ProgressBar animated now={100} className={styles['upload-logo--progress']} />
+              { progress
+              && <ProgressBar animated now={100} className={styles['upload-logo--progress']} />}
             </>
           )
-          : (
-            <>
-              <CloudUp className={styles['upload-logo--icon']} />
-              <Form.Label>Upload Logo</Form.Label>
-            </>
-          )}
+          : icon }
       </Form.Group>
       <Form.Control.Feedback type="invalid">
         {feedback}
@@ -86,3 +88,12 @@ export default function UploadLogo({ setFieldValue }:IUploadLogoProps) {
     </>
   );
 }
+
+UploadButton.defaultProps = {
+  icon: <>
+    <CloudUp className={styles['upload-logo--icon']} />
+    <Form.Label>Upload Logo</Form.Label>
+
+        </>,
+  className: '',
+};

@@ -12,8 +12,7 @@ import { StoreContext } from 'store/store.context';
 import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
-import UploadLogo from 'components/Buttons/uploadButton';
-import axios, { AxiosRequestConfig } from 'axios';
+import UploadButton from 'components/Buttons/UploadBtn';
 
 interface IValues {
   brandName: string;
@@ -109,7 +108,7 @@ export default function BrandInfo() {
 
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
-          <UploadLogo setFieldValue={setFieldValue} />
+          <UploadButton setFieldValue={setFieldValue} field="logoImage" />
           <Form.Text className="text-muted p-2 align-self-center">
             Under 5 MB (Formats: PNG, JPG, JPEG)
           </Form.Text>

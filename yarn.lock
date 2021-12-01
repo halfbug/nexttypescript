@@ -3169,6 +3169,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@icons/material@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "@icons/material@npm:0.2.4"
+  peerDependencies:
+    react: "*"
+  checksum: 24baa360cb83f7e1a9e6784ac11185d57eb895b0efd3070ec915693378330f35ff9feb248f650b9649fa3e1045601286585dc05795a4c734d4849b33900351ee
+  languageName: node
+  linkType: hard
+
 "@istanbuljs/load-nyc-config@npm:^1.0.0":
   version: 1.1.0
   resolution: "@istanbuljs/load-nyc-config@npm:1.1.0"
@@ -5082,7 +5091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/color-convert@npm:^2.0.0":
+"@types/color-convert@npm:*, @types/color-convert@npm:^2.0.0":
   version: 2.0.0
   resolution: "@types/color-convert@npm:2.0.0"
   dependencies:
@@ -5095,6 +5104,15 @@ __metadata:
   version: 1.1.1
   resolution: "@types/color-name@npm:1.1.1"
   checksum: b71fcad728cc68abcba1d405742134410c8f8eb3c2ef18113b047afca158ad23a4f2c229bcf71a38f4a818dead375c45b20db121d0e69259c2d81e97a740daa6
+  languageName: node
+  linkType: hard
+
+"@types/color@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@types/color@npm:3.0.2"
+  dependencies:
+    "@types/color-convert": "*"
+  checksum: ee25101a59b921a08fdb8270f82ff22db6a0bfdc4c48a8a72616a282590c14912fc6183518f7ecf3080216c243dddb88729653a34a7e30ec707f120bf1070d00
   languageName: node
   linkType: hard
 
@@ -5354,6 +5372,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-color@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@types/react-color@npm:3.0.6"
+  dependencies:
+    "@types/react": "*"
+    "@types/reactcss": "*"
+  checksum: 8cd881d6eb725190be942c1d71f7917d3dd1b418417740f64fa6c03ae3ba16cb91d07c4b3b348cf5bae20071c8ca5d4aaf514c9a5318077d5e50bd782a5e8da2
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -5391,6 +5419,15 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 39280743f6fec1bbc5c8e705976c1738a5526aaa0e693052badf5cd2dd599b6536dd815b651017737a533bf1c03db6a5738498796ff44f806e55324dc7867723
+  languageName: node
+  linkType: hard
+
+"@types/reactcss@npm:*":
+  version: 1.2.6
+  resolution: "@types/reactcss@npm:1.2.6"
+  dependencies:
+    "@types/react": "*"
+  checksum: f4711d707a1af653178c8941080e989a945feb0c529d848fed36687ee5e8a462cda183383caadf8848497b5c03bec16e6cdf22fc70462913d8d706cabb597130
   languageName: node
   linkType: hard
 
@@ -7897,10 +7934,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:~1.1.4":
+"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"color-string@npm:^1.7.4":
+  version: 1.7.4
+  resolution: "color-string@npm:1.7.4"
+  dependencies:
+    color-name: ^1.0.0
+    simple-swizzle: ^0.2.2
+  checksum: 7fd872f0105b574c1a931c2cda63a89192eb8740edadbc6a519494f2152ebc3ecea629deeab7b849c4d72942b66355f027d143ea7ac59dc58be2d8a99c6ccee9
+  languageName: node
+  linkType: hard
+
+"color@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "color@npm:4.0.2"
+  dependencies:
+    color-convert: ^2.0.1
+    color-string: ^1.7.4
+  checksum: 67af1b4ecccd2f6e409c6f98f353eacda027dbbc65b60259f89c09519e9706eba4a5f0ea2a5e100a6555821a52e65880307eee9f641bbf91992bd634f37bf86d
   languageName: node
   linkType: hard
 
@@ -10917,7 +10974,9 @@ fsevents@^1.2.7:
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.1.2
+    "@types/color": ^3.0.2
     "@types/react": 17.0.29
+    "@types/react-color": ^3.0.6
     "@types/yup": ^0.29.13
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
@@ -10926,6 +10985,7 @@ fsevents@^1.2.7:
     babel-loader: ^8.2.3
     babel-preset-react-app: ^10.0.0
     bootstrap: 5.1.3
+    color: ^4.0.2
     css-loader: 5.2.6
     eslint: ^7.32.0
     eslint-config-airbnb: ^18.2.1
@@ -10946,6 +11006,7 @@ fsevents@^1.2.7:
     react: 17.0.2
     react-bootstrap: ^2.0.1
     react-bootstrap-icons: ^1.6.1
+    react-color: ^2.19.3
     react-colorful: ^5.5.1
     react-dom: 17.0.2
     react-test-renderer: ^17.0.2
@@ -11725,6 +11786,13 @@ fsevents@^1.2.7:
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
   checksum: eef4417e3c10e60e2c810b6084942b3ead455af16c4509959a27e490e7aee87cfb3f38e01bbde92220b528a0ee1a18d52b787e1458ee86174d8c7f0e58cd488f
+  languageName: node
+  linkType: hard
+
+"is-arrayish@npm:^0.3.1":
+  version: 0.3.2
+  resolution: "is-arrayish@npm:0.3.2"
+  checksum: 977e64f54d91c8f169b59afcd80ff19227e9f5c791fa28fa2e5bce355cbaf6c2c356711b734656e80c9dd4a854dd7efcf7894402f1031dfc5de5d620775b4d5f
   languageName: node
   linkType: hard
 
@@ -13353,7 +13421,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21":
+"lodash-es@npm:^4.17.15, lodash-es@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
@@ -13402,7 +13470,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.0.0, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.10":
+"lodash@npm:^4.0.0, lodash@npm:^4.0.1, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.10":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -13580,6 +13648,13 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 9809d898ef71a0897f55e40481b8128a6041600d90387cf1d4126736bf8be0ba1f5594e57c655973b9aa60a877ad9e28e93124131e1e4902ca759a087a427027
+  languageName: node
+  linkType: hard
+
+"material-colors@npm:^1.2.1":
+  version: 1.2.6
+  resolution: "material-colors@npm:1.2.6"
+  checksum: 72d005ccccb82bab68eef3cd757e802668634fc86976dedb9fc564ce994f2d3258273766b7efecb7404a0031969e2d72201a1b74169763f0a53c0dd8d649209f
   languageName: node
   linkType: hard
 
@@ -15584,7 +15659,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -15880,6 +15955,23 @@ fsevents@^1.2.7:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
   checksum: d30e48c5a910756c560460bc8dd241af5321f0ba6f0e420bd61dcc40064ca890b8857bad680164d720f1ba4ae456a25435ff37d9390ba889206601995df20ab2
+  languageName: node
+  linkType: hard
+
+"react-color@npm:^2.19.3":
+  version: 2.19.3
+  resolution: "react-color@npm:2.19.3"
+  dependencies:
+    "@icons/material": ^0.2.4
+    lodash: ^4.17.15
+    lodash-es: ^4.17.15
+    material-colors: ^1.2.1
+    prop-types: ^15.5.10
+    reactcss: ^1.2.0
+    tinycolor2: ^1.4.1
+  peerDependencies:
+    react: "*"
+  checksum: 40b49e1aa2ab27a099cc37a3fa2d5bb906b8def4dbe2d922c0e42365e386d82b03f9b06a2b29a44a51f1e114cef72e61c0ba0740581a128d951936ea4617429b
   languageName: node
   linkType: hard
 
@@ -16197,6 +16289,15 @@ fsevents@^1.2.7:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
   checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
+  languageName: node
+  linkType: hard
+
+"reactcss@npm:^1.2.0":
+  version: 1.2.3
+  resolution: "reactcss@npm:1.2.3"
+  dependencies:
+    lodash: ^4.0.1
+  checksum: c53e386a0881f1477e1cff661f6a6ad4c662230941f3827862193ac30f9b75cdf7bc7b4c7e5ca543d3e4e80fee1a3e9fa0056c206b1c0423726c41773ab3fe45
   languageName: node
   linkType: hard
 
@@ -17127,6 +17228,15 @@ resolve@^2.0.0-next.3:
   version: 3.0.5
   resolution: "signal-exit@npm:3.0.5"
   checksum: a1d3d0d63f581bd298b30ed8f6de21b73a0fe5a0c0f123b2e8ed7168bbff8f4c1a45e681de12a1966a89bb725d8eb727816be1c436e136951f31953e4a201587
+  languageName: node
+  linkType: hard
+
+"simple-swizzle@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "simple-swizzle@npm:0.2.2"
+  dependencies:
+    is-arrayish: ^0.3.1
+  checksum: a7f3f2ab5c76c4472d5c578df892e857323e452d9f392e1b5cf74b74db66e6294a1e1b8b390b519fa1b96b5b613f2a37db6cffef52c3f1f8f3c5ea64eb2d54c0
   languageName: node
   linkType: hard
 
@@ -18144,6 +18254,13 @@ resolve@^2.0.0-next.3:
   version: 1.0.3
   resolution: "tiny-warning@npm:1.0.3"
   checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
+  languageName: node
+  linkType: hard
+
+"tinycolor2@npm:^1.4.1":
+  version: 1.4.2
+  resolution: "tinycolor2@npm:1.4.2"
+  checksum: 57ed262e08815a4ab0ed933edafdbc6555a17081781766149813b44a080ecbe58b3ee281e81c0e75b42e4d41679f138cfa98eabf043f829e0683c04adb12c031
   languageName: node
   linkType: hard
 
