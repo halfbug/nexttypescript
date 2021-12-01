@@ -24,7 +24,7 @@ const Dialogue = ({
     backdrop="static"
     keyboard={false}
     size={size}
-    fullscreen="md-down"
+    fullscreen="lg-down"
     centered
   >
     {/* <Modal.Header>

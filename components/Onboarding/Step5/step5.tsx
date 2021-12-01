@@ -15,13 +15,13 @@ interface IStep5Props {
 const Step5 = ({ show }: IStep5Props) => (
   <Dialogue show={show}>
     {/* <div className={styles.WelcomeModal}> */}
-    <Container className={styles.welcome}>
+    <Container className={styles.letsgo}>
       <ProgressBar progress="100" />
-      <Row className="my-4">
-        <Col md={6} className={styles.leftbar}>
-          <Row><Col><h5 className="">Congrats on creating your first</h5></Col></Row>
+      <Row className="my-4 ">
+        <Col md={6} className="border-end pt-lg-5 mt-lg-5">
+          <Row><Col><h5>Congrats on creating your first</h5></Col></Row>
           <Row><Col><Logo /></Col></Row>
-          <div className="w-75">
+          <div className="w-75 mb-lg-3">
             <Row className="mt-4"><Col><h6>You’re on the free plan</h6></Col></Row>
             <Row>
               <Col>
@@ -61,63 +61,71 @@ const Step5 = ({ show }: IStep5Props) => (
               </Col>
             </Row>
           </div>
-          <Row><Col><Button className="text-uppercase">Lets Go</Button></Col></Row>
+          <Row><Col><Button>Lets Go</Button></Col></Row>
         </Col>
-        <Col md={6} className="align-middle">
-          <Row className="border w-75">
-            <Col className="align-middle">Free</Col>
-            <Col>
-              Explore
-              <br />
-              First 100 Groupshops
-              <br />
-              From us, for everyone.
-              <br />
+        <Col md={6} className={styles.letsgo__left}>
+          <Row className={styles.letsgo__box}>
+            <Col xs={4} className={styles.letsgo__box_col1}><h2>Free</h2></Col>
+            <Col xs={8} className={styles.letsgo__box_col2}>
+              <h2>Explore</h2>
+              <p>
+                First 100 Groupshops
+
+                <p className="text-muted">From us, for everyone.</p>
+              </p>
             </Col>
           </Row>
-          <Row className="mt-4">
-            <Col className="align-middle">
-              25¢
-              <br />
-              per Groupshops
+          <Row className={styles.letsgo__box}>
+            <Col xs={4} className={styles.letsgo__box_col1}>
+              <h2>25¢</h2>
+              <p className="text-muted">
+                per Groupshops
+
+              </p>
             </Col>
-            <Col>
-              Launch
-              <br />
-              Up to 1,000 Groupshops
-              <br />
-              For small, ambitious businesses.
-              <br />
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col className="align-middle">
-              20¢
-              <br />
-              per Groupshops
-            </Col>
-            <Col>
-              Growth
-              <br />
-              Up to 2,500 Groupshops
-              <br />
-              For high-growth brands.
-              <br />
+            <Col xs={8} className={styles.letsgo__box_col2}>
+              <h2>Launch</h2>
+              <p>
+                Up to 1,000 Groupshops
+                <p className="text-muted">
+                  For small, ambitious businesses.
+                </p>
+              </p>
+
             </Col>
           </Row>
-          <Row className="mt-4">
-            <Col className="align-middle">
-              10¢
-              <br />
-              per Groupshop
+          <Row className={styles.letsgo__box}>
+            <Col xs={4} className={styles.letsgo__box_col1}>
+              <h2>20¢</h2>
+              <p className="text-muted">
+                per Groupshops
+              </p>
             </Col>
-            <Col>
-              Enterprise
-              <br />
-              2,500+ Groupshops
-              <br />
-              For leading companies.
-              <br />
+            <Col xs={8} className={styles.letsgo__box_col2}>
+              <h2>Growth</h2>
+              <p>
+                Up to 2,500 Groupshops
+                <p className="text-muted">
+                  For high-growth brands.
+                </p>
+              </p>
+            </Col>
+          </Row>
+          <Row className={styles.letsgo__box}>
+            <Col xs={4} className={styles.letsgo__box_col1}>
+              <h2>10¢</h2>
+              <p className="text-muted">
+                per Groupshop
+              </p>
+            </Col>
+            <Col xs={8} className={styles.letsgo__box_col2}>
+              <h2> Enterprise </h2>
+              <p>
+                2,500+ Groupshops
+                <p className="text-muted">
+                  For leading companies.
+                </p>
+              </p>
             </Col>
           </Row>
         </Col>
