@@ -77,17 +77,9 @@ const UPDATE_STORE_SETTINGS = gql`
 }
   }
 `;
-const UPDATE_STORE_REWARDS = gql`
-  mutation UpdateStore($updateStoreInput: UpdateStoreInput!) {
-    updateStore(updateStoreInput: $updateStoreInput) {
-      rewards
-      installationStep
-}
-  }
-`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
-  UPDATE_STORE_SETTINGS, UPDATE_STORE_REWARDS,
+  UPDATE_STORE_SETTINGS,
 };
