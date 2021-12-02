@@ -7,9 +7,13 @@ import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import Step3 from 'components/Onboarding/Step3/step3';
 import Step4 from 'components/Onboarding/Step4/step4';
 import Step5 from 'components/Onboarding/Step5/step5';
+import { StoreContext } from 'store/store.context';
 
 const useInstallation = (ins: string | string[] | undefined) => {
   const installationDialogue = useCallback((): React.ReactNode => {
+    const { store, dispatch } = React.useContext(StoreContext);
+    const { show } = store;
+
     switch (ins) {
       case '0':
         return (
@@ -37,7 +41,7 @@ const useInstallation = (ins: string | string[] | undefined) => {
         );
       case '5':
         return (
-          <Step5 show />
+          <Step5 />
         );
       default:
         return (

@@ -8,6 +8,7 @@ interface StoreContextType {
 }
 
 const initialState: IStore = {
+  show: true,
   shopifySessionId: '',
   brandName: '',
   shop: '',
@@ -28,6 +29,7 @@ export const StoreContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [store, dispatch] = React.useReducer(reducer, {
+    show: false,
     shopifySessionId: '',
     brandName: '',
     shop: '',

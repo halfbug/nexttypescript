@@ -1,10 +1,11 @@
 export interface IStore {
+  show?: boolean;
   id?: string;
   shopifySessionId?: string;
   brandName?: string;
   shop?: string;
   accessToken?: string;
-  installationStep?: number;
+  installationStep?: number | null;
   logoImage?: string;
   industry?: string;
   newCampaign?: ICampaign;

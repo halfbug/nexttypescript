@@ -53,7 +53,7 @@ export default function Rewards() {
         });
       }
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
-      // setParams({ ins: 4 });
+      setParams({ ins: 4 });
       console.log('@@@@@@@@@@@@', store);
     },
   });
