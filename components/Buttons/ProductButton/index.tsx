@@ -76,7 +76,7 @@ export default function ProductButton({ disableBtn }:IProps) {
       <Row className="mt-3 justify-content-center">
         <Col>
           <RButton
-            variant="outline-secondary"
+            variant="outline-primary"
             onClick={handleEditProduct}
             disabled={disableBtn}
           >

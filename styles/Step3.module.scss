@@ -1,0 +1,57 @@
+@import "./variables.scss";
+.rewards {
+	@extend .text-sm-start;
+	h6 {
+		font-size: 10px;
+	}
+	h5 {
+		font-size: 12px;
+	}
+	p {
+		font-size: 10px;
+	}
+
+	&__radio {
+		@extend .d-flex, .justify-content-end, .align-items-end, .p-0, .m-1;
+		// & + label {
+		&:focus:not(:focus-visible),
+		&:checked,
+		&:active {
+			outline: none !important;
+			border: none !important;
+			-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+		}
+		// }
+	}
+	&__group {
+		& input[type=radio] + label:not(:focus-visible) {
+			outline: none !important;
+			border: none !important;
+			-webkit-box-shadow: none !important;
+			box-shadow: none !important;
+		}
+		& input[type=radio]:checked + label div {
+			// background-color: $primary;
+			background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+		}
+
+		& input[type=radio]:nth-child(1):checked + label div {
+			// background-color: $primary;
+			background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+		}
+	}
+
+	&__bars {
+		@extend .m-0, .p-0;
+		@extend .border-0, .rounded-3;
+
+		background-color: $secondary;
+	}
+
+	&_hide {
+		position: absolute;
+		clip: rect(0, 0, 0, 0);
+		pointer-events: none;
+	}
+}

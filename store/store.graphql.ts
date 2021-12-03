@@ -91,8 +91,43 @@ const UPDATE_CAMPAIGN = gql`
   }
 `;
 
+const GET_APPSETTINGS = gql`
+query Appsettings {
+  appsettings{
+    salestargets{
+      id
+      name
+      rogsMin
+      rogsMax
+      rewards{
+        customerCount
+        discount
+        id
+      }
+    }
+  }
+}
+`;
+
+const GET_SALES_TARGET = gql`
+query SalesTarget {
+  salesTarget{
+    status
+    rogsMin
+    rogsMax
+    name
+    id
+    rewards{
+      id
+      customerCount
+      discount
+    }
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
-  UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN,
+  UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
 };
