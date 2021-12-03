@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Page from 'components/Layout/Page/Page';
 import useInstallation from 'hooks/useInstallation';
 import { useQuery } from '@apollo/client';
@@ -21,7 +21,7 @@ const ShopMain: NextPage = () => {
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
   const { installationDialogue } = useInstallation(ins);
 
-  const { dispatch } = useContext(StoreContext);
+  const { store, dispatch } = useContext(StoreContext);
 
   useEffect(() => {
     if (data) {
@@ -31,6 +31,10 @@ const ShopMain: NextPage = () => {
     //   cleanup
     // }
   }, [data]);
+  if (store.installationStep == null) {
+    const shopName: string[] | undefined = store?.shop?.split('.', 1);
+    Router.push(`/${shopName}/overview`);
+  }
 
   return (
     <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>

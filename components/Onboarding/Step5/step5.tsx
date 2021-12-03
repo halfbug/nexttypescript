@@ -29,16 +29,16 @@ const Step5 = () => {
   const handleClick = async () => {
     setShow(!show);
     console.log('...handleClick', store);
-    // await updateSt({
-    //   variables: {
-    //     updateStoreInput: {
-    //       id: store.id,
-    //       installationStep: null,
-    //     },
-    //   },
-    // });
-    // dispatch({ type: 'CLOSE_DIALOUGE', payload: { show, installationStep: null } });
-    dispatch({ type: 'CLOSE_DIALOUGE', payload: { show } });
+    await updateSt({
+      variables: {
+        updateStoreInput: {
+          id: store.id,
+          installationStep: null,
+        },
+      },
+    });
+    dispatch({ type: 'CLOSE_DIALOUGE', payload: { show, installationStep: null } });
+    // dispatch({ type: 'CLOSE_DIALOUGE', payload: { show } });
     console.log('....handleClick', store);
     Router.push(`/${shopName}/overview`);
   };
