@@ -4,8 +4,28 @@ const GET_STORE = gql`
 query StoreName($shop: String!) {
   storeName(shop: $shop) {
     id
-    shop
-    installationStep
+  shopifySessionId
+  accessToken
+  installationStep
+  shop
+  brandName
+  industry
+  logoImage
+  settings{
+    brandColor
+    customBg
+    customColor
+    imageUrl
+    youtubeUrl
+  }
+  campaigns{
+    name
+    criteria
+    storeId
+    joinExisting
+    rewards
+    products
+  }
   }
 }
 `;
