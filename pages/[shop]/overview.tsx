@@ -36,7 +36,7 @@ const ShopMain: NextPage = () => {
   const jsonStore = JSON.stringify(obj, null, '\t');
   console.log('inside shop folder');
   return (
-    <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+    <Page headingText="Overview" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       dashboard overview
       {shop}
       <div><pre>{ jsonStore }</pre></div>

@@ -37,7 +37,7 @@ const ShopMain: NextPage = () => {
   }
 
   return (
-    <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+    <Page headingText="Groupshop" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       dashboard
       {shop}
 

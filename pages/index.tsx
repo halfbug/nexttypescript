@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   // const { merchantStore } = useStore(sci || undefined);
 
   return (
-    <Page onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+    <Page headingText="Groupshop" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       dashboard
       {shop}
 

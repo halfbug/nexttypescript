@@ -9,16 +9,17 @@ interface HeaderProps {
   onLogin: () => void;
   onLogout: () => void;
   onCreateAccount: () => void;
+  headingText: string
 }
 
 const Header = ({
-  user, onLogin, onLogout, onCreateAccount,
+  user, onLogin, onLogout, onCreateAccount, headingText,
 }: HeaderProps) => (
   <header>
     <div className="wrapper">
       <div>
 
-        <h1>Groupshop</h1>
+        <h1>{headingText}</h1>
       </div>
       <div>
         {/* <Button size="small" label="Log out" /> */}
