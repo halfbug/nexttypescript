@@ -1,0 +1,30 @@
+@import "./variables.scss";
+
+.h1{
+    width: 139px;
+    height: 34px;
+    left: 349px;
+    top: 72px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 34px;
+    color: #000000;
+}
+.btn_div{
+    margin-right: 50px;
+    // background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    // display: inline-block;
+}
+.head_btn{
+    background-color: #f8f9fa ;
+    border-radius: 5px;
+}
+.head_btn2{
+    background-color:#f8f9fa;
+    margin-left: 25px;
+    border-radius: 5px;
+}

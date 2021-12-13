@@ -7,6 +7,7 @@ import { GET_STORE } from 'store/store.graphql';
 import { useRouter } from 'next/router';
 import { StoreContext } from 'store/store.context';
 import SideBar from './SideBar';
+import Review from './Review';
 
 interface PageProps {
   user?: {};
@@ -27,6 +28,7 @@ const Page = ({
       <Row>
         <Col md={3} className="border-end mt-4">
           <SideBar />
+          <Review />
         </Col>
         <Col md={9} className="mt-4">
           <Row className="text-start">

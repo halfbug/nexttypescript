@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import styles from 'styles/Header.module.scss';
 
-import Button from 'components/Buttons/Button/Button';
+// import Button from 'components/Buttons/Button/Button';
+import { Col, Row, Button } from 'react-bootstrap';
+import { ArrowDown, CaretDown, Eye } from 'react-bootstrap-icons';
 // import './header.css';
 
 interface HeaderProps {
@@ -17,21 +20,31 @@ const Header = ({
 }: HeaderProps) => (
   <header>
     <div className="wrapper">
-      <div>
+      <Row>
+        <Col>
+          <div>
 
-        <h1>{headingText}</h1>
-      </div>
-      <div>
-        {/* <Button size="small" label="Log out" /> */}
-        {/* {user ? (
-          <Button size="small" onClick={onLogout} label="Log out" />
-        ) : (
-          <>
-            <Button size="small" onClick={onLogin} label="Log in" />
-            <Button primary size="small" onClick={onCreateAccount} label="Sign up" />
-          </>
-        )} */}
-      </div>
+            <h1 className={styles.h1}>{headingText}</h1>
+          </div>
+        </Col>
+        <Col>
+          <div className={styles.btn_div}>
+            <Col className={styles.head_btn}>
+              <Eye color="black" size={20} />
+              <Button variant="light">
+                View Groupshop
+              </Button>
+            </Col>
+            { ' ' }
+            <Col className={styles.head_btn2}>
+              <Button variant="light">
+                LE SABLE
+              </Button>
+              <CaretDown color="black" size={20} />
+            </Col>
+          </div>
+        </Col>
+      </Row>
     </div>
   </header>
 );

@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
 import Logo from 'assets/images/logosmall.svg';
 import {
+  Gear, Activity, Image, CalendarMinus, Cloud,
+} from 'react-bootstrap-icons';
+import styles from 'styles/Sidebar.module.scss';
+
+import {
   Col, Container, Row, Nav,
 } from 'react-bootstrap';
 import { StoreContext } from 'store/store.context';
-// import './page.css';
-
+import Link from 'next/link';
 // interface SideBarProps {
 //     shopName?: string;
 // //   onCreateAccount: () => void;
@@ -25,17 +29,61 @@ const SideBar = () => {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col>
+        <Col className={styles.sidebar}>
           <Nav defaultActiveKey="/" className="flex-column">
-            <Nav.Link href={`/${shopName}/overview`}>Overview</Nav.Link>
-            <Nav.Link href={`/${shopName}/campaign`}>Campaign</Nav.Link>
-            <Nav.Link href={`/${shopName}/analytics`}>Analytics</Nav.Link>
-            <Nav.Link href={`/${shopName}/settings`}>Settings</Nav.Link>
-            <Nav.Link href={`/${shopName}/billing`}>Billing</Nav.Link>
-            <Nav.Link href={`/${shopName}/knowledgeBase`}>Knowledge Base</Nav.Link>
-          </Nav>
-          {' '}
+            <Row>
+              <Col className={styles.icon}><Image className="icons" color="light grey" size={20} /></Col>
+              {' '}
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/overview`}>Overview</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className={styles.icon}><Gear color="light grey" size={20} /></Col>
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/campaign`}>Campaign</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className={styles.icon}><Activity color="light grey" size={20} /></Col>
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/analytics`}>Analytics</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className={styles.icon}><Gear color="light grey" size={20} /></Col>
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/settings`}>Settings</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className={styles.icon}><CalendarMinus color="light grey" size={20} /></Col>
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/billing`}>Billing</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className={styles.icon}>
+                <Cloud color="light grey" size={20} />
+              </Col>
+              <Col className={styles.link}>
+                <Nav.Link className="m-2 p-4">
+                  <Link href={`/${shopName}/knowledgeBase`}>Knowledge Base</Link>
+                </Nav.Link>
+              </Col>
+            </Row>
 
+          </Nav>
         </Col>
       </Row>
 
