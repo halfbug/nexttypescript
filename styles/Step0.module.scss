@@ -5,9 +5,9 @@
 	h3 {
 		@extend .fw-bold;
 	}
-	&__img {
-		height: 1.5rem;
-	}
+	// &__img {
+	// 	height: 1.5rem;
+	// }
 
 	hr {
 		height: 0.625rem;
@@ -15,4 +15,27 @@
 		margin: 0rem;
 		margin-top: -0.625rem;
 	}
+	.rect_box {
+		width: 507px;
+		height: 83px;
+		left: 0px;
+		top: 0px;
+		align-items: center;
+		background: #ffffff;
+		border: 1px dashed #a68ad6;
+		box-sizing: border-box;
+		border-radius: 10px;
+	}
+	p {
+		font-family: Mulish;
+		font-size: 16px;
+		text-align: justify;
+  }
+}
+		.sideImg{
+		background-image: url("../assets/images/Rectangle 508.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+		
+	
 }

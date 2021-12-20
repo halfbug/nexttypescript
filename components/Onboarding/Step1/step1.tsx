@@ -20,9 +20,8 @@ const Step1 = ({ show }: IStep0Props) => (
 
       <Row className="my-4">
         <LeftPanel
-          heading="Define your brand"
-          content="Make your brand stand out by adding your brand name, logo, and
-          industry."
+          heading="About the brand"
+          content="Tell us who you are by adding your brand name, logo, and industry."
         />
         <Col className="text-sm-start mt-3" md={8}>
           <BrandInfo />
