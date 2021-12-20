@@ -8,27 +8,7 @@
 		border-radius: 10px;
 
 		&:first-child {
-			// position: relative;
-			// padding: 30% 2em;
-			// box-sizing: border-box !important;
-
-			// $border: 5px;
-			// // color: #fff;
-			// background: #fff;
-			// background-clip: padding-box !important;
-
-			// &:before {
-			// 	content: '';
-			// 	position: absolute;
-			// 	top: -2px;
-			// 	right: 0;
-			// 	bottom: 0;
-			// 	left: 0;
-			// 	z-index: -1;
-			// 	margin: -$border !important; /* !importanté */
-			// 	border-radius: inherit; /* !importanté */
-			// 	background: $brand-gradiant !important;
-			// }
+		
 			border-color: #ccb2f9 !important;
 			border-width: 2px !important;
 			@extend .gradient-box;
@@ -45,3 +25,54 @@
 		}
 	}
 }
+
+ .box_row{
+	.side_box{
+	width: 242px;
+	height: 161px;
+	left: 790px;
+	top: 300px;
+	margin: 7px;
+	border: 2px dashed #a68ad6;
+	box-sizing: border-box;
+	border-radius: 23px;
+	}
+	&
+	.btn {
+		background: #d5fa52;
+		border-radius: 6px;
+		border: none;
+		outline: none;
+		height: 22px;
+		text-align: center;
+		align-items: center;
+		margin-top: 5px;
+		width: 66px;
+		margin-left: 20px;
+	}
+	&
+	.free
+	{
+		background: #d5fa52;
+		border-radius: 6px;
+		border: none;
+		outline: none;
+		height: 22px;
+		text-align: center;
+		align-items: center;
+		margin-top: 5px;
+		width: 25px;
+		margin-left: 20px;	
+	}
+	&
+	h2{
+		text-align: center;
+		margin-top: 15px;
+	}
+	&
+	p{
+		text-align: center;
+		margin-top: 15px;	
+	}
+} 
+
