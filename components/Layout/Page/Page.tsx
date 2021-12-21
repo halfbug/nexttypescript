@@ -6,8 +6,9 @@ import { useQuery } from '@apollo/client';
 import { GET_STORE } from 'store/store.graphql';
 import { useRouter } from 'next/router';
 import { StoreContext } from 'store/store.context';
+import styles from 'styles/Sidebar.module.scss';
 import SideBar from './SideBar';
-import Review from './Review';
+import Dynamicpages from './Dynamicpages';
 
 interface PageProps {
   user?: {};
@@ -25,32 +26,31 @@ const Page = ({
 
   return (
     <Container>
-      <Row>
-        <Col md={3} className="border-end mt-4">
-          <SideBar />
-          <Review />
-        </Col>
-        <Col md={9} className="mt-4">
-          <Row className="text-start">
-            <Col>
-              {' '}
-              <Header
-                user={user}
-                onLogin={onLogin}
-                onLogout={onLogout}
-                onCreateAccount={onCreateAccount}
-                headingText={headingText}
-              />
-            </Col>
+      <SideBar />
+      <div className={styles.rightcontentwrap}>
+        <Row>
+          <Col className="mt-4">
+            <Row className="text-start">
+              <Col>
+                {' '}
+                <Header
+                  user={user}
+                  onLogin={onLogin}
+                  onLogout={onLogout}
+                  onCreateAccount={onCreateAccount}
+                  headingText={headingText}
+                />
+              </Col>
 
-          </Row>
-          <Row>
-            {children}
-          </Row>
+            </Row>
+            <Row>
+              {children}
+            </Row>
 
-        </Col>
-      </Row>
+          </Col>
+        </Row>
 
+      </div>
     </Container>
   );
 };
