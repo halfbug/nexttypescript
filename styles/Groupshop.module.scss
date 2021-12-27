@@ -1,0 +1,180 @@
+@import "./variables.scss";
+
+.groupshop {
+	@extend .px-2, .border-bottom;
+	background-color: white !important;
+
+	p {
+		@extend .mb-0;
+	}
+	&__logo {
+		@extend .d-flex, .justify-content-center;
+		img {
+			height: 15px;
+		}
+	}
+
+	&__last {
+		@extend .d-flex, .justify-content-end;
+	}
+
+	&_counter_top {
+		p {
+			margin-bottom: 0px;
+			@extend .fw-bold;
+
+			span {
+				@extend .p-1, .px-2, .border, .rounded, .ms-1;
+			}
+		}
+	}
+
+	&_infobutton {
+		@extend .d-flex, .mb-0, .align-items-center;
+		span {
+			@extend .ms-1, .fs-6;
+		}
+	}
+
+	&_brand {
+		@extend .text-uppercase;
+		font-family: Fahkwang !important;
+	}
+
+	&__top {
+		@extend .py-3, .d-flex, .justify-content-center, .w-100;
+
+		&_members {
+			@extend .d-flex, .justify-content-center, .flex-column;
+			.list-group-item {
+				@extend .m-1, .p-1, .rounded;
+			}
+		}
+
+		&_item {
+			@extend .m-1, .p-1, .rounded, .border;
+			border-color: $purple !important;
+			border-width: 2px;
+			cursor: pointer !important;
+			min-width: auto !important;
+			&:hover {
+				@extend .shadow-sm;
+			}
+		}
+	}
+
+	&__earn {
+		border-color: $purple;
+		border-width: 2px;
+		min-width: auto;
+		&:hover {
+			@extend .groupshop__earn;
+			background-color: $purple !important;
+		}
+	}
+
+	&_copy2clipboard {
+		@extend .w-100, .rounded-3, .border, .d-flex, .justify-content-between, .py-1, .px-3, .align-items-center;
+		span {
+			@extend .w-75, .text-truncate;
+		}
+		button {
+			min-width: auto !important;
+		}
+	}
+
+	&_facebook:hover {
+		color: blue;
+	}
+
+	&_instagram:hover {
+		color: red;
+	}
+
+	&_pinterest:hover {
+		color: darkred;
+	}
+
+	&_twitter:hover {
+		color: skyblue;
+	}
+
+	&_tiktok:hover {
+		color: green;
+	}
+
+	&__hero {
+		@extend .mw-100, .border, .d-flex, .justify-content-center, .align-items-center;
+		height: 291px;
+		background-repeat: repeat;
+		background-attachment: fixed;
+		background-position: center;
+		background-size: auto;
+		color: white;
+		@include media-breakpoint-up(lg) {
+			height: 400px;
+		}
+	}
+
+	&_dropdown {
+		@extend .rounded-pill, .text-center;
+		line-height: 1rem;
+		padding: 0.25rem;
+		// margin-top: -2px;
+		svg {
+			margin-left: 2px;
+		}
+		&::after {
+			@extend .border-0;
+			// text-align: center !important;
+			// vertical-align: middle !important;
+		}
+	}
+
+	&__pcard {
+		width: 282px;
+		position: relative;
+		@extend .border-0;
+
+		&_image {
+			height: 282px;
+		}
+		&_overlay {
+			height: 282px;
+		}
+
+		&_tag {
+			@extend .p-1, .px-2, .fs-6, .rounded, .fw-bold;
+			background-color: white;
+			&_price {
+				@extend .groupshop__pcard_tag;
+				top: 10px;
+				position: absolute;
+			}
+
+			&_buyer {
+				@extend .groupshop__pcard_tag;
+				@extend .p-1, .py-2, .rounded-pill, .m-1;
+				background-color: white;
+				top: 45px;
+				position: absolute;
+			}
+
+			&_addedby {
+				@extend .groupshop__pcard_tag;
+				// @extend .p-1, .py-2, .rounded-pill, .m-1;
+				background-color: white;
+				top: 220px;
+				right: 15px;
+				position: absolute;
+			}
+		}
+
+		// &_rtag {
+
+		// }
+	}
+}
+// button {
+// 	min-width: auto !important;
+// }

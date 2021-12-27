@@ -5382,6 +5382,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-copy-to-clipboard@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@types/react-copy-to-clipboard@npm:5.0.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: f2ba19587a8d56bfb54b31c716a053a263ac072f01e4bc9d64dfbcce96ff3857de279a827cf71d3a417f6bc6faf1153e6fe6d26aa05a5b6c1cb8d9b576dc226b
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -8173,7 +8182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3.3.1":
+"copy-to-clipboard@npm:^3, copy-to-clipboard@npm:^3.3.1":
   version: 3.3.1
   resolution: "copy-to-clipboard@npm:3.3.1"
   dependencies:
@@ -10977,6 +10986,7 @@ fsevents@^1.2.7:
     "@types/color": ^3.0.2
     "@types/react": 17.0.29
     "@types/react-color": ^3.0.6
+    "@types/react-copy-to-clipboard": ^5.0.2
     "@types/yup": ^0.29.13
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
@@ -11005,9 +11015,10 @@ fsevents@^1.2.7:
     prettier: 2.4.1
     react: 17.0.2
     react-bootstrap: ^2.0.1
-    react-bootstrap-icons: ^1.6.1
+    react-bootstrap-icons: ^1.7.2
     react-color: ^2.19.3
     react-colorful: ^5.5.1
+    react-copy-to-clipboard: ^5.0.4
     react-dom: 17.0.2
     react-test-renderer: ^17.0.2
     sass: ^1.43.4
@@ -15670,6 +15681,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"prop-types@npm:^15.5.8":
+  version: 15.8.0
+  resolution: "prop-types@npm:15.8.0"
+  dependencies:
+    loose-envify: ^1.4.0
+    object-assign: ^4.1.1
+    react-is: ^16.13.1
+  checksum: d8d51cf55d70cab207dd1e80df2dc093b8288a4519598a28d25d32d6e02319b2fd66712caa979040451656185f7393341185b0b081158520557aa4cbdcaa4b3a
+  languageName: node
+  linkType: hard
+
 "property-expr@npm:^2.0.4":
   version: 2.0.4
   resolution: "property-expr@npm:2.0.4"
@@ -15919,14 +15941,14 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-bootstrap-icons@npm:^1.6.1":
-  version: 1.6.1
-  resolution: "react-bootstrap-icons@npm:1.6.1"
+"react-bootstrap-icons@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "react-bootstrap-icons@npm:1.7.2"
   dependencies:
     prop-types: ^15.7.2
   peerDependencies:
     react: ^16.8.6 || ^17
-  checksum: a3cc168cb98accabc437ded46cd58190fedaafd86dfc4835cd918793c431b6180ad058a0cb6b91dc627352c2f56370ee14b41bbea07e35fca2ec31515f3c092b
+  checksum: 9d683914f93afc8071d3ac3675e43194ab12fbe8b4fe5775d3f5634d2013210febe8d1831ab3b5337887c8a180d9d055feea0eda4bbe04bd7180d75bb87ddff4
   languageName: node
   linkType: hard
 
@@ -15992,6 +16014,18 @@ fsevents@^1.2.7:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: e60811781716e57f0990379eff20d6f22d4d35b9e858c47ecf857c1dc1c1a2274c924ded7248bad5f1e2fbf2aab06e59b12852910c8dee5e6850f8e4df293670
+  languageName: node
+  linkType: hard
+
+"react-copy-to-clipboard@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "react-copy-to-clipboard@npm:5.0.4"
+  dependencies:
+    copy-to-clipboard: ^3
+    prop-types: ^15.5.8
+  peerDependencies:
+    react: ^15.3.0 || ^16.0.0 || ^17.0.0
+  checksum: dae8caae192d4937a151ec3ddad540fe4846d28646aee6d90774abcc6a077761926c99f2bcd9506a76a65524ec2c32b5ec1341e8096fcd3f6335365eaf065137
   languageName: node
   linkType: hard
 
@@ -16153,7 +16187,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.3.2, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
+"react-is@npm:^16.13.1, react-is@npm:^16.3.2, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f

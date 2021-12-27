@@ -11,7 +11,7 @@ const ProgressBar = ({ progress }:any) => (
     <div style={{
       backgroundImage: `url(${Slogo.src})`,
       width: '100%',
-      height: '18px',
+      height: '16px',
       backgroundRepeat: 'repeat-x',
       backgroundSize: 'auto',
       backgroundPosition: 'center',

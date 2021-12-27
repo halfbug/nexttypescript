@@ -6,15 +6,16 @@ export interface IIconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
     icon: React.ReactNode;
 }
 
-export default function IconButton({ icon, ...props }: IIconButtonProps) {
+export default function IconButton({ icon, children, ...props }: IIconButtonProps) {
   return (
     <button
-      className={styles.iconButton}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
+      className={[styles.iconButton, props.className].join(' ')}
     >
 
       {icon}
-
+      {children}
     </button>
   );
 }

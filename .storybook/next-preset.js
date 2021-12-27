@@ -1,9 +1,18 @@
 const path = require('path');
+// const assetRule = config.module.rules.find(({ test }) => test.test(".svg"));
+
+// const assetLoader = {
+//   loader: assetRule.loader,
+//   options: assetRule.options || assetRule.query
+// };
+
+// const pathToInlineSvg = path.resolve(__dirname, '../assets');
+
 
 module.exports = {
-  webpackFinal: async (baseConfig, options) => {
+  webpackFinal: async (baseConfig, options, defaultConfig) => {
     const { module = {} } = baseConfig;
-    
+        
     const newConfig = {
       ...baseConfig,
       module: {
@@ -47,11 +56,31 @@ module.exports = {
       include: path.resolve(__dirname, 'styles'),
     });
     
-    newConfig.module.rules.push({
+    // newConfig.module.rules.push({
+    //   test: /\.svg$/,
+    //   use: ['@svgr/webpack'],
+    // });
+    
+    newConfig.module.rules.unshift({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: ["@svgr/webpack"]
     });
-   
+    
+  //   const rules = baseConfig.module.rules;
+  //   // modify storybook's file-loader rule to avoid conflicts with svgr
+  // const fileLoaderRule = rules.find(rule => rule.test.test('.svg'));
+  // fileLoaderRule.exclude = pathToInlineSvg;
+
+  // newConfig.module.rules.push({
+  //   test: /\.svg$/,
+  //   include: pathToInlineSvg,
+  //   use: [{
+  //     loader: '@svgr/webpack',
+  //     options: {
+  //       icon: true,
+  //     },
+  //   }],
+  // });
     // If you are using CSS Modules, check out the setup from Justin (justincy)
     // Many thanks to Justin for the inspiration
     // https://gist.github.com/justincy/b8805ae2b333ac98d5a3bd9f431e8f70#file-next-preset-js

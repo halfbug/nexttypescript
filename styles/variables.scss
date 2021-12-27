@@ -16,17 +16,18 @@ $enable-gradients: true;
 
 $primary: #403f43;
 $secondary: #f3f3f3;
+$purple: #ccb2f9;
 @import "~bootstrap/scss/variables";
 $small-font-size: .675em !default;
 
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
-
+@import "~bootstrap/scss/helpers";
 @import "~bootstrap/scss/utilities/api";
 
-$brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+$brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
 
-$brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+$brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
 
 .brand-gradiat-repeat {
 	background: rgb(227 227 227);
