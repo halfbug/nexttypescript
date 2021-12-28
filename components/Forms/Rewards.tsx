@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import {
-  Form, Row, Col, ButtonGroup, ToggleButton,
+  Form, Row, Col, ButtonGroup, ToggleButton, Button as MyButton,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
@@ -13,7 +13,6 @@ import { ICampaign } from 'types/store';
 import styles from 'styles/Step3.module.scss';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
-import MyButton from 'components/Buttons/RewardButton/MyButton';
 
 interface IValues {
   rewards: string;
@@ -171,11 +170,11 @@ export default function Rewards() {
                     setMinDiscount(values.selectedTarget?.rewards[0].discount);
                     setMaxDiscount(values.selectedTarget?.rewards[2].discount);
                   }}
-                  className={btns[index].cssName}
-                  bsPrefix={styles.rewards_hide}
+                  // className={btns[index].cssName}
+                  // bsPrefix={styles.rewards_hide}
                   style={{ width: '66px' }}
                 >
-                  {btns[index].text}
+                  <MyButton className={btns[index].cssName} variant="light">{btns[index].text}</MyButton>
                 </ToggleButton>
 
               ))}

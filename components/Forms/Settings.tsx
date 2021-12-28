@@ -52,7 +52,7 @@ export default function Settings() {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
-      brandColor: '',
+      brandColor: '#3C3C3C',
       customColor: '#FFF199',
       customBg: '',
       imageUrl: '',
@@ -114,6 +114,8 @@ export default function Settings() {
                   type="color"
                   // id="brandColor"
                   name="brandColor"
+                  id="brandColor"
+                  isInvalid={touched.brandColor && !!errors.brandColor}
                   defaultValue="#3C3C3C"
                   title="Choose your color"
                   className="p-0 m-0 rounded-end"
