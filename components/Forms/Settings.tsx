@@ -1,6 +1,7 @@
+/* eslint-disable max-len */
 import * as React from 'react';
 import {
-  Form, Row, Col, InputGroup, ButtonGroup, ToggleButton,
+  Form, Row, Col, InputGroup, ButtonGroup, ToggleButton, Container,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
@@ -11,12 +12,13 @@ import { StoreContext } from 'store/store.context';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import styles from 'styles/Step4.module.scss';
-import Image1 from 'assets/images/image1.png';
-import Image2 from 'assets/images/image2.png';
-import Image3 from 'assets/images/image3.png';
+import Image1 from 'assets/images/Ellipse1.png';
+import Image2 from 'assets/images/Ellipse2.png';
+import Image3 from 'assets/images/Ellipse3.png';
+import Image4 from 'assets/images/Ellipse4.png';
+import Image5 from 'assets/images/Ellipse5.png';
 import custombg from 'assets/images/Rectangle499.png';
 import uploadbtn from 'assets/images/Rectangle500.png';
-import { Plus } from 'react-bootstrap-icons';
 import ColorPicker from 'components/Buttons/ColorPicker';
 import GradiantBox from 'components/Buttons/gradiantBox';
 import UploadButton from 'components/Buttons/UploadBtn';
@@ -29,11 +31,14 @@ interface IValues {
     youtubeUrl: string;
     media: string;
   }
-
-export default function Settings() {
+  interface IProps {
+    isDB: boolean;
+  }
+export default function Settings({ isDB }: IProps) {
   const [, setParams] = useQueryString();
   const front = React.useRef(null);
   const [color, setColor] = React.useState('#aabbcc');
+  console.log('🚀 Settings.tsx isDB', isDB);
 
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -80,7 +85,7 @@ export default function Settings() {
               imageUrl,
               youtubeUrl,
             },
-            installationStep: 5,
+            installationStep: isDB ? null : 5,
           },
         },
       });
@@ -91,14 +96,16 @@ export default function Settings() {
     },
   });
   const radios = [
-    { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
+    // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
     { name: 'image1', value: 'image1', component: <img src={Image1.src} alt="imageone" /> },
     { name: 'image2', value: 'image2', component: <img src={Image2.src} alt="imageone" /> },
     { name: 'image3', value: 'image3', component: <img src={Image3.src} alt="imageone" /> },
+    { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
+    { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
   console.log('🚀 ~ file: Settings.tsx ~ line 87 ~ Settings ~ values', values);
   return (
-    <Col className="text-sm-start" md={8}>
+    <Container fluid>
       <Form noValidate onSubmit={handleSubmit}>
         <Row><h5>Set your brand color</h5></Row>
         <Row>
@@ -133,90 +140,80 @@ export default function Settings() {
         <Row>
           <Form.Text className="text-muted mt-0 fs-6">This will serve as the banner for your Groupshop page </Form.Text>
         </Row>
-        <div className="border rounded w-75 p-3">
-          <Row className="mt-3">
-            <Col xs={12} className="d-flex">
-              <ColorPicker
-                name="customColorPicker"
-                className={styles.ob_settings__bannercolor}
-                setFieldValue={setFieldValue}
-              />
-
-              <ButtonGroup className={['mb-2', styles.ob_settings__group].join(' ')}>
-                {radios.map(({ name, component, value }) => (
-                  <ToggleButton
-                    key={name}
-                    id={`radio-${name}`}
-                    type="radio"
-                    variant="none"
-                    name="radio"
-                    value={value}
-                    checked={values.customBg === value}
-                    onChange={(e) => setFieldValue('customBg', e.currentTarget.value)}
-                    bsPrefix={styles.ob_settings_hide}
-                    className={styles.ob_settings__radio}
-                  >
-                    {component}
-                  </ToggleButton>
-                ))}
-              </ButtonGroup>
-
-            </Col>
-          </Row>
-          <Row className="mt-2"><h6>Custom background</h6></Row>
+        <div className="border rounded w-75 p-4">
           <Row>
-            <Col xs={4} className="align-middle">
-              <Form.Check
-                label="Image"
-                name="media"
-                value="image"
-                type="radio"
-                checked={values.media === 'image'}
-                onChange={(e) => setFieldValue('media', e.currentTarget.value)}
-              />
-              <Form.Check
-                label="Youtube video"
-                name="media"
-                value="youtube"
-                type="radio"
-                checked={values.media === 'youtube'}
-                onChange={(e) => setFieldValue('media', e.currentTarget.value)}
-              />
+            <Col xs={6} className="w-75">
+              <h6>Pre-Set Themes</h6>
+              <Row>
+                <ButtonGroup className={['mb-2', styles.ob_settings__group].join(' ')}>
+                  {radios.map(({ name, component, value }) => (
+                    <ToggleButton
+                      key={name}
+                      id={`radio-${name}`}
+                      type="radio"
+                      variant="none"
+                      name="radio"
+                      value={value}
+                      checked={values.customBg === value}
+                      onChange={(e) => setFieldValue('customBg', e.currentTarget.value)}
+                      bsPrefix={styles.ob_settings_hide}
+                      className={styles.ob_settings__radio}
+                    >
+                      {component}
+                    </ToggleButton>
+                  ))}
+                </ButtonGroup>
+              </Row>
+            </Col>
+            <Col xs={6}>
+              <Row className="mt-2"><h6>Custom background</h6></Row>
+              <Row>
+                <Col xs={12} className="align-middle mt-2">
+                  <Form.Check
+                    inline
+                    label="Image"
+                    name="media"
+                    value="image"
+                    type="radio"
+                    checked={values.media === 'image'}
+                    onChange={(e) => setFieldValue('media', e.currentTarget.value)}
+                  />
+                  <Form.Check
+                    inline
+                    label="Youtube video"
+                    name="media"
+                    value="youtube"
+                    type="radio"
+                    checked={values.media === 'youtube'}
+                    onChange={(e) => setFieldValue('media', e.currentTarget.value)}
+                  />
 
-            </Col>
-            <Col xs={8} className={values.media === 'image' ? 'd-flex' : 'd-none'}>
-              <Col className={[`${styles.imgbox}`, 'align-middle'].join(' ')}>
-                <UploadButton
-                  icon={(
-                    <>
-                      <Plus className="align-self-center" />
-                      <Form.Label>Upload Image</Form.Label>
-                    </>
-)}
-                  setFieldValue={setFieldValue}
-                  field="imageUrl"
-                  className={styles.ob_settings__uploadbtn}
-                />
-              </Col>
-              <Col className="text-muted align-middle">
-                Under 5mb (PNG, JPG, JPEG)
-                <br />
-                1440px x 500px
-              </Col>
-            </Col>
-            <Col xs={8} className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
-              <Form.Control
-                type="text"
-                name="youtubeUrl"
-                value={values.youtubeUrl}
-                onChange={handleChange}
-                isValid={touched.youtubeUrl && !errors.youtubeUrl}
-              />
-              <p className="text-muted">Please paste youtube video URL</p>
+                </Col>
+              </Row>
+              <Row className="">
+                <Col>
+                  <UploadButton
+                    icon={(<Form.Label>Upload</Form.Label>)}
+                    setFieldValue={setFieldValue}
+                    field="imageUrl"
+                    className={styles.ob_settings__uploadbtn}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col className="text-muted align-right text-end">
+                  Under 5mb (PNG, JPG, JPEG)
+                  <br />
+                  1440px x 500px
+                </Col>
+              </Row>
+
             </Col>
           </Row>
         </div>
         <Row />
+        {!isDB
+        && (
         <Row className="mt-5">
           <Col xs={4}>
             <Button onClick={() => setParams({ ins: 3 })}>Previous</Button>
@@ -230,8 +227,9 @@ export default function Settings() {
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>
+        )}
 
       </Form>
-    </Col>
+    </Container>
   );
 }

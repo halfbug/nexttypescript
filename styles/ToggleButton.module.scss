@@ -1,0 +1,46 @@
+@import "./variables.scss";
+.toggle_switch {
+	position: relative;
+	display: inline-block;
+	width: 34px;
+	height: 18px;
+	margin-top: 10px;
+  }
+  .toggle_switch input[type="checkbox"] {
+	display: none;
+  }
+  .toggle_switch .switch {
+	position: absolute;
+	cursor: pointer;
+	background: #F8F8F8;
+	border-radius: 25px;
+	border: 1px solid #E86562;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: background-color 0.2s ease;
+  }
+  .toggle_switch .switch::before {
+	position: absolute;
+	content: "";
+	left: 2px;
+	top: 2px;
+	width: 14px;
+	height: 14px;
+	background: #E86562;
+	border-radius: 50%;
+	transition: transform 0.3s ease;
+  }
+  .toggle_switch input[type="checkbox"]:checked + .switch::before {
+	transform: translateX(16px);
+	background: #A7C737;
+	border: 1px solid #A7C737;
+  }
+  .toggle_switch input[type="checkbox"]:checked + .switch {
+	background-color: #F8F8F8;
+	border: 1px solid #A7C737;
+   
+  
+  }
+  

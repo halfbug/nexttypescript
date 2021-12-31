@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent */
 import * as React from 'react';
 import styles from 'styles/UploadLogo.module.scss';
-import { Form, ProgressBar } from 'react-bootstrap';
+import { Button, Form, ProgressBar } from 'react-bootstrap';
 import CloudUp from 'assets/images/cloud-icon.svg';
 import axios from 'axios';
 import { StoreContext } from 'store/store.context';

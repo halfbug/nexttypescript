@@ -12,7 +12,7 @@ export interface IStore {
   totalProducts?: number;
   collections?: ICollection[];
   products?: IProduct[];
-  [x:string]: any;
+  [x: string]: any;
   settings?: ISettings;
 }
 export interface ICampaign {
@@ -21,31 +21,48 @@ export interface ICampaign {
   criteria?: string;
   joinExisting?: any;
   createCampaignInput?: object;
-  productsArray?:string[];
+  updateCampaignInput?: object;
+  productsArray?: string[];
   collections?: ICollection[];
   products?: IProduct[];
   rewards?: string;
 
 }
 
-export interface ICollection{
-  title:string;
+export interface ICollection {
+  title: string;
   id: string;
   productsCount: number;
   products: IProduct[]
 }
 
-export interface IProduct{
+export interface IProduct {
   id: string,
   title: string;
   featuredImage: string;
   price: string;
   currencyCode: string;
 }
-export interface ISettings{
+export interface ISettings {
   brandColor: string;
   customColor: string;
   customBg: string;
   imageUrl: string;
   youtubeUrl: string;
+}
+export interface IDBCampaign {
+  id?: string | null | undefined;
+  name?: string;
+  criteria?: string;
+  joinExisting?: any;
+  productsArray?: string[];
+  collections?: ICollection[];
+  products?: IProduct[];
+  brandColor?: string;
+  customColor?: string;
+  customBg?: string;
+  imageUrl?: string;
+  youtubeUrl?: string;
+  isActive?: boolean;
+  updateCampaignInput: object;
 }

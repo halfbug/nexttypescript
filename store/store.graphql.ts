@@ -19,6 +19,7 @@ query StoreName($shop: String!) {
     youtubeUrl
   }
   campaigns{
+    id
     name
     criteria
     storeId
@@ -103,10 +104,10 @@ const UPDATE_CAMPAIGN = gql`
     ) {
     updateCampaign(updateCampaignInput: $updateCampaignInput) {
     id
-    status
+    name
     joinExisting
     criteria
-    rewards
+    products
     }
   }
 `;
@@ -145,9 +146,21 @@ query SalesTarget {
   }
 }
 `;
+const GET_CAMPAIGN_BY_ID = gql`
+  query Campaign($campaignid: String!){
+    campaign(id: $campaignid) {
+    id
+    name
+    joinExisting
+    criteria
+    products
+    }
+  }
+`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
+  GET_CAMPAIGN_BY_ID,
 };

@@ -1,0 +1,80 @@
+import React, { useState, useEffect, useContext } from 'react';
+import ToggleButton from 'components/Buttons/ToggleButton/ToggleButton';
+import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import Page from 'components/Layout/Page/Page';
+import Router from 'next/router';
+import { Container, Row, Col } from 'react-bootstrap';
+import styles from 'styles/CampaignListing.module.scss';
+import { StoreContext } from 'store/store.context';
+
+const CampaignListing = () => {
+  const { store, dispatch } = useContext(StoreContext);
+
+  const [campaignList, setCampaignList] = useState([]);
+  const heading = ['Campaign Name', 'Revenue Generated', 'Number of Groupshops', 'Total Cashback', 'Active', 'Actions', ' '];
+
+  useEffect(() => {
+    if (store.campaigns) {
+      setCampaignList(store.campaigns);
+    }
+  }, [store.campaigns]);
+
+  const handleClick = (campaignid: string) => {
+    const shopName: string[] | undefined = store?.shop?.split('.', 1);
+    if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
+  };
+
+  return (
+    <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+      <Container fluid className={styles.container}>
+        <h1 className="mt-5">All Campaigns</h1>
+        <p className="mt-3">
+          ✨
+          From here you can edit your active campaign, create a new campaign,
+          or explore analytics for each campaign.
+          <br />
+          Creating different campaigns is a great
+          way to learn how the products and discounts
+          you offer impact your performance.
+          <strong> Only one campaign can be active at a time.</strong>
+        </p>
+        <Row className="">
+          <Col className="text-muted fs-6 mr-3">Campaign Name</Col>
+          <Col className="text-muted fs-6 mr-3">Revenue Generated</Col>
+          <Col className="text-muted fs-6 mr-3">Number of Groupshops</Col>
+          <Col className="text-muted fs-6 mr-3">Total Cashback</Col>
+          <Col className="text-muted fs-6 mr-3">Active</Col>
+          <Col className="text-muted fs-6 mr-3"> </Col>
+        </Row>
+
+        {campaignList.map((camp:any, index:number) => (
+          <>
+            <Row className={styles.rows}>
+              <Col className="mt-4">{camp.name}</Col>
+              <Col className="mt-4">
+                $
+                {' '}
+                1430
+              </Col>
+              <Col className="mt-4">10</Col>
+              <Col className="mt-4">
+                $1430
+              </Col>
+              <Col className="mt-4">
+                <ToggleButton />
+              </Col>
+              <Col className="mt-4"><WhiteButton text="View Analytics" /></Col>
+              <Col className="mt-4"><WhiteButton text="Edit" onClick={() => handleClick(camp.id)} /></Col>
+            </Row>
+          </>
+        ))}
+        <Row>
+          <Col className={styles.bottom_row}>
+            <p>+ Create New Campaign</p>
+          </Col>
+        </Row>
+      </Container>
+    </Page>
+  );
+};
+export default CampaignListing;

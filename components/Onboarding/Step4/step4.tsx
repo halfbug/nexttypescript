@@ -1,11 +1,11 @@
 import React from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 import {
-  Container, Row,
+  Container, Row, Col,
 } from 'react-bootstrap';
 import styles from 'styles/Step4.module.scss';
 import Settings from 'components/Forms/Settings';
-import LeftPanel from '../LeftPanel/LeftPanel';
+import LeftPanel from '../LeftPanel/LeftPanel1';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 interface IStep4Props {
@@ -19,10 +19,12 @@ const Step4 = ({ show }: IStep4Props) => (
       <ProgressBar progress="85" />
       <Row className="my-4">
         <LeftPanel
-          heading="Make it look on brand"
-          content="Control how your customers will see your Groupshop page as they shop from it. You’re almost done!"
+          heading="Make it look right"
+          content="Control how your customers will see your Groupshop page as they shop from it. You want your customer experience to feel on-brand. Oh, and you’re almost done!"
         />
-        <Settings />
+        <Col className="text-sm-start" md={8}>
+          <Settings isDB={false} />
+        </Col>
       </Row>
     </Container>
     {/* </div> */}

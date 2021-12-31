@@ -17,6 +17,9 @@ $enable-gradients: true;
 $primary: #403f43;
 $secondary: #f3f3f3;
 $purple: #ccb2f9;
+$grey:#CCB2F9;
+$comp_bg:#F8F8F8;
+
 @import "~bootstrap/scss/variables";
 $small-font-size: .675em !default;
 
@@ -81,6 +84,10 @@ $brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45
 	background-clip: padding-box; /* !importanté */
 	border: solid $border transparent; /* !importanté */
 	border-radius: 1em;
+	$dotted-border1: 1px dashed #A68AD6;
+	$dotted-border2: 1px dashed #A7C737;
+	$dotted-border3: 1px dashed #A68AD6;
+	$dotted-border4: 1px dashed #C8DC82;
 
 	&:before {
 		content: '';

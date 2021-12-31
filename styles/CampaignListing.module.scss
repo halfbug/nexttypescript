@@ -1,0 +1,33 @@
+@import "./variables.scss";
+@import "./variables.scss";
+
+.container {
+    .bg {
+        background: #f8f8f8;
+        border-radius: 10px;
+        @extend .mt-4 ;
+		@extend .p-3 ;
+		&:hover {
+			border:2px solid $brand-gradiant;
+		}
+    }
+    .rows {
+        background: #f8f8f8;
+        border-radius: 10px;
+        @extend .mt-4;
+    }
+    .bottom_row {
+        border: 1px dashed #ccb2f9;
+        border-radius: 10px;
+        @extend .mt-4;
+        &
+        p{
+            @extend .mt-2;   
+        }      
+    }
+}
+.btn_1{
+    background-color: red !important;
+    width:auto;
+    height: 20px;
+}
