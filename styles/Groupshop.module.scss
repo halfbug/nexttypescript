@@ -52,7 +52,7 @@
 		}
 
 		&_item {
-			@extend .m-1, .p-1, .rounded, .border;
+			@extend .m-1, .p-1, .rounded, .border, .text-capitalize;
 			border-color: $purple !important;
 			border-width: 2px;
 			cursor: pointer !important;
@@ -60,6 +60,11 @@
 			&:hover {
 				@extend .shadow-sm;
 			}
+		}
+
+		&_invite {
+			@extend .groupshop__top_item;
+			border-style: dashed !important;
 		}
 	}
 
@@ -144,7 +149,7 @@
 		}
 
 		&_tag {
-			@extend .p-1, .px-2, .fs-6, .rounded, .fw-bold;
+			@extend .p-1, .px-2, .fs-6, .rounded, .fw-bold, .text-uppercase;
 			background-color: white;
 			&_price {
 				@extend .groupshop__pcard_tag;
@@ -173,6 +178,16 @@
 		// &_rtag {
 
 		// }
+	}
+	&_row {
+		@extend .pt-4;
+	}
+
+	&_col {
+		@extend .p-2, .text-center;
+		h2 {
+			@extend .fw-bold, .text-uppercase;
+		}
 	}
 }
 // button {

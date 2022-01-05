@@ -16,5 +16,5 @@ const Template: ComponentStory<typeof Members> = (args) => <Members {...args} />
 
 export const Small = Template.bind({});
 Small.args = {
-  name: 'LE SABLÉ',
+  names: ['one', 'two', 'three'],
 };

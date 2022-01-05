@@ -7,15 +7,16 @@ import styles from 'styles/Groupshop.module.scss';
 import { ref } from 'yup';
 
 interface MembersProps {
-  name : string;
+  names : string[];
+  cashback : string[];
 }
 
 const Members = ({
-  name,
+  names, cashback,
 }: MembersProps) => (
 
   <>
-    {['👑 Elisa C.', 'Neil D.', 'Paul B.', 'Maddy S.'].map((member) => (
+    {names?.map((member, index) => (
       <OverlayTrigger
         trigger="click"
         rootClose
@@ -27,14 +28,27 @@ const Members = ({
           <Popover id={`popover-positioned-${member}`} arrowProps={() => {}}>
             {/* <Popover.Header as="h3">{`Popover ${member}`}</Popover.Header> */}
             <Popover.Body>
-              <h4>{member}</h4>
-              <p>👑 GROUPSHOP OWNER</p>
-              <p>$83 in discounts and cashback.</p>
+              <h4>
+
+                {member}
+                {index}
+              </h4>
+              <p>
+                {index === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
+                {' '}
+              </p>
+              <p>
+                {cashback[index]}
+                {' '}
+                in discounts and cashback.
+              </p>
             </Popover.Body>
           </Popover>
       )}
       >
         <Button variant="outline" className={styles.groupshop__top_item}>
+          {index === 0 && '👑'}
+          {' '}
           {member}
         </Button>
       </OverlayTrigger>

@@ -42,6 +42,7 @@ export interface IProduct {
   featuredImage: string;
   price: string;
   currencyCode: string;
+  lineItems?:any[];
 }
 export interface ISettings {
   brandColor: string;
@@ -50,6 +51,11 @@ export interface ISettings {
   imageUrl: string;
   youtubeUrl: string;
 }
+
+export interface RootProps {
+  pending?: Boolean;
+}
+
 export interface IDBCampaign {
   id?: string | null | undefined;
   name?: string;

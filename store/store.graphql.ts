@@ -158,9 +158,93 @@ const GET_CAMPAIGN_BY_ID = gql`
   }
 `;
 
+const GET_GROUPSHOP = gql`
+query Groupshop($code: String!) {
+  groupshop(code: $code) {
+    storeId
+    id
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+    }
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+    expiredAt
+    createdAt
+    totalProducts
+    members{
+      orderId
+      availedDiscount
+      role 
+      orderDetail{
+        customer{
+          firstName
+          LastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      products{
+        title
+        featuredImage
+        price
+        lineItems{
+          product{
+            id
+          }
+          price
+        }
+      }
+    }
+    store{
+      brandName
+    }
+  popularProducts{
+    featuredImage
+    id
+    title
+    price
+    currencyCode
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+  allProducts{
+    featuredImage
+    id
+    title
+    price
+    currencyCode
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+    campaign{
+      name
+      products
+    } 
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
-  GET_CAMPAIGN_BY_ID,
+  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID,
 };

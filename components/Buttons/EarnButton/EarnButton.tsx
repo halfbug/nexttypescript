@@ -9,6 +9,8 @@ import CopyToClipboard from '../CopyToClipboard/CopyToClipboard';
 interface EarnButtonProps {
   popContent : React.ReactNode;
   // handleClick():any;
+  className?: string;
+  displayIcon?: boolean;
   label: string | undefined;
 }
 
@@ -17,13 +19,13 @@ const Popcomp = (content: React.ReactNode) => (
     {/* <Popover.Header as="h3">Popover right</Popover.Header> */}
     <Popover.Body>
       {content}
-      {/* <CopyToClipboard value={copyValue} /> */}
+      {/* <CopyToClipboacrd value={copyValue} /> */}
     </Popover.Body>
   </Popover>
 );
 
 const EarnButton = ({
-  label, popContent,
+  label, popContent, className, displayIcon,
 }: EarnButtonProps) => (
   <OverlayTrigger
     trigger="click"
@@ -32,9 +34,9 @@ const EarnButton = ({
     placement="bottom"
     overlay={Popcomp(popContent)}
   >
-    <Button variant="outline-primary" className={styles.groupshop__earn}>
+    <Button variant="outline-primary" className={[styles.groupshop__earn, className].join(' ')}>
       {' '}
-      <Send className="fs-4" />
+      {displayIcon && <Send className="fs-4" />}
       {' '}
       {label}
     </Button>
@@ -43,8 +45,9 @@ const EarnButton = ({
 
 );
 
-// EarnButton.defaultProps = {
-//   label: undefined,
-// };
+EarnButton.defaultProps = {
+  className: undefined,
+  displayIcon: true,
+};
 
 export default EarnButton;
