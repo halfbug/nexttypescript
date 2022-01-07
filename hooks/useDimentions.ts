@@ -4,7 +4,7 @@ import {
 
 export default function useDimensions() {
   const ref = useRef<any>();
-  const [dimensions, setDimensions] = useState<any>({});
+  const [dimensions, setDimensions] = useState<any>({ width: 0 });
 
   // Run the first time renders to set the initial dimensions
   // useLayoutEffect(() => {

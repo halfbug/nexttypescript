@@ -35,6 +35,12 @@ export interface ICollection {
   productsCount: number;
   products: IProduct[]
 }
+export interface ILineItem{
+price: string;
+product : {
+  id: string
+}
+}
 
 export interface IProduct {
   id: string,
@@ -42,7 +48,8 @@ export interface IProduct {
   featuredImage: string;
   price: string;
   currencyCode: string;
-  lineItems?:any[];
+  // lineItems?: any;
+  orders?: any;
 }
 export interface ISettings {
   brandColor: string;

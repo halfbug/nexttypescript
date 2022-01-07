@@ -26,29 +26,25 @@ import {
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
-import { GroupshopContext } from 'store/groupshop.context';
+import { GroupshopContext, gsInit } from 'store/groupshop.context';
+import { IGroupshop } from 'types/groupshop';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
   const { query: { code, source } } = router;
-  const { groupshop: gsctx, dispatch } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const {
-    loading, error, data: { groupshop } = { groupshop: { members: [{ orderDetail: { customer: '' } }], store: { brandName: '' } } }, networkStatus,
-  } = useQuery(GET_GROUPSHOP, {
-
-    variables: { code: code?.length ? code[0] : null },
-    // pollInterval: 500,
+    loading, error, data: { groupshop } = { groupshop: gsInit }, networkStatus,
+  } = useQuery<{groupshop: IGroupshop }, {code: string | undefined}>(GET_GROUPSHOP, {
+    variables: { code: code?.length ? code[0] : undefined },
     notifyOnNetworkStatusChange: true,
     skip: !code,
-
   });
-  console.log('🚀 ~  ~ line 21 ~ data', groupshop);
-  // //   // console.log('🚀 ~  ~ line 21 ~ error', error);
-  console.log('🚀 ~  ~ line 21 ~ loading', loading);
-  // //   const { installationDialogue } = useInstallation(ins);
 
-  // //   const { store, dispatch } = useContext(StoreContext);
+  console.log('🚀 ~~ line 21 ~ data', groupshop);
+  console.log('🚀 ~~ line 21 ~ loading', loading);
+
   const [pending, setpending] = useState<Boolean>(true);
   useEffect(() => {
     if (groupshop.id && pending) {
@@ -58,19 +54,18 @@ const GroupShop: NextPage = () => {
     }
   }, [groupshop, pending]);
 
-  // if (groupshop) {
   const {
     members: [{ orderDetail: { customer: owner } }],
-    store: { brandName },
+    store: { brandName } = { brandName: '' },
     popularProducts,
     allProducts,
   } = groupshop;
-  // }
+
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
   if (error) {
-    // router.push('/404');
+    router.push('/404');
     return <p>groupshop not found</p>;
   }
 
@@ -79,7 +74,7 @@ const GroupShop: NextPage = () => {
       <Header LeftComp={<Counter expireDate={groupshop?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
       <Container fluid>
         <Row className={styles.groupshop__top}>
-          <Col md={3} className="text-center text-lg-start"><Brand name={brandName} pending={pending} /></Col>
+          <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>
           <Col md={6} className={styles.groupshop__top_members}>
             <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
             <div className="d-flex flex-row justify-content-center">
@@ -200,7 +195,7 @@ const GroupShop: NextPage = () => {
       <ProductGrid xs={12} md={6} lg={4} xl={3} products={popularProducts} maxrows={1}>
         <h2>Popular in Group</h2>
       </ProductGrid>
-      <ProductGrid xs={12} md={6} lg={4} xl={3} products={allProducts} maxrows={2}>
+      <ProductGrid xs={12} sm={6} md={6} lg={4} xl={3} products={allProducts} maxrows={3}>
         <h2>All Products</h2>
       </ProductGrid>
     </>

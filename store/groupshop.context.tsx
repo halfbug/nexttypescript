@@ -3,12 +3,14 @@ import { IGroupshop } from 'types/groupshop';
 import { gsreducer, GroupshopActions } from './groupshop.reducer';
 
 interface GSContextType {
-  groupshop: IGroupshop,
+  gsctx: IGroupshop,
   dispatch: React.Dispatch<GroupshopActions>;
 }
 
-const initialState: IGroupshop = {
-  members: [],
+export const gsInit: IGroupshop = {
+  members: [{
+    orderDetail: { customer: '' }, orderId: '', availedDiscount: 0, role: 'referral',
+  }],
   id: '',
   campaignId: '',
   storeId: '',
@@ -22,10 +24,11 @@ const initialState: IGroupshop = {
     priceRuleId: '',
   },
   milestones: [],
+  store: { brandName: '' },
 };
 
 export const GroupshopContext = React.createContext<GSContextType>(
-  { groupshop: initialState, dispatch: ():any => {} },
+  { gsctx: gsInit, dispatch: ():any => {} },
 );
 
 export const GroupshopContextProvider = ({
@@ -33,10 +36,10 @@ export const GroupshopContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [groupshop, dispatch] = React.useReducer(gsreducer, initialState);
+  const [gsctx, dispatch] = React.useReducer(gsreducer, gsInit);
 
   return (
-    <GroupshopContext.Provider value={{ groupshop, dispatch }}>
+    <GroupshopContext.Provider value={{ gsctx, dispatch }}>
       {children}
     </GroupshopContext.Provider>
   );

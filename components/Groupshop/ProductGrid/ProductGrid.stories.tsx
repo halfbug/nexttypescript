@@ -24,7 +24,7 @@ Grid.args = {
       title: 'THE LAST SUPPER | LEONARDO DA VINCI',
       price: '990.00',
       currencyCode: 'USD',
-      lineItems: [
+      orders: [
         {
           product: {
             id: 'gid://shopify/Product/6140915548326',

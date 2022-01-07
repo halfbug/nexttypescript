@@ -197,7 +197,7 @@ query Groupshop($code: String!) {
         title
         featuredImage
         price
-        lineItems{
+        orders{
           product{
             id
           }
@@ -209,15 +209,16 @@ query Groupshop($code: String!) {
       brandName
     }
   popularProducts{
-    featuredImage
     id
+    featuredImage
     title
     price
     currencyCode
-    lineItems{
+    orders{
       product{
         id
       }
+      quantity
       price
     }
   }

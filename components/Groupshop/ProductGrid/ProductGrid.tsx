@@ -6,41 +6,64 @@ import {
   Button,
   Col, Container, Placeholder, Row,
 } from 'react-bootstrap';
+import Pagination from 'react-bootstrap/Pagination';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import useDimensions from 'hooks/useDimentions';
 import { GroupshopContext } from 'store/groupshop.context';
+import usePagination from 'hooks/usePagination';
 
 type ProductGridProps = {
   products : IProduct[]| undefined,
+  maxrows?: number,
   xs?: number,
   sm?: number,
   md?: number,
   lg?: number,
   xl?: number,
   xxl?: number,
-  maxrows?: number,
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
-  products, pending, children, ...rest
+  products, pending, children, maxrows = 0,
+  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
 }: ProductGridProps) => {
+  // const {
+  //   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3,
+  // } = props;
   const [ref, dimensions] = useDimensions();
   const {
-    groupshop: { discountCode: { percentage }, dealProducts },
+    breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage,
+  } = usePagination<IProduct>({
+    dimensions,
+    maxrows,
+    screens: {
+      xs, sm, md, lg, xl, xxl,
+    },
+    items: products || [],
+  });
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 36 ~ maxrows', maxrows);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 31 ~ breakpoint', breakPoint);
+  // const pageSize = getPageSize(props[breakPoint]);
+  console.log('🚀 ~ Page size', pageSize);
+  console.log('🚀 ~ total pages', totalPages);
+
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 28 ~ dimensions', dimensions);
+  const {
+    gsctx: { discountCode: { percentage }, dealProducts },
   } = useContext(GroupshopContext);
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
   return (
-    <Container {...rest} ref={ref}>
+    <Container {...props} ref={ref} fluid>
       <Row className={styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}
         </Col>
       </Row>
       <Row>
-        {products?.map(({
-          title, featuredImage, lineItems, price, id,
+        {renderItems?.map(({
+          title, featuredImage, orders, price, id,
         }) => (
           <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={id}>
             <ProductCard
@@ -51,8 +74,12 @@ const ProductGrid = ({
                     {`${percentage}% OFF`}
                   </span>
                   <span className={styles.groupshop__pcard_tag_buyer}>MS</span>
-                  {dealProducts?.filter(({ productId }) => productId === id).map(({ addedBy }) => (
-                    <span className={styles.groupshop__pcard_tag_addedby}>
+                  {dealProducts?.filter(
+                    ({ productId }) => productId === id,
+                  ).map((
+                    { addedBy, productId },
+                  ) => (
+                    <span className={styles.groupshop__pcard_tag_addedby} key={productId}>
                       {`Added by ${addedBy}`}
                     </span>
                   ))}
@@ -60,9 +87,11 @@ const ProductGrid = ({
 )}
             >
               <h5 className="text-center fw-bold text-truncate">{title}</h5>
+              { orders?.length > 0 && (
               <p className="text-center mb-1 fs-5">
-                {`🔥 ${lineItems?.length} friends shopped`}
+                {`🔥 ${orders?.length} friends shopped`}
               </p>
+              )}
               <p className="text-center fw-bold fs-5 mb-0">
                 $
                 {' '}
@@ -74,18 +103,42 @@ const ProductGrid = ({
           </Col>
         ))}
       </Row>
+      <Row>
+        <Col>
+          { totalPages > 1 && (
+          <Pagination className="d-flex justify-content-center">
+            <Pagination.Prev onClick={() => setCurrentPage(
+              (currentPage > 1) ? currentPage - 1 : currentPage,
+            )}
+            />
+            {[...new Array(totalPages)].map((n, index) => (
+              <Pagination.Item
+                active={currentPage === index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next onClick={() => setCurrentPage(
+              (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
+            )}
+            />
+          </Pagination>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };
 
 ProductGrid.defaultProps = {
+  maxrows: 1,
   xs: 12,
   sm: 12,
   md: 6,
   lg: 4,
   xl: 3,
   xxl: 2,
-  maxrows: 4,
 };
 
 export default ProductGrid;
