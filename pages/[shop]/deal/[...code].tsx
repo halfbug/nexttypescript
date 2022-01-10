@@ -11,7 +11,7 @@ import styles from 'styles/Groupshop.module.scss';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import {
   Button,
-  Col, Container, Dropdown, ListGroup, Row,
+  Col, Container, Dropdown, ListGroup, Row, ButtonGroup,
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
@@ -28,6 +28,7 @@ import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { GroupshopContext, gsInit } from 'store/groupshop.context';
 import { IGroupshop } from 'types/groupshop';
+import { IProduct } from 'types/store';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
@@ -45,11 +46,14 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~~ line 21 ~ data', groupshop);
   console.log('🚀 ~~ line 21 ~ loading', loading);
 
+  const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
+
   const [pending, setpending] = useState<Boolean>(true);
   useEffect(() => {
     if (groupshop.id && pending) {
       console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
       setpending(false);
+      setallProducts(groupshop?.allProducts);
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
   }, [groupshop, pending]);
@@ -58,7 +62,7 @@ const GroupShop: NextPage = () => {
     members: [{ orderDetail: { customer: owner } }],
     store: { brandName } = { brandName: '' },
     popularProducts,
-    allProducts,
+    // allProducts,
   } = groupshop;
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
@@ -70,7 +74,7 @@ const GroupShop: NextPage = () => {
   }
 
   return (
-    <>
+    <div className={styles.groupshop}>
       <Header LeftComp={<Counter expireDate={groupshop?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
       <Container fluid>
         <Row className={styles.groupshop__top}>
@@ -185,7 +189,7 @@ const GroupShop: NextPage = () => {
           </Col>
         </Row>
         <Row>
-          {[0, 1, 2, 3].map((mproducts) => (
+          {[0, 1, 2, 3].map(() => (
             <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center ">
               <ProductCard isrc="https://static-01.daraz.pk/p/bddacc10cdf258fb1daa001db136dfb3.jpg_340x340q80.jpg_.web" imgOverlay={undefined} />
             </Col>
@@ -196,9 +200,53 @@ const GroupShop: NextPage = () => {
         <h2>Popular in Group</h2>
       </ProductGrid>
       <ProductGrid xs={12} sm={6} md={6} lg={4} xl={3} products={allProducts} maxrows={3}>
-        <h2>All Products</h2>
+        <div className="position-relative">
+          <h2>All Products</h2>
+          <div className="position-absolute top-0 end-0  ">
+            <Dropdown align="end" drop="down">
+              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic" className={styles.groupshop_sort}>
+                <span className="d-none d-sm-inline text-capitalize">
+                  Sort by
+                </span>
+                <ChevronDown />
+
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                  (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
+                ))}
+                >
+                  Price (Low to High)
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                  (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
+                ))}
+                >
+                  Price ( High to Low)
+
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                  (a, b) => a.title.localeCompare(b.title),
+                ))}
+                >
+                  Name (a-z)
+
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                  (a, b) => a.title.localeCompare(b.title),
+                ).reverse())}
+                >
+                  Name (z-a)
+
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+          </div>
+        </div>
       </ProductGrid>
-    </>
+    </div>
   );
 };
 
