@@ -27,7 +27,7 @@ import Hero from 'components/Groupshop/Hero/Hero';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { GroupshopContext, gsInit } from 'store/groupshop.context';
-import { IGroupshop } from 'types/groupshop';
+import { IGroupshop, Member } from 'types/groupshop';
 import { IProduct } from 'types/store';
 
 const GroupShop: NextPage = () => {
@@ -47,6 +47,7 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~~ line 21 ~ loading', loading);
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
+  const [member, setmember] = useState<Member | undefined>(undefined);
 
   const [pending, setpending] = useState<Boolean>(true);
   useEffect(() => {
@@ -54,6 +55,7 @@ const GroupShop: NextPage = () => {
       console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
       setpending(false);
       setallProducts(groupshop?.allProducts);
+      setmember(groupshop?.members[0]);
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
   }, [groupshop, pending]);
@@ -65,8 +67,8 @@ const GroupShop: NextPage = () => {
     // allProducts,
   } = groupshop;
 
-  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
-  console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
   if (error) {
     router.push('/404');
@@ -167,44 +169,41 @@ const GroupShop: NextPage = () => {
         </Col>
 
       </Hero>
-      <Container>
-        <Row className={styles.groupshop_row}>
-          <Col xs={12} className={styles.groupshop_col}>
-            <h2>
-              SHOPPED BY ELISA
-              {/* <IconButton icon={<ChevronDown />} className="rounded-pill p-2 border" /> */}
-              <Dropdown className="d-inline mx-2">
-                <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
-                  <ChevronDown />
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                  <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </h2>
-            <p>Shop from Elisa’s previous pruchases and recommendations.</p>
-          </Col>
-        </Row>
-        <Row>
-          {[0, 1, 2, 3].map(() => (
-            <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center ">
-              <ProductCard isrc="https://static-01.daraz.pk/p/bddacc10cdf258fb1daa001db136dfb3.jpg_340x340q80.jpg_.web" imgOverlay={undefined} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <ProductGrid xs={12} md={6} lg={4} xl={3} products={member?.products} maxrows={1}>
+        <h2>
+          SHOPPED BY
+          {' '}
+          {member?.orderDetail?.customer.firstName}
+          <Dropdown className="d-inline mx-2">
+            <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
+              <ChevronDown />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {groupshop?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+            </Dropdown.Menu>
+          </Dropdown>
+        </h2>
+        <p>
+          Shop from
+          {' '}
+          {member?.orderDetail?.customer?.firstName || ''}
+          {' '}
+          ’s previous pruchases and recommendations.
+        </p>
+
+      </ProductGrid>
+
       <ProductGrid xs={12} md={6} lg={4} xl={3} products={popularProducts} maxrows={1}>
         <h2>Popular in Group</h2>
       </ProductGrid>
       <ProductGrid xs={12} sm={6} md={6} lg={4} xl={3} products={allProducts} maxrows={3}>
         <div className="position-relative">
           <h2>All Products</h2>
-          <div className="position-absolute top-0 end-0  ">
+          <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
             <Dropdown align="end" drop="down">
-              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic" className={styles.groupshop_sort}>
+              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
                 <span className="d-none d-sm-inline text-capitalize">
                   Sort by
                 </span>

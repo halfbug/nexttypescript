@@ -27,9 +27,6 @@ const ProductGrid = ({
   products, pending, children, maxrows = 0,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
 }: ProductGridProps) => {
-  // const {
-  //   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3,
-  // } = props;
   const [ref, dimensions] = useDimensions();
   const {
     breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage,
@@ -41,15 +38,15 @@ const ProductGrid = ({
     },
     items: products || [],
   });
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 36 ~ maxrows', maxrows);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 31 ~ breakpoint', breakPoint);
-  // const pageSize = getPageSize(props[breakPoint]);
-  console.log('🚀 ~ Page size', pageSize);
-  console.log('🚀 ~ total pages', totalPages);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
 
-  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 28 ~ dimensions', dimensions);
+  const fillerz = Math.abs(pageSize - renderItems.length) || (breakPoint === 'sm' ? 1 : 0);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
   const {
-    gsctx: { discountCode: { percentage }, dealProducts },
+    gsctx: {
+      discountCode: { percentage },
+      dealProducts,
+    } = { discountCode: { percentage: 0 }, dealProducts: [] },
   } = useContext(GroupshopContext);
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -98,6 +95,34 @@ const ProductGrid = ({
                 {price}
               </p>
               <Button variant="primary" className="rounded-pill w-75">Add to Cart</Button>
+              <Button variant="outline-primary" className="m-1 rounded-pill">test</Button>
+            </ProductCard>
+          </Col>
+        ))}
+        {[...new Array(fillerz)]?.map((n) => (
+          <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={n}>
+            <ProductCard
+              isrc="/images/empty.png"
+              imgOverlay={(
+                <>
+                  <span className={styles.groupshop__pcard_tag_price}>
+                    {`${percentage}% OFF`}
+                  </span>
+                  <Button variant="outline-primary" className={styles.groupshop__pcard_tag_product}>ADD A PRODUCT</Button>
+                </>
+)}
+            >
+              <h5 className="text-center fw-bold text-truncate">Don’t see what you like?</h5>
+
+              <p className="text-center mb-1 fs-5">
+                Add your favorite product
+              </p>
+
+              <p className="text-center fw-bold fs-5 mb-0">
+                <br />
+                {' '}
+              </p>
+              <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
               <Button variant="outline-primary" className="m-1 rounded-pill">test</Button>
             </ProductCard>
           </Col>

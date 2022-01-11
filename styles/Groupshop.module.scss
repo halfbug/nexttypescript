@@ -142,18 +142,20 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&_sort {
-		@extend .border-0, .text-center, .fs-5, .fw-bold;
-		line-height: 1rem;
-		padding: 0.25rem;
+		button {
+			@extend .border-0, .text-center, .fs-5, .fw-bold;
+			line-height: 1rem;
+			padding: 0.25rem;
 
-		// margin-top: -2px;
-		svg {
-			margin-left: 2px;
-		}
-		&::after {
-			@extend .border-0;
-			// text-align: center !important;
-			// vertical-align: middle !important;
+			// margin-top: -2px;
+			svg {
+				margin-left: 2px;
+			}
+			&::after {
+				@extend .border-0;
+				// text-align: center !important;
+				// vertical-align: middle !important;
+			}
 		}
 	}
 
@@ -181,7 +183,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_buyer {
 				@extend .groupshop__pcard_tag;
 				@extend .p-1, .py-2, .rounded-pill, .m-1;
-				background-color: white;
+				// background-color: white;
 				top: 45px;
 				position: absolute;
 			}
@@ -189,10 +191,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_addedby {
 				@extend .groupshop__pcard_tag;
 				// @extend .p-1, .py-2, .rounded-pill, .m-1;
-				background-color: white;
+				// background-color: white;
 				top: 220px;
 				right: 15px;
 				position: absolute;
+			}
+
+			&_product {
+				@extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
+				left: 12%;
 			}
 		}
 
