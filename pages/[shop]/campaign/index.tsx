@@ -3,13 +3,17 @@ import ToggleButton from 'components/Buttons/ToggleButton/ToggleButton';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Page from 'components/Layout/Page/Page';
 import Router from 'next/router';
-import { Container, Row, Col } from 'react-bootstrap';
+import {
+  Container, Row, Col, Button,
+} from 'react-bootstrap';
 import styles from 'styles/CampaignListing.module.scss';
 import { StoreContext } from 'store/store.context';
 import { ICampaign } from 'types/store';
+import Link from 'next/link';
 
 const CampaignListing = () => {
   const { store, dispatch } = useContext(StoreContext);
+  const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
   const [campaignList, setCampaignList] = useState<ICampaign[]>([]);
   const heading = ['Campaign Name', 'Revenue Generated', 'Number of Groupshops', 'Total Cashback', 'Active', 'Actions', ' '];
@@ -21,8 +25,10 @@ const CampaignListing = () => {
   }, [store.campaigns]);
 
   const handleClick = (campaignid: string) => {
-    const shopName: string[] | undefined = store?.shop?.split('.', 1);
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
+  };
+  const handleClickNew = (campaignid: string) => {
+    if (shopName) Router.push(`/${shopName}/campaign/new`);
   };
 
   return (
@@ -71,7 +77,12 @@ const CampaignListing = () => {
         ))}
         <Row>
           <Col className={styles.bottom_row}>
-            <p>+ Create New Campaign</p>
+            <Button
+              className={styles.container_btnNew}
+              onClick={() => handleClickNew}
+            >
+              + Create New Campaign
+            </Button>
           </Col>
         </Row>
       </Container>

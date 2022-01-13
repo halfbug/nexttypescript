@@ -5,7 +5,7 @@ import Page from 'components/Layout/Page/Page';
 import UpdateCampaign from 'components/Forms/UpdateCampaign';
 
 const Campaign: NextPage = () => (
-  <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+  <Page headingText="Fall 2021 Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
     <UpdateCampaign />
   </Page>
 );

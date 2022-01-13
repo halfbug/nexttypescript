@@ -2,6 +2,26 @@
 @import "./variables.scss";
 
 .container {
+    &_btnNew{
+        background-color: transparent;
+        border: none;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 23px;
+        color: #000000;
+        &:hover {
+            background-color: transparent;
+            border: none;
+            color: $primary;
+        }
+        &:active {
+            background-color: transparent;
+            border: none;
+            color: $primary;
+        }
+    }
     .bg {
         background: #f8f8f8;
         border-radius: 10px;
