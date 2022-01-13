@@ -16,8 +16,8 @@ const ShopMain: NextPage = () => {
 
     variables: { shop },
   });
-  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
-  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
+  console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
+  console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
   const { installationDialogue } = useInstallation(ins);
 

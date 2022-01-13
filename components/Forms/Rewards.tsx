@@ -28,7 +28,7 @@ export default function Rewards() {
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
   } = useQuery(GET_SALES_TARGET);
-  console.log('🚀 ~ file: Rewards.tsx ~ line 22 ~ Rewards ~ appData', salesTarget);
+
   const [addReward] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
@@ -46,42 +46,54 @@ export default function Rewards() {
   };
 
   useEffect(() => {
+    /// initial value display
     if (salesTarget.length > 0) {
+      console.log('im in init');
       initvalz.rewards = salesTarget[3].id;
-
       // eslint-disable-next-line prefer-destructuring
       initvalz.selectedTarget = salesTarget[3];
+      if (minDiscount === '' && maxDiscount === '') {
+        setMinDiscount(salesTarget[3].rewards[0].discount);
+        setMaxDiscount(salesTarget[3].rewards[2].discount);
+      }
     }
-  }, [salesTarget, initvalz]);
+  }, [initvalz]);
 
   const {
     handleSubmit, values, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: initvalz,
     validationSchema,
-    enableReinitialize: true,
+    // enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { rewards } = valz;
-
       const id = store?.newCampaign?.id;
       if (id) {
         await addReward({
           variables: {
             updateCampaignInput: {
-              id,
+              storeId: store.id,
+              id: store?.newCampaign?.id,
               rewards,
             },
           },
         });
       }
-      dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
+      dispatch({ type: 'UPDATE_CAMPAIGN_REWARDS', payload: { rewards: valz } });
       setParams({ ins: 4 });
     },
   });
-  console.log('🚀 ~ file: Rewards.tsx ~ line 66 ~ Rewards ~ values', values);
+  console.log({ store });
+
+  useEffect(() => {
+    if (values.selectedTarget !== '') {
+      setMinDiscount(values.selectedTarget?.rewards[0].discount);
+      setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+    }
+  }, [values.selectedTarget]);
 
   if (appLodaing) {
     return (
@@ -123,9 +135,8 @@ export default function Rewards() {
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
   const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
-  console.log({ values: values.selectedTarget?.rewards });
-  // const minDiscount = values.selectedTarget?.rewards[0].discount;
-  // const maxDiscount = values.selectedTarget?.rewards[2].discount;
+
+  console.log({ values });
 
   return (
     <Col className={styles.rewards} md={8}>
@@ -167,14 +178,14 @@ export default function Rewards() {
                     const selectedTarget = JSON.parse(e.currentTarget.value);
                     setFieldValue('rewards', selectedTarget.id);
                     setFieldValue('selectedTarget', { ...selectedTarget, idx: +index });
-                    setMinDiscount(values.selectedTarget?.rewards[0].discount);
-                    setMaxDiscount(values.selectedTarget?.rewards[2].discount);
                   }}
                   // className={btns[index].cssName}
                   // bsPrefix={styles.rewards_hide}
                   style={{ width: '66px' }}
                 >
-                  <MyButton className={btns[index].cssName} variant="light">{btns[index].text}</MyButton>
+                  {/* <MyButton className={btns[index].cssName} variant="light"> */}
+                  {btns[index].text}
+                  {/* </MyButton> */}
                 </ToggleButton>
 
               ))}

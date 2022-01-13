@@ -108,6 +108,7 @@ const UPDATE_CAMPAIGN = gql`
     joinExisting
     criteria
     products
+    rewards
     }
   }
 `;
