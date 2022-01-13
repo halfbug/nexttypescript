@@ -1,16 +1,16 @@
+/* eslint-disable quotes */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import {
-  Form, Row, Col, ButtonGroup, ToggleButton, Button as MyButton,
+  Form, Row, Col, ButtonGroup, ToggleButton, Button,
 } from 'react-bootstrap';
-import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
 import { useMutation, useQuery } from '@apollo/client';
 import { ICampaign } from 'types/store';
-import styles from 'styles/Step3.module.scss';
+import styles from 'styles/Campaign.module.scss';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 
@@ -19,7 +19,7 @@ interface IValues {
   selectedTarget: any;
 }
 
-export default function Rewards() {
+export default function UpdateRewards() {
   const [, setParams] = useQueryString();
 
   const [minDiscount, setMinDiscount] = useState('');
@@ -28,9 +28,7 @@ export default function Rewards() {
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
   } = useQuery(GET_SALES_TARGET);
-
   const [addReward] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
-  // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
@@ -63,29 +61,26 @@ export default function Rewards() {
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: initvalz,
     validationSchema,
-    // enableReinitialize: true,
+    enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { rewards } = valz;
-      const id = store?.newCampaign?.id;
-      if (id) {
-        await addReward({
-          variables: {
-            updateCampaignInput: {
-              storeId: store.id,
-              id: store?.newCampaign?.id,
-              rewards,
-            },
+
+      await addReward({
+        variables: {
+          updateCampaignInput: {
+            storeId: store.id,
+            id: 'db41888f-3db0-405c-a2d2-96c36ab0019d',
+            rewards,
           },
-        });
-      }
-      dispatch({ type: 'UPDATE_CAMPAIGN_REWARDS', payload: { rewards: valz } });
-      setParams({ ins: 4 });
+        },
+      });
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
+      // setParams({ ins: 4 });
     },
   });
-
   useEffect(() => {
     if (values.selectedTarget !== '') {
       setMinDiscount(values.selectedTarget?.rewards[0].discount);
@@ -93,72 +88,38 @@ export default function Rewards() {
     }
   }, [values.selectedTarget]);
 
-  if (appLodaing) {
-    return (
-      <section className="text-sm-start">
-        <Row className="mt-3"><h4>Adjust your target sales volume</h4></Row>
-        <Row className="text-muted"><h6>Choose one of our recommended options. You can adjust them later on in the Settings page.</h6></Row>
-        <Row className="mt-2">
-          <Col>
-            <Placeholder animation="glow">
-              <Placeholder xs={6} />
-            </Placeholder>
-          </Col>
-          <Col>
-            <Placeholder animation="glow">
-              <Placeholder xs={6} />
-            </Placeholder>
-
-          </Col>
-          <Col>
-            <Placeholder animation="glow">
-              <Placeholder xs={7} />
-              <Placeholder xs={4} />
-              <Placeholder xs={4} />
-              <Placeholder xs={6} />
-              <Placeholder xs={8} />
-            </Placeholder>
-
-          </Col>
-
-        </Row>
-      </section>
-    );
-  }
-  const bars = [45, 77, 102, 125];
   const btns = [
     { text: 'Low', cssName: 'low_btn' },
     { text: 'Average', cssName: 'avg_btn' },
     { text: 'Hign', cssName: 'high_btn' },
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
-  const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
-
   console.log({ values });
 
   return (
-    <section className={styles.rewards}>
+    <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
 
       <Form noValidate onSubmit={handleSubmit}>
-        <Row className="mt-5"><Col><h4>Adjust your target sales volume</h4></Col></Row>
-        <Row className={styles.rewards_text_lg}>
+        <Row className="mt-1"><Col><h4>Set your rewards</h4></Col></Row>
+        <Row className={styles.dbrewards_text_lg}>
           <Col>
-            Choose one of our recommended options. You can
+            Set the discount and chashback percentages
             {' '}
             <br />
+            your customers will earn on their order
             {' '}
-            adjust them later on in the Settings page.
+            <br />
+            as they reach different milestones.
           </Col>
         </Row>
         <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
-        <Row className={styles.rewards_text_lg}>
+        <Row className={styles.dbrewards_text_lg}>
           <Col>
             We’ll set your reward tiers based on our
             {' '}
             <br />
             {' '}
             recommendations..
-
           </Col>
         </Row>
         <Row className="m-0">
@@ -177,53 +138,61 @@ export default function Rewards() {
                     const selectedTarget = JSON.parse(e.currentTarget.value);
                     setFieldValue('rewards', selectedTarget.id);
                     setFieldValue('selectedTarget', { ...selectedTarget, idx: +index });
+                    // changeVal();
+                    // handleSubmit();
+                    // setTimeout(() => handleSubmit(), 1000);
                   }}
-                  // className={btns[index].cssName}
+                  className={`${styles.dbrewards}__${btns[index].cssName}`}
                   // bsPrefix={styles.rewards_hide}
-                  style={{ width: '66px' }}
+                //   style={{ width: '66px' }}
                 >
-                  {/* <MyButton className={btns[index].cssName} variant="light"> */}
                   {btns[index].text}
-                  {/* </MyButton> */}
+                  {/* <span className={btns[index].cssName}>
+                    <button type="button">{btns[index].text}</button>
+                  </span> */}
                 </ToggleButton>
 
               ))}
             </ButtonGroup>
+            {/* <button type="submit">next</button> */}
           </Col>
         </Row>
 
-        <Row className={styles.rewards__box2}>
+        {/* <Row className={styles.dbrewards__box2}> */}
+        <Row>
           <Col sm={6}>
             <h4 className="fs-4">Baseline</h4>
-            <div className={styles.rewards__percent_btn}>{minDiscount}</div>
+            <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>
 
           </Col>
           <Col sm={6}>
             <h4 className="fs-4">Maximum</h4>
-            <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
+            <div className={styles.dbrewards__percent_btn}>{maxDiscount}</div>
           </Col>
 
         </Row>
 
         <Row className="mt-3 w-75">
           <Col>
-            🌟 Be generous – reward your customers the same way you reward Facebook or Google
-            for finding you leads.
-            We’ll do the math to make sure you’re always winning, and so are your customers.
+            💡 Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
+            {' '}
           </Col>
         </Row>
-        <Row className="mt-5">
-          <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 2 })}>Previous</Button>
+        <Row className="mt-3 w-75">
+          <Col>
+            🌟 Be generous – reward your customers the same
+            {' '}
+            <br />
+            way you reward Facebook or Google for finding
+            {' '}
+            <br />
+            you leads. We’ll do the math to make sure you’re
+            {' '}
+            <br />
+            always winning, and so are your customers.
           </Col>
-          <Col xs={4} className="text-center">
-            <span className="text-muted">2/4</span>
-          </Col>
-          <Col xs={4} className="d-flex justify-content-end">
-            <Button type="submit"> Next </Button>
-          </Col>
-          {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>
+
       </Form>
     </section>
   );

@@ -26,7 +26,7 @@ export const reducer = (
   if (action.type === 'UPDATE_CAMPAIGN') {
     console.log(action.payload);
     console.log(state.campaigns);
-    return { ...state, campaigns: { ...state.campaigns, ...action.payload } };
+    return { ...state, campaigns: [...action.payload.campaigns ?? []] };
   }
   if (action.type === 'UPDATE_CAMPAIGN_REWARDS') {
     console.log(action.payload);

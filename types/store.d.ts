@@ -14,6 +14,7 @@ export interface IStore {
   products?: IProduct[];
   [x: string]: any;
   settings?: ISettings;
+  campaigns?: ICampaign[];
 }
 export interface ICampaign {
   id?: string | null | undefined;
@@ -61,21 +62,4 @@ export interface ISettings {
 
 export interface RootProps {
   pending?: Boolean;
-}
-
-export interface IDBCampaign {
-  id?: string | null | undefined;
-  name?: string;
-  criteria?: string;
-  joinExisting?: any;
-  productsArray?: string[];
-  collections?: ICollection[];
-  products?: IProduct[];
-  brandColor?: string;
-  customColor?: string;
-  customBg?: string;
-  imageUrl?: string;
-  youtubeUrl?: string;
-  isActive?: boolean;
-  updateCampaignInput: object;
 }

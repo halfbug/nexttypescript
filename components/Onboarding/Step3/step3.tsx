@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 import {
-  Container, Row,
+  Container, Row, Col,
 } from 'react-bootstrap';
 import styles from 'styles/Step1.module.scss';
 import Rewards from 'components/Forms/Rewards';
@@ -24,7 +24,9 @@ const Step3 = ({ show }: IStep3Props) => (
                   Our engine dynamically adjusts your
                   rewards percentages for you so that you’re always winning, and so are your customers.."
         />
-        <Rewards />
+        <Col md={8}>
+          <Rewards />
+        </Col>
       </Row>
     </Container>
     {/* </div> */}

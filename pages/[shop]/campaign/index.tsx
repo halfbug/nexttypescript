@@ -6,16 +6,17 @@ import Router from 'next/router';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from 'styles/CampaignListing.module.scss';
 import { StoreContext } from 'store/store.context';
+import { ICampaign } from 'types/store';
 
 const CampaignListing = () => {
   const { store, dispatch } = useContext(StoreContext);
 
-  const [campaignList, setCampaignList] = useState([]);
+  const [campaignList, setCampaignList] = useState<ICampaign[]>([]);
   const heading = ['Campaign Name', 'Revenue Generated', 'Number of Groupshops', 'Total Cashback', 'Active', 'Actions', ' '];
 
   useEffect(() => {
     if (store.campaigns) {
-      setCampaignList(store.campaigns);
+      setCampaignList(store?.campaigns);
     }
   }, [store.campaigns]);
 
@@ -49,7 +50,7 @@ const CampaignListing = () => {
 
         {campaignList.map((camp:any, index:number) => (
           <>
-            <Row className={styles.rows}>
+            <Row className={styles.rows} key={camp.id}>
               <Col className="mt-4">{camp.name}</Col>
               <Col className="mt-4">
                 $

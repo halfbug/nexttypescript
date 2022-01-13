@@ -12,12 +12,14 @@ import DeleteButton from '../DeleteButton';
 
 interface IProps {
   disableBtn: boolean;
+  // eslint-disable-next-line react/require-default-props
+  totalProducts?: number;
 }
 
-export default function ProductButton({ disableBtn }:IProps) {
+export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   const [, setParams] = useQueryString();
   const {
-    store: { shop, newCampaign }, dispatch,
+    store: { shop, newCampaign, campaigns }, dispatch,
   } = React.useContext(StoreContext);
 
   const { data } = useQuery(TOTAL_PRODUCTS, {
@@ -71,6 +73,7 @@ export default function ProductButton({ disableBtn }:IProps) {
   const handleEditProduct = () => {
     setParams({ ins: '2a' });
   };
+  console.log(totalProducts);
   return (
     <>
       <Row className="mt-3 justify-content-center">
@@ -85,10 +88,13 @@ export default function ProductButton({ disableBtn }:IProps) {
 
         </Col>
       </Row>
-      { newCampaign?.products && newCampaign?.products?.length > 0 && (
+      { ((newCampaign?.products && newCampaign?.products?.length > 0)
+      || (totalProducts !== 0)) && (
       <Row className="m-2 justify-content-center">
         <Col className="text-muted">
-          {(newCampaign?.products && newCampaign?.products?.length) || 0}
+          {(newCampaign?.products && newCampaign?.products?.length)
+          || (totalProducts)
+          || 0}
           {' '}
           product(s)/
           {(newCampaign?.collections && newCampaign?.collections?.length) || 0}

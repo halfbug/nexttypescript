@@ -2,11 +2,11 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
-import DashboardCampaign from 'components/Forms/DashboardCampaign';
+import UpdateCampaign from 'components/Forms/UpdateCampaign';
 
 const Campaign: NextPage = () => (
   <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
-    <DashboardCampaign />
+    <UpdateCampaign />
   </Page>
 );
 

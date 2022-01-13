@@ -31,6 +31,10 @@ $small-font-size: .675em !default;
 $brand-gradiant: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
 
 $brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
+$dotted-border-color1:#A68AD6;
+$dotted-border-color2:#A7C737;
+$dotted-border-color3:#C8DC82;
+$dotted-border-color4:#F28BF4;
 
 .brand-gradiat-repeat {
 	background: rgb(227 227 227);
@@ -66,6 +70,7 @@ $brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45
 	);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ccb2f9", endColorstr="#ccb2f9", GradientType=1);
 }
+
 .gradient-box {
 	// display: flex;
 	// align-items: center;
@@ -84,10 +89,6 @@ $brand-gradiant-repeat: repeating-linear-gradient(270deg, #fee750 0%, #f4dec4 45
 	background-clip: padding-box; /* !importanté */
 	border: solid $border transparent; /* !importanté */
 	border-radius: 1em;
-	$dotted-border1: 1px dashed #a68ad6;
-	$dotted-border2: 1px dashed #a7c737;
-	$dotted-border3: 1px dashed #a68ad6;
-	$dotted-border4: 1px dashed #c8dc82;
 
 	&:before {
 		content: '';
