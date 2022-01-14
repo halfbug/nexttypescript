@@ -1,11 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
 import styles from 'styles/Header.module.scss';
-
-// import Button from 'components/Buttons/Button/Button';
+import React from 'react';
 import { Col, Row, Button } from 'react-bootstrap';
-import { ArrowDown, CaretDown, Eye } from 'react-bootstrap-icons';
-// import './header.css';
+import { FaEye, FaAngleDown } from 'react-icons/fa';
 
 interface HeaderProps {
   user?: {};
@@ -16,36 +12,36 @@ interface HeaderProps {
 }
 
 const Header = ({
+  // eslint-disable-next-line no-unused-vars
   user, onLogin, onLogout, onCreateAccount, headingText,
 }: HeaderProps) => (
-  <header>
-    <div className="wrapper">
-      <Row>
-        <Col>
-          <div>
+  <header className={styles.header}>
+    <Row>
+      <Col>
+        <h1>
+          {headingText}
+        </h1>
+      </Col>
 
-            <h1 className={styles.h1}>{headingText}</h1>
-          </div>
-        </Col>
-        <Col>
-          <div className={styles.btn_div}>
-            <Col className={styles.head_btn}>
-              <Eye color="black" size={20} />
-              <Button variant="light">
-                View Groupshop
-              </Button>
-            </Col>
-            { ' ' }
-            <Col className={styles.head_btn2}>
-              <Button variant="light">
-                LE SABLE
-              </Button>
-              <CaretDown color="black" size={20} />
-            </Col>
-          </div>
-        </Col>
-      </Row>
-    </div>
+      <Col className={styles.header_btn_div}>
+        <div className={styles.header_head_btn1}>
+          <Button className={styles.header_btn} size="lg">
+            <FaEye size={20} />
+            {' '}
+            View Groupshop
+          </Button>
+        </div>
+
+        <div className={styles.header_head_btn2}>
+          <Button className={styles.header_btn} size="lg" px-3>
+            LE SABLE
+            {' '}
+            <FaAngleDown size={20} />
+          </Button>
+        </div>
+      </Col>
+    </Row>
+
   </header>
 );
 

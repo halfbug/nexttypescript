@@ -11020,6 +11020,7 @@ fsevents@^1.2.7:
     react-colorful: ^5.5.1
     react-copy-to-clipboard: ^5.0.4
     react-dom: 17.0.2
+    react-icons: ^4.3.1
     react-test-renderer: ^17.0.2
     sass: ^1.43.4
     sass-loader: 10.1.1
@@ -16164,6 +16165,15 @@ fsevents@^1.2.7:
     react: ^16.6.0 || ^17.0.0
     react-dom: ^16.6.0 || ^17.0.0
   checksum: 8db5d875bb681dabc5f277ee3b0debe96d58f4b6d33cb2e9c72a026f4fd22e44722d2a7164a21b51a4002a6cd40d716195731ba37cc1d73167adf85e56441c1c
+  languageName: node
+  linkType: hard
+
+"react-icons@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "react-icons@npm:4.3.1"
+  peerDependencies:
+    react: "*"
+  checksum: 2cc608acdd3e906aa3aaee290b8398220639677c949382d86e554020e5dab6a9f1ed7484418aa5272cb5c5c018e1fc9a323d433d901697a76530029f9ecb1263
   languageName: node
   linkType: hard
 
