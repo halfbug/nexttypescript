@@ -1,30 +1,36 @@
 @import "./variables.scss";
 
-.h1{
-    width: 139px;
-    height: 34px;
-    left: 349px;
-    top: 72px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 34px;
-    color: #000000;
-}
-.btn_div{
-    margin-right: 50px;
-    // background-color: blue;
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    // display: inline-block;
-}
-.head_btn{
-    background-color: #f8f9fa ;
-    border-radius: 5px;
-}
-.head_btn2{
-    background-color:#f8f9fa;
-    margin-left: 25px;
-    border-radius: 5px;
+.header {
+ @extend .mt-5;
+
+  h1 {
+    @extend .fw-bolder, .lh-base, .fs-1, .mx-0, .px-0;
+    color: $black;
+  }
+
+  .head_btn {
+      @extend .mx-0, .d-flex;
+    justify-content: right;
+
+    &_head_btn1 {
+      margin-right: 2%;
+      background-color: transparent !important;
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      color: $black;
+      border-color: $gray-100 !important;
+    }
+
+    &_head_btn2 {
+      background-color: transparent !important;
+      font-family: DM Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      color: $black;
+      border-color: $gray-100 !important;
+    }
+  }
 }

@@ -1,11 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import styles from 'styles/Header.module.scss';
-
-// import Button from 'components/Buttons/Button/Button';
 import { Col, Row, Button } from 'react-bootstrap';
-import { ArrowDown, CaretDown, Eye } from 'react-bootstrap-icons';
-// import './header.css';
+import { FaEye, FaAngleDown } from 'react-icons/fa';
 
 interface HeaderProps {
   user?: {};
@@ -18,31 +15,34 @@ interface HeaderProps {
 const Header = ({
   user, onLogin, onLogout, onCreateAccount, headingText,
 }: HeaderProps) => (
-  <header>
+  <header className={styles.header}>
     <div className="wrapper">
       <Row>
         <Col>
-          <div>
 
-            <h1 className={styles.h1}>{headingText}</h1>
-          </div>
+          <h1>
+            {' '}
+            {headingText}
+          </h1>
+
         </Col>
-        <Col>
-          <div className={styles.btn_div}>
-            <Col className={styles.head_btn}>
-              <Eye color="black" size={20} />
-              <Button variant="light">
-                View Groupshop
-              </Button>
-            </Col>
-            { ' ' }
-            <Col className={styles.head_btn2}>
-              <Button variant="light">
-                LE SABLE
-              </Button>
-              <CaretDown color="black" size={20} />
-            </Col>
+        <Col className={styles.head_btn}>
+
+          <div className={styles.head_btn_head_btn1}>
+            <Button className="styles.header_" variant="outline-primary" size="lg">
+              <FaEye size={16} />
+              { ' ' }
+              View Groupshop
+            </Button>
           </div>
+          <div className={styles.head_btn_head_btn2}>
+            <Button className="" variant="outline-primary" size="lg">
+              LE SABLE
+              { ' ' }
+              <FaAngleDown size={16} />
+            </Button>
+          </div>
+
         </Col>
       </Row>
     </div>
