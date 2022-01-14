@@ -9,28 +9,18 @@
   }
 
   .head_btn {
-      @extend .mx-0, .d-flex;
+    @extend .mx-0, .d-flex;
     justify-content: right;
+    background-color: transparent !important;
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: $black;
+    border-color: $gray-100 !important;
 
     &_head_btn1 {
-      margin-right: 2%;
-      background-color: transparent !important;
-      font-family: DM Sans;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      color: $black;
-      border-color: $gray-100 !important;
-    }
-
-    &_head_btn2 {
-      background-color: transparent !important;
-      font-family: DM Sans;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      color: $black;
-      border-color: $gray-100 !important;
+      @extend .me-2;
     }
   }
 }

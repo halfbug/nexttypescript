@@ -35,7 +35,7 @@ const Header = ({
               View Groupshop
             </Button>
           </div>
-          <div className={styles.head_btn_head_btn2}>
+          <div className="">
             <Button className="" variant="outline-primary" size="lg">
               LE SABLE
               { ' ' }
