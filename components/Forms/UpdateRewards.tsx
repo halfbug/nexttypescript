@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable dot-notation */
 /* eslint-disable quotes */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
@@ -66,19 +68,21 @@ export default function UpdateRewards() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { rewards } = valz;
-
+      const { rewards, selectedTarget } = valz;
+      console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
+      selectedTarget.rewards.map((item:any) => (delete item["__typename"]));
+      delete selectedTarget["__typename"];
       await addReward({
         variables: {
           updateCampaignInput: {
             storeId: store.id,
-            id: 'db41888f-3db0-405c-a2d2-96c36ab0019d',
+            id: store.singleEditCampaignId,
             rewards,
+            salesTarget: selectedTarget,
           },
         },
       });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
-      // setParams({ ins: 4 });
     },
   });
   useEffect(() => {
@@ -137,10 +141,8 @@ export default function UpdateRewards() {
                   onChange={(e) => {
                     const selectedTarget = JSON.parse(e.currentTarget.value);
                     setFieldValue('rewards', selectedTarget.id);
-                    setFieldValue('selectedTarget', { ...selectedTarget, idx: +index });
-                    // changeVal();
-                    // handleSubmit();
-                    // setTimeout(() => handleSubmit(), 1000);
+                    setFieldValue('selectedTarget', { ...selectedTarget });
+                    handleSubmit();
                   }}
                   className={`${styles.dbrewards}__${btns[index].cssName}`}
                   // bsPrefix={styles.rewards_hide}
@@ -154,7 +156,6 @@ export default function UpdateRewards() {
 
               ))}
             </ButtonGroup>
-            {/* <button type="submit">next</button> */}
           </Col>
         </Row>
 
@@ -169,7 +170,6 @@ export default function UpdateRewards() {
             <h4 className="fs-4">Maximum</h4>
             <div className={styles.dbrewards__percent_btn}>{maxDiscount}</div>
           </Col>
-
         </Row>
 
         <Row className="mt-3 w-75">

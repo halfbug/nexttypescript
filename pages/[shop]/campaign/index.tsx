@@ -25,6 +25,7 @@ const CampaignListing = () => {
   }, [store.campaigns]);
 
   const handleClick = (campaignid: string) => {
+    dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
   };
   const handleClickNew = (campaignid: string) => {

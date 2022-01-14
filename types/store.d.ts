@@ -15,6 +15,7 @@ export interface IStore {
   [x: string]: any;
   settings?: ISettings;
   campaigns?: ICampaign[];
+  singleEditCampaignId?: string;
 }
 export interface ICampaign {
   id?: string | null | undefined;
@@ -27,6 +28,7 @@ export interface ICampaign {
   collections?: ICollection[];
   products?: IProduct[];
   rewards?: string;
+  salesTarget?: ISalesTarget;
 
 }
 
@@ -62,4 +64,19 @@ export interface ISettings {
 
 export interface RootProps {
   pending?: Boolean;
+}
+
+export interface ISalesTarget {
+  id: string;
+  name?: string;
+  rogsMin?: string;
+  rogsMax?: string;
+  status?: string;
+  rewards?: IRewards[];
+  isActive?: boolean;
+}
+export interface IRewards {
+  id: string;
+  discount?: string;
+  customerCount?: string;
 }

@@ -1,17 +1,23 @@
 @import "./variables.scss";
 .dashboard_campaign{
-    &__brandcolor {
-		@extend .d-flex, .border, .rounded, .align-items-center;
+    @extend .mt-4;
 
-		input[type=color] {
-			border: 0.05rem solid #3c3c3c;
-			outline: 0;
-			-webkit-appearance: none;
-			width: 84px;
-			height: 30px;
-			padding-left: 10px;
-		}
-	}
+    h3 {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 27px;
+        color: $black;
+    }
+    h4 {
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 21px;
+        color: #1D2329;
+    }
 
     &__box_1 {
         height: auto;

@@ -37,7 +37,6 @@ const ShopMain: NextPage = () => {
   delete obj.products;
   delete obj.collections;
   const jsonStore = JSON.stringify(obj, null, '\t');
-  console.log('inside shop folder');
   return (
     <Page headingText="Overview" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       dashboard overview

@@ -36,7 +36,6 @@ export default function UpdateCampaign() {
   const [disableBtn, setdisableBtn] = React.useState(true);
   const [state, setstate] = React.useState({
     id: '',
-    name: '',
     criteria: '',
     joinExisting: 1,
     rewards: '',
@@ -44,7 +43,6 @@ export default function UpdateCampaign() {
 
   let campaignInitial: ICampaign = {
     id: '',
-    name: '',
     criteria: '',
     joinExisting: 1,
     rewards: '',
@@ -59,11 +57,6 @@ export default function UpdateCampaign() {
   }, [store.campaigns]);
 
   const validationSchema = yup.object({
-    name: yup
-      .string()
-      .required('Campaign Name is required.')
-      .min(5, 'Too Short please give least five characters')
-      .max(20, 'Too Long !! only 20 characters allowed.'),
     criteria: yup
       .string()
       .required('Select product options'),
@@ -80,7 +73,7 @@ export default function UpdateCampaign() {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       if (validateForm) validateForm(valz);
       const {
-        name, criteria, joinExisting, products,
+        criteria, joinExisting, products,
       } = valz;
       console.log({ valz });
 
@@ -89,7 +82,6 @@ export default function UpdateCampaign() {
           updateCampaignInput: {
             storeId: store.id,
             id: campaignid,
-            name,
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
@@ -122,7 +114,7 @@ export default function UpdateCampaign() {
   console.log('🚀 campaignInitial', campaignInitial);
 
   return (
-    <Container className="dashboard_campaign">
+    <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a'} />
       <Row>
         <Col xs={6} className="mt-4">
@@ -135,41 +127,9 @@ export default function UpdateCampaign() {
             <Col>
               <Form noValidate onSubmit={handleSubmit}>
                 <section className={styles.dashboard_campaign__box_1}>
-                  <Row className="mt-4"><h4>Name your Groupshop campaign</h4></Row>
-                  <Row>
-                    <Col xs={9}>
-                      <Form.Group className="mb-3" controlId="campainNameValidation">
-                        <Form.Control
-                          type="text"
-                          placeholder="My first campaign..."
-                          name="name"
-                          value={values.name}
-                          onChange={(e) => {
-                            handleChange(e);
-                            // handleSubmit();
-                          }}
-                          isInvalid={touched.name && !!errors.name}
-                          onBlur={(e) => handleSubmit}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                          {errors.name}
-                        </Form.Control.Feedback>
-                      </Form.Group>
-                    </Col>
-                    <Col xs={3}>
-                      <Form.Text className="text-muted">
-                        {values.name?.length}
-                        /20
-                      </Form.Text>
-                    </Col>
-                  </Row>
-                  <Row className="mt-4">
+                  <Row className="mt-1">
                     <h4>
-                      Select
-                      {' '}
-                      &
-                      {' '}
-                      add products from your store
+                      Select and add products to Groupshop
                     </h4>
                   </Row>
                   <Row className="text-muted"><h6>Customers can get discounts on the products selected below</h6></Row>

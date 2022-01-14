@@ -25,6 +25,14 @@ query StoreName($shop: String!) {
     storeId
     joinExisting
     rewards
+    salesTarget{
+      id
+      name
+      rewards {
+        id
+        discount
+      }
+    }
     products
   }
   }
@@ -107,8 +115,15 @@ const UPDATE_CAMPAIGN = gql`
     name
     joinExisting
     criteria
-    products
+    
     rewards
+    salesTarget{
+      id
+      name
+      rewards{
+        discount
+      }
+    }
     }
   }
 `;
