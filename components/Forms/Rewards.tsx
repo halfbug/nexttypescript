@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable dot-notation */
+/* eslint-disable quotes */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import {
@@ -68,7 +71,9 @@ export default function Rewards() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { rewards } = valz;
+      const { rewards, selectedTarget } = valz;
+      selectedTarget.rewards.map((item:any) => (delete item['__typename']));
+      delete selectedTarget['__typename'];
       const id = store?.newCampaign?.id;
       if (id) {
         await addReward({
@@ -77,6 +82,8 @@ export default function Rewards() {
               storeId: store.id,
               id: store?.newCampaign?.id,
               rewards,
+              salesTarget: selectedTarget,
+
             },
           },
         });
@@ -132,7 +139,7 @@ export default function Rewards() {
     { text: 'Hign', cssName: 'high_btn' },
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
-  const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
+  // const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
 
   console.log({ values });
 
@@ -176,7 +183,7 @@ export default function Rewards() {
                   onChange={(e) => {
                     const selectedTarget = JSON.parse(e.currentTarget.value);
                     setFieldValue('rewards', selectedTarget.id);
-                    setFieldValue('selectedTarget', { ...selectedTarget, idx: +index });
+                    setFieldValue('selectedTarget', { ...selectedTarget });
                   }}
                   // className={btns[index].cssName}
                   // bsPrefix={styles.rewards_hide}

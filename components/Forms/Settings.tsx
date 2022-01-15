@@ -9,7 +9,7 @@ import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
-import { UPDATE_STORE } from 'store/store.graphql';
+import { UPDATE_CAMPAIGN, UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import styles from 'styles/Step4.module.scss';
 import Image1 from 'assets/images/Ellipse1.png';
@@ -45,7 +45,8 @@ export default function Settings({ isDB }: IProps) {
     // `current` points to the mounted text input element
     ref.current.click();
   };
-  const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
+  const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
+  const [updateStore] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
   // console.log(store);
@@ -74,11 +75,13 @@ export default function Settings({ isDB }: IProps) {
       const {
         brandColor, customColor, customBg, imageUrl, youtubeUrl,
       } = valz;
+      const campID = isDB ? store.singleEditCampaignId : store.newCampaign?.id;
 
-      await addSet({
+      const campSettings:null | any = await addSet({
         variables: {
-          updateStoreInput: {
-            id: store.id,
+          updateCampaignInput: {
+            storeId: store.id,
+            id: campID,
             settings: {
               brandColor,
               customColor,
@@ -86,16 +89,41 @@ export default function Settings({ isDB }: IProps) {
               imageUrl,
               youtubeUrl,
             },
-            installationStep: isDB ? null : 5,
+            // installationStep: isDB ? null : 5,
           },
         },
       });
-      dispatch({ type: 'UPDATE_STORE_SETTINGS', payload: { settings: valz } });
-      setParams({ ins: 5 });
-      // console.log('SETTINGS VALZ', valz);
-      // setTimeout(() => resetForm(), 5000);
+      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+        if (item.id === campSettings.id) {
+          return campSettings;
+        }
+        return item;
+      });
+      console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', updatedCampaigns);
+      console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', store.campaigns);
+
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+      if (!isDB) {
+        console.log('im in OB');
+        // update store. progress installationStep if its onboarding
+        await updateStore({
+          variables: {
+            updateStoreInput: {
+              id: store.id,
+              installationStep: 5,
+            },
+          },
+        });
+        setParams({ ins: 5 });
+      } // if
     },
   });
+
+  const handleForm = () => {
+    if (isDB) {
+      handleSubmit();
+    }
+  };
   const radios = [
     // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
     { name: 'image1', value: 'image1', component: <img src={Image1.src} alt="imageone" /> },
@@ -120,7 +148,7 @@ export default function Settings({ isDB }: IProps) {
                 <Form.Control
                   onChange={(e) => {
                     handleChange(e);
-                    // isDB ? handleSubmit() : null;
+                    handleForm();
                   }}
                   type="color"
                   // id="brandColor"
@@ -158,7 +186,10 @@ export default function Settings({ isDB }: IProps) {
                     name="radio"
                     value={value}
                     checked={values.customBg === value}
-                    onChange={(e) => setFieldValue('customBg', e.currentTarget.value)}
+                    onChange={(e) => {
+                      setFieldValue('customBg', e.currentTarget.value);
+                      handleForm();
+                    }}
                     bsPrefix={styles.ob_settings_hide}
                     className={styles.ob_settings__radio}
                   >
@@ -179,7 +210,10 @@ export default function Settings({ isDB }: IProps) {
                   value="image"
                   type="radio"
                   checked={values.media === 'image'}
-                  onChange={(e) => setFieldValue('media', e.currentTarget.value)}
+                  onChange={(e) => {
+                    setFieldValue('media', e.currentTarget.value);
+                    handleForm();
+                  }}
                 />
                 <Form.Check
                   inline
@@ -188,7 +222,10 @@ export default function Settings({ isDB }: IProps) {
                   value="youtube"
                   type="radio"
                   checked={values.media === 'youtube'}
-                  onChange={(e) => setFieldValue('media', e.currentTarget.value)}
+                  onChange={(e) => {
+                    setFieldValue('media', e.currentTarget.value);
+                    handleForm();
+                  }}
                 />
 
               </Col>

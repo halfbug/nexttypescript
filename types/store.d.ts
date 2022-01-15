@@ -29,6 +29,7 @@ export interface ICampaign {
   products?: IProduct[];
   rewards?: string;
   salesTarget?: ISalesTarget;
+  settings?: ISettings;
 
 }
 

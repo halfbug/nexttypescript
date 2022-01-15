@@ -28,6 +28,7 @@ const CampaignListing = () => {
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
   };
+  console.log('🚀 ~ file: index.tsx ~ line 36 ~ CampaignListing ~ store', store);
   const handleClickNew = (campaignid: string) => {
     if (shopName) Router.push(`/${shopName}/campaign/new`);
   };

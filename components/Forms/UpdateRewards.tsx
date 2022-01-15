@@ -72,7 +72,7 @@ export default function UpdateRewards() {
       console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
       selectedTarget.rewards.map((item:any) => (delete item["__typename"]));
       delete selectedTarget["__typename"];
-      await addReward({
+      const campRew:null | any = await addReward({
         variables: {
           updateCampaignInput: {
             storeId: store.id,
@@ -82,7 +82,13 @@ export default function UpdateRewards() {
           },
         },
       });
-      dispatch({ type: 'UPDATE_CAMPAIGN', payload: valz });
+      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+        if (item.id === campRew.id) {
+          return campRew;
+        }
+        return item;
+      });
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     },
   });
   useEffect(() => {

@@ -25,6 +25,14 @@ query StoreName($shop: String!) {
     storeId
     joinExisting
     rewards
+    settings{
+      brandColor
+      customBg
+      customColor
+      imageUrl
+      youtubeUrl
+    }
+ 
     salesTarget{
       id
       name
@@ -115,15 +123,22 @@ const UPDATE_CAMPAIGN = gql`
     name
     joinExisting
     criteria
-    
     rewards
-    salesTarget{
+    settings {
+      brandColor
+      customColor
+      customBg
+      imageUrl
+      youtubeUrl
+    }
+    salesTarget {
       id
       name
       rewards{
         discount
       }
     }
+    products
     }
   }
 `;

@@ -95,7 +95,6 @@ export default function UpdateCampaign() {
         }
         return item;
       });
-      console.log({ campObj });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
       console.log('🚀 ~ file: UpdateCampaign.tsx ~ line 32 ~ UpdateCampaign ~ store', store);
     },
