@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IGroupshop } from 'types/groupshop';
 import { gsreducer, GroupshopActions } from './groupshop.reducer';
 
-interface GSContextType {
+export interface GSContextType {
   gsctx: IGroupshop,
   dispatch: React.Dispatch<GroupshopActions>;
 }
@@ -24,7 +24,7 @@ export const gsInit: IGroupshop = {
     priceRuleId: '',
   },
   milestones: [],
-  store: { brandName: '' },
+  store: { brandName: '', products: [] },
 };
 
 export const GroupshopContext = React.createContext<GSContextType>(

@@ -9,6 +9,7 @@ import {
 import Pagination from 'react-bootstrap/Pagination';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import useDimensions from 'hooks/useDimentions';
+import { Send } from 'react-bootstrap-icons';
 import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
 
@@ -21,10 +22,11 @@ type ProductGridProps = {
   lg?: number,
   xl?: number,
   xxl?: number,
+  addProducts(e: boolean): any;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
-  products, pending, children, maxrows = 0,
+  products, pending, children, maxrows = 0, addProducts,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -38,10 +40,10 @@ const ProductGrid = ({
     },
     items: products || [],
   });
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
 
   const fillerz = Math.abs(pageSize - renderItems.length) || (breakPoint === 'sm' ? 1 : 0);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
   const {
     gsctx: {
       discountCode: { percentage },
@@ -95,7 +97,7 @@ const ProductGrid = ({
                 {price}
               </p>
               <Button variant="primary" className="rounded-pill w-75">Add to Cart</Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill">test</Button>
+              <Button variant="outline-primary" className="m-1 rounded-pill"><Send size={18} /></Button>
             </ProductCard>
           </Col>
         ))}
@@ -108,7 +110,7 @@ const ProductGrid = ({
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
-                  <Button variant="outline-primary" className={styles.groupshop__pcard_tag_product}>ADD A PRODUCT</Button>
+                  <Button variant="outline-primary" className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(true)}>ADD A PRODUCT</Button>
                 </>
 )}
             >
@@ -123,7 +125,9 @@ const ProductGrid = ({
                 {' '}
               </p>
               <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill">test</Button>
+              <Button variant="outline-primary" className="m-1 rounded-pill">
+                <Send size={18} />
+              </Button>
             </ProductCard>
           </Col>
         ))}
@@ -163,7 +167,7 @@ ProductGrid.defaultProps = {
   md: 6,
   lg: 4,
   xl: 3,
-  xxl: 2,
+  xxl: 3,
 };
 
 export default ProductGrid;

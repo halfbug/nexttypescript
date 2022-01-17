@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 // import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_GROUPSHOP } from 'store/store.graphql';
+import { GET_GROUPSHOP, GET_PRODUCTS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
@@ -29,10 +29,13 @@ import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { GroupshopContext, gsInit } from 'store/groupshop.context';
 import { IGroupshop, Member } from 'types/groupshop';
 import { IProduct } from 'types/store';
+import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import _ from 'lodash';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
-  const { query: { code, source } } = router;
+  const { query: { shop, code, source } } = router;
   const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const {
@@ -43,11 +46,23 @@ const GroupShop: NextPage = () => {
     skip: !code,
   });
 
+  const productsql = useQuery(GET_PRODUCTS, {
+    variables: {
+      productQueryInput: {
+        shop: `${shop}.myshopify.com`,
+        sort: -1,
+        limit: 10000,
+      },
+    },
+    skip: !shop,
+  });
+
   console.log('🚀 ~~ line 21 ~ data', groupshop);
   console.log('🚀 ~~ line 21 ~ loading', loading);
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
   const [member, setmember] = useState<Member | undefined>(undefined);
+  const [showps, setshowps] = useState<boolean>(false);
 
   const [pending, setpending] = useState<Boolean>(true);
   useEffect(() => {
@@ -60,6 +75,21 @@ const GroupShop: NextPage = () => {
     }
   }, [groupshop, pending]);
 
+  // const { shop, getProducts } = useStore();
+
+  React.useEffect(() => {
+    if (productsql?.data?.products && gsctx.allProducts) {
+      const otherProducts: IProduct[] = productsql?.data?.products.filter(
+        (o1:IProduct) => !gsctx?.allProducts?.some(
+          (o2:IProduct) => o1.id === o2.id,
+        ),
+      );
+
+      dispatch({ type: 'UPDATE_PRODUCTS', payload: { ...gsctx, store: { ...gsctx.store, products: otherProducts } } });
+      console.log('🚀 ~ file: [...code].tsx ~ line 88 ~ React.useEffect ~ otherProducts', otherProducts);
+    }
+  }, [productsql.data]);
+
   const {
     members: [{ orderDetail: { customer: owner } }],
     store: { brandName } = { brandName: '' },
@@ -67,7 +97,7 @@ const GroupShop: NextPage = () => {
     // allProducts,
   } = groupshop;
 
-  // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
+  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
   if (error) {
@@ -170,7 +200,17 @@ const GroupShop: NextPage = () => {
 
       </Hero>
 
-      <ProductGrid xs={12} md={6} lg={4} xl={3} products={member?.products} maxrows={1}>
+      <ProductGrid
+        xs={12}
+        md={6}
+        lg={4}
+        xl={3}
+        products={member?.products}
+        maxrows={1}
+        addProducts={setshowps}
+      >
+        ;
+
         <h2>
           SHOPPED BY
           {' '}
@@ -195,10 +235,27 @@ const GroupShop: NextPage = () => {
 
       </ProductGrid>
 
-      <ProductGrid xs={12} md={6} lg={4} xl={3} products={popularProducts} maxrows={1}>
+      <ProductGrid
+        xs={12}
+        md={6}
+        lg={4}
+        xl={3}
+        products={popularProducts}
+        maxrows={1}
+        addProducts={setshowps}
+      >
         <h2>Popular in Group</h2>
       </ProductGrid>
-      <ProductGrid xs={12} sm={6} md={6} lg={4} xl={3} products={allProducts} maxrows={3}>
+      <ProductGrid
+        xs={12}
+        sm={6}
+        md={6}
+        lg={4}
+        xl={3}
+        products={allProducts}
+        maxrows={3}
+        addProducts={setshowps}
+      >
         <div className="position-relative">
           <h2>All Products</h2>
           <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
@@ -245,6 +302,7 @@ const GroupShop: NextPage = () => {
           </div>
         </div>
       </ProductGrid>
+      <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
     </div>
   );
 };

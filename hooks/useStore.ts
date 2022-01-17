@@ -1,16 +1,29 @@
-// import { useCallback } from 'react';
-// import { IStore } from 'types/store';
-// import { gql } from '@apollo/client';
-// import client from 'config/apollo.client';
+import { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useLazyQuery } from '@apollo/client';
+import { GET_PRODUCTS } from 'store/store.graphql';
 
-const useStore = (shop: string) => {
-//   const [merchantStore, setMerchantStore] = useState(null);
-  // const { query: { shop, ins, sci } } = useRouter();
-  console.log('shop inside hook', shop);
-  // const getStore = useCallback(() => client.query({
+const useStore = () => {
+  const { query: { shop } } = useRouter();
+  const [getStoreProducts, { loading, error, data: products }] = useLazyQuery(GET_PRODUCTS, {
+    variables: {
+      productQueryInput: {
+        shop,
+        sort: -1,
+        limit: 10000,
+      },
+    },
+  });
+  const getProducts = useCallback(() => {
+    getStoreProducts();
 
-  // }), []);
-  return shop;
+    return ({ error, loading, products });
+  }, [shop]);
+
+  useEffect(() => {
+    if (products?.length > 0) { console.log({ products }); }
+  }, [products]);
+  return { shop, getProducts };
   // return { getStore };
 };
 export default useStore;

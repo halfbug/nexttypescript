@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { XCircleFill } from 'react-bootstrap-icons';
 import {
   Overlay, Popover, Button,
 } from 'react-bootstrap';

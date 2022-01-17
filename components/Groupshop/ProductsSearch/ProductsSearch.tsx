@@ -1,0 +1,226 @@
+/* eslint-disable no-unused-vars */
+import React, { useState, useContext } from 'react';
+import styles from 'styles/Groupshop.module.scss';
+import Navbar from 'react-bootstrap/Navbar';
+import { IProduct, RootProps } from 'types/store';
+import {
+  Button,
+  Col, Form, Modal, OverlayTrigger, Placeholder, Popover, Row,
+} from 'react-bootstrap';
+import useStore from 'hooks/useStore';
+import { GroupshopContext, GSContextType, gsInit } from 'store/groupshop.context';
+import useDebounce from 'hooks/useDebounce';
+import { X } from 'react-bootstrap-icons';
+import IconButton from 'components/Buttons/IconButton';
+import ProductGrid from '../ProductGrid/ProductGrid';
+import ProductCard from '../ProductCard/ProductCard';
+
+interface ProductsSearchProps extends RootProps {
+  show : boolean;
+  handleClose(e:any): any;
+  // handleSearch(e:any): any;
+}
+
+const ProductsSearch = ({
+  show, pending = false, handleClose,
+}: ProductsSearchProps) => {
+  const {
+    gsctx,
+    dispatch,
+  } = useContext(GroupshopContext);
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 24 ~ gsctx', gsctx);
+
+  const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
+
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 26 ~ otherProducts', otherProducts);
+  const {
+    discountCode: { percentage },
+    store: { products } = { store: { products: [] } },
+  } = gsctx;
+
+  const [selected, setSelected] = useState<string[]|undefined>(undefined);
+  const [smShow, setSmShow] = useState(false);
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 37 ~ selected', selected);
+  const searchPrd = (name:string) => {
+    console.log(name);
+    console.log(products);
+    if (products && name) {
+      setotherProducts(
+        products.filter(
+          (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
+        ),
+      );
+    }
+  };
+  const debouncedSearch = useDebounce(
+    (nextValue:string) => searchPrd(nextValue), 1000, products || [],
+  );
+
+  const handleSubmit = (e:any) => { e.preventDefault(); };
+  const closeModal = (e: any) => {
+    setotherProducts(undefined);
+    setSelected(undefined);
+    handleClose(e);
+  };
+  const addProducts = (id: string) => setSelected([...selected ?? [], id]);
+  const handleSearch = (event:any) => {
+    const { value: searchText } = event.target;
+    const code = event.keyCode || event.key;
+    // console.log({ e });
+    if (code !== 37 || code !== 38 || code !== 39 || code !== 40 || code !== 13) {
+      debouncedSearch(searchText);
+    }
+
+    if (searchText === '') { setotherProducts(undefined); }
+  };
+  const selectedCount = selected?.length || 0;
+  if (pending) {
+    return (<Placeholder as="h1" bg="secondary" className="w-100" />);
+  }
+  return (
+    <>
+      <Modal
+        show={show}
+        onHide={closeModal}
+        centered
+        size="lg"
+        dialogClassName={styles.groupshop_modal_search}
+        backdrop="static"
+        fullscreen="lg-down"
+      >
+        <Modal.Header closeButton className="pb-0" />
+        <Modal.Body className="px-5">
+          <div className="d-flex justify-content-between">
+            <h3>Search for products</h3>
+            <p className="text-muted d-flex justify-content-end align-items-center">
+              Add up to 5 products
+              {[...new Array(5)].map((v, i) => (
+                <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+              ))}
+            </p>
+          </div>
+
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3 " controlId="searchField">
+              <Form.Control size="lg" className="bg-light pt-2 border-0" type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
+            </Form.Group>
+          </Form>
+          {(otherProducts && otherProducts.length > 0) && (
+          <p>
+            {otherProducts?.length}
+            {' '}
+            results found
+          </p>
+          )}
+          <Row className={styles.groupshop_search}>
+            {otherProducts ? (
+              otherProducts.map(
+                (prd) => (
+                  <Col xs={6} sm={4} className="p-1">
+                    <ProductCard
+                      isrc={prd.featuredImage}
+                      className={styles.groupshop_search_pcard}
+                      imgOverlay={(
+                        <>
+                          { selected?.includes(prd.id) ? (
+                            <>
+                              <span className={styles.groupshop__pcard_tag_price}>
+                                {`${percentage}% OFF`}
+                              </span>
+                              <IconButton
+                                className={styles.groupshop__pcard_tag_cross}
+                                icon={<X size={18} />}
+                                onClick={() => setSelected(
+                                  selected?.filter((pid) => pid !== prd.id),
+                                )}
+                              />
+                            </>
+                          )
+                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(prd.id)}>ADD A PRODUCT</Button>}
+                        </>
+)}
+                    >
+                      <h5 className="text-center fw-bold text-truncate">
+                        { prd.title }
+                      </h5>
+                      <p className="text-center fw-bold fs-5 mb-0">
+                        $
+                        {' '}
+                        {prd.price}
+                      </p>
+                    </ProductCard>
+                  </Col>
+                ),
+              )
+            ) : (
+              <div className={styles.groupshop_modal_empty}>
+                <p>SEARCH TO FIND YOUR FAVORITE PRODUCTS</p>
+              </div>
+            )}
+          </Row>
+          {(otherProducts && otherProducts.length > 0) && (
+          <>
+            {selected && (
+            <Row>
+              <Col xs={12} className="text-center fs-5 pt-1">
+                {selectedCount}
+                {' '}
+                product selected
+                {' '}
+              </Col>
+            </Row>
+            )}
+            <Row>
+              <Col xs={12} className="text-center">
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={(
+                    <Popover className={styles.groupshop_search_popover} style={{ maxWidth: '325px' }}>
+
+                      <Popover.Body>
+                        <p className="text-center fs-5">
+                          Add
+                          <strong>
+                            {' '}
+                            {selectedCount}
+                            {' '}
+                            products
+                          </strong>
+                          {' '}
+                          to this Groupshop
+                        </p>
+                        <Form className="">
+                          <Form.Group className="d-flex" controlId="name">
+                            <Form.Control type="text" name="name" onChange={(e) => console.log(e)} />
+                            <Button type="submit">Add</Button>
+                          </Form.Group>
+                        </Form>
+                        {/* <Col xs="auto" className="my-1"> */}
+
+                        {/* </Col> */}
+                      </Popover.Body>
+
+                    </Popover>
+      )}
+                >
+                  <Button variant="outline-primary" className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold" onClick={() => setSmShow(true)}>ADD  to groupshop</Button>
+                </OverlayTrigger>
+
+              </Col>
+            </Row>
+          </>
+          )}
+        </Modal.Body>
+
+      </Modal>
+
+    </>
+  );
+};
+
+// ProductsSearch.defaultProps = {
+//   user: {},
+// };
+
+export default ProductsSearch;

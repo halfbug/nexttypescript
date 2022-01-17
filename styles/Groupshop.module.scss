@@ -188,6 +188,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				position: absolute;
 			}
 
+			&_cross {
+				@extend .groupshop__pcard_tag;
+				@extend .p-1, .py-2, .rounded-pill, .m-1;
+				background-color: white !important;
+				top: 3px;
+				right: 10px;
+				position: absolute;
+			}
+
 			&_addedby {
 				@extend .groupshop__pcard_tag;
 				// @extend .p-1, .py-2, .rounded-pill, .m-1;
@@ -200,6 +209,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_product {
 				@extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
 				left: 12%;
+				height: 40px;
 			}
 		}
 
@@ -217,7 +227,59 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .fw-bold, .text-uppercase;
 		}
 	}
+
+	&_modal {
+		&_search {
+			@extend .rounded-0;
+			width: 100%;
+			@include media-breakpoint-up(lg) {
+				width: 928px !important;
+				max-width: 928px !important;
+			}
+
+			div:first-child {
+				@extend .border-0, .rounded-0;
+			}
+			&_meter {
+				@extend .rounded-pill;
+				width: 9.58px;
+				height: 9.58px;
+				border: 1px solid #ff8f78;
+				list-style: none;
+				margin-left: 0.5rem;
+				&_fill {
+					@extend .groupshop_modal_search_meter;
+					background-color: #ff8f78;
+				}
+			}
+		}
+		&_empty {
+			@extend .d-flex, .justify-content-center, .align-items-center;
+			min-height: 300px !important;
+		}
+	}
+
+	&_search {
+		height: 300px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		&_pcard {
+			img {
+				height: 236px !important;
+			}
+			.card-img-overlay {
+				background: #ffffff6b !important;
+				// height: 230px;
+			}
+		}
+
+		&_popover {
+			width: 325px;
+		}
+	}
 }
+
 // button {
 // 	min-width: auto !important;
 // }

@@ -94,7 +94,7 @@ const CREATE_CAMPAIGN = gql`
 `;
 
 const GET_PRODUCTS = gql`
-query Collections($productQueryInput: ProductQueryInput!) {
+query Products($productQueryInput: ProductQueryInput!) {
   products(productQueryInput: $productQueryInput) {
     id
     title

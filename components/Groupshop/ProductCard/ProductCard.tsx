@@ -14,7 +14,7 @@ type IProductCardProps = {
 const ProductCard = ({
   isrc, children, imgOverlay, pending, ...rest
 }: IProductCardProps) => (
-  <Card {...rest} className={styles.groupshop__pcard}>
+  <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
     <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
     <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
       {imgOverlay}

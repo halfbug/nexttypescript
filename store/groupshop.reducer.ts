@@ -11,7 +11,9 @@ export const gsreducer = (
 ): IGroupshop => {
   console.log(action);
   switch (action.type) {
+    // eslint-disable-next-line no-sequences
     case 'UPDATE_GROUPSHOP':
+    case 'UPDATE_PRODUCTS':
       console.log('Action payload', action.payload);
       return { ...state, ...action.payload };
 
