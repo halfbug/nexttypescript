@@ -115,7 +115,6 @@ export default function DBRewards({
     { text: 'Hign', cssName: 'high_btn' },
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
-  console.log({ values });
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>

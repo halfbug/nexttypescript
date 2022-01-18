@@ -15,15 +15,15 @@ import { ICampaign, ICampaignForm } from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
-import { CREATE_CAMPAIGN } from 'store/store.graphql';
+import { CREATE_CAMPAIGN_DB } from 'store/store.graphql';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import { useRouter } from 'next/router';
 import useQueryString from 'hooks/useQueryString';
-import SocialMedia from '../SocialMedia';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
+import CampaignSocialMedia from './CampaignSocialMedia';
 
 export default function CreateCampaign() {
   const { query: { ins } } = useRouter();
@@ -32,7 +32,7 @@ export default function CreateCampaign() {
     addCampaign,
     // eslint-disable-next-line no-unused-vars
     { data, loading, error },
-  ] = useMutation<any, ICampaign | null>(CREATE_CAMPAIGN);
+  ] = useMutation<any, ICampaign | null>(CREATE_CAMPAIGN_DB);
 
   const { store, dispatch } = React.useContext(StoreContext);
 
@@ -81,11 +81,13 @@ export default function CreateCampaign() {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget,
-        brandColor, customColor, customBg, imageUrl, youtubeUrl,
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest, tiktok, facebook, twitter,
       } = valz;
       console.log({ valz });
-      console.log("VALZ products", products);
-      console.log("VALZ selectedTarget", selectedTarget);
+
+      const socialLinks = {
+        instagram, pinterest, tiktok, facebook, twitter,
+      };
 
       if (selectedTarget) {
         selectedTarget?.rewards.map((item:any) => (delete item["__typename"]));
@@ -101,6 +103,7 @@ export default function CreateCampaign() {
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             products: store?.newCampaign?.productsArray,
+            socialLinks,
             rewards,
             salesTarget: selectedTarget,
             settings: {
@@ -132,7 +135,6 @@ export default function CreateCampaign() {
 
   console.log({ store });
   console.log({ values });
-  console.log('🚀 campaignInitial', campaignInitial);
 
   return (
     <Container className="dashboard_campaign">
@@ -350,7 +352,10 @@ export default function CreateCampaign() {
           <Col>
             <Row />
             <section className={styles.dashboard_campaign__box_5}>
-              <SocialMedia />
+              <CampaignSocialMedia
+                handleChange={handleChange}
+                setFieldValue={setFieldValue}
+              />
             </section>
           </Col>
         </Row>

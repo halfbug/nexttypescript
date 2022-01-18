@@ -89,6 +89,17 @@ const CREATE_CAMPAIGN = gql`
     status
     joinExisting
     criteria
+    products
+    }
+  }
+`;
+const CREATE_CAMPAIGN_DB = gql`
+  mutation createCampaign($createCampaignInput: CreateCampaignInput!) {
+    createCampaign(createCampaignInput: $createCampaignInput) {
+    id
+    status
+    joinExisting
+    criteria
     settings {
       brandColor,
       customColor,
@@ -104,8 +115,14 @@ const CREATE_CAMPAIGN = gql`
         discount
       }
     }
+    socialLinks{
+      instagram
+      pinterest
+      tiktok
+      facebook
+      twitter
+    }
     products
-
     }
   }
 `;
@@ -295,5 +312,5 @@ export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
-  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID,
+  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB,
 };

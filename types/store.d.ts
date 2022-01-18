@@ -30,6 +30,7 @@ export interface ICampaign {
   rewards?: string;
   salesTarget?: ISalesTarget;
   settings?: ISettings;
+  socialLinks?: ISocialLink;
 
 }
 export interface ICampaignForm {
@@ -40,12 +41,17 @@ export interface ICampaignForm {
   products?: IProduct[];
   rewards?: string;
   selectedTarget?: any;
-  brandColor?: string,
-  customColor?: string,
-  customBg?: string,
-  imageUrl?: string,
-  youtubeUrl?: string,
-  media?: string
+  brandColor?: string;
+  customColor?: string;
+  customBg?: string;
+  imageUrl?: string;
+  youtubeUrl?: string;
+  media?: string;
+  instagram?: string;
+  pinterest?: string;
+  tiktok?: string;
+  twitter?: string;
+  facebook?: string;
 }
 
 export interface ICollection {
@@ -95,4 +101,11 @@ export interface IRewards {
   id: string;
   discount?: string;
   customerCount?: string;
+}
+export interface ISocialLink {
+  instagram?: string;
+  pinterest?: string;
+  tiktok?: string;
+  twitter?: string;
+  facebook?: string;
 }

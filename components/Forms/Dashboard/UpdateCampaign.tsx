@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
-import Settings from './Settings';
+import Settings from '../Settings';
 import SocialMedia from './SocialMedia';
 import UpdateRewards from './UpdateRewards';
 

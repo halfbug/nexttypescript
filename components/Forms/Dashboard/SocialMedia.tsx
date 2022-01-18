@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Form, Row, Col, InputGroup, Container,
+  Form, Row, Col, InputGroup, Container, Button,
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
@@ -11,6 +11,7 @@ import { UPDATE_CAMPAIGN } from 'store/store.graphql';
 import {
   Facebook, Instagram, Pinterest, Twitter, Tiktok, CheckCircle,
 } from 'react-bootstrap-icons';
+import styles from 'styles/Groupshop.module.scss';
 import { IStore } from 'types/store';
 
 interface IValues {
@@ -88,12 +89,20 @@ export default function SocialMedia() {
         </Row>
         <Row className="p-0">
           <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('instagram')}>
-            <Instagram className="fs-3 fw-bold" />
+            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Instagram className="fs-3 fw-bold" /></Button>
           </Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}><Pinterest className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}><Tiktok className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}><Twitter className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}><Facebook className="fs-3 fw-bold" /></Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}>
+            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Pinterest className="fs-3 fw-bold" /></Button>
+          </Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}>
+            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Tiktok className="fs-3 fw-bold" /></Button>
+          </Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}>
+            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Twitter className="fs-3 fw-bold" /></Button>
+          </Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}>
+            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Facebook className="fs-3 fw-bold" /></Button>
+          </Col>
         </Row>
         <Row className="p-1 mt-2">
           <Col xs={8}>
