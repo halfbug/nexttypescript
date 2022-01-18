@@ -89,6 +89,23 @@ const CREATE_CAMPAIGN = gql`
     status
     joinExisting
     criteria
+    settings {
+      brandColor,
+      customColor,
+      customBg,
+      imageUrl,
+      youtubeUrl,
+    }
+    salesTarget {
+      id
+      name
+      rewards{
+        id
+        discount
+      }
+    }
+    products
+
     }
   }
 `;

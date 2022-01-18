@@ -24,21 +24,16 @@ export const reducer = (
   }
 
   if (action.type === 'UPDATE_CAMPAIGN') {
-    console.log(action.payload);
-    console.log(state.campaigns);
     return { ...state, campaigns: [...action.payload.campaigns ?? []] };
   }
   if (action.type === 'UPDATE_CAMPAIGN_REWARDS') {
-    console.log(action.payload);
     return { ...state, newCampaign: { ...state.newCampaign, ...action.payload.rewards } };
   }
   if (action.type === 'SINGLE_CAMPAIGN') {
-    console.log(action.payload);
     return { ...state, singleEditCampaignId: action.payload.singleEditCampaignId };
   }
 
   if (action.type === 'NEW_CAMPAIGN') {
-    console.log(action.payload);
     return { ...state, newCampaign: { ...state.newCampaign, ...action.payload.newCampaign } };
   }
 

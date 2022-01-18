@@ -3,7 +3,7 @@ import Page from 'components/Layout/Page/Page';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from 'styles/CampaignListing.module.scss';
 import { StoreContext } from 'store/store.context';
-import CreateCampaign from 'components/Forms/CreateCampaign';
+import CreateCampaign from 'components/Forms/Dashboard/CreateCampaign';
 
 const NewCampaign = () => {
   const { store, dispatch } = useContext(StoreContext);

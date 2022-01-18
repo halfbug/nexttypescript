@@ -204,7 +204,7 @@ export default function UpdateCampaign() {
                     </Col>
                   </Row>
                   <Row className="text-muted"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
-                  <Row className="text-start"><Col><WhiteButton text="Add products" /></Col></Row>
+                  <Row className="text-start"><Col><WhiteButton>Add products</WhiteButton></Col></Row>
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>

@@ -7,7 +7,7 @@ import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
 import { useMutation } from '@apollo/client';
-import { UPDATE_STORE } from 'store/store.graphql';
+import { UPDATE_CAMPAIGN } from 'store/store.graphql';
 import {
   Facebook, Instagram, Pinterest, Twitter, Tiktok, CheckCircle,
 } from 'react-bootstrap-icons';
@@ -27,7 +27,7 @@ export default function SocialMedia() {
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
 
-  const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
+  const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
 
@@ -60,9 +60,9 @@ export default function SocialMedia() {
       console.log(valz);
       await addSM({
         variables: {
-          updateStoreInput: {
-            id: store.id,
-            shop: store.shop,
+          updateCampaignInput: {
+            storeId: store.id,
+            id: store.singleEditCampaignId,
             socialMedia: {
               facebook,
               instagram,
@@ -90,10 +90,10 @@ export default function SocialMedia() {
           <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('instagram')}>
             <Instagram className="fs-3 fw-bold" />
           </Col>
-          <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('pinterest')}><Pinterest className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('tiktok')}><Tiktok className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('twitter')}><Twitter className="fs-3 fw-bold" /></Col>
-          <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('facebook')}><Facebook className="fs-3 fw-bold" /></Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}><Pinterest className="fs-3 fw-bold" /></Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}><Tiktok className="fs-3 fw-bold" /></Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}><Twitter className="fs-3 fw-bold" /></Col>
+          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}><Facebook className="fs-3 fw-bold" /></Col>
         </Row>
         <Row className="p-1 mt-2">
           <Col xs={8}>

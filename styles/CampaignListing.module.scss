@@ -21,6 +21,11 @@
             border: none;
             color: $primary;
         }
+        &:focus {
+            background-color: transparent;
+            border: none;
+            color: $primary;
+        }
     }
     .bg {
         background: #f8f8f8;

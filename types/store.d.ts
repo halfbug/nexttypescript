@@ -32,6 +32,21 @@ export interface ICampaign {
   settings?: ISettings;
 
 }
+export interface ICampaignForm {
+  id?: string | null | undefined;
+  name?: string;
+  criteria?: string;
+  joinExisting?: any;
+  products?: IProduct[];
+  rewards?: string;
+  selectedTarget?: any;
+  brandColor?: string,
+  customColor?: string,
+  customBg?: string,
+  imageUrl?: string,
+  youtubeUrl?: string,
+  media?: string
+}
 
 export interface ICollection {
   title: string;

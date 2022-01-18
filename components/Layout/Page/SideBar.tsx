@@ -17,7 +17,6 @@ import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
 const Sidebar = () => {
   const { store } = useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
-  console.log(store);
 
   return (
     <div className={styles.sidebarwrap}>

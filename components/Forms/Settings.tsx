@@ -233,7 +233,7 @@ export default function Settings({ isDB }: IProps) {
             <Row className="">
               <Col>
                 <UploadButton
-                  icon={(<WhiteButton text="Upload" />)}
+                  icon={(<WhiteButton>Upload</WhiteButton>)}
                   setFieldValue={setFieldValue}
                   field="imageUrl"
                   className={styles.ob_settings__uploadbtn}

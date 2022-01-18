@@ -29,7 +29,7 @@ const CampaignListing = () => {
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
   };
   console.log('🚀 ~ file: index.tsx ~ line 36 ~ CampaignListing ~ store', store);
-  const handleClickNew = (campaignid: string) => {
+  const handleClickNew = () => {
     if (shopName) Router.push(`/${shopName}/campaign/new`);
   };
 
@@ -72,19 +72,20 @@ const CampaignListing = () => {
               <Col className="mt-4">
                 <ToggleButton />
               </Col>
-              <Col className="mt-4"><WhiteButton text="View Analytics" /></Col>
-              <Col className="mt-4"><WhiteButton text="Edit" onClick={() => handleClick(camp.id)} /></Col>
+              <Col className="mt-4"><WhiteButton>View Analytics</WhiteButton></Col>
+              <Col className="mt-4"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
             </Row>
           </>
         ))}
         <Row>
           <Col className={styles.bottom_row}>
-            <Button
+            <Link href="/native-roots-dev/campaign/new">+ Create New Campaign</Link>
+            {/* <Button
               className={styles.container_btnNew}
               onClick={() => handleClickNew}
             >
               + Create New Campaign
-            </Button>
+            </Button> */}
           </Col>
         </Row>
       </Container>
