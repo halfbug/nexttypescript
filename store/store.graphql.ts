@@ -232,6 +232,7 @@ query Groupshop($code: String!) {
       productId
       customerIP
       addedBy
+      type
     }
     discountCode{
       title
@@ -308,9 +309,95 @@ query Groupshop($code: String!) {
 }
 `;
 
+const ADD_DEAL_PRODUCT = gql`
+  mutation AddDealProduct($updateGroupshopInput: UpdateGroupshopInput!) {
+    addDealProduct(updateGroupshopInput: $updateGroupshopInput) {
+        
+      storeId
+    id
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+    }
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+    expiredAt
+    createdAt
+    totalProducts
+    members{
+      orderId
+      availedDiscount
+      role 
+      orderDetail{
+        customer{
+          firstName
+          LastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      products{
+        title
+        featuredImage
+        price
+        lineItems{
+          product{
+            id
+          }
+          price
+        }
+      }
+    }
+    store{
+      brandName
+    }
+  popularProducts{
+    featuredImage
+    id
+    title
+    price
+    currencyCode
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+  allProducts{
+    featuredImage
+    id
+    title
+    price
+    currencyCode
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+    campaign{
+      name
+      products
+    } 
+          
+      }
+   
+  }
+`;
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
-  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB,
+  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT,
 };

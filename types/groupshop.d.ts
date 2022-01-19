@@ -1,9 +1,9 @@
 import { IProduct as Product, IStore as Store, ICampaign as Campaign } from './store';
 
-export type DealProducts ={
+export type DealProduct ={
   productId: string;
 
-  type: 'deal' | 'abandoned';
+  type?: 'deal' | 'abandoned';
 
   addedBy: string;
 
@@ -57,7 +57,7 @@ export interface IGroupshop {
 
   totalProducts: number;
 
-  dealProducts?: DealProducts[];
+  dealProducts?: DealProduct[];
 
   url: string;
 

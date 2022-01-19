@@ -78,7 +78,10 @@ const ProductGrid = ({
                   ).map((
                     { addedBy, productId },
                   ) => (
-                    <span className={styles.groupshop__pcard_tag_addedby} key={productId}>
+                    <span
+                      className={styles.groupshop__pcard_tag_addedby}
+                      key={`${productId}_${Math.random()}`}
+                    >
                       {`Added by ${addedBy}`}
                     </span>
                   ))}

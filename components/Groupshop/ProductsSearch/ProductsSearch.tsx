@@ -12,6 +12,7 @@ import { GroupshopContext, GSContextType, gsInit } from 'store/groupshop.context
 import useDebounce from 'hooks/useDebounce';
 import { X } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
+import AddDealProduct from 'components/Forms/AddDealProduct';
 import ProductGrid from '../ProductGrid/ProductGrid';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -42,8 +43,6 @@ const ProductsSearch = ({
   const [smShow, setSmShow] = useState(false);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 37 ~ selected', selected);
   const searchPrd = (name:string) => {
-    console.log(name);
-    console.log(products);
     if (products && name) {
       setotherProducts(
         products.filter(
@@ -105,6 +104,8 @@ const ProductsSearch = ({
               <Form.Control size="lg" className="bg-light pt-2 border-0" type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
             </Form.Group>
           </Form>
+
+          {selected && <AddDealProduct selectedProducts={selected} handleClose={closeModal} />}
           {(otherProducts && otherProducts.length > 0) && (
           <p>
             {otherProducts?.length}
@@ -174,7 +175,7 @@ const ProductsSearch = ({
               <Col xs={12} className="text-center">
                 <OverlayTrigger
                   trigger="click"
-                  placement="bottom"
+                  placement="top"
                   overlay={(
                     <Popover className={styles.groupshop_search_popover} style={{ maxWidth: '325px' }}>
 
@@ -190,12 +191,8 @@ const ProductsSearch = ({
                           {' '}
                           to this Groupshop
                         </p>
-                        <Form className="">
-                          <Form.Group className="d-flex" controlId="name">
-                            <Form.Control type="text" name="name" onChange={(e) => console.log(e)} />
-                            <Button type="submit">Add</Button>
-                          </Form.Group>
-                        </Form>
+
+                        <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
                         {/* <Col xs="auto" className="my-1"> */}
 
                         {/* </Col> */}

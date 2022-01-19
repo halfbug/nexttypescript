@@ -57,7 +57,7 @@ const GroupShop: NextPage = () => {
     skip: !shop,
   });
 
-  console.log('🚀 ~~ line 21 ~ data', groupshop);
+  console.log('🚀 ~~ line 21 ~ groupshop', groupshop);
   console.log('🚀 ~~ line 21 ~ loading', loading);
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
@@ -74,6 +74,10 @@ const GroupShop: NextPage = () => {
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
   }, [groupshop, pending]);
+
+  useEffect(() => {
+    setallProducts(gsctx.allProducts);
+  }, [gsctx]);
 
   // const { shop, getProducts } = useStore();
 
@@ -95,7 +99,7 @@ const GroupShop: NextPage = () => {
     store: { brandName } = { brandName: '' },
     popularProducts,
     // allProducts,
-  } = groupshop;
+  } = gsctx;
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
@@ -107,14 +111,14 @@ const GroupShop: NextPage = () => {
 
   return (
     <div className={styles.groupshop}>
-      <Header LeftComp={<Counter expireDate={groupshop?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
+      <Header LeftComp={<Counter expireDate={gsctx?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
       <Container fluid>
         <Row className={styles.groupshop__top}>
           <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>
           <Col md={6} className={styles.groupshop__top_members}>
             <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
             <div className="d-flex flex-row justify-content-center">
-              <Members names={groupshop?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
               <EarnButton
                 popContent={(
                   <div className="pt-1">
@@ -221,7 +225,7 @@ const GroupShop: NextPage = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {groupshop?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+              {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`}</Dropdown.Item>)}
             </Dropdown.Menu>
           </Dropdown>
         </h2>
