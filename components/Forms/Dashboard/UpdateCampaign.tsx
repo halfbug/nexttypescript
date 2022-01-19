@@ -116,7 +116,7 @@ export default function UpdateCampaign() {
     <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a'} />
       <Row>
-        <Col xs={6} className="mt-4">
+        <Col lg={7} className="mt-4">
           <Row>
             <Col>
               <h3>Groupshop Product</h3>
@@ -126,7 +126,7 @@ export default function UpdateCampaign() {
             <Col>
               <Form noValidate onSubmit={handleSubmit}>
                 <section className={styles.dashboard_campaign__box_1}>
-                  <Row className="mt-1">
+                  <Row>
                     <h4>
                       Select and add products to Groupshop
                     </h4>
@@ -193,7 +193,8 @@ export default function UpdateCampaign() {
                     </Form.Control.Feedback>
                   </Row>
                   <ProductButton disableBtn={disableBtn} totalProducts={(values.products?.length) ? values.products?.length : 0} />
-                  <Row className="mt-4">
+                  <hr />
+                  <Row>
                     <Col>
                       <h4>
                         Allow customers to add products from your store
@@ -208,7 +209,7 @@ export default function UpdateCampaign() {
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>
-                  <Row className="mt-4">
+                  <Row>
                     <Col>
                       <h4>
                         Allow customers to join existing Groupshop pages
@@ -227,8 +228,8 @@ export default function UpdateCampaign() {
                         name="joinExisting"
                       >
                         <ToggleButton
-                          variant="outline-primary"
-                          className="rounded-pill me-2"
+                          variant="outline-success"
+                          className="  "
                           id="joinExisting-e"
                           value={1}
                           checked={values.joinExisting}
@@ -243,7 +244,7 @@ export default function UpdateCampaign() {
                         </ToggleButton>
                         <ToggleButton
                           variant="outline-primary"
-                          className="rounded-pill"
+                          className=""
                           id="joinExisting-d"
                           value={0}
                           checked={values.joinExisting === false}
@@ -268,7 +269,7 @@ export default function UpdateCampaign() {
           </Row>
 
         </Col>
-        <Col xs={6} className="mt-4">
+        <Col lg={5} className="mt-4">
           <Row>
             <Col>
               <h3>Campaign Rewards</h3>
@@ -278,18 +279,18 @@ export default function UpdateCampaign() {
           <UpdateRewards />
         </Col>
       </Row>
-      <Row className="mt-4">
-        <Col><h2>Groupshop Design</h2></Col>
+      <Row>
+        <Col><h3>Groupshop Design</h3></Col>
       </Row>
 
       <Row className="mt-2">
-        <Col>
+        <Col lg={7}>
           <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>
             <Settings isDB />
           </section>
 
         </Col>
-        <Col>
+        <Col lg={5}>
           <Row />
           <section className={styles.dashboard_campaign__box_5}>
             <SocialMedia />

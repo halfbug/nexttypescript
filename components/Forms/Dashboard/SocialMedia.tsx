@@ -80,53 +80,53 @@ export default function SocialMedia() {
   });
 
   return (
-    <Container fluid>
-      <Form noValidate onSubmit={handleSubmit}>
-        <Row className="p-2">
-          <Col>
-            <h4 className="mt-4 text-center">Add your social links</h4>
-          </Col>
-        </Row>
-        <Row className="p-0">
-          <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('instagram')}>
-            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Instagram className="fs-3 fw-bold" /></Button>
-          </Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}>
-            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Pinterest className="fs-3 fw-bold" /></Button>
-          </Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}>
-            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Tiktok className="fs-3 fw-bold" /></Button>
-          </Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}>
-            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Twitter className="fs-3 fw-bold" /></Button>
-          </Col>
-          <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}>
-            <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Facebook className="fs-3 fw-bold" /></Button>
-          </Col>
-        </Row>
-        <Row className="p-1 mt-2">
-          <Col xs={8}>
-            <Form.Group className="w-100" controlId="sm">
-              <Form.Control
-                onChange={handleChange}
-                className="px-2"
-                id={`${smUrl}`}
-                name={`${smUrl}`}
-                type="text"
-                size="sm"
-                placeholder={`Enter ${smUrl} account URL...`}
-              />
-              {/* <Form.Control.Feedback type="invalid">
+
+    <Form noValidate onSubmit={handleSubmit}>
+      <Row className="px-2 ">
+        <Col>
+          <h4 className="">Add your social links</h4>
+        </Col>
+      </Row>
+      <Row className="p-1 justify-content-center">
+        <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('instagram')}>
+          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Instagram className="fs-3 fw-bold" /></Button>
+        </Col>
+        <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}>
+          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Pinterest className="fs-3 fw-bold" /></Button>
+        </Col>
+        <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}>
+          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Tiktok className="fs-3 fw-bold" /></Button>
+        </Col>
+        <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}>
+          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Twitter className="fs-3 fw-bold" /></Button>
+        </Col>
+        <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}>
+          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Facebook className="fs-3 fw-bold" /></Button>
+        </Col>
+      </Row>
+      <Row className="p-1 mt-2">
+        <Col lg={10}>
+          <Form.Group className="w-100" controlId="sm">
+            <Form.Control
+              onChange={handleChange}
+              className="px-2"
+              id={`${smUrl}`}
+              name={`${smUrl}`}
+              type="text"
+              size="lg"
+              placeholder={`Enter ${smUrl} account URL...`}
+            />
+            {/* <Form.Control.Feedback type="invalid">
                 {errors.brandName}
               </Form.Control.Feedback> */}
 
-            </Form.Group>
-          </Col>
-          <Col className="align-middle" xs={4}>
-            <CheckCircle />
-          </Col>
-        </Row>
-      </Form>
-    </Container>
+          </Form.Group>
+        </Col>
+        <Col className="align-middle py-2 px-1" lg={2}>
+          <CheckCircle size={18} color="grey" />
+        </Col>
+      </Row>
+    </Form>
+
   );
 }

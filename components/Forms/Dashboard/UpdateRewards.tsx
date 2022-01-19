@@ -112,23 +112,16 @@ export default function UpdateRewards() {
       <Form noValidate onSubmit={handleSubmit}>
         <Row className="mt-1"><Col><h4>Set your rewards</h4></Col></Row>
         <Row className={styles.dbrewards_text_lg}>
-          <Col>
+          <Col className="text-muted">
             Set the discount and chashback percentages
-            {' '}
-            <br />
             your customers will earn on their order
-            {' '}
-            <br />
             as they reach different milestones.
           </Col>
         </Row>
-        <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
+        <Row className="mt-3"><Col><h5>Select your desired sales volume:</h5></Col></Row>
         <Row className={styles.dbrewards_text_lg}>
-          <Col>
+          <Col className="text-muted">
             We’ll set your reward tiers based on our
-            {' '}
-            <br />
-            {' '}
             recommendations..
           </Col>
         </Row>
@@ -178,13 +171,13 @@ export default function UpdateRewards() {
           </Col>
         </Row>
 
-        <Row className="mt-3 w-75">
+        <Row className="mt-3 ">
           <Col>
             💡 Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
             {' '}
           </Col>
         </Row>
-        <Row className="mt-3 w-75">
+        <Row className="mt-3 ">
           <Col>
             🌟 Be generous – reward your customers the same
             {' '}

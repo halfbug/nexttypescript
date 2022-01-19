@@ -3,24 +3,20 @@
 	@extend .text-sm-start;
 
 	h6 {
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 14px;
-		line-height: 18px;
-		
-		color: #000000;
+		@extend .fs-6, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $black;
 		}
 	h5 {
-		font-size: 12px;
+		@extend .fs-5, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
 	}
 	h4{
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 18px;
-		line-height: 23px;
-		color: #1D2329;
+
+		@extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
 	}
 	p {
 		font-size: 14px;

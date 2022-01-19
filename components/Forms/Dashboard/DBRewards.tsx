@@ -121,23 +121,15 @@ export default function DBRewards({
 
       <Row className="mt-1"><Col><h4>Set your rewards</h4></Col></Row>
       <Row className={styles.dbrewards_text_lg}>
-        <Col>
-          Set the discount and chashback percentages
-          {' '}
-          <br />
-          your customers will earn on their order
-          {' '}
-          <br />
+        <Col className="text-muted">
+          Set the discount and chashback percentages your customers will earn on their order
           as they reach different milestones.
         </Col>
       </Row>
       <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
       <Row className={styles.dbrewards_text_lg}>
-        <Col>
+        <Col className="text-muted">
           We’ll set your reward tiers based on our
-          {' '}
-          <br />
-          {' '}
           recommendations..
         </Col>
       </Row>

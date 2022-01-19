@@ -160,12 +160,10 @@ export default function Rewards() {
         <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
         <Row className={styles.rewards_text_lg}>
           <Col>
-            We’ll set your reward tiers based on our
-            {' '}
-            <br />
-            {' '}
-            recommendations..
-
+            <h6>
+              We’ll set your reward tiers based on our
+              recommendations..
+            </h6>
           </Col>
         </Row>
         <Row className="m-0">
@@ -229,7 +227,6 @@ export default function Rewards() {
           <Col xs={4} className="d-flex justify-content-end">
             <Button type="submit"> Next </Button>
           </Col>
-          {/* <Col xs={3} md={4}>&nbsp; </Col> */}
         </Row>
       </Form>
     </section>

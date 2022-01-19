@@ -1,66 +1,52 @@
 @import "./variables.scss";
-.dashboard_campaign{
-    @extend .mt-4;
+
+.dashboard_campaign {
+    @extend .mt-4, .px-0;
 
     h3 {
+        @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
         font-family: Montserrat;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 22px;
-        line-height: 27px;
         color: $black;
     }
     h4 {
+        @extend .fs-4, .fw-bold, .lh-base;
         font-family: DM Sans;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 21px;
-        color: #1D2329;
+        color: $subheadingclr;
+    }
+    hr {
+        opacity: 0.08;
+        border: 0.5px solid #000000;
+    }
+    &__box_1 {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
     }
 
-    &__box_1 {
-        height: auto;
-        width: 500px;
-        left: 0px;
-        top: 56px;
-        border-radius: 23px;
-        border: 1px dashed $dotted-border-color1;
-        padding: 10px;
-    }
-    &__box_2{
-        width: 500px;
-        // height: 162px;
+    &__box_2 {
+        @extend .mb-3, .p-4;
         border: 1px dashed $dotted-border-color2;
-        border-radius: 23px;
-        padding: 10px;
-        @extend .mt-5;
+        border-radius: 18px;
     }
+
     &__box_3 {
-        width: 596px;
-        height: auto;
+        @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color3;
-        box-sizing: border-box;
-        border-radius: 23px;
-        padding: 10px;
-        @extend .mt-2;
-    }      
+        border-radius: 18px;
+    }
+
     &__box_4 {
-        // width: 343px;
-        height: 462px;
+        @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color4;
-        box-sizing: border-box;
-        border-radius: 23px;
-        padding: 10px;
-        @extend .mt-2;
-    }      
+        border-radius: 18px;
+    }
+
     &__box_5 {
-        // width: 339px;
-        // height: 167px;
+        @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color4;
-        box-sizing: border-box;
-        border-radius: 23px;    
-    }      
+        border-radius: 18px;
+    }
+
     &__light_text {
         font-family: DM Sans;
         font-size: 14px;
@@ -73,97 +59,81 @@
     }
     &__lightBg {
         height: 135px;
-        background: #F3F3F3;
-        border: 1px dashed #CDC5F9;
-        box-sizing: border-box;
-        border-radius: 23px;   
-        padding: 10px; 
-    }
-
-}
-.dbrewards {
-    // width: 343px;
-    &_box {
-        width: 343px;
-        // height: 462px;
-        border: 1px dashed $dotted-border-color4;
+        background: #f3f3f3;
+        border: 1px dashed #cdc5f9;
         box-sizing: border-box;
         border-radius: 23px;
         padding: 10px;
-        // @extend .mt-2;
-        margin-left: 50px;
-    }   
+    }
+.existing_pages{
+   color:  $brandgreen;
+   border: $black;
+
+}
+
+}
+.dbrewards {
+    &_box {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
+    }
+
     &_line {
         width: 295px;
         height: 0px;
         opacity: 0.08;
         border: 1px solid #000000;
-    }   
-    h4{
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 18px;
-		line-height: 23px;
-		color: #1D2329;
-	}
-	h6 {
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 14px;
-		line-height: 18px;
-		
-		color: #000000;
-		}
-        &_text_lg {
-		font-family: Mulish;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 16px;
-		line-height: 20px;
-		color: #1D2329;
-		}
-	&_text_sm {
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 14px;
-		line-height: 18px;
-		color: #1D2329;
-		opacity: 0.5;
-		}
+    }
+    h4 {
+        @extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
+    h5 {
+        @extend .fs-5, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $black;
+    }
+    &_text_lg {
+        @extend .fs-5, .fw-normal, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
+    &_text_sm {
+        @extend .fs-6, .fw-normal, .lh-sm;
+        font-family: DM Sans;
+        color: $subheadingclr;
+        opacity: 0.5;
+    }
 
-        button {
-            height: 21px;
-            width: 66px;
-            @extend .mx-0;
-            border-radius: 8px;
-            color: #ffffff;
-            opacity: 40%;
-            // margin: 3px;        
-        }
-        &__low_btn {
-            background: rgba(232, 101, 98, 0.5) !important;
-        }
-        &__avg_btn {
-            background: #f7bc7d!important;
-        }
-        &__high_btn {
-            background: #a7c737!important;
-        }
-        &__super_btn {
-            background: #a68ad6!important;
-        }
+    button {
+        height: 21px;
+        width: 66px;
+        @extend .mx-0;
+        border-radius: 8px;
+        color: #ffffff;
+        opacity: 40%;
+        // margin: 3px;
+    }
+    &__low_btn {
+        background: rgba(232, 101, 98, 0.5) !important;
+    }
+    &__avg_btn {
+        background: #f7bc7d !important;
+    }
+    &__high_btn {
+        background: #a7c737 !important;
+    }
+    &__super_btn {
+        background: #a68ad6 !important;
+    }
 
-    &__percent_btn{
+    &__percent_btn {
         height: 24px;
         width: 45px;
         border-radius: 6px;
         text-align: center;
-        background-color: #D5FA52;
-    
+        background-color: #d5fa52;
     }
-        
 }
-
