@@ -13,13 +13,13 @@ import {
 } from 'react-bootstrap-icons';
 import styles from 'styles/Groupshop.module.scss';
 import { IStore } from 'types/store';
+import IconButton from 'components/Buttons/IconButton';
 
 interface IValues {
     facebook: string;
     instagram: string;
     twitter: string;
     pinterest: string;
-    youtube: string;
     tiktok: string;
     // setFieldValue: ()=>void;
 }
@@ -46,7 +46,6 @@ export default function SocialMedia() {
       facebook: '',
       instagram: '',
       tiktok: '',
-      youtube: '',
       pinterest: '',
       twitter: '',
     },
@@ -56,29 +55,36 @@ export default function SocialMedia() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const {
-        facebook, instagram, tiktok, youtube, pinterest, twitter,
+        facebook, instagram, tiktok, pinterest, twitter,
       } = valz;
       console.log(valz);
-      await addSM({
+      const smObj: null | any = await addSM({
         variables: {
           updateCampaignInput: {
             storeId: store.id,
             id: store.singleEditCampaignId,
-            socialMedia: {
+            socialLinks: {
               facebook,
               instagram,
               tiktok,
-              youtube,
               pinterest,
               twitter,
             },
           },
         },
       });
-      dispatch({ type: 'UPDATE_STORE', payload: valz });
+      // dispatch({ type: 'UPDATE_STORE', payload: { socialLinks: valz } });
+      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+        if (item.id === smObj.id) {
+          return smObj;
+        }
+        return item;
+      });
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+      console.log('🚀 ~ file: UpdateCampaign.tsx ~ line 32 ~ UpdateCampaign ~ store', store);
     },
   });
-
+  console.log({ store });
   return (
 
     <Form noValidate onSubmit={handleSubmit}>
@@ -88,20 +94,73 @@ export default function SocialMedia() {
         </Col>
       </Row>
       <Row className="p-1 justify-content-center">
-        <Col className="p-0 d-flex justify-content-center" onClick={() => setsmUrl('instagram')}>
-          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Instagram className="fs-3 fw-bold" /></Button>
+        <Col className="p-0 d-flex justify-content-center">
+          <Button
+            className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
+            variant="secondary"
+            onClick={() => setsmUrl('instagram')}
+            onChange={(e) => {
+              setFieldValue('instagram', e.currentTarget.value);
+            }}
+            name="instagram"
+          >
+            <Instagram className="fs-3 fw-bold" />
+          </Button>
         </Col>
-        <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('pinterest')}>
-          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Pinterest className="fs-3 fw-bold" /></Button>
+        <Col className="p-0 d-flex justify-content-center">
+          <Button
+            className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
+            variant="secondary"
+            onClick={() => setsmUrl('pinterest')}
+            onChange={(e) => {
+              setFieldValue('pinterest', e.currentTarget.value);
+            }}
+            name="pinterest"
+          >
+            <Pinterest className="fs-3 fw-bold" />
+          </Button>
         </Col>
         <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('tiktok')}>
-          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Tiktok className="fs-3 fw-bold" /></Button>
+          <Button
+            className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
+            variant="secondary"
+            onClick={() => setsmUrl('tiktok')}
+            onChange={(e) => {
+              setFieldValue('tiktok', e.currentTarget.value);
+            }}
+            name="tiktok"
+          >
+            <Tiktok className="fs-3 fw-bold" />
+
+          </Button>
         </Col>
         <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('twitter')}>
-          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Twitter className="fs-3 fw-bold" /></Button>
+          <Button
+            className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
+            variant="secondary"
+            onClick={() => setsmUrl('twitter')}
+            onChange={(e) => {
+              setFieldValue('twitter', e.currentTarget.value);
+            }}
+            name="twitter"
+          >
+            <Twitter className="fs-3 fw-bold" />
+
+          </Button>
         </Col>
         <Col className="p-0 d-flex justify-content-center" onChange={handleChange} onClick={() => setsmUrl('facebook')}>
-          <Button className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')} variant="secondary"><Facebook className="fs-3 fw-bold" /></Button>
+          <Button
+            className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
+            variant="secondary"
+            onClick={() => setsmUrl('facebook')}
+            onChange={(e) => {
+              setFieldValue('facebook', e.currentTarget.value);
+            }}
+            name="facebook"
+          >
+            <Facebook className="fs-3 fw-bold" />
+
+          </Button>
         </Col>
       </Row>
       <Row className="p-1 mt-2">
@@ -123,7 +182,7 @@ export default function SocialMedia() {
           </Form.Group>
         </Col>
         <Col className="align-middle py-2 px-1" lg={2}>
-          <CheckCircle size={18} color="grey" />
+          <IconButton icon={<CheckCircle size={18} color="grey" />} onClick={() => handleSubmit} />
         </Col>
       </Row>
     </Form>

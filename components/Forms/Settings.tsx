@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable max-len */
 import * as React from 'react';
 import {
@@ -25,12 +26,12 @@ import UploadButton from 'components/Buttons/UploadBtn';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 
 interface IValues {
-    brandColor: string;
-    customColor: string;
-    customBg: string;
-    imageUrl: string;
-    youtubeUrl: string;
-    media: string;
+    brandColor?: string;
+    customColor?: string;
+    customBg?: string;
+    imageUrl?: string;
+    youtubeUrl?: string;
+    media?: string;
   }
   interface IProps {
     isDB: boolean;
@@ -40,6 +41,24 @@ export default function Settings({ isDB }: IProps) {
   const front = React.useRef(null);
   const [color, setColor] = React.useState('#aabbcc');
   // console.log('🚀 Settings.tsx isDB', isDB);
+  let SettingsInitial:IValues = {
+    brandColor: '#3C3C3C',
+    customColor: '#FFF199',
+    customBg: '',
+    imageUrl: '',
+    youtubeUrl: '',
+    media: 'image',
+  };
+  const { store, dispatch } = React.useContext(StoreContext);
+  React.useEffect(() => {
+    if (store?.campaigns && isDB) {
+      const arr:any = store.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
+      console.log("🚀", store.campaigns);
+      SettingsInitial = { ...arr[0].settings };
+      console.log("🚀 ~ file: Settings.tsx ~ line 127 ~ React.useEffect ~ SettingsInitial", SettingsInitial);
+      // setstate({ ...arr[0] });
+    }
+  }, [isDB, store.campaigns]);
 
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -48,7 +67,6 @@ export default function Settings({ isDB }: IProps) {
   const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   const [updateStore] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
-  const { store, dispatch } = React.useContext(StoreContext);
   // console.log(store);
   const validationSchema = yup.object({
     brandColor: yup
@@ -58,15 +76,9 @@ export default function Settings({ isDB }: IProps) {
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
-    initialValues: {
-      brandColor: '#3C3C3C',
-      customColor: '#FFF199',
-      customBg: '',
-      imageUrl: '',
-      youtubeUrl: '',
-      media: 'image',
-    },
+    initialValues: SettingsInitial,
     validationSchema,
+    enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
@@ -132,7 +144,7 @@ export default function Settings({ isDB }: IProps) {
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
-  // console.log('🚀 ~ file: Settings.tsx ~ line 87 ~ Settings ~ values', values);
+  console.log('🚀 VALUES SETTINGS', values);
   return (
 
     <Form noValidate onSubmit={handleSubmit}>
@@ -159,6 +171,7 @@ export default function Settings({ isDB }: IProps) {
                 title="Choose your color"
                 className="p-0 m-0 rounded-end"
                 bsPrefix="onboarding"
+                value={values.brandColor}
               />
             </span>
             {' '}
