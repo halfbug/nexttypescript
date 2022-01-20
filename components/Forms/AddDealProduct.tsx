@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Form, Row, Col, InputGroup, Button,
+  Form, Button,
 } from 'react-bootstrap';
 // import Button from 'components/Buttons/Button/Button';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
@@ -11,7 +9,6 @@ import { useMutation } from '@apollo/client';
 import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct, IGroupshop } from 'types/groupshop';
-import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
   username: string;
@@ -25,12 +22,24 @@ type TAddDealProduct ={
 
 export default function AddDealProduct({ selectedProducts, handleClose }:TAddDealProduct) {
   const [addDealProduct] = useMutation<IGroupshop>(ADD_DEAL_PRODUCT);
+
+  // get grouphshop context
   const {
     gsctx,
     dispatch,
   } = React.useContext(GroupshopContext);
-  const { cleanTypename } = useUtilityFunction();
-  const { id, dealProducts: dealProductsCtx, allProducts: allProductsCtx } = gsctx;
+
+  const { id, dealProducts: dealProductsCtx } = gsctx;
+
+  // get client IP
+  const [myip, setmyip] = useState<string>('');
+
+  useEffect(() => {
+    fetch('https://geolocation-db.com/json/3a2b5be0-75a0-11ec-acd1-89ce18e6dbfe')
+      .then((response) => response.json())
+      .then((data) => setmyip(data.IPv4));
+  }, []);
+
   const validationSchema = yup.object({
     username: yup
       .string()
@@ -41,7 +50,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   });
 
   const {
-    handleSubmit, values, handleChange, touched, errors, setFieldValue,
+    handleSubmit, values, handleChange, touched, errors,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
       username: '',
@@ -56,12 +65,13 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
 
+      // merge selected products with groupshop deal prodcuts
       const dealProducts: DealProduct[] = [...products?.map((productId) => {
         const product:DealProduct = {
-          productId, addedBy: username, customerIP: 'tofix', type: 'deal',
+          productId, addedBy: username, customerIP: myip, type: 'deal',
         };
         return product;
-      }) || [], ...dealProductsCtx?.map(
+      }) || [], ...dealProductsCtx?.map( // remove __typename
         ({
           addedBy, customerIP, productId, type,
         }) => ({
@@ -79,13 +89,10 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         },
       });
       handleClose({});
+      // update context
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, allProducts: [...gsctx?.store?.products?.filter(({ id: pid }:{ id:string}) => products?.includes(pid)) || [], ...gsctx?.allProducts || []], dealProducts } });
-    //   setParams({ ins: 2 });
-      // console.log(valz);
-      // setTimeout(() => resetForm(), 5000);
     },
   });
-  console.log('🚀 ~ file: AddDealProduct.tsx ~ line 64 ~ AddDealProduct ~ values', values);
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
