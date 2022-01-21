@@ -73,7 +73,7 @@ export interface IProduct {
   featuredImage: string;
   price: string;
   currencyCode: string;
-  // lineItems?: any;
+  description?: string;
   orders?: any;
 }
 export interface ISettings {

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -12,6 +12,7 @@ import useDimensions from 'hooks/useDimentions';
 import { Send } from 'react-bootstrap-icons';
 import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
+import ProductDetail from '../ProductDetail/ProductDetail';
 
 type ProductGridProps = {
   products : IProduct[]| undefined,
@@ -41,7 +42,8 @@ const ProductGrid = ({
     items: products || [],
   });
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
-
+  const [showDetail, setshowDetail] = useState<boolean>(false);
+  const [sProduct, setsProduct] = useState<IProduct | undefined>(undefined);
   const fillerz = Math.abs(pageSize - renderItems.length) || (breakPoint === 'sm' ? 1 : 0);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
   const {
@@ -61,12 +63,10 @@ const ProductGrid = ({
         </Col>
       </Row>
       <Row>
-        {renderItems?.map(({
-          title, featuredImage, orders, price, id,
-        }) => (
-          <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={id}>
+        {renderItems?.map((prod) => (
+          <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={prod.id}>
             <ProductCard
-              isrc={featuredImage}
+              isrc={prod.featuredImage}
               imgOverlay={(
                 <>
                   <span className={styles.groupshop__pcard_tag_price}>
@@ -74,7 +74,7 @@ const ProductGrid = ({
                   </span>
                   <span className={styles.groupshop__pcard_tag_buyer}>MS</span>
                   {dealProducts?.filter(
-                    ({ productId }) => productId === id,
+                    ({ productId }) => productId === prod.id,
                   ).map((
                     { addedBy, productId },
                   ) => (
@@ -88,18 +88,25 @@ const ProductGrid = ({
                 </>
 )}
             >
-              <h5 className="text-center fw-bold text-truncate">{title}</h5>
-              { orders?.length > 0 && (
+              <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
+              { prod.orders?.length > 0 && (
               <p className="text-center mb-1 fs-5">
-                {`🔥 ${orders?.length} friends shopped`}
+                {`🔥 ${prod.orders?.length} friends shopped`}
               </p>
               )}
               <p className="text-center fw-bold fs-5 mb-0">
                 $
                 {' '}
-                {price}
+                {prod.price}
               </p>
-              <Button variant="primary" className="rounded-pill w-75">Add to Cart</Button>
+              <Button
+                variant="primary"
+                className="rounded-pill w-75"
+                onClick={() => { setsProduct(prod); setshowDetail(true); }}
+              >
+                Add to Cart
+
+              </Button>
               <Button variant="outline-primary" className="m-1 rounded-pill"><Send size={18} /></Button>
             </ProductCard>
           </Col>
@@ -159,6 +166,11 @@ const ProductGrid = ({
           )}
         </Col>
       </Row>
+      <ProductDetail
+        show={showDetail}
+        handleClose={(e) => setshowDetail(false)}
+        product={sProduct}
+      />
     </Container>
   );
 };

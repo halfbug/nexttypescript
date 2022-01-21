@@ -33,8 +33,8 @@ const Header = ({
         </div>
 
         <div className={styles.header_head_btn2}>
-          <Button className={styles.header_btn} size="lg" px-3>
-            LE SABLE
+          <Button className={styles.header_btn} size="lg">
+            LESABLE
             {' '}
             <FaAngleDown size={20} />
           </Button>

@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
-  Col, Form, Modal, OverlayTrigger, Placeholder, Popover, Row,
+  Col, Form, Modal, Overlay, OverlayTrigger, Placeholder, Popover, Row,
 } from 'react-bootstrap';
 import useStore from 'hooks/useStore';
 import { GroupshopContext, GSContextType, gsInit } from 'store/groupshop.context';
@@ -23,13 +23,22 @@ interface ProductsSearchProps extends RootProps {
 }
 
 const ProductsSearch = ({
-  show, pending = false, handleClose,
+  show: showSearch, pending = false, handleClose,
 }: ProductsSearchProps) => {
   const {
     gsctx,
     dispatch,
   } = useContext(GroupshopContext);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 24 ~ gsctx', gsctx);
+
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
+
+  const handleClick = (event: any) => {
+    setShow(!show);
+    setTarget(event.target);
+  };
 
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
 
@@ -40,7 +49,7 @@ const ProductsSearch = ({
   } = gsctx;
 
   const [selected, setSelected] = useState<string[]|undefined>(undefined);
-  const [smShow, setSmShow] = useState(false);
+  // const [smShow, setSmShow] = useState(false);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 37 ~ selected', selected);
   const searchPrd = (name:string) => {
     if (products && name) {
@@ -79,7 +88,7 @@ const ProductsSearch = ({
   return (
     <>
       <Modal
-        show={show}
+        show={showSearch}
         onHide={closeModal}
         centered
         size="lg"
@@ -105,7 +114,6 @@ const ProductsSearch = ({
             </Form.Group>
           </Form>
 
-          {selected && <AddDealProduct selectedProducts={selected} handleClose={closeModal} />}
           {(otherProducts && otherProducts.length > 0) && (
           <p>
             {otherProducts?.length}
@@ -173,11 +181,53 @@ const ProductsSearch = ({
             )}
             <Row>
               <Col xs={12} className="text-center">
-                <OverlayTrigger
+                <div ref={ref}>
+                  <Button
+                    onClick={handleClick}
+                    className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold"
+                  >
+                    ADD  to groupshop
+
+                  </Button>
+
+                  <Overlay
+                    show={show}
+                    target={target}
+                    placement="bottom"
+                    container={ref}
+                    containerPadding={20}
+                  >
+                    <Popover
+                      id="popover-contained"
+                      className={styles.groupshop_search_popover}
+                      style={{ maxWidth: '325px' }}
+                    >
+                      <Popover.Body>
+                        <p className="text-center fs-5">
+                          Add
+                          <strong>
+                            {' '}
+                            {selectedCount}
+                            {' '}
+                            products
+                          </strong>
+                          {' '}
+                          to this Groupshop
+                          <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
+                        </p>
+                      </Popover.Body>
+                    </Popover>
+                  </Overlay>
+                </div>
+                {/* <OverlayTrigger
                   trigger="click"
                   placement="top"
                   overlay={(
-                    <Popover className={styles.groupshop_search_popover} style={{ maxWidth: '325px' }}>
+                    <Popover
+                      className={styles.groupshop_search_popover}
+                      style={{ maxWidth: '325px' }}
+                      id="popover-positioned"
+                    >
 
                       <Popover.Body>
                         <p className="text-center fs-5">
@@ -190,19 +240,21 @@ const ProductsSearch = ({
                           </strong>
                           {' '}
                           to this Groupshop
+                          <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
                         </p>
-
-                        <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
-                        {/* <Col xs="auto" className="my-1"> */}
-
-                        {/* </Col> */}
                       </Popover.Body>
 
                     </Popover>
       )}
                 >
-                  <Button variant="outline-primary" className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold" onClick={() => setSmShow(true)}>ADD  to groupshop</Button>
-                </OverlayTrigger>
+                  <Button
+                    variant="outline-primary"
+                    className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold"
+                  >
+                    ADD  to groupshop
+
+                  </Button>
+                </OverlayTrigger> */}
 
               </Col>
             </Row>

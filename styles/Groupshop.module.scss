@@ -229,17 +229,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&_modal {
+		@extend .rounded-0;
+		width: 100%;
+		@include media-breakpoint-up(lg) {
+			width: 928px !important;
+			max-width: 928px !important;
+		}
+		div:first-child {
+			@extend .border-0, .rounded-0;
+		}
 		&_search {
-			@extend .rounded-0;
-			width: 100%;
-			@include media-breakpoint-up(lg) {
-				width: 928px !important;
-				max-width: 928px !important;
-			}
+			@extend .groupshop_modal;
 
-			div:first-child {
-				@extend .border-0, .rounded-0;
-			}
 			&_meter {
 				@extend .rounded-pill;
 				width: 9.58px;
@@ -256,6 +257,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_empty {
 			@extend .d-flex, .justify-content-center, .align-items-center;
 			min-height: 300px !important;
+		}
+
+		&_detail {
+			@extend .groupshop_modal;
+			h2 {
+				@extend .fw-bold;
+				font-family: 'DM Sans' !important;
+			}
 		}
 	}
 

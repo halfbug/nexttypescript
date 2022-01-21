@@ -134,6 +134,7 @@ query Products($productQueryInput: ProductQueryInput!) {
     title
     createdAtShopify
     featuredImage
+    description                             
     price
     currencyCode
   }
@@ -262,10 +263,12 @@ query Groupshop($code: String!) {
       products{
         title
         featuredImage
+        description
         price
         orders{
           product{
             id
+            
           }
           price
         }
@@ -278,6 +281,7 @@ query Groupshop($code: String!) {
     id
     featuredImage
     title
+    description
     price
     currencyCode
     orders{
@@ -292,6 +296,7 @@ query Groupshop($code: String!) {
     featuredImage
     id
     title
+    description
     price
     currencyCode
     lineItems{

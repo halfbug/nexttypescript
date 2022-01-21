@@ -56,7 +56,7 @@ const GroupShop: NextPage = () => {
     },
     skip: !shop,
   });
-
+  console.log('🚀 ~ file: [...code].tsx ~ line 43 ~ error', error);
   console.log('🚀 ~~ line 21 ~ groupshop', groupshop);
   console.log('🚀 ~~ line 21 ~ loading', loading);
 
