@@ -36,7 +36,7 @@ const CampaignListing = () => {
   return (
     <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       <Container fluid className={styles.container}>
-        <h1 className="mt-5">All Campaigns</h1>
+        <h3>All Campaigns</h3>
         <p className="mt-3">
           ✨
           From here you can edit your active campaign, create a new campaign,
@@ -47,33 +47,26 @@ const CampaignListing = () => {
           you offer impact your performance.
           <strong> Only one campaign can be active at a time.</strong>
         </p>
-        <Row className="">
-          <Col className="text-muted fs-6 mr-3">Campaign Name</Col>
-          <Col className="text-muted fs-6 mr-3">Revenue Generated</Col>
-          <Col className="text-muted fs-6 mr-3">Number of Groupshops</Col>
-          <Col className="text-muted fs-6 mr-3">Total Cashback</Col>
-          <Col className="text-muted fs-6 mr-3">Active</Col>
-          <Col className="text-muted fs-6 mr-3"> </Col>
+        <Row className="text-nowrap d-flex flex-row">
+          <Col className="text-muted fs-6 ">Campaign Name</Col>
+          <Col className="text-muted fs-6 ">Revenue Generated</Col>
+          <Col className="text-muted fs-6 ">Number of Groupshops</Col>
+          <Col className="text-muted fs-6 ">Total Cashback</Col>
+          <Col className="text-muted fs-6 ">Active</Col>
+          <Col className="text-muted fs-6 "> </Col>
+          <Col className="text-muted fs-6 "> </Col>
         </Row>
 
         {campaignList.map((camp:any, index:number) => (
           <>
             <Row className={styles.rows} key={camp.id}>
-              <Col className="mt-4">{camp.name}</Col>
-              <Col className="mt-4">
-                $
-                {' '}
-                1430
-              </Col>
-              <Col className="mt-4">10</Col>
-              <Col className="mt-4">
-                $1430
-              </Col>
-              <Col className="mt-4">
-                <ToggleButton />
-              </Col>
-              <Col className="mt-4"><WhiteButton>View Analytics</WhiteButton></Col>
-              <Col className="mt-4"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
+              <Col className="py-2 ">{camp.name}</Col>
+              <Col className="py-2 ">$1430</Col>
+              <Col className="py-2  ">10</Col>
+              <Col className="py-2 "> $1430</Col>
+              <Col className="px-0"><ToggleButton /></Col>
+              <Col className="px-0 fw-bold"><WhiteButton>View Analytics</WhiteButton></Col>
+              <Col className="px-0 fw-bold"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
             </Row>
           </>
         ))}
