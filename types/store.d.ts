@@ -82,6 +82,7 @@ export interface ISettings {
   customBg: string;
   imageUrl: string;
   youtubeUrl: string;
+  media: string;
 }
 
 export interface RootProps {

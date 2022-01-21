@@ -39,26 +39,32 @@ interface IValues {
 export default function Settings({ isDB }: IProps) {
   const [, setParams] = useQueryString();
   const front = React.useRef(null);
-  const [color, setColor] = React.useState('#aabbcc');
-  // console.log('🚀 Settings.tsx isDB', isDB);
-  let SettingsInitial:IValues = {
+
+  const [settingsState, setstate] = React.useState({
     brandColor: '#3C3C3C',
     customColor: '#FFF199',
     customBg: '',
     imageUrl: '',
     youtubeUrl: '',
     media: 'image',
-  };
+  });
+
   const { store, dispatch } = React.useContext(StoreContext);
+
   React.useEffect(() => {
     if (store?.campaigns && isDB) {
       const arr:any = store.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
-      console.log("🚀", store.campaigns);
-      SettingsInitial = { ...arr[0].settings };
-      console.log("🚀 ~ file: Settings.tsx ~ line 127 ~ React.useEffect ~ SettingsInitial", SettingsInitial);
-      // setstate({ ...arr[0] });
+      const {
+        settings: {
+          brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
+        },
+      } = arr[0];
+      setstate({
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
+      });
+      // console.log("🚀 ~ file: Settings.tsx ~ settingsState", settingsState);
     }
-  }, [isDB, store.campaigns]);
+  }, []);
 
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -76,7 +82,7 @@ export default function Settings({ isDB }: IProps) {
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
-    initialValues: SettingsInitial,
+    initialValues: settingsState,
     validationSchema,
     enableReinitialize: true,
     validateOnChange: false,
@@ -85,7 +91,7 @@ export default function Settings({ isDB }: IProps) {
       if (validateForm) validateForm(valz);
       // console.log('🚀 ~ file: Settings.tsx ~ line 67 ~ onSubmit: ~ valz', valz);
       const {
-        brandColor, customColor, customBg, imageUrl, youtubeUrl,
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
       } = valz;
       const campID = isDB ? store.singleEditCampaignId : store.newCampaign?.id;
 
@@ -100,6 +106,7 @@ export default function Settings({ isDB }: IProps) {
               customBg,
               imageUrl,
               youtubeUrl,
+              media,
             },
             // installationStep: isDB ? null : 5,
           },
@@ -111,12 +118,9 @@ export default function Settings({ isDB }: IProps) {
         }
         return item;
       });
-      console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', updatedCampaigns);
-      console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', store.campaigns);
 
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
       if (!isDB) {
-        console.log('im in OB');
         // update store. progress installationStep if its onboarding
         await updateStore({
           variables: {
@@ -144,7 +148,8 @@ export default function Settings({ isDB }: IProps) {
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
-  console.log('🚀 VALUES SETTINGS', values);
+  // console.log({ values });
+
   return (
 
     <Form noValidate onSubmit={handleSubmit}>
@@ -167,7 +172,7 @@ export default function Settings({ isDB }: IProps) {
                 name="brandColor"
                 id="brandColor"
                 isInvalid={touched.brandColor && !!errors.brandColor}
-                defaultValue="#3C3C3C"
+                // defaultValue={values.brandColor}
                 title="Choose your color"
                 className="p-0 m-0 rounded-end"
                 bsPrefix="onboarding"
@@ -246,13 +251,26 @@ export default function Settings({ isDB }: IProps) {
             </Col>
           </Row>
           <Row className="">
-            <Col>
+            <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
               <UploadButton
                 icon={(<WhiteButton>Upload</WhiteButton>)}
                 setFieldValue={setFieldValue}
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
               />
+            </Col>
+            <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
+              <Form.Control
+                type="text"
+                name="youtubeUrl"
+                value={values.youtubeUrl}
+                isValid={touched.youtubeUrl && !errors.youtubeUrl}
+                onChange={(e) => {
+                  setFieldValue('youtubeUrl', e.currentTarget.value);
+                  handleForm();
+                }}
+              />
+              <p className="text-muted">Please paste youtube video URL</p>
             </Col>
           </Row>
           <Row>

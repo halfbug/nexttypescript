@@ -31,6 +31,14 @@ query StoreName($shop: String!) {
       customColor
       imageUrl
       youtubeUrl
+      media
+    }
+    socialLinks{
+      facebook
+      instagram
+      tiktok
+      pinterest
+      twitter       
     }
  
     salesTarget{
@@ -165,6 +173,13 @@ const UPDATE_CAMPAIGN = gql`
       customBg
       imageUrl
       youtubeUrl
+    }
+    socialLinks{
+      instagram
+      pinterest
+      tiktok
+      facebook
+      twitter
     }
     salesTarget {
       id
@@ -400,9 +415,44 @@ const ADD_DEAL_PRODUCT = gql`
    
   }
 `;
+
+const GET_ALL_CAMPAIGNS = gql`
+query campaigns {
+  campaigns {
+    id
+    status
+    joinExisting
+    criteria
+    settings {
+      brandColor,
+      customColor,
+      customBg,
+      imageUrl,
+      youtubeUrl,
+    }
+    salesTarget {
+      id
+      name
+      rewards{
+        id
+        discount
+      }
+    }
+    socialLinks{
+      instagram
+      pinterest
+      tiktok
+      facebook
+      twitter
+    }
+    products
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
-  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT,
+  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
 };

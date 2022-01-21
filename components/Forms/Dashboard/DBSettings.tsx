@@ -49,64 +49,7 @@ export default function DBSettings({
     // `current` points to the mounted text input element
     ref.current.click();
   };
-  // const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
-  // const [updateStore] = useMutation<IStore>(UPDATE_STORE);
-  // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
-  //   const validationSchema = yup.object({
-  //     brandColor: yup
-  //       .string()
-  //       .required('Brand Color is required.'),
-  //   });
-  //   const {
-  //     handleSubmit, values, handleChange, touched, errors, setFieldValue,
-  //   }: FormikProps<IValues> = useFormik<IValues>({
-  //     initialValues: {
-  //       brandColor: '#3C3C3C',
-  //       customColor: '#FFF199',
-  //       customBg: '',
-  //       imageUrl: '',
-  //       youtubeUrl: '',
-  //       media: 'image',
-  //     },
-  //     validationSchema,
-  //     validateOnChange: false,
-  //     validateOnBlur: false,
-  //     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
-  //       if (validateForm) validateForm(valz);
-  //       // console.log('🚀 ~ file: Settings.tsx ~ line 67 ~ onSubmit: ~ valz', valz);
-  //       const {
-  //         brandColor, customColor, customBg, imageUrl, youtubeUrl,
-  //       } = valz;
-  //       const campID = store.newCampaign?.id;
-
-  //       const campSettings:null | any = await addSet({
-  //         variables: {
-  //           updateCampaignInput: {
-  //             storeId: store.id,
-  //             id: campID,
-  //             settings: {
-  //               brandColor,
-  //               customColor,
-  //               customBg,
-  //               imageUrl,
-  //               youtubeUrl,
-  //             },
-  //           },
-  //         },
-  //       });
-  //       const updatedCampaigns = store?.campaigns?.map((item:any) => {
-  //         if (item.id === campSettings.id) {
-  //           return campSettings;
-  //         }
-  //         return item;
-  //       });
-  //       console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', updatedCampaigns);
-  //       console.log('🚀 ~ file: Settings.tsx ~ line 100 ~ updatedCampaigns ~ updatedCampaigns', store.campaigns);
-
-  //       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-  //     },
-  //   });
 
   const radios = [
     // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
@@ -210,13 +153,25 @@ export default function DBSettings({
             </Col>
           </Row>
           <Row className="">
-            <Col>
+            <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
               <UploadButton
                 icon={(<WhiteButton>Upload</WhiteButton>)}
                 setFieldValue={setFieldValue}
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
               />
+            </Col>
+            <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
+              <Form.Control
+                type="text"
+                name="youtubeUrl"
+                value={values.youtubeUrl}
+                isValid={touched.youtubeUrl && !errors.youtubeUrl}
+                onChange={(e) => {
+                  setFieldValue('youtubeUrl', e.currentTarget.value);
+                }}
+              />
+              <p className="text-muted">Please paste youtube video URL</p>
             </Col>
           </Row>
           <Row>

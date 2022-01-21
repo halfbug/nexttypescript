@@ -135,5 +135,17 @@
         border-radius: 6px;
         text-align: center;
         background-color: #d5fa52;
+        display: inline-block;
+    }
+    &_rewardBtn {
+        background-color: transparent;
+        border: none;
+        text-transform: capitalize;
+        text-decoration: underline;
+        font-size: 12px;
+        line-height: 16px;
+        color: $black;
+        cursor: pointer;
+
     }
 }

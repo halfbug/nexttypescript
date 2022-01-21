@@ -10,10 +10,8 @@ import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
-import { useMutation, useQuery } from '@apollo/client';
-import { ICampaign } from 'types/store';
+import { useQuery } from '@apollo/client';
 import styles from 'styles/Campaign.module.scss';
-import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 
 interface IValues {
@@ -41,7 +39,6 @@ export default function DBRewards({
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
   } = useQuery(GET_SALES_TARGET);
 
-  // const [addReward] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
   const { store, dispatch } = React.useContext(StoreContext);
 
   // const validationSchema = yup.object({
@@ -69,39 +66,6 @@ export default function DBRewards({
     }
   }, [initvalz]);
 
-  // const {
-  //   handleSubmit, values, setFieldValue,
-  // }: FormikProps<IValues> = useFormik<IValues>({
-  //   initialValues: initvalz,
-  //   validationSchema,
-  //   enableReinitialize: true,
-  //   validateOnChange: false,
-  //   validateOnBlur: false,
-  //   onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
-  //     if (validateForm) validateForm(valz);
-  //     const { rewards, selectedTarget } = valz;
-  //     console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
-  //     selectedTarget.rewards.map((item:any) => (delete item["__typename"]));
-  //     delete selectedTarget["__typename"];
-  //     const campRew:null | any = await addReward({
-  //       variables: {
-  //         updateCampaignInput: {
-  //           storeId: store.id,
-  //           id: store.singleEditCampaignId,
-  //           rewards,
-  //           salesTarget: selectedTarget,
-  //         },
-  //       },
-  //     });
-  //     const updatedCampaigns = store?.campaigns?.map((item:any) => {
-  //       if (item.id === campRew.id) {
-  //         return campRew;
-  //       }
-  //       return item;
-  //     });
-  //     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-  //   },
-  // });
   useEffect(() => {
     if (values.selectedTarget !== '') {
       setMinDiscount(values.selectedTarget?.rewards[0].discount);

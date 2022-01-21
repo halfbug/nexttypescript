@@ -123,8 +123,9 @@ export default function BrandInfo() {
             aria-label="Default select example"
             onChange={handleChange}
             name="industry"
+            defaultValue=""
           >
-            <option selected>Click to select</option>
+            <option value="">Click to select</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>

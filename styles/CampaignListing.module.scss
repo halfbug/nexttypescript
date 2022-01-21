@@ -51,10 +51,8 @@
         background: #f8f8f8;
         border-radius: 10px;
         vertical-align: middle;
-        
         &:hover { 
             border: 1px solid $purple !important;
-            pointer-events:none;
         }
 
     }

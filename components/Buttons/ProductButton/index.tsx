@@ -19,13 +19,27 @@ interface IProps {
 export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   const [, setParams] = useQueryString();
   const {
-    store: { shop, newCampaign, campaigns }, dispatch,
+    store: { shop, newCampaign, campaigns }, store, dispatch,
   } = React.useContext(StoreContext);
 
   const { data } = useQuery(TOTAL_PRODUCTS, {
 
     variables: { shop },
   });
+
+  const [criteria, setcriteria] = React.useState('');
+
+  console.log(store);
+
+  React.useEffect(() => {
+    if (store?.singleEditCampaignId && store?.campaigns) {
+      const arr:any = store?.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
+      const camp = { ...arr[0] };
+      setcriteria(camp.criteria);
+    } else {
+      setcriteria('');
+    }
+  }, []);
 
   React.useEffect(() => {
     if (data) {
@@ -89,22 +103,23 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
         </Col>
       </Row>
       { ((newCampaign?.products && newCampaign?.products?.length > 0)
-      || (totalProducts !== 0)) && (
-      <Row className="m-2 justify-content-center">
-        <Col className="text-muted">
-          {(newCampaign?.products && newCampaign?.products?.length)
+      || (totalProducts !== 0 && criteria === 'custom'))
+       && (
+       <Row className="m-2 justify-content-center">
+         <Col className="text-muted">
+           {(newCampaign?.products && newCampaign?.products?.length)
           || (totalProducts)
           || 0}
-          {' '}
-          product(s)/
-          {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
-          {' '}
-          collection(s) selected
-          {' '}
-          <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
-        </Col>
-      </Row>
-      )}
+           {' '}
+           product(s)/
+           {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
+           {' '}
+           collection(s) selected
+           {' '}
+           <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
+         </Col>
+       </Row>
+       )}
     </>
   );
 }

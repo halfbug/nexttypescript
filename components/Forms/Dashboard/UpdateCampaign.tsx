@@ -54,7 +54,7 @@ export default function UpdateCampaign() {
       campaignInitial = { ...arr[0] };
       setstate({ ...arr[0] });
     }
-  }, [store.campaigns]);
+  }, []);
 
   const validationSchema = yup.object({
     criteria: yup

@@ -81,13 +81,13 @@ export default function CreateCampaign() {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget,
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest, tiktok, facebook, twitter,
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, media, instagram, pinterest, tiktok, facebook, twitter,
       } = valz;
       console.log({ valz });
 
-      const socialLinks = {
-        instagram, pinterest, tiktok, facebook, twitter,
-      };
+      // const socialLinks = {
+      //   instagram, pinterest, tiktok, facebook, twitter,
+      // };
 
       if (selectedTarget) {
         selectedTarget?.rewards.map((item:any) => (delete item["__typename"]));
@@ -103,7 +103,13 @@ export default function CreateCampaign() {
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             products: store?.newCampaign?.productsArray,
-            socialLinks,
+            socialLinks: {
+              facebook,
+              instagram,
+              tiktok,
+              pinterest,
+              twitter,
+            },
             rewards,
             salesTarget: selectedTarget,
             settings: {
@@ -112,15 +118,21 @@ export default function CreateCampaign() {
               customBg,
               imageUrl,
               youtubeUrl,
+              media,
             },
 
           },
         },
       });
       const newObj = campObj.data.createCampaign;
-      console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: newObj } });
-      // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: [...newObj] } });
+      // const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      //   if (item.id === campObj.id) {
+      //     return campObj;
+      //   }
+      //   return item;
+      // });
+      console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
       console.log('🚀 ~ store', store);
     },
   });
@@ -355,6 +367,7 @@ export default function CreateCampaign() {
               <CampaignSocialMedia
                 handleChange={handleChange}
                 setFieldValue={setFieldValue}
+                values={values}
               />
             </section>
           </Col>

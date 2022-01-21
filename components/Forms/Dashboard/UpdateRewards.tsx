@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable quotes */
@@ -19,6 +21,7 @@ import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 interface IValues {
   rewards: string;
   selectedTarget: any;
+  maxDiscountVal: string;
 }
 
 export default function UpdateRewards() {
@@ -26,6 +29,7 @@ export default function UpdateRewards() {
 
   const [minDiscount, setMinDiscount] = useState('');
   const [maxDiscount, setMaxDiscount] = useState('');
+  const [edit, setEdit] = useState(false);
 
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
@@ -43,6 +47,7 @@ export default function UpdateRewards() {
   const initvalz: IValues = {
     rewards: '',
     selectedTarget: '',
+    maxDiscountVal: '',
   };
 
   useEffect(() => {
@@ -68,10 +73,14 @@ export default function UpdateRewards() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { rewards, selectedTarget } = valz;
+      const { rewards, selectedTarget, maxDiscountVal } = valz;
       console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
       selectedTarget.rewards.map((item:any) => (delete item["__typename"]));
       delete selectedTarget["__typename"];
+
+      if (maxDiscountVal !== '') {
+        selectedTarget.rewards[2].discount = maxDiscountVal;
+      }
       const campRew:null | any = await addReward({
         variables: {
           updateCampaignInput: {
@@ -163,11 +172,23 @@ export default function UpdateRewards() {
           <Col sm={6}>
             <h4 className="fs-4">Baseline</h4>
             <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>
+            <span className={styles.dbrewards_rewardBtn} onClick={() => setEdit(!edit)}>edit</span>
 
           </Col>
           <Col sm={6}>
             <h4 className="fs-4">Maximum</h4>
             <div className={styles.dbrewards__percent_btn}>{maxDiscount}</div>
+            <div className={edit ? 'd-block' : 'd-none'}>
+              <Form.Control
+                type="text"
+                name="maxDiscount"
+                value={values.maxDiscountVal}
+                onChange={(e) => setFieldValue('maxDiscountVal', e.currentTarget.value)}
+                // isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+              />
+              <span className={styles.dbrewards_rewardBtn} onClick={() => handleSubmit}>save</span>
+            </div>
+
           </Col>
         </Row>
 
