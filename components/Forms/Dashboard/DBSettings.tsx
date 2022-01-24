@@ -61,8 +61,9 @@ export default function DBSettings({
   ];
   // console.log('🚀 ~ file: Settings.tsx ~ line 87 ~ Settings ~ values', values);
   return (
-    <Container fluid>
-      <Row><h5>Set your brand color</h5></Row>
+
+    <>
+      <Row><h4>Set your brand color</h4></Row>
       <Row>
         <Form.Text className="text-muted mt-0 fs-6">You’ll want a color that stands out on a white background</Form.Text>
       </Row>
@@ -76,7 +77,7 @@ export default function DBSettings({
                   handleChange(e);
                 }}
                 type="color"
-                  // id="brandColor"
+                // id="brandColor"
                 name="brandColor"
                 id="brandColor"
                 isInvalid={touched.brandColor && !!errors.brandColor}
@@ -93,7 +94,7 @@ export default function DBSettings({
           </Form.Group>
         </Col>
       </Row>
-      <Row className="mt-4"><h5>Select a banner background</h5></Row>
+      <Row className="mt-4"><h4>Select a banner background</h4></Row>
       <Row>
         <Form.Text className="text-muted mt-0 fs-6">This will serve as the banner for your Groupshop page </Form.Text>
       </Row>
@@ -185,6 +186,8 @@ export default function DBSettings({
         </Col>
       </Row>
       <Row />
-    </Container>
+
+    </>
+
   );
 }

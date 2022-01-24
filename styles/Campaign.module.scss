@@ -58,24 +58,16 @@
         color: silver;
     }
     &__lightBg {
-        height: 135px;
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
         background: #f3f3f3;
-        border: 1px dashed #cdc5f9;
-        box-sizing: border-box;
-        border-radius: 23px;
-        padding: 10px;
     }
-.existing_pages{
-   color:  $brandgreen;
-   border: $black;
-
-}
-
 }
 .dbrewards {
     &_box {
         @extend .mb-4, .p-4;
-        border: 1px dashed $dotted-border-color1;
+        border: 1px dashed $dotted-border-color4;
         border-radius: 18px;
     }
 
@@ -112,25 +104,89 @@
         width: 66px;
         @extend .mx-0;
         border-radius: 8px;
-        color: #ffffff;
+        color: #d62c2c;
         opacity: 40%;
         // margin: 3px;
     }
+    // &__low_btn {
+    //     // background: rgba(232, 101, 98, 0.5) !important;
+    //     background: rgba(232, 101, 98, 0.5);
+    //     opacity: 0.4;
+    // }
+    // &__avg_btn {
+    //     background: #f7bc7d !important;
+    // }
+    // &__high_btn {
+    //     background: #a7c737 !important;
+    // }
+    // &__super_btn {
+    //     background: #a68ad6 !important;
+    // }
     &__low_btn {
-        background: rgba(232, 101, 98, 0.5) !important;
+        @include button-variant($low, $low);
+        color: $white;
+        opacity: 50%;
+        &:hover {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
+        &:active {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
     }
     &__avg_btn {
-        background: #f7bc7d !important;
+        @include button-variant($average, $average);
+        color: $white;
+        opacity: 50%;
+        &:hover {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
+        &:active {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
     }
+
     &__high_btn {
-        background: #a7c737 !important;
+        @include button-variant($btnhigh, $btnhigh);
+        color: $white;
+        opacity: 50%;
+        &:hover {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
+        &:active {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
     }
+
     &__super_btn {
-        background: #a68ad6 !important;
+        @include button-variant($supercharged, $supercharged);
+        color: $white;
+        opacity: 50%;
+        &:hover {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
+        &:active {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+        }
     }
 
     &__percent_btn {
-        height: 24px;
+        @extend .py-1, .fw-bold, .px-0;
         width: 45px;
         border-radius: 6px;
         text-align: center;

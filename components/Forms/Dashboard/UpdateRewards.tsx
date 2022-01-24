@@ -134,7 +134,7 @@ export default function UpdateRewards() {
             recommendations..
           </Col>
         </Row>
-        <Row className="m-0">
+        <Row className="m-2">
           <Col className="text-start">
             <ButtonGroup>
               {salesTarget.map((starget: any, index: number) => (
@@ -168,7 +168,7 @@ export default function UpdateRewards() {
         </Row>
 
         {/* <Row className={styles.dbrewards__box2}> */}
-        <Row>
+        <Row className="mt-3">
           <Col sm={6}>
             <h4 className="fs-4">Baseline</h4>
             <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>

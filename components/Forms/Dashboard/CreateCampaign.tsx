@@ -38,7 +38,7 @@ export default function CreateCampaign() {
 
   const [disableBtn, setdisableBtn] = React.useState(true);
 
-  const campaignInitial:ICampaignForm = {
+  const campaignInitial: ICampaignForm = {
     id: '',
     name: '',
     criteria: '',
@@ -77,7 +77,7 @@ export default function CreateCampaign() {
     enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaignForm>) => {
+    onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget,
@@ -90,11 +90,11 @@ export default function CreateCampaign() {
       // };
 
       if (selectedTarget) {
-        selectedTarget?.rewards.map((item:any) => (delete item["__typename"]));
+        selectedTarget?.rewards.map((item: any) => (delete item["__typename"]));
         delete selectedTarget["__typename"];
       }
 
-      const campObj:null | any = await addCampaign({
+      const campObj: null | any = await addCampaign({
         variables: {
           createCampaignInput: {
             storeId: store.id,
@@ -149,11 +149,12 @@ export default function CreateCampaign() {
   console.log({ values });
 
   return (
-    <Container className="dashboard_campaign">
+    <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a'} />
       <Form noValidate onSubmit={handleSubmit}>
-        <Row className="mt-4">
-          <Col>
+
+        <Row>
+          <Col lg={7} className="mt-4">
             <Row>
               <Col>
                 <h3>Setup</h3>
@@ -161,8 +162,9 @@ export default function CreateCampaign() {
             </Row>
             <section className={styles.dashboard_campaign__box_1}>
               <Row><h4>Name your Groupshop campaign</h4></Row>
-              <Row>
-                <Col xs={9}>
+              <Row className="text-muted"><h6>You won’t be able to change this later. This name isn’t used on anything your customers will see.</h6></Row>
+              <Row className='mt-2'>
+                <Col lg={9}>
                   <Form.Group className="mb-3" controlId="campainNameValidation">
                     <Form.Control
                       type="text"
@@ -177,7 +179,7 @@ export default function CreateCampaign() {
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col xs={3}>
+                <Col lg={3}>
                   <Form.Text className="text-muted">
                     {values.name?.length}
                     /20
@@ -189,7 +191,7 @@ export default function CreateCampaign() {
           </Col>
         </Row>
         <Row>
-          <Col xs={6} className="mt-4">
+          <Col lg={7}>
             <Row>
               <Col>
                 <h3>Groupshop Product</h3>
@@ -198,7 +200,7 @@ export default function CreateCampaign() {
             <Row>
               <Col>
                 <section className={styles.dashboard_campaign__box_1}>
-                  <Row className="mt-4">
+                  <Row>
                     <h4>
                       Select
                       {' '}
@@ -218,7 +220,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         isInvalid={touched.criteria && !!errors.criteria}
                         value="bestseller"
-                  // onClick={() => setValue('criteria', 'bestseller')}
+                        // onClick={() => setValue('criteria', 'bestseller')}
                         checked={values.criteria === 'bestseller'}
                       />
                       <Form.Check
@@ -229,7 +231,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         value="newest"
                         isInvalid={touched.criteria && !!errors.criteria}
-                  // onClick={() => setValue('criteria', 'newest')}
+                        // onClick={() => setValue('criteria', 'newest')}
                         checked={values.criteria === 'newest'}
                       />
                     </Col>
@@ -258,7 +260,7 @@ export default function CreateCampaign() {
                   </Row>
                   <ProductButton
                     disableBtn={disableBtn}
-                    // totalProducts={(values.products?.length) ? values.products?.length : 0}
+                  // totalProducts={(values.products?.length) ? values.products?.length : 0}
                   />
                   <Row className="mt-4">
                     <Col>
@@ -275,7 +277,7 @@ export default function CreateCampaign() {
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>
-                  <Row className="mt-4">
+                  <Row>
                     <Col>
                       <h4>
                         Allow customers to join existing Groupshop pages
@@ -289,25 +291,27 @@ export default function CreateCampaign() {
                   <Row className="mt-2">
                     {/* <Col xs={3} md={4}> </Col> */}
                     <Col xs={12} md={6} className="text-right">
+
                       <ToggleButtonGroup
                         type="radio"
                         name="joinExisting"
                       >
                         <ToggleButton
-                          variant="outline-primary"
-                          className="rounded-pill me-2"
+                          variant="outline-success"
+                          className=""
                           id="joinExisting-e"
                           value={1}
-                          checked={values.joinExisting}
+                          checked={values.joinExisting === true}
                           onChange={(e) => handleChange(e)}
                         >
                           <Check2Circle className="fs-4" />
                           {' '}
                           Enabled
                         </ToggleButton>
+
                         <ToggleButton
                           variant="outline-primary"
-                          className="rounded-pill"
+                          className=""
                           id="joinExisting-d"
                           value={0}
                           checked={values.joinExisting === false}
@@ -327,7 +331,7 @@ export default function CreateCampaign() {
             </Row>
 
           </Col>
-          <Col xs={6} className="mt-4">
+          <Col lg={5}>
             <Row>
               <Col>
                 <h3>Campaign Rewards</h3>
@@ -344,12 +348,11 @@ export default function CreateCampaign() {
             />
           </Col>
         </Row>
-        <Row className="mt-4">
-          <Col><h2>Groupshop Design</h2></Col>
+        <Row>
+          <Col><h3>Groupshop Design</h3></Col>
         </Row>
-
-        <Row className="mt-2">
-          <Col>
+        <Row>
+          <Col lg={7}>
             <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>
               <DBSettings
                 values={values}
@@ -359,10 +362,8 @@ export default function CreateCampaign() {
                 setFieldValue={setFieldValue}
               />
             </section>
-
           </Col>
-          <Col>
-            <Row />
+          <Col lg={5}>
             <section className={styles.dashboard_campaign__box_5}>
               <CampaignSocialMedia
                 handleChange={handleChange}
@@ -372,20 +373,17 @@ export default function CreateCampaign() {
             </section>
           </Col>
         </Row>
-        <Row className={['mt-2', styles.dashboard_campaign__lightBg].join(' ')}>
-          <Col>
-            <Row>
-              <Col><h4>Save Campaign</h4></Col>
-            </Row>
-            <Row>
-              <Col><p className={styles.dashboard_campaign__light_text}>Save and activate this Groupshop campaign, or just save and come back to it later.</p></Col>
-            </Row>
-            <Row>
-              <Col xs={2} className='text-end'><WhiteButton type="submit">Save and activate</WhiteButton></Col>
-              <Col xs={10} className='text-start'><WhiteButton type="submit">Save for later</WhiteButton></Col>
-            </Row>
+        <Row>
+          <Col lg={7} className={[styles.dashboard_campaign__lightBg].join(' ')}>
+            <h4>Save Campaign</h4>
+            <p className={styles.dashboard_campaign__light_text}>Save & activate this Groupshop campaign, or just save and come back to it later.</p>
+            <WhiteButton type="submit">Save and activate</WhiteButton>
+            {' '}
+            {' '}
+            <WhiteButton type="submit">Save for later</WhiteButton>
           </Col>
         </Row>
+
       </Form>
     </Container>
   );

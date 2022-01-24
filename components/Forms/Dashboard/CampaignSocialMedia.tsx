@@ -34,15 +34,17 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
   const { store, dispatch } = React.useContext(StoreContext);
 
   return (
-    <Container fluid>
-      <Row className="p-2">
+
+    <>
+      <Row className="px-2">
         <Col>
-          <h4 className="mt-4 text-center">Add your social links</h4>
+          <h4 className="">Add your social links</h4>
         </Col>
       </Row>
-
       <Row className="p-1 justify-content-center">
-        <Col className="p-0 d-flex justify-content-center">
+        <Col
+          className="p-0 d-flex justify-content-center"
+        >
           <Button
             className={['rounded-pill p-2', styles.groupshop_instagram].join(' ')}
             variant="secondary"
@@ -177,6 +179,6 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
           />
         </Col>
       </Row>
-    </Container>
+    </>
   );
 }

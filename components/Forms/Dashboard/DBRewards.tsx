@@ -41,18 +41,6 @@ export default function DBRewards({
 
   const { store, dispatch } = React.useContext(StoreContext);
 
-  // const validationSchema = yup.object({
-  //   rewards: yup
-  //     .string()
-  //     .required('required.'),
-
-  // });
-
-  // const initvalz: IValues = {
-  //   rewards: '',
-  //   selectedTarget: '',
-  // };
-
   useEffect(() => {
     /// initial value display
     if (salesTarget.length > 0) {
@@ -74,10 +62,10 @@ export default function DBRewards({
   }, [values.selectedTarget]);
 
   const btns = [
-    { text: 'Low', cssName: 'low_btn' },
-    { text: 'Average', cssName: 'avg_btn' },
-    { text: 'Hign', cssName: 'high_btn' },
-    { text: 'SuperCharged', cssName: 'super_btn' },
+    { text: 'Low', cssName: 'low_btn', value: '1' },
+    { text: 'Average', cssName: 'avg_btn', value: '2' },
+    { text: 'Hign', cssName: 'high_btn', value: '3' },
+    { text: 'SuperCharged', cssName: 'super_btn', value: '4' },
   ];
 
   return (
@@ -90,22 +78,24 @@ export default function DBRewards({
           as they reach different milestones.
         </Col>
       </Row>
-      <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
+      <Row className="mt-3"><Col><h5>Select your desired sales volume:</h5></Col></Row>
       <Row className={styles.dbrewards_text_lg}>
         <Col className="text-muted">
           We’ll set your reward tiers based on our
-          recommendations..
+          recommendations...
         </Col>
       </Row>
-      <Row className="m-0">
+      <Row className="mt-2">
         <Col className="text-start">
+
           <ButtonGroup>
             {salesTarget.map((starget: any, index: number) => (
+
               <ToggleButton
                 key={starget.id}
                 id={starget.id}
                 type="radio"
-                variant="outline"
+                variant="outline-success"
                 name="salesTarget"
                 value={JSON.stringify(starget)}
                 checked={starget.id === values.rewards}
@@ -114,12 +104,9 @@ export default function DBRewards({
                   setFieldValue('rewards', selectedTarget.id);
                   setFieldValue('selectedTarget', { ...selectedTarget });
                 }}
-                className={`${styles.dbrewards}__${btns[index].cssName}`}
+                className={`${styles.dbrewards}__${btns[1].cssName}`}
               >
                 {btns[index].text}
-                {/* <span className={btns[index].cssName}>
-                    <button type="button">{btns[index].text}</button>
-                  </span> */}
               </ToggleButton>
 
             ))}
@@ -127,8 +114,7 @@ export default function DBRewards({
         </Col>
       </Row>
 
-      {/* <Row className={styles.dbrewards__box2}> */}
-      <Row>
+      <Row className="mt-3">
         <Col sm={6}>
           <h4 className="fs-4">Baseline</h4>
           <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>
@@ -140,13 +126,13 @@ export default function DBRewards({
         </Col>
       </Row>
 
-      <Row className="mt-3 w-75">
+      <Row className="mt-3 ">
         <Col>
           💡 Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
           {' '}
         </Col>
       </Row>
-      <Row className="mt-3 w-75">
+      <Row className="mt-3">
         <Col>
           🌟 Be generous – reward your customers the same
           {' '}
