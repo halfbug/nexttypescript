@@ -25,6 +25,7 @@ query StoreName($shop: String!) {
     storeId
     joinExisting
     rewards
+    isActive
     settings{
       brandColor
       customBg
@@ -167,6 +168,7 @@ const UPDATE_CAMPAIGN = gql`
     joinExisting
     criteria
     rewards
+    isActive
     settings {
       brandColor
       customColor
@@ -438,9 +440,11 @@ const GET_ALL_CAMPAIGNS = gql`
 query campaigns {
   campaigns {
     id
+    name
     status
     joinExisting
     criteria
+    isActive
     settings {
       brandColor,
       customColor,

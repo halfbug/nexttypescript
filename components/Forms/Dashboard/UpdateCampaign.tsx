@@ -41,17 +41,9 @@ export default function UpdateCampaign() {
     rewards: '',
   });
 
-  let campaignInitial: ICampaign = {
-    id: '',
-    criteria: '',
-    joinExisting: 1,
-    rewards: '',
-  };
-
   React.useEffect(() => {
     if (store?.campaigns) {
       const arr:any = store.campaigns.filter((item:any) => item.id === campaignid);
-      campaignInitial = { ...arr[0] };
       setstate({ ...arr[0] });
     }
   }, []);
@@ -96,7 +88,6 @@ export default function UpdateCampaign() {
         return item;
       });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-      console.log('🚀 ~ file: UpdateCampaign.tsx ~ line 32 ~ UpdateCampaign ~ store', store);
     },
   });
 
@@ -109,8 +100,6 @@ export default function UpdateCampaign() {
   }, [ins]);
 
   console.log({ store });
-  console.log({ values });
-  console.log('🚀 campaignInitial', campaignInitial);
 
   return (
     <Container className={styles.dashboard_campaign}>

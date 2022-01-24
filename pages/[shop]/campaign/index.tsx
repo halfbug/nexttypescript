@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React, { useState, useEffect, useContext } from 'react';
 import ToggleButton from 'components/Buttons/ToggleButton/ToggleButton';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
@@ -10,27 +11,69 @@ import styles from 'styles/CampaignListing.module.scss';
 import { StoreContext } from 'store/store.context';
 import { ICampaign } from 'types/store';
 import Link from 'next/link';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_ALL_CAMPAIGNS, UPDATE_CAMPAIGN } from 'store/store.graphql';
 
 const CampaignListing = () => {
   const { store, dispatch } = useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
-  const [campaignList, setCampaignList] = useState<ICampaign[]>([]);
+  const [campaignList, setCampaignList] = useState<[]>([]);
   const heading = ['Campaign Name', 'Revenue Generated', 'Number of Groupshops', 'Total Cashback', 'Active', 'Actions', ' '];
 
+  const [
+    editCampaignStatus,
+  ] = useMutation<any, ICampaign | null>(UPDATE_CAMPAIGN);
+
+  const {
+    loading, error, data, refetch,
+  } = useQuery(GET_ALL_CAMPAIGNS);
+
   useEffect(() => {
-    if (store.campaigns) {
-      setCampaignList(store?.campaigns);
+    if (data) {
+      console.log(data);
+      setCampaignList(data.campaigns);
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: data.campaigns } });
     }
-  }, [store.campaigns]);
+  }, [data]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const handleClick = (campaignid: string) => {
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
   };
-  console.log('🚀 ~ file: index.tsx ~ line 36 ~ CampaignListing ~ store', store);
-  const handleClickNew = () => {
-    if (shopName) Router.push(`/${shopName}/campaign/new`);
+
+  const handleToggle = async (id: string) => {
+    const currentCamp: any = store?.campaigns?.filter(
+      (item) => item.id === id,
+    );
+    const active = currentCamp[0]?.isActive;
+    const isActive = !active;
+
+    const campObj:null | any = await editCampaignStatus({
+      variables: {
+        updateCampaignInput: {
+          storeId: store.id,
+          id,
+          isActive,
+        },
+      },
+    });
+    console.log({ campObj });
+    const { data: { updateCampaign } } = campObj;
+    // refetch();
+    // now update store context with new campaign isActive changes
+    const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      if (item.id === updateCampaign.id) {
+        return updateCampaign;
+      }
+      return item;
+    });
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+    console.log({ store });
   };
 
   return (
@@ -58,27 +101,19 @@ const CampaignListing = () => {
         </Row>
 
         {campaignList.map((camp:any, index:number) => (
-          <>
-            <Row className={styles.rows} key={camp.id}>
-              <Col className="py-2 ">{camp.name}</Col>
-              <Col className="py-2 ">$1430</Col>
-              <Col className="py-2  ">10</Col>
-              <Col className="py-2 "> $1430</Col>
-              <Col className="px-0"><ToggleButton /></Col>
-              <Col className="px-0 fw-bold"><WhiteButton>View Analytics</WhiteButton></Col>
-              <Col className="px-0 fw-bold"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
-            </Row>
-          </>
+          <Row className={styles.rows} key={camp.id}>
+            <Col className="py-2 ">{camp.name}</Col>
+            <Col className="py-2 ">$1430</Col>
+            <Col className="py-2  ">10</Col>
+            <Col className="py-2 "> $1430</Col>
+            <Col className="px-0"><ToggleButton handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /></Col>
+            <Col className="px-0 fw-bold"><WhiteButton>View Analytics</WhiteButton></Col>
+            <Col className="px-0 fw-bold"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
+          </Row>
         ))}
         <Row>
           <Col className={styles.bottom_row}>
             <Link href="/native-roots-dev/campaign/new">+ Create New Campaign</Link>
-            {/* <Button
-              className={styles.container_btnNew}
-              onClick={() => handleClickNew}
-            >
-              + Create New Campaign
-            </Button> */}
           </Col>
         </Row>
       </Container>
