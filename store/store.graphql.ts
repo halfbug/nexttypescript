@@ -280,6 +280,12 @@ query Groupshop($code: String!) {
         featuredImage
         description
         price
+        options{
+      id
+      name
+      values
+      position
+    }
         orders{
           product{
             id
@@ -298,6 +304,12 @@ query Groupshop($code: String!) {
     title
     description
     price
+    options{
+      id
+      name
+      values
+      position
+    }
     currencyCode
     orders{
       product{
@@ -314,6 +326,12 @@ query Groupshop($code: String!) {
     description
     price
     currencyCode
+    options{
+      id
+      name
+      values
+      position
+    }
     lineItems{
       product{
         id
@@ -450,9 +468,34 @@ query campaigns {
 }
 `;
 
+const GET_PRODUCT_DETAIL = gql`
+ query ProductById($id: String!) {
+  productById(id: $id) {
+    id
+    description
+    images{
+      id
+      src
+    }
+    options{
+      id
+      name
+      values
+      position
+    }
+    variants{
+      id
+      title
+      inventoryQuantity
+    }
+   }
+ }
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
-  UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS, GET_SALES_TARGET,
-  GET_GROUPSHOP, GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
+  UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS,
+  GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
+  GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
 };

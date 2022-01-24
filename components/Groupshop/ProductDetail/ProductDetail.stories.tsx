@@ -33,5 +33,25 @@ Main.args = {
         price: '990.00',
       },
     ],
+    options: [
+      {
+        id: 'gid://shopify/ProductOption/7814556090534',
+        name: 'Size',
+        values: [
+          '9',
+          '10',
+          '12',
+        ],
+        position: 1,
+      },
+      {
+        id: 'gid://shopify/ProductOption/7814556123302',
+        name: 'Color',
+        values: [
+          'red',
+        ],
+        position: 2,
+      },
+    ],
   },
 };

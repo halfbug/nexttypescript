@@ -265,6 +265,28 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .fw-bold;
 				font-family: 'DM Sans' !important;
 			}
+			&_thumbnail {
+				width: 73px;
+				height: 73px;
+			}
+
+			&_button {
+				@extend .m-1, .border-0;
+				background-color: white !important;
+				&:hover {
+					@extend .shadow-sm;
+				}
+				&_selected {
+					@extend .groupshop_modal_detail_button, .border-2;
+					border-color: $purple;
+				}
+			}
+
+			&_featureImage {
+				max-width: 400px;
+				height: 400px;
+				object-fit: contain !important;
+			}
 		}
 	}
 

@@ -67,6 +67,13 @@ product : {
 }
 }
 
+export interface Ioption{
+  id : string;
+  name: string;
+  position : number;
+  values : string[];
+}
+
 export interface IProduct {
   id: string,
   title: string;
@@ -75,6 +82,7 @@ export interface IProduct {
   currencyCode: string;
   description?: string;
   orders?: any;
+  options?: Ioption[];
 }
 export interface ISettings {
   brandColor: string;
