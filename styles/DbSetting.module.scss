@@ -1,0 +1,91 @@
+@import "./variables.scss";
+
+.setting_tab {
+    @extend .mt-4, .py-4, .d-flex, .px-0;
+
+    h4 {
+        @extend .fw-bold, .lh-base, .fs-3, .mt-2, .mb-0, .pb-0;
+        font-family: DM sans;
+        font-size: 16px;
+        line-height: 21px;
+    }
+//    nav :active{
+//         background-image: none;
+//         background-color: none !important;
+//     }
+
+
+    &_general {
+        @extend .p-3;
+        border: 2px dashed $tab1_clr;
+        border-radius: 18px;
+
+        &:hover {
+            background-color: $tab1_clr;
+            color: $white;
+            border: 2px dashed $white;
+        }
+        // &:active {
+        //     background-color: $tab1_clr;
+        //     color: $white;
+        //     border: 2px dashed $white;
+        // }
+   
+    }
+
+    &_layout {
+        @extend .p-3;
+        border: 2px dashed $tab2_clr;
+        border-radius: 18px;
+
+        &:hover {
+            background-color: $tab2_clr;
+            border: 2px dashed $white;
+            color: $white;
+        }
+    }
+
+    &_marketing_tool {
+        @extend .p-3;
+        border: 2px dashed $tab3_clr;
+        border-radius: 18px;
+
+        &:hover {
+            background-color: $tab3_clr;
+            border: 2px dashed $white;
+            color: $white;
+        }
+    }
+
+    &_heading {
+        @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-3;
+        font-family: Montserrat;
+        color: $black;
+    }
+}
+
+.setting_col {
+    @extend .d-flex, .mt-2, .px-0;
+
+    &_purplebox {
+        @extend .mb-5, .p-4;
+        border: 2px dashed $purple1;
+        border-radius: 18px;
+    }
+
+    &_greenbox {
+        @extend .mb-5, .p-4;
+        border: 2px dashed $green;
+        border-radius: 18px;
+    }
+
+    &_subheading {
+        @extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
+    &_p {
+        @extend .lh-base, .fs-3;
+        color: $pclr;
+    }
+}
