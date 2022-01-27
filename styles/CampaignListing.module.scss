@@ -52,7 +52,18 @@
         border-radius: 10px;
         vertical-align: middle;
         &:hover { 
-            border: 1px solid $purple !important;
+            @extend .mt-3, .py-2, .d-flex, .flex-row ;
+            transform: translateY(0px)!important ;
+            // border-radius:round($number: 10px);
+            border-style: solid;
+            border-image: linear-gradient(to right ,#ccb2f9, #f4dec4 45.31%, #fee750);
+            border-image-slice: 1;
+            -webkit-mask: /*4*/
+            linear-gradient(#fff 0 0) padding-box, 
+            linear-gradient(#fff 0 0);
+ 
+
+            // linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
         }
 
     }
