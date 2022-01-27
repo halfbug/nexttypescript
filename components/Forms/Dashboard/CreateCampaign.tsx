@@ -19,7 +19,7 @@ import { CREATE_CAMPAIGN_DB } from 'store/store.graphql';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import useQueryString from 'hooks/useQueryString';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
@@ -35,6 +35,7 @@ export default function CreateCampaign() {
   ] = useMutation<any, ICampaign | null>(CREATE_CAMPAIGN_DB);
 
   const { store, dispatch } = React.useContext(StoreContext);
+  const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
   const [disableBtn, setdisableBtn] = React.useState(true);
 
@@ -80,7 +81,7 @@ export default function CreateCampaign() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
       const {
-        name, criteria, joinExisting, products, rewards, selectedTarget,
+        name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
         brandColor, customColor, customBg, imageUrl, youtubeUrl, media, instagram, pinterest, tiktok, facebook, twitter,
       } = valz;
       console.log({ valz });
@@ -102,6 +103,7 @@ export default function CreateCampaign() {
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
+            isActive,
             products: store?.newCampaign?.productsArray,
             socialLinks: {
               facebook,
@@ -126,14 +128,15 @@ export default function CreateCampaign() {
       });
       const newObj = campObj.data.createCampaign;
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: newObj } });
-      // const updatedCampaigns = store?.campaigns?.map((item:any) => {
-      //   if (item.id === campObj.id) {
-      //     return campObj;
-      //   }
-      //   return item;
-      // });
+      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+        if (item.id === newObj.id) {
+          return newObj;
+        }
+        return item;
+      });
       console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
       console.log('🚀 ~ store', store);
+      Router.push(`/${shopName}/campaign`);
     },
   });
 
@@ -377,10 +380,26 @@ export default function CreateCampaign() {
           <Col lg={7} className={[styles.dashboard_campaign__lightBg].join(' ')}>
             <h4>Save Campaign</h4>
             <p className={styles.dashboard_campaign__light_text}>Save & activate this Groupshop campaign, or just save and come back to it later.</p>
-            <WhiteButton type="submit">Save and activate</WhiteButton>
+            <WhiteButton
+              type="submit"
+              onClick={(e) => {
+                setFieldValue('isActive', true);
+                // handleSubmit();
+              }}
+            >
+              Save and activate
+            </WhiteButton>
             {' '}
             {' '}
-            <WhiteButton type="submit">Save for later</WhiteButton>
+            <WhiteButton
+              type="submit"
+              onClick={(e) => {
+                setFieldValue('isActive', false);
+                // handleSubmit();
+              }}
+            >
+              Save for later
+            </WhiteButton>
           </Col>
         </Row>
 

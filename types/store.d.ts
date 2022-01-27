@@ -52,6 +52,7 @@ export interface ICampaignForm {
   tiktok?: string;
   twitter?: string;
   facebook?: string;
+  isActive?: boolean;
 }
 
 export interface ICollection {
