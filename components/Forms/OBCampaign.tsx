@@ -60,6 +60,7 @@ export default function OBCampaign() {
             storeId: store.id,
             name,
             criteria,
+            isActive: true,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             products: store?.newCampaign?.productsArray,
