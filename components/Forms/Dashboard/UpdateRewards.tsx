@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-param-reassign */
@@ -15,7 +16,6 @@ import { StoreContext } from 'store/store.context';
 import { useMutation, useQuery } from '@apollo/client';
 import { ICampaign } from 'types/store';
 import styles from 'styles/Campaign.module.scss';
-import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 
 interface IValues {
@@ -75,8 +75,17 @@ export default function UpdateRewards() {
       if (validateForm) validateForm(valz);
       const { rewards, selectedTarget, maxDiscountVal } = valz;
       console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
-      selectedTarget.rewards.map((item:any) => (delete item["__typename"]));
-      delete selectedTarget["__typename"];
+
+      if (selectedTarget) {
+        delete selectedTarget["__typename"];
+        if (selectedTarget.rewards.length) {
+          const newR = selectedTarget?.rewards.map((item: any) => {
+            const { __typename, ...valWithoutTypename } = item;
+            return valWithoutTypename;
+          });
+          selectedTarget.rewards = [...newR];
+        }
+      }
 
       if (maxDiscountVal !== '') {
         selectedTarget.rewards[2].discount = maxDiscountVal;
@@ -134,36 +143,33 @@ export default function UpdateRewards() {
             recommendations..
           </Col>
         </Row>
-        <Row className="m-2">
-          <Col className="text-start">
-            <ButtonGroup>
-              {salesTarget.map((starget: any, index: number) => (
-                <ToggleButton
-                  key={starget.id}
-                  id={starget.id}
-                  type="radio"
-                  variant="outline"
-                  name="salesTarget"
-                  value={JSON.stringify(starget)}
-                  checked={starget.id === values.rewards}
-                  onChange={(e) => {
-                    const selectedTarget = JSON.parse(e.currentTarget.value);
-                    setFieldValue('rewards', selectedTarget.id);
-                    setFieldValue('selectedTarget', { ...selectedTarget });
-                    handleSubmit();
-                  }}
-                  className={`${styles.dbrewards}__${btns[index].cssName}`}
-                  // bsPrefix={styles.rewards_hide}
-                //   style={{ width: '66px' }}
-                >
-                  {btns[index].text}
-                  {/* <span className={btns[index].cssName}>
+        <Row className="mt-2">
+          <Col className="text-start" id="rbtn">
+            {salesTarget.map((starget: any, index: number) => (
+              <Button
+                key={starget.id}
+                id={starget.id}
+                variant="none"
+                value={JSON.stringify(starget)}
+                // checked={starget.id === values.rewards}
+                className={index === 0 ? styles.low_btn
+                  : index === 1 ? styles.avg_btn
+                    : index === 2 ? styles.high_btn
+                      : index === 3 ? styles.super_btn : ''}
+                onClick={(e) => {
+                  const selectedTarget = starget;
+                  setFieldValue('rewards', selectedTarget.id);
+                  setFieldValue('selectedTarget', { ...selectedTarget });
+                  handleSubmit();
+                }}
+              >
+                {btns[index].text}
+                {/* <span className={btns[index].cssName}>
                     <button type="button">{btns[index].text}</button>
                   </span> */}
-                </ToggleButton>
+              </Button>
 
-              ))}
-            </ButtonGroup>
+            ))}
           </Col>
         </Row>
 

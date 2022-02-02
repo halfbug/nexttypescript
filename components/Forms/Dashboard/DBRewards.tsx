@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable quotes */
@@ -29,7 +30,7 @@ interface IProps {
 
 export default function DBRewards({
   handleChange, values, setFieldValue, touched, errors, initvalz,
-}:IProps) {
+}: IProps) {
   const [, setParams] = useQueryString();
 
   const [minDiscount, setMinDiscount] = useState('');
@@ -62,11 +63,19 @@ export default function DBRewards({
   }, [values.selectedTarget]);
 
   const btns = [
-    { text: 'Low', cssName: 'low_btn', value: '1' },
-    { text: 'Average', cssName: 'avg_btn', value: '2' },
-    { text: 'Hign', cssName: 'high_btn', value: '3' },
-    { text: 'SuperCharged', cssName: 'super_btn', value: '4' },
+    { text: 'Low', cssName: 'low_btn', id: '1' },
+    { text: 'Average', cssName: 'avg_btn', id: '2' },
+    { text: 'Hign', cssName: 'high_btn', id: '3' },
+    { text: 'SuperCharged', cssName: 'super_btn', id: '4' },
   ];
+
+  const btn1 = "low_btn";
+  const btn2 = "avg_btn";
+  const btn3 = "high_btn";
+  const btn4 = "super_btn";
+
+  // const menuItems = ["Easy", "Medium", "Hard"];
+  const [activeButton, setActiveButton] = useState("");
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
@@ -86,31 +95,27 @@ export default function DBRewards({
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col className="text-start">
+        <Col className="text-start" id="rbtn">
 
-          <ButtonGroup>
-            {salesTarget.map((starget: any, index: number) => (
+          {salesTarget.map((starget: any, index: number) => (
+            <Button
+              key={starget.id}
+              id={starget.id}
+              variant="none"
+              className={index === 0 ? styles.low_btn
+                : index === 1 ? styles.avg_btn
+                  : index === 2 ? styles.high_btn
+                    : index === 3 ? styles.super_btn : ''}
+              onClick={(e) => {
+                const selectedTarget = starget;
+                setFieldValue('rewards', selectedTarget.id);
+                setFieldValue('selectedTarget', { ...selectedTarget });
+              }}
+            >
+              {btns[index].text}
 
-              <ToggleButton
-                key={starget.id}
-                id={starget.id}
-                type="radio"
-                variant="outline-success"
-                name="salesTarget"
-                value={JSON.stringify(starget)}
-                checked={starget.id === values.rewards}
-                onChange={(e) => {
-                  const selectedTarget = JSON.parse(e.currentTarget.value);
-                  setFieldValue('rewards', selectedTarget.id);
-                  setFieldValue('selectedTarget', { ...selectedTarget });
-                }}
-                className={`${styles.dbrewards}__${btns[1].cssName}`}
-              >
-                {btns[index].text}
-              </ToggleButton>
-
-            ))}
-          </ButtonGroup>
+            </Button>
+          ))}
         </Col>
       </Row>
 

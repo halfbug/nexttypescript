@@ -99,91 +99,16 @@
         opacity: 0.5;
     }
 
-    button {
-        height: 21px;
-        width: 66px;
-        @extend .mx-0;
-        border-radius: 8px;
-        color: #d62c2c;
-        opacity: 40%;
-        // margin: 3px;
-    }
-    // &__low_btn {
-    //     // background: rgba(232, 101, 98, 0.5) !important;
-    //     background: rgba(232, 101, 98, 0.5);
-    //     opacity: 0.4;
+    // #button {
+    //     @extend .me-2, .p-2, .lh-sm, .rounded;
+    //     width: fit-content;
+    //     border-radius: 8px;
+    //     color: #ffffff;
+    //     opacity: 40%;
+    //     // margin: 3px;
     // }
-    // &__avg_btn {
-    //     background: #f7bc7d !important;
-    // }
-    // &__high_btn {
-    //     background: #a7c737 !important;
-    // }
-    // &__super_btn {
-    //     background: #a68ad6 !important;
-    // }
-    &__low_btn {
-        @include button-variant($low, $low);
-        color: $white;
-        opacity: 50%;
-        &:hover {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-        &:active {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-    }
-    &__avg_btn {
-        @include button-variant($average, $average);
-        color: $white;
-        opacity: 50%;
-        &:hover {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-        &:active {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-    }
 
-    &__high_btn {
-        @include button-variant($btnhigh, $btnhigh);
-        color: $white;
-        opacity: 50%;
-        &:hover {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-        &:active {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-    }
-
-    &__super_btn {
-        @include button-variant($supercharged, $supercharged);
-        color: $white;
-        opacity: 50%;
-        &:hover {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-        &:active {
-            color: $white;
-            opacity: 100%;
-            border-color: $black;
-        }
-    }
+ 
 
     &__percent_btn {
         @extend .py-1, .fw-bold, .px-0;
@@ -202,6 +127,77 @@
         line-height: 16px;
         color: $black;
         cursor: pointer;
+    }
+}
 
+.low_btn {
+    @include button-variant($low, $low);
+    @extend .me-2, .p-2, .lh-sm, .rounded;
+    color: $white;
+    opacity: 50%;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $low;
+    }
+}
+.avg_btn {
+    @include button-variant($average, $average);
+    @extend .me-2, .p-2, .lh-sm, .rounded;
+    color: $white;
+    opacity: 50%;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $average;
+    }
+}
+
+.high_btn {
+    @include button-variant($btnhigh, $btnhigh);
+    @extend .me-2, .p-2, .lh-sm, .rounded;
+    color: $white;
+    opacity: 50%;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $btnhigh;
+    }
+}
+
+.super_btn {
+    @include button-variant($supercharged, $supercharged);
+    @extend .me-2, .p-2, .lh-sm, .rounded;
+    color: $white;
+    opacity: 50%;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active,
+    &:focus {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $supercharged;
     }
 }

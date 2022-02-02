@@ -91,8 +91,14 @@ export default function CreateCampaign() {
       // };
 
       if (selectedTarget) {
-        selectedTarget?.rewards.map((item: any) => (delete item["__typename"]));
         delete selectedTarget["__typename"];
+        if (selectedTarget.rewards.length) {
+          const newR = selectedTarget?.rewards.map((item: any) => {
+            const { __typename, ...valWithoutTypename } = item;
+            return valWithoutTypename;
+          });
+          selectedTarget.rewards = [...newR];
+        }
       }
 
       const campObj: null | any = await addCampaign({
