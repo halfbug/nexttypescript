@@ -10,6 +10,7 @@ import { FaStore, FaBullhorn } from 'react-icons/fa';
 import { FiLayout } from 'react-icons/fi';
 import styles from 'styles/DbSetting.module.scss';
 import BrandInfo from 'components/Forms/BrandInfo';
+import GeneralSettings from 'components/Forms/Dashboard/GeneralSettings';
 
 const Settings: NextPage = () => (
   <Page headingText="Settings" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
@@ -67,24 +68,7 @@ const Settings: NextPage = () => (
           <Col sm={12}>
             <Tab.Content>
               <Tab.Pane eventKey="General">
-                <Row className={styles.setting_col}>
-                  <Col lg={8}><BrandInfo /></Col>
-                  <Col lg={4} className={styles.setting_col_greenbox}>
-                    <h4 className={styles.setting_col_subheading}>Your Industry</h4>
-                    {' '}
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      name="industry"
-                    >
-                      <option selected>Click to select</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-
-                  </Col>
-                </Row>
+                <GeneralSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Layout">
                 adasd

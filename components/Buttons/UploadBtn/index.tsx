@@ -1,3 +1,5 @@
+/* eslint-disable react/require-default-props */
+/* eslint-disable quotes */
 /* eslint-disable react/jsx-indent */
 import * as React from 'react';
 import styles from 'styles/UploadLogo.module.scss';
@@ -15,11 +17,13 @@ interface IUploadButtonProps {
  icon? : React.ReactNode;
  field: string;
  className?: string;
+ value?: string;
+ handleForm?: any;
 }
 
 // eslint-disable-next-line no-unused-vars
 export default function UploadButton({
-  setFieldValue, icon, field, className,
+  setFieldValue, icon, field, className, value, handleForm,
 }:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
@@ -28,6 +32,13 @@ export default function UploadButton({
     // `current` points to the mounted text input element
     ref.current.click();
   };
+  // React.useEffect(() => {
+  //   if (value) {
+  //     setlogo(value);
+  //     console.log("🚀 ~ file: index.tsx ~ line 40 ~ React.useEffect ~ value", value);
+  //   }
+  // }, []);
+
   const [feedback, setfeedback] = React.useState<null | string>(null);
   const [logo, setlogo] = React.useState<null | string>(null);
   const [progress, setprogress] = React.useState<boolean>(false);
@@ -49,6 +60,7 @@ export default function UploadButton({
 
             setFieldValue(field, fileS3Url);
             setprogress(false);
+            if (handleForm) handleForm();
           })
           .catch((err) => console.log(err));
 
@@ -59,6 +71,8 @@ export default function UploadButton({
       setfeedback(JSON.stringify(ex));
     }
   };
+  console.log(logo);
+
   return (
     <>
       <Form.Group className={[styles['upload-logo'], className].join(' ')} controlId="brandinfo.upload-button" onClick={() => onButtonClick(front)}>

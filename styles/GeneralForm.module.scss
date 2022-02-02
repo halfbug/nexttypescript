@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+.generalform {
+    @extend .d-flex, .mt-2, .px-0;
+
+    &_subheading {
+        @extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
+    &_p {
+        @extend .lh-base, .fs-3;
+        color: $pclr;
+    }
+}

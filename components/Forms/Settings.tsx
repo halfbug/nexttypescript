@@ -257,6 +257,7 @@ export default function Settings({ isDB }: IProps) {
                 setFieldValue={setFieldValue}
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
+                handleForm={handleForm}
               />
             </Col>
             <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
