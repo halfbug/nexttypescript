@@ -174,7 +174,7 @@ export default function CreateCampaign() {
               <Row className="text-muted"><h6>You won’t be able to change this later. This name isn’t used on anything your customers will see.</h6></Row>
               <Row className='mt-2'>
                 <Col lg={9}>
-                  <Form.Group className="mb-3" controlId="campainNameValidation">
+                  <Form.Group className="mb-2" controlId="campainNameValidation">
                     <Form.Control
                       type="text"
                       placeholder="My first campaign..."
