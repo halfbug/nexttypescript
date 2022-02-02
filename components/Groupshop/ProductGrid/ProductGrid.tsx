@@ -52,6 +52,7 @@ const ProductGrid = ({
       dealProducts,
     } = { discountCode: { percentage: 0 }, dealProducts: [] },
   } = useContext(GroupshopContext);
+
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }

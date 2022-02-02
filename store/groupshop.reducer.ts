@@ -1,7 +1,7 @@
 import { IGroupshop } from 'types/groupshop';
 
 export type GroupshopActions = {
-  type: 'UPDATE_GROUPSHOP' | 'UPDATE_PRODUCTS';
+  type: 'UPDATE_GROUPSHOP' | 'UPDATE_PRODUCTS' | 'UPDATE_CART';
   payload: IGroupshop;
 };
 
@@ -16,7 +16,8 @@ export const gsreducer = (
     case 'UPDATE_PRODUCTS':
       console.log('Action payload', action.payload);
       return { ...state, ...action.payload };
-
+    case 'UPDATE_CART':
+      return { ...state, cart: action.payload.cart };
     default:
       return state;
   }

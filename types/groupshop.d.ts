@@ -48,6 +48,11 @@ export type Member ={
   orderDetail?: any;
 }
 
+export type CartProduct = Product & {
+ selectedVariant: any;
+ selectedQuantity: number;
+};
+
 export interface IGroupshop {
   id: string;
 
@@ -78,4 +83,6 @@ export interface IGroupshop {
   campaign?: Campaign;
 
   allProducts?: Product[];
+
+  cart?: CartProduct[];
 }

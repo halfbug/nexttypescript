@@ -7,24 +7,22 @@ import {
   Carousel,
   Col, Form, Modal, Row,
 } from 'react-bootstrap';
-import { GroupshopContext } from 'store/groupshop.context';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
 import { Send } from 'react-bootstrap-icons';
+import useCart from 'hooks/useCart';
 
 interface ProductDetailProps extends RootProps {
   show : boolean;
   handleClose(e:any): any;
+  // addToCart(e: any): any;
   product : IProduct | undefined
 }
 
 const ProductDetail = ({
   show, pending = false, handleClose, product,
 }: ProductDetailProps) => {
-  const {
-    gsctx,
-    dispatch,
-  } = useContext(GroupshopContext);
+  const { addCartProduct } = useCart();
 
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -48,6 +46,37 @@ const ProductDetail = ({
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
+
+  // add to cart
+  useEffect(() => {
+    if (product) {
+      // let obj = {};
+      setselOptions(product?.options?.reduce((obj, { name, values }) => (
+        { ...obj, [name]: values[0] }), {}));
+    }
+  }, [product]);
+
+  const [selOptions, setselOptions] = useState<any| undefined>();
+  console.log('🚀 ~ file: ProductDetail.tsx ~ line 55 ~ selOptions', selOptions);
+  const addToCart = () => {
+    const { productById: dproduct } = data;
+    const optionNames = Object.keys(selOptions);
+    console.log(optionNames);
+    const selectedVariant = dproduct.variants.filter(
+      (vr: { selectedOptions: any[]; }) => optionNames.reduce(
+        // if all selected options match
+        (isMatch, oname) => isMatch && Boolean(vr.selectedOptions.find(
+          (ele) => ele.name === oname && ele.value === selOptions[oname],
+        )), true,
+      ),
+    )?.[0];
+    if (selectedVariant.inventoryQuantity > 0) { console.log(selectedVariant.inventoryQuantity); }
+    addCartProduct({
+      ...product, ...dproduct, selectedVariant, selectedQuantity: 1,
+    });
+
+    closeModal({});
+  };
 
   return (
     <>
@@ -116,16 +145,32 @@ const ProductDetail = ({
               {product?.options?.map(({ name, values, id }) => (
                 <div key={id} className="mt-2">
                   <h4>{name}</h4>
-                  <Form.Select aria-label="option" className="w-50">
-                    {values.map((val: string) => (
-                      <option
-                        value={val}
-                        className="text-upercase"
-                        key={Math.random()}
-                      >
-                        {val}
+                  <Form.Select
+                    aria-label="option"
+                    className="w-50"
+                    onChange={({ target: { value } }) => {
+                      setselOptions({ ...selOptions, [name]: value });
+                    }}
+                    value={selOptions?.[name]}
+                  >
+                    {values.map((val: string, idx) => (
+                      <>
+                        {idx === 0 && (
+                        <option key={Math.random()}>
+                          --
+                          {name}
+                          --
+                        </option>
+                        )}
+                        <option
+                          value={val}
+                          className="text-upercase"
+                          key={Math.random()}
+                        >
+                          {val}
 
-                      </option>
+                        </option>
+                      </>
                     ))}
                   </Form.Select>
 
@@ -134,7 +179,7 @@ const ProductDetail = ({
               <Button
                 variant="primary"
                 className="rounded-2 w-75 pt-2 mt-3 me-2"
-                onClick={() => { console.log('test'); }}
+                onClick={() => addToCart()}
               >
                 Add to Cart
 

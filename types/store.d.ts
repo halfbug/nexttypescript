@@ -84,6 +84,8 @@ export interface IProduct {
   description?: string;
   orders?: any;
   options?: Ioption[];
+  images?: any[];
+  variants?: any[];
 }
 export interface ISettings {
   brandColor: string;

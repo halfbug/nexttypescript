@@ -278,6 +278,7 @@ query Groupshop($code: String!) {
         price
       }
       products{
+        id
         title
         featuredImage
         description
@@ -491,6 +492,10 @@ const GET_PRODUCT_DETAIL = gql`
       id
       title
       inventoryQuantity
+      selectedOptions{
+        name
+        value
+      }
     }
    }
  }

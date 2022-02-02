@@ -288,6 +288,50 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				object-fit: contain !important;
 			}
 		}
+
+		&_cart {
+			// @extend .groupshop_modal;
+			&_close {
+				flex-direction: row-reverse !important;
+				@extend .pb-0;
+			}
+
+			&_body {
+				@extend .m-0, .p-0, .text-center;
+				font-family: 'DM Sans';
+				h3 {
+					@extend .fw-bold;
+				}
+				p {
+					@extend .fs-5, .mb-0;
+				}
+				h5 {
+					@extend .fw-bold;
+				}
+			}
+
+			&_progress {
+				height: 11px;
+				@extend .rounded-3, .mt-1;
+				background: #EDEDEACC;
+			}
+
+			&_thumbnail {
+				width: 127px;
+				height: 128px;
+			}
+
+			&_quantity {
+				input,
+				button {
+					@extend .rounded-0, .text-center;
+					border-color: #e0e0e0;
+				}
+				input {
+					width: 45px;
+				}
+			}
+		}
 	}
 
 	&_search {

@@ -21,7 +21,7 @@ import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
 import {
   ArrowDown,
-  Cart, ChevronDown, Handbag, MenuDown, Search,
+  ChevronDown, Handbag, MenuDown, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
@@ -32,6 +32,7 @@ import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
+import Cart from 'components/Groupshop/Cart/Cart';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
@@ -63,8 +64,8 @@ const GroupShop: NextPage = () => {
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
   const [member, setmember] = useState<Member | undefined>(undefined);
   const [showps, setshowps] = useState<boolean>(false);
-
-  const [pending, setpending] = useState<Boolean>(true);
+  const [showCart, setshowCart] = useState<boolean>(false);
+  const [pending, setpending] = useState<boolean>(true);
   useEffect(() => {
     if (groupshop.id && pending) {
       console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
@@ -78,6 +79,10 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     setallProducts(gsctx.allProducts);
   }, [gsctx]);
+
+  useEffect(() => {
+    setshowCart(true);
+  }, [gsctx.cart]);
 
   // const { shop, getProducts } = useStore();
 
@@ -181,7 +186,7 @@ const GroupShop: NextPage = () => {
               label="EARN CASHBACK"
             />
             <IconButton icon={<Search size={24} />} className="mx-2" />
-            <IconButton icon={<Handbag size={24} />} className="mx-2">(2)</IconButton>
+            <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>(2)</IconButton>
           </Col>
 
         </Row>
@@ -307,6 +312,7 @@ const GroupShop: NextPage = () => {
         </div>
       </ProductGrid>
       <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+      <Cart show={showCart} handleClose={() => setshowCart(false)} product={undefined} />
     </div>
   );
 };
