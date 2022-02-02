@@ -5,10 +5,14 @@
 
   h1 {
     @extend .fw-bolder, .lh-sm, .fs-1;
+    margin-left: -.75rem;
   }
 
   &_btn_div {
     @extend .d-flex;
+    margin-right: -.75rem;
+    justify-content: right;
+    
   }
 
   &_btn {
