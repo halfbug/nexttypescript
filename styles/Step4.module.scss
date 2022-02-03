@@ -49,20 +49,23 @@
 			height: 100%;
 		}
 	}
-	&__group input[type=radio]:checked + label::before {
-		background-color: $primary;
-		@extend .px-1, .rounded-pill;
-		content: "✓";
-		position: absolute;
-		color: white;
-		right: -6px;
-		top: -5px;
+	&__group {
+		// &btn-group {
+		// 	display: block !important;
+		// }
+		input[type=radio]:checked + label::before {
+			background-color: $primary;
+			@extend .px-1, .rounded-pill;
+			content: "✓";
+			position: absolute;
+			color: white;
+			right: -6px;
+			top: -5px;
+		}
 	}
-
 	&__uploadbtn {
-		@extend .m-0, .p-0;
-		@extend .border-0, .rounded-3, .mx-1;
-		width: 109px;
+		@extend .border-0, .rounded-3, .mx-2;
+		width: 100%;
 		height: 56px;
 		background-color: $secondary;
 	}
@@ -109,6 +112,7 @@
 	h6 {
 		@extend .fw-bold;
 		color: black;
+		font-weight: 700 !important;
 	}
 	&__img {
 		height: 1.5rem;
@@ -120,4 +124,35 @@
 		margin: 0rem;
 		margin-top: -0.625rem;
 	}
+
+	h3 {
+		@extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
+		font-family: Montserrat;
+		color: $black;
+	}
+	h4 {
+		@extend .fs-4, .fw-bold, .lh-base;
+		font-family: DM Sans;
+		color: $subheadingclr;
+	}
+}
+
+.badge {
+	@extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
+	font-size: 8px;
+	background: $recommended !important;
+	color: $black !important;
+}
+.vertical {
+	border-left: 1px solid #dee2ed;
+	height: 200px;
+}
+
+.smallt {
+	font-size: 8px;
+	text-align: right;
+}
+
+.btn-group {
+	display: block !important;
 }

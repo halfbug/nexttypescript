@@ -1,11 +1,13 @@
 @import "./variables.scss";
 .upload-logo {
-	@extend .border, .rounded, .d-flex, .justify-content-center, .flex-column, .p-0;
-	width: 5.8rem;
-	height: 5.4rem;
-	background-color: #fcfcfc;
 	border-style: dashed !important;
 	position: relative;
+
+	@extend .rounded,  .m-2 , .d-flex, .justify-content-center, .py-4;
+	width: 85%;
+	height: fit-content;
+	background-color: #F3F3F3;
+
 	label {
 		@extend .text-center;
 		font-size: $small-font-size;
