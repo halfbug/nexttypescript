@@ -11,6 +11,7 @@ import { FiLayout } from 'react-icons/fi';
 import styles from 'styles/DbSetting.module.scss';
 import BrandInfo from 'components/Forms/BrandInfo';
 import GeneralSettings from 'components/Forms/Dashboard/GeneralSettings';
+import LayoutSettings from 'components/Forms/Dashboard/LayoutSettings';
 
 const Settings: NextPage = () => (
   <Page headingText="Settings" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
@@ -71,7 +72,7 @@ const Settings: NextPage = () => (
                 <GeneralSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Layout">
-                adasd
+                <LayoutSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Marketing">
                 adasd
