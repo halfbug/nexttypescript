@@ -25,7 +25,7 @@ const Page = ({
   const { store } = useContext(StoreContext);
 
   return (
-    <Container>
+    <Container fluid>
       <SideBar />
       <div className={styles.rightcontentwrap}>
         <Row>
