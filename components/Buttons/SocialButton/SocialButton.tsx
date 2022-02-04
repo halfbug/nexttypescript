@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import { FacebookShareButton, TwitterShareButton, PinterestShareButton } from 'react-share';
 import {
   Facebook, Instagram, Pinterest, Twitter, Tiktok,
 } from 'react-bootstrap-icons';
@@ -16,19 +17,61 @@ const SocialButton = ({
 
   <Button className={['rounded-pill p-2', styles[`groupshop_${network.toLowerCase()}`]].join(' ')} variant="secondary" href={url} target="_blank">
     {network === 'Instagram'
-    && <Instagram className="fs-3 fw-bold" />}
+    && (
+    <Instagram
+      className="fs-3 fw-bold"
+      onClick={() => navigator?.share({
+        title: 'Groupshop',
+        text: `Send special discounts to your friends by sharing this ${url}`,
+      })}
+    />
+    )}
 
     {network === 'Facebook'
-    && <Facebook className="fs-3 fw-bold" />}
+    && (
+    <FacebookShareButton
+      url={url}
+      quote="Send special discounts to your friends by sharing this Groupshop page with them. If you also shopped from this page, you’ll earn cashback every time they shop with you."
+      hashtag="#Groupshop"
+      // description="aiueo"
+      className="Demo__some-network__share-button"
+    >
+      <Facebook className="fs-3 fw-bold" />
+    </FacebookShareButton>
+    )}
 
     {network === 'Pinterest'
-    && <Pinterest className="fs-3 fw-bold" />}
+    && (
+    <PinterestShareButton
+      media="https://uploads-ssl.webflow.com/61897c94beba7addd32eff3a/618b60f014f6282a172433d0_dashboard-new.png"
+      title="Groupshop"
+      url={url}
+    >
+      <Pinterest className="fs-3 fw-bold" />
+    </PinterestShareButton>
+    )}
 
     {network === 'Twitter'
-    && <Twitter className="fs-3 fw-bold" />}
+    && (
+    <TwitterShareButton
+      title="Groupshop"
+      url={url}
+      hashtags={['groupshop', 'shopwithfriends']}
+    >
+      <Twitter className="fs-3 fw-bold" />
+    </TwitterShareButton>
+    )}
 
     {network === 'Tiktok'
-    && <Tiktok className="fs-3 fw-bold" />}
+    && (
+    <Tiktok
+      className="fs-3 fw-bold"
+      onClick={() => navigator?.share({
+        title: 'Groupshop',
+        text: `Send special discounts to your friends by sharing this ${url}`,
+      })}
+    />
+    )}
 
   </Button>
 );

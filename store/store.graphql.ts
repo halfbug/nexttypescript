@@ -246,6 +246,7 @@ query Groupshop($code: String!) {
   groupshop(code: $code) {
     storeId
     id
+    url
     dealProducts{
       productId
       customerIP

@@ -33,6 +33,7 @@ import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
 import Cart from 'components/Groupshop/Cart/Cart';
+import useDeal from 'hooks/useDeal';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
@@ -83,7 +84,8 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     setshowCart(true);
   }, [gsctx.cart]);
-
+  const { gsURL } = useDeal();
+  console.log('🚀 ~ file: [...code].tsx ~ line 88 ~ gsURL', gsURL);
   // const { shop, getProducts } = useStore();
 
   React.useEffect(() => {
@@ -127,13 +129,13 @@ const GroupShop: NextPage = () => {
               <EarnButton
                 popContent={(
                   <div className="pt-1">
-                    <CopyToClipboard value="www.groupshop.short.url.much.more.text" />
+                    <CopyToClipboard value={gsURL} />
                     <Row className="p-2">
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
+                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={gsURL} /></Col>
+                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={gsURL} /></Col>
+                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url={gsURL} /></Col>
+                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={gsURL} /></Col>
+                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={gsURL} /></Col>
                     </Row>
                     <Row className="flex-column">
                       <Col><h3>Shop, share, earn</h3></Col>
@@ -160,13 +162,13 @@ const GroupShop: NextPage = () => {
             <EarnButton
               popContent={(
                 <div className="pt-1">
-                  <CopyToClipboard value="www.groupshop.short.url.much.more.text" />
+                  <CopyToClipboard value={gsURL} />
                   <Row className="p-2">
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url="https://www.figma.com/file/zx6flytdYb7DCGXyHJmXwi/Groupshop---Consumer-Facing?node-id=669%3A516" /></Col>
+                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={gsURL} /></Col>
+                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={gsURL} /></Col>
+                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url={gsURL} /></Col>
+                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={gsURL} /></Col>
+                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={gsURL} /></Col>
                   </Row>
                   <Row className="flex-column">
                     <Col><h3>Shop, share, earn</h3></Col>

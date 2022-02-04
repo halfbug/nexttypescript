@@ -23,7 +23,13 @@ export default function useDeal() {
     price - ((+discount / 100) * price),
   ), [gsctx]);
 
+  //   const getURL = useCallback(() => `${window.location.origin}/${gsctx?.url}`,
+  //     [gsctx.url.length]);
+    
+  const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
+  //   `https://appfornt.groupshop.co${gsctx?.url}`;
+
   return {
-    currencySymbol, discount, dPrice,
+    currencySymbol, discount, dPrice, gsURL,
   };
 }
