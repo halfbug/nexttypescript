@@ -20,7 +20,7 @@ const Settings: NextPage = () => (
         <Row>
           <Col lg={12}>
             <Nav>
-              <Nav.Item className='col-lg-4'>
+              <Nav.Item className='col-lg-3'>
                 <Nav.Link eventKey="General">
                   <Row className={styles.setting_tab_general}>
                     <Col>
@@ -34,7 +34,7 @@ const Settings: NextPage = () => (
 
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className='col-lg-4'>
+              <Nav.Item className='col-lg-3'>
                 <Nav.Link eventKey="Layout">
                   <Row className={styles.setting_tab_layout}>
                     <Col>
@@ -48,7 +48,7 @@ const Settings: NextPage = () => (
 
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className='col-lg-4'>
+              <Nav.Item className='col-lg-3'>
                 <Nav.Link eventKey="Marketing">
                   <Row className={styles.setting_tab_marketing_tool}>
                     <Col>
@@ -57,6 +57,20 @@ const Settings: NextPage = () => (
                         Marketing Tools
                       </h4>
                       <TabPane eventKey="Marketing" title="Marketing" />
+                    </Col>
+                  </Row>
+
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='col-lg-3'>
+                <Nav.Link eventKey=" Affiliate">
+                  <Row className={styles.setting_tab_affiliate_tool}>
+                    <Col>
+                      <FaBullhorn size={24} />
+                      <h4>
+                        Affiliate Tools
+                      </h4>
+                      <TabPane eventKey=" Affiliate" title=" Affiliate" />
                     </Col>
                   </Row>
 

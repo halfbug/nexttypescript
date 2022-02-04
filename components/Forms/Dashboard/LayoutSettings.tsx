@@ -92,15 +92,8 @@ export default function LayoutSettings() {
   };
   return (
     <Form noValidate onSubmit={handleSubmit}>
-
+      <Row className="fw-bolder, lh-base, px-0, fs-3, mt-5, mb-2"><h4>Product Page Banners</h4></Row>
       <Row className={styles.layout}>
-        <BannerDesign
-          values={values}
-          errors={errors}
-          handleChange={handleChange}
-          handleForm={handleForm}
-          touched={touched}
-        />
         <ShowBanner
           values={values}
           errors={errors}
@@ -113,6 +106,13 @@ export default function LayoutSettings() {
           values={values}
           errors={errors}
           setFieldValue={setFieldValue}
+          handleChange={handleChange}
+          handleForm={handleForm}
+          touched={touched}
+        />
+        <BannerDesign
+          values={values}
+          errors={errors}
           handleChange={handleChange}
           handleForm={handleForm}
           touched={touched}

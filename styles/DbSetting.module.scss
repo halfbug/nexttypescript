@@ -57,6 +57,18 @@
         }
     }
 
+    &_affiliate_tool {
+        @extend .p-3;
+        border: 2px dashed $btnhigh;
+        border-radius: 18px;
+
+        &:hover {
+            background-color: $btnhigh;
+            border: 2px dashed $white;
+            color: $white;
+        }
+    }
+
     &_heading {
         @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-3;
         font-family: Montserrat;

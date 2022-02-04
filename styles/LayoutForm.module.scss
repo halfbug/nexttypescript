@@ -1,5 +1,79 @@
-.layout{
-   p {
-       margin: auto;
-   } 
+@import "./variables.scss";
+
+.layout {
+    &__box_1 {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
+    }
+    &__box_3 {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color3;
+        border-radius: 18px;
+    }
+    &__box_orange {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $average;
+        border-radius: 18px;
+    }
+    h3 {
+        @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
+        font-family: Montserrat;
+        color: $black;
+    }
+    h4 {
+        @extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
+    .vertical {
+        border-top: 1px solid #dee2ed;
+        height: 200px;
+    }
+    .badge {
+        @extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
+        font-size: 8px;
+        background: $recommended !important;
+        color: $black !important;
+    }
 }
+
+
+.enable_btn {
+    @include button-variant($enable, $enable);
+    @extend .me-2, .p-2, .lh-sm, .rounded;
+    color: $black;
+    &:hover {
+        color: $white;
+        border-color: $black;
+    }
+    &:active, &:focus {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $enable;
+    }
+}
+    .disable_btn {
+        @include button-variant($disable, $disable);
+        @extend .me-2, .p-2, .lh-sm, .rounded;
+        color: $black;
+        &:hover {
+            color: $black;
+            border-color: $black;
+        }
+        &:active, &:focus {
+            color: $black;
+            opacity: 100%;
+            border-color: $black;
+            background-color: $disable;
+        }
+}
+
+
+// .banners{
+//     left: 11.32%;
+// right: 0.87%;
+
+
+// }
