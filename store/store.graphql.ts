@@ -300,6 +300,7 @@ query Groupshop($code: String!) {
     }
     store{
       brandName
+      shop
     }
   popularProducts{
     id

@@ -308,6 +308,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				h5 {
 					@extend .fw-bold;
 				}
+
+				&__scrollable {
+					height: 65%;
+					overflow-y: scroll;
+					overflow-x: hidden;
+				}
 			}
 
 			&_progress {

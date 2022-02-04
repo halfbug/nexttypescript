@@ -8594,6 +8594,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"currency-symbol-map@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "currency-symbol-map@npm:5.0.1"
+  checksum: 1ae226248a5b946be4cae2dfcdcc12bd1733999220553c083914e23122e9134959fb586e165d9e6e6302058c5a8ef4313b07d9a805a428fd10da8f8edde78c96
+  languageName: node
+  linkType: hard
+
 "cyclist@npm:^1.0.1":
   version: 1.0.1
   resolution: "cyclist@npm:1.0.1"
@@ -10997,6 +11004,7 @@ fsevents@^1.2.7:
     bootstrap: 5.1.3
     color: ^4.0.2
     css-loader: 5.2.6
+    currency-symbol-map: ^5.0.1
     eslint: ^7.32.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-next: 11.1.2
