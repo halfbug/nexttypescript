@@ -17,6 +17,10 @@ query StoreName($shop: String!) {
     customColor
     imageUrl
     youtubeUrl
+    bannerProductPage
+    bannerCartPage
+    bannerDesign
+    bannerSummaryPage
   }
   campaigns{
     id

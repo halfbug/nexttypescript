@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from 'styles/LayoutForm.module.scss';
 import {
-  Form, Row, Col, ToggleButtonGroup, ToggleButton, Container, Button,
+  Row, Col, ToggleButtonGroup, ToggleButton, Container, Button,
 } from 'react-bootstrap';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 
@@ -11,15 +11,17 @@ export interface ShowBannerProps {
   touched: any;
   handleChange: any;
   handleForm: any;
+  handleSubmit: any;
   setFieldValue?: any;
 }
 
 export default function ShowBanner(
   {
-    values, errors, touched, handleChange, handleForm,
+    values, errors, touched, handleChange, handleForm, handleSubmit,
   }
     : ShowBannerProps,
 ) {
+  console.log(values);
   return (
     <section className={styles.layout__box_3}>
       <h4 className="mt-0">
@@ -31,15 +33,20 @@ export default function ShowBanner(
         <Col lg={12} md={6} className="text-right">
           <ToggleButtonGroup
             type="radio"
-            name="joinExisting"
+            name="bannerProductPage"
+            value={values.bannerProductPage}
           >
             <ToggleButton
               variant="outline-success"
-              className=""
-              id="joinExisting-e"
+              className={styles.enable_btn}
+              id="bannerProductPage-e"
               value={1}
-              checked={values.joinExisting === true}
-              onChange={(e) => handleChange(e)}
+              // eslint-disable-next-line eqeqeq
+              // checked={values.bannerProductPage === true}
+              // onClick={handleSubmit}
+              onChange={(e) => {
+                handleForm('bannerProductPage', e.currentTarget.value);
+              }}
             >
               <Check2Circle className="fs-4" />
               {' '}
@@ -48,11 +55,14 @@ export default function ShowBanner(
 
             <ToggleButton
               variant="outline-danger"
-              className=""
-              id="joinExisting-d"
+              className={styles.disable_btn}
+              id="bannerProductPage-d"
               value={0}
-              checked={values.joinExisting === false}
-              onChange={(e) => handleChange(e)}
+              // checked={values.bannerProductPage === false}
+              // onCLick={handleChange}
+              onChange={(e) => {
+                handleForm('bannerProductPage', e.currentTarget.value);
+              }}
             >
               <XCircle className="fs-5" />
               {' '}
@@ -60,22 +70,6 @@ export default function ShowBanner(
             </ToggleButton>
 
           </ToggleButtonGroup>
-          {/* <Button variant="outline-success" className="me-2 styles.enable_btn ">
-              {' '}
-              <Check2Circle className="fs-4" />
-              {' '}
-              Enabled
-
-            </Button>
-            {' '}
-            <Button variant="outline-danger" className="styles.disable_btn">
-              {' '}
-              <XCircle className="fs-5" />
-              {' '}
-              Disabled
-
-            </Button>
-            {' '} */}
         </Col>
       </Row>
       <hr className="mt-4 " style={{ color: '$black' }} />
@@ -88,15 +82,18 @@ export default function ShowBanner(
         <Col lg={12} md={6} className="text-right">
           <ToggleButtonGroup
             type="radio"
-            name="joinExisting"
+            name="bannerCartPage"
           >
             <ToggleButton
               variant="outline-success"
               className=""
-              id="joinExisting-e"
+              id="bannerCartPage-e"
               value={1}
-              checked={values.joinExisting === true}
-              onChange={(e) => handleChange(e)}
+              checked={values.bannerCartPage === 1}
+              // onChange={handleChange}
+              onChange={(e) => {
+                handleForm('bannerCartPage', e.currentTarget.value);
+              }}
             >
               <Check2Circle className="fs-4" />
               {' '}
@@ -106,10 +103,13 @@ export default function ShowBanner(
             <ToggleButton
               variant="outline-danger"
               className=""
-              id="joinExisting-d"
+              id="bannerCartPage-d"
               value={0}
-              checked={values.joinExisting === false}
-              onChange={(e) => handleChange(e)}
+              checked={values.bannerCartPage === 0}
+              // onChange={handleChange}
+              onChange={(e) => {
+                handleForm('bannerCartPage', e.currentTarget.value);
+              }}
             >
               <XCircle className="fs-5" />
               {' '}
@@ -117,22 +117,6 @@ export default function ShowBanner(
             </ToggleButton>
 
           </ToggleButtonGroup>
-          {/* <Button variant="outline-success" className="me-2 styles.enable_btn ">
-              {' '}
-              <Check2Circle className="fs-4" />
-              {' '}
-              Enabled
-
-            </Button>
-            {' '}
-            <Button variant="outline-danger" className="styles.disable_btn">
-              {' '}
-              <XCircle className="fs-5" />
-              {' '}
-              Disabled
-
-            </Button>
-            {' '} */}
         </Col>
       </Row>
     </section>

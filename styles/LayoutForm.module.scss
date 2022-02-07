@@ -44,6 +44,8 @@
     @include button-variant($enable, $enable);
     @extend .me-2, .p-2, .lh-sm, .rounded;
     color: $black;
+    background-color: white;
+
     &:hover {
         color: $white;
         border-color: $black;
@@ -59,6 +61,8 @@
         @include button-variant($disable, $disable);
         @extend .me-2, .p-2, .lh-sm, .rounded;
         color: $black;
+        background-color: white;
+
         &:hover {
             color: $black;
             border-color: $black;

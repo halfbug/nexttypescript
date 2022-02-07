@@ -20,44 +20,44 @@ import BannerLocation from 'components/Widgets/BannerLocation';
 import DisplayBanner from 'components/Widgets/DisplayBanner';
 
 interface IValues {
-    brandName: string | undefined;
-    industry: string | undefined;
-    logoImage: string | undefined;
-    // onChange: any;
-    // setFieldValue: ()=>void;
+  bannerProductPage: any;
+  bannerCartPage: any;
+  bannerLocation: string | undefined;
+  bannerDesign: string | undefined;
+  bannerSummaryPage: string | undefined;
+  callToActionText: string | undefined;
   }
 
 export default function LayoutSettings() {
   const [updateLayout, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   const [formData, setformData] = useState({
-    brandName: '',
-    logoImage: '',
-    industry: '',
+    bannerProductPage: 1,
+    bannerCartPage: 1,
+    bannerLocation: '',
+    bannerDesign: '',
+    bannerSummaryPage: '',
+    callToActionText: '',
   });
 
   const { store, dispatch } = React.useContext(StoreContext);
 
-  //   useEffect(() => {
-  //     if (store?.brandName || store?.logoImage || store?.industry) {
-  //     //   const { brandName, logoImage, industry } = store;
-  //       console.log(store);
-  //       const newState = {
-  //         brandName: store?.brandName!,
-  //         logoImage: store?.logoImage!,
-  //         industry: store?.industry!,
-  //       };
-  //       setformData({ ...newState });
-  //     }
-  //   }, [store]);
+  useEffect(() => {
+    if (store?.settings) {
+      //   const { brandName, logoImage, industry } = store;
+      console.log(store);
+      const newState = {
+        bannerProductPage: store?.bannerProductPage!,
+        bannerCartPage: store?.bannerCartPage!,
+        bannerLocation: store?.bannerLocation!,
+        bannerDesign: store?.bannerDesign!,
+        bannerSummaryPage: store?.bannerSummaryPage!,
+        callToActionText: store?.callToActionText!,
+      };
+      setformData({ ...newState });
+    }
+  }, [store]);
 
-  const validationSchema = yup.object({
-    brandName: yup
-      .string()
-      .required('Brand Name is required.')
-      .min(5, 'Too Short please give least five characters')
-      .max(20, 'Too Long !! only 20 characters allowed.'),
-
-  });
+  const validationSchema = yup.object({});
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
@@ -68,7 +68,10 @@ export default function LayoutSettings() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { brandName, industry, logoImage } = valz;
+      const {
+        // eslint-disable-next-line max-len
+        bannerProductPage, bannerCartPage, bannerLocation, bannerDesign, bannerSummaryPage, callToActionText,
+      } = valz;
       console.log({ valz });
 
       await updateLayout({
@@ -76,9 +79,15 @@ export default function LayoutSettings() {
           updateStoreInput: {
             id: store.id,
             shop: store.shop,
-            brandName,
-            industry,
-            logoImage,
+            settings: {
+              bannerProductPage: Boolean(parseInt(bannerProductPage, 10)),
+              bannerCartPage: Boolean(parseInt(bannerCartPage, 10)),
+              bannerLocation: "location",
+              // bannerDesign: "GS_WHITE",
+              // bannerSummaryPage: "RIGHT",
+              callToActionText: "call text",
+
+            },
           },
         },
       });
@@ -87,9 +96,9 @@ export default function LayoutSettings() {
   });
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
-    console.log("🚀 ~ file: LayoutSettings.tsx ~ line 83 ~ handleForm ~ value", field);
     handleSubmit();
   };
+  console.log(store);
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <Row className="fw-bolder, lh-base, px-0, fs-3, mt-5, mb-2"><h4>Product Page Banners</h4></Row>
@@ -101,6 +110,7 @@ export default function LayoutSettings() {
             setFieldValue={setFieldValue}
             handleChange={handleChange}
             handleForm={handleForm}
+            handleSubmit={handleSubmit}
             touched={touched}
           />
         </Col>
