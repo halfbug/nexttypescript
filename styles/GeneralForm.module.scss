@@ -2,7 +2,16 @@
 
 .generalform {
     @extend .d-flex, .mt-2, .px-0;
-
+    h3 {
+        @extend .mx-3, .fw-bolder, .lh-base, .px-0, .fs-3, .my-3;
+        font-family: Montserrat;
+        color: $black;
+    }
+    h4 {
+        @extend .fs-4, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+    }
     &_purplebox {
         @extend .mb-5, .p-4;
         border: 1px dashed $purple1;

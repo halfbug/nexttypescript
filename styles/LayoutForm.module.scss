@@ -1,6 +1,7 @@
 @import "./variables.scss";
 
 .layout {
+    @extend .d-flex, .mt-2, .px-0;
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
@@ -18,7 +19,7 @@
     }
 
     h3 {
-        @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
+        @extend .mx-3, .fw-bolder, .lh-base, .px-0, .fs-3, .my-3;
         font-family: Montserrat;
         color: $black;
     }
@@ -27,6 +28,7 @@
         font-family: DM Sans;
         color: $subheadingclr;
     }
+
     .vertical {
         border-top: 1px solid #dee2ed;
         height: 200px;
