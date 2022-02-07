@@ -25,12 +25,12 @@ export default function BrandName(
     <section className={styles.generalform_purplebox}>
       <Row><h4>Your Brand Name</h4></Row>
       <Row>
-        <h6>
+        <h6 className="text-muted">
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
 
-      <Row>
+      <Row className="mt-3">
         <Col xs={7}>
           <Form.Group className="" controlId="brandNamevalidation">
             <Form.Control
@@ -59,7 +59,7 @@ export default function BrandName(
       </Row>
       <Row className="mt-3"><h4>Your Brand Logo</h4></Row>
       <Row>
-        <h6>
+        <h6 className="text-muted">
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
@@ -75,7 +75,7 @@ export default function BrandName(
             handleForm={handleForm}
           />
           <Row className="mx-auto">
-            <Form.Text className="text-muted p-2 align-self-center">
+            <Form.Text className="text-muted d-flex justify-content-center">
               Under 5 MB (Formats: PNG, JPG, JPEG)
             </Form.Text>
           </Row>
