@@ -47,49 +47,49 @@ export default function BannerDesign(
       <Row>
         <Col lg={12} className="mt-2">
           <Form.Check
-            className="p-2"
+            className="p-2 d-flex align-items-center"
             onChange={(e) => handleChange(e)}
             type="radio"
           >
             <Form.Check.Input type="radio" name="bnr" />
             <Form.Check.Label>
-              <div className="d-inline mx-2">
+              <div className="mx-2">
                 <BannerComponent />
               </div>
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="p-2 d-flex align-items-center"
             onChange={(e) => handleChange(e)}
             type="radio"
           >
             <Form.Check.Input type="radio" name="bnr" />
             <Form.Check.Label>
-              <div className="d-inline mx-2">
+              <div className="mx-2">
                 <BannerComponent />
               </div>
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="p-2 d-flex align-items-center"
             onChange={(e) => handleChange(e)}
             type="radio"
           >
             <Form.Check.Input type="radio" name="bnr" />
             <Form.Check.Label>
-              <div className="d-inline mx-2">
+              <div className="mx-2">
                 <BannerComponent />
               </div>
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="p-2 d-flex align-items-center"
             onChange={(e) => handleChange(e)}
             type="radio"
           >
             <Form.Check.Input type="radio" name="bnr" />
             <Form.Check.Label>
-              <div className="d-inline mx-2">
+              <div className=" mx-2">
                 <BannerComponent />
               </div>
             </Form.Check.Label>
