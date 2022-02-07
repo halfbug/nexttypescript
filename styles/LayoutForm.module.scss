@@ -16,6 +16,8 @@
         border: 1px dashed $average;
         border-radius: 18px;
     }
+
+
     h3 {
         @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
         font-family: Montserrat;
@@ -70,10 +72,3 @@
         }
 }
 
-
-// .banners{
-//     left: 11.32%;
-// right: 0.87%;
-
-
-// }

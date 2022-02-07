@@ -4,10 +4,11 @@ import styles from 'styles/LayoutForm.module.scss';
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
-import Banner1 from 'assets/images/Banner B - Neon.png';
-import Banner2 from 'assets/images/Banner B - Light.png';
-import Banner3 from 'assets/images/Banner B - Dark.png';
-import Banner4 from 'assets/images/Banner B  - Clear.png';
+
+import B2 from 'assets/images/GS-2.png';
+import B3 from 'assets/images/GS-3.png';
+import B4 from 'assets/images/GS-4.png';
+import BannerComponent from './BannerComponent';
 
 export interface BannerDesignProps {
 values: any;
@@ -52,40 +53,70 @@ export default function BannerDesign(
             <div className="col-sm-12">
 
               <form>
-                <div className="radio py-2 ">
+                <div className="radio py-2 d-inline-flex align-items-center align-self-center ">
                   <label>
                     <input type="radio" value="option1" checked />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      <img src={Banner1.src} alt="B1" width="252" height="49" />
-                    </div>
+                    <BannerComponent />
                     {' '}
                   </label>
                 </div>
                 <div className="radio  py-2">
                   <label>
                     <input type="radio" value="option2" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      <img src={Banner2.src} alt="B2" width="252" height="49" />
+                    <div className="w-75 shadow-sm p-2 bg-body rounded">
+                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
+                        <Col lg={5}>
+                          <img src={B2.src} alt="B2" width="94" height="25" />
+                        </Col>
+                        <Col lg={7}>
+                          <h6>
+                            Shop with friends, get
+                            {' '}
+                            <b>$50 cashback.</b>
+
+                          </h6>
+                        </Col>
+                      </Row>
                     </div>
                   </label>
                 </div>
                 <div className="radio  py-2">
                   <label>
                     <input type="radio" value="option3" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      <img src={Banner3.src} alt="B3" width="252" height="49" />
+                    <div className="w-75 shadow-sm p-2 bg-body rounded">
+                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
+                        <Col lg={5}>
+                          <img src={B3.src} alt="B3" width="94" height="25" />
+                        </Col>
+                        <Col lg={7}>
+                          <h6>
+                            Shop with friends, get
+                            {' '}
+                            <b>$50 cashback.</b>
+
+                          </h6>
+                        </Col>
+                      </Row>
                     </div>
                   </label>
                 </div>
                 <div className="radio  py-2">
                   <label>
                     <input type="radio" value="option3" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      <img src={Banner4.src} alt="B4" width="252" height="49" />
+                    <div className="w-75 shadow-sm p-2 bg-body rounded">
+                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
+                        <Col lg={5}>
+                          <img src={B4.src} alt="B4" width="94" height="25" />
+                        </Col>
+                        <Col lg={7}>
+                          <h6>
+                            Shop with friends, get
+                            {' '}
+                            <b>$50 cashback.</b>
+
+                          </h6>
+                        </Col>
+                      </Row>
                     </div>
                   </label>
                 </div>
