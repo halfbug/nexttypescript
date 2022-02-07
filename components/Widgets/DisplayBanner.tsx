@@ -22,8 +22,8 @@ export default function DisplayBanner(
     : DisplayBannerProps,
 ) {
   return (
-    <section className={styles.layout}>
-      <Row className={styles.layout__box_orange}>
+    <section className={styles.layout__box_orange}>
+      <Row>
         <Col lg={6}>
           <h4 className="mt-0">
             Display banners on your order summary page

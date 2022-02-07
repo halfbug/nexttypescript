@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from 'styles/GeneralForm.module.scss';
+import {
+  Col, Row,
+} from 'react-bootstrap';
 
 export interface IAppProps {
 values: any;
@@ -18,11 +21,15 @@ export function Industry(
       : IAppProps,
 ) {
   return (
-    <>
+    <section className={styles.generalform_greenbox}>
       <h4 className={styles.generalform_subheading}>Your Industry</h4>
-      {' '}
+      <Row>
+        <h6>
+          This informs calculations for your Analytics page.
+        </h6>
+      </Row>
       <select
-        className="form-select"
+        className="form-select w-75"
         aria-label="Default select example"
         name="industry"
         onChange={(e) => {
@@ -34,7 +41,7 @@ export function Industry(
         <option value="2">Two</option>
         <option value="3">Three</option>
       </select>
-    </>
+    </section>
 
   );
 }

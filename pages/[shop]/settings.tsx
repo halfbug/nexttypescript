@@ -80,7 +80,7 @@ const Settings: NextPage = () => (
           </Col>
         </Row>
         <Row>
-          <Col sm={12}>
+          <Col lg={12}>
             <Tab.Content>
               <Tab.Pane eventKey="General">
                 <GeneralSettings />
@@ -89,7 +89,10 @@ const Settings: NextPage = () => (
                 <LayoutSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Marketing">
-                adasd
+                Marketing
+              </Tab.Pane>
+              <Tab.Pane eventKey="Affiliate">
+                Affiliate
               </Tab.Pane>
             </Tab.Content>
           </Col>

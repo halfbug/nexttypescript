@@ -1,6 +1,7 @@
 @import "./variables.scss";
 .upload-logo {
-	border-style: dashed !important;
+	// border-style: dashed !important;
+	border-radius: 10px !important;
 	position: relative;
 
 	@extend .rounded,  .m-2 , .d-flex, .justify-content-center, .py-4;

@@ -3,6 +3,18 @@
 .generalform {
     @extend .d-flex, .mt-2, .px-0;
 
+    &_purplebox {
+        @extend .mb-5, .p-4;
+        border: 1px dashed $purple1;
+        border-radius: 18px;
+    }
+
+    &_greenbox {
+        @extend .mb-5, .p-4;
+        border: 1px dashed $green;
+        border-radius: 18px;
+    }
+
     &_subheading {
         @extend .fs-4, .fw-bold, .lh-base;
         font-family: DM Sans;

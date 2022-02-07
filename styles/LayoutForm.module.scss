@@ -17,11 +17,6 @@
         border-radius: 18px;
     }
 
-    // .form-check-label{
-    //     color: $black !important;
-    // }
-    
-
     h3 {
         @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
         font-family: Montserrat;
@@ -75,4 +70,3 @@
             background-color: $disable;
         }
 }
-

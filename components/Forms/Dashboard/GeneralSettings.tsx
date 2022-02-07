@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import React, { useState, useEffect } from 'react';
-import styles from 'styles/DbSetting.module.scss';
+import styles from 'styles/GeneralForm.module.scss';
 import {
   Row, Col, Form, Button, InputGroup,
 } from 'react-bootstrap';
@@ -10,10 +10,8 @@ import { StoreContext } from 'store/store.context';
 import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
-import UploadButton from 'components/Buttons/UploadBtn';
 import BrandName from 'components/Widgets/BrandName';
 import { Industry } from 'components/Widgets/Industry';
-import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 
 interface IValues {
     brandName: string | undefined;
@@ -88,9 +86,9 @@ export default function GeneralSettings() {
   };
   return (
     <Form noValidate onSubmit={handleSubmit}>
-
-      <Row className={styles.setting_col}>
-        <Col lg={8}>
+      <Row className="fw-bolder, lh-base, px-0, fs-3, mt-5, mb-2"><h4>Brand Details</h4></Row>
+      <Row className={styles.generalform}>
+        <Col lg={7}>
           <BrandName
             values={values}
             errors={errors}
@@ -99,27 +97,8 @@ export default function GeneralSettings() {
             handleForm={handleForm}
             touched={touched}
           />
-
-          <Row className="mt-3"><h4>Upload your logo</h4></Row>
-          <Row>
-
-            <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
-              {/* // eslint-disable-next-line react/jsx-no-bind */}
-              <UploadButton
-                icon={(<WhiteButton>Upload</WhiteButton>)}
-                setFieldValue={setFieldValue}
-                field="logoImage"
-                value={values.logoImage}
-                handleForm={handleForm}
-              />
-              <Form.Text className="text-muted p-2 align-self-center">
-                Under 5 MB (Formats: PNG, JPG, JPEG)
-              </Form.Text>
-            </Form.Group>
-          </Row>
-          <Row />
         </Col>
-        <Col lg={4} className={styles.setting_col_greenbox}>
+        <Col lg={5}>
           <Industry
             values={values}
             errors={errors}
@@ -128,7 +107,6 @@ export default function GeneralSettings() {
             handleForm={handleForm}
             touched={touched}
           />
-
         </Col>
       </Row>
     </Form>
