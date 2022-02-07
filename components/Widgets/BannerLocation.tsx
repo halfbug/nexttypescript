@@ -6,19 +6,19 @@ import {
 } from 'react-bootstrap';
 
 export interface BannerLocationProps {
-values: any;
-errors: any;
-touched: any;
-handleChange: any;
-handleForm: any;
-setFieldValue?: any;
+  values: any;
+  errors: any;
+  touched: any;
+  handleChange: any;
+  handleForm: any;
+  setFieldValue?: any;
 }
 
 export default function BannerLocation(
   {
     values, errors, touched, handleChange, handleForm,
   }
-  : BannerLocationProps,
+    : BannerLocationProps,
 ) {
   return (
     <Col lg={5}>
@@ -27,47 +27,43 @@ export default function BannerLocation(
           Choose the location of  your
           <br />
           product page banner
-
         </h4>
-
-        <div className="row">
-          <div className="col-sm-12">
-
-            <form>
-              <div className="radio py-2 mt-2">
-                <label>
-                  <input type="radio" value="option1" checked />
-                  {' '}
-                  <div className="d-inline mx-2">
-                    Below product price tag
-                    {' '}
-                    <span className={styles.badge}>Recommended</span>
-                  </div>
-                </label>
-              </div>
-              <div className="radio  py-2">
-                <label>
-                  <input type="radio" value="option2" />
-                  {' '}
-                  <div className="d-inline mx-2">
-                    Below Add to cart
-                  </div>
-                </label>
-              </div>
-              <div className="radio  py-2">
-                <label>
-                  <input type="radio" value="option3" />
-                  {' '}
-                  <div className="d-inline mx-2">
-                    Customize location (Advanced)
-                  </div>
-                </label>
-              </div>
-            </form>
-
-          </div>
-        </div>
-
+        <Row>
+          <Col lg={12} className="mt-2">
+            <Form.Check
+              className="p-2"
+              onChange={(e) => handleChange(e)}
+              type="radio"
+              // eslint-disable-next-line react/jsx-closing-bracket-location
+              >
+              <Form.Check.Input type="radio" name="location" />
+              <Form.Check.Label className="mx-2">
+                Below product price tag
+                <span className={styles.badge}>Recommended</span>
+              </Form.Check.Label>
+            </Form.Check>
+            <Form.Check
+              className="p-2"
+              onChange={(e) => handleChange(e)}
+              type="radio"
+            >
+              <Form.Check.Input type="radio" name="location" />
+              <Form.Check.Label className="mx-2">
+                Below Add to cart
+              </Form.Check.Label>
+            </Form.Check>
+            <Form.Check
+              className="p-2"
+              onChange={(e) => handleChange(e)}
+              type="radio"
+            >
+              <Form.Check.Input type="radio" name="location" />
+              <Form.Check.Label className="mx-2">
+                Customize location (Advanced)
+              </Form.Check.Label>
+            </Form.Check>
+          </Col>
+        </Row>
       </section>
     </Col>
   );

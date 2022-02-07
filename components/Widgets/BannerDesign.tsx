@@ -5,25 +5,22 @@ import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
 
-import B2 from 'assets/images/GS-2.png';
-import B3 from 'assets/images/GS-3.png';
-import B4 from 'assets/images/GS-4.png';
 import BannerComponent from './BannerComponent';
 
 export interface BannerDesignProps {
-values: any;
-errors: any;
-touched: any;
-handleChange: any;
-handleForm: any;
-setFieldValue?: any;
+  values: any;
+  errors: any;
+  touched: any;
+  handleChange: any;
+  handleForm: any;
+  setFieldValue?: any;
 }
 
 export default function BannerDesign(
   {
     values, errors, touched, handleChange, handleForm,
   }
-  : BannerDesignProps,
+    : BannerDesignProps,
 ) {
   return (
     <section className={styles.layout}>
@@ -31,7 +28,6 @@ export default function BannerDesign(
         <section className={styles.layout__box_1}>
           <h4 className="mt-0">
             Banner Design
-
           </h4>
           <div className="d-inline-flex mt-2">
             <h5 className="text-muted mt-2">
@@ -49,117 +45,87 @@ export default function BannerDesign(
             </Button>
             {' '}
           </div>
-          <div className="row">
-            <div className="col-sm-12">
-
-              <form>
-                <div className="radio py-2 d-inline-flex align-items-center align-self-center ">
-                  <label>
-                    <input type="radio" value="option1" checked />
+          <Row>
+            <Col lg={12} className="mt-2">
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="bnr" />
+                <Form.Check.Label>
+                  <div className="d-inline mx-2">
                     <BannerComponent />
-                    {' '}
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option2" />
-                    <div className="w-75 shadow-sm p-2 bg-body rounded">
-                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
-                        <Col lg={5}>
-                          <img src={B2.src} alt="B2" width="94" height="25" />
-                        </Col>
-                        <Col lg={7}>
-                          <h6>
-                            Shop with friends, get
-                            {' '}
-                            <b>$50 cashback.</b>
-
-                          </h6>
-                        </Col>
-                      </Row>
-                    </div>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option3" />
-                    <div className="w-75 shadow-sm p-2 bg-body rounded">
-                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
-                        <Col lg={5}>
-                          <img src={B3.src} alt="B3" width="94" height="25" />
-                        </Col>
-                        <Col lg={7}>
-                          <h6>
-                            Shop with friends, get
-                            {' '}
-                            <b>$50 cashback.</b>
-
-                          </h6>
-                        </Col>
-                      </Row>
-                    </div>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option3" />
-                    <div className="w-75 shadow-sm p-2 bg-body rounded">
-                      <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
-                        <Col lg={5}>
-                          <img src={B4.src} alt="B4" width="94" height="25" />
-                        </Col>
-                        <Col lg={7}>
-                          <h6>
-                            Shop with friends, get
-                            {' '}
-                            <b>$50 cashback.</b>
-
-                          </h6>
-                        </Col>
-                      </Row>
-                    </div>
-                  </label>
-                </div>
-              </form>
-
-            </div>
-          </div>
-
+                  </div>
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="bnr" />
+                <Form.Check.Label>
+                  <div className="d-inline mx-2">
+                    <BannerComponent />
+                  </div>
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="bnr" />
+                <Form.Check.Label>
+                  <div className="d-inline mx-2">
+                    <BannerComponent />
+                  </div>
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="bnr" />
+                <Form.Check.Label>
+                  <div className="d-inline mx-2">
+                    <BannerComponent />
+                  </div>
+                </Form.Check.Label>
+              </Form.Check>
+            </Col>
+          </Row>
           <hr className="mt-2 " style={{ color: '$black' }} />
           <h4 className="mt-0">
             Select the call-to-action that customer will see
-
           </h4>
-
-          <div className="row">
-            <div className="col-sm-12">
-
-              <form>
-                <div className="radio py-2 mt-2">
-                  <label>
-                    <input type="radio" value="option1" checked />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Shop with friends, get $50 cashback.
-                    </div>
-                    {' '}
-                    <span className={styles.badge}>Recommended</span>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option2" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Shop with friends, get up to 90% back.
-                    </div>
-                  </label>
-                </div>
-
-              </form>
-
-            </div>
-          </div>
+          <Row>
+            <Col lg={12} className="mt-2">
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="cashback" />
+                <Form.Check.Label className="mx-2">
+                  Shop with friends, get $50 cashback.
+                  <span className={styles.badge}>Recommended</span>
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="cashback" />
+                <Form.Check.Label className="mx-2">
+                  Shop with friends, get up to 90% back.
+                </Form.Check.Label>
+              </Form.Check>
+            </Col>
+          </Row>
         </section>
       </Col>
     </section>

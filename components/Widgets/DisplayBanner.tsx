@@ -7,19 +7,19 @@ import {
 import Banner from 'assets/images/display banner.png';
 
 export interface DisplayBannerProps {
-values: any;
-errors: any;
-touched: any;
-handleChange: any;
-handleForm: any;
-setFieldValue?: any;
+  values: any;
+  errors: any;
+  touched: any;
+  handleChange: any;
+  handleForm: any;
+  setFieldValue?: any;
 }
 
 export default function DisplayBanner(
   {
     values, errors, touched, handleChange, handleForm,
   }
-  : DisplayBannerProps,
+    : DisplayBannerProps,
 ) {
   return (
     <section className={styles.layout}>
@@ -30,52 +30,51 @@ export default function DisplayBanner(
 
           </h4>
           <h6 className="text-muted mt-1 text-nowrap">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
-          <div className="row">
-            <div className="col-sm-12">
-
-              <form>
-                <div className="radio py-2 mt-2">
-                  <label>
-                    <input type="radio" value="option1" checked />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Show both
-                      {' '}
-                      <span className={styles.badge}>Recommended</span>
-                    </div>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option2" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Show left one only
-                    </div>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option3" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Show right one only
-                    </div>
-                  </label>
-                </div>
-                <div className="radio  py-2">
-                  <label>
-                    <input type="radio" value="option3" />
-                    {' '}
-                    <div className="d-inline mx-2">
-                      Don’t show
-                    </div>
-                  </label>
-                </div>
-              </form>
-
-            </div>
-          </div>
+          <Row>
+            <Col lg={12} className="mt-2">
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="display" />
+                <Form.Check.Label className="mx-2">
+                  Show both
+                  <span className={styles.badge}>Recommended</span>
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="display" />
+                <Form.Check.Label className="mx-2">
+                  Show left one only
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="display" />
+                <Form.Check.Label className="mx-2">
+                  Show right one only
+                </Form.Check.Label>
+              </Form.Check>
+              <Form.Check
+                className="p-2"
+                onChange={(e) => handleChange(e)}
+                type="radio"
+              >
+                <Form.Check.Input type="radio" name="display" />
+                <Form.Check.Label className="mx-2">
+                  Don’t show
+                </Form.Check.Label>
+              </Form.Check>
+            </Col>
+          </Row>
         </Col>
         <Col lg={6} className="d-flex justify-content-end">
           <img src={Banner.src} alt="Banner" width="413" height="215" />
