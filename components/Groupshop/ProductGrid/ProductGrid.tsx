@@ -32,7 +32,7 @@ const ProductGrid = ({
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   const {
-    breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage,
+    breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
   } = usePagination<IProduct>({
     dimensions,
     maxrows,
@@ -40,6 +40,7 @@ const ProductGrid = ({
       xs, sm, md, lg, xl, xxl,
     },
     items: products || [],
+    siblingCount: 4,
   });
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
   const [showDetail, setshowDetail] = useState<boolean>(false);
@@ -151,14 +152,16 @@ const ProductGrid = ({
               (currentPage > 1) ? currentPage - 1 : currentPage,
             )}
             />
-            {[...new Array(totalPages)].map((n, index) => (
+
+            {getPageNumbers().map((n, index) => (
               <Pagination.Item
-                active={currentPage === index + 1}
-                onClick={() => setCurrentPage(index + 1)}
+                active={currentPage === n}
+                onClick={() => setCurrentPage(n)}
               >
-                {index + 1}
+                {n}
               </Pagination.Item>
             ))}
+
             <Pagination.Next onClick={() => setCurrentPage(
               (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
             )}
