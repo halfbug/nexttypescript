@@ -5,7 +5,7 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Page from 'components/Layout/Page/Page';
 import Router from 'next/router';
 import {
-  Container, Row, Col, Button,
+  Container, Row, Col, Button, Form,
 } from 'react-bootstrap';
 import styles from 'styles/CampaignListing.module.scss';
 import { StoreContext } from 'store/store.context';
@@ -106,7 +106,19 @@ const CampaignListing = () => {
             <Col className="py-2 ">$1430</Col>
             <Col className="py-2  ">10</Col>
             <Col className="py-2 "> $1430</Col>
-            <Col className="px-0"><ToggleButton handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /></Col>
+            <Col className="px-0">
+              {/* <ToggleButton
+              handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
+              <Form.Check
+                checked={camp.isActive}
+                type="switch"
+                label=""
+                id="active_switch"
+                className={styles.container_switch}
+                onChange={() => handleToggle(camp.id)}
+                // value={camp.isActive}
+              />
+            </Col>
             <Col className="px-0 fw-bold"><WhiteButton>View Analytics</WhiteButton></Col>
             <Col className="px-0 fw-bold"><WhiteButton onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
           </Row>
