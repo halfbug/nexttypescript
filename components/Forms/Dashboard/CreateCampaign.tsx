@@ -82,9 +82,11 @@ export default function CreateCampaign() {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, media, instagram, pinterest, tiktok, facebook, twitter,
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest, tiktok, facebook, twitter,
       } = valz;
       console.log({ valz });
+      let { media } = valz;
+      if (customBg) media = "";
 
       // const socialLinks = {
       //   instagram, pinterest, tiktok, facebook, twitter,
@@ -156,6 +158,25 @@ export default function CreateCampaign() {
 
   console.log({ store });
   console.log({ values });
+
+  const handleCustomBg = (field: string, value: string) => {
+    // empty other bg and keep only one
+    if (field === 'customBg') {
+      setFieldValue('imageUrl', '');
+      setFieldValue('youtubeUrl', '');
+      setFieldValue('customColor', '');
+    } else {
+      setFieldValue('customColor', '');
+      setFieldValue('customBg', '');
+    }
+    // if ((field !== 'imageUrl' && field !== 'media' && field !== 'youtubeUrl')) {
+    // }
+    setFieldValue(field, value);
+    // handleSubmit();
+  };
+  const handleForm = (field: string, value: string) => {
+    setFieldValue(field, value);
+  };
 
   return (
     <Container className={styles.dashboard_campaign}>
@@ -369,6 +390,9 @@ export default function CreateCampaign() {
                 touched={touched}
                 errors={errors}
                 setFieldValue={setFieldValue}
+                handleCustomBg={handleCustomBg}
+                isEdit={false}
+                handleForm={handleForm}
               />
             </section>
           </Col>

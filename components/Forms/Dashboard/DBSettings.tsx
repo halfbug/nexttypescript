@@ -31,6 +31,7 @@ interface IValues {
     imageUrl: string;
     youtubeUrl: string;
     media: string;
+
   }
   interface IProps {
     handleChange: any;
@@ -38,9 +39,13 @@ interface IValues {
     setFieldValue: any;
     touched: any;
     errors: any;
-  }
+    handleCustomBg: any;
+    // eslint-disable-next-line react/require-default-props
+    handleForm?: any;
+    isEdit: boolean;
+    }
 export default function DBSettings({
-  handleChange, values, setFieldValue, touched, errors,
+  handleChange, values, setFieldValue, touched, errors, handleCustomBg, handleForm, isEdit,
 }:IProps) {
   const [, setParams] = useQueryString();
   const front = React.useRef(null);
@@ -59,7 +64,12 @@ export default function DBSettings({
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
-  // console.log('🚀 ~ file: Settings.tsx ~ line 87 ~ Settings ~ values', values);
+  console.log('🚀 DBSettings.tsx', values);
+  // if (isEdit) {
+  //   const { settings } = values;
+  //   // eslint-disable-next-line no-param-reassign
+  //   values = { ...settings };
+  // }
   return (
 
     <>
@@ -74,7 +84,7 @@ export default function DBSettings({
               <Form.Label htmlFor="brandColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
               <Form.Control
                 onChange={(e) => {
-                  handleChange(e);
+                  handleForm('brandColor', e.currentTarget.value);
                 }}
                 type="color"
                 // id="brandColor"
@@ -85,6 +95,7 @@ export default function DBSettings({
                 title="Choose your color"
                 className="p-0 m-0 rounded-end"
                 bsPrefix="onboarding"
+                value={values.brandColor}
               />
             </span>
             {' '}
@@ -100,10 +111,10 @@ export default function DBSettings({
       </Row>
 
       <Row className="border rounded px-1 py-3 my-1  mx-1 mt-2">
-        <Col lg={6}>
+        <Col md={6}>
           <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
 
-          <ButtonGroup className={['mb-2', 'mx-0', 'px-2', 'p-2', styles.ob_settings__group].join(' ')}>
+          <ButtonGroup className={['mb-2 d-block mx-0 p-0', styles.ob_settings__group].join(' ')}>
             {radios.map(({ name, component, value }) => (
               <ToggleButton
                 key={name}
@@ -114,7 +125,7 @@ export default function DBSettings({
                 value={value}
                 checked={values.customBg === value}
                 onChange={(e) => {
-                  setFieldValue('customBg', e.currentTarget.value);
+                  handleCustomBg('customBg', e.currentTarget.value);
                 }}
                 bsPrefix={styles.ob_settings_hide}
                 className={styles.ob_settings__radio}
@@ -125,7 +136,7 @@ export default function DBSettings({
           </ButtonGroup>
 
         </Col>
-        <Col lg={6} className={styles.vertical}>
+        <Col md={6} className={styles.vertical}>
           <Row className="mt-2">
             <h6 className="fs-6 fw-bolder lh-base text-nowrap">
               Custom background
@@ -143,7 +154,7 @@ export default function DBSettings({
                 type="radio"
                 checked={values.media === 'image'}
                 onChange={(e) => {
-                  setFieldValue('media', e.currentTarget.value);
+                  handleCustomBg('media', e.currentTarget.value);
                 }}
               />
               <Form.Check
@@ -154,7 +165,7 @@ export default function DBSettings({
                 type="radio"
                 checked={values.media === 'youtube'}
                 onChange={(e) => {
-                  setFieldValue('media', e.currentTarget.value);
+                  handleCustomBg('media', e.currentTarget.value);
                 }}
               />
 
@@ -167,6 +178,7 @@ export default function DBSettings({
                 setFieldValue={setFieldValue}
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
+                handleCustomBg={handleCustomBg}
               />
             </Col>
             <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
@@ -176,7 +188,7 @@ export default function DBSettings({
                 value={values.youtubeUrl}
                 isValid={touched.youtubeUrl && !errors.youtubeUrl}
                 onChange={(e) => {
-                  setFieldValue('youtubeUrl', e.currentTarget.value);
+                  handleCustomBg('youtubeUrl', e.currentTarget.value);
                 }}
               />
               <p className="text-muted">Please paste youtube video URL</p>

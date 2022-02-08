@@ -93,7 +93,7 @@ export default function Settings({ isDB }: IProps) {
       const {
         brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
       } = valz;
-      const campID = isDB ? store.singleEditCampaignId : store.newCampaign?.id;
+      const campID = store.newCampaign?.id;
 
       const campSettings:null | any = await addSet({
         variables: {
@@ -120,26 +120,32 @@ export default function Settings({ isDB }: IProps) {
       });
 
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-      if (!isDB) {
-        // update store. progress installationStep if its onboarding
-        await updateStore({
-          variables: {
-            updateStoreInput: {
-              id: store.id,
-              installationStep: 5,
-            },
+      // update store. progress installationStep if its onboarding
+      await updateStore({
+        variables: {
+          updateStoreInput: {
+            id: store.id,
+            installationStep: 5,
           },
-        });
-        setParams({ ins: 5 });
-      } // if
+        },
+      });
+      setParams({ ins: 5 });
     },
   });
 
-  const handleForm = () => {
-    if (isDB) {
-      handleSubmit();
+  const handleCustomBg = (field: string, value: string) => {
+    // empty other bg and keep only one
+    if (field === 'customBg') {
+      setFieldValue('imageUrl', '');
+      setFieldValue('youtubeUrl', '');
+      setFieldValue('customColor', '');
+    } else {
+      setFieldValue('customColor', '');
+      setFieldValue('customBg', '');
     }
+    setFieldValue(field, value);
   };
+
   const radios = [
     // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
     { name: 'image1', value: 'image1', component: <img src={Image1.src} alt="imageone" /> },
@@ -164,8 +170,7 @@ export default function Settings({ isDB }: IProps) {
               <Form.Label htmlFor="brandColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
               <Form.Control
                 onChange={(e) => {
-                  handleChange(e);
-                  handleForm();
+                  setFieldValue('brandColor', e.currentTarget.value);
                 }}
                 type="color"
                   // id="brandColor"
@@ -192,7 +197,7 @@ export default function Settings({ isDB }: IProps) {
           <Form.Text className="text-muted mt-0 fs-6">This will serve as the banner for your Groupshop page </Form.Text>
         </Col>
       </Row>
-      <Row className=" border rounded px-1 py-3 my-1 mt-2">
+      <Row className=" border rounded px-1 py-3 my-1 mx-1 mt-2">
         <Col md={6}>
           <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
           {/* <Row> */}
@@ -207,8 +212,7 @@ export default function Settings({ isDB }: IProps) {
                 value={value}
                 checked={values.customBg === value}
                 onChange={(e) => {
-                  setFieldValue('customBg', e.currentTarget.value);
-                  handleForm();
+                  handleCustomBg('customBg', e.currentTarget.value);
                 }}
                 bsPrefix={styles.ob_settings_hide}
                 className={styles.ob_settings__radio}
@@ -237,8 +241,7 @@ export default function Settings({ isDB }: IProps) {
                 type="radio"
                 checked={values.media === 'image'}
                 onChange={(e) => {
-                  setFieldValue('media', e.currentTarget.value);
-                  handleForm();
+                  handleCustomBg('media', e.currentTarget.value);
                 }}
               />
               <Form.Check
@@ -249,8 +252,7 @@ export default function Settings({ isDB }: IProps) {
                 type="radio"
                 checked={values.media === 'youtube'}
                 onChange={(e) => {
-                  setFieldValue('media', e.currentTarget.value);
-                  handleForm();
+                  handleCustomBg('media', e.currentTarget.value);
                 }}
               />
 
@@ -263,7 +265,7 @@ export default function Settings({ isDB }: IProps) {
                 setFieldValue={setFieldValue}
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
-                handleForm={handleForm}
+                handleCustomBg={handleCustomBg}
               />
             </Col>
             <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
@@ -273,8 +275,7 @@ export default function Settings({ isDB }: IProps) {
                 value={values.youtubeUrl}
                 isValid={touched.youtubeUrl && !errors.youtubeUrl}
                 onChange={(e) => {
-                  setFieldValue('youtubeUrl', e.currentTarget.value);
-                  handleForm();
+                  handleCustomBg('youtubeUrl', e.currentTarget.value);
                 }}
               />
               <p className="text-muted">Please paste youtube video URL</p>

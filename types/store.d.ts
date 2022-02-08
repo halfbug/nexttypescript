@@ -34,6 +34,7 @@ export interface ICampaign {
 
 }
 export interface ICampaignForm {
+  settings?: any;
   id?: string | null | undefined;
   name?: string;
   criteria?: string;

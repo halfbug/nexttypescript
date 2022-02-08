@@ -12,6 +12,7 @@ query StoreName($shop: String!) {
   industry
   logoImage
   settings{
+    media
     brandColor
     customBg
     customColor
@@ -114,6 +115,7 @@ const CREATE_CAMPAIGN_DB = gql`
     joinExisting
     criteria
     settings {
+      media
       brandColor,
       customColor,
       customBg,
@@ -179,6 +181,7 @@ const UPDATE_CAMPAIGN = gql`
       customBg
       imageUrl
       youtubeUrl
+      media
     }
     socialLinks{
       instagram
@@ -453,6 +456,7 @@ query campaigns {
     criteria
     isActive
     settings {
+      media
       brandColor,
       customColor,
       customBg,

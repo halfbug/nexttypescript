@@ -19,11 +19,12 @@ interface IUploadButtonProps {
  className?: string;
  value?: string;
  handleForm?: any;
+ handleCustomBg?: any;
 }
 
 // eslint-disable-next-line no-unused-vars
 export default function UploadButton({
-  setFieldValue, icon, field, className, value, handleForm,
+  setFieldValue, icon, field, className, value, handleForm, handleCustomBg,
 }:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
@@ -60,7 +61,7 @@ export default function UploadButton({
 
             setFieldValue(field, fileS3Url);
             setprogress(false);
-            if (handleForm) handleForm();
+            if (handleCustomBg) handleCustomBg(field, fileS3Url);
           })
           .catch((err) => console.log(err));
 
