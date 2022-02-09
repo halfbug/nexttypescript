@@ -1,8 +1,9 @@
 import { useCallback, useContext } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
-import { CartProduct } from 'types/groupshop';
+import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { IProduct } from 'types/store';
+import useIP from './useIP';
 
 export default function useDeal() {
   const {
@@ -10,10 +11,15 @@ export default function useDeal() {
     dispatch,
   } = useContext(GroupshopContext);
 
-  //   const addCartProduct = useCallback(
-  //   (product : CartProduct) => dispatch(
-  //   { type: 'UPDATE_CART',
-  //    payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } }), [gsctx.cart]);
+  const [clientIP] = useIP();
+
+  const clientDealProducts = useCallback(
+    ():string[] | undefined => ([...gsctx?.dealProducts?.filter(
+      ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
+    )?.map(
+      ({ productId }:DealProduct) => productId,
+    ) ?? []]), [clientIP, gsctx.dealProducts],
+  );
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currency || 'USD');
 
@@ -23,13 +29,10 @@ export default function useDeal() {
     price - ((+discount / 100) * price),
   ), [gsctx]);
 
-  //   const getURL = useCallback(() => `${window.location.origin}/${gsctx?.url}`,
-  //     [gsctx.url.length]);
-    
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
 
   return {
-    currencySymbol, discount, dPrice, gsURL,
+    currencySymbol, discount, dPrice, gsURL, clientDealProducts,
   };
 }

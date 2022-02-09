@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_GROUPSHOP, GET_PRODUCTS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
@@ -10,8 +10,7 @@ import styles from 'styles/Groupshop.module.scss';
 // import { StoreContext } from 'store/store.context';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import {
-  Button,
-  Col, Container, Dropdown, ListGroup, Row, ButtonGroup,
+  Col, Container, Dropdown, Row,
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
@@ -20,11 +19,9 @@ import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard'
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
 import {
-  ArrowDown,
-  ChevronDown, Handbag, MenuDown, Search,
+  ChevronDown, Handbag, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
-import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { GroupshopContext, gsInit } from 'store/groupshop.context';
 import { IGroupshop, Member } from 'types/groupshop';
@@ -34,11 +31,13 @@ import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 import _ from 'lodash';
 import Cart from 'components/Groupshop/Cart/Cart';
 import useDeal from 'hooks/useDeal';
+import useAlert from 'hooks/useAlert';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
   const { query: { shop, code, source } } = router;
   const { gsctx, dispatch } = useContext(GroupshopContext);
+  const { AlertComponent, showError } = useAlert();
 
   const {
     loading, error, data: { groupshop } = { groupshop: gsInit }, networkStatus,
@@ -84,7 +83,8 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     setshowCart(true);
   }, [gsctx.cart]);
-  const { gsURL } = useDeal();
+  const { gsURL, clientDealProducts } = useDeal();
+
   console.log('🚀 ~ file: [...code].tsx ~ line 88 ~ gsURL', gsURL);
   // const { shop, getProducts } = useStore();
 
@@ -111,6 +111,11 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
+  const handleAddProduct = () => {
+    const cprod = clientDealProducts()?.length || 0;
+    if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
+  };
+
   if (error) {
     router.push('/404');
     return <p>groupshop not found</p>;
@@ -118,6 +123,7 @@ const GroupShop: NextPage = () => {
 
   return (
     <div className={styles.groupshop}>
+
       <Header LeftComp={<Counter expireDate={gsctx?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
       <Container fluid>
         <Row className={styles.groupshop__top}>
@@ -218,7 +224,7 @@ const GroupShop: NextPage = () => {
         xl={3}
         products={member?.products}
         maxrows={1}
-        addProducts={setshowps}
+        addProducts={handleAddProduct}
       >
         ;
 
@@ -253,7 +259,7 @@ const GroupShop: NextPage = () => {
         xl={3}
         products={popularProducts}
         maxrows={1}
-        addProducts={setshowps}
+        addProducts={handleAddProduct}
       >
         <h2>Popular in Group</h2>
       </ProductGrid>
@@ -265,7 +271,7 @@ const GroupShop: NextPage = () => {
         xl={3}
         products={allProducts}
         maxrows={3}
-        addProducts={setshowps}
+        addProducts={handleAddProduct}
       >
         <div className="position-relative">
           <h2>All Products</h2>
@@ -315,7 +321,9 @@ const GroupShop: NextPage = () => {
       </ProductGrid>
       <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
       <Cart show={showCart} handleClose={() => setshowCart(false)} product={undefined} />
+      <AlertComponent />
     </div>
+
   );
 };
 

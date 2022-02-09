@@ -9,6 +9,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct, IGroupshop } from 'types/groupshop';
+import useIP from 'hooks/useIP';
 
 interface IValues {
   username: string;
@@ -32,13 +33,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   const { id, dealProducts: dealProductsCtx } = gsctx;
 
   // get client IP
-  const [myip, setmyip] = useState<string>('');
-
-  useEffect(() => {
-    fetch('https://geolocation-db.com/json/3a2b5be0-75a0-11ec-acd1-89ce18e6dbfe')
-      .then((response) => response.json())
-      .then((data) => setmyip(data.IPv4));
-  }, []);
+  const [clientIP] = useIP();
 
   const validationSchema = yup.object({
     username: yup
@@ -49,6 +44,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
   });
 
+  // const { showSuccess } = useAlert();
   const {
     handleSubmit, values, handleChange, touched, errors,
   }: FormikProps<IValues> = useFormik<IValues>({
@@ -66,18 +62,13 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       const { username, selectedProducts: products } = valz;
 
       // merge selected products with groupshop deal prodcuts
+
       const dealProducts: DealProduct[] = [...products?.map((productId) => {
         const product:DealProduct = {
-          productId, addedBy: username, customerIP: myip, type: 'deal',
+          productId, addedBy: username, customerIP: clientIP, type: 'deal',
         };
         return product;
-      }) || [], ...dealProductsCtx?.map( // remove __typename
-        ({
-          addedBy, customerIP, productId, type,
-        }) => ({
-          addedBy, customerIP, productId, type,
-        }),
-      ) || []];
+      }) || []];
 
       await addDealProduct({
         variables: {

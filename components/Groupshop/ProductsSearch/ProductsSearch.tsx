@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext, useRef } from 'react';
+import React, {
+  useState, useContext, useRef, useEffect,
+} from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import { IProduct, RootProps } from 'types/store';
@@ -13,6 +15,8 @@ import useDebounce from 'hooks/useDebounce';
 import { X } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
 import AddDealProduct from 'components/Forms/AddDealProduct';
+import useDeal from 'hooks/useDeal';
+import useAlert from 'hooks/useAlert';
 import ProductGrid from '../ProductGrid/ProductGrid';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -30,6 +34,8 @@ const ProductsSearch = ({
     dispatch,
   } = useContext(GroupshopContext);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 24 ~ gsctx', gsctx);
+
+  const { clientDealProducts } = useDeal();
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -49,7 +55,11 @@ const ProductsSearch = ({
   } = gsctx;
 
   const [selected, setSelected] = useState<string[]|undefined>(undefined);
-  // const [smShow, setSmShow] = useState(false);
+
+  useEffect(() => {
+    if (!selected || selected.length < 1) { setSelected(clientDealProducts()); }
+  }, [selected]);
+
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 37 ~ selected', selected);
   const searchPrd = (name:string) => {
     if (products && name) {
@@ -63,7 +73,7 @@ const ProductsSearch = ({
   const debouncedSearch = useDebounce(
     (nextValue:string) => searchPrd(nextValue), 1000, products || [],
   );
-
+  const { AlertComponent, showSuccess } = useAlert();
   const handleSubmit = (e:any) => { e.preventDefault(); };
   const closeModal = (e: any) => {
     setotherProducts(undefined);
@@ -213,7 +223,13 @@ const ProductsSearch = ({
                           </strong>
                           {' '}
                           to this Groupshop
-                          <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
+                          <AddDealProduct
+                            selectedProducts={selected}
+                            handleClose={(e) => {
+                              closeModal(e);
+                              showSuccess('Product(s) has been added successfully.');
+                            }}
+                          />
                         </p>
                       </Popover.Body>
                     </Popover>
@@ -263,7 +279,7 @@ const ProductsSearch = ({
         </Modal.Body>
 
       </Modal>
-
+      <AlertComponent />
     </>
   );
 };
