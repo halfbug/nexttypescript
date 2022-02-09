@@ -19,7 +19,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * Button contents
    */
-   children: string;
+  children: string;
   /**
    * Optional click handler
    */
@@ -38,13 +38,13 @@ const Button = ({
   ...props
 }: ButtonProps) => (
   <button
-      // variant="outline-primary"
+    // variant="outline-primary"
     className={styles.onboarding__button}
-      // eslint-disable-next-line react/button-has-type
-      // type={props.type}
-      // type="button"
-      // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      // style={{ backgroundColor }}
+    // eslint-disable-next-line react/button-has-type
+    // type={props.type}
+    // type="button"
+    // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+    // style={{ backgroundColor }}
     {...props}
     onClick={onClick}
   >

@@ -77,139 +77,133 @@ export default function OBCampaign() {
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
-
+  const Bstyle = {
+    width: '143px',
+  };
   return (
-    <Col className="text-sm-start" md={8}>
 
-      <Form noValidate onSubmit={handleSubmit}>
-        <Row className="mt-3"><h4>Name your Groupshop campaign</h4></Row>
-        <Row>
-          <Col xs={9}>
-            <Form.Group className="mb-3" controlId="campainNameValidation">
-              <Form.Control
-                type="email"
-                placeholder="My first campaign..."
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-                isInvalid={touched.name && !!errors.name}
-                onBlur={(e) => setValue('name', e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.name}
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Col>
-          <Col xs={3}>
-            <Form.Text className="text-muted">
-              {values.name?.length}
-              /20
-            </Form.Text>
-          </Col>
-        </Row>
-        <Row className="mt-3">
-          <h4>
-            Select
+    <Form noValidate onSubmit={handleSubmit} className="mx-4">
+      <Row className="mt-3"><h4>Name your Groupshop campaign</h4></Row>
+      <Row className="d-flex">
+        <Col lg={9}>
+          <Form.Group className="mb-3" controlId="campainNameValidation">
+            <Form.Control
+              type="email"
+              placeholder="My first campaign..."
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              isInvalid={touched.name && !!errors.name}
+              onBlur={(e) => setValue('name', e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.name}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        <Col lg={3}>
+          <Form.Text className="text-muted">
+            {values.name?.length}
+            /20
+          </Form.Text>
+        </Col>
+      </Row>
+      <Row className="mt-3">
+        <h4>
+          Select
+          {' '}
+          &
+          {' '}
+          add products from your store
+        </h4>
+      </Row>
+      <Row className="text-muted"><h6>Customers can get discounts on the products selected below by default.</h6></Row>
+      <Row className="mt-2">
+        <Col>
+          <Form.Check
+            inline
+            label="Best sellers"
+            onChange={handleChange}
+            type="radio"
+            name="criteria"
+            isInvalid={touched.criteria && !!errors.criteria}
+            value="bestseller"
+            onClick={() => setValue('criteria', 'bestseller')}
+            checked={values.criteria === 'bestseller'}
+          />
+          <Form.Check
+            inline
+            onChange={handleChange}
+            label="Newest products"
+            type="radio"
+            name="criteria"
+            value="newest"
+            isInvalid={touched.criteria && !!errors.criteria}
+            onClick={() => setValue('criteria', 'newest')}
+            checked={values.criteria === 'newest'}
+          />
+        </Col>
+      </Row>
+      <Row className="mt-2 ">
+        <Col>
+          <Form.Check
+            inline
+            label="Specific products/collections (up to 80 products)"
+            onChange={handleChange}
+            onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
+            type="radio"
+            name="criteria"
+            isInvalid={touched.criteria && !!errors.criteria}
+            value="custom"
+            checked={values.criteria === 'custom'}
+          />
+
+        </Col>
+        <Form.Control.Feedback type="invalid">
+          {errors.criteria}
+        </Form.Control.Feedback>
+      </Row>
+      <ProductButton disableBtn={disableBtn} />
+      {/* <p>25 product(s)/2 collection(s) selected</p> */}
+      <Row className="mt-4">
+        <Col lg={12}>
+          <h4 className="mt-1">
+            Allow customers to add products from your store
             {' '}
-            &
-            {' '}
-            add products from your store
+            <InfoCircle />
+
           </h4>
-        </Row>
-        <Row className="text-muted"><h6>Customers can get discounts on the products selected below</h6></Row>
-        <Row className="mt-2">
-          <Col>
-            <Form.Check
-              inline
-              label="Best sellers"
-              onChange={handleChange}
-              type="radio"
-              name="criteria"
-              isInvalid={touched.criteria && !!errors.criteria}
-              value="bestseller"
-              onClick={() => setValue('criteria', 'bestseller')}
-              checked={values.criteria === 'bestseller'}
-            />
-            <Form.Check
-              inline
-              onChange={handleChange}
-              label="Newest products"
-              type="radio"
-              name="criteria"
-              value="newest"
-              isInvalid={touched.criteria && !!errors.criteria}
-              onClick={() => setValue('criteria', 'newest')}
-              checked={values.criteria === 'newest'}
-            />
-          </Col>
-        </Row>
-        <Row className="mt-2">
-          <Col>
-            <Form.Check
-              inline
-              label="Specific products/collections (up to 80 products)"
-              onChange={handleChange}
-              onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
-              type="radio"
-              name="criteria"
-              isInvalid={touched.criteria && !!errors.criteria}
-              value="custom"
-              checked={values.criteria === 'custom'}
-            />
 
-          </Col>
-          <Form.Control.Feedback type="invalid">
-            {errors.criteria}
-          </Form.Control.Feedback>
-        </Row>
-        <ProductButton disableBtn={disableBtn} />
-        <Row className="mt-3">
-          <Col xs={12}>
-            <h4>
-              Allow customers to join existing Groupshop pages
+        </Col>
+
+      </Row>
+      <Row className="text-muted"><h6>Select additional products that customers can add to personalize their Groupshop.</h6></Row>
+      <Row className="mt-2">
+        {/* <Col xs={3} md={4}> </Col> */}
+        <Col xs={12} md={6} className="text-right">
+          <ToggleButtonGroup type="radio" name="joinExisting" value={values.joinExisting}>
+            <ToggleButton variant="outline-primary" id="joinExisting-d" value={0} onChange={handleChange} onClick={() => setValue('joinExisting', 0)}>
               {' '}
-              {' '}
-              <InfoCircle />
+              Add products
+            </ToggleButton>
 
-            </h4>
+          </ToggleButtonGroup>
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col lg={4}>
+          <Button style={Bstyle} onClick={() => setParams({ ins: 1 })}>Previous</Button>
+        </Col>
+        <Col lg={4} className="text-center d-flex align-items-center justify-content-center">
+          <span className="text-muted">2/4</span>
+        </Col>
+        <Col lg={4} className="d-flex justify-content-end">
+          <Button style={Bstyle} type="submit"> Next </Button>
 
-          </Col>
+        </Col>
 
-        </Row>
-        <Row className="text-muted"><h6>When enabled, customers can access discounts from existing Groupshop pages</h6></Row>
-        <Row className="mt-2">
-          {/* <Col xs={3} md={4}> </Col> */}
-          <Col xs={12} md={6} className="text-right">
-            <ToggleButtonGroup type="radio" name="joinExisting" value={values.joinExisting}>
-              <ToggleButton variant="outline-primary" className="rounded-pill me-2" id="joinExisting-e" value={1} onChange={handleChange} onClick={() => setValue('joinExisting', 1)}>
-                <Check2Circle className="fs-4" />
-                {' '}
-                Enabled
-              </ToggleButton>
-              <ToggleButton variant="outline-primary" className="rounded-pill" id="joinExisting-d" value={0} onChange={handleChange} onClick={() => setValue('joinExisting', 0)}>
-                <XCircle className="fs-5" />
-                {' '}
-                Disabled
-              </ToggleButton>
+      </Row>
 
-            </ToggleButtonGroup>
-          </Col>
-        </Row>
-        <Row className="mt-5">
-          <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 1 })}>Previous</Button>
-          </Col>
-          <Col xs={4} className="text-center">
-            <span className="text-muted">2/4</span>
-          </Col>
-          <Col xs={4} className="d-flex justify-content-end">
-            <Button type="submit"> Next </Button>
-
-          </Col>
-
-        </Row>
-
-      </Form>
-    </Col>
+    </Form>
   );
 }
