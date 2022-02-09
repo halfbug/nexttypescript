@@ -4,6 +4,7 @@ import Dialogue from 'components/Layout/Dialogue/dialogue';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from 'styles/Step0.module.scss';
 import HeadLogo from 'assets/images/Logo.svg';
+import Brand1 from 'assets/images/brandmark1.png';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Button from 'components/Buttons/Button/Button';
@@ -28,12 +29,19 @@ const Step0 = ({ show }: IStep0Props) => {
       {/* <ProgressBar progress="100" /> */}
       <Container className={styles.welcome}>
         <Row>
-          <Col md={4} className={styles.sideImg} />
-          <Col md={8}>
+          <Col lg={5} className={styles.sideImg} />
+          <Col lg={7} d-flex justify-content-center>
             <Row className="my-4">
               <Col>
-                <h3 className="font-weight-bold">Welcome to</h3>
-                <HeadLogo />
+                <Row>
+                  <Col lg={6} className="m-4 mt-3">
+                    <h3 className="font-weight-bold">Welcome to</h3>
+                    <HeadLogo />
+                  </Col>
+                  <Col lg={3}>
+                    <img src={Brand1.src} alt="Brand1" />
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <Row className="my-3">
