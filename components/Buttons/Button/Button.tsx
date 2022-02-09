@@ -49,7 +49,7 @@ const Button = ({
     onClick={onClick}
   >
     <span>
-      <span>
+      <span className="fw-bold">
         {children}
       </span>
     </span>

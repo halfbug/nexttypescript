@@ -18,12 +18,12 @@ const Step1 = ({ show }: IStep0Props) => (
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
 
-      <Row className="my-4">
+      <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="About the brand"
           content="Tell us who you are by adding your brand name, logo, and industry."
         />
-        <Col className="text-sm-start mt-3" md={8}>
+        <Col className="text-sm-start mt-3 border-start" lg={7}>
           <BrandInfo />
         </Col>
       </Row>

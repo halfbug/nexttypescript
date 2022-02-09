@@ -36,6 +36,7 @@ export default function BrandInfo() {
       .max(20, 'Too Long !! only 20 characters allowed.'),
 
   });
+
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
@@ -47,7 +48,7 @@ export default function BrandInfo() {
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+    onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { brandName, industry, logoImage } = valz;
 
@@ -71,8 +72,8 @@ export default function BrandInfo() {
   });
 
   return (
-    <Form noValidate onSubmit={handleSubmit}>
-      <Row><h4>Enter your brand name</h4></Row>
+    <Form noValidate onSubmit={handleSubmit} className="mx-4">
+      <Row className="mt-3"><h4>Enter your brand name</h4></Row>
       <Row>
         <h6>
           This identifies your business on your customers’ Groupshop page
@@ -80,8 +81,8 @@ export default function BrandInfo() {
 
       </Row>
       <Row>
-        <Col xs={9}>
-          <Form.Group className="" controlId="brandNamevalidation">
+        <Col lg={9}>
+          <Form.Group className="mt-0" controlId="brandNamevalidation">
             <Form.Control
               type="text"
               name="brandName"
@@ -96,51 +97,56 @@ export default function BrandInfo() {
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
-        <Col xs={3}>
-          <Form.Text className="text-muted align-baseline">
+        <Col lg={2} className="d-flex align-items-center justify-content-start">
+          <Form.Text className=" text-muted align-baseline">
             {values.brandName.length}
             /20
           </Form.Text>
         </Col>
       </Row>
-      <Row className="mt-3"><h4>Upload your logo</h4></Row>
+      <Row className="mt-4"><h4>Upload your logo</h4></Row>
       <Row>
-
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
           <UploadButton setFieldValue={setFieldValue} field="logoImage" />
-          <Form.Text className="text-muted p-2 align-self-center">
-            Under 5 MB (Formats: PNG, JPG, JPEG)
-          </Form.Text>
+          <Col lg={9} className="d-flex align-items-center justify-content-start">
+            <Form.Text className="text-muted text-center d-flex align-self-center">
+              Under 5 MB
+              <br />
+              (Formats: PNG, JPG, JPEG)
+            </Form.Text>
+          </Col>
         </Form.Group>
       </Row>
       <Row><h4>Select your industry</h4></Row>
       <Row>
-        {' '}
-        <InputGroup>
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            onChange={handleChange}
-            name="industry"
-            defaultValue=""
-          >
-            <option value="">Click to select</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </InputGroup>
+        <Col lg={6}>
+          {' '}
+          <InputGroup>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={handleChange}
+              name="industry"
+              defaultValue=""
+            >
+              <option value="">Click to select</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </InputGroup>
+        </Col>
       </Row>
       <Row />
       <Row className="mt-5 justify-content-center">
-        <Col xs={4}>
+        <Col lg={4}>
           {/* <Button>Previous</Button> */}
         </Col>
-        <Col xs={4} className="text-center">
+        <Col lg={4} className="text-center d-flex align-items-center ">
           <span className="text-muted">1/4</span>
         </Col>
-        <Col xs={4} className="d-flex justify-content-end">
+        <Col lg={4} className="d-flex justify-content-end ">
           <Button type="submit"> Next </Button>
           {/* onClick={() => setParams({ ins: 2 })} */}
         </Col>
