@@ -11,6 +11,7 @@ import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
 import { Send } from 'react-bootstrap-icons';
 import useCart from 'hooks/useCart';
+import useDeal from 'hooks/useDeal';
 
 interface ProductDetailProps extends RootProps {
   show : boolean;
@@ -36,6 +37,8 @@ const ProductDetail = ({
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
   };
+
+  const { currencySymbol, dPrice } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
 
@@ -137,7 +140,18 @@ const ProductDetail = ({
               <h2>
                 {product?.title}
               </h2>
-              <h3>{product?.price}</h3>
+              <h3>
+                <span className="text-decoration-line-through">
+                  {currencySymbol}
+                  {product?.price}
+                </span>
+                {' '}
+                <span>
+                  {currencySymbol}
+                  {dPrice(+(product?.price || 0)).toFixed(1)}
+                </span>
+
+              </h3>
               <p>
                 {product?.description}
                 -test

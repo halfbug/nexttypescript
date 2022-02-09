@@ -12,6 +12,7 @@ import useDimensions from 'hooks/useDimentions';
 import { Send } from 'react-bootstrap-icons';
 import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
+import useDeal from 'hooks/useDeal';
 import ProductDetail from '../ProductDetail/ProductDetail';
 
 type ProductGridProps = {
@@ -53,6 +54,8 @@ const ProductGrid = ({
       dealProducts,
     } = { discountCode: { percentage: 0 }, dealProducts: [] },
   } = useContext(GroupshopContext);
+
+  const { currencySymbol, dPrice } = useDeal();
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -96,11 +99,18 @@ const ProductGrid = ({
                 {`🔥 ${prod.orders?.length} friends shopped`}
               </p>
               )}
-              <p className="text-center fw-bold fs-5 mb-0">
-                $
+
+              <h5 className="pt-2 text-center fw-bold">
+                <span className="text-decoration-line-through">
+                  {currencySymbol}
+                  {prod.price}
+                </span>
                 {' '}
-                {prod.price}
-              </p>
+                <span>
+                  {currencySymbol}
+                  {dPrice(+(prod.price)).toFixed(1)}
+                </span>
+              </h5>
               <Button
                 variant="primary"
                 className="rounded-pill w-75"
