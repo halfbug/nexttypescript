@@ -11,7 +11,13 @@ export default function useCart() {
 
   const { dPrice } = useDeal();
 
-  const addCartProduct = useCallback((product : CartProduct) => dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } }), [gsctx.cart]);
+  const addCartProduct = useCallback((product : CartProduct) => {
+    const alreadyCartProduct = gsctx.cart?.find((prd) => prd.id === product.id);
+    if (alreadyCartProduct) plusQuantity(alreadyCartProduct.id);
+    else {
+      dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } });
+    }
+  }, [gsctx.cart]);
 
   const cartProducts = gsctx?.cart || [];
 
