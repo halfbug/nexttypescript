@@ -158,7 +158,7 @@ export default function Settings({ isDB }: IProps) {
 
   return (
 
-    <Form noValidate onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit} className="mx-4">
       <Row><h4>Set your brand color</h4></Row>
       <Row>
         <Form.Text className="text-muted mt-0 fs-6">You’ll want a color that stands out on a white background</Form.Text>
@@ -296,7 +296,7 @@ export default function Settings({ isDB }: IProps) {
           <Col xs={4}>
             <Button onClick={() => setParams({ ins: 3 })}>Previous</Button>
           </Col>
-          <Col xs={4} className="text-center">
+          <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
             <span className="text-muted">4/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">

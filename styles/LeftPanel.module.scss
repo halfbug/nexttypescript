@@ -13,7 +13,6 @@
 	h1{
 		margin-top: 42px;
 		font-size: 50px;
-		font-weight: 700;
 		margin-left: 30px;
 
 	}
@@ -34,10 +33,11 @@
 
 	}
 	h1{
+		@extend .fw-normal;
 		margin-top: 42px;
 		font-size: 50px;
-		font-weight: 700;
 		margin-left: 30px;
+		font-weight: 600!important;
 
 	}
 	p {

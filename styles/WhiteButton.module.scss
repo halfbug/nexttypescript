@@ -2,7 +2,7 @@
 
 .whitebutton {
     @extend .p-2;
-
+    height: fit-content;
     background-color: #fff;
     color: #000 !important;
     align-items: center;
