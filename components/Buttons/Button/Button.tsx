@@ -4,47 +4,20 @@ import React from 'react';
 import styles from 'styles/Button.module.scss';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * Is this the principal call to action on the page?
-   */
   primary?: boolean;
-  /**
-   * What background color to use
-   */
-  //  type?: ButtonHTMLAttributes<HTMLButtonElement>.type;
-  /**
-   * How large should the button be?
-   */
-  // size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
   children: string;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
 }
 
-/**
- * Primary UI component for user interaction
- */
 const Button = ({
-  // primary = false,
-  // size = 'medium',
   type,
   children,
   onClick,
+  className,
   ...props
 }: ButtonProps) => (
   <button
-    // variant="outline-primary"
-    className={styles.onboarding__button}
-    // eslint-disable-next-line react/button-has-type
-    // type={props.type}
-    // type="button"
-    // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-    // style={{ backgroundColor }}
+    className={[styles.onboarding__button, className].join(' ')}
     {...props}
     onClick={onClick}
   >

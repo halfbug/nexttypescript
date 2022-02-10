@@ -32,6 +32,8 @@ import _ from 'lodash';
 import Cart from 'components/Groupshop/Cart/Cart';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
+import Button from 'components/Buttons/Button/Button';
+import Footer from 'components/Layout/FooterGS/FooterGS';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
@@ -193,8 +195,8 @@ const GroupShop: NextPage = () => {
               )}
               label="EARN CASHBACK"
             />
-            <IconButton icon={<Search size={24} />} className="mx-2" />
-            <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>(2)</IconButton>
+            <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} />
+            <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
           </Col>
 
         </Row>
@@ -319,6 +321,13 @@ const GroupShop: NextPage = () => {
           </div>
         </div>
       </ProductGrid>
+      <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
+        <Col className="d-flex justify-content-center flex-column">
+          <p>Don’t see what you like?</p>
+          <Button className="align-self-center fs-4 px-5" onClick={handleAddProduct}>Add a Product</Button>
+        </Col>
+      </Row>
+      <Footer LeftComp={undefined} RightComp={undefined} />
       <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
       <Cart show={showCart} handleClose={() => setshowCart(false)} product={undefined} />
       <AlertComponent />

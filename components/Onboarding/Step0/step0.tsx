@@ -9,13 +9,7 @@ import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
-// import SideImg from 'assets/images/step0img.svg';
-// import ConeEmoji from 'assets/images/Cone.svg';
-// import BrandlogoBlack from 'assets/images/brandmark1.svg';
 import Icon from 'assets/images/Cone.svg';
-// import ProgressBar from '../ProgressBar/ProgressBar';
-
-// console.log('🚀 ~ file: step0.tsx ~ line 8 ~ Cart', Cart);
 
 interface IStep0Props {
   show: boolean,
