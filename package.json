@@ -32,6 +32,7 @@
 		"react-dom": "17.0.2",
 		"react-icons": "^4.3.1",
 		"react-share": "^4.4.0",
+		"react-show-more-text": "^1.5.2",
 		"yup": "^0.32.11"
 	},
 	"devDependencies": {
@@ -49,6 +50,7 @@
 		"@types/color": "^3.0.2",
 		"@types/react": "17.0.29",
 		"@types/react-color": "^3.0.6",
+		"@types/react-show-more-text": "^1.4.2",
 		"@types/react-copy-to-clipboard": "^5.0.2",
 		"@typescript-eslint/eslint-plugin": "^5.0.0",
 		"@typescript-eslint/parser": "^5.0.0",

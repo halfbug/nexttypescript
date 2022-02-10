@@ -2429,6 +2429,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/polyfill@npm:^7.12.1":
+  version: 7.12.1
+  resolution: "@babel/polyfill@npm:7.12.1"
+  dependencies:
+    core-js: ^2.6.5
+    regenerator-runtime: ^0.13.4
+  checksum: 3f59a9d85a41b390b044a1be13e11ae6d8efbfcf4e07217964585c7cef337b828eecfc5e164083227189146d2b6efc1affae8f59c831438eb40b848ab6fe5f39
+  languageName: node
+  linkType: hard
+
 "@babel/preset-env@npm:7.12.1":
   version: 7.12.1
   resolution: "@babel/preset-env@npm:7.12.1"
@@ -5391,6 +5401,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-show-more-text@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@types/react-show-more-text@npm:1.4.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: de4e298151c058e1c2ba5e088e1b3712373e731bf5bd5633dadc115de7438b876f361e91270946c4790c6cb7db47a544c4e599b6b28cfe78e19ed200d65b35c3
+  languageName: node
+  linkType: hard
+
 "@types/react-syntax-highlighter@npm:11.0.5":
   version: 11.0.5
   resolution: "@types/react-syntax-highlighter@npm:11.0.5"
@@ -8218,6 +8237,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js@npm:^2.6.5":
+  version: 2.6.12
+  resolution: "core-js@npm:2.6.12"
+  checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
+  languageName: node
+  linkType: hard
+
 "core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
   version: 3.19.0
   resolution: "core-js@npm:3.19.0"
@@ -10994,6 +11020,7 @@ fsevents@^1.2.7:
     "@types/react": 17.0.29
     "@types/react-color": ^3.0.6
     "@types/react-copy-to-clipboard": ^5.0.2
+    "@types/react-show-more-text": ^1.4.2
     "@types/yup": ^0.29.13
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
@@ -11030,6 +11057,7 @@ fsevents@^1.2.7:
     react-dom: 17.0.2
     react-icons: ^4.3.1
     react-share: ^4.4.0
+    react-show-more-text: ^1.5.2
     react-test-renderer: ^17.0.2
     sass: ^1.43.4
     sass-loader: 10.1.1
@@ -16284,6 +16312,18 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ^16.3.0 || ^17
   checksum: 69306d4593cbbc8043383d03a6aea254affb9d74f79da79903bfb6fb044451516761b955786a4b1bf54b84ff9ddeaa4512f3722388e80b073defcd3949f1abc4
+  languageName: node
+  linkType: hard
+
+"react-show-more-text@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "react-show-more-text@npm:1.5.2"
+  dependencies:
+    "@babel/polyfill": ^7.12.1
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">= 16.x.x"
+  checksum: 10d9f5ce23a07e6ceeeb3af9fffae89251bfd319364267dc7db80554f68dbe0caa76515439d274312807c580e66731d4943dc69c73db5131a736820a2924969d
   languageName: node
   linkType: hard
 

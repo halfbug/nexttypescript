@@ -11,6 +11,7 @@ import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
 import { Send } from 'react-bootstrap-icons';
 import useCart from 'hooks/useCart';
+import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
 
 interface ProductDetailProps extends RootProps {
@@ -152,44 +153,58 @@ const ProductDetail = ({
                 </span>
 
               </h3>
-              <p>
-                {product?.description}
-                -test
-              </p>
-              {product?.options?.map(({ name, values, id }) => (
-                <div key={id} className="mt-2">
-                  <h4>{name}</h4>
-                  <Form.Select
-                    aria-label="option"
-                    className="w-50"
-                    onChange={({ target: { value } }) => {
-                      setselOptions({ ...selOptions, [name]: value });
-                    }}
-                    value={selOptions?.[name]}
-                  >
-                    {values.map((val: string, idx) => (
-                      <>
-                        {idx === 0 && (
-                        <option key={Math.random()}>
-                          --
-                          {name}
-                          --
-                        </option>
-                        )}
-                        <option
-                          value={val}
-                          className="text-upercase"
-                          key={Math.random()}
-                        >
-                          {val}
+              <div className={styles.groupshop_modal_detail_height}>
+                <ShowMoreText
+                /* Default options */
+                  lines={3}
+                  more="Show more"
+                  less="Show less"
+                  className="content-css"
+                  anchorClass="my-anchor-css-class"
+                  // onClick={this.executeOnClick}
+                  expanded={false}
+                  width={0}
+                  truncatedEndingComponent="... "
+                >
+                  {product?.description}
 
-                        </option>
-                      </>
-                    ))}
-                  </Form.Select>
+                </ShowMoreText>
 
-                </div>
-              ))}
+                {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
+                  <div key={id} className="mt-2">
+                    <h4>{name}</h4>
+                    <Form.Select
+                      aria-label="option"
+                      className="w-50"
+                      onChange={({ target: { value } }) => {
+                        setselOptions({ ...selOptions, [name]: value });
+                      }}
+                      value={selOptions?.[name]}
+                    >
+                      {values.map((val: string, idx) => (
+                        <>
+                          {idx === 0 && (
+                          <option key={Math.random()}>
+                            --
+                            {name}
+                            --
+                          </option>
+                          )}
+                          <option
+                            value={val}
+                            className="text-upercase"
+                            key={Math.random()}
+                          >
+                            {val}
+
+                          </option>
+                        </>
+                      ))}
+                    </Form.Select>
+
+                  </div>
+                ))}
+              </div>
               <Button
                 variant="primary"
                 className="rounded-2 w-75 pt-2 mt-3 me-2"
