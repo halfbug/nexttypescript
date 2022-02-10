@@ -11,7 +11,7 @@ import { ICampaign } from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
-import { CREATE_CAMPAIGN } from 'store/store.graphql';
+import { CREATE_CAMPAIGN, UPDATE_CAMPAIGN } from 'store/store.graphql';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
@@ -20,6 +20,7 @@ export default function OBCampaign() {
     // eslint-disable-next-line no-unused-vars
     { data, loading, error },
   ] = useMutation<ICampaign, ICampaign | null>(CREATE_CAMPAIGN);
+  const [editCampaign] = useMutation<any, ICampaign | null>(UPDATE_CAMPAIGN);
 
   const { store, dispatch } = React.useContext(StoreContext);
 
@@ -53,22 +54,43 @@ export default function OBCampaign() {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       if (validateForm) validateForm(valz);
       const { name, criteria, joinExisting } = valz;
+      let campObj:null | any;
+      let newObj;
 
-      const campObj:null | any = await addCampaign({
-        variables: {
-          createCampaignInput: {
-            storeId: store.id,
-            name,
-            criteria,
-            isActive: true,
-            // eslint-disable-next-line radix
-            joinExisting: Boolean(parseInt(joinExisting ?? 1)),
-            products: store?.newCampaign?.productsArray,
+      if (store?.newCampaign?.id) {
+        campObj = await editCampaign({
+          variables: {
+            updateCampaignInput: {
+              storeId: store.id,
+              id: store?.newCampaign.id,
+              name,
+              criteria,
+              isActive: true,
+              // eslint-disable-next-line radix
+              joinExisting: Boolean(parseInt(joinExisting ?? 1)),
+              products: store?.newCampaign?.productsArray,
+            },
           },
-        },
-      });
-      const { id } = campObj.data.createCampaign;
-      const newObj = { ...valz, id };
+        });
+        newObj = { ...valz, id: store?.newCampaign.id };
+      } else {
+        campObj = await addCampaign({
+          variables: {
+            createCampaignInput: {
+              storeId: store.id,
+              name,
+              criteria,
+              isActive: true,
+              // eslint-disable-next-line radix
+              joinExisting: Boolean(parseInt(joinExisting ?? 1)),
+              products: store?.newCampaign?.productsArray,
+            },
+          },
+        });
+        const { id } = campObj.data.createCampaign;
+        newObj = { ...valz, id };
+      }
+
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: newObj } });
       setParams({ ins: 3 });
     },
@@ -80,6 +102,8 @@ export default function OBCampaign() {
   const Bstyle = {
     width: '143px',
   };
+  console.log({ store });
+
   return (
 
     <Form noValidate onSubmit={handleSubmit} className="mx-4">
