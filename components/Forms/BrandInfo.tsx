@@ -28,6 +28,21 @@ export default function BrandInfo() {
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
   console.log({ store });
+  const [state, setstate] = React.useState({
+    brandName: '',
+    industry: '',
+    logoImage: '',
+  });
+  React.useEffect(() => {
+    if (store.brandName) {
+      const newState: IValues = {
+        brandName: store?.brandName!,
+        industry: store?.industry!,
+        logoImage: store?.logoImage!,
+      };
+      setstate({ ...newState });
+    }
+  }, [store]);
   const validationSchema = yup.object({
     brandName: yup
       .string()
@@ -40,14 +55,11 @@ export default function BrandInfo() {
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
-    initialValues: {
-      brandName: '',
-      industry: '',
-      logoImage: '',
-    },
+    initialValues: state,
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
+    enableReinitialize: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { brandName, industry, logoImage } = valz;
@@ -108,7 +120,11 @@ export default function BrandInfo() {
       <Row>
         <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
-          <UploadButton setFieldValue={setFieldValue} field="logoImage" />
+          <UploadButton
+            setFieldValue={setFieldValue}
+            field="logoImage"
+            value={values.logoImage}
+          />
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className="text-muted text-center d-flex align-self-center">
               Under 5 MB
@@ -129,6 +145,7 @@ export default function BrandInfo() {
               onChange={handleChange}
               name="industry"
               defaultValue=""
+              value={values.industry}
             >
               <option value="">Click to select</option>
               <option value="1">One</option>
