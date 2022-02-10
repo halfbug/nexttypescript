@@ -119,7 +119,7 @@ export default function UpdateRewards() {
   const btns = [
     { text: 'Low', cssName: 'low_btn' },
     { text: 'Average', cssName: 'avg_btn' },
-    { text: 'Hign', cssName: 'high_btn' },
+    { text: 'High', cssName: 'high_btn' },
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
   console.log({ values });

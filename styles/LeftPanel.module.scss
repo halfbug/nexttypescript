@@ -27,7 +27,7 @@
 	background-image: url("../assets/images/brandmark3.png");
 	background-size: 80% 100% cover;
 	background-repeat: no-repeat;
-	@extend .text-start, .border-end;
+	@extend .text-start;
 	&:first-child {
 		@extend .pt-5;
 		@extend .mt-5;

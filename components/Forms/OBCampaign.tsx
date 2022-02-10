@@ -199,9 +199,7 @@ export default function OBCampaign() {
         </Col>
         <Col lg={4} className="d-flex justify-content-end">
           <Button style={Bstyle} type="submit"> Next </Button>
-
         </Col>
-
       </Row>
 
     </Form>

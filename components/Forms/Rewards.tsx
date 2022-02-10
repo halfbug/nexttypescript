@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable quotes */
@@ -72,8 +73,18 @@ export default function Rewards() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { rewards, selectedTarget } = valz;
-      selectedTarget.rewards.map((item:any) => (delete item['__typename']));
-      delete selectedTarget['__typename'];
+
+      if (selectedTarget) {
+        delete selectedTarget["__typename"];
+        if (selectedTarget.rewards.length) {
+          const newR = selectedTarget?.rewards.map((item: any) => {
+            const { __typename, ...valWithoutTypename } = item;
+            return valWithoutTypename;
+          });
+          selectedTarget.rewards = [...newR];
+        }
+      }
+
       const id = store?.newCampaign?.id;
       if (id) {
         await addReward({
@@ -136,7 +147,7 @@ export default function Rewards() {
   const btns = [
     { text: 'Low', cssName: 'low_btn' },
     { text: 'Average', cssName: 'avg_btn' },
-    { text: 'Hign', cssName: 'high_btn' },
+    { text: 'High', cssName: 'high_btn' },
     { text: 'SuperCharged', cssName: 'super_btn' },
   ];
   // const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
@@ -146,10 +157,10 @@ export default function Rewards() {
   return (
     <section className={styles.rewards}>
 
-      <Form noValidate onSubmit={handleSubmit}>
+      <Form noValidate onSubmit={handleSubmit} className="mx-4">
         <Row className="mt-5"><Col><h4>Adjust your target sales volume</h4></Col></Row>
         <Row className={styles.rewards_text_lg}>
-          <Col>
+          <Col className="text-muted">
             Choose one of our recommended options. You can
             {' '}
             <br />
@@ -157,60 +168,56 @@ export default function Rewards() {
             adjust them later on in the Settings page.
           </Col>
         </Row>
-        <Row className="mt-3"><Col><h6>Select your desired sales volume:</h6></Col></Row>
-        <Row className={styles.rewards_text_lg}>
-          <Col>
+        <Row className="mt-2"><Col><h5>Select your desired sales volume:</h5></Col></Row>
+        <Row className={styles.rewards_text_sm}>
+          <Col className="text-muted">
             <h6>
+              {' '}
               We’ll set your reward tiers based on our
               recommendations..
+
             </h6>
           </Col>
         </Row>
-        <Row className="m-0">
-          <Col className="text-start">
-            <ButtonGroup>
-              {salesTarget.map((starget: any, index: number) => (
-                <ToggleButton
-                  key={starget.id}
-                  id={starget.id}
-                  type="radio"
-                  variant="outline"
-                  name="salesTarget"
-                  value={JSON.stringify(starget)}
-                  checked={starget.id === values.rewards}
-                  onChange={(e) => {
-                    const selectedTarget = JSON.parse(e.currentTarget.value);
-                    setFieldValue('rewards', selectedTarget.id);
-                    setFieldValue('selectedTarget', { ...selectedTarget });
-                  }}
-                  // className={btns[index].cssName}
-                  // bsPrefix={styles.rewards_hide}
-                  style={{ width: '66px' }}
-                >
-                  {/* <MyButton className={btns[index].cssName} variant="light"> */}
-                  {btns[index].text}
-                  {/* </MyButton> */}
-                </ToggleButton>
+        <Row className="mt-2 mb-2">
+          <Col className="text-start" id="rbtn">
 
-              ))}
-            </ButtonGroup>
+            {salesTarget.map((starget: any, index: number) => (
+              <MyButton
+                key={starget.id}
+                id={starget.id}
+                variant="none"
+                rounded-pill
+                className={index === 0 ? styles.low_btn
+                  : index === 1 ? styles.avg_btn
+                    : index === 2 ? styles.high_btn
+                      : index === 3 ? styles.super_btn : ''}
+                onClick={(e) => {
+                  const selectedTarget = starget;
+                  setFieldValue('rewards', selectedTarget.id);
+                  setFieldValue('selectedTarget', { ...selectedTarget });
+                }}
+              >
+                {btns[index].text}
+
+              </MyButton>
+            ))}
           </Col>
         </Row>
-
         <Row className={styles.rewards__box2}>
-          <Col sm={6}>
+          <Col lg={6}>
             <h4 className="fs-4">Baseline</h4>
             <div className={styles.rewards__percent_btn}>{minDiscount}</div>
 
           </Col>
-          <Col sm={6}>
+          <Col lg={6}>
             <h4 className="fs-4">Maximum</h4>
             <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
           </Col>
 
         </Row>
 
-        <Row className="mt-3 w-75">
+        <Row className="mt-3 ">
           <Col>
             🌟 Be generous – reward your customers the same way you reward Facebook or Google
             for finding you leads.
@@ -221,8 +228,8 @@ export default function Rewards() {
           <Col xs={4}>
             <Button onClick={() => setParams({ ins: 2 })}>Previous</Button>
           </Col>
-          <Col xs={4} className="text-center">
-            <span className="text-muted">2/4</span>
+          <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
+            <span className="text-muted">3/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
             <Button type="submit"> Next </Button>

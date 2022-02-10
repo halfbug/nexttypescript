@@ -65,7 +65,7 @@ export default function DBRewards({
   const btns = [
     { text: 'Low', cssName: 'low_btn', id: '1' },
     { text: 'Average', cssName: 'avg_btn', id: '2' },
-    { text: 'Hign', cssName: 'high_btn', id: '3' },
+    { text: 'High', cssName: 'high_btn', id: '3' },
     { text: 'SuperCharged', cssName: 'super_btn', id: '4' },
   ];
 
