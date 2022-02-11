@@ -1,5 +1,5 @@
 @import "./variables.scss";
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,500;0,700;1,500&family=Fahkwang:wght@300;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,500;0,700;1,500&family=Fahkwang:wght@300;500;700&display=swap");
 
 $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
 	"Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
@@ -8,7 +8,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 .groupshop {
 	// @extend .px-2, .border-bottom;
 	background-color: white !important;
-	font-family: 'DM Sans' !important;
+	font-family: "DM Sans" !important;
 	p {
 		@extend .mb-0;
 	}
@@ -34,6 +34,20 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 
+	&_counter_footer {
+
+		p {
+			@extend .fw-bold, .mt-2;
+
+			span {
+				@extend .my-2, .p-3, .border, .border-primary, .rounded, .ms-1, .fs-6;
+				width: 55px;
+				height: 49px;
+				font-size: 12px;
+				border-color: #A68AD6;
+			}
+		}
+	}
 	&_infobutton {
 		@extend .d-flex, .mb-0, .align-items-center;
 		span {
@@ -263,7 +277,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .groupshop_modal;
 			h2 {
 				@extend .fw-bold;
-				font-family: 'DM Sans' !important;
+				font-family: "DM Sans" !important;
 			}
 			&_thumbnail {
 				width: 73px;
@@ -304,7 +318,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 			&_body {
 				@extend .m-0, .p-0, .text-center;
-				font-family: 'DM Sans';
+				font-family: "DM Sans";
 				h3 {
 					@extend .fw-bold;
 				}
@@ -325,7 +339,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_progress {
 				height: 11px;
 				@extend .rounded-3, .mt-1;
-				background: #EDEDEACC;
+				background: #ededeacc;
 			}
 
 			&_thumbnail {
@@ -370,3 +384,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 // button {
 // 	min-width: auto !important;
 // }
+
+.counterBox {
+	background: #a54e4e;
+	border: 2px solid #ccb2f9;
+	box-shadow: 0px 0px 4px rgba(131, 131, 131, 0.0730441);
+	border-radius: 3px;
+}
