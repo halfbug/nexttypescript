@@ -236,7 +236,7 @@ export default function CreateCampaign() {
                       {' '}
                       &
                       {' '}
-                      add products from your store
+                      add products to Groupshop
                     </h4>
                   </Row>
                   <Row className="text-muted"><h6>Customers can get discounts on the products selected below</h6></Row>
