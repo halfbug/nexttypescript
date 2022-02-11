@@ -10,6 +10,7 @@ import Face from 'assets/images/face.svg';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
 import Icon from 'assets/images/Cone.svg';
+import OB1head from 'assets/images/OB1 Head.svg';
 
 interface IStep0Props {
   show: boolean,
@@ -24,10 +25,10 @@ const Step0 = ({ show }: IStep0Props) => {
       <Container className={styles.welcome}>
         <Row>
           <Col lg={5} className={styles.sideImg} />
-          <Col lg={7} d-flex justify-content-center>
-            <Row className="my-4">
-              <Col>
-                <Row>
+          <Col lg={7} d-flex justify-content-center mx-3>
+            <Row>
+              <Col className="justify-content-center align-items-center">
+                {/* <Row className="mx-2 mt-3">
                   <Col lg={6} className="m-4 mt-3">
                     <h3 className="font-weight-bold">Welcome to</h3>
                     <HeadLogo />
@@ -35,19 +36,20 @@ const Step0 = ({ show }: IStep0Props) => {
                   <Col lg={3}>
                     <img src={Brand1.src} alt="Brand1" />
                   </Col>
-                </Row>
+                </Row> */}
+                <OB1head />
               </Col>
             </Row>
-            <Row className="my-3">
+            <Row className="my-3  mx-3 ">
 
               <Col>
-                <h4>We know that nothing beats a friend’s recommendation.</h4>
+                <h4 className="fw-bold">We know that nothing beats a friend’s recommendation.</h4>
               </Col>
 
             </Row>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-3">
               <Col>
-                <h4>
+                <h4 className="fw-bold">
                   Groupshop makes shopping together
                   a breeze with rewards that get your customers excited.
                 </h4>
@@ -92,13 +94,12 @@ const Step0 = ({ show }: IStep0Props) => {
                 <Icon />
               </Col>
               <Col xs={9}>
-                <p className="text-start">
-                  <strong>TLDR - Fewer paid ads, more organic leads.</strong>
+                <p className="text-start fw-bold">
+                  <b>TLDR - Fewer paid ads, more organic leads.</b>
                 </p>
               </Col>
             </Row>
-
-            <Row className="mt-5 justify-content-center">
+            <Row className="mt-4 justify-content-center">
               {/* <Col xs={3} md={4}> </Col> */}
               <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
                 <Button onClick={() => setParams({ ins: 1 })}>GET STARTED</Button>
