@@ -27,7 +27,66 @@
 }
 
  .box_row{
+	@extend .d-flex, .justify-content-center, .mb-3;
+	.box_1 {
+        @extend .mb-4, .p-4 , .mt-0;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+		&:hover {
+			@extend .border, .border-3, .border-primary;
+			border: 1px  $dotted-border-color1;
+			border-color: #a68ad6;
+		}
+
+    }
+
+    .box_2 {
+        @extend .mb-4, .p-4 , .mt-0;
+        border: 1px dashed $dotted-border-color2;
+        border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+		&:hover {
+			@extend .border, .border-3, .border-primary;
+			border: 1px  $dotted-border-color1;
+			border-color: #a68ad6;
+		}
+    }
+
+    .box_3 {
+        @extend .mb-4, .p-4 , .mt-0;
+        border: 1px dashed $OBorange;
+        border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+		&:hover {
+			@extend .border, .border-3, .border-primary;
+			border: 1px  $dotted-border-color1;
+			border-color: #a68ad6;
+		}
+    }
+
+    .box_4 {
+        @extend .mb-4, .p-4 , .mt-0;
+        border: 1px dashed $dotted-border-color4;
+        border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+		&:hover {
+			@extend .border, .border-3,  .border-primary;
+			border: 1px  $dotted-border-color1;
+			border-color: #a68ad6;
+		}
+    }
+
 	.side_box{
+		@extend .mb-3, .p-4;
 	width: 242px;
 	height: 161px;
 	left: 790px;
@@ -39,30 +98,36 @@
 	}
 	&
 	.btn {
+		@extend .py-1, .fw-bold, .m-2, .text-nowrap, .d-flex, .px-2;
 		background: #d5fa52;
+		justify-content: center;
+		align-self: center;
 		border-radius: 6px;
 		border: none;
 		outline: none;
-		height: 22px;
 		text-align: center;
 		align-items: center;
-		margin-top: 5px;
-		width: 66px;
-		margin-left: 20px;
 	}
 	&
 	.free
 	{
-		background: #d5fa52;
-		border-radius: 6px;
+		@extend .py-1, .fw-bold, .m-2 , .d-flex, .justify-content-center;
+        width: 45px;
+        border-radius: 6px;
+        text-align: center;
+		justify-content: center;
+		align-self: center;
 		border: none;
-		outline: none;
-		height: 22px;
-		text-align: center;
-		align-items: center;
-		margin-top: 5px;
-		width: 25px;
-		margin-left: 20px;	
+        background-color: #d5fa52;
+		// background: #d5fa52;
+		// border-radius: 6px;
+		// border: none;
+		// outline: none;
+		// height: 22px;
+		// align-items: center;
+		// margin-top: 5px;
+		// width: 25px;
+		// margin-left: 20px;	
 	}
 	&
 	h2{

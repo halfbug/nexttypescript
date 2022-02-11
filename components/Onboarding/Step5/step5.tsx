@@ -10,6 +10,7 @@ import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import Logo from 'assets/images/Logo.svg';
 import ConeEmoji from 'assets/images/Cone.svg';
+import Conlogo from 'assets/images/screen 5.svg';
 import { StoreContext } from 'store/store.context';
 import Router from 'next/router';
 import BrandlogoBlack from 'assets/images/brandmark1.svg';
@@ -49,75 +50,129 @@ const Step5 = () => {
       {/* <div className={styles.WelcomeModal}> */}
       <Container className={styles.letsgo}>
         <ProgressBar progress="100" />
-        <Row className="my-4 ">
-          <Col md={6} className="border-end pt-lg-5 mt-lg-5">
+        <Row className="my-4 d-flex align-items-center">
+
+          <Col lg={6} className="border-end  mt-lg-5 mr-0 d-flex align-items-center">
             <Row>
-              <Col md={3}>
-                {' '}
-                <BrandlogoBlack className="mt-3" />
-              </Col>
-              <Col className="m-4" md={7}>
-                <h5 className="mt-3">
-                  <ConeEmoji />
-                  {' '}
-                  Congrats on creating your first
-                </h5>
-                <Logo className="mt-2 m-3" />
-              </Col>
+              <Conlogo />
+              <div className="mb-lg-3">
+                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">You’re on the free plan</h6></Col></Row>
+                <Row>
+                  <Col>
+                    {' '}
+                    You only pay for the amount of Groupshop pages
+                    your customers create. The first 100 are on us.
+
+                  </Col>
+
+                </Row>
+                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">Next Steps</h6></Col></Row>
+                <Row>
+                  <Col>
+                    <ul>
+                      <li className="fs-6">
+                        Head to the
+                        {' '}
+                        <span className="fw-bold fs-5">Overview</span>
+                        {' '}
+                        dashboard to track your campaign’s progress
+                      </li>
+                      <li className="fs-6">
+                        Check your
+                        {' '}
+                        <span className="fw-bold fs-5">Analytics</span>
+                        {' '}
+                        for advanced first-party data
+                      </li>
+                      <li className="fs-6">
+                        Explore more features on the
+                        {' '}
+                        <span className="fw-bold fs-5">Settings</span>
+                        {' '}
+                        page
+                      </li>
+                    </ul>
+                  </Col>
+                </Row>
+              </div>
+              <Row><Col><Button onClick={handleClick}>Lets Go</Button></Col></Row>
             </Row>
-            <div className="w-75 mb-lg-3">
-              <Row className="mt-4"><Col><h6 className="fw-bold fs-4">You’re on the free plan</h6></Col></Row>
+
+            {/* <Row>
               <Row>
-                <Col>
+                <Col lg={3}>
                   {' '}
-                  You only pay for the amount of Groupshop pages
-                  your customers create. The first 100 are on us.
-
+                  <BrandlogoBlack className="me-5" />
                 </Col>
-
-              </Row>
-              <Row className="mt-4"><Col><h6 className="fw-bold fs-4">Next Steps</h6></Col></Row>
-              <Row>
-                <Col>
-                  <ul>
-                    <li className="fs-6">
-                      Head to the
-                      {' '}
-                      <span className="fw-bold fs-5">Overview</span>
-                      {' '}
-                      dashboard to track your campaign’s progress
-                    </li>
-                    <li className="fs-6">
-                      Check your
-                      {' '}
-                      <span className="fw-bold fs-5">Analytics</span>
-                      {' '}
-                      for advanced first-party data
-                    </li>
-                    <li className="fs-6">
-                      Explore more features on the
-                      {' '}
-                      <span className="fw-bold fs-5">Settings</span>
-                      {' '}
-                      page
-                    </li>
-                  </ul>
+                <Col className=" d-inline m-4" lg={6}>
+                  <ConeEmoji />
+                  <h5 className=" mt-3 mx-3 fw-bold text-nowarp">
+                    Congrats on creating
+                  </h5>
+                  <Logo className=" mx-3" />
                 </Col>
               </Row>
-            </div>
-            <Row><Col><Button onClick={handleClick}>Lets Go</Button></Col></Row>
+              <div className="mb-lg-3">
+                <Row className="mt-4">
+                <Col><h6 className="fw-bold fs-4">You’re on the free plan</h6></Col></Row>
+                <Row>
+                  <Col>
+                    {' '}
+                    You only pay for the amount of Groupshop pages
+                    your customers create. The first 100 are on us.
+
+                  </Col>
+
+                </Row>
+                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">Next Steps</h6></Col></Row>
+                <Row>
+                  <Col>
+                    <ul>
+                      <li className="fs-6">
+                        Head to the
+                        {' '}
+                        <span className="fw-bold fs-5">Overview</span>
+                        {' '}
+                        dashboard to track your campaign’s progress
+                      </li>
+                      <li className="fs-6">
+                        Check your
+                        {' '}
+                        <span className="fw-bold fs-5">Analytics</span>
+                        {' '}
+                        for advanced first-party data
+                      </li>
+                      <li className="fs-6">
+                        Explore more features on the
+                        {' '}
+                        <span className="fw-bold fs-5">Settings</span>
+                        {' '}
+                        page
+                      </li>
+                    </ul>
+                  </Col>
+                </Row>
+              </div>
+              <Row><Col><Button onClick={handleClick}>Lets Go</Button></Col></Row>
+            </Row> */}
+
           </Col>
-          <Col md={6} className={styles.letsgo__left}>
+
+          <Col lg={6} className={styles.letsgo__left}>
             <Row className={styles.box_row}>
-              <Col className={styles.side_box}>
-                <h2>Explore</h2>
-                <Button className={styles.free}>Free</Button>
-                <p>First 100 Groupshops</p>
+              <Col className={styles.box_1}>
+                <h2 className="fw-bold mb-0 py-0">Explore</h2>
+                <div className="d-flex justify-content-center">
+                  <div className={styles.free}>Free</div>
+                </div>
+                <p className="mb-4 mt-0 py-0">First 100 Groupshops</p>
               </Col>
-              <Col className={styles.side_box}>
-                <h2>Launch</h2>
-                <Button className={styles.btn}>25¢ per Groupshop</Button>
-                <p>
+              <Col className={styles.box_4}>
+                <h2 className="fw-bold mb-0 py-0">Launch</h2>
+                <div className="d-flex justify-content-center">
+                  <div className={styles.btn}>25¢ per Groupshop</div>
+                </div>
+                <p className="mb-4 mt-0 py-0">
                   Up to 1,000 Groupshops
                   {' '}
                   <br />
@@ -127,10 +182,12 @@ const Step5 = () => {
               </Col>
             </Row>
             <Row className={styles.box_row}>
-              <Col className={styles.side_box}>
-                <h2>Growth</h2>
-                <Button className={styles.btn}>20¢ per Groupshop</Button>
-                <p>
+              <Col className={styles.box_3}>
+                <h2 className="fw-bold mb-0 py-0">Growth</h2>
+                <div className="d-flex justify-content-center">
+                  <div className={styles.btn}>20¢ per Groupshop</div>
+                </div>
+                <p className="mb-4 mt-0 py-0">
                   Up to 2,500 Groupshops
                   {' '}
                   <br />
@@ -139,10 +196,12 @@ const Step5 = () => {
 
                 </p>
               </Col>
-              <Col className={styles.side_box}>
-                <h2>Unicorn</h2>
-                <Button className={styles.btn}>10¢ per Groupshop</Button>
-                <p>
+              <Col className={styles.box_2}>
+                <h2 className="fw-bold mb-0 py-0">Unicorn</h2>
+                <div className="d-flex justify-content-center">
+                  <div className={styles.btn}>10¢ per Groupshop</div>
+                </div>
+                <p className="mb-4 mt-0 py-0">
                   2,500+ Groupshops
                   {' '}
                   <br />
