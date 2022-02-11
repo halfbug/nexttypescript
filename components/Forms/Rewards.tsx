@@ -187,7 +187,6 @@ export default function Rewards() {
                 key={starget.id}
                 id={starget.id}
                 variant="none"
-                rounded-pill
                 className={index === 0 ? styles.low_btn
                   : index === 1 ? styles.avg_btn
                     : index === 2 ? styles.high_btn
