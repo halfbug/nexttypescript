@@ -77,7 +77,7 @@ const ProductGrid = ({
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
-                  <span className={styles.groupshop__pcard_tag_buyer}>MS</span>
+                  {/* <span className={styles.groupshop__pcard_tag_buyer}>MS</span> */}
                   {dealProducts?.filter(
                     ({ productId }) => productId === prod.id,
                   ).map((

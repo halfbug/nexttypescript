@@ -33,7 +33,6 @@ const ProductsSearch = ({
     gsctx,
     dispatch,
   } = useContext(GroupshopContext);
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 24 ~ gsctx', gsctx);
 
   const { clientDealProducts } = useDeal();
 
@@ -48,19 +47,21 @@ const ProductsSearch = ({
 
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
 
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 26 ~ otherProducts', otherProducts);
   const {
     discountCode: { percentage },
     store: { products } = { store: { products: [] } },
   } = gsctx;
 
   const [selected, setSelected] = useState<string[]|undefined>(undefined);
+  const clientDProducts = clientDealProducts();
 
   useEffect(() => {
-    if (!selected || selected.length < 1) { setSelected(clientDealProducts()); }
-  }, [selected]);
+    if ((!selected || selected.length < 1)
+      && (clientDProducts !== undefined && clientDProducts?.length > 0)) {
+      setSelected(clientDealProducts());
+    }
+  }, [selected, clientDProducts]);
 
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 37 ~ selected', selected);
   const searchPrd = (name:string) => {
     if (products && name) {
       setotherProducts(
