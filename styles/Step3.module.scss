@@ -133,7 +133,7 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus {
+    &:active, &:focus, &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;
@@ -150,7 +150,7 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus {
+    &:active, &:focus, &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;
@@ -169,7 +169,7 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus {
+    &:active, &:focus, &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;
@@ -189,7 +189,7 @@
         border-color: $black;
     }
     &:active,
-    &:focus {
+    &:focus, &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;

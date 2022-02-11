@@ -65,7 +65,6 @@ export default function UpdateRewards() {
   }, [initvalz]);
   // const [campaign, setcampaign] = useState(second);
   const { campaign } = useCampaign();
-  console.log("🚀 ~ file: UpdateRewards.tsx ~ line 71 ~ useEffect ~ campaign", campaign);
 
   const {
     handleSubmit, values, setFieldValue,

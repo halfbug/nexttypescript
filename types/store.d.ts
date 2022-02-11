@@ -31,7 +31,7 @@ export interface ICampaign {
   salesTarget?: ISalesTarget;
   settings?: ISettings;
   socialLinks?: ISocialLink;
-
+  selectedTarget?: ISalesTarget;
 }
 export interface ICampaignForm {
   settings?: any;

@@ -10,10 +10,12 @@ export default function useCampaign() {
     dispatch,
   } = useContext(StoreContext);
   const [campaign, setcampaign] = useState<ICampaign | undefined>(undefined);
+  const [newcampaign, setNewcampaign] = useState<ICampaign | undefined>(undefined);
 
   useEffect(() => {
     // if (campaign === undefined) {
     setcampaign(getCampaign());
+    setNewcampaign(getNewCampaign());
     console.log(store.campaigns);
     // }
   }, [store]);
@@ -30,7 +32,16 @@ export default function useCampaign() {
     return Incampaign;
   }, [store.campaigns]);
 
+  const getNewCampaign = useCallback(() => {
+    let newCampaign={};
+    if (store?.newCampaign) {
+      newCampaign = store?.newCampaign;
+      console.log({ newCampaign });
+    }
+    return newCampaign;
+  }, [store.newCampaign]);
+
   return {
-    getCampaign, campaign,
+    getCampaign, campaign, getNewCampaign, newcampaign,
   };
 }

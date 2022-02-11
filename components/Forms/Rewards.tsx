@@ -17,6 +17,7 @@ import { ICampaign } from 'types/store';
 import styles from 'styles/Step3.module.scss';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
   rewards: string;
@@ -26,8 +27,8 @@ interface IValues {
 export default function Rewards() {
   const [, setParams] = useQueryString();
 
-  const [minDiscount, setMinDiscount] = useState('');
-  const [maxDiscount, setMaxDiscount] = useState('');
+  const [minDiscount, setMinDiscount] = useState<string | undefined>('');
+  const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
 
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
@@ -48,9 +49,10 @@ export default function Rewards() {
     rewards: '',
     selectedTarget: '',
   };
+  const { newcampaign } = useCampaign();
+  console.log({ newcampaign });
 
   useEffect(() => {
-    /// initial value display
     if (salesTarget.length > 0) {
       initvalz.rewards = salesTarget[3].id;
       // eslint-disable-next-line prefer-destructuring
@@ -60,14 +62,29 @@ export default function Rewards() {
         setMaxDiscount(salesTarget[3].rewards[2].discount);
       }
     }
-  }, [initvalz]);
+  }, [salesTarget]);
+  useEffect(() => {
+    console.log({ initvalz });
+
+    /// initial value display
+    if (newcampaign?.selectedTarget) {
+      initvalz.rewards = newcampaign?.selectedTarget.id;
+      // eslint-disable-next-line prefer-destructuring
+      initvalz.selectedTarget = newcampaign?.selectedTarget;
+      if (newcampaign?.selectedTarget?.rewards) {
+        setMinDiscount(newcampaign?.selectedTarget?.rewards[0]?.discount);
+        setMaxDiscount(newcampaign?.selectedTarget?.rewards[2]?.discount);
+      }
+    }
+  }, [newcampaign]);
+  console.log({ initvalz });
 
   const {
     handleSubmit, values, setFieldValue,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: initvalz,
     validationSchema,
-    // enableReinitialize: true,
+    enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
@@ -106,6 +123,7 @@ export default function Rewards() {
 
   useEffect(() => {
     if (values.selectedTarget !== '') {
+      console.log(values.selectedTarget.name);
       setMinDiscount(values.selectedTarget?.rewards[0].discount);
       setMaxDiscount(values.selectedTarget?.rewards[2].discount);
     }
@@ -144,11 +162,12 @@ export default function Rewards() {
     );
   }
   const bars = [45, 77, 102, 125];
+
   const btns = [
-    { text: 'Low', cssName: 'low_btn' },
-    { text: 'Average', cssName: 'avg_btn' },
-    { text: 'High', cssName: 'high_btn' },
-    { text: 'SuperCharged', cssName: 'super_btn' },
+    { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
+    { text: 'Average', light: styles.avg_btn, dark: styles.avg_btn_dark },
+    { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
+    { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
   // const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
 
@@ -187,10 +206,7 @@ export default function Rewards() {
                 key={starget.id}
                 id={starget.id}
                 variant="none"
-                className={index === 0 ? styles.low_btn
-                  : index === 1 ? styles.avg_btn
-                    : index === 2 ? styles.high_btn
-                      : index === 3 ? styles.super_btn : ''}
+                className={(newcampaign?.selectedTarget?.name === starget.name) ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);
