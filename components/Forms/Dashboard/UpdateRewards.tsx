@@ -17,6 +17,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ICampaign } from 'types/store';
 import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
   rewards: string;
@@ -62,6 +63,9 @@ export default function UpdateRewards() {
       }
     }
   }, [initvalz]);
+  // const [campaign, setcampaign] = useState(second);
+  const { campaign } = useCampaign();
+  console.log("🚀 ~ file: UpdateRewards.tsx ~ line 71 ~ useEffect ~ campaign", campaign);
 
   const {
     handleSubmit, values, setFieldValue,
@@ -100,9 +104,11 @@ export default function UpdateRewards() {
           },
         },
       });
+      console.log({ campRew });
+      const newCamp = campRew.data.updateCampaign;
       const updatedCampaigns = store?.campaigns?.map((item:any) => {
-        if (item.id === campRew.id) {
-          return campRew;
+        if (item.id === newCamp.id) {
+          return newCamp;
         }
         return item;
       });
@@ -117,10 +123,10 @@ export default function UpdateRewards() {
   }, [values.selectedTarget]);
 
   const btns = [
-    { text: 'Low', cssName: 'low_btn' },
-    { text: 'Average', cssName: 'avg_btn' },
-    { text: 'High', cssName: 'high_btn' },
-    { text: 'SuperCharged', cssName: 'super_btn' },
+    { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
+    { text: 'Average', light: styles.avg_btn, dark: styles.avg_btn_dark },
+    { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
+    { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
   console.log({ values });
 
@@ -152,10 +158,7 @@ export default function UpdateRewards() {
                 variant="none"
                 value={JSON.stringify(starget)}
                 // checked={starget.id === values.rewards}
-                className={index === 0 ? styles.low_btn
-                  : index === 1 ? styles.avg_btn
-                    : index === 2 ? styles.high_btn
-                      : index === 3 ? styles.super_btn : ''}
+                className={campaign?.salesTarget?.name === starget.name ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);
