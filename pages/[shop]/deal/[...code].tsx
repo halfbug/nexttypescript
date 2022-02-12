@@ -34,6 +34,7 @@ import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
 import Button from 'components/Buttons/Button/Button';
 import Footer from 'components/Layout/FooterGS/FooterGS';
+import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
 
 const GroupShop: NextPage = () => {
   const router = useRouter();
@@ -126,7 +127,15 @@ const GroupShop: NextPage = () => {
   return (
     <div className={styles.groupshop}>
 
-      <Header LeftComp={<Counter expireDate={gsctx?.expiredAt} pending={pending} />} RightComp={<InfoButton handleClick={() => console.log('info link clicked')} message="How does this work?" />} />
+      <Header
+        LeftComp={(
+          <Counter
+            expireDate={gsctx?.expiredAt}
+            pending={pending}
+          />
+)}
+        RightComp={<InfoBox />}
+      />
       <Container fluid>
         <Row className={styles.groupshop__top}>
           <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>

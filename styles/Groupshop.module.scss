@@ -35,7 +35,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&_counter_footer {
-
 		p {
 			@extend .fw-bold, .mt-2;
 
@@ -44,7 +43,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				width: 55px;
 				height: 49px;
 				font-size: 12px;
-				border-color: #A68AD6;
+				border-color: #a68ad6;
 			}
 		}
 	}
@@ -358,6 +357,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					width: 45px;
 				}
 			}
+		}
+		&_info {
+			@extend .rounded-0;
+			//add all related classes here
 		}
 	}
 
