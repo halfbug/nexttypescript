@@ -193,8 +193,13 @@ const UPDATE_CAMPAIGN = gql`
     salesTarget {
       id
       name
+      rogsMin
+      rogsMax
+      status
       rewards{
+        customerCount
         discount
+        id
       }
     }
     products
@@ -464,13 +469,17 @@ query campaigns {
       youtubeUrl,
     }
     salesTarget {
-      id
+      status
+      rogsMin
+      rogsMax
       name
+      id
       rewards{
         id
+        customerCount
         discount
       }
-    }
+      }
     socialLinks{
       instagram
       pinterest

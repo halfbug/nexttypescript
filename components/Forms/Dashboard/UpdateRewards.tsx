@@ -23,14 +23,23 @@ interface IValues {
   rewards: string;
   selectedTarget: any;
   maxDiscountVal: string;
+  minDiscountVal: string;
 }
 
 export default function UpdateRewards() {
   const [, setParams] = useQueryString();
 
-  const [minDiscount, setMinDiscount] = useState('');
-  const [maxDiscount, setMaxDiscount] = useState('');
-  const [edit, setEdit] = useState(false);
+  const [minDiscount, setMinDiscount] = useState<string | undefined>('');
+  const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
+  const [editMin, setEditMin] = useState(false);
+  const [editMax, setEditMax] = useState(false);
+  const [current, setCurrent] = useState({});
+  const [initvalz, setInitValz] = useState<IValues>({
+    rewards: '',
+    selectedTarget: '',
+    maxDiscountVal: '',
+    minDiscountVal: '',
+  });
 
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
@@ -39,32 +48,36 @@ export default function UpdateRewards() {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
-    rewards: yup
-      .string()
-      .required('required.'),
+    // rewards: yup
+    //   .string()
+    //   .required('required.'),
 
   });
 
-  const initvalz: IValues = {
-    rewards: '',
-    selectedTarget: '',
-    maxDiscountVal: '',
-  };
+  const { campaign } = useCampaign();
 
+  // useEffect(() => {
+
+  // }, []);
   useEffect(() => {
     /// initial value display
-    if (salesTarget.length > 0) {
-      initvalz.rewards = salesTarget[3].id;
-      // eslint-disable-next-line prefer-destructuring
-      initvalz.selectedTarget = salesTarget[3];
-      if (minDiscount === '' && maxDiscount === '') {
-        setMinDiscount(salesTarget[3].rewards[0].discount);
-        setMaxDiscount(salesTarget[3].rewards[2].discount);
+    if (campaign?.salesTarget) {
+      if (campaign?.salesTarget?.rewards?.length) {
+        setMinDiscount(campaign?.salesTarget?.rewards[0].discount);
+        setMaxDiscount(campaign?.salesTarget?.rewards[2].discount);
+        setInitValz({
+          rewards: campaign?.salesTarget?.id,
+          minDiscountVal: campaign?.salesTarget?.rewards[0]?.discount || '',
+          maxDiscountVal: campaign?.salesTarget?.rewards[2]?.discount || '',
+          selectedTarget: campaign?.salesTarget,
+        });
       }
     }
-  }, [initvalz]);
+    console.log({ campaign });
+    console.log({ initvalz });
+    console.log({ values });
+  }, [campaign]);
   // const [campaign, setcampaign] = useState(second);
-  const { campaign } = useCampaign();
 
   const {
     handleSubmit, values, setFieldValue,
@@ -76,22 +89,36 @@ export default function UpdateRewards() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
-      const { rewards, selectedTarget, maxDiscountVal } = valz;
-      console.log("🚀 ~ file: UpdateRewards.tsx ~ line 70 ~ onSubmit: ~ valz", valz);
+      const {
+        rewards, selectedTarget, maxDiscountVal, minDiscountVal,
+      } = valz;
+      console.log({ valz });
 
-      if (selectedTarget) {
-        delete selectedTarget["__typename"];
-        if (selectedTarget.rewards.length) {
-          const newR = selectedTarget?.rewards.map((item: any) => {
-            const { __typename, ...valWithoutTypename } = item;
-            return valWithoutTypename;
-          });
-          selectedTarget.rewards = [...newR];
-        }
+      // if (selectedTarget) {
+      //   delete selectedTarget["__typename"];
+      //   if (selectedTarget.rewards.length) {
+      //     const newR = selectedTarget?.rewards.map((item: any) => {
+      //       const { __typename, ...valWithoutTypename } = item;
+      //       return valWithoutTypename;
+      //     });
+      //     selectedTarget.rewards = [...newR];
+      //   }
+      // }
+      const { __typename, ...newSelectedTarget } = selectedTarget;
+      if (newSelectedTarget.rewards.length) {
+        const newR = newSelectedTarget?.rewards.map((item: any) => {
+          const { __typename: tpn, ...valWithoutTypename } = item;
+          console.log({ valWithoutTypename });
+          return valWithoutTypename;
+        });
+        newSelectedTarget.rewards = [...newR];
       }
-
-      if (maxDiscountVal !== '') {
-        selectedTarget.rewards[2].discount = maxDiscountVal;
+      console.log({ selectedTarget });
+      console.log({ newSelectedTarget });
+      if (newSelectedTarget?.rewards && (editMax || editMin)) {
+        newSelectedTarget.rewards[0].discount = minDiscountVal;
+        newSelectedTarget.rewards[2].discount = maxDiscountVal;
+        newSelectedTarget.rewards[1].discount = `${(parseFloat(minDiscountVal) + parseFloat(maxDiscountVal)) / 2}%`;
       }
       const campRew:null | any = await addReward({
         variables: {
@@ -99,12 +126,13 @@ export default function UpdateRewards() {
             storeId: store.id,
             id: store.singleEditCampaignId,
             rewards,
-            salesTarget: selectedTarget,
+            salesTarget: newSelectedTarget,
           },
         },
       });
       console.log({ campRew });
       const newCamp = campRew.data.updateCampaign;
+      console.log({ newCamp });
       const updatedCampaigns = store?.campaigns?.map((item:any) => {
         if (item.id === newCamp.id) {
           return newCamp;
@@ -112,6 +140,8 @@ export default function UpdateRewards() {
         return item;
       });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+      setEditMin(false);
+      setEditMax(false);
     },
   });
   useEffect(() => {
@@ -179,14 +209,34 @@ export default function UpdateRewards() {
         <Row className="mt-3">
           <Col sm={6}>
             <h4 className="fs-4">Baseline</h4>
-            <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>
-            <span className={styles.dbrewards_rewardBtn} onClick={() => setEdit(!edit)}>edit</span>
+            {!editMin && (
+              <>
+                <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
+                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>edit</span>
+              </>
+            )}
+
+            <div className={editMin ? 'd-block' : 'd-none'}>
+              <Form.Control
+                type="text"
+                name="minDiscount"
+                value={values.minDiscountVal}
+                onChange={(e) => setFieldValue('minDiscountVal', e.currentTarget.value)}
+                // isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+              />
+              <Button variant="link" type="submit">save</Button>
+            </div>
 
           </Col>
           <Col sm={6}>
             <h4 className="fs-4">Maximum</h4>
-            <div className={styles.dbrewards__percent_btn}>{maxDiscount}</div>
-            <div className={edit ? 'd-block' : 'd-none'}>
+            {!editMax && (
+              <>
+                <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
+                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>edit</span>
+              </>
+            )}
+            <div className={editMax ? 'd-block' : 'd-none'}>
               <Form.Control
                 type="text"
                 name="maxDiscount"
@@ -194,7 +244,8 @@ export default function UpdateRewards() {
                 onChange={(e) => setFieldValue('maxDiscountVal', e.currentTarget.value)}
                 // isInvalid={touched.maxDiscount && !!errors.maxDiscount}
               />
-              <span className={styles.dbrewards_rewardBtn} onClick={() => handleSubmit}>save</span>
+              <Button variant="link" type="submit">save</Button>
+              {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
             </div>
 
           </Col>

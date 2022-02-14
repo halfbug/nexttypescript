@@ -33,7 +33,7 @@ export default function useCampaign() {
   }, [store.campaigns]);
 
   const getNewCampaign = useCallback(() => {
-    let newCampaign={};
+    let newCampaign = {};
     if (store?.newCampaign) {
       newCampaign = store?.newCampaign;
       console.log({ newCampaign });
