@@ -281,7 +281,7 @@ query Groupshop($code: String!) {
       orderDetail{
         customer{
           firstName
-          LastName
+          lastName
           email
           phone
           ip
@@ -391,7 +391,7 @@ const ADD_DEAL_PRODUCT = gql`
       orderDetail{
         customer{
           firstName
-          LastName
+          lastName
           email
           phone
           ip

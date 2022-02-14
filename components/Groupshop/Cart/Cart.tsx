@@ -57,7 +57,7 @@ const Cart = ({
                 %
                 off this order and $X cashback for
               </p>
-              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
 
               <div className={styles.groupshop_modal_cart_progress} />
             </div>

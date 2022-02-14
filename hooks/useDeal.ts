@@ -32,7 +32,11 @@ export default function useDeal() {
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
 
+  const getBuyers = useCallback((pid:string) => gsctx.members.filter(
+    (mem) => mem.products?.find((prd) => prd.id === pid),
+  ), [gsctx.members]);
+
   return {
-    currencySymbol, discount, dPrice, gsURL, clientDealProducts,
+    currencySymbol, discount, dPrice, gsURL, clientDealProducts, getBuyers,
   };
 }

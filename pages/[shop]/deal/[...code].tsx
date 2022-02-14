@@ -119,10 +119,10 @@ const GroupShop: NextPage = () => {
     if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
   };
 
-  if (error) {
-    router.push('/404');
-    return <p>groupshop not found</p>;
-  }
+  // if (error) {
+  //   router.push('/404');
+  //   return <p>groupshop not found</p>;
+  // }
 
   return (
     <div className={styles.groupshop}>
@@ -142,7 +142,7 @@ const GroupShop: NextPage = () => {
           <Col md={6} className={styles.groupshop__top_members}>
             <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
             <div className="d-flex flex-row justify-content-center">
-              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
               <EarnButton
                 popContent={(
                   <div className="pt-1">
@@ -249,7 +249,7 @@ const GroupShop: NextPage = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.LastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+              {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
             </Dropdown.Menu>
           </Dropdown>
         </h2>

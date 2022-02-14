@@ -13,6 +13,7 @@ import { Send } from 'react-bootstrap-icons';
 import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
 import useDeal from 'hooks/useDeal';
+import { Member } from 'types/groupshop';
 import ProductDetail from '../ProductDetail/ProductDetail';
 
 type ProductGridProps = {
@@ -32,6 +33,7 @@ const ProductGrid = ({
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
+
   const {
     breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
   } = usePagination<IProduct>({
@@ -55,7 +57,7 @@ const ProductGrid = ({
     } = { discountCode: { percentage: 0 }, dealProducts: [] },
   } = useContext(GroupshopContext);
 
-  const { currencySymbol, dPrice } = useDeal();
+  const { currencySymbol, dPrice, getBuyers } = useDeal();
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -77,7 +79,14 @@ const ProductGrid = ({
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
-                  {/* <span className={styles.groupshop__pcard_tag_buyer}>MS</span> */}
+                  <div className={styles.groupshop__pcard_tag_boughtby}>
+                    {getBuyers(prod.id)?.map(
+                      (member : Member) => (<span className={styles.groupshop__pcard_tag_buyer}>{`${member.orderDetail.customer.firstName} ${member.orderDetail.customer.lastName || ''}`}</span>),
+                    )}
+
+                    {getBuyers(prod.id).length > 0 && (
+                    <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                  </div>
                   {dealProducts?.filter(
                     ({ productId }) => productId === prod.id,
                   ).map((

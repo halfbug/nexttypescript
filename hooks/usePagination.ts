@@ -76,6 +76,8 @@ const usePagination = <T extends {}>({
     if (currentPage - 1 >= 0 && pageLeft >= siblingCount - 2) {
       start = currentPage - 1 > 0 ? currentPage - 1 : 1;
       end = start + (siblingCount - 1);
+    } else if (totalPages < siblingCount) {
+      end = totalPages;
     } else if (pageLeft < siblingCount && totalPages > 1) {
       start = totalPages - (siblingCount - 1);
       end = totalPages;
