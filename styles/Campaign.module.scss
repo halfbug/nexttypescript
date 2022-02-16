@@ -212,3 +212,34 @@
         background-color: $supercharged;
     }
 }
+
+.enablebtn{
+    @extend .rounded-3, .me-2;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $btnhigh;
+    }
+}
+
+.disablebtn{
+    @extend .rounded-3;
+    &:hover {
+        color: $black;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        color: $black;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $disable;
+    }
+
+}

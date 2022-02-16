@@ -302,7 +302,7 @@ export default function CreateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
+                  <Row className="text-muted mb-2"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
                   <Row className="text-start"><Col><WhiteButton>Add products</WhiteButton></Col></Row>
                 </section>
 
@@ -317,7 +317,7 @@ export default function CreateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted"><h6>When enabled, customers can access discounts from existing Groupshop pages</h6></Row>
+                  <Row className="text-muted w-75"><h6>When enabled, customers will be given the option to join an existing Groupshop on the info pop-up.</h6></Row>
                   <Row className="mt-2">
                     {/* <Col xs={3} md={4}> </Col> */}
                     <Col xs={12} md={6} className="text-right">
@@ -328,7 +328,7 @@ export default function CreateCampaign() {
                       >
                         <ToggleButton
                           variant="outline-success"
-                          className=""
+                          className={styles.enablebtn}
                           id="joinExisting-e"
                           value={1}
                           checked={values.joinExisting === true}
@@ -340,8 +340,8 @@ export default function CreateCampaign() {
                         </ToggleButton>
 
                         <ToggleButton
-                          variant="outline-primary"
-                          className=""
+                          variant="outline-danger"
+                          className={styles.disablebtn}
                           id="joinExisting-d"
                           value={0}
                           checked={values.joinExisting === false}
