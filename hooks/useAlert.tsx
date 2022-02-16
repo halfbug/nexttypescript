@@ -20,7 +20,7 @@ const useAlert = () => {
 
   const AlertComponent = useCallback((): any => (
     <ToastContainer className="position-fixed bottom-0 end-0 mb-3 me-2" position="bottom-end">
-      <Toast bg="danger" onClose={() => seterror(false)} show={error} delay={9000} autohide>
+      <Toast bg="danger" onClose={() => seterror(false)} show={error} delay={5000} autohide>
         <Toast.Header>
 
           <strong className="me-auto">!</strong>
@@ -28,7 +28,7 @@ const useAlert = () => {
         </Toast.Header>
         <Toast.Body className="text-white">{errorMsg}</Toast.Body>
       </Toast>
-      <Toast bg="success" onClose={() => setsuccess(false)} show={success} delay={9000} autohide>
+      <Toast bg="success" onClose={() => setsuccess(false)} show={success} delay={5000} autohide>
         <Toast.Header>
 
           <strong className="me-auto">!</strong>

@@ -30,3 +30,7 @@
 .auto-width-button {
 	min-width: auto !important;
 }
+
+.toast-container {
+	z-index: $zindex-tooltip;
+}

@@ -12,7 +12,9 @@ export default function useCart() {
   const { dPrice } = useDeal();
 
   const addCartProduct = useCallback((product : CartProduct) => {
-    const alreadyCartProduct = gsctx.cart?.find((prd) => prd.id === product.id);
+    const alreadyCartProduct = gsctx.cart?.find(
+      (prd) => prd.selectedVariant.id === product.selectedVariant.id,
+    );
     if (alreadyCartProduct) plusQuantity(alreadyCartProduct.id);
     else {
       dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } });
@@ -22,7 +24,7 @@ export default function useCart() {
   const cartProducts = gsctx?.cart || [];
 
   const removeProduct = useCallback((pid : string) => {
-    dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart?.filter(({ id }) => id !== pid) || []] } });
+    dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart?.filter((prd) =>  prd.selectedVariant.id !== pid) || []] } });
   }, [gsctx.cart]);
 
   const plusQuantity = useCallback((pid: string) => dispatch({

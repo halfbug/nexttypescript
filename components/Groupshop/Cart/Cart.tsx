@@ -135,7 +135,7 @@ const Cart = ({
                       -
                     </Button>
                   </ButtonGroup>
-                  <Button variant="link" className="ps-0 d-block" onClick={() => removeProduct(prd.id)}>Remove</Button>
+                  <Button variant="link" className="ps-0 d-block" onClick={() => removeProduct(prd.selectedVariant.id)}>Remove</Button>
                 </Col>
               </Row>
 

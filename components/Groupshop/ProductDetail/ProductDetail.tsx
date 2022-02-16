@@ -13,6 +13,7 @@ import { Send } from 'react-bootstrap-icons';
 import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
+import useAlert from 'hooks/useAlert';
 
 interface ProductDetailProps extends RootProps {
   show : boolean;
@@ -32,6 +33,8 @@ const ProductDetail = ({
     handleClose(e);
   };
 
+  const { AlertComponent, showError, showSuccess } = useAlert();
+
   // control carousel
   const [index, setIndex] = useState(0);
 
@@ -39,12 +42,14 @@ const ProductDetail = ({
     setIndex(selectedIndex);
   };
 
-  const { currencySymbol, dPrice } = useDeal();
+  const { currencySymbol, dPrice, getBuyers } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
 
     variables: { id: product?.id },
   });
+
+  const productCustomers = getBuyers(product?.id || '0');
 
   console.log('🚀 ~ file: ProductDetail.tsx ~ line 40 ~ data', data);
   useEffect(() => {
@@ -74,16 +79,20 @@ const ProductDetail = ({
         )), true,
       ),
     )?.[0];
-    if (selectedVariant.inventoryQuantity > 0) { console.log(selectedVariant.inventoryQuantity); }
-    addCartProduct({
-      ...product, ...dproduct, selectedVariant, selectedQuantity: 1,
-    });
-
+    if (selectedVariant.inventoryQuantity > 0) {
+      addCartProduct({
+        ...product, ...dproduct, selectedVariant, selectedQuantity: 1,
+      });
+      showSuccess('product has been added');
+    } else {
+      showError('product is out of stock');
+    }
     closeModal({});
   };
 
   return (
     <>
+      <AlertComponent />
       <Modal
         show={show}
         onHide={closeModal}
@@ -112,7 +121,7 @@ const ProductDetail = ({
                 </Carousel.Item>
                 {
                  data?.productById?.images?.map((img:any, i:number) => (
-                   <Carousel.Item>
+                   <Carousel.Item key={`${img.id}_${Math.random()}`}>
                      <img
                        src={img.src}
                        alt={`image_${i}`}
@@ -123,19 +132,7 @@ const ProductDetail = ({
                  ))
                }
               </Carousel>
-              <div className="d-flex">
-                {
-                 data?.productById?.images?.map((img:any, i:number) => (
-                   <button type="button" onClick={(e) => handleSelect((i + 1), e)} className={i === index ? styles.groupshop_modal_detail_button_selected : styles.groupshop_modal_detail_button}>
-                     <img
-                       src={img.src}
-                       alt={`image_${i}`}
-                       className={styles.groupshop_modal_detail_thumbnail}
-                     />
-                   </button>
-                 ))
-               }
-              </div>
+
             </Col>
             <Col xs={12} md={6}>
               <h2>
@@ -214,7 +211,27 @@ const ProductDetail = ({
 
               </Button>
               <Button variant="outline-primary" className="m-1 mt-3 rounded-pill"><Send size={18} /></Button>
-              <p>🎉 Over 13 people have earned cashback and discounts on this item!</p>
+
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} md={6}>
+              <div className="d-flex">
+                { data?.productById?.images.length > 1
+                && data?.productById?.images?.map((img:any, i:number) => (
+                  <button type="button" onClick={(e) => handleSelect((i + 1), e)} className={i === index ? styles.groupshop_modal_detail_button_selected : styles.groupshop_modal_detail_button}>
+                    <img
+                      src={img.src}
+                      alt={`image_${i}`}
+                      className={styles.groupshop_modal_detail_thumbnail}
+                    />
+                  </button>
+                ))}
+              </div>
+            </Col>
+            <Col xs={12} md={6}>
+              { productCustomers.length > 1
+              && (<p className="p-1">🎉 Over 13 people have earned cashback and discounts on this item!</p>)}
             </Col>
           </Row>
         </Modal.Body>
