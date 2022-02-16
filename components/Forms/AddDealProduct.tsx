@@ -63,12 +63,16 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
       // merge selected products with groupshop deal prodcuts
 
-      const dealProducts: DealProduct[] = [...products?.map((productId) => {
+      const clientDealProducts: DealProduct[] = [...products?.map((productId) => {
         const product:DealProduct = {
           productId, addedBy: username, customerIP: clientIP, type: 'deal',
         };
         return product;
       }) || []];
+
+      const dealProducts : DealProduct[] = Array.from(new Set(
+        [...dealProductsCtx || [], ...clientDealProducts],
+      ));
 
       await addDealProduct({
         variables: {
