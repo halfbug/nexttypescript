@@ -13,7 +13,9 @@ function createApolloClient() {
       uri: process.env.BE_URL,
     }),
     // uri: process.env.BE_URL,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
   });
 }
 
