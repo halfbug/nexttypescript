@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -18,27 +19,32 @@ import { ICampaign } from 'types/store';
 import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
   rewards: string;
   selectedTarget: any;
   maxDiscountVal: string;
   minDiscountVal: string;
+  minDiscount: number,
+  maxDiscount: number,
+
 }
 
 export default function UpdateRewards() {
   const [, setParams] = useQueryString();
 
-  const [minDiscount, setMinDiscount] = useState<string | undefined>('');
-  const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
+  // const [minDiscount, setMinDiscount] = useState<string | undefined>('');
+  // const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
   const [editMin, setEditMin] = useState(false);
   const [editMax, setEditMax] = useState(false);
-  const [current, setCurrent] = useState({});
   const [initvalz, setInitValz] = useState<IValues>({
     rewards: '',
     selectedTarget: '',
     maxDiscountVal: '',
     minDiscountVal: '',
+    minDiscount: 0,
+    maxDiscount: 0,
   });
 
   const {
@@ -46,41 +52,70 @@ export default function UpdateRewards() {
   } = useQuery(GET_SALES_TARGET);
   const [addReward] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
   const { store, dispatch } = React.useContext(StoreContext);
+  const { multiple5, isMultiple5 } = useUtilityFunction();
 
   const validationSchema = yup.object({
-    // rewards: yup
-    //   .string()
-    //   .required('required.'),
-
+    minDiscount: yup
+      .number()
+      .lessThan(yup.ref('maxDiscount'), "Baseline should be less than Maximum") // .test("diff", "diff",
+      .test("diff", "difference of values should be atleast 10",
+        (val: number | undefined, context) => {
+          if (val && (context.parent.maxDiscount - val) < 10) {
+            console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test("multiple", "multiple of 5",
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
+    maxDiscount: yup
+      .number()
+      .moreThan(yup.ref('minDiscount'), "Maximum should be greater than Baseline")
+      .test("diff", "difference of values should be atleast 10",
+        (val: number | undefined, context) => {
+          if (val && (val - context.parent.minDiscount) < 10) {
+            console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test("multiple", "multiple of 5",
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
   });
 
   const { campaign } = useCampaign();
-
-  // useEffect(() => {
-
-  // }, []);
   useEffect(() => {
     /// initial value display
     if (campaign?.salesTarget) {
       if (campaign?.salesTarget?.rewards?.length) {
-        setMinDiscount(campaign?.salesTarget?.rewards[0].discount);
-        setMaxDiscount(campaign?.salesTarget?.rewards[2].discount);
+        // setMinDiscount(campaign?.salesTarget?.rewards[0].discount);
+        // setMaxDiscount(campaign?.salesTarget?.rewards[2].discount);
         setInitValz({
           rewards: campaign?.salesTarget?.id,
           minDiscountVal: campaign?.salesTarget?.rewards[0]?.discount || '',
           maxDiscountVal: campaign?.salesTarget?.rewards[2]?.discount || '',
           selectedTarget: campaign?.salesTarget,
+          minDiscount: campaign?.salesTarget?.rewards[0]?.discount ? parseInt(campaign?.salesTarget?.rewards[0]?.discount) : 0,
+          maxDiscount: campaign?.salesTarget?.rewards[2]?.discount ? parseInt(campaign?.salesTarget?.rewards[2]?.discount) : 0,
         });
       }
     }
-    console.log({ campaign });
-    console.log({ initvalz });
     console.log({ values });
   }, [campaign]);
   // const [campaign, setcampaign] = useState(second);
 
   const {
-    handleSubmit, values, setFieldValue,
+    handleSubmit, values, setFieldValue, touched, errors,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: initvalz,
     validationSchema,
@@ -94,21 +129,10 @@ export default function UpdateRewards() {
       } = valz;
       console.log({ valz });
 
-      // if (selectedTarget) {
-      //   delete selectedTarget["__typename"];
-      //   if (selectedTarget.rewards.length) {
-      //     const newR = selectedTarget?.rewards.map((item: any) => {
-      //       const { __typename, ...valWithoutTypename } = item;
-      //       return valWithoutTypename;
-      //     });
-      //     selectedTarget.rewards = [...newR];
-      //   }
-      // }
       const { __typename, ...newSelectedTarget } = selectedTarget;
       if (newSelectedTarget.rewards.length) {
         const newR = newSelectedTarget?.rewards.map((item: any) => {
           const { __typename: tpn, ...valWithoutTypename } = item;
-          console.log({ valWithoutTypename });
           return valWithoutTypename;
         });
         newSelectedTarget.rewards = [...newR];
@@ -116,9 +140,12 @@ export default function UpdateRewards() {
       console.log({ selectedTarget });
       console.log({ newSelectedTarget });
       if (newSelectedTarget?.rewards && (editMax || editMin)) {
+        const baseline = parseInt(minDiscountVal);
+        const maximum = parseInt(maxDiscountVal);
+
         newSelectedTarget.rewards[0].discount = minDiscountVal;
         newSelectedTarget.rewards[2].discount = maxDiscountVal;
-        newSelectedTarget.rewards[1].discount = `${(parseFloat(minDiscountVal) + parseFloat(maxDiscountVal)) / 2}%`;
+        newSelectedTarget.rewards[1].discount = `${(parseInt(minDiscountVal) + parseInt(maxDiscountVal)) / 2}%`;
       }
       const campRew:null | any = await addReward({
         variables: {
@@ -144,12 +171,12 @@ export default function UpdateRewards() {
       setEditMax(false);
     },
   });
-  useEffect(() => {
-    if (values.selectedTarget !== '') {
-      setMinDiscount(values.selectedTarget?.rewards[0].discount);
-      setMaxDiscount(values.selectedTarget?.rewards[2].discount);
-    }
-  }, [values.selectedTarget]);
+  // useEffect(() => {
+  //   if (values.selectedTarget !== '') {
+  //     setMinDiscount(values.selectedTarget?.rewards[0].discount);
+  //     setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+  //   }
+  // }, [values.selectedTarget]);
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
@@ -221,9 +248,19 @@ export default function UpdateRewards() {
                 type="text"
                 name="minDiscount"
                 value={values.minDiscountVal}
-                onChange={(e) => setFieldValue('minDiscountVal', e.currentTarget.value)}
-                // isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+                onChange={(e) => {
+                  setFieldValue('minDiscountVal', e.currentTarget.value);
+                  // eslint-disable-next-line radix
+                  setFieldValue('minDiscount', parseInt(e.currentTarget.value));
+                }}
+                className={styles.dbrewards_input}
+                isInvalid={touched.minDiscount && !!errors.minDiscount}
+                placeholder="Enter %"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.minDiscount}
+              </Form.Control.Feedback>
+
               <Button variant="link" type="submit">save</Button>
             </div>
 
@@ -241,9 +278,18 @@ export default function UpdateRewards() {
                 type="text"
                 name="maxDiscount"
                 value={values.maxDiscountVal}
-                onChange={(e) => setFieldValue('maxDiscountVal', e.currentTarget.value)}
-                // isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+                onChange={(e) => {
+                  setFieldValue('maxDiscountVal', e.currentTarget.value);
+                  // eslint-disable-next-line radix
+                  setFieldValue('maxDiscount', parseInt(e.currentTarget.value));
+                }}
+                className={styles.dbrewards_input}
+                isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+                placeholder="Enter %"
               />
+              <Form.Control.Feedback type="invalid">
+                {errors.maxDiscount}
+              </Form.Control.Feedback>
               <Button variant="link" type="submit">save</Button>
               {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
             </div>

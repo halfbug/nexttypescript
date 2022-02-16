@@ -4,8 +4,7 @@ import React from 'react';
 import footerLogo1 from 'public/images/groupshopLogo.svg';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import styles from 'styles/Groupshop.module.scss';
-// import{ Button from 'components/Buttons/Button/Button';
-// import Button from 'components/Buttons/Button/Button';
+
 import {
   Col, Row, Button, FormControl, InputGroup,
 } from 'react-bootstrap';
