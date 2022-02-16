@@ -110,17 +110,6 @@
         opacity: 0.5;
     }
 
-    // #button {
-    //     @extend .me-2, .p-2, .lh-sm, .rounded;
-    //     width: fit-content;
-    //     border-radius: 8px;
-    //     color: #ffffff;
-    //     opacity: 40%;
-    //     // margin: 3px;
-    // }
-
- 
-
     &__percent_btn {
         @extend .py-1, .fw-bold, .px-0;
         width: 45px;
@@ -143,7 +132,7 @@
 
 .low_btn {
     @include button-variant($low, $low);
-    @extend .me-2, .p-2, .lh-sm, .rounded;
+    @extend .mx-2, .p-2, .lh-sm, .rounded;
     color: $white;
     opacity: 50%;
     &:hover {
@@ -160,7 +149,7 @@
 }
 .avg_btn {
     @include button-variant($average, $average);
-    @extend .me-2, .p-2, .lh-sm, .rounded;
+    @extend .mx-2, .p-2, .lh-sm, .rounded;
     color: $white;
     opacity: 50%;
     &:hover {
@@ -178,7 +167,7 @@
 
 .high_btn {
     @include button-variant($btnhigh, $btnhigh);
-    @extend .me-2, .p-2, .lh-sm, .rounded;
+    @extend .mx-2, .p-2, .lh-sm, .rounded;
     color: $white;
     opacity: 50%;
     &:hover {
@@ -196,7 +185,7 @@
 
 .super_btn {
     @include button-variant($supercharged, $supercharged);
-    @extend .me-2, .p-2, .lh-sm, .rounded;
+    @extend .mx-2, .p-2, .lh-sm, .rounded;
     color: $white;
     opacity: 50%;
     &:hover {
@@ -204,8 +193,7 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active,
-    &:focus, &_dark {
+    &:active, &:focus, &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;

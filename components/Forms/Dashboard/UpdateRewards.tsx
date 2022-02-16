@@ -205,7 +205,7 @@ export default function UpdateRewards() {
             recommendations..
           </Col>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 px-0">
           <Col className="text-start" id="rbtn">
             {salesTarget.map((starget: any, index: number) => (
               <Button
