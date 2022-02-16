@@ -65,6 +65,17 @@
     }
 }
 .dbrewards {
+    &_input {
+        border: 1px solid #000000;
+        border-radius: 6px;
+        width: 75px;
+        &:focus, &:active{
+            border: 1px solid #000000;
+            border-radius: 6px;
+            width: 75px;
+            box-shadow: none;    
+        }
+    }
     &_box {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color4;

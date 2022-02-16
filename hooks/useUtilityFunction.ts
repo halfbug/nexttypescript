@@ -29,6 +29,11 @@ export default function useUtilityFunction() {
     console.log('🚀 ~ file: useUtilityFunction.ts ~ line 31 ~ cleanTypename ~ obj', obj);
     return obj;
   }, []);
+  const multiple5 = useCallback((num: number) => Math.ceil(num / 5) * 5, []);
+  const isMultiple5 = useCallback((num: number = 4) => {
+    if (num % 5 === 0) return true;
+    return false;
+  }, []);
 
-  return { cleanTypename };
+  return { cleanTypename, multiple5, isMultiple5 };
 }
