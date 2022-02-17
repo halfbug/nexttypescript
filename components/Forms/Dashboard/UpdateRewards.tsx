@@ -142,6 +142,20 @@ export default function UpdateRewards() {
       if (newSelectedTarget?.rewards && (editMax || editMin)) {
         const baseline = parseInt(minDiscountVal);
         const maximum = parseInt(maxDiscountVal);
+        const lowBaseline = 10;
+        const avgBaseline = 15;
+        const highBaseline = 20;
+        const superBaseline = 25;
+
+        if (baseline <= lowBaseline) {
+          newSelectedTarget.name = "Low";
+        } else if (baseline > lowBaseline && baseline <= avgBaseline) {
+          newSelectedTarget.name = "Average";
+        } else if (baseline >= highBaseline && baseline < superBaseline) {
+          newSelectedTarget.name = "High";
+        } else if (baseline >= superBaseline) {
+          newSelectedTarget.name = "Super-charged";
+        }
 
         newSelectedTarget.rewards[0].discount = minDiscountVal;
         newSelectedTarget.rewards[2].discount = maxDiscountVal;
@@ -205,7 +219,7 @@ export default function UpdateRewards() {
             recommendations..
           </Col>
         </Row>
-        <Row className="mt-2">
+        <Row className="mt-2 px-0">
           <Col className="text-start" id="rbtn">
             {salesTarget.map((starget: any, index: number) => (
               <Button

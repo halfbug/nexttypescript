@@ -33,19 +33,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 
-	&_counter_footer {
-		p {
-			@extend .fw-bold, .mt-2;
-
-			span {
-				@extend .my-2, .p-3, .border, .border-primary, .rounded, .ms-1, .fs-6;
-				width: 55px;
-				height: 49px;
-				font-size: 12px;
-				border-color: #a68ad6;
-			}
-		}
-	}
 	&_infobutton {
 		@extend .d-flex, .mb-0, .align-items-center;
 		span {
@@ -107,6 +94,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 	&_facebook:hover {
 		color: blue;
+	}
+
+	&_youtube:hover {
+		color: darkred;
 	}
 
 	&_instagram:hover {
@@ -226,6 +217,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				height: 40px;
 			}
 		}
+
+
 	}
 	&_row {
 		@extend .pt-4;
@@ -395,6 +388,60 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			width: 325px;
 		}
 	}
+	&_footer {
+		@extend .w-100;
+		&_f1 {
+			@extend .justify-content-center, .align-items-center, .justify-content-around, .mb-5, .mt-2;
+		}
+		&_f2 {
+			@extend .d-flex, .justify-content-center, .align-items-center, .mb-3;
+			color: $black;
+		}
+		&__logo {
+			@extend .d-flex, .justify-content-center;
+			img {
+				height: 15px;
+			}
+		}
+		&_sub{
+			@extend .mx-2;
+			border: 1px solid $purple !important;
+
+		}
+		input{
+			border-bottom: 1px solid $purple !important;
+		}
+
+		&_link {
+			@extend .border-0, .d-inline, .fw-bold, .my-3, ;
+			button { 
+				text-decoration: none;
+				list-style: none;
+			}
+		}
+
+		div .btn-link {
+			text-decoration: none!important;
+		}
+
+		&_counter {
+			@extend .my-3, .mx-0;
+            width: 255px;
+			span {
+				@extend .d-block, .border, .border-3, .rounded, .fw-bold, .fs-4;
+				width: 55px;
+				display: flex !important;
+				justify-content: center;
+				align-items: center;
+				height: 49px;
+				font-size: 12px;
+				border: 2px solid $purple !important;
+			}
+		}
+		&_socialIcon {
+			@extend .my-3, .w-25, .px-0, .mx-0;
+			width: 80px;
+			height: 26px;
 
 	&_modal-header {
 		border-bottom: none !important;
@@ -431,3 +478,4 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 }
+}}
