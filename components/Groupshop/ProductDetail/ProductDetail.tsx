@@ -231,7 +231,15 @@ const ProductDetail = ({
             </Col>
             <Col xs={12} md={6}>
               { productCustomers.length > 1
-              && (<p className="p-1">🎉 Over 13 people have earned cashback and discounts on this item!</p>)}
+              && (
+              <p className="p-1">
+                🎉 Over
+                {' '}
+                {productCustomers.length}
+                {' '}
+                people have earned cashback and discounts on this item!
+              </p>
+              )}
             </Col>
           </Row>
         </Modal.Body>

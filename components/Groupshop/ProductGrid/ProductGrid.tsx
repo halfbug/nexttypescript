@@ -48,7 +48,7 @@ const ProductGrid = ({
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
   const [showDetail, setshowDetail] = useState<boolean>(false);
   const [sProduct, setsProduct] = useState<IProduct | undefined>(undefined);
-  const fillerz = Math.abs(pageSize - renderItems.length) || (breakPoint === 'sm' ? 1 : 0);
+  const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 1 : 0);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
   const {
     gsctx: {

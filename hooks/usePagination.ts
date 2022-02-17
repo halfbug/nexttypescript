@@ -29,7 +29,7 @@ const usePagination = <T extends {}>({
   const [breakPoint, setBreakPoint] = useState<string>('sm');
   const [pageSize, setPageSize] = useState<number>(6);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [renderItems, setRenderItems] = useState<typeof items>(items);
+  const [renderItems, setRenderItems] = useState<typeof items | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
