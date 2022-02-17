@@ -1,11 +1,11 @@
 @import "./variables.scss";
 
 .container {
-	@extend .mt-4, .py-4, .px-0;
+	@extend .mt-2, .py-4, .px-0;
 
 	h3 {
 		@extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
-		font-family: Montserrat;
+        font-family: DM Sans;
 		color: $black;
 	}
 
