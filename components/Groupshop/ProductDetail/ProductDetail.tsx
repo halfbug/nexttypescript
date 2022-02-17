@@ -14,6 +14,7 @@ import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
+import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
   show : boolean;
@@ -232,14 +233,18 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               { productCustomers.length > 1
               && (
-              <p className="p-1">
-                🎉 Over
-                {' '}
-                {productCustomers.length}
-                {' '}
-                people have earned cashback and discounts on this item!
-              </p>
+              <>
+                <p className="p-1">
+                  🎉 Over
+                  {' '}
+                  {productCustomers.length}
+                  {' '}
+                  people have earned cashback and discounts on this item!
+                </p>
+                <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+              </>
               )}
+
             </Col>
           </Row>
         </Modal.Body>

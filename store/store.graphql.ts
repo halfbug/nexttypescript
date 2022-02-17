@@ -151,6 +151,12 @@ query Products($productQueryInput: ProductQueryInput!) {
     featuredImage
     description                             
     price
+    options{
+      id
+      name
+      values
+      position
+    }
     currencyCode
   }
 }

@@ -36,7 +36,15 @@ export default function useDeal() {
     (mem) => mem.products?.find((prd) => prd.id === pid),
   ), [gsctx.members]);
 
+  const formatName = useCallback((customer : any) => `${customer.firstName} ${customer.lastName.charAt(0)}`,
+    [gsctx.members]);
+
+  const topFive = useCallback(
+    (entity : any) => Array.isArray(entity) && entity.slice(0, entity.length),
+    [gsctx.members],
+  );
+
   return {
-    currencySymbol, discount, dPrice, gsURL, clientDealProducts, getBuyers,
+    currencySymbol, discount, dPrice, gsURL, clientDealProducts, getBuyers, formatName, topFive,
   };
 }

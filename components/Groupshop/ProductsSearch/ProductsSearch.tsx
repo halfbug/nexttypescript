@@ -52,6 +52,10 @@ const ProductsSearch = ({
     store: { products } = { store: { products: [] } },
   } = gsctx;
 
+  useEffect(() => {
+    if (products && (!otherProducts || otherProducts?.length < 1)) { setotherProducts(products); }
+  }, [products]);
+
   const [selected, setSelected] = useState<string[]|undefined>(undefined);
   const clientDProducts = clientDealProducts();
 
