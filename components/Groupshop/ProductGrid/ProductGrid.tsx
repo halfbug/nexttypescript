@@ -48,7 +48,7 @@ const ProductGrid = ({
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
   const [showDetail, setshowDetail] = useState<boolean>(false);
   const [sProduct, setsProduct] = useState<IProduct | undefined>(undefined);
-  const fillerz = Math.abs(pageSize - renderItems.length) || (breakPoint === 'sm' ? 1 : 0);
+  const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 1 : 0);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
   const {
     gsctx: {
@@ -57,7 +57,9 @@ const ProductGrid = ({
     } = { discountCode: { percentage: 0 }, dealProducts: [] },
   } = useContext(GroupshopContext);
 
-  const { currencySymbol, dPrice, getBuyers } = useDeal();
+  const {
+    currencySymbol, dPrice, getBuyers, formatName, topFive,
+  } = useDeal();
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -80,9 +82,13 @@ const ProductGrid = ({
                     {`${percentage}% OFF`}
                   </span>
                   <div className={styles.groupshop__pcard_tag_boughtby}>
-                    {getBuyers(prod.id)?.map(
-                      (member : Member) => (<span className={styles.groupshop__pcard_tag_buyer}>{`${member.orderDetail.customer.firstName} ${member.orderDetail.customer.lastName || ''}`}</span>),
-                    )}
+                    {topFive(getBuyers(prod.id)?.map(
+                      (member : Member) => (
+                        <span className={styles.groupshop__pcard_tag_buyer}>
+                          { formatName(member.orderDetail.customer)}
+                        </span>
+                      ),
+                    ))}
 
                     {getBuyers(prod.id).length > 0 && (
                     <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}

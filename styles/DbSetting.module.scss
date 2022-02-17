@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .setting_tab {
-    @extend .mt-4, .py-4, .d-flex, .px-0;
+    @extend .mt-2, .py-4, .d-flex, .px-0;
 
     h4 {
         @extend .fw-bold, .lh-base, .fs-3, .mt-2, .mb-0, .pb-0;

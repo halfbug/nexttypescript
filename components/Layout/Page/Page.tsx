@@ -29,7 +29,7 @@ const Page = ({
       <SideBar />
       <div className={styles.rightcontentwrap}>
         <Row>
-          <Col className="mt-4">
+          <Col className="mt-2">
             <Row className="text-start">
               <Col>
                 {' '}
