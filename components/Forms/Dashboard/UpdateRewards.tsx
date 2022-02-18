@@ -61,7 +61,7 @@ export default function UpdateRewards() {
       .test("diff", "difference of values should be atleast 10",
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
-            console.log(context);
+            // console.log(context);
             return false;
           }
           return true;
@@ -110,7 +110,7 @@ export default function UpdateRewards() {
         });
       }
     }
-    console.log({ values });
+    // console.log({ values });
   }, [campaign]);
   // const [campaign, setcampaign] = useState(second);
 
@@ -127,7 +127,7 @@ export default function UpdateRewards() {
       const {
         rewards, selectedTarget, maxDiscountVal, minDiscountVal,
       } = valz;
-      console.log({ valz });
+      // console.log({ valz });
 
       const { __typename, ...newSelectedTarget } = selectedTarget;
       if (newSelectedTarget.rewards.length) {
@@ -137,8 +137,8 @@ export default function UpdateRewards() {
         });
         newSelectedTarget.rewards = [...newR];
       }
-      console.log({ selectedTarget });
-      console.log({ newSelectedTarget });
+      // console.log({ selectedTarget });
+      // console.log({ newSelectedTarget });
       if (newSelectedTarget?.rewards && (editMax || editMin)) {
         const baseline = parseInt(minDiscountVal);
         const maximum = parseInt(maxDiscountVal);
@@ -198,7 +198,7 @@ export default function UpdateRewards() {
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  console.log({ values });
+  // console.log({ values });
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>

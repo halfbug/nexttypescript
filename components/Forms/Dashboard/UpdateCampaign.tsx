@@ -9,7 +9,7 @@ import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
-import { ICampaign, ICampaignForm } from 'types/store';
+import { ICampaign, ICampaignForm, IProduct } from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
@@ -18,6 +18,8 @@ import { useRouter } from 'next/router';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
+import useUtilityFunction from 'hooks/useUtilityFunction';
+import useCampaign from 'hooks/useCampaign';
 import Settings from '../Settings';
 import SocialMedia from './SocialMedia';
 import UpdateRewards from './UpdateRewards';
@@ -36,6 +38,7 @@ export default function UpdateCampaign() {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const [disableBtn, setdisableBtn] = React.useState(true);
+  const [selectedProducts, setselectedProducts] = React.useState<IProduct[] | undefined>(undefined);
   const [state, setstate] = React.useState<ICampaignForm>({
     id: '',
     criteria: '',
@@ -47,13 +50,27 @@ export default function UpdateCampaign() {
     imageUrl: '',
     youtubeUrl: '',
     media: 'image',
+    addableProducts: [],
 
   });
-
+  const { findInArray } = useUtilityFunction();
+  const { campaign } = useCampaign();
+  // refactor it with useCampaign()
   React.useEffect(() => {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
+      if (arr[0].criteria! === "custom") setdisableBtn(false);
       // const thisCamp = [...arr[0]];
+      // if (ins === "2a") {
+      //   if (arr[0].products && !selectedProducts) {
+      //     setselectedProducts(findInArray(arr[0].products, store?.products || [], "id", "id"));
+      //     console.log(findInArray(arr[0].products, store?.products || [], "id", "id"));
+      //   }
+      // } else if (ins === "addproduct" && arr[0].addableProducts && !selectedProducts) {
+      //   setselectedProducts(findInArray(arr[0].addableProducts, store?.products || [], "id", "id"));
+      //   console.log(findInArray(arr[0].addableProducts, store?.products || [], "id", "id"));
+      // }
+
       const newState:ICampaignForm = {
         criteria: arr[0]?.criteria!,
         joinExisting: arr[0]?.joinExisting!,
@@ -63,6 +80,7 @@ export default function UpdateCampaign() {
         imageUrl: arr[0]?.settings?.imageUrl!,
         youtubeUrl: arr[0]?.settings?.youtubeUrl!,
         media: arr[0]?.settings?.media!,
+
       };
       setstate({ ...newState });
     }
@@ -88,7 +106,8 @@ export default function UpdateCampaign() {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
       const {
-        criteria, joinExisting, products, brandColor, customColor, customBg, imageUrl, youtubeUrl,
+        criteria, joinExisting, products, brandColor, customColor, customBg,
+        imageUrl, youtubeUrl, addableProducts,
       } = valz;
       console.log({ valz });
       let { media } = valz;
@@ -104,6 +123,7 @@ export default function UpdateCampaign() {
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             products: criteria === 'custom' ? store?.newCampaign?.productsArray : [],
+            addableProducts,
             settings: {
               brandColor,
               customColor,
@@ -125,17 +145,36 @@ export default function UpdateCampaign() {
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     },
   });
+  console.log({ selectedProducts });
+  console.log({ campaign });
 
   React.useEffect(() => {
+    if (ins === "2a") {
+      if (campaign?.products) {
+        setselectedProducts(findInArray(campaign?.products, store?.products || [], "id", "id"));
+        console.log(findInArray(campaign?.products, store?.products || [], "id", "id"));
+      }
+    } else if (ins === "addproduct" && campaign?.addableProducts) {
+      console.log('im in else of add product');
+
+      setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
+      console.log(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
+    }
+
     if (ins === '2') {
-      setFieldValue('products', store?.newCampaign?.productsArray);
+      if (store?.newCampaign?.productsArray?.length) {
+        setFieldValue('products', store?.newCampaign?.productsArray);
+      }
+      if (store?.newCampaign?.addableProductsArray?.length) {
+        setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
+      }
       setTimeout(handleSubmit, 2000);
       setParams({ ins: undefined });
     }
   }, [ins]);
 
-  console.log({ store });
-  console.log({ state });
+  // console.log({ store });
+  // console.log({ state });
 
   const handleCustomBg = (field: string, value: string) => {
     // empty other bg and keep only one
@@ -155,12 +194,24 @@ export default function UpdateCampaign() {
   };
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
-    console.log("🚀 ~ file: GeneralSettings.tsx ~ line 83 ~ handleForm ~ value", field);
     handleSubmit();
+  };
+  const handleAddProduct = () => {
+    // clear edit product context
+    // dispatch({
+    //   type: 'NEW_CAMPAIGN',
+    //   payload: {
+    //     newCampaign: {
+    //       productsArray: [],
+    //     },
+    //   },
+    // });
+
+    setParams({ ins: 'addproduct' });
   };
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a'} />
+      <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} />
       <Row>
         <Col lg={7} className="mt-4">
           <Row>
@@ -248,7 +299,7 @@ export default function UpdateCampaign() {
                     </Col>
                   </Row>
                   <Row className="text-muted"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
-                  <Row className="text-start"><Col><WhiteButton>Add products</WhiteButton></Col></Row>
+                  <Row className="text-start"><Col><WhiteButton onClick={handleAddProduct}>Add products</WhiteButton></Col></Row>
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>

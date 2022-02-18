@@ -16,11 +16,10 @@ export default function useCampaign() {
     // if (campaign === undefined) {
     setcampaign(getCampaign());
     setNewcampaign(getNewCampaign());
-    console.log(store.campaigns);
     // }
   }, [store]);
-  console.log({ campaign });
-  console.log({ store });
+  // console.log({ campaign });
+  // console.log({ store });
 
   const getCampaign = useCallback(() => {
     let Incampaign;
@@ -36,12 +35,28 @@ export default function useCampaign() {
     let newCampaign = {};
     if (store?.newCampaign) {
       newCampaign = store?.newCampaign;
-      console.log({ newCampaign });
     }
     return newCampaign;
   }, [store.newCampaign]);
 
+  const clearNewCampaign = useCallback(() => {
+    dispatch({
+      type: 'UPDATE_STORE',
+      payload: {
+        singleEditCampaignId: '',
+        newCampaign: {
+          products: [],
+          collections: [],
+          addableProductsArray: [],
+          productsArray: [],
+          criteria: '',
+          // productsArray: [],
+        },
+      },
+    });
+  }, []);
+
   return {
-    getCampaign, campaign, getNewCampaign, newcampaign,
+    getCampaign, campaign, getNewCampaign, newcampaign, clearNewCampaign,
   };
 }

@@ -56,6 +56,8 @@ query StoreName($shop: String!) {
       }
     }
     products
+    addableProducts
+
   }
   }
 }
@@ -104,6 +106,8 @@ const CREATE_CAMPAIGN = gql`
     joinExisting
     criteria
     products
+    addableProducts
+
     }
   }
 `;
@@ -138,6 +142,8 @@ const CREATE_CAMPAIGN_DB = gql`
       twitter
     }
     products
+    addableProducts
+
     }
   }
 `;
@@ -209,6 +215,8 @@ const UPDATE_CAMPAIGN = gql`
       }
     }
     products
+    addableProducts
+
     }
   }
 `;
@@ -255,6 +263,7 @@ const GET_CAMPAIGN_BY_ID = gql`
     joinExisting
     criteria
     products
+    addableProducts
     }
   }
 `;
@@ -494,6 +503,8 @@ query campaigns {
       twitter
     }
     products
+    addableProducts
+
   }
 }
 `;

@@ -1,5 +1,6 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable array-callback-return */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 import {
   Col, Form, ListGroup, Row, Button,
@@ -9,12 +10,14 @@ import useQueryString from 'hooks/useQueryString';
 import { StoreContext } from 'store/store.context';
 import { ICollection, IProduct } from 'types/store';
 import IconButton from 'components/Buttons/IconButton';
+import { useRouter } from 'next/router';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
 
 interface IScreen1Props {
   show: boolean,
+  selectedProducts?: IProduct[];
 }
 
 type SelectedType = {
@@ -22,7 +25,7 @@ type SelectedType = {
   products? : IProduct[];
 }
 
-const Screen1 = ({ show }: IScreen1Props) => {
+const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
   const [, setParams] = useQueryString();
   const { store, dispatch } = React.useContext(StoreContext);
   const [view, setview] = useState<'List' | 'Detail' | 'Search'>('List');
@@ -32,14 +35,21 @@ const Screen1 = ({ show }: IScreen1Props) => {
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
       collections: store.newCampaign?.collections ?? [],
-      products: store.newCampaign?.products ?? [],
+      products: selectedProducts ?? store.newCampaign?.products ?? [],
     },
   );
+  const { query: { ins } } = useRouter();
   const getEntityById = (id:string, entity: string):
    ICollection | IProduct => store?.[entity]?.find(
     (col:IProduct | ICollection) => col.id === id,
   );
 
+  React.useEffect(() => {
+    // if (selectedProducts && !campaign?.products?.length) {
+    if (selectedProducts) {
+      setcampaign({ ...campaign, products: selectedProducts });
+    }
+  }, [selectedProducts]);
   const backToList = () => {
     setview('List');
   };
@@ -110,20 +120,43 @@ const Screen1 = ({ show }: IScreen1Props) => {
   };
 
   const handleSave = () => {
-    if (campaign?.products && campaign?.products?.length < 81) {
-      dispatch({
-        type: 'NEW_CAMPAIGN',
-        payload: {
-          newCampaign: {
-            products: campaign?.products,
-            collections: campaign?.collections,
-            productsArray: campaign?.products?.map((prod) => prod.id),
+    // const finalArray = (ins === '2a') ? 'productsArray' : 'addableProductsArray';
+    if (ins === '2a') {
+      if (campaign?.products && campaign?.products?.length < 81) {
+        dispatch({
+          type: 'NEW_CAMPAIGN',
+          payload: {
+            newCampaign: {
+              products: campaign?.products,
+              collections: campaign?.collections,
+              productsArray: campaign?.products?.map((prod) => prod.id),
+            },
           },
-        },
-      });
+        });
+      }
+    } else {
+      console.log('im inelse');
+
+      if (campaign?.products) {
+        dispatch({
+          type: 'NEW_CAMPAIGN',
+          payload: {
+            newCampaign: {
+              addableProducts: campaign?.products,
+              addableCollections: campaign?.collections,
+              addableProductsArray: campaign?.products?.map((prod) => prod.id),
+              // productsArray: [],
+            },
+          },
+        });
+      }
     }
     setParams({ ins: 2 });
   };
+  console.log({ campaign });
+  console.log({ store });
+  console.log({ selectedProducts });
+  console.log('....................');
 
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">

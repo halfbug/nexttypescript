@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as React from 'react';
 import {
   Row, Col, Button as RButton,
@@ -7,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS, TOTAL_PRODUCTS, GET_PRODUCTS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 import { XCircleFill } from 'react-bootstrap-icons';
+import useCampaign from 'hooks/useCampaign';
 import IconButton from '../IconButton';
 import DeleteButton from '../DeleteButton';
 
@@ -26,20 +28,23 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
 
     variables: { shop },
   });
+  // const [criteria, setcriteria] = React.useState('');
 
-  const [criteria, setcriteria] = React.useState('');
+  // console.log(store);
 
-  console.log(store);
-
-  React.useEffect(() => {
-    if (store?.singleEditCampaignId && store?.campaigns) {
-      const arr:any = store?.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
-      const camp = { ...arr[0] };
-      setcriteria(camp.criteria);
-    } else {
-      setcriteria('');
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (store?.singleEditCampaignId && store?.campaigns) {
+  //     const arr:any = store?.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
+  //     const camp = { ...arr[0] };
+  //     setcriteria(camp.criteria);
+  //   } else {
+  //     setcriteria('');
+  //   }
+  // }, []);
+  const { newcampaign } = useCampaign();
+  const { campaign } = useCampaign();
+  console.log({ campaign }, '.........');
+  console.log({ newCampaign }, '.........');
 
   React.useEffect(() => {
     if (data) {
@@ -87,7 +92,8 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   const handleEditProduct = () => {
     setParams({ ins: '2a' });
   };
-  console.log(totalProducts);
+  // console.log(totalProducts);
+  // console.log({ campaign });
   return (
     <>
       <Row className="mt-3 justify-content-center">
@@ -102,24 +108,25 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
 
         </Col>
       </Row>
-      { ((newCampaign?.products && newCampaign?.products?.length > 0)
-      || (totalProducts !== 0 && criteria === 'custom'))
-       && (
-       <Row className="m-2 justify-content-center">
-         <Col className="text-muted">
-           {(newCampaign?.products && newCampaign?.products?.length)
-          || (totalProducts)
-          || 0}
-           {' '}
-           product(s)/
-           {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
-           {' '}
-           collection(s) selected
-           {' '}
-           <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
-         </Col>
-       </Row>
-       )}
+      { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
+      // || (totalProducts !== 0 && criteria === 'custom'))
+      || (campaign?.products?.length && campaign?.criteria === 'custom')
+      // || (newcampaign?.products?.length)
+      )
+      && (
+      <Row className="m-2 justify-content-center">
+        <Col className="text-muted">
+          {(newCampaign?.products?.length)
+          || (campaign?.products?.length)}
+          product(s)/
+          {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
+          {' '}
+          collection(s) selected
+          {' '}
+          <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
+        </Col>
+      </Row>
+      )}
     </>
   );
 }

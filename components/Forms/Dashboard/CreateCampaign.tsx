@@ -21,6 +21,8 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import Router, { useRouter } from 'next/router';
 import useQueryString from 'hooks/useQueryString';
+import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
@@ -52,6 +54,10 @@ export default function CreateCampaign() {
     youtubeUrl: '',
     media: 'image',
   };
+  const { clearNewCampaign } = useCampaign();
+  React.useEffect(() => {
+    clearNewCampaign();
+  }, []);
 
   const validationSchema = yup.object({
     name: yup
@@ -82,7 +88,8 @@ export default function CreateCampaign() {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest, tiktok, facebook, twitter,
+        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest,
+        tiktok, facebook, twitter, addableProducts,
       } = valz;
       console.log({ valz });
       let { media } = valz;
@@ -113,6 +120,7 @@ export default function CreateCampaign() {
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             isActive,
             products: store?.newCampaign?.productsArray,
+            addableProducts,
             socialLinks: {
               facebook,
               instagram,
@@ -150,14 +158,18 @@ export default function CreateCampaign() {
 
   React.useEffect(() => {
     if (ins === '2') {
-      setFieldValue('products', store?.newCampaign?.productsArray);
+      if (store?.newCampaign?.productsArray?.length) {
+        setFieldValue('products', store?.newCampaign?.productsArray);
+      }
+      if (store?.newCampaign?.addableProductsArray?.length) {
+        setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
+      }
       // setTimeout(handleSubmit, 2000);
       setParams({ ins: undefined });
     }
   }, [ins]);
 
   console.log({ store });
-  console.log({ values });
 
   const handleCustomBg = (field: string, value: string) => {
     // empty other bg and keep only one
@@ -177,10 +189,13 @@ export default function CreateCampaign() {
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
   };
-
+  const handleAddProduct = () => {
+    setParams({ ins: 'addproduct' });
+  };
+  const { setValue } = useUtilityFunction();
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a'} />
+      <Screen1 show={ins === '2a' || ins === 'addproduct'} />
       <Form noValidate onSubmit={handleSubmit}>
 
         <Row>
@@ -250,7 +265,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         isInvalid={touched.criteria && !!errors.criteria}
                         value="bestseller"
-                        // onClick={() => setValue('criteria', 'bestseller')}
+                        onClick={() => setValue('criteria', 'bestseller')}
                         checked={values.criteria === 'bestseller'}
                       />
                       <Form.Check
@@ -261,7 +276,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         value="newest"
                         isInvalid={touched.criteria && !!errors.criteria}
-                        // onClick={() => setValue('criteria', 'newest')}
+                        onClick={() => setValue('criteria', 'newest')}
                         checked={values.criteria === 'newest'}
                       />
                     </Col>
@@ -274,7 +289,7 @@ export default function CreateCampaign() {
                         onChange={(e) => handleChange(e)}
                         onClick={() => {
                           setdisableBtn(false);
-                          // setValue('criteria', 'custom');
+                          setValue('criteria', 'custom');
                         }}
                         type="radio"
                         name="criteria"
@@ -303,7 +318,7 @@ export default function CreateCampaign() {
                     </Col>
                   </Row>
                   <Row className="text-muted mb-2"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
-                  <Row className="text-start"><Col><WhiteButton>Add products</WhiteButton></Col></Row>
+                  <Row className="text-start"><Col><WhiteButton onClick={handleAddProduct}>Add products</WhiteButton></Col></Row>
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>
@@ -436,4 +451,7 @@ export default function CreateCampaign() {
       </Form>
     </Container>
   );
+}
+function useEffect(arg0: () => void) {
+  throw new Error('Function not implemented.');
 }

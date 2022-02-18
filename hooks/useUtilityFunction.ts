@@ -1,6 +1,8 @@
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
+import { StoreContext } from 'store/store.context';
+import { IProduct } from 'types/store';
 // /import { useRouter } from 'next/router';
 
 // export declare type TParams = {
@@ -11,6 +13,11 @@ export default function useUtilityFunction() {
 //   const router = useRouter();
 
   //   const { pathname, query: params } = router;
+  const {
+    store,
+    dispatch,
+  } = useContext(StoreContext);
+
   const cleanTypename = useCallback((obj: any) => {
     try {
       if (Array.isArray(obj)) {
@@ -35,5 +42,25 @@ export default function useUtilityFunction() {
     return false;
   }, []);
 
-  return { cleanTypename, multiple5, isMultiple5 };
+  const findInArray = (
+    mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
+  ):any => mainArr?.map((item: any) => {
+    console.log({ item });
+
+    const newArr = searchArr?.find(
+      (item2: any) => item2[searchField] === item,
+    );
+    console.log({ newArr });
+    console.log({ item });
+
+    return newArr;
+  });
+
+  const setValue = (field: string, value: string | number) => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
+  };
+
+  return {
+    cleanTypename, multiple5, isMultiple5, findInArray, setValue,
+  };
 }

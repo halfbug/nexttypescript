@@ -32,6 +32,10 @@ export interface ICampaign {
   settings?: ISettings;
   socialLinks?: ISocialLink;
   selectedTarget?: ISalesTarget;
+  addableProductsArray?: string[];
+  addableCollections?: ICollection[];
+  addableProducts?: IProduct[];
+
 }
 export interface ICampaignForm {
   settings?: any;
@@ -54,6 +58,7 @@ export interface ICampaignForm {
   twitter?: string;
   facebook?: string;
   isActive?: boolean;
+  addableProducts?: IProduct[];
 }
 
 export interface ICollection {

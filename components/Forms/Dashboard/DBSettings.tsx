@@ -64,7 +64,7 @@ export default function DBSettings({
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
-  console.log('🚀 DBSettings.tsx', values);
+  // console.log('🚀 DBSettings.tsx', values);
   // if (isEdit) {
   //   const { settings } = values;
   //   // eslint-disable-next-line no-param-reassign

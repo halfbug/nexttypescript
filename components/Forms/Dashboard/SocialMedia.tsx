@@ -101,8 +101,8 @@ export default function SocialMedia() {
     },
   });
 
-  console.log({ values });
-  console.log({ smState });
+  // console.log({ values });
+  // console.log({ smState });
 
   return (
 
