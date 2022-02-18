@@ -9,11 +9,12 @@ import {
 } from 'react-bootstrap';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
-import { Send } from 'react-bootstrap-icons';
+import { Images, Send } from 'react-bootstrap-icons';
 import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
+import Scrollable from 'components/Widgets/Scrollable/Scrollable';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -40,6 +41,7 @@ const ProductDetail = ({
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: number, e: any) => {
+    console.log({ selectedIndex });
     setIndex(selectedIndex);
   };
 
@@ -67,7 +69,7 @@ const ProductDetail = ({
   }, [product]);
 
   const [selOptions, setselOptions] = useState<any| undefined>();
-  console.log('🚀 ~ file: ProductDetail.tsx ~ line 55 ~ selOptions', selOptions);
+  // console.log('🚀 ~ file: ProductDetail.tsx ~ lines 55 ~ selOptions', selOptions);
   const addToCart = () => {
     const { productById: dproduct } = data;
     const optionNames = Object.keys(selOptions);
@@ -122,7 +124,7 @@ const ProductDetail = ({
                 </Carousel.Item>
                 {
                  data?.productById?.images?.map((img:any, i:number) => (
-                   <Carousel.Item key={`${img.id}_${Math.random()}`}>
+                   <Carousel.Item>
                      <img
                        src={img.src}
                        alt={`image_${i}`}
@@ -133,7 +135,29 @@ const ProductDetail = ({
                  ))
                }
               </Carousel>
-
+              {data?.productById?.images.length > 1
+                && (
+                <Scrollable width="100%">
+                  <div className="d-flex">
+                    {data?.productById?.images?.map((img:any, i:number) => (
+                      <button
+                        type="button"
+                        onClick={(e) => handleSelect((i + 1), e)}
+                        className={i === index
+                          ? styles.groupshop_modal_detail_button_selected
+                          : styles.groupshop_modal_detail_button}
+                        key={img.id}
+                      >
+                        <img
+                          src={img.src}
+                          alt={`image_${i}`}
+                          className={styles.groupshop_modal_detail_thumbnail}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </Scrollable>
+                )}
             </Col>
             <Col xs={12} md={6}>
               <h2>
@@ -216,20 +240,7 @@ const ProductDetail = ({
             </Col>
           </Row>
           <Row>
-            <Col xs={12} md={6}>
-              <div className="d-flex">
-                { data?.productById?.images.length > 1
-                && data?.productById?.images?.map((img:any, i:number) => (
-                  <button type="button" onClick={(e) => handleSelect((i + 1), e)} className={i === index ? styles.groupshop_modal_detail_button_selected : styles.groupshop_modal_detail_button}>
-                    <img
-                      src={img.src}
-                      alt={`image_${i}`}
-                      className={styles.groupshop_modal_detail_thumbnail}
-                    />
-                  </button>
-                ))}
-              </div>
-            </Col>
+            <Col xs={12} md={6} />
             <Col xs={12} md={6}>
               { productCustomers.length > 1
               && (
