@@ -217,8 +217,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				height: 40px;
 			}
 		}
-
-
 	}
 	&_row {
 		@extend .pt-4;
@@ -349,20 +347,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			}
 		}
 		&_info {
-               @extend .border-bottom-0;
-			   }
-			.modal-header{
-				border-bottom:none!important;
+			@extend .border-bottom-0;
+		}
+		.modal-header {
+			border-bottom: none !important;
+		}
+	}
 
-			}
-		}
-		
-		&_imgBox{
-			width: 107.7%;
-			margin-left: -31px;
-			margin-top: -21px;
-		}
-	
+	&_imgBox {
+		width: 107.7%;
+		margin-left: -31px;
+		margin-top: -21px;
+	}
 
 	&_search {
 		height: 300px;
@@ -397,85 +393,121 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .d-flex, .justify-content-center, .align-items-center, .mb-3;
 			color: $black;
 		}
+		p {
+			font-weight: 400;
+			font-family: DM Sans !important ;
+			font-style: normal;
+			font-size: 14px;
+			line-height: 16px;
+			
+		}
+		b {
+			font-family: DM Sans !important ;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 18px;
+		}
 		&__logo {
 			@extend .d-flex, .justify-content-center;
 			img {
-				height: 15px;
+				height: 52.26px;
+				width: 256.26px;
 			}
 		}
-		&_sub{
+		&_sub {
 			@extend .mx-2;
 			border: 1px solid $purple !important;
-
 		}
-		input{
+		input {
 			border-bottom: 1px solid $purple !important;
 		}
 
 		&_link {
-			@extend .border-0, .d-inline, .fw-bold, .my-3, ;
-			button { 
+			@extend .border-0, .d-inline, .fw-bold, .my-3;
+			button {
 				text-decoration: none;
 				list-style: none;
+				font-family: DM Sans;
+				font-style: normal;
+				font-weight: 500!important ;
+				font-size: 14px;
 			}
 		}
 
 		div .btn-link {
-			text-decoration: none!important;
+			text-decoration: none !important;
 		}
 
 		&_counter {
 			@extend .my-3, .mx-0;
-            width: 255px;
+			width: 240px;
 			span {
-				@extend .d-block, .border, .border-3, .rounded, .fw-bold, .fs-4;
-				width: 55px;
+				@extend .d-block, .border, .border-3, .rounded, .fs-4;
+				width: 50px;
 				display: flex !important;
 				justify-content: center;
 				align-items: center;
 				height: 49px;
-				font-size: 12px;
+				font-weight: 500;
+				font-size: 24px !important;
 				border: 2px solid $purple !important;
+			}
+
+			b {
+				font-family: DM Sans !important ;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 18px;
+			}
+			p {
+				font-weight: 700;
+				font-family: DM Sans !important ;
+				font-style: normal;
+				font-size: 12px;
+				line-height: 16px;
 			}
 		}
 		&_socialIcon {
-			@extend .my-3, .w-25, .px-0, .mx-0;
-			width: 80px;
+			@extend .my-3;
+			width: 118px;
 			height: 26px;
 
-	&_modal-header {
-		border-bottom: none !important;
-	}
+			&_modal-header {
+				border-bottom: none !important;
+			}
 
-	&_tostart {
-		@extend .my-0, .py-0;
-		h4 {
-			color: $black;
-			text-align: center;
-			// max-width: 600px;
-			position: relative;
-			text-align: center;
-		}
-		h4:before {
-			content: "";
-			display: block;
-			width: 99px;
-			height: 2px;
-			background: #dcdcdc;
-			left: 0;
-			top: 50%;
-			position: absolute;
-		}
-		h4:after {
-			content: "";
-			display: block;
-			width: 99px;
-			height: 2px;
-			background: #dcdcdc;
-			right: 0;
-			top: 50%;
-			position: absolute;
+			&_tostart {
+				@extend .my-0, .py-0;
+				h4 {
+					color: $black;
+					text-align: center;
+					// max-width: 600px;
+					position: relative;
+					text-align: center;
+				}
+				h4:before {
+					content: "";
+					display: block;
+					width: 99px;
+					height: 2px;
+					background: #dcdcdc;
+					left: 0;
+					top: 50%;
+					position: absolute;
+				}
+				h4:after {
+					content: "";
+					display: block;
+					width: 99px;
+					height: 2px;
+					background: #dcdcdc;
+					right: 0;
+					top: 50%;
+					position: absolute;
+				}
+			}
 		}
 	}
 }
-}}

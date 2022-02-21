@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import footerLogo from 'public/images/groupshoplogo.png';
 import footerLogo1 from 'public/images/logo-thin.png';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import styles from 'styles/Groupshop.module.scss';
@@ -23,61 +22,76 @@ const Footer = ({
     <hr />
     <Row className={styles.groupshop_footer_f1}>
       <Col lg={3}>
-        <p className="mb-5 w-75"><b>Complete your order in time to benefit from these exclusive rewards!</b></p>
-        <Row className={styles.groupshop_footer_counter}>
-          <Col className="d-flex ">
-            <div className="text-center m-1">
-              <span>
+        <section>
+          <p className="mb-5 w-75 "><b>Complete your order in time to benefit from these exclusive rewards!</b></p>
+          <Row className={styles.groupshop_footer_counter}>
+            <Col className="d-flex col-3 ">
+              <div className="text-center me-2">
+                <span>
+                  {' '}
+                  3
+                </span>
+                <p className="mt-1">DAYS</p>
+              </div>
+              <div className="py-3">
                 {' '}
-                3
-              </span>
-              <p className="fw-bold">DAYS</p>
-            </div>
-            <div className="py-4 mx-2">
-              {' '}
-              :
-            </div>
-
-          </Col>
-          <Col className="d-flex mx-0 px-0">
-            <div className="text-center m-1">
-              <span>
-                15
-              </span>
-              <p className="fw-bold">HOURS</p>
-            </div>
-            <div className="py-4 mx-2">
-              {' '}
-              :
-            </div>
-
-          </Col>
-          <Col className="d-flex mx-0 px-0">
-            <div className="text-center m-1">
-              <span>
-                3
-              </span>
-              <p className="fw-bold">MINUTES</p>
-            </div>
-          </Col>
-
-        </Row>
+                :
+              </div>
+            </Col>
+            <Col className="d-flex col-3  ">
+              <div className="text-center mx-2">
+                <span>
+                  15
+                </span>
+                <p className="mt-1">HOURS</p>
+              </div>
+              <div className="py-3">
+                {' '}
+                :
+              </div>
+            </Col>
+            <Col className="d-flex col-3 ">
+              <div className="text-center mx-3">
+                <span>
+                  3
+                </span>
+                <p className="mt-1">MINUTES</p>
+              </div>
+            </Col>
+          </Row>
+        </section>
       </Col>
-      <Col lg={3}>
-        <Row className={['mx-5 my-4', styles.groupshop_footer__logo].join(' ')}>
-          <img src={footerLogo.src} alt="brandLogo" />
+      <Col lg={4}>
+        <Row className={['mx-2 my-2', styles.groupshop_footer__logo].join(' ')}>
+          {/* <img src={footerLogo.src} alt="brandLogo" /> */}
+          <img src="/images/logo-thin.svg" alt="Groupshop" />
         </Row>
         <Row className={styles.groupshop_socialIcon}>
-          <Row className="mx-5 w-75 px-0">
-            <Row className="mx-2">
-              <Col><SocialButton network="Instagram" url={'  '} /></Col>
-              <Col>
-                <SocialButton network="Youtube" url={' '} />
-              </Col>
-              <Col><SocialButton network="Tiktok" url={'  '} /></Col>
-              <Col><SocialButton network="Twitter" url={'  '} /></Col>
-            </Row>
-          </Row>
+
+          <section className="d-flex justify-content-center px-2">
+            <div className="mx-1">
+              {' '}
+              <SocialButton network="Instagram" url={'  '} />
+            </div>
+
+            <div className="mx-1">
+              {' '}
+              <SocialButton network="Youtube" url={' '} />
+              {' '}
+            </div>
+
+            <div className="mx-1">
+              {' '}
+              <SocialButton network="Tiktok" url={'  '} />
+              {' '}
+            </div>
+            <div className="mx-1">
+              {' '}
+              <SocialButton network="Twitter" url={'  '} />
+              {' '}
+            </div>
+          </section>
+
         </Row>
         <Row className={['d-flex', styles.groupshop_footer_link].join(' ')}>
           <div className=" text-center ">
@@ -87,21 +101,24 @@ const Footer = ({
         </Row>
       </Col>
       <Col lg={3}>
-        <p className="w-75">
-          <b>Want your own store? </b>
-          Be the first to find out when you can shop your favorite brands on Groupshop.
-        </p>
-        <InputGroup className=" my-3 w-75" id="borderclr">
-          <FormControl
-            placeholder="Enter your email"
-            aria-label="Email"
-            aria-describedby="basic-addon2"
-            className="border-0 border-bottom px-2"
-          />
-          <Button size="sm" variant="outline" className={styles.groupshop_footer_sub}>
-            <ChevronRight size={16} />
-          </Button>
-        </InputGroup>
+        <section>
+          <p>
+            <strong>Want your own store? </strong>
+            Be the first to find out when
+            you can shop your favorite brands on Groupshop.
+          </p>
+          <InputGroup className=" my-3" id="borderclr">
+            <FormControl
+              placeholder="Enter your email"
+              aria-label="Email"
+              aria-describedby="basic-addon2"
+              className="border-0 border-bottom px-2"
+            />
+            <Button size="sm" variant="outline" className={styles.groupshop_footer_sub}>
+              <ChevronRight size={16} />
+            </Button>
+          </InputGroup>
+        </section>
       </Col>
     </Row>
     <hr />
