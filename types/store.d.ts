@@ -92,6 +92,9 @@ export interface IProduct {
   options?: Ioption[];
   images?: any[];
   variants?: any[];
+  inventoryQuantity?: number;
+  selectedOptions?: any;
+  image?: any;
 }
 export interface ISettings {
   brandColor: string;

@@ -89,7 +89,7 @@ const ProductDetail = ({
 
     if (selectedVariant?.inventoryQuantity > 0) {
       addCartProduct({
-        ...product, ...dproduct, selectedVariant, selectedQuantity: 1,
+        ...product, ...dproduct, selectedVariant: { ...selectedVariant, selectedQuantity: 1 },
       });
       showSuccess('product has been added');
     } else {

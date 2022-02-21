@@ -95,7 +95,7 @@ const Cart = ({
                     ...
                   </h5>
                   <p>
-                    {prd.selectedVariant.selectedOptions.reduce(
+                    {prd.selectedVariant?.selectedOptions?.reduce(
                       (vstr : string, opt:any) => `${vstr}, ${opt.value}`, '',
                     ).substr(1)}
                   </p>
@@ -103,12 +103,12 @@ const Cart = ({
                   <h5 className="pt-2">
                     <span className="text-decoration-line-through">
                       {currencySymbol}
-                      {prd.price}
+                      {prd.selectedVariant.price ?? prd.price}
                     </span>
                     {' '}
                     <span>
                       {currencySymbol}
-                      {dPrice(+(prd.price)).toFixed(1)}
+                      {dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
                     </span>
                   </h5>
                   <p>Quantity</p>
@@ -118,20 +118,23 @@ const Cart = ({
                   >
                     <Button
                       variant="outline-primary"
-                      onClick={() => minusQuantity(prd.id)}
-                      disabled={prd.selectedQuantity < 2}
+                      onClick={() => minusQuantity(prd.selectedVariant.id)}
+                      disabled={prd.selectedVariant.selectedQuantity < 2}
                     >
                       -
                     </Button>
                     <FormControl
                       type="text"
-                      value={prd.selectedQuantity}
+                      value={prd.selectedVariant.selectedQuantity}
                     />
 
                     <Button
                       variant="outline-primary"
-                      onClick={() => plusQuantity(prd.id)}
-                      disabled={prd.selectedQuantity > prd.selectedVariant.inventoryQuantity}
+                      onClick={() => plusQuantity(prd.selectedVariant.id)}
+                      disabled={
+                        prd.selectedVariant?.selectedQuantity
+                        > (prd.selectedVariant?.inventoryQuantity ?? 0)
+}
                     >
                       +
                     </Button>

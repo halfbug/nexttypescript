@@ -49,8 +49,8 @@ export type Member ={
 }
 
 export type CartProduct = Product & {
- selectedVariant: any;
- selectedQuantity: number;
+ selectedVariant: Product & { selectedQuantity : number};
+//  selectedQuantity: number;
 };
 
 export interface IGroupshop {

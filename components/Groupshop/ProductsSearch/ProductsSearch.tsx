@@ -53,6 +53,11 @@ const ProductsSearch = ({
   } = gsctx;
 
   useEffect(() => {
+    // console.log(products);
+    if (!otherProducts) { setotherProducts(products); }
+  }, [otherProducts]);
+
+  useEffect(() => {
     if (products && (!otherProducts || otherProducts?.length < 1)) { setotherProducts(products); }
   }, [products]);
 

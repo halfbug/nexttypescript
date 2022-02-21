@@ -15,7 +15,7 @@ export default function useCart() {
     const alreadyCartProduct = gsctx.cart?.find(
       (prd) => prd.selectedVariant.id === product.selectedVariant.id,
     );
-    if (alreadyCartProduct) plusQuantity(alreadyCartProduct.id);
+    if (alreadyCartProduct) plusQuantity(alreadyCartProduct.selectedVariant.id);
     else {
       dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } });
     }
@@ -24,7 +24,7 @@ export default function useCart() {
   const cartProducts = gsctx?.cart || [];
 
   const removeProduct = useCallback((pid : string) => {
-    dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart?.filter((prd) =>  prd.selectedVariant.id !== pid) || []] } });
+    dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart?.filter((prd) => prd.selectedVariant.id !== pid) || []] } });
   }, [gsctx.cart]);
 
   const plusQuantity = useCallback((pid: string) => dispatch({
@@ -33,7 +33,7 @@ export default function useCart() {
       ...gsctx,
       cart: gsctx?.cart?.map((cp) => {
         const ncp = { ...cp };
-        if (cp.id === pid) { ncp.selectedQuantity += 1; }
+        if (ncp.selectedVariant.id === pid) { ncp.selectedVariant.selectedQuantity += 1; }
 
         return ncp;
       }),
@@ -46,7 +46,7 @@ export default function useCart() {
       ...gsctx,
       cart: gsctx?.cart?.map((cp) => {
         const ncp = { ...cp };
-        if (cp.id === pid) { ncp.selectedQuantity -= 1; }
+        if (cp.selectedVariant.id === pid) { ncp.selectedVariant.selectedQuantity -= 1; }
 
         return ncp;
       }),
@@ -54,14 +54,18 @@ export default function useCart() {
   }), [gsctx.cart]);
 
   const getTotal = useCallback(() => gsctx.cart?.reduce(
-    (total: number, { price, selectedQuantity }) => total + (dPrice(+price) * selectedQuantity),
+    (total: number,
+      {
+        price: mprice,
+        selectedVariant: { selectedQuantity, price },
+      }) => total + (dPrice(+(price ?? mprice)) * selectedQuantity),
     0,
   ), [gsctx.cart]);
 
   const isCartEmpty = gsctx?.cart?.length === 0;
 
   const getShopifyUrl = useCallback(() => {
-    const cartDetail = cartProducts.map(({ selectedVariant: { id }, selectedQuantity }) => `${id.split('/')[4]}:${selectedQuantity}`).join(',');
+    const cartDetail = cartProducts.map(({ selectedVariant: { id, selectedQuantity } }) => `${id.split('/')[4]}:${selectedQuantity}`).join(',');
     // `id=${id.split('/')[4]}&quantity=${selectedQuantity}`).join('&');
     console.log(`https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}`);
     return `https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}`;
