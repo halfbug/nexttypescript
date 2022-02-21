@@ -11,6 +11,7 @@ import { StoreContext } from 'store/store.context';
 import { ICollection, IProduct } from 'types/store';
 import IconButton from 'components/Buttons/IconButton';
 import { useRouter } from 'next/router';
+import useCampaign from 'hooks/useCampaign';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
@@ -118,7 +119,7 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
       campaign?.products?.find((cprod) => cprod.id === id),
     );
   };
-
+  const { updateSelectedCampaignAddProducts, updateSelectedCampaignProducts } = useCampaign();
   const handleSave = () => {
     // const finalArray = (ins === '2a') ? 'productsArray' : 'addableProductsArray';
     if (ins === '2a') {
@@ -133,23 +134,30 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
             },
           },
         });
+        // update selected campaign context in store
+        // updateSelectedCampaignProducts(campaign?.products);
       }
     } else {
       console.log('im inelse');
 
-      if (campaign?.products) {
-        dispatch({
-          type: 'NEW_CAMPAIGN',
-          payload: {
-            newCampaign: {
-              addableProducts: campaign?.products,
-              addableCollections: campaign?.collections,
-              addableProductsArray: campaign?.products?.map((prod) => prod.id),
-              // productsArray: [],
-            },
+      // if (campaign?.products) {
+      // if screen addproducts then update newCampaign
+      // as well particular campaign in store.campaigns
+      dispatch({
+        type: 'NEW_CAMPAIGN',
+        payload: {
+          newCampaign: {
+            addableProducts: campaign?.products,
+            addableCollections: campaign?.collections,
+            addableProductsArray: campaign?.products?.map((prod) => prod.id),
+            // productsArray: [],
           },
-        });
-      }
+        },
+      });
+      // update selected campaign context in store
+      // updateSelectedCampaignAddProducts(campaign?.products);
+
+      // }
     }
     setParams({ ins: 2 });
   };

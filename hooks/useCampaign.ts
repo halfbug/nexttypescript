@@ -56,7 +56,39 @@ export default function useCampaign() {
     });
   }, []);
 
+  const updateSelectedCampaignProducts = useCallback((id, prod) => {
+    if (store?.campaigns) {
+      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+        if (item.id === id) {
+          // eslint-disable-next-line no-param-reassign
+          item.products = prod.map((pro:any) => pro.id);
+          return item;
+        }
+        return item;
+      });
+      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+    }
+  }, []);
+
+  const updateSelectedCampaignAddProducts = useCallback((id, prod) => {
+    const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      if (item.id === id) {
+        // eslint-disable-next-line no-param-reassign
+        item.addableProducts = prod.map((pro:any) => pro.id);
+        return item;
+      }
+      return item;
+    });
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+  }, []);
+
   return {
-    getCampaign, campaign, getNewCampaign, newcampaign, clearNewCampaign,
+    getCampaign,
+    campaign,
+    getNewCampaign,
+    newcampaign,
+    clearNewCampaign,
+    updateSelectedCampaignProducts,
+    updateSelectedCampaignAddProducts,
   };
 }

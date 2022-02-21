@@ -136,9 +136,12 @@ export default function UpdateCampaign() {
           },
         },
       });
+      console.log({ campObj });
+      const newObj = campObj.data.updateCampaign;
+
       const updatedCampaigns = store?.campaigns?.map((item:any) => {
-        if (item.id === campObj.id) {
-          return campObj;
+        if (item.id === newObj.id) {
+          return newObj;
         }
         return item;
       });
@@ -150,12 +153,16 @@ export default function UpdateCampaign() {
 
   React.useEffect(() => {
     if (ins === "2a") {
+      console.log(campaign?.products);
+      console.log('//////////////');
+
       if (campaign?.products) {
         setselectedProducts(findInArray(campaign?.products, store?.products || [], "id", "id"));
         console.log(findInArray(campaign?.products, store?.products || [], "id", "id"));
       }
     } else if (ins === "addproduct" && campaign?.addableProducts) {
-      console.log('im in else of add product');
+      console.log(campaign?.addableProducts);
+      console.log('//////////////');
 
       setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
       console.log(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
