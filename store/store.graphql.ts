@@ -532,6 +532,9 @@ const GET_PRODUCT_DETAIL = gql`
         name
         value
       }
+      image{
+        src
+      }
     }
    }
  }

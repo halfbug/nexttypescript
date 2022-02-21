@@ -54,7 +54,6 @@ const ProductDetail = ({
 
   const productCustomers = getBuyers(product?.id || '0');
 
-  console.log('🚀 ~ file: ProductDetail.tsx ~ line 40 ~ data', data);
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
@@ -69,20 +68,26 @@ const ProductDetail = ({
   }, [product]);
 
   const [selOptions, setselOptions] = useState<any| undefined>();
-  // console.log('🚀 ~ file: ProductDetail.tsx ~ lines 55 ~ selOptions', selOptions);
-  const addToCart = () => {
+
+  const getVariant = () => {
     const { productById: dproduct } = data;
     const optionNames = Object.keys(selOptions);
-    console.log(optionNames);
-    const selectedVariant = dproduct.variants.filter(
+    return dproduct.variants.filter(
       (vr: { selectedOptions: any[]; }) => optionNames.reduce(
         // if all selected options match
-        (isMatch, oname) => isMatch && Boolean(vr.selectedOptions.find(
+        (isMatch: any, oname: string | number) => isMatch && Boolean(vr.selectedOptions.find(
           (ele) => ele.name === oname && ele.value === selOptions[oname],
         )), true,
       ),
     )?.[0];
-    if (selectedVariant.inventoryQuantity > 0) {
+  };
+
+  const addToCart = () => {
+    const { productById: dproduct } = data;
+
+    const selectedVariant = getVariant();
+
+    if (selectedVariant?.inventoryQuantity > 0) {
       addCartProduct({
         ...product, ...dproduct, selectedVariant, selectedQuantity: 1,
       });
@@ -92,6 +97,47 @@ const ProductDetail = ({
     }
     closeModal({});
   };
+
+  const displayImage = () => {
+    const { productById: { images } } = data;
+    const { image } = getVariant() ?? { image: null };
+    if (image) {
+      const vrImage:number = images.findIndex(
+        (item: { src: any; }) => item.src === image?.src,
+      );
+
+      if (vrImage > -1) {
+        setIndex(vrImage + 1);
+      } else {
+        setIndex(images.length);
+      }
+    } else {
+      setIndex(images.length);
+    }
+  };
+
+  useEffect(() => {
+    if (data) { displayImage(); }
+  }, [selOptions]);
+
+  useEffect(() => { // if user select image it will select its options.
+    if (data) {
+      const { productById: dproduct } = data;
+      // 1. get the select image
+      const svImage = dproduct?.images[index - 1]?.src;
+
+      // 2. get its variant
+      const svrnt = dproduct.variants.filter(
+        (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
+      );
+
+      // 3. set selected option state to variant options
+      if (svrnt?.length) {
+        setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
+          { ...obj, [name]: value }), {}));
+      }
+    }
+  }, [index]);
 
   return (
     <>
@@ -205,13 +251,13 @@ const ProductDetail = ({
                     >
                       {values.map((val: string, idx) => (
                         <>
-                          {idx === 0 && (
+                          {/* {idx === 0 && (
                           <option key={Math.random()}>
                             --
                             {name}
                             --
                           </option>
-                          )}
+                          )} */}
                           <option
                             value={val}
                             className="text-upercase"

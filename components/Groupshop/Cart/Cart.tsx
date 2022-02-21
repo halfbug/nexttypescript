@@ -84,7 +84,7 @@ const Cart = ({
               <Row className="px-0 mx-1 py-2 border-bottom">
                 <Col>
                   <img
-                    src={prd.featuredImage}
+                    src={prd.selectedVariant?.image?.src ?? prd.featuredImage}
                     alt={prd.title}
                     className={styles.groupshop_modal_cart_thumbnail}
                   />
@@ -118,21 +118,22 @@ const Cart = ({
                   >
                     <Button
                       variant="outline-primary"
-                      onClick={() => plusQuantity(prd.id)}
-                      disabled={prd.selectedQuantity > prd.selectedVariant.inventoryQuantity}
+                      onClick={() => minusQuantity(prd.id)}
+                      disabled={prd.selectedQuantity < 2}
                     >
-                      +
+                      -
                     </Button>
                     <FormControl
                       type="text"
                       value={prd.selectedQuantity}
                     />
+
                     <Button
                       variant="outline-primary"
-                      onClick={() => minusQuantity(prd.id)}
-                      disabled={prd.selectedQuantity < 2}
+                      onClick={() => plusQuantity(prd.id)}
+                      disabled={prd.selectedQuantity > prd.selectedVariant.inventoryQuantity}
                     >
-                      -
+                      +
                     </Button>
                   </ButtonGroup>
                   <Button variant="link" className="ps-0 d-block" onClick={() => removeProduct(prd.selectedVariant.id)}>Remove</Button>

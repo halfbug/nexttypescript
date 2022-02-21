@@ -26,6 +26,7 @@ const Dialogue = ({
     size={size}
     fullscreen="lg-down"
     centered
+    className="onboarding"
   >
     {/* <Modal.Header>
         <Modal.Title>Modal title</Modal.Title>
