@@ -35,13 +35,15 @@ export default function CreateCampaign() {
     // eslint-disable-next-line no-unused-vars
     { data, loading, error },
   ] = useMutation<any, ICampaign | null>(CREATE_CAMPAIGN_DB);
+  const [editMin, setEditMin] = React.useState(false);
+  const [editMax, setEditMax] = React.useState(false);
 
   const { store, dispatch } = React.useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
   const [disableBtn, setdisableBtn] = React.useState(true);
 
-  const campaignInitial: ICampaignForm = {
+  const [campaignInitial, setcampaignInitial] = React.useState({
     id: '',
     name: '',
     criteria: '',
@@ -53,11 +55,18 @@ export default function CreateCampaign() {
     imageUrl: '',
     youtubeUrl: '',
     media: 'image',
-  };
+    maxDiscountVal: '',
+    minDiscountVal: '',
+    minDiscount: 0,
+    maxDiscount: 0,
+    isRewardEdit: false,
+
+  });
   const { clearNewCampaign } = useCampaign();
   React.useEffect(() => {
     clearNewCampaign();
   }, []);
+  const { multiple5, isMultiple5 } = useUtilityFunction();
 
   const validationSchema = yup.object({
     name: yup
@@ -74,6 +83,43 @@ export default function CreateCampaign() {
     rewards: yup
       .string()
       .required('required.'),
+    minDiscount: yup
+      .number()
+      .lessThan(yup.ref('maxDiscount'), "Baseline should be less than Maximum") // .test("diff", "diff",
+      .test("diff", "difference of values should be atleast 10",
+        (val: number | undefined, context) => {
+          if (val && (context.parent.maxDiscount - val) < 10) {
+            // console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test("multiple", "multiple of 5",
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
+    maxDiscount: yup
+      .number()
+      .moreThan(yup.ref('minDiscount'), "Maximum should be greater than Baseline")
+      .test("diff", "difference of values should be atleast 10",
+        (val: number | undefined, context) => {
+          if (val && (val - context.parent.minDiscount) < 10) {
+            console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test("multiple", "multiple of 5",
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
+
   });
 
   const {
@@ -83,31 +129,45 @@ export default function CreateCampaign() {
     validationSchema,
     enableReinitialize: true,
     validateOnChange: false,
-    validateOnBlur: false,
+    validateOnBlur: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
+      console.log({ validateForm });
+
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
         brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest,
-        tiktok, facebook, twitter, addableProducts,
+        tiktok, facebook, twitter, addableProducts, maxDiscountVal, minDiscountVal,
+        minDiscount, maxDiscount, isRewardEdit,
       } = valz;
       console.log({ valz });
       let { media } = valz;
       if (customBg) media = "";
+      const newSelectedTarget = { ...selectedTarget };
 
-      // const socialLinks = {
-      //   instagram, pinterest, tiktok, facebook, twitter,
-      // };
+      if (isRewardEdit) {
+        const baseline = minDiscount;
+        const maximum = maxDiscount;
+        const lowBaseline = 10;
+        const avgBaseline = 15;
+        const highBaseline = 20;
+        const superBaseline = 25;
 
-      if (selectedTarget) {
-        delete selectedTarget["__typename"];
-        if (selectedTarget.rewards.length) {
-          const newR = selectedTarget?.rewards.map((item: any) => {
-            const { __typename, ...valWithoutTypename } = item;
-            return valWithoutTypename;
-          });
-          selectedTarget.rewards = [...newR];
+        if (baseline! <= lowBaseline) {
+          newSelectedTarget.name = "Low";
+        } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
+          newSelectedTarget.name = "Average";
+        } else if (baseline! >= highBaseline && baseline! < superBaseline) {
+          newSelectedTarget.name = "High";
+        } else if (baseline! >= superBaseline) {
+          newSelectedTarget.name = "Super-charged";
         }
+        const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
+        newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
+          { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },
+          { ...newSelectedTarget.rewards[2], discount: maxDiscountVal }];
+
+        console.log({ valz });
       }
 
       const campObj: null | any = await addCampaign({
@@ -116,6 +176,7 @@ export default function CreateCampaign() {
             storeId: store.id,
             name,
             criteria,
+            rewards,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             isActive,
@@ -128,8 +189,7 @@ export default function CreateCampaign() {
               pinterest,
               twitter,
             },
-            rewards,
-            salesTarget: selectedTarget,
+            salesTarget: newSelectedTarget,
             settings: {
               brandColor,
               customColor,
@@ -193,6 +253,8 @@ export default function CreateCampaign() {
     setParams({ ins: 'addproduct' });
   };
   const { setValue } = useUtilityFunction();
+  console.log({ errors });
+
   return (
     <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a' || ins === 'addproduct'} />
@@ -217,7 +279,9 @@ export default function CreateCampaign() {
                       name="name"
                       value={values.name}
                       onChange={(e) => handleChange(e)}
+                      onClick={(e) => setValue('name', e.currentTarget.value)}
                       isInvalid={touched.name && !!errors.name}
+                      // onBlur={errors.name}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.name}
@@ -389,7 +453,13 @@ export default function CreateCampaign() {
               touched={touched}
               errors={errors}
               setFieldValue={setFieldValue}
-              initvalz={campaignInitial}
+              campaignInitial={campaignInitial}
+              setcampaignInitial={setcampaignInitial}
+              editMax={editMax}
+              editMin={editMin}
+              setEditMax={setEditMax}
+              setEditMin={setEditMin}
+              handleForm={handleForm}
             />
           </Col>
         </Row>

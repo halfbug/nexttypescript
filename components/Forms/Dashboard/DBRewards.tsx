@@ -1,9 +1,13 @@
+/* eslint-disable radix */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable quotes */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect, useState, Dispatch, SetStateAction,
+} from 'react';
 import {
   Form, Row, Col, ButtonGroup, ToggleButton, Button,
 } from 'react-bootstrap';
@@ -25,16 +29,23 @@ interface IProps {
   setFieldValue: any;
   touched: any;
   errors: any;
-  initvalz: any;
+  campaignInitial: any;
+  editMin: boolean;
+  editMax: boolean;
+  setEditMin: any;
+  setEditMax: any;
+  handleForm: any;
+  setcampaignInitial: Dispatch<SetStateAction<any>>;
 }
 
 export default function DBRewards({
-  handleChange, values, setFieldValue, touched, errors, initvalz,
+  handleChange, values, setFieldValue, touched, errors, campaignInitial,
+  editMax, editMin, setEditMax, setEditMin, handleForm, setcampaignInitial,
 }: IProps) {
   const [, setParams] = useQueryString();
 
-  const [minDiscount, setMinDiscount] = useState('');
-  const [maxDiscount, setMaxDiscount] = useState('');
+  // const [minDiscount, setMinDiscount] = useState('');
+  // const [maxDiscount, setMaxDiscount] = useState('');
 
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
@@ -45,38 +56,78 @@ export default function DBRewards({
   useEffect(() => {
     /// initial value display
     if (salesTarget.length > 0) {
-      initvalz.rewards = salesTarget[3].id;
-      // eslint-disable-next-line prefer-destructuring
-      initvalz.selectedTarget = salesTarget[3];
-      if (minDiscount === '' && maxDiscount === '') {
-        setMinDiscount(salesTarget[3].rewards[0].discount);
-        setMaxDiscount(salesTarget[3].rewards[2].discount);
-      }
-    }
-  }, [initvalz]);
+      setcampaignInitial((prev: any) => {
+        console.log({ prev });
 
-  useEffect(() => {
-    if (values.selectedTarget !== '') {
-      setMinDiscount(values.selectedTarget?.rewards[0].discount);
-      setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+        return {
+          ...prev,
+          name: values.name,
+          products: store?.newCampaign?.productsArray || [],
+          addableProducts: store?.newCampaign?.addableProductsArray || [],
+          criteria: values.criteria,
+          brandColor: values.brandColor,
+          selectedTarget: values.selectedTarget,
+          rewards: values.selectedTarget?.id,
+          minDiscountVal: values.selectedTarget?.rewards[0].discount || '',
+          maxDiscountVal: values.selectedTarget?.rewards[2].discount || '',
+          minDiscount: values.selectedTarget?.rewards[0]?.discount ? parseInt(values.selectedTarget?.rewards[0]?.discount) : 0,
+          maxDiscount: values.selectedTarget?.rewards[2]?.discount ? parseInt(values.selectedTarget?.rewards[2]?.discount) : 0,
+          isRewardEdit: false,
+        };
+      });
+
+      // if (minDiscount === '' && maxDiscount === '') {
+      //   setMinDiscount(values.selectedTarget.rewards[0].discount);
+      //   setMaxDiscount(values.selectedTarget.rewards[2].discount);
+      // }
     }
+    // if (values.selectedTarget !== '') {
+    //   setMinDiscount(values.selectedTarget?.rewards[0].discount);
+    //   setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+    // }
   }, [values.selectedTarget]);
+  useEffect(() => {
+    /// initial value display
+    if (salesTarget.length > 0) {
+      setcampaignInitial((prev: any) => {
+        console.log({ prev });
+        return {
+          ...prev,
+          name: values.name,
+          products: store?.newCampaign?.productsArray || [],
+          addableProducts: store?.newCampaign?.addableProductsArray || [],
+          criteria: values.criteria,
+          brandColor: values.brandColor,
+          rewards: salesTarget[3].id,
+          minDiscountVal: salesTarget[3].rewards[0].discount || '',
+          maxDiscountVal: salesTarget[3].rewards[0].discount || '',
+          selectedTarget: salesTarget[3],
+          maxDiscount: salesTarget[3].rewards[2]?.discount ? parseInt(salesTarget[3].rewards[2]?.discount) : 0,
+          minDiscount: salesTarget[3].rewards[0]?.discount ? parseInt(salesTarget[3].rewards[0]?.discount) : 0,
+        };
+      });
+    }
+  }, [salesTarget]);
+
+  // useEffect(() => {
+  //   if (values.selectedTarget !== '') {
+  //     setMinDiscount(values.selectedTarget?.rewards[0].discount);
+  //     setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+  //   }
+  // }, [values.selectedTarget]);
 
   const btns = [
-    { text: 'Low', cssName: 'low_btn', id: '1' },
-    { text: 'Average', cssName: 'avg_btn', id: '2' },
-    { text: 'High', cssName: 'high_btn', id: '3' },
-    { text: 'SuperCharged', cssName: 'super_btn', id: '4' },
+    { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
+    { text: 'Average', light: styles.avg_btn, dark: styles.avg_btn_dark },
+    { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
+    { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-
-  const btn1 = "low_btn";
-  const btn2 = "avg_btn";
-  const btn3 = "high_btn";
-  const btn4 = "super_btn";
+  console.log({ values });
+  console.log({ campaignInitial });
+  console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
   // const menuItems = ["Easy", "Medium", "Hard"];
   const [activeButton, setActiveButton] = useState("");
-
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
 
@@ -102,10 +153,7 @@ export default function DBRewards({
               key={starget.id}
               id={starget.id}
               variant="none"
-              className={index === 0 ? styles.low_btn
-                : index === 1 ? styles.avg_btn
-                  : index === 2 ? styles.high_btn
-                    : index === 3 ? styles.super_btn : ''}
+              className={values?.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
               onClick={(e) => {
                 const selectedTarget = starget;
                 setFieldValue('rewards', selectedTarget.id);
@@ -122,12 +170,81 @@ export default function DBRewards({
       <Row className="mt-3">
         <Col sm={6}>
           <h4 className="fs-4">Baseline</h4>
-          <div className={styles.dbrewards__percent_btn}>{minDiscount}</div>
+          {!editMin && (
+          <>
+            <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
+            <Button variant="link" onClick={() => setEditMin(!editMin)}>edit</Button>
+          </>
+          )}
+          <div className={editMin ? 'd-block' : 'd-none'}>
+            <Form.Control
+              type="text"
+              name="minDiscount"
+              value={values.minDiscountVal}
+              onChange={(e) => {
+                setFieldValue('minDiscountVal', e.currentTarget.value);
+                // eslint-disable-next-line radix
+                setFieldValue('minDiscount', parseInt(e.currentTarget.value));
+              }}
+              className={styles.dbrewards_input}
+              isInvalid={touched.minDiscount && !!errors.minDiscount}
+              placeholder="Enter %"
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.minDiscount}
+            </Form.Control.Feedback>
+
+            <Button
+              variant="link"
+              onClick={() => {
+                setEditMin(false);
+                setFieldValue('isRewardEdit', true);
+              }}
+            >
+              save
+
+            </Button>
+          </div>
 
         </Col>
         <Col sm={6}>
-          <h4 className="fs-4">Maximum</h4>
-          <div className={styles.dbrewards__percent_btn}>{maxDiscount}</div>
+          {!editMax && (
+          <>
+            <h4 className="fs-4">Maximum</h4>
+            <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
+            <Button variant="link" onClick={() => setEditMax(!editMax)}>edit</Button>
+          </>
+          )}
+          <div className={editMax ? 'd-block' : 'd-none'}>
+            <Form.Control
+              type="text"
+              name="maxDiscount"
+              value={values.maxDiscountVal}
+              onChange={(e) => {
+                setFieldValue('maxDiscountVal', e.currentTarget.value);
+                // eslint-disable-next-line radix
+                setFieldValue('maxDiscount', parseInt(e.currentTarget.value));
+              }}
+              className={styles.dbrewards_input}
+              isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+              placeholder="Enter %"
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.maxDiscount}
+            </Form.Control.Feedback>
+            <Button
+              variant="link"
+              onClick={() => {
+                setEditMax(false);
+                setFieldValue('isRewardEdit', true);
+              }}
+            >
+              save
+
+            </Button>
+            {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
+          </div>
+
         </Col>
       </Row>
 

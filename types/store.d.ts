@@ -59,6 +59,11 @@ export interface ICampaignForm {
   facebook?: string;
   isActive?: boolean;
   addableProducts?: IProduct[];
+  maxDiscountVal?: string;
+  minDiscountVal?: string;
+  minDiscount?: number;
+  maxDiscount?: number;
+  isRewardEdit?: boolean;
 }
 
 export interface ICollection {

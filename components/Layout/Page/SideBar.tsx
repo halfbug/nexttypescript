@@ -15,6 +15,8 @@ import Knowledgebaseicon from 'assets/images/knowledge-base-icon.svg';
 import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
 
 const Sidebar = () => {
+  // refactor. set loading state and if loading dont show the screen and
+  // after loading show the links
   const { store } = useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
@@ -28,7 +30,7 @@ const Sidebar = () => {
           <div className={styles.sidebarmenuwrap}>
             <ul className={styles.sidebarmenu}>
               <li>
-                <Link href={`/${shopName}/overview`}>
+                <Link prefetch={false} href={`/${shopName}/overview`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Overviewicon /></span>
@@ -38,7 +40,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/campaign`}>
+                <Link prefetch={false} href={`/${shopName}/campaign`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Campaignicon /></span>
@@ -48,7 +50,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/analytics`}>
+                <Link prefetch={false} href={`/${shopName}/analytics`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Analyticsicon /></span>
@@ -58,7 +60,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/billing`}>
+                <Link prefetch={false} href={`/${shopName}/billing`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Billingicon /></span>
@@ -69,7 +71,7 @@ const Sidebar = () => {
               </li>
 
               <li>
-                <Link href={`/${shopName}/settings`}>
+                <Link prefetch={false} href={`/${shopName}/settings`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Settingsicon /></span>
@@ -79,7 +81,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/knowledgebase`}>
+                <Link prefetch={false} href={`/${shopName}/knowledgebase`}>
                   <a>
                     <span className={styles.linkwrap}>
                       <span className={styles.linkicon}><Knowledgebaseicon /></span>

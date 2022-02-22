@@ -138,8 +138,6 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
         // updateSelectedCampaignProducts(campaign?.products);
       }
     } else {
-      console.log('im inelse');
-
       // if (campaign?.products) {
       // if screen addproducts then update newCampaign
       // as well particular campaign in store.campaigns
@@ -161,10 +159,10 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
     }
     setParams({ ins: 2 });
   };
-  console.log({ campaign });
-  console.log({ store });
-  console.log({ selectedProducts });
-  console.log('....................');
+  // console.log({ campaign });
+  // console.log({ store });
+  // console.log({ selectedProducts });
+  // console.log('....................');
 
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">

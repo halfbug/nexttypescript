@@ -228,7 +228,7 @@ export default function UpdateRewards() {
                 variant="none"
                 value={JSON.stringify(starget)}
                 // checked={starget.id === values.rewards}
-                className={campaign?.salesTarget?.name === starget.name ? btns[index].dark : btns[index].light}
+                className={initvalz.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);
