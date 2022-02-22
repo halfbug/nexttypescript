@@ -133,7 +133,7 @@ const Cart = ({
                       onClick={() => plusQuantity(prd.selectedVariant.id)}
                       disabled={
                         prd.selectedVariant?.selectedQuantity
-                        > (prd.selectedVariant?.inventoryQuantity ?? 0)
+                        >= prd.selectedVariant?.inventoryQuantity!
 }
                     >
                       +
