@@ -40,6 +40,9 @@ const CampaignListing = () => {
   useEffect(() => {
     refetch();
   }, []);
+  useEffect(() => {
+    refetch();
+  }, [store]);
 
   const handleClick = (campaignid: string) => {
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
@@ -74,6 +77,7 @@ const CampaignListing = () => {
     });
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     console.log({ store });
+    console.log(']]]]]]]]]]]]]]');
   };
 
   return (
