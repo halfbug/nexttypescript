@@ -1,0 +1,112 @@
+@import "./variables.scss";
+
+
+    &__percent_btn {
+        @extend .py-1, .fw-bold, .px-0;
+        width: 45px;
+        border-radius: 6px;
+        text-align: center;
+        background-color: #d5fa52;
+        display: inline-block;
+    }
+    &_rewardBtn {
+        background-color: transparent;
+        border: none;
+        text-transform: capitalize;
+        text-decoration: underline;
+        font-size: 12px;
+        line-height: 16px;
+        color: $black;
+        cursor: pointer;
+    }
+
+
+.low_btn {
+    @include button-variant($low, $low);
+    @extend .me-1, .px-1, .py-1, .lh-sm, .text-end;
+    color: $white;
+    opacity: 50%;
+    width: 66px;
+    border-radius: 8px !important;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        @extend .low_btn;
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $low;
+        border-radius: 8px !important;
+    }
+}
+.avg_btn {
+    @include button-variant($average, $average);
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
+    color: $white;
+    opacity: 50%;
+    width: 75px;
+    border-radius: 8px !important;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        @extend .avg_btn;
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $average;
+        border-radius: 8px !important;
+    }
+}
+
+.high_btn {
+    @include button-variant($btnhigh, $btnhigh);
+    @extend .mx-1, .px-1, .py-1,.lh-sm, .text-end;
+    color: $white;
+    opacity: 50%;
+    width: 75px;    ;
+    border-radius: 8px !important;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        @extend .high_btn;
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $btnhigh;
+        border-radius: 8px !important;
+    }
+}
+
+.super_btn {
+    @include button-variant($supercharged, $supercharged);
+    @extend .mx-1, .px-1, .py-1, .lh-sm;
+    color: $white;
+    opacity: 50%;
+    width: 100px;
+    border-radius: 8px !important;
+    &:hover {
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+    }
+    &:active, &:focus, &_dark {
+        @extend .super_btn;
+        color: $white;
+        opacity: 100%;
+        border-color: $black;
+        background-color: $supercharged;
+        border-radius: 8px !important;
+    }
+}
+
+
+

@@ -4,6 +4,7 @@ import {
   Container, Row, Col,
 } from 'react-bootstrap';
 import styles from 'styles/Step3.module.scss';
+// import styles2 from 'styles/OBReward.module.scss';
 import Rewards from 'components/Forms/Rewards';
 import LeftPanel from '../LeftPanel/LeftPanel1';
 import ProgressBar from '../ProgressBar/ProgressBar';
