@@ -4,13 +4,13 @@
 	border-radius: 10px !important;
 	position: relative;
 
-	@extend .rounded,  .m-2 , .d-flex, .justify-content-center, .py-4;
+	@extend .rounded, .m-2 , .mx-0, .d-flex, .justify-content-center, .py-4;
 	width: 85%;
 	height: fit-content;
 	background-color: #F3F3F3;
 
 	label {
-		@extend .text-center;
+		@extend .text-center, .mx-1, .mt-2;
 		font-size: $small-font-size;
 	}
 

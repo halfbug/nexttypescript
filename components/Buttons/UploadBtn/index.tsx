@@ -107,7 +107,7 @@ export default function UploadButton({
 UploadButton.defaultProps = {
   icon: <>
     <CloudUp className={styles['upload-logo--icon']} />
-    <Form.Label>Upload Logo</Form.Label>
+    <Form.Label className="text-center">Upload Logo</Form.Label>
 
         </>,
   className: '',

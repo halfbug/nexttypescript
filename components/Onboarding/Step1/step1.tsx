@@ -23,7 +23,7 @@ const Step1 = ({ show }: IStep0Props) => (
           heading="About the brand"
           content="Tell us who you are by adding your brand name, logo, and industry."
         />
-        <Col className="text-sm-start mt-3 border-start" lg={7}>
+        <Col className="text-sm-start mt-3 border-start px-5" lg={7}>
           <BrandInfo />
         </Col>
       </Row>

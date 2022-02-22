@@ -8,18 +8,25 @@
 	&:first-child {
 		@extend .pt-5;
 		@extend .mt-3;
-
 	}
-	h1{
-		margin-top: 42px;
-		font-size: 50px;
-		margin-left: 30px;
-
+	h1 {
+		margin-top: 40px;
+		font-size: 64px;
+		margin-left: 42px;
+		font-weight: 700 !important;
+		font-family: DM Sans;
+		font-style: normal;
+		font-size: 64px;
+		line-height: 64px;
 	}
 	p {
-		@extend .text-start, .fw-bold, .fs-4, .lh-base;
+		@extend .text-start, .fw-bold, .fs-4, .lh-base, .w-75;
+		margin-left: 42px;
 		font-family: Mulish;
-		margin-left: 30px;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 18px;
+		line-height: 24px;
 	}
 }
 .leftbar1 {
@@ -30,15 +37,13 @@
 	&:first-child {
 		@extend .pt-5;
 		@extend .mt-5;
-
 	}
-	h1{
+	h1 {
 		@extend .fw-normal;
 		margin-top: 42px;
 		font-size: 50px;
 		margin-left: 30px;
-		font-weight: 600!important;
-
+		font-weight: 700 !important;
 	}
 	p {
 		@extend .text-start;

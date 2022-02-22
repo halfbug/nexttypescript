@@ -13,6 +13,7 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import UploadButton from 'components/Buttons/UploadBtn';
+import styles from 'styles/Step1.module.scss';
 
 interface IValues {
   brandName: string;
@@ -84,17 +85,17 @@ export default function BrandInfo() {
   });
 
   return (
-    <Form noValidate onSubmit={handleSubmit} className="mx-4">
+    <Form noValidate onSubmit={handleSubmit} className={['mx-4', styles.welcome].join(' ')}>
       <Row className="mt-3"><h4>Enter your brand name</h4></Row>
       <Row>
-        <h6>
+        <p>
           This identifies your business on your customers’ Groupshop page
-        </h6>
+        </p>
 
       </Row>
       <Row>
-        <Col lg={9}>
-          <Form.Group className="mt-0" controlId="brandNamevalidation">
+        <Col lg={10} className="d-flex ">
+          <Form.Group className="col-11" controlId="brandNamevalidation">
             <Form.Control
               type="text"
               name="brandName"
@@ -108,17 +109,22 @@ export default function BrandInfo() {
               {errors.brandName}
             </Form.Control.Feedback>
           </Form.Group>
-        </Col>
-        <Col lg={2} className="d-flex align-items-center justify-content-start">
-          <Form.Text className=" text-muted align-baseline">
+          <Form.Text className="col-2 text-muted mt-2 mx-2">
             {values.brandName.length}
+            {' '}
             /20
+            {/* 0/20 */}
           </Form.Text>
         </Col>
+        {/* <Col lg={2} className={styles.welcome_digits}>
+          <Form.Text className="mx-0 text-muted align-baseline">
+            0/20
+          </Form.Text>
+        </Col> */}
       </Row>
       <Row className="mt-4"><h4>Upload your logo</h4></Row>
       <Row>
-        <Form.Group className="mb-3 d-flex" controlId="brandinfoUploadLogo">
+        <Form.Group className="mb-3 d-flex " controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
           <UploadButton
             setFieldValue={setFieldValue}
@@ -126,10 +132,12 @@ export default function BrandInfo() {
             value={values.logoImage}
           />
           <Col lg={9} className="d-flex align-items-center justify-content-start">
-            <Form.Text className="text-muted text-center d-flex align-self-center">
+            <Form.Text className="text-muted text-center d-flex align-self-center mx-2">
+
               Under 5 MB
               <br />
               (Formats: PNG, JPG, JPEG)
+
             </Form.Text>
           </Col>
         </Form.Group>
