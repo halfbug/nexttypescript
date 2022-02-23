@@ -2,18 +2,35 @@
 .letsgo {
 	&__left {
 		@extend .d-flex, .flex-column, .justify-content-center, .px-4, .align-items-center;
+		top: 1300px !important;
 	}
 	&__box {
 		@extend .border, .p-3, .w-100, .shadow-sm, .mt-4;
 		border-radius: 10px;
 
 		&:first-child {
-		
 			border-color: #ccb2f9 !important;
 			border-width: 2px !important;
 			@extend .gradient-box;
 		}
-
+		&_heading {
+			font-family: Mulish;
+			font-style: normal;
+			font-weight: bold;
+			font-size: 18px;
+			line-height: 23px;
+		}
+		&_logo {
+			@extend .mb-0;
+			margin-left: -6%;
+		}
+		&_detil {
+			font-family: Mulish;
+			font-style: normal;
+			font-weight: normal;
+			font-size: 18px;
+			line-height: 23px;
+		}
 		&_col1 {
 			@extend .d-flex, .align-items-center, .flex-column, .justify-content-center, .border-end;
 		}
@@ -26,79 +43,67 @@
 	}
 }
 
- .box_row{
-	@extend .d-flex, .justify-content-center, .mb-3;
-	.box_1 {
-        @extend .mb-4, .p-4 , .mt-0;
-        border: 1px dashed $dotted-border-color1;
-        border-radius: 18px;
-		margin: 7px;
-		width: 242px;
-		height: 161px;
-		&:hover {
-			@extend .border, .border-3, .border-primary;
-			border: 1px  $dotted-border-color1;
-			border-color: #a68ad6;
-		}
+.box_row {
+	@extend .d-flex, .justify-content-center, .mb-2;
 
-    }
-
-    .box_2 {
-        @extend .mb-4, .p-4 , .mt-0;
-        border: 1px dashed $dotted-border-color2;
-        border-radius: 18px;
-		margin: 7px;
-		width: 242px;
-		height: 161px;
-		&:hover {
-			@extend .border, .border-3, .border-primary;
-			border: 1px  $dotted-border-color1;
-			border-color: #a68ad6;
-		}
-    }
-
-    .box_3 {
-        @extend .mb-4, .p-4 , .mt-0;
-        border: 1px dashed $OBorange;
-        border-radius: 18px;
-		margin: 7px;
-		width: 242px;
-		height: 161px;
-		&:hover {
-			@extend .border, .border-3, .border-primary;
-			border: 1px  $dotted-border-color1;
-			border-color: #a68ad6;
-		}
-    }
-
-    .box_4 {
-        @extend .mb-4, .p-4 , .mt-0;
-        border: 1px dashed $dotted-border-color4;
-        border-radius: 18px;
-		margin: 7px;
-		width: 242px;
-		height: 161px;
-		&:hover {
-			@extend .border, .border-3,  .border-primary;
-			border: 1px  $dotted-border-color1;
-			border-color: #a68ad6;
-		}
-    }
-
-	.side_box{
-		@extend .mb-3, .p-4;
-	width: 242px;
-	height: 161px;
-	left: 790px;
-	top: 300px;
-	margin: 7px;
-	border: 2px dashed #a68ad6;
-	box-sizing: border-box;
-	border-radius: 23px;
+	&_boxheading {
+		@extend .text-center;
+		font-family: DM Sans;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		line-height: 29px;
 	}
-	&
-	.btn {
-		@extend .py-1, .fw-bold, .m-2, .text-nowrap, .d-flex, .px-2;
+	.box_1 {
+		@extend .mb-4, .p-4, .mt-0;
+		border: 2px solid $dotted-border-color1;
+		border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		border-color: #a68ad6;
+		height: 161px;
+	}
+
+	.box_2 {
+		@extend .mb-4, .p-4, .mt-0;
+		border: 1px dashed $dotted-border-color2;
+		border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+	}
+
+	.box_3 {
+		@extend .mb-4, .p-4, .mt-0;
+		border: 1px dashed $OBorange;
+		border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+	}
+
+	.box_4 {
+		@extend .mb-4, .p-4, .mt-0;
+		border: 1px dashed $dotted-border-color4;
+		border-radius: 18px;
+		margin: 7px;
+		width: 242px;
+		height: 161px;
+	}
+
+	.side_box {
+		@extend .mb-3, .p-4;
+		width: 242px;
+		height: 161px;
+		left: 790px;
+		top: 300px;
+		margin: 7px;
+		border: 2px dashed #a68ad6;
+		box-sizing: border-box;
+		border-radius: 23px;
+	}
+	& .btn {
+		@extend .py-1, .m-2, .text-nowrap, .d-flex, .px-2;
 		background: #d5fa52;
 		justify-content: center;
 		align-self: center;
@@ -107,37 +112,42 @@
 		outline: none;
 		text-align: center;
 		align-items: center;
+		font-family: DM Sans;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 15px;
+		/* identical to box height, or 125% */
+
+		text-align: center;
 	}
-	&
-	.free
-	{
-		@extend .py-1, .fw-bold, .m-2 , .d-flex, .justify-content-center;
-        width: 45px;
-        border-radius: 6px;
-        text-align: center;
+	& .free {
+		@extend .py-1, .m-2, .d-flex, .justify-content-center;
+		width: 45px;
+		border-radius: 6px;
+		text-align: center;
 		justify-content: center;
 		align-self: center;
 		border: none;
-        background-color: #d5fa52;
-		// background: #d5fa52;
-		// border-radius: 6px;
-		// border: none;
-		// outline: none;
-		// height: 22px;
-		// align-items: center;
-		// margin-top: 5px;
-		// width: 25px;
-		// margin-left: 20px;	
+		background-color: #d5fa52;
+		font-family: DM Sans;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 15px;
+		text-align: center;
 	}
-	&
-	h2{
+	& h2 {
 		text-align: center;
 		margin-top: 15px;
 	}
-	&
-	p{
+	& p {
 		text-align: center;
-		margin-top: 15px;	
+		margin-top: 15px;
+		font-family: DM Sans;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 15px;
 	}
-} 
-
+}

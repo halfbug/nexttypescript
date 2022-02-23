@@ -52,42 +52,44 @@ const Step5 = () => {
         <ProgressBar progress="100" />
         <Row className="my-4 d-flex align-items-center">
 
-          <Col lg={6} className="border-end  mt-lg-5 mr-0 d-flex align-items-center">
+          <Col lg={6} className="d-flex align-items-center border-end mt-lg-5 mr-0 ">
             <Row>
-              <Conlogo />
+              <div className={styles.letsgo__box_logo}>
+                {' '}
+                <Conlogo />
+                {' '}
+              </div>
               <div className="mb-lg-3">
-                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">You’re on the free plan</h6></Col></Row>
+                <Row className="mt-4"><Col><div className={styles.letsgo__box_heading}>You’re on the free plan</div></Col></Row>
                 <Row>
-                  <Col>
-                    {' '}
+                  <Col className={styles.letsgo__box_detil}>
                     You only pay for the amount of Groupshop pages
                     your customers create. The first 100 are on us.
-
                   </Col>
 
                 </Row>
-                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">Next Steps</h6></Col></Row>
+                <Row className="mt-4"><Col><div className={styles.letsgo__box_heading}>Next Steps</div></Col></Row>
                 <Row>
                   <Col>
                     <ul>
-                      <li className="fs-6">
+                      <li className={styles.letsgo__box_detil}>
                         Head to the
                         {' '}
-                        <span className="fw-bold fs-5">Overview</span>
+                        <span className="fw-bolder">Overview</span>
                         {' '}
                         dashboard to track your campaign’s progress
                       </li>
-                      <li className="fs-6">
+                      <li className={styles.letsgo__box_detil}>
                         Check your
                         {' '}
-                        <span className="fw-bold fs-5">Analytics</span>
+                        <span className="fw-bolder">Analytics</span>
                         {' '}
                         for advanced first-party data
                       </li>
-                      <li className="fs-6">
+                      <li className={styles.letsgo__box_detil}>
                         Explore more features on the
                         {' '}
-                        <span className="fw-bold fs-5">Settings</span>
+                        <span className="fw-bolder">Settings</span>
                         {' '}
                         page
                       </li>
@@ -157,22 +159,21 @@ const Step5 = () => {
             </Row> */}
 
           </Col>
-
-          <Col lg={6} className={styles.letsgo__left}>
+          <Col lg={6} className={['mt-5', styles.letsgo__left].join(' ')}>
             <Row className={styles.box_row}>
               <Col className={styles.box_1}>
-                <h2 className="fw-bold mb-0 py-0">Explore</h2>
+                <div className={styles.box_row_boxheading}>Explore</div>
                 <div className="d-flex justify-content-center">
                   <div className={styles.free}>Free</div>
                 </div>
-                <p className="mb-4 mt-0 py-0">First 100 Groupshops</p>
+                <p>First 100 Groupshops</p>
               </Col>
               <Col className={styles.box_4}>
-                <h2 className="fw-bold mb-0 py-0">Launch</h2>
+                <div className={styles.box_row_boxheading}>Launch</div>
                 <div className="d-flex justify-content-center">
                   <div className={styles.btn}>25¢ per Groupshop</div>
                 </div>
-                <p className="mb-4 mt-0 py-0">
+                <p>
                   Up to 1,000 Groupshops
                   {' '}
                   <br />
@@ -183,11 +184,11 @@ const Step5 = () => {
             </Row>
             <Row className={styles.box_row}>
               <Col className={styles.box_3}>
-                <h2 className="fw-bold mb-0 py-0">Growth</h2>
+                <div className={styles.box_row_boxheading}>Growth</div>
                 <div className="d-flex justify-content-center">
                   <div className={styles.btn}>20¢ per Groupshop</div>
                 </div>
-                <p className="mb-4 mt-0 py-0">
+                <p>
                   Up to 2,500 Groupshops
                   {' '}
                   <br />
@@ -197,11 +198,11 @@ const Step5 = () => {
                 </p>
               </Col>
               <Col className={styles.box_2}>
-                <h2 className="fw-bold mb-0 py-0">Unicorn</h2>
+                <div className={styles.box_row_boxheading}>Unicorn</div>
                 <div className="d-flex justify-content-center">
                   <div className={styles.btn}>10¢ per Groupshop</div>
                 </div>
-                <p className="mb-4 mt-0 py-0">
+                <p>
                   2,500+ Groupshops
                   {' '}
                   <br />
