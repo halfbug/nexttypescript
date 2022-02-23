@@ -171,7 +171,7 @@ export default function DBRewards({
                 setFieldValue('minDiscount', parseInt(e.currentTarget.value));
               }}
               className={styles.dbrewards_input}
-              isInvalid={touched.minDiscount && !!errors.minDiscount}
+              isInvalid={!!errors.minDiscount}
               placeholder="Enter %"
             />
             <Form.Control.Feedback type="invalid">
@@ -210,7 +210,7 @@ export default function DBRewards({
                 setFieldValue('maxDiscount', parseInt(e.currentTarget.value));
               }}
               className={styles.dbrewards_input}
-              isInvalid={touched.maxDiscount && !!errors.maxDiscount}
+              isInvalid={!!errors.maxDiscount}
               placeholder="Enter %"
             />
             <Form.Control.Feedback type="invalid">

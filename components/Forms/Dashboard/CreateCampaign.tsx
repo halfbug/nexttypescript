@@ -129,8 +129,8 @@ export default function CreateCampaign() {
     initialValues: campaignInitial,
     validationSchema,
     enableReinitialize: true,
-    validateOnChange: false,
-    validateOnBlur: false,
+    validateOnChange: true,
+    validateOnBlur: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
       console.log({ validateForm });
 
