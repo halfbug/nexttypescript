@@ -424,14 +424,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 
 		&_link {
-			@extend .border-0, .d-inline, .fw-bold, .my-3;
+			@extend .border-0, .d-inline, .my-3;
 			button {
 				text-decoration: none;
 				list-style: none;
 				font-family: DM Sans;
 				font-style: normal;
-				font-weight: 500 !important;
+				font-weight: 500 !important ;
 				font-size: 14px;
+				line-height: 18px;
 			}
 		}
 

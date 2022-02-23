@@ -62,7 +62,7 @@ const Footer = ({
         </section>
       </Col>
       <Col lg={4}>
-        <Row className={['mx-2 my-2', styles.groupshop_footer__logo].join(' ')}>
+        <Row className={['mt-5 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
           {/* <img src={footerLogo.src} alt="brandLogo" /> */}
           <img src="/images/logo-thin.svg" alt="Groupshop" />
         </Row>
@@ -95,8 +95,8 @@ const Footer = ({
         </Row>
         <Row className={['d-flex', styles.groupshop_footer_link].join(' ')}>
           <div className=" text-center ">
-            <Button variant="link" className="fw-bold">About</Button>
-            <Button variant="link" className="fw-bold">FAQ</Button>
+            <Button variant="link"><strong>About</strong></Button>
+            <Button variant="link"><strong>FAQ</strong></Button>
           </div>
         </Row>
       </Col>
