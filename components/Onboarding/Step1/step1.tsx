@@ -14,7 +14,7 @@ interface IStep0Props {
 
 const Step1 = ({ show }: IStep0Props) => (
   <Dialogue show={show}>
-    <ProgressBar progress="25" />
+    <ProgressBar progress="20" />
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
 

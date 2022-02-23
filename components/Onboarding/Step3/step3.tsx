@@ -17,7 +17,7 @@ const Step3 = ({ show }: IStep3Props) => (
   <Dialogue show={show}>
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
-      <ProgressBar progress="75" />
+      <ProgressBar progress="60" />
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Set your rewards"

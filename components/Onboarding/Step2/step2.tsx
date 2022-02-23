@@ -16,7 +16,7 @@ const Step2 = ({ show }: IStep0Props) => (
   <Dialogue show={show}>
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.welcome}>
-      <ProgressBar progress="50" />
+      <ProgressBar progress="40" />
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Create a Groupshop"
