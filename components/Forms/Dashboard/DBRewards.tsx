@@ -75,16 +75,7 @@ export default function DBRewards({
           isRewardEdit: false,
         };
       });
-
-      // if (minDiscount === '' && maxDiscount === '') {
-      //   setMinDiscount(values.selectedTarget.rewards[0].discount);
-      //   setMaxDiscount(values.selectedTarget.rewards[2].discount);
-      // }
     }
-    // if (values.selectedTarget !== '') {
-    //   setMinDiscount(values.selectedTarget?.rewards[0].discount);
-    //   setMaxDiscount(values.selectedTarget?.rewards[2].discount);
-    // }
   }, [values.selectedTarget]);
   useEffect(() => {
     /// initial value display
@@ -108,13 +99,6 @@ export default function DBRewards({
       });
     }
   }, [salesTarget]);
-
-  // useEffect(() => {
-  //   if (values.selectedTarget !== '') {
-  //     setMinDiscount(values.selectedTarget?.rewards[0].discount);
-  //     setMaxDiscount(values.selectedTarget?.rewards[2].discount);
-  //   }
-  // }, [values.selectedTarget]);
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },

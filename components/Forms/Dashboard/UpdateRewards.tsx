@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
 import { useMutation, useQuery } from '@apollo/client';
 import { ICampaign } from 'types/store';
+import * as constant from 'configs/constant';
 import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
@@ -57,8 +58,8 @@ export default function UpdateRewards() {
   const validationSchema = yup.object({
     minDiscount: yup
       .number()
-      .lessThan(yup.ref('maxDiscount'), "Baseline should be less than Maximum") // .test("diff", "diff",
-      .test("diff", "difference of values should be atleast 10",
+      .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
+      .test("diff", constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
             // console.log(context);
@@ -66,7 +67,7 @@ export default function UpdateRewards() {
           }
           return true;
         })
-      .test("multiple", "multiple of 5",
+      .test("multiple", constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;
@@ -75,8 +76,16 @@ export default function UpdateRewards() {
         }),
     maxDiscount: yup
       .number()
-      .moreThan(yup.ref('minDiscount'), "Maximum should be greater than Baseline")
-      .test("diff", "difference of values should be atleast 10",
+      .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
+      .test("less then 10", "Entered value should be atleast 10",
+        (val: number | undefined) => {
+          if (val && val < 10) {
+            // console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test("diff", constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
             console.log(context);
@@ -84,7 +93,7 @@ export default function UpdateRewards() {
           }
           return true;
         })
-      .test("multiple", "multiple of 5",
+      .test("multiple", constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;

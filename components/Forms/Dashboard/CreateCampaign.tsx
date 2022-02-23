@@ -23,6 +23,7 @@ import Router, { useRouter } from 'next/router';
 import useQueryString from 'hooks/useQueryString';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import * as constant from 'configs/constant';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
@@ -85,8 +86,8 @@ export default function CreateCampaign() {
       .required('required.'),
     minDiscount: yup
       .number()
-      .lessThan(yup.ref('maxDiscount'), "Baseline should be less than Maximum") // .test("diff", "diff",
-      .test("diff", "difference of values should be atleast 10",
+      .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
+      .test("diff", constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
             // console.log(context);
@@ -94,7 +95,7 @@ export default function CreateCampaign() {
           }
           return true;
         })
-      .test("multiple", "multiple of 5",
+      .test("multiple", constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;
@@ -103,8 +104,8 @@ export default function CreateCampaign() {
         }),
     maxDiscount: yup
       .number()
-      .moreThan(yup.ref('minDiscount'), "Maximum should be greater than Baseline")
-      .test("diff", "difference of values should be atleast 10",
+      .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
+      .test("diff", constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
             console.log(context);
@@ -112,7 +113,7 @@ export default function CreateCampaign() {
           }
           return true;
         })
-      .test("multiple", "multiple of 5",
+      .test("multiple", constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;
@@ -129,7 +130,7 @@ export default function CreateCampaign() {
     validationSchema,
     enableReinitialize: true,
     validateOnChange: false,
-    validateOnBlur: true,
+    validateOnBlur: false,
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
       console.log({ validateForm });
 
@@ -254,6 +255,7 @@ export default function CreateCampaign() {
   };
   const { setValue } = useUtilityFunction();
   console.log({ errors });
+  console.log("//////////////////");
 
   return (
     <Container className={styles.dashboard_campaign}>
