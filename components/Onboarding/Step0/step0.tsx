@@ -39,7 +39,7 @@ const Step0 = ({ show }: IStep0Props) => {
                 </Row>
               </Row>
               <section className=" mx-4">
-                <Row className="my-2  mx-3 ">
+                <Row className="mb-1  mx-3 ">
                   <Col>
                     <h4 className="">We know that nothing beats a friend’s recommendation.</h4>
                   </Col>
