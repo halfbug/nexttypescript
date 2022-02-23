@@ -38,7 +38,7 @@ const Cart = ({
 
   return (
     <>
-      <Offcanvas show={show} onHide={handleClose} placement="end" {...props}>
+      <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={styles.groupshop_modal_cart}>
         <Offcanvas.Header closeButton className={styles.groupshop_modal_cart_close}>
           <Offcanvas.Title>{' '}</Offcanvas.Title>
         </Offcanvas.Header>
@@ -50,16 +50,23 @@ const Cart = ({
           >
             <div className="p-2">
               <h3>Cart</h3>
-              <p>
-                💸 Spend $40 to unlock
+              <p className="px-3">
+                💸 Spend $40 to
                 {' '}
-                {discount}
-                %
-                off this order and $X cashback for
+                <strong>
+                  unlock
+                  {' '}
+                  {discount}
+                  %
+                  {' '}
+                  off this order
+                </strong>
+                {' '}
+                and $20 cashback for everyone!
               </p>
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
 
-              <div className={styles.groupshop_modal_cart_progress} />
+              {/* <div className={styles.groupshop_modal_cart_progress} /> */}
             </div>
             <hr />
             {cartProducts.length < 1 ? (
@@ -82,36 +89,36 @@ const Cart = ({
               </>
             ) : cartProducts.map((prd) => (
               <Row className="px-0 mx-1 py-2 border-bottom">
-                <Col>
+                <Col xs={4}>
                   <img
                     src={prd.selectedVariant?.image?.src ?? prd.featuredImage}
                     alt={prd.title}
                     className={styles.groupshop_modal_cart_thumbnail}
                   />
                 </Col>
-                <Col className="text-start">
-                  <h5>
-                    {prd.title.substr(0, 15)}
-                    ...
-                  </h5>
+                <Col className="text-start" xs={8}>
+
+                  <div className="d-flex justify-content-between">
+                    <h5 className="w-50 mb-0">
+                      {prd.title}
+                    </h5>
+                    <h5>
+                      <span className="text-decoration-line-through fw-light">
+                        {currencySymbol}
+                        {(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
+                      </span>
+                      {' '}
+                      <span>
+                        {currencySymbol}
+                        {dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
+                      </span>
+                    </h5>
+                  </div>
                   <p>
-                    {prd.selectedVariant?.selectedOptions?.reduce(
-                      (vstr : string, opt:any) => `${vstr}, ${opt.value}`, '',
-                    ).substr(1)}
+                    {prd.selectedVariant?.selectedOptions?.map((op:any) => op.value).join(', ').replace('Default Title', '')}
                   </p>
 
-                  <h5 className="pt-2">
-                    <span className="text-decoration-line-through">
-                      {currencySymbol}
-                      {prd.selectedVariant.price ?? prd.price}
-                    </span>
-                    {' '}
-                    <span>
-                      {currencySymbol}
-                      {dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
-                    </span>
-                  </h5>
-                  <p>Quantity</p>
+                  <p className="pt-2">Quantity</p>
                   <ButtonGroup
                     aria-label="product quantity"
                     className={styles.groupshop_modal_cart_quantity}

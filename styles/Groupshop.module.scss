@@ -299,6 +299,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 		&_cart {
 			// @extend .groupshop_modal;
+			// width: 430px !important;
 			&_close {
 				flex-direction: row-reverse !important;
 				@extend .pb-0;
@@ -395,14 +396,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		p {
 			font-weight: 400;
-			font-family: DM Sans !important ;
+			font-family: DM Sans !important;
 			font-style: normal;
 			font-size: 14px;
 			line-height: 16px;
-			
 		}
 		b {
-			font-family: DM Sans !important ;
+			font-family: DM Sans !important;
 			font-style: normal;
 			font-weight: 500;
 			font-size: 14px;
@@ -430,7 +430,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				list-style: none;
 				font-family: DM Sans;
 				font-style: normal;
-				font-weight: 500!important ;
+				font-weight: 500 !important;
 				font-size: 14px;
 			}
 		}
@@ -455,7 +455,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			}
 
 			b {
-				font-family: DM Sans !important ;
+				font-family: DM Sans !important;
 				font-style: normal;
 				font-weight: 500;
 				font-size: 14px;
@@ -463,7 +463,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			}
 			p {
 				font-weight: 700;
-				font-family: DM Sans !important ;
+				font-family: DM Sans !important;
 				font-style: normal;
 				font-size: 12px;
 				line-height: 16px;
