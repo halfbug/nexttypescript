@@ -113,9 +113,9 @@ export default function OBCampaign() {
 
     <Form noValidate onSubmit={handleSubmit} className="mx-4">
       <Row className="mt-3"><h4>Name your Groupshop campaign</h4></Row>
-      <Row className="d-flex">
-        <Col lg={9}>
-          <Form.Group className="mb-3" controlId="campainNameValidation">
+      <Row>
+        <Col lg={9} className="d-flex">
+          <Form.Group className="mb-3 col-10" controlId="campainNameValidation">
             <Form.Control
               type="email"
               placeholder="My first campaign..."
@@ -129,9 +129,7 @@ export default function OBCampaign() {
               {errors.name}
             </Form.Control.Feedback>
           </Form.Group>
-        </Col>
-        <Col lg={3}>
-          <Form.Text className="text-muted">
+          <Form.Text className="col-2 text-muted mt-2 mx-2">
             {values.name?.length}
             /20
           </Form.Text>
@@ -146,7 +144,7 @@ export default function OBCampaign() {
           add products from your store
         </h4>
       </Row>
-      <Row className="text-muted"><h6>Customers can get discounts on the products selected below by default.</h6></Row>
+      <Row className="text-muted"><p>Customers can get discounts on the products selected below by default.</p></Row>
       <Row className="mt-2">
         <Col>
           <Form.Check
@@ -206,7 +204,7 @@ export default function OBCampaign() {
         </Col>
 
       </Row>
-      <Row className="text-muted"><h6>Select additional products that customers can add to personalize their Groupshop.</h6></Row>
+      <Row className="text-muted"><p>Select additional products that customers can add to personalize their Groupshop.</p></Row>
       <Row className="mt-2">
         {/* <Col xs={3} md={4}> </Col> */}
         <Col xs={12} md={6} className="text-right">

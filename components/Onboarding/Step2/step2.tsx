@@ -20,7 +20,8 @@ const Step2 = ({ show }: IStep0Props) => (
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Create a Groupshop"
-          content="Now, let’s set up your first Groupshop campaign so you can start making
+          content="Now, let’s set up your first Groupshop
+          campaign so you can start making
           sales."
         />
         <Col className="text-sm-start mt-3 border-start" lg={7}>

@@ -50,7 +50,7 @@
 
 	}
 	p {
-		@extend .text-start;
+		@extend .text-start, .mt-1;
 		font-family: Mulish;
 		font-style: normal;
 		font-weight: 600;
