@@ -41,14 +41,15 @@ export default function useUtilityFunction() {
     if (num % 5 === 0) return true;
     return false;
   }, []);
-
+  // retrieve common element
   const findInArray = (
     mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
   ):any => mainArr?.map((item: any) => {
     console.log({ item });
+    const searched = arrayfield ? item?.[arrayfield] : item;
 
     const newArr = searchArr?.find(
-      (item2: any) => item2[searchField] === item,
+      (item2: any) => item2?.[searchField] === searched,
     );
     // console.log({ newArr });
     // console.log({ item });
@@ -56,11 +57,26 @@ export default function useUtilityFunction() {
     return newArr;
   });
 
+  const filterArray = (
+    mainArr: any[], filterArr: any[], arrayfield: any, filterField: string | number,
+  ):any => mainArr?.filter((item: any) => {
+    console.log({ item });
+    // const searched = arrayfield ? item?.[arrayfield] : item;
+
+    const newArr = filterArr?.find(
+      (item2: any) => item2?.[filterField] === item?.[arrayfield],
+    );
+    console.log({ newArr });
+    // console.log({ item });
+
+    return !newArr;
+  });
+
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
 
   return {
-    cleanTypename, multiple5, isMultiple5, findInArray, setValue,
+    cleanTypename, multiple5, isMultiple5, findInArray, setValue, filterArray,
   };
 }

@@ -13,23 +13,24 @@ export default function useCampaign() {
   const [newcampaign, setNewcampaign] = useState<ICampaign | undefined>(undefined);
 
   useEffect(() => {
-    // if (campaign === undefined) {
     setcampaign(getCampaign());
     setNewcampaign(getNewCampaign());
-    // }
   }, [store]);
   // console.log({ campaign });
   // console.log({ store });
+  // useEffect(() => {
+  //   setcampaign(getCampaign());
+  // }, [store.singleEditCampaignId]);
 
   const getCampaign = useCallback(() => {
     let Incampaign;
-    if (store?.campaigns) {
+    if (store?.campaigns && store.singleEditCampaignId) {
       const arr:any = store.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
       //   console.log({ arr });
       Incampaign = { ...arr[0] };
     }
     return Incampaign;
-  }, [store.campaigns]);
+  }, [store.singleEditCampaignId]);
 
   const getNewCampaign = useCallback(() => {
     let newCampaign = {};
@@ -47,8 +48,10 @@ export default function useCampaign() {
         newCampaign: {
           products: [],
           collections: [],
-          addableProductsArray: [],
           productsArray: [],
+          addableProductsArray: [],
+          addableCollections: [],
+          addableProducts: [],
           criteria: '',
           // productsArray: [],
         },

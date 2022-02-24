@@ -97,11 +97,11 @@ export default function SocialMedia() {
         return item;
       });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-      console.log("🚀 ~ file: SocialMedia.tsx ~ line 100 ~ onSubmit: ~ updatedCampaigns", updatedCampaigns);
+      // console.log("🚀 ~ file: SocialMedia.tsx  ~ updatedCampaigns", updatedCampaigns);
     },
   });
 
-  // console.log({ values });
+  // console.log({ store });
   // console.log({ smState });
 
   return (

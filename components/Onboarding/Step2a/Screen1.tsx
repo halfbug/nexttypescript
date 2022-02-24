@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable quotes */
 /* eslint-disable react/require-default-props */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
@@ -12,6 +14,7 @@ import { ICollection, IProduct } from 'types/store';
 import IconButton from 'components/Buttons/IconButton';
 import { useRouter } from 'next/router';
 import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
@@ -27,6 +30,7 @@ type SelectedType = {
 }
 
 const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
+  const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
   const { store, dispatch } = React.useContext(StoreContext);
   const [view, setview] = useState<'List' | 'Detail' | 'Search'>('List');
@@ -36,10 +40,9 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
       collections: store.newCampaign?.collections ?? [],
-      products: selectedProducts ?? store.newCampaign?.products ?? [],
+      products: selectedProducts ?? (ins === "2a" ? store.newCampaign?.products : store.newCampaign?.addableProducts) ?? [],
     },
   );
-  const { query: { ins } } = useRouter();
   const getEntityById = (id:string, entity: string):
    ICollection | IProduct => store?.[entity]?.find(
     (col:IProduct | ICollection) => col.id === id,
@@ -51,8 +54,46 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
       setcampaign({ ...campaign, products: selectedProducts });
     }
   }, [selectedProducts]);
+  const { filterArray, findInArray } = useUtilityFunction();
+  React.useEffect(() => {
+  //
+    // setcampaign({
+    //   products: [], collections: [],
+    // });
+    if (ins === "2a") {
+      setcampaign((prev) => ({
+        ...prev,
+        products: store.newCampaign?.products ?? [],
+        collections: store.newCampaign?.collections ?? [],
+      }));
+      setscollections(store?.collections);
+      setproducts(store?.products);
+    } else if (ins === "addproduct") {
+      // const searchArr = store?.newCampaign?.collections ? store?.newCampaign?.collections : campaign.collections
+      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
+      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
+      // console.log(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
+      // console.log(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
+
+      setcampaign((prev) => ({
+        ...prev,
+        products: store.newCampaign?.addableProducts ?? [],
+        collections: store.newCampaign?.addableCollections ?? [],
+      }));
+    }
+  }, [ins]);
+
   const backToList = () => {
     setview('List');
+
+    if (ins === "addproduct") {
+    // const searchArr = store?.newCampaign?.collections ? store?.newCampaign?.collections : campaign.collections
+      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
+      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
+    } else {
+      setscollections(store.collections);
+      setproducts(store.products);
+    }
   };
 
   const handleCollectionButton = (id:string) => {
@@ -69,11 +110,13 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
     const { value } = e.target;
 
     setview(value.length === 0 ? 'List' : 'Search');
-    const filteredCollections = store?.collections?.filter((col):boolean | undefined => {
+    const baseCollectionArray = ins === "2a" ? store?.collections : filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id");
+    const baseProductArray = ins === "2a" ? store?.products : filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id");
+    const filteredCollections = baseCollectionArray?.filter((col: any):boolean | undefined => {
       if (col.title.toLowerCase().includes(value)) return true;
       return false;
     });
-    const filteredProducts = store?.products?.filter((prod):boolean | undefined => {
+    const filteredProducts = baseProductArray?.filter((prod: any):boolean | undefined => {
       if (prod.title.toLowerCase().includes(value)) return true;
       return false;
     });
@@ -157,12 +200,15 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
 
       // }
     }
+    setcampaign({
+      products: [], collections: [],
+    });
     setParams({ ins: 2 });
   };
-  // console.log({ campaign });
-  // console.log({ store });
-  // console.log({ selectedProducts });
-  // console.log('....................');
+  console.log({ campaign });
+  console.log({ store });
+  console.log({ selectedProducts });
+  console.log('....................');
 
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">
@@ -200,7 +246,13 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
           isChecked={isChecked}
           handleChecked={handleChecked}
         />
-        <Collections data={scollections || store.collections} isChecked={isChecked} handleCollectionButton={handleCollectionButton} className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`} handleChecked={handleChecked} />
+        <Collections
+          data={scollections || store.collections}
+          isChecked={isChecked}
+          handleCollectionButton={handleCollectionButton}
+          className={`m-0 ${view === 'Detail' ? 'd-none' : ''}`}
+          handleChecked={handleChecked}
+        />
 
         <Form.Control.Feedback type="invalid" className={`${campaign?.products && campaign?.products?.length > 80 ? 'd-block' : 'd-none'} text-center`}>
           you can select only 80 products.

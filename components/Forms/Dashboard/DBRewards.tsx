@@ -106,9 +106,9 @@ export default function DBRewards({
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  console.log({ values });
-  console.log({ campaignInitial });
-  console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+  // console.log({ values });
+  // console.log({ campaignInitial });
+  // console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
   // const menuItems = ["Easy", "Medium", "Hard"];
   const [activeButton, setActiveButton] = useState("");

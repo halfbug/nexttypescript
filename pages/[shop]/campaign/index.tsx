@@ -13,6 +13,7 @@ import { ICampaign } from 'types/store';
 import Link from 'next/link';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ALL_CAMPAIGNS, UPDATE_CAMPAIGN } from 'store/store.graphql';
+import useCampaign from 'hooks/useCampaign';
 
 const CampaignListing = () => {
   const { store, dispatch } = useContext(StoreContext);
@@ -44,7 +45,9 @@ const CampaignListing = () => {
     refetch();
   }, [store]);
 
+  const { clearNewCampaign } = useCampaign();
   const handleClick = (campaignid: string) => {
+    clearNewCampaign();
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
     if (shopName) Router.push(`/${shopName}/campaign/${campaignid}`);
   };

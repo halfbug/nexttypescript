@@ -24,6 +24,7 @@ import useQueryString from 'hooks/useQueryString';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import * as constant from 'configs/constant';
+import AddProductButton from 'components/Buttons/AddProductButton';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
@@ -65,7 +66,10 @@ export default function CreateCampaign() {
   });
   const { clearNewCampaign } = useCampaign();
   React.useEffect(() => {
+    console.log("IM IN CREATE HOOK");
+
     clearNewCampaign();
+    dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: "" } });
   }, []);
   const { multiple5, isMultiple5 } = useUtilityFunction();
 
@@ -108,7 +112,7 @@ export default function CreateCampaign() {
       .test("diff", constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
-            console.log(context);
+            // console.log(context);
             return false;
           }
           return true;
@@ -132,7 +136,7 @@ export default function CreateCampaign() {
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
-      console.log({ validateForm });
+      // console.log({ validateForm });
 
       if (validateForm) validateForm(valz);
       const {
@@ -211,8 +215,8 @@ export default function CreateCampaign() {
         }
         return item;
       });
-      console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
-      console.log('🚀 ~ store', store);
+      // console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
+      // console.log('🚀 ~ store', store);
       Router.push(`/${shopName}/campaign`);
     },
   });
@@ -254,8 +258,8 @@ export default function CreateCampaign() {
     setParams({ ins: 'addproduct' });
   };
   const { setValue } = useUtilityFunction();
-  console.log({ errors });
-  console.log("//////////////////");
+  console.log({ store });
+  // console.log("//////////////////");
 
   return (
     <Container className={styles.dashboard_campaign}>
@@ -384,7 +388,12 @@ export default function CreateCampaign() {
                     </Col>
                   </Row>
                   <Row className="text-muted mb-2"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
-                  <Row className="text-start"><Col><WhiteButton onClick={handleAddProduct}>Add products</WhiteButton></Col></Row>
+                  <Row className="text-start">
+                    <Col>
+                      <AddProductButton />
+                      {/* <WhiteButton onClick={handleAddProduct}>Add products</WhiteButton> */}
+                    </Col>
+                  </Row>
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>

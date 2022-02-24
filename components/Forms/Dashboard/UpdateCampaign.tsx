@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable quotes */
 /* eslint-disable max-len */
 import * as React from 'react';
@@ -20,6 +21,7 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useCampaign from 'hooks/useCampaign';
+import AddProductButton from 'components/Buttons/AddProductButton';
 import Settings from '../Settings';
 import SocialMedia from './SocialMedia';
 import UpdateRewards from './UpdateRewards';
@@ -152,30 +154,31 @@ export default function UpdateCampaign() {
   console.log({ campaign });
 
   React.useEffect(() => {
-    if (ins === "2a") {
+    if (ins === "2a" && campaign?.products) {
       console.log(campaign?.products);
       console.log('//////////////');
 
       if (campaign?.products) {
-        setselectedProducts(findInArray(campaign?.products, store?.products || [], "id", "id"));
-        console.log(findInArray(campaign?.products, store?.products || [], "id", "id"));
+        setselectedProducts(findInArray(campaign?.products, store?.products || [], null, "id"));
+        console.log(findInArray(campaign?.products, store?.products || [], null, "id"));
       }
     } else if (ins === "addproduct" && campaign?.addableProducts) {
       console.log(campaign?.addableProducts);
       console.log('//////////////');
 
-      setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
-      console.log(findInArray(campaign?.addableProducts, store?.products || [], "id", "id"));
+      setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
+      console.log(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
     }
 
     if (ins === '2') {
       if (store?.newCampaign?.productsArray?.length) {
         setFieldValue('products', store?.newCampaign?.productsArray);
+        setTimeout(handleSubmit, 2000);
       }
       if (store?.newCampaign?.addableProductsArray?.length) {
         setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
+        setTimeout(handleSubmit, 2000);
       }
-      setTimeout(handleSubmit, 2000);
       setParams({ ins: undefined });
     }
   }, [ins]);
@@ -306,7 +309,11 @@ export default function UpdateCampaign() {
                     </Col>
                   </Row>
                   <Row className="text-muted"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
-                  <Row className="text-start"><Col><WhiteButton onClick={handleAddProduct}>Add products</WhiteButton></Col></Row>
+                  <Row className="text-start">
+                    <Col>
+                      <AddProductButton />
+                    </Col>
+                  </Row>
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>
