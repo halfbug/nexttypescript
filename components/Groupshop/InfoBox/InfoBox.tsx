@@ -4,7 +4,7 @@ import React, {
   useState,
 } from 'react';
 import {
-  Modal, Col, Row,
+  Modal, Col, Row, Container,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
@@ -29,105 +29,97 @@ const InfoBox = () => {
       <Modal
         show={show}
         onHide={handleClose}
-        className={styles.groupshop_modal_info}
         size="lg"
+        width={681}
         aria-labelledby="contained-modal-title-vcenter"
         centeredv
       >
-        <Modal.Header closeButton />
-        <Modal.Body>
-          <Row className="styles.groupshop_imgBox">
-            <img src="/images/purple-head.png" alt="headtag" width={783} height={40} />
+        <Modal.Header closeButton className="border-0" />
+        <Modal.Body className="p-0">
+          <Row className="styles.groupshop_infoBox_imgBox">
+            <img src="/images/purple-head.png" alt="headtag" />
           </Row>
           <Row>
-            <div className="d-block justify-content-center align-content-center">
-              <Row>
-                <div className="justify-content-center align-content-center mt-3 mb-2">
-                  <h3 className="align-content-center text-center fw-bolder lh-base">
-                    Shopping together has never
-                    <br />
-                    been so rewarding
-                  </h3>
-
-                </div>
-              </Row>
+            <div className={styles.groupshop_infoBox}>
+              <h2>
+                Shopping together has never
+                <br />
+                been so rewarding
+              </h2>
             </div>
           </Row>
-          <Row className="styles.groupshop_search_modelCenter">
-            <Row className="d-flex justify-content-center align-content-center">
-              <Row className="my-2  mx-3 ">
-
-                <Col>
-                  <h4 className="align-content-center text-center">
-                    Welcome to Groupshop ‒ a personalized store where you
-                    and your friends shop together and
-                    {' '}
-                    <span className="fw-bold">earn real cashback and discounts.</span>
-                  </h4>
-                </Col>
-
-              </Row>
-              <Row className=" justify-content-center align-content-center">
-                <Col className={styles.groupshop_tostart}>
-                  <h4 className="fw-bold align-content-center text-center">
-                    To start earning
-                  </h4>
-                </Col>
-              </Row>
-              <Row className="mt-3 justify-content-center align-content-center">
-                <Col xs={2} className="mx-2">
-                  <Cart />
-                </Col>
-                <Col xs={9}>
-                  <h4 className="text-start">
-                    <strong> Shop</strong>
-                    {' '}
-                    limited-time offers from Insert Name Here and complete your order.
-                  </h4>
-                </Col>
-              </Row>
-              <Row className="mt-3 justify-content-center align-content-center">
-                <Col xs={2} className="mx-2">
-                  {/* <img src={Face.src} alt="icon" /> */}
-                  <Envp />
-                </Col>
-                <Col xs={9}>
-                  <h4 className="text-start">
-                    Share this Groupshop link with friends to give them access to
-                    {' '}
-                    <strong> exclusive discounts.</strong>
-                  </h4>
-                </Col>
-              </Row>
-              <Row className="mt-3 justify-content-center align-content-center">
-                <Col xs={2} className="mx-2">
-                  <Face />
-                </Col>
-                <Col xs={9}>
-                  <h4 className="text-start fw-bold">
-                    <strong> Earn cashback*</strong>
-                    {' '}
-                    every time they shop, and keep unlocking additional rewards.
-                  </h4>
-                </Col>
-              </Row>
-              <Row>
-                <h4 className="align-content-center text-center fw-bold mt-3 "> The more friends shop, the more rewards for everyone!</h4>
-              </Row>
-              <Row className="mt-2 mb-4 justify-content-center">
-                <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
-                  <Button>Start Shopping</Button>
-                </Col>
-              </Row>
-              <Row>
-                <p className="align-content-center text-center">
-                  *Your cashback gets reimbursed
-                  automatically to the payment method you used for your order.
-                </p>
-
-              </Row>
+          <section className={styles.groupshop_infoBox}>
+            <Row className="d-flex justify-content-center">
+              <p>
+                Welcome to Groupshop ‒ a personalized store where you
+                and your friends shop together and
+                {' '}
+                <strong>earn real cashback and discounts.</strong>
+              </p>
             </Row>
-          </Row>
+            <Row className={styles.groupshop_infoBox_tostart}>
+              <h3>
+                To start earning
+              </h3>
+            </Row>
+            <Row className="my-2 d-flex justify-content-center">
+              <Col xs={2} className="d-flex justify-content-end">
+                <Cart />
+              </Col>
+              <Col xs={9}>
+                <p className="text-start">
+                  <strong> Shop</strong>
+                  {' '}
+                  limited-time offers from Insert Name Here and complete your order.
+                </p>
+              </Col>
+            </Row>
+            <Row className="my-2 d-flex justify-content-center">
+              <Col xs={2} className="d-flex justify-content-end">
+                {/* <img src={Face.src} alt="icon" /> */}
+                <Envp />
+              </Col>
+              <Col xs={9}>
+                <p className="text-start">
+                  Share this Groupshop link with friends to give them access to
+                  {' '}
+                  <strong> exclusive discounts.</strong>
+                </p>
+              </Col>
+            </Row>
+            <Row className="my-2 d-flex justify-content-center">
+              <Col xs={2} className="d-flex justify-content-end">
+                <Face />
+              </Col>
+              <Col xs={9}>
+                <p className="text-start">
+                  <strong> Earn cashback*</strong>
+                  {' '}
+                  every time they shop, and keep unlocking additional rewards.
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <h4 className="align-content-center text-center fw-bold ">
+                {' '}
+                The more friends shop, the more
+                <br />
+                rewards for everyone!
+
+              </h4>
+            </Row>
+            <Row className="d-flex justify-content-center my-4">
+              <Button className={styles.groupshop_infoBox_shoppingBtn}>Start Shopping</Button>
+            </Row>
+            <Row>
+              <div className={styles.groupshop_infoBox_lastLine}>
+                *Your cashback gets reimbursed
+                automatically to the payment
+                <br />
+                method you used for your order.
+              </div>
+            </Row>
+          </section>
         </Modal.Body>
 
       </Modal>
