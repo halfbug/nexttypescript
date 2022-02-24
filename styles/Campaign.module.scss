@@ -197,7 +197,7 @@
 
 .super_btn {
     @include button-variant($supercharged, $supercharged);
-    @extend .mx-1, .px-1, .py-1, .lh-sm;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .my-2;
     color: $white;
     opacity: 50%;
     width: 100px;

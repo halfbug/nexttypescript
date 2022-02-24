@@ -337,7 +337,7 @@ export default function UpdateCampaign() {
                       >
                         <ToggleButton
                           variant="outline-success"
-                          className="  "
+                          className={styles.enablebtn}
                           id="joinExisting-e"
                           value={1}
                           checked={values.joinExisting}
@@ -351,8 +351,8 @@ export default function UpdateCampaign() {
                           Enabled
                         </ToggleButton>
                         <ToggleButton
-                          variant="outline-primary"
-                          className=""
+                          variant="outline-danger"
+                          className={styles.disablebtn}
                           id="joinExisting-d"
                           value={0}
                           checked={values.joinExisting === false}

@@ -502,32 +502,30 @@ export default function CreateCampaign() {
             </section>
           </Col>
         </Row>
-        <Row>
-          <Col lg={7} className={[styles.dashboard_campaign__lightBg].join(' ')}>
-            <h4>Save Campaign</h4>
-            <p className={styles.dashboard_campaign__light_text}>Save & activate this Groupshop campaign, or just save and come back to it later.</p>
-            <WhiteButton
-              type="submit"
-              onClick={(e) => {
-                setFieldValue('isActive', true);
-                // handleSubmit();
-              }}
-            >
-              Save and activate
-            </WhiteButton>
-            {' '}
-            {' '}
-            <WhiteButton
-              type="submit"
-              onClick={(e) => {
-                setFieldValue('isActive', false);
-                // handleSubmit();
-              }}
-            >
-              Save for later
-            </WhiteButton>
-          </Col>
-        </Row>
+        <Col lg={7} className={[styles.dashboard_campaign__lightBg].join(' ')}>
+          <h4>Save Campaign</h4>
+          <p className={styles.dashboard_campaign__light_text}>Save & activate this Groupshop campaign, or just save and come back to it later.</p>
+          <WhiteButton
+            type="submit"
+            onClick={(e) => {
+              setFieldValue('isActive', true);
+              // handleSubmit();
+            }}
+          >
+            Save and activate
+          </WhiteButton>
+          {' '}
+          {' '}
+          <WhiteButton
+            type="submit"
+            onClick={(e) => {
+              setFieldValue('isActive', false);
+              // handleSubmit();
+            }}
+          >
+            Save for later
+          </WhiteButton>
+        </Col>
 
       </Form>
     </Container>
