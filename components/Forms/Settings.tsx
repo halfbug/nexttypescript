@@ -161,9 +161,9 @@ export default function Settings({ isDB }: IProps) {
     <Form noValidate onSubmit={handleSubmit} className="mx-4">
       <Row><h4>Set your brand color</h4></Row>
       <Row>
-        <Form.Text className="text-muted mt-0 fs-6">You’ll want a color that stands out on a white background</Form.Text>
+        <Form.Text className={styles.ob_settings_detail}>You’ll want a color that stands out on a white background</Form.Text>
       </Row>
-      <Row className="mt-3">
+      <Row className="mt-2">
         <Col lg={12}>
           <Form.Group className="d-flex ">
             <span className={styles.ob_settings__brandcolor}>
@@ -194,12 +194,12 @@ export default function Settings({ isDB }: IProps) {
       <Row className="mt-4"><h4>Select a banner background</h4></Row>
       <Row>
         <Col>
-          <Form.Text className="text-muted mt-0 fs-6">This will serve as the banner for your Groupshop page </Form.Text>
+          <Form.Text className={styles.ob_settings_detail}>This will serve as the banner for your Groupshop page </Form.Text>
         </Col>
       </Row>
       <Row className=" border rounded px-1 py-3 my-1 mx-1 mt-2">
         <Col md={6}>
-          <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
+          <div className={styles.ob_settings_preSet}>Pre-Set Themes</div>
           {/* <Row> */}
           <ButtonGroup className={["mb-2 d-block mx-0 p-0", styles.ob_settings__group].join(' ')}>
             {radios.map(({ name, component, value }) => (
@@ -224,11 +224,11 @@ export default function Settings({ isDB }: IProps) {
           {/* </Row> */}
         </Col>
         <Col md={6} className={styles.vertical}>
-          <Row className="mt-2">
-            <h6 className="fs-6 fw-bolder lh-base text-nowrap">
+          <Row>
+            <div className={styles.ob_settings_preSet}>
               Custom background
               <span className={styles.badge}>Recommended</span>
-            </h6>
+            </div>
 
           </Row>
           <Row>
@@ -282,8 +282,8 @@ export default function Settings({ isDB }: IProps) {
             </Col>
             <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
               <Col className="text-muted align-right text-end">
-                <h6 className={styles.smallt}> Under 5mb (PNG, JPG, JPEG)</h6>
-                <h6 className={styles.smallt}> 1440px x 500px</h6>
+                <div className={styles.smallt}> Under 5mb (PNG, JPG, JPEG)</div>
+                <div className={styles.smallt}> 1440px x 500px</div>
               </Col>
             </Row>
           </Row>
