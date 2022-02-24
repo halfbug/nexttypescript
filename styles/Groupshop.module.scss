@@ -511,4 +511,57 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			}
 		}
 	}
+	&_pagination {
+		@extend .d-flex, .justify-content-center;
+		margin: 0px 8px!important;
+		a {
+			width: 30px;
+			margin: 0px 8px !important;
+			height: 30px;
+			padding: 6px 6px;
+			border-radius: 15px;
+			text-align: center;
+			font-size: 12px;
+			line-height: 1.42857;
+			border: none;
+			box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.15);
+
+
+		}
+		span {
+			color: #000000;
+			background-color: none;
+			border-color: #ccb2f9;
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+			margin: 0px 4px;
+			text-align: center;
+			font-size: 12px;
+			line-height: 1.42857;
+			filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.15));
+			
+		}
+		&_prev {
+			margin: 0px 8px!important;
+			a {
+				border-bottom-left-radius: 0rem !important;
+				border-top-left-radius: 0rem !important;
+				width: 30px!important;
+				height: 30px!important;
+				border-radius: 15px!important;
+			}
+		}
+		&_next {
+			margin: 0px 8px!important;
+			a {
+				border-bottom-right-radius: 0rem !important;
+				border-top-right-radius: 0rem !important;
+				width: 30px!important;
+				height: 30px!important;
+				border-radius: 15px!important;
+			}
+		}
+	}
+
 }

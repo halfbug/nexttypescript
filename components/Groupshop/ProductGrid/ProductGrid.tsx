@@ -172,10 +172,12 @@ const ProductGrid = ({
       <Row>
         <Col>
           { totalPages > 1 && (
-          <Pagination className="d-flex justify-content-center">
-            <Pagination.Prev onClick={() => setCurrentPage(
-              (currentPage > 1) ? currentPage - 1 : currentPage,
-            )}
+          <Pagination className={styles.groupshop_pagination}>
+            <Pagination.Prev
+              className={styles.groupshop_pagination_prev}
+              onClick={() => setCurrentPage(
+                (currentPage > 1) ? currentPage - 1 : currentPage,
+              )}
             />
 
             {getPageNumbers().map((n, index) => (
@@ -187,9 +189,11 @@ const ProductGrid = ({
               </Pagination.Item>
             ))}
 
-            <Pagination.Next onClick={() => setCurrentPage(
-              (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
-            )}
+            <Pagination.Next
+              className={styles.groupshop_pagination_next}
+              onClick={() => setCurrentPage(
+                (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
+              )}
             />
           </Pagination>
           )}
