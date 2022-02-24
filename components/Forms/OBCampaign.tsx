@@ -12,6 +12,7 @@ import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { CREATE_CAMPAIGN, UPDATE_CAMPAIGN } from 'store/store.graphql';
+import AddProductButton from 'components/Buttons/AddProductButton';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
@@ -53,6 +54,8 @@ export default function OBCampaign() {
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
       if (validateForm) validateForm(valz);
+      console.log({ valz });
+
       const { name, criteria, joinExisting } = valz;
       let campObj:null | any;
       let newObj;
@@ -69,6 +72,7 @@ export default function OBCampaign() {
               // eslint-disable-next-line radix
               joinExisting: Boolean(parseInt(joinExisting ?? 1)),
               products: store?.newCampaign?.productsArray,
+              addableProducts: store?.newCampaign?.addableProductsArray,
             },
           },
         });
@@ -84,6 +88,7 @@ export default function OBCampaign() {
               // eslint-disable-next-line radix
               joinExisting: Boolean(parseInt(joinExisting ?? 1)),
               products: store?.newCampaign?.productsArray,
+              addableProducts: store?.newCampaign?.addableProductsArray,
             },
           },
         });
@@ -205,13 +210,7 @@ export default function OBCampaign() {
       <Row className="mt-2">
         {/* <Col xs={3} md={4}> </Col> */}
         <Col xs={12} md={6} className="text-right">
-          <ToggleButtonGroup type="radio" name="joinExisting" value={values.joinExisting}>
-            <ToggleButton variant="outline-primary" id="joinExisting-d" value={0} onChange={handleChange} onClick={() => setValue('joinExisting', 0)}>
-              {' '}
-              Add products
-            </ToggleButton>
-
-          </ToggleButtonGroup>
+          <AddProductButton />
         </Col>
       </Row>
       <Row className="mt-5">

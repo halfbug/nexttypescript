@@ -43,6 +43,10 @@ const useInstallation = (ins: string | string[] | undefined) => {
         return (
           <Step5 />
         );
+      case 'addproduct':
+        return (
+          <Screen1 show />
+        );
       default:
         return (
           <></>
