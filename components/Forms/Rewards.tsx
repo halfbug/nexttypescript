@@ -179,7 +179,7 @@ export default function Rewards() {
       <Form noValidate onSubmit={handleSubmit} className="mx-4">
         <Row className="mt-5"><Col><h4>Adjust your target sales volume</h4></Col></Row>
         <Row className={styles.rewards_text_lg}>
-          <Col className="text-muted">
+          <Col className="text-muted mb-2">
             Choose one of our recommended options. You can
             {' '}
             <br />
@@ -221,18 +221,18 @@ export default function Rewards() {
         </Row>
         <Row className={styles.rewards__box2}>
           <Col lg={6}>
-            <h4 className="fs-4">Baseline</h4>
+            <div className={styles.rewards_BaseMax}>Baseline</div>
             <div className={styles.rewards__percent_btn}>{minDiscount}</div>
 
           </Col>
           <Col lg={6}>
-            <h4 className="fs-4">Maximum</h4>
+            <div className={styles.rewards_BaseMax}>Maximum</div>
             <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
           </Col>
 
         </Row>
 
-        <Row className="mt-3 ">
+        <Row className={styles.rewards_Generous}>
           <Col>
             🌟 Be generous – reward your customers the same way you reward Facebook or Google
             for finding you leads.

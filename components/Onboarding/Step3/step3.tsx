@@ -21,7 +21,8 @@ const Step3 = ({ show }: IStep3Props) => (
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Set your rewards"
-          content="Set the discounts and cashback your customers will earn through Groupshop.
+          content="Set the discounts and cashback your customers will earn through
+                  Groupshop.
                   Our engine dynamically adjusts your
                   rewards percentages for you so that you’re always winning, and so are your customers."
         />

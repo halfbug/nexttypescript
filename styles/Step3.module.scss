@@ -1,126 +1,138 @@
 @import "./variables.scss";
 .rewards {
-	// @extend .text-sm-start;
-	h6 {
-		@extend .fs-6, .fw-normal, .lh-base;
-        font-family: DM Sans;
+    // @extend .text-sm-start;
+    h6 {
         color: $black;
-		}
-	h5 {
-		@extend .fs-5, .fw-bold, .lh-base;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    h5 {
+        color: $subheadingclr;
+        font-family: DM Sans;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    h4 {
+        @extend .fs-4, .fw-bold, .lh-base;
         font-family: DM Sans;
         color: $subheadingclr;
-	}
-	h4{
+    }
+    p {
+        font-size: 14px;
+        margin-left: 60px;
+    }
 
-		@extend .fs-4, .fw-bold, .lh-base;
+    &__radio {
+        @extend .d-flex, .justify-content-end, .align-items-end, .p-0, .m-1;
+        // & + label {
+        &:focus:not(:focus-visible),
+        &:checked,
+        &:active {
+            outline: none !important;
+            border: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        // }
+    }
+    &__group {
+        & input[type="radio"] + label:not(:focus-visible) {
+            outline: none !important;
+            border: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+        & input[type="radio"]:checked + label div {
+            // background-color: $primary;
+            background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+        }
+
+        & input[type="radio"]:nth-child(1):checked + label div {
+            // background-color: $primary;
+            background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
+        }
+    }
+
+    &__bars {
+        @extend .m-0, .p-0;
+        @extend .border-0, .rounded-3;
+
+        background-color: $secondary;
+    }
+
+    &_hide {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+        pointer-events: none;
+    }
+
+    &_text_lg {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #1d2329;
+    }
+    &_text_sm {
+        @extend .mt-0, .my-0;
         font-family: DM Sans;
-        color: $subheadingclr;
-	}
-	p {
-		font-size: 14px;
-		margin-left: 60px;
-	}
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        color: #1d2329;
+        opacity: 0.5;
+    }
 
-	&__radio {
-		@extend .d-flex, .justify-content-end, .align-items-end, .p-0, .m-1;
-		// & + label {
-		&:focus:not(:focus-visible),
-		&:checked,
-		&:active {
-			outline: none !important;
-			border: none !important;
-			-webkit-box-shadow: none !important;
-			box-shadow: none !important;
-		}
-		// }
-	}
-	&__group {
-		& input[type=radio] + label:not(:focus-visible) {
-			outline: none !important;
-			border: none !important;
-			-webkit-box-shadow: none !important;
-			box-shadow: none !important;
-		}
-		& input[type=radio]:checked + label div {
-			// background-color: $primary;
-			background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
-		}
+    &_BaseMax {
+        @extend .my-2;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+    }
 
-		& input[type=radio]:nth-child(1):checked + label div {
-			// background-color: $primary;
-			background-image: linear-gradient(to top, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
-		}
-	}
+    &_Generous {
+        @extend .mt-3;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+    }
 
-	&__bars {
-		@extend .m-0, .p-0;
-		@extend .border-0, .rounded-3;
-
-		background-color: $secondary;
-	}
-
-	&_hide {
-		position: absolute;
-		clip: rect(0, 0, 0, 0);
-		pointer-events: none;
-	}
-	// h6 {
-    //     font-family: DM Sans;
-    //     font-size: 16px;
-    //     font-style: normal;
-    //     font-weight: 700;
-    //     line-height: 21px;
-    //     letter-spacing: 0em;
-    //     text-align: left;
-    //     color: #1d2329;
-    // }
-	&_text_lg {
-		font-family: Mulish;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 16px;
-		line-height: 20px;
-		color: #1D2329;
-		}
-	&_text_sm {
-		@extend .mt-0, .my-0;
-		font-family: DM Sans;
-		font-style: normal;
-		font-weight: normal;
-		font-size: 14px;
-		color: #1D2329;
-		opacity: 0.5;
-		}
-
-	&__percent_btn {
-        @extend .py-1, .fw-bold, .px-0;
+    &__percent_btn {
+        @extend .py-1, .fw-bold, .px-0, .mb-2;
         width: 45px;
         border-radius: 6px;
         text-align: center;
         background-color: #d5fa52;
         display: inline-block;
     }
-	&__box {
-		height: 80px;
-		width: 284px;
-		right: 0px;
-		top: 0px;
-		border-radius: 18px;
-		border-radius: 23px;
-		border: 1px dashed #a68ad6;
-		padding: 10px;
-		margin-left: 10px;
-		margin-top: 15px;
-	}
-	&__box2 {
-		@extend .my-3, .p-2, .mx-1;
-		width: 248px;
-		border: 1px dashed #F28BF4;
-		box-sizing: border-box;
-		border-radius: 18px;
-	}
-
+    &__box {
+        height: 80px;
+        width: 284px;
+        right: 0px;
+        top: 0px;
+        border-radius: 18px;
+        border-radius: 23px;
+        border: 1px dashed #a68ad6;
+        padding: 10px;
+        margin-left: 10px;
+        margin-top: 15px;
+    }
+    &__box2 {
+        @extend .my-3, .p-2, .mx-1;
+        width: 248px;
+        border: 1px dashed #f28bf4;
+        box-sizing: border-box;
+        border-radius: 18px;
+    }
 }
 .low_btn {
     @include button-variant($low, $low);
@@ -134,7 +146,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .low_btn;
         color: $white;
         opacity: 100%;
@@ -155,7 +169,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .avg_btn;
         color: $white;
         opacity: 100%;
@@ -167,17 +183,19 @@
 
 .high_btn {
     @include button-variant($btnhigh, $btnhigh);
-    @extend .mx-1, .px-1, .py-1,.lh-sm, .text-end;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
-    width: 75px;    ;
+    width: 75px;
     border-radius: 8px !important;
     &:hover {
         color: $white;
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .high_btn;
         color: $white;
         opacity: 100%;
@@ -199,7 +217,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .super_btn;
         color: $white;
         opacity: 100%;
