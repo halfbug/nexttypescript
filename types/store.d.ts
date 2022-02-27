@@ -135,3 +135,6 @@ export interface ISocialLink {
   twitter?: string;
   facebook?: string;
 }
+export interface IBilling {
+  nooforder: number;
+}

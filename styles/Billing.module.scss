@@ -1,0 +1,16 @@
+@import "./variables.scss";
+.billing{
+    &_calculator_rectangle {
+        @extend .mb-5, .p-4;
+        border: 1px dashed #F7BC7D;
+        box-sizing: border-box;
+        border-radius: 23px;
+    }
+    &_border_text_rectangle{
+        border: 1px dashed #F28BF4;
+        width: 424px;
+        height: 51px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+}
