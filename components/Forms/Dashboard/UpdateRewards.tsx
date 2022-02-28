@@ -21,6 +21,8 @@ import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import Star from 'assets/images/star.svg';
+import Bulb from 'assets/images/bulb.svg';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 
 interface IValues {
@@ -329,26 +331,27 @@ export default function UpdateRewards() {
           </Col>
         </Row>
 
-        <Row className="mt-3 ">
-          <Col>
-            💡 Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
-            {' '}
-          </Col>
-        </Row>
-        <Row className="mt-3 ">
-          <Col>
-            🌟 Be generous – reward your customers the same
-            {' '}
-            <br />
-            way you reward Facebook or Google for finding
-            {' '}
-            <br />
-            you leads. We’ll do the math to make sure you’re
-            {' '}
-            <br />
-            always winning, and so are your customers.
-          </Col>
-        </Row>
+        <div className="border-top mt-4 mb-1">
+          <Row className=" mt-3 d-inline-flex justify-content-center">
+            <Col lg={1}>
+              <Bulb size={16} />
+            </Col>
+            <Col lg={10}>
+              Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
+            </Col>
+          </Row>
+          <Row className="mt-2 d-inline-flex justify-content-center">
+            <Col lg={1}>
+              <Star size={16} />
+            </Col>
+            <Col lg={10}>
+              Be generous – reward your customers the same
+              way you reward Facebook or Google for finding
+              you leads. We’ll do the math to make sure you’re
+              always winning, and so are your customers.
+            </Col>
+          </Row>
+        </div>
 
       </Form>
     </section>
