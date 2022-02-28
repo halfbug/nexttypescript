@@ -18,6 +18,7 @@ import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
+import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 
 interface IValues {
   rewards: string;
@@ -153,11 +154,15 @@ export default function DBRewards({
 
       <Row className="mt-3">
         <Col sm={6}>
-          <h4 className="fs-4">Baseline</h4>
+          <h4 className="fs-4">
+            Baseline
+            {' '}
+            <InfoCircle size={15} />
+          </h4>
           {!editMin && (
           <>
             <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
-            <Button variant="link" onClick={() => setEditMin(!editMin)}>edit</Button>
+            <Button variant="link" onClick={() => setEditMin(!editMin)}>Edit</Button>
           </>
           )}
           <div className={editMin ? 'd-block' : 'd-none'}>
@@ -185,7 +190,7 @@ export default function DBRewards({
                 setFieldValue('isRewardEdit', true);
               }}
             >
-              save
+              Save
 
             </Button>
           </div>
@@ -194,9 +199,13 @@ export default function DBRewards({
         <Col sm={6}>
           {!editMax && (
           <>
-            <h4 className="fs-4">Maximum</h4>
+            <h4 className="fs-4">
+              Maximum
+              {' '}
+              <InfoCircle size={15} />
+            </h4>
             <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
-            <Button variant="link" onClick={() => setEditMax(!editMax)}>edit</Button>
+            <Button variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
           </>
           )}
           <div className={editMax ? 'd-block' : 'd-none'}>
@@ -223,7 +232,7 @@ export default function DBRewards({
                 setFieldValue('isRewardEdit', true);
               }}
             >
-              save
+              Save
 
             </Button>
             {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}

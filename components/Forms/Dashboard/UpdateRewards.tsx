@@ -21,6 +21,7 @@ import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 
 interface IValues {
   rewards: string;
@@ -258,11 +259,15 @@ export default function UpdateRewards() {
         {/* <Row className={styles.dbrewards__box2}> */}
         <Row className="mt-3">
           <Col sm={6}>
-            <h4 className="fs-4">Baseline</h4>
+            <h4 className="fs-4">
+              Baseline
+              {' '}
+              <InfoCircle size={15} />
+            </h4>
             {!editMin && (
               <>
                 <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
-                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>edit</span>
+                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>Edit</span>
               </>
             )}
 
@@ -284,16 +289,20 @@ export default function UpdateRewards() {
                 {errors.minDiscount}
               </Form.Control.Feedback>
 
-              <Button variant="link" type="submit">save</Button>
+              <Button variant="link" type="submit">Save</Button>
             </div>
 
           </Col>
           <Col sm={6}>
-            <h4 className="fs-4">Maximum</h4>
+            <h4 className="fs-4">
+              Maximum
+              {' '}
+              <InfoCircle size={15} />
+            </h4>
             {!editMax && (
               <>
                 <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
-                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>edit</span>
+                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>Edit</span>
               </>
             )}
             <div className={editMax ? 'd-block' : 'd-none'}>
@@ -313,7 +322,7 @@ export default function UpdateRewards() {
               <Form.Control.Feedback type="invalid">
                 {errors.maxDiscount}
               </Form.Control.Feedback>
-              <Button variant="link" type="submit">save</Button>
+              <Button variant="link" type="submit">Save</Button>
               {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
             </div>
 

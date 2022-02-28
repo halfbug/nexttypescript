@@ -69,11 +69,12 @@
         border: 1px solid #000000;
         border-radius: 6px;
         width: 75px;
-        &:focus, &:active{
+        &:focus,
+        &:active {
             border: 1px solid #000000;
             border-radius: 6px;
             width: 75px;
-            box-shadow: none;    
+            box-shadow: none;
         }
     }
     &_box {
@@ -117,8 +118,14 @@
         text-align: center;
         background-color: #d5fa52;
         display: inline-block;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
     }
     &_rewardBtn {
+        @extend .mx-2;
         background-color: transparent;
         border: none;
         text-transform: capitalize;
@@ -142,7 +149,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .low_btn;
         color: $white;
         opacity: 100%;
@@ -163,7 +172,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .avg_btn;
         color: $white;
         opacity: 100%;
@@ -175,17 +186,19 @@
 
 .high_btn {
     @include button-variant($btnhigh, $btnhigh);
-    @extend .mx-1, .px-1, .py-1,.lh-sm, .text-end;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
-    width: 75px;    ;
+    width: 75px;
     border-radius: 8px !important;
     &:hover {
         color: $white;
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .high_btn;
         color: $white;
         opacity: 100%;
@@ -207,7 +220,9 @@
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         @extend .super_btn;
         color: $white;
         opacity: 100%;
@@ -217,14 +232,16 @@
     }
 }
 
-.enablebtn{
+.enablebtn {
     @extend .rounded-3, .me-2;
     &:hover {
         color: $white;
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         color: $white;
         opacity: 100%;
         border-color: $black;
@@ -232,18 +249,19 @@
     }
 }
 
-.disablebtn{
+.disablebtn {
     @extend .rounded-3;
     &:hover {
         color: $black;
         opacity: 100%;
         border-color: $black;
     }
-    &:active, &:focus, &_dark {
+    &:active,
+    &:focus,
+    &_dark {
         color: $black;
         opacity: 100%;
         border-color: $black;
         background-color: $disable;
     }
-
 }
