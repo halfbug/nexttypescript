@@ -86,10 +86,9 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     setshowCart(true);
   }, [gsctx.cart]);
-  const { gsURL, clientDealProducts } = useDeal();
-
-  console.log('🚀 ~ file: [...code].tsx ~ line 88 ~ gsURL', gsURL);
-  // const { shop, getProducts } = useStore();
+  const {
+    gsURL, clientDealProducts, isExpired,
+  } = useDeal();
 
   React.useEffect(() => {
     if (productsql?.data?.products && gsctx.allProducts) {
@@ -197,14 +196,13 @@ const GroupShop: NextPage = () => {
                         page, you’ll earn cashback every time the
                         y shop with you.
                       </p>
-
                     </Col>
                   </Row>
                 </div>
               )}
               label="EARN CASHBACK"
             />
-            <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} />
+            <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} disabled={isExpired} />
             <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
           </Col>
 

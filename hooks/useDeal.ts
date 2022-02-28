@@ -44,7 +44,40 @@ export default function useDeal() {
     [gsctx.members],
   );
 
+  const getDateDifference = useCallback(() => {
+    const { expiredAt } = gsctx;
+    const expiryDate = new Date(expiredAt);
+    const currentDate = new Date();
+    const diff = expiryDate.getTime() - currentDate.getTime();
+    if (diff < 0) {
+      return ({
+        time: diff,
+        days: 0,
+        hrs: 0,
+        mins: 0,
+      });
+    }
+    return ({
+      time: diff,
+      days: Math.floor(diff / 86400000), // days
+      hrs: Math.floor((diff % 86400000) / 3600000), // hours
+      mins: Math.round(((diff % 86400000) % 3600000) / 60000), // minutes
+    });
+  },
+  [gsctx.members]);
+
+  const isExpired = !(getDateDifference().time > -1);
+
   return {
-    currencySymbol, discount, dPrice, gsURL, clientDealProducts, getBuyers, formatName, topFive,
+    currencySymbol,
+    discount,
+    dPrice,
+    gsURL,
+    clientDealProducts,
+    getBuyers,
+    formatName,
+    topFive,
+    getDateDifference,
+    isExpired,
   };
 }

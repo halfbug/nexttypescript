@@ -58,7 +58,7 @@ const ProductGrid = ({
   } = useContext(GroupshopContext);
 
   const {
-    currencySymbol, dPrice, getBuyers, formatName, topFive,
+    currencySymbol, dPrice, getBuyers, formatName, topFive, isExpired,
   } = useDeal();
 
   if (pending) {
@@ -77,7 +77,7 @@ const ProductGrid = ({
             <ProductCard
               isrc={prod.featuredImage}
               imgOverlay={(
-                <>
+                <button onClick={() => { setsProduct(prod); setshowDetail(true); }} type="button" className="border-0">
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
@@ -105,7 +105,7 @@ const ProductGrid = ({
                       {`Added by ${addedBy}`}
                     </span>
                   ))}
-                </>
+                </button>
 )}
             >
               <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
@@ -130,6 +130,7 @@ const ProductGrid = ({
                 variant="primary"
                 className="rounded-pill w-75"
                 onClick={() => { setsProduct(prod); setshowDetail(true); }}
+                disabled={isExpired}
               >
                 Add to Cart
 
@@ -147,7 +148,15 @@ const ProductGrid = ({
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
-                  <Button variant="outline-primary" className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(true)}>ADD A PRODUCT</Button>
+                  <Button
+                    variant="outline-primary"
+                    className={styles.groupshop__pcard_tag_product}
+                    onClick={() => addProducts(true)}
+                    disabled={isExpired}
+                  >
+                    ADD A PRODUCT
+
+                  </Button>
                 </>
 )}
             >
@@ -184,6 +193,7 @@ const ProductGrid = ({
               <Pagination.Item
                 active={currentPage === n}
                 onClick={() => setCurrentPage(n)}
+                className={currentPage === n ? styles.gropushop_activePage : styles.groupshop_page}
               >
                 {n}
               </Pagination.Item>

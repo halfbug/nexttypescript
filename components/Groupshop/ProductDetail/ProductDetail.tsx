@@ -15,6 +15,8 @@ import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
 import Scrollable from 'components/Widgets/Scrollable/Scrollable';
+import SocialButton from 'components/Buttons/SocialButton/SocialButton';
+import GradiantButton from 'components/Buttons/Button/Button';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -41,11 +43,12 @@ const ProductDetail = ({
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: number, e: any) => {
-    console.log({ selectedIndex });
     setIndex(selectedIndex);
   };
 
-  const { currencySymbol, dPrice, getBuyers } = useDeal();
+  const {
+    currencySymbol, dPrice, getBuyers, isExpired, discount,
+  } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
 
@@ -227,7 +230,7 @@ const ProductDetail = ({
                   lines={3}
                   more="Show more"
                   less="Show less"
-                  className="content-css"
+                  className={isExpired ? 'text-muted' : 'fw-normal'}
                   anchorClass="my-anchor-css-class"
                   // onClick={this.executeOnClick}
                   expanded={false}
@@ -240,7 +243,7 @@ const ProductDetail = ({
 
                 {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
                   <div key={id} className="mt-2">
-                    <h4>{name}</h4>
+                    <h4 className={isExpired ? 'text-muted' : 'me-1'}>{name}</h4>
                     <Form.Select
                       aria-label="option"
                       className="w-50"
@@ -248,6 +251,7 @@ const ProductDetail = ({
                         setselOptions({ ...selOptions, [name]: value });
                       }}
                       value={selOptions?.[name]}
+                      disabled={isExpired}
                     >
                       {values.map((val: string, idx) => (
                         <>
@@ -277,6 +281,7 @@ const ProductDetail = ({
                 variant="primary"
                 className="rounded-2 w-75 pt-2 mt-3 me-2"
                 onClick={() => addToCart()}
+                disabled={isExpired}
               >
                 Add to Cart
 
@@ -304,6 +309,100 @@ const ProductDetail = ({
 
             </Col>
           </Row>
+          {isExpired && (
+          <Row className="border-top mt-4">
+            <Col className="d-flex justify-content-center mt-4">
+              <div className={styles.groupshop_modal_detail_expire}>
+                <h3 className="fw-bolder">
+                  {' '}
+                  This Groupshop has expired
+                </h3>
+                <section>
+                  <Row className={[styles.groupshop_footer_counter, 'justify-content-center w-100'].join(' ')}>
+                    <Col xs={3}>{' '}</Col>
+                    <Col xs={1} className="d-flex justify-content-center">
+                      <div className="text-center me-2">
+                        <span>
+                          {' '}
+                          0
+                        </span>
+                        <p className="mt-1">DAYS</p>
+                      </div>
+                      <div className="py-3">
+                        {' '}
+                        :
+                      </div>
+                    </Col>
+                    <Col xs={2} className="d-flex">
+                      <div className="text-center mx-2">
+                        <span>
+                          0
+                        </span>
+                        <p className="mt-1">HOURS</p>
+                      </div>
+                      <div className="py-3">
+                        {' '}
+                        :
+                      </div>
+                    </Col>
+                    <Col xs={1} className="d-flex">
+                      <div className="text-center ms-3 ms-lg-2">
+                        <span>
+                          0
+                        </span>
+                        <p className="mt-1">MINUTES</p>
+                      </div>
+                    </Col>
+                    <Col xs={4}>{' '}</Col>
+                  </Row>
+                </section>
+                <p>
+                  Groupshop is all about rewarding you and your friends with real
+                  cashback and discounts every time you shop together!
+
+                </p>
+                {/* <p>
+                  <strong>Invite 1 friend</strong>
+                  {' '}
+                  to this Groupshop, and start shopping with
+                  them to get
+                  {' '}
+                  <strong>20% off plus additional cashback</strong>
+                  {' '}
+                  on this and other products you love.
+
+                </p> */}
+                <div className="d-flex flex-column justify-content-center mb-2">
+                  <GradiantButton type="button" className="align-self-center mb-2">INVITE NOW</GradiantButton>
+                  OR SHARE
+                </div>
+                <section className="d-flex justify-content-center px-2">
+                  <div className="mx-1">
+                    {' '}
+                    <SocialButton network="Instagram" url={'  '} />
+                  </div>
+
+                  <div className="mx-1">
+                    {' '}
+                    <SocialButton network="Youtube" url={' '} />
+                    {' '}
+                  </div>
+
+                  <div className="mx-1">
+                    {' '}
+                    <SocialButton network="Tiktok" url={'  '} />
+                    {' '}
+                  </div>
+                  <div className="mx-1">
+                    {' '}
+                    <SocialButton network="Twitter" url={'  '} />
+                    {' '}
+                  </div>
+                </section>
+              </div>
+            </Col>
+          </Row>
+          )}
         </Modal.Body>
 
       </Modal>
