@@ -265,7 +265,7 @@ export default function CreateCampaign() {
           <Col lg={7} className="mt-4">
             <Row>
               <Col>
-                <h3>Setup</h3>
+                <h3>Set-Up</h3>
               </Col>
             </Row>
             <section className={['mt-2', styles.dashboard_campaign__box_1].join(' ')}>
@@ -454,7 +454,6 @@ export default function CreateCampaign() {
 
               </Col>
             </Row>
-
           </Col>
           <Col lg={5}>
             <Row>
