@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useContext, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -85,6 +84,17 @@ const ProductDetail = ({
     )?.[0];
   };
 
+  // handle variant change disable add to cart for out of stock variant
+  const [outofStock, setoutofStock] = useState<boolean>(false);
+  useEffect(() => {
+    if (data) {
+      const selectedVariant = getVariant();
+      if (selectedVariant?.inventoryQuantity < 1) {
+        setoutofStock(true);
+      } else setoutofStock(false);
+    }
+  }, [selOptions]);
+
   const addToCart = () => {
     const { productById: dproduct } = data;
 
@@ -168,7 +178,7 @@ const ProductDetail = ({
                   <img
                     className="d-block w-100"
                     src={product?.featuredImage}
-                    alt={`Feature Image ${Math.random()}`}
+                    alt={`Feature-${Math.random()}`}
                   />
                 </Carousel.Item>
                 {
@@ -281,12 +291,12 @@ const ProductDetail = ({
                 variant="primary"
                 className="rounded-2 w-75 pt-2 mt-3 me-2"
                 onClick={() => addToCart()}
-                disabled={isExpired}
+                disabled={isExpired || outofStock}
               >
-                Add to Cart
+                {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
               </Button>
-              <Button variant="outline-primary" className="m-1 mt-3 rounded-pill"><Send size={18} /></Button>
+              <Button variant="outline-primary" className="m-1 mt-3 rounded-pill" disabled={isExpired}><Send size={18} /></Button>
 
             </Col>
           </Row>

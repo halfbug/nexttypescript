@@ -80,7 +80,11 @@ const GroupShop: NextPage = () => {
   }, [groupshop, pending]);
 
   useEffect(() => {
-    setallProducts(gsctx.allProducts);
+    // setallProducts(gsctx.allProducts);
+
+    setallProducts(Array.from(new Set(
+      [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
+    )));
   }, [gsctx]);
 
   useEffect(() => {
@@ -99,7 +103,6 @@ const GroupShop: NextPage = () => {
       );
 
       dispatch({ type: 'UPDATE_PRODUCTS', payload: { ...gsctx, store: { ...gsctx.store, products: otherProducts } } });
-      console.log('🚀 ~ file: [...code].tsx ~ line 88 ~ React.useEffect ~ otherProducts', otherProducts);
     }
   }, [productsql.data]);
 

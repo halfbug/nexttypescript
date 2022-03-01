@@ -135,7 +135,7 @@ const ProductGrid = ({
                 Add to Cart
 
               </Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill"><Send size={18} /></Button>
+              <Button variant="outline-primary" className="m-1 rounded-pill" disabled={isExpired}><Send size={18} /></Button>
             </ProductCard>
           </Col>
         ))}
@@ -171,7 +171,7 @@ const ProductGrid = ({
                 {' '}
               </p>
               <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill">
+              <Button variant="outline-primary" className="m-1 rounded-pill" disabled={isExpired}>
                 <Send size={18} />
               </Button>
             </ProductCard>
