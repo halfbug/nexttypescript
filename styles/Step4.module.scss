@@ -195,3 +195,15 @@
 .btn-group {
 	display: block !important;
 }
+
+.gs_design{
+h4 {
+	@extend .mb-0;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 21px;
+	color: $subheadingclr;
+}
+}

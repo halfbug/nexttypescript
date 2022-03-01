@@ -116,23 +116,22 @@ export default function DBRewards({
   // const menuItems = ["Easy", "Medium", "Hard"];
   const [activeButton, setActiveButton] = useState("");
   return (
-    <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
-
-      <Row className="mt-1"><Col><h4>Set your rewards</h4></Col></Row>
+    <section className={['mt-2', styles.dbrewards, styles.dbrewards_box].join(' ')}>
+      <Row><Col><h4>Set your rewards</h4></Col></Row>
       <Row className={styles.dbrewards_text_lg}>
-        <Col className="text-muted">
+        <p>
           Set the discount and chashback percentages your customers will earn on their order
           as they reach different milestones.
-        </Col>
+        </p>
       </Row>
-      <Row className="mt-3"><Col><h5>Select your desired sales volume:</h5></Col></Row>
+      <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
       <Row className={styles.dbrewards_text_lg}>
-        <Col className="text-muted">
+        <p>
           We’ll set your reward tiers based on our
           recommendations...
-        </Col>
+        </p>
       </Row>
-      <Row className="mt-2">
+      <Row>
         <Col className="text-start" id="rbtn">
 
           {salesTarget.map((starget: any, index: number) => (
@@ -156,7 +155,7 @@ export default function DBRewards({
 
       <Row className="mt-3">
         <Col sm={6}>
-          <h4 className="fs-4">
+          <h4>
             Baseline
             {' '}
             <InfoCircle size={15} />
@@ -201,7 +200,7 @@ export default function DBRewards({
         <Col sm={6}>
           {!editMax && (
           <>
-            <h4 className="fs-4">
+            <h4>
               Maximum
               {' '}
               <InfoCircle size={15} />
@@ -247,7 +246,7 @@ export default function DBRewards({
           <Col lg={1}>
             <Bulb size={16} />
           </Col>
-          <Col lg={10}>
+          <Col lg={10} className={styles.dbrewards_icon_text}>
             Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
           </Col>
         </Row>
@@ -255,7 +254,7 @@ export default function DBRewards({
           <Col lg={1}>
             <Star size={16} />
           </Col>
-          <Col lg={10}>
+          <Col lg={10} className={styles.dbrewards_icon_text}>
             Be generous – reward your customers the same
             way you reward Facebook or Google for finding
             you leads. We’ll do the math to make sure you’re

@@ -4,18 +4,36 @@
     @extend .mt-2, .px-0;
 
     h3 {
-        @extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
+        @extend .px-0, .mt-2;
         font-family: DM Sans;
         color: $black;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 29px;
     }
     h4 {
-        @extend .fs-4, .fw-bold, .lh-base;
+        @extend .mb-0;
         font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
         color: $subheadingclr;
     }
     hr {
         opacity: 0.08;
         border: 0.5px solid #000000;
+    }
+    p {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: #1d2329;
+        opacity: 0.5;
     }
     &__box_1 {
         @extend .mb-4, .p-4;
@@ -48,14 +66,14 @@
     }
 
     &__light_text {
-        font-family: DM Sans;
-        font-size: 14px;
+        font-family: Mulish;
         font-style: normal;
         font-weight: 400;
+        font-size: 14px;
         line-height: 18px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: silver;
+        /* identical to box height */
+        color: #1d2329;
+        opacity: 0.5;
     }
     &__lightBg {
         @extend .mb-4, .p-4;
@@ -90,14 +108,30 @@
         border: 1px solid #000000;
     }
     h4 {
-        @extend .fs-4, .fw-bold, .lh-base;
         font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
         color: $subheadingclr;
     }
     h5 {
-        @extend .fs-5, .fw-bold, .lh-base;
+        @extend .mb-0;
         font-family: DM Sans;
         color: $black;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &_icon_text {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #1d2329;
     }
     &_text_lg {
         @extend .fs-5, .fw-normal, .lh-base;
@@ -234,6 +268,7 @@
 
 .enablebtn {
     @extend .rounded-3, .me-2;
+    width:96px;
     &:hover {
         color: $white;
         opacity: 100%;
@@ -251,6 +286,7 @@
 
 .disablebtn {
     @extend .rounded-3;
+    width:96px;
     &:hover {
         color: $black;
         opacity: 100%;

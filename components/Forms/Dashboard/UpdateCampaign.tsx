@@ -229,7 +229,7 @@ export default function UpdateCampaign() {
               <h3>Groupshop Product</h3>
             </Col>
           </Row>
-          <Row>
+          <Row className="mt-2">
             <Col>
               <Form noValidate onSubmit={handleSubmit}>
                 <section className={styles.dashboard_campaign__box_1}>
@@ -238,8 +238,8 @@ export default function UpdateCampaign() {
                       Select and add products to Groupshop
                     </h4>
                   </Row>
-                  <Row className="text-muted"><h6>Customers can get discounts on the products selected below</h6></Row>
-                  <Row className="mt-2">
+                  <Row className="text-muted"><p>Customers can get discounts on the products selected below</p></Row>
+                  <Row>
                     <Col>
                       <Form.Check
                         inline
@@ -308,7 +308,7 @@ export default function UpdateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
+                  <Row className="text-muted"><p>Select the products that customers can add to personalize their Groupshop</p></Row>
                   <Row className="text-start">
                     <Col>
                       <AddProductButton />
@@ -327,7 +327,7 @@ export default function UpdateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted"><h6>When enabled, customers can access discounts from existing Groupshop pages</h6></Row>
+                  <Row className="text-muted"><p>When enabled, customers can access discounts from existing Groupshop pages</p></Row>
                   <Row className="mt-2">
                     {/* <Col xs={3} md={4}> </Col> */}
                     <Col xs={12} md={6} className="text-right">
@@ -348,7 +348,7 @@ export default function UpdateCampaign() {
                         >
                           <Check2Circle className="fs-4" />
                           {' '}
-                          Enabled
+                          Enable
                         </ToggleButton>
                         <ToggleButton
                           variant="outline-danger"
@@ -363,7 +363,7 @@ export default function UpdateCampaign() {
                         >
                           <XCircle className="fs-5" />
                           {' '}
-                          Disabled
+                          Disable
                         </ToggleButton>
 
                       </ToggleButtonGroup>
@@ -378,7 +378,7 @@ export default function UpdateCampaign() {
 
         </Col>
         <Col lg={5} className="mt-4">
-          <Row>
+          <Row className="mb-2">
             <Col>
               <h3>Campaign Rewards</h3>
             </Col>
@@ -387,10 +387,9 @@ export default function UpdateCampaign() {
           <UpdateRewards />
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-2">
         <Col><h3>Groupshop Design</h3></Col>
       </Row>
-
       <Row className="mt-2">
         <Col lg={7}>
           <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>

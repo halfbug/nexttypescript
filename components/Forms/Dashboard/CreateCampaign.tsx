@@ -204,7 +204,7 @@ export default function CreateCampaign() {
       });
       const newObj = campObj.data.createCampaign;
       dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: newObj } });
-      const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      const updatedCampaigns = store?.campaigns?.map((item: any) => {
         if (item.id === newObj.id) {
           return newObj;
         }
@@ -268,12 +268,12 @@ export default function CreateCampaign() {
                 <h3>Setup</h3>
               </Col>
             </Row>
-            <section className={styles.dashboard_campaign__box_1}>
+            <section className={['mt-2', styles.dashboard_campaign__box_1].join(' ')}>
               <Row><h4>Name your Groupshop campaign</h4></Row>
-              <Row className="text-muted"><h6>You won’t be able to change this later. This name isn’t used on anything your customers will see.</h6></Row>
-              <Row className="mt-2">
+              <Row className="text-muted"><p>You won’t be able to change this later. This name isn’t used on anything your customers will see.</p></Row>
+              <Row className="d-flex  col-lg-10">
                 <Col lg={9}>
-                  <Form.Group className="mb-2" controlId="campainNameValidation">
+                  <Form.Group className="mb-2 me-0" controlId="campainNameValidation">
                     <Form.Control
                       type="text"
                       placeholder="My first campaign..."
@@ -282,14 +282,14 @@ export default function CreateCampaign() {
                       onChange={(e) => handleChange(e)}
                       onClick={(e) => setValue('name', e.currentTarget.value)}
                       isInvalid={touched.name && !!errors.name}
-                      // onBlur={errors.name}
+                    // onBlur={errors.name}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.name}
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col lg={3}>
+                <Col lg={3} className="mx-0 mt-1 text-start">
                   <Form.Text className="text-muted">
                     {values.name?.length}
                     /20
@@ -307,7 +307,7 @@ export default function CreateCampaign() {
                 <h3>Groupshop Product</h3>
               </Col>
             </Row>
-            <Row>
+            <Row className="mt-2">
               <Col>
                 <section className={styles.dashboard_campaign__box_1}>
                   <Row>
@@ -319,8 +319,8 @@ export default function CreateCampaign() {
                       add products to Groupshop
                     </h4>
                   </Row>
-                  <Row className="text-muted"><h6>Customers can get discounts on the products selected below</h6></Row>
-                  <Row className="mt-2">
+                  <Row className="text-muted"><p>Customers can get discounts on the products selected below</p></Row>
+                  <Row>
                     <Col>
                       <Form.Check
                         inline
@@ -372,9 +372,9 @@ export default function CreateCampaign() {
                     disableBtn={disableBtn}
                   // totalProducts={(values.products?.length) ? values.products?.length : 0}
                   />
-                  <Row className="mt-4">
+                  <Row className="mt-4 border-top">
                     <Col>
-                      <h4>
+                      <h4 className="mt-3">
                         Allow customers to add products from your store
                         {' '}
                         {' '}
@@ -382,7 +382,12 @@ export default function CreateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted mb-2"><h6>Select the products that customers can add to personalize their Groupshop</h6></Row>
+                  <Row>
+                    <p>
+                      Select the products that customers can add to
+                      personalize their Groupshop
+                    </p>
+                  </Row>
                   <Row className="text-start">
                     <Col>
                       <AddProductButton />
@@ -402,8 +407,13 @@ export default function CreateCampaign() {
                       </h4>
                     </Col>
                   </Row>
-                  <Row className="text-muted w-75"><h6>When enabled, customers will be given the option to join an existing Groupshop on the info pop-up.</h6></Row>
-                  <Row className="mt-2">
+                  <Row>
+                    <p>
+                      When enabled, customers will be given the option to
+                      join an existing Groupshop on the info pop-up.
+                    </p>
+                  </Row>
+                  <Row>
                     {/* <Col xs={3} md={4}> </Col> */}
                     <Col xs={12} md={6} className="text-right">
 
@@ -421,7 +431,7 @@ export default function CreateCampaign() {
                         >
                           <Check2Circle className="fs-4" />
                           {' '}
-                          Enabled
+                          Enable
                         </ToggleButton>
 
                         <ToggleButton
@@ -434,7 +444,7 @@ export default function CreateCampaign() {
                         >
                           <XCircle className="fs-5" />
                           {' '}
-                          Disabled
+                          Disable
                         </ToggleButton>
 
                       </ToggleButtonGroup>
@@ -472,7 +482,7 @@ export default function CreateCampaign() {
         <Row>
           <Col><h3>Groupshop Design</h3></Col>
         </Row>
-        <Row>
+        <Row className="mt-2">
           <Col lg={7}>
             <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>
               <DBSettings
@@ -497,7 +507,7 @@ export default function CreateCampaign() {
             </section>
           </Col>
         </Row>
-        <Col lg={8} className={[styles.dashboard_campaign__lightBg].join(' ')}>
+        <Col lg={9} className={[styles.dashboard_campaign__lightBg].join(' ')}>
           <h4>Save Campaign</h4>
           <p className={styles.dashboard_campaign__light_text}>
             Save & activate this Groupshop campaign, or just save and come back to it later.
