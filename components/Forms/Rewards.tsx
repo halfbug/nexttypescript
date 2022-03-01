@@ -18,6 +18,8 @@ import styles from 'styles/Step3.module.scss';
 import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
+import Star from 'assets/images/star.svg';
+import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 
 interface IValues {
   rewards: string;
@@ -177,28 +179,24 @@ export default function Rewards() {
     <section className={styles.rewards}>
 
       <Form noValidate onSubmit={handleSubmit} className="mx-4">
-        <Row className="mt-5"><Col><h4>Adjust your target sales volume</h4></Col></Row>
-        <Row className={styles.rewards_text_lg}>
-          <Col className="text-muted mb-2">
-            Choose one of our recommended options. You can
-            {' '}
+        <Row className="mt-5"><Col><h4 className="mb-0">Adjust your target sales volume</h4></Col></Row>
+        <Row>
+          <p>
+            Choose one of our recommended options to get started. You can
             <br />
-            {' '}
-            adjust them later on in the Settings page.
-          </Col>
-        </Row>
-        <Row className="mt-2"><Col><h5>Select your desired sales volume:</h5></Col></Row>
-        <Row className={styles.rewards_text_sm}>
-          <Col className="text-muted">
-            <h6>
-              {' '}
-              We’ll set your reward tiers based on our
-              recommendations..
+            customize each percentage later on in the Settings page.
 
-            </h6>
-          </Col>
+          </p>
         </Row>
-        <Row className="mt-2 mb-2">
+        <Row><Col><h4 className="mb-0">Select your desired sales volume:</h4></Col></Row>
+        <Row>
+          <p>
+            {' '}
+            We’ll set your reward tiers based on our
+            recommendations.
+          </p>
+        </Row>
+        <Row className="mb-2">
           <Col className="text-start" id="rbtn">
 
             {salesTarget.map((starget: any, index: number) => (
@@ -221,33 +219,45 @@ export default function Rewards() {
         </Row>
         <Row className={styles.rewards__box2}>
           <Col lg={6}>
-            <div className={styles.rewards_BaseMax}>Baseline</div>
+            <div className={styles.rewards_BaseMax}>
+              Baseline
+              {' '}
+              <InfoCircle size={9} />
+            </div>
             <div className={styles.rewards__percent_btn}>{minDiscount}</div>
 
           </Col>
           <Col lg={6}>
-            <div className={styles.rewards_BaseMax}>Maximum</div>
+            <div className={styles.rewards_BaseMax}>
+              Maximum
+              {' '}
+              <InfoCircle size={9} />
+            </div>
             <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
           </Col>
 
         </Row>
 
         <Row className={styles.rewards_Generous}>
-          <Col>
-            🌟 Be generous – reward your customers the same way you reward Facebook or Google
-            for finding you leads.
-            We’ll do the math to make sure you’re always winning, and so are your customers.
+          <Col lg={1}>
+            <Star size={16} />
+          </Col>
+          <Col lg={10}>
+            Be generous – reward your customers the same
+            way you reward Facebook or Google for finding
+            you leads. We’ll do the math to make sure you’re
+            always winning, and so are your customers.
           </Col>
         </Row>
         <Row className="mt-5">
           <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 2 })}>Previous</Button>
+            <Button className={styles.rewards_btn_pre} onClick={() => setParams({ ins: 2 })}>Previous</Button>
           </Col>
           <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
             <span className="text-muted">3/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button type="submit"> Next </Button>
+            <Button className={styles.rewards_btn_pre} type="submit"> Next </Button>
           </Col>
         </Row>
       </Form>

@@ -9,23 +9,34 @@
         font-size: 14px;
         line-height: 18px;
     }
-    h5 {
-        color: $subheadingclr;
-        font-family: DM Sans;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 18px;
-    }
+
     h4 {
-        @extend .fs-4, .fw-bold, .lh-base;
-        font-family: DM Sans;
         color: $subheadingclr;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
     }
     p {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: normal;
         font-size: 14px;
-        margin-left: 60px;
+        line-height: 18px;
+        color: #1d2329;
+        opacity: 0.5;
     }
-
+    &_btn_pre {
+        width: 124px;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+        color: #282828;
+    }
     &__radio {
         @extend .d-flex, .justify-content-end, .align-items-end, .p-0, .m-1;
         // & + label {
@@ -99,11 +110,12 @@
 
     &_Generous {
         @extend .mt-3;
-        font-family: DM Sans;
+        font-family: Mulish;
         font-style: normal;
-        font-weight: normal;
+        font-weight: 400;
         font-size: 12px;
-        line-height: 16px;
+        line-height: 15px;
+        color: #1d2329;
     }
 
     &__percent_btn {
@@ -127,8 +139,9 @@
         margin-top: 15px;
     }
     &__box2 {
-        @extend .my-3, .p-2, .mx-1;
+        @extend .my-3, .p-2;
         width: 248px;
+        margin-left: 1px;
         border: 1px dashed #f28bf4;
         box-sizing: border-box;
         border-radius: 18px;
@@ -136,10 +149,11 @@
 }
 .low_btn {
     @include button-variant($low, $low);
-    @extend .me-1, .px-1, .py-1, .lh-sm, .text-end;
+    @extend .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 66px;
+    margin-right: 1.25px;
     border-radius: 8px !important;
     &:hover {
         color: $white;
@@ -159,10 +173,11 @@
 }
 .avg_btn {
     @include button-variant($average, $average);
-    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
+    @extend .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 75px;
+    margin-right: 1.25px;
     border-radius: 8px !important;
     &:hover {
         color: $white;
@@ -183,10 +198,11 @@
 
 .high_btn {
     @include button-variant($btnhigh, $btnhigh);
-    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
+    @extend.px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 75px;
+    margin-right: 1.25px;
     border-radius: 8px !important;
     &:hover {
         color: $white;
@@ -207,10 +223,11 @@
 
 .super_btn {
     @include button-variant($supercharged, $supercharged);
-    @extend .mx-1, .px-1, .py-1, .lh-sm;
+    @extend .px-1, .py-1, .lh-sm;
     color: $white;
     opacity: 50%;
     width: 100px;
+    margin-right: 1.25px;
     border-radius: 8px !important;
     &:hover {
         color: $white;

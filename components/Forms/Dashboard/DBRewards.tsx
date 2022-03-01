@@ -12,8 +12,6 @@ import {
   Form, Row, Col, ButtonGroup, ToggleButton, Button,
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
-import { useFormik, FormikProps, FormikHelpers } from 'formik';
-import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import styles from 'styles/Campaign.module.scss';
