@@ -126,7 +126,7 @@ export default function DBRewards({
       <Row className={styles.dbrewards_text_lg}>
         <p>
           We’ll set your reward tiers based on our
-          recommendations...
+          recommendations.
         </p>
       </Row>
       <Row>
