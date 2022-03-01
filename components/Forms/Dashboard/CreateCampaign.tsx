@@ -1,8 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable dot-notation */
-/* eslint-disable quotes */
-/* eslint-disable jsx-quotes */
-/* eslint-disable max-len */
 import * as React from 'react';
 import {
   Form, Row, Col, ToggleButtonGroup, ToggleButton, Container, Button,
@@ -66,10 +61,10 @@ export default function CreateCampaign() {
   });
   const { clearNewCampaign } = useCampaign();
   React.useEffect(() => {
-    console.log("IM IN CREATE HOOK");
+    // console.log('IM IN CREATE HOOK');
 
     clearNewCampaign();
-    dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: "" } });
+    dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: '' } });
   }, []);
   const { multiple5, isMultiple5 } = useUtilityFunction();
 
@@ -91,7 +86,7 @@ export default function CreateCampaign() {
     minDiscount: yup
       .number()
       .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
-      .test("diff", constant.EDIT_REWARDS_MSG1,
+      .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
             // console.log(context);
@@ -99,7 +94,7 @@ export default function CreateCampaign() {
           }
           return true;
         })
-      .test("multiple", constant.EDIT_REWARDS_MSG3,
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;
@@ -109,7 +104,7 @@ export default function CreateCampaign() {
     maxDiscount: yup
       .number()
       .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
-      .test("diff", constant.EDIT_REWARDS_MSG1,
+      .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
             // console.log(context);
@@ -117,7 +112,7 @@ export default function CreateCampaign() {
           }
           return true;
         })
-      .test("multiple", constant.EDIT_REWARDS_MSG3,
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
             return true;
@@ -145,9 +140,9 @@ export default function CreateCampaign() {
         tiktok, facebook, twitter, addableProducts, maxDiscountVal, minDiscountVal,
         minDiscount, maxDiscount, isRewardEdit,
       } = valz;
-      console.log({ valz });
+      // console.log({ valz });
       let { media } = valz;
-      if (customBg) media = "";
+      if (customBg) media = '';
       const newSelectedTarget = { ...selectedTarget };
 
       if (isRewardEdit) {
@@ -159,20 +154,20 @@ export default function CreateCampaign() {
         const superBaseline = 25;
 
         if (baseline! <= lowBaseline) {
-          newSelectedTarget.name = "Low";
+          newSelectedTarget.name = 'Low';
         } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
-          newSelectedTarget.name = "Average";
+          newSelectedTarget.name = 'Average';
         } else if (baseline! >= highBaseline && baseline! < superBaseline) {
-          newSelectedTarget.name = "High";
+          newSelectedTarget.name = 'High';
         } else if (baseline! >= superBaseline) {
-          newSelectedTarget.name = "Super-charged";
+          newSelectedTarget.name = 'Super-charged';
         }
         const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
         newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
           { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },
           { ...newSelectedTarget.rewards[2], discount: maxDiscountVal }];
 
-        console.log({ valz });
+        // console.log({ valz });
       }
 
       const campObj: null | any = await addCampaign({
@@ -234,7 +229,7 @@ export default function CreateCampaign() {
     }
   }, [ins]);
 
-  console.log({ store });
+  // console.log({ store });
 
   const handleCustomBg = (field: string, value: string) => {
     // empty other bg and keep only one
@@ -258,7 +253,7 @@ export default function CreateCampaign() {
     setParams({ ins: 'addproduct' });
   };
   const { setValue } = useUtilityFunction();
-  console.log({ store });
+  // console.log({ store });
   // console.log("//////////////////");
 
   return (
@@ -276,7 +271,7 @@ export default function CreateCampaign() {
             <section className={styles.dashboard_campaign__box_1}>
               <Row><h4>Name your Groupshop campaign</h4></Row>
               <Row className="text-muted"><h6>You won’t be able to change this later. This name isn’t used on anything your customers will see.</h6></Row>
-              <Row className='mt-2'>
+              <Row className="mt-2">
                 <Col lg={9}>
                   <Form.Group className="mb-2" controlId="campainNameValidation">
                     <Form.Control
@@ -367,7 +362,7 @@ export default function CreateCampaign() {
                         value="custom"
                         checked={values.criteria === 'custom'}
                       />
-                      {/* {values.criteria === 'bestseller' ? setdisableBtn(false) : setdisableBtn(true)} */}
+
                     </Col>
                     <Form.Control.Feedback type="invalid">
                       {errors.criteria}
@@ -502,9 +497,11 @@ export default function CreateCampaign() {
             </section>
           </Col>
         </Row>
-        <Col lg={7} className={[styles.dashboard_campaign__lightBg].join(' ')}>
+        <Col lg={8} className={[styles.dashboard_campaign__lightBg].join(' ')}>
           <h4>Save Campaign</h4>
-          <p className={styles.dashboard_campaign__light_text}>Save & activate this Groupshop campaign, or just save and come back to it later.</p>
+          <p className={styles.dashboard_campaign__light_text}>
+            Save & activate this Groupshop campaign, or just save and come back to it later.
+          </p>
           <WhiteButton
             type="submit"
             onClick={(e) => {
@@ -530,7 +527,4 @@ export default function CreateCampaign() {
       </Form>
     </Container>
   );
-}
-function useEffect(arg0: () => void) {
-  throw new Error('Function not implemented.');
 }
