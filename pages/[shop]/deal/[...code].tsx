@@ -117,8 +117,10 @@ const GroupShop: NextPage = () => {
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
   const handleAddProduct = () => {
-    const cprod = clientDealProducts()?.length || 0;
-    if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
+    if (gsctx?.totalProducts < 101) {
+      const cprod = clientDealProducts()?.length || 0;
+      if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
+    } else showError('Groupshop is full you can not add more products to it');
   };
 
   // if (error) {

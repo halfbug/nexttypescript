@@ -60,19 +60,19 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
+      console.log('🚀 ~ file: AddDealProduct.tsx ~ line 63 ~ onSubmit: ~ products', products);
 
       // merge selected products with groupshop deal prodcuts
 
-      const clientDealProducts: DealProduct[] = [...products?.map((productId) => {
-        const product:DealProduct = {
-          productId, addedBy: username, customerIP: clientIP, type: 'deal',
-        };
-        return product;
-      }) || []];
-
-      const dealProducts : DealProduct[] = Array.from(new Set(
-        [...dealProductsCtx || [], ...clientDealProducts],
-      ));
+      const dealProducts = products?.map(
+        (productId) => {
+          const preProduct = dealProductsCtx?.find((prd) => prd.productId === productId);
+          const newProduct:DealProduct = {
+            productId, addedBy: username, customerIP: clientIP, type: 'deal',
+          };
+          return preProduct ?? newProduct;
+        },
+      );
 
       await addDealProduct({
         variables: {
