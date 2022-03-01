@@ -41,20 +41,20 @@ export default function BillingCalculator() {
   return (
     <section className={styles.billing}>
       <Form noValidate onSubmit={handleSubmit}>
-        <Row className="w-75">
+        <Row>
           <Col className={styles.billing_calculator_rectangle}>
             <Row>
               <Col><h5>Estimate your monthly cost</h5></Col>
             </Row>
             <Row>
-              <Col className='text-muted'>Enter your store’s average sales volume per month to estimate your cost.</Col>
+              <p className='text-muted mb-2'>Enter your store’s average sales volume per month to estimate your cost.</p>
             </Row>
             <Row>
-              <Col className=''><h6>Average number of orders per month</h6></Col>
+              <Col className={styles.billing_averageline}>Average number of orders per month</Col>
             </Row>
             <Row>
-              <Col className=''>
-                <Form.Group className="col-11" controlId="brandNamevalidation">
+              <Col lg={4}>
+                <Form.Group className="" controlId="brandNamevalidation">
                   <Form.Control
                     type="text"
                     name="nooforder"
@@ -72,8 +72,21 @@ export default function BillingCalculator() {
             </Row>
             <Row>
               <Col>
-                <Slider label='Explore' />
+                <Slider />
               </Col>
+              {/* <input
+                id="ex22"
+                type="text"
+                data-slider-id="slider22"
+                data-slider-min="0"
+                data-slider-max="5000"
+                data-slider-step="1"
+                data-slider-value="14"
+                data-slider-rangeHighlights='[{ "start": 0, "end": 100, "class": "category1" },
+                                   { "start": 101, "end": 1000, "class": "category2" },
+                                   { "start": 1001, "end": 2500 },
+                                   { "start": 2500, "end": 5000 }]'
+              /> */}
             </Row>
           </Col>
         </Row>

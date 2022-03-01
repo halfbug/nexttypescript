@@ -6,7 +6,7 @@ export default {
   title: 'Components/Slider',
   component: Slider,
 } as ComponentMeta<typeof Slider>;
-const Template: ComponentStory<typeof Slider> = (args) => <Slider {...args} />;
+const Template: ComponentStory<typeof Slider> = () => <Slider />;
 
 export const Default = Template.bind({});
 Default.args = {

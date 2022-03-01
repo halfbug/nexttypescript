@@ -1,16 +1,310 @@
 @import "./variables.scss";
-.billing{
+.billing {
+    // @extend .d-flex, .mt-2, .px-0;
+    @extend .mt-3, .py-0, .d-flex, .px-0;
     &_calculator_rectangle {
-        @extend .mb-5, .p-4;
-        border: 1px dashed #F7BC7D;
+        @extend .mt-2, .p-4, .w-100;
+        border: 1px dashed #f7bc7d;
         box-sizing: border-box;
+        width: 756px;
         border-radius: 23px;
     }
-    &_border_text_rectangle{
-        border: 1px dashed #F28BF4;
-        width: 424px;
+    &_border_text_rectangle {
+        border: 1px dashed #f28bf4;
         height: 51px;
         box-sizing: border-box;
         border-radius: 10px;
+    }
+    &_first_tier {
+        width: 137px;
+        height: 21px;
+        background: #A68AD6;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0px;
+        span {
+        /* for text */
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 13px;
+        color: #FFFFFF;
+        margin: auto; 
+        padding: auto; 
+        }
+}
+    &_second_tier {
+        width: 137px;
+        height: 21px;
+        background: #F28BF4;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0px;
+        span {
+            /* for text */
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 13px;
+            color: #FFFFFF;
+            margin: auto; 
+            padding: auto; 
+            }
+        }
+    &_third_tier {
+        width: 137px;
+        height: 21px;
+        background: #F8C48D;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0px;
+        span {
+            /* for text */
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 13px;
+            color: #FFFFFF;
+            margin: auto; 
+            padding: auto; 
+            }
+        }
+    &_fourth_tier {
+        width: 137px;
+        height: 21px;
+        background: #D5FA52;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0px;
+        span {
+            /* for text */
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 13px;
+            color: #FFFFFF;
+            margin: auto; 
+            padding: auto; 
+            }
+        }
+
+    h5 {
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
+        color: #1d2329;
+    }
+
+    p {
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &_averageline {
+        @extend .my-2;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        /* identical to box height */
+
+        color: #1d2329;
+    }
+    &_bulbinfo {
+        h5 {
+            @extend .pt-2, .text-nowrap;
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+            color: #1d2329;
+        }
+        &_box_4 {
+            @extend .p-3, .mt-0;
+            border: 1px dashed $dotted-border-color4;
+            border-radius: 18px;
+            margin: 4px;
+        }
+    }
+
+    .letsgo {
+        h3 {
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 29px;
+            color: $black;
+        }
+        &__box {
+            @extend .border, .p-3, .w-100, .shadow-sm, .mt-4;
+            border-radius: 10px;
+
+            &:first-child {
+                border-color: #ccb2f9 !important;
+                border-width: 2px !important;
+                @extend .gradient-box;
+            }
+            &_heading {
+                font-family: Mulish;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 23px;
+            }
+            &_logo {
+                @extend .mb-0;
+                margin-left: -6%;
+            }
+            &_detil {
+                font-family: Mulish;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 23px;
+            }
+            &_col1 {
+                @extend .d-flex, .align-items-center, .flex-column, .justify-content-center, .border-end;
+            }
+            &_col2 {
+                @extend .d-flex, .flex-column;
+                p {
+                    @extend .pb-0, .mb-0;
+                }
+            }
+        }
+    }
+
+    .box_row {
+        @extend .d-flex, .mt-3;
+
+        &_boxheading {
+            @extend .text-center;
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 29px;
+        }
+        .box_1 {
+            @extend .mb-2, .p-4, .mt-0;
+            border: 1px dashed $dotted-border-color1;
+            border-radius: 18px;
+            margin: 7px;
+            width: 242px;
+            border-color: #a68ad6;
+            height: 161px;
+
+            &:hover {
+                @extend .box_1;
+                border: 3px solid $dotted-border-color1;
+                border-color: $dotted-border-color1;
+            }
+        }
+
+        .box_2 {
+            @extend .mb-2, .p-4, .mt-0;
+            border: 1px dashed $dotted-border-color2;
+            border-radius: 18px;
+            margin: 7px;
+            width: 242px;
+            height: 161px;
+            &:hover {
+                @extend .box_2;
+                border: 3px solid $dotted-border-color1;
+                border-color: $dotted-border-color2;
+            }
+        }
+
+        .box_3 {
+            @extend .mb-2, .p-4, .mt-0;
+            border: 1px dashed $OBorange;
+            border-radius: 18px;
+            margin: 7px;
+            width: 242px;
+            height: 161px;
+            &:hover {
+                @extend .box_3;
+                border: 3px solid $OBorange;
+                border-color: $OBorange;
+            }
+        }
+
+        .box_4 {
+            @extend .mb-2, .p-4, .mt-0;
+            border: 1px dashed $dotted-border-color4;
+            border-radius: 18px;
+            margin: 7px;
+            width: 242px;
+            height: 161px;
+            &:hover {
+                @extend .box_3;
+                border: 3px solid $dotted-border-color4;
+                border-color: $dotted-border-color4;
+            }
+        }
+
+        .side_box {
+            @extend .mb-3, .p-4;
+            width: 242px;
+            height: 161px;
+            left: 790px;
+            top: 300px;
+            margin: 7px;
+            border: 2px dashed #a68ad6;
+            box-sizing: border-box;
+            border-radius: 23px;
+        }
+        & .btn {
+            @extend .py-1, .m-2, .text-nowrap, .d-flex, .px-2;
+            background: #d5fa52;
+            justify-content: center;
+            align-self: center;
+            border-radius: 6px;
+            border: none;
+            outline: none;
+            text-align: center;
+            align-items: center;
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            /* identical to box height, or 125% */
+
+            text-align: center;
+        }
+        & .free {
+            @extend .py-1, .m-2, .d-flex, .justify-content-center;
+            width: 45px;
+            border-radius: 6px;
+            text-align: center;
+            justify-content: center;
+            align-self: center;
+            border: none;
+            background-color: #d5fa52;
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+        }
+        & h2 {
+            text-align: center;
+            margin-top: 15px;
+        }
+        & p {
+            text-align: center;
+            margin-top: 15px;
+            font-family: DM Sans;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 15px;
+        }
     }
 }
