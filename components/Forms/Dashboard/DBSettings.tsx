@@ -74,9 +74,7 @@ export default function DBSettings({
 
     <>
       <Row><h4 className="mb-0">Set your brand color</h4></Row>
-      <Row>
-        <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
-      </Row>
+      <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
       <Row className="">
         <Col lg={12}>
           <Form.Group className="d-flex ">
@@ -106,12 +104,10 @@ export default function DBSettings({
         </Col>
       </Row>
       <Row className="mt-4 mb-0"><h4>Select a banner background</h4></Row>
-      <Row>
-        <Form.Text>
-          <p className="mt-0">This will serve as the banner for your Groupshop page</p>
-          {' '}
-        </Form.Text>
-      </Row>
+      <Form.Text>
+        <p className="mt-0">This will serve as the banner for your Groupshop page</p>
+        {' '}
+      </Form.Text>
 
       <Row className="border rounded px-1 py-3 mx-1">
         <Col md={6}>
