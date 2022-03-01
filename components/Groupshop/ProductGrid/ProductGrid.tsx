@@ -123,7 +123,7 @@ const ProductGrid = ({
                 {' '}
                 <span>
                   {currencySymbol}
-                  {dPrice(+(prod.price)).toFixed(1)}
+                  {dPrice(+(prod.price)).toFixed(2)}
                 </span>
               </h5>
               <Button

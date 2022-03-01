@@ -25,9 +25,7 @@ export default function useDeal() {
 
   const discount = gsctx?.discountCode?.percentage;
 
-  const dPrice = useCallback((price: number) => Math.round(
-    price - ((+discount / 100) * price),
-  ), [gsctx]);
+  const dPrice = useCallback((price: number) => price - ((+discount / 100) * price), [gsctx]);
 
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
