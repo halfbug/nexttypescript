@@ -7,7 +7,7 @@ import useQueryString from 'hooks/useQueryString';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS, TOTAL_PRODUCTS, GET_PRODUCTS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
-import { XCircleFill } from 'react-bootstrap-icons';
+import { XCircle } from 'react-bootstrap-icons';
 import useCampaign from 'hooks/useCampaign';
 import IconButton from '../IconButton';
 import DeleteButton from '../DeleteButton';
@@ -96,37 +96,41 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   // console.log({ campaign });
   return (
     <>
-      <Row className="mt-3 justify-content-center">
-        <Col>
+      <Row className="mt-3">
+        <Col lg={4}>
           <RButton
             variant="outline-primary"
             onClick={handleEditProduct}
             disabled={disableBtn}
+            className="text-nowrap"
           >
             Edit products/collections
           </RButton>
 
         </Col>
-      </Row>
-      { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
+        <Col lg={8} className="d-flex align-items-center justify-content-start">
+          { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
       // || (totalProducts !== 0 && criteria === 'custom'))
       || (campaign?.products?.length && campaign?.criteria === 'custom')
       // || (newcampaign?.products?.length)
-      )
+          )
       && (
-      <Row className="m-2 justify-content-center">
-        <Col className="text-muted">
+      <Row className=" justify-content-start">
+        <Col>
           {(newCampaign?.products?.length)
           || (campaign?.products?.length)}
+          {' '}
           product(s)/
           {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
           {' '}
           collection(s) selected
           {' '}
-          <DeleteButton icon={<XCircleFill className="text-muted" />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
+          <DeleteButton icon={<XCircle />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
         </Col>
       </Row>
       )}
+        </Col>
+      </Row>
     </>
   );
 }
