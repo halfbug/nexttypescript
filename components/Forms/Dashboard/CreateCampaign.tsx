@@ -271,9 +271,9 @@ export default function CreateCampaign() {
             <section className={['mt-2', styles.dashboard_campaign__box_1].join(' ')}>
               <Row><h4>Name your Groupshop campaign</h4></Row>
               <Row className="text-muted"><p>You won’t be able to change this later. This name isn’t used on anything your customers will see.</p></Row>
-              <Row className="d-flex  col-lg-10">
-                <Col lg={9}>
-                  <Form.Group className="mb-2 me-0" controlId="campainNameValidation">
+              <Row>
+                <Col lg={10} className="d-flex ">
+                  <Form.Group className="col-9 mb-2 " controlId="campainNameValidation">
                     <Form.Control
                       type="text"
                       placeholder="My first campaign..."
@@ -282,18 +282,21 @@ export default function CreateCampaign() {
                       onChange={(e) => handleChange(e)}
                       onClick={(e) => setValue('name', e.currentTarget.value)}
                       isInvalid={touched.name && !!errors.name}
-                    // onBlur={errors.name}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.name}
                     </Form.Control.Feedback>
                   </Form.Group>
-                </Col>
-                <Col lg={3} className="mx-0 mt-1 text-start">
-                  <Form.Text className="text-muted">
+                  <Form.Text className={['col-3 mt-2 mx-2', styles.dashboard_campaign_text_limit].join(' ')}>
                     {values.name?.length}
                     /20
                   </Form.Text>
+                  {/* <Col lg={3} className="mx-0 mt-1 text-start">
+                  <Form.Text className={styles.dashboard_campaign_text_limit}>
+                    {values.name?.length}
+                    /20
+                  </Form.Text>
+                </Col> */}
                 </Col>
               </Row>
             </section>
@@ -319,10 +322,9 @@ export default function CreateCampaign() {
                       add products to Groupshop
                     </h4>
                   </Row>
-                  <Row>
+                  <Row className="text-muted">
                     <p>
-                      Customers get cashback and discounts on the products
-                      selected below by default
+                      Customers can get discounts on the products selected below
                     </p>
                   </Row>
                   <Row>

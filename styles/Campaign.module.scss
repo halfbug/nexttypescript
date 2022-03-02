@@ -35,6 +35,15 @@
         color: #1d2329;
         opacity: 0.5;
     }
+    &_text_limit {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: #1d2329;
+        opacity: 0.5;
+    }
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
@@ -268,7 +277,7 @@
 
 .enablebtn {
     @extend .rounded-3, .me-2;
-    width:96px;
+    width: 96px;
     &:hover {
         color: $white;
         opacity: 100%;
@@ -286,7 +295,7 @@
 
 .disablebtn {
     @extend .rounded-3;
-    width:96px;
+    width: 96px;
     &:hover {
         color: $black;
         opacity: 100%;
