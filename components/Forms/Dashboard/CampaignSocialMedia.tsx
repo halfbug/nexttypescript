@@ -76,7 +76,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
         </div>
       </Row>
       <Row className="p-1 mt-2">
-        <Col lg={10}>
+        <Col lg={10} className="d-flex">
           <Form.Group className="w-100" controlId="sm">
             <Form.Control
               onChange={(e) => {
@@ -95,7 +95,9 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
                 setFieldValue('pinterest', e.currentTarget.value);
               }}
               className={smUrl === 'pinterest' ? 'd-block' : 'd-none'}
-              // className="px-2"
+              // className={styles.groupshop_socialmedia_textbox}
+              // className={['smUrl === 'pinterest' ? 'd-block' : 'd-none',
+              // styles.groupshop_instagram].join(' ')}
               // id={`${smUrl}`}
               name="pinterest"
               type="text"
@@ -147,8 +149,6 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
               </Form.Control.Feedback> */}
 
           </Form.Group>
-        </Col>
-        <Col className="align-middle py-2 px-1" lg={2}>
           <IconButton
             icon={<CheckCircle size={18} color="grey" />}
             type="submit"

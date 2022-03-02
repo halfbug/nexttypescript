@@ -147,7 +147,7 @@ export default function SocialMedia() {
         </div>
       </Row>
       <Row className="p-1 mt-2">
-        <Col lg={10}>
+        <Col lg={10} className="d-flex">
           <Form.Group className="w-100" controlId="sm">
             <Form.Control
               onChange={(e) => {
@@ -218,8 +218,6 @@ export default function SocialMedia() {
               </Form.Control.Feedback> */}
 
           </Form.Group>
-        </Col>
-        <Col className="align-middle py-2 px-1" lg={2}>
           <IconButton icon={<CheckCircle size={18} color="grey" />} type="submit" onClick={() => handleSubmit} />
         </Col>
       </Row>
