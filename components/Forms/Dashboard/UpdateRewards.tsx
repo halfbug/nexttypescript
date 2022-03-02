@@ -218,7 +218,7 @@ export default function UpdateRewards() {
       <Form noValidate onSubmit={handleSubmit}>
         <Row><Col><h4>Set your rewards</h4></Col></Row>
         <Row className={styles.dbrewards_text_lg}>
-          <p>
+          <p className="mt-1">
             Set the discount and chashback percentages
             your customers will earn on their order
             as they reach different milestones.
@@ -226,7 +226,7 @@ export default function UpdateRewards() {
         </Row>
         <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
         <Row className={styles.dbrewards_text_lg}>
-          <p>
+          <p className="mt-1">
             We’ll set your reward tiers based on our
             recommendations.
           </p>

@@ -104,6 +104,7 @@
             box-shadow: none;
         }
     }
+
     &_box {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color4;
