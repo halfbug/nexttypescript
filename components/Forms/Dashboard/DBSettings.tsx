@@ -193,9 +193,13 @@ export default function DBSettings({
               <p className="text-muted">Please paste youtube video URL</p>
             </Col>
             <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
-              <Col className="text-muted align-right text-end">
-                <h6 className={styles.smallt}> Under 5mb (PNG, JPG, JPEG)</h6>
-                <h6 className={styles.smallt}> 1440px x 500px</h6>
+              <Col>
+                <h6 className={styles.smallt}>
+                  {' '}
+                  Under 5mb (PNG, JPG, JPEG)
+                  <br />
+                  1440px x 500px
+                </h6>
               </Col>
             </Row>
           </Row>
