@@ -40,13 +40,14 @@ const ProductDetail = ({
 
   // control carousel
   const [index, setIndex] = useState(0);
+  const [addedbyname, setaddedbyname] = useState<string | undefined>('');
 
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
   };
 
   const {
-    currencySymbol, dPrice, getBuyers, isExpired, discount,
+    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
   } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
@@ -63,6 +64,8 @@ const ProductDetail = ({
   // add to cart
   useEffect(() => {
     if (product) {
+      setaddedbyname(addedByName(product?.id));
+
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
@@ -187,6 +190,8 @@ const ProductDetail = ({
                      <img
                        src={img.src}
                        alt={`image_${i}`}
+                       // eslint-disable-next-line react/no-array-index-key
+                       key={`image_${i}`}
                        className={styles.groupshop_modal_detail_featureImage}
                      />
                    </Carousel.Item>
@@ -234,6 +239,13 @@ const ProductDetail = ({
                 </span>
 
               </h3>
+              {addedbyname && (
+              <div className={styles.groupshop_added_by_text}>
+                Added By
+                {' '}
+                { addedbyname }
+              </div>
+              )}
               <div className={styles.groupshop_modal_detail_height}>
                 <ShowMoreText
                 /* Default options */

@@ -66,6 +66,17 @@ export default function useDeal() {
 
   const isExpired = !(getDateDifference().time > -1);
 
+  const addedByName = useCallback((productId) => {
+    const { dealProducts } = gsctx;
+    console.log('dealProducts', dealProducts);
+    const filtered = dealProducts?.find((item) => item.productId === productId);
+    console.log('filtered', filtered);
+    console.log('productId', productId);
+
+    return filtered?.addedBy;
+  },
+  [gsctx]);
+
   return {
     currencySymbol,
     discount,
@@ -77,5 +88,6 @@ export default function useDeal() {
     topFive,
     getDateDifference,
     isExpired,
+    addedByName,
   };
 }

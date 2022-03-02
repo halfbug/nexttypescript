@@ -210,6 +210,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				right: 15px;
 				position: absolute;
 			}
+			&_addedbyname {
+				@extend .groupshop__pcard_tag;
+				// @extend .p-1, .py-2, .rounded-pill, .m-1;
+				background-color: white;
+				top: 10px;
+				// right: 15px;
+				position: absolute;
+			}
 
 			&_product {
 				@extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
@@ -609,5 +617,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			background: #dcd0e8;
 			border: 2px solid #000000;
 		}
+	}
+	&_added_by_text {
+		@extend .m-4;
+		font-family: Mulish;
+		text-transform: uppercase;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 11px;
+		line-height: 14px;
+		letter-spacing: 0.2px;
+		color: #000000;
 	}
 }
