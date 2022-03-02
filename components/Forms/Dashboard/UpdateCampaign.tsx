@@ -238,7 +238,7 @@ export default function UpdateCampaign() {
                       Select and add products to Groupshop
                     </h4>
                   </Row>
-                  <Row className="text-muted"><p>Customers can get discounts on the products selected below</p></Row>
+                  <Row><p>Customers get cashback and discounts on the products selected below by default</p></Row>
                   <Row>
                     <Col>
                       <Form.Check
