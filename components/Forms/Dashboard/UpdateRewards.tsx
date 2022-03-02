@@ -287,7 +287,7 @@ export default function UpdateRewards() {
                 isInvalid={touched.minDiscount && !!errors.minDiscount}
                 placeholder="Enter %"
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
                 {errors.minDiscount}
               </Form.Control.Feedback>
 
@@ -321,7 +321,7 @@ export default function UpdateRewards() {
                 isInvalid={touched.maxDiscount && !!errors.maxDiscount}
                 placeholder="Enter %"
               />
-              <Form.Control.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
                 {errors.maxDiscount}
               </Form.Control.Feedback>
               <Button variant="link" type="submit">Save</Button>

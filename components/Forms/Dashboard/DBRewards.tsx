@@ -178,7 +178,7 @@ export default function DBRewards({
               isInvalid={!!errors.minDiscount}
               placeholder="Enter %"
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
               {errors.minDiscount}
             </Form.Control.Feedback>
 
@@ -221,7 +221,7 @@ export default function DBRewards({
               isInvalid={!!errors.maxDiscount}
               placeholder="Enter %"
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
               {errors.maxDiscount}
             </Form.Control.Feedback>
             <Button

@@ -104,7 +104,15 @@
             box-shadow: none;
         }
     }
-
+    &_error {
+        @extend .text-nowrap;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        color: #ff0000;
+    }
     &_box {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color4;
