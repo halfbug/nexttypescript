@@ -35,15 +35,18 @@
         color: #1d2329;
         opacity: 0.5;
     }
-    &_text_limit {
-        font-family: Mulish;
+
+    &_radio_label {
+        font-family: DM Sans;
         font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 15px;
+        font-weight: 500;
+        font-size: 14px;
         color: #1d2329;
-        opacity: 0.5;
+        :active,:focus{
+            font-weight: 700;
+        }
     }
+    
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;

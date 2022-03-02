@@ -244,6 +244,7 @@ export default function UpdateCampaign() {
                       <Form.Check
                         inline
                         label="Best sellers"
+                        className={styles.dashboard_campaign_radio_label}
                         onChange={(e) => {
                           handleChange(e);
                           handleSubmit();
@@ -262,6 +263,7 @@ export default function UpdateCampaign() {
                           handleSubmit();
                         }}
                         label="Newest products"
+                        className={styles.dashboard_campaign_radio_label}
                         type="radio"
                         name="criteria"
                         value="newest"
@@ -276,6 +278,7 @@ export default function UpdateCampaign() {
                       <Form.Check
                         inline
                         label="Specific products/collections (up to 80 products)"
+                        className={styles.dashboard_campaign_radio_label}
                         onChange={(e) => {
                           handleChange(e);
                           handleSubmit();

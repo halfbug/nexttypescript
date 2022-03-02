@@ -332,6 +332,7 @@ export default function CreateCampaign() {
                       <Form.Check
                         inline
                         label="Best sellers"
+                        className={styles.dashboard_campaign_radio_label}
                         onChange={(e) => handleChange(e)}
                         type="radio"
                         name="criteria"
@@ -344,6 +345,7 @@ export default function CreateCampaign() {
                         inline
                         onChange={(e) => handleChange(e)}
                         label="Newest products"
+                        className={styles.dashboard_campaign_radio_label}
                         type="radio"
                         name="criteria"
                         value="newest"
@@ -358,6 +360,7 @@ export default function CreateCampaign() {
                       <Form.Check
                         inline
                         label="Specific products/collections (up to 80 products)"
+                        className={styles.dashboard_campaign_radio_label}
                         onChange={(e) => handleChange(e)}
                         onClick={() => {
                           setdisableBtn(false);
