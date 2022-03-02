@@ -2,7 +2,11 @@
 
 .dashboard_campaign {
     @extend .mt-2, .px-0;
-
+    ::-webkit-input-placeholder {
+        color: #161414;
+        opacity: 0.1;
+        background-color: #FCFCFC;
+    }
     h3 {
         @extend .px-0, .mt-2;
         font-family: DM Sans;
