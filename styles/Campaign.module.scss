@@ -5,7 +5,7 @@
     ::-webkit-input-placeholder {
         color: #161414;
         opacity: 0.1;
-        background-color: #FCFCFC;
+        background-color: #fcfcfc;
     }
     h3 {
         @extend .px-0, .mt-2;
@@ -46,11 +46,12 @@
         font-weight: 500;
         font-size: 14px;
         color: #1d2329;
-        :active,:focus{
+        :active,
+        :focus {
             font-weight: 700;
         }
     }
-    
+
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
@@ -91,6 +92,17 @@
         color: #1d2329;
         opacity: 0.5;
     }
+
+    &_text_limit {
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 15px;
+        color: $subheadingclr;
+        opacity: 0.5;
+    }
+
     &__lightBg {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
