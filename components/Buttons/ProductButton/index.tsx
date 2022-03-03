@@ -97,7 +97,7 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   return (
     <>
       <Row className="mt-3">
-        <Col lg={4}>
+        <Col lg={6}>
           <RButton
             variant="outline-primary"
             onClick={handleEditProduct}
@@ -108,7 +108,7 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
           </RButton>
 
         </Col>
-        <Col lg={8} className="d-flex align-items-center justify-content-start">
+        <Col lg={6} className="d-flex align-items-center justify-content-start">
           { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
       // || (totalProducts !== 0 && criteria === 'custom'))
       || (campaign?.products?.length && campaign?.criteria === 'custom')

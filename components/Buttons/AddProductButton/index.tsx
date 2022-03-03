@@ -77,7 +77,7 @@ export default function AddProductButton() {
   return (
     <>
       <Row className="">
-        <Col lg={3}>
+        <Col lg={6}>
           <RButton
             variant="outline-primary"
             onClick={handleAddProduct}
@@ -88,7 +88,7 @@ export default function AddProductButton() {
           </RButton>
 
         </Col>
-        <Col lg={9} className="d-flex align-items-center justify-content-start">
+        <Col lg={6} className="d-flex align-items-center justify-content-start">
           { (newCampaign?.addableProducts?.length || campaign?.addableProducts?.length)
       && (
       <Row className=" justify-content-start">

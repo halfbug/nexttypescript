@@ -283,7 +283,7 @@ export default function CreateCampaign() {
                       onClick={(e) => setValue('name', e.currentTarget.value)}
                       isInvalid={touched.name && !!errors.name}
                     />
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
                       {errors.name}
                     </Form.Control.Feedback>
                   </Form.Group>
