@@ -41,13 +41,14 @@ const ProductDetail = ({
   // control carousel
   const [index, setIndex] = useState(0);
   const [addedbyname, setaddedbyname] = useState<string | undefined>('');
+  const [cashBack, setCashBack] = useState<number>(0);
 
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
   };
 
   const {
-    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
+    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName, totalCashBack,
   } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
@@ -65,6 +66,9 @@ const ProductDetail = ({
   useEffect(() => {
     if (product) {
       setaddedbyname(addedByName(product?.id));
+      setCashBack(totalCashBack(product));
+      console.log(totalCashBack(product));
+      console.log('///////////////');
 
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
@@ -237,14 +241,24 @@ const ProductDetail = ({
                   {currencySymbol}
                   {dPrice(+(product?.price || 0)).toFixed(1)}
                 </span>
+                {cashBack && (
+                <span className={styles.groupshop_added_by_text}>
+                  Plus up to
+                  {' '}
+                  $
+                  { cashBack }
+                  {' '}
+                  cashback
+                </span>
+                )}
 
               </h3>
               {addedbyname && (
-              <div className={styles.groupshop_added_by_text}>
+              <span className={styles.groupshop_added_by_text}>
                 Added By
                 {' '}
                 { addedbyname }
-              </div>
+              </span>
               )}
               <div className={styles.groupshop_modal_detail_height}>
                 <ShowMoreText

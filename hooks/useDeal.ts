@@ -66,6 +66,28 @@ export default function useDeal() {
 
   const isExpired = !(getDateDifference().time > -1);
 
+  const totalCashBack = useCallback((product) => {
+    const {
+      members, discountCode: { percentage },
+      campaign,
+    } = gsctx;
+    const rew = { ...campaign?.salesTarget?.rewards };
+    // eslint-disable-next-line radix
+    const maxdiscount: number = parseInt(rew[2].discount || '0');
+
+    let cashback: number = 0;
+    if (members.length < 5) {
+      cashback = ((maxdiscount - +(percentage)) / 100) * +(product.price);
+      cashback = +(cashback);
+      cashback = Math.floor(cashback);
+      console.log({ product });
+      console.log({ cashback });
+      console.log('.......................');
+    }
+    return cashback;
+  },
+  [gsctx]);
+
   const addedByName = useCallback((productId) => {
     const { dealProducts } = gsctx;
     console.log('dealProducts', dealProducts);
@@ -89,5 +111,6 @@ export default function useDeal() {
     getDateDifference,
     isExpired,
     addedByName,
+    totalCashBack,
   };
 }
