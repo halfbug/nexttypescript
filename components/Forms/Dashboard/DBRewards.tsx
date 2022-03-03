@@ -196,13 +196,13 @@ export default function DBRewards({
 
         </Col>
         <Col sm={6}>
+          <h4>
+            Maximum
+            {' '}
+            <InfoCircle size={15} />
+          </h4>
           {!editMax && (
           <>
-            <h4>
-              Maximum
-              {' '}
-              <InfoCircle size={15} />
-            </h4>
             <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
             <Button variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
           </>
