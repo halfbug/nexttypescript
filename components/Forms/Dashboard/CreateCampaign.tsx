@@ -324,7 +324,7 @@ export default function CreateCampaign() {
                   </Row>
                   <Row className="text-muted">
                     <p>
-                      Customers can get discounts on the products selected below
+                      Customers get cashback and discounts on the products selected below by default
                     </p>
                   </Row>
                   <Row>
