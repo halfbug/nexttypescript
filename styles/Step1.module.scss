@@ -8,8 +8,52 @@
 		font-size: 14px;
 		line-height: 18px;
 		color: #161414;
-
 	}
+	::-webkit-input-placeholder {
+		opacity: 0.1;
+		background-color: #fcfcfc;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+		color: #161414;
+	}
+	&_text_limit {
+		@extend .text-muted, .mt-2, .mx-2;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 12px;
+		line-height: 15px;
+		color: $subheadingclr;
+		opacity: 0.5;
+	}
+
+	&_btn_next {
+		width: 143px;
+	}
+
+	&_select {
+		opacity: 0.1;
+		background-color: #fcfcfc;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+		color: #161414;
+	}
+
+	// &_format {
+	// 	@extend .d-flex, .align-self-center, .mx-2;
+	// 	font-family: Mulish;
+	// 	font-style: normal;
+	// 	font-weight: normal;
+	// 	font-size: 14px;
+	// 	line-height: 18px;
+	// 	text-align: center;
+	// }
 	p {
 		@extend .py-0;
 		font-family: Mulish;

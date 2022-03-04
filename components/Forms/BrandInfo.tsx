@@ -86,13 +86,11 @@ export default function BrandInfo() {
 
   return (
     <Form noValidate onSubmit={handleSubmit} className={['mx-4', styles.welcome].join(' ')}>
-      <Row className="mt-3"><h4>Enter your brand name</h4></Row>
-      <Row>
-        <p>
-          This identifies your business on your customers’ Groupshop page
-        </p>
+      <h4 className="mt-3 mb-0">Enter your brand name</h4>
+      <p>
+        This identifies your business on your customers’ Groupshop page
+      </p>
 
-      </Row>
       <Row>
         <Col lg={10} className="d-flex ">
           <Form.Group className="col-11" controlId="brandNamevalidation">
@@ -109,7 +107,7 @@ export default function BrandInfo() {
               {errors.brandName}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Text className="col-2 text-muted mt-2 mx-2">
+          <Form.Text className={['col-2', styles.welcome_text_limit].join(' ')}>
             {values.brandName.length}
             {' '}
             /20
@@ -155,7 +153,7 @@ export default function BrandInfo() {
               defaultValue=""
               value={values.industry}
             >
-              <option value="">Click to select</option>
+              <option value="" className={styles.welcome_select}>Click to select</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
@@ -172,7 +170,7 @@ export default function BrandInfo() {
           <span className="text-muted">1/4</span>
         </Col>
         <Col lg={4} className="d-flex justify-content-end ">
-          <Button type="submit"> Next </Button>
+          <Button type="submit" className={styles.welcome_btn_next}> Next </Button>
           {/* onClick={() => setParams({ ins: 2 })} */}
         </Col>
 
