@@ -8,6 +8,7 @@ import Styles from 'styles/Screen1.module.scss';
 import IconButton from 'components/Buttons/IconButton';
 import { ChevronRight } from 'react-bootstrap-icons';
 import { ICollection } from 'types/store';
+import styles2 from 'styles/product.module.scss';
 
 export interface ICollectionsProps {
     data: ICollection[] | undefined;
@@ -24,8 +25,8 @@ export default function Collections({
   return (
     <Container {...props}>
       <Row>
-        <Col xs={12} className="mt-5">
-          <h4>Collections</h4>
+        <Col xs={12} className="mt-4">
+          <h4 className={styles2.product_collection}>Collections</h4>
         </Col>
       </Row>
       <Row className="m-0">
@@ -34,21 +35,19 @@ export default function Collections({
             { data?.map(({ title, productsCount, id }) => (
               <ListGroup.Item
                 as="li"
-                className="d-flex justify-content-between align-items-center mt-1 rounded-3 border border-1"
+                className={styles2.border_listgroup}
                 key={id}
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">
-                    <Form.Check type="checkbox" inline className="fs-4" name="collections" id={id} onChange={handleChecked} checked={isChecked(id, 'collections')} />
-                    <p className="m-0">
+                    <Form.Check type="checkbox" inline className={['fs-4', styles2.product_check].join(' ')} name="collections" id={id} onChange={handleChecked} checked={isChecked(id, 'collections')} />
+                    <div className={['m-0', styles2.product_all_product].join(' ')}>
                       {title}
                       {' '}
                       (
-                      {' '}
                       {productsCount}
-                      {' '}
                       )
-                    </p>
+                    </div>
                   </div>
                 </div>
                 <IconButton icon={<ChevronRight />} onClick={() => handleCollectionButton(id)} />

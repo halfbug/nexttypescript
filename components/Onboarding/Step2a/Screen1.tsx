@@ -15,6 +15,7 @@ import IconButton from 'components/Buttons/IconButton';
 import { useRouter } from 'next/router';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import styles from 'styles/product.module.scss';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
@@ -219,10 +220,10 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
             <ListGroup as="ol">
               <ListGroup.Item
                 as="li"
-                className="d-flex justify-content-between align-items-center"
+                className={['d-flex justify-content-between align-items-center ', styles.border_listgroup].join(' ')}
               >
                 <div className="ms-2 me-auto p-2">
-                  <div className="fw-bold">
+                  <div className={styles.product_all_product}>
                     { store?.totalProducts && store?.totalProducts < 80 && <Form.Check type="checkbox" inline className="fs-4" />}
 
                     All Products (
@@ -258,16 +259,14 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
           you can select only 80 products.
         </Form.Control.Feedback>
 
-        <Row className="mt-4">
+        <Row className="mt-4 d-flex justify-content-end">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}
-            <Button variant="outline-primary" size="lg" className="rounded-pill" onClick={() => setParams({ ins: 2 })}>
-              Go Back
+            <Button variant="outline-primary" className={styles.product_btnClose} onClick={() => setParams({ ins: 2 })}>
+              Close
             </Button>
-          </Col>
-          <Col xs={6} className="text-start">
             {/* <RBButton>Save</RBButton> */}
-            <Button variant="primary" size="lg" className="rounded-pill" onClick={handleSave}>
+            <Button variant="outline-primary" className={styles.product_btnSave} onClick={handleSave}>
               Save
             </Button>
           </Col>

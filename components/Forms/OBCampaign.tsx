@@ -198,19 +198,11 @@ export default function OBCampaign() {
             Allow customers to add products from your store
             {' '}
             <InfoCircle />
-
           </h4>
-
         </Col>
-
       </Row>
       <Row className="text-muted"><p>Select additional products that customers can add to personalize their Groupshop.</p></Row>
-      <Row className="mt-2">
-        {/* <Col xs={3} md={4}> </Col> */}
-        <Col xs={12} md={6} className="text-right">
-          <AddProductButton />
-        </Col>
-      </Row>
+      <AddProductButton />
       <Row className="mt-5">
         <Col lg={4}>
           <Button style={Bstyle} onClick={() => setParams({ ins: 1 })}>Previous</Button>

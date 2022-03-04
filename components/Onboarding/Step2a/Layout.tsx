@@ -3,6 +3,8 @@ import React from 'react';
 import {
   Container, Row, Col, Form,
 } from 'react-bootstrap';
+import styles from 'styles/product.module.scss';
+import { FaSistrix } from 'react-icons/fa';
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -19,10 +21,10 @@ const Layout = ({ children, handleSearch, campaign }:ILayoutProps) => {
   };
   const { products, collections } = campaign;
   return (
-    <Container>
+    <Container className={styles.product}>
       <Row className="border-bottom">
         <Col className="text-left" xs={12} md={6}><h3>Add products/collections</h3></Col>
-        <Col className="text-left text-md-end" xs={12} md={6}>
+        <Col className={styles.product_selected} xs={12} md={6}>
           {products?.length || 0}
           {' '}
           product(s)/
@@ -34,7 +36,8 @@ const Layout = ({ children, handleSearch, campaign }:ILayoutProps) => {
       <Row className="mt-3">
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3 " controlId="searchField">
-            <Form.Control size="lg" className="bg-light pt-2" type="text" placeholder="Search products/collections" name="searchField" onChange={handleSearch} />
+            <Form.Control size="lg" className={styles.product_search_product} type="text" placeholder="Search products/collections" name="searchField" onChange={handleSearch} />
+            {/* <FaSistrix /> */}
           </Form.Group>
         </Form>
 
