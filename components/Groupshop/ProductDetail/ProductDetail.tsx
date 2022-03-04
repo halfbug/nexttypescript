@@ -184,6 +184,15 @@ const ProductDetail = ({
                 indicators={false}
               >
                 <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
+                  <span className={styles.groupshop__pcard_tag_addedbyname}>
+                    {addedbyname && (
+                    <div className={styles.groupshop_added_by_text}>
+                      Added By
+                      {' '}
+                      { addedbyname }
+                    </div>
+                    )}
+                  </span>
                   <img
                     className="d-block w-100"
                     src={product?.featuredImage}
@@ -210,20 +219,24 @@ const ProductDetail = ({
                 <Scrollable width="100%">
                   <div className="d-flex">
                     {data?.productById?.images?.map((img:any, i:number) => (
-                      <button
-                        type="button"
-                        onClick={(e) => handleSelect((i + 1), e)}
-                        className={i === index
-                          ? styles.groupshop_modal_detail_button_selected
-                          : styles.groupshop_modal_detail_button}
-                        key={img.id}
-                      >
-                        <img
-                          src={img.src}
-                          alt={`image_${i}`}
-                          className={styles.groupshop_modal_detail_thumbnail}
-                        />
-                      </button>
+                      <>
+
+                        <button
+                          type="button"
+                          onClick={(e) => handleSelect((i + 1), e)}
+                          className={i === index
+                            ? styles.groupshop_modal_detail_button_selected
+                            : styles.groupshop_modal_detail_button}
+                          key={img.id}
+                        >
+
+                          <img
+                            src={img.src}
+                            alt={`image_${i}`}
+                            className={styles.groupshop_modal_detail_thumbnail}
+                          />
+                        </button>
+                      </>
                     ))}
                   </div>
                 </Scrollable>
@@ -255,13 +268,6 @@ const ProductDetail = ({
                 )}
 
               </h3>
-              {addedbyname && (
-              <span className={styles.groupshop_added_by_text}>
-                Added By
-                {' '}
-                { addedbyname }
-              </span>
-              )}
               <div className={styles.groupshop_modal_detail_height}>
                 <ShowMoreText
                 /* Default options */
