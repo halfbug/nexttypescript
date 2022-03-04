@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import {
-  FacebookShareButton, TwitterShareButton, PinterestShareButton,
+  FacebookShareButton, TwitterShareButton, PinterestShareButton, EmailShareButton, EmailIcon,
 } from 'react-share';
 import {
-  Facebook, Instagram, Pinterest, Twitter, Tiktok, Youtube,
+  Facebook, Instagram, Pinterest, Twitter, Tiktok, Youtube, Chat,
 } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 
 type SocialButtonProps = React.PropsWithChildren<{
-  network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube';
+  network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
   url: string;
 }>;
 
@@ -84,6 +84,17 @@ const SocialButton = ({
             text: `Send special discounts to your friends by sharing this ${url}`,
           })}
         />
+      )}
+
+    {network === 'Email'
+      && (
+        <EmailShareButton
+          subject="Groupshop"
+          body="Send special discounts to your friends by sharing your Groupshop"
+          url={url}
+        >
+          <Chat className="fs-3 fw-bold" />
+        </EmailShareButton>
       )}
 
   </Button>

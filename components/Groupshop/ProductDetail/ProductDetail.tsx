@@ -16,6 +16,7 @@ import useAlert from 'hooks/useAlert';
 import Scrollable from 'components/Widgets/Scrollable/Scrollable';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import GradiantButton from 'components/Buttons/Button/Button';
+import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -48,7 +49,8 @@ const ProductDetail = ({
   };
 
   const {
-    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName, totalCashBack,
+    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
+    totalCashBack, productShareUrl,
   } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
@@ -322,7 +324,7 @@ const ProductDetail = ({
                 {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
               </Button>
-              <Button variant="outline-primary" className="m-1 mt-3 rounded-pill" disabled={isExpired}><Send size={18} /></Button>
+              <ShareButton disabled={isExpired} placement="right-start" shareurl={productShareUrl(product?.id ?? '')} label="" className="m-1 mt-4 px-2 rounded-pill" />
 
             </Col>
           </Row>

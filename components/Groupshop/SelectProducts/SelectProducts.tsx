@@ -55,7 +55,7 @@ const SelectProducts = ({
             {' '}
           </p>
           <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
-          <Button variant="outline-primary" className="m-1 rounded-pill">
+          <Button variant="outline-primary" className="m-1 rounded-pill px-2">
             <Send size={18} />
           </Button>
         </ProductCard>

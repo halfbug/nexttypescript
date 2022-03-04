@@ -30,6 +30,13 @@ export default function useDeal() {
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
 
+  const productShareUrl = useCallback((pid:string) => {
+    console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
+    const pidbreak = pid.split('/');
+    console.log('🚀 ~ file: useDeal.ts ~ line 38 ~ productShareUrl ~ pidbreak', pidbreak);
+    return `${gsURL}/product&${pidbreak[4]}`;
+  }, [gsctx.url]);
+
   const getBuyers = useCallback((pid:string) => gsctx.members.filter(
     (mem) => mem.products?.find((prd) => prd.id === pid),
   ), [gsctx.members]);
@@ -110,6 +117,7 @@ export default function useDeal() {
     topFive,
     getDateDifference,
     isExpired,
+    productShareUrl,
     addedByName,
     totalCashBack,
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_GROUPSHOP, GET_PRODUCTS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
@@ -14,12 +14,11 @@ import {
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
-import EarnButton from 'components/Buttons/EarnButton/EarnButton';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
 import {
-  ChevronDown, Handbag, Search,
+  ChevronDown, Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
@@ -31,23 +30,27 @@ import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 import _ from 'lodash';
 import Cart from 'components/Groupshop/Cart/Cart';
 import useDeal from 'hooks/useDeal';
+import useCode from 'hooks/useCode';
 import useAlert from 'hooks/useAlert';
 import Button from 'components/Buttons/Button/Button';
 import Footer from 'components/Layout/FooterGS/FooterGS';
 import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
+import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
+import useDetail from 'hooks/useDetail';
+import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
+import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 const GroupShop: NextPage = () => {
-  const router = useRouter();
-  const { query: { shop, code, source } } = router;
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
+  const { shop, discountCode, productCode } = useCode();
 
   const {
     loading, error, data: { groupshop } = { groupshop: gsInit }, networkStatus,
   } = useQuery<{groupshop: IGroupshop }, {code: string | undefined}>(GET_GROUPSHOP, {
-    variables: { code: code?.length ? code[0] : undefined },
+    variables: { code: discountCode },
     notifyOnNetworkStatusChange: true,
-    skip: !code,
+    skip: !discountCode,
   });
 
   const productsql = useQuery(GET_PRODUCTS, {
@@ -93,6 +96,10 @@ const GroupShop: NextPage = () => {
   const {
     gsURL, clientDealProducts, isExpired,
   } = useDeal();
+
+  const {
+    showDetail, setshowDetail, sProduct, setsProduct,
+  } = useDetail(allProducts);
 
   React.useEffect(() => {
     if (productsql?.data?.products && gsctx.allProducts) {
@@ -147,65 +154,22 @@ const GroupShop: NextPage = () => {
             <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
             <div className="d-flex flex-row justify-content-center">
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
-              <EarnButton
-                popContent={(
-                  <div className="pt-1">
-                    <CopyToClipboard value={gsURL} />
-                    <Row className="p-2">
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={gsURL} /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={gsURL} /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url={gsURL} /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={gsURL} /></Col>
-                      <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={gsURL} /></Col>
-                    </Row>
-                    <Row className="flex-column">
-                      <Col><h3>Shop, share, earn</h3></Col>
-                      <Col>
-                        <p>
-                          Send special discounts to your
-                          friends by sharing this Groupshop page
-                          with them. If you also shopped from this
-                          page, you’ll earn cashback every time the
-                          y shop with you.
-                        </p>
 
-                      </Col>
-                    </Row>
-                  </div>
-              )}
-                label="+Invite"
+              <ShareButton
+                placement="bottom"
+                shareurl={gsURL}
+                label="Invite"
                 className={styles.groupshop__top_invite}
-                displayIcon={false}
+                icon={<Plus size={18} className="me-0 pe-0" />}
               />
             </div>
           </Col>
           <Col md={3} className="text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto">
-            <EarnButton
-              popContent={(
-                <div className="pt-1">
-                  <CopyToClipboard value={gsURL} />
-                  <Row className="p-2">
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={gsURL} /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={gsURL} /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Tiktok" url={gsURL} /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={gsURL} /></Col>
-                    <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={gsURL} /></Col>
-                  </Row>
-                  <Row className="flex-column">
-                    <Col><h3>Shop, share, earn</h3></Col>
-                    <Col>
-                      <p>
-                        Send special discounts to your
-                        friends by sharing this Groupshop page
-                        with them. If you also shopped from this
-                        page, you’ll earn cashback every time the
-                        y shop with you.
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              )}
+            <ShareButton
+              placement="bottom"
+              shareurl={gsURL}
               label="EARN CASHBACK"
+
             />
             <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} disabled={isExpired} />
             <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
@@ -239,9 +203,8 @@ const GroupShop: NextPage = () => {
         products={member?.products}
         maxrows={1}
         addProducts={handleAddProduct}
+        handleDetail={(prd) => setsProduct(prd)}
       >
-        ;
-
         <h2>
           SHOPPED BY
           {' '}
@@ -274,6 +237,7 @@ const GroupShop: NextPage = () => {
         products={popularProducts}
         maxrows={1}
         addProducts={handleAddProduct}
+        handleDetail={(prd) => setsProduct(prd)}
       >
         <h2>Popular in Group</h2>
       </ProductGrid>
@@ -286,6 +250,7 @@ const GroupShop: NextPage = () => {
         products={allProducts}
         maxrows={3}
         addProducts={handleAddProduct}
+        handleDetail={(prd) => setsProduct(prd)}
       >
         <div className="position-relative">
           <h2>All Products</h2>
@@ -341,6 +306,11 @@ const GroupShop: NextPage = () => {
       </Row>
       <Footer LeftComp={undefined} RightComp={undefined} />
       <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+      <ProductDetail
+        show={showDetail}
+        handleClose={(e) => setshowDetail(false)}
+        product={sProduct}
+      />
       <Cart show={showCart} handleClose={() => setshowCart(false)} product={undefined} />
       <AlertComponent />
     </div>

@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -14,7 +13,7 @@ import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
 import useDeal from 'hooks/useDeal';
 import { Member } from 'types/groupshop';
-import ProductDetail from '../ProductDetail/ProductDetail';
+import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 type ProductGridProps = {
   products : IProduct[]| undefined,
@@ -26,10 +25,11 @@ type ProductGridProps = {
   xl?: number,
   xxl?: number,
   addProducts(e: boolean): any;
+  handleDetail(prd:any):void;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
-  products, pending, children, maxrows = 0, addProducts,
+  products, pending, children, maxrows = 0, addProducts, handleDetail,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -45,11 +45,9 @@ const ProductGrid = ({
     items: products || [],
     siblingCount: 4,
   });
-  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 41 ~ breakPoint', breakPoint);
-  const [showDetail, setshowDetail] = useState<boolean>(false);
-  const [sProduct, setsProduct] = useState<IProduct | undefined>(undefined);
+
   const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 1 : 0);
-  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 43 ~ fillerz', fillerz);
+
   const {
     gsctx: {
       discountCode: { percentage },
@@ -58,7 +56,7 @@ const ProductGrid = ({
   } = useContext(GroupshopContext);
 
   const {
-    currencySymbol, dPrice, getBuyers, formatName, topFive, isExpired,
+    currencySymbol, dPrice, getBuyers, formatName, topFive, isExpired, productShareUrl,
   } = useDeal();
 
   if (pending) {
@@ -77,7 +75,7 @@ const ProductGrid = ({
             <ProductCard
               isrc={prod.featuredImage}
               imgOverlay={(
-                <button onClick={() => { setsProduct(prod); setshowDetail(true); }} type="button" className="border-0">
+                <button onClick={() => handleDetail(prod)} type="button" className="border-0">
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>
@@ -129,13 +127,14 @@ const ProductGrid = ({
               <Button
                 variant="primary"
                 className="rounded-pill w-75"
-                onClick={() => { setsProduct(prod); setshowDetail(true); }}
+                onClick={() => handleDetail(prod)}
+                  // () => { setsProduct(prod); setshowDetail(true); }}
                 disabled={isExpired}
               >
                 Add to Cart
 
               </Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill" disabled={isExpired}><Send size={18} /></Button>
+              <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="m-1 px-2 rounded-pill" />
             </ProductCard>
           </Col>
         ))}
@@ -171,7 +170,7 @@ const ProductGrid = ({
                 {' '}
               </p>
               <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill" disabled={isExpired}>
+              <Button variant="outline-primary" className="m-1 rounded-pill px-2" disabled>
                 <Send size={18} />
               </Button>
             </ProductCard>
@@ -209,11 +208,11 @@ const ProductGrid = ({
           )}
         </Col>
       </Row>
-      <ProductDetail
+      {/* <ProductDetail
         show={showDetail}
         handleClose={(e) => setshowDetail(false)}
         product={sProduct}
-      />
+      /> */}
     </Container>
   );
 };
