@@ -31,9 +31,9 @@ export default function useDeal() {
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
 
   const productShareUrl = useCallback((pid:string) => {
-    console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
+    // console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
     const pidbreak = pid.split('/');
-    console.log('🚀 ~ file: useDeal.ts ~ line 38 ~ productShareUrl ~ pidbreak', pidbreak);
+    // console.log('🚀 ~ file: useDeal.ts ~ line 38 ~ productShareUrl ~ pidbreak', pidbreak);
     return `${gsURL}/product&${pidbreak[4]}`;
   }, [gsctx.url]);
 

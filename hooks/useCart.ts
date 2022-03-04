@@ -71,6 +71,13 @@ export default function useCart() {
     return `https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}`;
   }, [gsctx.cart]);
 
+  const getSuggestedProducts = useCallback(() => {
+    const { allProducts } = gsctx;
+    // console.log({ allProducts });
+
+    return allProducts;
+  }, [gsctx]);
+
   return {
     addCartProduct,
     cartProducts,
@@ -80,5 +87,6 @@ export default function useCart() {
     getTotal,
     isCartEmpty,
     getShopifyUrl,
+    getSuggestedProducts,
   };
 }

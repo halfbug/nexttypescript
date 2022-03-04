@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -11,16 +11,20 @@ import { GroupshopContext } from 'store/groupshop.context';
 import useCart from 'hooks/useCart';
 import useDeal from 'hooks/useDeal';
 import { useRouter } from 'next/router';
+import useSuggested from 'hooks/useSuggested';
+import useDetail from 'hooks/useDetail';
 import Members from '../Members/Members';
+import ProductCard from '../ProductCard/ProductCard';
 
 interface CartProps extends RootProps {
   show : boolean;
   handleClose(): any;
+  handleDetail(item:any):void;
   product : IProduct | undefined
 }
 
 const Cart = ({
-  show, pending = false, handleClose, product, ...props
+  show, pending = false, handleDetail, handleClose, product, ...props
 }: CartProps) => {
   const {
     gsctx,
@@ -30,9 +34,11 @@ const Cart = ({
   const { currencySymbol, dPrice, discount } = useDeal();
 
   const {
-    cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal, isCartEmpty, getShopifyUrl,
+    cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
+    isCartEmpty, getShopifyUrl, getSuggestedProducts, addCartProduct,
   } = useCart();
-  console.log('🚀 ~ file: Cart.tsx ~ line 34 ~ isCartEmpty', isCartEmpty);
+  const { suggestedProd } = useSuggested();
+  const { setsProduct } = useDetail(suggestedProd);
 
   const { push } = useRouter();
 
@@ -86,6 +92,7 @@ const Cart = ({
                 </div>
 
                 <hr />
+
               </>
             ) : cartProducts.map((prd) => (
               <Row className="px-0 mx-1 py-2 border-bottom">
@@ -151,6 +158,59 @@ const Cart = ({
               </Row>
 
             )) }
+            <Container fluid>
+              {suggestedProd && (
+              <Row>
+                {/* <ProductGrid products={suggestedProd} /> */}
+                {suggestedProd.map((item) => (
+                  <Col xs={6} className="m-0 p-1 border-1 d-flex justify-content-center">
+                    <ProductCard
+                      type="small"
+                      isrc={item.featuredImage}
+                      imgOverlay={
+                        // eslint-disable-next-line react/jsx-wrap-multilines
+                        (
+                          <span
+                            className={styles.groupshop__pcard_tag_addedbytop}
+                          >
+                            {currencySymbol}
+                            {Math.round(+(item.price) - +(dPrice(+(item?.price || 0)).toFixed(1)))}
+                            {' '}
+                            OFF
+                          </span>
+                        )
+                      }
+                    >
+                      <h5 className="text-center fw-bold text-truncate">{item.title}</h5>
+                      <h5 className="pt-1 text-center fw-bold">
+                        <span className="text-decoration-line-through">
+                          {currencySymbol}
+                          {item?.price}
+                        </span>
+                        {' '}
+                        <span>
+                          {currencySymbol}
+                          {dPrice(+(item?.price || 0)).toFixed(1)}
+                        </span>
+                      </h5>
+
+                      {/* <p className="text-center mb-1 fs-5">
+                        {`🔥 ${item.orders?.length} friends shopped`}
+                      </p> */}
+                      <Button
+                        variant="primary"
+                        className="rounded-pill w-50"
+                        onClick={() => handleDetail(item)}
+                      >
+                        Add
+                      </Button>
+                    </ProductCard>
+                  </Col>
+                ))}
+              </Row>
+              )}
+            </Container>
+
           </div>
           {!isCartEmpty && (
           <Container fluid className="py-3 my-2">

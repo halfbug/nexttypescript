@@ -311,7 +311,12 @@ const GroupShop: NextPage = () => {
         handleClose={(e) => setshowDetail(false)}
         product={sProduct}
       />
-      <Cart show={showCart} handleClose={() => setshowCart(false)} product={undefined} />
+      <Cart
+        show={showCart}
+        handleClose={() => setshowCart(false)}
+        product={undefined}
+        handleDetail={(prd) => setsProduct(prd)}
+      />
       <AlertComponent />
     </div>
 

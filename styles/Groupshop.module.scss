@@ -159,6 +159,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		width: 282px;
 		position: relative;
 		@extend .border-0;
+		&_small {
+			// width: 144px;
+			// height: 216px;
+			width: 90%;
+	
+		}
 
 		&_image {
 			height: 282px;
@@ -208,6 +214,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				// background-color: white;
 				top: 220px;
 				right: 15px;
+				position: absolute;
+			}
+			&_addedbytop {
+				@extend .groupshop__pcard_tag;
+				// @extend .p-1, .py-2, .rounded-pill, .m-1;
+				// background-color: white;
+				top: 4px;
+				left: 1px;
 				position: absolute;
 			}
 			&_addedbyname {

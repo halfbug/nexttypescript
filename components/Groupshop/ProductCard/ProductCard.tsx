@@ -9,26 +9,56 @@ import { RootProps } from 'types/store';
 type IProductCardProps = {
   imgOverlay : React.ReactNode;
   isrc: string;
+  type?: 'small' | 'large';
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, children, imgOverlay, pending, ...rest
-}: IProductCardProps) => (
-  <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
-    <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
-    <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
-      {imgOverlay}
-    </Card.ImgOverlay>
-    <Card.Body>
-      {children}
-    </Card.Body>
+  isrc, children, type, imgOverlay, pending, ...rest
+}: IProductCardProps) => {
+  console.log('sas');
+  switch (type) {
+    case 'large':
+      return (
+        <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
+          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+          <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
+            {imgOverlay}
+          </Card.ImgOverlay>
+          <Card.Body>
+            {children}
+          </Card.Body>
+        </Card>
+      );
+    case 'small':
+      return (
+        <Card {...rest} className={[styles.groupshop__pcard_small, rest.className].join(' ')}>
+          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+          <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
+            {imgOverlay}
+          </Card.ImgOverlay>
+          <Card.Body>
+            {children}
+          </Card.Body>
+        </Card>
+      );
 
-  </Card>
+    default:
+      return (
+        <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
+          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+          <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
+            {imgOverlay}
+          </Card.ImgOverlay>
+          <Card.Body>
+            {children}
+          </Card.Body>
+        </Card>
+      );
+  }
+};
 
-);
-
-// ProductCard.defaultProps = {
-//   user: {},
-// };
+ProductCard.defaultProps = {
+  type: 'large',
+};
 
 export default ProductCard;
