@@ -97,7 +97,14 @@ const Step5 = () => {
                   </Col>
                 </Row>
               </div>
-              <Row><Col><Button onClick={handleClick}>Lets Go</Button></Col></Row>
+              <Row>
+                <Col>
+                  <Button onClick={handleClick} className={styles.letsgo_btn_letgo}>
+                    Let's Go
+                  </Button>
+                </Col>
+
+              </Row>
             </Row>
 
             {/* <Row>
