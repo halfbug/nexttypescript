@@ -22,11 +22,11 @@ const Step0 = ({ show }: IStep0Props) => {
   return (
     <Dialogue show={show}>
       {/* <ProgressBar progress="100" /> */}
-      <Container className={styles.welcome}>
+      <Container fluid className={styles.welcome}>
         <Row>
           <Col lg={5} className={styles.sideImg} />
           <Col lg={7} d-flex justify-content-center>
-            <section className="mt-4">
+            <Container fluid className="mt-4">
               <Row>
                 <Row className={styles.welcome_taghead}>
                   <Col lg={6} className="me-4 mt-5">
@@ -38,7 +38,7 @@ const Step0 = ({ show }: IStep0Props) => {
                   </Col>
                 </Row>
               </Row>
-              <section className=" mx-4">
+              <section className="mx-4">
                 <Row className="mb-1  mx-3 ">
                   <Col>
                     <h4 className="">We know that nothing beats a friend’s recommendation.</h4>
@@ -106,7 +106,7 @@ const Step0 = ({ show }: IStep0Props) => {
                   {/* <Col xs={3} md={4}>&nbsp; </Col> */}
                 </Row>
               </section>
-            </section>
+            </Container>
           </Col>
         </Row>
       </Container>

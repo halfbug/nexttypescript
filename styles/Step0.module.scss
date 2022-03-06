@@ -1,7 +1,9 @@
 @import "./variables.scss";
 .welcome {
 	@extend .text-center;
-
+	// overflow-y: scroll;
+    height: 700px;
+	  
    &_taghead{
 	@extend .mt-3, .justify-content-center;
 	margin-left: 30px;
@@ -65,6 +67,6 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	width: 451px;
-	height: 721px;
+	height: 700px;
 	padding: 0px!important;
 }
