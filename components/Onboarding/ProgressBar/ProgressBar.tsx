@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from 'styles/Progressbar.module.scss';
-import Slogo from 'assets/images/small-logo.png';
-import Slogo2 from 'assets/images/small-logo2.png';
 
 const ProgressBar = ({ progress }:any) => (
   <div
