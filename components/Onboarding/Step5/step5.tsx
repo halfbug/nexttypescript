@@ -9,8 +9,6 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import Logo from 'assets/images/Logo.svg';
-import ConeEmoji from 'assets/images/Cone.svg';
-import Conlogo from 'assets/images/screen 5.svg';
 import { StoreContext } from 'store/store.context';
 import Router from 'next/router';
 import BrandlogoBlack from 'assets/images/brandmark1.svg';
@@ -56,7 +54,8 @@ const Step5 = () => {
             <Row>
               <div className={styles.letsgo__box_logo}>
                 {' '}
-                <Conlogo />
+                <BrandlogoBlack />
+                <Logo />
                 {' '}
               </div>
               <div className="mb-lg-3">
@@ -106,64 +105,6 @@ const Step5 = () => {
 
               </Row>
             </Row>
-
-            {/* <Row>
-              <Row>
-                <Col lg={3}>
-                  {' '}
-                  <BrandlogoBlack className="me-5" />
-                </Col>
-                <Col className=" d-inline m-4" lg={6}>
-                  <ConeEmoji />
-                  <h5 className=" mt-3 mx-3 fw-bold text-nowarp">
-                    Congrats on creating
-                  </h5>
-                  <Logo className=" mx-3" />
-                </Col>
-              </Row>
-              <div className="mb-lg-3">
-                <Row className="mt-4">
-                <Col><h6 className="fw-bold fs-4">You’re on the free plan</h6></Col></Row>
-                <Row>
-                  <Col>
-                    {' '}
-                    You only pay for the amount of Groupshop pages
-                    your customers create. The first 100 are on us.
-
-                  </Col>
-
-                </Row>
-                <Row className="mt-4"><Col><h6 className="fw-bold fs-4">Next Steps</h6></Col></Row>
-                <Row>
-                  <Col>
-                    <ul>
-                      <li className="fs-6">
-                        Head to the
-                        {' '}
-                        <span className="fw-bold fs-5">Overview</span>
-                        {' '}
-                        dashboard to track your campaign’s progress
-                      </li>
-                      <li className="fs-6">
-                        Check your
-                        {' '}
-                        <span className="fw-bold fs-5">Analytics</span>
-                        {' '}
-                        for advanced first-party data
-                      </li>
-                      <li className="fs-6">
-                        Explore more features on the
-                        {' '}
-                        <span className="fw-bold fs-5">Settings</span>
-                        {' '}
-                        page
-                      </li>
-                    </ul>
-                  </Col>
-                </Row>
-              </div>
-              <Row><Col><Button onClick={handleClick}>Lets Go</Button></Col></Row>
-            </Row> */}
 
           </Col>
           <Col lg={6} className={['mt-5', styles.letsgo__left].join(' ')}>
