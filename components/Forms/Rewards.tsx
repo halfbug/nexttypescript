@@ -239,10 +239,10 @@ export default function Rewards() {
         </Row>
 
         <Row className={styles.rewards_Generous}>
-          <Col lg={1}>
-            <Star size={16} />
+          <Col lg={1} className="pe-0 me-0 float-right">
+            <Star size={18} />
           </Col>
-          <Col lg={10}>
+          <Col lg={10} className="px-0 ms-0 float-left">
             Be generous – reward your customers the same
             way you reward Facebook or Google for finding
             you leads. We’ll do the math to make sure you’re

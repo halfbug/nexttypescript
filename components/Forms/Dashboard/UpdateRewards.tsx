@@ -336,7 +336,7 @@ export default function UpdateRewards() {
             <Col lg={1}>
               <Bulb size={16} />
             </Col>
-            <Col lg={10} className={['ms-0 px-0', styles.dbrewards_icon_text].join(' ')}>
+            <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
               Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
             </Col>
           </Row>
@@ -344,7 +344,7 @@ export default function UpdateRewards() {
             <Col lg={1} className={styles.dbrewards_icon_text}>
               <Star size={16} />
             </Col>
-            <Col lg={10} className={['ms-0 px-0', styles.dbrewards_icon_text].join(' ')}>
+            <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
               Be generous – reward your customers the same
               way you reward Facebook or Google for finding
               you leads. We’ll do the math to make sure you’re

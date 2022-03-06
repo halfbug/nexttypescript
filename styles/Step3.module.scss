@@ -36,6 +36,7 @@
         line-height: 18px;
         text-align: center;
         color: #282828;
+        
     }
     &__radio {
         @extend .d-flex, .justify-content-end, .align-items-end, .p-0, .m-1;
@@ -109,7 +110,7 @@
     }
 
     &_Generous {
-        @extend .mt-3;
+        @extend .mt-1, .d-inline-flex, .justify-content-start;
         font-family: Mulish;
         font-style: normal;
         font-weight: 400;
