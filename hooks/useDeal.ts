@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -12,7 +12,7 @@ export default function useDeal() {
   } = useContext(GroupshopContext);
 
   const [clientIP] = useIP();
-
+  const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
   const clientDealProducts = useCallback(
     ():string[] | undefined => ([...gsctx?.dealProducts?.filter(
       ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
@@ -106,6 +106,20 @@ export default function useDeal() {
   },
   [gsctx]);
 
+  const displayAddedByFunc = useCallback((productId) => {
+    const { members } = gsctx;
+    const ownerProd = members[0]?.products!;
+    const prod1 = ownerProd.find((item) => item.id === productId);
+    let flagVar;
+    if (prod1) flagVar = false;
+    if (!prod1) flagVar = true;
+    return flagVar;
+
+    // if (prod1) setdisplayAddedBy(false);
+    // if (!prod1) setdisplayAddedBy(true);
+  },
+  [gsctx]);
+
   return {
     currencySymbol,
     discount,
@@ -120,5 +134,7 @@ export default function useDeal() {
     productShareUrl,
     addedByName,
     totalCashBack,
+    displayAddedBy,
+    displayAddedByFunc,
   };
 }

@@ -56,7 +56,8 @@ const ProductGrid = ({
   } = useContext(GroupshopContext);
 
   const {
-    currencySymbol, dPrice, getBuyers, formatName, topFive, isExpired, productShareUrl,
+    currencySymbol, dPrice, getBuyers, formatName, topFive,
+    isExpired, productShareUrl, displayAddedByFunc,
   } = useDeal();
 
   if (pending) {
@@ -95,14 +96,18 @@ const ProductGrid = ({
                     ({ productId }) => productId === prod.id,
                   ).map((
                     { addedBy, productId },
-                  ) => (
-                    <span
-                      className={styles.groupshop__pcard_tag_addedby}
-                      key={`${productId}_${Math.random()}`}
-                    >
-                      {`Added by ${addedBy}`}
-                    </span>
-                  ))}
+                  ) => {
+                    const show = displayAddedByFunc(productId);
+                    const htmldata = show ? (
+                      <span
+                        className={styles.groupshop__pcard_tag_addedby}
+                        key={`${productId}_${Math.random()}`}
+                      >
+                        {`Added by ${addedBy}`}
+                      </span>
+                    ) : '';
+                    return htmldata;
+                  })}
                 </button>
 )}
             >
