@@ -50,7 +50,7 @@ const ProductDetail = ({
 
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
-    totalCashBack, productShareUrl,
+    totalCashBack, productShareUrl, displayAddedByFunc,
   } = useDeal();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
@@ -177,6 +177,17 @@ const ProductDetail = ({
         <Modal.Body className="px-5">
           <Row>
             <Col xs={12} md={6}>
+              <span className={styles.groupshop__pcard_tag_addedbyname}>
+                {
+                    displayAddedByFunc(product?.id) && addedbyname && (
+                    <div className={styles.groupshop_added_by_text}>
+                      Added By
+                      {' '}
+                      { addedbyname }
+                    </div>
+                    )
+}
+              </span>
               <Carousel
                 activeIndex={index}
                 onSelect={handleSelect}
@@ -184,15 +195,6 @@ const ProductDetail = ({
                 indicators={false}
               >
                 <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
-                  <span className={styles.groupshop__pcard_tag_addedbyname}>
-                    {addedbyname && (
-                    <div className={styles.groupshop_added_by_text}>
-                      Added By
-                      {' '}
-                      { addedbyname }
-                    </div>
-                    )}
-                  </span>
                   <img
                     className="d-block w-100"
                     src={product?.featuredImage}
@@ -202,16 +204,6 @@ const ProductDetail = ({
                 {
                  data?.productById?.images?.map((img:any, i:number) => (
                    <Carousel.Item>
-                     <span className={styles.groupshop__pcard_tag_addedbyname}>
-                       {addedbyname && (
-                       <div className={styles.groupshop_added_by_text}>
-                         Added By
-                         {' '}
-                         { addedbyname }
-                       </div>
-                       )}
-                     </span>
-
                      <img
                        src={img.src}
                        alt={`image_${i}`}

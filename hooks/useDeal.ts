@@ -108,9 +108,11 @@ export default function useDeal() {
 
   const displayAddedByFunc = useCallback((productId) => {
     const { members } = gsctx;
-    const ownerProd = members[0]?.products!;
-    const prod1 = ownerProd.find((item) => item.id === productId);
+    const ownerProd = members[0]?.products;
+    const prod1 = ownerProd?.find((item) => item.id === productId);
     let flagVar;
+    console.log({ prod1 });
+
     if (prod1) flagVar = false;
     if (!prod1) flagVar = true;
     return flagVar;
