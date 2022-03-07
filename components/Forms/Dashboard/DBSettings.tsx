@@ -23,6 +23,7 @@ import ColorPicker from 'components/Buttons/ColorPicker';
 import GradiantBox from 'components/Buttons/gradiantBox';
 import UploadButton from 'components/Buttons/UploadBtn';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
     brandColor: string;
@@ -64,6 +65,7 @@ export default function DBSettings({
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
+  const { getKeyFromS3URL } = useCampaign();
   // console.log('🚀 DBSettings.tsx', values);
   // if (isEdit) {
   //   const { settings } = values;
@@ -178,6 +180,7 @@ export default function DBSettings({
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
                 handleCustomBg={handleCustomBg}
+                url={getKeyFromS3URL(values.imageUrl)}
               />
             </Col>
             <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>

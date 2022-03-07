@@ -11,6 +11,7 @@ import { IStore } from 'types/store';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
+import WhiteButton from '../WhiteButton/WhiteButton';
 
 interface IUploadButtonProps {
  setFieldValue(field: string, value: string): any;
@@ -20,11 +21,13 @@ interface IUploadButtonProps {
  value?: string;
  handleForm?: any;
  handleCustomBg?: any;
+ url?: string;
 }
 
 // eslint-disable-next-line no-unused-vars
 export default function UploadButton({
   setFieldValue, icon, field, className, value, handleForm, handleCustomBg,
+  url,
 }:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
@@ -43,6 +46,17 @@ export default function UploadButton({
   const [feedback, setfeedback] = React.useState<null | string>(null);
   const [logo, setlogo] = React.useState<null | string>(null);
   const [progress, setprogress] = React.useState<boolean>(false);
+  const apiFunc = async () => {
+    if (url) {
+      const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
+      console.log("🚀 ~ file: index.tsx ~ line 51 ~ apiFunc ~ res", dbUrl);
+      setlogo(dbUrl);
+    }
+  };
+  React.useEffect(() => {
+    apiFunc();
+  }, [url]);
+
   const handleImageUpload = (e: any) => {
     try {
       if (e.target.files) {
@@ -55,7 +69,7 @@ export default function UploadButton({
         const imgExt = files[0].name.split('.')[1];
         fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt}`);
         setprogress(true);
-        axios.post(`${process.env.API_URL}/upload`, fd, config)
+        axios.post(`${process.env.API_URL}/image`, fd, config)
           .then((res) => {
             const fileS3Url: string = res.data.data.Location;
 
@@ -90,7 +104,9 @@ export default function UploadButton({
         {logo
           ? (
             <>
+            {/* // <div className={styles['upload-logo_replace']}> */}
               <img src={logo} alt="logo" />
+              <WhiteButton>Replace</WhiteButton>
               { progress
               && <ProgressBar animated now={100} className={styles['upload-logo--progress']} />}
             </>

@@ -24,6 +24,7 @@ import ColorPicker from 'components/Buttons/ColorPicker';
 import GradiantBox from 'components/Buttons/gradiantBox';
 import UploadButton from 'components/Buttons/UploadBtn';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
     brandColor?: string;
@@ -65,6 +66,11 @@ export default function Settings({ isDB }: IProps) {
       // console.log("🚀 ~ file: Settings.tsx ~ settingsState", settingsState);
     }
   }, []);
+  // React.useEffect(() => {
+  //   if(values.imageUrl){
+
+  //   }
+  // },[values.imageUrl]
 
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
@@ -145,6 +151,7 @@ export default function Settings({ isDB }: IProps) {
     }
     setFieldValue(field, value);
   };
+  const { getKeyFromS3URL } = useCampaign();
 
   const radios = [
     // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },
@@ -154,7 +161,7 @@ export default function Settings({ isDB }: IProps) {
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
-  // console.log({ values });
+  console.log({ values });
 
   return (
 
@@ -266,6 +273,7 @@ export default function Settings({ isDB }: IProps) {
                 field="imageUrl"
                 className={styles.ob_settings__uploadbtn}
                 handleCustomBg={handleCustomBg}
+                url={getKeyFromS3URL(values.imageUrl)}
               />
             </Col>
             <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>

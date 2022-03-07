@@ -14,6 +14,7 @@ import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import UploadButton from 'components/Buttons/UploadBtn';
 import styles from 'styles/Step1.module.scss';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
   brandName: string;
@@ -83,6 +84,7 @@ export default function BrandInfo() {
       // setTimeout(() => resetForm(), 5000);
     },
   });
+  const { getKeyFromS3URL } = useCampaign();
 
   return (
     <Form noValidate onSubmit={handleSubmit} className={['mx-4', styles.welcome].join(' ')}>
@@ -128,6 +130,7 @@ export default function BrandInfo() {
             setFieldValue={setFieldValue}
             field="logoImage"
             value={values.logoImage}
+            url={getKeyFromS3URL(values.logoImage)}
           />
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className="text-muted text-center d-flex align-self-center mx-2">
@@ -151,7 +154,7 @@ export default function BrandInfo() {
               onChange={handleChange}
               name="industry"
               defaultValue=""
-              value={values.industry}
+              value={getKeyFromS3URL(values.industry)}
             >
               <option value="" className={styles.welcome_select}>Click to select</option>
               <option value="1">One</option>

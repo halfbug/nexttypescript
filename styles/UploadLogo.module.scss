@@ -3,11 +3,14 @@
 	// border-style: dashed !important;
 	border-radius: 10px !important;
 	position: relative;
+	// max-width: 150px;
+	// max-height: 120px;
 
 	@extend .rounded, .m-2 , .mx-0, .d-flex, .justify-content-center, .py-4;
 	width: 85%;
 	height: fit-content;
 	background-color: #F3F3F3;
+	overflow: hidden;
 
 	label {
 		@extend .text-center, .mx-1, .mt-2;
@@ -28,7 +31,20 @@
 	}
 
 	img {
-		max-width: 100%;
-		max-height: 95%;
+		max-width: 150px;
+		max-height: 120px;
 	}
+		// position: relative;
+		button {
+			// position: absolute;
+			// top: 20%;
+			@extend .position-absolute, .top-50, .start-50, .translate-middle;
+		}
+		img {
+			// position: absolute;
+			// top: 1px;
+			@extend .position-absolute, .top-50, .start-50, .translate-middle;
+		}
+
+
 }
