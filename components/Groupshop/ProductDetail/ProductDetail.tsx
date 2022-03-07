@@ -202,6 +202,16 @@ const ProductDetail = ({
                 {
                  data?.productById?.images?.map((img:any, i:number) => (
                    <Carousel.Item>
+                     <span className={styles.groupshop__pcard_tag_addedbyname}>
+                       {addedbyname && (
+                       <div className={styles.groupshop_added_by_text}>
+                         Added By
+                         {' '}
+                         { addedbyname }
+                       </div>
+                       )}
+                     </span>
+
                      <img
                        src={img.src}
                        alt={`image_${i}`}
