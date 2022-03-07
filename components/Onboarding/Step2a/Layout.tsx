@@ -23,7 +23,7 @@ const Layout = ({ children, handleSearch, campaign }:ILayoutProps) => {
   return (
     <Container className={styles.product}>
       <Row className="border-bottom">
-        <Col className="text-left" xs={12} md={6}><h3>Add products/collections</h3></Col>
+        <Col className="text-left my-2" xs={12} md={6}><h3>Add products/collections</h3></Col>
         <Col className={styles.product_selected} xs={12} md={6}>
           {products?.length || 0}
           {' '}
