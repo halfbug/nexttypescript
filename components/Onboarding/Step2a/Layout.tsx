@@ -5,16 +5,18 @@ import {
 } from 'react-bootstrap';
 import styles from 'styles/product.module.scss';
 import { FaSistrix } from 'react-icons/fa';
+import Search from 'assets/images/search-icon.svg';
+import { FiSearch } from 'react-icons/fi';
 
 interface ILayoutProps {
   children: React.ReactNode;
-  handleSearch(e:any): any;
+  handleSearch(e: any): any;
   campaign: any;
-    // All other props
-  [x:string]: any;
+  // All other props
+  [x: string]: any;
 }
 
-const Layout = ({ children, handleSearch, campaign }:ILayoutProps) => {
+const Layout = ({ children, handleSearch, campaign }: ILayoutProps) => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     event.stopPropagation();
@@ -35,10 +37,19 @@ const Layout = ({ children, handleSearch, campaign }:ILayoutProps) => {
       </Row>
       <Row className="mt-3">
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3 " controlId="searchField">
-            <Form.Control size="lg" className={styles.product_search_product} type="text" placeholder="Search products/collections" name="searchField" onChange={handleSearch} />
-            {/* <FaSistrix /> */}
-          </Form.Group>
+          <div>
+            <FiSearch color="#F3F3F3" size="1.5em" className={styles.product_serachicon} />
+            <Form.Group className={['mb-3', styles.product_serachform].join(' ')} controlId="searchField">
+              <Form.Control
+                size="lg"
+                className={styles.product_search_product}
+                type="text"
+                placeholder="Search products/collections"
+                name="searchField"
+                onChange={handleSearch}
+              />
+            </Form.Group>
+          </div>
         </Form>
 
       </Row>

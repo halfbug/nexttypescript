@@ -9,6 +9,15 @@
 		color: $subheadingclr;
 	}
 
+	&_serachicon{
+		position: absolute;
+		margin: 1.2% 1.2%;
+	}
+	&_serachform{
+		@extend .mb-3;
+		position: relative;
+	}
+
 	.border_listgroup {
 		@extend .d-flex, .justify-content-between, .align-items-center, .my-2, .border, .border-1;
 		border-radius: 11px !important;
@@ -51,6 +60,7 @@
 		font-style: normal;
 		font-weight: 500;
 		font-size: 14px;
+		padding-left:5%;
 		line-height: 18px;
 		color: $subheadingclr;
 		opacity: 0.2;
