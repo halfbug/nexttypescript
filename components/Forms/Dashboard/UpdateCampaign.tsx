@@ -16,6 +16,7 @@ import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { UPDATE_CAMPAIGN } from 'store/store.graphql';
 import { useRouter } from 'next/router';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
@@ -306,8 +307,13 @@ export default function UpdateCampaign() {
                       <h4>
                         Allow customers to add products from your store
                         {' '}
-                        {' '}
-                        <InfoCircle />
+                        <ToolTip
+                          className={styles.dashboard_campaign__pop}
+                          icon={<InfoCircle size={13} />}
+                          popContent="You choose which products your customers will earn
+                        cashback and discounts on. Use this feature to select which additional products
+                        customers can add from your store to personalize their Groupshop."
+                        />
                       </h4>
                     </Col>
                   </Row>
@@ -325,8 +331,13 @@ export default function UpdateCampaign() {
                       <h4>
                         Allow customers to join existing Groupshop pages
                         {' '}
-                        {' '}
-                        <InfoCircle />
+                        <ToolTip
+                          className={styles.dashboard_campaign__pop}
+                          icon={<InfoCircle size={13} />}
+                          popContent="When customers view the pre-purchase pop-up on your store
+                          to learn about Groupshop, they can be given
+                          the option to join an existing Groupshop. Enable this feature to display this option."
+                        />
                       </h4>
                     </Col>
                   </Row>

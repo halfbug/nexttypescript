@@ -24,6 +24,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import Star from 'assets/images/star.svg';
 import Bulb from 'assets/images/bulb.svg';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 interface IValues {
   rewards: string;
@@ -264,7 +265,12 @@ export default function UpdateRewards() {
             <h4 className="mb-3">
               Baseline
               {' '}
-              <InfoCircle size={15} />
+              <ToolTip
+                className={styles.dashboard_campaign__pop}
+                icon={<InfoCircle size={10} />}
+                popContent="This is the first discount tier and  the ongoing commission your customer earns on new orders after
+                they have received all their cashback. Learn more about how rewards work here."
+              />
             </h4>
             {!editMin && (
               <>
@@ -299,7 +305,12 @@ export default function UpdateRewards() {
             <h4>
               Maximum
               {' '}
-              <InfoCircle size={15} />
+              <ToolTip
+                className={styles.dashboard_campaign__pop}
+                icon={<InfoCircle size={10} />}
+                popContent="This is the maximum discount and cashback that you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
+                Think of this as an ‘up to X% off’. Learn more about how rewards work here."
+              />
             </h4>
             {!editMax && (
               <>

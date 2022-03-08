@@ -20,6 +20,7 @@ import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import Star from 'assets/images/star.svg';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 interface IValues {
   rewards: string;
@@ -222,7 +223,12 @@ export default function Rewards() {
             <div className={styles.rewards_BaseMax}>
               Baseline
               {' '}
-              <InfoCircle size={9} />
+              <ToolTip
+                className={styles.dashboard_campaign__pop}
+                icon={<InfoCircle size={10} />}
+                popContent="This is the first discount tier and  the ongoing commission your customer earns on new orders after
+                they have received all their cashback. Learn more about how rewards work here."
+              />
             </div>
             <div className={styles.rewards__percent_btn}>{minDiscount}</div>
 
@@ -231,7 +237,13 @@ export default function Rewards() {
             <div className={styles.rewards_BaseMax}>
               Maximum
               {' '}
-              <InfoCircle size={9} />
+              <ToolTip
+                className={styles.dashboard_campaign__pop}
+                icon={<InfoCircle size={10} />}
+                popContent="This is the maximum discount and cashback that
+                you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
+                Think of this as an ‘up to X% off’. Learn more about how rewards work here."
+              />
             </div>
             <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
           </Col>
