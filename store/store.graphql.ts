@@ -374,6 +374,7 @@ query Groupshop($code: String!) {
     campaign{
       name
       products
+      addableProducts
       salesTarget{
         id
         name

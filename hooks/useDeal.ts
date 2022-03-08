@@ -111,7 +111,7 @@ export default function useDeal() {
     const ownerProd = members[0]?.products;
     const prod1 = ownerProd?.find((item) => item.id === productId);
     let flagVar;
-    console.log({ prod1 });
+    // console.log({ prod1 });
 
     if (prod1) flagVar = false;
     if (!prod1) flagVar = true;

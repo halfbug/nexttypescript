@@ -39,14 +39,15 @@ import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
 import useDetail from 'hooks/useDetail';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
-  const { shop, discountCode, productCode } = useCode();
+  const { shop, discountCode } = useCode();
 
   const {
-    loading, error, data: { groupshop } = { groupshop: gsInit }, networkStatus,
+    loading, error, data: { groupshop } = { groupshop: gsInit },
   } = useQuery<{groupshop: IGroupshop }, {code: string | undefined}>(GET_GROUPSHOP, {
     variables: { code: discountCode },
     notifyOnNetworkStatusChange: true,
@@ -100,15 +101,20 @@ const GroupShop: NextPage = () => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
-
+  const { findInArray } = useUtilityFunction();
   React.useEffect(() => {
+    let otherProducts: IProduct[];
     if (productsql?.data?.products && gsctx.allProducts) {
-      const otherProducts: IProduct[] = productsql?.data?.products.filter(
-        (o1:IProduct) => !gsctx?.allProducts?.some(
-          (o2:IProduct) => o1.id === o2.id,
-        ),
-      );
-
+      if (gsctx.campaign?.addableProducts?.length) {
+        otherProducts = findInArray(gsctx.campaign?.addableProducts, productsql?.data?.products || [], null, 'id');
+        console.log(findInArray(gsctx.campaign?.addableProducts, productsql?.data?.products || [], null, 'id'));
+      } else {
+        otherProducts = productsql?.data?.products.filter(
+          (o1:IProduct) => !gsctx?.allProducts?.some(
+            (o2:IProduct) => o1.id === o2.id,
+          ),
+        );
+      }
       dispatch({ type: 'UPDATE_PRODUCTS', payload: { ...gsctx, store: { ...gsctx.store, products: otherProducts } } });
     }
   }, [productsql.data]);
@@ -308,7 +314,7 @@ const GroupShop: NextPage = () => {
       <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
       <ProductDetail
         show={showDetail}
-        handleClose={(e) => setshowDetail(false)}
+        handleClose={() => setshowDetail(false)}
         product={sProduct}
       />
       <Cart

@@ -60,13 +60,13 @@ export default function useUtilityFunction() {
   const filterArray = (
     mainArr: any[], filterArr: any[], arrayfield: any, filterField: string | number,
   ):any => mainArr?.filter((item: any) => {
-    console.log({ item });
+    // console.log({ item });
     // const searched = arrayfield ? item?.[arrayfield] : item;
 
     const newArr = filterArr?.find(
       (item2: any) => item2?.[filterField] === item?.[arrayfield],
     );
-    console.log({ newArr });
+    // console.log({ newArr });
     // console.log({ item });
 
     return !newArr;

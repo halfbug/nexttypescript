@@ -15,7 +15,7 @@ type IProductCardProps = {
 const ProductCard = ({
   isrc, children, type, imgOverlay, pending, ...rest
 }: IProductCardProps) => {
-  console.log('sas');
+  // console.log('sas');
   switch (type) {
     case 'large':
       return (
