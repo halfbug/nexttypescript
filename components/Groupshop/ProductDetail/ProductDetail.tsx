@@ -350,6 +350,13 @@ const ProductDetail = ({
                   people have earned cashback and discounts on this item!
                 </p>
                 <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+                <ShareButton
+                  disabled={isExpired}
+                  placement="auto-end"
+                  shareurl={productShareUrl(product?.id ?? '')}
+                  label=""
+                  className="m-1 px-2 rounded-pill"
+                />
               </>
               )}
 
