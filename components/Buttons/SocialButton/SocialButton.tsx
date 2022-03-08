@@ -17,7 +17,7 @@ const SocialButton = ({
   url, network, children,
 }: SocialButtonProps) => (
 
-  <Button className={['rounded-pill p-2', styles[`groupshop_${network.toLowerCase()}`]].join(' ')} variant="secondary" href={url} target="_blank">
+  <Button className={['rounded-pill p-2', styles[`groupshop_${network.toLowerCase()}`]].join(' ')} variant="secondary" target="_blank">
     {network === 'Instagram'
       && (
         <Instagram
