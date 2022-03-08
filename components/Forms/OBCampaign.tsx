@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Form, Row, Col, ToggleButtonGroup, ToggleButton,
+  Form, Row, Col, ToggleButtonGroup, ToggleButton, Tooltip,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
@@ -13,6 +13,8 @@ import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { CREATE_CAMPAIGN, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import AddProductButton from 'components/Buttons/AddProductButton';
+import styles from 'styles/Campaign.module.scss';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 export default function OBCampaign() {
   const [, setParams] = useQueryString();
@@ -129,7 +131,7 @@ export default function OBCampaign() {
               {errors.name}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Text className="col-2 text-muted mt-2 mx-2">
+          <Form.Text className={['col-2 text-muted mt-2 mx-2', styles.dashboard_campaign_text_limit].join(' ')}>
             {values.name?.length}
             /20
           </Form.Text>
@@ -150,6 +152,7 @@ export default function OBCampaign() {
           <Form.Check
             inline
             label="Best sellers"
+            className={styles.dashboard_campaign_radio_label}
             onChange={handleChange}
             type="radio"
             name="criteria"
@@ -162,6 +165,7 @@ export default function OBCampaign() {
             inline
             onChange={handleChange}
             label="Newest products"
+            className={styles.dashboard_campaign_radio_label}
             type="radio"
             name="criteria"
             value="newest"
@@ -176,6 +180,7 @@ export default function OBCampaign() {
           <Form.Check
             inline
             label="Specific products/collections (up to 80 products)"
+            className={styles.dashboard_campaign_radio_label}
             onChange={handleChange}
             onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
             type="radio"
@@ -197,7 +202,13 @@ export default function OBCampaign() {
           <h4 className="mt-1">
             Allow customers to add products from your store
             {' '}
-            <InfoCircle />
+            <ToolTip
+              className={styles.dashboard_campaign__pop}
+              icon={<InfoCircle size={13} />}
+              popContent="You choose which products your customers will earn
+                        cashback and discounts on. Use this feature to select which additional products
+                        customers can add from your store to personalize their Groupshop."
+            />
           </h4>
         </Col>
       </Row>
