@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 import * as React from 'react';
 import {
@@ -90,19 +91,20 @@ export default function AddProductButton() {
         </Col>
         <Col lg={6} className="d-flex align-items-center justify-content-start">
           { (newCampaign?.addableProducts?.length || campaign?.addableProducts?.length)
-      && (
-      <Row className=" justify-content-start">
-        <Col>
-          { (campaign?.addableProducts?.length) ? campaign?.addableProducts?.length : newCampaign?.addableProducts?.length}
-          {' '}
-          product(s)/
-          { (campaign?.addableCollections?.length) ? campaign?.addableCollections?.length : newCampaign?.addableCollections?.length}
-          collection(s)
+            ? (
+              <Row className=" justify-content-start">
+                <Col>
+                  { newCampaign?.addableProducts?.length ? newCampaign?.addableProducts?.length : campaign?.addableProducts?.length }
+                  {/* campaign?.addableProducts?.length ? campaign?.addableProducts?.length : '' */}
+                  {' '}
+                  product(s)/
+                  { campaign?.addableCollections?.length ? campaign?.addableCollections?.length : newCampaign?.addableCollections?.length ? newCampaign?.addableCollections?.length : ''}
+                  collection(s)
 
-          <DeleteButton icon={<XCircle />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [] } } })} message="Are you sure to clear all selection?" />
-        </Col>
-      </Row>
-      )}
+                  <DeleteButton icon={<XCircle />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [] } } })} message="Are you sure to clear all selection?" />
+                </Col>
+              </Row>
+            ) : ''}
         </Col>
       </Row>
     </>

@@ -32,7 +32,7 @@ const CampaignListing = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
+      // console.log(data);
       setCampaignList(data.campaigns);
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: data.campaigns } });
     }
@@ -68,7 +68,7 @@ const CampaignListing = () => {
         },
       },
     });
-    console.log({ campObj });
+    // console.log({ campObj });
     const { data: { updateCampaign } } = campObj;
     // refetch();
     // now update store context with new campaign isActive changes
@@ -79,8 +79,8 @@ const CampaignListing = () => {
       return item;
     });
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-    console.log({ store });
-    console.log(']]]]]]]]]]]]]]');
+    // console.log({ store });
+    // console.log(']]]]]]]]]]]]]]');
   };
 
   return (

@@ -45,7 +45,7 @@ export default function useUtilityFunction() {
   const findInArray = (
     mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
   ):any => mainArr?.map((item: any) => {
-    console.log({ item });
+    // console.log({ item });
     const searched = arrayfield ? item?.[arrayfield] : item;
 
     const newArr = searchArr?.find(

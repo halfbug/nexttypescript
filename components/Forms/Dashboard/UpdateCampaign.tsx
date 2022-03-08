@@ -116,6 +116,14 @@ export default function UpdateCampaign() {
       let { media } = valz;
 
       if (customBg) media = "";
+      let customProducts: any[] = [];
+      if (criteria === 'custom') {
+        if (store?.newCampaign?.productsArray?.length) {
+          customProducts = [...store?.newCampaign?.productsArray ?? []];
+        } else {
+          customProducts = [...campaign?.products ?? []];
+        }
+      }
 
       const campObj:null | any = await editCampaign({
         variables: {
@@ -125,7 +133,8 @@ export default function UpdateCampaign() {
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
-            products: criteria === 'custom' ? store?.newCampaign?.productsArray : [],
+            // products: criteria === 'custom' ? store?.newCampaign?.productsArray : campaign?.products,
+            products: customProducts,
             addableProducts,
             settings: {
               brandColor,
@@ -153,6 +162,7 @@ export default function UpdateCampaign() {
   });
   console.log({ selectedProducts });
   console.log({ campaign });
+  console.log({ store });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
