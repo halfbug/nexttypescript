@@ -116,11 +116,6 @@ export default function BrandInfo() {
             {/* 0/20 */}
           </Form.Text>
         </Col>
-        {/* <Col lg={2} className={styles.welcome_digits}>
-          <Form.Text className="mx-0 text-muted align-baseline">
-            0/20
-          </Form.Text>
-        </Col> */}
       </Row>
       <Row className="mt-4"><h4>Upload your logo</h4></Row>
       <Row>

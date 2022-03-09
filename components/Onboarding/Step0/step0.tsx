@@ -3,14 +3,13 @@ import Dialogue from 'components/Layout/Dialogue2/dialogue';
 // import Button from '../../Buttons/Button/Button';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from 'styles/Step0.module.scss';
-import HeadLogo from 'assets/images/Logo.svg';
+import HeadLogo from 'assets/images/s1-logo.svg';
 import Brand1 from 'assets/images/brandmark1.png';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
 import Icon from 'assets/images/Cone.svg';
-import OB1head from 'assets/images/OB1 Head.svg';
 
 interface IStep0Props {
   show: boolean,
