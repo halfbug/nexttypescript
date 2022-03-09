@@ -163,7 +163,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			// width: 144px;
 			// height: 216px;
 			width: 90%;
-	
 		}
 
 		&_image {
@@ -410,8 +409,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_tostart {
 			@extend .py-0;
 			h3 {
-				font-family: Mulish;
 				font-weight: 700 !important;
+				font-family: DM Sans;
+				font-style: normal;
 				font-size: 18px;
 				line-height: 23px;
 				text-align: center;
