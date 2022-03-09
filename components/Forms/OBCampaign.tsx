@@ -198,18 +198,18 @@ export default function OBCampaign() {
       <ProductButton disableBtn={disableBtn} />
       {/* <p>25 product(s)/2 collection(s) selected</p> */}
       <Row className="mt-4">
-        <Col lg={12}>
-          <h4 className="mt-1">
+        <Col lg={12} className="d-flex align-items-center">
+          <h4 className="my-1">
             Allow customers to add products from your store
-            {' '}
-            <ToolTip
-              className={styles.dashboard_campaign__pop}
-              icon={<InfoCircle size={13} />}
-              popContent="You choose which products your customers will earn
+          </h4>
+          <ToolTip
+            className={['px-2 d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
+            icon={<InfoCircle size={13} />}
+            popContent="You choose which products your customers will earn
                         cashback and discounts on. Use this feature to select which additional products
                         customers can add from your store to personalize their Groupshop."
-            />
-          </h4>
+          />
+
         </Col>
       </Row>
       <Row className="text-muted"><p>Select additional products that customers can add to personalize their Groupshop.</p></Row>
