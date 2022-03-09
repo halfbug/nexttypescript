@@ -93,9 +93,9 @@ const InfoBox = () => {
               </Col>
               <Col xs={9}>
                 <p className="text-start">
-                  <strong> Earn cashback*</strong>
+                  <strong> Earn</strong>
                   {' '}
-                  every time they shop, and keep unlocking additional rewards.
+                  cashback* every time they shop, and keep unlocking additional rewards.
                 </p>
               </Col>
             </Row>
