@@ -138,7 +138,7 @@ export default function UpdateRewards() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const {
-        rewards, selectedTarget, maxDiscountVal, minDiscountVal,
+        rewards, selectedTarget, maxDiscountVal, minDiscountVal, minDiscount, maxDiscount,
       } = valz;
       // console.log({ valz });
 
@@ -169,10 +169,12 @@ export default function UpdateRewards() {
         } else if (baseline >= superBaseline) {
           newSelectedTarget.name = "Super-charged";
         }
+        const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
 
         newSelectedTarget.rewards[0].discount = minDiscountVal;
         newSelectedTarget.rewards[2].discount = maxDiscountVal;
-        newSelectedTarget.rewards[1].discount = `${(parseInt(minDiscountVal) + parseInt(maxDiscountVal)) / 2}%`;
+        newSelectedTarget.rewards[1].discount = `${newAverage}%`;
+        // newSelectedTarget.rewards[1].discount = `${(parseInt(minDiscountVal) + parseInt(maxDiscountVal)) / 2}%`;
       }
       const campRew:null | any = await addReward({
         variables: {
@@ -198,12 +200,14 @@ export default function UpdateRewards() {
       setEditMax(false);
     },
   });
-  // useEffect(() => {
-  //   if (values.selectedTarget !== '') {
-  //     setMinDiscount(values.selectedTarget?.rewards[0].discount);
-  //     setMaxDiscount(values.selectedTarget?.rewards[2].discount);
-  //   }
-  // }, [values.selectedTarget]);
+  useEffect(() => {
+    if (values.selectedTarget !== '') {
+      values.maxDiscountVal = values.selectedTarget?.rewards[2].discount;
+      values.minDiscountVal = values.selectedTarget?.rewards[0].discount;
+      values.minDiscount = values.selectedTarget?.rewards[0]?.discount ? parseInt(values.selectedTarget?.rewards[0]?.discount) : 0;
+      values.maxDiscount = values.selectedTarget?.rewards[2]?.discount ? parseInt(values.selectedTarget?.rewards[2]?.discount) : 0;
+    }
+  }, [values.selectedTarget]);
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
@@ -211,7 +215,7 @@ export default function UpdateRewards() {
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  // console.log({ values });
+  console.log({ values });
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
@@ -241,7 +245,7 @@ export default function UpdateRewards() {
                 variant="none"
                 value={JSON.stringify(starget)}
                 // checked={starget.id === values.rewards}
-                className={initvalz.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
+                className={values.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);

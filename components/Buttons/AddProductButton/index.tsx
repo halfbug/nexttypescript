@@ -31,8 +31,8 @@ export default function AddProductButton() {
   });
   const { newcampaign } = useCampaign();
   const { campaign } = useCampaign();
-  console.log({ campaign }, '.....add....');
-  console.log({ newCampaign }, '....add.....');
+  // console.log({ campaign }, '.....add....');
+  // console.log({ newCampaign }, '....add.....');
 
   React.useEffect(() => {
     if (data) {

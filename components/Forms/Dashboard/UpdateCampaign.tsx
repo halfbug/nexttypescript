@@ -160,7 +160,7 @@ export default function UpdateCampaign() {
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     },
   });
-  console.log({ selectedProducts });
+  // console.log({ selectedProducts });
   console.log({ campaign });
   console.log({ store });
 

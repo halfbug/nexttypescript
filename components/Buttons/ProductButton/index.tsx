@@ -43,8 +43,8 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
   // }, []);
   const { newcampaign } = useCampaign();
   const { campaign } = useCampaign();
-  console.log({ campaign }, '.........');
-  console.log({ newCampaign }, '.........');
+  // console.log({ campaign }, '.........');
+  // console.log({ newCampaign }, '.........');
 
   React.useEffect(() => {
     if (data) {
