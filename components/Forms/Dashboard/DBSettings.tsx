@@ -12,6 +12,7 @@ import { StoreContext } from 'store/store.context';
 import { UPDATE_CAMPAIGN, UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import styles from 'styles/Step4.module.scss';
+import styles2 from 'styles/Campaign.module.scss';
 import Image1 from 'assets/images/Ellipse1.png';
 import Image2 from 'assets/images/Ellipse2.png';
 import Image3 from 'assets/images/Ellipse3.png';
@@ -75,142 +76,149 @@ export default function DBSettings({
   return (
 
     <>
-      <Row><h4 className="mb-0">Set your brand color</h4></Row>
-      <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
-      <Row className="">
-        <Col lg={12}>
-          <Form.Group className="d-flex ">
-            <span className={styles.ob_settings__brandcolor}>
-              <Form.Label htmlFor="brandColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
-              <Form.Control
-                onChange={(e) => {
-                  handleForm('brandColor', e.currentTarget.value);
-                }}
-                type="color"
-                // id="brandColor"
-                name="brandColor"
-                id="brandColor"
-                isInvalid={touched.brandColor && !!errors.brandColor}
-                defaultValue="#3C3C3C"
-                title="Choose your color"
-                className="p-0 m-0 rounded-end"
-                bsPrefix="onboarding"
-                value={values.brandColor}
-              />
-            </span>
-            {' '}
-            <Form.Control.Feedback type="invalid">
-              {errors.brandColor}
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row className="mt-4 mb-0"><h4>Select a banner background</h4></Row>
-      <Form.Text>
-        <p className="mt-0">This will serve as the banner for your Groupshop page</p>
-        {' '}
-      </Form.Text>
-
-      <Row className="border rounded px-1 py-3 mx-1">
-        <Col md={6}>
-          <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
-
-          <ButtonGroup className={['mb-2 d-block mx-0 p-0', styles.ob_settings__group].join(' ')}>
-            {radios.map(({ name, component, value }) => (
-              <ToggleButton
-                key={name}
-                id={`radio-${name}`}
-                type="radio"
-                variant="none"
-                name="radio"
-                value={value}
-                checked={values.customBg === value}
-                onChange={(e) => {
-                  handleCustomBg('customBg', e.currentTarget.value);
-                }}
-                bsPrefix={styles.ob_settings_hide}
-                className={styles.ob_settings__radio}
-              >
-                {component}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
-
-        </Col>
-        <Col md={6} className={styles.vertical}>
-          <Row className="mt-2">
-            <h6 className="fs-6 fw-bolder lh-base text-nowrap">
-              Custom background
-              <span className={styles.badge}>Recommended</span>
+      <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
+        <Row><h4 className="mb-0">Set your brand color</h4></Row>
+        <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
+        <Row>
+          <Col lg={12}>
+            <Form.Group className="d-flex ">
+              <span className={styles.ob_settings__brandcolor}>
+                <Form.Label htmlFor="brandColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
+                <Form.Control
+                  onChange={(e) => {
+                    handleForm('brandColor', e.currentTarget.value);
+                  }}
+                  type="color"
+                  // id="brandColor"
+                  name="brandColor"
+                  id="brandColor"
+                  isInvalid={touched.brandColor && !!errors.brandColor}
+                  defaultValue="#3C3C3C"
+                  title="Choose your color"
+                  className="p-0 m-0 rounded-end"
+                  bsPrefix="onboarding"
+                  value={values.brandColor}
+                />
+              </span>
               {' '}
-            </h6>
-          </Row>
-          <Row>
-            <Col lg={12} className="align-middle mt-2">
-              <Form.Check
-                inline
-                label="Image"
-                name="media"
-                value="image"
-                type="radio"
-                checked={values.media === 'image'}
-                onChange={(e) => {
-                  handleCustomBg('media', e.currentTarget.value);
-                }}
-              />
-              <Form.Check
-                inline
-                label="Youtube video"
-                name="media"
-                value="youtube"
-                type="radio"
-                checked={values.media === 'youtube'}
-                onChange={(e) => {
-                  handleCustomBg('media', e.currentTarget.value);
-                }}
-              />
+              <Form.Control.Feedback type="invalid">
+                {errors.brandColor}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
+      </section>
+      <section className={['mt-4', styles2.dashboard_campaign__box_3].join(' ')}>
+        <Row>
+          <Col lg={7}>
+            <h4>Select a banner background</h4>
+            <Form.Text>
+              <p className="mt-0">This will serve as the banner for your Groupshop page</p>
+              {' '}
+            </Form.Text>
+          </Col>
+        </Row>
+        <Row className="border rounded px-1 py-3 mx-1">
+          <Col lg={6}>
+            <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
 
-            </Col>
-          </Row>
-          <Row className="">
-            <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
-              <UploadButton
-                icon={(<WhiteButton>Upload</WhiteButton>)}
-                setFieldValue={setFieldValue}
-                field="imageUrl"
-                className={styles.ob_settings__uploadbtn}
-                handleCustomBg={handleCustomBg}
-                url={getKeyFromS3URL(values.imageUrl)}
-              />
-            </Col>
-            <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
-              <Form.Control
-                type="text"
-                name="youtubeUrl"
-                value={values.youtubeUrl}
-                isValid={touched.youtubeUrl && !errors.youtubeUrl}
-                onChange={(e) => {
-                  handleCustomBg('youtubeUrl', e.currentTarget.value);
-                }}
-              />
-              <p className="text-muted">Please paste youtube video URL</p>
-            </Col>
-            <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
-              <Col>
-                <h6 className={styles.smallt}>
+            <ButtonGroup className={['mb-2 d-block mx-0 p-0', styles.ob_settings__group].join(' ')}>
+              {radios.map(({ name, component, value }) => (
+                <ToggleButton
+                  key={name}
+                  id={`radio-${name}`}
+                  type="radio"
+                  variant="none"
+                  name="radio"
+                  value={value}
+                  checked={values.customBg === value}
+                  onChange={(e) => {
+                    handleCustomBg('customBg', e.currentTarget.value);
+                  }}
+                  bsPrefix={styles.ob_settings_hide}
+                  className={styles.ob_settings__radio}
+                >
+                  {component}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
+
+          </Col>
+          <Col lg={6} className={styles.vertical}>
+            <div className=" ms-3">
+              <Row className="mt-2 ">
+                <h6 className="fs-6 fw-bolder lh-base">
+                  Custom background
+                  <span className={styles.badge}>Recommended</span>
                   {' '}
-                  Under 5mb (PNG, JPG, JPEG)
-                  <br />
-                  1440px x 500px
                 </h6>
-              </Col>
-            </Row>
-          </Row>
+              </Row>
+              <Row>
+                <Col lg={12} className="align-middle mt-2">
+                  <Form.Check
+                    inline
+                    label="Image"
+                    className={styles2.dashboard_campaign_radio_label}
+                    name="media"
+                    value="image"
+                    type="radio"
+                    checked={values.media === 'image'}
+                    onChange={(e) => {
+                      handleCustomBg('media', e.currentTarget.value);
+                    }}
+                  />
+                  <Form.Check
+                    inline
+                    label="Youtube video"
+                    className={styles2.dashboard_campaign_radio_label}
+                    name="media"
+                    value="youtube"
+                    type="radio"
+                    checked={values.media === 'youtube'}
+                    onChange={(e) => {
+                      handleCustomBg('media', e.currentTarget.value);
+                    }}
+                  />
 
-        </Col>
-      </Row>
-      <Row />
-
+                </Col>
+              </Row>
+              <Row>
+                <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
+                  <UploadButton
+                    icon={(<WhiteButton>Upload</WhiteButton>)}
+                    setFieldValue={setFieldValue}
+                    field="imageUrl"
+                    className={styles.ob_settings__uploadbtn}
+                    handleCustomBg={handleCustomBg}
+                  />
+                </Col>
+                <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
+                  <Form.Control
+                    type="text"
+                    name="youtubeUrl"
+                    value={values.youtubeUrl}
+                    isValid={touched.youtubeUrl && !errors.youtubeUrl}
+                    onChange={(e) => {
+                      handleCustomBg('youtubeUrl', e.currentTarget.value);
+                    }}
+                  />
+                  <p className="text-muted">Please paste youtube video URL</p>
+                </Col>
+                <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
+                  <Col>
+                    <h6 className={styles.smallt}>
+                      {' '}
+                      Under 5mb (PNG, JPG, JPEG)
+                      <br />
+                      1440px x 500px
+                    </h6>
+                  </Col>
+                </Row>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </section>
     </>
 
   );

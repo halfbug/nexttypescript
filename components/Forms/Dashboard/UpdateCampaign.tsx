@@ -416,7 +416,7 @@ export default function UpdateCampaign() {
       </Row>
       <Row className="mt-2">
         <Col lg={7}>
-          <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>
+          <section>
             {/* <Settings isDB /> */}
             <DBSettings
               values={values}

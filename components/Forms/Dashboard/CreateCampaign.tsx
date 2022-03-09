@@ -504,7 +504,7 @@ export default function CreateCampaign() {
         </Row>
         <Row className="mt-2">
           <Col lg={7}>
-            <section className={[styles.dashboard_campaign__box_3, '', ''].join(' ')}>
+            <section>
               <DBSettings
                 values={values}
                 handleChange={handleChange}
