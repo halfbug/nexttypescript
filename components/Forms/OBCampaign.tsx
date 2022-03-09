@@ -127,7 +127,7 @@ export default function OBCampaign() {
               isInvalid={touched.name && !!errors.name}
               onBlur={(e) => setValue('name', e.target.value)}
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
               {errors.name}
             </Form.Control.Feedback>
           </Form.Group>

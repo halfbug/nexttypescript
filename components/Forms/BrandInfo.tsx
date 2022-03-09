@@ -105,7 +105,7 @@ export default function BrandInfo() {
               placeholder="Brand Name ..."
             />
 
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type="invalid" className={styles.welcome_error}>
               {errors.brandName}
             </Form.Control.Feedback>
           </Form.Group>
