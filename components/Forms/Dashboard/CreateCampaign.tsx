@@ -60,7 +60,7 @@ export default function CreateCampaign() {
     isRewardEdit: false,
 
   });
-  const { clearNewCampaign } = useCampaign();
+  const { clearNewCampaign, updateCampaign } = useCampaign();
   React.useEffect(() => {
     // console.log('IM IN CREATE HOOK');
 
@@ -256,6 +256,19 @@ export default function CreateCampaign() {
   const { setValue } = useUtilityFunction();
   // console.log({ store });
   // console.log("//////////////////");
+  const handleDeleteProduct = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
+    setFieldValue('products', []);
+    // const mycamp = updateCampaign(campaignid, 'products', []);
+    // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+    // handleSubmit();
+  };
+  const handleDeleteAddProduct = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
+    setFieldValue('addableProducts', []);
+    // const mycamp = updateCampaign(campaignid, 'addableProducts', []);
+    // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+  };
 
   return (
     <Container className={styles.dashboard_campaign}>
@@ -382,6 +395,7 @@ export default function CreateCampaign() {
                   <ProductButton
                     disableBtn={disableBtn}
                   // totalProducts={(values.products?.length) ? values.products?.length : 0}
+                    handleDelete={handleDeleteProduct}
                   />
                   <Row className="mt-4 border-top">
                     <Col>
@@ -406,7 +420,9 @@ export default function CreateCampaign() {
                   </Row>
                   <Row className="text-start">
                     <Col>
-                      <AddProductButton />
+                      <AddProductButton
+                        handleDelete={handleDeleteAddProduct}
+                      />
                       {/* <WhiteButton onClick={handleAddProduct}>Add products</WhiteButton> */}
                     </Col>
                   </Row>

@@ -17,9 +17,11 @@ interface IProps {
     // setFieldValue: any;
   // eslint-disable-next-line react/require-default-props
 //   totalProducts?: number;
+// eslint-disable-next-line react/require-default-props
+handleDelete?: any;
 }
 
-export default function AddProductButton() {
+export default function AddProductButton({ handleDelete }:IProps) {
   const [, setParams] = useQueryString();
   const {
     store: { shop, newCampaign, campaigns }, store, dispatch,
@@ -101,7 +103,12 @@ export default function AddProductButton() {
                   { campaign?.addableCollections?.length ? campaign?.addableCollections?.length : newCampaign?.addableCollections?.length ? newCampaign?.addableCollections?.length : ''}
                   collection(s)
 
-                  <DeleteButton icon={<XCircle />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [] } } })} message="Are you sure to clear all selection?" />
+                  <DeleteButton
+                    icon={<XCircle />}
+                    handleDelete={handleDelete}
+                    // handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [] } } })}
+                    message="Are you sure to clear all selection?"
+                  />
                 </Col>
               </Row>
             ) : ''}

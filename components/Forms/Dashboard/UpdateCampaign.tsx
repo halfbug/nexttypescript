@@ -57,22 +57,12 @@ export default function UpdateCampaign() {
 
   });
   const { findInArray } = useUtilityFunction();
-  const { campaign } = useCampaign();
+  const { campaign, updateCampaign } = useCampaign();
   // refactor it with useCampaign()
   React.useEffect(() => {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
       if (arr[0].criteria! === "custom") setdisableBtn(false);
-      // const thisCamp = [...arr[0]];
-      // if (ins === "2a") {
-      //   if (arr[0].products && !selectedProducts) {
-      //     setselectedProducts(findInArray(arr[0].products, store?.products || [], "id", "id"));
-      //     console.log(findInArray(arr[0].products, store?.products || [], "id", "id"));
-      //   }
-      // } else if (ins === "addproduct" && arr[0].addableProducts && !selectedProducts) {
-      //   setselectedProducts(findInArray(arr[0].addableProducts, store?.products || [], "id", "id"));
-      //   console.log(findInArray(arr[0].addableProducts, store?.products || [], "id", "id"));
-      // }
 
       const newState:ICampaignForm = {
         criteria: arr[0]?.criteria!,
@@ -83,6 +73,7 @@ export default function UpdateCampaign() {
         imageUrl: arr[0]?.settings?.imageUrl!,
         youtubeUrl: arr[0]?.settings?.youtubeUrl!,
         media: arr[0]?.settings?.media!,
+        products: arr[0]?.products,
 
       };
       setstate({ ...newState });
@@ -148,7 +139,7 @@ export default function UpdateCampaign() {
           },
         },
       });
-      console.log({ campObj });
+      // console.log({ campObj });
       const newObj = campObj.data.updateCampaign;
 
       const updatedCampaigns = store?.campaigns?.map((item:any) => {
@@ -166,19 +157,19 @@ export default function UpdateCampaign() {
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
-      console.log(campaign?.products);
-      console.log('//////////////');
+      // console.log(campaign?.products);
+      // console.log('//////////////');
 
       if (campaign?.products) {
         setselectedProducts(findInArray(campaign?.products, store?.products || [], null, "id"));
-        console.log(findInArray(campaign?.products, store?.products || [], null, "id"));
+        // console.log(findInArray(campaign?.products, store?.products || [], null, "id"));
       }
     } else if (ins === "addproduct" && campaign?.addableProducts) {
-      console.log(campaign?.addableProducts);
-      console.log('//////////////');
+      // console.log(campaign?.addableProducts);
+      // console.log('//////////////');
 
       setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
-      console.log(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
+      // console.log(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
     }
 
     if (ins === '2') {
@@ -194,9 +185,6 @@ export default function UpdateCampaign() {
     }
   }, [ins]);
 
-  // console.log({ store });
-  // console.log({ state });
-
   const handleCustomBg = (field: string, value: string) => {
     // empty other bg and keep only one
     if (field === 'customBg') {
@@ -210,7 +198,7 @@ export default function UpdateCampaign() {
     // if ((field !== 'imageUrl' && field !== 'media' && field !== 'youtubeUrl')) {
     // }
     setFieldValue(field, value);
-    console.log({ field });
+    // console.log({ field });
     handleSubmit();
   };
   const handleForm = (field: string, value: string) => {
@@ -218,18 +206,25 @@ export default function UpdateCampaign() {
     handleSubmit();
   };
   const handleAddProduct = () => {
-    // clear edit product context
-    // dispatch({
-    //   type: 'NEW_CAMPAIGN',
-    //   payload: {
-    //     newCampaign: {
-    //       productsArray: [],
-    //     },
-    //   },
-    // });
-
     setParams({ ins: 'addproduct' });
   };
+  const handleDeleteProduct = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
+    setFieldValue('products', []);
+    const mycamp = updateCampaign(campaignid, 'products', []);
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+    handleSubmit();
+  };
+  const handleDeleteAddProduct = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
+    setFieldValue('addableProducts', []);
+    const mycamp = updateCampaign(campaignid, 'addableProducts', []);
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+    handleSubmit();
+  };
+  console.log({ store });
+  console.log({ campaign });
+
   return (
     <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} />
@@ -310,7 +305,11 @@ export default function UpdateCampaign() {
                       {errors.criteria}
                     </Form.Control.Feedback>
                   </Row>
-                  <ProductButton disableBtn={disableBtn} totalProducts={(values.products?.length) ? values.products?.length : 0} />
+                  <ProductButton
+                    disableBtn={disableBtn}
+                    totalProducts={(values.products?.length) ? values.products?.length : 0}
+                    handleDelete={handleDeleteProduct}
+                  />
                   <hr />
                   <Row>
                     <Col>
@@ -330,7 +329,9 @@ export default function UpdateCampaign() {
                   <Row className="text-muted"><p>Select the products that customers can add to personalize their Groupshop</p></Row>
                   <Row className="text-start">
                     <Col>
-                      <AddProductButton />
+                      <AddProductButton
+                        handleDelete={handleDeleteAddProduct}
+                      />
                     </Col>
                   </Row>
                 </section>

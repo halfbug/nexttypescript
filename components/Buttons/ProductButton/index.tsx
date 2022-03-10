@@ -16,9 +16,11 @@ interface IProps {
   disableBtn: boolean;
   // eslint-disable-next-line react/require-default-props
   totalProducts?: number;
+  // eslint-disable-next-line react/require-default-props
+  handleDelete?: any;
 }
 
-export default function ProductButton({ disableBtn, totalProducts }:IProps) {
+export default function ProductButton({ disableBtn, totalProducts, handleDelete }:IProps) {
   const [, setParams] = useQueryString();
   const {
     store: { shop, newCampaign, campaigns }, store, dispatch,
@@ -114,21 +116,26 @@ export default function ProductButton({ disableBtn, totalProducts }:IProps) {
       || (campaign?.products?.length && campaign?.criteria === 'custom')
       // || (newcampaign?.products?.length)
           )
-      && (
-      <Row className=" justify-content-start">
-        <Col>
-          {(newCampaign?.products?.length)
+            ? (
+              <Row className=" justify-content-start">
+                <Col>
+                  {(newCampaign?.products?.length)
           || (campaign?.products?.length)}
-          {' '}
-          product(s)/
-          {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
-          {' '}
-          collection(s) selected
-          {' '}
-          <DeleteButton icon={<XCircle />} handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })} message="Are you sure to clear all selection?" />
-        </Col>
-      </Row>
-      )}
+                  {' '}
+                  product(s)/
+                  {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
+                  {' '}
+                  collection(s) selected
+                  {' '}
+                  <DeleteButton
+                    icon={<XCircle />}
+                    handleDelete={handleDelete}
+            // handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })}
+                    message="Are you sure to clear all selection?"
+                  />
+                </Col>
+              </Row>
+            ) : ''}
         </Col>
       </Row>
     </>
