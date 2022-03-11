@@ -116,7 +116,7 @@ const Footer = ({
                 placeholder="Enter your email"
                 aria-label="Email"
                 aria-describedby="basic-addon2"
-                className="border-0 border-bottom px-2"
+                className="border-bottom rounded-0 border-0 px-2"
               />
               <Button size="sm" variant="outline" className={styles.groupshop_footer_sub}>
                 <ChevronRight size={16} />
