@@ -44,7 +44,7 @@ const InfoBox = () => {
               <h2>
                 Shopping together has never
                 <br />
-                been so rewarding
+                been so rewarding.
               </h2>
             </div>
           </Row>
