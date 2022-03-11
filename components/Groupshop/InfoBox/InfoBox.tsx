@@ -70,7 +70,8 @@ const InfoBox = () => {
                 <p className="text-start">
                   <strong> Shop</strong>
                   {' '}
-                  limited-time offers from Insert Name Here and complete your order.
+                  <i> limited-time </i>
+                  offers from Insert Name Here and complete your order.
                 </p>
               </Col>
             </Row>
