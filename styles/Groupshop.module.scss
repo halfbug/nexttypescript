@@ -407,7 +407,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			width: 443px;
 		}
 		&_tostart {
-			@extend .py-0;
+			@extend .py-0, .my-3;
 			h3 {
 				font-weight: 700 !important;
 				font-family: DM Sans;
@@ -423,7 +423,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				height: 1px;
 				background: #dcdcdc;
 				left: 210px;
-				top: 35%;
+				top: 36%;
 				position: absolute;
 			}
 			h3:after {
@@ -433,7 +433,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				height: 1px;
 				background: #dcdcdc;
 				right: 215px;
-				top: 35%;
+				top: 36%;
 				position: absolute;
 			}
 		}
