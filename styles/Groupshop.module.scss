@@ -652,4 +652,17 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	// 	line-height: 16px;
 	// 	color: rgba(29, 35, 41, 0.5);
 	// }
+	&_addtoCart {
+		@extend  .rounded-pill, .w-75;
+		color: #ffffff;
+		background-color: $black;
+		font-family: 'DM Sans';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 21px;
+		letter-spacing: 0.32px;
+		text-transform: uppercase;
+		width: 212px;
+	}
 }

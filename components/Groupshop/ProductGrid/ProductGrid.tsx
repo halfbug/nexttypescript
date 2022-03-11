@@ -131,7 +131,7 @@ const ProductGrid = ({
               </h5>
               <Button
                 variant="primary"
-                className="rounded-pill w-75"
+                className={styles.groupshop_addtoCart}
                 onClick={() => handleDetail(prod)}
                   // () => { setsProduct(prod); setshowDetail(true); }}
                 disabled={isExpired}
@@ -174,7 +174,7 @@ const ProductGrid = ({
                 <br />
                 {' '}
               </p>
-              <Button variant="primary" disabled className="rounded-pill w-75">Add to Cart</Button>
+              <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>
               <Button variant="outline-primary" className="m-1 rounded-pill px-2" disabled>
                 <Send size={18} />
               </Button>
