@@ -13,6 +13,8 @@ import useDeal from 'hooks/useDeal';
 import { useRouter } from 'next/router';
 import useSuggested from 'hooks/useSuggested';
 import useDetail from 'hooks/useDetail';
+import Icon from 'assets/images/small-cone.svg';
+import IconMoney from 'assets/images/money-fly.svg';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -56,20 +58,23 @@ const Cart = ({
           >
             <div className="p-2">
               <h3>Cart</h3>
-              <p className="px-3">
-                💸 Spend $40 to
-                {' '}
-                <strong>
-                  unlock
+              <Row className="d-flex justify-content-center">
+                <Col sm={10} className={styles.groupshop_cart_spend}>
+                  <IconMoney className="col-1" />
+                  Spend $40 to
                   {' '}
-                  {discount}
-                  %
+                  <strong>
+                    unlock
+                    {' '}
+                    {discount}
+                    %
+                    {' '}
+                    off this order
+                  </strong>
                   {' '}
-                  off this order
-                </strong>
-                {' '}
-                and $20 cashback for everyone!
-              </p>
+                  and $20 cashback for everyone!
+                </Col>
+              </Row>
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
 
               {/* <div className={styles.groupshop_modal_cart_progress} /> */}
@@ -213,10 +218,10 @@ const Cart = ({
 
           </div>
           {!isCartEmpty && (
-          <Container fluid className="py-3 my-2">
+          <Container fluid className="py-3 my-2 ">
             <Row>
-              <Col className="text-start"><h3>TOTAL</h3></Col>
-              <Col className="text-end">
+              <Col className="text-start mx-2"><h3>TOTAL</h3></Col>
+              <Col className="text-end mx-2">
                 <h3>
                   {currencySymbol}
                   {getTotal()}
@@ -224,26 +229,42 @@ const Cart = ({
 
               </Col>
             </Row>
-            <Row>
-              <p>
-                🎉You’ve saved $30 by shopping with GROUPSHOP
-                And you can keep earning up to 40% cashback!
-              </p>
+            <Row className="d-flex justify-content-center">
+              <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
+                <Icon className="col-1" />
+                <div className="col-11">
+                  You’ve saved
+                  {' '}
+                  <strong>$30</strong>
+                  {' '}
+                  by shopping with
+                  {' '}
+                  <strong>GROUPSHOP</strong>
+                  {' '}
+                  And you can keep earning up to 40% cashback!
+                </div>
+              </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className=" mt-2">
                 <Button
                   variant="primary"
                   onClick={() => push(getShopifyUrl())}
                   size="lg"
-                  className="w-75 my-2"
+                  className={styles.groupshop_cart_checkout}
                 >
                   Checkout
                 </Button>
 
               </Col>
             </Row>
-            <Row><p>Shipping and taxes calculated at checkout.</p></Row>
+            <Row>
+              <div
+                className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
+              >
+                Shipping and taxes calculated at checkout.
+              </div>
+            </Row>
           </Container>
           )}
         </Offcanvas.Body>
