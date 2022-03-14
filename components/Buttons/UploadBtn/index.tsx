@@ -86,7 +86,7 @@ export default function UploadButton({
       setfeedback(JSON.stringify(ex));
     }
   };
-  console.log(logo);
+  // console.log(logo);
 
   return (
     <>

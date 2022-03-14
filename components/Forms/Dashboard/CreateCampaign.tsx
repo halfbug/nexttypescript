@@ -132,8 +132,6 @@ export default function CreateCampaign() {
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
-      // console.log({ validateForm });
-
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
@@ -141,7 +139,7 @@ export default function CreateCampaign() {
         tiktok, facebook, twitter, addableProducts, maxDiscountVal, minDiscountVal,
         minDiscount, maxDiscount, isRewardEdit,
       } = valz;
-      // console.log({ valz });
+      console.log({ valz });
       let { media } = valz;
       if (customBg) media = '';
       const newSelectedTarget = { ...selectedTarget };
@@ -216,6 +214,7 @@ export default function CreateCampaign() {
       Router.push(`/${shopName}/campaign`);
     },
   });
+  // console.log({ errors });
 
   React.useEffect(() => {
     if (ins === '2') {

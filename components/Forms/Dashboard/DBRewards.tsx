@@ -108,7 +108,7 @@ export default function DBRewards({
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  // console.log({ values });
+  // console.log({ errors });
   // console.log({ campaignInitial });
   // console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
@@ -182,6 +182,7 @@ export default function DBRewards({
               }}
               className={styles.dbrewards_input}
               isInvalid={!!errors.minDiscount}
+              // isInvalid={!!errors.minDiscount}
               placeholder="Enter %"
             />
             <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
@@ -191,8 +192,10 @@ export default function DBRewards({
             <Button
               variant="link"
               onClick={() => {
-                setEditMin(false);
-                setFieldValue('isRewardEdit', true);
+                if (!(errors.minDiscount)) {
+                  setEditMin(false);
+                  setFieldValue('isRewardEdit', true);
+                }
               }}
             >
               Save
@@ -238,8 +241,10 @@ export default function DBRewards({
             <Button
               variant="link"
               onClick={() => {
-                setEditMax(false);
-                setFieldValue('isRewardEdit', true);
+                if (!(errors.maxDiscount)) {
+                  setEditMax(false);
+                  setFieldValue('isRewardEdit', true);
+                }
               }}
             >
               Save
