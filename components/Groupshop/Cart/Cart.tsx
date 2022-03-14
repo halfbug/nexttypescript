@@ -82,21 +82,12 @@ const Cart = ({
             <hr />
             {cartProducts.length < 1 ? (
               <>
-                <p className="p-2">
+                <div className={[' mt-5', styles.groupshop_emptyCardHeading].join(' ')}>
                   Your cart is empty!
-                </p>
-                <p className="p-2">
-                  Don’t miss out on these limited time offers.
-                </p>
-
-                <div className="d-grid gap-2 m-3">
-                  <Button variant="primary" size="lg" onClick={() => handleClose()}>
-                    Get back to shopping
-                  </Button>
-
                 </div>
-
-                <hr />
+                <div className={[' mb-4', styles.groupshop_emptyCardHeading].join(' ')}>
+                  Don’t miss out on these limited time offers.
+                </div>
 
               </>
             ) : cartProducts.map((prd) => (
@@ -217,7 +208,12 @@ const Cart = ({
               </Row>
               )}
             </Container>
+            <div className=" gap-2 text-center mt-5 mb-4">
+              <Button variant="primary" size="lg" className={styles.groupshop_emptyCardBtn} onClick={() => handleClose()}>
+                Get back to shopping
+              </Button>
 
+            </div>
           </div>
           {!isCartEmpty && (
           <Container fluid className="py-3 my-2 ">
