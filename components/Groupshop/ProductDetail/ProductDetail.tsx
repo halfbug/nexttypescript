@@ -17,6 +17,7 @@ import Scrollable from 'components/Widgets/Scrollable/Scrollable';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import GSlogo from 'assets/images/p-detail-GSlogo.svg';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -248,7 +249,7 @@ const ProductDetail = ({
               <h2>
                 {product?.title}
               </h2>
-              <h3>
+              <h3 className="d-flex align-items-center">
                 <span className="text-decoration-line-through">
                   {currencySymbol}
                   {product?.price}
@@ -259,14 +260,25 @@ const ProductDetail = ({
                   {dPrice(+(product?.price || 0)).toFixed(1)}
                 </span>
                 {cashBack && (
-                <span className={styles.groupshop_added_by_text}>
-                  Plus up to
-                  {' '}
-                  $
-                  { cashBack }
-                  {' '}
-                  cashback
-                </span>
+                <Row className={styles.groupshop_cashback}>
+                  <Col className="d-flex align-items-center mx-0">
+                    <div className={[' col-8 me-0 mx-0 px-0 ', styles.groupshop_PlusUpto].join(' ')}>
+                      Plus up to
+                      {' '}
+                      <strong>
+                        {' '}
+                        $
+                        { cashBack }
+                        {' '}
+                        cashback
+                        {' '}
+                      </strong>
+                      with
+                      {' '}
+                    </div>
+                    <GSlogo className="col-4 ms-0 mx-0" />
+                  </Col>
+                </Row>
                 )}
 
               </h3>

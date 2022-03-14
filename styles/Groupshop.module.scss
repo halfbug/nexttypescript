@@ -677,44 +677,65 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			line-height: 18px;
 			text-align: center;
 		}
-	// &_socialmedia_textbox {
-	// 	font-family: DM Sans;
-	// 	font-style: normal;
-	// 	font-weight: normal;
-	// 	font-size: 12px;
-	// 	line-height: 16px;
-	// 	color: rgba(29, 35, 41, 0.5);
-	// }
-	}
-	&_cartProductText {
-		font-family: "DM Sans";
-		font-weight: 400;
-		font-size: 12px;
-		line-height: 16px;
-		color: $black;
 	}
 
-	&_cartProductHeading {
-		@extend .text-start, .mx-4, .mb-0, .pb-0;
-		font-family: "DM Sans";
-		font-weight: 500;
-		font-size: 14px;
-		line-height: 18px;
-		color: $black;
-	}
-	&_addtoCart {
-		@extend  .rounded-pill, .w-75;
-		color: #ffffff;
-		background-color: $black;
-		font-family: 'DM Sans';
+	&_PlusUpto {
+		// @extend .w-100;
+		font-family: "Mulish";
 		font-style: normal;
-		font-weight: 700;
-		font-size: 16px;
-		line-height: 21px;
-		letter-spacing: 0.32px;
-		text-transform: uppercase;
-		width: 212px;
+		font-weight: 400;
+		font-size: 11px;
+		line-height: 14px;
+		letter-spacing: 0.2px;
+		color: #000000;
+	}
+
+	&_pdPrice {
+		@extend .text-decoration-line-through;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 23px;
+		text-align: center;
+		letter-spacing: 0.36px;
+		color: #282828;
+	}
+
+	&_cashback{
+		@extend .shadow-sm, .mx-1, .p-2, .bg-body, .rounded;
+		width: 300pX;}
+
+		&_cartProductText {
+			font-family: "DM Sans";
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 16px;
+			color: $black;
+		}
+	
+		&_cartProductHeading {
+			@extend .text-start, .mx-4, .mb-0, .pb-0;
+			font-family: "DM Sans";
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 18px;
+			color: $black;
+		}
+		&_addtoCart {
+			@extend  .rounded-pill, .w-75;
+			color: #ffffff;
+			background-color: $black;
+			font-family: 'DM Sans';
+			font-style: normal;
+			font-weight: 700;
+			font-size: 16px;
+			line-height: 21px;
+			letter-spacing: 0.32px;
+			text-transform: uppercase;
+			width: 212px;
+		}
 	}
 
 
-}
+

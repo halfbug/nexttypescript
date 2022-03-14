@@ -80,7 +80,7 @@ export default function AddProductButton({ handleDelete }:IProps) {
   return (
     <>
       <Row className="">
-        <Col lg={3} md={6} sm={12}>
+        <Col xl={4} lg={6} sm={12}>
           <RButton
             variant="outline-primary"
             onClick={handleAddProduct}
