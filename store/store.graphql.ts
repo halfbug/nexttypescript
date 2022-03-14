@@ -551,10 +551,27 @@ const GET_PRODUCT_DETAIL = gql`
  }
 `;
 
+const GET_ACTIVE_STORES = gql`
+query ACTIVE_STORES {
+  activeStores{   
+    shop
+  }
+}
+`;
+
+const GET_QR_DEAL = gql`
+query GetQrDealLink($email: String!, $ordernumber: String!) {
+  getQrDealLink(email: $email, ordernumber: $ordernumber) {    
+    url
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS,
   GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
+  GET_ACTIVE_STORES, GET_QR_DEAL,
 };
