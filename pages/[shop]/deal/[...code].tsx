@@ -87,7 +87,8 @@ const GroupShop: NextPage = () => {
     // setallProducts(gsctx.allProducts);
 
     setallProducts(Array.from(new Set(
-      [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
+      // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
+      [...gsctx?.allProducts ?? []],
     )));
   }, [gsctx]);
 
