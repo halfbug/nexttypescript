@@ -18,6 +18,7 @@ import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import GSlogo from 'assets/images/p-detail-GSlogo.svg';
+import Icon from 'assets/images/cart-cone.svg';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -337,41 +338,48 @@ const ProductDetail = ({
               </div>
               <Button
                 variant="primary"
-                className="rounded-2 w-75 pt-2 mt-3 me-2"
+                className={styles.groupshop_Pd_addtoCart}
                 onClick={() => addToCart()}
                 disabled={isExpired || outofStock}
               >
                 {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
               </Button>
-              <ShareButton disabled={isExpired} placement="right-start" shareurl={productShareUrl(product?.id ?? '')} label="" className="m-1 mt-4 px-2 rounded-pill" />
-
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} md={6} />
-            <Col xs={12} md={6}>
-              { productCustomers.length > 1
+              <ShareButton
+                disabled={isExpired}
+                placement="right-start"
+                shareurl={productShareUrl(product?.id ?? '')}
+                label=""
+                className="m-1 my-3 px-2 rounded-pill"
+              />
+              <Col xs={12} md={12}>
+                { productCustomers.length > 1
               && (
               <>
-                <p className="p-1">
-                  🎉 Over
-                  {' '}
-                  {productCustomers.length}
-                  {' '}
-                  people have earned cashback and discounts on this item!
-                </p>
+                <Row className="d-flex align-items-center">
+                  <Col xs={1} className=" text-nowrap">
+                    <Icon />
+                  </Col>
+                  <Col xs={10}>
+                    Over
+                    {' '}
+                    {productCustomers.length}
+                    {' '}
+                    people have earned cashback and discounts on this item!
+                  </Col>
+                </Row>
                 <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
                 <ShareButton
                   disabled={isExpired}
                   placement="auto-end"
                   shareurl={productShareUrl(product?.id ?? '')}
-                  label=""
-                  className="m-1 px-2 rounded-pill"
+                  label="Invite more friends"
+                  className={styles.groupshop_InviteBtn}
                 />
               </>
               )}
 
+              </Col>
             </Col>
           </Row>
           {isExpired && (
