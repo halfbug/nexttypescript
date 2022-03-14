@@ -100,7 +100,7 @@ const Cart = ({
 
               </>
             ) : cartProducts.map((prd) => (
-              <Row className="px-0 mx-1 py-2 border-bottom">
+              <Row className="px-0 m-1 py-2 border-bottom">
                 <Col xs={4}>
                   <img
                     src={prd.selectedVariant?.image?.src ?? prd.featuredImage}
@@ -108,12 +108,12 @@ const Cart = ({
                     className={styles.groupshop_modal_cart_thumbnail}
                   />
                 </Col>
-                <Col className="text-start" xs={8}>
+                <Col className="px-1 d-block align-items-baseline" xs={8}>
 
-                  <div className="d-flex justify-content-between">
-                    <h5 className="w-50 mb-0">
+                  <div className="d-flex justify-content-between pb-0 mb-0">
+                    <div className={styles.groupshop_cartProductHeading}>
                       {prd.title}
-                    </h5>
+                    </div>
                     <h5>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
@@ -126,39 +126,41 @@ const Cart = ({
                       </span>
                     </h5>
                   </div>
-                  <p>
-                    {prd.selectedVariant?.selectedOptions?.map((op:any) => op.value).join(', ').replace('Default Title', '')}
-                  </p>
+                  <div className="text-start mx-4">
+                    <div className={['pt-0', styles.groupshop_cartProductText].join(' ')}>
+                      {prd.selectedVariant?.selectedOptions?.map((op:any) => op.value).join(', ').replace('Default Title', '')}
+                    </div>
 
-                  <p className="pt-2">Quantity</p>
-                  <ButtonGroup
-                    aria-label="product quantity"
-                    className={styles.groupshop_modal_cart_quantity}
-                  >
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => minusQuantity(prd.selectedVariant.id)}
-                      disabled={prd.selectedVariant.selectedQuantity < 2}
+                    <div className={['pt-2 pb-2', styles.groupshop_cartProductText].join(' ')}>Quantity</div>
+                    <ButtonGroup
+                      aria-label="product quantity"
+                      className={styles.groupshop_modal_cart_quantity}
                     >
-                      -
-                    </Button>
-                    <FormControl
-                      type="text"
-                      value={prd.selectedVariant.selectedQuantity}
-                    />
+                      <Button
+                        variant="outline-primary"
+                        onClick={() => minusQuantity(prd.selectedVariant.id)}
+                        disabled={prd.selectedVariant.selectedQuantity < 2}
+                      >
+                        -
+                      </Button>
+                      <FormControl
+                        type="text"
+                        value={prd.selectedVariant.selectedQuantity}
+                      />
 
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => plusQuantity(prd.selectedVariant.id)}
-                      disabled={
+                      <Button
+                        variant="outline-primary"
+                        onClick={() => plusQuantity(prd.selectedVariant.id)}
+                        disabled={
                         prd.selectedVariant?.selectedQuantity
                         >= prd.selectedVariant?.inventoryQuantity!
 }
-                    >
-                      +
-                    </Button>
-                  </ButtonGroup>
-                  <Button variant="link" className="ps-0 d-block" onClick={() => removeProduct(prd.selectedVariant.id)}>Remove</Button>
+                      >
+                        +
+                      </Button>
+                    </ButtonGroup>
+                    <Button variant="link" className={['ps-0 d-block ', styles.groupshop_cartProductText].join(' ')} onClick={() => removeProduct(prd.selectedVariant.id)}>Remove</Button>
+                  </div>
                 </Col>
               </Row>
 

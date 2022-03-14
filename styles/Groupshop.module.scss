@@ -686,6 +686,22 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	// 	color: rgba(29, 35, 41, 0.5);
 	// }
 	}
+	&_cartProductText {
+		font-family: "DM Sans";
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 16px;
+		color: $black;
+	}
+
+	&_cartProductHeading {
+		@extend .text-start, .mx-4, .mb-0, .pb-0;
+		font-family: "DM Sans";
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 18px;
+		color: $black;
+	}
 	&_addtoCart {
 		@extend  .rounded-pill, .w-75;
 		color: #ffffff;
@@ -699,4 +715,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		text-transform: uppercase;
 		width: 212px;
 	}
+
+
 }
