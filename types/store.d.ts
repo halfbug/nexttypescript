@@ -16,6 +16,9 @@ export interface IStore {
   settings?: ISettings;
   campaigns?: ICampaign[];
   singleEditCampaignId?: string;
+  plan?: any;
+  // plan?: 'LAUNCH' | 'EXPLORE' | 'GROWTH' | 'UNICORN' | undefined;
+  totalGroupShop?: number | undefined;
 }
 export interface ICampaign {
   id?: string | null | undefined;

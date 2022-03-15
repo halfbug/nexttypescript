@@ -15,6 +15,9 @@
         box-sizing: border-box;
         border-radius: 10px;
     }
+    &_no_display {
+        display: none;
+    }
     &_first_tier {
         width: 137px;
         height: 21px;

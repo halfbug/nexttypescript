@@ -11,6 +11,7 @@ query StoreName($shop: String!) {
   brandName
   industry
   logoImage
+
   settings{
     media
     brandColor
@@ -70,6 +71,17 @@ const UPDATE_STORE = gql`
     shop
     brandName
     installationStep
+    }
+  }
+`;
+const GET_STORE_DETAILS = gql`
+query store($id: String!) {
+  store(id: $id) {
+    id
+    shop
+    brandName
+    plan
+    totalGroupShop
     }
   }
 `;
@@ -574,4 +586,5 @@ export {
   GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
   GET_ACTIVE_STORES, GET_QR_DEAL,
+  GET_STORE_DETAILS,
 };

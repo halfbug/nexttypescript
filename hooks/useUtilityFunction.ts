@@ -75,8 +75,10 @@ export default function useUtilityFunction() {
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
+  // eslint-disable-next-line max-len
+  const findIndexInArray = useCallback((arr, searchField, searchValue) => arr.findIndex((item: any) => item[searchField] === searchValue), []);
 
   return {
-    cleanTypename, multiple5, isMultiple5, findInArray, setValue, filterArray,
+    cleanTypename, multiple5, isMultiple5, findInArray, setValue, filterArray, findIndexInArray,
   };
 }
