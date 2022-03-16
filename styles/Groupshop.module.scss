@@ -167,6 +167,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 		&_image {
 			height: 282px;
+			object-fit: contain;
 		}
 		&_overlay {
 			height: 282px;
