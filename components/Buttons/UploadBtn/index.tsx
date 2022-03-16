@@ -123,7 +123,7 @@ export default function UploadButton({
 UploadButton.defaultProps = {
   icon: <>
     <CloudUp className={styles['upload-logo--icon']} />
-    <Form.Label className="text-center">Upload Logo</Form.Label>
+    <Form.Label style={{ width: 'min-content' }}>Upload logo</Form.Label>
 
         </>,
   className: '',

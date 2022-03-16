@@ -125,11 +125,11 @@ export default function BrandInfo() {
             setFieldValue={setFieldValue}
             field="logoImage"
             value={values.logoImage}
+            className={styles.welcome_Obupload}
             url={getKeyFromS3URL(values.logoImage)}
           />
           <Col lg={9} className="d-flex align-items-center justify-content-start">
-            <Form.Text className="text-muted text-center d-flex align-self-center mx-2">
-
+            <Form.Text className={['text-center d-flex align-self-center mx-2', styles.welcome_format].join(' ')}>
               Under 5 MB
               <br />
               (Formats: PNG, JPG, JPEG)
@@ -151,7 +151,9 @@ export default function BrandInfo() {
               defaultValue=""
               value={getKeyFromS3URL(values.industry)}
             >
-              <option value="" className={styles.welcome_select}>Click to select</option>
+              <option className={styles.welcome_select} style={{ opacity: '0.1' }}>
+                Click to select
+              </option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>

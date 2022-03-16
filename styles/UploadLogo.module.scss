@@ -13,13 +13,24 @@
 	overflow: hidden;
 
 	label {
-		@extend .text-center, .mx-1, .mt-2;
-		font-size: $small-font-size;
+		@extend .d-flex, .flex-row, .text-center, .mx-1, .mt-2;
+		 align-self: center !important;
+		// font-size: $small-font-size;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: 600;
+		font-size: 12px;
+		text-align: center;
+		color: #1d2329;
+		width: 108px; 
 	}
 
 	&--icon {
+		@extend .d-flex, .flex-row,.justify-content-center;
 		align-self: center !important;
-		height: 1.5rem;
+		// height: 1.5rem;
+		width: max-content;
+		height: 27.29px;
 	}
 
 	&--progress {

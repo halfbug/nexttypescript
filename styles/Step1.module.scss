@@ -53,15 +53,15 @@
 		color: #161414;
 	}
 
-	// &_format {
-	// 	@extend .d-flex, .align-self-center, .mx-2;
-	// 	font-family: Mulish;
-	// 	font-style: normal;
-	// 	font-weight: normal;
-	// 	font-size: 14px;
-	// 	line-height: 18px;
-	// 	text-align: center;
-	// }
+	&_format {
+		@extend .d-flex, .align-self-center, .mx-3;
+		font-family: Mulish;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 18px;
+		text-align: center;
+	}
 	p {
 		@extend .py-0;
 		font-family: Mulish;
@@ -111,5 +111,13 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 2.5vw;
+	}
+	&_Obupload {
+		background: #fcfcfc !important;
+		border: 1px dashed #dddedf;
+		padding: 5px;
+		width: 108px;
+		height: 99.96px;
+		border-radius: 3px !important;
 	}
 }
