@@ -185,7 +185,7 @@ export default function DBSettings({
               <Row>
                 <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
                   <UploadButton
-                    icon={(<WhiteButton>Upload</WhiteButton>)}
+                    icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
                     setFieldValue={setFieldValue}
                     field="imageUrl"
                     className={styles.ob_settings__uploadbtn}
