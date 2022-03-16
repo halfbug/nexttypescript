@@ -217,7 +217,7 @@ const Cart = ({
           </div>
           {!isCartEmpty && (
           <Container fluid className="py-3 my-2 ">
-            <Row>
+            <Row className="mx-3">
               <Col className="text-start mx-2"><h3>TOTAL</h3></Col>
               <Col className="text-end mx-2">
                 <h3>
