@@ -209,6 +209,7 @@ export default function DBRewards({
             Maximum
             {' '}
             <ToolTip
+              placement="bottom"
               className={styles.dashboard_campaign__pop}
               icon={<InfoCircle size={10} />}
               popContent="This is the maximum discount and cashback that you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
