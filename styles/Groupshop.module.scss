@@ -227,7 +227,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_addedbyname {
 				@extend .groupshop__pcard_tag;
 				// @extend .p-1, .py-2, .rounded-pill, .m-1;
-				background-color: white;
+				background-color:transparent;
 				top: 10px;
 				// right: 15px;
 				position: absolute;
