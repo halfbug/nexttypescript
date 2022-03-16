@@ -16,7 +16,7 @@ import { Member } from 'types/groupshop';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 type ProductGridProps = {
-  products : IProduct[]| undefined,
+  products: IProduct[] | undefined,
   maxrows?: number,
   xs?: number,
   sm?: number,
@@ -25,7 +25,7 @@ type ProductGridProps = {
   xl?: number,
   xxl?: number,
   addProducts(e: boolean): any;
-  handleDetail(prd:any):void;
+  handleDetail(prd: any): void;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
@@ -82,15 +82,15 @@ const ProductGrid = ({
                   </span>
                   <div className={styles.groupshop__pcard_tag_boughtby}>
                     {topFive(getBuyers(prod.id)?.map(
-                      (member : Member) => (
+                      (member: Member) => (
                         <span className={styles.groupshop__pcard_tag_buyer}>
-                          { formatName(member.orderDetail.customer)}
+                          {formatName(member.orderDetail.customer)}
                         </span>
                       ),
                     ))}
 
                     {getBuyers(prod.id).length > 0 && (
-                    <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                      <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                   </div>
                   {dealProducts?.filter(
                     ({ productId }) => productId === prod.id,
@@ -109,13 +109,13 @@ const ProductGrid = ({
                     return htmldata;
                   })}
                 </button>
-)}
+              )}
             >
               <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-              { prod.orders?.length > 0 && (
-              <p className="text-center mb-1 fs-5">
-                {`🔥 ${prod.orders?.length} friends shopped`}
-              </p>
+              {prod.orders?.length > 0 && (
+                <p className="text-center mb-1 fs-5">
+                  {`🔥 ${prod.orders?.length} friends shopped`}
+                </p>
               )}
 
               <h5 className="pt-2 text-center fw-bold">
@@ -133,7 +133,7 @@ const ProductGrid = ({
                 variant="primary"
                 className={styles.groupshop_addtoCart}
                 onClick={() => handleDetail(prod)}
-                  // () => { setsProduct(prod); setshowDetail(true); }}
+                // () => { setsProduct(prod); setshowDetail(true); }}
                 disabled={isExpired}
               >
                 Add to Cart
@@ -162,21 +162,18 @@ const ProductGrid = ({
 
                   </Button>
                 </>
-)}
+              )}
             >
               <h5 className="text-center fw-bold text-truncate">Don’t see what you like?</h5>
 
-              <p className="text-center mb-1 fs-5">
+              <p className="text-center  fs-5">
                 Add your favorite product
               </p>
-
-              <p className="text-center fw-bold fs-5 mb-0">
-                <br />
-                {' '}
-              </p>
+              <br />
+              <br />
               <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>
-              <Button variant="outline-primary" className="m-1 rounded-pill px-2" disabled>
-                <Send size={18} />
+              <Button variant="outline-primary" className={styles.groupshop_disableShareCircle} disabled>
+                <Send size={16} />
               </Button>
             </ProductCard>
           </Col>
@@ -184,32 +181,33 @@ const ProductGrid = ({
       </Row>
       <Row>
         <Col>
-          { totalPages > 1 && (
-          <Pagination className={styles.groupshop_pagination}>
-            <Pagination.Prev
-              className={styles.groupshop_pagination_prev}
-              onClick={() => setCurrentPage(
-                (currentPage > 1) ? currentPage - 1 : currentPage,
-              )}
-            />
+          {totalPages > 1 && (
+            <Pagination className={styles.groupshop_pagination}>
+              <Pagination.Prev
+                className={styles.groupshop_pagination_prev}
+                onClick={() => setCurrentPage(
+                  (currentPage > 1) ? currentPage - 1 : currentPage,
+                )}
+              />
 
-            {getPageNumbers().map((n, index) => (
-              <Pagination.Item
-                active={currentPage === n}
-                onClick={() => setCurrentPage(n)}
-                className={currentPage === n ? styles.gropushop_activePage : styles.groupshop_page}
-              >
-                {n}
-              </Pagination.Item>
-            ))}
+              {getPageNumbers().map((n, index) => (
+                <Pagination.Item
+                  active={currentPage === n}
+                  onClick={() => setCurrentPage(n)}
+                  className={currentPage === n
+                    ? styles.gropushop_activePage : styles.groupshop_page}
+                >
+                  {n}
+                </Pagination.Item>
+              ))}
 
-            <Pagination.Next
-              className={styles.groupshop_pagination_next}
-              onClick={() => setCurrentPage(
-                (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
-              )}
-            />
-          </Pagination>
+              <Pagination.Next
+                className={styles.groupshop_pagination_next}
+                onClick={() => setCurrentPage(
+                  (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
+                )}
+              />
+            </Pagination>
           )}
         </Col>
       </Row>
