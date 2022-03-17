@@ -60,7 +60,7 @@ const Cart = ({
               <h3>Cart</h3>
               <Row className="d-flex justify-content-center">
                 <Col sm={10} className={styles.groupshop_cart_spend}>
-                  <IconMoney className="col-1" />
+                  <IconMoney className=" mx-1 " />
                   Spend $40 to
                   {' '}
                   <strong>
@@ -192,9 +192,6 @@ const Cart = ({
                         </span>
                       </h5>
 
-                      {/* <p className="text-center mb-1 fs-5">
-                        {`🔥 ${item.orders?.length} friends shopped`}
-                      </p> */}
                       <Button
                         variant="primary"
                         className="rounded-pill w-50"
