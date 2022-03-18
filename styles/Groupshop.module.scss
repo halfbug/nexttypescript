@@ -336,6 +336,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_body {
 				@extend .m-0, .p-0, .text-center;
 				font-family: "DM Sans";
+				overflow-x: hidden;
 				h3 {
 					@extend .fw-bold;
 				}
