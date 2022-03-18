@@ -725,7 +725,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_addtoCart {
 			@extend  .rounded-pill, .w-75;
 			color: #ffffff;
-			background-color: $black;
+			background-color: $addtocart;
 			font-family: 'DM Sans';
 			font-style: normal;
 			font-weight: 700;
