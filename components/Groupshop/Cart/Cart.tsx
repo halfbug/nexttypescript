@@ -5,7 +5,7 @@ import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   ButtonGroup,
-  Col, Container, FormControl, Offcanvas, Row,
+  Col, Container, FormControl, Offcanvas, Row, Badge,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useCart from 'hooks/useCart';
@@ -157,57 +157,66 @@ const Cart = ({
               </Row>
 
             )) }
-            <Container fluid>
+            <Container>
               {suggestedProd && (
-              <Row>
+              <Row className="p-4">
                 {/* <ProductGrid products={suggestedProd} /> */}
                 {suggestedProd.map((item) => (
-                  <Col xs={6} className="m-0 p-1 border-1 d-flex justify-content-center">
+                  <Col xs={6} className=" py-1 px-0 mb-1 border-2 d-flex justify-content-center">
                     <ProductCard
                       type="small"
                       isrc={item.featuredImage}
                       imgOverlay={
-                        // eslint-disable-next-line react/jsx-wrap-multilines
+
                         (
-                          <span
+                          <Badge
+                            bg="light"
+                            text="dark"
                             className={styles.groupshop__pcard_tag_addedbytop}
                           >
                             {currencySymbol}
                             {Math.round(+(item.price) - +(dPrice(+(item?.price || 0)).toFixed(1)))}
                             {' '}
                             OFF
-                          </span>
+                          </Badge>
                         )
                       }
                     >
-                      <h5 className="text-center fw-bold text-truncate">{item.title}</h5>
-                      <h5 className="pt-1 text-center fw-bold">
-                        <span className="text-decoration-line-through">
-                          {currencySymbol}
-                          {item?.price}
-                        </span>
-                        {' '}
-                        <span>
-                          {currencySymbol}
-                          {dPrice(+(item?.price || 0)).toFixed(1)}
-                        </span>
-                      </h5>
-
-                      <Button
-                        variant="primary"
-                        className="rounded-pill w-50"
-                        onClick={() => handleDetail(item)}
-                      >
-                        Add
-                      </Button>
+                      <div className={styles.groupshop__pcard_cardBody_PDetail}>
+                        <div className={styles.groupshop__pcard_cardBody_pName}>{item.title}</div>
+                        <div className={styles.groupshop__pcard_cardBody_PDesc}>
+                          5 friends shopped
+                        </div>
+                        <Row className="mt-1 d-flex align-items-center">
+                          <Button
+                            variant="primary"
+                            className={styles.groupshop__pcard_cardBody_addBtn}
+                            onClick={() => handleDetail(item)}
+                            // onClick={() => console.log({ item})}
+                          >
+                            Add
+                          </Button>
+                          <div className=" col-7 fw-bold text-nowrap">
+                            <span className="text-decoration-line-through  ">
+                              {currencySymbol}
+                              {item?.price}
+                            </span>
+                            {' '}
+                            <span>
+                              {currencySymbol}
+                              {dPrice(+(item?.price || 0)).toFixed(1)}
+                            </span>
+                          </div>
+                        </Row>
+                      </div>
                     </ProductCard>
                   </Col>
                 ))}
               </Row>
               )}
             </Container>
-            <div className=" gap-2 text-center mt-5 mb-4">
-              <Button variant="primary" size="lg" className={styles.groupshop_emptyCardBtn} onClick={() => handleClose()}>
+            <div className=" gap-2 text-center my-3 mb-4">
+              <Button variant="primary" size="lg" className={styles.groupshop_cart_goBackShoppingBtn} onClick={() => handleClose()}>
                 Get back to shopping
               </Button>
 

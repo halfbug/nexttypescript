@@ -32,11 +32,11 @@ const ProductCard = ({
     case 'small':
       return (
         <Card {...rest} className={[styles.groupshop__pcard_small, rest.className].join(' ')}>
-          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
-          <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
+          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
+          <Card.ImgOverlay className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
-          <Card.Body>
+          <Card.Body className="styles.groupshop__pcard_cardBody">
             {children}
           </Card.Body>
         </Card>
