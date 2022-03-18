@@ -76,7 +76,7 @@ const ProductGrid = ({
             <ProductCard
               isrc={prod.featuredImage}
               imgOverlay={(
-                <button onClick={() => handleDetail(prod)} type="button" className="border-0">
+                <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
                     {`${percentage}% OFF`}
                   </span>

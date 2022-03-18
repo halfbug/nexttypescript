@@ -761,12 +761,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			border-color: $brand-gradiant !important;
 	
 	}
-	//for disable share button in product grid
 	&_disableShareCircle{
 		@extend .m-1, .rounded-circle, .p-1;
 		width: 35px;
 		height: 34px;
 	}
+	&_btnBgClr{
+		@extend .border-0;
+		background-color: transparent;
+	}
+
 	}
 
 
