@@ -152,7 +152,7 @@ export default function OBCampaign() {
           <Form.Check
             inline
             label="Best sellers"
-            className={styles.dashboard_campaign_radio_label}
+            className={values.criteria === 'bestseller' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
             onChange={handleChange}
             type="radio"
             name="criteria"
@@ -165,7 +165,7 @@ export default function OBCampaign() {
             inline
             onChange={handleChange}
             label="Newest products"
-            className={styles.dashboard_campaign_radio_label}
+            className={values.criteria === 'newest' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
             type="radio"
             name="criteria"
             value="newest"
@@ -180,7 +180,7 @@ export default function OBCampaign() {
           <Form.Check
             inline
             label="Specific products/collections (up to 80 products)"
-            className={styles.dashboard_campaign_radio_label}
+            className={values.criteria === 'custom' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
             onChange={handleChange}
             onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
             type="radio"

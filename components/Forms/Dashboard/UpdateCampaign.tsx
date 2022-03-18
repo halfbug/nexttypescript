@@ -58,7 +58,7 @@ export default function UpdateCampaign() {
   });
   const { findInArray } = useUtilityFunction();
   const { campaign, updateCampaign } = useCampaign();
-  // refactor it with useCampaign()
+
   React.useEffect(() => {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
@@ -124,7 +124,7 @@ export default function UpdateCampaign() {
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
-            // products: criteria === 'custom' ? store?.newCampaign?.productsArray : campaign?.products,
+
             products: customProducts,
             addableProducts,
             settings: {
@@ -151,25 +151,17 @@ export default function UpdateCampaign() {
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     },
   });
-  // console.log({ selectedProducts });
+
   console.log({ campaign });
   console.log({ store });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
-      // console.log(campaign?.products);
-      // console.log('//////////////');
-
       if (campaign?.products) {
         setselectedProducts(findInArray(campaign?.products, store?.products || [], null, "id"));
-        // console.log(findInArray(campaign?.products, store?.products || [], null, "id"));
       }
     } else if (ins === "addproduct" && campaign?.addableProducts) {
-      // console.log(campaign?.addableProducts);
-      // console.log('//////////////');
-
       setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
-      // console.log(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
     }
 
     if (ins === '2') {
@@ -195,10 +187,9 @@ export default function UpdateCampaign() {
       setFieldValue('customColor', '');
       setFieldValue('customBg', '');
     }
-    // if ((field !== 'imageUrl' && field !== 'media' && field !== 'youtubeUrl')) {
-    // }
+
     setFieldValue(field, value);
-    // console.log({ field });
+
     handleSubmit();
   };
   const handleForm = (field: string, value: string) => {
@@ -250,7 +241,7 @@ export default function UpdateCampaign() {
                       <Form.Check
                         inline
                         label="Best sellers"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'bestseller' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         onChange={(e) => {
                           handleChange(e);
                           handleSubmit();
@@ -259,7 +250,6 @@ export default function UpdateCampaign() {
                         name="criteria"
                         isInvalid={touched.criteria && !!errors.criteria}
                         value="bestseller"
-                  // onClick={() => setValue('criteria', 'bestseller')}
                         checked={values.criteria === 'bestseller'}
                       />
                       <Form.Check
@@ -269,12 +259,11 @@ export default function UpdateCampaign() {
                           handleSubmit();
                         }}
                         label="Newest products"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'newest' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         type="radio"
                         name="criteria"
                         value="newest"
                         isInvalid={touched.criteria && !!errors.criteria}
-                  // onClick={() => setValue('criteria', 'newest')}
                         checked={values.criteria === 'newest'}
                       />
                     </Col>
@@ -284,14 +273,13 @@ export default function UpdateCampaign() {
                       <Form.Check
                         inline
                         label="Specific products/collections (up to 80 products)"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'custom' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         onChange={(e) => {
                           handleChange(e);
                           handleSubmit();
                         }}
                         onClick={() => {
                           setdisableBtn(false);
-                          // setValue('criteria', 'custom');
                         }}
                         type="radio"
                         name="criteria"
@@ -299,7 +287,7 @@ export default function UpdateCampaign() {
                         value="custom"
                         checked={values.criteria === 'custom'}
                       />
-                      {/* {values.criteria === 'bestseller' ? setdisableBtn(false) : setdisableBtn(true)} */}
+
                     </Col>
                     <Form.Control.Feedback type="invalid">
                       {errors.criteria}
@@ -354,7 +342,7 @@ export default function UpdateCampaign() {
                   </Row>
                   <Row className="text-muted"><p>When enabled, customers can access discounts from existing Groupshop pages</p></Row>
                   <Row className="mt-2">
-                    {/* <Col xs={3} md={4}> </Col> */}
+
                     <Col xs={12} md={6} className="text-right">
                       <ToggleButtonGroup
                         type="radio"

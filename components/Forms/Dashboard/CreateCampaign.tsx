@@ -62,8 +62,6 @@ export default function CreateCampaign() {
   });
   const { clearNewCampaign, updateCampaign } = useCampaign();
   React.useEffect(() => {
-    // console.log('IM IN CREATE HOOK');
-
     clearNewCampaign();
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: '' } });
   }, []);
@@ -209,12 +207,10 @@ export default function CreateCampaign() {
         }
         return item;
       });
-      // console.log("🚀 ~ file: CreateCampaign.tsx ~ line 123 ~ onSubmit: ~ newObj", newObj);
-      // console.log('🚀 ~ store', store);
+
       Router.push(`/${shopName}/campaign`);
     },
   });
-  // console.log({ errors });
 
   React.useEffect(() => {
     if (ins === '2') {
@@ -224,15 +220,12 @@ export default function CreateCampaign() {
       if (store?.newCampaign?.addableProductsArray?.length) {
         setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
       }
-      // setTimeout(handleSubmit, 2000);
+
       setParams({ ins: undefined });
     }
   }, [ins]);
 
-  // console.log({ store });
-
   const handleCustomBg = (field: string, value: string) => {
-    // empty other bg and keep only one
     if (field === 'customBg') {
       setFieldValue('imageUrl', '');
       setFieldValue('youtubeUrl', '');
@@ -241,10 +234,8 @@ export default function CreateCampaign() {
       setFieldValue('customColor', '');
       setFieldValue('customBg', '');
     }
-    // if ((field !== 'imageUrl' && field !== 'media' && field !== 'youtubeUrl')) {
-    // }
+
     setFieldValue(field, value);
-    // handleSubmit();
   };
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
@@ -253,20 +244,14 @@ export default function CreateCampaign() {
     setParams({ ins: 'addproduct' });
   };
   const { setValue } = useUtilityFunction();
-  // console.log({ store });
-  // console.log("//////////////////");
+
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);
-    // const mycamp = updateCampaign(campaignid, 'products', []);
-    // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
-    // handleSubmit();
   };
   const handleDeleteAddProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
     setFieldValue('addableProducts', []);
-    // const mycamp = updateCampaign(campaignid, 'addableProducts', []);
-    // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
   };
 
   return (
@@ -304,12 +289,7 @@ export default function CreateCampaign() {
                     {values.name?.length}
                     /20
                   </Form.Text>
-                  {/* <Col lg={3} className="mx-0 mt-1 text-start">
-                  <Form.Text className={styles.dashboard_campaign_text_limit}>
-                    {values.name?.length}
-                    /20
-                  </Form.Text>
-                </Col> */}
+
                 </Col>
               </Row>
             </section>
@@ -345,7 +325,7 @@ export default function CreateCampaign() {
                       <Form.Check
                         inline
                         label="Best sellers"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'bestseller' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         onChange={(e) => handleChange(e)}
                         type="radio"
                         name="criteria"
@@ -358,7 +338,7 @@ export default function CreateCampaign() {
                         inline
                         onChange={(e) => handleChange(e)}
                         label="Newest products"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'newest' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         type="radio"
                         name="criteria"
                         value="newest"
@@ -373,7 +353,7 @@ export default function CreateCampaign() {
                       <Form.Check
                         inline
                         label="Specific products/collections (up to 80 products)"
-                        className={styles.dashboard_campaign_radio_label}
+                        className={values.criteria === 'custom' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                         onChange={(e) => handleChange(e)}
                         onClick={() => {
                           setdisableBtn(false);
@@ -393,7 +373,6 @@ export default function CreateCampaign() {
                   </Row>
                   <ProductButton
                     disableBtn={disableBtn}
-                  // totalProducts={(values.products?.length) ? values.products?.length : 0}
                     handleDelete={handleDeleteProduct}
                   />
                   <Row className="mt-4 border-top">
@@ -422,7 +401,7 @@ export default function CreateCampaign() {
                       <AddProductButton
                         handleDelete={handleDeleteAddProduct}
                       />
-                      {/* <WhiteButton onClick={handleAddProduct}>Add products</WhiteButton> */}
+
                     </Col>
                   </Row>
                 </section>
@@ -450,7 +429,7 @@ export default function CreateCampaign() {
                     </p>
                   </Row>
                   <Row>
-                    {/* <Col xs={3} md={4}> </Col> */}
+
                     <Col xs={12} md={6} className="text-right">
 
                       <ToggleButtonGroup
@@ -551,7 +530,6 @@ export default function CreateCampaign() {
             type="submit"
             onClick={(e) => {
               setFieldValue('isActive', true);
-              // handleSubmit();
             }}
           >
             Save and activate
@@ -562,7 +540,6 @@ export default function CreateCampaign() {
             type="submit"
             onClick={(e) => {
               setFieldValue('isActive', false);
-              // handleSubmit();
             }}
           >
             Save for later

@@ -64,10 +64,15 @@
         font-weight: 500;
         font-size: 14px;
         color: #1d2329;
-        // :active,
-        // :focus {
-        //     font-weight: 700;
-        // }
+ 
+    }
+
+    &_active_radio_option{
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        color: #1d2329;
     }
 
     &__box_1 {
