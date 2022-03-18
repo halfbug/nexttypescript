@@ -84,11 +84,28 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 	&_copy2clipboard {
 		@extend .w-100, .rounded-3, .border, .d-flex, .justify-content-between, .py-1, .px-3, .align-items-center;
+		transform: translateY(0px) !important;
+		border-image-slice: 1!important;
+		border-radius: 8px !important;
+		overflow: hidden;
+		border-image-source:$copyclip!important;
+			border-style: solid;
+			border-image:$copyclip;
+			-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
 		span {
 			@extend .w-75, .text-truncate;
 		}
 		button {
+			@extend .rounded-3;
 			min-width: auto !important;
+			border-radius: 8px !important;
+		}
+		&_copybtn {
+			border-radius: 8px !important;
+			background: #ffffff;
+			border-image-slice: 1;
+			border-width: 1px;
+			border-image-source: linear-gradient(180deg, #ccb2f9 0%, #ecd5d0 100%) !important;
 		}
 	}
 
@@ -227,7 +244,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_addedbyname {
 				@extend .groupshop__pcard_tag;
 				// @extend .p-1, .py-2, .rounded-pill, .m-1;
-				background-color:transparent;
+				background-color: transparent;
 				top: 10px;
 				// right: 15px;
 				position: absolute;
@@ -658,7 +675,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			color: $black;
 		}
 		&_checkout {
-			@extend  .my-2;
+			@extend .my-2;
 			color: #ffffff;
 			background-color: $black;
 			font-family: "DM Sans";
@@ -703,76 +720,72 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		color: #282828;
 	}
 
-	&_cashback{
+	&_cashback {
 		@extend .shadow-sm, .mx-1, .p-2, .bg-body, .rounded;
-		width: 300pX;}
-
-		&_cartProductText {
-			font-family: "DM Sans";
-			font-weight: 400;
-			font-size: 12px;
-			line-height: 16px;
-			color: $black;
-		}
-	
-		&_cartProductHeading {
-			@extend .text-start, .mx-4, .mb-0, .pb-0;
-			font-family: "DM Sans";
-			font-weight: 500;
-			font-size: 14px;
-			line-height: 18px;
-			color: $black;
-		}
-		&_addtoCart {
-			@extend  .rounded-pill, .w-75;
-			color: #ffffff;
-			background-color: $addtocart;
-			font-family: 'DM Sans';
-			font-style: normal;
-			font-weight: 700;
-			font-size: 16px;
-			line-height: 21px;
-			letter-spacing: 0.32px;
-			text-transform: uppercase;
-			width: 212px;
-		}
-		&_Pd_addtoCart {
-			@extend .rounded-2, .w-75, .me-2;
-			color: #ffffff;
-			background-color: $black;
-			font-family: "DM Sans";
-			font-style: normal;
-			font-weight: 700;
-			font-size: 16px;
-			line-height: 21px;
-			letter-spacing: 0.32px;
-			text-transform: uppercase;
-			width: 276px;
-			height: 43px;
-		}
-	
-		&_InviteBtn {
-			@extend .m-1, .float-end;
-			font-family: "DM Sans";
-			font-style: normal;
-			font-weight: 500;
-			font-size: 10px;
-			line-height: 13px;
-			color: $black;
-			border-color: $brand-gradiant !important;
-	
+		width: 300px;
 	}
-	&_disableShareCircle{
+
+	&_cartProductText {
+		font-family: "DM Sans";
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 16px;
+		color: $black;
+	}
+
+	&_cartProductHeading {
+		@extend .text-start, .mx-4, .mb-0, .pb-0;
+		font-family: "DM Sans";
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 18px;
+		color: $black;
+	}
+	&_addtoCart {
+		@extend .rounded-pill, .w-75;
+		color: #ffffff;
+		background-color: $addtocart;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 21px;
+		letter-spacing: 0.32px;
+		text-transform: uppercase;
+		width: 212px;
+	}
+	&_Pd_addtoCart {
+		@extend .rounded-2, .w-75, .me-2;
+		color: #ffffff;
+		background-color: $black;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 21px;
+		letter-spacing: 0.32px;
+		text-transform: uppercase;
+		width: 276px;
+		height: 43px;
+	}
+
+	&_InviteBtn {
+		@extend .m-1, .float-end;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 500;
+		font-size: 10px;
+		line-height: 13px;
+		color: $black;
+		border-color: $brand-gradiant !important;
+	}
+	&_disableShareCircle {
 		@extend .m-1, .rounded-circle, .p-1;
 		width: 35px;
 		height: 34px;
 	}
-	&_btnBgClr{
+	&_btnBgClr {
 		@extend .border-0;
 		background-color: transparent;
 	}
-
-	}
-
-
-
+}

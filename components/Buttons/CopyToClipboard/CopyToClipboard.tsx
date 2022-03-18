@@ -20,7 +20,7 @@ const CopyToClipboard = ({
         text={value}
         onCopy={() => setCopied(!copied)}
       >
-        <Button variant="secondary">{copied ? 'Copied' : 'Copy'}</Button>
+        <Button variant="outline" className={[' rounded-3 float-end', styles.groupshop_copy2clipboard_copybtn].join(' ')}>{copied ? 'Copied' : 'Copy'}</Button>
       </CopyButton>
     </div>
   );
