@@ -262,8 +262,8 @@ const ProductDetail = ({
                 </span>
                 {cashBack && (
                 <Row className={styles.groupshop_cashback}>
-                  <Col className="d-flex align-items-center mx-0">
-                    <div className={[' col-8 me-0 mx-0 px-0 ', styles.groupshop_PlusUpto].join(' ')}>
+                  <Col className=" mx-0">
+                    <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
                       Plus up to
                       {' '}
                       <strong>
@@ -276,8 +276,8 @@ const ProductDetail = ({
                       </strong>
                       with
                       {' '}
+                      <GSlogo className=" ms-0 mx-0" />
                     </div>
-                    <GSlogo className="col-4 ms-0 mx-0" />
                   </Col>
                 </Row>
                 )}
