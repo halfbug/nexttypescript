@@ -85,13 +85,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&_copy2clipboard {
 		@extend .w-100, .rounded-3, .border, .d-flex, .justify-content-between, .py-1, .px-3, .align-items-center;
 		transform: translateY(0px) !important;
-		border-image-slice: 1!important;
+		border-image-slice: 1 !important;
 		border-radius: 8px !important;
 		overflow: hidden;
-		border-image-source:$copyclip!important;
-			border-style: solid;
-			border-image:$copyclip;
-			-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+		border-image-source: $copyclip !important;
+		border-style: solid;
+		border-image: $copyclip;
+		-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
 		span {
 			@extend .w-75, .text-truncate;
 		}
@@ -345,6 +345,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_cart {
 			// @extend .groupshop_modal;
 			// width: 430px !important;
+			&_heading {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 700;
+				font-size: 24px;
+				line-height: 31px;
+				color: $black;
+			}
+
 			&_close {
 				flex-direction: row-reverse !important;
 				@extend .pb-0;
@@ -663,6 +672,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		letter-spacing: 0.2px;
 		color: #000000;
 	}
+	&_emptyCardHeading {
+		@extend .d-flex, .justify-content-center;
+		font-family: "DM Sans";
+		width: 277px;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 23px;
+		text-align: center;
+		color: $black;
+		margin-left: 50px;
+	}
 
 	&_cart {
 		&_totalSave {
@@ -690,7 +711,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .px-3, .ms-0;
 			font-family: "DM Sans";
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 500;
 			font-size: 14px;
 			line-height: 18px;
 			text-align: center;

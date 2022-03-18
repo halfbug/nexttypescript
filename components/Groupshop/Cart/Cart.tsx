@@ -57,7 +57,7 @@ const Cart = ({
 }
           >
             <div className="p-2">
-              <h3>Cart</h3>
+              <h3 className={styles.groupshop_modal_cart_heading}>Cart</h3>
               <Row className="d-flex justify-content-center">
                 <Col sm={10} className={styles.groupshop_cart_spend}>
                   <IconMoney className=" mx-1 " />
@@ -82,12 +82,13 @@ const Cart = ({
             <hr />
             {cartProducts.length < 1 ? (
               <>
-                <div className={[' mt-5', styles.groupshop_emptyCardHeading].join(' ')}>
-                  Your cart is empty!
-                </div>
-                <div className={[' mb-4', styles.groupshop_emptyCardHeading].join(' ')}>
-                  Don’t miss out on these limited time offers.
-                </div>
+                <Row className={[' mt-5 mb-2 .d-flex, .justify-content-center', styles.groupshop_emptyCardHeading].join(' ')}>
+                  <div className="mb-2"> Your cart is empty!</div>
+                  Don’t miss out on these limited
+                  <br />
+                  time offers.
+                </Row>
+                <br />
 
               </>
             ) : cartProducts.map((prd) => (
