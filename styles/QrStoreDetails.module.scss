@@ -1,3 +1,198 @@
-.qrcontainer{
-    color: #2b343d;
-} 
+@import "./variables.scss";
+
+.QRContainer {
+  &__Logo {
+    @media (max-width: 767px) {
+      text-align: center;
+      padding-bottom: 50px;
+      padding-top: 50px;
+    }
+  }
+
+  &__form__wrapper {
+    padding: 40px;
+    font-size: 18px;
+    margin: 0;
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
+  }
+
+  &__content__heading {
+    max-width: 410px;
+
+    p {
+      padding-top: 50px;
+      margin: 0;
+      font-size: 18px;
+    }
+  }
+
+  &__content__container {
+    padding-top: 80px;
+    padding-left: 25px;
+
+    @media (max-width: 767px) {
+      padding-right: 25px;
+    }
+
+    hr {
+      border: 0.5px solid #000000;
+    }
+  }
+
+  &__form__container {
+    max-width: 300px;
+    padding-top: 20px;
+
+    @media (max-width: 767px) {
+      max-width: none;
+    }
+
+    input {
+      background: #f7f7fa;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #d3d3d8;
+
+      &::placeholder {
+        color: #7b7b7d;
+      }
+
+      .invalid-feedback {
+        font-size: 12px;
+      }
+    }
+
+    label {
+      color: #000000;
+      font-size: 16px;
+    }
+
+    button {
+      background: #202020;
+      border-radius: 0;
+      font-size: 18px;
+      padding: 10px 18px;
+    }
+  }
+
+  &__text__how {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    a {
+      font-size: 14px;
+      color: #7f7f7f;
+    }
+  }
+
+  &__bottom__content {
+    padding-top: 100px;
+    width: 85%;
+
+    @media (max-width: 767px) {
+      width: 100%;
+      text-align: center;
+    }
+
+    p {
+      color: #000000;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    a {
+      color: #000000;
+    }
+
+    svg {
+      margin-right: 20px;
+    }
+  }
+
+  &__social__media {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+    align-items: center;
+
+    @media (max-width: 767px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__desktopImage {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__mobileImage {
+    display: none;
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
+
+  &__btnGroupShop {
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+  }
+
+  &__link {
+    @media (max-width: 767px) {
+      p {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  &__YR__Logo {
+    @media (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  &__YR__mobileLogo {
+    display: none;
+    @media (max-width: 767px) {
+      text-align: center;
+      display: block;
+      padding-bottom: 30px;
+    }
+  }
+
+  &__content__congrats {
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+    h2 {
+      padding-top: 30px;
+    }
+
+    p {
+      max-width: 450px;
+      margin: 0;
+      font-size: 18px;
+      padding-bottom: 30px;
+      font-weight: 500;
+
+      @media (max-width: 767px) {
+        max-width: none;
+      }
+    }
+  }
+
+  &__btn__goToStore {
+    a {
+      background: #202020;
+      color: #ffffff !important;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}

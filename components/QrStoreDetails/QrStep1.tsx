@@ -1,12 +1,27 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
-import {
-  Form, Button, Row, Col, ToggleButtonGroup, ToggleButton,
-} from 'react-bootstrap';
 import * as yup from 'yup';
 import useAlert from 'hooks/useAlert';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { GET_QR_DEAL } from 'store/store.graphql';
+import Image from 'next/image';
+
+// import react bootstrap components
+import {
+  Form, Button, Container, Row, Col,
+} from 'react-bootstrap';
+
+// import styles
+import styles from 'styles/QrStoreDetails.module.scss';
+
+// import images
+import HeadLogo from 'assets/images/QRLogo.svg';
+import QR from 'assets/images/qr-screen-1.png';
+import QRMobile from 'assets/images/qr-screen-mobile-1.png';
+import Instagram from 'assets/images/instagram.svg';
+import Pinterest from 'assets/images/pinterest.svg';
+import Twitter from 'assets/images/twitter.svg';
+import Facebook from 'assets/images/facebook.svg';
 
 export interface IQRCode {
   email: string;
@@ -18,13 +33,14 @@ interface IStep1Props {
   setShowStep2: any;
   setShowStep3: any;
   setdealLink: any;
- }
+}
 
-export default function QrStep1(
-  {
-    setShowStep1, setShowStep2, setShowStep3, setdealLink,
-  }: IStep1Props,
-) {
+export default function QrStep1({
+  setShowStep1,
+  setShowStep2,
+  setShowStep3,
+  setdealLink,
+}: IStep1Props) {
   const validationSchema = yup.object({
     email: yup.string().email('Invalid email format').required('Required'),
     ordernumber: yup.number().required('Required'),
@@ -32,12 +48,10 @@ export default function QrStep1(
 
   const { showError } = useAlert();
 
-  const [getDealLink, { loading, data }] = useLazyQuery(GET_QR_DEAL, {
-    onError(error) {
-      console.log('Record not found!');
+  const [getDealLink, { data }] = useLazyQuery(GET_QR_DEAL, {
+    onError() {
       showError('Record not found!');
     },
-
   });
 
   useEffect(() => {
@@ -53,7 +67,10 @@ export default function QrStep1(
   }, [data]);
 
   const {
-    handleSubmit, values, handleChange, touched, errors, setFieldValue,
+    handleSubmit,
+    handleChange,
+    errors,
+    setFieldValue,
   }: FormikProps<IQRCode> = useFormik<IQRCode>({
     initialValues: {
       email: '',
@@ -62,86 +79,115 @@ export default function QrStep1(
     validationSchema,
     validateOnChange: true,
     validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<IQRCode>) => {
+    onSubmit: async (valz, { validateForm }: FormikHelpers<IQRCode>) => {
       if (validateForm) validateForm(valz);
-      console.log(valz);
       const { email, ordernumber } = valz;
       getDealLink({ variables: { email, ordernumber } });
     },
   });
 
   return (
-    <Row>
-      <Col xs={12} md={6}>
-        <h2>
-          Access your personalized store with exclusive discounts
-          and cashback for you and your friends.
-        </h2>
-        <Form noValidate onSubmit={handleSubmit}>
+    <>
+      <div className={styles.QRContainer}>
+        <Container fluid>
           <Row>
-            <Col lg={7} className="mt-4">
-              <section className="qr-step1">
-                <Row className="mt-2">
-                  <Col lg={7}>
-                    <Form.Group className="mb-2">
-                      <Form.Text className="text-muted">
-                        Email
-                      </Form.Text>
-                      <Form.Control
-                        type="email"
-                        placeholder="Email..."
-                        name="email"
-                        isInvalid={!!errors.email}
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors.email}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col lg={5} />
-                </Row>
-                <Row className="mt-2">
-                  <Col lg={7}>
-                    <Form.Group className="mb-2">
-                      <Form.Text className="text-muted">
-                        Order Number
-                      </Form.Text>
-                      <Form.Control
-                        type="text"
-                        placeholder="Order Number..."
-                        name="ordernumber"
-                        isInvalid={!!errors.ordernumber}
-                        onChange={(e) => setFieldValue('ordernumber', e.currentTarget.value)}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {errors.ordernumber}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col lg={5}>
-                    <Form.Text className="text-muted">
-                      You can find your order number on the order confirmation
-                      email from the brand you used Groupshop
-                      with as well as the order summary slip included in your package.
-                    </Form.Text>
-                  </Col>
-                </Row>
-              </section>
+            <Col md={6}>
+              <div className={styles.QRContainer__form__wrapper}>
+                <div className={styles.QRContainer__Logo}>
+                  <HeadLogo />
+                </div>
+                <div className={styles.QRContainer__mobileImage}>
+                  <Image src={QRMobile} alt="QR Right Screen" layout="responsive" />
+                </div>
+                <div className={styles.QRContainer__content__container}>
+                  <div className={styles.QRContainer__content__heading}>
+                    <h2>
+                      Access your personalized store with
+                      {' '}
+                      <strong>
+                        exclusive discounts and cashback for you and your friends.
+                      </strong>
+                    </h2>
+                  </div>
+                  <div className={styles.QRContainer__form__container}>
+                    <Form noValidate onSubmit={handleSubmit}>
+                      <Form.Group className="mb-4">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="Email"
+                          name="email"
+                          isInvalid={!!errors.email}
+                          onChange={(e) => handleChange(e)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.email}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group className="mb-4">
+                        <div className={styles.QRContainer__text__how}>
+                          <Form.Label>Order Number</Form.Label>
+                          <a href="/">How?</a>
+                        </div>
+                        <Form.Control
+                          type="text"
+                          placeholder="Order Number"
+                          name="ordernumber"
+                          isInvalid={!!errors.ordernumber}
+                          onChange={(e) => setFieldValue('ordernumber', e.currentTarget.value)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.ordernumber}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <div className={styles.QRContainer__btnGroupShop}>
+                        <Button type="submit"> Get my Groupshop </Button>
+                      </div>
+                    </Form>
+                  </div>
+                  <div className={styles.QRContainer__bottom__content}>
+                    <hr />
+                    <p>
+                      Have Questions?
+                      {' '}
+                      <a href="/">Peep our FAQ</a>
+                    </p>
 
+                    <div className={styles.QRContainer__social__media}>
+                      <div className={styles.QRContainer__social__icons}>
+                        <Instagram />
+                        <Pinterest />
+                        <Twitter />
+                        <Facebook />
+                      </div>
+                      <div className={styles.QRContainer__link}>
+                        <p>
+                          Go to
+                          {' '}
+                          <a href="/">groupshop.com</a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Col>
+            <Col md={6} className="p-0">
+              <div className={styles.QRContainer__contentImage}>
+                <div className={styles.QRContainer__desktopImage}>
+                  <Image
+                    src={QR}
+                    alt="QR Right Screen"
+                    width="100%"
+                    height="100%"
+                    layout="responsive"
+                  />
+                </div>
+              </div>
             </Col>
           </Row>
-          <Row>
-            <Col xs={4} className="d-flex justify-content-end">
-              <Button type="submit"> Get my Groupshop </Button>
-            </Col>
-
-          </Row>
-        </Form>
-      </Col>
-      <Col xs={12} md={6}>
-        Image
-      </Col>
-    </Row>
+        </Container>
+      </div>
+    </>
   );
 }
