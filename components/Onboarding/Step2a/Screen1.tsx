@@ -256,7 +256,7 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
         />
 
         <Form.Control.Feedback type="invalid" className={`${campaign?.products && campaign?.products?.length > 80 ? 'd-block' : 'd-none'} text-center`}>
-          you can select only 80 products.
+          { ins === "addproduct" ? '' : "you can select only 80 products" }
         </Form.Control.Feedback>
 
         <Row className="mt-4 d-flex justify-content-end">
