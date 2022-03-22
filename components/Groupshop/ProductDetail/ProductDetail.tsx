@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useContext, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -163,6 +164,9 @@ const ProductDetail = ({
     }
   }, [index]);
 
+  const days = 10;
+  const hrs = 6;
+  const mins = 3;
   return (
     <>
       <AlertComponent />
@@ -380,6 +384,50 @@ const ProductDetail = ({
               )}
 
               </Col>
+              <Row className={styles.groupshop_timerRow}>
+                <Col lg={4} />
+                <section className="mt-1">
+                  <b className={styles.groupshop_timerRow_text}>
+                    Complete your order in time to benefit from these exclusive discounts!
+                  </b>
+                  <Row className={styles.groupshop_footer_counter}>
+                    <Col className={['d-flex col-3 ms-5  ', styles.groupshop_timerRow_days].join(' ')}>
+                      <div className="text-center me-2">
+                        <span>
+                          {' '}
+                          {days}
+                        </span>
+                        <p className="mt-1">DAYS</p>
+                      </div>
+                      <div className="py-3">
+                        {' '}
+                        :
+                      </div>
+                    </Col>
+                    <Col className="d-flex col-3  ">
+                      <div className="text-center mx-2">
+                        <span>
+                          {hrs}
+                        </span>
+                        <p className="mt-1">HOURS</p>
+                      </div>
+                      <div className="py-3">
+                        {' '}
+                        :
+                      </div>
+                    </Col>
+                    <Col className="d-flex col-3 ">
+                      <div className="text-center mx-3">
+                        <span>
+                          {mins}
+                        </span>
+                        <p className="mt-1">MINUTES</p>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Col />
+                </section>
+              </Row>
             </Col>
           </Row>
           {isExpired && (

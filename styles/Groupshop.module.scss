@@ -610,6 +610,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 
 		&_counter {
+			// @extend .my-3, .mx-0, .d-flex, .justify-content-center;
 			@extend .my-3, .mx-0;
 			width: 240px;
 			span {
@@ -873,4 +874,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		@extend .border-0;
 		background-color: transparent;
 	}
+	&_timerRow {
+		@extend .mt-2, .d-flex, .justify-content-center, .align-items-center, .rounded-3;
+		text-align: center;
+		background-color: transparent !important;
+     &_days{
+		@extend .d-flex; 
+		margin-left: 3rem!important;
+	 }
+	 &_text{
+		 @extend .w-50;
+		width: 276px!important;
+	 }
+	}
+
 }
