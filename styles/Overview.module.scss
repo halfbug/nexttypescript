@@ -1,0 +1,145 @@
+.overiew{
+    &__header{
+        margin: 30px 0 10px 0;
+        h3{
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+    &__campaignBox{
+        background:#DCD0E8;
+        border: 1px solid #DCD0E8;
+        border-radius: 23px;
+        padding: 20px;
+        &__name{
+            background: #FFFFFF;
+            border-radius: 8px;
+            text-align: center;
+            padding-top: 30px;
+        }
+        &__year{
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 23px;
+            color:#fff;
+        }
+    }
+    &__performanceBox{
+        border: 1px solid #DCD0E8;
+        border-radius: 23px;
+        
+        padding: 20px;
+    }
+}
+.metrics{
+    &__header{
+        margin: 30px 0 10px 0;
+        h3{
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+    &__box{
+            &__customers{
+                background: #F8F8F8;
+                border-radius: 23px;
+                &__header{
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 20px;
+                    
+                }
+                &__node{
+                    display: grid;
+                    grid-template-columns: 5fr 9fr 1fr;
+                    margin-top: 20px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 18px;
+        
+                    &__value{
+                        background: #D5FA52;
+                        border-radius: 6px;
+                        padding: 4px 10px;
+                        margin: auto;
+                    }
+                }
+            }
+            &__products{
+                background: #F8F8F8;
+                border-radius: 23px;
+                &__header{
+                    display: flex;
+                    justify-content: space-between;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+                &__detail{
+                    display: flex;
+                    column-gap: 30px;
+                    margin-top: 20px;
+                    &__image{
+                        padding: 10px;
+                        border: 1px dashed #000000;
+                        border-radius: 8px;
+                        box-sizing: border-box;
+                        background: #FFFFFF;
+                    }
+                    &__title{
+                        font-weight: 600;
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                    &__value1{
+                        margin: 10px 0px;
+                        padding: 4px 10px;
+                        background: #D5FA52;
+                        border-radius: 6px;
+                    }
+                    &__value2{
+                        margin: 10px 0px;
+                        padding: 4px 10px;
+                        background: #F28BF4;
+                        border-radius: 6px;
+                    }
+                }
+            }
+    }
+}
+.strength{
+    &__header{
+        margin: 30px 0 10px 0;
+        h3{
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+    &__node{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+
+        border-bottom: 1px solid #DCDCDC;
+    }
+    &__experience{
+        background: linear-gradient(290.19deg, #FEE750 0%, #F8E291 24.48%, #F4DEC4 61.81%, #CCB2F9 94.79%, #CCB2F9 100%);
+        border-radius: 23px;
+        padding: 10px 30px;
+        &__trow{
+            width: 220px;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 24px;
+        }
+        &__brow{
+            width: 240px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+}

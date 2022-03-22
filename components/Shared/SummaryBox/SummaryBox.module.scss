@@ -1,0 +1,38 @@
+.s_box{
+    padding: 16px;
+    border: 1px dashed #A7C737;
+    border-radius: 23px;
+    margin-top: 20px;
+    .revenue_icon{
+        width: 28px;
+        height: 28px;
+        background: #D5FA52;
+        border-radius: 14px;
+        svg{
+            margin-left: 6px;
+            margin-top: 6px;
+        }
+    }
+    .shop_icon{
+        width: 28px;
+        height: 28px;
+        background: #F28BF4;
+        border-radius: 14px;
+        svg{
+            margin-left: 6px;
+            margin-top: 6px;
+        }
+    }
+    .label{
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 24px;
+        margin: 6px 0px; 
+    }
+    .value{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 20px;
+        margin: 8px 0px; 
+    }
+}
