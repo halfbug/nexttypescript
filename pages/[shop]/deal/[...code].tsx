@@ -215,7 +215,9 @@ const GroupShop: NextPage = () => {
         <h2>
           SHOPPED BY
           {' '}
-          {member?.orderDetail?.customer.firstName}
+          <span className={styles.groupshop_firstName}>
+            {member?.orderDetail?.customer.firstName}
+          </span>
           <Dropdown className="d-inline mx-2">
             <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
               <ChevronDown />

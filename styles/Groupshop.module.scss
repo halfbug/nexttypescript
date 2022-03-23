@@ -896,4 +896,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			width: 276px !important;
 		}
 	}
+	&_firstName{
+		text-decoration: underline 2px solid #CCB2F9 ;
+	}
 }
