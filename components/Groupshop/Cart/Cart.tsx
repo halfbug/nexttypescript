@@ -273,6 +273,15 @@ const Cart = ({
                 Shipping and taxes calculated at checkout.
               </div>
             </Row>
+            <Row className="d-flex justify-content-center">
+              <div
+                className={['', styles.groupshop_cart_byChecking].join(' ')}
+              >
+                By checking out with Groupshop you agree to receive email updates
+                about your order and rewards. We don’t sell or share your information.
+                You can unsuscribe at any time.
+              </div>
+            </Row>
           </Container>
           )}
         </Offcanvas.Body>
