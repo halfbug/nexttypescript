@@ -72,7 +72,7 @@ const Cart = ({
                     off this order
                   </strong>
                   {' '}
-                  and $20 cashback for everyone!
+                  and $20 cashback for
                 </Col>
               </Row>
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
