@@ -82,13 +82,20 @@ const Cart = ({
             <hr />
             {cartProducts.length < 1 ? (
               <>
-                <Row className={[' mt-5 mb-2 .d-flex, .justify-content-center', styles.groupshop_emptyCardHeading].join(' ')}>
+                <Row className={['pt-4 my-5 .d-flex, .justify-content-center', styles.groupshop_emptyCardHeading].join(' ')}>
                   <div className="mb-2"> Your cart is empty!</div>
                   Don’t miss out on these limited
                   <br />
                   time offers.
                 </Row>
+                <div className=" gap-2 text-center my-4 ">
+                  <Button variant="primary" size="lg" className={styles.groupshop_cart_goBackShoppingBtn} onClick={() => handleClose()}>
+                    Get back to shopping
+                  </Button>
+
+                </div>
                 <br />
+                <hr />
 
               </>
             ) : cartProducts.map((prd) => (
@@ -215,12 +222,6 @@ const Cart = ({
               </Row>
               )}
             </Container>
-            <div className=" gap-2 text-center my-3 mb-4">
-              <Button variant="primary" size="lg" className={styles.groupshop_cart_goBackShoppingBtn} onClick={() => handleClose()}>
-                Get back to shopping
-              </Button>
-
-            </div>
           </div>
           {!isCartEmpty && (
           <Container fluid className="py-3 my-2 ">
