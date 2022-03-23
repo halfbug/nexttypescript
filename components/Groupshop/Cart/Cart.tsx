@@ -59,7 +59,7 @@ const Cart = ({
             <div className="p-2">
               <h3 className={styles.groupshop_modal_cart_heading}>Cart</h3>
               <Row className="d-flex justify-content-center">
-                <Col sm={10} className={styles.groupshop_cart_spend}>
+                <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
                   <IconMoney className=" mx-1 " />
                   Spend $40 to
                   {' '}
@@ -166,60 +166,62 @@ const Cart = ({
             )) }
             <Container>
               {suggestedProd && (
-              <Row className="p-4">
-                {/* <ProductGrid products={suggestedProd} /> */}
-                {suggestedProd.map((item) => (
-                  <Col xs={6} className=" py-1 px-0 mb-1 border-2 d-flex justify-content-center">
-                    <ProductCard
-                      type="small"
-                      isrc={item.featuredImage}
-                      imgOverlay={
-
-                        (
+              <>
+                <div className={['text-start', styles.groupshop_cart_spend].join(' ')}>
+                  In case you missed the best-sellers...
+                </div>
+                <Row className="p-4 pt-2">
+                  {/* <ProductGrid products={suggestedProd} /> */}
+                  {suggestedProd.map((item) => (
+                    <Col xs={6} className=" py-1 px-0 mb-1 border-2 d-flex justify-content-center">
+                      <ProductCard
+                        type="small"
+                        isrc={item.featuredImage}
+                        imgOverlay={(
                           <Badge
                             bg="light"
                             text="dark"
-                            className={styles.groupshop__pcard_tag_addedbytop}
+                            className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
                           >
                             {currencySymbol}
                             {Math.round(+(item.price) - +(dPrice(+(item?.price || 0)).toFixed(1)))}
                             {' '}
                             OFF
                           </Badge>
-                        )
-                      }
-                    >
-                      <div className={styles.groupshop__pcard_cardBody_PDetail}>
-                        <div className={styles.groupshop__pcard_cardBody_pName}>{item.title}</div>
-                        <div className={styles.groupshop__pcard_cardBody_PDesc}>
-                          5 friends shopped
-                        </div>
-                        <Row className="mt-1 d-flex align-items-center">
-                          <Button
-                            variant="primary"
-                            className={styles.groupshop__pcard_cardBody_addBtn}
-                            onClick={() => handleDetail(item)}
-                            // onClick={() => console.log({ item})}
-                          >
-                            Add
-                          </Button>
-                          <div className=" col-7 fw-bold text-nowrap">
-                            <span className="text-decoration-line-through  ">
-                              {currencySymbol}
-                              {item?.price}
-                            </span>
-                            {' '}
-                            <span>
-                              {currencySymbol}
-                              {dPrice(+(item?.price || 0)).toFixed(1)}
-                            </span>
+                          )}
+                      >
+                        <div className={styles.groupshop__pcard_cardBody_PDetail}>
+                          <div className={styles.groupshop__pcard_cardBody_pName}>{item.title}</div>
+                          <div className={styles.groupshop__pcard_cardBody_PDesc}>
+                            5 friends shopped
                           </div>
-                        </Row>
-                      </div>
-                    </ProductCard>
-                  </Col>
-                ))}
-              </Row>
+                          <Row className="mt-1 d-flex align-items-center">
+                            <Button
+                              variant="primary"
+                              className={styles.groupshop__pcard_cardBody_addBtn}
+                              onClick={() => handleDetail(item)}
+                            >
+                              Add
+                            </Button>
+                            <div className=" col-7 fw-bold text-nowrap">
+                              <span className="text-decoration-line-through  ">
+                                {currencySymbol}
+                                {item?.price}
+                              </span>
+                              {' '}
+                              <span>
+                                {currencySymbol}
+                                {dPrice(+(item?.price || 0)).toFixed(1)}
+                              </span>
+                            </div>
+                          </Row>
+                        </div>
+                      </ProductCard>
+                    </Col>
+                  ))}
+                </Row>
+
+              </>
               )}
             </Container>
           </div>
