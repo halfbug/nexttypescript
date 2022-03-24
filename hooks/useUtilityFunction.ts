@@ -78,7 +78,18 @@ export default function useUtilityFunction() {
   // eslint-disable-next-line max-len
   const findIndexInArray = useCallback((arr, searchField, searchValue) => arr.findIndex((item: any) => item[searchField] === searchValue), []);
 
+  const convertNumToMonth = (num:number) => {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return monthNames[num];
+  };
   return {
-    cleanTypename, multiple5, isMultiple5, findInArray, setValue, filterArray, findIndexInArray,
+    cleanTypename,
+    multiple5,
+    isMultiple5,
+    findInArray,
+    setValue,
+    filterArray,
+    findIndexInArray,
+    convertNumToMonth,
   };
 }

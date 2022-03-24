@@ -578,6 +578,36 @@ query GetQrDealLink($email: String!, $ordernumber: String!) {
   }
 }
 `;
+const GET_TOTAL_GS = gql`
+query TotalGroupshops($storeId: String!) {
+  totalGroupshops(storeId: $storeId) {
+    id
+    url
+  }
+}
+`;
+const GET_TOTAL_REVENUE = gql`
+query FindTotalRevenue($storeId: String!) {
+  findTotalRevenue(storeId: $storeId) {
+    _id
+    revenue
+  }
+}
+`;
+const GET_MONTHLY_GS = gql`
+query GetMonthlyGSBilling($storeId: String!) {
+  getMonthlyGSBilling(storeId: $storeId) {
+    _id {
+      year
+      month
+    }
+    amount
+    totalCashBack
+    revenue
+    count
+    }
+}
+`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
@@ -586,5 +616,5 @@ export {
   GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
   GET_ACTIVE_STORES, GET_QR_DEAL,
-  GET_STORE_DETAILS,
+  GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
 };
