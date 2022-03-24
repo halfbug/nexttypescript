@@ -200,7 +200,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 
 		&_tag {
-			@extend .p-1, .px-2, .fs-6, .rounded, .fw-bold, .text-uppercase, .m-1;
+			@extend .shadow-sm, .p-1, .px-2, .fs-6, .rounded, .fw-bold, .text-uppercase, .m-1;
 			background-color: white;
 
 			&_price {
