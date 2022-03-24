@@ -39,41 +39,39 @@ export default function BillingCalculator() {
   });
 
   return (
-    <section className={styles.billing}>
-      <Form noValidate onSubmit={handleSubmit}>
-        <Row>
-          <Col className={styles.billing_calculator_rectangle}>
-            <Row>
-              <Col><h5>Estimate your monthly cost</h5></Col>
-            </Row>
-            <Row>
-              <p className='text-muted mb-2'>Enter your store’s average sales volume per month to estimate your cost.</p>
-            </Row>
-            <Row>
-              <Col className={styles.billing_averageline}>Average number of orders per month</Col>
-            </Row>
-            <Row>
-              <Col lg={4}>
-                <Form.Group className="" controlId="brandNamevalidation">
-                  <Form.Control
-                    type="text"
-                    name="nooforder"
-                    value={values.nooforder ? values.nooforder : ''}
-                    onChange={handleChange}
-                    isInvalid={touched.nooforder && !!errors.nooforder}
-                    placeholder="Enter number"
-                  />
+    <Row className={styles.billing}>
+      <Col lg={9}>
+        <Form noValidate onSubmit={handleSubmit}>
+          <Row>
+            <Col className={styles.billing_calculator_rectangle}>
+              <Row>
+                <Col><h5>Estimate your monthly cost</h5></Col>
+              </Row>
+              <Row>
+                <p className='text-muted mb-2'>Enter your store’s average sales volume per month to estimate your cost.</p>
+              </Row>
+              <Row>
+                <Col className={styles.billing_averageline}>Average number of orders per month</Col>
+              </Row>
+              <Row>
+                <Col lg={4}>
+                  <Form.Group className="" controlId="brandNamevalidation">
+                    <Form.Control
+                      type="text"
+                      name="nooforder"
+                      value={values.nooforder ? values.nooforder : ''}
+                      onChange={handleChange}
+                      isInvalid={touched.nooforder && !!errors.nooforder}
+                      placeholder="Enter number"
+                    />
 
-                  <Form.Control.Feedback type="invalid">
-                    {errors.nooforder}
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Slider />
-              </Col>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.nooforder}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Slider />
               {/* <input
                 id="ex22"
                 type="text"
@@ -87,11 +85,10 @@ export default function BillingCalculator() {
                                    { "start": 1001, "end": 2500 },
                                    { "start": 2500, "end": 5000 }]'
               /> */}
-            </Row>
-          </Col>
-        </Row>
-      </Form>
-
-    </section>
+            </Col>
+          </Row>
+        </Form>
+      </Col>
+    </Row>
   );
 }

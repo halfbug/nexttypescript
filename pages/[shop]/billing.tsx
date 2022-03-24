@@ -2,16 +2,16 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
 import BillingCalculator from 'components/Forms/Dashboard/BillingCalculator';
-import BillingTable from 'components/Forms/Dashboard/BillingTable';
 import BillingPackage from 'components/Forms/Dashboard/BillingPackage';
 import BulbInfo from 'components/Forms/Dashboard/BulbInfo';
 import {
-  Row, Col, Form, Button, InputGroup,
+  Row,
 } from 'react-bootstrap';
+import PaymentHistory from 'components/Forms/Dashboard/PaymentHistory';
 
 const Billing: NextPage = () => (
   <Page headingText="Billing" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
-    <Col lg={12}>
+    {/* <Col lg={12}>
       <BillingPackage />
     </Col>
     <Col lg={12}>
@@ -22,7 +22,13 @@ const Billing: NextPage = () => (
     </Col>
     <Col lg={12}>
       <BillingTable />
-    </Col>
+    </Col> */}
+    <Row>
+      <BillingPackage />
+      <BulbInfo />
+      <BillingCalculator />
+      <PaymentHistory />
+    </Row>
   </Page>
 );
 

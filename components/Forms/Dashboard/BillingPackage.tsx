@@ -7,7 +7,6 @@ import {
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { IBilling } from 'types/store';
-import Slider from '../../Widgets/Slider/Slider';
 
 export interface BillingPackageProps {
   values: any;
@@ -39,65 +38,66 @@ export default function BillingPackage() {
   });
 
   return (
-    <section className={styles.billing}>
-      <Form noValidate onSubmit={handleSubmit}>
-        <Row>
-          <Col lg={12} className={['my-2', styles.letsgo].join(' ')}>
-            <h3>Plans</h3>
-            <Row className={styles.box_row}>
-              <Col className={styles.box_1}>
-                <div className={styles.box_row_boxheading}>Explore</div>
-                <div className="d-flex justify-content-center">
-                  <div className={styles.free}>Free</div>
-                </div>
-                <p>First 100 Groupshops</p>
-              </Col>
-              <Col className={styles.box_4}>
-                <div className={styles.box_row_boxheading}>Launch</div>
-                <div className="d-flex justify-content-center">
-                  <div className={styles.btn}>25¢ per Groupshop</div>
-                </div>
-                <p>
-                  Up to 1,000 Groupshops
-                  {' '}
-                  <br />
-                  {' '}
-                  per month
-                </p>
-              </Col>
-              <Col className={styles.box_3}>
-                <div className={styles.box_row_boxheading}>Growth</div>
-                <div className="d-flex justify-content-center">
-                  <div className={styles.btn}>20¢ per Groupshop</div>
-                </div>
-                <p>
-                  Up to 2,500 Groupshops
-                  {' '}
-                  <br />
-                  {' '}
-                  per month
+    <Row className={styles.billing}>
+      <Col>
+        <Form noValidate onSubmit={handleSubmit}>
+          <Row>
+            <Col lg={12} className={['my-2', styles.letsgo].join(' ')}>
+              <h3>Plans</h3>
+              <Row className={styles.box_row}>
+                <Col className={styles.box_1}>
+                  <div className={styles.box_row_boxheading}>Explore</div>
+                  <div className="d-flex justify-content-center">
+                    <div className={styles.free}>Free</div>
+                  </div>
+                  <p>First 100 Groupshops</p>
+                </Col>
+                <Col className={styles.box_4__active}>
+                  <div className={styles.box_row_boxheading}>Launch</div>
+                  <div className="d-flex justify-content-center">
+                    <div className={styles.btn}>25¢ per Groupshop</div>
+                  </div>
+                  <p>
+                    Up to 1,000 Groupshops
+                    {' '}
+                    <br />
+                    {' '}
+                    per month
+                  </p>
+                </Col>
+                <Col className={styles.box_3}>
+                  <div className={styles.box_row_boxheading}>Growth</div>
+                  <div className="d-flex justify-content-center">
+                    <div className={styles.btn}>20¢ per Groupshop</div>
+                  </div>
+                  <p>
+                    Up to 2,500 Groupshops
+                    {' '}
+                    <br />
+                    {' '}
+                    per month
 
-                </p>
-              </Col>
-              <Col className={styles.box_2}>
-                <div className={styles.box_row_boxheading}>Unicorn</div>
-                <div className="d-flex justify-content-center">
-                  <div className={styles.btn}>10¢ per Groupshop</div>
-                </div>
-                <p>
-                  2,500+ Groupshops
-                  {' '}
-                  <br />
-                  {' '}
-                  per month
+                  </p>
+                </Col>
+                <Col className={styles.box_2}>
+                  <div className={styles.box_row_boxheading}>Unicorn</div>
+                  <div className="d-flex justify-content-center">
+                    <div className={styles.btn}>10¢ per Groupshop</div>
+                  </div>
+                  <p>
+                    2,500+ Groupshops
+                    {' '}
+                    <br />
+                    {' '}
+                    per month
 
-                </p>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Form>
-
-    </section>
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Form>
+      </Col>
+    </Row>
   );
 }

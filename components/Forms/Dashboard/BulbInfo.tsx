@@ -8,7 +8,7 @@ import Bulb from 'assets/images/bulb.svg';
 
 export default function BulbInfo() {
   return (
-    <section className={styles.billing}>
+    <div className={styles.billing}>
       <Row className={styles.billing_bulbinfo_box_4}>
         <Col lg={1}>
           <Bulb size={16} />
@@ -19,6 +19,6 @@ export default function BulbInfo() {
           </h5>
         </Col>
       </Row>
-    </section>
+    </div>
   );
 }
