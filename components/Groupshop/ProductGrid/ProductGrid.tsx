@@ -57,12 +57,14 @@ const ProductGrid = ({
 
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive,
-    isExpired, productShareUrl, displayAddedByFunc,
+    isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
   } = useDeal();
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
+  console.log({ renderItems });
+
   return (
     <Container {...props} ref={ref} fluid>
       <Row className={styles.groupshop_row}>
@@ -78,7 +80,10 @@ const ProductGrid = ({
               imgOverlay={(
                 <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
-                    {`${percentage}% OFF`}
+                    $
+                    {productPriceDiscount(+(prod.price), +percentage)}
+                    {' '}
+                    OFF
                   </span>
                   <div className={styles.groupshop__pcard_tag_boughtby}>
                     {topFive(getBuyers(prod.id)?.map(

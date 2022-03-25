@@ -122,6 +122,10 @@ export default function useDeal() {
   },
   [gsctx]);
 
+  const productPriceDiscount = ((price: number, percent: number) => {
+    const discountedPrice = price * (percent / 100);
+    return discountedPrice.toFixed(2);
+  });
   return {
     currencySymbol,
     discount,
@@ -138,5 +142,6 @@ export default function useDeal() {
     totalCashBack,
     displayAddedBy,
     displayAddedByFunc,
+    productPriceDiscount,
   };
 }
