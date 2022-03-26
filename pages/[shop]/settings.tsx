@@ -9,9 +9,9 @@ import {
 import { FaStore, FaBullhorn } from 'react-icons/fa';
 import { FiLayout } from 'react-icons/fi';
 import styles from 'styles/DbSetting.module.scss';
-import BrandInfo from 'components/Forms/BrandInfo';
 import GeneralSettings from 'components/Forms/Dashboard/GeneralSettings';
 import LayoutSettings from 'components/Forms/Dashboard/LayoutSettings';
+import MarketingSettings from 'components/Forms/Dashboard/MarketingSettings';
 
 const Settings: NextPage = () => (
   <Page headingText="Settings" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
@@ -20,7 +20,7 @@ const Settings: NextPage = () => (
         <Row>
           <Col lg={12}>
             <Nav>
-              <Nav.Item className='col-lg-3'>
+              <Nav.Item className='me-1'>
                 <Nav.Link eventKey="General">
                   <Row className={styles.setting_tab_general}>
                     <Col>
@@ -34,7 +34,7 @@ const Settings: NextPage = () => (
 
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className='col-lg-3'>
+              <Nav.Item className='mx-1'>
                 <Nav.Link eventKey="Layout">
                   <Row className={styles.setting_tab_layout}>
                     <Col>
@@ -48,7 +48,7 @@ const Settings: NextPage = () => (
 
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className='col-lg-3'>
+              <Nav.Item className='mx-1'>
                 <Nav.Link eventKey="Marketing">
                   <Row className={styles.setting_tab_marketing_tool}>
                     <Col>
@@ -62,13 +62,13 @@ const Settings: NextPage = () => (
 
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className='col-lg-3'>
+              <Nav.Item className='mx-1'>
                 <Nav.Link eventKey=" Affiliate">
                   <Row className={styles.setting_tab_affiliate_tool}>
                     <Col>
                       <FaBullhorn size={24} />
                       <h4>
-                        Affiliate Tools
+                        Partner Tools
                       </h4>
                       <TabPane eventKey=" Affiliate" title=" Affiliate" />
                     </Col>
@@ -89,7 +89,7 @@ const Settings: NextPage = () => (
                 <LayoutSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Marketing">
-                Marketing
+                <MarketingSettings />
               </Tab.Pane>
               <Tab.Pane eventKey="Affiliate">
                 Affiliate

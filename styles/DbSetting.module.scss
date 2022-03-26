@@ -19,27 +19,39 @@
         border: 1px dashed $tab1_clr;
         border-radius: 18px;
         box-sizing: border-box;
+        width: 160px;
         &:hover {
             background-color: $tab1_clr;
             color: $white;
             border: 2px dashed $white;
         }
-        // &:active {
-        //     background-color: $tab1_clr;
-        //     color: $white;
-        //     border: 2px dashed $white;
-        // }
+        h4 {
+            color: $subheadingclr;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px!important;
+            line-height: 21px;
+        }
     }
 
     &_layout {
         @extend .p-3;
         border: 1px dashed $tab2_clr;
         border-radius: 18px;
-
-        &:hover {
+        width: 160px;
+                &:hover {
             background-color: $tab2_clr;
             border: 2px dashed $white;
             color: $white;
+        }
+        h4 {
+            color: $subheadingclr;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px!important;
+            line-height: 21px;
         }
     }
 
@@ -47,11 +59,19 @@
         @extend .p-3;
         border: 1px dashed $tab3_clr;
         border-radius: 18px;
-
+        width:max-content;
         &:hover {
             background-color: $tab3_clr;
             border: 2px dashed $white;
             color: $white;
+        }
+        h4 {
+            color: $subheadingclr;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px!important;
+            line-height: 21px;
         }
     }
 
@@ -59,11 +79,19 @@
         @extend .p-3;
         border: 1px dashed $btnhigh;
         border-radius: 18px;
-
+        width:max-content;
         &:hover {
             background-color: $btnhigh;
             border: 2px dashed $white;
             color: $white;
+        }
+        h4 {
+            color: $subheadingclr;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px!important;
+            line-height: 21px;
         }
     }
 
