@@ -4,15 +4,14 @@
     @extend .mt-2, .py-4, .d-flex, .px-0;
 
     h4 {
-        @extend .fw-bold, .lh-base, .fs-3, .mt-2, .mb-0, .pb-0;
-        font-family: DM sans;
-        font-size: 16px;
+        @extend  .mt-2, .mb-0, .pb-0;
+        color: $subheadingclr;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px!important;
         line-height: 21px;
     }
-    //    nav :active{
-    //         background-image: none;
-    //         background-color: none !important;
-    //     }
 
     &_general {
         @extend .p-3;
