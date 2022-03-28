@@ -22,10 +22,13 @@ export default function CustomerActivation(
         </p>
         <WhiteButton
           type="submit"
+          // variant="outline-primary"
+          className={['px-4 py-1 ', styles.marketing_DownloadBtn].join(' ')}
+
         >
           Download QR Code
         </WhiteButton>
-        <Button variant="link">See how it works</Button>
+        <Button variant="link" className={styles.marketing_LinkBtn}>See how it works</Button>
         <ArrowIcon />
         <hr />
         <h4 className="d-flex align-items-center">
@@ -35,7 +38,7 @@ export default function CustomerActivation(
         <p className="mb-0">
           Educate your customers on how Groupshop works with how to’s and FAQs.
         </p>
-        <Button variant="link" className="ms-0 ps-0 mt-0">View and download our customizable template</Button>
+        <Button variant="link" className={[' ms-0 ps-0 mt-0', styles.marketing_LinkBtn].join(' ')}>View and download our customizable template</Button>
         <ArrowIcon />
       </section>
 

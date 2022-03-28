@@ -32,7 +32,7 @@
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
-        font-size: 16px!important;
+        font-size: 16px !important;
         line-height: 21px;
     }
     p {
@@ -54,41 +54,71 @@
         background: $recommended !important;
         color: $black !important;
     }
-    .enable_btn {
-        @include button-variant($enable, $enable);
-        @extend .me-2, .p-2, .lh-sm, .rounded;
-        color: $black;
-        background-color: white;
-    
+
+    .enablebtn {
+        @extend .rounded-3, .me-2;
+        width: 96px;
         &:hover {
-            color: $white;
-            border-color: $black;
-        }
-        &:active,
-        &:focus {
             color: $white;
             opacity: 100%;
             border-color: $black;
-            background-color: $enable;
+        }
+        &:active,
+        &:focus,
+        &_dark {
+            color: $white;
+            opacity: 100%;
+            border-color: $black;
+            background-color: $btnhigh;
         }
     }
-    .disable_btn {
-        @include button-variant($disable, $disable);
-        @extend .me-2, .p-2, .lh-sm, .rounded;
-        color: $black;
-        background-color: white;
-    
+
+    .disablebtn {
+        @extend .rounded-3;
+        width: 96px;
         &:hover {
             color: $black;
+            opacity: 100%;
             border-color: $black;
         }
         &:active,
-        &:focus {
+        &:focus,
+        &_dark {
             color: $black;
             opacity: 100%;
             border-color: $black;
             background-color: $disable;
         }
     }
-}
 
+    &_LinkBtn {
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        text-decoration-line: underline;
+        color: $black;
+    }
+
+    &_DownloadBtn {
+        @extend .text-nowrap;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        width: max-content;
+        text-align: center;
+        border: $black;
+        background: #ffffff;
+        border: 1px solid $black;
+        border-radius: 6px;
+        &:hover{
+            border: $black;
+            background: #ffffff;
+            border: 1px solid $black;
+            border-radius: 6px;
+        }
+    }
+}
