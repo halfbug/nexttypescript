@@ -5,13 +5,17 @@ import {
 } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { StoreContext } from 'store/store.context';
-import { GET_MONTHLY_GS, GET_TOTAL_GS, GET_TOTAL_REVENUE } from 'store/store.graphql';
+import {
+  GET_MONTHLY_GS, GET_TOTAL_GS, GET_TOTAL_GS_MONTHLY, GET_TOTAL_REVENUE,
+} from 'store/store.graphql';
+import { MonthlyGSType } from 'types/billing';
 
 export default function useBilling() {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { store } = useContext(StoreContext);
 
   const [totalGS, settotalGS] = useState(0);
+  const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
 
   // query to get total # of gs of merchant store
@@ -26,35 +30,45 @@ export default function useBilling() {
   } = useQuery(GET_TOTAL_REVENUE, {
     variables: { storeId: store.id },
   });
+    // query to get total # of groupshops per month
+  const {
+    data: data3, refetch: refetch3,
+  } = useQuery(GET_TOTAL_GS_MONTHLY, {
+    variables: { storeId: store.id },
+  });
   useEffect(() => {
     if (data2?.findTotalRevenue) { settotalRevenue(data2.findTotalRevenue.revenue); }
   }, [data2]);
 
   console.log('🚀 ~ file: useBilling.ts TOTAL # of GS', data);
+  console.log('🚀 ~ file: useBilling.ts TOTAL # of GS by month', data3);
   console.log('🚀 ~ file: useBilling.ts TOTAL # of REV', data2);
   console.log('🚀 ~ file: useBilling.ts TOTAL # of totalRevenue', totalRevenue);
+  useEffect(() => {
+    if (data3?.findTotalGSMonthly.length) { settotalGSByMonth(data3.findTotalGSMonthly); }
+  }, [data3]);
 
   /// ///////useeffects//////////
   useEffect(() => {
     if (data?.totalGroupshops.length) { settotalGS(data.totalGroupshops.length); }
   }, [data]);
-  // useEffect(() => {
-  //   if (data2.getMonthlyGSBilling.length) { setmonthlyGS(data2.getMonthlyGSBilling); }
-  // }, [data2]);
+
   useEffect(() => {
     refetch();
     refetch2();
+    refetch3();
   }, []);
-  // useEffect(() => {
-  //   // refetch();
-  //   refetch2();
-  // }, []);
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currency || 'USD');
 
-  const getMonthlyGS = useCallback((storeId) => {
-    console.log({ storeId });
-    return 'gsmonth';
-  }, []);
+  const getMonthlyGSCount = (month: number) => {
+    if (totalGSByMonth.length) {
+      // eslint-disable-next-line no-underscore-dangle
+      const GSOfMonth = totalGSByMonth.find((item) => item._id.month === month);
+      console.log('🚀 ~ file: useBilling.ts ~ line 67 ~ getMonthlyGSCount ~ GSOfMonth', GSOfMonth);
+      return GSOfMonth?.count;
+    }
+    return 0;
+  };
   const getStorePlan = useCallback((storeId) => {
     console.log(store.plan);
     return store.plan;
@@ -77,7 +91,7 @@ export default function useBilling() {
   }, []);
 
   return {
-    getMonthlyGS,
+    getMonthlyGSCount,
     getCashBack,
     getMonthlyEstimateCost,
     getRevenue,

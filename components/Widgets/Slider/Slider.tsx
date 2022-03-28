@@ -72,13 +72,16 @@ export default function Slider() {
                 />
               </div>
               <div className={styles.billing__tiles}>
-                {sliderDisplayCSS.map((slider) => (
+                {sliderDisplayCSS.map((slider, index) => (
                   <div className={styles.billing__tierWrapper__tier}>
-                    <div className={slider.display}>
-                      <span>
-                        {slider.text}
-                      </span>
-                    </div>
+                    {(index <= planIndex) ? (
+                      <div className={slider.display}>
+                        <span>
+                          {slider.text}
+                        </span>
+                      </div>
+                    ) : ''}
+
                   </div>
                 ))}
               </div>

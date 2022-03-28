@@ -7,9 +7,15 @@ export type BillingType ={
 
     count: number;
 
-    totalCashBack: number;
+    cashBack: number;
 
     revenue: number;
 
-    amount: number;
+    feeCharges: number;
+  }
+export type MonthlyGSType ={
+    _id: BillingIDType;
+
+    count: number;
+
   }

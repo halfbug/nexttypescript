@@ -13,7 +13,9 @@ import { BillingType } from 'types/billing';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
 export default function PaymentHistory() {
-  const { totalGS, totalRevenue, currencySymbol } = useBilling();
+  const {
+    totalGS, totalRevenue, currencySymbol, getMonthlyGSCount,
+  } = useBilling();
   const { convertNumToMonth } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
   const [monthlyGS, setmonthlyGS] = React.useState([]);
@@ -45,16 +47,16 @@ export default function PaymentHistory() {
         </thead>
         <tbody>
           {monthlyGS.map((item:BillingType) => (
-            <tr key={`${item.totalCashBack}-${Math.random()}`}>
+            <tr key={`${item.cashBack}-${Math.random()}`}>
               <td>
-                {convertNumToMonth(item._id.month)}
+                {convertNumToMonth(item._id.month - 1)}
                 {' '}
                 {item._id.year}
               </td>
               <td>{item.revenue}</td>
-              <td>{item.count}</td>
-              <td>{(item.totalCashBack).toFixed(2)}</td>
-              <td>{item.amount}</td>
+              <td>{getMonthlyGSCount(item._id.month)}</td>
+              <td>{(item.cashBack).toFixed(2)}</td>
+              <td>{item.feeCharges}</td>
               <td><DownloadIcon /></td>
             </tr>
           ))}

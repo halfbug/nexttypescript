@@ -25,6 +25,7 @@ const ShopMain: NextPage = () => {
   });
 
   const { store, dispatch } = useContext(StoreContext);
+  console.log('🚀 ~ file: overview.tsx ~ line 28 ~ store', store);
   const [jsonobj, setjsonobj] = useState<any | undefined>(undefined);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);

@@ -11,6 +11,7 @@ query StoreName($shop: String!) {
   brandName
   industry
   logoImage
+  plan
 
   settings{
     media
@@ -601,9 +602,20 @@ query GetMonthlyGSBilling($storeId: String!) {
       year
       month
     }
-    amount
-    totalCashBack
+    feeCharges
+    cashBack
     revenue
+    count
+    }
+}
+`;
+const GET_TOTAL_GS_MONTHLY = gql`
+query FindTotalGSMonthly($storeId: String!) {
+  findTotalGSMonthly(storeId: $storeId) {
+    _id {
+      year
+      month
+    }
     count
     }
 }
@@ -617,4 +629,5 @@ export {
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
   GET_ACTIVE_STORES, GET_QR_DEAL,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
+  GET_TOTAL_GS_MONTHLY,
 };
