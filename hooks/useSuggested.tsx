@@ -17,7 +17,7 @@ const useSuggested = () => {
     const { allProducts } = gsctx;
     console.log('🚀 ~ file: useSuggested.tsx allProducts', allProducts);
     let newProd = [...allProducts ?? []];
-    newProd = newProd.sort(() => Math.random() - 0.5); // shuffle array to have random products
+    // newProd = newProd.sort(() => Math.random() - 0.5); // shuffle array to have random products
     newProd = newProd.slice(0, 4);
     setsuggestedProd(newProd);
   }, [gsctx, gsctx.cart]);
