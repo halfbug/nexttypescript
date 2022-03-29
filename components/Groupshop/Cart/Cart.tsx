@@ -116,12 +116,12 @@ const Cart = ({
                     <h5>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
-                        {(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
+                        {(+(prd.selectedVariant.price ?? prd.price)).toFixed(2)}
                       </span>
                       {' '}
                       <span>
                         {currencySymbol}
-                        {dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(1)}
+                        {dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(2)}
                       </span>
                     </h5>
                   </div>
