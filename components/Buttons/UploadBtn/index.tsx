@@ -59,6 +59,8 @@ export default function UploadButton({
 
   const handleImageUpload = (e: any) => {
     try {
+      console.log('im in upload');
+
       if (e.target.files) {
         const files:any = Array.from(e.target.files);
         const config = {
@@ -75,7 +77,8 @@ export default function UploadButton({
 
             setFieldValue(field, fileS3Url);
             setprogress(false);
-            if (handleCustomBg) handleCustomBg(field, fileS3Url);
+            if (handleCustomBg) { handleCustomBg(field, fileS3Url); }
+            if (handleForm) handleForm(field, fileS3Url);
           })
           .catch((err) => console.log(err));
 

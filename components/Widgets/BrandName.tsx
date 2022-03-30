@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import UploadButton from 'components/Buttons/UploadBtn';
+import useCampaign from 'hooks/useCampaign';
 
 export interface BrandNameProps {
   values: any;
@@ -21,6 +22,9 @@ export default function BrandName(
   }
     : BrandNameProps,
 ) {
+  const { getKeyFromS3URL } = useCampaign();
+  console.log({ values });
+
   return (
     <section className={styles.generalform_purplebox}>
       <Row><h4>Your Brand Name</h4></Row>
@@ -73,6 +77,8 @@ export default function BrandName(
             field="logoImage"
             value={values.logoImage}
             handleForm={handleForm}
+            className={styles.welcome_Obupload}
+            url={getKeyFromS3URL(values.logoImage)}
           />
           <Row className="mx-auto">
             <Form.Text className="text-muted d-flex justify-content-center">

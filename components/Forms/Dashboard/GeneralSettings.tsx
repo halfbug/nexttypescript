@@ -80,6 +80,8 @@ export default function GeneralSettings() {
     },
   });
   const handleForm = (field: string, value: string) => {
+    console.log('image uploaded and in db too');
+
     setFieldValue(field, value);
     console.log("🚀 ~ file: GeneralSettings.tsx ~ line 83 ~ handleForm ~ value", field);
     handleSubmit();

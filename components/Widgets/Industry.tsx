@@ -37,9 +37,9 @@ export function Industry(
         }}
       >
         <option>Click to select</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="1" selected={values.industry === '1'}>One</option>
+        <option value="2" selected={values.industry === '2'}>Two</option>
+        <option value="3" selected={values.industry === '3'}>Three</option>
       </select>
     </section>
 
