@@ -122,6 +122,34 @@ export default function useDeal() {
   },
   [gsctx]);
 
+  const googleEventCode = () => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      event: 'pageChange',
+    });
+  };
+
+  const googleProductCode = (productInfo:{productName: string,
+    productId : string,
+    orignamePrice: string,
+    finalPrice: string}) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      event: 'productView',
+      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+      productBrand: gsctx?.store?.brandName,
+      ...productInfo,
+    });
+  };
+
   const productPriceDiscount = ((price: number, percent: number) => {
     const discountedPrice = price * (percent / 100);
     return discountedPrice.toFixed(2);
@@ -142,6 +170,8 @@ export default function useDeal() {
     totalCashBack,
     displayAddedBy,
     displayAddedByFunc,
+    googleEventCode,
+    googleProductCode,
     productPriceDiscount,
   };
 }

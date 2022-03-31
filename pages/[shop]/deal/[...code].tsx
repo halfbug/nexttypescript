@@ -39,6 +39,8 @@ import useDetail from 'hooks/useDetail';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import Head from 'next/head';
+import script from 'next/script';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -95,7 +97,7 @@ const GroupShop: NextPage = () => {
     setshowCart(true);
   }, [gsctx.cart]);
   const {
-    gsURL, clientDealProducts, isExpired,
+    gsURL, clientDealProducts, isExpired, googleEventCode,
   } = useDeal();
 
   const {
@@ -107,7 +109,8 @@ const GroupShop: NextPage = () => {
     if (productsql?.data?.products && gsctx.allProducts) {
       if (gsctx.campaign?.addableProducts?.length) {
         otherProducts = findInArray(gsctx.campaign?.addableProducts, productsql?.data?.products || [], null, 'id');
-        console.log(findInArray(gsctx.campaign?.addableProducts, productsql?.data?.products || [], null, 'id'));
+        // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
+        // .data?.products || [], null, 'id'));
       } else {
         otherProducts = productsql?.data?.products.filter(
           (o1:IProduct) => !gsctx?.allProducts?.some(
@@ -142,210 +145,224 @@ const GroupShop: NextPage = () => {
   // }
 
   return (
-    <div className={styles.groupshop}>
-
-      <Header
-        LeftComp={(
-          <Counter
-            expireDate={gsctx?.expiredAt}
-            pending={pending}
-          />
+    <>
+      <Head>
+        <title>Groupshop</title>
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5GCXJRC');`,
+          }}
+        />
+      </Head>
+      <div className={styles.groupshop}>
+        <Header
+          LeftComp={(
+            <Counter
+              expireDate={gsctx?.expiredAt}
+              pending={pending}
+            />
 )}
-        RightComp={<InfoBox />}
-      />
-      <Container fluid>
-        <Row className={styles.groupshop__top}>
-          <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>
-          <Col md={6} className={styles.groupshop__top_members}>
-            <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
-            <div className="d-flex flex-row justify-content-center">
-              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+          RightComp={<InfoBox />}
+        />
+        <Container fluid>
+          <Row className={styles.groupshop__top}>
+            <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>
+            <Col md={6} className={styles.groupshop__top_members}>
+              <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
+              <div className="d-flex flex-row justify-content-center">
+                <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
 
+                <ShareButton
+                  placement="bottom"
+                  shareurl={gsURL}
+                  label="Invite"
+                  className={styles.groupshop__top_invite}
+                  icon={<Plus size={18} className="me-0 pe-0" />}
+                  onClick={googleEventCode}
+                />
+              </div>
+            </Col>
+            <Col md={3} className="text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto">
               <ShareButton
                 placement="bottom"
                 shareurl={gsURL}
-                label="Invite"
-                className={styles.groupshop__top_invite}
-                icon={<Plus size={18} className="me-0 pe-0" />}
+                label="EARN CASHBACK"
+                onClick={googleEventCode}
               />
-            </div>
-          </Col>
-          <Col md={3} className="text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto">
-            <ShareButton
-              placement="bottom"
-              shareurl={gsURL}
-              label="EARN CASHBACK"
+              <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} disabled={isExpired} />
+              <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
+            </Col>
 
-            />
-            <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} disabled={isExpired} />
-            <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
-          </Col>
+          </Row>
+        </Container>
+        <Hero>
 
-        </Row>
-      </Container>
-      <Hero>
-
-        <Col xs={12} className="text-center">
-          <h3>
-            Welcome to
-            {' '}
-            <span className="text-capitalize">
+          <Col xs={12} className="text-center">
+            <h3>
+              Welcome to
               {' '}
-              {owner?.firstName}
-              {' '}
-            </span>
-            ’s Groupshop
-          </h3>
-          <p>The more friends shop, the more discounts and cashback!</p>
-        </Col>
+              <span className="text-capitalize">
+                {' '}
+                {owner?.firstName}
+                {' '}
+              </span>
+              ’s Groupshop
+            </h3>
+            <p>The more friends shop, the more discounts and cashback!</p>
+          </Col>
 
-      </Hero>
+        </Hero>
 
-      <ProductGrid
-        xs={12}
-        md={6}
-        lg={4}
-        xl={3}
-        products={member?.products}
-        maxrows={1}
-        addProducts={handleAddProduct}
-        handleDetail={(prd) => setsProduct(prd)}
-      >
-        <h2>
-          SHOPPED BY
-          {' '}
-          <span className={styles.groupshop_firstName}>
-            {member?.orderDetail?.customer.firstName}
-          </span>
-          <Dropdown className="d-inline mx-2">
-            <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
-              <ChevronDown />
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
-            </Dropdown.Menu>
-          </Dropdown>
-        </h2>
-        <p>
-          Shop from
-          {' '}
-          {member?.orderDetail?.customer?.firstName || ''}
-          {' '}
-          ’s previous pruchases and recommendations.
-        </p>
-
-      </ProductGrid>
-      {popularProducts?.length ? (
         <ProductGrid
           xs={12}
           md={6}
           lg={4}
           xl={3}
-          products={popularProducts}
+          products={member?.products}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
         >
-          <h2>Popular in Group</h2>
-        </ProductGrid>
+          <h2>
+            SHOPPED BY
+            {' '}
+            <span className={styles.groupshop_firstName}>
+              {member?.orderDetail?.customer.firstName}
+            </span>
+            <Dropdown className="d-inline mx-2">
+              <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
+                <ChevronDown />
+              </Dropdown.Toggle>
 
-      )
-        : (
+              <Dropdown.Menu>
+                {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+              </Dropdown.Menu>
+            </Dropdown>
+          </h2>
+          <p>
+            Shop from
+            {' '}
+            {member?.orderDetail?.customer?.firstName || ''}
+            {' '}
+            ’s previous pruchases and recommendations.
+          </p>
+
+        </ProductGrid>
+        {popularProducts?.length ? (
           <ProductGrid
             xs={12}
             md={6}
             lg={4}
             xl={3}
-            products={bestSeller}
+            products={popularProducts}
             maxrows={1}
-            addProducts={() => console.log('')}
+            addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
           >
-            <h2>Top Picks</h2>
+            <h2>Popular in Group</h2>
           </ProductGrid>
 
-        )}
+        )
+          : (
+            <ProductGrid
+              xs={12}
+              md={6}
+              lg={4}
+              xl={3}
+              products={bestSeller}
+              maxrows={1}
+              addProducts={() => console.log('')}
+              handleDetail={(prd) => setsProduct(prd)}
+            >
+              <h2>Top Picks</h2>
+            </ProductGrid>
 
-      <ProductGrid
-        xs={12}
-        sm={6}
-        md={6}
-        lg={4}
-        xl={3}
-        products={allProducts}
-        maxrows={3}
-        addProducts={handleAddProduct}
-        handleDetail={(prd) => setsProduct(prd)}
-      >
-        <div className="position-relative">
-          <h2>All Products</h2>
-          <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
-            <Dropdown align="end" drop="down">
-              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                <span className="d-none d-sm-inline text-capitalize">
-                  Sort by
-                </span>
-                <ChevronDown />
+          )}
 
-              </Dropdown.Toggle>
+        <ProductGrid
+          xs={12}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={allProducts}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+        >
+          <div className="position-relative">
+            <h2>All Products</h2>
+            <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
+              <Dropdown align="end" drop="down">
+                <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                  <span className="d-none d-sm-inline text-capitalize">
+                    Sort by
+                  </span>
+                  <ChevronDown />
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                  (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
-                ))}
-                >
-                  Price (Low to High)
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                  (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
-                ))}
-                >
-                  Price ( High to Low)
+                </Dropdown.Toggle>
 
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                  (a, b) => a.title.localeCompare(b.title),
-                ))}
-                >
-                  Name (a-z)
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                    (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
+                  ))}
+                  >
+                    Price (Low to High)
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                    (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
+                  ))}
+                  >
+                    Price ( High to Low)
 
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                  (a, b) => a.title.localeCompare(b.title),
-                ).reverse())}
-                >
-                  Name (z-a)
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                    (a, b) => a.title.localeCompare(b.title),
+                  ))}
+                  >
+                    Name (a-z)
 
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                    (a, b) => a.title.localeCompare(b.title),
+                  ).reverse())}
+                  >
+                    Name (z-a)
 
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+
+            </div>
           </div>
-        </div>
-      </ProductGrid>
-      <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
-        <Col className="d-flex justify-content-center flex-column">
-          <p>Don’t see what you like?</p>
-          <Button className="align-self-center fs-4 px-5" onClick={handleAddProduct}>Add a Product</Button>
-        </Col>
-      </Row>
-      <Footer LeftComp={undefined} RightComp={undefined} />
-      <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
-      <ProductDetail
-        show={showDetail}
-        handleClose={() => setshowDetail(false)}
-        product={sProduct}
-      />
-      <Cart
-        show={showCart}
-        handleClose={() => setshowCart(false)}
-        product={undefined}
-        handleDetail={(prd) => setsProduct(prd)}
-      />
-      <AlertComponent />
-    </div>
-
+        </ProductGrid>
+        <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
+          <Col className="d-flex justify-content-center flex-column">
+            <p>Don’t see what you like?</p>
+            <Button className="align-self-center fs-4 px-5" onClick={handleAddProduct}>Add a Product</Button>
+          </Col>
+        </Row>
+        <Footer LeftComp={undefined} RightComp={undefined} />
+        <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+        <ProductDetail
+          show={showDetail}
+          handleClose={() => setshowDetail(false)}
+          product={sProduct}
+        />
+        <Cart
+          show={showCart}
+          handleClose={() => setshowCart(false)}
+          product={undefined}
+          handleDetail={(prd) => setsProduct(prd)}
+        />
+        <AlertComponent />
+      </div>
+    </>
   );
 };
 

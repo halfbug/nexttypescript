@@ -62,6 +62,7 @@ const ProductDetail = ({
   });
 
   const productCustomers = getBuyers(product?.id || '0');
+  const { googleProductCode } = useDeal();
 
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }
@@ -73,8 +74,13 @@ const ProductDetail = ({
       setaddedbyname(addedByName(product?.id));
       setCashBack(totalCashBack(product));
       console.log(totalCashBack(product));
-      console.log('///////////////');
+      googleProductCode({
+        productName: product.title,
+        productId: product.id,
+        orignamePrice: product.price,
+        finalPrice: `${dPrice(+(product.price))}`,
 
+      });
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));

@@ -15,10 +15,11 @@ type ShareButtonProps = {
 }& React.ComponentPropsWithoutRef<'button'> & PopoverButtonProps & Omit<PopoverButtonProps, 'icon'>
 
 const ShareButton = ({
-  label, className, shareurl, placement, disabled, popContent, icon,
+  label, className, shareurl, placement, disabled, popContent, icon, onClick,
 }: ShareButtonProps) => (
   <PopoverButton
     disabled={disabled}
+    onClick={onClick}
     popContent={popContent ?? (
       <div className="pt-1">
         <CopyToClipboard value={shareurl} />

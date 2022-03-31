@@ -40,6 +40,11 @@ const ProductsSearch = ({
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
+  const { googleEventCode } = useDeal();
+  useEffect(() => {
+    if (show) { googleEventCode(); }
+  }, [show]);
+
   const handleClick = (event: any) => {
     setShow(!show);
     setTarget(event.target);

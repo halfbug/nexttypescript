@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import React, {
-  useState,
+  useState, useEffect,
 } from 'react';
 import {
   Modal, Col, Row, Container,
@@ -11,6 +10,7 @@ import styles from 'styles/Groupshop.module.scss';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
+import useDeal from 'hooks/useDeal';
 
 // interface InfoBoxProps extends RootProps {
 //   show : boolean;
@@ -20,6 +20,11 @@ import Envp from 'assets/images/envelop.svg';
 
 const InfoBox = () => {
   const [show, setShow] = useState(false);
+
+  const { googleEventCode } = useDeal();
+  useEffect(() => {
+    if (show) { googleEventCode(); }
+  }, [show]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

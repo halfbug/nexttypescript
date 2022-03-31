@@ -24,7 +24,7 @@ const Popcomp = (content: React.ReactNode) => (
 );
 
 const PopoverButton = ({
-  label, popContent, className, icon, placement, disabled,
+  label, popContent, className, icon, placement, disabled, onClick,
 }: PopoverButtonProps) => (
   <OverlayTrigger
     trigger="click"
@@ -33,7 +33,7 @@ const PopoverButton = ({
     placement={placement ?? 'bottom'}
     overlay={Popcomp(popContent)}
   >
-    <Button variant="outline-primary" disabled={disabled} className={[styles.groupshop__earn, className].join(' ')}>
+    <Button variant="outline-primary" disabled={disabled} className={[styles.groupshop__earn, className].join(' ')} onClick={onClick}>
       {' '}
       {icon ?? ''}
       {' '}
