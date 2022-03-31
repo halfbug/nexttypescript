@@ -121,4 +121,17 @@
             border-radius: 6px;
         }
     }
+
+    
+    &_inputIconBox{
+        @extend .d-flex;
+        position: relative;
+    
+    }
+    &_inputIcon{
+        // @extend .mt-2;
+        position: absolute;
+        margin-left: -5px;
+    
+    }
 }
