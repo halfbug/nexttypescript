@@ -63,7 +63,7 @@ const ProductGrid = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
-  console.log({ renderItems });
+  // console.log({ renderItems });
 
   return (
     <Container {...props} ref={ref} fluid>

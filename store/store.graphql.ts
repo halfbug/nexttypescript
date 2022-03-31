@@ -287,6 +287,27 @@ query Groupshop($code: String!) {
     storeId
     id
     url
+    bestSeller{
+      featuredImage
+      id
+      title
+      description
+      price
+      currencyCode
+      options{
+        id
+        name
+        values
+        position
+      }
+      lineItems{
+        product{
+          id
+        }
+        price
+      }
+       
+    }
     dealProducts{
       productId
       customerIP

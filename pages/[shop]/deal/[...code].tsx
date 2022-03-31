@@ -8,7 +8,6 @@ import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
 // import { StoreContext } from 'store/store.context';
-import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import {
   Col, Container, Dropdown, Row,
 } from 'react-bootstrap';
@@ -123,7 +122,7 @@ const GroupShop: NextPage = () => {
   const {
     members: [{ orderDetail: { customer: owner } }],
     store: { brandName } = { brandName: '' },
-    popularProducts,
+    popularProducts, bestSeller,
     // allProducts,
   } = gsctx;
 
@@ -237,19 +236,37 @@ const GroupShop: NextPage = () => {
         </p>
 
       </ProductGrid>
+      {popularProducts?.length ? (
+        <ProductGrid
+          xs={12}
+          md={6}
+          lg={4}
+          xl={3}
+          products={popularProducts}
+          maxrows={1}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+        >
+          <h2>Popular in Group</h2>
+        </ProductGrid>
 
-      <ProductGrid
-        xs={12}
-        md={6}
-        lg={4}
-        xl={3}
-        products={popularProducts}
-        maxrows={1}
-        addProducts={handleAddProduct}
-        handleDetail={(prd) => setsProduct(prd)}
-      >
-        <h2>Popular in Group</h2>
-      </ProductGrid>
+      )
+        : (
+          <ProductGrid
+            xs={12}
+            md={6}
+            lg={4}
+            xl={3}
+            products={bestSeller}
+            maxrows={1}
+            addProducts={() => console.log('')}
+            handleDetail={(prd) => setsProduct(prd)}
+          >
+            <h2>Top Picks</h2>
+          </ProductGrid>
+
+        )}
+
       <ProductGrid
         xs={12}
         sm={6}

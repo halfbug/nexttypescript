@@ -85,4 +85,7 @@ export interface IGroupshop {
   allProducts?: Product[];
 
   cart?: CartProduct[];
+
+  bestSeller?: Product[];
+
 }
