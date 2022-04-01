@@ -124,6 +124,7 @@ const GroupShop: NextPage = () => {
 
   const {
     members: [{ orderDetail: { customer: owner } }],
+    members,
     store: { brandName } = { brandName: '' },
     popularProducts, bestSeller,
     // allProducts,
@@ -253,7 +254,7 @@ const GroupShop: NextPage = () => {
           </p>
 
         </ProductGrid>
-        {popularProducts?.length ? (
+        {members?.length > 1 ? (
           <ProductGrid
             xs={12}
             md={6}
