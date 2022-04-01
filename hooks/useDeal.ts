@@ -154,6 +154,9 @@ export default function useDeal() {
     const discountedPrice = price * (percent / 100);
     return discountedPrice.toFixed(2);
   });
+
+  const socialLinks = gsctx?.campaign?.socialLinks;
+
   return {
     currencySymbol,
     discount,
@@ -173,5 +176,6 @@ export default function useDeal() {
     googleEventCode,
     googleProductCode,
     productPriceDiscount,
+    socialLinks,
   };
 }

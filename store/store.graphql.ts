@@ -409,6 +409,12 @@ query Groupshop($code: String!) {
       name
       products
       addableProducts
+      socialLinks{
+        instagram
+        tiktok
+        facebook
+        twitter
+      }  
       salesTarget{
         id
         name

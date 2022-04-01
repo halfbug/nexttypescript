@@ -14,7 +14,7 @@ export const reducer = (
   }
 
   if (action.type === 'UPDATE_STORE') {
-    console.log(action.payload);
+    // console.log(action.payload);
     return { ...state, ...action.payload };
   }
 

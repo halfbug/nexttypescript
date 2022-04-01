@@ -514,7 +514,6 @@ export default function CreateCampaign() {
           <Col lg={5}>
             <section className={styles.dashboard_campaign__box_5}>
               <CampaignSocialMedia
-                handleChange={handleChange}
                 setFieldValue={setFieldValue}
                 values={values}
               />

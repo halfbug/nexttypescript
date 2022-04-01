@@ -67,6 +67,8 @@ export interface ICampaignForm {
   minDiscount?: number;
   maxDiscount?: number;
   isRewardEdit?: boolean;
+  socialLinks?: ISocialLink;
+
 }
 
 export interface ICollection {

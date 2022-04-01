@@ -18,7 +18,7 @@ interface FooterProps {
 const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
-  const { getDateDifference, isExpired } = useDeal();
+  const { getDateDifference, isExpired, socialLinks } = useDeal();
   const { days, hrs, mins } = getDateDifference();
   return (
 
@@ -75,23 +75,23 @@ const Footer = ({
             <section className="d-flex justify-content-center px-2">
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Instagram" url={'  '} />
+                <SocialButton network="Instagram" url={socialLinks?.instagram ?? ''} />
               </div>
 
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Youtube" url={' '} />
+                <SocialButton network="Youtube" url={socialLinks?.instagram ?? ''} />
                 {' '}
               </div>
 
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Tiktok" url={'  '} />
+                <SocialButton network="Tiktok" url={socialLinks?.tiktok ?? ''} />
                 {' '}
               </div>
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Twitter" url={'  '} />
+                <SocialButton network="Twitter" url={socialLinks?.twitter ?? ''} />
                 {' '}
               </div>
             </section>

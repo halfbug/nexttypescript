@@ -23,10 +23,9 @@ import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useCampaign from 'hooks/useCampaign';
 import AddProductButton from 'components/Buttons/AddProductButton';
-import Settings from '../Settings';
-import SocialMedia from './SocialMedia';
 import UpdateRewards from './UpdateRewards';
 import DBSettings from './DBSettings';
+import CampaignSocialMedia from './CampaignSocialMedia';
 
 export default function UpdateCampaign() {
   const { query: { campaignid, ins } } = useRouter();
@@ -54,6 +53,11 @@ export default function UpdateCampaign() {
     youtubeUrl: '',
     media: 'image',
     addableProducts: [],
+    facebook: '',
+    instagram: '',
+    tiktok: '',
+    pinterest: '',
+    twitter: '',
 
   });
   const { findInArray } = useUtilityFunction();
@@ -63,6 +67,12 @@ export default function UpdateCampaign() {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
       if (arr[0].criteria! === "custom") setdisableBtn(false);
+      // const {
+      //   socialLinks: {
+      //     facebook, instagram, tiktok, twitter,
+      //   },
+      // } = arr[0];
+      console.log("🚀 ~ file: UpdateCampaign.tsx ~ line 77 ~ React.useEffect ~ arr[0]", arr[0]);
 
       const newState:ICampaignForm = {
         criteria: arr[0]?.criteria!,
@@ -74,6 +84,11 @@ export default function UpdateCampaign() {
         youtubeUrl: arr[0]?.settings?.youtubeUrl!,
         media: arr[0]?.settings?.media!,
         products: arr[0]?.products,
+        facebook: arr[0]?.socialLinks?.facebook,
+        instagram: arr[0]?.socialLinks?.instagram,
+        tiktok: arr[0]?.socialLinks?.tiktok,
+        // pinterest: arr[0]?.socialLinks?.facebook,
+        twitter: arr[0]?.socialLinks?.twitter,
 
       };
       setstate({ ...newState });
@@ -102,6 +117,7 @@ export default function UpdateCampaign() {
       const {
         criteria, joinExisting, products, brandColor, customColor, customBg,
         imageUrl, youtubeUrl, addableProducts,
+        facebook, tiktok, instagram, twitter,
       } = valz;
       console.log({ valz });
       let { media } = valz;
@@ -124,6 +140,12 @@ export default function UpdateCampaign() {
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
+            socialLinks: {
+              facebook,
+              instagram,
+              tiktok,
+              twitter,
+            },
 
             products: customProducts,
             addableProducts,
@@ -424,7 +446,11 @@ export default function UpdateCampaign() {
         <Col lg={5}>
           <Row />
           <section className={styles.dashboard_campaign__box_5}>
-            <SocialMedia />
+            <CampaignSocialMedia
+              setFieldValue={setFieldValue}
+              values={values}
+              handleForm={handleForm}
+            />
           </section>
         </Col>
       </Row>

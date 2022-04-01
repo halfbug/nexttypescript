@@ -18,14 +18,16 @@ import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
 
 interface IProps {
-  handleChange: any;
+  handleForm?: any;
   values?: any;
   setFieldValue?: any;
   // touched?: any;
   // errors?: any;
 }
 
-export default function CampaignSocialMedia({ handleChange, setFieldValue, values }: IProps) {
+export default function CampaignSocialMedia({
+  handleForm, setFieldValue, values,
+}: IProps) {
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
 
@@ -80,7 +82,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
           <Form.Group className="w-100" controlId="sm">
             <Form.Control
               onChange={(e) => {
-                setFieldValue('instagram', e.currentTarget.value);
+                handleForm('instagram', e.currentTarget.value);
               }}
               className={smUrl === 'instagram' ? 'd-block' : 'd-none'}
               // id={`${smUrl}`}
@@ -92,7 +94,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
             />
             <Form.Control
               onChange={(e) => {
-                setFieldValue('pinterest', e.currentTarget.value);
+                handleForm('pinterest', e.currentTarget.value);
               }}
               className={smUrl === 'pinterest' ? 'd-block' : 'd-none'}
               // className={styles.groupshop_socialmedia_textbox}
@@ -107,7 +109,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
             />
             <Form.Control
               onChange={(e) => {
-                setFieldValue('tiktok', e.currentTarget.value);
+                handleForm('tiktok', e.currentTarget.value);
               }}
               className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -120,7 +122,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
             />
             <Form.Control
               onChange={(e) => {
-                setFieldValue('twitter', e.currentTarget.value);
+                handleForm('twitter', e.currentTarget.value);
               }}
               className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -139,7 +141,7 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
               type="text"
               size="lg"
               onChange={(e) => {
-                setFieldValue('facebook', e.currentTarget.value);
+                handleForm('facebook', e.currentTarget.value);
               }}
               placeholder="Enter facebook account URL..."
               value={values.facebook}
@@ -151,7 +153,6 @@ export default function CampaignSocialMedia({ handleChange, setFieldValue, value
           </Form.Group>
           <IconButton
             icon={<CheckCircle size={18} color="grey" />}
-            type="submit"
           // onClick={() => handleSubmit}
           />
         </Col>

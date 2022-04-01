@@ -26,7 +26,12 @@ export const gsInit: IGroupshop = {
   milestones: [],
   store: { brandName: '', products: [] },
   cart: [],
-  campaign: { salesTarget: { id: '', rewards: [] } },
+  campaign: {
+    socialLinks: {
+      facebook: '', instagram: '', tiktok: '', twitter: '',
+    },
+    salesTarget: { id: '', rewards: [] },
+  },
 };
 
 export const GroupshopContext = React.createContext<GSContextType>(
