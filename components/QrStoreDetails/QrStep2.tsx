@@ -17,6 +17,9 @@ import Pinterest from 'assets/images/pinterest.svg';
 import Twitter from 'assets/images/twitter.svg';
 import Facebook from 'assets/images/facebook.svg';
 
+// import shared component
+import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
+
 export default function QrStep2() {
   return (
     <>
@@ -88,10 +91,9 @@ export default function QrStep2() {
                 </div>
               </div>
             </Col>
-
           </Row>
-
         </Container>
+        <MarqueeSlider />
       </div>
     </>
   );

@@ -15,6 +15,9 @@ import Twitter from 'assets/images/twitter.svg';
 import Facebook from 'assets/images/facebook.svg';
 import { Container, Row, Col } from 'react-bootstrap';
 
+// import shared component
+import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
+
 interface IStep3Props {
   dealLink: string;
 }
@@ -97,11 +100,10 @@ export default function QrStep3({ dealLink }: IStep3Props) {
                 </div>
               </div>
             </Col>
-
           </Row>
         </Container>
+        <MarqueeSlider />
       </div>
-
     </>
   );
 }

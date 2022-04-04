@@ -1,0 +1,16 @@
+.MarqueeSliderContainer {
+    background: #000000;
+    color: #ffffff;
+    position: fixed;
+    bottom: 25px;
+    padding: 15px;
+    width: 100%;
+
+    @media (max-width: 767px) {
+        position: unset;
+    }
+
+    p {
+        margin: 0;
+    }
+}

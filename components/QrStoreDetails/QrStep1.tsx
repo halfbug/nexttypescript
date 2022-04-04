@@ -23,6 +23,9 @@ import Pinterest from 'assets/images/pinterest.svg';
 import Twitter from 'assets/images/twitter.svg';
 import Facebook from 'assets/images/facebook.svg';
 
+// import shared component
+import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
+
 export interface IQRCode {
   email: string;
   ordernumber: string;
@@ -187,6 +190,7 @@ export default function QrStep1({
             </Col>
           </Row>
         </Container>
+        <MarqueeSlider />
       </div>
     </>
   );

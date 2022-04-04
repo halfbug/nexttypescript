@@ -1,6 +1,13 @@
 @import "./variables.scss";
 
 .QRContainer {
+  height: 100vh;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    height: auto;
+  }
+  
   &__Logo {
     @media (max-width: 767px) {
       text-align: center;
@@ -127,6 +134,9 @@
   &__desktopImage {
     @media (max-width: 767px) {
       display: none;
+    }
+    > div{
+      height: 100vh;
     }
   }
 

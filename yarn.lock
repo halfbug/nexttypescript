@@ -11056,6 +11056,7 @@ fsevents@^1.2.7:
     react-copy-to-clipboard: ^5.0.4
     react-dom: 17.0.2
     react-icons: ^4.3.1
+    react-marquee-slider: ^1.1.5
     react-share: ^4.4.0
     react-show-more-text: ^1.5.2
     react-test-renderer: ^17.0.2
@@ -16254,6 +16255,15 @@ fsevents@^1.2.7:
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
+  languageName: node
+  linkType: hard
+
+"react-marquee-slider@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "react-marquee-slider@npm:1.1.5"
+  peerDependencies:
+    styled-components: ">=4.0.0"
+  checksum: b213dfcbacf165ee782eac893918d7cf56cad466651310b4b5eba478d555d855fb88182c8f9985470126fd13dca170c6beff7c6cbaee8a9b58d57d461071c5ea
   languageName: node
   linkType: hard
 
