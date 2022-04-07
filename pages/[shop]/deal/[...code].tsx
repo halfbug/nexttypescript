@@ -123,13 +123,12 @@ const GroupShop: NextPage = () => {
   }, [productsql.data]);
 
   const {
-    members: [{ orderDetail: { customer: owner } }],
+    members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
     members,
     store: { brandName } = { brandName: '' },
     popularProducts, bestSeller,
     // allProducts,
   } = gsctx;
-
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
@@ -275,9 +274,10 @@ const GroupShop: NextPage = () => {
               md={6}
               lg={4}
               xl={3}
-              products={bestSeller}
+              products={ownerProducts
+                && (ownerProducts!.length > 3 ? bestSeller?.slice(0, 3) : bestSeller)}
               maxrows={1}
-              addProducts={() => console.log('')}
+              addProducts={handleAddProduct}
               handleDetail={(prd) => setsProduct(prd)}
             >
               <h2>Top Picks</h2>
