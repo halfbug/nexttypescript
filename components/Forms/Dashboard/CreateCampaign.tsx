@@ -38,6 +38,7 @@ export default function CreateCampaign() {
 
   const { store, dispatch } = React.useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
+  const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
   const [disableBtn, setdisableBtn] = React.useState(true);
 
@@ -118,6 +119,10 @@ export default function CreateCampaign() {
           }
           return false;
         }),
+    facebook: yup.string().matches(re, 'URL is not valid'),
+    instagram: yup.string().matches(re, 'URL is not valid'),
+    tiktok: yup.string().matches(re, 'URL is not valid'),
+    twitter: yup.string().matches(re, 'URL is not valid'),
 
   });
 
@@ -516,6 +521,9 @@ export default function CreateCampaign() {
               <CampaignSocialMedia
                 setFieldValue={setFieldValue}
                 values={values}
+                handleForm={handleForm}
+                touched={touched}
+                errors={errors}
               />
             </section>
           </Col>

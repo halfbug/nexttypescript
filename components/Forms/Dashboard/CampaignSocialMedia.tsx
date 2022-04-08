@@ -21,20 +21,33 @@ interface IProps {
   handleForm?: any;
   values?: any;
   setFieldValue?: any;
-  // touched?: any;
-  // errors?: any;
+  touched?: any;
+  errors?: any;
 }
 
 export default function CampaignSocialMedia({
-  handleForm, setFieldValue, values,
+  handleForm, setFieldValue, values, touched, errors,
 }: IProps) {
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
+  const [fb, setfb] = React.useState('');
+  const [insta, setinsta] = React.useState('');
+  const [titk, settitk] = React.useState('');
+  const [twitter, settwitter] = React.useState('');
+  const [field, setfield] = React.useState('');
+  const [val, setval] = React.useState('');
 
   const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
 
+  React.useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      handleForm(field, val);
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [val]);
   return (
 
     <>
@@ -82,6 +95,8 @@ export default function CampaignSocialMedia({
           <Form.Group className="w-100" controlId="sm">
             <Form.Control
               onChange={(e) => {
+                // setval(e.currentTarget.value);
+                // setfield('instagram');
                 handleForm('instagram', e.currentTarget.value);
               }}
               className={smUrl === 'instagram' ? 'd-block' : 'd-none'}
@@ -91,10 +106,17 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter instagram account URL..."
               value={values.instagram}
+              isInvalid={!!errors.instagram}
             />
-            <Form.Control
+            <Form.Control.Feedback type="invalid">
+              {errors.instagram}
+            </Form.Control.Feedback>
+
+            {/* <Form.Control
               onChange={(e) => {
-                handleForm('pinterest', e.currentTarget.value);
+                setval(e.currentTarget.value);
+                setfield('pinterest');
+                // handleForm('pinterest', e.currentTarget.value);
               }}
               className={smUrl === 'pinterest' ? 'd-block' : 'd-none'}
               // className={styles.groupshop_socialmedia_textbox}
@@ -106,10 +128,17 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter pinterest account URL..."
               value={values.pinterest}
+              isInvalid={!!errors.pinterest}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.pinterest}
+            </Form.Control.Feedback> */}
+
             <Form.Control
               onChange={(e) => {
                 handleForm('tiktok', e.currentTarget.value);
+                // setval(e.currentTarget.value);
+                // setfield('tiktok');
               }}
               className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -119,10 +148,16 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter tiktok account URL..."
               value={values.tiktok}
+              isInvalid={!!errors.tiktok}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.tiktok}
+            </Form.Control.Feedback>
             <Form.Control
               onChange={(e) => {
                 handleForm('twitter', e.currentTarget.value);
+                // setval(e.currentTarget.value);
+                // setfield('twitter');
               }}
               className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -132,7 +167,11 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter twitter account URL..."
               value={values.twitter}
+              isInvalid={!!errors.twitter}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.twitter}
+            </Form.Control.Feedback>
             <Form.Control
               className={smUrl === 'facebook' ? 'd-block' : 'd-none'}
               // className="px-2 "
@@ -142,19 +181,30 @@ export default function CampaignSocialMedia({
               size="lg"
               onChange={(e) => {
                 handleForm('facebook', e.currentTarget.value);
+                // setval(e.currentTarget.value);
+                // setfield('facebook');
               }}
               placeholder="Enter facebook account URL..."
               value={values.facebook}
+              isInvalid={!!errors.facebook}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.facebook}
+            </Form.Control.Feedback>
             {/* <Form.Control.Feedback type="invalid">
                 {errors.brandName}
               </Form.Control.Feedback> */}
 
           </Form.Group>
-          <IconButton
-            icon={<CheckCircle size={18} color="grey" />}
-          // onClick={() => handleSubmit}
-          />
+          {Object.keys(errors).length === 0 ? (
+            <IconButton
+              icon={<CheckCircle size={18} color="green" />}
+            />
+          ) : (
+            <IconButton
+              icon={<CheckCircle size={18} color="grey" />}
+            />
+          )}
         </Col>
       </Row>
     </>

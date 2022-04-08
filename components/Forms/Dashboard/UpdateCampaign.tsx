@@ -62,6 +62,7 @@ export default function UpdateCampaign() {
   });
   const { findInArray } = useUtilityFunction();
   const { campaign, updateCampaign } = useCampaign();
+  const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
   React.useEffect(() => {
     if (store?.campaigns) {
@@ -84,11 +85,11 @@ export default function UpdateCampaign() {
         youtubeUrl: arr[0]?.settings?.youtubeUrl!,
         media: arr[0]?.settings?.media!,
         products: arr[0]?.products,
-        facebook: arr[0]?.socialLinks?.facebook,
-        instagram: arr[0]?.socialLinks?.instagram,
-        tiktok: arr[0]?.socialLinks?.tiktok,
+        facebook: arr[0]?.socialLinks?.facebook ?? '',
+        instagram: arr[0]?.socialLinks?.instagram ?? '',
+        tiktok: arr[0]?.socialLinks?.tiktok ?? '',
         // pinterest: arr[0]?.socialLinks?.facebook,
-        twitter: arr[0]?.socialLinks?.twitter,
+        twitter: arr[0]?.socialLinks?.twitter ?? '',
 
       };
       setstate({ ...newState });
@@ -102,6 +103,11 @@ export default function UpdateCampaign() {
     brandColor: yup
       .string()
       .required('Brand Color is required.'),
+    facebook: yup.string().matches(re, 'URL is not valid'),
+    instagram: yup.string().matches(re, 'URL is not valid'),
+    tiktok: yup.string().matches(re, 'URL is not valid'),
+    twitter: yup.string().matches(re, 'URL is not valid'),
+
   });
 
   const {
@@ -176,6 +182,7 @@ export default function UpdateCampaign() {
 
   console.log({ campaign });
   console.log({ store });
+  console.log({ errors });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
@@ -450,6 +457,8 @@ export default function UpdateCampaign() {
               setFieldValue={setFieldValue}
               values={values}
               handleForm={handleForm}
+              touched={touched}
+              errors={errors}
             />
           </section>
         </Col>
