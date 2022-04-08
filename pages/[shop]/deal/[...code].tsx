@@ -74,6 +74,7 @@ const GroupShop: NextPage = () => {
   const [showps, setshowps] = useState<boolean>(false);
   const [showCart, setshowCart] = useState<boolean>(false);
   const [pending, setpending] = useState<boolean>(true);
+  const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   useEffect(() => {
     if (groupshop.id && pending) {
       console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
@@ -84,14 +85,37 @@ const GroupShop: NextPage = () => {
     }
   }, [groupshop, pending]);
 
-  useEffect(() => {
-    // setallProducts(gsctx.allProducts);
+  const {
+    members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
+    members,
+    store: { brandName } = { brandName: '' },
+    popularProducts, bestSeller, dealProducts,
+    // allProducts,
+  } = gsctx;
+  const { findInArray, filterArray } = useUtilityFunction();
 
+  useEffect(() => {
     setallProducts(Array.from(new Set(
       // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
       [...gsctx?.allProducts ?? []],
     )));
   }, [gsctx]);
+  useEffect(() => {
+    // mixing popular produt with best seller to complete the count of 4 if popular are less.
+    if (popularProducts?.length) {
+      if (popularProducts.length < 4) {
+        // removing popular prd from bestseller so no duplication
+        const uniqueBestSeller = filterArray(bestSeller as any[], popularProducts as any[], 'id', 'id').slice(0, 4 - popularProducts.length);
+        const newPopularArr = Array.from(new Set(
+          [...popularProducts ?? [], ...uniqueBestSeller ?? []],
+        ));
+        setNewPopularPrd([...newPopularArr]);
+      } else {
+        setNewPopularPrd([...popularProducts ?? []]);
+      }
+    }
+  }, [popularProducts, dealProducts]);
+  console.log({ newPopularPrd });
 
   useEffect(() => {
     setshowCart(true);
@@ -103,7 +127,6 @@ const GroupShop: NextPage = () => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
-  const { findInArray } = useUtilityFunction();
   React.useEffect(() => {
     let otherProducts: IProduct[];
     if (productsql?.data?.products && gsctx.allProducts) {
@@ -122,13 +145,6 @@ const GroupShop: NextPage = () => {
     }
   }, [productsql.data]);
 
-  const {
-    members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
-    members,
-    store: { brandName } = { brandName: '' },
-    popularProducts, bestSeller,
-    // allProducts,
-  } = gsctx;
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
@@ -259,7 +275,8 @@ const GroupShop: NextPage = () => {
             md={6}
             lg={4}
             xl={3}
-            products={popularProducts}
+            products={ownerProducts
+              && (ownerProducts!.length > 3 ? popularProducts?.slice(0, 3) : newPopularPrd)}
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
