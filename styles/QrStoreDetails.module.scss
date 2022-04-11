@@ -45,7 +45,7 @@
   }
 
   &__content__container {
-    padding-top: 80px;
+    @extend .pb-3, .pt-5;
     padding-left: 25px;
 
     @media (max-width: 767px) {
@@ -81,8 +81,12 @@
     }
 
     label {
-      color: #000000;
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 500;
       font-size: 16px;
+      line-height: 21px;
+      color: $black;
     }
 
     button {
@@ -105,7 +109,7 @@
   }
 
   &__bottom__content {
-    padding-top: 100px;
+    @extend .pt-3;
     width: 85%;
 
     @media (max-width: 767px) {
@@ -113,10 +117,19 @@
       text-align: center;
     }
 
+    hr {
+      color: $black;
+    }
     p {
-      color: #000000;
-      font-size: 14px;
+      color: $black;
       margin: 0;
+      font-family: "Mulish";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.03em;
+      font-feature-settings: "pnum" on, "lnum" on;
     }
 
     a {
@@ -129,9 +142,9 @@
   }
 
   &__social__media {
+    @extend .pb-3, .pt-5;
     display: flex;
     justify-content: space-between;
-    padding-top: 100px;
     align-items: center;
 
     @media (max-width: 767px) {
@@ -141,7 +154,7 @@
 
   &__desktopImage {
     background-color: $bgClr;
-  
+
     @media (max-width: 767px) {
       display: none;
     }
@@ -159,6 +172,7 @@
   }
 
   &__btnGroupShop {
+    @extend .mb-4;
     @media (max-width: 767px) {
       text-align: center;
     }
@@ -217,7 +231,7 @@
     }
   }
 
-  &__fit__image{
+  &__fit__image {
     object-fit: contain;
   }
 }
