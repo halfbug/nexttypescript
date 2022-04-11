@@ -7,7 +7,7 @@
   @media (max-width: 767px) {
     height: auto;
   }
-  
+
   &__Logo {
     @media (max-width: 767px) {
       text-align: center;
@@ -33,6 +33,14 @@
       padding-top: 50px;
       margin: 0;
       font-size: 18px;
+    }
+    h2 {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 31px;
+      color: $black;
     }
   }
 
@@ -135,7 +143,7 @@
     @media (max-width: 767px) {
       display: none;
     }
-    > div{
+    > div {
       height: 100vh;
     }
   }
