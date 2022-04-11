@@ -77,7 +77,7 @@ const ProductDetail = ({
       googleProductCode({
         productName: product.title,
         productId: product.id,
-        orignamePrice: product.price,
+        originalPrice: product.price,
         finalPrice: `${dPrice(+(product.price))}`,
 
       });

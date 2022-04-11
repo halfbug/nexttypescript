@@ -125,24 +125,47 @@ export default function useDeal() {
     // @ts-ignore
     // eslint-disable-next-line no-undef
     dataLayer.push({
-      event: 'pageChange',
+      event: 'modalChange',
+    });
+    console.log('--------<<<<<<<<<<gtm>>>>>>----------');
+    console.log({
+      event: 'modalChange',
     });
   };
 
   const googleProductCode = (productInfo:{productName: string,
     productId : string,
-    orignamePrice: string,
+    originalPrice: string,
     finalPrice: string}) => {
     // @ts-ignore
     window.dataLayer = window.dataLayer || [];
 
+    const {
+      productId, productName, originalPrice, finalPrice,
+    } = productInfo;
     // @ts-ignore
     // eslint-disable-next-line no-undef
     dataLayer.push({
       event: 'productView',
-      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+      productName,
+      productId,
       productBrand: gsctx?.store?.brandName,
-      ...productInfo,
+      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+      originalPrice,
+      finalPrice,
+
+    });
+
+    console.log('--------<<<<<<<<<<gtm>>>>>>----------');
+    console.log({
+      event: 'productView',
+      productName,
+      productId,
+      productBrand: gsctx?.store?.brandName,
+      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+      originalPrice,
+      finalPrice,
+
     });
   };
 
@@ -171,6 +194,7 @@ export default function useDeal() {
   }, [gsctx]);
 
   const milestones = gsctx?.milestones;
+
   return {
     currencySymbol,
     discount,

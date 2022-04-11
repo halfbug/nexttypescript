@@ -42,8 +42,8 @@ const ProductsSearch = ({
 
   const { googleEventCode } = useDeal();
   useEffect(() => {
-    if (show) { googleEventCode(); }
-  }, [show]);
+    if (showSearch) { googleEventCode(); }
+  }, [showSearch]);
 
   const handleClick = (event: any) => {
     setShow(!show);
