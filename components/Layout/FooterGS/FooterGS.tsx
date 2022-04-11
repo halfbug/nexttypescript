@@ -26,9 +26,9 @@ const Footer = ({
       <hr />
       <Row className={styles.groupshop_footer_f1}>
         <Col lg={3}>
-          <section>
+          <div className={styles.groupshop_footer_counter_wrapper}>
             <p className="mb-5 w-75 ">{isExpired ? <strong>THIS GROUPSHOP HAS EXPIRED </strong> : <b>Complete your order in time to benefit from these exclusive rewards!</b>}</p>
-            <Row className={styles.groupshop_footer_counter}>
+            <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
               <Col className="d-flex col-3 ">
                 <div className="text-center me-2">
                   <span>
@@ -63,7 +63,7 @@ const Footer = ({
                 </div>
               </Col>
             </Row>
-          </section>
+          </div>
         </Col>
         <Col lg={4}>
           <Row className={['mt-5 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
@@ -125,8 +125,8 @@ const Footer = ({
           </section>
         </Col>
       </Row>
-      <hr />
-      <Row>
+      <Row className={styles.groupshop_footer_f2_wrapper}>
+        <hr />
         <div className={styles.groupshop_footer_f2}>
           <p>Powered by</p>
           <img src={footerLogo1.src} alt="Logo" className=" mx-1" width={112} />

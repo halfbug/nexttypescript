@@ -7,6 +7,7 @@ import {
   Col, Row, Button, Container,
 } from 'react-bootstrap';
 import { ArrowDown, CaretDown, Eye } from 'react-bootstrap-icons';
+import SettingsIcon from 'assets/images/settings-icon-black.svg';
 
 interface HeaderProps {
   LeftComp : React.ReactNode;
@@ -18,14 +19,15 @@ const Header = ({
 }: HeaderProps) => (
   <Navbar bg="light" className={styles.groupshop}>
     <Container fluid>
-      <Row className="w-100 align-items-center">
-        <Col xs={{ span: 12, order: 2 }} md={{ span: 3, order: 1 }}>{LeftComp}</Col>
-        <Col xs={{ span: 12, order: 1 }} md={{ span: 6, order: 2 }} className={styles.groupshop__logo}><Navbar.Brand href="#home"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
+      <Row className="w-100 align-items-center gx-0">
+        <Col xs={{ span: 3, order: 1 }} md={{ span: 3, order: 1 }}>{LeftComp}</Col>
+        <Col xs={{ span: 6, order: 2 }} md={{ span: 6, order: 2 }} className={styles.groupshop__logo}><Navbar.Brand href="#home"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
         <Col
-          xs={{ span: 12, order: 3 }}
+          xs={{ span: 3, order: 3 }}
           md={{ span: 3, order: 3 }}
           className={styles.groupshop__last}
         >
+          <SettingsIcon className={styles.groupshop__settingsicon} />
           {RightComp}
 
         </Col>

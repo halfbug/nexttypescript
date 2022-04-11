@@ -13,6 +13,8 @@ export default function useDeal() {
 
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
+  // const [allDiscount, setallDiscount] = useState<(string | undefined)[]>([]);
+
   const clientDealProducts = useCallback(
     ():string[] | undefined => ([...gsctx?.dealProducts?.filter(
       ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
@@ -87,9 +89,6 @@ export default function useDeal() {
       cashback = ((maxdiscount - +(percentage)) / 100) * +(product.price);
       cashback = +(cashback);
       cashback = Math.floor(cashback);
-      console.log({ product });
-      console.log({ cashback });
-      console.log('.......................');
     }
     return cashback;
   },
@@ -97,10 +96,7 @@ export default function useDeal() {
 
   const addedByName = useCallback((productId) => {
     const { dealProducts } = gsctx;
-    console.log('dealProducts', dealProducts);
     const filtered = dealProducts?.find((item) => item.productId === productId);
-    console.log('filtered', filtered);
-    console.log('productId', productId);
 
     return filtered?.addedBy;
   },
@@ -157,6 +153,24 @@ export default function useDeal() {
 
   const socialLinks = gsctx?.campaign?.socialLinks;
 
+  const getDiscounts = useCallback(() => {
+    const allDiscountArr = gsctx.campaign?.salesTarget?.rewards?.map((rew) => rew.discount);
+    return allDiscountArr;
+  }, [gsctx]);
+
+  const getBannerTotalCashBack = useCallback((discountVal) => {
+    const total = gsctx?.members.reduce((cashback, member) => {
+      const totalPrice = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
+      // eslint-disable-next-line radix
+      const totalDiscountedAmount = totalPrice! * (parseInt(discountVal) / 100);
+      // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
+      return cashback + (totalDiscountedAmount);
+    }, 0);
+
+    return total;
+  }, [gsctx]);
+
+  const milestones = gsctx?.milestones;
   return {
     currencySymbol,
     discount,
@@ -177,5 +191,8 @@ export default function useDeal() {
     googleProductCode,
     productPriceDiscount,
     socialLinks,
+    getDiscounts,
+    milestones,
+    getBannerTotalCashBack,
   };
 }

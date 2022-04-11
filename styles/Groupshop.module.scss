@@ -22,6 +22,26 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		@extend .d-flex, .justify-content-end;
 	}
 
+	&__counter {
+		@extend .my-1;
+		@include media-breakpoint-up(sm) {
+			display: none !important;
+		}
+	}
+
+	&__counter_middle {
+		@extend .d-flex, .justify-content-start;
+		span {
+			@extend .p-1, .mx-1;
+			border: 1px solid #FFA79C;
+			border-radius: 3px;
+			font-size: 10px;
+			font-weight: 500;
+			color: $black;
+			line-height: 13px;
+		}
+	}
+
 	&_counter_top {
 		p {
 			margin-bottom: 0px;
@@ -31,12 +51,30 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .p-1, .px-2, .border, .rounded, .ms-1;
 			}
 		}
+		@include media-breakpoint-down(sm) {
+			display: none;
+		}
+		@include media-breakpoint-only(md) {
+			width: 150% !important;
+		}
+	}
+
+	&__settingsicon {
+		@include media-breakpoint-up(sm) {
+			display: none;
+		}
 	}
 
 	&_infobutton {
 		@extend .d-flex, .mb-0, .align-items-center;
 		span {
 			@extend .ms-1, .fs-6;
+		}
+		@include media-breakpoint-down(sm) {
+			justify-content: flex-end;
+			span {
+				display: none;
+			}
 		}
 	}
 
@@ -52,6 +90,27 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .d-flex, .justify-content-center, .flex-column;
 			.list-group-item {
 				@extend .m-1, .p-1, .rounded;
+			}
+			@include media-breakpoint-down(sm) {
+				display: none !important;
+			}
+		}
+		@include media-breakpoint-down(sm) {
+			.row {
+				--bs-gutter-x: 0px !important;
+			}
+		}
+		&__left_icons {
+			@include media-breakpoint-down(sm) {
+				button {
+					min-width: 17px !important;
+					margin-right: 0px !important;
+					margin-left: 20px !important;
+					svg {
+						width: 15px !important;
+						height: 15px !important;
+					}
+				}
 			}
 		}
 
@@ -79,6 +138,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&:hover {
 			@extend .groupshop__earn;
 			background-color: $purple !important;
+		}
+		@include media-breakpoint-down(md) {
+			display: none;
 		}
 	}
 
@@ -136,13 +198,225 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&__hero {
 		@extend .mw-100, .border, .d-flex, .justify-content-center, .align-items-center;
 		height: 291px;
-		background-repeat: repeat;
+		background-repeat: none;
 		background-attachment: fixed;
 		background-position: center;
-		background-size: auto;
+		background-size: cover;
 		color: white;
 		@include media-breakpoint-up(lg) {
-			height: 400px;
+			height: 500px;
+		}
+		@include media-breakpoint-down(lg) {
+			height: 535px;
+		}
+		@include media-breakpoint-down(sm) {
+			height: 475px;
+		}
+		&__cart_count {
+			display: none !important;
+			font-size: 13px;
+			font-weight: $font-weight-normal;
+			color: $black;
+			line-height: 13px;
+			@include media-breakpoint-down(sm) {
+				display: block !important;
+			}
+		}
+		&__small_banner_right {
+			@extend .d-flex, .justify-content-end, .align-items-center;
+			@include media-breakpoint-down(sm) {
+				display: none !important;
+			}
+		}
+		&__small_banner_left {
+			@extend .d-flex, .align-items-center, .justify-content-start;
+			@include media-breakpoint-down(sm) {
+				display: none !important;
+			}
+		}
+		&_iconBtn {
+			@extend .mx-2;
+			@include media-breakpoint-only(md) {
+				margin-top: 10px
+			}
+		}
+		// @include media-breakpoint-up(sm) {
+		// 	&_small_banner_box {
+		// 	display: block;
+		// 	}
+		// }
+		&_small_banner_box {
+			@extend .px-1, .py-2, .mb-1, .align-items-center, .d-block;
+			text-align: center;
+			width: fit-content;
+			height: fit-content;
+			background: rgba(0, 0, 0, 0.2);
+			border: 1px solid rgba(204, 178, 249, 0.75);
+			box-sizing: border-box;
+			backdrop-filter: blur(4px);
+			/* Note: backdrop-filter has minimal browser support */
+			border-radius: 5px;
+			&_box{
+				font-size: 14px;
+				line-height: 18px;
+			}
+			&_cashback{
+				font-size: 12px;
+				line-height: 16px;
+			}
+		}
+		&_how_to{
+			@extend .m-auto, .pb-1;
+			width: fit-content;
+			border-bottom: 1px solid #fff;
+		}
+		&_unlocked {
+			@extend .mb-2;
+			font-family: "DM Sans";
+			font-style: normal;
+			font-weight: $font-weight-bolder;
+			font-size: 12px;
+			line-height: 16px;
+			/* identical to box height */
+
+			color: #ffffff;
+		}
+		&_current_reward {
+			@extend .mb-2;
+			font-family: "DM Sans";
+			font-style: normal;
+			font-weight: 700;
+			font-size: 12px;
+			line-height: 16px;
+			/* identical to box height */
+
+			color: #ffffff;
+		}
+		&_big_banner_box {
+			@extend .px-5, .py-2, .align-items-center, .d-flex, .justify-content-center;
+			text-align: center;
+			width: fit-content;
+			height: fit-content;
+			background: rgba(0, 0, 0, 0.2);
+			// border: 1px solid rgba(204, 178, 249, 0.75);
+			box-sizing: border-box;
+			backdrop-filter: blur(4px);
+			/* Note: backdrop-filter has minimal browser support */
+			border-radius: 16px;
+
+			//border: 1px solid;
+			//border-image: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%) 10;
+			&_shoppers {
+				@extend .my-2;
+				font-family: "DM Sans";
+				font-style: italic;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 16px;
+				/* identical to box height, or 114% */
+
+				text-align: center;
+
+				color: #ffffff;
+			}
+			&_off {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 700;
+				font-size: 36px;
+				line-height: 47px;
+				/* identical to box height */
+
+				color: #ffffff;
+			}
+			&_2off {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 700;
+				font-size: 18px;
+				line-height: 23px;
+
+				color: #ffffff;
+			}
+			&_orders {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 16px;
+				/* identical to box height, or 114% */
+				text-align: center;
+				color: #ffffff;
+			}
+			&_line{
+				@extend .d-flex, .justify-content-center;
+				border: 1px solid;
+				border-image: linear-gradient(270deg, #FEE750 0%,  #CCB2F9 94.79%, #CCB2F9 100%);
+
+			}
+			&_other_orders {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 16px;
+				/* identical to box height, or 114% */
+
+				text-align: center;
+
+				color: #ffffff;
+			}
+			&::before{
+				content: "";
+				position: absolute;
+				z-index: -1;
+				padding: .08rem;
+				inset: 0;
+				border-radius: 16px;
+				background: linear-gradient(to right, #ccb2f9, #fee750);
+				-webkit-mask: 
+					linear-gradient(#fff 0 0) content-box, 
+					linear-gradient(#fff 0 0);
+						mask: 
+					linear-gradient(#fff 0 0) content-box, 
+					linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+						mask-composite: exclude;
+			}
+			hr{
+				width: 25px;
+				margin: 15px auto;
+				background: linear-gradient(to right, #ccb2f9, #fee750);
+			}
+		}
+		&_welcome {
+			@extend .align-items-start, .text-center, .mb-4;
+			// @include media-breakpoint-down(lg) {
+			// 	display: none;;
+			// }
+		}
+		&_share_btn {
+			@include media-breakpoint-down(lg) {
+				display: none;
+			}
+		}
+		h3 {
+			font-family: "DM Sans";
+			font-style: normal;
+			font-weight: 700;
+			font-size: 24px;
+			line-height: 31px;
+			color: #ffffff;
+		}
+
+		p {
+			font-family: "Mulish";
+			font-style: normal;
+			font-weight: 600;
+			font-size: 14px;
+			line-height: 18px;
+			/* identical to box height */
+			color: #ffffff;
 		}
 	}
 
@@ -183,6 +457,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 
 		&_image {
+			@include media-breakpoint-down(sm) {
+				height: unset;
+			}
 			height: 282px;
 			object-fit: contain;
 
@@ -194,8 +471,19 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		&_overlay {
 			height: 282px;
+			@include media-breakpoint-down(md){
+				height: 180px;
+			}
 			&_small {
 				height: 100px;
+			}
+			&:hover{
+				.groupshop__pcard_tag_addToCart{
+					display: flex;
+					@include media-breakpoint-down(md){
+						display: none;
+					}
+				}
 			}
 		}
 
@@ -207,6 +495,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .groupshop__pcard_tag;
 				top: 10px;
 				position: absolute;
+				@include media-breakpoint-down(md) {
+					font-size: 10px !important;
+				}
 			}
 
 			&_boughtby {
@@ -218,11 +509,17 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				width: 50%;
 				display: flex;
 				flex-direction: column-reverse;
+				@include media-breakpoint-down(sm) {
+					height: calc(50vw - 100px);
+				}
 			}
 
 			&_buyer {
 				@extend .groupshop__pcard_tag, .text-capitalize;
 				width: fit-content !important;
+				@include media-breakpoint-down(sm) {
+					font-size: 10px !important;
+				}
 			}
 
 			&_cross {
@@ -253,7 +550,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_addedbyname {
 				@extend .groupshop__pcard_tag;
 				// @extend .p-1, .py-2, .rounded-pill, .m-1;
-				background-color: transparent;
+				//background-color: transparent;
 				top: 10px;
 				// right: 15px;
 				position: absolute;
@@ -264,6 +561,30 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
 				left: 12%;
 				height: 40px;
+			}
+			&_addToCart{
+				@extend .position-absolute, .align-items-center, .w-75, .justify-content-center;
+				display: none;
+				top: 75%;
+				left: 12%;
+				z-index: 1;
+				color: black;
+				&_btn{
+					@extend .rounded-pill, .w-100, .px-0;
+					color: $black;
+					background-color: $white;
+					font-family: "DM Sans";
+					font-style: normal;
+					font-weight: 700;
+					font-size: 16px;
+					line-height: 21px;
+					letter-spacing: 0.32px;
+					text-transform: uppercase;
+					width: 212px;
+					&:hover{
+						background-color: $black;
+					}
+				}
 			}
 		}
 		&_cardBody {
@@ -309,7 +630,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 	&_row {
-		@extend .pt-4;
+		@extend .pt-4, .pb-3;
 	}
 
 	&_col {
@@ -349,6 +670,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_empty {
 			@extend .d-flex, .justify-content-center, .align-items-center;
 			min-height: 300px !important;
+		}
+
+		&_content{
+			@extend .bg-transparent;
+			.groupshop__earn{
+				height: 43px;
+				width: 43px;
+			}
 		}
 
 		&_detail {
@@ -559,6 +888,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_f1 {
 			@extend .justify-content-center, .align-items-center, .justify-content-around, .mb-5, .mt-2;
 		}
+		&_f2_wrapper{
+			@include media-breakpoint-down(md){
+				display: none;
+			}
+		}
 		&_f2 {
 			@extend .d-flex, .justify-content-center, .align-items-center, .mb-3;
 			color: $black;
@@ -608,11 +942,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		div .btn-link {
 			text-decoration: none !important;
 		}
-
+		&_counter_wrapper{
+			@include media-breakpoint-down(md){
+				display: none;
+			}
+		}
 		&_counter {
 			// @extend .my-3, .mx-0, .d-flex, .justify-content-center;
-			@extend .my-3, .mx-0;
+			@extend .my-3;
 			width: 240px;
+			justify-content: center;
 			span {
 				@extend .d-block, .border, .border-3, .rounded, .fs-4;
 				width: 50px;
@@ -651,8 +990,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 	&_pagination {
-		@extend .d-flex, .justify-content-center;
-		margin: 0px 8px !important;
+		@extend .d-flex, .justify-content-center, .mx-2, .my-2;
 		a {
 			width: 30px;
 			margin: 0px 8px !important;
@@ -836,9 +1174,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		line-height: 18px;
 		color: $black;
 	}
+	&_addtoCart_wrapper {
+		@include media-breakpoint-down(md){
+			display: flex;
+			justify-content: center;
+			.groupshop__earn{
+				display: none;
+			}
+		}
+	}
 	&_addtoCart {
 		@extend .rounded-pill, .w-75;
-		color: #ffffff;
+		color: $white;
 		background-color: $addtocart;
 		font-family: "DM Sans";
 		font-style: normal;
@@ -848,6 +1195,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		letter-spacing: 0.32px;
 		text-transform: uppercase;
 		width: 212px;
+		@include media-breakpoint-down(md){
+			background-color: $white;
+			color: $black;
+			font-size: 14px;
+			line-height: 18px;
+			width: 100%;
+		}
 	}
 	&_Pd_addtoCart {
 		@extend .rounded-2, .w-75, .me-2;
@@ -878,25 +1232,35 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		@extend .m-1, .rounded-circle, .p-1;
 		width: 35px;
 		height: 34px;
+		@include media-breakpoint-down(md) {
+			display: none;
+		}
 	}
 	&_btnBgClr {
 		@extend .border-0;
 		background-color: transparent;
 	}
 	&_timerRow {
-		@extend .mt-2, .d-flex, .justify-content-center, .align-items-center, .rounded-3;
+		@extend .m-auto, .d-flex, .justify-content-center, .align-items-center, .rounded-3, .w-50;
+		@media (max-width: 767px) {
+			width: 80% !important;
+		  }
 		text-align: center;
 		background-color: transparent !important;
 		&_days {
 			@extend .d-flex;
-			margin-left: 3rem !important;
+			//margin-left: 3rem !important;
 		}
 		&_text {
 			@extend .w-50;
-			width: 276px !important;
+			//width: 276px !important;
+		}
+		&_content{
+			@extend .bg-white, .pt-3, .mt-2;
+			border-radius: 10px;
 		}
 	}
-	&_firstName{
-		text-decoration: underline 2px solid #CCB2F9 ;
+	&_firstName {
+		text-decoration: underline 2px solid #ccb2f9;
 	}
 }

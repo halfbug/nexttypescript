@@ -46,7 +46,7 @@ const Members = ({
           </Popover>
       )}
       >
-        <Button variant="outline" className={styles.groupshop__top_item}>
+        <Button variant="light" className={styles.groupshop__top_item}>
           {index === 0 && '👑'}
           {' '}
           {member}

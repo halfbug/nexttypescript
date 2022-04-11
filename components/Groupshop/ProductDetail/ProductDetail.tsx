@@ -184,22 +184,34 @@ const ProductDetail = ({
         dialogClassName={styles.groupshop_modal_detail}
         backdrop="static"
         fullscreen="lg-down"
+        contentClassName={styles.groupshop_modal_content}
       >
-        <Modal.Header closeButton className="pb-0" />
-        <Modal.Body className="px-5">
+        <Modal.Header closeButton className="pb-0 bg-white" />
+        <Modal.Body className="px-5 bg-white">
           <Row>
             <Col xs={12} md={6}>
-              <span className={styles.groupshop__pcard_tag_addedbyname}>
-                {
-                    displayAddedByFunc(product?.id) && addedbyname && (
-                    <div className={styles.groupshop_added_by_text}>
-                      Added By
-                      {' '}
-                      { addedbyname }
-                    </div>
-                    )
-}
-              </span>
+              <Row>
+                <Col>
+                  <span className={styles.groupshop__pcard_tag_price}>
+                    $
+                    30
+                    Off
+                  </span>
+                </Col>
+                <Col className="d-flex justify-content-end">
+                  <span className={styles.groupshop__pcard_tag_addedbyname}>
+                    {
+                      displayAddedByFunc(product?.id) && addedbyname && (
+                        <div className={styles.groupshop_added_by_text}>
+                          Added By
+                          {' '}
+                          {addedbyname}
+                        </div>
+                      )
+                    }
+                  </span>
+                </Col>
+              </Row>
               <Carousel
                 activeIndex={index}
                 onSelect={handleSelect}
@@ -363,14 +375,14 @@ const ProductDetail = ({
                 className="m-1 my-3 px-2 rounded-pill"
               />
               <Col xs={12} md={12}>
-                { productCustomers.length > 1
+                { productCustomers.length > 0
               && (
               <>
-                <Row className="d-flex align-items-center">
-                  <Col xs={1} className=" text-nowrap">
+                <Row className="d-flex align-items-center my-2">
+                  <Col xs={1} className="text-nowrap">
                     <Icon />
                   </Col>
-                  <Col xs={10}>
+                  <Col xs={11}>
                     Over
                     {' '}
                     {productCustomers.length}
@@ -390,50 +402,6 @@ const ProductDetail = ({
               )}
 
               </Col>
-              <Row className={styles.groupshop_timerRow}>
-                <Col lg={4} />
-                <section className="mt-1">
-                  <b className={styles.groupshop_timerRow_text}>
-                    Complete your order in time to benefit from these exclusive discounts!
-                  </b>
-                  <Row className={styles.groupshop_footer_counter}>
-                    <Col className={['d-flex col-3 ms-5  ', styles.groupshop_timerRow_days].join(' ')}>
-                      <div className="text-center me-2">
-                        <span>
-                          {' '}
-                          {days}
-                        </span>
-                        <p className="mt-1">DAYS</p>
-                      </div>
-                      <div className="py-3">
-                        {' '}
-                        :
-                      </div>
-                    </Col>
-                    <Col className="d-flex col-3  ">
-                      <div className="text-center mx-2">
-                        <span>
-                          {hrs}
-                        </span>
-                        <p className="mt-1">HOURS</p>
-                      </div>
-                      <div className="py-3">
-                        {' '}
-                        :
-                      </div>
-                    </Col>
-                    <Col className="d-flex col-3 ">
-                      <div className="text-center mx-3">
-                        <span>
-                          {mins}
-                        </span>
-                        <p className="mt-1">MINUTES</p>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Col />
-                </section>
-              </Row>
             </Col>
           </Row>
           {isExpired && (
@@ -531,6 +499,54 @@ const ProductDetail = ({
           </Row>
           )}
         </Modal.Body>
+        <Modal.Footer className="bg-transparent d-block">
+          <Row className={styles.groupshop_timerRow}>
+            <Col xs={1} md={1} />
+            <Col xs={10} md={10} className={styles.groupshop_timerRow_content}>
+              <div className="mt-1">
+                <b className={styles.groupshop_timerRow_text}>
+                  Complete your order in time to benefit from these exclusive discounts!
+                </b>
+                <Row className={['mx-auto', styles.groupshop_footer_counter].join(' ')}>
+                  <Col className={['d-flex col-3 p-0 ', styles.groupshop_timerRow_days].join(' ')}>
+                    <div className="text-center me-2">
+                      <span>
+                        {' '}
+                        {days}
+                      </span>
+                      <p className="mt-1">DAYS</p>
+                    </div>
+                    <div className="py-3">
+                      {' '}
+                      :
+                    </div>
+                  </Col>
+                  <Col className="d-flex col-3 p-0 ">
+                    <div className="text-center mx-2">
+                      <span>
+                        {hrs}
+                      </span>
+                      <p className="mt-1">HOURS</p>
+                    </div>
+                    <div className="py-3">
+                      {' '}
+                      :
+                    </div>
+                  </Col>
+                  <Col className="d-flex col-3 p-0 ">
+                    <div className="text-center mx-3">
+                      <span>
+                        {mins}
+                      </span>
+                      <p className="mt-1">MINUTES</p>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col xs={1} md={1} />
+          </Row>
+        </Modal.Footer>
 
       </Modal>
 

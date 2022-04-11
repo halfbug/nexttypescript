@@ -8,6 +8,7 @@ import {
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
+import QRCode from '../../../assets/images/qr-code.svg';
 
 type ShareButtonProps = {
   shareurl: string;
@@ -30,8 +31,8 @@ const ShareButton = ({
           <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={shareurl} /></Col>
           <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
         </Row>
-        <Row className="flex-column">
-          <Col><h3>Shop, share, earn</h3></Col>
+        <Row className="flex-column text-center">
+          {/* <Col><h3>Shop, share, earn</h3></Col>
           <Col>
             <p>
               Send special discounts to your
@@ -40,7 +41,9 @@ const ShareButton = ({
               page, you’ll earn cashback every time they shop with you.
             </p>
 
-          </Col>
+          </Col> */}
+          <Col><QRCode /></Col>
+          <Col><h6>Scan to share on mobile</h6></Col>
         </Row>
       </div>
     )}

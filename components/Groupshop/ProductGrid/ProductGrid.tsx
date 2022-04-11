@@ -24,13 +24,14 @@ type ProductGridProps = {
   lg?: number,
   xl?: number,
   xxl?: number,
+  showHoverButton?: boolean,
   addProducts(e: boolean): any;
   handleDetail(prd: any): void;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail,
-  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, ...props
+  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
 
@@ -74,7 +75,7 @@ const ProductGrid = ({
       </Row>
       <Row>
         {renderItems?.map((prod) => (
-          <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={prod.id}>
+          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={prod.id}>
             <ProductCard
               isrc={prod.featuredImage}
               imgOverlay={(
@@ -85,6 +86,25 @@ const ProductGrid = ({
                     {' '}
                     OFF
                   </span>
+                  {showHoverButton && (
+                    <Row className={styles.groupshop__pcard_tag_addToCart}>
+                      <Col lg={10} className="p-0">
+                        <Button
+                          variant="primary"
+                          className={styles.groupshop__pcard_tag_addToCart_btn}
+                          onClick={() => handleDetail(prod)}
+                          // () => { setsProduct(prod); setshowDetail(true); }}
+                          disabled={isExpired}
+                        >
+                          Add to Cart
+
+                        </Button>
+                      </Col>
+                      <Col lg={2} className="ps-1">
+                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="px-2 rounded-pill bg-white" />
+                      </Col>
+                    </Row>
+                  )}
                   <div className={styles.groupshop__pcard_tag_boughtby}>
                     {topFive(getBuyers(prod.id)?.map(
                       (member: Member) => (
@@ -134,22 +154,26 @@ const ProductGrid = ({
                   {dPrice(+(prod.price)).toFixed(2)}
                 </span>
               </h5>
-              <Button
-                variant="primary"
-                className={styles.groupshop_addtoCart}
-                onClick={() => handleDetail(prod)}
-                // () => { setsProduct(prod); setshowDetail(true); }}
-                disabled={isExpired}
-              >
-                Add to Cart
+              {!showHoverButton && (
+                <div className={styles.groupshop_addtoCart_wrapper}>
+                  <Button
+                    variant="primary"
+                    className={styles.groupshop_addtoCart}
+                    onClick={() => handleDetail(prod)}
+                    // () => { setsProduct(prod); setshowDetail(true); }}
+                    disabled={isExpired}
+                  >
+                    Add to Cart
 
-              </Button>
-              <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="m-1 px-2 rounded-pill" />
+                  </Button>
+                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="m-1 px-2 rounded-pill" />
+                </div>
+              )}
             </ProductCard>
           </Col>
         ))}
         {[...new Array(fillerz)]?.map((n) => (
-          <Col xs={12} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={n}>
+          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={n}>
             <ProductCard
               isrc="/images/empty.png"
               imgOverlay={(
@@ -176,10 +200,12 @@ const ProductGrid = ({
               </p>
               <br />
               <br />
-              <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>
-              <Button variant="outline-primary" className={styles.groupshop_disableShareCircle} disabled>
-                <Send size={16} />
-              </Button>
+              <div className={styles.groupshop_addtoCart_wrapper}>
+                <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>
+                <Button variant="outline-primary" className={styles.groupshop_disableShareCircle} disabled>
+                  <Send size={16} />
+                </Button>
+              </div>
             </ProductCard>
           </Col>
         ))}
@@ -233,6 +259,7 @@ ProductGrid.defaultProps = {
   lg: 4,
   xl: 3,
   xxl: 3,
+  showHoverButton: false,
 };
 
 export default ProductGrid;

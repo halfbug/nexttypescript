@@ -287,6 +287,10 @@ query Groupshop($code: String!) {
     storeId
     id
     url
+    milestones{
+      discount
+      activatedAt
+    }
     bestSeller{
       featuredImage
       id
@@ -327,6 +331,10 @@ query Groupshop($code: String!) {
       orderId
       availedDiscount
       role 
+      refund{
+        discount
+        amount
+      }
       orderDetail{
         customer{
           firstName
