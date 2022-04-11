@@ -16,8 +16,9 @@ import Members from 'components/Groupshop/Members/Members';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
+import Icon from 'assets/images/small cone.svg';
 import {
-  ChevronDown, Handbag, Plus, Search,
+  ChevronDown, Handbag, Link, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
@@ -41,6 +42,11 @@ import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Head from 'next/head';
 import script from 'next/script';
+import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
+import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
+import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
+import TickCircle from 'assets/images/tick-circle.svg';
+import GradientCircle from 'assets/images/gradient-circle.svg';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -74,6 +80,8 @@ const GroupShop: NextPage = () => {
   const [showps, setshowps] = useState<boolean>(false);
   const [showCart, setshowCart] = useState<boolean>(false);
   const [pending, setpending] = useState<boolean>(true);
+  const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[]
+    | undefined>(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   useEffect(() => {
     if (groupshop.id && pending) {
@@ -99,6 +107,7 @@ const GroupShop: NextPage = () => {
       // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
       [...gsctx?.allProducts ?? []],
     )));
+    // setbannerDiscount(getDiscounts());
   }, [gsctx]);
   useEffect(() => {
     // mixing popular produt with best seller to complete the count of 4 if popular are less.
@@ -120,13 +129,17 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     setshowCart(true);
   }, [gsctx.cart]);
-  const {
-    gsURL, clientDealProducts, isExpired, googleEventCode,
-  } = useDeal();
 
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
+
+  const {
+    gsURL, clientDealProducts, isExpired, googleEventCode,
+  } = useDeal();
+
+  // const { findInArray } = useUtilityFunction();
+
   React.useEffect(() => {
     let otherProducts: IProduct[];
     if (productsql?.data?.products && gsctx.allProducts) {
@@ -185,9 +198,9 @@ const GroupShop: NextPage = () => {
 )}
           RightComp={<InfoBox />}
         />
-        <Container fluid>
-          <Row className={styles.groupshop__top}>
-            <Col md={3} className="text-center text-lg-start"><Brand name={brandName || ''} pending={pending} /></Col>
+        <Container fluid className="border-top">
+          <Row className={['gx-0', styles.groupshop__top].join(' ')}>
+            <Col md={3} xs={4} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
             <Col md={6} className={styles.groupshop__top_members}>
               <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
               <div className="d-flex flex-row justify-content-center">
@@ -203,39 +216,101 @@ const GroupShop: NextPage = () => {
                 />
               </div>
             </Col>
-            <Col md={3} className="text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto">
+            <Col xs={4} className={styles.groupshop__counter}>
+              <div className={styles.groupshop__counter_middle}>
+                <p>
+                  <span>35H</span>
+                  :
+                  <span>59M</span>
+                  {' '}
+                  :
+                  <span>10S</span>
+                </p>
+              </div>
+            </Col>
+            <Col
+              md={3}
+              xs={4}
+              className={['text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                styles.groupshop__top__left_icons].join(' ')}
+            >
               <ShareButton
                 placement="bottom"
                 shareurl={gsURL}
                 label="EARN CASHBACK"
                 onClick={googleEventCode}
+                className={styles.groupshop__hero_share_btn}
               />
-              <IconButton icon={<Search size={24} />} className="mx-2" onClick={handleAddProduct} disabled={isExpired} />
-              <IconButton icon={<Handbag size={24} />} className="mx-2" onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
+              <IconButton
+                icon={<Search size={24} />}
+                className={styles.groupshop__hero_iconBtn}
+                onClick={handleAddProduct}
+                disabled={isExpired}
+              />
+              <IconButton icon={<Handbag size={24} />} className={styles.groupshop__hero_iconBtn} onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
+              <p className={['d-flex align-items-center', styles.groupshop__hero__cart_count].join(' ')}>(2)</p>
             </Col>
 
           </Row>
         </Container>
         <Hero>
-
-          <Col xs={12} className="text-center">
-            <h3>
-              Welcome to
-              {' '}
-              <span className="text-capitalize">
+          <Container>
+            <Row className={styles.groupshop__hero_welcome}>
+              <Col lg={12}>
+                <h3>
+                  Welcome to
+                  {' '}
+                  <span className="text-capitalize">
+                    {' '}
+                    {owner?.firstName}
+                    {' '}
+                  </span>
+                  ’s Groupshop
+                </h3>
+                <p>The more friends shop, the more discounts and cashback!</p>
+              </Col>
+            </Row>
+            <Row className="d-flex justify-content-evenly">
+              <Col md={4} className={styles.groupshop__hero__small_banner_right}>
+                <div className="d-flex flex-column justify-content-center align-items-center ">
+                  <div className="mb-2">Unlocked</div>
+                  <SmallBannerBox />
+                  <TickCircle />
+                </div>
+              </Col>
+              <Col md={4} className="text-center mb-5">
+                <div className={styles.groupshop__hero_current_reward}>
+                  Current Rewards
+                </div>
+                <BigBannerBox />
+              </Col>
+              <Col md={4} className={styles.groupshop__hero__small_banner_left}>
+                <div className="d-flex flex-column justify-content-center align-items-center ">
+                  <div className="mb-2">Next Rewards</div>
+                  <SmallBannerBox2 />
+                  <GradientCircle />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <p className="mb-2 text-center">
+                <Icon />
                 {' '}
-                {owner?.firstName}
-                {' '}
-              </span>
-              ’s Groupshop
-            </h3>
-            <p>The more friends shop, the more discounts and cashback!</p>
-          </Col>
-
+                Plus unlock $27 cashback for
+              </p>
+            </Row>
+            <div className="mt-2 mb-4 d-flex justify-content-center">
+              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+            </div>
+            <Row className={styles.groupshop__hero_how_to}>
+              How it works
+            </Row>
+          </Container>
         </Hero>
 
         <ProductGrid
-          xs={12}
+          xs={6}
+          sm={6}
           md={6}
           lg={4}
           xl={3}
@@ -271,7 +346,8 @@ const GroupShop: NextPage = () => {
         </ProductGrid>
         {members?.length > 1 ? (
           <ProductGrid
-            xs={12}
+            xs={6}
+            sm={6}
             md={6}
             lg={4}
             xl={3}
@@ -287,7 +363,8 @@ const GroupShop: NextPage = () => {
         )
           : (
             <ProductGrid
-              xs={12}
+              xs={6}
+              sm={6}
               md={6}
               lg={4}
               xl={3}
@@ -303,7 +380,7 @@ const GroupShop: NextPage = () => {
           )}
 
         <ProductGrid
-          xs={12}
+          xs={6}
           sm={6}
           md={6}
           lg={4}
@@ -312,6 +389,7 @@ const GroupShop: NextPage = () => {
           maxrows={3}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
         >
           <div className="position-relative">
             <h2>All Products</h2>
@@ -362,7 +440,7 @@ const GroupShop: NextPage = () => {
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             <p>Don’t see what you like?</p>
-            <Button className="align-self-center fs-4 px-5" onClick={handleAddProduct}>Add a Product</Button>
+            <Button className="align-self-center fs-4 my-2 px-5" onClick={handleAddProduct}>Add a Product</Button>
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />

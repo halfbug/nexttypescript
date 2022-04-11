@@ -194,7 +194,6 @@ export default function useDeal() {
   }, [gsctx]);
 
   const milestones = gsctx?.milestones;
-
   return {
     currencySymbol,
     discount,
