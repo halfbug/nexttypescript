@@ -190,7 +190,7 @@ export default function useDeal() {
       return cashback + (totalDiscountedAmount);
     }, 0);
 
-    return total;
+    return total.toFixed(2);
   }, [gsctx]);
 
   const milestones = gsctx?.milestones;

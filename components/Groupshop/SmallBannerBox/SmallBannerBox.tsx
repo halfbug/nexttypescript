@@ -2,27 +2,51 @@
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Col, Row, Container } from 'react-bootstrap';
+import useDeal from 'hooks/useDeal';
 
-// interface IProps {
-//   children : React.ReactNode;
-// }
+interface IProps {
+  bannerDiscount : (string | undefined)[] | undefined;
+}
+const SmallBannerBox = ({
+  bannerDiscount,
+}: IProps) => {
+  const {
+    milestones, getBannerTotalCashBack, currencySymbol,
+  } = useDeal();
+  return (
 
-const SmallBannerBox = () => (
+    <>
 
-  <>
+      <Row className={styles.groupshop__hero_small_banner_box}>
+        <Col>
+          <Row className={styles.groupshop__hero_small_banner_box_off}>
+            <Col>
+              {bannerDiscount?.length ? bannerDiscount[0] : ''}
+              {' '}
+              off
+            </Col>
+          </Row>
+          <Row className={styles.groupshop__hero_small_banner_box_cashback}>
+            <Col>
+              {bannerDiscount?.length
+                ? (
+                  <>
+                    +
+                    {' '}
+                    {currencySymbol}
+                    {getBannerTotalCashBack(milestones[milestones.length - 1].discount)}
+                    {' '}
+                    cashback
+                  </>
+                ) : '' }
 
-    <Row className={styles.groupshop__hero_small_banner_box}>
-      <Col>
-        <Row className={styles.groupshop__hero_small_banner_box_off}>
-          <Col>10% off</Col>
-        </Row>
-        <Row className={styles.groupshop__hero_small_banner_box_cashback}>
-          <Col>+ $23 cashback</Col>
-        </Row>
-      </Col>
-    </Row>
-  </>
-);
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </>
+  );
+};
 
 // Hero.defaultProps = {
 //   user: {},

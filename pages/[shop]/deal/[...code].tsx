@@ -94,6 +94,11 @@ const GroupShop: NextPage = () => {
   }, [groupshop, pending]);
 
   const {
+    gsURL, clientDealProducts, isExpired, googleEventCode, discount,
+    getDiscounts, milestones, getBannerTotalCashBack,
+  } = useDeal();
+
+  const {
     members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
     members,
     store: { brandName } = { brandName: '' },
@@ -107,7 +112,7 @@ const GroupShop: NextPage = () => {
       // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
       [...gsctx?.allProducts ?? []],
     )));
-    // setbannerDiscount(getDiscounts());
+    setbannerDiscount(getDiscounts());
   }, [gsctx]);
   useEffect(() => {
     // mixing popular produt with best seller to complete the count of 4 if popular are less.
@@ -134,10 +139,6 @@ const GroupShop: NextPage = () => {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
 
-  const {
-    gsURL, clientDealProducts, isExpired, googleEventCode,
-  } = useDeal();
-
   // const { findInArray } = useUtilityFunction();
 
   React.useEffect(() => {
@@ -159,7 +160,6 @@ const GroupShop: NextPage = () => {
   }, [productsql.data]);
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
-  // console.log('🚀 ~ file: [...code].tsx ~ line 55 ~ owner', owner);
 
   const handleAddProduct = () => {
     if (gsctx?.totalProducts < 101) {
@@ -274,7 +274,7 @@ const GroupShop: NextPage = () => {
               <Col md={4} className={styles.groupshop__hero__small_banner_right}>
                 <div className="d-flex flex-column justify-content-center align-items-center ">
                   <div className="mb-2">Unlocked</div>
-                  <SmallBannerBox />
+                  <SmallBannerBox bannerDiscount={bannerDiscount} />
                   <TickCircle />
                 </div>
               </Col>
@@ -287,7 +287,7 @@ const GroupShop: NextPage = () => {
               <Col md={4} className={styles.groupshop__hero__small_banner_left}>
                 <div className="d-flex flex-column justify-content-center align-items-center ">
                   <div className="mb-2">Next Rewards</div>
-                  <SmallBannerBox2 />
+                  <SmallBannerBox2 bannerDiscount={bannerDiscount} />
                   <GradientCircle />
                 </div>
               </Col>
