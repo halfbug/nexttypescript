@@ -23,6 +23,7 @@ import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useCampaign from 'hooks/useCampaign';
 import AddProductButton from 'components/Buttons/AddProductButton';
+import useDelay from 'hooks/useDelay';
 import UpdateRewards from './UpdateRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
@@ -73,7 +74,7 @@ export default function UpdateCampaign() {
       //     facebook, instagram, tiktok, twitter,
       //   },
       // } = arr[0];
-      console.log("🚀 ~ file: UpdateCampaign.tsx ~ line 77 ~ React.useEffect ~ arr[0]", arr[0]);
+      // console.log("🚀 ~ file: UpdateCampaign.tsx ~ line 77 ~ React.useEffect ~ arr[0]", arr[0]);
 
       const newState:ICampaignForm = {
         criteria: arr[0]?.criteria!,
@@ -180,9 +181,10 @@ export default function UpdateCampaign() {
     },
   });
 
-  console.log({ campaign });
-  console.log({ store });
+  // console.log({ campaign });
+  // console.log({ store });
   console.log({ errors });
+  console.log({ values });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
@@ -221,9 +223,15 @@ export default function UpdateCampaign() {
 
     handleSubmit();
   };
+  const debouncedSubmit = useDelay(300);
+
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
-    handleSubmit();
+    if (field === "brandColor") {
+      handleSubmit();
+    } else {
+      debouncedSubmit(handleSubmit);
+    }
   };
   const handleAddProduct = () => {
     setParams({ ins: 'addproduct' });
@@ -242,8 +250,6 @@ export default function UpdateCampaign() {
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
     handleSubmit();
   };
-  console.log({ store });
-  console.log({ campaign });
 
   return (
     <Container className={styles.dashboard_campaign}>

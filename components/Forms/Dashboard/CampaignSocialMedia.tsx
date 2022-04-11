@@ -30,24 +30,9 @@ export default function CampaignSocialMedia({
 }: IProps) {
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
-  const [fb, setfb] = React.useState('');
-  const [insta, setinsta] = React.useState('');
-  const [titk, settitk] = React.useState('');
-  const [twitter, settwitter] = React.useState('');
-  const [field, setfield] = React.useState('');
-  const [val, setval] = React.useState('');
 
   const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
-  // if (error) return `Submission error! ${error.message}`;
-  const { store, dispatch } = React.useContext(StoreContext);
 
-  React.useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      handleForm(field, val);
-    }, 1000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [val]);
   return (
 
     <>
@@ -112,33 +97,12 @@ export default function CampaignSocialMedia({
               {errors.instagram}
             </Form.Control.Feedback>
 
-            {/* <Form.Control
-              onChange={(e) => {
-                setval(e.currentTarget.value);
-                setfield('pinterest');
-                // handleForm('pinterest', e.currentTarget.value);
-              }}
-              className={smUrl === 'pinterest' ? 'd-block' : 'd-none'}
-              // className={styles.groupshop_socialmedia_textbox}
-              // className={['smUrl === 'pinterest' ? 'd-block' : 'd-none',
-              // styles.groupshop_instagram].join(' ')}
-              // id={`${smUrl}`}
-              name="pinterest"
-              type="text"
-              size="lg"
-              placeholder="Enter pinterest account URL..."
-              value={values.pinterest}
-              isInvalid={!!errors.pinterest}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.pinterest}
-            </Form.Control.Feedback> */}
-
             <Form.Control
               onChange={(e) => {
                 handleForm('tiktok', e.currentTarget.value);
                 // setval(e.currentTarget.value);
                 // setfield('tiktok');
+                // debouncedSearch('tiktok', e.currentTarget.value);
               }}
               className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -158,6 +122,7 @@ export default function CampaignSocialMedia({
                 handleForm('twitter', e.currentTarget.value);
                 // setval(e.currentTarget.value);
                 // setfield('twitter');
+                // debouncedSearch('twitter', e.currentTarget.value);
               }}
               className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
               // className="px-2"
@@ -183,6 +148,7 @@ export default function CampaignSocialMedia({
                 handleForm('facebook', e.currentTarget.value);
                 // setval(e.currentTarget.value);
                 // setfield('facebook');
+                // debouncedSearch('facebook', e.currentTarget.value);
               }}
               placeholder="Enter facebook account URL..."
               value={values.facebook}
