@@ -140,6 +140,8 @@
   }
 
   &__desktopImage {
+    background-color: $bgClr;
+  
     @media (max-width: 767px) {
       display: none;
     }
@@ -149,6 +151,7 @@
   }
 
   &__mobileImage {
+    background-color: $bgClr;
     display: none;
     @media (max-width: 767px) {
       display: block;
@@ -212,5 +215,9 @@
       padding: 10px;
       cursor: pointer;
     }
+  }
+
+  &__fit__image{
+    object-fit: contain;
   }
 }
