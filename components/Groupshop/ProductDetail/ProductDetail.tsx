@@ -62,7 +62,7 @@ const ProductDetail = ({
   });
 
   const productCustomers = getBuyers(product?.id || '0');
-  const { googleProductCode } = useDeal();
+  const { googleProductCode, googleEventCode } = useDeal();
 
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }
@@ -76,11 +76,12 @@ const ProductDetail = ({
       console.log(totalCashBack(product));
       googleProductCode({
         productName: product.title,
-        productId: product.id,
-        originalPrice: product.price,
-        finalPrice: `${dPrice(+(product.price))}`,
+        productId: product.id.split('/')[4],
+        originalPrice: (+product.price) as number,
+        finalPrice: (+dPrice(+(product.price)).toFixed(2)) as number,
 
       });
+      googleEventCode();
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));

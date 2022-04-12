@@ -135,8 +135,8 @@ export default function useDeal() {
 
   const googleProductCode = (productInfo:{productName: string,
     productId : string,
-    originalPrice: string,
-    finalPrice: string}) => {
+    originalPrice: number,
+    finalPrice: number}) => {
     // @ts-ignore
     window.dataLayer = window.dataLayer || [];
 
