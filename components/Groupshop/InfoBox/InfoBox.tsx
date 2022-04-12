@@ -11,6 +11,7 @@ import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
 import useDeal from 'hooks/useDeal';
+import ArrowDown from 'assets/images/arrow-down.svg';
 
 // interface InfoBoxProps extends RootProps {
 //   show : boolean;
@@ -38,8 +39,14 @@ const InfoBox = () => {
         width={681}
         aria-labelledby="contained-modal-title-vcenter"
         centeredv
+        dialogClassName={styles.groupshop__info_modal}
       >
-        <Modal.Header closeButton className="border-0" />
+        <Row className={styles.groupshop__info_modal__closebtnlg}>
+          <Modal.Header className="border-0" closeButton />
+        </Row>
+        <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
+          <Row onClick={handleClose}><ArrowDown /></Row>
+        </Modal.Header>
         <Modal.Body className="p-0">
           <Row className="styles.groupshop_infoBox_imgBox">
             <img src="/images/purple-head.png" alt="headtag" />
@@ -72,7 +79,7 @@ const InfoBox = () => {
                 <Cart />
               </Col>
               <Col xs={9}>
-                <p className="text-start">
+                <p className={styles.groupshop_infoBox__pointers}>
                   <strong> Shop</strong>
                   {' '}
                   <i> limited-time </i>
@@ -86,7 +93,7 @@ const InfoBox = () => {
                 <Envp />
               </Col>
               <Col xs={9}>
-                <p className="text-start">
+                <p className={styles.groupshop_infoBox__pointers}>
                   Share this Groupshop link with friends to give them access to
                   {' '}
                   <strong> exclusive discounts.</strong>
@@ -98,7 +105,7 @@ const InfoBox = () => {
                 <Face />
               </Col>
               <Col xs={9}>
-                <p className="text-start">
+                <p className={styles.groupshop_infoBox__pointers}>
                   <strong> Earn</strong>
                   {' '}
                   cashback* every time they shop, and keep unlocking additional rewards.

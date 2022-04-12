@@ -200,7 +200,7 @@ const GroupShop: NextPage = () => {
         />
         <Container fluid className="border-top">
           <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-            <Col md={3} xs={4} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
+            <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
             <Col md={6} className={styles.groupshop__top_members}>
               <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
               <div className="d-flex flex-row justify-content-center">
@@ -216,7 +216,7 @@ const GroupShop: NextPage = () => {
                 />
               </div>
             </Col>
-            <Col xs={4} className={styles.groupshop__counter}>
+            <Col xs={6} className={styles.groupshop__counter}>
               <div className={styles.groupshop__counter_middle}>
                 <p>
                   <span>35H</span>
@@ -230,7 +230,7 @@ const GroupShop: NextPage = () => {
             </Col>
             <Col
               md={3}
-              xs={4}
+              xs={3}
               className={['text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
                 styles.groupshop__top__left_icons].join(' ')}
             >

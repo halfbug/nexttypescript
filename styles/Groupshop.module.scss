@@ -30,7 +30,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&__counter_middle {
-		@extend .d-flex, .justify-content-start;
+		@extend .d-flex, .justify-content-center;
 		span {
 			@extend .p-1, .mx-1;
 			border: 1px solid #FFA79C;
@@ -81,6 +81,34 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&_brand {
 		@extend .text-uppercase;
 		font-family: Fahkwang !important;
+		@include media-breakpoint-down(sm) {
+			font-size: 10px;
+			font-weight: 500;
+			display: flex;
+			align-items: center;
+			margin-bottom: 0px;
+			padding-top: 2px;
+		}
+	}
+
+	&__info_modal {
+		&__closebtnsm {
+			display: none;
+		}
+		
+		@include media-breakpoint-down(sm) {
+			margin-top: 115px;
+			&__closebtnsm {
+				display: flex;
+				justify-content: center;
+				svg {
+					cursor: pointer;
+				}
+			}
+			&__closebtnlg {
+				display: none;
+			}
+		}
 	}
 
 	&__top {
@@ -790,6 +818,60 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&_infoBox {
 		@extend .mx-2;
 
+		@include media-breakpoint-down(lg) {
+			&__pointers {
+				width: fit-content !important;
+			}
+			&_tostart {
+				h3 {
+					font-size: 16px !important;
+					line-height: 20px !important;
+				}
+				h3:before {
+					left: 83px !important;
+					top: 32.6% !important;
+				}
+				h3:after {
+					right: 83px !important;
+					top: 32.6% !important;
+				}
+			}
+		}
+
+		@include media-breakpoint-down(sm) {
+			margin: 0px !important;
+			padding: 0px 25px;
+			h2 {
+				font-size: 20px !important;
+				line-height: 28px !important;
+			}
+			p{
+				font-size: 16px !important;
+				line-height: 20px !important;
+			}
+			&__pointers {
+				width: fit-content !important;
+			}
+			&_tostart {
+				h3 {
+					font-size: 16px !important;
+					line-height: 20px !important;
+				}
+				h3:before {
+					width: 70px !important;
+					left: 245px !important;
+					top: 30.3% !important;
+				}
+				h3:after {
+					width: 70px !important;
+					right: 245px !important;
+					top: 30.3% !important;
+				}
+			}
+		}
+		&__pointers {
+			@extend .text-start;
+		}
 		&_shoppingBtn {
 			width: 192px;
 			height: 42.96px;
@@ -808,7 +890,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			font-family: Mulish;
 			font-style: normal;
 			font-weight: 400 !important;
-			font-size: 18px !important;
+			font-size: 18px;
 			line-height: 23px;
 			text-align: center;
 			width: 443px;
