@@ -14,7 +14,7 @@ import Pinterest from 'assets/images/pinterest.svg';
 import Twitter from 'assets/images/twitter.svg';
 import Facebook from 'assets/images/facebook.svg';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import Cone from 'assets/images/small-cone.svg';
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
 
@@ -44,23 +44,28 @@ export default function QrStep3({ dealLink }: IStep3Props) {
                     <div className={styles.QRContainer__YR__Logo}>
                       <Image src={YR} alt="QR Right Screen" />
                     </div>
-                    <h2>🎉 Congrats, your Groupshop store is live!</h2>
-                    <p>
+                    <h2>
+                      {' '}
+                      <Cone height="25" width="25" />
+                      Congrats, your Groupshop store is live!
+
+                    </h2>
+                    <p className="mt-3 mb-2">
                       <strong>Access exclusive discounts and share the link</strong>
                       {' '}
                       to your store with friends and followers to
                       {' '}
-                      <strong>get up to 100% </strong>
-                      cashback on your recent order whenever they shop on your
+                      <strong>get up to 100%  cashback </strong>
+                      on your recent order whenever they shop on your
                       Groupshop.
                     </p>
-                    <div className={styles.QRContainer__btn__goToStore}>
+                    <div className={[' mb-3', styles.QRContainer__btn__goToStore].join(' ')}>
                       <a target="_blank" href={dealLink} rel="noreferrer">
                         Go to my Groupshop
                       </a>
                     </div>
                   </div>
-                  <div className={styles.QRContainer__bottom__content}>
+                  <div className={[' mt-5 pt-5', styles.QRContainer__bottom__content].join(' ')}>
                     <hr />
                     <p>
                       Have Questions?
