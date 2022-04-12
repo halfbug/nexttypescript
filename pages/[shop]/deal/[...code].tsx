@@ -83,6 +83,8 @@ const GroupShop: NextPage = () => {
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[]
     | undefined>(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
+  const [newBestSeller, setnewBestSeller] = useState<IProduct[]>();
+
   useEffect(() => {
     if (groupshop.id && pending) {
       console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
@@ -129,7 +131,13 @@ const GroupShop: NextPage = () => {
       }
     }
   }, [popularProducts, dealProducts]);
-  console.log({ newPopularPrd });
+
+  useEffect(() => {
+    if (bestSeller?.length) {
+      const nb = bestSeller!.filter((prd) => prd.outofstock === false);
+      setnewBestSeller([...nb]);
+    }
+  }, [bestSeller]);
 
   useEffect(() => {
     setshowCart(true);
@@ -369,7 +377,8 @@ const GroupShop: NextPage = () => {
               lg={4}
               xl={3}
               products={ownerProducts
-                && (ownerProducts!.length > 3 ? bestSeller?.slice(0, 3) : bestSeller)}
+                && (ownerProducts!.length > 3 ? newBestSeller?.slice(0, 3)
+                  : newBestSeller?.slice(0, 4))}
               maxrows={1}
               addProducts={handleAddProduct}
               handleDetail={(prd) => setsProduct(prd)}

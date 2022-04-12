@@ -92,6 +92,7 @@ export interface Ioption{
 }
 
 export interface IProduct {
+  outofstock?: boolean;
   id: string,
   title: string;
   featuredImage: string;

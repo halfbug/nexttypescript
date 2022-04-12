@@ -298,6 +298,7 @@ query Groupshop($code: String!) {
       description
       price
       currencyCode
+      outofstock
       options{
         id
         name
