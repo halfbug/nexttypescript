@@ -153,7 +153,7 @@
   }
 
   &__desktopImage {
-    background-color: $bgClr;
+ 
 
     @media (max-width: 767px) {
       display: none;
@@ -240,6 +240,11 @@
   }
 
   &__fit__image {
+    background-color: $bgClr;
     object-fit: contain;
+  }
+  &__fit__imageQR3 {
+    object-fit: cover;
+    background-color: #5c6064;
   }
 }

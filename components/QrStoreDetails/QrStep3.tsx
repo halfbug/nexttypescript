@@ -101,6 +101,7 @@ export default function QrStep3({ dealLink }: IStep3Props) {
                     width="100%"
                     height="100%"
                     layout="responsive"
+                    className={styles.QRContainer__fit__imageQR3}
                   />
                 </div>
               </div>
