@@ -71,9 +71,9 @@ const GroupShop: NextPage = () => {
     },
     skip: !shop,
   });
-  console.log('🚀 ~ file: [...code].tsx ~ line 43 ~ error', error);
-  console.log('🚀 ~~ line 21 ~ groupshop', groupshop);
-  console.log('🚀 ~~ line 21 ~ loading', loading);
+  console.log('🚀 ~ file: [...code].tsx ~ line74  ~ error', error);
+  console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
+  console.log('🚀 ~~ line 75 ~ loading', loading);
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
   const [member, setmember] = useState<Member | undefined>(undefined);
@@ -110,12 +110,17 @@ const GroupShop: NextPage = () => {
   const { findInArray, filterArray } = useUtilityFunction();
 
   useEffect(() => {
-    setallProducts(Array.from(new Set(
-      // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
-      [...gsctx?.allProducts ?? []],
-    )));
+    // setallProducts(Array.from(new Set(
+    //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
+    //   [...gsctx?.allProducts ?? []],
+    // )));
+    setallProducts([...allProducts ?? []]?.sort(
+      (a, b) => a.title.localeCompare(b.title),
+    ));
+
     setbannerDiscount(getDiscounts());
   }, [gsctx]);
+
   useEffect(() => {
     // mixing popular produt with best seller to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
@@ -280,11 +285,14 @@ const GroupShop: NextPage = () => {
             </Row>
             <Row className="d-flex justify-content-evenly">
               <Col md={4} className={styles.groupshop__hero__small_banner_right}>
-                <div className="d-flex flex-column justify-content-center align-items-center ">
-                  <div className="mb-2">Unlocked</div>
-                  <SmallBannerBox bannerDiscount={bannerDiscount} />
-                  <TickCircle />
-                </div>
+                {(members.length > 2 && members.length < 6)
+                  ? (
+                    <div className="d-flex flex-column justify-content-center align-items-center ">
+                      <div className="mb-2">Unlocked</div>
+                      <SmallBannerBox bannerDiscount={bannerDiscount} />
+                      <TickCircle />
+                    </div>
+                  ) : '' }
               </Col>
               <Col md={4} className="text-center mb-5">
                 <div className={styles.groupshop__hero_current_reward}>
@@ -293,11 +301,14 @@ const GroupShop: NextPage = () => {
                 <BigBannerBox />
               </Col>
               <Col md={4} className={styles.groupshop__hero__small_banner_left}>
-                <div className="d-flex flex-column justify-content-center align-items-center ">
-                  <div className="mb-2">Next Rewards</div>
-                  <SmallBannerBox2 bannerDiscount={bannerDiscount} />
-                  <GradientCircle />
-                </div>
+                {members.length < 5
+                  ? (
+                    <div className="d-flex flex-column justify-content-center align-items-center ">
+                      <div className="mb-2">Next Rewards</div>
+                      <SmallBannerBox2 bannerDiscount={bannerDiscount} />
+                      <GradientCircle />
+                    </div>
+                  ) : '' }
               </Col>
             </Row>
             <Row>
