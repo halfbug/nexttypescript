@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
@@ -47,6 +49,7 @@ import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
+import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -83,6 +86,7 @@ const GroupShop: NextPage = () => {
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[]
     | undefined>(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
+  const [showRewards, setShowRewards] = useState<boolean>(false);
   const [newBestSeller, setnewBestSeller] = useState<IProduct[]>();
 
   useEffect(() => {
@@ -298,7 +302,9 @@ const GroupShop: NextPage = () => {
                 <div className={styles.groupshop__hero_current_reward}>
                   Current Rewards
                 </div>
-                <BigBannerBox />
+                <div role="button" onClick={() => { setShowRewards(true); }}>
+                  <BigBannerBox />
+                </div>
               </Col>
               <Col md={4} className={styles.groupshop__hero__small_banner_left}>
                 {members.length < 5
@@ -477,6 +483,10 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
+        <RewardBox
+          show={showRewards}
+          handleClose={() => setShowRewards(false)}
+        />
       </div>
     </>
   );

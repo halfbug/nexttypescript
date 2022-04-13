@@ -376,31 +376,37 @@ const ProductDetail = ({
                 className="m-1 my-3 px-2 rounded-pill"
               />
               <Col xs={12} md={12}>
-                { productCustomers.length > 0
-              && (
-              <>
-                <Row className="d-flex align-items-center my-2">
-                  <Col xs={1} className="text-nowrap">
-                    <Icon />
-                  </Col>
-                  <Col xs={11}>
-                    Over
-                    {' '}
-                    {productCustomers.length}
-                    {' '}
-                    people have earned cashback and discounts on this item!
-                  </Col>
-                </Row>
-                <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
-                <ShareButton
-                  disabled={isExpired}
-                  placement="auto-end"
-                  shareurl={productShareUrl(product?.id ?? '')}
-                  label="Invite more friends"
-                  className={styles.groupshop_InviteBtn}
-                />
-              </>
-              )}
+                {productCustomers.length > 0
+                  && (
+                    <>
+                      <Row className="d-flex align-items-center my-2">
+                        <Col xs={1} className="text-nowrap">
+                          <Icon />
+                        </Col>
+                        <Col xs={11}>
+                          Over
+                          {' '}
+                          {productCustomers.length}
+                          {' '}
+                          people have earned cashback and discounts on this item!
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={6}>
+                          <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+                        </Col>
+                        <Col md={6}>
+                          <ShareButton
+                            disabled={isExpired}
+                            placement="auto-end"
+                            shareurl={productShareUrl(product?.id ?? '')}
+                            label="Invite more friends"
+                            className={styles.groupshop_InviteBtn}
+                          />
+                        </Col>
+                      </Row>
+                    </>
+                  )}
 
               </Col>
             </Col>
