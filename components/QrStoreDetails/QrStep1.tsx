@@ -134,7 +134,7 @@ export default function QrStep1({
                         </div>
                         <Form.Control
                           type="text"
-                          placeholder="Order Number"
+                          placeholder="Enter Order Number"
                           name="ordernumber"
                           isInvalid={!!errors.ordernumber}
                           onChange={(e) => setFieldValue('ordernumber', e.currentTarget.value)}
