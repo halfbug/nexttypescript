@@ -26,6 +26,7 @@
       }
     }
     &_first_tier {
+        @extend .d-flex, .align-items-center;
         height: 21px;
         background: #A68AD6;
         border-radius: 8px;
@@ -42,6 +43,7 @@
         }
 }
     &_second_tier {
+        @extend .d-flex, .align-items-center;
         height: 21px;
         background: #F28BF4;
         border-radius: 8px;
@@ -58,6 +60,7 @@
             }
         }
     &_third_tier {
+        @extend .d-flex, .align-items-center;
         height: 21px;
         background: #F8C48D;
         border-radius: 8px;
@@ -74,6 +77,7 @@
             }
         }
     &_fourth_tier {
+        @extend .d-flex, .align-items-center;
         height: 21px;
         background: #D5FA52;
         border-radius: 8px;

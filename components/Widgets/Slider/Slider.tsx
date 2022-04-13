@@ -25,10 +25,10 @@ export default function Slider() {
   }, []);
 
   const sliderDisplayCSS = [
-    { text: 'EXPLORE', display: styles.billing_first_tier, noDisplay: styles.billing_no_display },
-    { text: 'LAUNCH', display: styles.billing_second_tier, noDisplay: styles.billing_no_display },
-    { text: 'GROWTH', display: styles.billing_third_tier, noDisplay: styles.billing_no_display },
-    { text: 'UNICORN', display: styles.billing_fourth_tier, noDisplay: styles.billing_no_display },
+    { text: 'Explore', display: styles.billing_first_tier, noDisplay: styles.billing_no_display },
+    { text: 'Launch', display: styles.billing_second_tier, noDisplay: styles.billing_no_display },
+    { text: 'Growth', display: styles.billing_third_tier, noDisplay: styles.billing_no_display },
+    { text: 'Unicorn', display: styles.billing_fourth_tier, noDisplay: styles.billing_no_display },
   ];
   useEffect(() => {
     if (data) {
