@@ -4,6 +4,7 @@
     margin-left: 10px;
     @extend .mt-3, .py-0, .d-flex, .px-0;
     &_calculator_rectangle {
+      margin-left: 1px;
         @extend .mt-2, .p-4, .w-100;
         border: 1px dashed #f7bc7d;
         box-sizing: border-box;
@@ -169,6 +170,7 @@
         color: #1d2329;
     }
     &_bulbinfo {
+      margin-left: 10px;
         p {
             @extend .py-1, .my-1,.d-flex, .align-items-center,.text-nowrap;
             font-family: 'DM Sans';
@@ -179,6 +181,7 @@
         }
         &_box_4 {
             @extend .mt-0, .d-flex, .align-items-center;
+            margin-left: 10px;
             border: 1px dashed $dotted-border-color4;
             border-radius: 10px;
             height: 51px;
@@ -409,6 +412,7 @@
         }
     }
     &__paymenthistory {
+      margin-left: 1px;
         &__header {
           margin: 30px 0 10px 0;
           h3 {
@@ -483,12 +487,11 @@
           }
         }
         &__turnOff {
-          padding: 30px 25px;
-          margin-top: 60px;
+          @extend .mb-5, .px-4, .py-3;
+          padding: 10px 25px;
           border: 1px dashed #f56363;
           box-sizing: border-box;
-          border-radius: 23px;
-          margin-bottom: 60px;
+          border-radius: 10px;
     
           &__powerIcon {
             display: flex;
