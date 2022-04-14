@@ -526,8 +526,8 @@ const ADD_DEAL_PRODUCT = gql`
 `;
 
 const GET_ALL_CAMPAIGNS = gql`
-query campaigns {
-  campaigns {
+query campaigns($storeId: String!) {
+  campaigns(storeId: $storeId) {
     id
     name
     status

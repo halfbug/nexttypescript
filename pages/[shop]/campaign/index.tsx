@@ -28,7 +28,9 @@ const CampaignListing = () => {
 
   const {
     loading, error, data, refetch,
-  } = useQuery(GET_ALL_CAMPAIGNS);
+  } = useQuery(GET_ALL_CAMPAIGNS, {
+    variables: { storeId: store.id },
+  });
 
   useEffect(() => {
     if (data) {
