@@ -3,6 +3,17 @@
     // @extend .d-flex, .mt-2, .px-0;
     margin-left: 10px;
     @extend .mt-3, .py-0, .d-flex, .px-0;
+
+    &_btn {
+      @extend .mt-1;
+      border-radius: 8px;
+      border: 1px solid $black;
+      background-color: $white;
+      &:hover {
+          border-radius: 8px;
+          border: 1px solid $black;
+      }
+  }
     &_calculator_rectangle {
       margin-left: 1px;
         @extend .mt-2, .p-4, .w-100;

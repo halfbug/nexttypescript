@@ -119,7 +119,11 @@ export default function PaymentHistory() {
               Temporarily turn the Groupshop app off. Come back any time to reactivate it.
             </div>
             <div className='mx-4 mb-2'>
-              <WhiteButton>Turn off</WhiteButton>
+              <WhiteButton
+                className={['px-4 py-2 ', styles.billing_btn].join(' ')}
+              >
+                Turn off
+              </WhiteButton>
             </div>
           </Col>
           <Col lg={3} />
