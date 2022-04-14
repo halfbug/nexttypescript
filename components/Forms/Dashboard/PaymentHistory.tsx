@@ -126,7 +126,7 @@ export default function PaymentHistory() {
               </WhiteButton>
             </div>
           </Col>
-          <Col lg={3} />
+          <Col lg={9} className={styles.billing_white_space} />
         </Row>
       </Col>
     </Row>

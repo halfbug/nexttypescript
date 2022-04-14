@@ -503,7 +503,7 @@
           border: 1px dashed #f56363;
           box-sizing: border-box;
           border-radius: 10px;
-    
+
           &__powerIcon {
             display: flex;
             align-items: center;
@@ -523,5 +523,9 @@
             color: #8e9194;
           }
         }
+      }
+
+      &_white_space{
+        margin: 4% 0%;
       }
 }
