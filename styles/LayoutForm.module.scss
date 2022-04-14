@@ -2,20 +2,37 @@
 
 .layout {
     @extend .d-flex, .mt-2, .px-0;
+
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
         border-radius: 18px;
     }
+
     &__box_3 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color3;
         border-radius: 18px;
     }
+
     &__box_orange {
         @extend .mb-4, .p-4;
         border: 1px dashed $average;
         border-radius: 18px;
+    }
+
+    &__light_txt {
+        color: $subheadingclr;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-light;
+        line-height: $line-height-18;
+        font-family: 'Mulish';
+        opacity: $opacity-medium;
+        margin-left: 0px;
+    }
+
+    &__style_btns {
+        @extend .mt-2, .d-flex, .align-items-center;
     }
 
     h3 {
@@ -27,60 +44,165 @@
         line-height: 29px;
         color: $black;
     }
+
     h4 {
+        @extend .mb-1;
         color: $subheadingclr;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
-        font-size: 16px!important;
+        font-size: 16px !important;
         line-height: 21px;
-
     }
 
     .vertical {
         border-top: 1px solid #dee2ed;
         height: 200px;
     }
+
     .badge {
-        @extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
-        font-size: 8px;
+        @extend .m-1, .rounded, .lh-sm;
+        font-size: $font-size-small;
+        font-weight: $font-weight-normal;
+        color: $black;
         background: $recommended !important;
-        color: $black !important;
+        padding: 5px 10px;
     }
-}
 
-
-.enable_btn {
-    @include button-variant($enable, $enable);
-    @extend .me-2, .p-2, .lh-sm, .rounded;
-    color: $black;
-    background-color: white;
-
-    &:hover {
-        color: $white;
-        border-color: $black;
+    &__sperator {
+        @extend .mt-4;
+        color: $black;
+        opacity: .08;
     }
-    &:active, &:focus {
-        color: $white;
-        opacity: 100%;
-        border-color: $black;
-        background-color: $enable;
+
+    &__enable_btn {
+        // @include button-variant($enable, $enable);
+        @extend .me-2, .px-2, .lh-sm, .rounded;
+        color: $enable !important;
+        background-color: white !important;
+        height: 30px;
+        border-color: $enable !important;
+    
+        &:hover, &:active, &:focus {
+            color: $white !important;
+            border-color: $black !important;
+            background-color: $enable !important;
+        }
+    
+        // &:active,
+        // &:focus {
+        //     color: $white;
+        //     opacity: 100%;
+        //     border-color: $black;
+        //     background-color: $enable;
+        // }
     }
-}
-    .disable_btn {
+    
+    &__disable_btn {
         @include button-variant($disable, $disable);
-        @extend .me-2, .p-2, .lh-sm, .rounded;
+        @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
+        color: $disable;
+        background-color: white;
+        border-color: $disable;
+        height: 30px;
+    
+        &:hover, &:active, &:focus {
+            border-color: $black !important;
+            background-color: $disable !important;
+            color: $black;
+        }
+    
+        // &:active,
+        // &:focus {
+        //     color: $black;
+        //     opacity: 100%;
+        //     border-color: $black;
+        //     background-color: $disable;
+        // }
+    }
+
+    &__modern_btn {
+        @extend .me-2, .px-2, .lh-sm, .rounded, .mx-3;
         color: $black;
         background-color: white;
+        border-color: $black;
+        height: 30px;
+        width: 75px;
+    
+        &:hover, &:active, &:focus {
+            color: $black;
+            border-color: $black !important;
+            background-color: $modern !important;
+        }
+    }
 
-        &:hover {
+    &__classic_btn {
+        @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
+        color: $black;
+        background-color: white;
+        border-color: $black;
+        height: 30px;
+        width: 75px;
+    
+        &:hover, &:active, &:focus {
             color: $black;
-            border-color: $black;
+            border-color: $black !important;
+            background-color: $classic !important;
         }
-        &:active, &:focus {
+    }
+    &__description {
+        color: $subheadingclr;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-light;
+        line-height: $line-height-18;
+        font-family: 'DM Sans';
+    }
+
+    &__codesnip {
+        @extend .mt-3;
+        margin-left: 0px;
+        border: 1px solid $lightBorder;
+        border-radius: 10px;
+        background: $white;
+        height: 105px;
+        max-width: 268px;
+        &__col {
+            @extend .pt-2;
+            border-right: 1px solid $lightBorder;
+        }
+        &__txt {
+            font-weight: $font-weight-normal;
+            font-size: 12px;
+            line-height: $line-height-15;
+            opacity: $opacity-medium;
             color: $black;
-            opacity: 100%;
-            border-color: $black;
-            background-color: $disable;
+            text-align: center
         }
+    }
+
+    &__checkbox {
+        @extend .p-2, .d-flex, .align-items-center;
+        &__input {
+            width: 18px !important;
+            height: 18px !important;
+            border: 3px solid $white;
+            box-shadow: 0 0 0 1px $lightGrey;
+            &:checked {
+                border-color: $white;
+                background-image: none !important;
+            }
+            &:checked+label {
+                font-weight: $font-weight-normal;
+            }
+            &__label {
+                padding-top: .2rem;
+                color: $subheadingclr;
+                font-size: $font-size-medium;
+                font-weight: $font-weight-light;
+                line-height: $line-height-18;
+                font-family: 'DM Sans';
+                padding-left: 8px;
+            }
+        }
+    }
 }

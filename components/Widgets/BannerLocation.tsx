@@ -20,6 +20,7 @@ export default function BannerLocation(
   }
     : BannerLocationProps,
 ) {
+  const [check, setCheck] = React.useState(true);
   return (
     <section className={styles.layout__box_1}>
       <h4 className="mt-0">
@@ -31,36 +32,98 @@ export default function BannerLocation(
         <Col lg={12} className="mt-2">
           <Form.Check
             className="p-2"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             type="radio"
               // eslint-disable-next-line react/jsx-closing-bracket-location
               >
-            <Form.Check.Input type="radio" name="location" />
-            <Form.Check.Label className="mx-2">
+            <Form.Check.Input type="radio" name="location" className={styles.layout__checkbox__input} />
+            <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Below product price tag
               <span className={styles.badge}>Recommended</span>
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
             className="p-2"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="location" />
-            <Form.Check.Label className="mx-2">
+            <Form.Check.Input type="radio" name="location" className={styles.layout__checkbox__input} />
+            <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Below Add to cart
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
             className="p-2"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => {
+              handleChange(e);
+            }}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="location" />
-            <Form.Check.Label className="mx-2">
+            <Form.Check.Input type="radio" name="location" className={styles.layout__checkbox__input} />
+            <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Customize location (Advanced)
             </Form.Check.Label>
           </Form.Check>
+
+          {check && (
+            <>
+              <div className="m-2 mt-3">
+                <h4>Step 1</h4>
+                <div className={styles.layout__description}>
+                  When you are done customizing your banner,
+                  add the code below right after the opening tag of your website.
+                  The code only needs to be added once per page – add it on all
+                  the pages you will be displaying
+                  the Groupshop banner.
+                </div>
+                <Row className={styles.layout__codesnip}>
+                  <Col lg={2} className={styles.layout__codesnip__col}>
+                    <div className={styles.layout__codesnip__txt}>1</div>
+                    <div className={styles.layout__codesnip__txt}>2</div>
+                    <div className={styles.layout__codesnip__txt}>3</div>
+                    <div className={styles.layout__codesnip__txt}>4</div>
+                    <div className={styles.layout__codesnip__txt}>5</div>
+                  </Col>
+                  <Col lg={10} className="pt-2 w-50">
+                    <div className={styles.layout__codesnip__txt}>script</div>
+                    <div className={styles.layout__codesnip__txt}>some</div>
+                    <div className={styles.layout__codesnip__txt}>code</div>
+                    <div className={styles.layout__codesnip__txt}>is going</div>
+                    <div className={styles.layout__codesnip__txt}>/script</div>
+                  </Col>
+                </Row>
+              </div>
+
+              <div className="m-2 mt-3">
+                <h4>Step 2</h4>
+                <div className={styles.layout__description}>
+                  Add the following code anywhere you want to display the Groupshop banner.
+                  We recommend placing them on your product page and on your cart page or modal.
+                </div>
+                <Row className={styles.layout__codesnip}>
+                  <Col lg={2} className={styles.layout__codesnip__col}>
+                    <div className={styles.layout__codesnip__txt}>1</div>
+                    <div className={styles.layout__codesnip__txt}>2</div>
+                    <div className={styles.layout__codesnip__txt}>3</div>
+                    <div className={styles.layout__codesnip__txt}>4</div>
+                    <div className={styles.layout__codesnip__txt}>5</div>
+                  </Col>
+                  <Col lg={10} className="pt-2 w-50">
+                    <div className={styles.layout__codesnip__txt}>script</div>
+                    <div className={styles.layout__codesnip__txt}>some</div>
+                    <div className={styles.layout__codesnip__txt}>code</div>
+                    <div className={styles.layout__codesnip__txt}>is going</div>
+                    <div className={styles.layout__codesnip__txt}>/script</div>
+                  </Col>
+                </Row>
+              </div>
+            </>
+          )}
+
         </Col>
       </Row>
     </section>

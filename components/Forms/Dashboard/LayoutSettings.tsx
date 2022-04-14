@@ -103,7 +103,7 @@ export default function LayoutSettings() {
     <Form noValidate onSubmit={handleSubmit}>
       <Row className={styles.layout}>
         <h3>Product Page Banners</h3>
-        <Col lg={7}>
+        <Col xl={7} lg={8} md={12}>
           <ShowBanner
             values={values}
             errors={errors}
@@ -113,8 +113,16 @@ export default function LayoutSettings() {
             handleSubmit={handleSubmit}
             touched={touched}
           />
+
+          <BannerDesign
+            values={values}
+            errors={errors}
+            handleChange={handleChange}
+            handleForm={handleForm}
+            touched={touched}
+          />
         </Col>
-        <Col lg={5}>
+        <Col xl={5} lg={8} md={12}>
           <BannerLocation
             values={values}
             errors={errors}
@@ -124,16 +132,7 @@ export default function LayoutSettings() {
             touched={touched}
           />
         </Col>
-        <Col lg={7}>
-          <BannerDesign
-            values={values}
-            errors={errors}
-            handleChange={handleChange}
-            handleForm={handleForm}
-            touched={touched}
-          />
-        </Col>
-        <Col lg={12}>
+        <Col xl={12} lg={12} md={12}>
           <DisplayBanner
             values={values}
             errors={errors}

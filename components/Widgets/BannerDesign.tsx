@@ -5,6 +5,10 @@ import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
 
+import B1 from 'assets/images/GS-1.png';
+import B2 from 'assets/images/GS-2.png';
+import B3 from 'assets/images/GS-3.png';
+import B4 from 'assets/images/GS-4.png';
 import BannerComponent from './BannerComponent';
 
 export interface BannerDesignProps {
@@ -28,17 +32,17 @@ export default function BannerDesign(
         Banner Design
 
       </h4>
-      <div className="d-inline-flex mt-2">
-        <h5 className="text-muted mt-2">
+      <div className={styles.layout__style_btns}>
+        <div className={styles.layout__light_txt}>
           Select style:
 
-        </h5>
-        <Button variant="outline-primary" className="mx-2 me-2 styles.enable_btn btn-sm rounded-3">
+        </div>
+        <Button variant="outline-primary" className={styles.layout__modern_btn}>
           Modern
 
         </Button>
         {' '}
-        <Button variant="outline-primary" className="styles.disable_btn btn-sm">
+        <Button variant="outline-primary" className={styles.layout__classic_btn}>
           Classic
 
         </Button>
@@ -47,14 +51,14 @@ export default function BannerDesign(
       <Row>
         <Col lg={12} className="mt-2">
           <Form.Check
-            className="p-2 d-flex align-items-center"
+            className={styles.layout__checkbox}
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="bnr" />
+            <Form.Check.Input type="radio" name="bnr" className={styles.layout__checkbox__input} />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent />
+                <BannerComponent image={B1} />
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -63,10 +67,10 @@ export default function BannerDesign(
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="bnr" />
+            <Form.Check.Input type="radio" name="bnr" className={styles.layout__checkbox__input} />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent />
+                <BannerComponent image={B2} />
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -75,10 +79,10 @@ export default function BannerDesign(
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="bnr" />
+            <Form.Check.Input type="radio" name="bnr" className={styles.layout__checkbox__input} />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent />
+                <BannerComponent image={B3} />
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -87,16 +91,16 @@ export default function BannerDesign(
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="bnr" />
+            <Form.Check.Input type="radio" name="bnr" className={styles.layout__checkbox__input} />
             <Form.Check.Label>
               <div className=" mx-2">
-                <BannerComponent />
+                <BannerComponent image={B4} />
               </div>
             </Form.Check.Label>
           </Form.Check>
         </Col>
       </Row>
-      <hr className="mt-2 " style={{ color: '$black' }} />
+      <hr className={styles.layout__sperator} />
       <h4 className="mt-0">
         Select the call-to-action that customer will see
       </h4>
@@ -107,8 +111,8 @@ export default function BannerDesign(
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="cashback" />
-            <Form.Check.Label className="mx-2">
+            <Form.Check.Input type="radio" name="cashback" className={styles.layout__checkbox__input} />
+            <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Shop with friends, get $50 cashback.
               <span className={styles.badge}>Recommended</span>
             </Form.Check.Label>
@@ -118,8 +122,8 @@ export default function BannerDesign(
             onChange={(e) => handleChange(e)}
             type="radio"
           >
-            <Form.Check.Input type="radio" name="cashback" />
-            <Form.Check.Label className="mx-2">
+            <Form.Check.Input type="radio" name="cashback" className={styles.layout__checkbox__input} />
+            <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Shop with friends, get up to 90% back.
             </Form.Check.Label>
           </Form.Check>

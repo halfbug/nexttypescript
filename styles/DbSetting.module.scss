@@ -19,10 +19,17 @@
         border-radius: 18px;
         box-sizing: border-box;
         width: 160px;
+        cursor: pointer;
         &:hover {
             background-color: $tab1_clr;
             color: $white;
-            border: 2px dashed $white;
+            border: 1px dashed $white;
+            h4 {
+                color: $white;
+            }
+            svg * {
+                fill: $white;
+            }
         }
         h4 {
             color: $subheadingclr;
@@ -31,6 +38,18 @@
             font-weight: 700;
             font-size: 16px!important;
             line-height: 21px;
+        }
+        &_active {
+            @extend .p-3;
+            background-color: $tab1_clr;
+            color: $white;
+            border: 1px dashed $white;
+            border-radius: 18px;
+            box-sizing: border-box;
+            width: 160px;
+            h4 {
+                color: $white;
+            }
         }
     }
 
@@ -39,10 +58,17 @@
         border: 1px dashed $tab2_clr;
         border-radius: 18px;
         width: 160px;
-                &:hover {
+        cursor: pointer;
+        svg {
+            color: $tab2_clr;
+        }
+        &:hover {
             background-color: $tab2_clr;
-            border: 2px dashed $white;
+            border: 1px dashed $white;
             color: $white;
+            h4 {
+                color: $white;
+            }
         }
         h4 {
             color: $subheadingclr;
@@ -51,6 +77,18 @@
             font-weight: 700;
             font-size: 16px!important;
             line-height: 21px;
+        }
+        &_active {
+            @extend .p-3;
+            border-radius: 18px;
+            width: 160px;
+            background-color: $tab2_clr;
+            border: 1px dashed $white;
+            color: $white;
+            cursor: pointer;
+            h4 {
+                color: $white;
+            }
         }
     }
 
@@ -59,10 +97,20 @@
         border: 1px dashed $tab3_clr;
         border-radius: 18px;
         width:max-content;
+        cursor: pointer;
+        svg {
+            color: $tab3_clr;
+        }
         &:hover {
             background-color: $tab3_clr;
-            border: 2px dashed $white;
+            border: 1px dashed $white;
             color: $white;
+            h4 {
+                color: $white;
+            }
+            svg * {
+                fill: $white;
+            }
         }
         h4 {
             color: $subheadingclr;
@@ -71,6 +119,18 @@
             font-weight: 700;
             font-size: 16px!important;
             line-height: 21px;
+        }
+        &_active {
+            @extend .p-3;
+            border-radius: 18px;
+            width:max-content;
+            background-color: $tab3_clr;
+            border: 1px dashed $white;
+            color: $white;
+            cursor: pointer;
+            h4 {
+                color: $white;
+            }
         }
     }
 
@@ -79,10 +139,20 @@
         border: 1px dashed $btnhigh;
         border-radius: 18px;
         width:max-content;
+        cursor: pointer;
+        svg {
+            color: $btnhigh;
+        }
         &:hover {
             background-color: $btnhigh;
-            border: 2px dashed $white;
+            border: 1px dashed $white;
             color: $white;
+            h4 {
+                color: $white;
+            }
+            svg * {
+                fill: $white;
+            }
         }
         h4 {
             color: $subheadingclr;
@@ -91,6 +161,18 @@
             font-weight: 700;
             font-size: 16px!important;
             line-height: 21px;
+        }
+        &_active {
+            @extend .p-3;
+            border-radius: 18px;
+            width:max-content;
+            background-color: $btnhigh;
+            border: 1px dashed $white;
+            color: $white;
+            cursor: pointer;
+            h4 {
+                color: $white;
+            }
         }
     }
 

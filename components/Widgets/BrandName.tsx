@@ -29,7 +29,7 @@ export default function BrandName(
     <section className={styles.generalform_purplebox}>
       <Row><h4>Your Brand Name</h4></Row>
       <Row>
-        <h6 className="text-muted">
+        <h6 className={styles.generalform_light_txt}>
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
@@ -41,6 +41,7 @@ export default function BrandName(
               type="text"
               name="brandName"
               value={values.brandName}
+              className={styles.generalform__name}
               onChange={(e) => {
                 // setFieldValue('brandName', e.currentTarget.value);
                 handleForm('brandName', e.currentTarget.value);
@@ -55,7 +56,7 @@ export default function BrandName(
           </Form.Group>
         </Col>
         <Col xs={2}>
-          <Form.Text className="text-muted align-baseline">
+          <Form.Text className={styles.generalform_count_txt}>
             {values.brandName.length}
             /20
           </Form.Text>
@@ -63,13 +64,13 @@ export default function BrandName(
       </Row>
       <Row className="mt-3"><h4>Your Brand Logo</h4></Row>
       <Row>
-        <h6 className="text-muted">
+        <h6 className={styles.generalform_light_txt}>
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
       <Row>
 
-        <Form.Group className="mb-3 w-50 py-2" controlId="brandinfoUploadLogo">
+        <Form.Group className="mb-3 py-2 " controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
           <UploadButton
             icon={(<WhiteButton>Upload</WhiteButton>)}
@@ -77,12 +78,12 @@ export default function BrandName(
             field="logoImage"
             value={values.logoImage}
             handleForm={handleForm}
-            className={styles.welcome_Obupload}
+            className={styles.generalform_Obupload}
             url={getKeyFromS3URL(values.logoImage)}
           />
           <Row className="mx-auto">
-            <Form.Text className="text-muted d-flex justify-content-center">
-              Under 5 MB (Formats: PNG, JPG, JPEG)
+            <Form.Text className={styles.generalform_smalltxt}>
+              Under 5 MB (PNG, JPG, JPEG)
             </Form.Text>
           </Row>
         </Form.Group>

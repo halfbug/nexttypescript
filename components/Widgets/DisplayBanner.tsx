@@ -24,12 +24,12 @@ export default function DisplayBanner(
   return (
     <section className={styles.layout__box_orange}>
       <Row>
-        <Col lg={6}>
+        <Col xxl={7} xl={6} lg={4}>
           <h4 className="mt-0">
             Display banners on your order summary page
 
           </h4>
-          <h6 className="text-muted mt-1 text-nowrap">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
+          <h6 className="text-muted mt-1">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
           <Row>
             <Col lg={12} className="mt-2">
               <Form.Check
@@ -37,8 +37,8 @@ export default function DisplayBanner(
                 onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" />
-                <Form.Check.Label className="mx-2">
+                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show both
                   <span className={styles.badge}>Recommended</span>
                 </Form.Check.Label>
@@ -48,8 +48,8 @@ export default function DisplayBanner(
                 onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" />
-                <Form.Check.Label className="mx-2">
+                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show left one only
                 </Form.Check.Label>
               </Form.Check>
@@ -58,8 +58,8 @@ export default function DisplayBanner(
                 onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" />
-                <Form.Check.Label className="mx-2">
+                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show right one only
                 </Form.Check.Label>
               </Form.Check>
@@ -68,15 +68,15 @@ export default function DisplayBanner(
                 onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" />
-                <Form.Check.Label className="mx-2">
+                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Don’t show
                 </Form.Check.Label>
               </Form.Check>
             </Col>
           </Row>
         </Col>
-        <Col lg={6} className="d-flex justify-content-end">
+        <Col xxl={5} xl={6} lg={8} className="d-flex justify-content-end">
           <img src={Banner.src} alt="Banner" width="413" height="215" />
         </Col>
       </Row>

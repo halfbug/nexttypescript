@@ -28,7 +28,9 @@ export default function ShowBanner(
         Show Groupshop banner on product pages
         <span className={styles.badge}>Recommended</span>
       </h4>
-      <Row className="text-muted"><h6 className="mt-1">Help customers learn about Groupshop’s rewards as they shop on your store.</h6></Row>
+      <Row className={styles.layout__light_txt}>
+        Help customers learn about Groupshop’s rewards as they shop on your store.
+      </Row>
       <Row className="mt-2 me-2 mb-2">
         <Col lg={12} md={6} className="text-right">
           <ToggleButtonGroup
@@ -38,7 +40,7 @@ export default function ShowBanner(
           >
             <ToggleButton
               variant="outline-success"
-              className={styles.enable_btn}
+              className={styles.layout__enable_btn}
               id="bannerProductPage-e"
               value={1}
               // eslint-disable-next-line eqeqeq
@@ -55,7 +57,7 @@ export default function ShowBanner(
 
             <ToggleButton
               variant="outline-danger"
-              className={styles.disable_btn}
+              className={styles.layout__disable_btn}
               id="bannerProductPage-d"
               value={0}
               // checked={values.bannerProductPage === false}
@@ -72,12 +74,14 @@ export default function ShowBanner(
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <hr className="mt-4 " style={{ color: '$black' }} />
+      <hr className={styles.layout__sperator} />
       <h4>
         Show Groupshop banner on cart page
         <span className={styles.badge}>Recommended</span>
       </h4>
-      <Row className="text-muted"><h6 className="mt-1">Remind customers about Groupshop’s rewards right before their purchase.</h6></Row>
+      <Row className={styles.layout__light_txt}>
+        Remind customers about Groupshop’s rewards right before their purchase.
+      </Row>
       <Row className="mt-2 me-2 mb-2">
         <Col lg={12} md={6} className="text-right">
           <ToggleButtonGroup
@@ -86,7 +90,7 @@ export default function ShowBanner(
           >
             <ToggleButton
               variant="outline-success"
-              className=""
+              className={styles.layout__enable_btn}
               id="bannerCartPage-e"
               value={1}
               checked={values.bannerCartPage === 1}
@@ -102,7 +106,7 @@ export default function ShowBanner(
 
             <ToggleButton
               variant="outline-danger"
-              className=""
+              className={styles.layout__disable_btn}
               id="bannerCartPage-d"
               value={0}
               checked={values.bannerCartPage === 0}
