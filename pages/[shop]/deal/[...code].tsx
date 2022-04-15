@@ -15,12 +15,10 @@ import {
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
-import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
-import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
 import {
-  ChevronDown, Handbag, Link, Plus, Search,
+  ChevronDown, Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
@@ -37,24 +35,26 @@ import useAlert from 'hooks/useAlert';
 import Button from 'components/Buttons/Button/Button';
 import Footer from 'components/Layout/FooterGS/FooterGS';
 import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
-import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
 import useDetail from 'hooks/useDetail';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Head from 'next/head';
-import script from 'next/script';
 import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
 import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
+import { useMediaQuery } from 'react-responsive';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { shop, discountCode } = useCode();
+  const isModalForMobile = useMediaQuery({
+    query: '(max-width: 475px)',
+  });
 
   const {
     loading, error, data: { groupshop } = { groupshop: gsInit },
@@ -487,10 +487,12 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
+        {isModalForMobile && (
         <RewardBox
           show={showRewards}
           handleClose={() => setShowRewards(false)}
         />
+        )}
       </div>
     </>
   );

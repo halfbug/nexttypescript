@@ -167,9 +167,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@extend .groupshop__earn;
 			background-color: $purple !important;
 		}
-		@include media-breakpoint-down(md) {
-			display: none;
-		}
 	}
 
 	&_copy2clipboard {
@@ -1346,5 +1343,103 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 	&_firstName {
 		text-decoration: underline 2px solid #ccb2f9;
+	}
+	&_rewardBox{
+		&_modal{
+			@include media-breakpoint-up(sm){
+				display: none;
+			}
+			position: fixed;
+			bottom: 0;
+			margin: 0;
+		}
+		&_heading{
+			@extend .d-flex, .justify-content-center, .mx-3;
+			font-family: $font-family-sans-serif;
+			font-style: normal;
+			font-weight: $font-weight-bolder;
+			font-size: $size-14px;
+			line-height: $size-18px;
+			letter-spacing: 0.5px;
+			text-transform: uppercase;
+			color: $black;
+		}
+		&_state{
+			@extend .d-flex, .justify-content-between, .mt-3, .px-3, .pb-1;
+			span{
+				font-family: 'Mulish';
+				font-style: normal;
+				font-weight: $font-weight-bold;
+				font-size: $size-12px;
+				line-height: $size-16px;
+				color: $black;
+			}
+		}
+		&_pointer_wrapper{
+			@extend .d-flex, .justify-content-between;
+			position: absolute;
+			
+		}
+		&_pointer{
+			height: 18px;
+			width:18px;
+			background: rgba(255, 255, 255);
+			// border: 1px solid rgba(204, 178, 249, 0.75);
+			box-sizing: border-box;
+			backdrop-filter: blur(4px);
+			/* Note: backdrop-filter has minimal browser support */
+			border-radius: 18px;
+			&::before{
+				content: "";
+				position: absolute;
+				z-index: -1;
+				padding: .08rem;
+				inset: 0;
+				border-radius: 16px;
+				background: linear-gradient(to right, #ccb2f9, #fee750);
+				-webkit-mask: 
+					linear-gradient(#fff 0 0) content-box, 
+					linear-gradient(#fff 0 0);
+						mask: 
+					linear-gradient(#fff 0 0) content-box, 
+					linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+						mask-composite: exclude;
+			}
+		}
+		&_bar{
+			@extend .w-50;
+			height: 18px;
+			background: linear-gradient(270deg, #FEE750 0%, #F4DEC4 45.31%, #CCB2F9 94.79%, #CCB2F9 100%);
+		}
+		&_reward{
+			@extend .d-flex, .justify-content-between, .px-3;
+			p{
+				@extend .mb-1;
+				font-family: $font-family-sans-serif;
+				font-style: normal;
+				font-weight: $font-weight-bolder;
+				font-size: $size-12px;
+				line-height: $size-16px;
+				color: $black;
+			}
+			span{
+				font-family: $font-family-sans-serif;
+				font-style: normal;
+				font-weight: $font-weight-bolder;
+				font-size: $size-8px;
+				line-height: $size-10px;
+				color: $black;
+			}
+		}
+		&_invite {
+			@extend .groupshop__top_item;
+			border-style: dashed !important;
+		}
+		&_inviteArrow{
+			@extend .px-2, .rounded-pill, .bg-white, .mx-2;
+			height: 42px;
+			width: 42px;
+		}
 	}
 }
