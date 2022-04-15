@@ -85,7 +85,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       });
       handleClose({});
       // update context
-      dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, allProducts: [...gsctx?.store?.products?.filter(({ id: pid }:{ id:string}) => products?.includes(pid)) || [], ...gsctx?.allProducts || []], dealProducts } });
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, popularProducts: [...gsctx?.store?.products?.filter(({ id: pid }:{ id:string}) => products?.includes(pid)) || [], ...gsctx?.popularProducts || []], dealProducts } });
     },
   });
 

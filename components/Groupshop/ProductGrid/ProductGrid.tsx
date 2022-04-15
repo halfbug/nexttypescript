@@ -14,6 +14,8 @@ import usePagination from 'hooks/usePagination';
 import useDeal from 'hooks/useDeal';
 import { Member } from 'types/groupshop';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+// import Link from 'next/link';
+// import Router, { useRouter } from 'next/router';
 
 type ProductGridProps = {
   products: IProduct[] | undefined,
@@ -27,14 +29,15 @@ type ProductGridProps = {
   showHoverButton?: boolean,
   addProducts(e: boolean): any;
   handleDetail(prd: any): void;
+  id?: string;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail,
-  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, ...props
+  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
-
+  // const router = useRouter();
   const {
     breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
   } = usePagination<IProduct>({
@@ -61,13 +64,21 @@ const ProductGrid = ({
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
   } = useDeal();
 
+  // React.useEffect(() => {
+  //   console.log('im cuurent page changes');
+  //   // Router.push('#allproducts');
+  //   // router.pathname = `${router.pathname}#allproducts`;
+
+  //   // <Link href="#allproducts"><a>My first section</a></Link>
+  // }, [currentPage]);
+
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
   // console.log({ renderItems });
 
   return (
-    <Container {...props} ref={ref} fluid>
+    <Container {...props} ref={ref} fluid id={id}>
       <Row className={styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}
@@ -260,6 +271,7 @@ ProductGrid.defaultProps = {
   xl: 3,
   xxl: 3,
   showHoverButton: false,
+  id: 'popularproducts',
 };
 
 export default ProductGrid;

@@ -343,6 +343,7 @@ const GroupShop: NextPage = () => {
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
+          id="shoppedby"
         >
           <h2>
             SHOPPED BY
@@ -381,6 +382,7 @@ const GroupShop: NextPage = () => {
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
+            id="popularproducts"
           >
             <h2>Popular in Group</h2>
           </ProductGrid>
@@ -399,6 +401,7 @@ const GroupShop: NextPage = () => {
               maxrows={1}
               addProducts={handleAddProduct}
               handleDetail={(prd) => setsProduct(prd)}
+              id="toppicks"
             >
               <h2>Top Picks</h2>
             </ProductGrid>
@@ -416,6 +419,7 @@ const GroupShop: NextPage = () => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           showHoverButton
+          id="allproducts"
         >
           <div className="position-relative">
             <h2>All Products</h2>
