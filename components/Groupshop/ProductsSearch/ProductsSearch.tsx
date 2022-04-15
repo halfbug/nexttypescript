@@ -42,7 +42,7 @@ const ProductsSearch = ({
 
   const { googleEventCode } = useDeal();
   useEffect(() => {
-    if (showSearch) { googleEventCode(); }
+    if (showSearch) { googleEventCode('product-search-modal'); }
   }, [showSearch]);
 
   const handleClick = (event: any) => {

@@ -118,7 +118,7 @@ export default function useDeal() {
   },
   [gsctx]);
 
-  const googleEventCode = () => {
+  const googleEventCode = (modalName: string) => {
     // @ts-ignore
     window.dataLayer = window.dataLayer || [];
 
@@ -126,10 +126,12 @@ export default function useDeal() {
     // eslint-disable-next-line no-undef
     dataLayer.push({
       event: 'modalChange',
+      modalName,
     });
     console.log('--------<<<<<<<<<<gtm>>>>>>----------');
     console.log({
       event: 'modalChange',
+      modalName,
     });
   };
 

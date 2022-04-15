@@ -81,7 +81,7 @@ const ProductDetail = ({
         finalPrice: (+dPrice(+(product.price)).toFixed(2)) as number,
 
       });
-      googleEventCode();
+      googleEventCode('product-detail-modal');
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));

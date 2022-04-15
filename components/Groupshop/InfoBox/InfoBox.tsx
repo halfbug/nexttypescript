@@ -24,7 +24,7 @@ const InfoBox = () => {
 
   const { googleEventCode } = useDeal();
   useEffect(() => {
-    if (show) { googleEventCode(); }
+    if (show) { googleEventCode('how-it-works-modal'); }
   }, [show]);
 
   const handleClose = () => setShow(false);

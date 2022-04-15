@@ -33,8 +33,12 @@ const Cart = ({
     dispatch,
   } = useContext(GroupshopContext);
 
-  const { currencySymbol, dPrice, discount } = useDeal();
-
+  const {
+    currencySymbol, dPrice, discount, googleEventCode,
+  } = useDeal();
+  useEffect(() => {
+    if (show) { googleEventCode('cart-modal'); }
+  }, [show]);
   const {
     cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
     isCartEmpty, getShopifyUrl, getSuggestedProducts, addCartProduct,

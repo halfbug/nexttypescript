@@ -229,7 +229,7 @@ const GroupShop: NextPage = () => {
                   label="Invite"
                   className={styles.groupshop__top_invite}
                   icon={<Plus size={18} className="me-0 pe-0" />}
-                  onClick={googleEventCode}
+                  onClick={() => googleEventCode('invite-share-modal')}
                 />
               </div>
             </Col>
@@ -255,7 +255,7 @@ const GroupShop: NextPage = () => {
                 placement="bottom"
                 shareurl={gsURL}
                 label="EARN CASHBACK"
-                onClick={googleEventCode}
+                onClick={() => googleEventCode('earn-cashback-modal')}
                 className={styles.groupshop__hero_share_btn}
               />
               <IconButton
