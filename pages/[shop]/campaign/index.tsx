@@ -14,8 +14,16 @@ import Link from 'next/link';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ALL_CAMPAIGNS, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
+import Model from 'components/Widgets/Model/Model';
 
 const CampaignListing = () => {
+  const [show, setShow] = useState(false);
+  const [campId, setCampId] = useState('');
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
+
   const { store, dispatch } = useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
@@ -81,13 +89,21 @@ const CampaignListing = () => {
       return item;
     });
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-    // console.log({ store });
-    // console.log(']]]]]]]]]]]]]]');
+    handleClose();
   };
 
   return (
     <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
       <Container fluid className={styles.container}>
+        <Model
+          show={show}
+          handleClose={handleClose}
+          handleShow={handleShow}
+          handleToggle={() => handleToggle(campId)}
+          id={campId ?? ''}
+        />
+        ;
+        {' '}
         <h3>All Campaigns</h3>
         <p className="mt-3">
           ✨
@@ -124,7 +140,14 @@ const CampaignListing = () => {
                 label=""
                 id="active_switch"
                 className={styles.container_switch}
-                onChange={() => handleToggle(camp.id)}
+                onChange={() => {
+                  if (camp.isActive) {
+                    setShow(true);
+                    setCampId(camp.id);
+                  } else {
+                    handleToggle(camp.id);
+                  }
+                }}
                 // value={camp.isActive}
               />
             </Col>
