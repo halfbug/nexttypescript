@@ -29,7 +29,7 @@ export default function BrandName(
     <section className={styles.generalform_purplebox}>
       <Row><h4>Your Brand Name</h4></Row>
       <Row>
-        <h6 className={styles.generalform_light_txt}>
+        <h6 className={['pt-1', styles.generalform_light_txt].join(' ')}>
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
@@ -62,7 +62,7 @@ export default function BrandName(
       </Row>
       <Row className="mt-3"><h4>Your Brand Logo</h4></Row>
       <Row>
-        <h6 className={styles.generalform_light_txt}>
+        <h6 className={['pt-1', styles.generalform_light_txt].join(' ')}>
           This identifies your business on your customers’ Groupshop page
         </h6>
       </Row>
@@ -71,7 +71,13 @@ export default function BrandName(
         <Form.Group className="mb-3 py-2 " controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
           <UploadButton
-            icon={(<WhiteButton>Upload</WhiteButton>)}
+            icon={(
+              <WhiteButton
+                className={['px-3', styles.generalform_btn].join(' ')}
+              >
+                Upload
+              </WhiteButton>
+)}
             setFieldValue={setFieldValue}
             field="logoImage"
             value={values.logoImage}

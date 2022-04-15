@@ -2,6 +2,19 @@
 
 .generalform {
     @extend .d-flex, .mt-2, .px-0;
+
+    &_btn {
+        @extend .mt-1;
+        height: 28px;
+        width: 83px;
+        border-radius: 6px;
+        border: 1px solid $black;
+        background-color: $white;
+        &:hover {
+            border-radius: 6px;
+            border: 1px solid $black;
+        }
+    }
     h3 {
         @extend .m-3, .px-0;
         font-family: "DM Sans";
