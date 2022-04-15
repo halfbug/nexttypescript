@@ -35,15 +35,15 @@ export default function BrandName(
       </Row>
 
       <Row className="mt-3">
-        <Col xs={7}>
-          <Form.Group className="" controlId="brandNamevalidation">
+        <Col lg={9} className="d-flex ">
+          <Form.Group className="col-10 pe-2" controlId="brandNamevalidation">
             <Form.Control
               type="text"
               name="brandName"
               value={values.brandName}
               className={styles.generalform__name}
               onChange={(e) => {
-                // setFieldValue('brandName', e.currentTarget.value);
+              // setFieldValue('brandName', e.currentTarget.value);
                 handleForm('brandName', e.currentTarget.value);
               }}
               isInvalid={touched.brandName && !!errors.brandName}
@@ -54,9 +54,7 @@ export default function BrandName(
               {errors.brandName}
             </Form.Control.Feedback>
           </Form.Group>
-        </Col>
-        <Col xs={2}>
-          <Form.Text className={styles.generalform_count_txt}>
+          <Form.Text className={['col-2', styles.generalform_count_txt].join(' ')}>
             {values.brandName.length}
             /20
           </Form.Text>
