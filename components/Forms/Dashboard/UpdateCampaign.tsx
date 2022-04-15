@@ -183,8 +183,8 @@ export default function UpdateCampaign() {
 
   // console.log({ campaign });
   // console.log({ store });
-  console.log({ errors });
-  console.log({ values });
+  // console.log({ errors });
+  // console.log({ values });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {

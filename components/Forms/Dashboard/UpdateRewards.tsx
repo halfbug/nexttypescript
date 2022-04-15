@@ -138,8 +138,9 @@ export default function UpdateRewards() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const {
-        rewards, selectedTarget, maxDiscountVal, minDiscountVal, minDiscount, maxDiscount,
+        rewards, selectedTarget, minDiscount, maxDiscount,
       } = valz;
+      let { minDiscountVal, maxDiscountVal } = valz;
       // console.log({ valz });
 
       const { __typename, ...newSelectedTarget } = selectedTarget;
@@ -170,6 +171,12 @@ export default function UpdateRewards() {
           newSelectedTarget.name = "Super-charged";
         }
         const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
+        if (minDiscountVal[minDiscountVal.length - 1] !== '%') {
+          minDiscountVal = `${minDiscountVal}%`;
+        }
+        if (maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
+          maxDiscountVal = `${maxDiscountVal}%`;
+        }
 
         newSelectedTarget.rewards[0].discount = minDiscountVal;
         newSelectedTarget.rewards[2].discount = maxDiscountVal;
@@ -213,6 +220,7 @@ export default function UpdateRewards() {
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
+  console.log({ values });
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>
