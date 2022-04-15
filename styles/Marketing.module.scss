@@ -108,6 +108,7 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
+        height: 28px;
         width: max-content;
         text-align: center;
         border: $black;
@@ -122,6 +123,24 @@
         }
     }
 
+    &__submitbtn {
+        color: $black;
+        border-color: $black;
+        width: 96px;
+        height: 31px;
+        &:hover {
+            background: $white;
+            border-color: $black;
+        }
+    }
+
+    &__valid {
+        color: #2BB439;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+    }
+
     
     &_inputIconBox{
         @extend .d-flex;
@@ -133,5 +152,32 @@
         position: absolute;
         margin-left: -5px;
     
+    }
+
+    &__collapse {
+        background: #FCFCFC;
+        border: 1px solid #F3F3F3;
+        margin-bottom: 15px;
+        
+        &__header {
+            background: #FCFCFC;
+            display: flex;
+            justify-content: space-between;
+            height: 50px;
+            align-items: center;
+            border: none;
+
+            svg {
+                cursor: pointer;
+            }
+
+            &__txt {
+                color: #1D2329;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 18px;
+                padding-left: 12px;
+            }
+        }
     }
 }

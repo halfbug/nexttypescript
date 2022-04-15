@@ -2,16 +2,55 @@
 import * as React from 'react';
 import styles from 'styles/Marketing.module.scss';
 import {
-  Row, Col, FormControl, InputGroup,
+  Row, Col, FormControl, InputGroup, Accordion, Card, useAccordionButton, ToggleButton,
 } from 'react-bootstrap';
 import Inte from 'assets/images/Integrations.svg';
 import Fa from 'assets/images/FacebookPixel.svg';
 import Ga from 'assets/images/GooglePixel.svg';
 import Ta from 'assets/images/TikTokPixel.svg';
-import { InfoCircle } from 'react-bootstrap-icons';
+import PrivateKeyIcon from 'assets/images/private-key-icon.svg';
+import AttentiveSetupIcon from 'assets/images/attentive-setup.svg';
+import PostscriptSetupIcon from 'assets/images/postscript-setup.svg';
+import SMTPSetupIcon from 'assets/images/smtp-setup.svg';
+import GreenTickIcon from 'assets/images/green-tick.svg';
+import PlusIcon from 'assets/images/plus-icon.svg';
+import MinusIcon from 'assets/images/minus-icon.svg';
+import { useState } from 'react';
+import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import { Check2Circle } from 'react-bootstrap-icons';
+
+export interface ICustomToggleProps {
+  children: any;
+  eventKey: any;
+  [x: string]: any;
+}
+
+function CustomToggle({
+  children, eventKey,
+}: ICustomToggleProps) {
+  const decoratedOnClick = useAccordionButton(eventKey);
+
+  return (
+    <div onClick={decoratedOnClick} aria-hidden="true">
+      {children}
+    </div>
+  );
+}
 
 export default function Integrations(
 ) {
+  const [activeId, setActiveId] = useState('0');
+  const [open, setOpen] = useState(true);
+
+  const openCloseAccordian = (id: any) => {
+    setActiveId(id);
+    if (activeId === id) {
+      setOpen(!open);
+    } else {
+      setOpen(true);
+    }
+  };
+
   return (
     <>
       <h3 className="my-3 mx-0 ps-0 ">Integrations</h3>
@@ -78,6 +117,123 @@ export default function Integrations(
             <p>Enhance your Groupshop experience with email and SMS marketing solutions.</p>
           </Col>
         </Row>
+
+        <Accordion defaultActiveKey={activeId} className="mx-5">
+          <Card className={styles.marketing__collapse}>
+            <Card.Header className={styles.marketing__collapse__header}>
+              <div>
+                <PrivateKeyIcon />
+                <span className={styles.marketing__collapse__header__txt}>Klaviyo setup</span>
+              </div>
+              <div onClick={() => openCloseAccordian('0')} aria-hidden="true">
+                <CustomToggle eventKey="0">
+                  {(activeId === '0' && open) ? (
+                    <MinusIcon />
+                  ) : (
+                    <PlusIcon />
+                  )}
+                </CustomToggle>
+              </div>
+            </Card.Header>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body className="mx-5">
+                <div className="d-flex align-items-center">
+                  <InputGroup>
+                    <FormControl
+                      placeholder="Enter Private API Key"
+                      aria-label="privatekey"
+                    />
+                  </InputGroup>
+                  <WhiteButton
+                    type="submit"
+                    className={['px-4 py-1 ms-2 ', styles.marketing_DownloadBtn].join(' ')}
+
+                  >
+                    Test API
+                  </WhiteButton>
+                </div>
+                <section className={['mt-2 ms-1 d-flex align-items-center', styles.marketing__valid].join(' ')}>
+                  <GreenTickIcon />
+                  <span className="ms-2">Your Private API Key is Valid</span>
+                </section>
+                <Row>
+                  <ToggleButton
+                    variant="outline-success"
+                    className={['mx-3 mt-3 mb-2', styles.marketing__submitbtn].join(' ')}
+                    id="joinExisting-e"
+                    value={1}
+                  >
+                    <Check2Circle className="fs-4" />
+                    {' '}
+                    Submit
+                  </ToggleButton>
+                </Row>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card className={styles.marketing__collapse}>
+            <Card.Header className={styles.marketing__collapse__header}>
+              <div>
+                <AttentiveSetupIcon />
+                <span className={styles.marketing__collapse__header__txt}>Attentive setup</span>
+              </div>
+              <div onClick={() => openCloseAccordian('1')} aria-hidden="true">
+                <CustomToggle eventKey="1">
+                  {(activeId === '1' && open) ? (
+                    <MinusIcon />
+                  ) : (
+                    <PlusIcon />
+                  )}
+                </CustomToggle>
+              </div>
+            </Card.Header>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body>bOdy here</Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card className={styles.marketing__collapse}>
+            <Card.Header className={styles.marketing__collapse__header}>
+              <div>
+                <PostscriptSetupIcon />
+                <span className={styles.marketing__collapse__header__txt}>Postscript setup</span>
+              </div>
+              <div onClick={() => openCloseAccordian('2')} aria-hidden="true">
+                <CustomToggle eventKey="2">
+                  {(activeId === '2' && open) ? (
+                    <MinusIcon />
+                  ) : (
+                    <PlusIcon />
+                  )}
+                </CustomToggle>
+              </div>
+            </Card.Header>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body>body here</Card.Body>
+            </Accordion.Collapse>
+          </Card>
+          <Card className={styles.marketing__collapse}>
+            <Card.Header className={styles.marketing__collapse__header}>
+              <div>
+                <SMTPSetupIcon />
+                <span className={styles.marketing__collapse__header__txt}>
+                  SMTP/Other email client setup
+                </span>
+              </div>
+              <div onClick={() => openCloseAccordian('3')} aria-hidden="true">
+                <CustomToggle eventKey="3">
+                  {(activeId === '3' && open) ? (
+                    <MinusIcon />
+                  ) : (
+                    <PlusIcon />
+                  )}
+                </CustomToggle>
+              </div>
+            </Card.Header>
+            <Accordion.Collapse eventKey="3">
+              <Card.Body>body here</Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        </Accordion>
       </section>
     </>
   );
