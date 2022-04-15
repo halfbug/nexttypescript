@@ -89,7 +89,7 @@ export default function GeneralSettings() {
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <Row className={styles.generalform}>
-        <h3>Brand Details</h3>
+        <h3 className=" pt-3">Brand Details</h3>
         <Col lg={7}>
           <BrandName
             values={values}
