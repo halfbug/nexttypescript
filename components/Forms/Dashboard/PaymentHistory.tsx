@@ -37,7 +37,7 @@ export default function PaymentHistory() {
 
   const getBillingTableHTML = () => (
     <div>
-      <Table borderless hover>
+      <Table borderless hover className='mb-0'>
         <thead>
           <tr>
             {columns.map((column) => (
@@ -65,7 +65,14 @@ export default function PaymentHistory() {
         </tbody>
       </Table>
       <Row>
-        <Col className="text-end"><WhiteButton>Load more</WhiteButton></Col>
+        <Col className="text-end">
+          <WhiteButton
+            className={styles.billing_btn}
+          >
+            Load more
+          </WhiteButton>
+
+        </Col>
       </Row>
     </div>
   );
@@ -120,7 +127,7 @@ export default function PaymentHistory() {
             </div>
             <div className='mx-4 mb-2'>
               <WhiteButton
-                className={['px-4 py-2 ', styles.billing_btn].join(' ')}
+                className={['px-4', styles.billing_btn].join(' ')}
               >
                 Turn off
               </WhiteButton>
