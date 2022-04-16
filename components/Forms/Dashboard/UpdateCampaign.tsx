@@ -64,7 +64,7 @@ export default function UpdateCampaign() {
   const { findInArray } = useUtilityFunction();
   const { campaign, updateCampaign } = useCampaign();
   const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-
+  const validUrl = /^(https:\/\/?(www.)?instagram.com\/p\/([^/?#&/]+)).*/gm;
   React.useEffect(() => {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
@@ -105,7 +105,7 @@ export default function UpdateCampaign() {
       .string()
       .required('Brand Color is required.'),
     facebook: yup.string().matches(re, 'URL is not valid'),
-    instagram: yup.string().matches(re, 'URL is not valid'),
+    instagram: yup.string().matches(re, 'Instagram url is not valid'),
     tiktok: yup.string().matches(re, 'URL is not valid'),
     twitter: yup.string().matches(re, 'URL is not valid'),
 
@@ -227,11 +227,14 @@ export default function UpdateCampaign() {
 
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
-    if (field === "brandColor") {
-      handleSubmit();
-    } else {
-      debouncedSubmit(handleSubmit);
-    }
+    console.log('dsfdfsdfdsfsdf');
+
+    // if (field === "brandColor") {
+    //   handleSubmit();
+    // } else {
+    //   debouncedSubmit(handleSubmit);
+    // }
+    handleSubmit();
   };
   const handleAddProduct = () => {
     setParams({ ins: 'addproduct' });

@@ -220,7 +220,7 @@ export default function UpdateRewards() {
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  console.log({ values });
+  // console.log({ values });
 
   return (
     <section className={[styles.dbrewards, styles.dbrewards_box].join(' ')}>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/require-default-props */
 import * as React from 'react';
 import {
@@ -30,8 +31,10 @@ export default function CampaignSocialMedia({
 }: IProps) {
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
+  const [field, setfield] = React.useState('instagram');
 
   const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
+  console.log({ errors });
 
   return (
 
@@ -81,7 +84,7 @@ export default function CampaignSocialMedia({
             <Form.Control
               onChange={(e) => {
                 // setval(e.currentTarget.value);
-                // setfield('instagram');
+                setfield('instagram');
                 handleForm('instagram', e.currentTarget.value);
               }}
               className={smUrl === 'instagram' ? 'd-block' : 'd-none'}
@@ -101,7 +104,7 @@ export default function CampaignSocialMedia({
               onChange={(e) => {
                 handleForm('tiktok', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                // setfield('tiktok');
+                setfield('tiktok');
                 // debouncedSearch('tiktok', e.currentTarget.value);
               }}
               className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
@@ -121,7 +124,7 @@ export default function CampaignSocialMedia({
               onChange={(e) => {
                 handleForm('twitter', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                // setfield('twitter');
+                setfield('twitter');
                 // debouncedSearch('twitter', e.currentTarget.value);
               }}
               className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
@@ -147,7 +150,7 @@ export default function CampaignSocialMedia({
               onChange={(e) => {
                 handleForm('facebook', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                // setfield('facebook');
+                setfield('facebook');
                 // debouncedSearch('facebook', e.currentTarget.value);
               }}
               placeholder="Enter facebook account URL..."
@@ -162,15 +165,16 @@ export default function CampaignSocialMedia({
               </Form.Control.Feedback> */}
 
           </Form.Group>
-          {Object.keys(errors).length === 0 ? (
-            <IconButton
-              icon={<CheckCircle size={18} color="green" />}
-            />
-          ) : (
+          {(errors[field] !== undefined) ? (
             <IconButton
               icon={<CheckCircle size={18} color="grey" />}
             />
-          )}
+          )
+            : (
+              <IconButton
+                icon={<CheckCircle size={18} color="green" />}
+              />
+            )}
         </Col>
       </Row>
     </>
