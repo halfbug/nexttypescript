@@ -148,8 +148,8 @@ export default function BrandInfo() {
               aria-label="Default select example"
               onChange={handleChange}
               name="industry"
-              defaultValue=""
-              value={getKeyFromS3URL(values.industry)}
+              defaultValue={values.industry}
+              value={values.industry}
             >
               <option className={styles.welcome_select} style={{ opacity: '0.1' }}>
                 Click to select
