@@ -22,6 +22,7 @@ const BigBannerBox = () => {
           <Row>
             <Col className={styles.groupshop__hero_big_banner_box_off}>
               {milestones.length ? milestones[milestones.length - 1].discount : ''}
+              {' '}
               off
             </Col>
           </Row>

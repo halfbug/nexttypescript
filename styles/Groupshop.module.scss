@@ -313,7 +313,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			color: #ffffff;
 		}
 		&_current_reward {
-			@extend .mb-2;
+			@extend .mb-3;
 			font-family: "DM Sans";
 			font-style: normal;
 			font-weight: 700;
