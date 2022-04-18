@@ -463,6 +463,7 @@
         padding: 16px 20px 20px 20px;
         border: 1px dashed #a7c737;
         border-radius: 23px;
+        width: 225px;
 
         &__revenue_icon {
           width: 28px;
@@ -485,10 +486,12 @@
           }
         }
         &__label {
+          @extend .text-nowrap;
           font-weight: 700;
           font-size: 14px;
           line-height: 24px;
           margin: 6px 0px;
+          
         }
         &__value {
           font-weight: 700;
@@ -501,6 +504,7 @@
         padding: 16px 20px 20px 20px;
         border: 1px dashed #F28BF4;
         border-radius: 23px;
+        width: 225px;
 
         &__revenue_icon {
           width: 28px;
