@@ -93,7 +93,7 @@ const ProductGrid = ({
                 <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
                     $
-                    {productPriceDiscount(+(prod.price), +percentage)}
+                    {parseFloat(productPriceDiscount(+(prod.price), +percentage))}
                     {' '}
                     OFF
                   </span>
@@ -157,12 +157,13 @@ const ProductGrid = ({
               <h5 className="pt-2 text-center fw-bold">
                 <span className="text-decoration-line-through">
                   {currencySymbol}
-                  {prod.price}
+                  {/* {prod.price} */}
+                  {parseFloat((prod.price))}
                 </span>
                 {' '}
                 <span>
                   {currencySymbol}
-                  {dPrice(+(prod.price)).toFixed(2)}
+                  {parseFloat(dPrice(+(prod.price)).toFixed(2))}
                 </span>
               </h5>
               {!showHoverButton && (
