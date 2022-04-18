@@ -23,6 +23,7 @@ const ShareButton = ({
     onClick={onClick}
     popContent={popContent ?? (
       <div className="pt-1">
+        <h4 className={styles.groupshop__give_off}>Give friends 15% off</h4>
         <CopyToClipboard value={shareurl} />
         <Row className="p-2">
           <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
@@ -43,7 +44,7 @@ const ShareButton = ({
 
           </Col> */}
           <Col><QRCode /></Col>
-          <Col><h6>Scan to share on mobile</h6></Col>
+          <Col><h6 className={styles.groupshop__scan_share}>Scan to share on mobile</h6></Col>
         </Row>
       </div>
     )}

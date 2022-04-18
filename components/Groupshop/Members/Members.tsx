@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap';
 import styles from 'styles/Groupshop.module.scss';
 import { ref } from 'yup';
+import CrossICon from 'assets/images/cross.svg';
 
 interface MembersProps {
   names : string[];
@@ -28,12 +29,15 @@ const Members = ({
           <Popover id={`popover-positioned-${member}`} arrowProps={() => {}}>
             {/* <Popover.Header as="h3">{`Popover ${member}`}</Popover.Header> */}
             <Popover.Body>
+              <div className={['d-flex justify-content-end mb-1 ', styles.groupshop__popover_cross].join('')}>
+                <CrossICon />
+              </div>
               <h4>
 
                 {member}
                 {index}
               </h4>
-              <p>
+              <p className="mb-2">
                 {index === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
                 {' '}
               </p>
