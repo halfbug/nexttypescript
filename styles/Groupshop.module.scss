@@ -492,6 +492,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		width: 282px;
 		position: relative;
 		@extend .border-0;
+		@include media-breakpoint-down(sm) {
+			width: 186px;
+		}
 		&_small {
 			width: 155px;
 			height: 218px;
@@ -500,7 +503,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 		&_image {
 			@include media-breakpoint-down(sm) {
-				height: unset;
+				height: 186px;
 			}
 			height: 282px;
 			object-fit: contain;
@@ -695,7 +698,26 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		&_search {
 			@extend .groupshop_modal;
-
+			
+			&_body{
+				@extend .px-5;
+				@include media-breakpoint-down(sm) {
+					padding-left: 0 !important;
+					padding-right: 0 !important;
+				}
+				&_top{
+					@extend .justify-content-between;
+					display: flex;
+					@include media-breakpoint-down(sm) {
+						display: none;
+					}
+				}
+				&_meter{
+					@include media-breakpoint-up(sm) {
+						display: none;
+					}
+				}
+			}
 			&_meter {
 				@extend .rounded-pill;
 				width: 9.58px;
@@ -964,10 +986,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		height: 300px;
 		overflow-y: scroll;
 		overflow-x: hidden;
-
+		@include media-breakpoint-down(sm) {
+			height: 70vh !important;
+		}
 		&_pcard {
 			img {
 				height: 236px !important;
+				@include media-breakpoint-down(sm) {
+					height: 186px !important;
+				}
 			}
 			.card-img-overlay {
 				background: #ffffff6b !important;

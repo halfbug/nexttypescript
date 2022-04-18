@@ -122,8 +122,8 @@ const ProductsSearch = ({
         fullscreen="lg-down"
       >
         <Modal.Header closeButton className="pb-0" />
-        <Modal.Body className="px-5">
-          <div className="d-flex justify-content-between">
+        <Modal.Body className={styles.groupshop_modal_search_body}>
+          <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
             <p className="text-muted d-flex justify-content-end align-items-center">
               Add up to 5 products
@@ -140,17 +140,29 @@ const ProductsSearch = ({
           </Form>
 
           {(otherProducts && otherProducts.length > 0) && (
-          <p>
-            {otherProducts?.length}
-            {' '}
-            results found
-          </p>
+            <Row>
+              <Col xs={4}>
+                <p>
+                  {otherProducts?.length}
+                  {' '}
+                  results found
+                </p>
+              </Col>
+              <Col xs={8} className={styles.groupshop_modal_search_body_meter}>
+                <p className="text-muted d-flex justify-content-end align-items-center">
+                  Add up to 5 products
+                  {[...new Array(5)].map((v, i) => (
+                    <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                  ))}
+                </p>
+              </Col>
+            </Row>
           )}
           <Row className={styles.groupshop_search}>
             {otherProducts ? (
               otherProducts.map(
                 (prd) => (
-                  <Col xs={6} sm={4} className="p-1">
+                  <Col xs={6} sm={6} md={4} className="p-1">
                     <ProductCard
                       isrc={prd.featuredImage}
                       className={styles.groupshop_search_pcard}
@@ -170,7 +182,7 @@ const ProductsSearch = ({
                               />
                             </>
                           )
-                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(prd.id)}>ADD A PRODUCT</Button>}
+                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
                         </>
 )}
                     >
