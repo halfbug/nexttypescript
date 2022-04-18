@@ -58,8 +58,8 @@ export default function Slider() {
       </Row> */}
 
       <div className={styles.billing}>
-        <Row>
-          <Col lg={10} className="px-0">
+        <Row className="d-flex align-items-center">
+          <Col lg={10} md={12} className="px-0">
             <div className={styles.billing__sliderWrapper}>
               <div className={styles.billing__slider}>
                 <Form.Control
@@ -74,20 +74,20 @@ export default function Slider() {
               <div className={styles.billing__tiles}>
                 {sliderDisplayCSS.map((slider, index) => (
                   <div className={styles.billing__tierWrapper__tier}>
-                    {(index <= planIndex) ? (
-                      <div className={slider.display}>
-                        <span>
-                          {slider.text}
-                        </span>
-                      </div>
-                    ) : ''}
+                    {/* {(index <= planIndex) ? ( */}
+                    <div className={slider.display}>
+                      <span>
+                        {slider.text}
+                      </span>
+                    </div>
+                    {/* ) : ''} */}
 
                   </div>
                 ))}
               </div>
             </div>
           </Col>
-          <Col lg={2}>
+          <Col lg={2} md={12}>
             <div className={styles.billing__customSliderWrapper__cost}>
               $296/mo
             </div>
