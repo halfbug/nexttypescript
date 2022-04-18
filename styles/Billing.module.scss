@@ -4,6 +4,25 @@
   margin-left: 10px;
   @extend .mt-3, .py-0, .d-flex, .px-0;
 
+  &_enternum {
+    width: 107px;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    ::-webkit-input-placeholder { /* Edge */
+      color: rgba(29, 35, 41, 0.5);
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: rgba(29, 35, 41, 0.5);
+    }
+    
+    ::placeholder {
+      color: rgba(29, 35, 41, 0.5);
+    }
+  }
   &_btn {
     @extend .mt-1, .px-3;
     border-radius: 6px;

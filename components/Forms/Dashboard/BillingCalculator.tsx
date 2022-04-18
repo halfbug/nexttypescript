@@ -55,7 +55,7 @@ export default function BillingCalculator() {
               </Row>
               <Row>
                 <Col lg={4}>
-                  <Form.Group className="" controlId="brandNamevalidation">
+                  <Form.Group className={styles.billing_enternum} controlId="brandNamevalidation">
                     <Form.Control
                       type="text"
                       name="nooforder"
