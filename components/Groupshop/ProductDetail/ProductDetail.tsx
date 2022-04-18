@@ -40,6 +40,8 @@ const ProductDetail = ({
     handleClose(e);
   };
 
+  const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
+
   const { AlertComponent, showError, showSuccess } = useAlert();
 
   // control carousel
@@ -85,6 +87,8 @@ const ProductDetail = ({
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
+
+      setvariantPrice(product.price);
     }
   }, [product]);
 
@@ -108,10 +112,13 @@ const ProductDetail = ({
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
+      console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
       if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
+      setvariantPrice(selectedVariant?.price ?? product?.price);
     }
+    console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
   }, [selOptions]);
 
   const addToCart = () => {
@@ -174,6 +181,9 @@ const ProductDetail = ({
   const days = 10;
   const hrs = 6;
   const mins = 3;
+  console.log({ variantPrice });
+  console.log({ selOptions });
+
   return (
     <>
       <AlertComponent />
@@ -276,12 +286,13 @@ const ProductDetail = ({
               <h3 className="d-flex align-items-center">
                 <span className="text-decoration-line-through">
                   {currencySymbol}
-                  {product?.price}
+                  {product?.options ? variantPrice : product?.price}
                 </span>
                 {' '}
                 <span>
                   {currencySymbol}
-                  {dPrice(+(product?.price || 0)).toFixed(1)}
+                  {product?.options ? dPrice((+(variantPrice || 0))).toFixed(1)
+                    : dPrice(+(product?.price || 0)).toFixed(1) }
                 </span>
                 {cashBack && (
                 <Row className={styles.groupshop_cashback}>
