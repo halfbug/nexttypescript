@@ -459,9 +459,47 @@
     }
     &__summaryBox {
       column-gap: 16px;
-      &__s_box {
+      &__s1_box {
         padding: 16px 20px 20px 20px;
         border: 1px dashed #a7c737;
+        border-radius: 23px;
+
+        &__revenue_icon {
+          width: 28px;
+          height: 28px;
+          background: #d5fa52;
+          border-radius: 14px;
+          svg {
+            margin-left: 6px;
+            margin-top: 6px;
+          }
+        }
+        &__shop_icon {
+          width: 28px;
+          height: 28px;
+          background: #f28bf4;
+          border-radius: 14px;
+          svg {
+            margin-left: 6px;
+            margin-top: 6px;
+          }
+        }
+        &__label {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 24px;
+          margin: 6px 0px;
+        }
+        &__value {
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 20px;
+          margin: 8px 0px;
+        }
+      }
+      &__s2_box {
+        padding: 16px 20px 20px 20px;
+        border: 1px dashed #F28BF4;
         border-radius: 23px;
 
         &__revenue_icon {

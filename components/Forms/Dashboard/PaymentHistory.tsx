@@ -83,27 +83,27 @@ export default function PaymentHistory() {
           <h3>Payment History</h3>
         </div>
         <Row className={styles.billing__paymenthistory__summaryBox}>
-          <Col lg={3} className={styles.billing__paymenthistory__summaryBox__s_box}>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__revenue_icon}>
+          <Col lg={3} className={styles.billing__paymenthistory__summaryBox__s1_box}>
+            <div className={styles.billing__paymenthistory__summaryBox__s1_box__revenue_icon}>
               <R1 />
             </div>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__label}>
+            <div className={styles.billing__paymenthistory__summaryBox__s1_box__label}>
               Total Groupshop Revenue
             </div>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__value}>
+            <div className={styles.billing__paymenthistory__summaryBox__s1_box__value}>
               {currencySymbol}
               {totalRevenue}
             </div>
           </Col>
 
-          <Col lg={3} className={styles.billing__paymenthistory__summaryBox__s_box}>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__shop_icon}>
+          <Col lg={3} className={styles.billing__paymenthistory__summaryBox__s2_box}>
+            <div className={styles.billing__paymenthistory__summaryBox__s2_box__shop_icon}>
               <C1 />
             </div>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__label}>
+            <div className={styles.billing__paymenthistory__summaryBox__s2_box__label}>
               Total # of Groupshops
             </div>
-            <div className={styles.billing__paymenthistory__summaryBox__s_box__value}>
+            <div className={styles.billing__paymenthistory__summaryBox__s2_box__value}>
               {totalGS}
             </div>
           </Col>
