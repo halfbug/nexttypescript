@@ -255,6 +255,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		&__small_banner_left {
 			@extend .d-flex, .align-items-center, .justify-content-start;
+			opacity: 0.5;
+			font-family: "DM Sans";
+			font-style: normal;
+			font-weight: 700;
+			font-size: 12px;
+			line-height: 16px;
 			@include media-breakpoint-down(sm) {
 				display: none !important;
 			}
@@ -281,13 +287,23 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			backdrop-filter: blur(4px);
 			/* Note: backdrop-filter has minimal browser support */
 			border-radius: 5px;
-			&_box {
-				font-size: 14px;
-				line-height: 18px;
-			}
+
 			&_cashback {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 700;
 				font-size: 12px;
 				line-height: 16px;
+				/* identical to box height */
+				color: #ffffff;
+			}
+			&_off {
+				font-family: "DM Sans";
+				font-style: normal;
+				font-weight: 700;
+				font-size: 14px;
+				line-height: 18px;
+				color: #ffffff;
 			}
 		}
 		&_how_to {

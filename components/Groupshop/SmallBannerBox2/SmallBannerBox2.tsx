@@ -21,6 +21,7 @@ const SmallBannerBox2 = ({
           <Row className={styles.groupshop__hero_small_banner_box_off}>
             <Col>
               {bannerDiscount?.length ? bannerDiscount[milestones.length] : ''}
+              {' '}
               off
             </Col>
           </Row>
