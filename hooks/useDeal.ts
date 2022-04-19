@@ -75,7 +75,7 @@ export default function useDeal() {
 
   const isExpired = !(getDateDifference().time > -1);
 
-  const totalCashBack = useCallback((product) => {
+  const totalCashBack = useCallback((price) => {
     const {
       members, discountCode: { percentage },
       campaign,
@@ -86,7 +86,7 @@ export default function useDeal() {
 
     let cashback: number = 0;
     if (members.length < 5) {
-      cashback = ((maxdiscount - +(percentage)) / 100) * +(product.price);
+      cashback = ((maxdiscount - +(percentage)) / 100) * +(price);
       cashback = +(cashback);
       cashback = Math.floor(cashback);
     }

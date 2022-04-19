@@ -91,7 +91,7 @@ const GroupShop: NextPage = () => {
 
   useEffect(() => {
     if (groupshop.id && pending) {
-      console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
+      // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
       setpending(false);
       setallProducts(groupshop?.allProducts);
       setmember(groupshop?.members[0]);
@@ -191,7 +191,6 @@ const GroupShop: NextPage = () => {
   //   router.push('/404');
   //   return <p>groupshop not found</p>;
   // }
-  console.log({ showCart });
 
   return (
     <>

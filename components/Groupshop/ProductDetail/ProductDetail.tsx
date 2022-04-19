@@ -70,12 +70,13 @@ const ProductDetail = ({
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
 
+  const [selOptions, setselOptions] = useState<any| undefined>();
   // add to cart
   useEffect(() => {
     if (product) {
+      setvariantPrice(product.price);
       setaddedbyname(addedByName(product?.id));
-      setCashBack(totalCashBack(product));
-      console.log(totalCashBack(product));
+
       googleProductCode({
         productName: product.title,
         productId: product.id.split('/')[4],
@@ -87,12 +88,11 @@ const ProductDetail = ({
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
-
-      setvariantPrice(product.price);
+      setCashBack(totalCashBack(selOptions ? variantPrice : product.price));
+      console.log('.................');
+      console.log(product.price, variantPrice);
     }
   }, [product]);
-
-  const [selOptions, setselOptions] = useState<any| undefined>();
 
   const getVariant = () => {
     const { productById: dproduct } = data;
@@ -117,6 +117,7 @@ const ProductDetail = ({
         setoutofStock(true);
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);
+      setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
     }
     console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
   }, [selOptions]);
