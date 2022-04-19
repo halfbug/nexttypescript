@@ -1,23 +1,20 @@
-/* eslint-disable no-unused-vars */
 import React, {
   useState, useContext, useRef, useEffect,
 } from 'react';
 import styles from 'styles/Groupshop.module.scss';
-import Navbar from 'react-bootstrap/Navbar';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
-  Col, Form, Modal, Overlay, OverlayTrigger, Placeholder, Popover, Row,
+  Col, Form, Modal, Overlay, Placeholder, Popover, Row,
 } from 'react-bootstrap';
-import useStore from 'hooks/useStore';
-import { GroupshopContext, GSContextType, gsInit } from 'store/groupshop.context';
+import { GroupshopContext } from 'store/groupshop.context';
 import useDebounce from 'hooks/useDebounce';
 import { X } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
 import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
-import ProductGrid from '../ProductGrid/ProductGrid';
+import useGtm from 'hooks/useGtm';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -40,7 +37,7 @@ const ProductsSearch = ({
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const { googleEventCode } = useDeal();
+  const { googleEventCode } = useGtm();
   useEffect(() => {
     if (showSearch) { googleEventCode('product-search-modal'); }
   }, [showSearch]);

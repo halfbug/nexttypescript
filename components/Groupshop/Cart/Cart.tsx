@@ -15,6 +15,7 @@ import useSuggested from 'hooks/useSuggested';
 import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
 import IconMoney from 'assets/images/money-fly.svg';
+import useGtm from 'hooks/useGtm';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -34,8 +35,9 @@ const Cart = ({
   } = useContext(GroupshopContext);
 
   const {
-    currencySymbol, dPrice, discount, googleEventCode,
+    currencySymbol, dPrice, discount,
   } = useDeal();
+  const { googleEventCode } = useGtm();
   useEffect(() => {
     if (show) { googleEventCode('cart-modal'); }
   }, [show]);

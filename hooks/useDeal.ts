@@ -118,59 +118,6 @@ export default function useDeal() {
   },
   [gsctx]);
 
-  const googleEventCode = (modalName: string) => {
-    // @ts-ignore
-    window.dataLayer = window.dataLayer || [];
-
-    // @ts-ignore
-    // eslint-disable-next-line no-undef
-    dataLayer.push({
-      event: 'modalChange',
-      modalName,
-    });
-    console.log('--------<<<<<<<<<<gtm>>>>>>----------');
-    console.log({
-      event: 'modalChange',
-      modalName,
-    });
-  };
-
-  const googleProductCode = (productInfo:{productName: string,
-    productId : string,
-    originalPrice: number,
-    finalPrice: number}) => {
-    // @ts-ignore
-    window.dataLayer = window.dataLayer || [];
-
-    const {
-      productId, productName, originalPrice, finalPrice,
-    } = productInfo;
-    // @ts-ignore
-    // eslint-disable-next-line no-undef
-    dataLayer.push({
-      event: 'productView',
-      productName,
-      productId,
-      productBrand: gsctx?.store?.brandName,
-      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
-      originalPrice,
-      finalPrice,
-
-    });
-
-    console.log('--------<<<<<<<<<<gtm>>>>>>----------');
-    console.log({
-      event: 'productView',
-      productName,
-      productId,
-      productBrand: gsctx?.store?.brandName,
-      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
-      originalPrice,
-      finalPrice,
-
-    });
-  };
-
   const productPriceDiscount = ((price: number, percent: number) => {
     const discountedPrice = price * (percent / 100);
     return discountedPrice.toFixed(2);
@@ -212,8 +159,6 @@ export default function useDeal() {
     totalCashBack,
     displayAddedBy,
     displayAddedByFunc,
-    googleEventCode,
-    googleProductCode,
     productPriceDiscount,
     socialLinks,
     getDiscounts,

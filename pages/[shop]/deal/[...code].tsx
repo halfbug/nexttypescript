@@ -47,6 +47,7 @@ import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 import { useMediaQuery } from 'react-responsive';
+import useGtm from 'hooks/useGtm';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -100,9 +101,11 @@ const GroupShop: NextPage = () => {
   }, [groupshop, pending]);
 
   const {
-    gsURL, clientDealProducts, isExpired, googleEventCode, discount,
+    gsURL, clientDealProducts, isExpired, discount,
     getDiscounts, milestones, getBannerTotalCashBack,
   } = useDeal();
+
+  const { googleEventCode } = useGtm();
 
   const {
     members: [{ orderDetail: { customer: owner }, products: ownerProducts }],

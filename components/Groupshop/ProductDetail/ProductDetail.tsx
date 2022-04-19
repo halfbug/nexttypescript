@@ -20,6 +20,7 @@ import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import GSlogo from 'assets/images/p-detail-GSlogo.svg';
 import Icon from 'assets/images/cart-cone.svg';
+import useGtm from 'hooks/useGtm';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -64,7 +65,7 @@ const ProductDetail = ({
   });
 
   const productCustomers = getBuyers(product?.id || '0');
-  const { googleProductCode, googleEventCode } = useDeal();
+  const { googleProductCode, googleEventCode } = useGtm();
 
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }

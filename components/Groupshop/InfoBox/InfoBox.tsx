@@ -12,6 +12,7 @@ import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
 import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
+import useGtm from 'hooks/useGtm';
 
 // interface InfoBoxProps extends RootProps {
 //   show : boolean;
@@ -22,7 +23,7 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 const InfoBox = () => {
   const [show, setShow] = useState(false);
 
-  const { googleEventCode } = useDeal();
+  const { googleEventCode } = useGtm();
   useEffect(() => {
     if (show) { googleEventCode('how-it-works-modal'); }
   }, [show]);
