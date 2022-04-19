@@ -45,10 +45,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&_counter_top {
 		p {
 			margin-bottom: 0px;
-			@extend .fw-bold;
-
+			font-family: "DM Sans" !important;
+			font-weight: $font-weight-normal;
+			font-size: $size-14px;
 			span {
 				@extend .p-1, .px-2, .border, .rounded, .ms-1;
+				font-size: $size-12px;
 			}
 		}
 		@include media-breakpoint-down(sm) {
@@ -69,7 +71,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		box-shadow: none !important;
 		@extend .d-flex, .mb-0, .align-items-center;
 		span {
-			@extend .ms-1, .fs-6;
+			@extend .ms-1;
+			font-size: $size-14px;
+			font-weight: $font-weight-normal;
 		}
 		@include media-breakpoint-down(sm) {
 			justify-content: flex-end;
@@ -115,7 +119,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&__top {
-		@extend .py-3, .d-flex, .justify-content-center, .w-100;
+		@extend .py-3, .d-flex, .justify-content-center, .align-items-center, .w-100;
 
 		&_members {
 			@extend .d-flex, .justify-content-center, .flex-column;

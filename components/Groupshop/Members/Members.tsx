@@ -54,6 +54,7 @@ const Members = ({
           {index === 0 && '👑'}
           {' '}
           {member}
+          .
         </Button>
       </OverlayTrigger>
     ))}
