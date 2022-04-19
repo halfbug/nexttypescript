@@ -149,7 +149,9 @@ const GroupShop: NextPage = () => {
   }, [bestSeller]);
 
   useEffect(() => {
-    setshowCart(true);
+    if (gsctx.cart && gsctx?.cart?.length > 0) {
+      setshowCart(true);
+    }
   }, [gsctx.cart]);
 
   const {
@@ -189,6 +191,7 @@ const GroupShop: NextPage = () => {
   //   router.push('/404');
   //   return <p>groupshop not found</p>;
   // }
+  console.log({ showCart });
 
   return (
     <>
