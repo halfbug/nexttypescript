@@ -273,7 +273,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				padding: 0.08rem;
 				inset: 0;
 				border-radius: 8px;
-				background: linear-gradient(to right, #CCB2F9, #ECD5D0);
+				background: linear-gradient(to right, #ccb2f9, #ecd5d0);
 				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 				mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 				-webkit-mask-composite: xor;
@@ -563,6 +563,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&_sort {
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 700!important;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: 0.32px;
+		text-transform: capitalize;
+		color: $black;
 		button {
 			@extend .border-0, .text-center, .fs-5, .fw-bold;
 			line-height: 1rem;
@@ -830,14 +838,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		&_search {
 			@extend .groupshop_modal;
-			
-			&_body{
+
+			&_body {
 				@extend .px-5;
 				@include media-breakpoint-down(sm) {
 					padding-left: 0 !important;
 					padding-right: 0 !important;
 				}
-				&_top{
+				&_top {
 					@extend .justify-content-between;
 					display: flex;
 					@include media-breakpoint-down(sm) {
@@ -872,7 +880,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					border: 1px solid #707070;
 					opacity: .1;
 				}
-				&_meter{
+				&_meter {
 					@include media-breakpoint-up(sm) {
 						display: none;
 					}

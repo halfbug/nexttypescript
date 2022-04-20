@@ -17,6 +17,7 @@ import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
+import ArrowSort from 'assets/images/ArrowSort.svg';
 import {
   ChevronDown, Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
@@ -436,8 +437,8 @@ const GroupShop: NextPage = () => {
                   <span className="d-none d-sm-inline text-capitalize">
                     Sort by
                   </span>
-                  <ChevronDown />
-
+                  {/* <ChevronDown width={8} /> */}
+                  <ArrowSort />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
