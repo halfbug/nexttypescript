@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { GroupshopContext } from 'store/groupshop.context';
+import { useQRCode } from 'next-qrcode';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
 import QRCode from '../../../assets/images/qr-code.svg';
@@ -21,7 +22,7 @@ const ShareButton = ({
 }: ShareButtonProps) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { discountCode: { percentage } } = gsctx;
-
+  const { Canvas } = useQRCode();
   return (
     <PopoverButton
       disabled={disabled}
@@ -53,7 +54,28 @@ const ShareButton = ({
           </p>
 
         </Col> */}
-          <Col><QRCode /></Col>
+          <Col>
+            <Canvas
+              text={shareurl}
+              options={{
+                type: 'image/jpeg',
+                quality: 0.3,
+                level: 'L',
+                margin: 3,
+                scale: 4,
+                width: 200,
+                color: {
+                  dark: '#000000',
+                  light: '#FFFFFF',
+                },
+              }}
+            />
+            {/* <QRCode onClick={() => navigator?.share({
+              title: 'Groupshop',
+              text: `Send special discounts to your friends by sharing this ${shareurl}`,
+            })}
+            /> */}
+          </Col>
           <Col><h6 className={styles.groupshop__scan_share}>Scan to share on mobile</h6></Col>
         </Row>
       </div>
