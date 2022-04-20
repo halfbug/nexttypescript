@@ -129,6 +129,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			@include media-breakpoint-down(sm) {
 				display: none !important;
 			}
+			h5 {
+				font-size: 12px;
+				font-weight: 500;
+				color: $black;
+			}
 		}
 		@include media-breakpoint-down(sm) {
 			.row {
@@ -537,11 +542,17 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&__pcard {
-		width: 282px;
+		width: 270px;
 		position: relative;
 		@extend .border-0;
 		@include media-breakpoint-down(sm) {
 			width: 186px;
+		}
+		p {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 18px;
+			color: #282828;
 		}
 		&_small {
 			width: 155px;
@@ -654,6 +665,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
 				left: 12%;
 				height: 40px;
+				font-size: 12px !important;
+				font-weight: 700 !important;
+				line-height: 16px;
 			}
 			&_addToCart {
 				@extend .position-absolute, .align-items-center, .w-75, .justify-content-center;
@@ -732,6 +746,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		@extend .p-2, .text-center;
 		h2 {
 			@extend .fw-bold, .text-uppercase;
+			font-weight: 700 !important;
+			font-size: 24px;
+			color: $black;
+		}
+		p {
+			font-size: 14px;
+			font-weight: 400;
+			color: $black;
 		}
 	}
 
@@ -745,6 +767,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 		div:first-child {
 			@extend .border-0, .rounded-0;
+		}
+		&_groupshopBtn {
+			font-size: 16px !important;
+			font-weight: 700 !important;
+			line-height: 21px;
 		}
 		&_search {
 			@extend .groupshop_modal;
@@ -761,6 +788,34 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					@include media-breakpoint-down(sm) {
 						display: none;
 					}
+					h3 {
+						font-size: 16px;
+						font-weight: 700;
+						line-height: 21px;
+						color: #1D2329;
+					}
+					&_txt {
+						font-size: 12px;
+						line-height: 15px;
+						font-weight: 500;
+						opacity: .33;
+						color: #1D2329;
+					}
+					li {
+						border: 1px solid #FF8F78;
+					}
+					&_input {
+						font-weight: 600;
+						font-size: 12px;
+						line-height: 15px;
+						color: $black;
+					}
+				}
+				hr {
+					margin-top: 0px;
+					margin-bottom: 10px;
+					border: 1px solid #707070;
+					opacity: .1;
 				}
 				&_meter{
 					@include media-breakpoint-up(sm) {
@@ -1443,6 +1498,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 	&_firstName {
 		text-decoration: underline 2px solid #ccb2f9;
+		font-weight: 700;
+		font-size: 24px;
+		color: $black;
 	}
 	&_rewardBox {
 		&_modal {

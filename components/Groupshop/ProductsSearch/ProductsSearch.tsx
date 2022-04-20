@@ -5,7 +5,7 @@ import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
-  Col, Form, Modal, Overlay, Placeholder, Popover, Row,
+  Col, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Row,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useDebounce from 'hooks/useDebounce';
@@ -15,6 +15,7 @@ import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
 import useGtm from 'hooks/useGtm';
+import SearchIcon from 'assets/images/search-icon.svg';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -123,16 +124,29 @@ const ProductsSearch = ({
           <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
             <p className="text-muted d-flex justify-content-end align-items-center">
-              Add up to 5 products
+              <span className={styles.groupshop_modal_search_body_top_txt}>
+                Add up to 5 products
+              </span>
               {[...new Array(5)].map((v, i) => (
                 <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
               ))}
             </p>
           </div>
 
+          <hr />
+
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3 " controlId="searchField">
-              <Form.Control size="lg" className="bg-light pt-2 border-0" type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
+            {/* <Form.Group className="mb-3 " controlId="searchField">
+              <InputGroup size="sm" className="mb-3">
+                <InputGroup.Text id="inputGroup-sizing-sm"><SearchIcon /></InputGroup.Text>
+                <Form.Control size="lg" className="bg-light pt-2 border-0" type="text" placeholder=
+                "Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
+              </InputGroup>
+            </Form.Group> */}
+
+            <Form.Group className="mb-3 d-flex align-items-center bg-light px-3" controlId="searchField">
+              <SearchIcon />
+              <Form.Control size="lg" className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')} type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
             </Form.Group>
           </Form>
 
@@ -214,13 +228,13 @@ const ProductsSearch = ({
             </Row>
             )}
             <Row>
-              <Col xs={12} className="text-center">
+              <Col xs={12} className="text-center my-3">
                 <div ref={ref}>
                   <Button
                     onClick={handleClick}
-                    className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold"
+                    className={['text-center rounded-pill text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
                   >
-                    ADD  to groupshop
+                    ADD to groupshop
 
                   </Button>
 
