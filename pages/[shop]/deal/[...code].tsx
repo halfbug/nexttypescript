@@ -49,6 +49,7 @@ import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 import { useMediaQuery } from 'react-responsive';
 import useGtm from 'hooks/useGtm';
+import useTopBanner from 'hooks/useTopBanner';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -157,6 +158,8 @@ const GroupShop: NextPage = () => {
       setshowCart(true);
     }
   }, [gsctx.cart]);
+
+  const { text, cashBackText } = useTopBanner();
 
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
@@ -311,7 +314,7 @@ const GroupShop: NextPage = () => {
                   Current Rewards
                 </div>
                 <div role="button" onClick={() => { setShowRewards(true); }}>
-                  <BigBannerBox />
+                  <BigBannerBox text={text} />
                 </div>
               </Col>
               <Col md={4} className={styles.groupshop__hero__small_banner_left}>
@@ -329,7 +332,7 @@ const GroupShop: NextPage = () => {
               <p className="mb-2 text-center">
                 <Icon />
                 {' '}
-                Plus unlock $27 cashback for
+                {cashBackText}
               </p>
             </Row>
             <div className="mt-2 mb-4 d-flex justify-content-center align-items-center">

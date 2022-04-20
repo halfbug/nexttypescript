@@ -141,6 +141,27 @@ export default function useDeal() {
 
     return total.toFixed(2);
   }, [gsctx]);
+  const unLockCashBack = useCallback((discountVal, milestones) => {
+    const prevDiscount = milestones.length > 1
+    // eslint-disable-next-line radix
+      ? parseInt(milestones[milestones.length - 2].discount)
+      : 0;
+    // eslint-disable-next-line radix
+    const discountCurrent = parseInt(discountVal);
+    const discountToCal = discountCurrent - prevDiscount;
+    console.log({ prevDiscount });
+    const mem: any = gsctx?.members[0];
+    const total = mem.products?.reduce((tot: any, prd: any) => tot + +(prd.price), 0);
+    const totalDiscountedAmount = total! * (discountToCal / 100);
+
+    return parseFloat(totalDiscountedAmount.toFixed(2));
+  }, [gsctx]);
+  const formatNumber = ((num: number) => {
+    const floatNum = parseFloat(num.toFixed(2));
+    const lastDigit = floatNum % 10;
+    const newFormatedNum = lastDigit === 0 ? num : floatNum;
+    return newFormatedNum;
+  });
 
   const milestones = gsctx?.milestones;
   return {
@@ -164,5 +185,7 @@ export default function useDeal() {
     getDiscounts,
     milestones,
     getBannerTotalCashBack,
+    unLockCashBack,
+    formatNumber,
   };
 }

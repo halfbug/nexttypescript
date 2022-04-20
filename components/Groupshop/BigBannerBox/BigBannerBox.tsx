@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import {
   Col, Row, Container, Button,
 } from 'react-bootstrap';
 import useDeal from 'hooks/useDeal';
+import { Member } from 'types/groupshop';
 
-// interface IProps {
-//   children: React.ReactNode;
-// }
+interface IProps {
+  text: string;
+}
 
-const BigBannerBox = () => {
+const BigBannerBox = ({ text }: IProps) => {
   const {
     milestones, getBannerTotalCashBack, currencySymbol,
   } = useDeal();
@@ -28,7 +29,7 @@ const BigBannerBox = () => {
           </Row>
           <Row>
             <Col className={styles.groupshop__hero_big_banner_box_shoppers}>
-              For the next two shoppers only
+              { text }
             </Col>
           </Row>
           {/* <Row>
