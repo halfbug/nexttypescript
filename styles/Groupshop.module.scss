@@ -954,9 +954,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 			&_close {
 				flex-direction: row-reverse !important;
-				@extend .pb-0;
+				@extend .pb-0, .px-0, .pt-2;
+				opacity: 100%;
 			}
-
+	
 			&_body {
 				@extend .m-0, .p-0, .text-center;
 				font-family: "DM Sans";
