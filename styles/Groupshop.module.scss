@@ -655,15 +655,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@extend .groupshop__pcard_tag;
 				top: 10px;
 				position: absolute;
-				border: 1px solid #ffffff;
 				left: 5px;
-
-				&:hover {
-					border: 2px solid #000000;
-				}
+				border: 2px solid #000000;
+				border-radius: 6px !important;
 				@include media-breakpoint-down(md) {
 					font-size: 10px !important;
-					border-radius: 50px !important;
 				}
 			}
 
@@ -676,6 +672,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				width: 50%;
 				display: flex;
 				flex-direction: column-reverse;
+				border-radius: 6px !important;
 				@include media-breakpoint-down(sm) {
 					
 				}
@@ -1667,4 +1664,38 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			width: 42px;
 		}
 	}
+	&_shopping_box_mobile {
+		max-width: 350px;
+		position: fixed;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		bottom: 50px;
+		z-index: 9;
+		&_content {
+			border-radius: 6px;
+			color: #000000;
+			font-weight: 600;
+			box-shadow: none !important;
+			box-sizing: border-box;
+			backdrop-filter: blur(4px);
+			border-radius: 6px;
+			&::before {
+				content: "";
+				position: absolute;
+				z-index: -1;
+				padding: 0.08rem;
+				inset: 0;
+				border-radius: 4px;
+				background: linear-gradient(to right, #CCB2F9, #FEE750);
+				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+				mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+				mask-composite: exclude;
+			}
+	
+
+		}
+	}
+	
 }

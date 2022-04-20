@@ -44,6 +44,7 @@ import Head from 'next/head';
 import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
 import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
+import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
@@ -232,7 +233,6 @@ const GroupShop: NextPage = () => {
                 <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
                 <div className="d-flex flex-row justify-content-center">
                   <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
-
                   <ShareButton
                     placement="bottom"
                     shareurl={gsURL}
@@ -474,7 +474,6 @@ const GroupShop: NextPage = () => {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-
             </div>
           </div>
         </ProductGrid>
@@ -505,6 +504,8 @@ const GroupShop: NextPage = () => {
         />
         )}
       </div>
+      {isModalForMobile && <ShoppingBoxMobile />}
+
     </>
   );
 };
