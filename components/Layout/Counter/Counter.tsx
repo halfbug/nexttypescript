@@ -43,7 +43,7 @@ const Counter = ({
           {diffDays}
           D
         </span>
-
+        {' '}
         :
         <span>
           {diffHrs}

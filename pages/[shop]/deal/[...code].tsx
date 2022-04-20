@@ -331,7 +331,7 @@ const GroupShop: NextPage = () => {
                 Plus unlock $27 cashback for
               </p>
             </Row>
-            <div className="mt-2 mb-4 d-flex justify-content-center">
+            <div className="mt-2 mb-4 d-flex justify-content-center align-items-center">
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
             </div>
             <Row className={styles.groupshop__hero_how_to}>

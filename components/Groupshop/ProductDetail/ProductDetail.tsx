@@ -404,11 +404,11 @@ const ProductDetail = ({
                           people have earned cashback and discounts on this item!
                         </Col>
                       </Row>
-                      <Row>
-                        <Col md={6}>
+                      <Row className="align-items-center">
+                        <Col xs={6} md={6} lg={6}>
                           <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
                         </Col>
-                        <Col md={6}>
+                        <Col xs={6} md={6} lg={6}>
                           <ShareButton
                             disabled={isExpired}
                             placement="auto-end"

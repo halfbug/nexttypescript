@@ -56,8 +56,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			font-weight: $font-weight-normal;
 			font-size: $size-14px;
 			span {
-				@extend .p-1, .px-2, .border, .rounded, .ms-1;
+				@extend .p-1, .rounded, .ms-1, .d-inline-block;
+				border: 1px solid $purple;
 				font-size: $size-12px;
+				width: 36px;
+				text-align: center;
 			}
 		}
 		@include media-breakpoint-down(sm) {
@@ -169,8 +172,31 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			border-width: 2px;
 			cursor: pointer !important;
 			min-width: auto !important;
+			background: $white;
 			&:hover {
 				@extend .shadow-sm;
+			}
+			&_owner{
+				background: $white;
+				border: 0px;
+				box-shadow: none !important;
+				box-sizing: border-box;
+				backdrop-filter: blur(4px);
+				/* Note: backdrop-filter has minimal browser support */
+				border-radius: 6px;
+				&::before {
+					content: "";
+					position: absolute;
+					z-index: -1;
+					padding: 0.08rem;
+					inset: 0;
+					border-radius: 4px;
+					background: linear-gradient(to right, #CCB2F9, #ECD5D0);
+					-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+					mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+					-webkit-mask-composite: xor;
+					mask-composite: exclude;
+				}
 			}
 		}
 
