@@ -86,7 +86,7 @@ const ProductGrid = ({
       </Row>
       <Row>
         {renderItems?.map((prod) => (
-          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={prod.id}>
+          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center p-0" key={prod.id}>
             <ProductCard
               isrc={prod.featuredImage}
               imgOverlay={(
@@ -210,7 +210,6 @@ const ProductGrid = ({
               <p className="text-center  fs-5">
                 Add your favorite product
               </p>
-              <br />
               <br />
               <div className={styles.groupshop_addtoCart_wrapper}>
                 <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>

@@ -1,14 +1,13 @@
 /* eslint-disable no-undef */
-import React, { useState, useContext, useEffect } from 'react';
+import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
-import { IProduct, RootProps } from 'types/store';
+import { RootProps } from 'types/store';
 import {
-  Col, Modal, ProgressBar, Row,
+  Col, Modal, Row,
 } from 'react-bootstrap';
 import { Plus } from 'react-bootstrap-icons';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import Button from 'components/Buttons/Button/Button';
-import GradientCircle from 'assets/images/gradient-circle.svg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import Members from '../Members/Members';
 
@@ -34,7 +33,7 @@ const RewardBox = ({
         size="sm"
         dialogClassName={styles.groupshop_rewardBox_modal}
         backdrop="static"
-        contentClassName={styles.groupshop_rewardBox_content}
+        contentClassName="reward-modal"
       >
         <Row className={styles.groupshop__info_modal__closebtnlg}>
           <Modal.Header className="border-0" closeButton />

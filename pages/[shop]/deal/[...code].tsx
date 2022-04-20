@@ -211,70 +211,72 @@ const GroupShop: NextPage = () => {
         />
       </Head>
       <div className={styles.groupshop}>
-        <Header
-          LeftComp={(
-            <Counter
-              expireDate={gsctx?.expiredAt}
-              pending={pending}
-            />
+        <header>
+          <Header
+            LeftComp={(
+              <Counter
+                expireDate={gsctx?.expiredAt}
+                pending={pending}
+              />
 )}
-          RightComp={<InfoBox />}
-        />
-        <Container fluid className="border-top">
-          <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-            <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
-            <Col md={6} className={styles.groupshop__top_members}>
-              <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
-              <div className="d-flex flex-row justify-content-center">
-                <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+            RightComp={<InfoBox />}
+          />
+          <Container fluid className="border-top bg-white">
+            <Row className={['gx-0', styles.groupshop__top].join(' ')}>
+              <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
+              <Col md={6} className={styles.groupshop__top_members}>
+                <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
+                <div className="d-flex flex-row justify-content-center">
+                  <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
 
+                  <ShareButton
+                    placement="bottom"
+                    shareurl={gsURL}
+                    label="Invite"
+                    className={styles.groupshop__top_invite}
+                    icon={<Plus size={18} className="me-0 pe-0" />}
+                    onClick={() => googleEventCode('invite-share-modal')}
+                  />
+                </div>
+              </Col>
+              <Col xs={6} className={styles.groupshop__counter}>
+                <div className={styles.groupshop__counter_middle}>
+                  <p>
+                    <span>35H</span>
+                    :
+                    <span>59M</span>
+                    {' '}
+                    :
+                    <span>10S</span>
+                  </p>
+                </div>
+              </Col>
+              <Col
+                md={3}
+                xs={3}
+                className={['text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                  styles.groupshop__top__left_icons].join(' ')}
+              >
                 <ShareButton
                   placement="bottom"
                   shareurl={gsURL}
-                  label="Invite"
-                  className={styles.groupshop__top_invite}
-                  icon={<Plus size={18} className="me-0 pe-0" />}
-                  onClick={() => googleEventCode('invite-share-modal')}
+                  label="EARN CASHBACK"
+                  onClick={() => googleEventCode('earn-cashback-modal')}
+                  className={styles.groupshop__hero_share_btn}
                 />
-              </div>
-            </Col>
-            <Col xs={6} className={styles.groupshop__counter}>
-              <div className={styles.groupshop__counter_middle}>
-                <p>
-                  <span>35H</span>
-                  :
-                  <span>59M</span>
-                  {' '}
-                  :
-                  <span>10S</span>
-                </p>
-              </div>
-            </Col>
-            <Col
-              md={3}
-              xs={3}
-              className={['text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
-                styles.groupshop__top__left_icons].join(' ')}
-            >
-              <ShareButton
-                placement="bottom"
-                shareurl={gsURL}
-                label="EARN CASHBACK"
-                onClick={() => googleEventCode('earn-cashback-modal')}
-                className={styles.groupshop__hero_share_btn}
-              />
-              <IconButton
-                icon={<Search size={24} />}
-                className={styles.groupshop__hero_iconBtn}
-                onClick={handleAddProduct}
-                disabled={isExpired}
-              />
-              <IconButton icon={<Handbag size={24} />} className={styles.groupshop__hero_iconBtn} onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
-              <p className={['d-flex align-items-center', styles.groupshop__hero__cart_count].join(' ')}>(2)</p>
-            </Col>
+                <IconButton
+                  icon={<Search size={24} />}
+                  className={styles.groupshop__hero_iconBtn}
+                  onClick={handleAddProduct}
+                  disabled={isExpired}
+                />
+                <IconButton icon={<Handbag size={24} />} className={styles.groupshop__hero_iconBtn} onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
+                <p className={['d-flex align-items-center', styles.groupshop__hero__cart_count].join(' ')}>(2)</p>
+              </Col>
 
-          </Row>
-        </Container>
+            </Row>
+          </Container>
+        </header>
         <Hero>
           <Container>
             <Row className={styles.groupshop__hero_welcome}>
