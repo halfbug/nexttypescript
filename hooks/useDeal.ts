@@ -143,18 +143,31 @@ export default function useDeal() {
   }, [gsctx]);
   const unLockCashBack = useCallback((discountVal, milestones) => {
     const prevDiscount = milestones.length > 1
-    // eslint-disable-next-line radix
-      ? parseInt(milestones[milestones.length - 2].discount)
-      : 0;
+      ? parseInt(milestones[milestones.length - 2].discount, 10)
+      : parseInt(milestones[0].discount, 10);
     // eslint-disable-next-line radix
     const discountCurrent = parseInt(discountVal);
-    const discountToCal = discountCurrent - prevDiscount;
+    console.log(nextDiscountCalculator(discountVal));
+    const nextDis = nextDiscountCalculator(discountVal);
+    // const discountToCal = discountCurrent - prevDiscount;
+    const discountToCal = parseInt(nextDis, 10) - discountCurrent;
+    console.log({ discountToCal });
     console.log({ prevDiscount });
-    const mem: any = gsctx?.members[0];
-    const total = mem.products?.reduce((tot: any, prd: any) => tot + +(prd.price), 0);
-    const totalDiscountedAmount = total! * (discountToCal / 100);
+    console.log({ discountCurrent });
+    const receivedCB = getBannerTotalCashBack(discountVal);
+    // const mem: any = gsctx?.members[0];
+    // const total = mem.products?.reduce((tot: any, prd: any) => tot + +(prd.price), 0);
+    // const totalDiscountedAmount = total! * (discountToCal / 100);
+    const potentialCB = gsctx?.members.reduce((cashback, member) => {
+      const totalPrice = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
+      // eslint-disable-next-line radix
+      const totalDiscountedAmount = totalPrice! * (discountToCal / 100);
+      // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
+      return cashback + (totalDiscountedAmount);
+    }, 0);
+    const totalCB = +receivedCB + +potentialCB;
 
-    return parseFloat(totalDiscountedAmount.toFixed(2));
+    return parseFloat((+totalCB).toFixed(2));
   }, [gsctx]);
   const formatNumber = ((num: number) => {
     const floatNum = parseFloat(num.toFixed(2));
@@ -162,7 +175,18 @@ export default function useDeal() {
     const newFormatedNum = lastDigit === 0 ? num : floatNum;
     return newFormatedNum;
   });
+  const nextDiscountCalculator = ((disc: string) => {
+    const rew = gsctx.campaign?.salesTarget?.rewards!;
+    const nextIndex = gsctx.campaign?.salesTarget?.rewards?.findIndex(
+      (reward) => reward.discount === `${disc}%`,
+    );
+    console.log('🚀 ~ file: useDeal.ts ~ line 183 ~ nextDiscountCalculator ~ nextIndex', nextIndex);
+    console.log(`${disc}%`);
 
+    const nextDiscount = (nextIndex === 0 || nextIndex === 1) ? rew[nextIndex + 1].discount
+      : rew[0].discount;
+    return nextDiscount as string;
+  });
   const milestones = gsctx?.milestones;
   return {
     currencySymbol,
