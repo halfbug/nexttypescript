@@ -630,6 +630,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					@include media-breakpoint-down(md) {
 						display: none;
 					}
+					&_btn{
+						@extend .shadow-sm;
+						border-style: none;
+						border: none;
+					}
 				}
 			}
 		}
