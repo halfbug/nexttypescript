@@ -5,7 +5,7 @@
 
 	h3 {
 		@extend .fw-bolder, .lh-base, .px-0, .fs-3, .mt-2;
-        font-family: DM Sans;
+		font-family: DM Sans;
 		color: $black;
 	}
 
@@ -92,6 +92,45 @@
 			background-color: transparent !important;
 			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28232, 101, 97, 1%29'/%3e%3c/svg%3e") !important;
 		}
+	}
+	&_Analytics {
+		@extend .border-dark;
+		border-radius: 8px;
+		border-width: 2px;
+		height: auto;
+		width: fit-content;
+		background-color: $white;
+		color: $black !important;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 15px;
+		text-align: center;
+		&:hover {
+			color: $black;
+			background-color: $white;
+		}
+	}
+	&_edit {
+		@extend .border-dark;
+		border-radius: 8px;
+		border-width: 2px;
+		height: auto;
+		min-width: 63px;
+		background-color: $white;
+		color: $black !important;
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 15px;
+		text-align: center;
+		&:hover {
+			color: $black;
+			background-color: $white;
+		}
+		
 	}
 }
 .btn_1 {
