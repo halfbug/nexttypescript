@@ -331,7 +331,11 @@ query Groupshop($code: String!) {
     members{
       orderId
       availedDiscount
-      role 
+      role
+      lineItems{
+        quantity
+        price
+      }
       refund{
         discount
         amount

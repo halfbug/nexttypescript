@@ -7,14 +7,14 @@ const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
   const [cashbackVal, setCashBackVal] = useState<number | undefined>();
-  const { unLockCashBack } = useDeal();
+  const { unLockCB } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
 
   useEffect(() => {
-    if (percentage) setCashBackVal(unLockCashBack(percentage, milestones));
+    if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
     console.log({ percentage });
     if (members) {
       if (members.length === 1 || members.length === 3) {

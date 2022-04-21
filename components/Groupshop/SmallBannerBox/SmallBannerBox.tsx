@@ -19,6 +19,8 @@ const SmallBannerBox = ({
   }, [milestones]);
 
   console.log({ prev });
+  console.log(milestones[milestones.length - 1].discount);
+
   return (
 
     <>
@@ -40,7 +42,7 @@ const SmallBannerBox = ({
                     +
                     {' '}
                     {currencySymbol}
-                    {getBannerTotalCashBack(milestones[milestones.length - 1].discount)}
+                    {getBannerTotalCashBack(bannerDiscount[prev])}
                     {' '}
                     cashback
                   </>

@@ -46,6 +46,9 @@ export type Member ={
   products?: Product[];
 
   orderDetail?: any;
+
+  lineItems?: any;
+
 }
 
 export type CartProduct = Product & {

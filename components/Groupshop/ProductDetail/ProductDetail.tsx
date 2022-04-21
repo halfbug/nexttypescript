@@ -183,8 +183,8 @@ const ProductDetail = ({
   const days = 10;
   const hrs = 6;
   const mins = 3;
-  console.log({ variantPrice });
-  console.log({ selOptions });
+  // console.log({ variantPrice });
+  // console.log({ selOptions });
 
   return (
     <>
