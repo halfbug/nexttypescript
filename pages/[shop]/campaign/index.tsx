@@ -102,7 +102,6 @@ const CampaignListing = () => {
           handleToggle={() => handleToggle(campId)}
           id={campId ?? ''}
         />
-        ;
         {' '}
         <h3>All Campaigns</h3>
         <p className="mt-3 mb-4">
