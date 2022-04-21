@@ -105,7 +105,7 @@ const CampaignListing = () => {
         ;
         {' '}
         <h3>All Campaigns</h3>
-        <p className="mt-3">
+        <p className="mt-3 mb-4">
           ✨
           From here you can edit your active campaign, create a new campaign,
           or explore analytics for each campaign.
@@ -113,7 +113,9 @@ const CampaignListing = () => {
           Creating different campaigns is a great
           way to learn how the products and discounts
           you offer impact your performance.
-          <strong> Only one campaign can be active at a time.</strong>
+          <br />
+          Only one campaign can be active at a time,
+          click on a toggle to switch to a new campaign, or create a new one.
         </p>
         <Row className={['text-nowrap d-flex flex-row ', styles.container_listHeader].join(' ')}>
           <Col className="text-muted fs-6 ">Campaign Name</Col>
