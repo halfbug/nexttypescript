@@ -9,6 +9,15 @@
 		color: $black;
 	}
 
+	&_listHeader {
+		font-family: "DM Sans";
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 18px;
+		color: $black;
+		opacity: 0.7;
+	}
 	&_btnNew {
 		background-color: transparent;
 		border: none;
@@ -44,7 +53,7 @@
 		}
 	}
 	.rows {
-		@extend .mt-3, .py-2, .fw-bold, .d-flex, .flex-row, .rounded-3;
+		@extend .mt-3, .py-2, .fw-bold, .d-flex, .flex-row, .rounded-3, .align-items-center;
 		background: #f8f8f8;
 		border-radius: 10px;
 		border-style: solid;
@@ -61,6 +70,15 @@
 			-webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
 
 			// linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, $purple 100%);
+		}
+		&_text {
+			@extend .py-2;
+			font-family: "DM Sans";
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 23px;
+			color: #000000;
 		}
 	}
 

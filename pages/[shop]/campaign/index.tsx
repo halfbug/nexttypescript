@@ -115,7 +115,7 @@ const CampaignListing = () => {
           you offer impact your performance.
           <strong> Only one campaign can be active at a time.</strong>
         </p>
-        <Row className="text-nowrap d-flex flex-row">
+        <Row className={['text-nowrap d-flex flex-row ', styles.container_listHeader].join(' ')}>
           <Col className="text-muted fs-6 ">Campaign Name</Col>
           <Col className="text-muted fs-6 ">Revenue Generated</Col>
           <Col className="text-muted fs-6 ">Number of Groupshops</Col>
@@ -127,11 +127,11 @@ const CampaignListing = () => {
 
         {campaignList.map((camp:any, index:number) => (
           <Row className={styles.rows} key={camp.id}>
-            <Col className="py-2 ">{camp.name}</Col>
-            <Col className="py-2 ">$1430</Col>
-            <Col className="py-2  ">10</Col>
-            <Col className="py-2 "> $1430</Col>
-            <Col className="px-0">
+            <Col className={styles.rows_text}>{camp.name}</Col>
+            <Col className={styles.rows_text}>$1430</Col>
+            <Col className={styles.rows_text}>10</Col>
+            <Col className={styles.rows_text}> $1430</Col>
+            <Col className={styles.rows_text}>
               {/* <ToggleButton
               handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
               <Form.Check
