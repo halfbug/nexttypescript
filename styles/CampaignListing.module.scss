@@ -17,6 +17,7 @@
 		line-height: 18px;
 		color: $black;
 		opacity: 0.7;
+		padding: 0px 20px;
 	}
 	&_btnNew {
 		background-color: transparent;
@@ -59,6 +60,7 @@
 		border-style: solid;
 		border-color: transparent;
 		vertical-align: middle;
+		padding: 0px 20px;
 		&:hover {
 			@extend .mt-3, .py-2, .d-flex, .flex-row, .rounded-3;
 			transform: translateY(0px) !important;
@@ -95,7 +97,8 @@
 	}
 
 	&_switch {
-		@extend .fs-4;
+		@extend .fs-4,.me-0, ;
+         
 		background-color: transparent !important;
 		color: transparent !important;
 
@@ -125,6 +128,7 @@
 		font-size: 12px;
 		line-height: 15px;
 		text-align: center;
+		margin-left: -18px;
 		&:hover {
 			color: $black;
 			background-color: $white;

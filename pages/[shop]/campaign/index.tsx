@@ -69,7 +69,7 @@ const CampaignListing = () => {
     const active = currentCamp[0]?.isActive;
     const isActive = !active;
 
-    const campObj:null | any = await editCampaignStatus({
+    const campObj: null | any = await editCampaignStatus({
       variables: {
         updateCampaignInput: {
           storeId: store.id,
@@ -82,7 +82,7 @@ const CampaignListing = () => {
     const { data: { updateCampaign } } = campObj;
     // refetch();
     // now update store context with new campaign isActive changes
-    const updatedCampaigns = store?.campaigns?.map((item:any) => {
+    const updatedCampaigns = store?.campaigns?.map((item: any) => {
       if (item.id === updateCampaign.id) {
         return updateCampaign;
       }
@@ -93,7 +93,7 @@ const CampaignListing = () => {
   };
 
   return (
-    <Page headingText="Campaign" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
+    <Page headingText="Campaign" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Container fluid className={styles.container}>
         <Model
           show={show}
@@ -117,21 +117,23 @@ const CampaignListing = () => {
           click on a toggle to switch to a new campaign, or create a new one.
         </p>
         <Row className={['text-nowrap d-flex flex-row ', styles.container_listHeader].join(' ')}>
-          <Col className="text-muted fs-6 ">Campaign Name</Col>
+          <Col className="text-muted fs-6 pe-5">Campaign Name</Col>
           <Col className="text-muted fs-6 ">Revenue Generated</Col>
           <Col className="text-muted fs-6 ">Number of Groupshops</Col>
-          <Col className="text-muted fs-6 ">Total Cashback</Col>
-          <Col className="text-muted fs-6 ">Active</Col>
+          <Col className="text-muted fs-6 ps-2">Total Cashback</Col>
+          <Col className="text-muted fs-6 ms-2">Active</Col>
           <Col className="text-muted fs-6 "> </Col>
           <Col className="text-muted fs-6 "> </Col>
         </Row>
 
-        {campaignList.map((camp:any, index:number) => (
+        {campaignList.map((camp: any, index: number) => (
           <Row className={styles.rows} key={camp.id}>
-            <Col className={styles.rows_text}>{camp.name}</Col>
+            <Col className={['pe-5 ', styles.rows_text].join(' ')}>
+              {camp.name}
+            </Col>
             <Col className={styles.rows_text}>$1430</Col>
             <Col className={styles.rows_text}>10</Col>
-            <Col className={styles.rows_text}> $1430</Col>
+            <Col className={['ps-2 ', styles.rows_text].join(' ')}> $1430</Col>
             <Col className={styles.rows_text}>
               {/* <ToggleButton
               handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
@@ -140,7 +142,7 @@ const CampaignListing = () => {
                 type="switch"
                 label=""
                 id="active_switch"
-                className={styles.container_switch}
+                className={['ms-0', styles.container_switch].join(' ')}
                 onChange={() => {
                   if (camp.isActive) {
                     setShow(true);
@@ -149,7 +151,7 @@ const CampaignListing = () => {
                     handleToggle(camp.id);
                   }
                 }}
-                // value={camp.isActive}
+              // value={camp.isActive}
               />
             </Col>
             <Col className="pe-1 "><WhiteButton className={styles.container_Analytics}>View Analytics</WhiteButton></Col>
