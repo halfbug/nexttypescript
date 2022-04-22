@@ -1,11 +1,9 @@
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
-import Navbar from 'react-bootstrap/Navbar';
 // import Button from 'components/Buttons/Button/Button';
 import {
-  Col, Row, Button, Container, Placeholder,
+  Placeholder,
 } from 'react-bootstrap';
-import { ArrowDown, CaretDown, Eye } from 'react-bootstrap-icons';
 import { RootProps } from 'types/store';
 import useDeal from 'hooks/useDeal';
 
@@ -37,7 +35,7 @@ const Counter = ({
   }
   return (
     <div className={styles.groupshop_counter_top}>
-      <p>
+      <p className="d-flex align-items-center">
         {!isExpired && 'EXPIRES IN'}
         <span>
           {diffDays}

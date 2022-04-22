@@ -51,7 +51,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 	&_counter_top {
 		p {
-			margin-bottom: 0px;
 			font-family: "DM Sans" !important;
 			font-weight: $font-weight-normal;
 			font-size: $size-14px;
@@ -96,6 +95,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	&_brand {
 		@extend .text-uppercase;
 		font-family: Fahkwang !important;
+		margin: 0;
 		@include media-breakpoint-down(sm) {
 			font-size: 10px;
 			font-weight: 500;
@@ -1696,6 +1696,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	
 
 		}
+	}
+
+	&__share_social_icons {
+		border-bottom: 1px solid #F0F0F0;
 	}
 	
 }

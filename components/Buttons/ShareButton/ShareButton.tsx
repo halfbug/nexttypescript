@@ -36,13 +36,15 @@ const ShareButton = ({
           % off
         </h4>
         <CopyToClipboard value={shareurl} />
-        <Row className="p-2">
-          <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
-          <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={shareurl} /></Col>
-          <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} /></Col>
-          <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={shareurl} /></Col>
-          <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
-        </Row>
+        <div className={styles.groupshop__share_social_icons}>
+          <Row className="p-2">
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
+          </Row>
+        </div>
         <Row className="flex-column text-center">
           {/* <Col><h3>Shop, share, earn</h3></Col>
         <Col>
@@ -63,7 +65,7 @@ const ShareButton = ({
                 level: 'L',
                 margin: 3,
                 scale: 4,
-                width: 200,
+                width: 150,
                 color: {
                   dark: '#000000',
                   light: '#FFFFFF',
