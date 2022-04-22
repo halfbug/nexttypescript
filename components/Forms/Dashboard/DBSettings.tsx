@@ -118,7 +118,7 @@ export default function DBSettings({
             </Form.Text>
           </Col>
         </Row>
-        <Row className="border rounded px-1 py-3 mx-1">
+        <Row className="border rounded px-1 py-3 mx-1 pb-5">
           <Col lg={6}>
             <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
 
