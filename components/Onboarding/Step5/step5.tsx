@@ -6,7 +6,7 @@ import {
 import styles from 'styles/Step5.module.scss';
 import Button from 'components/Buttons/Button/Button';
 import { useMutation } from '@apollo/client';
-import { UPDATE_STORE } from 'store/store.graphql';
+import { BILLING_SUBSCRIPTION, UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import Logo from 'assets/images/Logo.svg';
 import { StoreContext } from 'store/store.context';
@@ -21,8 +21,11 @@ interface IStep5Props {
 const Step5 = () => {
   const [show, setShow] = useState(true);
   const { store, dispatch } = React.useContext(StoreContext);
-  console.log('@@@FinalStore', store);
+  // console.log('@@@FinalStore', store);
   const [updateSt, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
+  const [getSubscription,
+    { data: sdata, loading: sloading, error: serror }] = useMutation<IStore>(BILLING_SUBSCRIPTION);
+  console.log('🚀 ~ file: step5.tsx ~ line 28 ~ Step5 ~ sdata', sdata);
   // const { shop, id } = store;
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
   // const shopNalo: string | undefined = shopName?[0];
@@ -30,6 +33,14 @@ const Step5 = () => {
   const handleClick = async () => {
     setShow(!show);
     console.log('...handleClick', store);
+
+    await getSubscription({
+      variables: {
+        shop: store.shop,
+        accessToken: store.accessToken,
+
+      },
+    });
     await updateSt({
       variables: {
         updateStoreInput: {
@@ -38,11 +49,21 @@ const Step5 = () => {
         },
       },
     });
-    dispatch({ type: 'CLOSE_DIALOUGE', payload: { show, installationStep: null } });
+
     // dispatch({ type: 'CLOSE_DIALOUGE', payload: { show } });
     console.log('....handleClick', store);
-    Router.push(`/${shopName}/overview`);
+    // dispatch({ type: 'CLOSE_DIALOUGE', payload: { show, installationStep: null } });
+    // Router.push(`/${shopName}/overview`);
   };
+  useEffect(() => {
+    if (sdata) {
+      const { billingSubscription: { redirectUrl } } = sdata;
+      // dispatch({ type: 'CLOSE_DIALOUGE', payload: { show, installationStep: null } });
+      console.log({ redirectUrl });
+      Router.push(redirectUrl);
+    }
+  }, [sdata]);
+
   return (
     <Dialogue show={show}>
       {/* <div className={styles.WelcomeModal}> */}

@@ -661,6 +661,14 @@ query FindTotalGSMonthly($storeId: String!) {
 }
 `;
 
+const BILLING_SUBSCRIPTION = gql`
+  mutation  BillingSubscription($shop: String!, $accessToken: String!){
+  billingSubscription(shop:$shop, accessToken:$accessToken){
+    redirectUrl
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -669,5 +677,5 @@ export {
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
   GET_ACTIVE_STORES, GET_QR_DEAL,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
-  GET_TOTAL_GS_MONTHLY,
+  GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION,
 };
