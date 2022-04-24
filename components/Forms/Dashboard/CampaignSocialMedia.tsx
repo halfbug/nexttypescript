@@ -80,7 +80,7 @@ export default function CampaignSocialMedia({
       </Row>
       <Row className="p-1 mt-2">
         <Col lg={10} className="d-flex">
-          <Form.Group className="w-100" controlId="sm">
+          <Form.Group controlId="sm">
             <Form.Control
               onChange={(e) => {
                 // setval(e.currentTarget.value);
