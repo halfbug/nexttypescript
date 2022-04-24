@@ -118,11 +118,11 @@ export default function DBSettings({
             </Form.Text>
           </Col>
         </Row>
-        <Row className="border rounded px-1 py-3 mx-1 pb-5">
+        <Row className="border rounded px-1 py-3 mx-1">
           <Col lg={6}>
-            <h6 className="fs-6 fw-bolder lh-base">Pre-Set Themes</h6>
+            <h6 className="fs-6 fw-bolder lh-base mb-4">Pre-Set Themes</h6>
 
-            <ButtonGroup className={['mb-2 d-block mx-0 p-0', styles.ob_settings__group].join(' ')}>
+            <ButtonGroup className={['d-block mx-0 mb-0', styles.ob_settings__group].join(' ')}>
               {radios.map(({ name, component, value }) => (
                 <ToggleButton
                   key={name}
