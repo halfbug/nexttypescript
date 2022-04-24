@@ -4,12 +4,16 @@
 	color: $primary !important;
 	background-color: transparent !important;
 	border: none;
-	@extend .rounded, .px-0, .fs-5;
-	min-width: 2.3rem;
+	box-shadow: none;
+	@extend .rounded, .px-0, .mx-0,.fs-5;
+	min-width: 1.5rem;
+	color: black !important;
+
 
 	&:hover {
 		color: black !important;
-		@extend .fw-bold, .shadow-sm;
+		box-shadow: none;
+		@extend .fw-bold, .px-0, .mx-0;
 	}
 
 	&:focus {

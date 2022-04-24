@@ -126,7 +126,6 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
                   {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
                   {' '}
                   collection(s) selected
-                  {' '}
                   <DeleteButton
                     icon={<XCircle />}
                     handleDelete={handleDelete}
