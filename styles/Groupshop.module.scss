@@ -194,7 +194,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					padding: 0.08rem;
 					inset: 0;
 					border-radius: 4px;
-					background: linear-gradient(to right, #CCB2F9, #ECD5D0);
+					background: linear-gradient(to right, #CCB2F9, #FEE750);
 					-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 					mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 					-webkit-mask-composite: xor;
@@ -563,6 +563,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&::after {
 			@extend .border-0;
 		}
+		&:focus{
+			box-shadow: none;
+		}
 	}
 
 	&_sort {
@@ -664,6 +667,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				@include media-breakpoint-down(md) {
 					font-size: 10px !important;
 				}
+				z-index: 8;
 			}
 
 			&_boughtby {
@@ -721,7 +725,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				top: 10px;
 				// right: 15px;
 				position: absolute;
-				z-index: $zindex-tooltip;
+				border: 2px solid transparent;
+				border-radius: 6px !important;
+				@include media-breakpoint-down(md) {
+					font-size: 10px !important;
+				}
+				z-index: 8;
 			}
 
 			&_product {

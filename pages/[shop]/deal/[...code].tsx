@@ -226,12 +226,12 @@ const GroupShop: NextPage = () => {
 )}
             RightComp={<InfoBox />}
           />
-          <Container fluid className="border-top bg-white">
+          <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
               <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
-                <div className="d-flex flex-row justify-content-center">
+                <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
                   <ShareButton
                     placement="bottom"

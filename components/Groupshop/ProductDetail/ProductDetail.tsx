@@ -211,18 +211,14 @@ const ProductDetail = ({
                     Off
                   </span>
                 </Col>
-                <Col className="d-flex justify-content-end">
+                <Col className="d-flex justify-content-end ms-1">
+                  {displayAddedByFunc(product?.id) && addedbyname && (
                   <span className={styles.groupshop__pcard_tag_addedbyname}>
-                    {
-                      displayAddedByFunc(product?.id) && addedbyname && (
-                        <div className={styles.groupshop_added_by_text}>
-                          Added By
-                          {' '}
-                          {addedbyname}
-                        </div>
-                      )
-                    }
+                    Added By
+                    {' '}
+                    {addedbyname}
                   </span>
+                  )}
                 </Col>
               </Row>
               <Carousel
