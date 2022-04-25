@@ -508,8 +508,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				z-index: -1;
 				padding: 0.08rem;
 				inset: 0;
-				border-radius: 16px;
-				background: linear-gradient(to right, #ccb2f9, #fee750);
+				border-radius: 10px;
+				background: linear-gradient(270deg, #FEE750 0%, #CCB2F9 100%);
 				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 				mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
 				-webkit-mask-composite: xor;
@@ -868,6 +868,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 				&_top {
 					@extend .justify-content-between;
 					display: flex;
+					border-bottom: 1px solid rgba(112, 112, 112, .1);
+					margin-bottom: 11px;
+
 					@include media-breakpoint-down(sm) {
 						display: none;
 					}

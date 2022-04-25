@@ -133,8 +133,6 @@ const ProductsSearch = ({
             </p>
           </div>
 
-          <hr />
-
           <Form onSubmit={handleSubmit}>
             {/* <Form.Group className="mb-3 " controlId="searchField">
               <InputGroup size="sm" className="mb-3">
