@@ -21,7 +21,7 @@ const ProductCard = ({
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
           <div className={styles.groupshop__pcard_image_wrapper}>
-            <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+            <Card.Img variant="top" src={isrc} className={[' img-fluid', styles.groupshop__pcard_image].join(' ')} />
           </div>
           <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
             {imgOverlay}

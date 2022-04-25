@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -9,7 +9,6 @@ import {
 } from 'react-bootstrap';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
-import { Images, Send } from 'react-bootstrap-icons';
 import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
 import useDeal from 'hooks/useDeal';
@@ -21,6 +20,7 @@ import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import GSlogo from 'assets/images/p-detail-GSlogo.svg';
 import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
+import { useMediaQuery } from 'react-responsive';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -186,6 +186,9 @@ const ProductDetail = ({
   // console.log({ variantPrice });
   // console.log({ selOptions });
 
+  const isForMobile = useMediaQuery({
+    query: '(min-width: 476px)',
+  });
   return (
     <>
       <AlertComponent />
@@ -199,42 +202,39 @@ const ProductDetail = ({
         fullscreen="lg-down"
         contentClassName={styles.groupshop_modal_content}
       >
-        <Modal.Header closeButton className="pb-0 bg-white" />
-        <Modal.Body className="px-5 bg-white">
+        <Modal.Header closeButton className="bg-white border-0" />
+        <Modal.Body className="bg-white">
           <Row>
             <Col xs={12} md={6}>
-              <Row>
-                <Col>
-                  <span className={styles.groupshop__pcard_tag_price}>
-                    $
-                    30
-                    Off
-                  </span>
-                </Col>
+              <div className={styles.groupshop_left_content_wrapper}>
+                <span className={styles.groupshop__pcard_tag_price}>
+                  $
+                  30
+                  Off
+                </span>
                 <Col className="d-flex justify-content-end ms-1">
                   {displayAddedByFunc(product?.id) && addedbyname && (
-                  <span className={styles.groupshop__pcard_tag_addedbyname}>
-                    Added By
-                    {' '}
-                    {addedbyname}
-                  </span>
+                    <span className={styles.groupshop__pcard_tag_addedbyname}>
+                      Added By
+                      {' '}
+                      {addedbyname}
+                    </span>
                   )}
                 </Col>
-              </Row>
-              <Carousel
-                activeIndex={index}
-                onSelect={handleSelect}
-                interval={null}
-                indicators={false}
-              >
-                <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
-                  <img
-                    className="d-block w-100"
-                    src={product?.featuredImage}
-                    alt={`Feature-${Math.random()}`}
-                  />
-                </Carousel.Item>
-                {
+                <Carousel
+                  activeIndex={index}
+                  onSelect={handleSelect}
+                  interval={null}
+                  indicators={false}
+                >
+                  <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
+                    <img
+                      className="img-fluid"
+                      src={product?.featuredImage}
+                      alt={`Feature-${Math.random()}`}
+                    />
+                  </Carousel.Item>
+                  {
                  data?.productById?.images?.map((img:any, i:number) => (
                    <Carousel.Item>
                      <img
@@ -248,8 +248,8 @@ const ProductDetail = ({
 
                  ))
                }
-              </Carousel>
-              {data?.productById?.images.length > 1
+                </Carousel>
+                {data?.productById?.images.length > 1
                 && (
                 <Scrollable width="100%">
                   <div className="d-flex">
@@ -276,116 +276,122 @@ const ProductDetail = ({
                   </div>
                 </Scrollable>
                 )}
+              </div>
+
             </Col>
             <Col xs={12} md={6}>
-              <h2>
-                {product?.title}
-              </h2>
-              <h3 className="d-flex align-items-center">
-                <span className="text-decoration-line-through">
-                  {currencySymbol}
-                  {product?.options ? parseFloat(variantPrice as string) : parseFloat((product?.price || '0'))}
-                </span>
-                {' '}
-                <span>
-                  {currencySymbol}
-                  {product?.options ? parseFloat(dPrice((+(variantPrice || 0))).toFixed(2))
-                    : parseFloat(dPrice(+(product?.price || 0)).toFixed(2)) }
-                </span>
-                {cashBack && (
-                <Row className={styles.groupshop_cashback}>
-                  <Col className=" mx-0">
-                    <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
-                      Plus up to
-                      {' '}
-                      <strong>
-                        {' '}
-                        $
-                        { cashBack }
-                        {' '}
-                        cashback
-                        {' '}
-                      </strong>
-                      with
-                      {' '}
-                      <GSlogo className=" ms-0 mx-0" />
-                    </div>
-                  </Col>
-                </Row>
-                )}
-
-              </h3>
-              <div className={styles.groupshop_modal_detail_height}>
-                <ShowMoreText
+              <div className={styles.groupshop_right_content_wrapper}>
+                <div className={styles.groupshop_right_content}>
+                  <h2>
+                    {product?.title}
+                  </h2>
+                  <h3 className="d-flex align-items-center">
+                    <span className="text-decoration-line-through">
+                      {currencySymbol}
+                      {product?.options ? parseFloat(variantPrice as string) : parseFloat((product?.price || '0'))}
+                    </span>
+                    {' '}
+                    <span>
+                      {currencySymbol}
+                      {product?.options ? parseFloat(dPrice((+(variantPrice || 0))).toFixed(2))
+                        : parseFloat(dPrice(+(product?.price || 0)).toFixed(2)) }
+                    </span>
+                    {cashBack && (
+                    <Row className={styles.groupshop_cashback}>
+                      <Col className=" mx-0">
+                        <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
+                          Plus up to
+                          {' '}
+                          <strong>
+                            {' '}
+                            $
+                            { cashBack }
+                            {' '}
+                            cashback
+                            {' '}
+                          </strong>
+                          with
+                          {' '}
+                          <GSlogo className=" ms-0 mx-0" />
+                        </div>
+                      </Col>
+                    </Row>
+                    )}
+                  </h3>
+                  <div className={styles.groupshop_modal_detail_height}>
+                    <ShowMoreText
                 /* Default options */
-                  lines={3}
-                  more="Show more"
-                  less="Show less"
-                  className={isExpired ? 'text-muted' : 'fw-normal'}
-                  anchorClass="my-anchor-css-class"
+                      lines={3}
+                      more="Show more"
+                      less="Show less"
+                      className={isExpired ? 'text-muted' : 'fw-normal'}
+                      anchorClass="my-anchor-css-class"
                   // onClick={this.executeOnClick}
-                  expanded={false}
-                  width={0}
-                  truncatedEndingComponent="... "
-                >
-                  {product?.description}
-
-                </ShowMoreText>
-
-                {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
-                  <div key={id} className="mt-2">
-                    <h4 className={isExpired ? 'text-muted' : 'me-1'}>{name}</h4>
-                    <Form.Select
-                      aria-label="option"
-                      className="w-50"
-                      onChange={({ target: { value } }) => {
-                        setselOptions({ ...selOptions, [name]: value });
-                      }}
-                      value={selOptions?.[name]}
-                      disabled={isExpired}
+                      expanded={false}
+                      width={0}
+                      truncatedEndingComponent="... "
                     >
-                      {values.map((val: string, idx) => (
-                        <>
-                          {/* {idx === 0 && (
+                      {product?.description}
+
+                    </ShowMoreText>
+
+                    {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
+                      <div key={id} className="mt-3">
+                        <h4 className={isExpired ? 'text-muted' : 'me-1'}>{name}</h4>
+                        <Form.Select
+                          aria-label="option"
+                          className="w-50"
+                          onChange={({ target: { value } }) => {
+                            setselOptions({ ...selOptions, [name]: value });
+                          }}
+                          value={selOptions?.[name]}
+                          disabled={isExpired}
+                        >
+                          {values.map((val: string, idx) => (
+                            <>
+                              {/* {idx === 0 && (
                           <option key={Math.random()}>
                             --
                             {name}
                             --
                           </option>
                           )} */}
-                          <option
-                            value={val}
-                            className="text-upercase"
-                            key={Math.random()}
-                          >
-                            {val}
+                              <option
+                                value={val}
+                                className="text-upercase"
+                                key={Math.random()}
+                              >
+                                {val}
 
-                          </option>
-                        </>
-                      ))}
-                    </Form.Select>
+                              </option>
+                            </>
+                          ))}
+                        </Form.Select>
 
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <Button
-                variant="primary"
-                className={styles.groupshop_Pd_addtoCart}
-                onClick={() => addToCart()}
-                disabled={isExpired || outofStock}
-              >
-                {outofStock ? 'Out of Stock' : 'Add to Cart'}
+                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white'].join(' ')}>
+                    <Button
+                      variant="primary"
+                      className={styles.groupshop_Pd_addtoCart}
+                      onClick={() => addToCart()}
+                      disabled={isExpired || outofStock}
+                    >
+                      {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
-              </Button>
-              <ShareButton
-                disabled={isExpired}
-                placement="right-start"
-                shareurl={productShareUrl(product?.id ?? '')}
-                label=""
-                className="m-1 my-3 px-2 rounded-pill"
-              />
-              <Col xs={12} md={12}>
-                {productCustomers.length > 0
+                    </Button>
+                    <ShareButton
+                      disabled={isExpired}
+                      placement="right-start"
+                      shareurl={productShareUrl(product?.id ?? '')}
+                      label=""
+                      className="m-1 my-3 px-2 rounded-pill"
+                    />
+                  </div>
+                  <div className={styles.groupshop_modal_content_bottom}>
+                    <Col xs={12} md={12}>
+                      {productCustomers.length > 0
                   && (
                     <>
                       <Row className="d-flex align-items-center my-2">
@@ -416,8 +422,10 @@ const ProductDetail = ({
                       </Row>
                     </>
                   )}
-
-              </Col>
+                    </Col>
+                  </div>
+                </div>
+              </div>
             </Col>
           </Row>
           {isExpired && (
@@ -515,6 +523,7 @@ const ProductDetail = ({
           </Row>
           )}
         </Modal.Body>
+        {isForMobile && (
         <Modal.Footer className="bg-transparent d-block">
           <Row className={styles.groupshop_timerRow}>
             <Col xs={1} md={1} />
@@ -563,6 +572,7 @@ const ProductDetail = ({
             <Col xs={1} md={1} />
           </Row>
         </Modal.Footer>
+        )}
 
       </Modal>
 
