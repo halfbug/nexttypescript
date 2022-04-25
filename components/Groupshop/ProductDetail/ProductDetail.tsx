@@ -529,33 +529,33 @@ const ProductDetail = ({
                 </b>
                 <Row className={['mx-auto', styles.groupshop_footer_counter].join(' ')}>
                   <Col className={['d-flex col-3 p-0 ', styles.groupshop_timerRow_days].join(' ')}>
-                    <div className="text-center me-2">
-                      <span>
+                    <div className={['text-center ', styles.groupshop_timerRow_days_timeArea].join(' ')}>
+                      <span className={styles.groupshop_timerRow_days_time}>
                         {' '}
                         {days}
                       </span>
                       <p className="mt-1">DAYS</p>
                     </div>
-                    <div className="py-3">
+                    <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
                       {' '}
                       :
                     </div>
                   </Col>
                   <Col className="d-flex col-3 p-0 ">
-                    <div className="text-center mx-2">
-                      <span>
+                    <div className={['text-center mx-2 ', styles.groupshop_timerRow_days_timeArea1].join(' ')}>
+                      <span className={styles.groupshop_timerRow_days_time}>
                         {hrs}
                       </span>
                       <p className="mt-1">HOURS</p>
                     </div>
-                    <div className="py-3">
+                    <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
                       {' '}
                       :
                     </div>
                   </Col>
                   <Col className="d-flex col-3 p-0 ">
                     <div className="text-center mx-3">
-                      <span>
+                      <span className={styles.groupshop_timerRow_days_time}>
                         {mins}
                       </span>
                       <p className="mt-1">MINUTES</p>

@@ -37,19 +37,23 @@ const Counter = ({
     <div className={styles.groupshop_counter_top}>
       <p className="d-flex align-items-center">
         {!isExpired && 'EXPIRES IN'}
-        <span>
+        <span className={styles.groupshop_counter_top_txt}>
           {diffDays}
           D
         </span>
         {' '}
-        :
         <span>
+          :
+        </span>
+        <span className={styles.groupshop_counter_top_txt}>
           {diffHrs}
           H
         </span>
         {' '}
-        :
         <span>
+          :
+        </span>
+        <span className={styles.groupshop_counter_top_txt}>
           {diffMins}
           M
         </span>

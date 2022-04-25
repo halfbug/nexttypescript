@@ -144,7 +144,7 @@ const ProductsSearch = ({
               </InputGroup>
             </Form.Group> */}
 
-            <Form.Group className="mb-3 d-flex align-items-center bg-light px-3" controlId="searchField">
+            <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
               <SearchIcon />
               <Form.Control size="lg" className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')} type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
             </Form.Group>
@@ -153,7 +153,7 @@ const ProductsSearch = ({
           {(otherProducts && otherProducts.length > 0) && (
             <Row>
               <Col xs={4}>
-                <p>
+                <p className={styles.groupshop_modal_search_body_top_resultFound}>
                   {otherProducts?.length}
                   {' '}
                   results found
@@ -251,16 +251,18 @@ const ProductsSearch = ({
                       style={{ maxWidth: '325px' }}
                     >
                       <Popover.Body>
-                        <p className="text-center fs-5">
-                          Add
-                          <strong>
+                        <>
+                          <p className={styles.groupshop_search_popover_txt}>
+                            Add
+                            <strong>
+                              {' '}
+                              {selectedCount}
+                              {' '}
+                              products
+                            </strong>
                             {' '}
-                            {selectedCount}
-                            {' '}
-                            products
-                          </strong>
-                          {' '}
-                          to this Groupshop
+                            to this Groupshop
+                          </p>
                           <AddDealProduct
                             selectedProducts={selected}
                             handleClose={(e) => {
@@ -268,7 +270,7 @@ const ProductsSearch = ({
                               showSuccess('Product(s) has been added successfully.');
                             }}
                           />
-                        </p>
+                        </>
                       </Popover.Body>
                     </Popover>
                   </Overlay>

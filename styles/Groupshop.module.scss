@@ -55,12 +55,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			font-weight: $font-weight-normal;
 			font-size: $size-14px;
 			span {
-				@extend .p-1, .rounded, .ms-1, .d-inline-block;
-				border: 1px solid $purple;
-				font-size: $size-12px;
-				width: 36px;
-				text-align: center;
+				font-weight: 600;
 			}
+		}
+		&_txt {
+			@extend .p-1, .rounded, .ms-1, .d-inline-block;
+			border: 1px solid $purple;
+			font-size: $size-12px;
+			width: 36px;
+			text-align: center;
 		}
 		@include media-breakpoint-down(sm) {
 			display: none;
@@ -807,7 +810,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		h2 {
 			@extend .fw-bold, .text-uppercase;
 			font-weight: 700 !important;
-			font-size: 24px;
+			font-size: 21px;
+			color: $black;
+		}
+		&_shoppedby {
+			font-weight: 700 !important;
+			font-size: 24px !important;
 			color: $black;
 		}
 		p {
@@ -825,9 +833,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			width: 928px !important;
 			max-width: 928px !important;
 		}
-		div:first-child {
-			@extend .border-0, .rounded-0;
-		}
+		// div:first-child {
+		// 	@extend .border-0, .rounded-0;
+		// }
 		&_groupshopBtn {
 			font-size: 16px !important;
 			font-weight: 700 !important;
@@ -864,10 +872,27 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					li {
 						border: 1px solid #FF8F78;
 					}
+					&_inputArea {
+						border-radius: 10px !important;
+					}
 					&_input {
 						font-weight: 600;
 						font-size: 12px;
 						line-height: 15px;
+						color: $black;
+						::placeholder {
+							color: $black !important;
+							font-size: 12px !important;
+						}
+						.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+							color: red !important;
+							opacity: 1; /* Firefox */
+						}
+					}
+					&_resultFound {
+						font-size: 10px;
+						font-weight: 500;
+						line-height: 13px;
 						color: $black;
 					}
 				}
@@ -1171,6 +1196,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
 		&_popover {
 			width: 325px;
+			&_txt {
+				font-size: 14px;
+				font-weight: 400;
+				margin-bottom: 11px;
+			}
 		}
 	}
 	&_footer {
@@ -1548,6 +1578,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_days {
 			@extend .d-flex;
 			//margin-left: 3rem !important;
+			&_time {
+				font-size: 24px !important;
+				font-weight: 500 !important;
+				line-height: 31px;
+				color: $black;
+			}
+			&_timeArea {
+				margin-right: .4rem !important;
+			}
+			&_timeArea1 {
+				margin-right: .4rem !important;
+			}
 		}
 		&_text {
 			@extend .w-50;

@@ -356,7 +356,7 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
           id="shoppedby"
         >
-          <h2>
+          <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
             {' '}
             <span className={styles.groupshop_firstName}>
