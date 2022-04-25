@@ -214,11 +214,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		border-color: $purple;
 		border-width: 2px;
 		min-width: auto;
+		margin-right: 10px;
 		&:hover {
 			@extend .groupshop__earn;
 			background-color: $purple !important;
 		}
 	}
+
 
 	&__give_off {
 		color: $black;
@@ -591,9 +593,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 	}
 
 	&__pcard_image_wrapper {
+		max-height: 282px;
+    	overflow: hidden;
+    	width: 282px;
 		@include media-breakpoint-down(sm) {
 			max-height: 186px;
 			overflow: hidden;
+			width: auto;
 		}
 	}
 
@@ -616,6 +622,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			line-height: 18px;
 			color: #282828;
 		}
+
+		
 		&_small {
 			width: 155px;
 			height: 218px;
@@ -623,9 +631,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 
 		&_image {
-			height: 282px;
-			object-fit: contain;
-
+			
 			@include media-breakpoint-down(sm) {
 				height: auto;
 			}
@@ -750,8 +756,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			&_addToCart {
 				@extend .position-absolute, .align-items-center, .w-75, .justify-content-center;
 				display: none;
-				top: 75%;
-				left: 12%;
+				bottom: 35px;
+				left: 50px;
 				z-index: 1;
 				color: black;
 				&_btn {
