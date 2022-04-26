@@ -15,6 +15,7 @@ import { IStore } from 'types/store';
 import UploadButton from 'components/Buttons/UploadBtn';
 import styles from 'styles/Step1.module.scss';
 import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
   brandName: string;
@@ -84,7 +85,7 @@ export default function BrandInfo() {
       // setTimeout(() => resetForm(), 5000);
     },
   });
-  const { getKeyFromS3URL } = useCampaign();
+  const { getKeyFromS3URL } = useUtilityFunction();
 
   return (
     <Form noValidate onSubmit={handleSubmit} className={['mx-4', styles.welcome].join(' ')}>

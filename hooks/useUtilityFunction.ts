@@ -1,5 +1,6 @@
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
+import axios from 'axios';
 import { useCallback, useContext } from 'react';
 import { StoreContext } from 'store/store.context';
 import { IProduct } from 'types/store';
@@ -82,6 +83,19 @@ export default function useUtilityFunction() {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return monthNames[num];
   };
+
+  const getKeyFromS3URL = useCallback((key) => {
+    console.log('🚀 ~ file: useUtilityFunction.ts ~ line 88 ~ getKeyFromS3URL ~ key', key);
+    // this function extract the file name froms store logo store in db
+    const newKey = key.split('/');
+    console.log('🚀 ~ file: useUtilityFunction.ts ~ line 90 ~ getKeyFromS3URL ~ newKey', newKey);
+    return newKey[4];
+  }, []);
+  const getSignedUrlS3 = async (url: string) => {
+    const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
+    return dbUrl;
+  };
+
   return {
     cleanTypename,
     multiple5,
@@ -91,5 +105,7 @@ export default function useUtilityFunction() {
     filterArray,
     findIndexInArray,
     convertNumToMonth,
+    getKeyFromS3URL,
+    getSignedUrlS3,
   };
 }

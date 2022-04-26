@@ -25,6 +25,7 @@ import GradiantBox from 'components/Buttons/gradiantBox';
 import UploadButton from 'components/Buttons/UploadBtn';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
     brandColor?: string;
@@ -151,7 +152,7 @@ export default function Settings({ isDB }: IProps) {
     }
     setFieldValue(field, value);
   };
-  const { getKeyFromS3URL } = useCampaign();
+  const { getKeyFromS3URL } = useUtilityFunction();
 
   const radios = [
     // { name: 'solid', value: 'solid', component: <GradiantBox color={values.customColor} className={styles.ob_settings__thumbnail} type="circle" /> },

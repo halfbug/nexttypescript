@@ -84,11 +84,6 @@ export default function useCampaign() {
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
   }, []);
 
-  const getKeyFromS3URL = useCallback((key) => {
-    const newKey = key.split('/');
-    // console.log('🚀 ~ file: useCampaign.ts ~ line 90 ~ getKeyFromS3URL ~ newKey', newKey);
-    return newKey[4];
-  }, []);
   const updateCampaign = useCallback((id, field, value) => {
     console.log('//////////////////////////');
     let updatedCampaigns: ICampaign[] = [];
@@ -118,7 +113,6 @@ export default function useCampaign() {
     clearNewCampaign,
     updateSelectedCampaignProducts,
     updateSelectedCampaignAddProducts,
-    getKeyFromS3URL,
     updateCampaign,
   };
 }

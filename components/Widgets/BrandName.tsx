@@ -6,6 +6,7 @@ import {
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import UploadButton from 'components/Buttons/UploadBtn';
 import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 export interface BrandNameProps {
   values: any;
@@ -22,7 +23,7 @@ export default function BrandName(
   }
     : BrandNameProps,
 ) {
-  const { getKeyFromS3URL } = useCampaign();
+  const { getKeyFromS3URL } = useUtilityFunction();
   console.log({ values });
 
   return (

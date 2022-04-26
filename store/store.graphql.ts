@@ -376,6 +376,7 @@ query Groupshop($code: String!) {
     store{
       brandName
       shop
+      logoImage
     }
   popularProducts{
     id

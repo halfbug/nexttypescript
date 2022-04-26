@@ -92,6 +92,7 @@ const GroupShop: NextPage = () => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [newBestSeller, setnewBestSeller] = useState<IProduct[]>();
+  const [storeLogo, setStoreLogo] = useState<string>('');
 
   useEffect(() => {
     if (groupshop.id && pending) {
@@ -117,10 +118,13 @@ const GroupShop: NextPage = () => {
     members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
     members,
     store: { brandName } = { brandName: '' },
+    store: { logoImage } = { logoImage: '' },
     popularProducts, bestSeller, dealProducts, addedProducts,
     // allProducts,
   } = gsctx;
-  const { findInArray, filterArray } = useUtilityFunction();
+  const {
+    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
+  } = useUtilityFunction();
 
   useEffect(() => {
     // setallProducts(Array.from(new Set(
@@ -133,6 +137,17 @@ const GroupShop: NextPage = () => {
 
     setbannerDiscount(getDiscounts());
   }, [gsctx]);
+
+  useEffect(() => {
+    async function gets3logo() {
+      const key = getKeyFromS3URL(logoImage ?? '');
+      const logoS3 = await getSignedUrlS3(key);
+      console.log('🚀 [...code] logoS3', logoS3);
+      if (logoS3) setStoreLogo(logoS3);
+    }
+    gets3logo();
+  }, [logoImage]);
+  console.log({ storeLogo });
 
   useEffect(() => {
     // mixing popular produt with best seller to complete the count of 4 if popular are less.
@@ -231,7 +246,10 @@ const GroupShop: NextPage = () => {
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-              <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start"><Brand name={brandName || ''} pending={pending} /></Col>
+              <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start">
+                {/* <Brand name={brandName || ''} pending={pending} /> */}
+                <img src={storeLogo} alt={`${brandName} store logo`} width={130} className="img-fluid" />
+              </Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
