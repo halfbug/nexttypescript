@@ -127,7 +127,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
                   {' '}
                   collection(s) selected
                   <DeleteButton
-                    icon={<XCircle />}
+                    icon={<XCircle width={14} height={13.5} />}
                     handleDelete={handleDelete}
             // handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [] } } })}
                     message="Are you sure to clear all selection?"

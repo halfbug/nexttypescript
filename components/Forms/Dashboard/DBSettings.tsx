@@ -113,15 +113,14 @@ export default function DBSettings({
           <Col lg={7}>
             <h4>Select a banner background</h4>
             <Form.Text>
-              <p className="mt-0">This will serve as the banner for your Groupshop page</p>
+              <p className="mt-0 text-nowrap">This will serve as the banner for your Groupshop page</p>
               {' '}
             </Form.Text>
           </Col>
         </Row>
-        <Row className="border rounded px-1 py-3 mx-1">
+        <Row className="border rounded px-1 py-3 pb-4 mx-1">
           <Col lg={6}>
             <h6 className="fs-6 fw-bolder lh-base mb-4">Pre-Set Themes</h6>
-
             <ButtonGroup className={['d-block mx-0 mb-0', styles.ob_settings__group].join(' ')}>
               {radios.map(({ name, component, value }) => (
                 <ToggleButton
@@ -145,14 +144,12 @@ export default function DBSettings({
 
           </Col>
           <Col lg={6} className={styles.vertical}>
-            <div className=" ms-3">
-              <Row className="mt-2 ">
-                <h6 className="fs-6 fw-bolder lh-base">
-                  Custom background
-                  <span className={styles.badge}>Recommended</span>
-                  {' '}
-                </h6>
-              </Row>
+            <div className="ms-3">
+              <h6 className="fs-6 fw-bolder lh-base ">
+                Custom background
+                <span className={styles.badge}>Recommended</span>
+                {' '}
+              </h6>
               <Row>
                 <Col lg={12} className="align-middle mt-2">
                   <Form.Check

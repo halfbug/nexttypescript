@@ -104,7 +104,7 @@ export default function AddProductButton({ handleDelete }:IProps) {
                   collection(s)
 
                   <DeleteButton
-                    icon={<XCircle />}
+                    icon={<XCircle width={14} height={13.5} />}
                     handleDelete={handleDelete}
                     // handleDelete={() => dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [] } } })}
                     message="Are you sure to clear all selection?"
