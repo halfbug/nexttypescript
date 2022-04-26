@@ -39,7 +39,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     username: yup
       .string()
       .required('Name is required.')
-      .min(5, 'Too Short please give least five characters')
+      .min(3, 'Too Short please give least three characters')
       .max(20, 'Too Long !! only 20 characters allowed.'),
 
   });
@@ -85,7 +85,18 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       });
       handleClose({});
       // update context
-      dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, popularProducts: [...gsctx?.store?.products?.filter(({ id: pid }:{ id:string}) => products?.includes(pid)) || [], ...gsctx?.popularProducts || []], dealProducts } });
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          popularProducts: [...gsctx?.store?.products?.filter(
+            ({ id: pid }:{ id:string}) => products?.includes(pid),
+          ) || [],
+          ...gsctx?.popularProducts || []],
+          dealProducts,
+          addedProducts: [...dealProducts || []],
+        },
+      });
     },
   });
 

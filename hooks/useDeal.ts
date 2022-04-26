@@ -62,6 +62,7 @@ export default function useDeal() {
         days: 0,
         hrs: 0,
         mins: 0,
+        secs: 0,
       });
     }
     return ({
@@ -69,6 +70,7 @@ export default function useDeal() {
       days: Math.floor(diff / 86400000), // days
       hrs: Math.floor((diff % 86400000) / 3600000), // hours
       mins: Math.round(((diff % 86400000) % 3600000) / 60000), // minutes
+      secs: Math.round((((diff % 86400000) % 3600000) / 60000) / 60000), // seconds
     });
   },
   [gsctx.members]);

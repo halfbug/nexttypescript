@@ -105,8 +105,11 @@ const GroupShop: NextPage = () => {
 
   const {
     gsURL, clientDealProducts, isExpired, discount,
-    getDiscounts, milestones, getBannerTotalCashBack,
+    getDiscounts, milestones, getDateDifference,
   } = useDeal();
+  const {
+    days, hrs, mins, secs,
+  } = getDateDifference();
 
   const { googleEventCode } = useGtm();
 
@@ -114,7 +117,7 @@ const GroupShop: NextPage = () => {
     members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
     members,
     store: { brandName } = { brandName: '' },
-    popularProducts, bestSeller, dealProducts,
+    popularProducts, bestSeller, dealProducts, addedProducts,
     // allProducts,
   } = gsctx;
   const { findInArray, filterArray } = useUtilityFunction();
@@ -246,12 +249,21 @@ const GroupShop: NextPage = () => {
               <Col xs={6} className={styles.groupshop__counter}>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
-                    <span>35H</span>
+                    <span>
+                      {hrs}
+                      H
+                    </span>
                     :
-                    <span>59M</span>
+                    <span>
+                      {mins}
+                      M
+                    </span>
                     {' '}
                     :
-                    <span>10S</span>
+                    <span>
+                      {secs}
+                      S
+                    </span>
                   </p>
                 </div>
               </Col>
@@ -381,7 +393,7 @@ const GroupShop: NextPage = () => {
           </p>
 
         </ProductGrid>
-        {members?.length > 1 ? (
+        {(members?.length > 1 || (addedProducts?.length)) ? (
           <ProductGrid
             xs={6}
             sm={6}

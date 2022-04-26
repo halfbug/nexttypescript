@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -21,6 +21,7 @@ import GSlogo from 'assets/images/p-detail-GSlogo.svg';
 import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
+import { GroupshopContext } from 'store/groupshop.context';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -40,7 +41,7 @@ const ProductDetail = ({
     // setSelected(undefined);
     handleClose(e);
   };
-
+  const { gsctx: { discountCode: { percentage } } } = useContext(GroupshopContext);
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -56,8 +57,10 @@ const ProductDetail = ({
 
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
-    totalCashBack, productShareUrl, displayAddedByFunc,
+    totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
+    getDateDifference,
   } = useDeal();
+  const { days, hrs, mins } = getDateDifference();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
 
@@ -180,9 +183,9 @@ const ProductDetail = ({
     }
   }, [index]);
 
-  const days = 10;
-  const hrs = 6;
-  const mins = 3;
+  // const days = 10;
+  // const hrs = 6;
+  // const mins = 3;
   // console.log({ variantPrice });
   // console.log({ selOptions });
 
@@ -209,7 +212,7 @@ const ProductDetail = ({
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={styles.groupshop__pcard_tag_price}>
                   $
-                  30
+                  {parseFloat(productPriceDiscount(+(product?.price ?? ''), +percentage))}
                   Off
                 </span>
                 <Col className="d-flex justify-content-end ms-1">

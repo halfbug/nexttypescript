@@ -91,4 +91,6 @@ export interface IGroupshop {
 
   bestSeller?: Product[];
 
+  addedProducts?: DealProduct[];
+
 }
