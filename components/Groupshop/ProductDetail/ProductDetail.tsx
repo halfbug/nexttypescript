@@ -18,6 +18,7 @@ import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import GSlogo from 'assets/images/p-detail-GSlogo.svg';
+import LeftArrowIcon from 'assets/images/left-arrow.svg';
 import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
@@ -205,12 +206,16 @@ const ProductDetail = ({
         fullscreen="lg-down"
         contentClassName={styles.groupshop_modal_content}
       >
-        <Modal.Header closeButton className="bg-white border-0" />
+        <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
+        <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
+          <LeftArrowIcon />
+          <span className={styles.groupshop__pcard__headerMobile__txt}>Back To All</span>
+        </Modal.Header>
         <Modal.Body className="bg-white">
           <Row>
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
-                <span className={styles.groupshop__pcard_tag_price}>
+                <span className={styles.groupshop__pcard_tag_priceMobile}>
                   $
                   {parseFloat(productPriceDiscount(+(product?.price ?? ''), +percentage))}
                   Off
@@ -254,30 +259,32 @@ const ProductDetail = ({
                 </Carousel>
                 {data?.productById?.images.length > 1
                 && (
-                <Scrollable width="100%">
-                  <div className="d-flex">
-                    {data?.productById?.images?.map((img:any, i:number) => (
-                      <>
+                  <Row className={[styles.groupshop__pcard_tag__photoSlider].join(' ')}>
+                    <Scrollable width="100%">
+                      <div className="d-flex">
+                        {data?.productById?.images?.map((img: any, i: number) => (
+                          <>
 
-                        <button
-                          type="button"
-                          onClick={(e) => handleSelect((i + 1), e)}
-                          className={i === index
-                            ? styles.groupshop_modal_detail_button_selected
-                            : styles.groupshop_modal_detail_button}
-                          key={img.id}
-                        >
+                            <button
+                              type="button"
+                              onClick={(e) => handleSelect((i + 1), e)}
+                              className={i === index
+                                ? styles.groupshop_modal_detail_button_selected
+                                : styles.groupshop_modal_detail_button}
+                              key={img.id}
+                            >
 
-                          <img
-                            src={img.src}
-                            alt={`image_${i}`}
-                            className={styles.groupshop_modal_detail_thumbnail}
-                          />
-                        </button>
-                      </>
-                    ))}
-                  </div>
-                </Scrollable>
+                              <img
+                                src={img.src}
+                                alt={`image_${i}`}
+                                className={styles.groupshop_modal_detail_thumbnail}
+                              />
+                            </button>
+                          </>
+                        ))}
+                      </div>
+                    </Scrollable>
+                  </Row>
                 )}
               </div>
 
@@ -313,9 +320,11 @@ const ProductDetail = ({
                             cashback
                             {' '}
                           </strong>
-                          with
-                          {' '}
-                          <GSlogo className=" ms-0 mx-0" />
+                          <span className={styles.groupshop_PlusUpto__logo}>
+                            with
+                            {' '}
+                            <GSlogo className=" ms-0 mx-0" />
+                          </span>
                         </div>
                       </Col>
                     </Row>

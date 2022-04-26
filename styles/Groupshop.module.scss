@@ -630,6 +630,29 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			border: 1.2px solid #202020;
 		}
 
+		&__headerCross {
+			display: flex;
+			@include media-breakpoint-down(sm) {
+				display: none;
+			}
+		}
+		&__headerMobile {
+			display: none;
+			cursor: pointer;
+			justify-content: flex-start;
+			@include media-breakpoint-down(sm) {
+				display: flex;
+			}
+			&__txt {
+				@extend .mx-2;
+				font-weight: $font-weight-normal;
+				font-size: 10px;
+				line-height: 13px;
+				color: #989898;
+				text-transform: uppercase;
+			}
+		}
+
 		&_image {
 			
 			@include media-breakpoint-down(sm) {
@@ -680,6 +703,25 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 					font-size: 10px !important;
 				}
 				z-index: 8;
+			}
+			&_priceMobile {
+				@extend .groupshop__pcard_tag;
+				top: 20px;
+				position: absolute;
+				left: 20px;
+				border: 2px solid #000000;
+				border-radius: 6px !important;
+				@include media-breakpoint-down(md) {
+					font-size: 10px !important;
+				}
+				z-index: 8;
+			}
+
+			&__photoSlider {
+				display: block;
+				@include media-breakpoint-down(sm) {
+					display: none;
+				}	
 			}
 
 			&_boughtby {
@@ -1504,6 +1546,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		line-height: 14px;
 		letter-spacing: 0.2px;
 		color: #000000;
+
+		&__logo {
+			display: block;
+			@include media-breakpoint-down(sm) {
+				display: none;
+			}
+		}
 	}
 
 	&_pdPrice {
