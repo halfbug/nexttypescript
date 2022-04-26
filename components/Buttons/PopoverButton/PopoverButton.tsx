@@ -37,7 +37,7 @@ const PopoverButton = ({
       {' '}
       {icon ?? ''}
       {' '}
-      {label}
+      <span className={styles.groupshop__earn__label}>{label}</span>
     </Button>
 
   </OverlayTrigger>

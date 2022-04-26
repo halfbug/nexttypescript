@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   ButtonGroup,
-  Col, Container, FormControl, Offcanvas, Row, Badge,
+  Col, Container, FormControl, Offcanvas, Row, Badge, ProgressBar,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useCart from 'hooks/useCart';
@@ -18,6 +18,7 @@ import IconMoney from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
+import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 
 interface CartProps extends RootProps {
   show : boolean;
@@ -85,6 +86,9 @@ const Cart = ({
                 <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
               </div>
               {/* <div className={styles.groupshop_modal_cart_progress} /> */}
+              <div className="mt-3">
+                <GradientProgressBar progress={60} />
+              </div>
             </div>
             <hr />
             {cartProducts.length < 1 ? (

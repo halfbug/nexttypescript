@@ -955,6 +955,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			.groupshop__earn {
 				height: 43px;
 				width: 43px;
+				&__label {
+					margin-left: 5px;
+				}
 			}
 		}
 
