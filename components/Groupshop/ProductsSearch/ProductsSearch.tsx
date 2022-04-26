@@ -171,6 +171,7 @@ const ProductsSearch = ({
             {otherProducts ? (
               otherProducts.map(
                 (prd) => (
+                  (+prd.price > 0) && (
                   <Col xs={6} sm={6} md={4} className="p-1">
                     <ProductCard
                       isrc={prd.featuredImage}
@@ -205,6 +206,7 @@ const ProductsSearch = ({
                       </p>
                     </ProductCard>
                   </Col>
+                  )
                 ),
               )
             ) : (
