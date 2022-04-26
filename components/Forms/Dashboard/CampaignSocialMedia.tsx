@@ -167,12 +167,12 @@ export default function CampaignSocialMedia({
           </Form.Group>
           {(errors[field] !== undefined) ? (
             <IconButton
-              icon={<CheckCircle size={18} color="grey" />}
+              icon={<CheckCircle size={18} color="green" />}
             />
           )
             : (
               <IconButton
-                icon={<CheckCircle size={18} color="green" />}
+                icon={<CheckCircle size={18} color="black" opacity={0.4} />}
               />
             )}
         </Col>
