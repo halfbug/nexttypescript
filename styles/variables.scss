@@ -167,3 +167,8 @@ $dotted-border-color4:#F28BF4;
 .popover{
 	border-radius: 10px !important;
 }
+
+
+$btn-focus-box-shadow: none !important;
+// You can also disable the box-shadow on focus around inputs with:
+$input-focus-box-shadow: none !important;
