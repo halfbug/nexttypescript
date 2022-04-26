@@ -298,13 +298,13 @@ const ProductDetail = ({
                   <h3 className="d-flex align-items-center">
                     <span className="text-decoration-line-through">
                       {currencySymbol}
-                      {product?.options ? parseFloat(variantPrice as string) : parseFloat((product?.price || '0'))}
+                      {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
                     </span>
                     {' '}
                     <span>
                       {currencySymbol}
-                      {product?.options ? parseFloat(dPrice((+(variantPrice || 0))).toFixed(2))
-                        : parseFloat(dPrice(+(product?.price || 0)).toFixed(2)) }
+                      {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
+                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
                     </span>
                     {cashBack && (
                     <Row className={styles.groupshop_cashback}>

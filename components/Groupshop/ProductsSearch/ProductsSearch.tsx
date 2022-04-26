@@ -201,7 +201,7 @@ const ProductsSearch = ({
                       <p className="text-center fw-bold fs-5 mb-0">
                         $
                         {' '}
-                        {prd.price}
+                        {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                       </p>
                     </ProductCard>
                   </Col>

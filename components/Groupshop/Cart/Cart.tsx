@@ -127,12 +127,12 @@ const Cart = ({
                     <h5>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
-                        {parseFloat((+(prd.selectedVariant.price ?? prd.price)).toFixed(2))}
+                        {((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                       {' '}
                       <span>
                         {currencySymbol}
-                        {parseFloat(dPrice(+(prd.selectedVariant.price ?? prd.price)).toFixed(2))}
+                        {(dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                     </h5>
                   </div>

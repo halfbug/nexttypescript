@@ -238,15 +238,10 @@ export default function useDeal() {
     //   // add 3rd person product discount only
     //   members[2].products?.reduce((tot, prd) => tot + +(prd.price), 0);
     // }
-    return cb;
+    const formattedCB = +(cb.toFixed(2).toString().replace('.00', ''));
+    return formattedCB;
   }, [gsctx]);
 
-  const formatNumber = ((num: number) => {
-    const floatNum = parseFloat(num.toFixed(2));
-    const lastDigit = floatNum % 10;
-    const newFormatedNum = lastDigit === 0 ? num : floatNum;
-    return newFormatedNum;
-  });
   const nextDiscountCalculator = ((disc: string) => {
     const rew = gsctx.campaign?.salesTarget?.rewards!;
     const nextIndex = gsctx.campaign?.salesTarget?.rewards?.findIndex(
@@ -282,7 +277,6 @@ export default function useDeal() {
     milestones,
     getBannerTotalCashBack,
     // unLockCashBack,
-    formatNumber,
     unLockCB,
     getBannerTotalCashBackByOrder,
   };

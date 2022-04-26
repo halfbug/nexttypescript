@@ -95,6 +95,17 @@ export default function useUtilityFunction() {
     const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
     return dbUrl;
   };
+  const formatNumber = ((num: number | string) => {
+    const numb = num.toString();
+    const numLength = numb.length;
+    const decimalPart = numb.split('.')[1];
+    console.log({ decimalPart });
+    const floatNum = parseFloat((+num).toFixed(2));
+    const lastDigit = decimalPart[decimalPart.length - 1];
+    // const lastDigit = floatNum % 10;
+    const newFormatedNum = +lastDigit === 0 ? num : floatNum;
+    return newFormatedNum;
+  });
 
   return {
     cleanTypename,
@@ -107,5 +118,6 @@ export default function useUtilityFunction() {
     convertNumToMonth,
     getKeyFromS3URL,
     getSignedUrlS3,
+    formatNumber,
   };
 }

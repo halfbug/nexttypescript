@@ -14,6 +14,7 @@ import usePagination from 'hooks/usePagination';
 import useDeal from 'hooks/useDeal';
 import { Member } from 'types/groupshop';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
 
@@ -63,6 +64,7 @@ const ProductGrid = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
   } = useDeal();
+  const { formatNumber } = useUtilityFunction();
 
   // React.useEffect(() => {
   //   console.log('im cuurent page changes');
@@ -93,7 +95,7 @@ const ProductGrid = ({
                 <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
                     $
-                    {parseFloat(productPriceDiscount(+(prod.price), +percentage))}
+                    {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
                     {' '}
                     OFF
                   </span>
@@ -158,12 +160,12 @@ const ProductGrid = ({
                 <span className="text-decoration-line-through">
                   {currencySymbol}
                   {/* {prod.price} */}
-                  {parseFloat((prod.price))}
+                  {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
                 </span>
                 {' '}
                 <span>
                   {currencySymbol}
-                  {parseFloat(dPrice(+(prod.price)).toFixed(2))}
+                  {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
                 </span>
               </h5>
               {!showHoverButton && (

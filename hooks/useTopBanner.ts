@@ -12,10 +12,12 @@ const useTopBanner = () => {
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
+  // useEffect(() => {
+
+  // }, [cashbackVal]);
 
   useEffect(() => {
     if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
-    console.log({ percentage });
     if (members) {
       if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');
@@ -28,7 +30,7 @@ const useTopBanner = () => {
         setCashBackText(`This group has unlocked over $${cashbackVal} in discounts and cashback. `);
       }
     }
-  }, [gsctx]);
+  }, [gsctx, cashbackVal]);
 
   return {
     text, setText, cashBackText,
