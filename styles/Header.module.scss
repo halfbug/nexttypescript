@@ -4,7 +4,12 @@
   @extend .mt-5;
 
   h1 {
-    @extend .fw-bolder, .lh-sm, .fs-1;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+    color: $black;
     margin-left: -.75rem;
   }
 

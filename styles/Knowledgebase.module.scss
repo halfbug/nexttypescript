@@ -83,13 +83,13 @@
         border-radius: 18px;
         border: 1px dashed $purple;
 
-        h4{
+        h4 {
             font-family: "DM Sans";
             font-style: normal;
             font-weight: 700;
             font-size: 18px;
             line-height: 23px;
-            color: $black; 
+            color: $black;
         }
     }
 
@@ -105,11 +105,20 @@
 
     &_btn {
         @extend .mt-1;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: center;
+        color: $black;
+        background-color: $white;
         border-radius: 8px;
         border: 1px solid $black;
         &:hover {
             border-radius: 8px;
             border: 1px solid $black;
+            background-color: $white;
         }
     }
     &_FAQs {

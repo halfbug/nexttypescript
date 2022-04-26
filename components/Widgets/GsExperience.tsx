@@ -16,7 +16,7 @@ export default function GsExperience(
         <Col lg={3} md={6} sm={12} className="pe-0">
           <img src={SetUpPic.src} width={120} height={88} alt="GSExperience" />
         </Col>
-        <Col lg={9} md={6} sm={12} className="px-0">
+        <Col lg={9} md={6} sm={12} className="px-1">
           <h4>
             <Rocket className="me-2" />
             Get set up in no time
@@ -27,7 +27,8 @@ export default function GsExperience(
           <br />
           <WhiteButton
             type="submit"
-            className={styles.Kb_btn}
+            className={['px-3', styles.Kb_btn].join(' ')}
+
           >
             Watch product demo
           </WhiteButton>
