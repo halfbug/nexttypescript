@@ -12,8 +12,8 @@ export default function GsGuide(
   return (
     <section className={styles.Kb}>
       <Row className="me-2 pe-2">
-        <h4 className=" ">
-          How-to guide
+        <h4 className="my-2 mb-3">
+          How-to guides
           <Button variant="link" className="styles.Kb_browse">Browse</Button>
         </h4>
         <Col lg={6}>

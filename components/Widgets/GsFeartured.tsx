@@ -10,7 +10,7 @@ export default function GsFeartured(
   return (
     <section className={styles.Kb}>
       <Row className=" my-3">
-        <h4>
+        <h4 className="my-4">
           Featured videos
           <Button variant="link" className="styles.Kb_browse">Browse</Button>
         </h4>
