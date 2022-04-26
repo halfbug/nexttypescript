@@ -250,19 +250,19 @@ const GroupShop: NextPage = () => {
                 <div className={styles.groupshop__counter_middle}>
                   <p>
                     <span>
-                      {hrs}
-                      H
+                      {days}
+                      D
                     </span>
                     :
                     <span>
-                      {mins}
-                      M
+                      {hrs}
+                      H
                     </span>
                     {' '}
                     :
                     <span>
-                      {secs}
-                      S
+                      {mins}
+                      M
                     </span>
                   </p>
                 </div>

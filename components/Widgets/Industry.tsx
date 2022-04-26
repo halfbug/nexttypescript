@@ -39,9 +39,14 @@ export function Industry(
         value={values.industry}
       >
         <option>Click to select</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option value="Clothing/Fashion">Clothing/Fashion</option>
+        <option value="Beauty & Self-Care">Beauty & Self-Care</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Wellness">Wellness</option>
+        <option value="Home">Home</option>
+        <option value="Food & Beverage">Food & Beverage</option>
+        <option value="Outdoors">Outdoors</option>
+        <option value="Pets">Pets</option>
       </select>
     </section>
 
