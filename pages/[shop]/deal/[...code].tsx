@@ -246,9 +246,11 @@ const GroupShop: NextPage = () => {
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-              <Col md={3} xs={3} className="text-center text-lg-start d-flex justify-content-start">
-                {/* <Brand name={brandName || ''} pending={pending} /> */}
-                <img src={storeLogo} alt={`${brandName} store logo`} width={130} className="img-fluid" />
+              <Col md={3} xs={3}>
+                <div className={styles.groupshop_main_logo}>
+                  {/* <Brand name={brandName || ''} pending={pending} /> */}
+                  <img src={storeLogo} alt={`${brandName} store logo`} className="img-fluid" />
+                </div>
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
