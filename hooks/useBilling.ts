@@ -40,10 +40,10 @@ export default function useBilling() {
     if (data2?.findTotalRevenue) { settotalRevenue(data2.findTotalRevenue.revenue); }
   }, [data2]);
 
-  console.log('🚀 ~ file: useBilling.ts TOTAL # of GS', data);
-  console.log('🚀 ~ file: useBilling.ts TOTAL # of GS by month', data3);
-  console.log('🚀 ~ file: useBilling.ts TOTAL # of REV', data2);
-  console.log('🚀 ~ file: useBilling.ts TOTAL # of totalRevenue', totalRevenue);
+  // console.log('🚀 ~ file: useBilling.ts TOTAL # of GS', data);
+  // console.log('🚀 ~ file: useBilling.ts TOTAL # of GS by month', data3);
+  // console.log('🚀 ~ file: useBilling.ts TOTAL # of REV', data2);
+  // console.log('🚀 ~ file: useBilling.ts TOTAL # of totalRevenue', totalRevenue);
   useEffect(() => {
     if (data3?.findTotalGSMonthly.length) { settotalGSByMonth(data3.findTotalGSMonthly); }
   }, [data3]);
@@ -64,7 +64,8 @@ export default function useBilling() {
     if (totalGSByMonth.length) {
       // eslint-disable-next-line no-underscore-dangle
       const GSOfMonth = totalGSByMonth.find((item) => item._id.month === month);
-      console.log('🚀 ~ file: useBilling.ts ~ line 67 ~ getMonthlyGSCount ~ GSOfMonth', GSOfMonth);
+      // console.log('🚀 ~ file: useBilling.ts ~ line 67 ~ getMonthlyGSCount ~ GSOfMonth',
+      // GSOfMonth);
       return GSOfMonth?.count;
     }
     return 0;

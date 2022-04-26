@@ -11,6 +11,7 @@ import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import { BillingType } from 'types/billing';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import ExportToExcel from 'components/Widgets/ExportToExcel';
 import R1 from 'assets/images/Revenue.svg';
 import C1 from 'assets/images/CartBag.svg';
 
@@ -27,7 +28,7 @@ export default function PaymentHistory() {
   } = useQuery(GET_MONTHLY_GS, {
     variables: { storeId: store.id },
   });
-  console.log('🚀 ~ file: PaymentHistory.tsx ~ line 22 ~ PaymentHistory ~ data', data);
+  // console.log('🚀 ~ file: PaymentHistory.tsx ~ line 22 ~ PaymentHistory ~ data', data);
   React.useEffect(() => {
     if (data?.getMonthlyGSBilling.length) { setmonthlyGS(data.getMonthlyGSBilling); }
   }, [data]);
@@ -58,8 +59,19 @@ export default function PaymentHistory() {
               <td>{item.revenue}</td>
               <td>{getMonthlyGSCount(item._id.month)}</td>
               <td>{(item.cashBack).toFixed(2)}</td>
-              <td>{item.feeCharges}</td>
-              <td><DownloadIcon /></td>
+              <td>{(item.feeCharges).toFixed(2)}</td>
+              <td>
+                <ExportToExcel
+                  apiData={mockData}
+                  fileName="groupshop"
+                  month={item._id.month}
+                  year={item._id.year}
+                  storeId={store.id}
+                >
+                  <DownloadIcon />
+                </ExportToExcel>
+
+              </td>
             </tr>
           ))}
         </tbody>

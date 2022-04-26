@@ -6,11 +6,15 @@ import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import { GET_STORE_DETAILS } from 'store/store.graphql';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { GS_PLAN1_END_COUNT, GS_PLAN2_END_COUNT, GS_PLAN3_END_COUNT } from 'configs/constant';
 
-export default function Slider() {
+type SliderProp = {
+  nooforder: number;
+}
+function Slider({ nooforder }: SliderProp) {
   const [value, setValue] = useState(0);
   const { store } = React.useContext(StoreContext);
-  const [plan, setPlan] = useState(undefined);
+  const [plan, setPlan] = useState('Explore');
   const [planIndex, setPlanIndex] = useState(0);
   // console.log({ store });
   const { findIndexInArray } = useUtilityFunction();
@@ -36,27 +40,23 @@ export default function Slider() {
       setPlanIndex(findIndexInArray(sliderDisplayCSS, 'text', data.store.plan));
     }
   }, [data]);
+  useEffect(() => {
+    if (nooforder <= GS_PLAN1_END_COUNT) {
+      setPlan('Explore');
+    } else if (nooforder > GS_PLAN1_END_COUNT && nooforder <= GS_PLAN2_END_COUNT) {
+      setPlan('Launch');
+    } else if (nooforder > GS_PLAN2_END_COUNT && nooforder <= GS_PLAN3_END_COUNT) {
+      setPlan('Growth');
+    } else {
+      setPlan('Unicorn');
+    }
+  }, [nooforder]);
   // console.log({ data });
   // console.log({ plan });
   // console.log({ planIndex });
 
   return (
     <>
-      {/* <Row className="mt-4 mx-0 p-0">
-        {sliderDisplayCSS.map((slider, index) => (
-          <Col className="p-0">
-            { (index <= planIndex)
-              ? (
-                <div className={slider.display}>
-                  <span>
-                    {slider.text}
-                  </span>
-                </div>
-              ) : ''}
-          </Col>
-        ))}
-      </Row> */}
-
       <div className={styles.billing}>
         <Row className="d-flex align-items-center">
           <Col lg={10} md={12} className="px-0">
@@ -74,7 +74,7 @@ export default function Slider() {
               <div className={styles.billing__tiles}>
                 {sliderDisplayCSS.map((slider, index) => (
                   <div className={styles.billing__tierWrapper__tier}>
-                    {/* {(index <= planIndex) ? ( */}
+                    {/* {(slider.text === plan) ? ( */}
                     <div className={slider.display}>
                       <span>
                         {slider.text}
@@ -97,3 +97,8 @@ export default function Slider() {
     </>
   );
 }
+// Slider.defaultProps = {
+//   nooforder: 0,
+// };
+
+export default Slider;

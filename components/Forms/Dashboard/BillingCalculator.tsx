@@ -71,7 +71,7 @@ export default function BillingCalculator() {
                   </Form.Group>
                 </Col>
               </Row>
-              <Slider />
+              <Slider nooforder={values.nooforder ?? 0} />
               {/* <input
                 id="ex22"
                 type="text"

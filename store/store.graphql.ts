@@ -660,6 +660,29 @@ query FindTotalGSMonthly($storeId: String!) {
     }
 }
 `;
+const GET_BILLING_BY_DATE = gql`
+query GetBillingByDate($storeId: String!, $startDate: DateTime!, $endDate: DateTime!) {
+  getBillingByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+    _id {
+      date
+      month
+      year
+    }
+    revenue
+    totalfeeByCashback
+    totalfeeByGS
+    totalCashback
+    todaysTotalGS
+    storeTotalGS
+    storePlan
+    feeformGroupshop{
+       plan
+      totalGS
+      totalCharged
+      }
+    }
+}
+`;
 
 const BILLING_SUBSCRIPTION = gql`
   mutation  BillingSubscription($shop: String!, $accessToken: String!){
@@ -677,5 +700,6 @@ export {
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
   GET_ACTIVE_STORES, GET_QR_DEAL,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
+  GET_BILLING_BY_DATE,
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION,
 };
