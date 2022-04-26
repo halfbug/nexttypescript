@@ -65,7 +65,7 @@ const ShareButton = ({
                 level: 'L',
                 margin: 3,
                 scale: 4,
-                width: 150,
+                width: 105,
                 color: {
                   dark: '#000000',
                   light: '#FFFFFF',

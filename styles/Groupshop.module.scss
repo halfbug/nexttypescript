@@ -56,10 +56,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 			font-size: $size-14px;
 			span {
 				font-weight: 600;
+				margin: 0px 3px;
 			}
 		}
 		&_txt {
-			@extend .p-1, .rounded, .ms-1, .d-inline-block;
+			@extend .p-1, .rounded, .d-inline-block;
 			border: 1px solid $purple;
 			font-size: $size-12px;
 			width: 36px;
@@ -603,6 +604,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		}
 	}
 
+	&_modal_cart_close {
+		button {
+			&:focus {
+				box-shadow: none;
+			}
+		}
+	}
+
 	&_modal_detail_height {
 		padding: 15px 0px;
 	}
@@ -656,7 +665,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		&_image {
 			
 			@include media-breakpoint-down(sm) {
-				height: auto;
+				min-height: 186px;
 			}
 
 			&_small {
@@ -1606,10 +1615,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 		font-style: normal;
 		font-weight: 700;
 		font-size: 16px;
-		line-height: 21px;
+		line-height: 27px;
 		letter-spacing: 0.32px;
 		text-transform: uppercase;
-		width: 212px;
+		width: 212px !important;
 		@include media-breakpoint-down(md) {
 			background-color: $white;
 			color: $black;
