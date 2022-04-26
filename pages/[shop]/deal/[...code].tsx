@@ -147,7 +147,6 @@ const GroupShop: NextPage = () => {
     }
     gets3logo();
   }, [logoImage]);
-  console.log({ storeLogo });
 
   useEffect(() => {
     // mixing popular produt with best seller to complete the count of 4 if popular are less.
@@ -248,8 +247,17 @@ const GroupShop: NextPage = () => {
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
               <Col md={3} xs={3}>
                 <div className={styles.groupshop_main_logo}>
-                  {/* <Brand name={brandName || ''} pending={pending} /> */}
-                  <img src={storeLogo} alt={`${brandName} store logo`} className="img-fluid" />
+                  { (logoImage === '' || logoImage === undefined)
+                    ? (<Brand name={(brandName || '').split(' ').slice(0, 2).join(' ') || ''} pending={pending} />)
+                    : (
+                      <img
+                        src={storeLogo}
+                        alt={`${brandName}`}
+                      // alt="d"
+                        width={130}
+                        className="img-fluid"
+                      />
+                    ) }
                 </div>
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>

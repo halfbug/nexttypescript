@@ -92,6 +92,7 @@ export default function useUtilityFunction() {
     return newKey[4];
   }, []);
   const getSignedUrlS3 = async (url: string) => {
+    if (url === '' || url === undefined) return '';
     const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
     return dbUrl;
   };
