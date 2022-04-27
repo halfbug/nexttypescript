@@ -152,7 +152,7 @@ export default function DBSettings({
                 {' '}
               </h6>
               <Row>
-                <Col lg={12} className="align-middle mt-2">
+                <Col lg={12} className="d-line-flex text-nowrap align-middle ">
                   <Form.Check
                     inline
                     label="Image"
