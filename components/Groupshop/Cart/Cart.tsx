@@ -18,7 +18,7 @@ import IconMoney from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
-import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
+// import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 
 interface CartProps extends RootProps {
   show : boolean;
@@ -34,7 +34,6 @@ const Cart = ({
     gsctx,
     dispatch,
   } = useContext(GroupshopContext);
-
   const {
     currencySymbol, dPrice, discount,
   } = useDeal();
@@ -45,9 +44,16 @@ const Cart = ({
   const {
     cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
     isCartEmpty, getShopifyUrl, getSuggestedProducts, addCartProduct,
+    getCartSaveMoney, getTotalActualCartTotal,
   } = useCart();
   const { suggestedProd } = useSuggested();
   const { setsProduct } = useDetail(suggestedProd);
+  const [upToPercent, setupToPercent] = React.useState<string>();
+  const { campaign } = gsctx;
+  useEffect(() => {
+    const rew = { ...campaign?.salesTarget?.rewards };
+    setupToPercent(rew[2]?.discount);
+  }, [gsctx.campaign]);
 
   const { push } = useRouter();
 
@@ -65,7 +71,7 @@ const Cart = ({
           >
             <div className="p-2">
               <h3 className={styles.groupshop_modal_cart_heading}>Cart</h3>
-              <Row className="d-flex justify-content-center">
+              {/* <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
                   <IconMoney className=" mx-1 " />
                   Spend $40 to
@@ -81,14 +87,14 @@ const Cart = ({
                   {' '}
                   and $20 cashback for
                 </Col>
-              </Row>
+              </Row> */}
               <div className="align-items-center">
                 <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
               </div>
               {/* <div className={styles.groupshop_modal_cart_progress} /> */}
-              <div className="mt-3">
+              {/* <div className="mt-3">
                 <GradientProgressBar progress={60} />
-              </div>
+              </div> */}
             </div>
             <hr />
             {cartProducts.length < 1 ? (
@@ -195,7 +201,10 @@ const Cart = ({
                             className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
                           >
                             {currencySymbol}
-                            {Math.round(+(item.price) - +(dPrice(+(item?.price || 0)).toFixed(1)))}
+                            {Math.round(+(item.price) - +(dPrice(+(item?.price || 0))
+                              .toFixed(2)))}
+                            {/* {(+(item.price) - +(dPrice(+(item?.price || 0))))
+                              .toFixed(2).toString().replace('.00', '')} */}
                             {' '}
                             OFF
                           </Badge>
@@ -254,13 +263,20 @@ const Cart = ({
                 <div className="col-11">
                   You’ve saved
                   {' '}
-                  <strong>$30</strong>
+                  <strong>
+                    $
+                    {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
+                  </strong>
                   {' '}
                   by shopping with
                   {' '}
                   <strong>GROUPSHOP</strong>
                   {' '}
-                  And you can keep earning up to 40% cashback!
+                  And you can keep earning up to
+                  {' '}
+                  { upToPercent }
+                  {' '}
+                  cashback!
                 </div>
               </Col>
             </Row>

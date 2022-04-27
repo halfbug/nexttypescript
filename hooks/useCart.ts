@@ -80,6 +80,23 @@ export default function useCart() {
 
     return allProducts;
   }, [gsctx]);
+  // ......... this func calculates all products actual price and show thier sum
+  const getTotalActualCartTotal = useCallback(() => {
+    let totalPrice: any = 0;
+    const { cart } = gsctx;
+    if (cart?.length) {
+      totalPrice = cart?.reduce(
+        (tot, prd) => (tot + (+(prd.price) * prd.selectedVariant.selectedQuantity)), 0,
+      );
+    }
+    return +totalPrice;
+  }, [gsctx.cart]);
+  const getCartSaveMoney = useCallback((discount) => {
+    const totalPrice1 = getTotalActualCartTotal()
+    - (getTotal() ?? (+getTotalActualCartTotal() * discount) / 100);
+    const saved = totalPrice1;
+    return +totalPrice1;
+  }, [gsctx.cart]);
 
   return {
     addCartProduct,
@@ -91,5 +108,7 @@ export default function useCart() {
     isCartEmpty,
     getShopifyUrl,
     getSuggestedProducts,
+    getTotalActualCartTotal,
+    getCartSaveMoney,
   };
 }
