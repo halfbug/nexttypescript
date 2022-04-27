@@ -140,7 +140,7 @@ export default function UpdateRewards() {
       const {
         rewards, selectedTarget, minDiscount, maxDiscount,
       } = valz;
-      let { minDiscountVal, maxDiscountVal } = valz;
+      // let { minDiscountVal, maxDiscountVal } = valz;
       // console.log({ valz });
 
       const { __typename, ...newSelectedTarget } = selectedTarget;
@@ -153,36 +153,35 @@ export default function UpdateRewards() {
       }
       // console.log({ selectedTarget });
       // console.log({ newSelectedTarget });
-      if (newSelectedTarget?.rewards && (editMax || editMin)) {
-        const baseline = parseInt(minDiscountVal);
-        const maximum = parseInt(maxDiscountVal);
-        const lowBaseline = 10;
-        const avgBaseline = 15;
-        const highBaseline = 20;
-        const superBaseline = 25;
+      // if (newSelectedTarget?.rewards && (editMax || editMin)) {
+      //   const baseline = parseInt(minDiscountVal);
+      //   const maximum = parseInt(maxDiscountVal);
+      //   const lowBaseline = 10;
+      //   const avgBaseline = 15;
+      //   const highBaseline = 20;
+      //   const superBaseline = 25;
 
-        if (baseline <= lowBaseline) {
-          newSelectedTarget.name = "Low";
-        } else if (baseline > lowBaseline && baseline <= avgBaseline) {
-          newSelectedTarget.name = "Average";
-        } else if (baseline >= highBaseline && baseline < superBaseline) {
-          newSelectedTarget.name = "High";
-        } else if (baseline >= superBaseline) {
-          newSelectedTarget.name = "Super-charged";
-        }
-        const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
-        if (minDiscountVal[minDiscountVal.length - 1] !== '%') {
-          minDiscountVal = `${minDiscountVal}%`;
-        }
-        if (maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
-          maxDiscountVal = `${maxDiscountVal}%`;
-        }
+      //   if (baseline <= lowBaseline) {
+      //     newSelectedTarget.name = "Low";
+      //   } else if (baseline > lowBaseline && baseline <= avgBaseline) {
+      //     newSelectedTarget.name = "Average";
+      //   } else if (baseline >= highBaseline && baseline < superBaseline) {
+      //     newSelectedTarget.name = "High";
+      //   } else if (baseline >= superBaseline) {
+      //     newSelectedTarget.name = "Super-charged";
+      //   }
+      //   const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
+      //   if (minDiscountVal[minDiscountVal.length - 1] !== '%') {
+      //     minDiscountVal = `${minDiscountVal}%`;
+      //   }
+      //   if (maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
+      //     maxDiscountVal = `${maxDiscountVal}%`;
+      //   }
 
-        newSelectedTarget.rewards[0].discount = minDiscountVal;
-        newSelectedTarget.rewards[2].discount = maxDiscountVal;
-        newSelectedTarget.rewards[1].discount = `${newAverage}%`;
-        // newSelectedTarget.rewards[1].discount = `${(parseInt(minDiscountVal) + parseInt(maxDiscountVal)) / 2}%`;
-      }
+      //   newSelectedTarget.rewards[0].discount = minDiscountVal;
+      //   newSelectedTarget.rewards[2].discount = maxDiscountVal;
+      //   newSelectedTarget.rewards[1].discount = `${newAverage}%`;
+      // }
       const campRew:null | any = await addReward({
         variables: {
           updateCampaignInput: {
@@ -281,14 +280,14 @@ export default function UpdateRewards() {
                 they have received all their cashback. Learn more about how rewards work here."
               />
             </h4>
-            {!editMin && (
-              <>
-                <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
-                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>Edit</span>
+            {/* {!editMin && (
+              <> */}
+            <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
+            {/*  <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>Edit</span>
               </>
-            )}
+            )} */}
 
-            <div className={editMin ? 'd-block' : 'd-none'}>
+            {/* <div className={editMin ? 'd-block' : 'd-none'}>
               <Form.Control
                 type="text"
                 name="minDiscount"
@@ -307,7 +306,7 @@ export default function UpdateRewards() {
               </Form.Control.Feedback>
 
               <Button variant="link" type="submit">Save</Button>
-            </div>
+            </div> */}
 
           </Col>
           <Col sm={6}>
@@ -322,13 +321,13 @@ export default function UpdateRewards() {
                 Think of this as an ‘up to X% off’. Learn more about how rewards work here."
               />
             </h4>
-            {!editMax && (
-              <>
-                <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
-                <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>Edit</span>
+            {/* {!editMax && (
+              <> */}
+            <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
+            {/* <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>Edit</span>
               </>
-            )}
-            <div className={editMax ? 'd-block' : 'd-none'}>
+            )} */}
+            {/* <div className={editMax ? 'd-block' : 'd-none'}>
               <Form.Control
                 type="text"
                 name="maxDiscount"
@@ -346,8 +345,7 @@ export default function UpdateRewards() {
                 {errors.maxDiscount}
               </Form.Control.Feedback>
               <Button variant="link" type="submit">Save</Button>
-              {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
-            </div>
+            </div> */}
 
           </Col>
         </Row>
@@ -358,18 +356,9 @@ export default function UpdateRewards() {
               <Bulb size={16} />
             </Col>
             <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
-              Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
-            </Col>
-          </Row>
-          <Row className="mt-2 d-inline-flex justify-content-center">
-            <Col lg={1} className={styles.dbrewards_icon_text}>
-              <Star size={16} />
-            </Col>
-            <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
-              Be generous – reward your customers the same
-              way you reward Facebook or Google for finding
-              you leads. We’ll do the math to make sure you’re
-              always winning, and so are your customers.
+              You can’t edit your rewards after your campaign is created. Want to set different rewards? Duplicate this campaign to set new rewards.
+              {' '}
+
             </Col>
           </Row>
         </div>
