@@ -1513,9 +1513,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     font-size: 12px;
     line-height: 1.42857;
     box-shadow: none !important;
-    &:hover {
+    &:focus,
+    &:active {
       background: #dcd0e8;
       border: 2px solid #000000;
+    }
+    &:hover{
+      background: #dcd0e8;
     }
   }
   &_added_by_text {
