@@ -455,9 +455,8 @@ export default function UpdateCampaign() {
               handleForm={handleForm}
               isEdit
             />
-
           </section>
-
+          <Row className="mb-4" />
         </Col>
         <Col lg={5}>
           <Row />

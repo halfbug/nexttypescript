@@ -552,8 +552,8 @@ export default function CreateCampaign() {
             Save for later
           </WhiteButton>
         </Col>
-
       </Form>
+      <Row className="mb-5 pb-3" />
     </Container>
   );
 }
