@@ -544,7 +544,11 @@ const GroupShop: NextPage = () => {
         />
         )}
       </div>
-      {isModalForMobile && <ShoppingBoxMobile />}
+      {isModalForMobile && (
+        <Row onClick={() => { setShowRewards(true); }}>
+          <ShoppingBoxMobile />
+        </Row>
+      )}
 
     </>
   );

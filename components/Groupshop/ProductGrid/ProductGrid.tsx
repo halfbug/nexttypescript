@@ -157,7 +157,7 @@ const ProductGrid = ({
               )}
 
               <h5 className="pt-2 text-center fw-bold">
-                <span className="text-decoration-line-through">
+                <span className="text-decoration-line-through fw-light me-1">
                   {currencySymbol}
                   {/* {prod.price} */}
                   {(+(prod.price)).toFixed(2).toString().replace('.00', '')}

@@ -638,6 +638,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_modal_cart_close {
+    @extend .ms-2, .mt-2;
     button {
       &:focus {
         box-shadow: none;
@@ -675,6 +676,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       display: flex;
       @include media-breakpoint-down(sm) {
         display: none;
+      }
+      button {
+        &:focus {
+          box-shadow: none;
+        }
       }
     }
     &__headerMobile {
@@ -1664,6 +1670,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: none;
       }
     }
+    .groupshop__earn{
+      height: 41px;
+      width: 41px;
+    }
   }
   &_addtoCart {
     @extend .rounded-pill, .w-75;
@@ -1715,8 +1725,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &_disableShareCircle {
     @extend .m-1, .rounded-circle, .p-1;
-    width: 35px;
-    height: 34px;
+    width: 41px;
+    height: 41px;
     @include media-breakpoint-down(md) {
       display: none;
     }
