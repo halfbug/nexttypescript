@@ -14,12 +14,6 @@ import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 
-// interface InfoBoxProps extends RootProps {
-//   show : boolean;
-//   handleClose(e:any): any;
-//   // handleSearch(e:any): any;
-// }
-
 const InfoBox = () => {
   const [show, setShow] = useState(false);
 
