@@ -1120,7 +1120,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_body {
         @extend .m-0, .p-0, .text-center;
         font-family: "DM Sans";
-        overflow-x: hidden;
+        overflow: hidden;
         h3 {
           @extend .fw-bold;
         }

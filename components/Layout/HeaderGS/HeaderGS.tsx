@@ -21,7 +21,7 @@ const Header = ({
     <Container fluid>
       <Row className="w-100 align-items-center gx-0">
         <Col xs={{ span: 3, order: 1 }} md={{ span: 3, order: 1 }}>{LeftComp}</Col>
-        <Col xs={{ span: 6, order: 2 }} md={{ span: 6, order: 2 }} className={styles.groupshop__logo}><Navbar.Brand href="#home"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
+        <Col xs={{ span: 6, order: 2 }} md={{ span: 6, order: 2 }} className="text-center"><Navbar.Brand href="#home" className="m-0"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
         <Col
           xs={{ span: 3, order: 3 }}
           md={{ span: 3, order: 3 }}
