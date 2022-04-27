@@ -218,6 +218,7 @@ const ProductDetail = ({
                 <span className={styles.groupshop__pcard_tag_priceMobile}>
                   $
                   {parseFloat(productPriceDiscount(+(product?.price ?? ''), +percentage))}
+                  {' '}
                   Off
                 </span>
                 <Col className="d-flex justify-content-end ms-1">
@@ -320,11 +321,11 @@ const ProductDetail = ({
                             cashback
                             {' '}
                           </strong>
-                          <span className={styles.groupshop_PlusUpto__logo}>
+                          {/* <span className={styles.groupshop_PlusUpto__logo}>
                             with
                             {' '}
                             <GSlogo className=" ms-0 mx-0" />
-                          </span>
+                          </span> */}
                         </div>
                       </Col>
                     </Row>
