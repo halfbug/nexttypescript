@@ -12,23 +12,23 @@ const ConnectSocialMedia = () => (
     <section className="d-flex justify-content-start px-0">
       <div className="ms-0">
         {' '}
-        <SocialButton network="Instagram" url={'  '} />
+        <SocialButton network="Instagram" url="https://www.instagram.com/groupshopit/" />
       </div>
 
       <div className="mx-1">
         {' '}
-        <SocialButton network="Youtube" url={' '} />
+        <SocialButton network="Youtube" url="" />
         {' '}
       </div>
 
       <div className="mx-1">
         {' '}
-        <SocialButton network="Tiktok" url={'  '} />
+        <SocialButton network="Tiktok" url="https://www.tiktok.com/@groupshopit?lang=en" />
         {' '}
       </div>
       <div className="mx-1">
         {' '}
-        <SocialButton network="Twitter" url={'  '} />
+        <SocialButton network="Twitter" url="https://twitter.com/groupshopit" />
         {' '}
       </div>
     </section>

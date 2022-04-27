@@ -20,7 +20,7 @@ export default function GsFeartured(
             width="281.64"
             height="135"
             title="GS"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY"
+            src="https://www.youtube.com/embed/NpEaa2P7qZI"
             allowFullScreen
           />
           <h5 className={styles.Kb_featured_heading}>
@@ -33,7 +33,7 @@ export default function GsFeartured(
             width="281.64"
             height="135"
             title="GS1"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY"
+            src="https://www.youtube.com/embed/NpEaa2P7qZI"
             allowFullScreen
           />
           <h5 className={styles.Kb_featured_heading}>
