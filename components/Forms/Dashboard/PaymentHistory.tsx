@@ -21,7 +21,18 @@ export default function PaymentHistory() {
   } = useBilling();
   const { convertNumToMonth } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
-  const [monthlyGS, setmonthlyGS] = React.useState([]);
+  const [monthlyGS, setmonthlyGS] = React.useState([{
+    _id: {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth(),
+      date: new Date().getDate(),
+
+    },
+    count: 0,
+    revenue: 0,
+    feeCharges: 0,
+    cashBack: 0,
+  }]);
 
   const {
     loading, data, refetch,
@@ -49,23 +60,23 @@ export default function PaymentHistory() {
           </tr>
         </thead>
         <tbody>
-          {monthlyGS.map((item:BillingType) => (
+          {monthlyGS.map((item) => (
             <tr key={`${item.cashBack}-${Math.random()}`}>
               <td>
-                {convertNumToMonth(item._id.month - 1)}
+                {convertNumToMonth(item._id.month as unknown as number - 1)}
                 {' '}
                 {item._id.year}
               </td>
               <td>{item.revenue}</td>
-              <td>{getMonthlyGSCount(item._id.month)}</td>
+              <td>{getMonthlyGSCount(item._id.month as unknown as number)}</td>
               <td>{(item.cashBack).toFixed(2)}</td>
               <td>{(item.feeCharges).toFixed(2)}</td>
               <td>
                 <ExportToExcel
                   apiData={mockData}
                   fileName="groupshop"
-                  month={item._id.month}
-                  year={item._id.year}
+                  month={item._id.month as unknown as number}
+                  year={item._id.year as unknown as number}
                   storeId={store.id}
                 >
                   <DownloadIcon />

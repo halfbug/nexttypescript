@@ -265,6 +265,7 @@ const Cart = ({
                   {' '}
                   <strong>
                     $
+                    {/* {dPrice(getTotalActualCartTotal())} */}
                     {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
                   </strong>
                   {' '}

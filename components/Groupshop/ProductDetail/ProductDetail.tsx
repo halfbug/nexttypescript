@@ -93,7 +93,7 @@ const ProductDetail = ({
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
-      setCashBack(totalCashBack(selOptions ? variantPrice : product.price));
+      setCashBack(totalCashBack(product.price));
       console.log('.................');
       console.log(product.price, variantPrice);
     }

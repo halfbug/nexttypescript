@@ -86,14 +86,18 @@ export default function useCart() {
     const { cart } = gsctx;
     if (cart?.length) {
       totalPrice = cart?.reduce(
-        (tot, prd) => (tot + (+(prd.price) * prd.selectedVariant.selectedQuantity)), 0,
+        (tot, prd) => (
+          tot + (+(prd.selectedVariant.price) * prd.selectedVariant.selectedQuantity)
+        ), 0,
       );
     }
+    console.log({ totalPrice });
+
     return +totalPrice;
   }, [gsctx.cart]);
   const getCartSaveMoney = useCallback((discount) => {
     const totalPrice1 = getTotalActualCartTotal()
-    - (getTotal() ?? (+getTotalActualCartTotal() * discount) / 100);
+    - (getTotal() ?? 0);
     const saved = totalPrice1;
     return +totalPrice1;
   }, [gsctx.cart]);

@@ -6,18 +6,18 @@ import useDeal from './useDeal';
 const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
-  const [cashbackVal, setCashBackVal] = useState<number | undefined>();
+  const [cashbackVal, setCashBackVal] = useState<number | undefined | string>('...');
   const { unLockCB } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
-  // useEffect(() => {
-
-  // }, [cashbackVal]);
-
   useEffect(() => {
     if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
+  }, [gsctx]);
+
+  useEffect(() => {
+    // if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
     if (members) {
       if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');
