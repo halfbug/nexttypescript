@@ -1646,7 +1646,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_cashback {
     @extend .shadow-sm, .mx-1, .p-2, .bg-body, .rounded;
-    width: 300px;
+    width: fit-content;
   }
 
   &_cartProductText {
@@ -1893,7 +1893,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     left: 0;
     right: 0;
     margin: 0 auto;
-    bottom: 50px;
+    bottom: 100px;
     z-index: 9;
     &_content {
       border-radius: 6px;
