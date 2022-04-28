@@ -406,6 +406,8 @@ query Groupshop($code: String!) {
     description
     price
     currencyCode
+    purchaseCount
+    outofstock
     options{
       id
       name

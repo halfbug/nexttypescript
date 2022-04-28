@@ -51,6 +51,7 @@ import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 import { useMediaQuery } from 'react-responsive';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
+import useTopPicks from 'hooks/useTopPicks';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -125,6 +126,7 @@ const GroupShop: NextPage = () => {
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
   } = useUtilityFunction();
+  const { topPicks } = useTopPicks();
 
   useEffect(() => {
     // setallProducts(Array.from(new Set(
@@ -447,8 +449,8 @@ const GroupShop: NextPage = () => {
               lg={4}
               xl={3}
               products={ownerProducts
-                && (ownerProducts!.length > 3 ? newBestSeller?.slice(0, 3)
-                  : newBestSeller?.slice(0, 4))}
+                && (ownerProducts!.length > 3 ? topPicks?.slice(0, 3)
+                  : topPicks?.slice(0, 4))}
               maxrows={1}
               addProducts={handleAddProduct}
               handleDetail={(prd) => setsProduct(prd)}

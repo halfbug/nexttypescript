@@ -106,6 +106,7 @@ export interface IProduct {
   inventoryQuantity?: number;
   selectedOptions?: any;
   image?: any;
+  purchaseCount?: number;
 }
 export interface ISettings {
   brandColor: string;
