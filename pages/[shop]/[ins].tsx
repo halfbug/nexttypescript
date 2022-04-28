@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client';
 import { GET_STORE } from 'store/store.graphql';
 
 import { StoreContext } from 'store/store.context';
+import { Spinner } from 'react-bootstrap';
 
 const ShopMain: NextPage = () => {
   const { query: { shop, ins } } = useRouter();
@@ -38,8 +39,7 @@ const ShopMain: NextPage = () => {
 
   return (
     <Page headingText="Groupshop" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
-      dashboard
-      {shop}
+      <Spinner animation="border" variant="primary" />
 
       {installationDialogue()}
 

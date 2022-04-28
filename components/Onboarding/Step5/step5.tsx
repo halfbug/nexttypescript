@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 import {
-  Container, Row, Col,
+  Container, Row, Col, Spinner,
 } from 'react-bootstrap';
 import styles from 'styles/Step5.module.scss';
 import Button from 'components/Buttons/Button/Button';
@@ -25,14 +25,17 @@ const Step5 = () => {
   const [updateSt, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   const [getSubscription,
     { data: sdata, loading: sloading, error: serror }] = useMutation<IStore>(BILLING_SUBSCRIPTION);
-  console.log('🚀 ~ file: step5.tsx ~ line 28 ~ Step5 ~ sdata', sdata);
-  // const { shop, id } = store;
-  const shopName: string[] | undefined = store?.shop?.split('.', 1);
-  // const shopNalo: string | undefined = shopName?[0];
+  // console.log('🚀 ~ file: step5.tsx ~ line 28 ~ Step5 ~ sdata', sdata);
+  // // const { shop, id } = store;
+  // const shopName: string[] | undefined = store?.shop?.split('.', 1);
+  // // const shopNalo: string | undefined = shopName?[0];
+
+  const [loader, setloader] = useState<boolean>(false);
 
   const handleClick = async () => {
-    setShow(!show);
     console.log('...handleClick', store);
+
+    setloader(true);
 
     await getSubscription({
       variables: {
@@ -41,6 +44,7 @@ const Step5 = () => {
 
       },
     });
+    // setShow(!show);
     await updateSt({
       variables: {
         updateStoreInput: {
@@ -119,9 +123,12 @@ const Step5 = () => {
               </div>
               <Row>
                 <Col>
-                  <Button onClick={handleClick} className={styles.letsgo_btn_letgo}>
-                    Let's Go
-                  </Button>
+                  {loader ? <Spinner animation="border" variant="primary" />
+                    : (
+                      <Button onClick={handleClick} className={styles.letsgo_btn_letgo}>
+                        Let's Go
+                      </Button>
+                    )}
                 </Col>
 
               </Row>
