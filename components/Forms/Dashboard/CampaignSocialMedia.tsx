@@ -35,7 +35,10 @@ export default function CampaignSocialMedia({
 
   const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   console.log({ errors });
+  const styleObj = {
 
+    width: '248px',
+  };
   return (
 
     <>
@@ -80,7 +83,7 @@ export default function CampaignSocialMedia({
       </Row>
       <Row className="p-1 mt-2 ">
         <Col lg={10} className="d-flex">
-          <Form.Group className="w-75 me-2" controlId="sm">
+          <Form.Group className="me-1" style={styleObj} controlId="sm">
             <Form.Control
               onChange={(e) => {
                 // setval(e.currentTarget.value);
