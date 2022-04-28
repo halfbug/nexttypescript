@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-lone-blocks */
 import React, { useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -233,14 +235,18 @@ const ProductGrid = ({
                 onClick={() => {
                   setCurrentPage(
                     (currentPage > 1) ? currentPage - 1 : currentPage,
-                  ); paginationScroll();
+                  );
+                  { (id === 'allproducts') && (paginationScroll()); }
                 }}
               />
 
               {getPageNumbers().map((n, index) => (
                 <Pagination.Item
                   active={currentPage === n}
-                  onClick={() => { setCurrentPage(n); paginationScroll(); }}
+                  onClick={() => {
+                    setCurrentPage(n);
+                    { (id === 'allproducts') && (paginationScroll()); }
+                  }}
                   className={currentPage === n
                     ? styles.gropushop_activePage : styles.groupshop_page}
                 >
@@ -253,7 +259,8 @@ const ProductGrid = ({
                 onClick={() => {
                   setCurrentPage(
                     (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
-                  ); paginationScroll();
+                  );
+                  { (id === 'allproducts') && (paginationScroll()); }
                 }}
               />
             </Pagination>

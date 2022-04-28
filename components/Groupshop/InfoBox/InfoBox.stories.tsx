@@ -12,10 +12,10 @@ export default {
   },
 } as ComponentMeta<typeof InfoBox>;
 
-const Template: ComponentStory<typeof InfoBox> = () => <InfoBox />;
+const Template: ComponentStory<typeof InfoBox> = () => <InfoBox mes="How does this work?" />;
 
 export const Main = Template.bind({});
 Main.args = {
-  show: true,
-  handleClose: () => false,
+  // show: true,
+  // showhandleClose: () => false,
 };

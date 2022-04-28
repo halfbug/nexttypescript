@@ -14,7 +14,11 @@ import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 
-const InfoBox = () => {
+interface mesProps {
+  mes: string;
+}
+
+const InfoBox = ({ mes }: mesProps) => {
   const [show, setShow] = useState(false);
 
   const { googleEventCode } = useGtm();
@@ -26,7 +30,7 @@ const InfoBox = () => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <InfoButton handleClick={handleShow} message="How does this work?" />
+      <InfoButton handleClick={handleShow} message={mes} />
       <Modal
         show={show}
         onHide={handleClose}

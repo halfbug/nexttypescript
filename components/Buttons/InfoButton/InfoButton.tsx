@@ -16,7 +16,7 @@ const InfoButton = ({
   <IconButton
     icon={(
       <div className={styles.groupshop_infobutton}>
-        <InfoCircle />
+        {(message !== 'How it works') && (<InfoCircle />)}
         { message
         && (
         <span>

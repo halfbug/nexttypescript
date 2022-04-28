@@ -39,8 +39,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     username: yup
       .string()
       .required('Name is required.')
-      .min(3, 'Too Short please give least three characters')
-      .max(20, 'Too Long !! only 20 characters allowed.'),
+      .min(1, 'Too Short please give least one characters')
+      .max(10, 'Too Long !! only 10 characters allowed.'),
 
   });
 
@@ -112,6 +112,9 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           placeholder="Your Name ..."
           className="me-1"
         />
+        <Form.Control.Feedback type="invalid">
+          {errors.username}
+        </Form.Control.Feedback>
         <Button type="submit">Add</Button>
       </Form.Group>
 

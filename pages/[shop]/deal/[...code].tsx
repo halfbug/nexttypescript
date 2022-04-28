@@ -243,7 +243,7 @@ const GroupShop: NextPage = () => {
                 pending={pending}
               />
 )}
-            RightComp={<InfoBox />}
+            RightComp={<InfoBox mes="How does this work?" />}
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
@@ -381,7 +381,7 @@ const GroupShop: NextPage = () => {
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
             </div>
             <Row className={styles.groupshop__hero_how_to}>
-              How it works
+              <InfoBox mes="How it works" />
             </Row>
           </Container>
         </Hero>
