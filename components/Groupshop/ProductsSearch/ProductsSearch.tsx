@@ -219,7 +219,7 @@ const ProductsSearch = ({
           <>
             {selected && (
             <Row>
-              <Col xs={12} className="text-center fs-5 pt-1">
+              <Col xs={12} className="text-center fs-5 pt-3">
                 {selectedCount}
                 {' '}
                 product selected
@@ -232,7 +232,7 @@ const ProductsSearch = ({
                 <div ref={ref}>
                   <Button
                     onClick={handleClick}
-                    className={['text-center rounded-pill text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
+                    className={['text-center text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
                   >
                     ADD to groupshop
 

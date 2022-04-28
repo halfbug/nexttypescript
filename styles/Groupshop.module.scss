@@ -6,6 +6,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
   "Noto Color Emoji" !default;
 
+.form-control::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	color: pink;
+}
 .groupshop {
   background-color: white !important;
   font-family: "DM Sans" !important;
@@ -101,6 +105,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: none;
       }
     }
+	:hover {
+		font-weight: 600 !important;
+	}
   }
 
   &_brand {
@@ -763,7 +770,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         top: 20px;
         position: absolute;
         left: 20px;
-        border: 2px solid #000000;
+        border: 1px solid #000000;
         border-radius: 6px !important;
         @include media-breakpoint-down(md) {
           font-size: 10px !important;
@@ -964,6 +971,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 16px !important;
       font-weight: 700 !important;
       line-height: 21px;
+	  height: 42px
     }
     &_search {
       @extend .groupshop_modal;
@@ -1007,16 +1015,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
             font-size: 12px;
             line-height: 15px;
             color: $black;
-            ::placeholder {
-              color: $black !important;
-              font-size: 12px !important;
-            }
-            .form-control::placeholder {
-              /* Chrome, Firefox, Opera, Safari 10.1+ */
-              color: red !important;
-              opacity: 1; /* Firefox */
-            }
           }
+		  &_input::placeholder {
+			color: $black !important;
+			font-size: 12px !important;
+			font-weight: 600 !important;
+		  }
           &_resultFound {
             font-size: 10px;
             font-weight: 500;
