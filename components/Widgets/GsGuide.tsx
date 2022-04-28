@@ -14,7 +14,7 @@ export default function GsGuide(
       <Row className="me-2 pe-2">
         <h4 className="my-2 mb-3">
           How-to guides
-          <Button variant="link" className="styles.Kb_browse">Browse</Button>
+          <Button variant="link" className="text-black-50">Browse</Button>
         </h4>
         <Col lg={6}>
           <div className={styles.Kb_guide}>
@@ -33,7 +33,7 @@ export default function GsGuide(
                   {' '}
                   into brand influencers.
                   <br />
-                  <Button variant="link" className="">Read more</Button>
+                  <Button variant="link" className="text-black-50">Read more</Button>
                 </div>
               </Col>
             </Row>
@@ -52,7 +52,7 @@ export default function GsGuide(
                 <div className="col-6 ms-3">
                   Get your products in front of more prospects with these tips.
                   <br />
-                  <Button variant="link">Get started</Button>
+                  <Button variant="link" className="text-black-50">Get started</Button>
                 </div>
               </Col>
             </Row>

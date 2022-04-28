@@ -12,7 +12,7 @@ export default function GsFeartured(
       <Row className=" my-3">
         <h4 className="my-4">
           Featured videos
-          <Button variant="link" className="styles.Kb_browse">Browse</Button>
+          <Button variant="link" className="text-black-50">Browse</Button>
         </h4>
         <Col lg={6}>
           <iframe
