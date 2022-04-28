@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, Fragment } from 'react';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
@@ -5,6 +7,9 @@ import useAlert from 'hooks/useAlert';
 import { useLazyQuery } from '@apollo/client';
 import { GET_QR_DEAL } from 'store/store.graphql';
 import Image from 'next/image';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import Link from 'next/link';
 
 // import react bootstrap components
 import {
@@ -46,10 +51,10 @@ export default function QrStep1({
 }: IStep1Props) {
   const validationSchema = yup.object({
     email: yup.string().email('Invalid email format').required('Required'),
-    ordernumber: yup.number().required('Required'),
+    ordernumber: yup.number().typeError('Must be a number only').required('Required'),
   });
 
-  const { showError } = useAlert();
+  const { AlertComponent, showError } = useAlert();
 
   const [getDealLink, { data }] = useLazyQuery(GET_QR_DEAL, {
     onError() {
@@ -130,7 +135,15 @@ export default function QrStep1({
                       <Form.Group className="mb-4">
                         <div className={styles.QRContainer__text__how}>
                           <Form.Label>Order Number</Form.Label>
-                          <a href="/">How?</a>
+                          <a>
+                            {' '}
+                            <ToolTip
+                              className={styles.dashboard_campaign__pop}
+                              label="How?"
+                              popContent="You can find your order number on the order confirmation email from the brand you used Groupshop with as well as the order summary slip included in your package."
+                            />
+                          </a>
+
                         </div>
                         <Form.Control
                           type="text"
@@ -158,16 +171,16 @@ export default function QrStep1({
 
                     <div className={styles.QRContainer__social__media}>
                       <div className={styles.QRContainer__social__icons}>
-                        <Instagram />
-                        <Pinterest />
-                        <Twitter />
-                        <Facebook />
+                        <Link href="https://www.instagram.com/groupshopit/"><a target="_blank"><Instagram /></a></Link>
+                        <Link href="https://pinterest.com/Groupshop/"><a target="_blank"><Pinterest /></a></Link>
+                        <Link href="https://twitter.com/groupshopit"><a target="_blank"><Twitter /></a></Link>
+                        <Link href="/"><a><Facebook /></a></Link>
                       </div>
                       <div className={styles.QRContainer__link}>
                         <p>
                           Go to
                           {' '}
-                          <a href="/">groupshop.com</a>
+                          <Link href="https://www.groupshop.com/"><a target="_blank">groupshop.com</a></Link>
                         </p>
                       </div>
                     </div>
@@ -191,6 +204,7 @@ export default function QrStep1({
             </Col>
           </Row>
         </Container>
+        <AlertComponent />
         <MarqueeSlider />
       </div>
     </>
