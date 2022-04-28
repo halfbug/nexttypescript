@@ -437,7 +437,7 @@ const GroupShop: NextPage = () => {
             handleDetail={(prd) => setsProduct(prd)}
             id="popularproducts"
           >
-            <h2>Popular in Group</h2>
+            <h2>Popular with the Group</h2>
           </ProductGrid>
 
         )
