@@ -252,7 +252,7 @@ const Cart = ({
               <Col className="text-end mx-2">
                 <h3>
                   {currencySymbol}
-                  {getTotal()}
+                  {getTotal() && getTotal()?.toFixed(2).toString().replace('.00', '')}
                 </h3>
 
               </Col>

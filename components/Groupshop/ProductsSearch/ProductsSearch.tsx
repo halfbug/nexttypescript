@@ -16,6 +16,7 @@ import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
 import useGtm from 'hooks/useGtm';
 import SearchIcon from 'assets/images/search-icon.svg';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -32,7 +33,8 @@ const ProductsSearch = ({
     dispatch,
   } = useContext(GroupshopContext);
 
-  const { clientDealProducts } = useDeal();
+  const { clientDealProducts, currencySymbol, dPrice } = useDeal();
+  const { formatNumber } = useUtilityFunction();
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -181,7 +183,9 @@ const ProductsSearch = ({
                           { selected?.includes(prd.id) ? (
                             <>
                               <span className={styles.groupshop__pcard_tag_price}>
-                                {`${percentage}% OFF`}
+                                {/* {`${currencySymbol}
+                          ${formatNumber(+prd.price - dPrice(+(prd.price)))} OFF`} */}
+                                {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
                               </span>
                               <IconButton
                                 className={styles.groupshop__pcard_tag_cross}
@@ -191,6 +195,7 @@ const ProductsSearch = ({
                                 )}
                               />
                             </>
+
                           )
                             : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
                         </>
@@ -200,9 +205,19 @@ const ProductsSearch = ({
                         { prd.title }
                       </h5>
                       <p className="text-center fw-bold fs-5 mb-0">
-                        $
+                        <span className="text-decoration-line-through fw-light me-1">
+                          {currencySymbol}
+                          {/* {prod.price} */}
+                          {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
                         {' '}
-                        {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                        <span>
+                          {currencySymbol}
+                          {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                        {/* $
+                        {' '}
+                        {(+(prd.price)).toFixed(2).toString().replace('.00', '')} */}
                       </p>
                     </ProductCard>
                   </Col>

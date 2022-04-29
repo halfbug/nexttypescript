@@ -13,7 +13,7 @@ const useTopBanner = () => {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
   useEffect(() => {
-    if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
+    if (percentage) setCashBackVal(unLockCB(percentage, milestones, members).toFixed(2).toString().replace('.00', ''));
   }, [gsctx]);
 
   useEffect(() => {

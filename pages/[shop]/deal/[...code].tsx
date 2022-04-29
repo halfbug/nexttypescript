@@ -93,7 +93,6 @@ const GroupShop: NextPage = () => {
     | undefined>(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
-  const [newBestSeller, setnewBestSeller] = useState<IProduct[]>();
   const [storeLogo, setStoreLogo] = useState<string>('');
 
   useEffect(() => {
@@ -121,7 +120,7 @@ const GroupShop: NextPage = () => {
     members,
     store: { brandName } = { brandName: '' },
     store: { logoImage } = { logoImage: '' },
-    popularProducts, bestSeller, dealProducts, addedProducts,
+    popularProducts, dealProducts, addedProducts,
     // allProducts,
   } = gsctx;
   const {
@@ -152,11 +151,11 @@ const GroupShop: NextPage = () => {
   }, [logoImage]);
 
   useEffect(() => {
-    // mixing popular produt with best seller to complete the count of 4 if popular are less.
+    // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
-        // removing popular prd from bestseller so no duplication
-        const uniqueBestSeller = filterArray(bestSeller as any[], popularProducts as any[], 'id', 'id').slice(0, 4 - popularProducts.length);
+        // removing popular prd from topPicks so no duplication
+        const uniqueBestSeller = filterArray(topPicks as any[], popularProducts as any[], 'id', 'id').slice(0, 4 - popularProducts.length);
         const newPopularArr = Array.from(new Set(
           [...popularProducts ?? [], ...uniqueBestSeller ?? []],
         ));
@@ -166,13 +165,6 @@ const GroupShop: NextPage = () => {
       }
     }
   }, [popularProducts, dealProducts]);
-
-  useEffect(() => {
-    if (bestSeller?.length) {
-      const nb = bestSeller!.filter((prd) => prd.outofstock === false);
-      setnewBestSeller([...nb]);
-    }
-  }, [bestSeller]);
 
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {

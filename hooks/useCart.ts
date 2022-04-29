@@ -60,7 +60,7 @@ export default function useCart() {
         selectedVariant: { selectedQuantity, price },
       }) => {
       const myTot = total + (dPrice(+(price ?? mprice)) * selectedQuantity);
-      return +myTot.toFixed(2).toString().replace('.00', '');
+      return +myTot;
     },
     0,
   ), [gsctx.cart]);
