@@ -17,7 +17,6 @@ import useGtm from 'hooks/useGtm';
 interface mesProps {
   mes: string;
 }
-
 const InfoBox = ({ mes }: mesProps) => {
   const [show, setShow] = useState(false);
 
