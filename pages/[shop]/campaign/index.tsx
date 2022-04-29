@@ -160,7 +160,7 @@ const CampaignListing = () => {
         ))}
         <Row>
           <Col className={styles.bottom_row}>
-            <Link href="/native-roots-dev/campaign/new">+ Create New Campaign</Link>
+            <Link href={`/${shopName}/campaign/new`}>+ Create New Campaign</Link>
           </Col>
         </Row>
       </Container>

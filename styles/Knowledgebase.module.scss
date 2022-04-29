@@ -143,11 +143,10 @@
     &_FAQs {
         &_acc{
             button{
-                background-color: none!important;
+                background: none!important;
+                box-shadow: none!important;
             }
-        .accordion-button:not(.collapsed){
-            background-color: none!important;
-        }
+      
     }
         &_headingText {
             @extend .mb-3;
