@@ -33,7 +33,7 @@ const PopoverButton = ({
     placement={placement ?? 'bottom'}
     overlay={Popcomp(popContent)}
   >
-    <Button variant="outline-primary" disabled={disabled} className={[styles.groupshop__earn, className].join(' ')} onClick={onClick}>
+    <Button variant="outline-primary" disabled={disabled} className={className} onClick={onClick}>
       {' '}
       {icon ?? ''}
       {' '}

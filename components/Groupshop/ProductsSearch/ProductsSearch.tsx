@@ -248,7 +248,7 @@ const ProductsSearch = ({
                 <div ref={ref}>
                   <Button
                     onClick={handleClick}
-                    className={['text-center text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
+                    className={['rounded-pill text-center text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
                   >
                     ADD to groupshop
 

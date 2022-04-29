@@ -116,7 +116,7 @@ const ProductGrid = ({
                         </Button>
                       </Col>
                       <Col lg={2} className="ps-1">
-                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="px-2 rounded-pill bg-white" />
+                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} />
                       </Col>
                     </Row>
                   )}
@@ -182,7 +182,7 @@ const ProductGrid = ({
                     Add to Cart
 
                   </Button>
-                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className="m-1 px-2 rounded-pill" />
+                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')} />
                 </div>
               )}
             </ProductCard>

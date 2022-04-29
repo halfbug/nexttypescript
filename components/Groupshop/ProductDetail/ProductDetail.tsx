@@ -411,7 +411,7 @@ const ProductDetail = ({
                       placement="right-start"
                       shareurl={productShareUrl(product?.id ?? '')}
                       label=""
-                      className="m-1 my-3 px-2 rounded-pill"
+                      className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                     />
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>

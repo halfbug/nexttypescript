@@ -218,7 +218,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           content: "";
           position: absolute;
           z-index: -1;
-          padding: 0.08rem;
+          padding: 1px;
           inset: 0;
           border-radius: 4px;
           background: linear-gradient(to right, #ccb2f9, #fee750);
@@ -228,6 +228,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           -webkit-mask-composite: xor;
           mask-composite: exclude;
         }
+        &:hover {
+          background-color: $purple !important;
+          color: #ffffff;
+        }
       }
     }
 
@@ -235,6 +239,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       box-shadow: none !important;
       @extend .groupshop__top_item;
       border-style: dashed !important;
+
+      &:hover {
+        background-color: $purple !important;
+      }
     }
   }
 
@@ -251,15 +259,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       content: "";
       position: absolute;
       z-index: -1;
-      padding: 0.08rem;
+      padding: 2px;
       inset: 0;
-      border-radius: 25px;
       background: linear-gradient(to right, #ccb2f9, #fee750);
       -webkit-mask: linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
+      border-radius: 50%;
     }
     &:hover {
       @extend .groupshop__earn;
@@ -503,7 +511,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-align: center;
       width: fit-content;
       height: fit-content;
-      background: rgba(0, 0, 0, 0.2);
       // border: 1px solid rgba(204, 178, 249, 0.75);
       box-sizing: border-box;
       backdrop-filter: blur(4px);
@@ -580,7 +587,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         content: "";
         position: absolute;
         z-index: -1;
-        padding: 0.08rem;
+        padding: 2px;
         inset: 0;
         border-radius: 10px;
         background: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%);
@@ -604,6 +611,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_share_btn {
       box-shadow: none !important;
+      border: 2px solid #CCB2F9 !important;
+      font-weight: 600;
+      font-size: 12px;
+
+      &:hover {
+        background: #CCB2F9;
+        color: #ffffff;
+      }
+      
       @include media-breakpoint-down(lg) {
         display: none;
       }
@@ -634,7 +650,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     padding: 0.05rem;
     width: 20px;
     height: 20px;
-    border: 2px solid $black;
+    border: 1px solid $black;
     svg {
       margin-left: 2px;
     }
@@ -999,15 +1015,33 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       width: 928px !important;
       max-width: 928px !important;
     }
-    // div:first-child {
-    // 	@extend .border-0, .rounded-0;
-    // }
     &_groupshopBtn {
-      font-size: 16px !important;
-      font-weight: 700 !important;
-      line-height: 21px;
-	  height: 42px
+      background: $white;
+      box-shadow: none !important;
+      box-sizing: border-box;
+      backdrop-filter: blur(4px);
+      color: #000000;
+      border: none;
+      /* Note: backdrop-filter has minimal browser support */
+    
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      padding: 2px;
+      inset: 0;
+      background: linear-gradient(to right, #ccb2f9, #fee750);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      border-radius: 25px;
     }
+    &:hover {
+      background-color: $purple !important;
+    }
+  }
     &_search {
       @extend .groupshop_modal;
 
@@ -1706,6 +1740,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &_addtoCart_wrapper {
     text-align: center;
+
     @include media-breakpoint-down(md) {
       display: flex;
       justify-content: center;
@@ -1753,18 +1788,61 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     height: 43px;
   }
 
+  &__onHoverCart{
+    background: $white;
+    border: 0px;
+    box-shadow: none !important;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+    /* Note: backdrop-filter has minimal browser support */
+    color: #000000;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      padding: 1px;
+      inset: 0;
+      background: linear-gradient(to right, #ccb2f9, #fee750);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      border-radius: 25px;
+    }
+    &:hover {
+      background-color: $purple !important;
+    }
+  }
+
   &_InviteBtn {
     @extend .m-1, .float-end;
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 13px;
-    color: $black;
-    border-color: $brand-gradiant !important;
-    height: auto !important;
-    width: auto !important;
+    background: $white;
+    border: 0px;
     box-shadow: none !important;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+    /* Note: backdrop-filter has minimal browser support */
+    color: #000000;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      padding: 1px;
+      inset: 0;
+      background: linear-gradient(to right, #ccb2f9, #fee750);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      border-radius: 3px;
+    }
+    &:hover {
+      background-color: $purple !important;
+    }
   }
   &_disableShareCircle {
     @extend .m-1, .rounded-circle, .p-1;
