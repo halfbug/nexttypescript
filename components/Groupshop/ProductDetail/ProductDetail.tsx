@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-undef */
 import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
@@ -161,6 +163,10 @@ const ProductDetail = ({
     }
   };
 
+  const handleCloseClick = () => {
+    closeModal({});
+  };
+
   useEffect(() => {
     if (data) { displayImage(); }
   }, [selOptions]);
@@ -209,7 +215,13 @@ const ProductDetail = ({
         <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
         <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
           <LeftArrowIcon />
-          <span className={styles.groupshop__pcard__headerMobile__txt}>Back To All</span>
+          <span
+            onClick={handleCloseClick}
+            className={styles.groupshop__pcard__headerMobile__txt}
+          >
+            Back To All
+
+          </span>
         </Modal.Header>
         <Modal.Body className="bg-white">
           <Row>
