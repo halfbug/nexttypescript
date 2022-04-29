@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Header from 'components/Layout/Header/Header';
 import { Col, Container, Row } from 'react-bootstrap';
 // import './page.css';
-import { useQuery } from '@apollo/client';
-import { GET_STORE } from 'store/store.graphql';
-import { useRouter } from 'next/router';
-import { StoreContext } from 'store/store.context';
 import styles from 'styles/Sidebar.module.scss';
+import useStore from 'hooks/useStore';
 import SideBar from './SideBar';
-import Dynamicpages from './Dynamicpages';
 
 interface PageProps {
   user?: {};
@@ -22,7 +18,8 @@ interface PageProps {
 const Page = ({
   user, onLogin, onLogout, onCreateAccount, children, headingText,
 }: PageProps) => {
-  const { store } = useContext(StoreContext);
+  // const { store } = useContext(StoreContext);
+  const store = useStore();
 
   return (
     <Container fluid>

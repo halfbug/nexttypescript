@@ -1,29 +1,45 @@
-import { useCallback, useEffect } from 'react';
+import {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/client';
-import { GET_PRODUCTS } from 'store/store.graphql';
+import { useQuery } from '@apollo/client';
+import { GET_STORE } from 'store/store.graphql';
+import { StoreContext } from 'store/store.context';
 
 const useStore = () => {
   const { query: { shop } } = useRouter();
-  const [getStoreProducts, { loading, error, data: products }] = useLazyQuery(GET_PRODUCTS, {
-    variables: {
-      productQueryInput: {
-        shop,
-        sort: -1,
-        limit: 10000,
-      },
-    },
-  });
-  const getProducts = useCallback(() => {
-    getStoreProducts();
 
-    return ({ error, loading, products });
-  }, [shop]);
+  const {
+    loading, data, refetch,
+  } = useQuery(GET_STORE, {
+
+    variables: { shop },
+  });
+
+  const { store, dispatch } = useContext(StoreContext);
+  console.log('🚀 ~ file: overview.tsx ~ line 28 ~ store', store);
+  const [jsonobj, setjsonobj] = useState<any | undefined>(undefined);
+  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
+  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
+  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
 
   useEffect(() => {
-    if (products?.length > 0) { console.log({ products }); }
-  }, [products]);
-  return { shop, getProducts };
-  // return { getStore };
+    if (data) {
+      dispatch({ type: 'UPDATE_STORE', payload: data?.storeName });
+      if (!jsonobj && !loading && data) {
+        const obj = { ...store };
+        delete obj.products;
+        delete obj.collections;
+        setjsonobj(obj);
+      }
+    }
+    // return () => {
+    //   cleanup
+    // }
+  }, [data]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 };
 export default useStore;

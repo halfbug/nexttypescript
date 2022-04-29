@@ -2,6 +2,7 @@ import styles from 'styles/Header.module.scss';
 import React from 'react';
 import { Col, Row, Button } from 'react-bootstrap';
 import { FaEye, FaAngleDown } from 'react-icons/fa';
+import { StoreContext } from 'store/store.context';
 
 interface HeaderProps {
   user?: {};
@@ -14,36 +15,42 @@ interface HeaderProps {
 const Header = ({
   // eslint-disable-next-line no-unused-vars
   user, onLogin, onLogout, onCreateAccount, headingText,
-}: HeaderProps) => (
-  <header className={styles.header}>
-    <Row>
-      <Col>
-        <h1>
-          {headingText}
-        </h1>
-      </Col>
+}: HeaderProps) => {
+  const { store: { brandName } } = React.useContext(StoreContext);
+  return (
+    <header className={styles.header}>
+      <Row>
+        <Col>
+          <h1>
+            {headingText}
+          </h1>
+        </Col>
 
-      <Col className={styles.header_btn_div}>
-        <div className={styles.header_head_btn1}>
-          <Button className={styles.header_btn} size="lg">
-            <FaEye size={20} />
-            {' '}
-            View Groupshop
-          </Button>
-        </div>
+        <Col className={styles.header_btn_div}>
+          <div className={styles.header_head_btn1}>
+            <Button className={styles.header_btn} size="lg">
+              <FaEye size={20} />
+              {' '}
+              View Groupshop
+            </Button>
+          </div>
 
-        <div className={styles.header_head_btn2}>
-          <Button className={styles.header_btn} size="lg">
+          <div className={styles.header_head_btn2}>
+            Welcome
+            <br />
+            {brandName}
+            {/* <Button className={styles.header_btn} size="lg">
             LESABLE
             {' '}
             <FaAngleDown size={20} />
-          </Button>
-        </div>
-      </Col>
-    </Row>
+          </Button> */}
+          </div>
+        </Col>
+      </Row>
 
-  </header>
-);
+    </header>
+  );
+};
 
 Header.defaultProps = {
   user: {},

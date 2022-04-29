@@ -13,12 +13,17 @@ import Billingicon from 'assets/images/billing-icon.svg';
 import Settingsicon from 'assets/images/settings-icon.svg';
 import Knowledgebaseicon from 'assets/images/knowledge-base-icon.svg';
 import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
+import { useRouter } from 'next/router';
 
 const Sidebar = () => {
   // refactor. set loading state and if loading dont show the screen and
   // after loading show the links
   const { store } = useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
+  const { pathname } = useRouter();
+  // console.log('🚀 ~ file: SideBar.tsx ~ line 24 ~ Sidebar ~ route', route);
+
+  const linkstyle = (route :string) => (pathname?.includes(route) ? [styles.linkwrap, styles.active].join(' ') : styles.linkwrap);
 
   return (
     <div className={styles.sidebarwrap}>
@@ -30,9 +35,9 @@ const Sidebar = () => {
           <div className={styles.sidebarmenuwrap}>
             <ul className={styles.sidebarmenu}>
               <li>
-                <Link prefetch={false} href={`/${shopName}/overview`}>
+                <Link href={`/${shopName}/overview`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('overview')}>
                       <span className={styles.linkicon}><Overviewicon /></span>
                       <span className={styles.linktext}>Overview</span>
                     </span>
@@ -40,9 +45,9 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href={`/${shopName}/campaign`}>
+                <Link href={`/${shopName}/campaign`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('campaign')}>
                       <span className={styles.linkicon}><Campaignicon /></span>
                       <span className={styles.linktext}>Campaign</span>
                     </span>
@@ -50,9 +55,9 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href={`/${shopName}/analytics`}>
+                <Link href={`/${shopName}/analytics`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('analytics')}>
                       <span className={styles.linkicon}><Analyticsicon /></span>
                       <span className={styles.linktext}>Analytics</span>
                     </span>
@@ -60,9 +65,9 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href={`/${shopName}/billing`}>
+                <Link href={`/${shopName}/billing`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('billing')}>
                       <span className={styles.linkicon}><Billingicon /></span>
                       <span className={styles.linktext}>Billing</span>
                     </span>
@@ -71,9 +76,9 @@ const Sidebar = () => {
               </li>
 
               <li>
-                <Link prefetch={false} href={`/${shopName}/settings`}>
+                <Link href={`/${shopName}/settings`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('settings')}>
                       <span className={styles.linkicon}><Settingsicon /></span>
                       <span className={styles.linktext}>Settings</span>
                     </span>
@@ -81,9 +86,9 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href={`/${shopName}/knowledgebase`}>
+                <Link href={`/${shopName}/knowledgebase`}>
                   <a>
-                    <span className={styles.linkwrap}>
+                    <span className={linkstyle('knowledgebase')}>
                       <span className={styles.linkicon}><Knowledgebaseicon /></span>
                       <span className={styles.linktext}>Knowledge Base</span>
                     </span>

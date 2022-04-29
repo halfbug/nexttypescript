@@ -15,41 +15,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 // import useStore from 'hooks/useStore';
 
 const ShopMain: NextPage = () => {
-  const { query: { shop } } = useRouter();
-
-  const {
-    loading, data, refetch,
-  } = useQuery(GET_STORE, {
-
-    variables: { shop },
-  });
-
-  const { store, dispatch } = useContext(StoreContext);
-  console.log('🚀 ~ file: overview.tsx ~ line 28 ~ store', store);
-  const [jsonobj, setjsonobj] = useState<any | undefined>(undefined);
-  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
-  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
-  // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
-
-  useEffect(() => {
-    if (data) {
-      dispatch({ type: 'UPDATE_STORE', payload: data?.storeName });
-      if (!jsonobj && !loading && data) {
-        const obj = { ...store };
-        delete obj.products;
-        delete obj.collections;
-        setjsonobj(obj);
-      }
-    }
-    // return () => {
-    //   cleanup
-    // }
-  }, [data]);
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
+  console.log('overview page');
   return (
     <Page headingText="Overview" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Container>
