@@ -9,15 +9,15 @@ export default function GsFeartured(
 ) {
   return (
     <section className={styles.Kb}>
-      <Row className=" my-3">
+      <Row className=" my-3 ">
         <h4 className="my-4">
           Featured videos
           <Button variant="link" className="text-black-50">Browse</Button>
         </h4>
-        <Col lg={6}>
+        <Col lg={5} className="">
           <iframe
             style={{ border: '1px solid black', borderRadius: '23px!important' }}
-            width="281.64"
+            width="260"
             height="135"
             title="GS"
             src="https://www.youtube.com/embed/NpEaa2P7qZI"
@@ -27,10 +27,11 @@ export default function GsFeartured(
             How Y&R increased their AOV by 27% in 3 months
           </h5>
         </Col>
-        <Col lg={6}>
+        <Col lg={1} className="mx-2" />
+        <Col lg={5} className="">
           <iframe
             style={{ border: '1px solid black', borderRadius: '23px!important' }}
-            width="281.64"
+            width="260"
             height="135"
             title="GS1"
             src="https://www.youtube.com/embed/NpEaa2P7qZI"

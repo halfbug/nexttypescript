@@ -141,6 +141,14 @@
         }
     }
     &_FAQs {
+        &_acc{
+            button{
+                background-color: none!important;
+            }
+        .accordion-button:not(.collapsed){
+            background-color: none!important;
+        }
+    }
         &_headingText {
             @extend .mb-3;
             font-family: "DM Sans";

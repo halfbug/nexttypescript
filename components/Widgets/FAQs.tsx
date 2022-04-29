@@ -18,7 +18,7 @@ export default function FAQs(
           <Quick className="me-2" />
           Get quick answers to your most-asked questions.
         </div>
-        <Accordion defaultActiveKey="0">
+        <Accordion className={styles.Kb_FAQs_acc}>
           <Accordion.Item eventKey="0" className="border-0 border-bottom">
             <Accordion.Header className={styles.Kb_FAQs_ques}>
               What is a Groupshop page?
