@@ -27,7 +27,7 @@ export default function GsFeartured(
             How Y&R increased their AOV by 27% in 3 months
           </h5>
         </Col>
-        <Col lg={1} className="mx-2" />
+        <Col lg={1} className="mx-1" />
         <Col lg={5} className="">
           <iframe
             style={{ border: '1px solid black', borderRadius: '23px!important' }}
