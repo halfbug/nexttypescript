@@ -1597,6 +1597,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     font-size: 12px;
     line-height: 1.42857;
     box-shadow: none !important;
+    background: #F0F0F0;
+
     &:focus,
     &:active {
       background: #dcd0e8;
@@ -2039,5 +2041,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &__share_social_icons {
     border-bottom: 1px solid #f0f0f0;
+  }
+  &_socialConnectBg{
+    background: #f0f0f0!important;
+    button{
+      background: #f0f0f0!important;
+    }
   }
 }
