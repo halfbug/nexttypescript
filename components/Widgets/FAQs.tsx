@@ -11,7 +11,7 @@ export default function FAQs(
 ) {
   return (
     <section className={styles.Kb}>
-      <h3 className="ms-2 px-0 ">FAQs</h3>
+      <h3 className="ms-2 px-0 mb-4 ">FAQs</h3>
       <Row className={styles.Kb_greenbox}>
         <div className={styles.Kb_FAQs_headingText}>
           <Quick className="me-2" />
