@@ -91,6 +91,7 @@ const ProductsSearch = ({
   const { AlertComponent, showSuccess } = useAlert();
   const handleSubmit = (e:any) => { e.preventDefault(); };
   const closeModal = (e: any) => {
+    setShow(false);
     setotherProducts(undefined);
     setSelected(undefined);
     handleClose(e);
