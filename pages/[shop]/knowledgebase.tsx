@@ -18,7 +18,6 @@ const KnowledgeBase: NextPage = () => (
       </Col>
       <Col lg={5}>
         <FAQs />
-        <ConnectSocialMedia />
       </Col>
     </Row>
   </Page>

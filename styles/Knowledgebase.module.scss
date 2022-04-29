@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .Kb {
-    @extend .px-0;
+    @extend .px-0, .mx-3;
 
     h1 {
         font-family: "DM Sans";

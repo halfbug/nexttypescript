@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from 'styles/Knowledgebase.module.scss';
 import Quick from 'assets/images/quick.svg';
+import ConnectSocialMedia from 'components/Widgets/ConnectSocialMedia';
 
 import {
   Row, Accordion,
@@ -99,6 +100,7 @@ export default function FAQs(
           </WhiteButton>
         </div>
       </Row>
+      <ConnectSocialMedia />
     </section>
 
   );
