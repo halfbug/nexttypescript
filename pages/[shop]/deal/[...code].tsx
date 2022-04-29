@@ -18,6 +18,7 @@ import Members from 'components/Groupshop/Members/Members';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
 import ArrowSort from 'assets/images/ArrowSort.svg';
+import DownArrow from 'assets/images/DownArrowSmall.svg';
 import {
   ChevronDown, Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
@@ -406,7 +407,7 @@ const GroupShop: NextPage = () => {
             </span>
             <Dropdown className="d-inline mx-2">
               <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
-                <ChevronDown />
+                <DownArrow />
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
