@@ -18,7 +18,6 @@ interface mesProps {
   mes: string;
 }
 const InfoBox = ({ mes }: mesProps) => {
-
   const [show, setShow] = useState(false);
 
   const { googleEventCode } = useGtm();
