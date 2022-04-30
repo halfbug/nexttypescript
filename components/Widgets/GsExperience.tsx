@@ -27,8 +27,7 @@ export default function GsExperience(
           <br />
           <WhiteButton
             type="submit"
-            className={['px-3', styles.Kb_btn].join(' ')}
-
+            className={styles.Kb_btnExp}
           >
             Watch product demo
           </WhiteButton>
