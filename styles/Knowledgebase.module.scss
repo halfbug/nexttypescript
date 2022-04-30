@@ -27,21 +27,21 @@
         line-height: 23px;
         color: $black;
     }
-    .btn-link{
-        font-weight: 400!important;
+    .btn-link {
+        font-weight: 400 !important;
         font-size: 12px;
-        line-height: 16px!important;
-        color: rgba(0, 0, 0, 0.5)!important;
+        line-height: 16px !important;
+        color: rgba(0, 0, 0, 0.5) !important;
     }
     &_browse {
         font-family: "DM Sans";
         font-style: normal;
-        font-weight: 400!important;
+        font-weight: 400 !important;
         font-size: 12px;
-        line-height: 16px!important;
+        line-height: 16px !important;
         text-align: center;
         text-decoration-line: underline;
-        color: rgba(0, 0, 0, 0.5)!important;
+        color: rgba(0, 0, 0, 0.5) !important;
     }
     &_getSetUp {
         @extend .my-3, .py-2, .px-1, .d-flex, .align-items-center;
@@ -120,8 +120,10 @@
         color: $pclr;
     }
 
-    &_btn {
+    &_btnFAQ {
         @extend .mt-1;
+        width: 120px;
+        height: 28px;
         background-color: $white;
         border-radius: 8px;
         border: 1px solid $black;
@@ -132,6 +134,7 @@
         line-height: 15px;
         text-align: center;
         color: $black;
+
         &:hover,
         &:active,
         &:focus {
@@ -143,7 +146,7 @@
     &_btnExp {
         @extend .mt-1;
         width: 162px;
-        height:28px ;
+        height: 28px;
         background-color: $white;
         border-radius: 8px;
         border: 1px solid $black;
@@ -163,13 +166,12 @@
         }
     }
     &_FAQs {
-        &_acc{
-            button{
-                background: none!important;
-                box-shadow: none!important;
+        &_acc {
+            button {
+                background: none !important;
+                box-shadow: none !important;
             }
-      
-    }
+        }
         &_headingText {
             @extend .mb-3;
             font-family: "DM Sans";
@@ -203,5 +205,10 @@
             background: #dcd0e8;
             border: 2px solid #000000;
         }
+    }
+    &_paddingFAQ {
+        @extend .ps-5, .pe-0;
+        padding-right: 0px;
+        margin-right: 0px;
     }
 }

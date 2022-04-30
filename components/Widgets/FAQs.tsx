@@ -93,7 +93,7 @@ export default function FAQs(
         <div className="mt-2 d-flex justify-content-end">
           <WhiteButton
             type="submit"
-            className={['px-4 py-1 ', styles.Kb_btn].join(' ')}
+            className={styles.Kb_btnFAQ}
 
           >
             View all FAQs
