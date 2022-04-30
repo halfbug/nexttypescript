@@ -17,7 +17,12 @@ const SocialButton = ({
   url, network, children,
 }: SocialButtonProps) => (
 
-  <Button className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} styles.groupshop_socialConnectBg`]].join(' ')} variant="secondary" target="_blank">
+  <Button
+    className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
+    variant="default"
+    style={{ color: 'black', background: '#F0F0F0' }}
+    target="_blank"
+  >
     {network === 'Instagram'
       && (
         <Instagram
