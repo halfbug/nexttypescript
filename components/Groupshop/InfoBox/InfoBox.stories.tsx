@@ -12,7 +12,7 @@ export default {
   },
 } as ComponentMeta<typeof InfoBox>;
 
-const Template: ComponentStory<typeof InfoBox> = () => <InfoBox mes="How does this work?" />;
+const Template: ComponentStory<typeof InfoBox> = () => <InfoBox mes="How does this work?" brandname="brand Name Insert" />;
 
 export const Main = Template.bind({});
 Main.args = {

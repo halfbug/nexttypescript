@@ -129,7 +129,7 @@ const CampaignListing = () => {
         {campaignList.map((camp: any, index: number) => (
           <Row className={styles.rows} key={camp.id}>
             <Col title={camp.name} className={['pe-5 ', styles.rows_text].join(' ')}>
-              {(camp.name.length > 10) ? camp.name.slice(0, 10) : camp.name}
+              {(camp.name.length > 10) ? `${camp.name.slice(0, 10)}...` : camp.name}
             </Col>
             <Col className={styles.rows_text}>$1430</Col>
             <Col className={styles.rows_text}>10</Col>

@@ -16,8 +16,9 @@ import useGtm from 'hooks/useGtm';
 
 interface mesProps {
   mes: string;
+  brandname: any;
 }
-const InfoBox = ({ mes }: mesProps) => {
+const InfoBox = ({ mes, brandname }: mesProps) => {
   const [show, setShow] = useState(false);
 
   const { googleEventCode } = useGtm();
@@ -81,7 +82,11 @@ const InfoBox = ({ mes }: mesProps) => {
                   <strong> Shop</strong>
                   {' '}
                   <i> limited-time </i>
-                  offers from Insert Name Here and complete your order.
+                  offers from
+                  {' '}
+                  {brandname}
+                  {' '}
+                  and complete your order.
                 </p>
               </Col>
             </Row>

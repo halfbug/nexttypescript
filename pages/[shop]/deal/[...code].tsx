@@ -127,7 +127,6 @@ const GroupShop: NextPage = () => {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
   } = useUtilityFunction();
   const { topPicks } = useTopPicks();
-
   useEffect(() => {
     // setallProducts(Array.from(new Set(
     //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
@@ -236,7 +235,7 @@ const GroupShop: NextPage = () => {
                 pending={pending}
               />
 )}
-            RightComp={<InfoBox mes="How does this work?" />}
+            RightComp={<InfoBox mes="How does this work?" brandname={brandName} />}
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
@@ -374,7 +373,7 @@ const GroupShop: NextPage = () => {
               <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
             </div>
             <Row className={styles.groupshop__hero_how_to}>
-              <InfoBox mes="How it works" />
+              <InfoBox mes="How it works" brandname={brandName} />
             </Row>
           </Container>
         </Hero>
