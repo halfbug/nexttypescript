@@ -125,7 +125,13 @@ const InfoBox = ({ mes, brandname }: mesProps) => {
               </h4>
             </Row>
             <Row className="d-flex justify-content-center my-4">
-              <Button className={styles.groupshop_infoBox_shoppingBtn}>Start Shopping</Button>
+              <Button
+                className={styles.groupshop_infoBox_shoppingBtn}
+                onClick={handleClose}
+              >
+                Start Shopping
+
+              </Button>
             </Row>
             <Row>
               <div className={styles.groupshop_infoBox_lastLine}>
