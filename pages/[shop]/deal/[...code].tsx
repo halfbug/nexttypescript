@@ -471,37 +471,48 @@ const GroupShop: NextPage = () => {
             <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
               <Dropdown align="end" drop="down">
                 <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                  <span className="d-none d-sm-inline text-capitalize">
+                  <span className={['d-none d-sm-inline text-capitalize', styles.groupshop_sort_txt].join(' ')}>
                     Sort by
                   </span>
                   {/* <ChevronDown width={8} /> */}
                   <ArrowSort />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                    (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
-                  ))}
+                <Dropdown.Menu className={styles.groupshop_sort_menu}>
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                      (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
+                    ))}
                   >
                     Price (Low to High)
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                    (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
-                  ))}
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                      (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
+                    ))}
                   >
                     Price ( High to Low)
 
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                    (a, b) => a.title.localeCompare(b.title),
-                  ))}
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                      (a, b) => a.title.localeCompare(b.title),
+                    ))}
                   >
                     Name (a-z)
 
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                    (a, b) => a.title.localeCompare(b.title),
-                  ).reverse())}
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
+                      (a, b) => a.title.localeCompare(b.title),
+                    ).reverse())}
                   >
                     Name (z-a)
 

@@ -9,6 +9,7 @@ import { Plus } from 'react-bootstrap-icons';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import Button from 'components/Buttons/Button/Button';
 import ArrowDown from 'assets/images/arrow-down.svg';
+import Cross from 'assets/images/CrossLg.svg';
 import Members from '../Members/Members';
 
 interface RewardBoxProps extends RootProps {
@@ -35,9 +36,9 @@ const RewardBox = ({
         backdrop="static"
         contentClassName="reward-modal"
       >
-        <Row className={styles.groupshop__info_modal__closebtnlg}>
-          <Modal.Header className="border-0" closeButton />
-        </Row>
+        <Modal.Header className={styles.groupshop__info_modal__closebtnlg}>
+          <Row onClick={handleClose}><Cross /></Row>
+        </Modal.Header>
         <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
           <Row onClick={handleClose}><ArrowDown /></Row>
         </Modal.Header>

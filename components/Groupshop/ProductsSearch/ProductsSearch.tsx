@@ -16,6 +16,7 @@ import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
 import useGtm from 'hooks/useGtm';
 import SearchIcon from 'assets/images/search-icon.svg';
+import Cross from 'assets/images/CrossLg.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -122,7 +123,15 @@ const ProductsSearch = ({
         backdrop="static"
         fullscreen="lg-down"
       >
-        <Modal.Header closeButton className="pb-0" />
+        <Modal.Header className={styles.groupshop_modal__closebtnlg}>
+          <Row onClick={(e) => {
+            handleClose(e);
+            setShow(false);
+          }}
+          >
+            <Cross />
+          </Row>
+        </Modal.Header>
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
@@ -198,7 +207,7 @@ const ProductsSearch = ({
                             </>
 
                           )
-                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop__pcard_tag_product} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
+                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
                         </>
 )}
                     >

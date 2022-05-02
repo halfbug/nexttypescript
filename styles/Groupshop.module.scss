@@ -113,9 +113,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: none;
       }
     }
-	:hover {
-		font-weight: 600 !important;
-	}
   }
 
   &_brand {
@@ -136,6 +133,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__closebtnsm {
       box-shadow: none !important;
       display: none;
+    }
+    &__closebtnlg {
+      display: flex;
+      justify-content: flex-end;
+      box-shadow: none !important;
+      svg {
+        cursor: pointer;
+      }
     }
 
     @include media-breakpoint-down(sm) {
@@ -207,6 +212,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         @extend .shadow-sm;
       }
       &_owner {
+        padding-left: 12px;
+        padding-right: 13px;
         background: $white;
         border: 0px;
         box-shadow: none !important;
@@ -218,7 +225,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           content: "";
           position: absolute;
           z-index: -1;
-          padding: 1px;
+          padding: .08rem;
           inset: 0;
           border-radius: 4px;
           background: linear-gradient(to right, #ccb2f9, #fee750);
@@ -670,15 +677,44 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     letter-spacing: 0.32px;
     text-transform: capitalize;
     color: $black;
+    &_txt {
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 700 !important;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.32px;
+      text-transform: capitalize;
+      color: $black;
+    }
+    &_menu {
+      border-radius: 10px;
+      &_item {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        text-transform: capitalize;
+        color: $black;
+        padding: .4rem 1rem;
+      }
+      &_border {
+        border-bottom: 1px solid #EBEBEB;
+        width: 118px;
+        margin-left: 1rem;
+      }
+    }
     button {
       @extend .border-0, .text-center, .fs-5, .fw-bold;
       line-height: 1rem;
       padding: 0.25rem;
       svg {
-        margin-left: 2px;
+        margin-left: 5px;
       }
       &::after {
         @extend .border-0;
+      }
+      &:hover {
+        background: white;
       }
     }
   }
@@ -1030,7 +1066,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       content: "";
       position: absolute;
       z-index: -1;
-      padding: 2px;
+      padding: .08rem;
       inset: 0;
       background: linear-gradient(to right, #ccb2f9, #fee750);
       -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -1042,6 +1078,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &:hover {
       background-color: $purple !important;
+    }
+  }
+  &__closebtnlg {
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: none !important;
+    svg {
+      cursor: pointer;
     }
   }
     &_search {
@@ -1415,6 +1459,42 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .card-img-overlay {
         background: #ffffff6b !important;
         // height: 230px;
+      }
+
+      &_addProduct {
+        @extend .rounded-pill,
+        .w-75,
+        .position-absolute,
+        .top-50;
+        left: 12%;
+        height: 36px;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        line-height: 16px;
+        box-shadow: none !important;
+        box-sizing: border-box;
+        backdrop-filter: blur(4px);
+        color: #000000;
+        border: none;
+        background: $white;
+
+        &::before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          padding: .08rem;
+          inset: 0;
+          background: linear-gradient(to right, #ccb2f9, #fee750);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          border-radius: 25px;
+        }
+        &:hover {
+          background-color: $purple !important;
+        }
       }
     }
 
