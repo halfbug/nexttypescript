@@ -570,6 +570,11 @@ query campaigns($storeId: String!) {
     }
     products
     addableProducts
+    details{
+      totalGroupshops
+      totalRevenue
+      totalCashback
+    }
 
   }
 }

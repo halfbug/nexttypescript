@@ -131,10 +131,15 @@ const CampaignListing = () => {
             <Col title={camp.name} className={['pe-5 ', styles.rows_text].join(' ')}>
               {(camp.name.length > 10) ? `${camp.name.slice(0, 10)}...` : camp.name}
             </Col>
-            <Col className={styles.rows_text}>$1430</Col>
-            <Col className={styles.rows_text}>10</Col>
-            <Col className={['ps-2 ', styles.rows_text].join(' ')}> $1430</Col>
             <Col className={styles.rows_text}>
+
+              {camp?.details.totalRevenue ? `$ ${camp?.details.totalRevenue}` : '-'}
+            </Col>
+            <Col className={styles.rows_text}>{camp?.details.totalGroupshops}</Col>
+            <Col className={['ps-3 ', styles.rows_text].join(' ')}>
+              {camp?.details.totalCashback ? `$ ${camp?.details.totalCashback}` : '-'}
+            </Col>
+            <Col className={[styles.rows_text, 'ps-3'].join(' ')}>
               {/* <ToggleButton
               handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
               <Form.Check

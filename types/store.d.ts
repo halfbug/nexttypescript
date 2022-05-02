@@ -38,6 +38,7 @@ export interface ICampaign {
   addableProductsArray?: string[];
   addableCollections?: ICollection[];
   addableProducts?: IProduct[];
+  details?: any;
 
 }
 export interface ICampaignForm {
