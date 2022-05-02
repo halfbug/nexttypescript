@@ -23,10 +23,10 @@ import styles from 'styles/QrStoreDetails.module.scss';
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.png';
 import QRMobile from 'assets/images/qr-screen-mobile-1.png';
-import Instagram from 'assets/images/instagram.svg';
-import Pinterest from 'assets/images/pinterest.svg';
-import Twitter from 'assets/images/twitter.svg';
-import Facebook from 'assets/images/facebook.svg';
+import Instagram from 'assets/images/instagram-with-border.svg';
+import Pinterest from 'assets/images/pinterest-with-border.svg';
+import Twitter from 'assets/images/twitter-with-border.svg';
+import Facebook from 'assets/images/facebook-with-border.svg';
 
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';

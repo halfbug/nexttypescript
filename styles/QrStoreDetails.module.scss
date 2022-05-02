@@ -24,6 +24,11 @@
     @media (max-width: 767px) {
       padding: 0;
     }
+
+    @include media-breakpoint-down(lg) {
+      height: 600px;
+      overflow-y: scroll;
+    }
   }
 
   &__content__heading {
@@ -140,6 +145,12 @@
     svg {
       margin-right: 20px;
     }
+
+    @include media-breakpoint-down(lg) {
+      svg {
+        margin-bottom: 10px;
+      }
+    }
   }
 
   &__social__media {
@@ -237,6 +248,7 @@
       color: #ffffff !important;
       padding: 10px;
       cursor: pointer;
+      text-decoration: none;
     }
   }
 
