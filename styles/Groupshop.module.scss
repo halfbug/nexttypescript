@@ -307,7 +307,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       content: "";
       position: absolute;
       z-index: -1;
-      padding: 0.08rem;
+      padding: 1px;
       inset: 0;
       border-radius: 10px;
       background: linear-gradient(to right, #ccb2f9, #fee750);
@@ -335,7 +335,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         content: "";
         position: absolute;
         z-index: -1;
-        padding: 0.08rem;
+        padding: 1px;
         inset: 0;
         border-radius: 8px;
         background: linear-gradient(to right, #ccb2f9, #ecd5d0);
@@ -380,7 +380,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .align-items-center;
     height: 291px;
     background-repeat: none;
-    background-attachment: fixed;
     background-position: center;
     background-size: cover;
     color: white;
@@ -755,6 +754,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 13px;
         color: #989898;
         text-transform: uppercase;
+        background: none;
+        border: none;
       }
     }
 
@@ -1022,6 +1023,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       backdrop-filter: blur(4px);
       color: #000000;
       border: none;
+      padding: 10px;
       /* Note: backdrop-filter has minimal browser support */
     
     &::before {
@@ -1767,6 +1769,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     letter-spacing: 0.32px;
     text-transform: uppercase;
     width: 212px !important;
+
+    &:hover {
+      background-color: $addtocart;
+      background-image: none;
+    }
     @include media-breakpoint-down(md) {
       background-color: $white;
       color: $black;

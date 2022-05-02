@@ -3,14 +3,13 @@ import React, { useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Send } from 'react-bootstrap-icons';
 import {
-  Button, Col, OverlayTrigger, Popover, Row,
+  Col, Row,
 } from 'react-bootstrap';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { GroupshopContext } from 'store/groupshop.context';
 import { useQRCode } from 'next-qrcode';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
-import QRCode from '../../../assets/images/qr-code.svg';
 
 type ShareButtonProps = {
   shareurl: string;

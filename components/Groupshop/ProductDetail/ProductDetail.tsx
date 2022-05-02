@@ -19,7 +19,6 @@ import Scrollable from 'components/Widgets/Scrollable/Scrollable';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
-import GSlogo from 'assets/images/p-detail-GSlogo.svg';
 import LeftArrowIcon from 'assets/images/left-arrow.svg';
 import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
@@ -215,13 +214,14 @@ const ProductDetail = ({
         <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
         <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
           <LeftArrowIcon />
-          <span
+          <button
             onClick={handleCloseClick}
             className={styles.groupshop__pcard__headerMobile__txt}
+            type="button"
           >
             Back To All
 
-          </span>
+          </button>
         </Modal.Header>
         <Modal.Body className="bg-white">
           <Row>
