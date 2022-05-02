@@ -283,7 +283,11 @@ const ProductsSearch = ({
                             selectedProducts={selected}
                             handleClose={(e) => {
                               closeModal(e);
-                              showSuccess('Product(s) has been added successfully.');
+                              if (selected && selected?.length > 0) {
+                                showSuccess('Product(s) has been added successfully.');
+                              } else {
+                                showSuccess('No product(s) has been selected.');
+                              }
                             }}
                           />
                         </>
