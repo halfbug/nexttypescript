@@ -174,7 +174,7 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="minDiscount"
-              value={values.minDiscountVal}
+              value={values.minDiscountVal[values.minDiscountVal.length - 1] !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
               onChange={(e) => {
                 setFieldValue('minDiscountVal', e.currentTarget.value);
                 // eslint-disable-next-line radix
@@ -226,7 +226,7 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="maxDiscount"
-              value={values.maxDiscountVal}
+              value={values.maxDiscountVal[values.maxDiscountVal.length - 1] !== '%' ? `${values.maxDiscountVal}%` : values.maxDiscountVal}
               onChange={(e) => {
                 setFieldValue('maxDiscountVal', e.currentTarget.value);
                 // eslint-disable-next-line radix

@@ -139,9 +139,10 @@ export default function CreateCampaign() {
       const {
         name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
         brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest,
-        tiktok, facebook, twitter, addableProducts, maxDiscountVal, minDiscountVal,
+        tiktok, facebook, twitter, addableProducts,
         minDiscount, maxDiscount, isRewardEdit,
       } = valz;
+      let { minDiscountVal, maxDiscountVal } = valz;
       console.log({ valz });
       let { media } = valz;
       if (customBg) media = '';
@@ -165,6 +166,13 @@ export default function CreateCampaign() {
           newSelectedTarget.name = 'Super-charged';
         }
         const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
+        if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
+          minDiscountVal = `${minDiscountVal}%`;
+        }
+        if (maxDiscountVal && maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
+          maxDiscountVal = `${maxDiscountVal}%`;
+        }
+
         newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
           { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },
           { ...newSelectedTarget.rewards[2], discount: maxDiscountVal }];
