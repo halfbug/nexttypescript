@@ -11,7 +11,8 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 15px;	
-    &:focus {
+    &:focus,
+    &:active {
 		background-color: #fff;
         color: #000 !important;
 		align-items: center;
@@ -20,9 +21,11 @@
         font-weight: bold;
         font-size: 12px;
         line-height: 15px;
+        border: $black 1px solid;
     	}
 &:hover {
 		background-color: #fff;
+        border: $black 1px solid;
 	}
 
 
