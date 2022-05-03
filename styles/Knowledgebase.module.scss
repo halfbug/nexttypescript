@@ -1,7 +1,8 @@
 @import "./variables.scss";
 
 .Kb {
-    @extend .px-0, .mx-3;
+    @extend .px-0;
+
 
     h1 {
         font-family: "DM Sans";
@@ -46,7 +47,7 @@
     &_getSetUp {
         @extend .my-3, .py-2, .px-1, .d-flex, .align-items-center;
         // width: 612px;
-        width: fit-content;
+        width: 612px;
         height: 154px;
         background-color: #dcd0e8;
         border-radius: 23px;
@@ -209,6 +210,6 @@
     &_paddingFAQ {
         @extend .ps-5, .pe-0;
         padding-right: 0px;
-        margin-right: 0px;
+        margin-right: -20px!important;
     }
 }
