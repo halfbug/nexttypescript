@@ -18,8 +18,14 @@
         // width: 248px;
     }
     &__pop {
+        position:relative;
         background: #ffffff;
         border: none !important;
+        svg{
+            @extend .mx-1;
+            position:absolute;
+            bottom: -2px;
+        }
         &:hover {
             border: none !important;
             color: none;
