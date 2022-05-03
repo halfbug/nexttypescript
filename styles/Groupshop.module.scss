@@ -478,7 +478,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &_how_to {
       @extend .m-auto, .pb-1;
       width: fit-content;
-      border-bottom: 1px solid #fff;
+      // border-bottom: 1px solid #fff;
+      text-decoration: underline;
+      text-underline-offset: 8px;
       font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
