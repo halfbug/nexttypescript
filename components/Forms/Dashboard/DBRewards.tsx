@@ -174,7 +174,8 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="minDiscount"
-              value={values.minDiscountVal[values.minDiscountVal.length - 1] !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
+              value={values.minDiscountVal}
+              // value={values.minDiscountVal[values.minDiscountVal.length - 1] !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
               onChange={(e) => {
                 setFieldValue('minDiscountVal', e.currentTarget.value);
                 // eslint-disable-next-line radix
@@ -226,10 +227,11 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="maxDiscount"
-              value={values.maxDiscountVal[values.maxDiscountVal.length - 1] !== '%' ? `${values.maxDiscountVal}%` : values.maxDiscountVal}
+              value={values.maxDiscountVal}
               onChange={(e) => {
-                setFieldValue('maxDiscountVal', e.currentTarget.value);
+                // setFieldValue('maxDiscountVal', e.currentTarget.value[e.currentTarget.value.length - 1] !== '%' ? `${e.currentTarget.value}%` : e.currentTarget.value);
                 // eslint-disable-next-line radix
+                setFieldValue('maxDiscountVal', e.currentTarget.value);
                 setFieldValue('maxDiscount', parseInt(e.currentTarget.value));
               }}
               className={styles.dbrewards_input}

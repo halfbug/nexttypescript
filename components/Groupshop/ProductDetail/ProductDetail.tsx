@@ -319,29 +319,29 @@ const ProductDetail = ({
                       {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
                     </span>
-                    {cashBack && (
-                    <Row className={styles.groupshop_cashback}>
-                      <Col className=" mx-0">
-                        <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
-                          Plus up to
-                          {' '}
-                          <strong>
+                    {cashBack ? (
+                      <Row className={styles.groupshop_cashback}>
+                        <Col className=" mx-0">
+                          <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
+                            Plus up to
                             {' '}
-                            $
-                            { cashBack }
-                            {' '}
-                            cashback
-                            {' '}
-                          </strong>
-                          {/* <span className={styles.groupshop_PlusUpto__logo}>
+                            <strong>
+                              {' '}
+                              $
+                              { cashBack }
+                              {' '}
+                              cashback
+                              {' '}
+                            </strong>
+                            {/* <span className={styles.groupshop_PlusUpto__logo}>
                             with
                             {' '}
                             <GSlogo className=" ms-0 mx-0" />
                           </span> */}
-                        </div>
-                      </Col>
-                    </Row>
-                    )}
+                          </div>
+                        </Col>
+                      </Row>
+                    ) : ''}
                   </h3>
                   <div className={styles.groupshop_modal_detail_height}>
                     <ShowMoreText
