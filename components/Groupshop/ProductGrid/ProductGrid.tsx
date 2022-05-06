@@ -275,11 +275,13 @@ const ProductGrid = ({
     </Container>
   );
 };
-
+let app = 0;
 function paginationScroll() {
-  const app = document.getElementById('allproducts')?.clientHeight;
+  if (app === 0) {
+    app = (document.getElementById('allproducts')?.offsetHeight) ?? 0;
+  }
   window.scroll({
-    top: (app ?? 0) + 250,
+    top: (app ?? 0) + 400,
     behavior: 'smooth',
   });
 }

@@ -23,10 +23,10 @@ import styles from 'styles/QrStoreDetails.module.scss';
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.png';
 import QRMobile from 'assets/images/qr-screen-mobile-1.png';
-import Instagram from 'assets/images/instagram-with-border.svg';
-import Pinterest from 'assets/images/pinterest-with-border.svg';
-import Twitter from 'assets/images/twitter-with-border.svg';
-import Facebook from 'assets/images/facebook-with-border.svg';
+import Instagram from 'assets/images/instagram.svg';
+import Pinterest from 'assets/images/pinterest.svg';
+import Twitter from 'assets/images/twitter.svg';
+import TikTok from 'assets/images/TikTokPixel.svg';
 
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
@@ -174,7 +174,7 @@ export default function QrStep1({
                         <Link href="https://www.instagram.com/groupshopit/"><a target="_blank"><Instagram /></a></Link>
                         <Link href="https://pinterest.com/Groupshop/"><a target="_blank"><Pinterest /></a></Link>
                         <Link href="https://twitter.com/groupshopit"><a target="_blank"><Twitter /></a></Link>
-                        <Link href="/"><a><Facebook /></a></Link>
+                        <Link href="https://www.tiktok.com/@groupshopit?lang=en"><a target="_blank"><TikTok /></a></Link>
                       </div>
                       <div className={styles.QRContainer__link}>
                         <p>
