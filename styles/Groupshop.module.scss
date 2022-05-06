@@ -205,6 +205,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .m-1, .p-1, .rounded, .border, .text-capitalize;
       border-color: $purple !important;
       border-width: 2px;
+      margin: .25rem .35rem !important;
       cursor: pointer !important;
       min-width: auto !important;
       background: $white;
@@ -219,6 +220,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         box-shadow: none !important;
         box-sizing: border-box;
         backdrop-filter: blur(4px);
+        margin-right: .35rem;
         /* Note: backdrop-filter has minimal browser support */
         border-radius: 6px;
         &::before {
@@ -745,6 +747,35 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_modal_detail_height {
     padding: 15px 0px;
+    &_descriptionExpired {
+      @extend .text-muted;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: $black;
+    }
+    &_descriptionNormal {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: $black;
+    }
+
+    &_headingExpired {
+      @extend .text-muted;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+      color: $black;
+      text-transform: uppercase;
+    }
+    &_headingNormal {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+      color: $black;
+      text-transform: uppercase;
+    }
   }
 
   &_modal_content_bottom {
@@ -929,7 +960,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         @extend .groupshop__pcard_tag;
         // @extend .p-1, .py-2, .rounded-pill, .m-1;
         //background-color: transparent;
-        top: 10px;
+        top: 20px;
+        margin-right: 10px !important;
         // right: 15px;
         position: absolute;
         border: 2px solid transparent;
@@ -1183,7 +1215,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         height: 43px;
         width: 43px;
         &__label {
-          margin-left: 5px;
+          margin-left: 3px;
         }
       }
     }
@@ -1293,6 +1325,21 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_right_content {
+    &_title {
+      font-size: 24px;
+      font-weight: 700 !important;
+      line-height: 31px;
+      color: #282828;
+      letter-spacing: 0.48px;
+    }
+    &_price {
+      font-size: 18px;
+      line-height: 23px;
+      font-weight: 500 !important;
+      color: #282828;
+      letter-spacing: 0.36px;
+      margin-right: 5px;
+    }
     @media screen and (max-width: 475px) {
       padding-top: 30px;
     }

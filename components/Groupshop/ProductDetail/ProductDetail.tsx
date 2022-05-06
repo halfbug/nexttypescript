@@ -305,16 +305,16 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div className={styles.groupshop_right_content_wrapper}>
                 <div className={styles.groupshop_right_content}>
-                  <h2>
+                  <p className={styles.groupshop_right_content_title}>
                     {product?.title}
-                  </h2>
+                  </p>
                   <h3 className="d-flex align-items-center">
-                    <span className="text-decoration-line-through">
+                    <span className={['text-decoration-line-through', styles.groupshop_right_content_price].join(' ')}>
                       {currencySymbol}
                       {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
                     </span>
                     {' '}
-                    <span>
+                    <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
                       {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
@@ -349,11 +349,13 @@ const ProductDetail = ({
                       lines={3}
                       more="Show more"
                       less="Show less"
-                      className={isExpired ? 'text-muted' : 'fw-normal'}
+                      className={isExpired
+                        ? styles.groupshop_modal_detail_height_descriptionExpired
+                        : styles.groupshop_modal_detail_height_descriptionNormal}
                       anchorClass="my-anchor-css-class"
                   // onClick={this.executeOnClick}
                       expanded={false}
-                      width={0}
+                      width={406}
                       truncatedEndingComponent="... "
                     >
                       {product?.description}
@@ -362,7 +364,12 @@ const ProductDetail = ({
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
                       <div key={id} className="mt-3">
-                        <h4 className={isExpired ? 'text-muted' : 'me-1'}>{name}</h4>
+                        <p className={isExpired
+                          ? styles.groupshop_modal_detail_height_headingExpired
+                          : styles.groupshop_modal_detail_height_headingNormal}
+                        >
+                          {name}
+                        </p>
                         <Form.Select
                           aria-label="option"
                           className="w-50"
