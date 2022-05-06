@@ -167,3 +167,6 @@ $dotted-border-color4:#F28BF4;
 $btn-focus-box-shadow: none !important;
 // You can also disable the box-shadow on focus around inputs with:
 $input-focus-box-shadow: none !important;
+.btn-outline-dark {
+    border-color: $black!important;
+}
