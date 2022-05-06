@@ -127,19 +127,19 @@ const CampaignListing = () => {
         </Row>
 
         {campaignList.map((camp: any, index: number) => (
-          <Row className={styles.rows} key={camp.id}>
-            <Col title={camp.name} className={['pe-5 ', styles.rows_text].join(' ')}>
+          <Row className={styles.gradient} key={camp.id}>
+            <Col title={camp.name} className={['pe-5 ', styles.gradient_text].join(' ')}>
               {(camp.name.length > 10) ? `${camp.name.slice(0, 10)}...` : camp.name}
             </Col>
-            <Col className={styles.rows_text}>
+            <Col className={styles.gradient_text}>
 
               {camp?.details.totalRevenue ? `$ ${camp?.details.totalRevenue}` : '-'}
             </Col>
-            <Col className={styles.rows_text}>{camp?.details.totalGroupshops}</Col>
-            <Col className={['ps-3 ', styles.rows_text].join(' ')}>
+            <Col className={styles.gradient_text}>{camp?.details.totalGroupshops}</Col>
+            <Col className={['ps-3 ', styles.gradient_text].join(' ')}>
               {camp?.details.totalCashback ? `$ ${camp?.details.totalCashback}` : '-'}
             </Col>
-            <Col className={[styles.rows_text, 'ps-3'].join(' ')}>
+            <Col className={[styles.gradient_text, 'ps-3'].join(' ')}>
               {/* <ToggleButton
               handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
               <Form.Check
