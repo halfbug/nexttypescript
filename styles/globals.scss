@@ -53,3 +53,15 @@ h4 {
 		// background-color: #01223770;
 	}
 }
+
+.form-select:focus{
+    box-shadow: none;
+}
+
+.popover{
+	border-radius: 10px !important;
+	border-color: #E9E9E9;
+}
+.popover-arrow{
+	display: none !important;
+}
