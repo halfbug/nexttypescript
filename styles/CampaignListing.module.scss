@@ -125,6 +125,7 @@
 		@extend .mt-3, .py-3, .fw-bold, .fs-6;
 		border: 1px dashed #ccb2f9;
 		border-radius: 10px;
+		margin: 0px 14px;
 		&_p {
 			@extend .mt-2;
 		}
