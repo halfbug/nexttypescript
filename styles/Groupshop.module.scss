@@ -734,7 +734,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_modal_cart_close {
     @extend .ms-2, .mt-2;
+
     button {
+      opacity: 1;
       &:focus {
         box-shadow: none;
       }
