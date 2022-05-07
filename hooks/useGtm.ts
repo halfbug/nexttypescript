@@ -19,6 +19,10 @@ export default function useGtm() {
     promotionTag: undefined,
     originalPrice: undefined,
     finalPrice: undefined,
+    buttonName: undefined,
+    currency: undefined,
+    totalCartValue: undefined,
+    items: undefined,
   };
 
   const googleEventCode = (modalName: string) => {
@@ -54,12 +58,16 @@ export default function useGtm() {
     dataLayer.push({
       ...flushtDataLayer,
       event: 'productView',
-      productName,
-      productId,
-      productBrand: gsctx?.store?.brandName,
-      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
-      originalPrice,
-      finalPrice,
+      items: [
+        {
+          productId,
+          productName,
+          promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+          productBrand: gsctx?.store?.brandName,
+          originalPrice,
+          finalPrice,
+          quantity: 1,
+        }],
     });
 
     // console.log('--------<<<<<<<<<<gtm>>>>>>----------');
@@ -75,9 +83,91 @@ export default function useGtm() {
     // });
   };
 
+  const googleButtonCode = (buttonName: string) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      ...flushtDataLayer,
+      event: 'buttonClick',
+      buttonName,
+    });
+    console.log({
+      event: 'buttonClick',
+      buttonName,
+    });
+  };
+
+  const checkoutCartView = (items : any, totalCartValue: number) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      ...flushtDataLayer,
+      event: 'checkoutCartView',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+    console.log({
+      event: 'checkoutCartView',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+  };
+
+  const checkoutButtonClick = (items : any, totalCartValue: number) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      ...flushtDataLayer,
+      event: 'checkoutButtonClick',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+    console.log({
+      event: 'checkoutCartView',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+  };
+
+  const checkoutUpsellClick = (items : any, totalCartValue: number) => {
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    dataLayer.push({
+      ...flushtDataLayer,
+      event: 'checkoutUpsellClick',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+    console.log({
+      event: 'checkoutUpsellClick',
+      currency: gsctx?.store?.currencyCode,
+      totalCartValue,
+      items,
+    });
+  };
   return {
     googleEventCode,
     googleProductCode,
-
+    googleButtonCode,
+    checkoutCartView,
+    checkoutButtonClick,
+    checkoutUpsellClick,
   };
 }

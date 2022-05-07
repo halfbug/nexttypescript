@@ -37,15 +37,33 @@ const Cart = ({
   const {
     currencySymbol, dPrice, discount,
   } = useDeal();
-  const { googleEventCode } = useGtm();
-  useEffect(() => {
-    if (show) { googleEventCode('cart-modal'); }
-  }, [show]);
+
   const {
     cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
     isCartEmpty, getShopifyUrl, getSuggestedProducts, addCartProduct,
     getCartSaveMoney, getTotalActualCartTotal,
   } = useCart();
+
+  const {
+    googleEventCode, checkoutCartView, checkoutButtonClick, checkoutUpsellClick,
+  } = useGtm();
+  useEffect(() => {
+    if (show) {
+      googleEventCode('cart-modal');
+
+      checkoutCartView(cartProducts.map((prd) => ({
+        productId: prd.id,
+        productName: prd.title,
+        promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+        currency: prd.currencyCode,
+        productBrand: gsctx.store?.brandName,
+        originalPrice: +prd.selectedVariant.price,
+        finalPrice: dPrice(+(prd.selectedVariant.price)),
+        quantity: prd.selectedVariant.selectedQuantity,
+      })), getTotal() ?? 0);
+    }
+  }, [show]);
+
   const { suggestedProd } = useSuggested();
   const { setsProduct } = useDetail(suggestedProd);
   const [upToPercent, setupToPercent] = React.useState<string>();
@@ -56,6 +74,20 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   const { push } = useRouter();
+
+  const handleCheckout = () => {
+    checkoutButtonClick(cartProducts.map((prd) => ({
+      productId: prd.id,
+      productName: prd.title,
+      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+      currency: prd.currencyCode,
+      productBrand: gsctx.store?.brandName,
+      originalPrice: +prd.selectedVariant.price,
+      finalPrice: dPrice(+(prd.selectedVariant.price)),
+      quantity: prd.selectedVariant.selectedQuantity,
+    })), getTotal() ?? 0);
+    push(getShopifyUrl());
+  };
 
   return (
     <>
@@ -219,7 +251,19 @@ const Cart = ({
                             <Button
                               variant="primary"
                               className={styles.groupshop__pcard_cardBody_addBtn}
-                              onClick={() => handleDetail(item)}
+                              onClick={() => {
+                                handleDetail(item);
+                                checkoutUpsellClick([{
+                                  productId: item.id,
+                                  productName: item.title,
+                                  promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+                                  currency: item.currencyCode,
+                                  productBrand: gsctx.store?.brandName,
+                                  originalPrice: +item.price,
+                                  finalPrice: dPrice(+(item.price)),
+                                  quantity: 1,
+                                }], getTotal() ?? 0);
+                              }}
                             >
                               Add
                             </Button>
@@ -285,7 +329,7 @@ const Cart = ({
               <Col className=" mt-2">
                 <Button
                   variant="primary"
-                  onClick={() => push(getShopifyUrl())}
+                  onClick={handleCheckout}
                   size="lg"
                   className={styles.groupshop_cart_checkout}
                 >

@@ -10,6 +10,7 @@ import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct, IGroupshop } from 'types/groupshop';
 import useIP from 'hooks/useIP';
+import useGtm from 'hooks/useGtm';
 
 interface IValues {
   username: string;
@@ -35,6 +36,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   // get client IP
   const [clientIP] = useIP();
 
+  const { googleButtonCode } = useGtm();
+
   const validationSchema = yup.object({
     username: yup
       .string()
@@ -58,6 +61,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+      googleButtonCode('product-share');
       if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line 63 ~ onSubmit: ~ products', products);

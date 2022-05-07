@@ -12,6 +12,7 @@ query StoreName($shop: String!) {
   industry
   logoImage
   plan
+  currencyCode
 
   settings{
     media
@@ -377,6 +378,7 @@ query Groupshop($code: String!) {
       brandName
       shop
       logoImage
+      currencyCode
     }
   popularProducts{
     id

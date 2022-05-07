@@ -17,6 +17,7 @@ import useDeal from 'hooks/useDeal';
 import { Member } from 'types/groupshop';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import useGtm from 'hooks/useGtm';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
 
@@ -80,6 +81,7 @@ const ProductGrid = ({
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
   // console.log({ renderItems });
+  const { googleButtonCode } = useGtm();
 
   return (
     <Container {...props} ref={ref} fluid id={id}>
@@ -116,7 +118,7 @@ const ProductGrid = ({
                         </Button>
                       </Col>
                       <Col lg={2} className="ps-1">
-                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} />
+                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={() => googleButtonCode('product-share')} />
                       </Col>
                     </Row>
                   )}
@@ -182,7 +184,7 @@ const ProductGrid = ({
                     Add to Cart
 
                   </Button>
-                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')} />
+                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
                 </div>
               )}
             </ProductCard>

@@ -19,6 +19,7 @@ export interface IStore {
   plan?: any;
   // plan?: 'LAUNCH' | 'EXPLORE' | 'GROWTH' | 'UNICORN' | undefined;
   totalGroupShop?: number | undefined;
+  currencyCode?: string;
 }
 export interface ICampaign {
   id?: string | null | undefined;

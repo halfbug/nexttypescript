@@ -113,7 +113,7 @@ const GroupShop: NextPage = () => {
     days, hrs, mins, secs,
   } = getDateDifference();
 
-  const { googleEventCode } = useGtm();
+  const { googleEventCode, googleButtonCode } = useGtm();
 
   const {
     members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
@@ -200,6 +200,7 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
 
   const handleAddProduct = () => {
+    googleButtonCode('product-share');
     if (gsctx?.totalProducts < 101) {
       const cprod = clientDealProducts()?.length || 0;
       if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
