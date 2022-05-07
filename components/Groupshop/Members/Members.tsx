@@ -1,24 +1,34 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
-  Button, ListGroup, OverlayTrigger, Popover, Row,
+  Button, ListGroup, OverlayTrigger, Placeholder, Popover, Row,
 } from 'react-bootstrap';
 import styles from 'styles/Groupshop.module.scss';
 import { ref } from 'yup';
 import CrossICon from 'assets/images/cross.svg';
+import { RootProps } from 'types/store';
 
-interface MembersProps {
+interface MembersProps extends RootProps{
   names : string[];
   cashback : string[];
 }
 
 const Members = ({
-  names, cashback,
+  names, cashback, pending,
 }: MembersProps) => {
   const [show, setShow] = useState(false);
   const handleCloseBtn = () => {
     setShow(!show);
   };
+
+  if (pending) {
+    return (
+      <>
+        <Placeholder.Button as="p" className="border-0 m-1 placeholder-glow bg-light" />
+        <Placeholder.Button as="p" className="border-0 m-1 placeholder-glow bg-light" />
+      </>
+    );
+  }
   return (
     <>
       {names?.map((member, index) => (

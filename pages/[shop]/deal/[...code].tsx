@@ -50,6 +50,7 @@ import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 import { useMediaQuery } from 'react-responsive';
+import Router from 'next/router';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
@@ -207,10 +208,10 @@ const GroupShop: NextPage = () => {
     } else showError('Groupshop is full you can not add more products to it');
   };
 
-  // if (error) {
-  //   router.push('/404');
-  //   return <p>groupshop not found</p>;
-  // }
+  if (error) {
+    Router.push('/404');
+    return <p>groupshop not found</p>;
+  }
 
   return (
     <>
@@ -258,7 +259,7 @@ const GroupShop: NextPage = () => {
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
-                  <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+                  <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} pending={pending} />
                   <ShareButton
                     placement="bottom"
                     shareurl={gsURL}
@@ -371,7 +372,7 @@ const GroupShop: NextPage = () => {
               </p>
             </Row>
             <div className="mt-2 mb-4 d-flex justify-content-center align-items-center">
-              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} pending={pending} />
             </div>
             <Row className={styles.groupshop__hero_how_to}>
               <InfoBox mes="How it works" brandname={brandName} />
