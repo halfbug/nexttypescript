@@ -3,7 +3,6 @@
 .Kb {
     @extend .px-0;
 
-
     h1 {
         font-family: "DM Sans";
         font-style: normal;
@@ -45,18 +44,23 @@
         color: rgba(0, 0, 0, 0.5) !important;
     }
     &_getSetUp {
-        @extend .my-3, .py-2, .px-1, .d-flex, .align-items-center;
-        // width: 612px;
+        @extend .my-3, .py-4, .px-1, .d-flex, .align-items-center, .ms-1;
         width: 612px;
-        height: 154px;
+        // width:  fit-content;
+        height: fit-content;
         background-color: #dcd0e8;
         border-radius: 23px;
     }
+    &_GSguide{
+        @extend .ms-1;
+        width: 612px;
+    }
     &_guide {
-        @extend .p-3, .m-0;
+        @extend .p-3, .pe-2;
         // width: 314px;
+        // height: auto;
         width: fit-content;
-        height: 200px;
+        height: fit-content;
         background-color: #f8f8f8;
         border-radius: 23px;
 
@@ -69,6 +73,32 @@
             line-height: 20px;
             color: $black;
         }
+    }
+    // &_guide2 {
+    //     @extend .p-3 ;
+    //     width: 288px;
+    //     height: auto;
+    //     background-color: #f8f8f8;
+    //     border-radius: 23px;
+
+    //     &_heading {
+    //         @extend .d-block, .mb-0;
+    //         font-family: "DM Sans";
+    //         font-style: normal;
+    //         font-weight: 500;
+    //         font-size: 14px;
+    //         line-height: 20px;
+    //         color: $black;
+    //     }
+    // }
+    &_guideDetail {
+        @extend .ms-3, .me-2;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        color: $black;
     }
     &_featured {
         @extend .my-2;
@@ -210,6 +240,6 @@
     &_paddingFAQ {
         @extend .ps-5, .pe-0;
         padding-right: 0px;
-        margin-right: -20px!important;
+        margin-right: -20px !important;
     }
 }

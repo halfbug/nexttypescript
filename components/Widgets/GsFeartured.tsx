@@ -14,7 +14,7 @@ export default function GsFeartured(
           Featured videos
           <Button variant="link" className="text-black-50">Browse</Button>
         </h4>
-        <Row className="mt-1">
+        <Row className="mt-1 d-inline-flex">
           <Col lg={5} className="">
             <iframe
               style={{ border: '1px solid black', borderRadius: '23px!important' }}
