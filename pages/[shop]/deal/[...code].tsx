@@ -398,7 +398,7 @@ const GroupShop: NextPage = () => {
             <span className={styles.groupshop_firstName}>
               {member?.orderDetail?.customer.firstName}
             </span>
-            { !pending ? (
+            { !pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2">
                 <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary">
                   +
