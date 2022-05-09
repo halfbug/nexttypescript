@@ -15,6 +15,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_ALL_CAMPAIGNS, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import Model from 'components/Widgets/Model/Model';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 const CampaignListing = () => {
   const [show, setShow] = useState(false);
@@ -56,6 +57,8 @@ const CampaignListing = () => {
   }, [store]);
 
   const { clearNewCampaign } = useCampaign();
+  const { formatNumber } = useUtilityFunction();
+
   const handleClick = (campaignid: string) => {
     clearNewCampaign();
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
@@ -133,11 +136,11 @@ const CampaignListing = () => {
             </Col>
             <Col className={styles.gradient_text}>
 
-              {camp?.details.totalRevenue ? `$${camp?.details.totalRevenue}` : '-'}
+              {camp?.details.totalRevenue ? `$${formatNumber(camp?.details.totalRevenue)}` : '-'}
             </Col>
             <Col className={styles.gradient_text}>{camp?.details.totalGroupshops}</Col>
             <Col className={['ps-3 ', styles.gradient_text].join(' ')}>
-              {camp?.details.totalCashback ? `$ ${camp?.details.totalCashback}` : '-'}
+              {camp?.details.totalCashback ? `$ ${formatNumber(camp?.details.totalCashback)}` : '-'}
             </Col>
             <Col className={[styles.gradient_text, 'ps-3'].join(' ')}>
               {/* <ToggleButton

@@ -16,6 +16,7 @@ import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
 import IconMoney from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -88,7 +89,7 @@ const Cart = ({
     })), getTotal() ?? 0);
     push(getShopifyUrl());
   };
-
+  const { formatNumber } = useUtilityFunction();
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={styles.groupshop_modal_cart}>
@@ -234,7 +235,7 @@ const Cart = ({
                           >
                             {currencySymbol}
                             {Math.round(+(item.price) - +(dPrice(+(item?.price || 0))
-                              .toFixed(2)))}
+                              .toFixed(2).toString().replace('.00', '')))}
                             {/* {(+(item.price) - +(dPrice(+(item?.price || 0))))
                               .toFixed(2).toString().replace('.00', '')} */}
                             {' '}
@@ -270,12 +271,12 @@ const Cart = ({
                             <div className=" col-7 fw-bold text-nowrap">
                               <span className="text-decoration-line-through  ">
                                 {currencySymbol}
-                                {item?.price}
+                                {formatNumber(item?.price)}
                               </span>
                               {' '}
                               <span>
                                 {currencySymbol}
-                                {dPrice(+(item?.price || 0)).toFixed(1)}
+                                {formatNumber(dPrice(+(item?.price || 0)))}
                               </span>
                             </div>
                           </Row>
