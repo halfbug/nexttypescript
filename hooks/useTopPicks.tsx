@@ -26,7 +26,8 @@ const useTopPicks = () => {
         (prd1, prd2) => (prd2?.purchaseCount!) - (prd1?.purchaseCount!),
       );
       // filter out the products that are already bought in this groupshop deal
-    const finalTP = filterArray(newProd, popularProducts ?? [], 'id', 'id');
+    const newProd2 = newProd.filter((item: any) => item.outofstock === false);
+    const finalTP = filterArray(newProd2, popularProducts ?? [], 'id', 'id');
     setTopPicks([...finalTP.slice(0, 4)]);
   }, [gsctx]);
   console.log({ topPicks });
