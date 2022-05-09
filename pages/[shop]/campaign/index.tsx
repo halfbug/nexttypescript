@@ -133,7 +133,7 @@ const CampaignListing = () => {
             </Col>
             <Col className={styles.gradient_text}>
 
-              {camp?.details.totalRevenue ? `$ ${camp?.details.totalRevenue}` : '-'}
+              {camp?.details.totalRevenue ? `$${camp?.details.totalRevenue}` : '-'}
             </Col>
             <Col className={styles.gradient_text}>{camp?.details.totalGroupshops}</Col>
             <Col className={['ps-3 ', styles.gradient_text].join(' ')}>
