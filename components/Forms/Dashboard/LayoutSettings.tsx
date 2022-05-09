@@ -102,7 +102,7 @@ export default function LayoutSettings() {
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <Row className={styles.layout}>
-        <h3>Product Page Banners</h3>
+        <div className={styles.layout_settings}>Product Page Banners</div>
         <Col xl={7} lg={8} md={12}>
           <ShowBanner
             values={values}

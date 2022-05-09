@@ -11,14 +11,25 @@
 
     &__box_3 {
         @extend .mb-4, .p-4;
-        border: 1px dashed $dotted-border-color3;
-        border-radius: 18px;
+        border: 1px dashed #A7C737;
+        border-radius: 23px;
     }
 
     &__box_orange {
         @extend .mb-4, .p-4;
         border: 1px dashed $average;
         border-radius: 18px;
+    }
+
+    &_settings {
+        @extend .m-3, .px-0;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 29px;
+        color: $black;
+        margin-bottom: 27px !important;
     }
 
     &__light_txt {
@@ -29,6 +40,8 @@
         font-family: 'Mulish';
         opacity: $opacity-medium;
         margin-left: 0px;
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
 
     &__style_btns {
@@ -66,7 +79,7 @@
         font-weight: $font-weight-normal;
         color: $black;
         background: $recommended !important;
-        padding: 5px 10px;
+        padding: .42rem 10px;
     }
 
     &__sperator {
@@ -78,10 +91,11 @@
     &__enable_btn {
         // @include button-variant($enable, $enable);
         @extend .me-2, .px-2, .lh-sm, .rounded;
-        color: $enable !important;
-        background-color: white !important;
+        color: $white !important;
+        background-color: $enable !important;
         height: 30px;
-        border-color: $enable !important;
+        border-color: $black !important;
+        border-radius: 6px !important;
     
         &:hover, &:active, &:focus {
             color: $white !important;
@@ -101,14 +115,15 @@
     &__disable_btn {
         @include button-variant($disable, $disable);
         @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
-        color: $disable;
+        color: $black;
         background-color: white;
-        border-color: $disable;
+        border-color: $black;
         height: 30px;
+        border-radius: 6px !important;
     
         &:hover, &:active, &:focus {
             border-color: $black !important;
-            background-color: $disable !important;
+            background-color: $white !important;
             color: $black;
         }
     
