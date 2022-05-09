@@ -398,15 +398,22 @@ const GroupShop: NextPage = () => {
             <span className={styles.groupshop_firstName}>
               {member?.orderDetail?.customer.firstName}
             </span>
-            <Dropdown className="d-inline mx-2">
-              <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary" className={styles.groupshop_dropdown}>
-                <DownArrow />
-              </Dropdown.Toggle>
+            { !pending ? (
+              <Dropdown className="d-inline mx-2">
+                <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary">
+                  +
+                  {gsctx?.members?.length - 1}
+                  {' '}
+                  other
+                  {(gsctx?.members?.length - 1) > 1 && 's'}
+                  {/* <DownArrow /> */}
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Menu>
+                  {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : ''}
           </h2>
           <p>
             Shop from
