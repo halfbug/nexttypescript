@@ -67,10 +67,10 @@ export default function PaymentHistory() {
                 {' '}
                 {item._id.year}
               </td>
-              <td>{item.revenue}</td>
+              <td>{(item.revenue).toFixed(2).toString().replace('.00', '')}</td>
               <td>{getMonthlyGSCount(item._id.month as unknown as number)}</td>
-              <td>{(item.cashBack).toFixed(2)}</td>
-              <td>{(item.feeCharges).toFixed(2)}</td>
+              <td>{(item.cashBack).toFixed(2).toString().replace('.00', '')}</td>
+              <td>{(item.feeCharges).toFixed(2).toString().replace('.00', '')}</td>
               <td>
                 <ExportToExcel
                   apiData={mockData}
@@ -115,7 +115,7 @@ export default function PaymentHistory() {
             </div>
             <div className={styles.billing__paymenthistory__summaryBox__s1_box__value}>
               {currencySymbol}
-              {totalRevenue}
+              {totalRevenue.toFixed(2).toString().replace('.00', '')}
             </div>
           </Col>
 
