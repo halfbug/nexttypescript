@@ -20,7 +20,10 @@ import Facebook from 'assets/images/facebook-with-border.svg';
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
 
-export default function QrStep2() {
+interface IStep2Props {
+  brandLogo: string;
+}
+export default function QrStep2({ brandLogo }: IStep2Props) {
   return (
     <>
       <div className={styles.QRContainer}>
@@ -32,15 +35,15 @@ export default function QrStep2() {
                   <HeadLogo />
                 </div>
                 <div className={styles.QRContainer__YR__mobileLogo}>
-                  <Image src={YR} alt="QR Right Screen" />
+                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div>
                 <div className={styles.QRContainer__mobileImage}>
-                  <Image src={QRMobile} alt="QR Right Screen" layout="responsive" />
+                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__heading}>
                     <div className={styles.QRContainer__YR__Logo}>
-                      <Image src={YR} alt="QR Right Screen" />
+                      <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                     </div>
                     <h2>
                       Access your personalized store with

@@ -11,6 +11,7 @@ const QrCode: NextPage = () => {
   const [showStep2, setShowStep2] = useState(false);
   const [showStep3, setShowStep3] = useState(false);
   const [dealLink, setdealLink] = useState('');
+  const [brandLogo, setbrandLogo] = useState('');
 
   return (
     <>
@@ -20,10 +21,11 @@ const QrCode: NextPage = () => {
           setShowStep2={setShowStep2}
           setShowStep3={setShowStep3}
           setdealLink={setdealLink}
+          setbrandLogo={setbrandLogo}
         />
       )}
-      {showStep2 && <QrStep2 />}
-      {showStep3 && <QrStep3 dealLink={dealLink} />}
+      {showStep2 && <QrStep2 brandLogo={brandLogo} />}
+      {showStep3 && <QrStep3 dealLink={dealLink} brandLogo={brandLogo} />}
     </>
   );
 };

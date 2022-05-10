@@ -625,7 +625,7 @@ query ACTIVE_STORES {
 const GET_QR_DEAL = gql`
 query GetQrDealLink($email: String!, $ordernumber: String!) {
   getQrDealLink(email: $email, ordernumber: $ordernumber) {    
-    url
+    url, brandname
   }
 }
 `;

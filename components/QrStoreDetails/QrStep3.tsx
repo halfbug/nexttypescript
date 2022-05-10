@@ -20,9 +20,10 @@ import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
 
 interface IStep3Props {
   dealLink: string;
+  brandLogo: string;
 }
 
-export default function QrStep3({ dealLink }: IStep3Props) {
+export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
   return (
     <>
       <div className={styles.QRContainer}>
@@ -34,15 +35,15 @@ export default function QrStep3({ dealLink }: IStep3Props) {
                   <HeadLogo />
                 </div>
                 <div className={styles.QRContainer__YR__mobileLogo}>
-                  <Image src={YR} alt="QR Right Screen" />
+                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div>
                 <div className={styles.QRContainer__mobileImage}>
-                  <Image src={QRMobile} alt="QR Right Screen" layout="responsive" />
+                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__congrats}>
                     <div className={styles.QRContainer__YR__Logo}>
-                      <Image src={YR} alt="QR Right Screen" />
+                      <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                     </div>
                     <h2>
                       {' '}

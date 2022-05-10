@@ -27,6 +27,7 @@ import Instagram from 'assets/images/instagram.svg';
 import Pinterest from 'assets/images/pinterest.svg';
 import Twitter from 'assets/images/twitter.svg';
 import TikTok from 'assets/images/TikTokPixel.svg';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
@@ -41,6 +42,7 @@ interface IStep1Props {
   setShowStep2: any;
   setShowStep3: any;
   setdealLink: any;
+  setbrandLogo: any;
 }
 
 export default function QrStep1({
@@ -48,6 +50,7 @@ export default function QrStep1({
   setShowStep2,
   setShowStep3,
   setdealLink,
+  setbrandLogo,
 }: IStep1Props) {
   const validationSchema = yup.object({
     email: yup.string().email('Invalid email format').required('Required'),
@@ -62,16 +65,24 @@ export default function QrStep1({
     },
   });
 
+  const { getSignedUrlS3, getKeyFromS3URL } = useUtilityFunction();
   useEffect(() => {
-    if (data) {
-      setShowStep1(false);
-      setShowStep2(true);
-      setTimeout(() => {
-        setdealLink(data.getQrDealLink.url);
-        setShowStep2(false);
-        setShowStep3(true);
-      }, 2000);
+    async function gets3logo() {
+      if (data) {
+        const key = getKeyFromS3URL(data?.getQrDealLink.brandname ?? '');
+        const logoS3 = await getSignedUrlS3(key);
+        console.log(logoS3);
+        setbrandLogo(logoS3);
+        setShowStep1(false);
+        setShowStep2(true);
+        setTimeout(() => {
+          setdealLink(data.getQrDealLink.url);
+          setShowStep2(false);
+          setShowStep3(true);
+        }, 2000);
+      }
     }
+    gets3logo();
   }, [data]);
 
   const {

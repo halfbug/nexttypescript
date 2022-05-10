@@ -10,7 +10,7 @@ interface HeroProps {
 const Hero = ({
   children,
 }: HeroProps) => (
-  <div className={styles.groupshop__hero} style={{ backgroundImage: 'url(/images/gs-banner.jpeg)' }}>
+  <div className={styles.groupshop__hero} style={{ backgroundImage: 'url(/images/gs-banner-new.png)' }}>
     {children}
   </div>
 );
