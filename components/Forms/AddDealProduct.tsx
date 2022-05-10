@@ -61,7 +61,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
-      googleButtonCode('product-share');
+      googleButtonCode('addproduct-complete');
       if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line 63 ~ onSubmit: ~ products', products);

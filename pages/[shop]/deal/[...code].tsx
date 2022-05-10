@@ -235,7 +235,7 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
 
   const handleAddProduct = () => {
-    googleButtonCode('product-share');
+    googleButtonCode('addproduct-button');
     if (gsctx?.totalProducts < 101) {
       const cprod = clientDealProducts()?.length || 0;
       if (cprod >= 5) {

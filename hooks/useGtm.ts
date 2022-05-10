@@ -70,17 +70,21 @@ export default function useGtm() {
         }],
     });
 
-    // console.log('--------<<<<<<<<<<gtm>>>>>>----------');
-    // console.log({
-    //   event: 'productView',
-    //   productName,
-    //   productId,
-    //   productBrand: gsctx?.store?.brandName,
-    //   promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
-    //   originalPrice,
-    //   finalPrice,
+    console.log('--------<<<<<<<<<<gtm>>>>>>----------');
+    console.log({
+      event: 'productView',
+      items: [
+        {
+          productId,
+          productName,
+          promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+          productBrand: gsctx?.store?.brandName,
+          originalPrice,
+          finalPrice,
+          quantity: 1,
+        }],
 
-    // });
+    });
   };
 
   const googleButtonCode = (buttonName: string) => {
@@ -99,7 +103,7 @@ export default function useGtm() {
       buttonName,
     });
   };
-
+  // productId: product.id.split('/')[4],
   const checkoutCartView = (items : any, totalCartValue: number) => {
     // @ts-ignore
     window.dataLayer = window.dataLayer || [];

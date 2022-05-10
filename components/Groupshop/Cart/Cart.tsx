@@ -53,13 +53,13 @@ const Cart = ({
       googleEventCode('cart-modal');
 
       checkoutCartView(cartProducts.map((prd) => ({
-        productId: prd.id,
+        productId: prd.id.split('/')[4],
         productName: prd.title,
         promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
         currency: prd.currencyCode,
         productBrand: gsctx.store?.brandName,
         originalPrice: +prd.selectedVariant.price,
-        finalPrice: dPrice(+(prd.selectedVariant.price)),
+        finalPrice: dPrice(+(prd.selectedVariant.price)).toFixed(2),
         quantity: prd.selectedVariant.selectedQuantity,
       })), getTotal() ?? 0);
     }
@@ -78,13 +78,13 @@ const Cart = ({
 
   const handleCheckout = () => {
     checkoutButtonClick(cartProducts.map((prd) => ({
-      productId: prd.id,
+      productId: prd.id.split('/')[4],
       productName: prd.title,
       promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
       currency: prd.currencyCode,
       productBrand: gsctx.store?.brandName,
       originalPrice: +prd.selectedVariant.price,
-      finalPrice: dPrice(+(prd.selectedVariant.price)),
+      finalPrice: dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
     push(getShopifyUrl());
@@ -255,13 +255,13 @@ const Cart = ({
                               onClick={() => {
                                 handleDetail(item);
                                 checkoutUpsellClick([{
-                                  productId: item.id,
+                                  productId: item.id.split('/')[4],
                                   productName: item.title,
                                   promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
                                   currency: item.currencyCode,
                                   productBrand: gsctx.store?.brandName,
                                   originalPrice: +item.price,
-                                  finalPrice: dPrice(+(item.price)),
+                                  finalPrice: dPrice(+(item.price)).toFixed(2),
                                   quantity: 1,
                                 }], getTotal() ?? 0);
                               }}
