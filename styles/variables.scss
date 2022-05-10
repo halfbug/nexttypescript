@@ -164,6 +164,31 @@ $dotted-border-color4:#F28BF4;
 	}
 }
 
+.gradient-block {
+	background: $white;
+	border: 0px;
+	box-shadow: none !important;
+	box-sizing: border-box;
+	backdrop-filter: blur(4px);
+	/* Note: backdrop-filter has minimal browser support */
+	border-radius: 6px;
+	&::before {
+	  content: "";
+	  position: absolute;
+	  width: auto;
+	  z-index: -1;
+	  padding: 1px;
+	  inset: 0;
+	  border-radius: 4px;
+	  background: linear-gradient(to right, #ccb2f9, #fee750);
+	  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	  -webkit-mask-composite: xor;
+	  mask-composite: exclude;
+	}
+  }
+
 $btn-focus-box-shadow: none !important;
 // You can also disable the box-shadow on focus around inputs with:
 $input-focus-box-shadow: none !important;

@@ -64,12 +64,17 @@ const GroupShop: NextPage = () => {
   });
 
   const {
-    loading, error, data: { groupshop } = { groupshop: gsInit },
-  } = useQuery<{groupshop: IGroupshop }, {code: string | undefined}>(GET_GROUPSHOP, {
-    variables: { code: discountCode },
-    notifyOnNetworkStatusChange: true,
-    skip: !discountCode,
-  });
+    loading,
+    error,
+    data: { groupshop } = { groupshop: gsInit },
+  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined }>(
+    GET_GROUPSHOP,
+    {
+      variables: { code: discountCode },
+      notifyOnNetworkStatusChange: true,
+      skip: !discountCode,
+    },
+  );
 
   const productsql = useQuery(GET_PRODUCTS, {
     variables: {
@@ -85,13 +90,15 @@ const GroupShop: NextPage = () => {
   console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
   console.log('🚀 ~~ line 75 ~ loading', loading);
 
-  const [allProducts, setallProducts] = useState<IProduct[] | undefined>(undefined);
+  const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
+    undefined,
+  );
   const [member, setmember] = useState<Member | undefined>(undefined);
   const [showps, setshowps] = useState<boolean>(false);
   const [showCart, setshowCart] = useState<boolean>(false);
   const [pending, setpending] = useState<boolean>(true);
-  const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[]
-    | undefined>(undefined);
+  const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
+    >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [storeLogo, setStoreLogo] = useState<string>('');
@@ -107,8 +114,13 @@ const GroupShop: NextPage = () => {
   }, [groupshop, pending]);
 
   const {
-    gsURL, clientDealProducts, isExpired, discount,
-    getDiscounts, milestones, getDateDifference,
+    gsURL,
+    clientDealProducts,
+    isExpired,
+    discount,
+    getDiscounts,
+    milestones,
+    getDateDifference,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -117,11 +129,18 @@ const GroupShop: NextPage = () => {
   const { googleEventCode, googleButtonCode } = useGtm();
 
   const {
-    members: [{ orderDetail: { customer: owner }, products: ownerProducts }],
+    members: [
+      {
+        orderDetail: { customer: owner },
+        products: ownerProducts,
+      },
+    ],
     members,
     store: { brandName } = { brandName: '' },
     store: { logoImage } = { logoImage: '' },
-    popularProducts, dealProducts, addedProducts,
+    popularProducts,
+    dealProducts,
+    addedProducts,
     // allProducts,
   } = gsctx;
   const {
@@ -133,9 +152,9 @@ const GroupShop: NextPage = () => {
     //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
     //   [...gsctx?.allProducts ?? []],
     // )));
-    setallProducts([...allProducts ?? []]?.sort(
-      (a, b) => a.title.localeCompare(b.title),
-    ));
+    setallProducts(
+      [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
+    );
 
     setbannerDiscount(getDiscounts());
   }, [gsctx]);
@@ -155,13 +174,18 @@ const GroupShop: NextPage = () => {
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
         // removing popular prd from topPicks so no duplication
-        const uniqueBestSeller = filterArray(topPicks as any[], popularProducts as any[], 'id', 'id').slice(0, 4 - popularProducts.length);
-        const newPopularArr = Array.from(new Set(
-          [...popularProducts ?? [], ...uniqueBestSeller ?? []],
-        ));
+        const uniqueBestSeller = filterArray(
+          topPicks as any[],
+          popularProducts as any[],
+          'id',
+          'id',
+        ).slice(0, 4 - popularProducts.length);
+        const newPopularArr = Array.from(
+          new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
+        );
         setNewPopularPrd([...newPopularArr]);
       } else {
-        setNewPopularPrd([...popularProducts ?? []]);
+        setNewPopularPrd([...(popularProducts ?? [])]);
       }
     }
   }, [popularProducts, dealProducts]);
@@ -184,17 +208,26 @@ const GroupShop: NextPage = () => {
     let otherProducts: IProduct[];
     if (productsql?.data?.products && gsctx.allProducts) {
       if (gsctx.campaign?.addableProducts?.length) {
-        otherProducts = findInArray(gsctx.campaign?.addableProducts, productsql?.data?.products || [], null, 'id');
+        otherProducts = findInArray(
+          gsctx.campaign?.addableProducts,
+          productsql?.data?.products || [],
+          null,
+          'id',
+        );
         // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
         // .data?.products || [], null, 'id'));
       } else {
         otherProducts = productsql?.data?.products.filter(
-          (o1:IProduct) => !gsctx?.allProducts?.some(
-            (o2:IProduct) => o1.id === o2.id,
-          ),
+          (o1: IProduct) => !gsctx?.allProducts?.some((o2: IProduct) => o1.id === o2.id),
         );
       }
-      dispatch({ type: 'UPDATE_PRODUCTS', payload: { ...gsctx, store: { ...gsctx.store, products: otherProducts } } });
+      dispatch({
+        type: 'UPDATE_PRODUCTS',
+        payload: {
+          ...gsctx,
+          store: { ...gsctx.store, products: otherProducts },
+        },
+      });
     }
   }, [productsql.data]);
 
@@ -204,7 +237,13 @@ const GroupShop: NextPage = () => {
     googleButtonCode('product-share');
     if (gsctx?.totalProducts < 101) {
       const cprod = clientDealProducts()?.length || 0;
-      if (cprod >= 5) { showError('Only 5 products can be added to this Group Shop per person.'); } else { setshowps(true); }
+      if (cprod >= 5) {
+        showError(
+          'Only 5 products can be added to this Group Shop per person.',
+        );
+      } else {
+        setshowps(true);
+      }
     } else showError('Groupshop is full you can not add more products to it');
   };
 
@@ -231,35 +270,49 @@ const GroupShop: NextPage = () => {
       <div className={styles.groupshop}>
         <header>
           <Header
-            LeftComp={(
-              <Counter
-                expireDate={gsctx?.expiredAt}
-                pending={pending}
-              />
-)}
-            RightComp={<InfoBox mes="How does this work?" brandname={brandName} />}
+            LeftComp={
+              <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+            }
+            RightComp={
+              <InfoBox mes="How does this work?" brandname={brandName} />
+            }
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
               <Col md={3} xs={3}>
                 <div className={styles.groupshop_main_logo}>
-                  { (logoImage === '' || logoImage === undefined)
-                    ? (<Brand name={(brandName || '').split(' ').slice(0, 2).join(' ') || ''} pending={pending} />)
-                    : (
-                      <img
-                        src={storeLogo}
-                        alt={`${brandName}`}
+                  {logoImage === '' || logoImage === undefined ? (
+                    <Brand
+                      name={
+                        (brandName || '').split(' ').slice(0, 2).join(' ') || ''
+                      }
+                      pending={pending}
+                    />
+                  ) : (
+                    <img
+                      src={storeLogo}
+                      alt={`${brandName}`}
                       // alt="d"
-                        width={130}
-                        className="img-fluid"
-                      />
-                    ) }
+                      width={130}
+                      className="img-fluid"
+                    />
+                  )}
                 </div>
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>
-                <h5 className="text-center">Shop or invite your friends to shop to get started!</h5>
+                <h5 className="text-center">
+                  Shop or invite your friends to shop to get started!
+                </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
-                  <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} pending={pending} />
+                  <Members
+                    names={gsctx?.members.map(
+                      (mem: any) => `${mem.orderDetail.customer.firstName} ${
+                        mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                      }`,
+                    )}
+                    cashback={['$23', '$20']}
+                    pending={pending}
+                  />
                   <ShareButton
                     placement="bottom"
                     shareurl={gsURL}
@@ -294,8 +347,10 @@ const GroupShop: NextPage = () => {
               <Col
                 md={3}
                 xs={3}
-                className={['text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
-                  styles.groupshop__top__left_icons].join(' ')}
+                className={[
+                  'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                  styles.groupshop__top__left_icons,
+                ].join(' ')}
               >
                 <ShareButton
                   placement="bottom"
@@ -310,10 +365,24 @@ const GroupShop: NextPage = () => {
                   onClick={handleAddProduct}
                   disabled={isExpired}
                 />
-                <IconButton icon={<Handbag size={24} />} className={styles.groupshop__hero_iconBtn} onClick={() => setshowCart(true)}>{gsctx?.cart && (gsctx?.cart?.length > 0) ? `(${gsctx?.cart?.length})` : ''}</IconButton>
-                <p className={['d-flex align-items-center', styles.groupshop__hero__cart_count].join(' ')}>(2)</p>
+                <IconButton
+                  icon={<Handbag size={24} />}
+                  className={styles.groupshop__hero_iconBtn}
+                  onClick={() => setshowCart(true)}
+                >
+                  {gsctx?.cart && gsctx?.cart?.length > 0
+                    ? `(${gsctx?.cart?.length})`
+                    : ''}
+                </IconButton>
+                <p
+                  className={[
+                    'd-flex align-items-center',
+                    styles.groupshop__hero__cart_count,
+                  ].join(' ')}
+                >
+                  (2)
+                </p>
               </Col>
-
             </Row>
           </Container>
         </header>
@@ -335,33 +404,43 @@ const GroupShop: NextPage = () => {
               </Col>
             </Row>
             <Row className="d-flex justify-content-evenly">
-              <Col md={4} className={styles.groupshop__hero__small_banner_right}>
-                {(members.length > 2 && members.length < 6)
-                  ? (
-                    <div className="d-flex flex-column justify-content-center align-items-center ">
-                      <div className="mb-2">Unlocked</div>
-                      <SmallBannerBox bannerDiscount={bannerDiscount} />
-                      <TickCircle />
-                    </div>
-                  ) : '' }
+              <Col
+                md={4}
+                className={styles.groupshop__hero__small_banner_right}
+              >
+                {members.length > 2 && members.length < 6 ? (
+                  <div className="d-flex flex-column justify-content-center align-items-center ">
+                    <div className="mb-2">Unlocked</div>
+                    <SmallBannerBox bannerDiscount={bannerDiscount} />
+                    <TickCircle />
+                  </div>
+                ) : (
+                  ''
+                )}
               </Col>
               <Col md={4} className="text-center mb-5">
                 <div className={styles.groupshop__hero_current_reward}>
                   Current Rewards
                 </div>
-                <div role="button" onClick={() => { setShowRewards(true); }}>
+                <div
+                  role="button"
+                  onClick={() => {
+                    setShowRewards(true);
+                  }}
+                >
                   <BigBannerBox text={text} />
                 </div>
               </Col>
               <Col md={4} className={styles.groupshop__hero__small_banner_left}>
-                {members.length < 5
-                  ? (
-                    <div className="d-flex flex-column justify-content-center align-items-center ">
-                      <div className="mb-2">Next Rewards</div>
-                      <SmallBannerBox2 bannerDiscount={bannerDiscount} />
-                      <GradientCircle />
-                    </div>
-                  ) : '' }
+                {members.length < 5 ? (
+                  <div className="d-flex flex-column justify-content-center align-items-center ">
+                    <div className="mb-2">Next Rewards</div>
+                    <SmallBannerBox2 bannerDiscount={bannerDiscount} />
+                    <GradientCircle />
+                  </div>
+                ) : (
+                  ''
+                )}
               </Col>
             </Row>
             <Row>
@@ -372,7 +451,15 @@ const GroupShop: NextPage = () => {
               </p>
             </Row>
             <div className="mt-2 mb-4 d-flex justify-content-center align-items-center">
-              <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} pending={pending} />
+              <Members
+                names={gsctx?.members.map(
+                  (mem: any) => `${mem.orderDetail.customer.firstName} ${
+                    mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                  }`,
+                )}
+                cashback={['$23', '$20']}
+                pending={pending}
+              />
             </div>
             <Row className={styles.groupshop__hero_how_to}>
               <InfoBox mes="How it works" brandname={brandName} />
@@ -398,41 +485,64 @@ const GroupShop: NextPage = () => {
             <span className={styles.groupshop_firstName}>
               {member?.orderDetail?.customer.firstName}
             </span>
-            { !pending && gsctx?.members?.length > 1 ? (
+            {!pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2">
-                <Dropdown.Toggle id="dropdown-autoclose-true" variant="outline-primary">
+                <Dropdown.Toggle
+                  id="dropdown-autoclose-true"
+                  variant="outline-primary"
+                  className={styles.groupshop_dropdown}
+                >
                   +
                   {gsctx?.members?.length - 1}
                   {' '}
                   other
-                  {(gsctx?.members?.length - 1) > 1 && 's'}
-                  {/* <DownArrow /> */}
+                  {gsctx?.members?.length - 1 > 1 && 's'}
+                  <DownArrow />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                  {gsctx?.members.map((mem: any) => <Dropdown.Item onClick={() => setmember(mem)}>{`${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`}</Dropdown.Item>)}
+                <Dropdown.Menu className={styles.groupshop_dropdownMenu}>
+                  {gsctx?.members.map((mem: any, index) => (
+                    <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
+                      <Dropdown.Item onClick={() => setmember(mem)}>
+                        {index === 0 && '👑 '}
+                        {`${
+                          mem.orderDetail.customer.firstName
+                        } ${
+                          mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                        }`}
+
+                      </Dropdown.Item>
+                    </div>
+
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
-            ) : ''}
+            ) : (
+              ''
+            )}
           </h2>
           <p>
             Shop from
             {' '}
             {member?.orderDetail?.customer?.firstName || ''}
             {' '}
-            ’s previous pruchases and recommendations.
+            ’s
+            previous pruchases and recommendations.
           </p>
-
         </ProductGrid>
-        {(members?.length > 1 || (addedProducts?.length)) ? (
+        {members?.length > 1 || addedProducts?.length ? (
           <ProductGrid
             xs={6}
             sm={6}
             md={6}
             lg={4}
             xl={3}
-            products={ownerProducts
-              && (ownerProducts!.length > 3 ? popularProducts?.slice(0, 3) : newPopularPrd)}
+            products={
+              ownerProducts
+              && (ownerProducts!.length > 3
+                ? popularProducts?.slice(0, 3)
+                : newPopularPrd)
+            }
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
@@ -440,27 +550,27 @@ const GroupShop: NextPage = () => {
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
-
-        )
-          : (
-            <ProductGrid
-              xs={6}
-              sm={6}
-              md={6}
-              lg={4}
-              xl={3}
-              products={ownerProducts
-                && (ownerProducts!.length > 3 ? topPicks?.slice(0, 3)
-                  : topPicks?.slice(0, 4))}
-              maxrows={1}
-              addProducts={handleAddProduct}
-              handleDetail={(prd) => setsProduct(prd)}
-              id="toppicks"
-            >
-              <h2>Top Picks</h2>
-            </ProductGrid>
-
-          )}
+        ) : (
+          <ProductGrid
+            xs={6}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+            products={
+              ownerProducts
+              && (ownerProducts!.length > 3
+                ? topPicks?.slice(0, 3)
+                : topPicks?.slice(0, 4))
+            }
+            maxrows={1}
+            addProducts={handleAddProduct}
+            handleDetail={(prd) => setsProduct(prd)}
+            id="toppicks"
+          >
+            <h2>Top Picks</h2>
+          </ProductGrid>
+        )}
 
         <ProductGrid
           xs={6}
@@ -477,10 +587,20 @@ const GroupShop: NextPage = () => {
         >
           <div className="position-relative">
             <h2>All Products</h2>
-            <div className={['position-absolute top-0 end-0', styles.groupshop_sort].join(' ')}>
+            <div
+              className={[
+                'position-absolute top-0 end-0',
+                styles.groupshop_sort,
+              ].join(' ')}
+            >
               <Dropdown align="end" drop="down">
                 <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                  <span className={['d-none d-sm-inline text-capitalize', styles.groupshop_sort_txt].join(' ')}>
+                  <span
+                    className={[
+                      'd-none d-sm-inline text-capitalize',
+                      styles.groupshop_sort_txt,
+                    ].join(' ')}
+                  >
                     Sort by
                   </span>
                   {/* <ChevronDown width={8} /> */}
@@ -490,41 +610,44 @@ const GroupShop: NextPage = () => {
                 <Dropdown.Menu className={styles.groupshop_sort_menu}>
                   <Dropdown.Item
                     className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                      (a, b) => (parseFloat(a.price) - parseFloat(b.price)),
-                    ))}
+                    onClick={() => setallProducts(
+                      [...(allProducts ?? [])]?.sort(
+                        (a, b) => parseFloat(a.price) - parseFloat(b.price),
+                      ),
+                    )}
                   >
                     Price (Low to High)
                   </Dropdown.Item>
                   <div className={styles.groupshop_sort_menu_border} />
                   <Dropdown.Item
                     className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                      (a, b) => (parseFloat(b.price) - parseFloat(a.price)),
-                    ))}
+                    onClick={() => setallProducts(
+                      [...(allProducts ?? [])]?.sort(
+                        (a, b) => parseFloat(b.price) - parseFloat(a.price),
+                      ),
+                    )}
                   >
                     Price ( High to Low)
-
                   </Dropdown.Item>
                   <div className={styles.groupshop_sort_menu_border} />
                   <Dropdown.Item
                     className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                      (a, b) => a.title.localeCompare(b.title),
-                    ))}
+                    onClick={() => setallProducts(
+                      [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
+                    )}
                   >
                     Name (a-z)
-
                   </Dropdown.Item>
                   <div className={styles.groupshop_sort_menu_border} />
                   <Dropdown.Item
                     className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts([...allProducts ?? []]?.sort(
-                      (a, b) => a.title.localeCompare(b.title),
-                    ).reverse())}
+                    onClick={() => setallProducts(
+                      [...(allProducts ?? [])]
+                        ?.sort((a, b) => a.title.localeCompare(b.title))
+                        .reverse(),
+                    )}
                   >
                     Name (z-a)
-
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -534,7 +657,12 @@ const GroupShop: NextPage = () => {
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             <p>Don’t see what you like?</p>
-            <Button className="align-self-center fs-4 my-2 px-5" onClick={handleAddProduct}>Add a Product</Button>
+            <Button
+              className="align-self-center fs-4 my-2 px-5"
+              onClick={handleAddProduct}
+            >
+              Add a Product
+            </Button>
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />
@@ -552,18 +680,21 @@ const GroupShop: NextPage = () => {
         />
         <AlertComponent />
         {isModalForMobile && (
-        <RewardBox
-          show={showRewards}
-          handleClose={() => setShowRewards(false)}
-        />
+          <RewardBox
+            show={showRewards}
+            handleClose={() => setShowRewards(false)}
+          />
         )}
       </div>
       {isModalForMobile && (
-        <Row onClick={() => { setShowRewards(true); }}>
+        <Row
+          onClick={() => {
+            setShowRewards(true);
+          }}
+        >
           <ShoppingBoxMobile />
         </Row>
       )}
-
     </>
   );
 };
