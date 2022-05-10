@@ -98,7 +98,7 @@ const ProductGrid = ({
               imgOverlay={(
                 <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
-                    $
+                    {currencySymbol}
                     {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
                     {' '}
                     OFF

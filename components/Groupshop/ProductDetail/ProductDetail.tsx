@@ -228,7 +228,7 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={styles.groupshop__pcard_tag_priceMobile}>
-                  $
+                  {currencySymbol}
                   {parseFloat(productPriceDiscount(+(product?.price ?? ''), +percentage))}
                   {' '}
                   Off
@@ -327,7 +327,7 @@ const ProductDetail = ({
                             {' '}
                             <strong>
                               {' '}
-                              $
+                              {currencySymbol}
                               { cashBack }
                               {' '}
                               cashback
@@ -440,7 +440,7 @@ const ProductDetail = ({
                       </Row>
                       <Row className="align-items-center">
                         <Col xs={6} md={6} lg={6}>
-                          <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+                          <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
                         </Col>
                         <Col xs={6} md={6} lg={6}>
                           <ShareButton

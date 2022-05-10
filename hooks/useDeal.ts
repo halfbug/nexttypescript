@@ -23,7 +23,7 @@ export default function useDeal() {
     ) ?? []]), [clientIP, gsctx.dealProducts],
   );
 
-  const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currency || 'USD');
+  const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
 
   const discount = gsctx?.discountCode?.percentage;
 

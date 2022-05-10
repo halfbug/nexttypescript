@@ -122,7 +122,7 @@ const Cart = ({
                 </Col>
               </Row> */}
               <div className="align-items-center">
-                <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={['$23', '$20']} />
+                <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
               </div>
               {/* <div className={styles.groupshop_modal_cart_progress} /> */}
               {/* <div className="mt-3">
@@ -309,7 +309,7 @@ const Cart = ({
                   You’ve saved
                   {' '}
                   <strong>
-                    $
+                    {currencySymbol}
                     {/* {dPrice(getTotalActualCartTotal())} */}
                     {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
                   </strong>

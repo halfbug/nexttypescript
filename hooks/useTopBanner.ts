@@ -7,7 +7,7 @@ const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
   const [cashbackVal, setCashBackVal] = useState<number | undefined | string>('...');
-  const { unLockCB } = useDeal();
+  const { unLockCB, currencySymbol } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
     members, discountCode: { percentage }, milestones,
@@ -21,13 +21,13 @@ const useTopBanner = () => {
     if (members) {
       if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');
-        setCashBackText(`Plus unlock $${cashbackVal} cashback for`);
+        setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
       } else if (members.length === 2 || members.length === 4) {
         setText('For the next one shopper only');
-        setCashBackText(`Plus unlock $${cashbackVal} cashback for`);
+        setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
       } else if (members.length >= 5) {
         setText('all orders');
-        setCashBackText(`This group has unlocked over $${cashbackVal} in discounts and cashback. `);
+        setCashBackText(`This group has unlocked over ${currencySymbol}${cashbackVal} in discounts and cashback. `);
       }
     }
   }, [gsctx, cashbackVal]);

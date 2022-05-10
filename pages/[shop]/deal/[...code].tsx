@@ -121,6 +121,7 @@ const GroupShop: NextPage = () => {
     getDiscounts,
     milestones,
     getDateDifference,
+    currencySymbol,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -310,7 +311,7 @@ const GroupShop: NextPage = () => {
                         mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                       }`,
                     )}
-                    cashback={['$23', '$20']}
+                    cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                     pending={pending}
                   />
                   <ShareButton
@@ -457,7 +458,7 @@ const GroupShop: NextPage = () => {
                     mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                   }`,
                 )}
-                cashback={['$23', '$20']}
+                cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                 pending={pending}
               />
             </div>
