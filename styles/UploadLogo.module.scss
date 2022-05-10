@@ -42,8 +42,10 @@
 	}
 
 	img {
-		max-width: 150px;
-		max-height: 120px;
+		// max-width: 150px;
+		// max-height: 120px;
+		max-width: 100%;
+		height: auto;
 	}
 		// position: relative;
 		button {
