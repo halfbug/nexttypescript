@@ -17,10 +17,10 @@ export default function BannerComponent(
   return (
 
     <section>
-      <div className="w-75 shadow-sm p-2 bg-body rounded">
-        <Row className=" d-flex flex-row mx-2 d-flex align-items-center align-self-center">
+      <div className="w-75 shadow-sm p-1 bg-body rounded">
+        <Row className=" d-flex flex-row mx-0 d-flex align-items-center align-self-center">
           <Col lg={5}>
-            <img src={image.src} alt="B1" width="94" height="25" />
+            <img src={image.src} alt="B1" width="94" height="27" />
           </Col>
           <Col lg={7}>
             <h6>

@@ -4,19 +4,22 @@
     @extend .d-flex, .mt-2, .px-0;
 
     &__box_1 {
-        @extend .mb-4, .p-4;
+        @extend .mb-4;
+        padding: 27px 33px;
         border: 1px dashed $dotted-border-color1;
         border-radius: 18px;
     }
 
     &__box_3 {
-        @extend .mb-4, .p-4;
+        @extend .mb-4;
+        padding: 27px 33px;
         border: 1px dashed #A7C737;
         border-radius: 23px;
     }
 
     &__box_orange {
-        @extend .mb-4, .p-4;
+        @extend .mb-4;
+        padding: 27px 33px;
         border: 1px dashed $average;
         border-radius: 18px;
     }
@@ -38,6 +41,17 @@
         font-weight: $font-weight-light;
         line-height: $line-height-18;
         font-family: 'Mulish';
+        opacity: $opacity-medium;
+        margin-left: 0px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    &__light_meduim_txt {
+        color: #1D2329;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 21px;
+        font-family: 'DM Sans';
         opacity: $opacity-medium;
         margin-left: 0px;
         padding-top: 3px;
@@ -86,6 +100,7 @@
         @extend .mt-4;
         color: $black;
         opacity: .08;
+        margin-bottom: 26px;
     }
 
     &__enable_btn {
@@ -141,7 +156,8 @@
         color: $black;
         background-color: white;
         border-color: $black;
-        height: 30px;
+        height: 28px;
+        border-radius: 6px !important;
         width: 75px;
     
         &:hover, &:active, &:focus {
@@ -156,7 +172,8 @@
         color: $black;
         background-color: white;
         border-color: $black;
-        height: 30px;
+        height: 28px;
+        border-radius: 6px !important;
         width: 75px;
     
         &:hover, &:active, &:focus {
@@ -198,12 +215,12 @@
     &__checkbox {
         @extend .p-2, .d-flex, .align-items-center;
         &__input {
-            width: 18px !important;
-            height: 18px !important;
-            border: 3px solid $white;
+            width: 20px !important;
+            height: 20px !important;
+            border: 1px solid white;
             box-shadow: 0 0 0 1px $lightGrey;
             &:checked {
-                border-color: $white;
+                border: .2rem solid white;
                 background-image: none !important;
             }
             &:checked+label {

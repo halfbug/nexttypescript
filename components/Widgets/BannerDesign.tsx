@@ -33,7 +33,7 @@ export default function BannerDesign(
 
       </h4>
       <div className={styles.layout__style_btns}>
-        <div className={styles.layout__light_txt}>
+        <div className={styles.layout__light_meduim_txt}>
           Select style:
 
         </div>
@@ -113,12 +113,12 @@ export default function BannerDesign(
           >
             <Form.Check.Input type="radio" name="cashback" className={styles.layout__checkbox__input} />
             <Form.Check.Label className={styles.layout__checkbox__input__label}>
-              Shop with friends, get $50 cashback.
+              <span className="pe-1">Shop with friends, get $50 cashback.</span>
               <span className={styles.badge}>Recommended</span>
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="px-2 py-1"
             onChange={(e) => handleChange(e)}
             type="radio"
           >
