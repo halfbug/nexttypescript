@@ -53,7 +53,7 @@ export default function Integrations(
 
   return (
     <>
-      <h3 className="my-3 mx-0 ps-0 ">Integrations</h3>
+      <h3>Integrations</h3>
       <section className={styles.marketing__box_1}>
         <h4 className="mt-0">
           Connect your pixels

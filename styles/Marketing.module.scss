@@ -1,7 +1,7 @@
 @import "./variables.scss";
 
 .marketing {
-    @extend .d-flex, .mt-2, .px-0;
+    @extend .d-flex, .px-0;
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
@@ -19,7 +19,7 @@
     }
 
     h3 {
-        @extend .mx-3, .px-0, .my-3;
+        @extend .px-0, .mt-5, .mb-4;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
@@ -36,7 +36,7 @@
         line-height: 21px;
     }
     p {
-        font-family: "DM Sans"!important;
+        font-family: "DM Sans" !important;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -63,10 +63,11 @@
     .enablebtn {
         @extend .rounded-3, .me-2;
         width: 96px;
+        border-color: $black;
+        color: $black;
         &:hover {
             color: $white;
             opacity: 100%;
-            border-color: $black;
         }
         &:active,
         &:focus,
@@ -81,10 +82,10 @@
     .disablebtn {
         @extend .rounded-3;
         width: 96px;
+        border-color: $black;
+        color: $black;
         &:hover {
-            color: $black;
             opacity: 100%;
-            border-color: $black;
         }
         &:active,
         &:focus,

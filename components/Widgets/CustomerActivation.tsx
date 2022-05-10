@@ -10,7 +10,7 @@ export default function CustomerActivation(
 ) {
   return (
     <>
-      <h3 className=" pb-2 ms-0 ps-0 pt-4 ">Customer Activation</h3>
+      <h3>Customer Activation</h3>
       <section className={styles.marketing__box_1}>
         <h4 className="d-flex align-items-center">
           Download Brand QR Code

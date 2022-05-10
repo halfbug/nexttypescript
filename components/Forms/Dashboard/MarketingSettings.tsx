@@ -11,8 +11,8 @@ import Integrations from 'components/Widgets/Integrations';
 export default function MarketingSettings() {
   return (
     <Row className={styles.marketing}>
-      <h3>Marketing Tools</h3>
       <Col lg={8}>
+        <h3>Marketing Tools</h3>
         <MarketingTools />
         <CustomerActivation />
         <Integrations />
