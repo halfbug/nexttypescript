@@ -8,7 +8,7 @@ import Recover from 'assets/images/recover.svg';
 import Sms from 'assets/images/add-sms.svg';
 import InviteCustomer from 'assets/images/invite-customer.svg';
 import DisableButton from 'assets/images/disable-btn-icon.svg';
-import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import { Check2Circle, InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 
@@ -21,11 +21,11 @@ export default function MarketingTools(
           <Col lg={1} className="me-0 mt-2">
             <Recover />
           </Col>
-          <Col lg={10} className="ms-2 px-0">
+          <Col lg={10} className="px-0">
             <h4 className="mt-0">
               Recover abandoned carts
               <ToolTip
-                className="mx-2"
+                className={styles.marketing__tooltip_1}
                 icon={<InfoCircle size={13} />}
                 popContent="No purchase yet? No problem.
               We'll add the abandoned products to a dedicated Groupshop page,
@@ -72,7 +72,7 @@ export default function MarketingTools(
           <Col lg={1} className="me-0 mt-2">
             <Sms />
           </Col>
-          <Col lg={10} className="ms-2 px-0">
+          <Col lg={10} className="px-0">
             <h4 className="mt-0">
               Add SMS and WhatsApp notifications
             </h4>
@@ -114,7 +114,7 @@ export default function MarketingTools(
           <Col lg={1} className="me-0 mt-2">
             <InviteCustomer />
           </Col>
-          <Col lg={10} className="ms-2 px-0">
+          <Col lg={10} className="px-0">
             <h4 className="mt-0">
               Invite past customers to Groupshop
             </h4>

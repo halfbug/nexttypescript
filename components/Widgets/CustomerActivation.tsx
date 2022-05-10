@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styles from 'styles/Marketing.module.scss';
 import {
-  Row, Col, Button,
+  Button,
 } from 'react-bootstrap';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 

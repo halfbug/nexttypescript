@@ -1,21 +1,30 @@
 @import "./variables.scss";
 
-.marketing {
+.marketing {    
     @extend .d-flex, .px-0;
     &__box_1 {
-        @extend .mb-4, .p-4;
+        @extend .mb-4;
+        padding: 24px 34px;
         border: 1px dashed $dotted-border-color1;
         border-radius: 18px;
     }
     &__box_3 {
-        @extend .mb-4, .p-4;
-        border: 1px dashed $dotted-border-color3;
+        @extend .mb-4;
+        padding: 24px 34px;
+        border: 1px dashed $dotted-border-color2;
         border-radius: 18px;
     }
     &__box_orange {
         @extend .mb-4, .p-4;
         border: 1px dashed $average;
         border-radius: 18px;
+    }
+
+    &__tooltip_1{
+        @extend .mx-2;
+    }
+    .popover{
+        border:5px solid;
     }
 
     h3 {
@@ -50,14 +59,16 @@
         height: 200px;
     }
     .badge {
-        @extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
+        @extend .m-1, .lh-sm;
         background: $recommended !important;
         color: $black !important;
         font-family: "DM Sans";
-        font-weight: 500!important;
+        font-weight: 500 !important;
         font-size: 10px;
-        line-height: 15px!important;
         text-align: center;
+        line-height: 26px !important;
+        width: 96px;
+        border-radius: 6px;
     }
 
     .enablebtn {
