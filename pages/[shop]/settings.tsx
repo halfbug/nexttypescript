@@ -38,7 +38,7 @@ const Settings: NextPage = () => {
                       onClick={() => setTab('General')}
                       className={tab === 'General' ? styles.setting_tab_general_active : styles.setting_tab_general}
                     >
-                      <Col>
+                      <Col className='ps-0'>
                         {tab === 'General' ? <GeneralTransparentLogo /> : <GeneralLogo />}
                         <h4>
                           General
@@ -55,7 +55,7 @@ const Settings: NextPage = () => {
                       onClick={() => setTab('Layout')}
                       className={tab === 'Layout' ? styles.setting_tab_layout_active : styles.setting_tab_layout}
                     >
-                      <Col>
+                      <Col className='ps-0'>
                         {tab === 'Layout' ? <LayoutTransparentLogo /> : <LayoutLogo />}
                         <h4>
                           Layout
@@ -72,7 +72,7 @@ const Settings: NextPage = () => {
                       onClick={() => setTab('Marketing')}
                       className={tab === 'Marketing' ? styles.setting_tab_marketing_tool_active : styles.setting_tab_marketing_tool}
                     >
-                      <Col>
+                      <Col className='ps-0'>
                         {tab === 'Marketing' ? <MarketingTransparentLogo /> : <MarketingLogo />}
                         <h4>
                           Marketing Tools
@@ -89,7 +89,7 @@ const Settings: NextPage = () => {
                       onClick={() => setTab('Affiliate')}
                       className={tab === 'Affiliate' ? styles.setting_tab_affiliate_tool_active : styles.setting_tab_affiliate_tool}
                     >
-                      <Col>
+                      <Col className='ps-0'>
                         {tab === 'Affiliate' ? <PartnerToolTransparentLogo /> : <PartnerToolLogo />}
                         <h4>
                           Partner Tools
