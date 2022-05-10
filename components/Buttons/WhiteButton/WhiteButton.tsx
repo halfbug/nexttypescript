@@ -12,7 +12,7 @@ const WhiteButton = ({
   <Button
     size="sm"
     variant="light"
-    className={['rounded-3', 'btn-outline-dark', 'btn-group-sm', styles.whitebutton].join(' ')}
+    className={['rounded-3', 'btn-outline-dark', styles.whitebutton].join(' ')}
     {...rest}
   >
     {children}

@@ -4,11 +4,10 @@
     @extend .p-2;
     height: fit-content;
     background-color: #fff;
-    color: #000 !important;
+    color: $black !important;
     align-items: center;
     font-family: DM Sans;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 12px;
     line-height: 15px;	
     &:focus,
