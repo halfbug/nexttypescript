@@ -36,13 +36,14 @@
         line-height: 21px;
     }
     p {
-        font-family: "DM Sans";
+        font-family: "DM Sans"!important;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
         color: #1d2329;
         opacity: 0.5;
+        
     }
     .vertical {
         border-top: 1px solid #dee2ed;
