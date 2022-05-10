@@ -61,7 +61,7 @@ export default function CreateCampaign() {
     isRewardEdit: false,
 
   });
-  const { clearNewCampaign, updateCampaign } = useCampaign();
+  const { clearNewCampaign, updateCampaign, setValue } = useCampaign();
   React.useEffect(() => {
     clearNewCampaign();
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: '' } });
@@ -256,8 +256,6 @@ export default function CreateCampaign() {
   const handleAddProduct = () => {
     setParams({ ins: 'addproduct' });
   };
-  const { setValue } = useUtilityFunction();
-
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);

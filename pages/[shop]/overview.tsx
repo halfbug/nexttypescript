@@ -1,12 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Page from 'components/Layout/Page/Page';
-import { StoreContext } from 'store/store.context';
-import { useQuery } from '@apollo/client';
-import { GET_STORE } from 'store/store.graphql';
-
 import CampaignOverview from 'components/Forms/Dashboard/CampaignOverview';
 import CampaignMetrics from 'components/Forms/Dashboard/CampaignMetrics';
 import CampaignStrength from 'components/Forms/Dashboard/CampaignStrength';

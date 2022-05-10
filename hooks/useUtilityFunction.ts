@@ -1,23 +1,13 @@
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { useCallback, useContext } from 'react';
-import { StoreContext } from 'store/store.context';
-import { IProduct } from 'types/store';
-// /import { useRouter } from 'next/router';
-
-// export declare type TParams = {
-//     [param: string]: any;
-// };
 
 export default function useUtilityFunction() {
 //   const router = useRouter();
 
   //   const { pathname, query: params } = router;
-  const {
-    store,
-    dispatch,
-  } = useContext(StoreContext);
 
   const cleanTypename = useCallback((obj: any) => {
     try {
@@ -73,9 +63,6 @@ export default function useUtilityFunction() {
     return !newArr;
   });
 
-  const setValue = (field: string, value: string | number) => {
-    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
-  };
   // eslint-disable-next-line max-len
   const findIndexInArray = useCallback((arr, searchField, searchValue) => arr.findIndex((item: any) => item[searchField] === searchValue), []);
 
@@ -100,18 +87,19 @@ export default function useUtilityFunction() {
     const newNum = (+num).toFixed(2).toString().replace('.00', '');
     return newNum;
   });
+  const storeCurrencySymbol = (currCode: string) => getSymbolFromCurrency(currCode || 'USD');
 
   return {
     cleanTypename,
     multiple5,
     isMultiple5,
     findInArray,
-    setValue,
     filterArray,
     findIndexInArray,
     convertNumToMonth,
     getKeyFromS3URL,
     getSignedUrlS3,
     formatNumber,
+    storeCurrencySymbol,
   };
 }

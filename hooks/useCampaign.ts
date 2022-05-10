@@ -100,10 +100,12 @@ export default function useCampaign() {
         return newItem;
       });
       // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-      console.log({ updatedCampaigns });
     }
     return updatedCampaigns;
   }, []);
+  const setValue = (field: string, value: string | number) => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
+  };
 
   return {
     getCampaign,
@@ -114,5 +116,6 @@ export default function useCampaign() {
     updateSelectedCampaignProducts,
     updateSelectedCampaignAddProducts,
     updateCampaign,
+    setValue,
   };
 }

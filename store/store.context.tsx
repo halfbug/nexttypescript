@@ -17,6 +17,7 @@ const initialState: IStore = {
   logoImage: '',
   industry: '',
   newCampaign: { products: [], collections: [], productsArray: [] },
+  currencyCode: '',
 };
 
 export const StoreContext = React.createContext<StoreContextType>(
@@ -37,6 +38,8 @@ export const StoreContextProvider = ({
     installationStep: 0,
     logoImage: '',
     industry: '',
+    currencyCode: '',
+
   });
 
   return (

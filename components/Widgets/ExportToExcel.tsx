@@ -42,7 +42,6 @@ const ExportToExcel = ({
   React.useEffect(() => {
     if (excelData) {
       // foramt data then assign in sheetdata
-      console.log({ excelData });
       const sheetRes = formatDataForExcel(excelData.getBillingByDate);
 
       exportToCSV(sheetRes, xlFileName);
@@ -54,8 +53,6 @@ const ExportToExcel = ({
   const BillingQueryLoader = () => {
     const startDate = new Date(year, month - 1, 1); // month -1 because JS start month from 0zero
     const endDate = new Date(year, month, 0);
-    console.log({ startDate });
-    console.log({ endDate });
     const data = getDayBilling({
       variables: {
         storeId,
@@ -63,7 +60,6 @@ const ExportToExcel = ({
         endDate,
       },
     });
-    console.log({ sheetData });
 
     // if (sheetData) exportToCSV(sheetData, xlFileName);
   };

@@ -1,16 +1,18 @@
 import { useLazyQuery } from '@apollo/client';
 import {
-  useEffect, useState,
+  useEffect, useState, useContext,
 } from 'react';
+import { StoreContext } from 'store/store.context';
 import { GET_BILLING_BY_DATE } from 'store/store.graphql';
+import useUtilityFunction from './useUtilityFunction';
 
 const useExcelDocument = () => {
   const [sheetData, setsheetData] = useState(undefined);
   const [getDayBilling, { data, loading }] = useLazyQuery(GET_BILLING_BY_DATE);
-  console.log({ data });
+  const { storeCurrencySymbol } = useUtilityFunction();
+  const { store } = useContext(StoreContext);
 
   const formatDataForExcel = (sourceData : any) => {
-    console.log(sourceData);
     const sheetresult: any = sourceData.map((bRec: any) => {
       const {
         _id: { month, date, year },
@@ -18,20 +20,17 @@ const useExcelDocument = () => {
         feeformGroupshop, storeTotalGS, todaysTotalGS, storePlan,
       } = bRec;
 
-      const GSUsageCharges = feeformGroupshop.map((item: any) => {
-        console.log({ item });
-        return `(${item.plan} Total GS ${item.totalGS}) >> $${item.totalCharged}`;
-      });
+      const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}`);
       console.log({ GSUsageCharges });
 
       return {
         Day: `${month}-${date}-${year}`,
-        Revenue_Generated: revenue,
+        Revenue_Generated: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${revenue}`,
         Groupshops_Created: todaysTotalGS,
-        Total_CashBack_Given: totalCashback,
+        Total_CashBack_Given: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalCashback}`,
         Store_Plan: storePlan,
         // storeTotalGS,
-        Charge_From_CashBack: totalfeeByCashback,
+        Charge_From_CashBack: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalfeeByCashback}`,
         Charge_From_GroupShops: GSUsageCharges.join(' | '),
       };
     });
@@ -47,8 +46,6 @@ const useExcelDocument = () => {
   //     // setsheetData(data);
   //   }
   // }, [data]);
-
-  console.log({ sheetData });
 
   return {
     sheetData, getDayBilling, loading, data, formatDataForExcel,

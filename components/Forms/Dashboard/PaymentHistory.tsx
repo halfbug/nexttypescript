@@ -19,7 +19,7 @@ export default function PaymentHistory() {
   const {
     totalGS, totalRevenue, currencySymbol, getMonthlyGSCount,
   } = useBilling();
-  const { convertNumToMonth } = useUtilityFunction();
+  const { convertNumToMonth, storeCurrencySymbol } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
   const [monthlyGS, setmonthlyGS] = React.useState([{
     _id: {
@@ -46,7 +46,6 @@ export default function PaymentHistory() {
   React.useEffect(() => {
     refetch();
   }, []);
-
   const getBillingTableHTML = () => (
     <div>
       <Table borderless hover className='mb-0'>
@@ -67,10 +66,21 @@ export default function PaymentHistory() {
                 {' '}
                 {item._id.year}
               </td>
-              <td>{(item.revenue).toFixed(2).toString().replace('.00', '')}</td>
-              <td>{getMonthlyGSCount(item._id.month as unknown as number)}</td>
-              <td>{(item.cashBack).toFixed(2).toString().replace('.00', '')}</td>
-              <td>{(item.feeCharges).toFixed(2).toString().replace('.00', '')}</td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                {(item.revenue).toFixed(2).toString().replace('.00', '')}
+              </td>
+              <td>
+                {getMonthlyGSCount(item._id.month as unknown as number)}
+              </td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                {(item.cashBack).toFixed(2).toString().replace('.00', '')}
+              </td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                {(item.feeCharges).toFixed(2).toString().replace('.00', '')}
+              </td>
               <td>
                 <ExportToExcel
                   apiData={mockData}

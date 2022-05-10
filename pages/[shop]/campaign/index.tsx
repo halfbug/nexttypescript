@@ -57,7 +57,7 @@ const CampaignListing = () => {
   }, [store]);
 
   const { clearNewCampaign } = useCampaign();
-  const { formatNumber } = useUtilityFunction();
+  const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
 
   const handleClick = (campaignid: string) => {
     clearNewCampaign();
@@ -136,11 +136,11 @@ const CampaignListing = () => {
             </Col>
             <Col className={styles.gradient_text}>
 
-              {camp?.details.totalRevenue ? `$${formatNumber(camp?.details.totalRevenue)}` : '-'}
+              {camp?.details.totalRevenue ? `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(camp?.details.totalRevenue)}` : '-'}
             </Col>
             <Col className={styles.gradient_text}>{camp?.details.totalGroupshops}</Col>
             <Col className={['ps-3 ', styles.gradient_text].join(' ')}>
-              {camp?.details.totalCashback ? `$${formatNumber(camp?.details.totalCashback)}` : '-'}
+              {camp?.details.totalCashback ? `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(camp?.details.totalCashback)}` : '-'}
             </Col>
             <Col className={[styles.gradient_text, 'ps-3'].join(' ')}>
               {/* <ToggleButton
