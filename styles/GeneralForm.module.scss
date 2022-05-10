@@ -29,7 +29,7 @@
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
-        font-size: 16px!important;
+        font-size: 16px !important;
         line-height: 21px;
     }
     .form-control {
@@ -48,9 +48,11 @@
     }
 
     &_subheading {
-        @extend .fs-4, .fw-bold, .lh-base;
-        font-family: DM Sans;
         color: $subheadingclr;
+        font-family: "DM Sans";
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 21px;
     }
     &_p {
         @extend .lh-base, .fs-3;
@@ -70,15 +72,15 @@
         font-size: $font-size-medium;
         font-weight: $font-weight-light;
         line-height: $line-height-18;
-        font-family: 'Mulish';
+        font-family: "Mulish";
         opacity: $opacity-medium;
     }
 
     &_Obupload {
         @extend .p-2;
-		width: 198px !important;
-		height: 87px !important;
-	}
+        width: 198px !important;
+        height: 87px !important;
+    }
 
     &_smalltxt {
         @extend .px-4;
