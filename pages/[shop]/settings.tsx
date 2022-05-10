@@ -40,7 +40,7 @@ const Settings: NextPage = () => {
                     >
                       <Col className='ps-0'>
                         {tab === 'General' ? <GeneralTransparentLogo /> : <GeneralLogo />}
-                        <h4>
+                        <h4 className='pt-1'>
                           General
                         </h4>
                         <TabPane eventKey="General" title="General" />
@@ -57,7 +57,7 @@ const Settings: NextPage = () => {
                     >
                       <Col className='ps-0'>
                         {tab === 'Layout' ? <LayoutTransparentLogo /> : <LayoutLogo />}
-                        <h4>
+                        <h4 className='pt-1'>
                           Layout
                         </h4>
                         <TabPane eventKey="Layout" title="Layout" />
@@ -74,7 +74,7 @@ const Settings: NextPage = () => {
                     >
                       <Col className='ps-0'>
                         {tab === 'Marketing' ? <MarketingTransparentLogo /> : <MarketingLogo />}
-                        <h4>
+                        <h4 className='pt-1'>
                           Marketing Tools
                         </h4>
                         <TabPane eventKey="Marketing" title="Marketing" />
@@ -91,7 +91,7 @@ const Settings: NextPage = () => {
                     >
                       <Col className='ps-0'>
                         {tab === 'Affiliate' ? <PartnerToolTransparentLogo /> : <PartnerToolLogo />}
-                        <h4>
+                        <h4 className='pt-1'>
                           Partner Tools
                         </h4>
                         <TabPane eventKey="Affiliate" title="Affiliate" />
