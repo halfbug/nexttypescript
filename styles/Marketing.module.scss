@@ -50,9 +50,13 @@
     }
     .badge {
         @extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
-        font-size: 8px;
         background: $recommended !important;
         color: $black !important;
+        font-family: "DM Sans";
+        font-weight: 500!important;
+        font-size: 10px;
+        line-height: 15px!important;
+        text-align: center;
     }
 
     .enablebtn {
@@ -115,7 +119,7 @@
         background: #ffffff;
         border: 1px solid $black;
         border-radius: 6px;
-        &:hover{
+        &:hover {
             border: $black;
             background: #ffffff;
             border: 1px solid $black;
@@ -135,32 +139,29 @@
     }
 
     &__valid {
-        color: #2BB439;
+        color: #2bb439;
         font-size: 14px;
         font-weight: 500;
         line-height: 18px;
     }
 
-    
-    &_inputIconBox{
+    &_inputIconBox {
         @extend .d-flex;
         position: relative;
-    
     }
-    &_inputIcon{
+    &_inputIcon {
         // @extend .mt-2;
         position: absolute;
         margin-left: -5px;
-    
     }
 
     &__collapse {
-        background: #FCFCFC;
-        border: 1px solid #F3F3F3;
+        background: #fcfcfc;
+        border: 1px solid #f3f3f3;
         margin-bottom: 15px;
-        
+
         &__header {
-            background: #FCFCFC;
+            background: #fcfcfc;
             display: flex;
             justify-content: space-between;
             height: 50px;
@@ -172,7 +173,7 @@
             }
 
             &__txt {
-                color: #1D2329;
+                color: #1d2329;
                 font-size: 14px;
                 font-weight: 500;
                 line-height: 18px;
