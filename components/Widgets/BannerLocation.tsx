@@ -89,11 +89,19 @@ export default function BannerLocation(
                     <div className={styles.layout__codesnip__txt}>5</div>
                   </Col>
                   <Col lg={10} className="pt-2 w-50">
-                    <div className={styles.layout__codesnip__txt}>script</div>
-                    <div className={styles.layout__codesnip__txt}>some</div>
-                    <div className={styles.layout__codesnip__txt}>code</div>
-                    <div className={styles.layout__codesnip__txt}>is going</div>
-                    <div className={styles.layout__codesnip__txt}>/script</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>
+                      {'<'}
+                      script
+                      {'>'}
+                    </div>
+                    <div className={styles.layout__codesnip__code}>some code</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>is going</div>
+                    <div className={['ps-3', styles.layout__codesnip__code].join(' ')}>here</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>
+                      {'<'}
+                      /script
+                      {'>'}
+                    </div>
                   </Col>
                 </Row>
               </div>
@@ -113,11 +121,19 @@ export default function BannerLocation(
                     <div className={styles.layout__codesnip__txt}>5</div>
                   </Col>
                   <Col lg={10} className="pt-2 w-50">
-                    <div className={styles.layout__codesnip__txt}>script</div>
-                    <div className={styles.layout__codesnip__txt}>some</div>
-                    <div className={styles.layout__codesnip__txt}>code</div>
-                    <div className={styles.layout__codesnip__txt}>is going</div>
-                    <div className={styles.layout__codesnip__txt}>/script</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>
+                      {'<'}
+                      script
+                      {'>'}
+                    </div>
+                    <div className={styles.layout__codesnip__code}>some code</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>is going</div>
+                    <div className={['ps-3', styles.layout__codesnip__code].join(' ')}>here</div>
+                    <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>
+                      {'<'}
+                      /script
+                      {'>'}
+                    </div>
                   </Col>
                 </Row>
               </div>
