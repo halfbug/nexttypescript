@@ -23,7 +23,7 @@ import ProductCard from '../ProductCard/ProductCard';
 interface ProductsSearchProps extends RootProps {
   show : boolean;
   handleClose(e:any): any;
-  // handleSearch(e:any): any;
+
 }
 
 const ProductsSearch = ({
@@ -101,7 +101,7 @@ const ProductsSearch = ({
   const handleSearch = (event:any) => {
     const { value: searchText } = event.target;
     const code = event.keyCode || event.key;
-    // console.log({ e });
+
     if (code !== 37 || code !== 38 || code !== 39 || code !== 40 || code !== 13) {
       debouncedSearch(searchText);
     }
@@ -112,6 +112,7 @@ const ProductsSearch = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
+
   return (
     <>
       <Modal
@@ -146,13 +147,6 @@ const ProductsSearch = ({
           </div>
 
           <Form onSubmit={handleSubmit}>
-            {/* <Form.Group className="mb-3 " controlId="searchField">
-              <InputGroup size="sm" className="mb-3">
-                <InputGroup.Text id="inputGroup-sizing-sm"><SearchIcon /></InputGroup.Text>
-                <Form.Control size="lg" className="bg-light pt-2 border-0" type="text" placeholder=
-                "Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
-              </InputGroup>
-            </Form.Group> */}
 
             <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
               <SearchIcon />
@@ -193,8 +187,7 @@ const ProductsSearch = ({
                           { selected?.includes(prd.id) ? (
                             <>
                               <span className={styles.groupshop__pcard_tag_price}>
-                                {/* {`${currencySymbol}
-                          ${formatNumber(+prd.price - dPrice(+(prd.price)))} OFF`} */}
+
                                 {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
                               </span>
                               <IconButton
@@ -217,7 +210,7 @@ const ProductsSearch = ({
                       <p className="text-center fw-bold fs-5 mb-0">
                         <span className="text-decoration-line-through fw-light me-1">
                           {currencySymbol}
-                          {/* {prod.price} */}
+
                           {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                         </span>
                         {' '}
@@ -225,9 +218,7 @@ const ProductsSearch = ({
                           {currencySymbol}
                           {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                         </span>
-                        {/* $
-                        {' '}
-                        {(+(prd.price)).toFixed(2).toString().replace('.00', '')} */}
+
                       </p>
                     </ProductCard>
                   </Col>
@@ -237,6 +228,11 @@ const ProductsSearch = ({
             ) : (
               <div className={styles.groupshop_modal_empty}>
                 <p>SEARCH TO FIND YOUR FAVORITE PRODUCTS</p>
+              </div>
+            )}
+            {otherProducts?.length === 0 && (
+              <div className={styles.groupshop_modal_empty}>
+                <p>No more products left in store</p>
               </div>
             )}
           </Row>
@@ -304,47 +300,12 @@ const ProductsSearch = ({
                     </Popover>
                   </Overlay>
                 </div>
-                {/* <OverlayTrigger
-                  trigger="click"
-                  placement="top"
-                  overlay={(
-                    <Popover
-                      className={styles.groupshop_search_popover}
-                      style={{ maxWidth: '325px' }}
-                      id="popover-positioned"
-                    >
-
-                      <Popover.Body>
-                        <p className="text-center fs-5">
-                          Add
-                          <strong>
-                            {' '}
-                            {selectedCount}
-                            {' '}
-                            products
-                          </strong>
-                          {' '}
-                          to this Groupshop
-                          <AddDealProduct selectedProducts={selected} handleClose={closeModal} />
-                        </p>
-                      </Popover.Body>
-
-                    </Popover>
-      )}
-                >
-                  <Button
-                    variant="outline-primary"
-                    className="text-center rounded-pill text-uppercase px-4 fs-4 fw-bold"
-                  >
-                    ADD  to groupshop
-
-                  </Button>
-                </OverlayTrigger> */}
 
               </Col>
             </Row>
           </>
           )}
+
         </Modal.Body>
 
       </Modal>
