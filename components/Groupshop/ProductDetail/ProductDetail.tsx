@@ -191,11 +191,16 @@ const ProductDetail = ({
     }
   }, [index]);
 
-  // const days = 10;
-  // const hrs = 6;
-  // const mins = 3;
-  // console.log({ variantPrice });
-  // console.log({ selOptions });
+  useEffect(() => { // select instock variant as featured variant
+    if (data) {
+      const { productById: dproduct } = data;
+
+      const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
+
+      setselOptions(instockV?.selectedOptions.reduce((obj: any, { name, value }: any) => (
+        { ...obj, [name]: value }), {}));
+    }
+  }, [data]);
 
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
