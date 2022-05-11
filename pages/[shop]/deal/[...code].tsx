@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
 // import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import { GET_GROUPSHOP, GET_PRODUCTS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
@@ -54,6 +54,7 @@ import Router from 'next/router';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
+import useProducts from 'hooks/useProducts';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -76,16 +77,9 @@ const GroupShop: NextPage = () => {
     },
   );
 
-  const productsql = useQuery(GET_PRODUCTS, {
-    variables: {
-      productQueryInput: {
-        shop: `${shop}.myshopify.com`,
-        sort: -1,
-        limit: 10000,
-      },
-    },
-    skip: !shop,
-  });
+  // load all products
+  useProducts(`${shop}.myshopify.com`);
+
   console.log('🚀 ~ file: [...code].tsx ~ line74  ~ error', error);
   console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
   console.log('🚀 ~~ line 75 ~ loading', loading);
@@ -202,35 +196,6 @@ const GroupShop: NextPage = () => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
-
-  // const { findInArray } = useUtilityFunction();
-
-  React.useEffect(() => {
-    let otherProducts: IProduct[];
-    if (productsql?.data?.products && gsctx.allProducts) {
-      if (gsctx.campaign?.addableProducts?.length) {
-        otherProducts = findInArray(
-          gsctx.campaign?.addableProducts,
-          productsql?.data?.products || [],
-          null,
-          'id',
-        );
-        // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
-        // .data?.products || [], null, 'id'));
-      } else {
-        otherProducts = productsql?.data?.products.filter(
-          (o1: IProduct) => !gsctx?.allProducts?.some((o2: IProduct) => o1.id === o2.id),
-        );
-      }
-      dispatch({
-        type: 'UPDATE_PRODUCTS',
-        payload: {
-          ...gsctx,
-          store: { ...gsctx.store, products: otherProducts },
-        },
-      });
-    }
-  }, [productsql.data]);
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
 
