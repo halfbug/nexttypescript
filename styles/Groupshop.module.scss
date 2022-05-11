@@ -7,8 +7,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   "Noto Color Emoji" !default;
 
 .form-control::-webkit-input-placeholder {
-	/* Chrome/Opera/Safari */
-	color: pink;
+  /* Chrome/Opera/Safari */
+  color: pink;
 }
 .groupshop {
   background-color: white !important;
@@ -25,9 +25,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &_main_logo {
     img {
-      max-height: 31px;
-      width: auto;
+      max-height: 48px;
       padding-left: 15px;
+      max-width: 130px;
+      object-fit: contain;
     }
   }
 
@@ -74,7 +75,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       margin-right: 7px !important;
     }
     &__expired {
-      margin-left: 6px !important
+      margin-left: 6px !important;
     }
 
     &_txt {
@@ -205,7 +206,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .m-1, .p-1, .rounded, .border, .text-capitalize;
       border-color: $purple !important;
       border-width: 2px;
-      margin: .25rem .35rem !important;
+      margin: 0.25rem 0.35rem !important;
       cursor: pointer !important;
       min-width: auto !important;
       background: $white;
@@ -220,14 +221,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         box-shadow: none !important;
         box-sizing: border-box;
         backdrop-filter: blur(4px);
-        margin-right: .35rem;
+        margin-right: 0.35rem;
+        text-transform: capitalize;
         /* Note: backdrop-filter has minimal browser support */
         border-radius: 6px;
         &::before {
           content: "";
           position: absolute;
           z-index: -1;
-          padding: .08rem;
+          padding: 0.08rem;
           inset: 0;
           border-radius: 4px;
           background: linear-gradient(to right, #ccb2f9, #fee750);
@@ -263,7 +265,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     border-radius: 6px;
-    
+
     &::before {
       content: "";
       position: absolute;
@@ -301,12 +303,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_copy2clipboard {
+    padding-right: 0.5rem;
+    padding-left: 1rem;
     @extend .w-100,
       .rounded-3,
       .d-flex,
       .justify-content-between,
       .py-1,
-      .px-3,
       .align-items-center;
     box-sizing: border-box;
     backdrop-filter: blur(4px);
@@ -417,11 +420,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: none !important;
       }
     }
-	
-	 span {
-      
-	  color: $white;
 
+    span {
+      color: $white;
     }
     &__small_banner_left {
       @extend .d-flex, .align-items-center, .justify-content-start;
@@ -621,15 +622,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_share_btn {
       box-shadow: none !important;
-      border: 2px solid #CCB2F9 !important;
+      border: 2px solid #ccb2f9 !important;
       font-weight: 600;
       font-size: 12px;
+      margin-right: 10px;
 
       &:hover {
-        background: #CCB2F9;
+        background: #ccb2f9;
         color: #ffffff;
       }
-      
+
       @include media-breakpoint-down(lg) {
         display: none;
       }
@@ -673,21 +675,21 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
 
-  &_dropdownMenu{
+  &_dropdownMenu {
     border-radius: 10px;
     padding: 20px 0px;
   }
-  
-  &_dropdownItem{
-    @extend .ms-3, .w-75;
+
+  &_dropdownItem {
+    @extend .ms-3;
     padding-top: 10px;
     margin-top: 10px;
     border-top: 1px solid $lightBorder;
-    &:first-child{
+    &:first-child {
       padding-top: 0px;
       margin-top: 0px;
     }
-    a{
+    a {
       width: fit-content;
       border: 1px solid $purple;
       border-radius: 4px;
@@ -698,12 +700,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         background: none !important;
       }
     }
-    &_owner{
+    &_owner {
       @extend .groupshop_dropdownItem, .gradient-block;
       padding-bottom: unset;
       border: none;
       width: fit-content;
-      a{
+      a {
         border: none;
       }
     }
@@ -736,10 +738,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 18px;
         text-transform: capitalize;
         color: $black;
-        padding: .4rem 1rem;
+        padding: 0.4rem 1rem;
       }
       &_border {
-        border-bottom: 1px solid #EBEBEB;
+        border-bottom: 1px solid #ebebeb;
         width: 118px;
         margin-left: 1rem;
       }
@@ -981,8 +983,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         @extend .groupshop__pcard_tag;
         // @extend .p-1, .py-2, .rounded-pill, .m-1;
         // background-color: white;
-        top: 220px;
-        right: 15px;
+        bottom: 10px;
+        right: 10px;
         position: absolute;
       }
       &_addedbytop {
@@ -1094,11 +1096,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
   &_row {
-    @extend .pt-4, .pb-3;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   }
 
   &_col {
-    @extend .p-2, .text-center;
+    @extend .text-center;
     h2 {
       @extend .fw-bold, .text-uppercase;
       font-weight: 700 !important;
@@ -1134,33 +1137,33 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border: none;
       padding: 10px;
       /* Note: backdrop-filter has minimal browser support */
-    
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      padding: .08rem;
-      inset: 0;
-      background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      border-radius: 25px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        padding: 0.08rem;
+        inset: 0;
+        background: linear-gradient(to right, #ccb2f9, #fee750);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        border-radius: 25px;
+      }
+      &:hover {
+        background-color: $purple !important;
+      }
     }
-    &:hover {
-      background-color: $purple !important;
+    &__closebtnlg {
+      display: flex;
+      justify-content: flex-end;
+      box-shadow: none !important;
+      svg {
+        cursor: pointer;
+      }
     }
-  }
-  &__closebtnlg {
-    display: flex;
-    justify-content: flex-end;
-    box-shadow: none !important;
-    svg {
-      cursor: pointer;
-    }
-  }
     &_search {
       @extend .groupshop_modal;
 
@@ -1204,11 +1207,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
             line-height: 15px;
             color: $black;
           }
-		  &_input::placeholder {
-			color: $black !important;
-			font-size: 12px !important;
-			font-weight: 600 !important;
-		  }
+          &_input::placeholder {
+            color: $black !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+          }
           &_resultFound {
             font-size: 10px;
             font-weight: 500;
@@ -1550,10 +1553,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
 
       &_addProduct {
-        @extend .rounded-pill,
-        .w-75,
-        .position-absolute,
-        .top-50;
+        @extend .rounded-pill, .w-75, .position-absolute, .top-50;
         left: 12%;
         height: 36px;
         font-size: 12px !important;
@@ -1570,7 +1570,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           content: "";
           position: absolute;
           z-index: -1;
-          padding: .08rem;
+          padding: 0.08rem;
           inset: 0;
           background: linear-gradient(to right, #ccb2f9, #fee750);
           -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -1767,14 +1767,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     font-size: 12px;
     line-height: 1.42857;
     box-shadow: none !important;
-    background: #F0F0F0;
+    background: #f0f0f0;
 
     &:focus,
     &:active {
       background: #dcd0e8;
       border: 2px solid #000000;
     }
-    &:hover{
+    &:hover {
       background: #dcd0e8;
     }
   }
@@ -1920,7 +1920,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: none;
       }
     }
-    .groupshop__earn{
+    .groupshop__earn {
       height: 41px;
       width: 41px;
     }
@@ -1965,7 +1965,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     height: 43px;
   }
 
-  &__onHoverCart{
+  &__onHoverCart {
     background: $white;
     border: 0px;
     box-shadow: none !important;
@@ -1973,7 +1973,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     color: #000000;
-    
+
     &::before {
       content: "";
       position: absolute;
@@ -2002,7 +2002,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     color: #000000;
-    
+
     &::before {
       content: "";
       position: absolute;
@@ -2217,5 +2217,4 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &__share_social_icons {
     border-bottom: 1px solid #f0f0f0;
   }
-
 }

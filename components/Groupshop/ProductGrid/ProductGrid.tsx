@@ -84,7 +84,7 @@ const ProductGrid = ({
   const { googleButtonCode } = useGtm();
 
   return (
-    <Container {...props} ref={ref} fluid id={id}>
+    <Container {...props} ref={ref} id={id}>
       <Row className={styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}

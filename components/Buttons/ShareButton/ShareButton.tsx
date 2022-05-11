@@ -36,7 +36,7 @@ const ShareButton = ({
         </h4>
         <CopyToClipboard value={shareurl} />
         <div className={styles.groupshop__share_social_icons}>
-          <Row className="p-2">
+          <Row className="p-3">
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} /></Col>
@@ -44,7 +44,7 @@ const ShareButton = ({
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
           </Row>
         </div>
-        <Row className="flex-column text-center">
+        <Row className="flex-column text-center p-2">
           {/* <Col><h3>Shop, share, earn</h3></Col>
         <Col>
           <p>
