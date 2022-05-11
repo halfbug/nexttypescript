@@ -12,7 +12,7 @@ export default function MarketingSettings() {
   return (
     <Row className={styles.marketing}>
       <Col lg={8}>
-        <h3>Marketing Tools</h3>
+        <h3 className="pb-2">Marketing Tools</h3>
         <MarketingTools />
         <CustomerActivation />
         <Integrations />
