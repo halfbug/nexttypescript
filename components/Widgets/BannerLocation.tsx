@@ -36,8 +36,8 @@ export default function BannerLocation(
               handleChange(e);
             }}
             type="radio"
-              // eslint-disable-next-line react/jsx-closing-bracket-location
-              >
+          // eslint-disable-next-line react/jsx-closing-bracket-location
+          >
             <Form.Check.Input type="radio" name="location" className={styles.layout__checkbox__input} />
             <Form.Check.Label className={styles.layout__checkbox__input__label}>
               Below product price tag
@@ -74,11 +74,20 @@ export default function BannerLocation(
               <div className="m-2 mt-3">
                 <h4>Step 1</h4>
                 <div className={styles.layout__description}>
-                  When you are done customizing your banner,
-                  add the code below right after the opening tag of your website.
-                  The code only needs to be added once per page – add it on all
-                  the pages you will be displaying
-                  the Groupshop banner.
+                  When you are done customizing your
+                  banner, add the code below right after
+                  the opening
+                  {' '}
+                  {'<'}
+                  body
+                  {'>'}
+                  {' '}
+                  tag of your website.
+                  The code only needs to be added once
+                  per page
+                  –
+                  add it on all the pages you will
+                  be displaying the Groupshop banner.
                 </div>
                 <Row className={styles.layout__codesnip}>
                   <Col lg={2} className={styles.layout__codesnip__col}>
