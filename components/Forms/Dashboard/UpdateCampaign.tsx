@@ -28,7 +28,10 @@ import UpdateRewards from './UpdateRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
 
-export default function UpdateCampaign() {
+interface IProps {
+  setHeading: any;
+}
+export default function UpdateCampaign({ setHeading }: IProps) {
   const { query: { campaignid, ins } } = useRouter();
   const [, setParams] = useQueryString();
 
@@ -69,12 +72,7 @@ export default function UpdateCampaign() {
     if (store?.campaigns) {
       const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
       if (arr[0].criteria! === "custom") setdisableBtn(false);
-      // const {
-      //   socialLinks: {
-      //     facebook, instagram, tiktok, twitter,
-      //   },
-      // } = arr[0];
-      // console.log("🚀 ~ file: UpdateCampaign.tsx ~ line 77 ~ React.useEffect ~ arr[0]", arr[0]);
+      setHeading(arr[0].name!);
 
       const newState:ICampaignForm = {
         criteria: arr[0]?.criteria!,
