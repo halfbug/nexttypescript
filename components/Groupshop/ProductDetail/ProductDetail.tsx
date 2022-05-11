@@ -56,6 +56,7 @@ const ProductDetail = ({
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
   };
+  console.log({ index });
 
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
@@ -157,9 +158,10 @@ const ProductDetail = ({
       } else {
         setIndex(images.length);
       }
-    } else {
-      setIndex(images.length);
     }
+    // else {
+    //   setIndex(images.length);
+    // }
   };
 
   const handleCloseClick = () => {
@@ -245,8 +247,8 @@ const ProductDetail = ({
                 <Carousel
                   activeIndex={index}
                   onSelect={handleSelect}
-                  interval={null}
-                  indicators={false}
+                  // interval={null}
+                  // indicators={false}
                 >
                   <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
                     <img
