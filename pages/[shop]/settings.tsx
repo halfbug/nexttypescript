@@ -103,7 +103,7 @@ const Settings: NextPage = () => {
               </Nav>
             </Col>
           </Row>
-          <Row>
+          <Row className='ge-0'>
             <Col lg={12}>
               <Tab.Content>
                 <Tab.Pane eventKey="General">

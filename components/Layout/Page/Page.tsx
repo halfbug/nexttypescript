@@ -40,7 +40,7 @@ const Page = ({
               </Col>
 
             </Row>
-            <Row>
+            <Row className={styles.rightcontentwrap__body}>
               {children}
             </Row>
 

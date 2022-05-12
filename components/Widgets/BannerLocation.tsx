@@ -31,7 +31,7 @@ export default function BannerLocation(
       <Row>
         <Col lg={12} className="mt-2">
           <Form.Check
-            className="p-2"
+            className="p-2 ps-0 py-1"
             onChange={(e) => {
               handleChange(e);
             }}
@@ -45,7 +45,7 @@ export default function BannerLocation(
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="p-2 ps-0 py-1"
             onChange={(e) => {
               handleChange(e);
             }}
@@ -57,7 +57,7 @@ export default function BannerLocation(
             </Form.Check.Label>
           </Form.Check>
           <Form.Check
-            className="p-2"
+            className="p-2 ps-0 py-1"
             onChange={(e) => {
               handleChange(e);
             }}
@@ -71,7 +71,7 @@ export default function BannerLocation(
 
           {check && (
             <>
-              <div className="m-2 mt-3">
+              <div className="m-2 mt-3 ms-0">
                 <h4>Step 1</h4>
                 <div className={styles.layout__description}>
                   When you are done customizing your
@@ -115,7 +115,7 @@ export default function BannerLocation(
                 </Row>
               </div>
 
-              <div className="m-2 mt-3">
+              <div className="m-2 mt-3 ms-0">
                 <h4>Step 2</h4>
                 <div className={styles.layout__description}>
                   Add the following code anywhere you want to display the Groupshop banner.

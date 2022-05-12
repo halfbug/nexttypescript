@@ -23,8 +23,8 @@ export function Industry(
   return (
     <section className={styles.generalform_greenbox}>
       <h4 className={styles.generalform_subheading}>Your Industry</h4>
-      <Row>
-        <h6 className={['pt-2', styles.generalform_light_txt].join(' ')}>
+      <Row className="pt-2">
+        <h6 className={styles.generalform_light_txt}>
           This informs calculations for your Analytics page.
         </h6>
       </Row>

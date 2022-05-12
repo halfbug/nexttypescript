@@ -20,6 +20,8 @@
     &__box_orange {
         @extend .mb-4;
         padding: 27px 33px;
+        padding-top: 27px;
+        padding-bottom: 20px;
         border: 1px dashed $average;
         border-radius: 18px;
     }
@@ -88,12 +90,13 @@
     }
 
     .badge {
-        @extend .m-1, .rounded, .lh-sm;
+        @extend .m-1, .lh-sm;
         font-size: $font-size-small;
         font-weight: $font-weight-normal;
         color: $black;
         background: $recommended !important;
         padding: .42rem 10px;
+        border-radius: 6px;
     }
 
     &__sperator {
@@ -109,6 +112,7 @@
         color: $white !important;
         background-color: $enable !important;
         height: 30px;
+        width: 99px;
         border-color: $black !important;
         border-radius: 6px !important;
     
@@ -134,6 +138,7 @@
         background-color: white;
         border-color: $black;
         height: 30px;
+        width: 99px;
         border-radius: 6px !important;
     
         &:hover, &:active, &:focus {

@@ -29,7 +29,7 @@ export default function DisplayBanner(
             Display banners on your order summary page
 
           </h4>
-          <h6 className="text-muted mt-1">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
+          <h6 className="text-muted mt-2">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
           <Row>
             <Col lg={12} className="mt-2">
               <Form.Check

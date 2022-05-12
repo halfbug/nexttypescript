@@ -74,18 +74,19 @@
     .enablebtn {
         @extend .rounded-3, .me-2;
         width: 96px;
-        border-color: $black;
-        color: $black;
+        border-color: $black !important;
+        background-color: $enable !important;
+        color: $white !important;
         &:hover {
-            color: $white;
+            color: $white !important;
             opacity: 100%;
         }
         &:active,
         &:focus,
         &_dark {
-            color: $white;
+            color: $white !important;
             opacity: 100%;
-            border-color: $black;
+            border-color: $black !important;
             background-color: $btnhigh;
         }
     }
