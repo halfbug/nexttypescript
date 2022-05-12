@@ -27,7 +27,7 @@ const Header = ({
           md={{ span: 3, order: 3 }}
           className={styles.groupshop__last}
         >
-          <SettingsIcon className={styles.groupshop__settingsicon} />
+          {/* <SettingsIcon className={styles.groupshop__settingsicon} /> */}
           {RightComp}
 
         </Col>

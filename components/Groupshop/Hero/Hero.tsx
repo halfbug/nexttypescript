@@ -11,9 +11,12 @@ interface HeroProps {
 const Hero = ({
   bannerImage, children,
 }: HeroProps) => (
-  <div className={styles.groupshop__hero} style={{ backgroundImage: `url(${bannerImage})` }}>
-    {children}
-  </div>
+  <>
+    <div className={styles.groupshop__hero} style={{ backgroundImage: `url(${bannerImage})` }}>
+      <div className={styles.groupshop__overlay} />
+      {children}
+    </div>
+  </>
 );
 
 // Hero.defaultProps = {

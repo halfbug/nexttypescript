@@ -59,6 +59,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       line-height: 13px;
     }
   }
+  &__hero__content {  
+  z-index: 2;
+  }
 
   &_counter_top {
     p {
@@ -266,21 +269,23 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     border-radius: 6px;
+    border-radius: 50%;
+    border: 1px solid #ccb2f9;
 
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      padding: 2px;
-      inset: 0;
-      background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      border-radius: 50%;
-    }
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   z-index: -1;
+    //   padding: 2px;
+    //   inset: 0;
+    //   background: linear-gradient(to right, #ccb2f9, #fee750);
+    //   -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    //     linear-gradient(#fff 0 0);
+    //   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //   -webkit-mask-composite: xor;
+    //   mask-composite: exclude;
+    //   border-radius: 50%;
+    // }
     &:hover {
       @extend .groupshop__earn;
       background-color: $purple !important;
@@ -385,6 +390,24 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     color: green;
   }
 
+  &__overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #202020;
+    z-index: 1;
+    opacity: 50%;
+    height: 100%;
+
+    @include media-breakpoint-down(lg) {
+      height: 535px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      height: 475px;
+    }
+  }
+
   &__hero {
     @extend .mw-100,
       .border,
@@ -398,6 +421,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     color: white;
     @include media-breakpoint-up(lg) {
       height: 500px;
+      position: relative;
     }
     @include media-breakpoint-down(lg) {
       height: 535px;
@@ -607,6 +631,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       // 	display: none;;
       // }
     }
+
     &_share_btn {
       box-shadow: none !important;
       border: 2px solid #ccb2f9 !important;

@@ -374,7 +374,7 @@ const GroupShop: NextPage = () => {
           </Container>
         </header>
         <Hero bannerImage={bannerImage}>
-          <Container>
+          <Container className={styles.groupshop__hero__content}>
             <Row className={styles.groupshop__hero_welcome}>
               <Col lg={12}>
                 <h3>
@@ -679,7 +679,7 @@ const GroupShop: NextPage = () => {
             setShowRewards(true);
           }}
         >
-          <ShoppingBoxMobile />
+          {/* <ShoppingBoxMobile /> */}
         </Row>
       )}
     </>
