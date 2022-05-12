@@ -189,7 +189,7 @@ export default function Integrations(
                   </div>
                 </Card.Header>
                 <Accordion.Collapse eventKey="1">
-                  <Card.Body>bOdy here</Card.Body>
+                  <Card.Body>body here</Card.Body>
                 </Accordion.Collapse>
               </Card>
               <Card className={styles.marketing__collapse}>
