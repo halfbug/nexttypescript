@@ -252,7 +252,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border-style: dashed !important;
 
       &:hover {
-        background-color: $purple !important;
+        background-color: transparent !important;
+        color: #000000;
       }
     }
   }
@@ -522,7 +523,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-align: center;
       width: fit-content;
       height: fit-content;
-      // border: 1px solid rgba(204, 178, 249, 0.75);
+      border: 1px solid #ccb2f9;
       box-sizing: border-box;
       backdrop-filter: blur(4px);
       /* Note: backdrop-filter has minimal browser support */
@@ -593,20 +594,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         text-align: center;
 
         color: #ffffff;
-      }
-      &::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        padding: 2px;
-        inset: 0;
-        border-radius: 10px;
-        background: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
       }
       hr {
         width: 25px;
