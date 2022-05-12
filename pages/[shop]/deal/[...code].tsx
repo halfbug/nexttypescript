@@ -96,15 +96,26 @@ const GroupShop: NextPage = () => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [storeLogo, setStoreLogo] = useState<string>('');
+  const [bannerImage, setBannerImage] = useState<string>('');
 
   useEffect(() => {
-    if (groupshop.id && pending) {
+    async function gets3headerBanner() {
+      if (groupshop.id && pending) {
       // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
-      setpending(false);
-      setallProducts(groupshop?.allProducts);
-      setmember(groupshop?.members[0]);
-      dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
+        setpending(false);
+        setallProducts(groupshop?.allProducts);
+        setmember(groupshop?.members[0]);
+        dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
+        if (groupshop?.campaign?.settings?.imageUrl) {
+          const key = getKeyFromS3URL(groupshop?.campaign?.settings?.imageUrl ?? '');
+          const bannerImageS3 = await getSignedUrlS3(key);
+          if (bannerImageS3) setBannerImage(bannerImageS3);
+        } else {
+          setBannerImage('/images/bg.jpg');
+        }
+      }
     }
+    gets3headerBanner();
   }, [groupshop, pending]);
 
   const {
@@ -362,7 +373,7 @@ const GroupShop: NextPage = () => {
             </Row>
           </Container>
         </header>
-        <Hero>
+        <Hero bannerImage={bannerImage}>
           <Container>
             <Row className={styles.groupshop__hero_welcome}>
               <Col lg={12}>

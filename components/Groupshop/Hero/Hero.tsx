@@ -5,12 +5,13 @@ import { Col, Row } from 'react-bootstrap';
 
 interface HeroProps {
   children : React.ReactNode;
+  bannerImage: any;
 }
 
 const Hero = ({
-  children,
+  bannerImage, children,
 }: HeroProps) => (
-  <div className={styles.groupshop__hero} style={{ backgroundImage: 'url(/images/gs-banner-new.png)' }}>
+  <div className={styles.groupshop__hero} style={{ backgroundImage: `url(${bannerImage})` }}>
     {children}
   </div>
 );

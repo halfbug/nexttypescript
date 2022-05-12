@@ -432,7 +432,15 @@ query Groupshop($code: String!) {
         tiktok
         facebook
         twitter
-      }  
+      }
+      settings{
+        brandColor
+        customColor
+        customBg
+        imageUrl
+        youtubeUrl
+        media
+      }   
       salesTarget{
         id
         name

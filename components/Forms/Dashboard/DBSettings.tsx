@@ -182,12 +182,14 @@ export default function DBSettings({
               </Row>
               <Row>
                 <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
+                  -
                   <UploadButton
                     icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
                     setFieldValue={setFieldValue}
                     field="imageUrl"
                     className={styles.ob_settings__uploadbtn}
                     handleCustomBg={handleCustomBg}
+                    url={getKeyFromS3URL(values.imageUrl)}
                   />
                 </Col>
                 <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>

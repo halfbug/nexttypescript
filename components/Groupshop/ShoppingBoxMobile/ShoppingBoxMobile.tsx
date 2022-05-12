@@ -11,9 +11,7 @@ const ShoppingBoxMobile = () => (
     <Row>
       <Col md={12}>
         <div className={['d-flex align-items-center', styles.groupshop_shopping_box_mobile].join(' ')}>
-          <div className={['p-2 d-flex bg-white align-items-center', styles.groupshop_shopping_box_mobile_content].join(' ')}>
-            <p className="m-0">You’re shopping with Elisa + 6 others. Check the rewards meter.</p>
-          </div>
+          <div className={['p-2 d-flex bg-white align-items-center', styles.groupshop_shopping_box_mobile_content].join(' ')} />
           <ShareButton
             placement="right-start"
             shareurl=""
