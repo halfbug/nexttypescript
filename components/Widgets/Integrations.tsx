@@ -15,6 +15,7 @@ import SMTPSetupIcon from 'assets/images/smtp-setup.svg';
 import GreenTickIcon from 'assets/images/green-tick.svg';
 import PlusIcon from 'assets/images/plus-icon.svg';
 import MinusIcon from 'assets/images/minus-icon.svg';
+import TooltipIcon from 'assets/images/tooltip-icon.svg';
 import { useState } from 'react';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { Check2Circle } from 'react-bootstrap-icons';
@@ -70,6 +71,7 @@ export default function Integrations(
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                   />
+                  <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
                 {/* <InfoCircle className="styles.marketing_inputIcon" fill="0F0E0E" /> */}
               </Col>
@@ -85,6 +87,7 @@ export default function Integrations(
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                   />
+                  <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
               </Col>
             </div>
@@ -99,6 +102,7 @@ export default function Integrations(
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                   />
+                  <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
               </Col>
             </div>

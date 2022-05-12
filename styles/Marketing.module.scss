@@ -110,6 +110,7 @@
     }
 
     &_LinkBtn {
+        @extend .pe-2;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 500;
@@ -194,5 +195,16 @@
                 padding-left: 12px;
             }
         }
+    }
+
+    &__ArrowIcon{
+        position: relative;
+        top: 1px;
+    }
+
+    &__input_tooltip{
+        @extend .position-absolute;
+        top: 7px;
+        right: 9px;
     }
 }
