@@ -50,9 +50,7 @@ const Members = ({
                   <CrossICon onClick={handleCloseBtn} />
                 </div>
                 <h4>
-
                   {member}
-                  {index}
                 </h4>
                 <p className="mb-2">
                   {index === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
