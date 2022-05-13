@@ -749,7 +749,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &__pcard_image_wrapper {
-    max-height: 282px;
+    height: 282px;
     overflow: hidden;
     width: 282px;
     @include media-breakpoint-down(sm) {
@@ -1967,29 +1967,29 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &_InviteBtn {
     @extend .m-1, .float-end;
     background: $white;
-    border: 0px;
+    border: 1px solid #ccb2f9;
     box-shadow: none !important;
     box-sizing: border-box;
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     color: #000000;
 
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      padding: 1px;
-      inset: 0;
-      background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      border-radius: 3px;
-    }
-    &:hover {
-      background-color: $purple !important;
-    }
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   z-index: -1;
+    //   padding: 1px;
+    //   inset: 0;
+    //   background: linear-gradient(to right, #ccb2f9, #fee750);
+    //   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //   -webkit-mask-composite: xor;
+    //   mask-composite: exclude;
+    //   border-radius: 3px;
+    // }
+    // &:hover {
+    //   background-color: $purple !important;
+    // }
   }
   &_disableShareCircle {
     @extend .m-1, .rounded-circle, .p-1;
@@ -2173,9 +2173,5 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &__share_social_icons {
     border-bottom: 1px solid #f0f0f0;
-  }
-
-  &_product_info{
-    padding-top: 33px;
   }
 }
