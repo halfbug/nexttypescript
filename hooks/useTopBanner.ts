@@ -23,7 +23,7 @@ const useTopBanner = () => {
         setText('For the next two shoppers only');
         setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
       } else if (members.length === 2 || members.length === 4) {
-        setText('For the next one shopper only');
+        setText('For the next shopper only');
         setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
       } else if (members.length >= 5) {
         setText('all orders');
