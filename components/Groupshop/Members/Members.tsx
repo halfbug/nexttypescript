@@ -67,11 +67,11 @@ const Members = ({
                   {idx === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
                   {' '}
                 </p>
-                <p>
+                {/* <p>
                   {cashback[idx]}
                   {' '}
                   in discounts and cashback.
-                </p>
+                </p> */}
               </Popover.Body>
             </Popover>
           </Overlay>
