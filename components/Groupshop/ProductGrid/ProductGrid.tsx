@@ -153,26 +153,27 @@ const ProductGrid = ({
                 </button>
               )}
             >
-              <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-              {prod.orders?.length > 0 && (
+              <div className={styles.groupshop_product_info}>
+                <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
+                {prod.orders?.length > 0 && (
                 <p className="text-center mb-1 fs-5">
                   {`🔥 ${prod.orders?.length} friends shopped`}
                 </p>
-              )}
+                )}
 
-              <h5 className="pt-2 text-center fw-bold">
-                <span className="text-decoration-line-through fw-light me-1">
-                  {currencySymbol}
-                  {/* {prod.price} */}
-                  {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                </span>
-                {' '}
-                <span>
-                  {currencySymbol}
-                  {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                </span>
-              </h5>
-              {!showHoverButton && (
+                <h5 className="pt-2 text-center fw-bold">
+                  <span className="text-decoration-line-through fw-light me-1">
+                    {currencySymbol}
+                    {/* {prod.price} */}
+                    {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                  </span>
+                  {' '}
+                  <span>
+                    {currencySymbol}
+                    {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                  </span>
+                </h5>
+                {!showHoverButton && (
                 <div className={styles.groupshop_addtoCart_wrapper}>
                   <Button
                     variant="primary"
@@ -186,7 +187,8 @@ const ProductGrid = ({
                   </Button>
                   <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
                 </div>
-              )}
+                )}
+              </div>
             </ProductCard>
           </Col>
         ))}

@@ -1882,6 +1882,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     color: $black;
   }
   &_addtoCart_wrapper {
+
     text-align: center;
 
     @include media-breakpoint-down(md) {
@@ -2172,5 +2173,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &__share_social_icons {
     border-bottom: 1px solid #f0f0f0;
+  }
+
+  &_product_info{
+    padding-top: 33px;
   }
 }
