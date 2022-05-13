@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
-  Button, ListGroup, OverlayTrigger, Placeholder, Popover, Row,
+  Button, Placeholder, Popover, Overlay,
 } from 'react-bootstrap';
 import styles from 'styles/Groupshop.module.scss';
-import { ref } from 'yup';
 import CrossICon from 'assets/images/cross.svg';
 import { RootProps } from 'types/store';
 
@@ -16,9 +14,15 @@ interface MembersProps extends RootProps{
 const Members = ({
   names, cashback, pending,
 }: MembersProps) => {
-  const [show, setShow] = useState(false);
-  const handleCloseBtn = () => {
-    setShow(!show);
+  const [show, setShow] = useState<any>({});
+  const [target, setTarget] = useState(null);
+
+  const handleClick = (event: any, state: string) => {
+    setShow({ [state]: true });
+    setTarget(event.target);
+  };
+  const handleClose = (event: any, state: string) => {
+    setShow({ [state]: false });
   };
 
   if (pending) {
@@ -31,47 +35,47 @@ const Members = ({
   }
   return (
     <>
-      {names?.map((member, index) => (
-        <OverlayTrigger
-          trigger="click"
-          rootClose
-          key={member}
-          placement="bottom"
-        // delay={200}
-        // flip
-          overlay={(
-            <Popover id={`popover-positioned-${member}`} arrowProps={() => {}}>
-              {/* <Popover.Header as="h3">{`Popover ${member}`}</Popover.Header> */}
+
+      {names?.map((member, idx) => (
+        <div>
+          <Button onClick={(e) => handleClick(e, `m-${idx}`)} variant="light" className={styles.groupshop__top_item}>
+            {idx === 0 && '👑'}
+            {' '}
+            {member}
+          </Button>
+
+          <Overlay
+            rootClose
+            show={show[`m-${idx}`] || false}
+            target={target}
+            placement="bottom"
+            onHide={() => setShow({ ...show, [`m-${idx}`]: false })}
+
+          >
+            <Popover id={`popover-positioned-${idx}`}>
               <Popover.Body>
                 <div
                   className={['d-flex justify-content-end mb-1 ',
                     styles.groupshop__popover_cross].join('')}
                 >
-                  <CrossICon onClick={handleCloseBtn} />
+                  <CrossICon onClick={(e: any) => handleClose(e, `m-${idx}`)} />
                 </div>
                 <h4>
                   {member}
                 </h4>
                 <p className="mb-2">
-                  {index === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
+                  {idx === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
                   {' '}
                 </p>
                 <p>
-                  {cashback[index]}
+                  {cashback[idx]}
                   {' '}
                   in discounts and cashback.
                 </p>
               </Popover.Body>
             </Popover>
-      )}
-        >
-          <Button variant="light" className={styles.groupshop__top_item}>
-            {index === 0 && '👑'}
-            {' '}
-            {member}
-            .
-          </Button>
-        </OverlayTrigger>
+          </Overlay>
+        </div>
       ))}
     </>
   );
