@@ -95,6 +95,7 @@ const ProductGrid = ({
           <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center" key={prod.id}>
             <ProductCard
               isrc={prod.featuredImage}
+              onClick={() => handleDetail(prod)}
               imgOverlay={(
                 <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
                   <span className={styles.groupshop__pcard_tag_price}>
