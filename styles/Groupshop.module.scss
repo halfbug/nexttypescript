@@ -962,7 +962,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_boughtby {
         @extend .text-capitalize;
         position: absolute;
-        top: 60px;
+        top: 0px;
         left: 5px;
         bottom: 10px;
         width: 98%;
