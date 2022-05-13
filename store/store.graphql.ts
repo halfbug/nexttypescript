@@ -645,6 +645,14 @@ query TotalGroupshops($storeId: String!) {
   }
 }
 `;
+const GET_TOTAL_GS_FROM_BILLING = gql`
+query FindTotalGS($storeId: String!) {
+  findTotalGS(storeId: $storeId) {
+    count
+  }
+}
+`;
+
 const GET_TOTAL_REVENUE = gql`
 query FindTotalRevenue($storeId: String!) {
   findTotalRevenue(storeId: $storeId) {
@@ -664,6 +672,7 @@ query GetMonthlyGSBilling($storeId: String!) {
     cashBack
     revenue
     count
+    totalGS
     }
 }
 `;
@@ -719,5 +728,5 @@ export {
   GET_ACTIVE_STORES, GET_QR_DEAL,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
   GET_BILLING_BY_DATE,
-  GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION,
+  GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING,
 };

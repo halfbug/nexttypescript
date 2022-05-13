@@ -48,7 +48,7 @@ const ExportToExcel = ({
       // setsheetData(data);
     }
   }, [excelData]);
-  console.log({ excelData });
+  // console.log({ excelData });
 
   const BillingQueryLoader = () => {
     const startDate = new Date(year, month - 1, 1); // month -1 because JS start month from 0zero

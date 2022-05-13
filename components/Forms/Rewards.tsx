@@ -226,8 +226,15 @@ export default function Rewards() {
               <ToolTip
                 className={styles.dashboard_campaign__pop}
                 icon={<InfoCircle size={10} />}
-                popContent="This is the first discount tier and  the ongoing commission your customer earns on new orders after
-                they have received all their cashback. Learn more about how rewards work here."
+                popContent={(
+                  <p>
+                    This is the first discount tier and  the ongoing commission your customer earns on new orders after
+                    they have received all their cashback. Learn more about how rewards work
+                    {' '}
+                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
+                    .
+                  </p>
+)}
               />
             </div>
             <div className={styles.rewards__percent_btn}>{minDiscount}</div>
@@ -240,9 +247,16 @@ export default function Rewards() {
               <ToolTip
                 className={styles.dashboard_campaign__pop}
                 icon={<InfoCircle size={10} />}
-                popContent="This is the maximum discount and cashback that
-                you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
-                Think of this as an ‘up to X% off’. Learn more about how rewards work here."
+                popContent={(
+                  <p>
+                    This is the maximum discount and cashback that
+                    you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
+                    Think of this as an ‘up to X% off’. Learn more about how rewards work
+                    {' '}
+                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
+                    .
+                  </p>
+)}
               />
             </div>
             <div className={styles.rewards__percent_btn}>{maxDiscount}</div>

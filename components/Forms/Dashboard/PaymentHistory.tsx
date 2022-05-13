@@ -17,7 +17,7 @@ import C1 from 'assets/images/CartBag.svg';
 
 export default function PaymentHistory() {
   const {
-    totalGS, totalRevenue, currencySymbol, getMonthlyGSCount,
+    totalGS, totalRevenue, currencySymbol,
   } = useBilling();
   const { convertNumToMonth, storeCurrencySymbol } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
@@ -32,6 +32,7 @@ export default function PaymentHistory() {
     revenue: 0,
     feeCharges: 0,
     cashBack: 0,
+    totalGS: 0,
   }]);
 
   const {
@@ -71,7 +72,7 @@ export default function PaymentHistory() {
                 {(item.revenue).toFixed(2).toString().replace('.00', '')}
               </td>
               <td>
-                {getMonthlyGSCount(item._id.month as unknown as number)}
+                {item.totalGS}
               </td>
               <td>
                 {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
