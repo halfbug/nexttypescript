@@ -11,7 +11,7 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 export default function FAQs(
 ) {
   return (
-    <section className={styles.Kb_paddingFAQ}>
+    <section>
       <h3 className="ms-2 px-0 mb-4 ">FAQs</h3>
       <Row className={styles.Kb_greenbox}>
         <div className={styles.Kb_FAQs_headingText}>
@@ -23,7 +23,7 @@ export default function FAQs(
             <Accordion.Header className={styles.Kb_FAQs_ques}>
               What is a Groupshop page?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               It’s a personalized shopping page we create after
               your customers shop from your store.
               They can share it with friends and send
@@ -36,7 +36,7 @@ export default function FAQs(
               What is ROGS (Return on Group
               Spend)?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               ROGS is calculated by dividing your revenue by the amount of cashback
               and discounts given to customers.
               It’s a similar calculation to ROAS, only with cashback and discounts
@@ -49,7 +49,7 @@ export default function FAQs(
             <Accordion.Header className={styles.Kb_FAQs_ques}>
               How do I set cashback and discounts?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               No need to crunch numbers! Use the ROGS meter on your
               Campaign page to automatically set discounts and
               cashback percentages that always match or exceed your ROAS.
@@ -60,7 +60,7 @@ export default function FAQs(
               How do customers get cashback
               and discounts?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               Customers are incentivized to share their Groupshop page with friends
               and automatically receive a cashback refund every time a friend shops.
               Friends get discounts on their orders, too..
@@ -70,7 +70,7 @@ export default function FAQs(
             <Accordion.Header className={styles.Kb_FAQs_ques}>
               Do I have to process the refunds?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               No. We automatically refund customers through Shopify
               every time someone shops with them on Groupshop.
               Cashback gets reimbursed directly to the payment method
@@ -82,7 +82,7 @@ export default function FAQs(
               What products are eligible for
               cashback and discounts?
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className={styles.Kb_FAQs_acc_body}>
               You choose which products your customers will
               earn cashback on from your Campaign page.
               You can also allow customers to add more products
