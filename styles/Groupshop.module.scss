@@ -1,9 +1,8 @@
 @import "./variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,500&family=Fahkwang:wght@300;400,500;700&display=swap");
 
-$font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
-  "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
-  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+$font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+  "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
   "Noto Color Emoji" !default;
 
 .form-control::-webkit-input-placeholder {
@@ -59,8 +58,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       line-height: 13px;
     }
   }
-  &__hero__content {  
-  z-index: 2;
+  &__hero__content {
+    z-index: 2;
   }
 
   &_counter_top {
@@ -166,11 +165,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__top {
-    @extend .py-3,
-      .d-flex,
-      .justify-content-center,
-      .align-items-center,
-      .w-100;
+    @extend .py-3, .d-flex, .justify-content-center, .align-items-center, .w-100;
 
     &_members {
       @extend .d-flex, .justify-content-center, .flex-column;
@@ -236,8 +231,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           inset: 0;
           border-radius: 4px;
           background: linear-gradient(to right, #ccb2f9, #fee750);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -311,12 +305,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &_copy2clipboard {
     padding-right: 0.5rem;
     padding-left: 1rem;
-    @extend .w-100,
-      .rounded-3,
-      .d-flex,
-      .justify-content-between,
-      .py-1,
-      .align-items-center;
+    @extend .w-100, .rounded-3, .d-flex, .justify-content-between, .py-1, .align-items-center;
     box-sizing: border-box;
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
@@ -329,8 +318,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       inset: 0;
       border-radius: 10px;
       background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -357,8 +345,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         inset: 0;
         border-radius: 8px;
         background: linear-gradient(to right, #ccb2f9, #ecd5d0);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -409,11 +396,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__hero {
-    @extend .mw-100,
-      .border,
-      .d-flex,
-      .justify-content-center,
-      .align-items-center;
+    @extend .mw-100, .border, .d-flex, .justify-content-center, .align-items-center;
     height: 291px;
     background-repeat: none;
     background-position: center;
@@ -539,11 +522,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       color: #ffffff;
     }
     &_big_banner_box {
-      @extend .px-5,
-        .py-2,
-        .align-items-center,
-        .d-flex,
-        .justify-content-center;
+      @extend .px-5, .py-2, .align-items-center, .d-flex, .justify-content-center;
       text-align: center;
       width: fit-content;
       height: fit-content;
@@ -600,12 +579,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_line {
         @extend .d-flex, .justify-content-center;
         border: 1px solid;
-        border-image: linear-gradient(
-          270deg,
-          #fee750 0%,
-          #ccb2f9 94.79%,
-          #ccb2f9 100%
-        );
+        border-image: linear-gradient(270deg, #fee750 0%, #ccb2f9 94.79%, #ccb2f9 100%);
       }
       &_other_orders {
         font-family: "DM Sans";
@@ -821,8 +795,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-transform: uppercase;
     }
     &_headingNormal {
+      @extend .mb-2;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 500!important;
       line-height: 18px;
       color: $black;
       text-transform: uppercase;
@@ -832,6 +807,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &_modal_content_bottom {
     @include media-breakpoint-down(sm) {
       margin-bottom: 70px;
+    }
+    p {
+      font-family: "DM Sans"!important;
+      font-style: normal;
+      font-weight: 400!important;
+      font-size: 12px;
+      line-height: 16px;
+      color: $black;
     }
   }
 
@@ -916,14 +899,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
 
     &_tag {
-      @extend .shadow-sm,
-        .p-1,
-        .px-2,
-        .fs-6,
-        .rounded,
-        .fw-bold,
-        .text-uppercase,
-        .m-1;
+      @extend .shadow-sm, .p-1, .px-2, .fs-6, .rounded, .fw-bold, .text-uppercase, .m-1;
       background-color: white;
 
       &_price {
@@ -1024,11 +1000,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
 
       &_product {
-        @extend .groupshop__pcard_tag,
-          .rounded-pill,
-          .w-75,
-          .position-absolute,
-          .top-50;
+        @extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
         left: 12%;
         height: 40px;
         font-size: 12px !important;
@@ -1036,10 +1008,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 16px;
       }
       &_addToCart {
-        @extend .position-absolute,
-          .align-items-center,
-          .w-75,
-          .justify-content-center;
+        @extend .position-absolute, .align-items-center, .w-75, .justify-content-center;
         display: none;
         bottom: 35px;
         left: 50px;
@@ -1108,8 +1077,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
   &_row {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   &_col {
@@ -1157,8 +1126,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         padding: 0.08rem;
         inset: 0;
         background: linear-gradient(to right, #ccb2f9, #fee750);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -1527,11 +1495,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
 
     &_lastLine {
-      @extend .d-flex,
-        .justify-content-center,
-        .align-content-center,
-        .text-center,
-        .mb-4;
+      @extend .d-flex, .justify-content-center, .align-content-center, .text-center, .mb-4;
       font-family: Mulish;
       font-style: normal;
       font-weight: normal;
@@ -1585,8 +1549,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           padding: 0.08rem;
           inset: 0;
           background: linear-gradient(to right, #ccb2f9, #fee750);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -1610,11 +1573,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &_footer {
     @extend .w-100;
     &_f1 {
-      @extend .justify-content-center,
-        .align-items-center,
-        .justify-content-around,
-        .mb-5,
-        .mt-2;
+      @extend .justify-content-center, .align-items-center, .justify-content-around, .mb-5, .mt-2;
     }
     &_f2_wrapper {
       @include media-breakpoint-down(md) {
@@ -1993,8 +1952,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       padding: 1px;
       inset: 0;
       background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -2022,8 +1980,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       padding: 1px;
       inset: 0;
       background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -2047,12 +2004,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     box-shadow: none !important;
   }
   &_timerRow {
-    @extend .m-auto,
-      .d-flex,
-      .justify-content-center,
-      .align-items-center,
-      .rounded-3,
-      .w-50;
+    @extend .m-auto, .d-flex, .justify-content-center, .align-items-center, .rounded-3, .w-50;
     @media (max-width: 767px) {
       width: 80% !important;
     }
@@ -2145,8 +2097,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         inset: 0;
         border-radius: 16px;
         background: linear-gradient(to right, #ccb2f9, #fee750);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -2155,13 +2106,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &_bar {
       @extend .w-50;
       height: 18px;
-      background: linear-gradient(
-        270deg,
-        #fee750 0%,
-        #f4dec4 45.31%,
-        #ccb2f9 94.79%,
-        #ccb2f9 100%
-      );
+      background: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
     }
     &_reward {
       @extend .d-flex, .justify-content-between, .px-3;
@@ -2217,8 +2162,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         inset: 0;
         border-radius: 4px;
         background: linear-gradient(to right, #ccb2f9, #fee750);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;

@@ -438,11 +438,13 @@ const ProductDetail = ({
                           <Icon />
                         </Col>
                         <Col xs={11}>
-                          Over
-                          {' '}
-                          {productCustomers.length}
-                          {' '}
-                          people have earned cashback and discounts on this item!
+                          <p className="pt-3">
+                            Over
+                            {' '}
+                            {productCustomers.length}
+                            {' '}
+                            people have earned cashback and discounts on this item!
+                          </p>
                         </Col>
                       </Row>
                       <Row className="align-items-center">
