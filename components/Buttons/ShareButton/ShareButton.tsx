@@ -83,7 +83,7 @@ const ShareButton = ({
       )}
       label={label}
       className={className}
-      icon={icon ?? <Send size={17} />}
+      icon={icon ?? <Send size={18} />}
       placement={placement}
     />
   );

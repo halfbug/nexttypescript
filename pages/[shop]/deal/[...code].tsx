@@ -327,7 +327,6 @@ const GroupShop: NextPage = () => {
                       {hrs}
                       H
                     </span>
-                    {' '}
                     :
                     <span>
                       {mins}

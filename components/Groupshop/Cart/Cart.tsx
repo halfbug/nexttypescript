@@ -219,10 +219,10 @@ const Cart = ({
                 <div className={['text-start', styles.groupshop_cart_spend].join(' ')}>
                   In case you missed the best-sellers...
                 </div>
-                <Row className="p-4 pt-2">
+                <Row className="p-3 pt-2">
                   {/* <ProductGrid products={suggestedProd} /> */}
                   {suggestedProd.map((item) => (
-                    <Col xs={6} className=" py-1 px-0 mb-1 border-2 d-flex justify-content-center">
+                    <Col xs={6} className=" py-1 mb-1 px-1 border-2">
                       <ProductCard
                         type="small"
                         isrc={item.featuredImage}

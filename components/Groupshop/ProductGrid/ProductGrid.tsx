@@ -90,9 +90,9 @@ const ProductGrid = ({
           {children}
         </Col>
       </Row>
-      <Row>
+      <Row className="justify-content-center">
         {renderItems?.map((prod) => (
-          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center" key={prod.id}>
+          <Col xs={xs} md={6} lg={4} xl={3} key={prod.id}>
             <ProductCard
               isrc={prod.featuredImage}
               onClick={() => handleDetail(prod)}
@@ -194,7 +194,7 @@ const ProductGrid = ({
           </Col>
         ))}
         {[...new Array(fillerz)]?.map((n) => (
-          <Col xs={xs} md={6} lg={4} xl={3} className="d-flex justify-content-center " key={n}>
+          <Col xs={xs} md={6} lg={4} xl={3} key={n}>
             <ProductCard
               isrc="/images/empty.png"
               imgOverlay={(
