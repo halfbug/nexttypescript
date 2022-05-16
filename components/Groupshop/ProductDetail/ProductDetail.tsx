@@ -426,6 +426,10 @@ const ProductDetail = ({
                       shareurl={productShareUrl(product?.id ?? '')}
                       label=""
                       className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                      onClick={() => navigator?.share({
+                        title: 'Groupshop',
+                        text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
+                      })}
                     />
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
