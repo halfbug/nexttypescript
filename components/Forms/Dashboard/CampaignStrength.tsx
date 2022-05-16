@@ -2,7 +2,7 @@
 import * as React from 'react';
 import styles from 'styles/Overview.module.scss';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
-import { Container } from 'react-bootstrap';
+import { Accordion, Container } from 'react-bootstrap';
 
 export default function CampaignStrength() {
   return (
@@ -11,35 +11,40 @@ export default function CampaignStrength() {
         <div className={styles.strength__header}>
           <h3>Campaign Strength</h3>
         </div>
-        <div>
-          <div className={styles.strength__node}>
-            <div className='my-4'>
-              Recover abandoned carts
-            </div>
-            <div>
-              <ArrowIcon />
-            </div>
-          </div>
-          <div className={styles.strength__node}>
-            <div className='my-4'>
-              Recover abandoned carts
-            </div>
-            <div>
-              <ArrowIcon />
-            </div>
-          </div>
+        <Accordion className={styles.strength__acc}>
+          <Accordion.Item eventKey="0" className="border-0 border-bottom">
+            <Accordion.Header className={styles.strength__ques}>
+              <div className={styles.strength__ques__name}>
+                Enable email/SMS marketing
+              </div>
+            </Accordion.Header>
+            <Accordion.Body className={styles.strength__acc_body}>
+              It’s a personalized shopping page we create
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="0" className="border-0 border-bottom">
+            <Accordion.Header className={styles.strength__ques}>
+              <div className={styles.strength__ques__name}>
+                Recover abandoned carts
+              </div>
+            </Accordion.Header>
+            <Accordion.Body className={styles.strength__acc_body}>
+              It’s a personalized shopping page we create
+            </Accordion.Body>
+          </Accordion.Item>
+          <Accordion.Item eventKey="0" className="border-0 border-bottom">
+            <Accordion.Header className={styles.strength__ques}>
+              <div className={styles.strength__ques__name}>
+                Customize product page banners
+              </div>
+            </Accordion.Header>
+            <Accordion.Body className={styles.strength__acc_body}>
+              It’s a personalized shopping page we create
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
 
-          <div className={styles.strength__node}>
-            <div className='my-4'>
-              Customize product page banners
-            </div>
-            <div>
-              <ArrowIcon />
-            </div>
-          </div>
-        </div>
-
-        <div className='mt-3'>
+        <div className={['mt-3', styles.strength__viewAll].join(' ')}>
           <WhiteButton>View all settings</WhiteButton>
         </div>
 

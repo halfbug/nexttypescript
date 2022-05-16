@@ -2,16 +2,37 @@
 import * as React from 'react';
 import styles from 'styles/Overview.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
+import DownArrow from 'assets/images/DownArrowSmall.svg';
+import CalendarIcon from 'assets/images/calendar-icon.svg';
 
 // import images
 import ProductLogo from 'assets/images/viral-product-icon.svg';
-import { Col, Row } from 'react-bootstrap';
+import {
+  Accordion, Col, Dropdown, Row,
+} from 'react-bootstrap';
 
 export default function CampaignMetrics() {
   return (
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
         <h3>Campaign Metrics</h3>
+        <Dropdown className="d-inline mx-2">
+          <Dropdown.Toggle
+            id="dropdown-autoclose-true"
+            variant="outline-primary"
+            className={styles.metrics__header__dropdown}
+          >
+            <CalendarIcon />
+            <span className={styles.metrics__header__dropdown__txt}>This week</span>
+            <DownArrow />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className={styles.metrics__header__dropdownMenu}>
+            <Dropdown.Item className={styles.metrics__header__dropdownItem}>
+              item 1
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
       <div className={styles.metrics__box}>
         <Row>
@@ -38,33 +59,38 @@ export default function CampaignMetrics() {
         </Row>
         <Row className="mt-4">
           <Col lg={6} className="mt-1">
-            <div className={[styles.metrics__box__customers, 'h-100 p-4'].join(' ')}>
+            <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>
               <div className={styles.metrics__box__customers__header}>
                 Most Viral Customers
               </div>
-              <div className={`${styles.metrics__box__customers__node} pb-2`}>
-                <div>
-                  Ilian Davis
-                </div>
-                <div className={styles.metrics__box__customers__node__value}>
-                  $428 generated
-                </div>
-                <div className='text-end'>
-                  <ArrowIcon />
-                </div>
-              </div>
-              <hr />
-              <div className={`${styles.metrics__box__customers__node} pb-2`}>
-                <div>
-                  Anna Karter
-                </div>
-                <div className={styles.metrics__box__customers__node__value}>
-                  $213 generated
-                </div>
-                <div className='text-end'>
-                  <ArrowIcon />
-                </div>
-              </div>
+              <Accordion className={styles.metrics__box__customers__acc}>
+                <Accordion.Item eventKey="0" className="border-0 border-bottom">
+                  <Accordion.Header className={styles.metrics__box__customers__ques}>
+                    <div className={styles.metrics__box__customers__ques__name}>
+                      Ilian Davis
+                    </div>
+                    <div className={styles.metrics__box__customers__node__value}>
+                      $428 generated
+                    </div>
+                  </Accordion.Header>
+                  <Accordion.Body className={styles.metrics__box__customers__acc_body}>
+                    It’s a personalized shopping page we create
+                  </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="1" className="border-0 border-bottom">
+                  <Accordion.Header className={styles.metrics__box__customers__ques}>
+                    <div className={styles.metrics__box__customers__ques__name}>
+                      Anna Karter
+                    </div>
+                    <div className={styles.metrics__box__customers__node__value}>
+                      $213 generated
+                    </div>
+                  </Accordion.Header>
+                  <Accordion.Body className={styles.metrics__box__customers__acc_body}>
+                    It’s a personalized shopping page we create
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
             </div>
           </Col>
           <Col lg={6} className="mt-1">

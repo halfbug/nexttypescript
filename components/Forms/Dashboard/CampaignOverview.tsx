@@ -4,6 +4,7 @@ import {
   Row, Col,
 } from 'react-bootstrap';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import InfoIcon from 'assets/images/info-icon.svg';
 
 export default function CampaignOverview() {
   return (
@@ -24,15 +25,9 @@ export default function CampaignOverview() {
                 <div className={styles.overiew__campaignBox__year}>
                   Fall 2021 Campaign
                 </div>
-                <div className="mt-3">
-                  <Row>
-                    <Col lg={6}>
-                      <WhiteButton>View Analytics</WhiteButton>
-                    </Col>
-                    <Col lg={6}>
-                      <WhiteButton>Edit Campaign</WhiteButton>
-                    </Col>
-                  </Row>
+                <div>
+                  <WhiteButton>View Analytics</WhiteButton>
+                  <WhiteButton>Edit Campaign</WhiteButton>
                 </div>
               </Col>
             </Row>
@@ -40,12 +35,15 @@ export default function CampaignOverview() {
         </Col>
         <Col lg={4}>
           <div className={`${styles.overiew__performanceBox} h-100`}>
-            <div>
+            <div className={styles.overiew__performanceBox__tag}>
               Performance
             </div>
-            <div>
+            <div className={styles.overiew__performanceBox__multiplier}>
               3.5x
-              ROGS i
+            </div>
+            <div className={styles.overiew__performanceBox__rogs}>
+              ROGS
+              <InfoIcon />
             </div>
           </div>
         </Col>

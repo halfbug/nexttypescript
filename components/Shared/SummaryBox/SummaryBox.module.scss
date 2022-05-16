@@ -1,5 +1,5 @@
 .s_box{
-    padding: 16px;
+    padding: 16px 20px;
     border: 1px dashed #A7C737;
     border-radius: 23px;
     margin-top: 20px;
@@ -27,7 +27,8 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 24px;
-        margin: 6px 0px; 
+        margin-top: 5px;
+        margin-bottom: 8px; 
     }
     .value{
         font-weight: 700;
@@ -35,4 +36,23 @@
         line-height: 20px;
         margin: 8px 0px; 
     }
+}
+
+.revenue {
+    border: 1px dashed #A7C737 !important;
+}
+.purchase {
+    border: 1px dashed #F28BF4 !important;
+}
+.cashBack{
+    border: 1px dashed #7DD8C7 !important;
+}
+.scale{
+    border: 1px dashed #C1B7F8 !important;
+}
+.click{
+    border: 1px dashed #835CC6 !important;
+}
+.traffic{
+    border: 1px dashed #FFD966 !important;
 }
