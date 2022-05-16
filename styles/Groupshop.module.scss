@@ -667,6 +667,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &:focus {
       box-shadow: none;
     }
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
   }
 
   &_dropdownMenu {
@@ -826,6 +830,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
   }
 
+  &_friendsShopped {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+
   &__pcard {
     position: relative;
     @extend .border-0;
@@ -834,6 +844,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       font-weight: 400;
       line-height: 18px;
       color: #282828;
+      font-style: italic;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        line-height: 16px !important;
+      }
     }
 
     &_small {
@@ -1104,6 +1121,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       @include media-breakpoint-down(sm) {
           font-size: 18px !important;
         }
+    }
+    &_recommendations {
+      display: block;
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
     }
     p {
       font-size: 14px;
@@ -1411,6 +1434,39 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
 
+    @media (max-width: 390px) {
+      &_tostart {
+        h3:before {
+          left: 255px !important;
+        }
+        h3:after {
+          right: 255px !important;
+        }
+      }
+    }
+
+    @media (min-width: 390px) and (max-width: 425px) {
+      &_tostart {
+        h3:before {
+          left: 270px !important;
+        }
+        h3:after {
+          right: 270px !important;
+        }
+      }
+    }
+
+    @media (min-width: 425px) and (max-width: 575px) {
+      &_tostart {
+        h3:before {
+          left: 280px !important;
+        }
+        h3:after {
+          right: 280px !important;
+        }
+      }
+    }
+
     @include media-breakpoint-down(sm) {
       margin: 0px !important;
       padding: 0px 25px;
@@ -1432,12 +1488,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         }
         h3:before {
           width: 70px !important;
-          left: 245px !important;
+          // left: 280px !important;
           top: 30.3% !important;
         }
         h3:after {
           width: 70px !important;
-          right: 245px !important;
+          // right: 280px !important;
           top: 30.3% !important;
         }
       }
@@ -1449,6 +1505,21 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       width: 192px;
       height: 42.96px;
       box-shadow: none !important;
+    }
+    &_shareBtn {
+      width: 38px;
+      height: 38px;
+      background: #FFFFFF;
+      border: 1px solid #403f43;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-left: 14px;
+      margin-top: 2px;
+      svg {
+        position: relative;
+        top: 9px;
+        left: -4px;
+      }
     }
     h2 {
       @extend .mt-4, .mb-3;

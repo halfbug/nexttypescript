@@ -474,6 +474,7 @@ const GroupShop: NextPage = () => {
             <span className={styles.groupshop_firstName}>
               {member?.orderDetail?.customer.firstName}
             </span>
+            {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2">
                 <Dropdown.Toggle
@@ -510,7 +511,7 @@ const GroupShop: NextPage = () => {
               ''
             )}
           </h2>
-          <p>
+          <p className={styles.groupshop_col_recommendations}>
             Shop from
             {' '}
             {member?.orderDetail?.customer?.firstName || ''}

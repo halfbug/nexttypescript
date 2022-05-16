@@ -14,6 +14,7 @@ import Cross from 'assets/images/CrossLg.svg';
 import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
+import { Send } from 'react-bootstrap-icons';
 
 interface mesProps {
   mes: string;
@@ -133,6 +134,9 @@ const InfoBox = ({ mes, brandname }: mesProps) => {
                 Start Shopping
 
               </Button>
+              <div className={styles.groupshop_infoBox_shareBtn}>
+                <Send size={18} />
+              </div>
             </Row>
             <Row>
               <div className={styles.groupshop_infoBox_lastLine}>

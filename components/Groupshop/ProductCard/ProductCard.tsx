@@ -26,7 +26,7 @@ const ProductCard = ({
           <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
             {imgOverlay}
           </Card.ImgOverlay>
-          <Card.Body>
+          <Card.Body className="px-2">
             {children}
           </Card.Body>
         </Card>
