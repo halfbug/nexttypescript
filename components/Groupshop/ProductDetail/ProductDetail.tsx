@@ -433,11 +433,11 @@ const ProductDetail = ({
                       {productCustomers.length > 0
                   && (
                     <>
-                      <Row className="d-flex align-items-center my-2">
-                        <Col xs={1} className="text-nowrap">
+                      <div className="d-flex align-items-center my-2">
+                        <div className="text-nowrap px-2">
                           <Icon />
-                        </Col>
-                        <Col xs={11}>
+                        </div>
+                        <div>
                           <p className="pt-3">
                             Over
                             {' '}
@@ -445,8 +445,8 @@ const ProductDetail = ({
                             {' '}
                             people have earned cashback and discounts on this item!
                           </p>
-                        </Col>
-                      </Row>
+                        </div>
+                      </div>
                       <Row className="align-items-center">
                         <Col xs={6} md={6} lg={6}>
                           <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />

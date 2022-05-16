@@ -5,7 +5,7 @@ import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   ButtonGroup,
-  Col, Container, FormControl, Offcanvas, Row, Badge, ProgressBar,
+  Col, Container, FormControl, Offcanvas, Row, Badge,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useCart from 'hooks/useCart';
@@ -14,7 +14,6 @@ import { useRouter } from 'next/router';
 import useSuggested from 'hooks/useSuggested';
 import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
-import IconMoney from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Members from '../Members/Members';
@@ -133,7 +132,7 @@ const Cart = ({
             {cartProducts.length < 1 ? (
               <>
                 <Row className={['pt-4 my-5 .d-flex, .justify-content-center', styles.groupshop_emptyCardHeading].join(' ')}>
-                  <div className="mb-2"> Your cart is empty!</div>
+                  <div className="mb-1"> Your cart is empty!</div>
                   Don’t miss out on these limited
                   <br />
                   time offers.
@@ -274,7 +273,7 @@ const Cart = ({
                                 {formatNumber(item?.price)}
                               </span>
                               {' '}
-                              <span>
+                              <span className="fw-normal">
                                 {currencySymbol}
                                 {formatNumber(dPrice(+(item?.price || 0)))}
                               </span>

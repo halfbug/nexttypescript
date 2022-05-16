@@ -1316,9 +1316,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
 
     &_cart {
-      // @extend .groupshop_modal;
-      // width: 430px !important;
       &_heading {
+        margin-bottom: 10px;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
@@ -1396,6 +1395,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
     @media screen and (max-width: 475px) {
       padding-top: 30px;
+      padding-bottom: 30px;
     }
   }
 

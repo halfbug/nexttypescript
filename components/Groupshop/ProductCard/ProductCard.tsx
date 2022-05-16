@@ -38,7 +38,7 @@ const ProductCard = ({
           <Card.ImgOverlay className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
-          <Card.Body className="styles.groupshop__pcard_cardBody">
+          <Card.Body>
             {children}
           </Card.Body>
         </Card>
