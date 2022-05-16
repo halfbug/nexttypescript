@@ -29,6 +29,7 @@ export interface ICampaign {
   createCampaignInput?: object;
   updateCampaignInput?: object;
   productsArray?: string[];
+  collectionsArray?: string[];
   collections?: ICollection[];
   products?: IProduct[];
   rewards?: string;
@@ -49,6 +50,7 @@ export interface ICampaignForm {
   criteria?: string;
   joinExisting?: any;
   products?: IProduct[];
+  collections?: ICollection[];
   rewards?: string;
   selectedTarget?: any;
   brandColor?: string;

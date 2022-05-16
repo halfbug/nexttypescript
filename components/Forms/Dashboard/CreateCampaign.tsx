@@ -191,6 +191,7 @@ export default function CreateCampaign() {
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
             isActive,
             products: store?.newCampaign?.productsArray,
+            collections: store?.newCampaign?.collectionsArray,
             addableProducts,
             socialLinks: {
               facebook,

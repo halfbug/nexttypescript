@@ -59,6 +59,7 @@ query StoreName($shop: String!) {
       }
     }
     products
+    collections
     addableProducts
 
   }
@@ -120,6 +121,7 @@ const CREATE_CAMPAIGN = gql`
     joinExisting
     criteria
     products
+    collections
     addableProducts
 
     }
@@ -156,6 +158,7 @@ const CREATE_CAMPAIGN_DB = gql`
       twitter
     }
     products
+    collections
     addableProducts
 
     }
@@ -229,6 +232,7 @@ const UPDATE_CAMPAIGN = gql`
       }
     }
     products
+    collections
     addableProducts
 
     }
@@ -277,6 +281,7 @@ const GET_CAMPAIGN_BY_ID = gql`
     joinExisting
     criteria
     products
+    collections
     addableProducts
     }
   }
@@ -426,6 +431,7 @@ query Groupshop($code: String!) {
     campaign{
       name
       products
+      collections
       addableProducts
       socialLinks{
         instagram
@@ -579,6 +585,7 @@ query campaigns($storeId: String!) {
       twitter
     }
     products
+    collections
     addableProducts
     details{
       totalGroupshops

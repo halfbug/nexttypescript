@@ -74,6 +74,7 @@ export default function OBCampaign() {
               // eslint-disable-next-line radix
               joinExisting: Boolean(parseInt(joinExisting ?? 1)),
               products: store?.newCampaign?.productsArray,
+              collections: store?.newCampaign?.collectionsArray,
               addableProducts: store?.newCampaign?.addableProductsArray,
             },
           },
@@ -90,6 +91,7 @@ export default function OBCampaign() {
               // eslint-disable-next-line radix
               joinExisting: Boolean(parseInt(joinExisting ?? 1)),
               products: store?.newCampaign?.productsArray,
+              collections: store?.newCampaign?.collectionsArray,
               addableProducts: store?.newCampaign?.addableProductsArray,
             },
           },

@@ -23,6 +23,7 @@ import Products from './Products';
 interface IScreen1Props {
   show: boolean,
   selectedProducts?: IProduct[];
+  selectedCollections?: ICollection[];
 }
 
 type SelectedType = {
@@ -30,7 +31,7 @@ type SelectedType = {
   products? : IProduct[];
 }
 
-const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
+const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props) => {
   const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
   const { store, dispatch } = React.useContext(StoreContext);
@@ -52,7 +53,7 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
   React.useEffect(() => {
     // if (selectedProducts && !campaign?.products?.length) {
     if (selectedProducts) {
-      setcampaign({ ...campaign, products: selectedProducts });
+      setcampaign({ ...campaign, products: selectedProducts, collections: selectedCollections ?? [] });
     }
   }, [selectedProducts]);
   const { filterArray, findInArray } = useUtilityFunction();
@@ -175,6 +176,7 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
               products: campaign?.products,
               collections: campaign?.collections,
               productsArray: campaign?.products?.map((prod) => prod.id),
+              collectionsArray: campaign?.collections?.map((prod) => prod.id),
             },
           },
         });
@@ -206,7 +208,7 @@ const Screen1 = ({ show, selectedProducts }: IScreen1Props) => {
     });
     setParams({ ins: 2 });
   };
-  // console.log({ campaign });
+  console.log({ campaign });
   // console.log({ store });
   // console.log({ selectedProducts });
   // console.log('....................');

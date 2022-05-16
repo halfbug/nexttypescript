@@ -45,7 +45,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
   // }, []);
   const { newcampaign } = useCampaign();
   const { campaign } = useCampaign();
-  // console.log({ campaign }, '.........');
+  // console.log({ campaign }, '....campaign.....');
   // console.log({ newCampaign }, '.........');
 
   React.useEffect(() => {
@@ -123,7 +123,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
           || (campaign?.products?.length)}
                   {' '}
                   product(s)/
-                  {(newCampaign?.collections && newCampaign?.collections?.length) || 0}
+                  {(campaign?.collections && campaign?.collections?.length) || 0}
                   {' '}
                   collection(s) selected
                   <DeleteButton

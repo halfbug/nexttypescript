@@ -10,7 +10,9 @@ import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
-import { ICampaign, ICampaignForm, IProduct } from 'types/store';
+import {
+  ICampaign, ICampaignForm, ICollection, IProduct,
+} from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
@@ -45,6 +47,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   const [disableBtn, setdisableBtn] = React.useState(true);
   const [selectedProducts, setselectedProducts] = React.useState<IProduct[] | undefined>(undefined);
+  const [selectedCollections, setselectedCollections] = React.useState<ICollection[] | undefined>(undefined);
   const [state, setstate] = React.useState<ICampaignForm>({
     id: '',
     criteria: '',
@@ -129,11 +132,14 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
       if (customBg) media = "";
       let customProducts: any[] = [];
+      let customCollections: any[] = [];
       if (criteria === 'custom') {
         if (store?.newCampaign?.productsArray?.length) {
           customProducts = [...store?.newCampaign?.productsArray ?? []];
+          customCollections = [...store?.newCampaign?.collectionsArray ?? []];
         } else {
           customProducts = [...campaign?.products ?? []];
+          customCollections = [...campaign?.collections ?? []];
         }
       }
 
@@ -153,6 +159,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
             },
 
             products: customProducts,
+            collections: customCollections,
             addableProducts,
             settings: {
               brandColor,
@@ -189,6 +196,9 @@ export default function UpdateCampaign({ setHeading }: IProps) {
       if (campaign?.products) {
         setselectedProducts(findInArray(campaign?.products, store?.products || [], null, "id"));
       }
+      if (campaign?.collections) {
+        setselectedCollections(findInArray(campaign?.collections, store?.collections || [], null, "id"));
+      }
     } else if (ins === "addproduct" && campaign?.addableProducts) {
       setselectedProducts(findInArray(campaign?.addableProducts, store?.products || [], null, "id"));
     }
@@ -196,6 +206,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     if (ins === '2') {
       if (store?.newCampaign?.productsArray?.length) {
         setFieldValue('products', store?.newCampaign?.productsArray);
+        setFieldValue('collections', store?.newCampaign?.collections);
         setTimeout(handleSubmit, 2000);
       }
       if (store?.newCampaign?.addableProductsArray?.length) {
@@ -251,10 +262,9 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
     handleSubmit();
   };
-
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} />
+      <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
       <Row>
         <Col lg={7} className="mt-4">
           <Row>

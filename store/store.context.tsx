@@ -16,7 +16,9 @@ const initialState: IStore = {
   installationStep: 0,
   logoImage: '',
   industry: '',
-  newCampaign: { products: [], collections: [], productsArray: [] },
+  newCampaign: {
+    products: [], collections: [], productsArray: [], collectionsArray: [],
+  },
   currencyCode: '',
 };
 
