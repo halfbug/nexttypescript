@@ -444,16 +444,9 @@ const ProductDetail = ({
                       {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
                     </Button>
-                    {isForMobile ? (
-                      <ShareButton
-                        disabled={isExpired}
-                        placement="right-start"
-                        shareurl={productShareUrl(product?.id ?? '')}
-                        label=""
-                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                      />
-                    ) : (
+                    {isForMobile === false ? (
                       <Button
+                        id="mobileBtn"
                         variant="outline-primary"
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                         onClick={() => navigator?.share({
@@ -463,6 +456,15 @@ const ProductDetail = ({
                       >
                         <Send size={17} />
                       </Button>
+                    ) : (
+                      <ShareButton
+                        disabled={isExpired}
+                        placement="right-start"
+                        shareurl={productShareUrl(product?.id ?? '')}
+                        label=""
+                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                      />
+
                     )}
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
