@@ -21,14 +21,14 @@ const useExcelDocument = () => {
       } = bRec;
 
       const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}`);
-      console.log({ GSUsageCharges });
+      console.log({ feeformGroupshop });
 
       return {
         Day: `${month}-${date}-${year}`,
         Revenue_Generated: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${revenue}`,
         Groupshops_Created: todaysTotalGS,
         Total_CashBack_Given: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalCashback}`,
-        Store_Plan: storePlan,
+        Store_Plan: feeformGroupshop[feeformGroupshop.length - 1].plan,
         // storeTotalGS,
         Charge_From_CashBack: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalfeeByCashback}`,
         Charge_From_GroupShops: GSUsageCharges.join(' | '),
