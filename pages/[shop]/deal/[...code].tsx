@@ -179,6 +179,8 @@ const GroupShop: NextPage = () => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
+        console.log('im in popular');
+
         // removing popular prd from topPicks so no duplication
         const uniqueBestSeller = filterArray(
           topPicks as any[],
@@ -186,6 +188,9 @@ const GroupShop: NextPage = () => {
           'id',
           'id',
         ).slice(0, 4 - popularProducts.length);
+        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ topPicks', topPicks);
+        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ popularProduct', popularProducts);
+        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ uniqueBestSeller', uniqueBestSeller);
         const newPopularArr = Array.from(
           new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
         );
@@ -194,7 +199,7 @@ const GroupShop: NextPage = () => {
         setNewPopularPrd([...(popularProducts ?? [])]);
       }
     }
-  }, [popularProducts, dealProducts]);
+  }, [popularProducts, topPicks]);
 
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {
