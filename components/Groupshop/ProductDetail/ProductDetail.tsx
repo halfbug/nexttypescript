@@ -176,25 +176,47 @@ const ProductDetail = ({
     if (data) {
       const { productById: dproduct } = data;
       // 1. get the select image
-      const svImage = dproduct?.images[index - 1]?.src;
+      const svImage = dproduct?.images[index - 1]?.src ?? '';
+      console.log('🚀 ~ file: ProductDetail.tsx ~ line 180 ~ useEffect ~ svImage', svImage);
 
-      // 2. get its variant
+      // 2. get image variant
       const svrnt = dproduct.variants.filter(
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
+      console.log('🚀 ~ file: ProductDetail.tsx ~ line 186 ~ useEffect ~ svrnt', svrnt);
 
-      // 3. set selected option state to variant options
-      if (svrnt?.length) {
+      // 3. if selected image related variant not found then select first variant
+      // let selectedV =
+
+      if (svrnt?.[0]) {
+      // 4. check if first variant is out of stock
+        // if (selectedV.inventoryQuantity === 0) {
+        //   // get instock variants
+        //   selectedV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
+        // }
+
+        // 3. set selected options to in stock variant
         setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
           { ...obj, [name]: value }), {}));
       }
+      // // 2. get its all variants
+      // const svrnt = dproduct.variants.filter(
+      //   (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
+      // );
+
+      // 3. set selected option state to variant options
+      // if (svrnt?.length) {
+      //   setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
+      //     { ...obj, [name]: value }), {}));
+      // }
     }
   }, [index]);
 
   useEffect(() => { // select instock variant as featured variant
+    console.log('inside variant effect');
     if (data) {
       const { productById: dproduct } = data;
-
+      console.log('inside variat data check');
       const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
 
       setselOptions(instockV?.selectedOptions.reduce((obj: any, { name, value }: any) => (
