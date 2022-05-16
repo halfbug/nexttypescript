@@ -348,7 +348,7 @@ const GroupShop: NextPage = () => {
                 />
                 <IconButton
                   icon={<Search size={24} />}
-                  className={styles.groupshop__hero_iconBtn}
+                  className={styles.groupshop__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
                 />
@@ -357,18 +357,20 @@ const GroupShop: NextPage = () => {
                   className={styles.groupshop__hero_iconBtn}
                   onClick={() => setshowCart(true)}
                 >
-                  {gsctx?.cart && gsctx?.cart?.length > 0
-                    ? `(${gsctx?.cart?.length})`
-                    : ''}
+                  <span className={styles.groupshop__hero__cart_count}>
+                    {gsctx?.cart && gsctx?.cart?.length > 0
+                      ? `(${gsctx?.cart?.length})`
+                      : ''}
+                  </span>
                 </IconButton>
-                <p
+                {/* <p
                   className={[
                     'd-flex align-items-center',
                     styles.groupshop__hero__cart_count,
                   ].join(' ')}
                 >
                   (2)
-                </p>
+                </p> */}
               </Col>
             </Row>
           </Container>
@@ -645,7 +647,7 @@ const GroupShop: NextPage = () => {
           <Col className="d-flex justify-content-center flex-column">
             <p>Don’t see what you like?</p>
             <Button
-              className="align-self-center fs-4 my-2 px-5"
+              className={['align-self-center my-2 px-5', styles.groupshop__productBtn].join(' ')}
               onClick={handleAddProduct}
             >
               Add a Product
