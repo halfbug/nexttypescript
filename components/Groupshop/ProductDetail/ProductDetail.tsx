@@ -24,6 +24,7 @@ import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
+import { Send } from 'react-bootstrap-icons';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -227,6 +228,7 @@ const ProductDetail = ({
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
+  console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
   return (
     <>
       <AlertComponent />
@@ -442,17 +444,26 @@ const ProductDetail = ({
                       {outofStock ? 'Out of Stock' : 'Add to Cart'}
 
                     </Button>
-                    <ShareButton
-                      disabled={isExpired}
-                      placement="right-start"
-                      shareurl={productShareUrl(product?.id ?? '')}
-                      label=""
-                      className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                      onClick={() => navigator?.share({
-                        title: 'Groupshop',
-                        text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
-                      })}
-                    />
+                    {isForMobile ? (
+                      <ShareButton
+                        disabled={isExpired}
+                        placement="right-start"
+                        shareurl={productShareUrl(product?.id ?? '')}
+                        label=""
+                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                      />
+                    ) : (
+                      <Button
+                        variant="outline-primary"
+                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                        onClick={() => navigator?.share({
+                          title: 'Groupshop',
+                          text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
+                        })}
+                      >
+                        <Send size={17} />
+                      </Button>
+                    )}
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
