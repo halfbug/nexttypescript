@@ -13,7 +13,7 @@ type IProductCardProps = {
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, children, type, imgOverlay, pending, ...rest
+  isrc, children, type, imgOverlay, pending, onClick, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
@@ -23,7 +23,7 @@ const ProductCard = ({
           <div className={styles.groupshop__pcard_image_wrapper}>
             <Card.Img variant="top" src={isrc} className={[' img-fluid', styles.groupshop__pcard_image].join(' ')} />
           </div>
-          <Card.ImgOverlay className={styles.groupshop__pcard_overlay}>
+          <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay}>
             {imgOverlay}
           </Card.ImgOverlay>
           <Card.Body className="px-2">
@@ -35,7 +35,7 @@ const ProductCard = ({
       return (
         <Card {...rest} className={[styles.groupshop__pcard_small, rest.className].join(' ')}>
           <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
-          <Card.ImgOverlay className={styles.groupshop__pcard_overlay_small}>
+          <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
           <Card.Body>

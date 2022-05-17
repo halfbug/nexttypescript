@@ -82,6 +82,10 @@ const ProductGrid = ({
   }
   // console.log({ renderItems });
   const { googleButtonCode } = useGtm();
+  const handleCard = (e: any) => {
+    e.stopPropagation();
+    googleButtonCode('product-share');
+  };
 
   return (
     <Container {...props} ref={ref} id={id}>
@@ -119,7 +123,7 @@ const ProductGrid = ({
                         </Button>
                       </Col>
                       <Col lg={2} className="ps-1">
-                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={() => googleButtonCode('product-share')} />
+                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
                       </Col>
                     </Row>
                   )}
