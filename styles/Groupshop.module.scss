@@ -2157,9 +2157,20 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       position: fixed;
       bottom: 0;
       margin: 0;
+      &_header{
+        display: flex;
+        justify-content: center;
+        border-bottom: none;
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+    &_modalContent{
+      border-radius: 21px;
     }
     &_heading {
-      @extend .d-flex, .justify-content-center, .mx-3;
+      @extend .d-flex, .justify-content-center;
       font-family: $font-family-sans-serif;
       font-style: normal;
       font-weight: $font-weight-bolder;
@@ -2170,7 +2181,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       color: $black;
     }
     &_state {
-      @extend .d-flex, .justify-content-between, .mt-3, .px-3, .pb-1;
+      @extend .d-flex, .justify-content-between, .mt-3, .px-4, .pb-1;
       span {
         font-family: "Mulish";
         font-style: normal;
@@ -2213,7 +2224,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       background: linear-gradient(270deg, #fee750 0%, #f4dec4 45.31%, #ccb2f9 94.79%, #ccb2f9 100%);
     }
     &_reward {
-      @extend .d-flex, .justify-content-between, .px-3;
+      @extend .d-flex, .justify-content-between, .px-4;
       p {
         @extend .mb-1;
         font-family: $font-family-sans-serif;
@@ -2240,6 +2251,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       @extend .px-2, .rounded-pill, .bg-white, .mx-2;
       height: 42px;
       width: 42px;
+    }
+    &_btnWrappper{
+      @extend .d-flex, .justify-content-center, .align-items-center;
+      margin-top: 36px;
+    }
+    &_worksBtn{
+      width: 170px;
+      height: 42px;
     }
   }
   &_shopping_box_mobile {

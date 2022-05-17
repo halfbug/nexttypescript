@@ -72,7 +72,7 @@ function Slider({ nooforder }: SliderProp) {
                 />
               </div>
               <div className={styles.billing__tiles}>
-                {sliderDisplayCSS.map((slider, index) => (
+                {sliderDisplayCSS.map((slider) => (
                   <div className={styles.billing__tierWrapper__tier}>
                     {/* {(slider.text === plan) ? ( */}
                     <div className={slider.display}>

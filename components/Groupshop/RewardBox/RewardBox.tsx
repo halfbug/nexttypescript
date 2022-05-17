@@ -34,15 +34,12 @@ const RewardBox = ({
         size="sm"
         dialogClassName={styles.groupshop_rewardBox_modal}
         backdrop="static"
-        contentClassName="reward-modal"
+        contentClassName={styles.groupshop_rewardBox_modalContent}
       >
-        <Modal.Header className={styles.groupshop__info_modal__closebtnlg}>
-          <Row onClick={handleClose}><Cross /></Row>
-        </Modal.Header>
-        <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
+        <Modal.Header className={styles.groupshop_rewardBox_modal_header}>
           <Row onClick={handleClose}><ArrowDown /></Row>
         </Modal.Header>
-        <Modal.Body className="px-0 bg-white">
+        <Modal.Body className="px-0 pt-0 bg-white">
           <Row>
             <Col xs={12} sm={12} md={12} className={styles.groupshop_rewardBox_heading}>
               Next 2 shoppers get
@@ -85,9 +82,9 @@ const RewardBox = ({
                 {' '}
               </p>
             </Col>
-            <Col xs={12} sm={12} md={12} className={[styles.groupshop_rewardBox_reward, 'mb-3'].join(' ')}>
+            <Col xs={12} sm={12} md={12} className={[styles.groupshop_rewardBox_reward, 'mb-2'].join(' ')}>
               <p>
-                $23%
+                $23
                 <span> cashback</span>
                 {' '}
               </p>
@@ -122,8 +119,8 @@ const RewardBox = ({
                 onClick={() => { }}
               />
             </Col>
-            <Col xs={12} className="d-flex justify-content-center align-items-center mt-5">
-              <Button className="align-self-center fs-4 my-2 px-5" onClick={() => {}}>How it Works</Button>
+            <Col xs={12} className={styles.groupshop_rewardBox_btnWrappper}>
+              <Button className={['align-self-center fs-4 my-2 px-5', styles.groupshop_rewardBox_worksBtn].join(' ')} onClick={() => {}}>How it Works</Button>
               <ShareButton
                 placement="auto"
                 shareurl=""
