@@ -786,9 +786,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &_modal_cart_close {
     @extend .ms-2, .mt-2;
+    position: relative;
 
     button {
       opacity: 1;
+      position: absolute;
+      padding-left: 765px!important;
+      width: 10px;
+      height: 10px;
       &:focus {
         box-shadow: none;
       }
