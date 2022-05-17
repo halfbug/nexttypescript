@@ -532,8 +532,8 @@ const GroupShop: NextPage = () => {
             lg={4}
             xl={3}
             products={
-              ownerProducts
-              && (ownerProducts!.length > 3
+              member?.products
+              && (member?.products!.length > 3
                 ? popularProducts?.slice(0, 3)
                 : newPopularPrd)
             }
@@ -552,8 +552,8 @@ const GroupShop: NextPage = () => {
             lg={4}
             xl={3}
             products={
-              ownerProducts
-              && (ownerProducts!.length > 3
+              member?.products
+              && (member?.products!.length > 3
                 ? topPicks?.slice(0, 3)
                 : topPicks?.slice(0, 4))
             }

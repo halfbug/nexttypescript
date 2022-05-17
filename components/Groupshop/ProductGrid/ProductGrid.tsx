@@ -54,7 +54,7 @@ const ProductGrid = ({
     siblingCount: 4,
   });
 
-  const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 1 : 0);
+  const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 0 : 0);
 
   const {
     gsctx: {
