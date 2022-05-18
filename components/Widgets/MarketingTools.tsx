@@ -17,11 +17,11 @@ export default function MarketingTools(
   return (
     <>
       <section className={styles.marketing__box_3}>
-        <Row className="">
-          <Col lg={1} className="me-0 mt-2">
+        <Row className="position-relative">
+          <Col className="position-absolute mt-2">
             <Recover />
           </Col>
-          <Col lg={10} className="px-0">
+          <Col lg={10} className="ps-4 ms-4">
             <h4 className="mt-0">
               Recover abandoned carts
               <ToolTip
@@ -69,10 +69,10 @@ export default function MarketingTools(
         <br />
         <hr />
         <Row>
-          <Col lg={1} className="me-0 mt-2">
+          <Col lg={1} className="position-absolute mt-2">
             <Sms />
           </Col>
-          <Col lg={10} className="px-0">
+          <Col lg={10} className="ps-4 ms-4">
             <h4 className="mt-0">
               Add SMS and WhatsApp notifications
             </h4>
@@ -111,10 +111,10 @@ export default function MarketingTools(
       </section>
       <section className={styles.marketing__box_3}>
         <Row className="">
-          <Col lg={1} className="me-0 mt-2">
+          <Col lg={1} className="position-absolute mt-2">
             <InviteCustomer />
           </Col>
-          <Col lg={10} className="px-0">
+          <Col lg={10} className="ps-4 ms-4">
             <h4 className="mt-0">
               Invite past customers to Groupshop
             </h4>
