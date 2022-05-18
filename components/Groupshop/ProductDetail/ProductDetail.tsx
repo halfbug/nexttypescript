@@ -238,7 +238,7 @@ const ProductDetail = ({
         centered
         size="lg"
         dialogClassName={styles.groupshop_modal_detail}
-        backdrop="static"
+        // backdrop="static"
         fullscreen="lg-down"
         contentClassName={styles.groupshop_modal_content}
       >

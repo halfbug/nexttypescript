@@ -33,7 +33,7 @@ const RewardBox = ({
         onHide={closeModal}
         size="sm"
         dialogClassName={styles.groupshop_rewardBox_modal}
-        backdrop="static"
+        // backdrop="static"
         contentClassName={styles.groupshop_rewardBox_modalContent}
       >
         <Modal.Header className={styles.groupshop_rewardBox_modal_header}>

@@ -17,7 +17,7 @@ export default function Model({
       <Modal
         show={show}
         onHide={handleClose}
-        backdrop="static"
+        // backdrop="static"
         keyboard={false}
         aria-labelledby="contained-modal-title-vcenter"
         centered
