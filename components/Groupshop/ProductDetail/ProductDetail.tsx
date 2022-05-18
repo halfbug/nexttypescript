@@ -228,7 +228,7 @@ const ProductDetail = ({
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
-  console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
+  // console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
   return (
     <>
       <AlertComponent />

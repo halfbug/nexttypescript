@@ -79,9 +79,9 @@ const GroupShop: NextPage = () => {
   // load all products
   useProducts(`${shop}.myshopify.com`);
 
-  console.log('🚀 ~ file: [...code].tsx ~ line74  ~ error', error);
+  // console.log('🚀 ~ file: [...code].tsx ~ line74  ~ error', error);
   console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
-  console.log('🚀 ~~ line 75 ~ loading', loading);
+  // console.log('🚀 ~~ line 75 ~ loading', loading);
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
     undefined,
@@ -162,13 +162,25 @@ const GroupShop: NextPage = () => {
     );
 
     setbannerDiscount(getDiscounts());
-  }, [gsctx]);
+    // fillAddedPrdInCTX();
+  }, [gsctx, gsctx.dealProducts]);
 
+  useEffect(() => {
+    const addedPrds = filterArray(dealProducts ?? [], popularProducts ?? [], 'id', 'id');
+    console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
+    dispatch({
+      type: 'UPDATE_GROUPSHOP',
+      payload: {
+        ...gsctx,
+        addedProducts: [...gsctx?.addedProducts || [], ...addedPrds || []],
+      },
+    });
+  }, [dealProducts, popularProducts]);
   useEffect(() => {
     async function gets3logo() {
       const key = getKeyFromS3URL(logoImage ?? '');
       const logoS3 = await getSignedUrlS3(key);
-      console.log('🚀 [...code] logoS3', logoS3);
+      // console.log('🚀 [...code] logoS3', logoS3);
       if (logoS3) setStoreLogo(logoS3);
     }
     gets3logo();
@@ -178,8 +190,6 @@ const GroupShop: NextPage = () => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
-        console.log('im in popular');
-
         // removing popular prd from topPicks so no duplication
         const uniqueBestSeller = filterArray(
           topPicks as any[],
@@ -187,9 +197,9 @@ const GroupShop: NextPage = () => {
           'id',
           'id',
         ).slice(0, 4 - popularProducts.length);
-        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ topPicks', topPicks);
-        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ popularProduct', popularProducts);
-        console.log('🚀 ~ file: [...code].tsx ~ line 191 ~ useEffect ~ uniqueBestSeller', uniqueBestSeller);
+        // console.log('🚀[...code].tsx topPicks', topPicks);
+        // console.log('🚀[...code].tsx popularProduct', popularProducts);
+        // console.log('🚀[...code].tsx uniqueBestSeller', uniqueBestSeller);
         const newPopularArr = Array.from(
           new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
         );
