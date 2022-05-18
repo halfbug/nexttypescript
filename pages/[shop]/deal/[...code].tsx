@@ -274,9 +274,13 @@ const GroupShop: NextPage = () => {
             LeftComp={
               <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
-            RightComp={
-              <InfoBox mes="How does this work?" brandname={brandName} />
-            }
+            RightComp={(
+              <InfoBox
+                mes="How does this work?"
+                brandname={brandName}
+                shareUrl={gsURL}
+              />
+            )}
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
@@ -463,7 +467,7 @@ const GroupShop: NextPage = () => {
               />
             </div>
             <Row className={styles.groupshop__hero_how_to}>
-              <InfoBox mes="How it works" brandname={brandName} />
+              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsURL} />
             </Row>
           </Container>
         </Hero>

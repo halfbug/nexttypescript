@@ -15,12 +15,14 @@ import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { Send } from 'react-bootstrap-icons';
+import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 interface mesProps {
   mes: string;
   brandname: any;
+  shareUrl?: string;
 }
-const InfoBox = ({ mes, brandname }: mesProps) => {
+const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
   const [show, setShow] = useState(false);
 
   const { googleEventCode } = useGtm();
@@ -132,11 +134,17 @@ const InfoBox = ({ mes, brandname }: mesProps) => {
                 onClick={handleClose}
               >
                 Start Shopping
-
               </Button>
-              <div className={styles.groupshop_infoBox_shareBtn}>
-                <Send size={18} />
-              </div>
+              {/* <Send size={18} /> */}
+              <ShareButton
+                  // placement="bottom"
+                shareurl={shareUrl ?? ''}
+                  // label="Invite"
+                  // className={styles.groupshop__top_invite}
+                icon={<Send size={18} />}
+                className={styles.groupshop_infoBox_shareBtn}
+                onClick={() => googleEventCode('how-it-works-modal')}
+              />
             </Row>
             <Row>
               <div className={styles.groupshop_infoBox_lastLine}>
@@ -154,8 +162,8 @@ const InfoBox = ({ mes, brandname }: mesProps) => {
   );
 };
 
-// InfoBox.defaultProps = {
-//   user: {},
-// };
+InfoBox.defaultProps = {
+  shareUrl: '',
+};
 
 export default InfoBox;
