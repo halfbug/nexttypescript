@@ -4,8 +4,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 // import Head from 'next/head';
 // import { useRouter } from 'next/router';
-import { useQuery, useLazyQuery } from '@apollo/client';
-import { GET_GROUPSHOP, GET_PRODUCTS } from 'store/store.graphql';
+import { useQuery } from '@apollo/client';
+import { GET_GROUPSHOP } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
@@ -20,7 +20,7 @@ import Icon from 'assets/images/small cone.svg';
 import ArrowSort from 'assets/images/ArrowSort.svg';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import {
-  ChevronDown, Handbag, Plus, Search,
+  Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
@@ -45,7 +45,6 @@ import Head from 'next/head';
 import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
 import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
-import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
@@ -285,7 +284,6 @@ const GroupShop: NextPage = () => {
                       src={storeLogo}
                       alt={`${brandName}`}
                       // alt="d"
-                      width={130}
                       className="img-fluid"
                     />
                   )}

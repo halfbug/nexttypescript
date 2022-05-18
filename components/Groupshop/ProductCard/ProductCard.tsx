@@ -21,11 +21,11 @@ const ProductCard = ({
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
           <div className={styles.groupshop__pcard_image_wrapper}>
+            <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
+              {imgOverlay}
+            </Card.ImgOverlay>
             <Card.Img variant="top" src={isrc} className={[' img-fluid', styles.groupshop__pcard_image].join(' ')} />
           </div>
-          <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay}>
-            {imgOverlay}
-          </Card.ImgOverlay>
           <Card.Body className="px-2">
             {children}
           </Card.Body>
@@ -34,10 +34,10 @@ const ProductCard = ({
     case 'small':
       return (
         <Card {...rest} className={[styles.groupshop__pcard_small, rest.className].join(' ')}>
-          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
           <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
+          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
           <Card.Body>
             {children}
           </Card.Body>

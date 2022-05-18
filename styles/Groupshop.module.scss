@@ -12,6 +12,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 .groupshop {
   background-color: white !important;
   font-family: "DM Sans" !important;
+
   p {
     @extend .mb-0;
   }
@@ -289,8 +290,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
     svg {
       position: absolute;
-      left: 11px;
-      top: 10px;
+      left: 10px;
+      top: 11px;
     }
   }
 
@@ -769,18 +770,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &__pcard_image_wrapper {
-    height: 282px;
+    height: 0;
     overflow: hidden;
-    width: 282px;
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
 
     img {
-      height: 100%;
       object-fit: cover;
-    }
-    @include media-breakpoint-down(sm) {
-      max-height: 186px;
-      overflow: hidden;
-      width: auto;
     }
   }
 
@@ -913,19 +910,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
 
       &_small {
-        height: 143px;
-        max-height: 135px;
+        max-height: 165px;
+        width: 100%;
+        object-fit: cover;
         padding: 6px;
       }
     }
     &_overlay {
-      height: 282px;
-      @include media-breakpoint-down(md) {
-        height: 180px;
-      }
-      &_small {
-        height: 100px;
-      }
       &:hover {
         .groupshop__pcard_tag_addToCart {
           display: flex;
@@ -934,8 +925,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
           }
           &_btn {
             @extend .shadow-sm;
-            border-style: none;
-            border: none;
           }
         }
       }
@@ -950,7 +939,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         top: 10px;
         position: absolute;
         left: 5px;
-        border: 2px solid #000000;
+        border: 1px solid #000000;
         border-radius: 6px !important;
         color: #000000;
         @include media-breakpoint-down(md) {
@@ -1043,19 +1032,30 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
 
       &_product {
-        @extend .groupshop__pcard_tag, .rounded-pill, .w-75, .position-absolute, .top-50;
+        @extend .groupshop__pcard_tag, .rounded-pill;
         height: 40px;
         font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 16px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 75%;
+        margin: 0 auto !important;
       }
       &_addToCart {
-        @extend .position-absolute, .align-items-center, .w-75, .justify-content-center;
+        @extend .position-absolute, .align-items-center, .justify-content-center;
         display: none;
-        bottom: 35px;
-        left: 50px;
+        right: 0;
+        left: 0;
         z-index: 1;
         color: black;
+        position: absolute !important;
+        bottom: 15px;
+        margin: 0 auto;
+        width: 85%;
         &_btn {
           @extend .rounded-pill, .w-100, .px-0;
           color: $black;
@@ -1301,6 +1301,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       &_thumbnail {
         width: 73px;
         height: 73px;
+        object-fit: cover;
       }
       &_expire {
         @extend .w-50, .text-center;
@@ -1323,10 +1324,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       &_featureImage {
         width: 100%;
         height: 400px;
-        object-fit: cover;
+
+        img {
+          object-fit: cover;
+        }
       }
 
       &_height {
+        font-family: "DM Sans" !important;
+
         @include media-breakpoint-up(md) {
           min-height: 215px;
         }
@@ -1402,6 +1408,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       line-height: 31px;
       color: #282828;
       letter-spacing: 0.48px;
+      font-family: "DM Sans" !important;
     }
     &_price {
       font-size: 18px;
@@ -1410,6 +1417,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       color: #282828;
       letter-spacing: 0.36px;
       margin-right: 5px;
+      font-family: "DM Sans" !important;
     }
     @media screen and (max-width: 475px) {
       padding-top: 30px;
@@ -1619,7 +1627,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_pcard {
       img {
         object-fit: cover;
-        height: 100%;
         @include media-breakpoint-down(sm) {
           height: 186px !important;
         }
@@ -1630,18 +1637,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
 
       &_addProduct {
-        @extend .rounded-pill, .w-75, .position-absolute, .top-50;
-        height: 36px;
+        @extend .groupshop__pcard_tag, .rounded-pill;
+        height: 40px;
         font-size: 12px !important;
         font-weight: 700 !important;
         line-height: 16px;
-        box-shadow: none !important;
-        box-sizing: border-box;
-        backdrop-filter: blur(4px);
-        color: #000000;
-        background: $white;
-        border: 1px solid #403F43;
-        font-family: "DM Sans" !important;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 75%;
+        margin: 0 auto !important;
 
         // &::before {
         //   content: "";
@@ -2050,22 +2057,25 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     backdrop-filter: blur(4px);
     /* Note: backdrop-filter has minimal browser support */
     color: #000000;
+    border: 1px solid #ccb2f9 !important;
 
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      padding: 1px;
-      inset: 0;
-      background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      border-radius: 25px;
-    }
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   z-index: -1;
+    //   padding: 1px;
+    //   inset: 0;
+    //   background: linear-gradient(to right, #ccb2f9, #fee750);
+    //   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    //   -webkit-mask-composite: xor;
+    //   mask-composite: exclude;
+    //   border-radius: 25px;
+    // }
     &:hover {
-      background-color: $purple !important;
+      // background-color: $purple !important;
+      color: inherit;
+      border: inherit;
     }
   }
 
