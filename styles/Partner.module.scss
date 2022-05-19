@@ -125,10 +125,12 @@
         @extend .my-2;
         margin-left: 0px;
         &__percentage{
-            @extend .py-1, .px-3;
+            @extend .px-3;
+            padding-top: 0.35rem;
+            padding-bottom: 0.25rem;
             color: $black;
             font-size: $font-size-medium;
-            font-weight: $font-weight-light;
+            font-weight: $font-weight-bolder;
             text-align: center;
             background-color: $modern;
             width: fit-content;
