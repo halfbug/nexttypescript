@@ -18,37 +18,37 @@ export default function AffiliateDetail() {
         {' '}
         <span>WOM Score</span>
       </h4>
-      <hr className={styles.partner__sperator} />
+      <hr className={styles.partner__separator} />
 
       <Row className="mt-4">
-        <Col lg={6} md={6} xs={6}>
+        <Col lg={5} md={5} xs={5}>
           <span className={styles.partner__detail_tag__tag1}>$428 generated</span>
         </Col>
-        <Col lg={6} md={6} xs={6}>
+        <Col lg={5} md={5} xs={5}>
           <span className={styles.partner__detail_tag__tag2}>
             <UniqueClicksLogo />
           </span>
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col lg={6} md={6} xs={6}>
+        <Col lg={5} md={5} xs={5}>
           <span className={styles.partner__detail_tag__tag3}>
             <NewPurchaseLogo />
           </span>
         </Col>
-        <Col lg={6} md={6} xs={6}>
+        <Col lg={5} md={5} xs={5}>
           <span className={styles.partner__detail_tag__tag4}>
             <NewCustomerLogo />
           </span>
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col lg={6} md={6} xs={6}>
+        <Col lg={5} md={5} xs={5}>
           <span className={styles.partner__detail_tag__tag5}>
             <CashBackLogo />
           </span>
         </Col>
-        <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
+        <Col lg={5} md={5} xs={5} className="d-flex justify-content-start align-items-center">
           <span className={styles.partner__btn}>View Groupshop</span>
           <ArrowRightLogo />
         </Col>

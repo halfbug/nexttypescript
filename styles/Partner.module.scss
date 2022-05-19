@@ -33,6 +33,11 @@
         color: $black;
         opacity: $opacity-large;
     }
+    &__separator {
+        margin-top: 2rem;
+        color: $black;
+        opacity: $opacity-large;
+    }
 
     &__btn {
         @extend .px-2;
