@@ -15,7 +15,6 @@ export default function AffiliateDetail() {
         llian Davis
         {' '}
         <span className={styles.partner__wom_score}>9</span>
-        {' '}
         <span>WOM Score</span>
       </h4>
       <hr className={styles.partner__separator} />
