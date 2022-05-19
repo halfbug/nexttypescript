@@ -104,7 +104,7 @@ const ProductDetail = ({
 
   const getVariant = () => {
     const { productById: dproduct } = data;
-    const optionNames = Object.keys(selOptions);
+    const optionNames = Object.keys(selOptions ?? {});
     return dproduct.variants.filter(
       (vr: { selectedOptions: any[]; }) => optionNames.reduce(
         // if all selected options match
