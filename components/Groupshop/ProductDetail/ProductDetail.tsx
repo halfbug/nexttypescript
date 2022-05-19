@@ -254,39 +254,6 @@ const ProductDetail = ({
 
           </button>
         </Modal.Header>
-        <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center py-2'].join(' ')}>
-          <Button
-            variant="primary"
-            className={styles.groupshop_Pd_addtoCart}
-            onClick={() => addToCart()}
-            disabled={isExpired || outofStock}
-          >
-            {outofStock ? 'Out of Stock' : 'Add to Cart'}
-
-          </Button>
-          {isForMobile === false ? (
-            <Button
-              id="mobileBtn"
-              variant="outline-primary"
-              className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-              onClick={() => navigator?.share({
-                title: 'Groupshop',
-                text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
-              })}
-            >
-              <Send size={18} />
-            </Button>
-          ) : (
-            <ShareButton
-              disabled={isExpired}
-              placement="right-start"
-              shareurl={productShareUrl(product?.id ?? '')}
-              label=""
-              className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-            />
-
-          )}
-        </div>
         <Modal.Body className="bg-white">
           <Row>
             <Col xs={12} md={6}>
@@ -466,6 +433,39 @@ const ProductDetail = ({
 
                       </div>
                     ))}
+                  </div>
+                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center py-2'].join(' ')}>
+                    <Button
+                      variant="primary"
+                      className={styles.groupshop_Pd_addtoCart}
+                      onClick={() => addToCart()}
+                      disabled={isExpired || outofStock}
+                    >
+                      {outofStock ? 'Out of Stock' : 'Add to Cart'}
+
+                    </Button>
+                    {isForMobile === false ? (
+                      <Button
+                        id="mobileBtn"
+                        variant="outline-primary"
+                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                        onClick={() => navigator?.share({
+                          title: 'Groupshop',
+                          text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
+                        })}
+                      >
+                        <Send size={18} />
+                      </Button>
+                    ) : (
+                      <ShareButton
+                        disabled={isExpired}
+                        placement="right-start"
+                        shareurl={productShareUrl(product?.id ?? '')}
+                        label=""
+                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                      />
+
+                    )}
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
