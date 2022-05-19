@@ -16,16 +16,18 @@
     }
 
     &__wom_score {
-        @extend .p-1, .px-3, .mx-2;
+        @extend .p-1, .px-3, .mx-1;
         font-family: "DM Sans";
-        font-style: normal;
-        font-weight: $font-weight-normal;
+        font-weight: 400!important;
         font-size: $font-size-small-medium;
         line-height: $line-height-15;
         color: $black;
         background: $classic;
         border-radius: $border-radius-light;
         margin-left: 25px !important;
+        width: 35px;
+        height: 26px;
+
     }
 
     &__sperator {
