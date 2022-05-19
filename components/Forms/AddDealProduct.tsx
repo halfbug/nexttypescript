@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Form, Button,
+  Form, Button, Spinner,
 } from 'react-bootstrap';
 // import Button from 'components/Buttons/Button/Button';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
@@ -32,6 +32,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   } = React.useContext(GroupshopContext);
 
   const { id, dealProducts: dealProductsCtx } = gsctx;
+  const [loadingSubmit, setloadingSubmit] = useState(false);
 
   // get client IP
   const [clientIP] = useIP();
@@ -61,6 +62,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+      setloadingSubmit(true);
       googleButtonCode('addproduct-complete');
       if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
@@ -88,6 +90,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         },
       });
       handleClose({});
+      setloadingSubmit(false);
+
       // update context
       dispatch({
         type: 'UPDATE_GROUPSHOP',
@@ -119,7 +123,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         <Form.Control.Feedback type="invalid">
           {errors.username}
         </Form.Control.Feedback>
-        <Button type="submit">Add</Button>
+        {loadingSubmit ? <Spinner animation="border" /> : <Button type="submit">Add</Button>}
       </Form.Group>
 
     </Form>

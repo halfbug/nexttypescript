@@ -121,7 +121,7 @@ const ProductsSearch = ({
         centered
         size="lg"
         dialogClassName={styles.groupshop_modal_search}
-        backdrop="static"
+        // backdrop="static"
         fullscreen="lg-down"
       >
         <Modal.Header className={styles.groupshop_modal__closebtnlg}>
