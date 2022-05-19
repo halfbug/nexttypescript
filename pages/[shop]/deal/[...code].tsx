@@ -47,7 +47,6 @@ import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
-import RewardBox from 'components/Groupshop/RewardBox/RewardBox';
 import { useMediaQuery } from 'react-responsive';
 import Router from 'next/router';
 import useGtm from 'hooks/useGtm';
@@ -686,12 +685,12 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
-        {isModalForMobile && (
+        {/* {isModalForMobile && (
           <RewardBox
             show={showRewards}
             handleClose={() => setShowRewards(false)}
           />
-        )}
+        )} */}
       </div>
       {isModalForMobile && (
         <Row
