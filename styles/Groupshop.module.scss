@@ -29,6 +29,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       padding-left: 15px;
       max-width: 130px;
       object-fit: contain;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+        max-height: 40px;
+      }
     }
   }
 
@@ -37,6 +42,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &__counter {
+    h6 {
+      text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+    }
+    @extend .text-center;
     @extend .my-1;
     @include media-breakpoint-up(sm) {
       display: none !important;
@@ -195,8 +206,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
           margin-right: 0px !important;
           // margin-left: 20px !important;
           svg {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
           }
         }
       }
@@ -394,14 +405,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     z-index: 1;
     opacity: 50%;
     height: 100%;
-
-    @include media-breakpoint-down(lg) {
-      height: 535px;
-    }
-
-    @include media-breakpoint-down(sm) {
-      height: 475px;
-    }
   }
 
   &__hero {
@@ -416,10 +419,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       position: relative;
     }
     @include media-breakpoint-down(lg) {
-      height: 535px;
-    }
-    @include media-breakpoint-down(sm) {
-      height: 475px;
+      height: fit-content;
+      padding: 30px 15px;
+      position: relative;
     }
     &__cart_count {
       @include media-breakpoint-down(sm){
@@ -458,21 +460,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         margin-top: 10px;
       }
       @include media-breakpoint-down(md) {
-        margin-left: 10px !important;
+        margin-left: 20px !important;
       }
     }
-    &_iconSearchBtn{
-      @include media-breakpoint-down(sm){
-        svg{
-          height: 13px !important; 
-        }
-      }
-    }
-    // @include media-breakpoint-up(sm) {
-    // 	&_small_banner_box {
-    // 	display: block;
-    // 	}
-    // }
     &_small_banner_box {
       @extend .px-1, .py-2, .mb-1, .align-items-center, .d-block;
       text-align: center;
@@ -617,7 +607,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
     &_welcome {
-      @extend .align-items-start, .text-center, .mb-4;
+      @extend .align-items-start, .text-center, .mb-4, .mt-4;
       // @include media-breakpoint-down(lg) {
       // 	display: none;;
       // }
@@ -643,8 +633,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
-      font-size: 24px;
-      line-height: 31px;
+      font-size: 20px;
       color: #ffffff;
     }
 
@@ -905,10 +894,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
 
     &_image {
-      @include media-breakpoint-down(sm) {
-        min-height: 186px;
-      }
-
       &_small {
         max-height: 165px;
         width: 100%;
@@ -1121,6 +1106,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &_row {
     padding-top: 3rem;
     padding-bottom: 3rem;
+
+    @include media-breakpoint-down(sm) {
+      padding-bottom: 1.5rem;
+    }
+
   }
 
   &_col {
@@ -1324,6 +1314,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       &_featureImage {
         width: 100%;
         height: 400px;
+        object-fit: cover;
 
         img {
           object-fit: cover;
@@ -1684,7 +1675,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &_footer {
     @extend .w-100;
     &_f1 {
-      @extend .justify-content-center, .align-items-center, .justify-content-around, .mb-5, .mt-2;
+      @extend .justify-content-center, .align-items-center, .justify-content-around, .mb-2, .mt-2;
     }
     &_f2_wrapper {
       @include media-breakpoint-down(md) {
@@ -1719,6 +1710,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_sub {
       @extend .mx-2;
       border: 1px solid $purple !important;
+    }
+    &_text {
+      @include media-breakpoint-down(sm) {
+        text-align: center;
+      }
+      
     }
     input {
       border-bottom: 1px solid $purple !important;
@@ -2162,6 +2159,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     font-weight: 700;
     font-size: 24px;
     color: $black;
+    text-underline-offset: 3px;
     @include media-breakpoint-down(sm) {
       font-size: 18px;
     }

@@ -254,6 +254,39 @@ const ProductDetail = ({
 
           </button>
         </Modal.Header>
+        <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center py-2'].join(' ')}>
+          <Button
+            variant="primary"
+            className={styles.groupshop_Pd_addtoCart}
+            onClick={() => addToCart()}
+            disabled={isExpired || outofStock}
+          >
+            {outofStock ? 'Out of Stock' : 'Add to Cart'}
+
+          </Button>
+          {isForMobile === false ? (
+            <Button
+              id="mobileBtn"
+              variant="outline-primary"
+              className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+              onClick={() => navigator?.share({
+                title: 'Groupshop',
+                text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
+              })}
+            >
+              <Send size={18} />
+            </Button>
+          ) : (
+            <ShareButton
+              disabled={isExpired}
+              placement="right-start"
+              shareurl={productShareUrl(product?.id ?? '')}
+              label=""
+              className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+            />
+
+          )}
+        </div>
         <Modal.Body className="bg-white">
           <Row>
             <Col xs={12} md={6}>
@@ -403,7 +436,7 @@ const ProductDetail = ({
                         </p>
                         <Form.Select
                           aria-label="option"
-                          className="w-50"
+                          className="w-50 text-capitalize"
                           onChange={({ target: { value } }) => {
                             setselOptions({ ...selOptions, [name]: value });
                           }}
@@ -421,7 +454,7 @@ const ProductDetail = ({
                           )} */}
                               <option
                                 value={val}
-                                className="text-upercase"
+                                className="text-capitalize"
                                 key={Math.random()}
                               >
                                 {val}
@@ -433,39 +466,6 @@ const ProductDetail = ({
 
                       </div>
                     ))}
-                  </div>
-                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white'].join(' ')}>
-                    <Button
-                      variant="primary"
-                      className={styles.groupshop_Pd_addtoCart}
-                      onClick={() => addToCart()}
-                      disabled={isExpired || outofStock}
-                    >
-                      {outofStock ? 'Out of Stock' : 'Add to Cart'}
-
-                    </Button>
-                    {isForMobile === false ? (
-                      <Button
-                        id="mobileBtn"
-                        variant="outline-primary"
-                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                        onClick={() => navigator?.share({
-                          title: 'Groupshop',
-                          text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
-                        })}
-                      >
-                        <Send size={17} />
-                      </Button>
-                    ) : (
-                      <ShareButton
-                        disabled={isExpired}
-                        placement="right-start"
-                        shareurl={productShareUrl(product?.id ?? '')}
-                        label=""
-                        className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                      />
-
-                    )}
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
@@ -486,20 +486,16 @@ const ProductDetail = ({
                           </p>
                         </div>
                       </div>
-                      <Row className="align-items-center">
-                        <Col xs={6} md={6} lg={6}>
-                          <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
-                        </Col>
-                        <Col xs={6} md={6} lg={6}>
-                          <ShareButton
-                            disabled={isExpired}
-                            placement="auto-end"
-                            shareurl={productShareUrl(product?.id ?? '')}
-                            label="Invite more friends"
-                            className={styles.groupshop_InviteBtn}
-                          />
-                        </Col>
-                      </Row>
+                      <div className="d-flex align-items-center justify-content-start flex-wrap">
+                        <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
+                        <ShareButton
+                          disabled={isExpired}
+                          placement="auto-end"
+                          shareurl={productShareUrl(product?.id ?? '')}
+                          label="Invite more friends"
+                          className={styles.groupshop_InviteBtn}
+                        />
+                      </div>
                     </>
                   )}
                     </Col>

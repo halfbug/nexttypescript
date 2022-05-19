@@ -66,9 +66,9 @@ const Footer = ({
           </div>
         </Col>
         <Col lg={4}>
-          <Row className={['mt-5 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
+          <Row className={['mt-2 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
             {/* <img src={footerLogo.src} alt="brandLogo" /> */}
-            <img src="/images/logo-thin.svg" alt="Groupshop" />
+            <img src="/images/logo-thin.svg" alt="Groupshop" className="img-fluid" />
           </Row>
           <Row className={styles.groupshop_socialIcon}>
 
@@ -106,11 +106,13 @@ const Footer = ({
         </Col>
         <Col lg={3}>
           <section>
-            <p>
-              <strong>Want your own store? </strong>
-              Be the first to find out when
-              you can shop your favorite brands on Groupshop.
-            </p>
+            <div className={styles.groupshop_footer_text}>
+              <p>
+                <strong>Want your own store? </strong>
+                Be the first to find out when
+                you can shop your favorite brands on Groupshop.
+              </p>
+            </div>
             <InputGroup className=" my-3" id="borderclr">
               <FormControl
                 placeholder="Enter your email"

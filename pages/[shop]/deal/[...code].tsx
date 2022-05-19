@@ -328,6 +328,7 @@ const GroupShop: NextPage = () => {
                 </div>
               </Col>
               <Col xs={6} className={styles.groupshop__counter}>
+                <h6 className="text-center">Store expires in</h6>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
                     <span>
@@ -455,7 +456,7 @@ const GroupShop: NextPage = () => {
                 {cashBackText}
               </p>
             </Row>
-            <div className="mt-2 mb-4 d-flex justify-content-center align-items-center">
+            <div className="mt-2 d-flex justify-content-center align-items-center">
               <Members
                 names={gsctx?.members.map(
                   (mem: any) => `${mem.orderDetail.customer.firstName} ${
@@ -466,7 +467,7 @@ const GroupShop: NextPage = () => {
                 pending={pending}
               />
             </div>
-            <Row className={styles.groupshop__hero_how_to}>
+            <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
               <InfoBox mes="How it works" brandname={brandName} shareUrl={gsURL} />
             </Row>
           </Container>
