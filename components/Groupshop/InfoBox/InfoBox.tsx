@@ -3,7 +3,7 @@ import React, {
   useState, useEffect,
 } from 'react';
 import {
-  Modal, Col, Row, Container,
+  Modal, Col, Row, Container, Button as ButtonReact,
 } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
@@ -35,6 +35,9 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
   useEffect(() => {
     if (show) { googleEventCode('how-it-works-modal'); }
   }, [show]);
+  const isForMobile = useMediaQuery({
+    query: '(min-width: 476px)',
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -143,16 +146,30 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               >
                 Start Shopping
               </Button>
-              {/* <Send size={18} /> */}
-              <ShareButton
+              {isForMobile === false ? (
+                <ButtonReact
+                  id="mobileBtn"
+                  variant="outline-primary"
+                  // className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                  className={styles.groupshop_infoBox_shareBtn}
+                  onClick={() => navigator?.share({
+                    title: 'Groupshop',
+                    text: `Send special discounts to your friends by sharing this ${shareUrl ?? ''})}`,
+                  })}
+                >
+                  <Send size={18} />
+                </ButtonReact>
+              ) : (
+                <ShareButton
                   // placement="bottom"
-                shareurl={shareUrl ?? ''}
+                  shareurl={shareUrl ?? ''}
                   // label="Invite"
                   // className={styles.groupshop__top_invite}
-                icon={<Send size={18} />}
-                className={styles.groupshop_infoBox_shareBtn}
-                onClick={() => googleEventCode('how-it-works-modal')}
-              />
+                  icon={<Send size={18} />}
+                  className={styles.groupshop_infoBox_shareBtn}
+                  onClick={() => googleEventCode('how-it-works-modal')}
+                />
+              )}
             </Row>
             <Row>
               <div className={styles.groupshop_infoBox_lastLine}>
