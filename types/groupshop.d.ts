@@ -69,7 +69,7 @@ export interface IGroupshop {
 
   url: string;
 
-  shortUrl: string;
+  shortUrl?: string;
 
   createdAt: Date;
 
