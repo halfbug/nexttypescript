@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import footerLogo1 from 'public/images/logo-thin.png';
-import SocialButton from 'components/Buttons/SocialButton/SocialButton';
+import SocialButtonLinks from 'components/Buttons/SocialButtonLinks/SocialButtonLinks';
 import styles from 'styles/Groupshop.module.scss';
-
 import {
   Col, Row, Button, FormControl, InputGroup, Container,
 } from 'react-bootstrap';
@@ -75,23 +74,23 @@ const Footer = ({
             <section className="d-flex justify-content-center px-2">
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Instagram" url={socialLinks?.instagram ?? ''} />
+                <SocialButtonLinks network="Instagram" url={socialLinks?.instagram ?? ''} />
               </div>
 
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Youtube" url={socialLinks?.instagram ?? ''} />
+                <SocialButtonLinks network="Facebook" url={socialLinks?.facebook ?? ''} />
                 {' '}
               </div>
 
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Tiktok" url={socialLinks?.tiktok ?? ''} />
+                <SocialButtonLinks network="Tiktok" url={socialLinks?.tiktok ?? ''} />
                 {' '}
               </div>
               <div className="mx-1">
                 {' '}
-                <SocialButton network="Twitter" url={socialLinks?.twitter ?? ''} />
+                <SocialButtonLinks network="Twitter" url={socialLinks?.twitter ?? ''} />
                 {' '}
               </div>
             </section>
