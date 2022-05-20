@@ -8,6 +8,12 @@
         border: 1px dashed $dotted-border-color1;
         border-radius: $border-radius-medium;
     }
+    &__box_last {
+        @extend .mb-4, .p-4;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: $border-radius-medium;
+        width: 311px;
+    }
 
     &__box_2 {
         @extend .mb-4, .p-4;
@@ -18,7 +24,7 @@
     &__wom_score {
         @extend .p-1, .px-3, .mx-1;
         font-family: "DM Sans";
-        font-weight: 400!important;
+        font-weight: 400 !important;
         font-size: $font-size-small-medium;
         line-height: $line-height-15;
         color: $black;
@@ -27,7 +33,6 @@
         margin-left: 25px !important;
         width: 35px;
         height: 26px;
-
     }
 
     &__sperator {
@@ -41,63 +46,88 @@
         opacity: $opacity-large;
     }
 
+    &_order {
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+    }
     &__btn {
         @extend .px-2;
         color: $black;
-        font-weight: $font-weight-normal;
-        font-size: $font-size-medium;
+        font-weight: $font-weight-bolder;
         line-height: $line-height-18;
         text-decoration: underline;
         cursor: pointer;
+        font-family: "DM Sans";
+        font-size: 14px;
+        white-space: nowrap;
     }
 
     &__simple_txt {
-        font-size: $font-size-medium;
-        font-weight: $font-weight-light;
+        font-size: 14px;
+        font-weight: $font-weight-bolder;
         line-height: $line-height-18;
         font-family: "DM Sans";
         font-style: normal;
         color: $black;
         &__aligned {
             @extend .d-flex, .justify-content-center, .align-items-center;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
         }
     }
 
     &__detail_tag {
-        font-weight: $font-weight-normal;
+        font-weight: $font-weight-bolder;
         font-size: $font-size-small-medium;
         line-height: $line-height-15;
         color: $black;
         &__tag1 {
             @extend .d-flex, .justify-content-center, .align-items-center;
-            font-weight: $font-weight-bold;
+            font-weight: $font-weight-bolder;
             background-color: $modern;
             border-radius: $border-radius-light;
             height: $height-normal;
+            width: 112px;
         }
         &__tag2 {
             @extend .d-flex, .justify-content-center, .align-items-center;
+            font-weight: $font-weight-bolder;
             background-color: $yellow;
             border-radius: $border-radius-light;
             height: $height-normal;
+            white-space: nowrap;
+            width: 130px;
         }
         &__tag3 {
             @extend .d-flex, .justify-content-center, .align-items-center;
+            font-weight: $font-weight-bolder;
             background-color: $tab3_clr;
             border-radius: $border-radius-light;
             height: $height-normal;
+            width: 112px;
         }
         &__tag4 {
             @extend .d-flex, .justify-content-center, .align-items-center;
+            font-weight: $font-weight-bolder;
             background-color: $recommended;
             border-radius: $border-radius-light;
             height: $height-normal;
+            white-space: nowrap;
+            width: 130px;
         }
         &__tag5 {
             @extend .d-flex, .justify-content-center, .align-items-center;
+            font-weight: $font-weight-bolder;
             background-color: $LightPurple;
             border-radius: $border-radius-light;
             height: $height-normal;
+            width: 112px;
         }
     }
 
@@ -106,7 +136,7 @@
         font-size: $font-size-medium;
         font-weight: $font-weight-light;
         line-height: $line-height-18;
-        font-family: 'Mulish';
+        font-family: "Mulish";
         opacity: $opacity-medium;
         margin-left: 0px;
     }
@@ -124,7 +154,7 @@
     &__percentage_area {
         @extend .my-2;
         margin-left: 0px;
-        &__percentage{
+        &__percentage {
             @extend .px-3;
             padding-top: 0.35rem;
             padding-bottom: 0.25rem;
@@ -136,8 +166,8 @@
             width: fit-content;
             border-radius: $border-radius-light;
         }
-    
-        &__editbtn{
+
+        &__editbtn {
             @extend .py-2, .px-3;
             color: $black;
             font-size: $font-size-small-medium;
