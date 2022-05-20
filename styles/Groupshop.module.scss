@@ -33,6 +33,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       @include media-breakpoint-down(sm) {
         padding: 0;
         max-height: 40px;
+        max-width: 92px;
       }
     }
   }
@@ -117,7 +118,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &_infobutton {
     box-shadow: none !important;
-    @extend .d-flex, .align-items-center, .mt-4;
+    @extend .d-flex, .align-items-center;
     span {
       @extend .ms-1;
       font-size: $size-14px;
@@ -443,6 +444,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
     span {
       color: $white;
+      margin-top: 1.5rem;
     }
     &__small_banner_left {
       @extend .d-flex, .align-items-center, .justify-content-start;
@@ -460,6 +462,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       box-shadow: none !important;
       margin-right: 1rem;
       margin-left: 1rem;
+      @include media-breakpoint-down(sm) {
+        margin: 0;
+      }
     }
     &_small_banner_box {
       @extend .px-1, .py-2, .mb-1, .align-items-center, .d-block;
@@ -529,19 +534,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_big_banner_box {
       @extend .py-2, .align-items-center, .d-flex, .justify-content-center;
       text-align: center;
-      max-width: 270px;
+      max-width: 300px;
       height: fit-content;
       border: 1px solid #ccb2f9;
       box-sizing: border-box;
       // backdrop-filter: blur(4px);
       /* Note: backdrop-filter has minimal browser support */
       border-radius: 16px;
-
-      //border: 1px solid;
-      //border-image: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%) 10;
-      @include media-breakpoint-down(md) {
-        width: 200px;
-      }
       &_shoppers {
         @extend .my-2;
         font-family: "DM Sans";
@@ -1429,6 +1428,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       align-items: center;
       width: 100%;
       border-top: 1px solid #ebebeb;
+      padding-top: 0.5rem;
+      padding-bottom: 1rem;
     }
   }
 

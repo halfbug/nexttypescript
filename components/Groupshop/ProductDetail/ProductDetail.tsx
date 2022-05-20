@@ -434,7 +434,7 @@ const ProductDetail = ({
                       </div>
                     ))}
                   </div>
-                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center py-2'].join(' ')}>
+                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center'].join(' ')}>
                     <Button
                       variant="primary"
                       className={styles.groupshop_Pd_addtoCart}
