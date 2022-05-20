@@ -1,14 +1,13 @@
 @import "./variables.scss";
 
 .onboarding__button {
-	color: black !important;
-	@extend .rounded, .px-0;
-	background-image: $brand-gradiant;
+	color: #000000;
+	@extend .rounded;
 	box-sizing: border-box;
 	font-family: DM Sans;
 	font-style: normal;
 	font-weight: 700!important;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 23px;
 	text-align: center;
 	display: flex;
@@ -17,7 +16,8 @@
 	text-decoration: none;
 	z-index: 2;
 	border-radius: 2px;
-	border: none;
+	border: 2px solid #ccb2f9 !important;
+	background: #ffffff;
 
 	span {
 		align-items: center;
@@ -32,16 +32,12 @@
 		transition: background 0.5s ease;
 		width: 98%;
 
-		span {
-			@extend .p-2, .px-3, .fs-6;
-			font-size: 18px!important ;
-		}
 	}
 
 	&:hover {
 		span {
 			// color: #fff;
-			background-color: transparent;
+			background-color: #ccb2f9;
 		}
 		// background-color: $brand-gradiant !important;
 		// background-image: $brand-gradiant !important;

@@ -1352,7 +1352,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       &_body {
         @extend .m-0, .p-0, .text-center;
         font-family: "DM Sans";
-        overflow: scroll;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
         h3 {
           @extend .fw-bold;
         }
@@ -1364,7 +1367,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         }
 
         &__scrollable {
-          height: 65%;
           overflow-y: scroll;
           overflow-x: hidden;
         }
@@ -2330,4 +2332,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
   }
+
+  &__total_cartWrapper {
+    border-top: 1px solid #ebebeb;
+  }
+
 }
