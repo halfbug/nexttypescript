@@ -39,6 +39,7 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
   const [products, setproducts] = useState<IProduct[] | null | undefined>(null);
   const [title, setTitle] = useState<string | null>(null);
   const [scollections, setscollections] = useState<ICollection[] | undefined>(undefined);
+  const [allProductChecked, setAllProductChecked] = useState<boolean | undefined>(false);
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
       collections: store.newCampaign?.collections ?? [],
@@ -127,6 +128,21 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
     setTitle(`Search Results for "${value}"`);
   };
 
+  const clickAllProducts = (e: any) => {
+    const { checked } = e.target;
+    if (checked === true) {
+      setcampaign({
+        products: store?.products, collections: store?.collections,
+      });
+      setAllProductChecked(true);
+    } else {
+      setcampaign({
+        products: [], collections: [],
+      });
+      setAllProductChecked(false);
+    }
+  };
+
   const handleChecked = (e: any) => {
     const { checked, id, name } = e.target;
     const ncamp = { ...campaign };
@@ -140,6 +156,12 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
         const entity = getEntityById(id, name) as IProduct;
         ncamp?.products?.push(entity);
       }
+
+      if (store?.collections?.length === ncamp?.collections?.length) {
+        setAllProductChecked(true);
+      } else {
+        setAllProductChecked(false);
+      }
     } else if (checked === false) {
       if (name === 'collections') {
         ncamp.collections = campaign?.collections?.filter((col) => col.id !== id);
@@ -150,7 +172,9 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
       } else {
         ncamp.products = ncamp?.products?.filter((prod) => prod.id !== id);
       }
+      setAllProductChecked(false);
     }
+
     setcampaign(ncamp);
   };
 
@@ -226,7 +250,7 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
               >
                 <div className="ms-2 me-auto p-2">
                   <div className={styles.product_all_product}>
-                    { store?.totalProducts && store?.totalProducts < 80 && <Form.Check type="checkbox" inline className="fs-4" />}
+                    { store?.totalProducts && store?.totalProducts < 80 && <Form.Check type="checkbox" inline className="fs-4" id="all-products-handle" checked={allProductChecked} onChange={clickAllProducts} />}
 
                     All Products (
                     {store.totalProducts}

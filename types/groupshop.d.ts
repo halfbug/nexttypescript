@@ -69,6 +69,8 @@ export interface IGroupshop {
 
   url: string;
 
+  shortUrl: string;
+
   createdAt: Date;
 
   expiredAt: Date;

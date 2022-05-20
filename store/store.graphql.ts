@@ -293,6 +293,7 @@ query Groupshop($code: String!) {
     storeId
     id
     url
+    shortUrl
     milestones{
       discount
       activatedAt

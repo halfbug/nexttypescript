@@ -118,6 +118,7 @@ const GroupShop: NextPage = () => {
 
   const {
     gsURL,
+    gsShortURL,
     clientDealProducts,
     isExpired,
     discount,
@@ -357,7 +358,7 @@ const GroupShop: NextPage = () => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={gsURL}
+                  shareurl={gsShortURL}
                   label="EARN CASHBACK"
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
@@ -467,7 +468,7 @@ const GroupShop: NextPage = () => {
               />
             </div>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
-              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsURL} />
+              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL} />
             </Row>
           </Container>
         </Hero>
