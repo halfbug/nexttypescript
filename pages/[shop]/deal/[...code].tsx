@@ -278,7 +278,7 @@ const GroupShop: NextPage = () => {
               <InfoBox
                 mes="How does this work?"
                 brandname={brandName}
-                shareUrl={gsURL}
+                shareUrl={gsShortURL}
               />
             )}
           />
