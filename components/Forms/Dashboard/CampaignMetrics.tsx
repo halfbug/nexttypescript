@@ -34,6 +34,10 @@ export default function CampaignMetrics() {
           </Dropdown.Menu>
         </Dropdown>
       </div>
+      <div className={styles.metrics__description}>
+        ✨ Your Groupshop is still new, you’ll see data appear when you get your first sales.
+        Speed up the process by increasing your campaign strength!
+      </div>
       <div className={styles.metrics__box}>
         <Row>
           <Col lg={4}>
@@ -57,6 +61,30 @@ export default function CampaignMetrics() {
             <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" />
           </Col>
         </Row>
+
+        <Row>
+          <Col lg={4}>
+            <SummaryBox label="Total Revenue " value="-" iconType="RevenueIcon" />
+          </Col>
+          <Col lg={4}>
+            <SummaryBox label="Number of Purchases" value="-" iconType="PurchaseIcon" />
+          </Col>
+          <Col lg={4}>
+            <SummaryBox label="Average Order Value" value="-" iconType="ScaleIcon" />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={4}>
+            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" />
+          </Col>
+          <Col lg={4}>
+            <SummaryBox label="Traffic Value" value="-" iconType="TrafficIcon" />
+          </Col>
+          <Col lg={4}>
+            <SummaryBox label="Cashback Given" value="-" iconType="CashBackIcon" />
+          </Col>
+        </Row>
+
         <Row className="mt-4">
           <Col lg={6} className="mt-1">
             <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>
@@ -116,6 +144,33 @@ export default function CampaignMetrics() {
                     39 Buys
                   </div>
                 </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col lg={6} className="mt-1">
+            <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>
+              <div className={styles.metrics__box__customers__header}>
+                Most Viral Customers
+              </div>
+              <div className={styles.metrics__emptytxt}>
+                <div className='mb-1'>👀 It looks empty in here!</div>
+                Let us help you promote Groupshop and get more sales.
+                <div className={styles.metrics__emptytxt__light}>Set up marketing tools</div>
+              </div>
+            </div>
+          </Col>
+          <Col lg={6} className="mt-1">
+            <div className={[styles.metrics__box__products, 'h-100 p-4'].join(' ')}>
+              <div className={styles.metrics__box__products__header}>
+                <div>Most Viral Product</div>
+              </div>
+              <div className={styles.metrics__emptytxt}>
+                <div className='mb-1'>🛒 No products to show yet.</div>
+                Add more to increase your chances of getting a sale.
+                <div className={styles.metrics__emptytxt__light}>Edit campaign settings</div>
               </div>
             </div>
           </Col>

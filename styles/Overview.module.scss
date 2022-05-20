@@ -10,6 +10,13 @@
             color: $black;
         }
     }
+    &__description {
+        color: #000000;
+        line-height: 23px;
+        font-size: 18px;
+        font-weight: 400;
+        font-family: 'DM Sans';
+    }
     &__campaignBox{
         background:#DCD0E8;
         border: 1px solid #DCD0E8;
@@ -30,6 +37,68 @@
             color:#fff;
             margin-bottom: 12px;
             margin-top: 8px;
+        }
+        button {
+            height: 28px;
+            font-size: 12px;
+            line-height: 15px;
+            font-weight: 400;
+            padding: 7px 10px !important;
+            margin-right: 12px;
+        }
+        &__logo {
+            height: 85px !important;
+            min-width: 116px;
+            background: #F3F3F3;
+            margin: 0 !important;
+            button {
+                height: 28px;
+                font-size: 12px;
+                line-height: 15px;
+                font-weight: 400;
+                padding: 7px 10px !important;
+                margin-right: 12px;
+                min-width: fit-content;
+            }
+        }
+    }
+    &__campaignBox1{
+        background:#D5FA52;
+        border: 1px solid #D5FA52;
+        border-radius: 23px;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-start;
+        &__name{
+            background: #FFFFFF;
+            border-radius: 8px;
+            height: 85px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 116px;
+        }
+        &__year{
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 23px;
+            color:#fff;
+            margin-bottom: 12px;
+            margin-top: 8px;
+        }
+        &__activateHead {
+            color: #000000;
+            line-height: 23px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'DM Sans';
+        }
+        &__activatedesc {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
         }
         button {
             height: 28px;
@@ -148,6 +217,20 @@
                 background: none !important;
               }
             }
+        }
+    }
+    &__emptytxt {
+        margin-top: 15px;
+        color: #000000;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+        font-family: 'DM Sans';
+        &__light {
+            margin-top: 8px;
+            text-decoration: underline;
+            color: #918e8e;
+            cursor: pointer;
         }
     }
     &__box{
@@ -275,6 +358,16 @@
             font-size: 22px;
             font-weight: 700;
         }
+    }
+    &__progressBar {
+        margin: 0px !important;
+        height: 14px !important;
+        width: 95%;
+    }
+    &__barArea {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     &__acc {
         button {

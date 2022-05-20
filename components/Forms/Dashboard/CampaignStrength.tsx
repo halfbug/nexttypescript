@@ -3,6 +3,8 @@ import * as React from 'react';
 import styles from 'styles/Overview.module.scss';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { Accordion, Container } from 'react-bootstrap';
+import GradientProgressBar from 'components/Groupshop/GradientProgressBar/GradientProgressBar';
+import ElectricIcon from 'assets/images/Electric-icon.svg';
 
 export default function CampaignStrength() {
   return (
@@ -10,6 +12,10 @@ export default function CampaignStrength() {
       <div className={styles.strength}>
         <div className={styles.strength__header}>
           <h3>Campaign Strength</h3>
+        </div>
+        <div className={styles.strength__barArea}>
+          <GradientProgressBar progress={60} className={styles.strength__progressBar} />
+          <ElectricIcon />
         </div>
         <Accordion className={styles.strength__acc}>
           <Accordion.Item eventKey="0" className="border-0 border-bottom">
@@ -22,7 +28,7 @@ export default function CampaignStrength() {
               It’s a personalized shopping page we create
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey="0" className="border-0 border-bottom">
+          <Accordion.Item eventKey="1" className="border-0 border-bottom">
             <Accordion.Header className={styles.strength__ques}>
               <div className={styles.strength__ques__name}>
                 Recover abandoned carts
@@ -32,7 +38,7 @@ export default function CampaignStrength() {
               It’s a personalized shopping page we create
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey="0" className="border-0 border-bottom">
+          <Accordion.Item eventKey="2" className="border-0 border-bottom">
             <Accordion.Header className={styles.strength__ques}>
               <div className={styles.strength__ques__name}>
                 Customize product page banners
