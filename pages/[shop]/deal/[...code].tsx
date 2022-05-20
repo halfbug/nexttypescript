@@ -665,7 +665,7 @@ const GroupShop: NextPage = () => {
           <Col className="d-flex justify-content-center flex-column">
             <p>Don’t see what you like?</p>
             <Button
-              className={['align-self-center my-2 px-5', styles.groupshop__productBtn].join(' ')}
+              className={['align-self-center my-2 px-5 py-2'].join(' ')}
               onClick={handleAddProduct}
             >
               Add a Product

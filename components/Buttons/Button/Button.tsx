@@ -21,11 +21,7 @@ const Button = ({
     {...props}
     onClick={onClick}
   >
-    <span>
-      <span>
-        {children}
-      </span>
-    </span>
+    {children}
   </button>
 );
 
