@@ -267,13 +267,13 @@ const Cart = ({
                             >
                               Add
                             </Button>
-                            <div className=" col-7 fw-bold text-nowrap">
+                            <div className=" col-7 fw-normal text-nowrap">
                               <span className="text-decoration-line-through  ">
                                 {currencySymbol}
                                 {formatNumber(item?.price)}
                               </span>
                               {' '}
-                              <span className="fw-normal">
+                              <span className="fw-bold">
                                 {currencySymbol}
                                 {formatNumber(dPrice(+(item?.price || 0)))}
                               </span>
