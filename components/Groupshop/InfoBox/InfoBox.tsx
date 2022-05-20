@@ -5,12 +5,14 @@ import React, {
 import {
   Modal, Col, Row, Container,
 } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
 import Cross from 'assets/images/CrossLg.svg';
+import PuprpleHeadMobile from 'assets/images/purple-head-mobile.png';
 import useDeal from 'hooks/useDeal';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
@@ -24,6 +26,10 @@ interface mesProps {
 }
 const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
   const [show, setShow] = useState(false);
+
+  const isModalForMobile = useMediaQuery({
+    query: '(max-width: 475px)',
+  });
 
   const { googleEventCode } = useGtm();
   useEffect(() => {
@@ -43,6 +49,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
         aria-labelledby="contained-modal-title-vcenter"
         centeredv
         dialogClassName={styles.groupshop__info_modal}
+        contentClassName={styles.groupshop__info_modal__content}
       >
         <Modal.Header className={styles.groupshop__info_modal__closebtnlg}>
           <Row onClick={handleClose}><Cross /></Row>
@@ -52,7 +59,8 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
         </Modal.Header>
         <Modal.Body className="p-0">
           <Row className="styles.groupshop_infoBox_imgBox">
-            <img src="/images/purple-head.png" alt="headtag" />
+            {!isModalForMobile && <img src="/images/purple-head.png" alt="headtag" />}
+            {isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" />}
           </Row>
           <Row>
             <div className={styles.groupshop_infoBox}>

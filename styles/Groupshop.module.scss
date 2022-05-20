@@ -146,6 +146,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &__info_modal {
+    &__content{
+      border-radius: 21px 21px 0 0;
+    }
     &__closebtnsm {
       box-shadow: none !important;
       display: none;
@@ -529,9 +532,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       color: #ffffff;
     }
     &_big_banner_box {
-      @extend .px-5, .py-2, .align-items-center, .d-flex, .justify-content-center;
+      @extend .py-2, .align-items-center, .d-flex, .justify-content-center;
       text-align: center;
-      width: fit-content;
+      max-width: 270px;
       height: fit-content;
       border: 1px solid #ccb2f9;
       box-sizing: border-box;
@@ -541,6 +544,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
       //border: 1px solid;
       //border-image: linear-gradient(270deg, #fee750 0%, #ccb2f9 100%) 10;
+      @include media-breakpoint-down(md) {
+        width: 200px;
+      }
       &_shoppers {
         @extend .my-2;
         font-family: "DM Sans";

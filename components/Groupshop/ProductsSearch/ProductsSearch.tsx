@@ -9,6 +9,8 @@ import {
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useDebounce from 'hooks/useDebounce';
+
+import { useMediaQuery } from 'react-responsive';
 import { X } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
 import AddDealProduct from 'components/Forms/AddDealProduct';
@@ -17,6 +19,7 @@ import useAlert from 'hooks/useAlert';
 import useGtm from 'hooks/useGtm';
 import SearchIcon from 'assets/images/search-icon.svg';
 import Cross from 'assets/images/CrossLg.svg';
+import CrossGrey from 'assets/images/cross-grey.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -112,7 +115,9 @@ const ProductsSearch = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
-
+  const isModalForMobile = useMediaQuery({
+    query: '(max-width: 475px)',
+  });
   return (
     <>
       <Modal
@@ -124,6 +129,7 @@ const ProductsSearch = ({
         // backdrop="static"
         fullscreen="lg-down"
       >
+        {!isModalForMobile && (
         <Modal.Header className={styles.groupshop_modal__closebtnlg}>
           <Row onClick={(e) => {
             handleClose(e);
@@ -133,6 +139,7 @@ const ProductsSearch = ({
             <Cross />
           </Row>
         </Modal.Header>
+        )}
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
@@ -151,6 +158,17 @@ const ProductsSearch = ({
             <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
               <SearchIcon />
               <Form.Control size="lg" className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')} type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
+              {isModalForMobile && (
+                <Row onClick={(e) => {
+                  handleClose(e);
+                  setShow(false);
+                }}
+                >
+                  <div>
+                    <CrossGrey />
+                  </div>
+                </Row>
+              )}
             </Form.Group>
           </Form>
 
