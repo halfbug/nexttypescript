@@ -117,7 +117,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &_infobutton {
     box-shadow: none !important;
-    @extend .d-flex, .mb-0, .align-items-center;
+    @extend .d-flex, .align-items-center, .mt-4;
     span {
       @extend .ms-1;
       font-size: $size-14px;
@@ -458,13 +458,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
     &_iconBtn,&_iconSearchBtn {
       box-shadow: none !important;
-      @extend .mx-3, .pe-0;
-      @include media-breakpoint-only(md) {
-        margin-top: 10px;
-      }
-      @include media-breakpoint-down(md) {
-        margin-left: 20px !important;
-      }
+      margin-right: 1rem;
+      margin-left: 1rem;
     }
     &_small_banner_box {
       @extend .px-1, .py-2, .mb-1, .align-items-center, .d-block;
@@ -1283,6 +1278,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       .groupshop__earn {
         height: 43px;
         width: 43px;
+        position: relative;
         &__label {
           margin-left: 3px;
         }

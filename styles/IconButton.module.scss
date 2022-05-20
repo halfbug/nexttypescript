@@ -1,22 +1,20 @@
 @import "./variables.scss";
 
 .iconButton {
-	color: $primary !important;
-	background-color: transparent !important;
-	border: none;
-	box-shadow: none;
-	@extend .rounded, .fs-5;
-	min-width: 1.5rem;
-	color: black !important;
+  color: $primary !important;
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  @extend .rounded, .fs-5;
+  color: black !important;
 
+  &:hover {
+    color: black !important;
+    box-shadow: none;
+    @extend .fw-bold;
+  }
 
-	&:hover {
-		color: black !important;
-		box-shadow: none;
-		@extend .fw-bold;
-	}
-
-	&:focus {
-		outline: none !important;
-	}
+  &:focus {
+    outline: none !important;
+  }
 }
