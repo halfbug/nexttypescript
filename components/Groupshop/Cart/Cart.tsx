@@ -102,7 +102,7 @@ const Cart = ({
 }
           >
             <div className="p-2">
-              <h3 className={styles.groupshop_modal_cart_heading}>Cart</h3>
+              <h3 className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</h3>
               {/* <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
                   <IconMoney className=" mx-1 " />
@@ -120,9 +120,13 @@ const Cart = ({
                   and $20 cashback for
                 </Col>
               </Row> */}
-              <div className="align-items-center">
-                <Members names={gsctx?.members.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
-              </div>
+              {/* <div className="align-items-center">
+                // eslint-disable-next-line max-len
+                <Members names={gsctx?.members.map((mem: any) => `
+                ${mem.orderDetail.customer.firstName}
+                ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)}
+                cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
+              </div> */}
               {/* <div className={styles.groupshop_modal_cart_progress} /> */}
               {/* <div className="mt-3">
                 <GradientProgressBar progress={60} />
