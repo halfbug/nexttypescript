@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   Form, Button, Spinner,
 } from 'react-bootstrap';
-// import Button from 'components/Buttons/Button/Button';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import _ from 'lodash';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
@@ -70,7 +71,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
       // merge selected products with groupshop deal prodcuts
 
-      const dealProducts = products?.map(
+      const sdealProducts = products?.map(
         (productId) => {
           const preProduct = dealProductsCtx?.find((prd) => prd.productId === productId);
           const newProduct:DealProduct = {
@@ -79,6 +80,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           return preProduct ?? newProduct;
         },
       );
+      // unique by complete object
+      const dealProducts = _.uniq([...gsctx.dealProducts ?? [], ...sdealProducts ?? []]);
 
       await addDealProduct({
         variables: {
