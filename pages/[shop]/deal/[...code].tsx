@@ -166,13 +166,15 @@ const GroupShop: NextPage = () => {
   }, [gsctx, gsctx.dealProducts]);
 
   useEffect(() => {
-    const addedPrds = filterArray(dealProducts ?? [], popularProducts ?? [], 'id', 'id');
+    const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'id', 'id');
+    // const addedPrds = dealProducts?.filter((item));
+
     console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
     dispatch({
       type: 'UPDATE_GROUPSHOP',
       payload: {
         ...gsctx,
-        addedProducts: [...gsctx?.addedProducts || [], ...addedPrds || []],
+        addedProducts: _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]),
       },
     });
   }, [dealProducts, popularProducts]);
