@@ -12,15 +12,12 @@ import styles from 'styles/DbSetting.module.scss';
 import GeneralSettings from 'components/Forms/Dashboard/GeneralSettings';
 import LayoutSettings from 'components/Forms/Dashboard/LayoutSettings';
 import MarketingSettings from 'components/Forms/Dashboard/MarketingSettings';
-import PartnerToolLogo from 'assets/images/partner-tools.svg';
-import PartnerToolTransparentLogo from 'assets/images/partner-tools-transparent.svg';
 import MarketingLogo from 'assets/images/marketing-tool.svg';
 import MarketingTransparentLogo from 'assets/images/marketing-tools-transparent.svg';
 import LayoutLogo from 'assets/images/layout.svg';
 import LayoutTransparentLogo from 'assets/images/feather-layout.svg';
 import GeneralLogo from 'assets/images/general.svg';
 import GeneralTransparentLogo from 'assets/images/awesome-store.svg';
-import PartnerSettings from 'components/Forms/Dashboard/PartnerSettings';
 
 const Settings: NextPage = () => {
   const [tab, setTab] = useState('General');
@@ -83,23 +80,6 @@ const Settings: NextPage = () => {
 
                   </Nav.Link>
                 </Nav.Item>
-                <Nav.Item className='mx-1'>
-                  <Nav.Link eventKey="Affiliate">
-                    <Row
-                      onClick={() => setTab('Affiliate')}
-                      className={tab === 'Affiliate' ? styles.setting_tab_affiliate_tool_active : styles.setting_tab_affiliate_tool}
-                    >
-                      <Col className='ps-0'>
-                        {tab === 'Affiliate' ? <PartnerToolTransparentLogo /> : <PartnerToolLogo />}
-                        <h4 className='pt-1'>
-                          Partner Tools
-                        </h4>
-                        <TabPane eventKey="Affiliate" title="Affiliate" />
-                      </Col>
-                    </Row>
-
-                  </Nav.Link>
-                </Nav.Item>
               </Nav>
             </Col>
           </Row>
@@ -114,9 +94,6 @@ const Settings: NextPage = () => {
                 </Tab.Pane>
                 <Tab.Pane eventKey="Marketing">
                   <MarketingSettings />
-                </Tab.Pane>
-                <Tab.Pane eventKey="Affiliate">
-                  <PartnerSettings />
                 </Tab.Pane>
               </Tab.Content>
             </Col>

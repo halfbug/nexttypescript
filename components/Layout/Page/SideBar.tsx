@@ -13,6 +13,7 @@ import Billingicon from 'assets/images/billing-icon.svg';
 import Settingsicon from 'assets/images/settings-icon.svg';
 import Knowledgebaseicon from 'assets/images/knowledge-base-icon.svg';
 import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
+import PartnerToolLogo from 'assets/images/partner-tools.svg';
 import { useRouter } from 'next/router';
 
 const Sidebar = () => {
@@ -75,6 +76,16 @@ const Sidebar = () => {
                 </Link>
               </li>
 
+              <li>
+                <Link href={`/${shopName}/partnertools`}>
+                  <a>
+                    <span className={linkstyle('partnertools')}>
+                      <span className={styles.linkicon}><PartnerToolLogo /></span>
+                      <span className={styles.linktext}>Partner Tools</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
               <li>
                 <Link href={`/${shopName}/settings`}>
                   <a>
