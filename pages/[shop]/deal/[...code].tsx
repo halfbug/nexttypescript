@@ -269,6 +269,7 @@ const GroupShop: NextPage = () => {
           })(window, document, "clarity", "script", "bj0ox02vse");`,
           }}
         />
+        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
       </Head>
       <div className={styles.groupshop}>
         <header>
