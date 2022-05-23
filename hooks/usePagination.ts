@@ -49,12 +49,15 @@ const usePagination = <T extends {}>({
   };
   const setVals = (currentWidth: number) => {
     let bPoint = 'sm';
+
     for (const key in breakpoints) {
       if (breakpoints[key] < currentWidth) { bPoint = key; } else { break; }
     }
     // bPoint = (bPoint === xs )
+
     setBreakPoint(bPoint);
     const pagesize = (12 / screens[bPoint]) * maxrows;
+
     setPageSize(pagesize);
     const totalpages = Math.ceil((items.length) / pagesize);
     setTotalPages(totalpages);
@@ -73,7 +76,7 @@ const usePagination = <T extends {}>({
     let end : number = siblingCount;
     const pageLeft = totalPages - currentPage;
 
-    if (currentPage - 1 >= 0 && pageLeft >= siblingCount - 2) {
+    if (currentPage - 1 > 0 && pageLeft >= siblingCount - 2) {
       start = currentPage - 1 > 0 ? currentPage - 1 : 1;
       end = start + (siblingCount - 1);
     } else if (totalPages < siblingCount && totalPages > 1) {
