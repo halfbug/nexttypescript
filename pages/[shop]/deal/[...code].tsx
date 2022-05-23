@@ -242,7 +242,7 @@ const GroupShop: NextPage = () => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
-
+  console.log('addedProducts', addedProducts?.length);
   return (
     <>
       <Head>
@@ -545,8 +545,8 @@ const GroupShop: NextPage = () => {
             lg={4}
             xl={3}
             products={
-              member?.products
-              && (member?.products!.length > 3
+              ownerProducts
+              && (ownerProducts!.length > 3
                 ? popularProducts?.slice(0, 3)
                 : newPopularPrd)
             }
