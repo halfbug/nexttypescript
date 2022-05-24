@@ -84,7 +84,7 @@ export default function CreateCampaign() {
       .string()
       .required('required.'),
     minDiscount: yup
-      .number()
+      .number().typeError('you must specify a number')
       .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
@@ -97,12 +97,14 @@ export default function CreateCampaign() {
       .test('multiple', constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
+            console.log('val', val);
             return true;
           }
+
           return false;
         }),
     maxDiscount: yup
-      .number()
+      .number().typeError('you must specify a number')
       .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
@@ -142,7 +144,9 @@ export default function CreateCampaign() {
         tiktok, facebook, twitter, addableProducts,
         minDiscount, maxDiscount, isRewardEdit,
       } = valz;
-      let { minDiscountVal, maxDiscountVal } = valz;
+      // let { minDiscountVal, maxDiscountVal } = valz;
+      const minDiscountVal = `${minDiscount}%`;
+      const maxDiscountVal = `${maxDiscount}%`;
       console.log({ valz });
       let { media } = valz;
       if (customBg) media = '';
@@ -166,12 +170,12 @@ export default function CreateCampaign() {
           newSelectedTarget.name = 'Super-charged';
         }
         const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
-        if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
-          minDiscountVal = `${minDiscountVal}%`;
-        }
-        if (maxDiscountVal && maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
-          maxDiscountVal = `${maxDiscountVal}%`;
-        }
+        // if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
+        //   minDiscountVal = `${minDiscountVal}%`;
+        // }
+        // if (maxDiscountVal && maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
+        //   maxDiscountVal = `${maxDiscountVal}%`;
+        // }
 
         newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
           { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },

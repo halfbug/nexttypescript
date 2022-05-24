@@ -109,7 +109,7 @@ export default function DBRewards({
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  // console.log({ errors });
+  console.log({ values });
   // console.log({ campaignInitial });
   // console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
@@ -174,7 +174,10 @@ export default function DBRewards({
           </h4>
           {!editMin && (
           <>
-            <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
+            <div className={styles.dbrewards__percent_btn}>
+              {values.minDiscount}
+              %
+            </div>
             <Button variant="link" onClick={() => setEditMin(!editMin)}>Edit</Button>
           </>
           )}
@@ -182,13 +185,9 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="minDiscount"
-              value={values.minDiscountVal}
+              value={values.minDiscount}
               // value={values.minDiscountVal[values.minDiscountVal.length - 1] !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
-              onChange={(e) => {
-                setFieldValue('minDiscountVal', e.currentTarget.value);
-                // eslint-disable-next-line radix
-                setFieldValue('minDiscount', parseInt(e.currentTarget.value));
-              }}
+              onChange={handleChange}
               className={styles.dbrewards_input}
               isInvalid={!!errors.minDiscount}
               // isInvalid={!!errors.minDiscount}
@@ -235,7 +234,10 @@ export default function DBRewards({
           </h4>
           {!editMax && (
           <>
-            <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
+            <div className={styles.dbrewards__percent_btn}>
+              {values.maxDiscount}
+              %
+            </div>
             <Button variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
           </>
           )}
@@ -243,13 +245,8 @@ export default function DBRewards({
             <Form.Control
               type="text"
               name="maxDiscount"
-              value={values.maxDiscountVal}
-              onChange={(e) => {
-                // setFieldValue('maxDiscountVal', e.currentTarget.value[e.currentTarget.value.length - 1] !== '%' ? `${e.currentTarget.value}%` : e.currentTarget.value);
-                // eslint-disable-next-line radix
-                setFieldValue('maxDiscountVal', e.currentTarget.value);
-                setFieldValue('maxDiscount', parseInt(e.currentTarget.value));
-              }}
+              value={values.maxDiscount}
+              onChange={handleChange}
               className={styles.dbrewards_input}
               isInvalid={!!errors.maxDiscount}
               placeholder="Enter %"
