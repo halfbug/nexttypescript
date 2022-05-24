@@ -55,7 +55,7 @@ export default function NewPartnerForm() {
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <h4 className="mt-0">
+      {/* <h4 className="mt-0">
         Reward Settings
       </h4>
       <Row className={styles.partner__light_txt}>
@@ -65,7 +65,7 @@ export default function NewPartnerForm() {
       <Row className={styles.partner__percentage_area}>
         <Col lg={2} md={2} sm={3} className={styles.partner__percentage_area__percentage}>20%</Col>
         <Col lg={2} md={2} sm={3} className={styles.partner__percentage_area__editbtn}>Edit</Col>
-      </Row>
+      </Row> */}
     </section>
   );
 }

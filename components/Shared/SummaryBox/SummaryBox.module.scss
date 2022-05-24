@@ -1,13 +1,18 @@
+.isActive_box {
+    border: 2px solid #A7C737 !important;
+}
 .s_box{
     padding: 16px 20px;
     border: 1px dashed #A7C737;
     border-radius: 23px;
     margin-top: 20px;
     .revenue_icon{
-        width: 28px;
+        width: 100%;
         height: 28px;
-        background: #D5FA52;
         border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         svg{
             margin-left: 6px;
             margin-top: 6px;

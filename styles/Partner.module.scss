@@ -182,6 +182,11 @@
         @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
         height: 31px;
         min-width: 117px;
+        color: #000000;
+        font-weight: 700;
+        font-family: 'DM Sans';
+        font-size: 12px;
+        line-height: 15px;
         &__txt {
             position: relative;
             top: 1px;
@@ -238,6 +243,50 @@
             background-color: white !important;
             border-color: $dotted-border-color2;
             background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2014%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Ccircle%20cx%3D%226%22%20cy%3D%227%22%20r%3D%226%22%20fill%3D%22%23A7C737%22%2F%3E%0A%3C%2Fsvg%3E%0A") !important;
+        }
+    }
+
+    &__rewards_box {
+        @extend .mb-4, .p-4;
+        border: 1px dashed #F28BF4;
+        border-radius: $border-radius-medium;
+
+        &__header {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+        }
+
+        &__heading {
+            color: #000000;
+            font-family: 'DM Sans'; 
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            margin-bottom: 11px;
+            
+            svg {
+                margin-left: 2px;
+            }
+        }
+
+        &__percentage {
+            padding: 6px 12px;
+            background: #D5FA52;
+            border-radius: 6px;
+            margin-right: 6px;
+        }
+
+        &__edit {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            cursor: pointer;
+            text-decoration-line: underline;
         }
     }
 }

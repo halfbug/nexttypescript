@@ -5,6 +5,7 @@ import ScaleIcon from 'assets/images/average-of-order.png';
 import ClickIcon from 'assets/images/unique-clicks.png';
 import TrafficIcon from 'assets/images/traffic-value.png';
 import PurchaseIcon from 'assets/images/number-of-purchase.png';
+import Arrow1 from 'assets/images/arrow1.png';
 import styles from './SummaryBox.module.scss';
 
 const SummaryBox = (props: { label: any; value: any; iconType: any; }) => {
@@ -24,6 +25,25 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; }) => {
         return TrafficIcon.src;
       case 'PurchaseIcon':
         return PurchaseIcon.src;
+      default:
+        return '';
+    }
+  };
+
+  const renderArrow = (type: any) => {
+    switch (type) {
+      case 'RevenueIcon':
+        return Arrow1.src;
+      case 'CashBackIcon':
+        return Arrow1.src;
+      case 'ScaleIcon':
+        return Arrow1.src;
+      case 'ClickIcon':
+        return Arrow1.src;
+      case 'TrafficIcon':
+        return Arrow1.src;
+      case 'PurchaseIcon':
+        return Arrow1.src;
       default:
         return '';
     }
@@ -50,9 +70,10 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; }) => {
 
   // className={styles.s_box}
   return (
-    <div className={[renderStyle(iconType), styles.s_box].join(' ')}>
+    <div className={[renderStyle(iconType), styles.s_box, styles.isActive_box].join(' ')}>
       <div className={styles.revenue_icon}>
-        <img src={renderIcon(iconType)} alt="asaa" />
+        <div><img src={renderIcon(iconType)} alt="asaa" /></div>
+        <div><img src={renderArrow(iconType)} alt="arrow" /></div>
       </div>
       <div className={styles.label}>
         {label}
