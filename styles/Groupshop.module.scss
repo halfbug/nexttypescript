@@ -42,6 +42,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     @extend .d-flex, .justify-content-end;
   }
 
+
   &__counter {
     h6 {
       text-transform: uppercase;
@@ -1188,13 +1189,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
     &_search {
-      @extend .groupshop_modal;
+    
 
       &_body {
         @extend .px-5;
         @include media-breakpoint-down(sm) {
-          padding-left: 0 !important;
-          padding-right: 0 !important;
+          padding-left: 1.5rem !important;
+          padding-right: 1.5rem !important;
         }
         &_top {
           @extend .justify-content-between;
@@ -1626,14 +1627,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     overflow-y: scroll;
     overflow-x: hidden;
     @include media-breakpoint-down(sm) {
-      height: 70vh !important;
+      height: 100vh !important;
     }
     &_pcard {
       img {
         object-fit: cover;
-        @include media-breakpoint-down(sm) {
-          height: 186px !important;
-        }
       }
       .card-img-overlay {
         background: #ffffff6b !important;
@@ -1679,6 +1677,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
   }
+
   &_footer {
     @extend .w-100;
     &_f1 {

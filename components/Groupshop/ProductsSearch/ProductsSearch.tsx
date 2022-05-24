@@ -173,30 +173,28 @@ const ProductsSearch = ({
           </Form>
 
           {(otherProducts && otherProducts.length > 0) && (
-            <Row>
-              <Col xs={4}>
-                <p className={styles.groupshop_modal_search_body_top_resultFound}>
-                  {otherProducts?.length}
-                  {' '}
-                  results found
-                </p>
-              </Col>
-              <Col xs={8} className={styles.groupshop_modal_search_body_meter}>
+            <div className="d-flex justify-content-between m-0 flex-nowrap">
+              <p className={styles.groupshop_modal_search_body_top_resultFound}>
+                {otherProducts?.length}
+                {' '}
+                results found
+              </p>
+              <div className={styles.groupshop_modal_search_body_meter}>
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
                     <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
                   ))}
                 </p>
-              </Col>
-            </Row>
+              </div>
+            </div>
           )}
           <Row className={styles.groupshop_search}>
             {otherProducts ? (
               otherProducts.map(
                 (prd) => (
                   (+prd.price > 0) && (
-                  <Col xs={6} sm={6} md={4} className="p-1">
+                  <Col xs={6} sm={6} md={4}>
                     <ProductCard
                       isrc={prd.featuredImage}
                       className={styles.groupshop_search_pcard}
@@ -254,77 +252,69 @@ const ProductsSearch = ({
               </div>
             )}
           </Row>
-          {(otherProducts && otherProducts.length > 0) && (
+        </Modal.Body>
+        {(otherProducts && otherProducts.length > 0) && (
           <>
-            {selected && (
-            <Row>
-              <Col xs={12} className="text-center fs-5 pt-3">
+            <div ref={ref} className={['p-3 text-center', styles.groupshop_bilal].join('')}>
+              {selected && (
+              <div className="pb-3">
                 {selectedCount}
                 {' '}
                 product selected
-                {' '}
-              </Col>
-            </Row>
-            )}
-            <Row>
-              <Col xs={12} className="text-center my-3">
-                <div ref={ref}>
-                  <Button
-                    onClick={handleClick}
-                    className={['rounded-pill text-center text-uppercase px-5 fw-bold ', styles.groupshop_modal_groupshopBtn].join('')}
-                  >
-                    ADD to groupshop
+                  {' '}
+              </div>
+              )}
+              <Button
+                onClick={handleClick}
+                className="rounded-pill text-center text-uppercase px-5 fw-bold"
+              >
+                ADD to groupshop
 
-                  </Button>
+              </Button>
 
-                  <Overlay
-                    show={show}
-                    target={target}
-                    placement="bottom"
-                    container={ref}
-                    containerPadding={20}
-                  >
-                    <Popover
-                      id="popover-contained"
-                      className={styles.groupshop_search_popover}
-                      style={{ maxWidth: '325px' }}
-                    >
-                      <Popover.Body>
-                        <>
-                          <p className={styles.groupshop_search_popover_txt}>
-                            Add
-                            <strong>
-                              {' '}
-                              {selectedCount}
-                              {' '}
-                              products
-                            </strong>
-                            {' '}
-                            to this Groupshop
-                          </p>
-                          <AddDealProduct
-                            selectedProducts={selected}
-                            handleClose={(e) => {
-                              closeModal(e);
-                              if (selected && selected?.length > 0) {
-                                showSuccess('Product(s) has been added successfully.');
-                              } else {
-                                showSuccess('No product(s) has been selected.');
-                              }
-                            }}
-                          />
-                        </>
-                      </Popover.Body>
-                    </Popover>
-                  </Overlay>
-                </div>
-
-              </Col>
-            </Row>
+              <Overlay
+                show={show}
+                target={target}
+                placement="bottom"
+                container={ref}
+                containerPadding={20}
+              >
+                <Popover
+                  id="popover-contained"
+                  className={styles.groupshop_search_popover}
+                  style={{ maxWidth: '325px' }}
+                >
+                  <Popover.Body>
+                    <>
+                      <p className={styles.groupshop_search_popover_txt}>
+                        Add
+                        <strong>
+                          {' '}
+                          {selectedCount}
+                          {' '}
+                          products
+                        </strong>
+                        {' '}
+                        to this Groupshop
+                      </p>
+                      <AddDealProduct
+                        selectedProducts={selected}
+                        handleClose={(e) => {
+                          closeModal(e);
+                          if (selected && selected?.length > 0) {
+                            showSuccess('Product(s) has been added successfully.');
+                          } else {
+                            showSuccess('No product(s) has been selected.');
+                          }
+                        }}
+                      />
+                    </>
+                  </Popover.Body>
+                </Popover>
+              </Overlay>
+            </div>
           </>
-          )}
-
-        </Modal.Body>
+        )}
 
       </Modal>
       <AlertComponent />
