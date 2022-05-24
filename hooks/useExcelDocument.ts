@@ -22,6 +22,7 @@ const useExcelDocument = () => {
 
       const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}`);
       console.log({ feeformGroupshop });
+      const formattedCBFee = +totalfeeByCashback.toFixed(2).toString().replace('00', '');
 
       return {
         Day: `${month}-${date}-${year}`,
@@ -30,7 +31,7 @@ const useExcelDocument = () => {
         Total_CashBack_Given: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalCashback}`,
         Store_Plan: feeformGroupshop[feeformGroupshop.length - 1].plan,
         // storeTotalGS,
-        Charge_From_CashBack: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalfeeByCashback}`,
+        Charge_From_CashBack: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formattedCBFee}`,
         Charge_From_GroupShops: GSUsageCharges.join(' | '),
       };
     });
