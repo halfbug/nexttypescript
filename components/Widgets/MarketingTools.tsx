@@ -47,7 +47,7 @@ export default function MarketingTools(
                 id="joinExisting-e"
                 value={1}
               >
-                <Check2Circle className="fs-4" />
+                <Check2Circle className="fs-5" />
                 {' '}
                 Enable
               </ToggleButton>
@@ -66,7 +66,6 @@ export default function MarketingTools(
             </ToggleButtonGroup>
           </Col>
         </Row>
-        <br />
         <hr />
         <Row>
           <Col lg={1} className="position-absolute mt-2">
@@ -89,7 +88,7 @@ export default function MarketingTools(
                 id="joinExisting-e"
                 value={1}
               >
-                <Check2Circle className="fs-4" />
+                <Check2Circle className="fs-5" />
                 {' '}
                 Enable
               </ToggleButton>

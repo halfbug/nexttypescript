@@ -49,7 +49,7 @@ export default function BannerDesign(
         {' '}
       </div>
       <Row>
-        <Col lg={12} className="mt-2">
+        <Col lg={12} className="mt-2 px-1">
           <Form.Check
             className={styles.layout__checkbox}
             onChange={(e) => handleChange(e)}
@@ -105,7 +105,7 @@ export default function BannerDesign(
         Select the call-to-action that customer will see
       </h4>
       <Row>
-        <Col lg={12} className="mt-2">
+        <Col lg={12} className="mt-2 px-1">
           <Form.Check
             className="p-2"
             onChange={(e) => handleChange(e)}

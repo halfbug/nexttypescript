@@ -2,7 +2,7 @@
 
 .layout {
     @extend .d-flex, .mt-2, .px-0;
-
+    
     &__box_1 {
         @extend .mb-4;
         padding: 27px 33px;
@@ -232,7 +232,7 @@
             width: 20px !important;
             height: 20px !important;
             border: 1px solid white;
-            box-shadow: 0 0 0 1px $lightGrey;
+            box-shadow: 0 0 0 1px $lightGrey !important;
             &:checked {
                 border: .2rem solid white;
                 background-image: none !important;
@@ -249,6 +249,9 @@
                 font-family: 'DM Sans';
                 padding-left: 8px;
             }
+        }
+        &:focus{
+            box-shadow: none;
         }
     }
 }

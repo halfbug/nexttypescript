@@ -147,7 +147,7 @@ export default function Integrations(
                       </InputGroup>
                       <WhiteButton
                         type="submit"
-                        className={['px-4 py-1 ms-2 ', styles.marketing_DownloadBtn].join(' ')}
+                        className={['px-2 py-1 ms-2 ', styles.marketing_DownloadBtn].join(' ')}
 
                       >
                         Test API

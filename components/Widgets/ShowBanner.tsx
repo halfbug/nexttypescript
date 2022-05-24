@@ -4,6 +4,7 @@ import {
   Row, Col, ToggleButtonGroup, ToggleButton, Container, Button,
 } from 'react-bootstrap';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import DisableButton from 'assets/images/disable-btn-icon.svg';
 
 export interface ShowBannerProps {
   values: any;
@@ -52,7 +53,7 @@ export default function ShowBanner(
             >
               <Check2Circle className="fs-4" />
               {' '}
-              Enabled
+              Enable
             </ToggleButton>
 
             <ToggleButton
@@ -66,9 +67,9 @@ export default function ShowBanner(
                 handleForm('bannerProductPage', e.currentTarget.value);
               }}
             >
-              <XCircle className="fs-5" />
+              <DisableButton className="fs-5" />
               {' '}
-              Disabled
+              Disable
             </ToggleButton>
 
           </ToggleButtonGroup>
@@ -101,7 +102,7 @@ export default function ShowBanner(
             >
               <Check2Circle className="fs-4" />
               {' '}
-              Enabled
+              Enable
             </ToggleButton>
 
             <ToggleButton
@@ -115,9 +116,9 @@ export default function ShowBanner(
                 handleForm('bannerCartPage', e.currentTarget.value);
               }}
             >
-              <XCircle className="fs-5" />
+              <DisableButton className="fs-5" />
               {' '}
-              Disabled
+              Disable
             </ToggleButton>
 
           </ToggleButtonGroup>

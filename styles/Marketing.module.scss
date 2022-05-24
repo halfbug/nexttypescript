@@ -74,6 +74,8 @@
     .enablebtn {
         @extend .rounded-3, .me-2;
         width: 96px;
+        height: 28px;
+        line-height: 14px;
         border-color: $black !important;
         background-color: $enable !important;
         color: $white !important;
@@ -93,7 +95,9 @@
 
     .disablebtn {
         @extend .rounded-3;
-        width: 96px;
+        width: 99px;
+        height: 28px;
+        line-height: 14px;
         border-color: $black;
         color: $black;
         &:hover {
@@ -121,14 +125,13 @@
     }
 
     &_DownloadBtn {
-        @extend .text-nowrap;
         font-family: "DM Sans";
         font-style: normal;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 12px;
         line-height: 15px;
         height: 28px;
-        width: max-content;
+        width: 75px;
         text-align: center;
         border: $black;
         background: #ffffff;
