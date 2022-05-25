@@ -149,7 +149,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &__info_modal {
     &__content{
-      border-radius: 21px 21px 0 0;
+      border-radius: 21px;
+
+            @include media-breakpoint-down(sm) {
+        border-radius: 21px 21px 0px 0px !important;
+      }
     }
     &__closebtnsm {
       box-shadow: none !important;
@@ -165,9 +169,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
 
     @include media-breakpoint-down(sm) {
-      margin-top: 115px;
-      margin-left: 0;
-      margin-right: 0;
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      max-height: 90vh;
       &__closebtnsm {
         display: flex;
         justify-content: center;
@@ -629,6 +634,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       @include media-breakpoint-down(lg) {
         display: none;
       }
+    }
+
+    &_bilal {
+      background: red;
     }
     h3 {
       font-family: "DM Sans";
@@ -1144,6 +1153,25 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
   }
 
+  &_addtocartmodal {
+    padding: 1rem 0px;
+    text-align: center;
+    border-top: 1px solid #EBEBEB;
+
+    button {
+      color: #ffffff;
+      background-color: #171717;
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 27px;
+      letter-spacing: 0.32px;
+      text-transform: uppercase;
+      background-image: none;
+    }
+  }
+
   &_modal {
     @extend .rounded-0;
     width: 100%;
@@ -1437,7 +1465,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &_infoBox {
+    svg {
+      height: 30px !important;
+    }
     @extend .mx-2;
+
 
     @include media-breakpoint-down(lg) {
       &__pointers {
@@ -1492,37 +1524,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
 
-    @include media-breakpoint-down(sm) {
-      margin: 0px !important;
-      padding: 0px 25px;
-      h2 {
-        font-size: 20px !important;
-        line-height: 28px !important;
-      }
-      p {
-        font-size: 16px !important;
-        line-height: 20px !important;
-      }
-      &__pointers {
-        width: fit-content !important;
-      }
-      &_tostart {
-        h3 {
-          font-size: 16px !important;
-          line-height: 20px !important;
-        }
-        h3:before {
-          width: 70px !important;
-          // left: 280px !important;
-          top: 30.3% !important;
-        }
-        h3:after {
-          width: 70px !important;
-          // right: 280px !important;
-          top: 30.3% !important;
-        }
-      }
-    }
     &__pointers {
       @extend .text-start;
     }
@@ -1558,18 +1559,21 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       font-style: normal;
       font-weight: bold;
       font-size: 24px;
-      line-height: 31px;
+      line-height: 1.4;
       text-align: center;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 22px;
+      }
     }
     p {
       @extend .mx-3, .d-block;
       font-family: Mulish;
       font-style: normal;
       font-weight: 400 !important;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 23px;
       text-align: center;
-      width: 443px;
     }
     &_tostart {
       @extend .py-0, .my-3;
@@ -1580,26 +1584,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         font-size: 18px;
         line-height: 23px;
         text-align: center;
-      }
-      h3:before {
-        content: "";
-        display: block;
-        width: 99px;
-        height: 1px;
-        background: #dcdcdc;
-        left: 210px;
-        top: 36%;
-        position: absolute;
-      }
-      h3:after {
-        content: "";
-        display: block;
-        width: 99px;
-        height: 1px;
-        background: #dcdcdc;
-        right: 215px;
-        top: 36%;
-        position: absolute;
       }
     }
 
@@ -2004,6 +1988,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &_addtoCart_wrapper {
 
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
 
     @include media-breakpoint-down(md) {
       display: flex;
@@ -2287,35 +2275,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
   }
   &_shopping_box_mobile {
-    max-width: 350px;
     position: fixed;
     left: 0;
-    right: 0;
-    margin: 0 auto;
-    bottom: 100px;
-    z-index: 9;
-    &_content {
-      border-radius: 6px;
-      color: #000000;
-      font-weight: 600;
-      box-shadow: none !important;
-      box-sizing: border-box;
-      backdrop-filter: blur(4px);
-      border-radius: 6px;
-      &::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        padding: 0.08rem;
-        inset: 0;
-        border-radius: 4px;
-        background: linear-gradient(to right, #ccb2f9, #fee750);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-      }
-    }
+    bottom: 0;
+    z-index: 999;
   }
 
   &__share_social_icons {

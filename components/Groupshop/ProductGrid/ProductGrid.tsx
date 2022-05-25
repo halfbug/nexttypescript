@@ -190,7 +190,7 @@ const ProductGrid = ({
                     Add to Cart
 
                   </Button>
-                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
+                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
                 </div>
                 )}
               </div>

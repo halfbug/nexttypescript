@@ -255,7 +255,7 @@ const ProductsSearch = ({
         </Modal.Body>
         {(otherProducts && otherProducts.length > 0) && (
           <>
-            <div ref={ref} className={['p-3 text-center', styles.groupshop_bilal].join('')}>
+            <div ref={ref} className={styles.groupshop_addtocartmodal}>
               {selected && (
               <div className="pb-3">
                 {selectedCount}
@@ -275,7 +275,7 @@ const ProductsSearch = ({
               <Overlay
                 show={show}
                 target={target}
-                placement="bottom"
+                placement="top"
                 container={ref}
                 containerPadding={20}
               >

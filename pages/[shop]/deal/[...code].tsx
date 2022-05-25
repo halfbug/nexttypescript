@@ -53,6 +53,7 @@ import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
+import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -695,16 +696,12 @@ const GroupShop: NextPage = () => {
             handleClose={() => setShowRewards(false)}
           />
         )} */}
+        {isModalForMobile && (
+        <div>
+          <ShoppingBoxMobile />
+        </div>
+        )}
       </div>
-      {isModalForMobile && (
-        <Row
-          onClick={() => {
-            setShowRewards(true);
-          }}
-        >
-          {/* <ShoppingBoxMobile /> */}
-        </Row>
-      )}
     </>
   );
 };
