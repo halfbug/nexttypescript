@@ -18,7 +18,7 @@ export default function CampaignOverview() {
           <div className={styles.overiew__campaignBox}>
             <Row className="justify-content-center">
               <Col lg={4} className="">
-                <div className={['h-100', styles.overiew__campaignBox__name].join(' ')}>
+                <div className={['d-flex align-items-center', styles.overiew__campaignBox__name].join(' ')}>
                   LE SABLÉ
                 </div>
               </Col>

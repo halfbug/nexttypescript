@@ -133,7 +133,7 @@ export default function CampaignMetrics() {
                 <div className={styles.metrics__box__products__detail__image}>
                   <ProductLogo />
                 </div>
-                <div>
+                <div className={styles.metrics__box__products__detail_ptext}>
                   <div className={styles.metrics__box__products__detail__title}>
                     Insert Waves Here
                   </div>
@@ -141,7 +141,7 @@ export default function CampaignMetrics() {
                     $395 generated
                   </div>
                   <div className={styles.metrics__box__products__detail__value2}>
-                    39 Buys
+                    🛒 39 Buys
                   </div>
                 </div>
               </div>

@@ -1,9 +1,9 @@
 @import "./variables.scss";
 
-.overiew{
-    &__header{
+.overiew {
+    &__header {
         margin: 30px 0 27px 0;
-        h3{
+        h3 {
             font-size: 22px;
             font-weight: 700;
             line-height: 29px;
@@ -15,26 +15,26 @@
         line-height: 23px;
         font-size: 18px;
         font-weight: 400;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
     }
-    &__campaignBox{
-        background:#DCD0E8;
-        border: 1px solid #DCD0E8;
+    &__campaignBox {
+        background: #dcd0e8;
+        border: 1px solid #dcd0e8;
         border-radius: 23px;
         padding: 20px;
-        &__name{
-            background: #FFFFFF;
+        &__name {
+            background: #ffffff;
             border-radius: 8px;
             height: 85px !important;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        &__year{
+        &__year {
             font-weight: 700;
             font-size: 18px;
             line-height: 23px;
-            color:#fff;
+            color: #fff;
             margin-bottom: 12px;
             margin-top: 8px;
         }
@@ -49,7 +49,7 @@
         &__logo {
             height: 85px !important;
             min-width: 116px;
-            background: #F3F3F3;
+            background: #f3f3f3;
             margin: 0 !important;
             button {
                 height: 28px;
@@ -62,15 +62,15 @@
             }
         }
     }
-    &__campaignBox1{
-        background:#D5FA52;
-        border: 1px solid #D5FA52;
+    &__campaignBox1 {
+        background: #d5fa52;
+        border: 1px solid #d5fa52;
         border-radius: 23px;
         padding: 20px;
         display: flex;
         justify-content: flex-start;
-        &__name{
-            background: #FFFFFF;
+        &__name {
+            background: #ffffff;
             border-radius: 8px;
             height: 85px !important;
             display: flex;
@@ -78,11 +78,11 @@
             justify-content: center;
             min-width: 116px;
         }
-        &__year{
+        &__year {
             font-weight: 700;
             font-size: 18px;
             line-height: 23px;
-            color:#fff;
+            color: #fff;
             margin-bottom: 12px;
             margin-top: 8px;
         }
@@ -91,11 +91,11 @@
             line-height: 23px;
             font-size: 18px;
             font-weight: 700;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
         }
         &__activatedesc {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
@@ -109,15 +109,15 @@
             margin-right: 12px;
         }
     }
-    &__performanceBox{
-        border: 1px solid #DCD0E8;
+    &__performanceBox {
+        border: 1px solid #dcd0e8;
         border-radius: 23px;
-        
+
         padding: 15px 20px;
 
         &__tag {
             padding: 6px 8px;
-            background: #DCD0E8;
+            background: #dcd0e8;
             border-radius: 6px;
             width: fit-content;
         }
@@ -147,18 +147,18 @@
         }
     }
 }
-.metrics{
+.metrics {
     margin-top: 66px;
-    &__header{
+    &__header {
         margin: 30px 0 24px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        h3{
+        h3 {
             font-size: 22px;
             font-weight: 700;
             line-height: 29px;
-            margin-bottom:  0px !important;
+            margin-bottom: 0px !important;
         }
         &__dropdown {
             @extend .rounded-pill, .text-center;
@@ -171,21 +171,26 @@
             width: 138px;
             height: 38px;
             border-color: #fff !important;
-            background: #F8F8F8 !important;
+            background: #f8f8f8 !important;
             display: flex;
             align-items: center;
             svg {
-              margin-left: 2px;
+                margin-left: 2px;
             }
             &::after {
-              @extend .border-0;
+                @extend .border-0;
             }
             &:focus {
-              box-shadow: none;
+                box-shadow: none;
             }
             &__txt {
                 padding: 0px 5px;
                 width: 80px;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 24px;
             }
         }
         &__dropdown:hover {
@@ -196,26 +201,26 @@
             border-radius: 10px;
             padding: 20px 0px;
         }
-        
+
         &__dropdownItem {
             @extend .ms-3;
             padding-top: 10px;
             margin-top: 10px;
             &:first-child {
-              padding-top: 0px;
-              margin-top: 0px;
-              margin-left: 0px !important;
+                padding-top: 0px;
+                margin-top: 0px;
+                margin-left: 0px !important;
             }
             a {
-              width: fit-content;
-              border: 1px solid $purple;
-              border-radius: 4px;
-              font-weight: $font-weight-bold;
-              padding: 6px 8px;
-        
-              &:hover {
-                background: none !important;
-              }
+                width: fit-content;
+                border: 1px solid $purple;
+                border-radius: 4px;
+                font-weight: $font-weight-bold;
+                padding: 6px 8px;
+
+                &:hover {
+                    background: none !important;
+                }
             }
         }
     }
@@ -225,7 +230,7 @@
         font-size: 14px;
         line-height: 18px;
         font-weight: 400;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         &__light {
             margin-top: 8px;
             text-decoration: underline;
@@ -233,128 +238,134 @@
             cursor: pointer;
         }
     }
-    &__box{
-            &__customers{
-                background: #F8F8F8;
-                border-radius: 23px;
-                padding: 16px 30px;
-                &__header{
-                    font-weight: 700;
-                    font-size: 14px;
-                    line-height: 24px;
-                    
-                }
-                &__node{
-                    display: grid;
-                    grid-template-columns: 5fr 9fr 1fr;
-                    margin-top: 20px;
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 18px;
-        
-                    &__value{
-                        background: #D5FA52;
-                        border-radius: 6px;
-                        padding: 6px 12px;
-                        margin: auto;
-                        font-size: 12px;
-                        font-weight: 500;
-                        color: #000000;
-                        line-height: 15px;
-                    }
-                }
-                &__acc {
-                    button {
-                        background: none !important;
-                        box-shadow: none !important;
-                    }
-                }
-                &__ques {
-                    button {
-                        font-family: "DM Sans";
-                        font-style: normal;
-                        font-weight: 500 !important;
-                        font-size: 14px;
-                        line-height: 20px;
-                        color: $black;
-                        background-color: #F8F8F8 !important;
-                        padding: 20px 0px;
-                    }
-                    &__name {
-                        font-weight: 400;
-                        font-size: 14px;
-                        line-height: 20px;
-                        color: #000000;
-                    }
-                }
-                &__acc_body {
-                    padding-top: 0px;
-                    padding-bottom: 20px;
-                    font-weight: 400 !important;
-                    font-family: "DM Sans" !important;
+    &__box {
+        &__customers {
+            background: #f8f8f8;
+            border-radius: 23px;
+            padding: 16px 30px;
+            &__header {
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 24px;
+            }
+            &__node {
+                display: grid;
+                grid-template-columns: 5fr 9fr 1fr;
+                margin-top: 20px;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 18px;
+
+                &__value {
+                    background: #d5fa52;
+                    border-radius: 6px;
+                    padding: 6px 12px;
+                    margin: auto;
                     font-size: 12px;
-                    line-height: 20px !important;
-                    color: #333333;
-                    background-color: #F8F8F8 !important;
+                    font-weight: 500;
+                    color: #000000;
+                    line-height: 15px;
                 }
             }
-            &__products{
-                background: #F8F8F8;
-                border-radius: 23px;
-                &__header{
-                    display: flex;
-                    justify-content: space-between;
-                    font-weight: 700;
+            &__acc {
+                button {
+                    background: none !important;
+                    box-shadow: none !important;
+                }
+            }
+            &__ques {
+                button {
+                    font-family: "DM Sans";
+                    font-style: normal;
+                    font-weight: 500 !important;
                     font-size: 14px;
                     line-height: 20px;
+                    color: $black;
+                    background-color: #f8f8f8 !important;
+                    padding: 20px 0px;
                 }
-                &__detail{
-                    display: flex;
-                    column-gap: 30px;
-                    margin-top: 20px;
-                    &__image{
-                        padding: 5px;
-                        border: 1px dashed #000000;
-                        border-radius: 8px;
-                        box-sizing: border-box;
-                        background: #FFFFFF;
-                    }
-                    &__title{
-                        font-weight: 400;
-                        font-size: 12px;
-                        line-height: 16px;
-                        font-family: "DM Sans";
-                    }
-                    &__value1{
-                        margin: 10px 0px;
-                        padding: 6px 10px;
-                        background: #D5FA52;
-                        border-radius: 6px;
-                        font-weight: 500;
-                        font-size: 12px;
-                        line-height: 15px;
-                        color: #000000;
-                        font-family: "DM Sans";
-                    }
-                    &__value2{
-                        margin: 10px 0px;
-                        padding: 7px 10px;
-                        background: #F28BF4;
-                        border-radius: 6px;
-                        font-weight: 400;
-                        font-size: 12px;
-                        line-height: 15px;
-                        color: #000000;
-                        font-family: "DM Sans";
-                    }
+                &__name {
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #000000;
                 }
             }
+            &__acc_body {
+                padding-top: 0px;
+                padding-bottom: 20px;
+                font-weight: 400 !important;
+                font-family: "DM Sans" !important;
+                font-size: 12px;
+                line-height: 20px !important;
+                color: #333333;
+                background-color: #f8f8f8 !important;
+            }
+        }
+        &__products {
+            background: #f8f8f8;
+            border-radius: 23px;
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 20px;
+            }
+            &__detail {
+                position: relative;
+                height: fit-content;
+                display: flex;
+                column-gap: 30px;
+                margin-top: 20px;
+                &_ptext{
+                    position: absolute;
+                    padding-left: 115px;
+                }
+                &__image {
+                    height: fit-content;
+                    padding: 5px;
+                    border: 1px dashed #000000;
+                    border-radius: 8px;
+                    box-sizing: border-box;
+                    background: #ffffff;
+                }
+                &__title {
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 16px;
+                    font-family: "DM Sans";
+                }
+                &__value1 {
+                    margin: 10px 0px;
+                    padding: 6px 10px;
+                    background: #d5fa52;
+                    border-radius: 6px;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: #000000;
+                    font-family: "DM Sans";
+                }
+                &__value2 {
+                    margin: 10px 0px;
+                    padding: 7px 10px;
+                    background: #f28bf4;
+                    border-radius: 6px;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: #000000;
+                    font-family: "DM Sans";
+                }
+            }
+        }
     }
 }
-.strength{
-    &__header{
+.strength {
+    &__header {
         margin: 30px 0 10px 0;
-        h3{
+        h3 {
             font-size: 22px;
             font-weight: 700;
         }
@@ -403,7 +414,7 @@
         color: #333333;
         background-color: #fff !important;
     }
-    &__node{
+    &__node {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -411,19 +422,26 @@
         font-size: 14px;
         line-height: 18px;
 
-        border-bottom: 1px solid #DCDCDC;
+        border-bottom: 1px solid #dcdcdc;
     }
-    &__experience{
-        background: linear-gradient(290.19deg, #FEE750 0%, #F8E291 24.48%, #F4DEC4 61.81%, #CCB2F9 94.79%, #CCB2F9 100%);
+    &__experience {
+        background: linear-gradient(
+            290.19deg,
+            #fee750 0%,
+            #f8e291 24.48%,
+            #f4dec4 61.81%,
+            #ccb2f9 94.79%,
+            #ccb2f9 100%
+        );
         border-radius: 23px;
         padding: 10px 30px;
-        &__trow{
+        &__trow {
             width: 220px;
             font-weight: 700;
             font-size: 18px;
             line-height: 24px;
         }
-        &__brow{
+        &__brow {
             width: 240px;
             font-weight: 400;
             font-size: 12px;
