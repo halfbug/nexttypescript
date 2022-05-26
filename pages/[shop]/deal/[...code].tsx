@@ -323,7 +323,7 @@ const GroupShop: NextPage = () => {
                   />
                   <ShareButton
                     placement="bottom"
-                    shareurl={gsURL}
+                    shareurl={gsShortURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
