@@ -17,9 +17,9 @@ export default function GsFeartured(
         <Row className="mt-1 d-inline-flex">
           <Col lg={5} className="">
             <iframe
-              style={{ border: '1px solid black', borderRadius: '23px!important' }}
-              width="260"
-              height="135"
+              width="281.64"
+              className={styles.Kb_featured_frames}
+              height="119"
               title="GS"
               src="https://www.youtube.com/embed/NpEaa2P7qZI"
               allowFullScreen
@@ -31,9 +31,9 @@ export default function GsFeartured(
           <Col lg={1} className="mx-1" />
           <Col lg={5} className="">
             <iframe
-              style={{ border: '1px solid black', borderRadius: '23px!important' }}
-              width="260"
-              height="135"
+              width="281.64"
+              className={styles.Kb_featured_frames}
+              height="119"
               title="GS1"
               src="https://www.youtube.com/embed/NpEaa2P7qZI"
               allowFullScreen

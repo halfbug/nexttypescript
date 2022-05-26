@@ -94,8 +94,13 @@
         height: fit-content;
         // height: 119px;
         background-color: #f8f8f8;
-        border-radius: 23px;
+        border-radius: 14px;
+        &_frames {
+            width:281.64px;
+            height:119px;
+            border-radius: 14px;
 
+        }
         &_heading {
             @extend .d-block, .mb-0, .mx-2;
             font-family: "DM Sans";
