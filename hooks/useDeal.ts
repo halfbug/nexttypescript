@@ -256,6 +256,8 @@ export default function useDeal() {
     return nextDiscount as string;
   });
   const milestones = gsctx?.milestones;
+  // const activateURL = `${gsURL}?activated=${Math.floor((Math.random() * 6) + 1).toFixed(2)}-GS`;
+  const activateURL = `${gsURL}/status&activated`;
   return {
     currencySymbol,
     discount,
@@ -281,5 +283,6 @@ export default function useDeal() {
     // unLockCashBack,
     unLockCB,
     getBannerTotalCashBackByOrder,
+    activateURL,
   };
 }

@@ -7,7 +7,7 @@ import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   Carousel,
-  Col, Form, Modal, Row,
+  Col, Form, Modal, Row, Spinner,
 } from 'react-bootstrap';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
@@ -25,6 +25,8 @@ import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
 import { Send } from 'react-bootstrap-icons';
+import { InvariantError } from '@apollo/client/utilities/globals';
+import Link from 'next/link';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -51,7 +53,9 @@ const ProductDetail = ({
 
   // control carousel
   const [index, setIndex] = useState(0);
+  const [loaderInvite, setloaderInvite] = useState(false);
   const [addedbyname, setaddedbyname] = useState<string | undefined>('');
+  const [urlForActivation, seturlForActivation] = useState<string | undefined>('');
   const [cashBack, setCashBack] = useState<number>(0);
 
   const handleSelect = (selectedIndex: number, e: any) => {
@@ -62,7 +66,7 @@ const ProductDetail = ({
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
-    getDateDifference,
+    getDateDifference, activateURL,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -74,6 +78,13 @@ const ProductDetail = ({
   const productCustomers = getBuyers(product?.id || '0');
   const { googleProductCode, googleEventCode } = useGtm();
 
+  const inviteForExpiredGS = () => {
+    setloaderInvite(true);
+    setTimeout(() => {
+      setloaderInvite(false);
+      seturlForActivation(activateURL);
+    }, 1000);
+  };
   useEffect(() => {
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
@@ -589,29 +600,36 @@ const ProductDetail = ({
 
                 </p> */}
                 <div className="d-flex flex-column justify-content-center mb-2">
-                  <GradiantButton type="button" className="align-self-center mb-2">INVITE NOW</GradiantButton>
+                  { loaderInvite
+                    ? (<Spinner animation="border" className="align-self-center mb-2" />)
+                    : (
+                      <>
+                        <GradiantButton type="button" className="align-self-center mb-2" onClick={() => inviteForExpiredGS()}>INVITE NOW</GradiantButton>
+                        { urlForActivation ? (<Link href={activateURL}><a target="_blank">{urlForActivation}</a></Link>) : '' }
+                      </>
+                    )}
                   OR SHARE
                 </div>
                 <section className="d-flex justify-content-center px-2">
                   <div className="mx-1">
                     {' '}
-                    <SocialButton network="Instagram" url={'  '} />
+                    <SocialButton network="Instagram" url={activateURL} />
                   </div>
 
                   <div className="mx-1">
                     {' '}
-                    <SocialButton network="Youtube" url={' '} />
+                    <SocialButton network="Youtube" url={activateURL} />
                     {' '}
                   </div>
 
                   <div className="mx-1">
                     {' '}
-                    <SocialButton network="Tiktok" url={'  '} />
+                    <SocialButton network="Tiktok" url={activateURL} />
                     {' '}
                   </div>
                   <div className="mx-1">
                     {' '}
-                    <SocialButton network="Twitter" url={'  '} />
+                    <SocialButton network="Twitter" url={activateURL} />
                     {' '}
                   </div>
                 </section>
@@ -620,7 +638,7 @@ const ProductDetail = ({
           </Row>
           )}
         </Modal.Body>
-        {isForMobile && (
+        {isForMobile && !isExpired && (
         <Modal.Footer className="bg-transparent d-block">
           <Row className={styles.groupshop_timerRow}>
             <Col xs={1} md={1} />

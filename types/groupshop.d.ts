@@ -95,4 +95,6 @@ export interface IGroupshop {
 
   addedProducts?: DealProduct[];
 
+  status?: string;
+
 }

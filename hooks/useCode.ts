@@ -9,6 +9,7 @@ const useCode = () => {
 
   const { query: { shop, code } } = router;
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
+  const [status, setStatus] = useState<string | undefined>(undefined);
   const [discountCode, setdiscountCode] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -26,6 +27,11 @@ const useCode = () => {
                 case 'product':
                   setproductCode(entity[1]);
                   break;
+                case 'status':
+                  console.log('status', entity[1]);
+
+                  setStatus(entity[1]);
+                  break;
 
                 default:
                   break;
@@ -39,6 +45,8 @@ const useCode = () => {
     }
   }, [code]);
 
-  return { shop, discountCode, productCode };
+  return {
+    shop, discountCode, productCode, status,
+  };
 };
 export default useCode;

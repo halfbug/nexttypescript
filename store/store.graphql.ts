@@ -288,8 +288,8 @@ const GET_CAMPAIGN_BY_ID = gql`
 `;
 
 const GET_GROUPSHOP = gql`
-query Groupshop($code: String!) {
-  groupshop(code: $code) {
+query Groupshop($code: String!, $status: String = "") {
+  groupshop(code: $code, status: $status) {
     storeId
     id
     url

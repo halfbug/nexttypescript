@@ -58,7 +58,7 @@ import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBo
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
-  const { shop, discountCode } = useCode();
+  const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
@@ -67,10 +67,10 @@ const GroupShop: NextPage = () => {
     loading,
     error,
     data: { groupshop } = { groupshop: gsInit },
-  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined }>(
+  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined, status: string | undefined}>(
     GET_GROUPSHOP,
     {
-      variables: { code: discountCode },
+      variables: { code: discountCode, status: status ?? '' },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },

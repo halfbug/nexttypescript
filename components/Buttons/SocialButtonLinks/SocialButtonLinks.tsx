@@ -11,7 +11,7 @@ type SocialButtonLinksProps = React.PropsWithChildren<{
 }>;
 
 const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
-  console.log(network);
+  console.log('');
   return (
     <div>
       { network === 'Instagram' && url !== '' && (
