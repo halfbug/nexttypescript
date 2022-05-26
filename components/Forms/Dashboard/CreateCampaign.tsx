@@ -85,6 +85,8 @@ export default function CreateCampaign() {
       .required('required.'),
     minDiscount: yup
       .number().typeError('you must specify a number')
+      .min(5)
+      .max(40)
       .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
@@ -106,6 +108,7 @@ export default function CreateCampaign() {
     maxDiscount: yup
       .number().typeError('you must specify a number')
       .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
+      .max(50)
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
@@ -169,7 +172,7 @@ export default function CreateCampaign() {
         } else if (baseline! >= superBaseline) {
           newSelectedTarget.name = 'Super-charged';
         }
-        const newAverage = multiple5((minDiscount! + maxDiscount!) / 2);
+        const newAverage = multiple5((+minDiscount! + +maxDiscount!) / 2);
         // if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
         //   minDiscountVal = `${minDiscountVal}%`;
         // }
