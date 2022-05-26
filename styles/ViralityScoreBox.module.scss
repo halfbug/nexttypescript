@@ -1,0 +1,79 @@
+.viralityScoreBox {
+    &__score_area {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 11px;
+        margin-bottom: 12px;
+        &__txt {
+            color: #000000;
+            line-height: 19px;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: 'DM Sans';
+        }
+        &__tag {
+            color: #000000;
+            line-height: 16px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'DM Sans';
+            padding: 3px 6px;
+            background: #F28BF4;
+            border-radius: 6px;
+            margin-left: 5px;
+        }
+    }
+
+    &__infoBox {
+        display: flex;
+        &__logo {
+            border: 1px dashed #000000;
+            border-radius: 8px;
+            padding: 5px;
+            width: fit-content;
+            margin-right: 15px;
+
+            svg {
+                border-radius: 8px;
+            }
+        }
+
+        &__detail {
+            &__txt {
+                color: #000000;
+                font-family: 'DM Sans';
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 16px;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+            }
+            &__generated{
+                color: #000000;
+                text-align: center;
+                font-size: 12px;
+                line-height: 15px;
+                font-weight: 500;
+                font-family: 'DM Sans';
+                padding: 6px 9px;
+                background: #D5FA52;
+                border-radius: 6px;
+                width: fit-content;
+                margin-bottom: 6px;
+            }
+            &__buys{
+                color: #000000;
+                text-align: center;
+                font-size: 12px;
+                line-height: 15px;
+                font-weight: 400;
+                font-family: 'DM Sans';
+                padding: 6px 13px;
+                background: #DCD0E8;
+                border-radius: 6px;
+                width: fit-content;
+            }
+        }
+    }
+}

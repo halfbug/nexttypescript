@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
 import { Col, Container, Row } from 'react-bootstrap';
 import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
+import ViralityMetrics from 'components/Forms/Dashboard/ViralityMetrics';
+import CustomerData from 'components/Forms/Dashboard/CutomerData';
 
 const Analytics: NextPage = () => (
   <Page headingText="Analytics" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
@@ -12,9 +14,10 @@ const Analytics: NextPage = () => (
           <CoreMetrics />
         </Col>
         <Col lg={{ span: 4, offset: 1 }} className="p-0">
-          Virality Metrics
+          <ViralityMetrics />
         </Col>
       </Row>
+      <CustomerData />
     </Container>
   </Page>
 );
