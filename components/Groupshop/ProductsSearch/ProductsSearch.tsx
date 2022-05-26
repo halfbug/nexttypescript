@@ -230,7 +230,7 @@ const ProductsSearch = ({
                           {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                         </span>
                         {' '}
-                        <span>
+                        <span className="fw-bolder">
                           {currencySymbol}
                           {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                         </span>

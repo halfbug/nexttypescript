@@ -123,6 +123,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
                 </p>
               </Col>
             </div>
+            {!isModalForMobile && (
             <div>
               <h4 className="align-content-center text-center fw-bold ">
                 {' '}
@@ -132,6 +133,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
 
               </h4>
             </div>
+            )}
           </div>
           <div className="d-flex justify-content-center my-4">
             <Button

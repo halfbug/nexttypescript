@@ -340,7 +340,7 @@ const ProductDetail = ({
                     {product?.title}
                   </p>
                   <h3 className="d-flex align-items-center">
-                    <span className={['text-decoration-line-through', styles.groupshop_right_content_price].join(' ')}>
+                    <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
                       {currencySymbol}
                       {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
                     </span>
@@ -375,6 +375,7 @@ const ProductDetail = ({
                     ) : ''}
                   </h3>
                   <div className={styles.groupshop_modal_detail_height}>
+                    {isForMobile && (
                     <ShowMoreText
                 /* Default options */
                       lines={3}
@@ -392,9 +393,10 @@ const ProductDetail = ({
                       {product?.description}
 
                     </ShowMoreText>
+                    )}
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
-                      <div key={id} className="mt-3">
+                      <div key={id} className="my-3">
                         <p className={isExpired
                           ? styles.groupshop_modal_detail_height_headingExpired
                           : styles.groupshop_modal_detail_height_headingNormal}
@@ -433,6 +435,25 @@ const ProductDetail = ({
 
                       </div>
                     ))}
+                    {!isForMobile && (
+                    <ShowMoreText
+                /* Default options */
+                      lines={3}
+                      more="Show more"
+                      less="Show less"
+                      className={isExpired
+                        ? styles.groupshop_modal_detail_height_descriptionExpired
+                        : styles.groupshop_modal_detail_height_descriptionNormal}
+                      anchorClass="my-anchor-css-class"
+                  // onClick={this.executeOnClick}
+                      expanded={false}
+                      width={406}
+                      truncatedEndingComponent="... "
+                    >
+                      {product?.description}
+
+                    </ShowMoreText>
+                    )}
                   </div>
                   <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center'].join(' ')}>
                     <Button
