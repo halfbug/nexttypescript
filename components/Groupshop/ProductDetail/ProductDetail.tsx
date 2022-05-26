@@ -26,7 +26,7 @@ import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
 import { Send } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -57,6 +57,7 @@ const ProductDetail = ({
   const [addedbyname, setaddedbyname] = useState<string | undefined>('');
   const [urlForActivation, seturlForActivation] = useState<string | undefined>('');
   const [cashBack, setCashBack] = useState<number>(0);
+  const router = useRouter();
 
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
@@ -605,7 +606,7 @@ const ProductDetail = ({
                     : (
                       <>
                         <GradiantButton type="button" className="align-self-center mb-2" onClick={() => inviteForExpiredGS()}>INVITE NOW</GradiantButton>
-                        { urlForActivation ? (<Link href={activateURL}><a target="_blank">{urlForActivation}</a></Link>) : '' }
+                        { urlForActivation ? (<a href={activateURL}>{urlForActivation}</a>) : '' }
                       </>
                     )}
                   OR SHARE
