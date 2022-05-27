@@ -65,10 +65,12 @@ const ExportToExcel = ({
   };
 
   return (
-    <Button onClick={(e) => {
-      // exportToCSV(sheetData, fileName);
-      BillingQueryLoader();
-    }}
+    <Button
+      variant=""
+      onClick={(e) => {
+        // exportToCSV(sheetData, fileName);
+        BillingQueryLoader();
+      }}
     >
       {loading ? (
         <Spinner animation="border" role="status">

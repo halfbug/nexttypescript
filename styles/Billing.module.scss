@@ -4,21 +4,23 @@
   margin-left: 10px;
   @extend .mt-3, .py-0, .d-flex, .px-0;
 
-  &_enternum {
+  Checkout the co &_enternum {
     width: 107px;
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    ::-webkit-input-placeholder { /* Edge */
+    ::-webkit-input-placeholder {
+      /* Edge */
       color: rgba(29, 35, 41, 0.5);
     }
-    
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
       color: rgba(29, 35, 41, 0.5);
     }
-    
+
     ::placeholder {
       color: rgba(29, 35, 41, 0.5);
     }
@@ -66,16 +68,16 @@
   &_first_tier {
     @extend .d-flex, .align-items-center;
     height: 21px;
-    width:137px;
+    width: 137px;
     background: #a68ad6;
     border-radius: 8px;
     padding-left: 90px;
     padding-right: 10px;
     text-align: right;
-    
+
     span {
       /* for text */
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -87,7 +89,7 @@
   &_second_tier {
     @extend .d-flex, .align-items-center;
     height: 21px;
-    width:137px;
+    width: 137px;
     background: #f28bf4;
     border-radius: 8px;
     padding-left: 90px;
@@ -95,7 +97,7 @@
     text-align: right;
     span {
       /* for text */
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -107,7 +109,7 @@
   &_third_tier {
     @extend .d-flex, .align-items-center;
     height: 21px;
-    width:137px;
+    width: 137px;
     background: #f8c48d;
     border-radius: 8px;
     padding-left: 90px;
@@ -115,7 +117,7 @@
     text-align: right;
     span {
       /* for text */
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -127,7 +129,7 @@
   &_fourth_tier {
     @extend .d-flex, .align-items-center;
     height: 21px;
-    width:137px;
+    width: 137px;
     background: #d5fa52;
     border-radius: 8px;
     padding-left: 90px;
@@ -135,7 +137,7 @@
     text-align: right;
     span {
       /* for text */
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -185,7 +187,7 @@
       box-shadow: none;
     }
     &__cost {
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
       font-size: 22px;
@@ -506,7 +508,6 @@
           font-size: 14px;
           line-height: 24px;
           margin: 6px 0px;
-          
         }
         &__value {
           font-weight: 700;
@@ -517,7 +518,7 @@
       }
       &__s2_box {
         padding: 16px 20px 20px 20px;
-        border: 1px dashed #F28BF4;
+        border: 1px dashed #f28bf4;
         border-radius: 23px;
         width: 225px;
 
@@ -557,9 +558,11 @@
     }
     &__tableContainer {
       margin-top: 40px;
+
       table {
         border-collapse: separate;
-        border-spacing: 0 20px;
+        border-spacing: 0 10px;
+
         thead {
           tr {
             background-color: unset;
@@ -571,9 +574,17 @@
             }
           }
         }
+        
         tr {
+          @extend .ps-4;
           background-color: #f8f8f8;
           line-height: 50px;
+          td:first-child {
+            border-radius: 10px 0 0 10px;
+          }
+          td:last-child {
+            border-radius: 0 10px 10px 0;
+          }
           td {
             font-size: 18px;
           }
