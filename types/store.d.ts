@@ -20,6 +20,7 @@ export interface IStore {
   // plan?: 'LAUNCH' | 'EXPLORE' | 'GROWTH' | 'UNICORN' | undefined;
   totalGroupShop?: number | undefined;
   currencyCode?: string;
+  appTrialEnd?: string | undefined;
 }
 export interface ICampaign {
   id?: string | null | undefined;

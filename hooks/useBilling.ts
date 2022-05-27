@@ -17,6 +17,7 @@ export default function useBilling() {
   const [totalGS, settotalGS] = useState(0);
   const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
+  const [appTrial, setappTrial] = useState(true);
 
   // query to get total # of gs of merchant store
   const {
@@ -86,19 +87,25 @@ export default function useBilling() {
     console.log({ gsid });
     return 'gsid';
   }, []);
-  const getPayment = useCallback((gsid) => {
-    console.log({ gsid });
-    return 'gsid';
-  }, []);
+  const isAppTrial = () => {
+    const { appTrialEnd } = store;
+    if (appTrialEnd) {
+      const appTrialEndDate = new Date(appTrialEnd);
+      const currentDate = new Date();
+      const diff = appTrialEndDate.getTime() - currentDate.getTime();
+      if (diff < 0) setappTrial(false);
+    }
+    setappTrial(true);
+  };
 
   return {
     // getMonthlyGSCount,
     getCashBack,
     getMonthlyEstimateCost,
     getRevenue,
-    getPayment,
     totalGS,
     totalRevenue,
     currencySymbol,
+    appTrial,
   };
 }

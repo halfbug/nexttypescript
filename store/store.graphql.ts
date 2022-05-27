@@ -13,6 +13,7 @@ query StoreName($shop: String!) {
   logoImage
   plan
   currencyCode
+  appTrialEnd
 
   settings{
     media
@@ -85,6 +86,7 @@ query store($id: String!) {
     brandName
     plan
     totalGroupShop
+    appTrialEnd
     }
   }
 `;
@@ -677,6 +679,8 @@ query GetMonthlyGSBilling($storeId: String!) {
       month
     }
     feeCharges
+    feeChargesGS
+    totalCharges
     cashBack
     revenue
     count

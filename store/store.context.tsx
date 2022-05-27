@@ -20,6 +20,7 @@ const initialState: IStore = {
     products: [], collections: [], productsArray: [], collectionsArray: [],
   },
   currencyCode: '',
+  appTrialEnd: '',
 };
 
 export const StoreContext = React.createContext<StoreContextType>(

@@ -17,7 +17,7 @@ import C1 from 'assets/images/CartBag.svg';
 
 export default function PaymentHistory() {
   const {
-    totalGS, totalRevenue, currencySymbol,
+    totalGS, totalRevenue, currencySymbol, appTrial,
   } = useBilling();
   const { convertNumToMonth, storeCurrencySymbol } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
@@ -33,6 +33,8 @@ export default function PaymentHistory() {
     feeCharges: 0,
     cashBack: 0,
     totalGS: 0,
+    totalCharges: 0,
+    feeChargesGS: 0,
   }]);
 
   const {
@@ -47,6 +49,8 @@ export default function PaymentHistory() {
   React.useEffect(() => {
     refetch();
   }, []);
+  console.log('monthlyGS', monthlyGS);
+
   const getBillingTableHTML = () => (
     <div>
       <Table borderless hover className='mb-0'>
@@ -80,7 +84,8 @@ export default function PaymentHistory() {
               </td>
               <td>
                 {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                {(item.feeCharges).toFixed(2).toString().replace('.00', '')}
+                { appTrial ? (item.feeCharges).toFixed(2).toString().replace('.00', '')
+                  : (item.totalCharges).toFixed(2).toString().replace('.00', '')}
               </td>
               <td>
                 <ExportToExcel
