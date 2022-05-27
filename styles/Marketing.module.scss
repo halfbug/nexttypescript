@@ -7,6 +7,10 @@
         padding: 24px 34px;
         border: 1px dashed $dotted-border-color1;
         border-radius: 18px;
+        &__inte {
+            display: flex;
+            justify-content: center
+        }
     }
     &__box_3 {
         @extend .mb-4;
@@ -28,7 +32,7 @@
     }
 
     h3 {
-        @extend .px-0, .mt-5, .mb-4;
+        @extend .px-0, .mt-4, .mb-4, .pt-3;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
@@ -131,7 +135,7 @@
         font-size: 12px;
         line-height: 15px;
         height: 28px;
-        width: 75px;
+        min-width: 75px;
         text-align: center;
         border: $black;
         background: #ffffff;

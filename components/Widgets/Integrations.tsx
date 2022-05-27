@@ -111,7 +111,7 @@ export default function Integrations(
       </section>
       <section className={styles.marketing__box_1}>
         <Row>
-          <Col lg={1} className="me-0 mt-2">
+          <Col lg={1} className={['me-0 mt-2', styles.marketing__box_1__inte].join(' ')}>
             <Inte />
           </Col>
           <Col lg={11} className="px-0">

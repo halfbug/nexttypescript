@@ -77,7 +77,7 @@ export default function DisplayBanner(
           </Row>
         </Col>
         <Col xxl={5} xl={6} lg={8} className="d-flex justify-content-end">
-          <img src={Banner.src} alt="Banner" width="413" height="215" />
+          <img src={Banner.src} alt="Banner" width="413" height="100%" />
         </Col>
       </Row>
     </section>
