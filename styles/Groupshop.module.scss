@@ -1715,6 +1715,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_text {
       @include media-breakpoint-down(sm) {
         text-align: center;
+        padding-top: 20px;
       }
       
     }

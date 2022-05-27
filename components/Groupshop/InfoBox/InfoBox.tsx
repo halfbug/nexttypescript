@@ -105,7 +105,9 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               </Col>
               <Col xs={9}>
                 <p className={styles.groupshop_infoBox__pointers}>
-                  Share this Groupshop link with friends to give them access to
+                  <strong>Share</strong>
+                  {' '}
+                  this Groupshop link with friends to give them access to
                   {' '}
                   <strong> exclusive discounts.</strong>
                 </p>
