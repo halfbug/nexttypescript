@@ -18,7 +18,7 @@ export default function MarketingTools(
     <>
       <section className={styles.marketing__box_3}>
         <Row className="position-relative">
-          <Col className="position-absolute mt-2">
+          <Col lg={1} className="position-absolute mt-2">
             <Recover />
           </Col>
           <Col lg={10} className="ps-4 ms-4">
@@ -26,6 +26,7 @@ export default function MarketingTools(
               Recover abandoned carts
               <ToolTip
                 className={styles.marketing__tooltip_1}
+                popoverClassName={styles.marketing__tooltip_1__popover}
                 icon={<InfoCircle size={13} />}
                 popContent="No purchase yet? No problem.
               We'll add the abandoned products to a dedicated Groupshop page,

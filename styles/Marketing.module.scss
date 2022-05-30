@@ -26,6 +26,9 @@
 
     &__tooltip_1{
         @extend .mx-2;
+        &__popover{
+            border-color: $green;
+        }
     }
     .popover{
         border:5px solid;
