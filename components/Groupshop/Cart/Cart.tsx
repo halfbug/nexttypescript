@@ -226,6 +226,9 @@ const Cart = ({
                   {suggestedProd.map((item) => (
                     <Col xs={6} className=" py-1 mb-1 px-1 border-2">
                       <ProductCard
+                        onClick={() => {
+                          handleDetail(item);
+                        }}
                         type="small"
                         isrc={item.featuredImage}
                         imgOverlay={(
