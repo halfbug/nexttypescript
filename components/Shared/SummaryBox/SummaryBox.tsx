@@ -8,8 +8,13 @@ import PurchaseIcon from 'assets/images/number-of-purchase.png';
 import Arrow1 from 'assets/images/arrow1.png';
 import styles from './SummaryBox.module.scss';
 
-const SummaryBox = (props: { label: any; value: any; iconType: any; }) => {
-  const { label, value, iconType } = props;
+const SummaryBox = (props: { label: any; value: any; iconType: any; arrowIcon: boolean }) => {
+  const {
+    label,
+    value,
+    iconType,
+    arrowIcon,
+  } = props;
 
   const renderIcon = (type: any) => {
     switch (type) {
@@ -73,7 +78,11 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; }) => {
     <div className={[renderStyle(iconType), styles.s_box, styles.isActive_box].join(' ')}>
       <div className={styles.revenue_icon}>
         <div><img src={renderIcon(iconType)} alt="asaa" /></div>
-        <div><img src={renderArrow(iconType)} alt="arrow" /></div>
+        <div>
+          {arrowIcon && (
+            <img src={renderArrow(iconType)} alt="arrow" />
+          )}
+        </div>
       </div>
       <div className={styles.label}>
         {label}

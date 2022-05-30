@@ -13,8 +13,8 @@ export default function CampaignOverview() {
       <div className={styles.overiew__header}>
         <h3>Campaign Overview</h3>
       </div>
-      <Row>
-        <Col lg={8}>
+      <div className={styles.overiew__campaignBox_area}>
+        <div>
           <div className={styles.overiew__campaignBox}>
             <Row className="justify-content-center">
               <Col lg={4} className="">
@@ -33,8 +33,8 @@ export default function CampaignOverview() {
               </Col>
             </Row>
           </div>
-        </Col>
-        <Col lg={4}>
+        </div>
+        <div>
           <div className={`${styles.overiew__performanceBox} h-100`}>
             <div className={styles.overiew__performanceBox__tag}>
               Performance
@@ -47,11 +47,11 @@ export default function CampaignOverview() {
               <InfoIcon />
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row className="mt-3">
-        <Col lg={8}>
+      <div className={['mt-3', styles.overiew__campaignBox_area].join(' ')}>
+        <div>
           <div className={styles.overiew__campaignBox}>
             <Row className="justify-content-center">
               <Col lg={4} className="">
@@ -79,8 +79,8 @@ export default function CampaignOverview() {
               </Col>
             </Row>
           </div>
-        </Col>
-        <Col lg={4}>
+        </div>
+        <div>
           <div className={`${styles.overiew__performanceBox} h-100`}>
             <div className={styles.overiew__performanceBox__tag}>
               Performance
@@ -93,8 +93,8 @@ export default function CampaignOverview() {
               <InfoIcon />
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
       <Row className="mt-3">
         <Col lg={12}>

@@ -17,6 +17,11 @@
         font-weight: 400;
         font-family: "DM Sans";
     }
+    &__campaignBox_area {
+        display: grid;
+        grid-template-columns: 3fr 1.15fr;
+        grid-column-gap: 10px;
+    }
     &__campaignBox {
         background: #dcd0e8;
         border: 1px solid #dcd0e8;
@@ -31,6 +36,7 @@
             justify-content: center;
         }
         &__year {
+            font-family: 'DM Sans';
             font-weight: 700;
             font-size: 18px;
             line-height: 23px;
@@ -360,6 +366,9 @@
                 }
             }
         }
+        &__summary_box {
+            padding-right: 0px;
+        }
     }
 }
 .strength {
@@ -440,6 +449,8 @@
             font-weight: 700;
             font-size: 18px;
             line-height: 24px;
+            margin-top: 40px;
+            margin-bottom: 7px;
         }
         &__brow {
             width: 240px;

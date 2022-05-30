@@ -32,24 +32,24 @@ export default function CoreMetrics() {
 
       <Row>
         <Col lg={4}>
-          <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" />
+          <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" arrowIcon />
         </Col>
         <Col lg={4}>
-          <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" />
+          <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" arrowIcon />
         </Col>
         <Col lg={4}>
-          <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" />
+          <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" arrowIcon />
         </Col>
       </Row>
       <Row>
         <Col lg={4}>
-          <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" />
+          <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon />
         </Col>
         <Col lg={4}>
-          <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" />
+          <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" arrowIcon />
         </Col>
         <Col lg={4}>
-          <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" />
+          <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" arrowIcon />
         </Col>
       </Row>
 

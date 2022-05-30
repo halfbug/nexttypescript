@@ -40,48 +40,48 @@ export default function CampaignMetrics() {
       </div>
       <div className={styles.metrics__box}>
         <Row>
-          <Col lg={4}>
-            <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" arrowIcon={false} />
           </Col>
         </Row>
         <Row>
-          <Col lg={4}>
-            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
 
         <Row>
-          <Col lg={4}>
-            <SummaryBox label="Total Revenue " value="-" iconType="RevenueIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Total Revenue " value="-" iconType="RevenueIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Number of Purchases" value="-" iconType="PurchaseIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Number of Purchases" value="-" iconType="PurchaseIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Average Order Value" value="-" iconType="ScaleIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Average Order Value" value="-" iconType="ScaleIcon" arrowIcon={false} />
           </Col>
         </Row>
         <Row>
-          <Col lg={4}>
-            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Traffic Value" value="-" iconType="TrafficIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Traffic Value" value="-" iconType="TrafficIcon" arrowIcon={false} />
           </Col>
-          <Col lg={4}>
-            <SummaryBox label="Cashback Given" value="-" iconType="CashBackIcon" />
+          <Col lg={4} className={styles.metrics__box__summary_box}>
+            <SummaryBox label="Cashback Given" value="-" iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
 

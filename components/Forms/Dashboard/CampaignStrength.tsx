@@ -58,10 +58,10 @@ export default function CampaignStrength() {
           <div className="mt-3">
             <RightArrowIcon />
           </div>
-          <div className={`${styles.strength__experience__trow} mt-5`}>
+          <div className={`${styles.strength__experience__trow}`}>
             Maximize your Groupshop experience
           </div>
-          <div className={`${styles.strength__experience__brow} my-3`}>
+          <div className={`${styles.strength__experience__brow} mb-3`}>
             Get access to tips
             {' '}
             &
