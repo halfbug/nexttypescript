@@ -212,9 +212,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &__left_icons {
       @include media-breakpoint-down(sm) {
         button {
-          // min-width: 17px !important;
           margin-right: 0px !important;
-          // margin-left: 20px !important;
+          padding-right: 0px !important;
           svg {
             width: 20px;
             height: 20px;
@@ -683,11 +682,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &_dropdownMenu {
     border-radius: 10px;
-    padding: 20px 0px;
+    padding: 20px;
+    min-width: 0px !important;
+    margin-top: 10px !important;
   }
 
   &_dropdownItem {
-    @extend .ms-3;
     padding-top: 10px;
     margin-top: 10px;
     border-top: 1px solid $lightBorder;
@@ -1311,8 +1311,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_content {
       @extend .bg-transparent;
       .groupshop__earn {
-        height: 43px;
-        width: 43px;
+        height: 41px;
+        width: 41px;
         position: relative;
         &__label {
           margin-left: 3px;
@@ -1815,7 +1815,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       margin: 0px 4px;
       text-align: center;
       font-size: 12px;
-      line-height: 1.42857;
+      padding: 4px;
       filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.15));
     }
     &_prev {
@@ -2287,6 +2287,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     }
   }
   &_shopping_box_mobile {
+    display: none;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -2312,3 +2313,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
 }
+
+.offcanvas-end {
+  border: none !important;
+  }

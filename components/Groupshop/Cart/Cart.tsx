@@ -91,8 +91,8 @@ const Cart = ({
   const { formatNumber } = useUtilityFunction();
   return (
     <>
-      <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={styles.groupshop_modal_cart}>
-        <Offcanvas.Header closeButton className={styles.groupshop_modal_cart_close}>
+      <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={['border-start-0', styles.groupshop_modal_cart].join(' ')}>
+        <Offcanvas.Header closeButton>
           <Offcanvas.Title>{' '}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className={styles.groupshop_modal_cart_body}>
@@ -101,9 +101,8 @@ const Cart = ({
               : styles.groupshop_modal_cart_body__scrollable
 }
           >
-            <div className="p-2">
-              <h3 className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</h3>
-              {/* <Row className="d-flex justify-content-center">
+            <h3 className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</h3>
+            {/* <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
                   <IconMoney className=" mx-1 " />
                   Spend $40 to
@@ -120,18 +119,17 @@ const Cart = ({
                   and $20 cashback for
                 </Col>
               </Row> */}
-              {/* <div className="align-items-center">
+            {/* <div className="align-items-center">
                 // eslint-disable-next-line max-len
                 <Members names={gsctx?.members.map((mem: any) => `
                 ${mem.orderDetail.customer.firstName}
                 ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
               </div> */}
-              {/* <div className={styles.groupshop_modal_cart_progress} /> */}
-              {/* <div className="mt-3">
+            {/* <div className={styles.groupshop_modal_cart_progress} /> */}
+            {/* <div className="mt-3">
                 <GradientProgressBar progress={60} />
               </div> */}
-            </div>
             <hr />
             {cartProducts.length < 1 ? (
               <>

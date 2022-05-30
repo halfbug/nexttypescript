@@ -460,7 +460,7 @@ const GroupShop: NextPage = () => {
                 {cashBackText}
               </p>
             </Row>
-            <div className="mt-2 d-flex justify-content-center align-items-center">
+            <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
                 names={gsctx?.members.map(
                   (mem: any) => `${mem.orderDetail.customer.firstName} ${
@@ -497,7 +497,7 @@ const GroupShop: NextPage = () => {
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
-              <Dropdown className="d-inline mx-2">
+              <Dropdown className="d-inline mx-2" align={{ lg: 'start', sm: 'end' }}>
                 <Dropdown.Toggle
                   id="dropdown-autoclose-true"
                   variant="outline-primary"
