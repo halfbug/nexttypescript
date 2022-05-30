@@ -37,9 +37,9 @@ export default function QrStep2({ brandLogo }: IStep2Props) {
                 <div className={styles.QRContainer__YR__mobileLogo}>
                   <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div>
-                <div className={styles.QRContainer__mobileImage}>
+                {/* <div className={styles.QRContainer__mobileImage}>
                   <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
-                </div>
+                </div> */}
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__heading}>
                     <div className={styles.QRContainer__YR__Logo}>
