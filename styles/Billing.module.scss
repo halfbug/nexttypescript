@@ -225,6 +225,10 @@
   }
   &_bulbinfo {
     margin-left: 10px;
+
+    &_bulbh{
+      padding-top: 0.4rem;
+    }
     p {
       @extend .py-1, .my-1, .d-flex, .align-items-center, .text-nowrap;
       font-family: "DM Sans";
@@ -299,12 +303,17 @@
       @extend .text-center;
       font-family: DM Sans;
       font-style: normal;
-      font-weight: bold;
+      font-weight: 500px;
       font-size: 22px;
       line-height: 29px;
+      &:active {
+        font-weight: 700px !important;
+      }
     }
+
     .box_1 {
       @extend .p-4;
+      font-weight: 500px;
       border: 1px dashed $dotted-border-color1;
       border-radius: 18px;
       margin: calc(7px - 1px);
@@ -321,6 +330,7 @@
       }
       &__active {
         @extend .box_1;
+        font-weight: 700px !important;
         border: 3px solid $dotted-border-color1;
         border-color: $dotted-border-color1;
         &:hover {
@@ -332,6 +342,7 @@
 
     .box_2 {
       @extend .p-4;
+      font-weight: 500px;
       border: 1px dashed $dotted-border-color2;
       border-radius: 18px;
       margin: calc(7px - 1px);
@@ -346,6 +357,7 @@
       }
       &__active {
         @extend .box_2;
+        font-weight: 700px !important;
         border: 3px solid $dotted-border-color1;
         border-color: $dotted-border-color2;
         &:hover {
@@ -357,6 +369,7 @@
 
     .box_3 {
       @extend .p-4;
+      font-weight: 500px;
       border: 1px dashed $OBorange;
       border-radius: 18px;
       margin: calc(7px - 1px);
@@ -370,6 +383,7 @@
         height: 163px;
       }
       &__active {
+        font-weight: 700px !important;
         @extend .box_3;
         border: 3px solid $OBorange;
         border-color: $OBorange;
@@ -396,6 +410,7 @@
       }
       &__active {
         @extend .box_4;
+        font-weight: 700px !important;
         border: 3px solid $dotted-border-color4;
         border-color: $dotted-border-color4;
         &:hover {
@@ -574,7 +589,7 @@
             }
           }
         }
-        
+
         tr {
           @extend .ps-4;
           background-color: #f8f8f8;
@@ -621,5 +636,16 @@
 
   &_white_space {
     margin: 4% 0%;
+  }
+
+  &_first_100 {
+    @extend .mt-1;
+    font-family: "DM Sans"!important;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: $black;
   }
 }

@@ -12,7 +12,7 @@ export default function BulbInfo() {
       <Row className={styles.billing_bulbinfo_box_4}>
         <Col lg={5} className={styles.billing_bulbinfo}>
           <p>
-            <span className='pt-1'><Bulb size={16} /></span>
+            <span className={styles.billing_bulbinfo_bulbh}><Bulb size={16} /></span>
             You’re currently averaging 1,280 Groupshops per month
           </p>
         </Col>
