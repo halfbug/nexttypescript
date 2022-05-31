@@ -4,12 +4,14 @@ import {
 } from 'react';
 import { StoreContext } from 'store/store.context';
 import { GET_BILLING_BY_DATE } from 'store/store.graphql';
+import useBilling from './useBilling';
 import useUtilityFunction from './useUtilityFunction';
 
 const useExcelDocument = () => {
   const [sheetData, setsheetData] = useState(undefined);
   const [getDayBilling, { data, loading }] = useLazyQuery(GET_BILLING_BY_DATE);
   const { storeCurrencySymbol } = useUtilityFunction();
+  const { isAppTrialOnGivenDate } = useBilling();
   const { store } = useContext(StoreContext);
 
   const formatDataForExcel = (sourceData : any) => {
@@ -17,10 +19,16 @@ const useExcelDocument = () => {
       const {
         _id: { month, date, year },
         revenue, totalCashback, totalfeeByCashback,
-        feeformGroupshop, storeTotalGS, todaysTotalGS, storePlan,
+        feeformGroupshop, storeTotalGS, todaysTotalGS, storePlan, store: recStore,
       } = bRec;
+      console.log({ bRec });
+      const thisDate = `${month} ${date}, ${year}`;
+      const isAppTrialForThisDate = isAppTrialOnGivenDate(recStore.isAppTrial, thisDate);
+      console.log('🚀 ~ file: useExcelDocument.ts ~ line 26 ~ isAppTrialForThisDate', isAppTrialForThisDate);
+      const appTrialtext = isAppTrialForThisDate ? `>> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}0`
+        : '';
 
-      const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}`);
+      const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}${appTrialtext}`);
       console.log({ feeformGroupshop });
       const formattedCBFee = +totalfeeByCashback.toFixed(2).toString().replace('00', '');
 

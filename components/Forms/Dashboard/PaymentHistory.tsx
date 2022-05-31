@@ -49,7 +49,7 @@ export default function PaymentHistory() {
   React.useEffect(() => {
     refetch();
   }, []);
-  console.log('monthlyGS', monthlyGS);
+  // console.log('monthlyGS', monthlyGS);
 
   const getBillingTableHTML = () => (
     <div>

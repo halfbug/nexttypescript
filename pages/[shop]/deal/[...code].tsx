@@ -169,6 +169,7 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
     // const addedPrds = dealProducts?.filter((item));
+    // check addedPrds has no product which is < 1 price
 
     console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
     dispatch({

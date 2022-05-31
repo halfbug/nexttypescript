@@ -714,6 +714,10 @@ query GetBillingByDate($storeId: String!, $startDate: DateTime!, $endDate: DateT
     todaysTotalGS
     storeTotalGS
     storePlan
+    store{
+      appTrialEnd
+      plan
+    }
     feeformGroupshop{
        plan
       totalGS

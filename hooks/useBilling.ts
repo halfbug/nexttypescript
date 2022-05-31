@@ -18,6 +18,7 @@ export default function useBilling() {
   const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
   const [appTrial, setappTrial] = useState(true);
+  const [appTrialDay, setappTrialDay] = useState(true);
 
   // query to get total # of gs of merchant store
   const {
@@ -97,6 +98,15 @@ export default function useBilling() {
     }
     setappTrial(true);
   };
+  const isAppTrialOnGivenDate = (appTrialDate: Date, recordDate: any) => {
+    if (appTrialDate) {
+      const appTrialEndDate = new Date(appTrialDate);
+      const recDate = new Date(recordDate);
+      const diff = appTrialEndDate.getTime() - recDate.getTime();
+      if (diff < 0) return false;
+    }
+    return true;
+  };
 
   return {
     // getMonthlyGSCount,
@@ -107,5 +117,6 @@ export default function useBilling() {
     totalRevenue,
     currencySymbol,
     appTrial,
+    isAppTrialOnGivenDate,
   };
 }
