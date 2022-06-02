@@ -17,13 +17,13 @@ export default function BannerComponent(
   return (
 
     <section>
-      <div className="w-75 shadow-sm p-1 bg-body rounded">
+      <div className="ms-2 w-75 shadow-sm p-1 bg-body rounded">
         <Row className=" d-flex flex-row mx-0 d-flex align-items-center align-self-center">
           <Col lg={5}>
             <img src={image.src} alt="B1" width="94" height="27" />
           </Col>
           <Col lg={7}>
-            <h6>
+            <h6 className="pt-2">
               Shop with friends, get
               {' '}
               <b>$50 cashback.</b>

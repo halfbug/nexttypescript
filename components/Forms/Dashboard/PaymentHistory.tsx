@@ -106,7 +106,7 @@ export default function PaymentHistory() {
       <Row>
         <Col className="text-end">
           <WhiteButton
-            className={styles.billing_btn}
+            className={styles.billing_learn}
           >
             Load more
           </WhiteButton>

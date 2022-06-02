@@ -41,6 +41,27 @@
       border-radius: 6px;
       border: 1px solid $black;
     }
+
+  }
+  &_learn {
+    width: 110px;
+    height: 28px;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: $black;
+    border: 1px solid $black;
+    border-radius: 6px;
+    background-color: transparent;
+    &:hover {
+      border-radius: 6px;
+      border: 1px solid $black;
+      background-color: transparent;
+
+    }
   }
   &_calculator_rectangle {
     margin-left: 1px;
@@ -226,7 +247,7 @@
   &_bulbinfo {
     margin-left: 10px;
 
-    &_bulbh{
+    &_bulbh {
       padding-top: 0.4rem;
     }
     p {
@@ -640,7 +661,7 @@
 
   &_first_100 {
     @extend .mt-1;
-    font-family: "DM Sans"!important;
+    font-family: "DM Sans" !important;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
