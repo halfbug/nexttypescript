@@ -44,13 +44,15 @@ const useProducts = (shop: string) => {
           data?.products || [],
           null,
           'id',
-        );
+        ).filter((item: any) => +item.price > 1);
         // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
         // .data?.products || [], null, 'id'));
       } else {
         otherProducts = data?.products.filter(
           (o1: IProduct) => !gsctx?.allProducts?.some((o2: IProduct) => o1.id === o2.id),
-        );
+        ).filter((item: any) => +item.price > 1);
+        // console.log({ otherProducts });
+        // console.log('otherproduct', otherProducts.filter(({ price }) => +price > 1));
       }
       dispatch({
         type: 'UPDATE_PRODUCTS',

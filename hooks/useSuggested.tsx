@@ -17,7 +17,9 @@ const useSuggested = () => {
     const { allProducts } = gsctx;
     let newProd = [...allProducts ?? []];
     // newProd = newProd.sort(() => Math.random() - 0.5); // shuffle array to have random products
-    newProd = newProd.slice(0, 4);
+    newProd = newProd
+      .filter((item) => item.outofstock === false)
+      .slice(0, 4);
     setsuggestedProd(newProd);
   }, [gsctx, gsctx.cart]);
 

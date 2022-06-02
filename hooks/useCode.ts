@@ -26,10 +26,10 @@ const useCode = () => {
               switch (entity[0]) {
                 case 'product':
                   setproductCode(entity[1]);
+                  // setStatus('');
+
                   break;
                 case 'status':
-                  console.log('status', entity[1]);
-
                   setStatus(entity[1]);
                   break;
 

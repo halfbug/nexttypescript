@@ -25,18 +25,23 @@ const useExcelDocument = () => {
       const thisDate = `${month} ${date}, ${year}`;
       const isAppTrialForThisDate = isAppTrialOnGivenDate(recStore.isAppTrial, thisDate);
       console.log('🚀 ~ file: useExcelDocument.ts ~ line 26 ~ isAppTrialForThisDate', isAppTrialForThisDate);
-      const appTrialtext = isAppTrialForThisDate ? `>> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}0`
+      const appTrialtext = isAppTrialForThisDate ? ` >> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}0`
         : '';
 
-      const GSUsageCharges = feeformGroupshop.map((item: any) => `(${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${item.totalCharged}${appTrialtext}`);
+      const GSUsageCharges = feeformGroupshop.map((item: any) => {
+        const formattedTotalCharged = +(item.totalCharged).toFixed(2).toString().replace('.00', '');
+        return `${item.plan} Total GS ${item.totalGS}) >> ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formattedTotalCharged}${appTrialtext}`;
+      });
       console.log({ feeformGroupshop });
-      const formattedCBFee = +totalfeeByCashback.toFixed(2).toString().replace('00', '');
+      const formattedCBFee = +totalfeeByCashback.toFixed(2).toString().replace('.00', '');
+      const formattedRevenue = +revenue.toFixed(2).toString().replace('.00', '');
+      const formattedTotalCashback = +totalCashback.toFixed(2).toString().replace('.00', '');
 
       return {
         Day: `${month}-${date}-${year}`,
-        Revenue_Generated: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${revenue}`,
+        Revenue_Generated: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formattedRevenue}`,
         Groupshops_Created: todaysTotalGS,
-        Total_CashBack_Given: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${totalCashback}`,
+        Total_CashBack_Given: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formattedTotalCashback}`,
         Store_Plan: feeformGroupshop[feeformGroupshop.length - 1].plan,
         // storeTotalGS,
         Charge_From_CashBack: `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formattedCBFee}`,
