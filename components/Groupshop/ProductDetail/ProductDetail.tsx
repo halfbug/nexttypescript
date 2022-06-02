@@ -266,7 +266,7 @@ const ProductDetail = ({
 
           </button>
         </Modal.Header>
-        <Modal.Body className="bg-white">
+        <Modal.Body className={['bg-white', styles.groupshop__pcard__modalBody].join(' ')}>
           <Row>
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
