@@ -42,12 +42,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     @extend .d-flex, .justify-content-end;
   }
 
-
   &__counter {
     h6 {
       text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 11px;
+      letter-spacing: 0.5px;
+      font-size: 11px;
     }
     @extend .text-center;
     @extend .my-1;
@@ -148,10 +147,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   }
 
   &__info_modal {
-    &__content{
+    &__content {
       border-radius: 21px;
 
-            @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(sm) {
         border-radius: 21px 21px 0px 0px !important;
       }
     }
@@ -433,7 +432,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       position: relative;
     }
     &__cart_count {
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         font-size: 10px;
         font-weight: $font-weight-normal;
         color: $black;
@@ -463,7 +462,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         display: none !important;
       }
     }
-    &_iconBtn,&_iconSearchBtn {
+    &_iconBtn,
+    &_iconSearchBtn {
       box-shadow: none !important;
       margin-right: 1rem;
       margin-left: 1rem;
@@ -787,7 +787,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     button {
       opacity: 1;
       position: absolute;
-      padding-left: 765px!important;
+      padding-left: 765px !important;
       width: 10px;
       height: 10px;
       &:focus {
@@ -798,7 +798,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
 
   &_modal_detail_height {
     padding-top: 15px;
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       padding: 0px;
     }
     &_descriptionExpired {
@@ -826,7 +826,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_headingNormal {
       @extend .mb-2;
       font-size: 14px;
-      font-weight: 500!important;
+      font-weight: 500 !important;
       line-height: 18px;
       color: $black;
       text-transform: uppercase;
@@ -838,9 +838,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       margin-bottom: 70px;
     }
     p {
-      font-family: "DM Sans"!important;
+      font-family: "DM Sans" !important;
       font-style: normal;
-      font-weight: 400!important;
+      font-weight: 400 !important;
       font-size: 12px;
       line-height: 16px;
       color: $black;
@@ -996,7 +996,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         top: 3px;
         right: 10px;
         position: absolute;
-        .iconButton{
+        .iconButton {
           @extend .rounded-pill;
         }
       }
@@ -1128,7 +1128,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     @include media-breakpoint-down(sm) {
       padding-bottom: 1.5rem;
     }
-
   }
 
   &_col {
@@ -1144,8 +1143,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       font-size: 24px !important;
       color: $black;
       @include media-breakpoint-down(sm) {
-          font-size: 18px !important;
-        }
+        font-size: 18px !important;
+      }
     }
     &_recommendations {
       display: block;
@@ -1163,7 +1162,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &_addtocartmodal {
     padding: 1rem 0px;
     text-align: center;
-    border-top: 1px solid #EBEBEB;
+    border-top: 1px solid #ebebeb;
 
     button {
       color: #ffffff;
@@ -1193,7 +1192,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       box-sizing: border-box;
       backdrop-filter: blur(4px);
       color: #000000;
-      border: 1px solid #403F43;
+      border: 1px solid #403f43;
       padding: 10px;
       font-family: "DM Sans" !important;
       /* Note: backdrop-filter has minimal browser support */
@@ -1224,8 +1223,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
     }
     &_search {
-    
-
       &_body {
         @extend .px-5;
         @include media-breakpoint-down(sm) {
@@ -1450,7 +1447,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       letter-spacing: 0.36px;
       margin-right: 5px;
       font-family: "DM Sans" !important;
-      @include media-breakpoint-down(md){
+      @include media-breakpoint-down(md) {
         font-size: 14px;
       }
     }
@@ -1480,7 +1477,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       height: 30px !important;
     }
     @extend .mx-2;
-
 
     @include media-breakpoint-down(lg) {
       &__pointers {
@@ -1546,7 +1542,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     &_shareBtn {
       width: 38px;
       height: 38px;
-      background: #FFFFFF;
+      background: #ffffff;
       border: 1px solid #ccb2f9 !important;
       border-radius: 25px;
       cursor: pointer;
@@ -1717,7 +1713,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         text-align: center;
         padding-top: 20px;
       }
-      
     }
     input {
       border-bottom: 1px solid $purple !important;
@@ -1760,6 +1755,38 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         font-weight: 500;
         font-size: 24px !important;
         border: 2px solid $purple !important;
+      }
+
+      b {
+        font-family: DM Sans !important;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      p {
+        font-weight: 700;
+        font-family: DM Sans !important;
+        font-style: normal;
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+    &_expire {
+      // @extend .my-3, .mx-0, .d-flex, .justify-content-center;
+      @extend .my-3;
+      width: 260px;
+      justify-content: center;
+      span {
+        @extend .d-block, .border, .border-3, .rounded, .fs-4;
+        width: 55px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        height: 49px;
+        font-weight: 500;
+        font-size: 24px !important;
+        border: 2px solid #ffa89a !important;
       }
 
       b {
@@ -1942,7 +1969,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         background: #1c1c1c !important;
         color: #ffffff;
       }
-      
     }
   }
 
@@ -1998,7 +2024,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     color: $black;
   }
   &_addtoCart_wrapper {
-
     text-align: center;
     display: flex;
     justify-content: center;
@@ -2182,7 +2207,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       position: fixed;
       bottom: 0;
       margin: 0;
-      &_header{
+      &_header {
         display: flex;
         justify-content: center;
         border-bottom: none;
@@ -2191,7 +2216,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
         }
       }
     }
-    &_modalContent{
+    &_modalContent {
       border-radius: 21px;
     }
     &_heading {
@@ -2277,11 +2302,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       height: 42px;
       width: 42px;
     }
-    &_btnWrappper{
+    &_btnWrappper {
       @extend .d-flex, .justify-content-center, .align-items-center;
       margin-top: 36px;
     }
-    &_worksBtn{
+    &_worksBtn {
       width: 170px;
       height: 42px;
     }
@@ -2297,12 +2322,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
   &__share_social_icons {
     border-bottom: 1px solid #f0f0f0;
   }
-  &__productBtn{
-    @include media-breakpoint-down(sm){
-      span{
-        span{
-            width: 180px;
-            height: 42px;
+  &__productBtn {
+    @include media-breakpoint-down(sm) {
+      span {
+        span {
+          width: 180px;
+          height: 42px;
         }
       }
     }
@@ -2312,8 +2337,23 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
     border-top: 1px solid #ebebeb;
   }
 
+  // &_gradBtn {
+  //   @extend  .align-self-center, .mb-2, .p-2;
+  //   border-image: linear-gradient(to left, #fee750, #ccb2f9);
+  //   border-image-slice: 1;
+  //   background-color: $white;
+  //   font-family: "Montserrat";
+  //   font-style: normal;
+  //   font-weight: 600;
+  //   font-size: 18px;
+  //   line-height: 22px;
+  //   text-align: center;
+  //   color: #282828;
+  //   border-radius: 3px !important;
+  //   border-width: 2px;
+  // }
 }
 
 .offcanvas-end {
   border: none !important;
-  }
+}

@@ -543,10 +543,10 @@ const ProductDetail = ({
               <div className={styles.groupshop_modal_detail_expire}>
                 <h3 className="fw-bolder">
                   {' '}
-                  This Groupshop has expired
+                  This Groupshop has expired, but you can still get 20% off.
                 </h3>
                 <section>
-                  <Row className={[styles.groupshop_footer_counter, 'justify-content-center w-100'].join(' ')}>
+                  <Row className={[styles.groupshop_footer_expire, 'justify-content-center w-100'].join(' ')}>
                     <Col xs={3}>{' '}</Col>
                     <Col xs={1} className="d-flex justify-content-center">
                       <div className="text-center me-2">
@@ -554,7 +554,7 @@ const ProductDetail = ({
                           {' '}
                           0
                         </span>
-                        <p className="mt-1">DAYS</p>
+                        <p className="mt-1">HOURS</p>
                       </div>
                       <div className="py-3">
                         {' '}
@@ -566,7 +566,7 @@ const ProductDetail = ({
                         <span>
                           0
                         </span>
-                        <p className="mt-1">HOURS</p>
+                        <p className="mt-1">MINUTES</p>
                       </div>
                       <div className="py-3">
                         {' '}
@@ -578,7 +578,7 @@ const ProductDetail = ({
                         <span>
                           0
                         </span>
-                        <p className="mt-1">MINUTES</p>
+                        <p className="mt-1">SECONDS</p>
                       </div>
                     </Col>
                     <Col xs={4}>{' '}</Col>
@@ -589,7 +589,7 @@ const ProductDetail = ({
                   cashback and discounts every time you shop together!
 
                 </p>
-                {/* <p>
+                <p>
                   <strong>Invite 1 friend</strong>
                   {' '}
                   to this Groupshop, and start shopping with
@@ -599,19 +599,19 @@ const ProductDetail = ({
                   {' '}
                   on this and other products you love.
 
-                </p> */}
+                </p>
                 <div className="d-flex flex-column justify-content-center mb-2">
                   { loaderInvite
                     ? (<Spinner animation="border" className="align-self-center mb-2" />)
                     : (
                       <>
-                        <GradiantButton type="button" className="align-self-center mb-2" onClick={() => inviteForExpiredGS()}>INVITE NOW</GradiantButton>
+                        <GradiantButton type="button" className="align-self-center mb-2 p-2" onClick={() => inviteForExpiredGS()}>🔗 INVITE NOW</GradiantButton>
                         { urlForActivation ? (<a href={activateURL}>{urlForActivation}</a>) : '' }
                       </>
                     )}
                   OR SHARE
                 </div>
-                <section className="d-flex justify-content-center px-2">
+                <section className="d-flex justify-content-center px-2 mb-3">
                   <div className="mx-1">
                     {' '}
                     <SocialButton network="Instagram" url={activateURL} />
@@ -619,7 +619,7 @@ const ProductDetail = ({
 
                   <div className="mx-1">
                     {' '}
-                    <SocialButton network="Youtube" url={activateURL} />
+                    <SocialButton network="Pinterest" url={activateURL} />
                     {' '}
                   </div>
 
@@ -631,6 +631,11 @@ const ProductDetail = ({
                   <div className="mx-1">
                     {' '}
                     <SocialButton network="Twitter" url={activateURL} />
+                    {' '}
+                  </div>
+                  <div className="mx-1">
+                    {' '}
+                    <SocialButton network="Facebook" url={activateURL} />
                     {' '}
                   </div>
                 </section>
