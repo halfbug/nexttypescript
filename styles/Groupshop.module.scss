@@ -1412,8 +1412,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       }
 
       &_thumbnail {
-        width: 127px;
-        height: 128px;
+       width: 100%;
+       object-fit: cover;
       }
 
       &_quantity {
@@ -1844,6 +1844,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       font-size: 12px;
       padding: 4px;
       filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.15));
+      background-image: none !important;
+
     }
     &_prev {
       margin: 0px 8px !important;

@@ -72,9 +72,9 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
           <div className={styles.groupshop_infoBox}>
             <p>
               Welcome to Groupshop ‒ a personalized store where you
-              and your friends shop together and
+              and your friends shop and
               {' '}
-              <strong>earn real cashback and discounts.</strong>
+              <strong>earn cashback and discounts.</strong>
             </p>
             <div className={styles.groupshop_infoBox_tostart}>
               <h3>
@@ -87,14 +87,16 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               </Col>
               <Col xs={9}>
                 <p className={styles.groupshop_infoBox__pointers}>
+
                   <strong> Shop</strong>
                   {' '}
-                  <i> limited-time </i>
-                  offers from
+                  exclusive
                   {' '}
                   {brandname}
                   {' '}
-                  and complete your order.
+                  <strong>discounts</strong>
+                  {' '}
+                  on this Groupshop.
                 </p>
               </Col>
             </div>
@@ -107,9 +109,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
                 <p className={styles.groupshop_infoBox__pointers}>
                   <strong>Share</strong>
                   {' '}
-                  this Groupshop link with friends to give them access to
-                  {' '}
-                  <strong> exclusive discounts.</strong>
+                  this Groupshop with friends to give them access to discounts too.
                 </p>
               </Col>
             </div>
@@ -119,9 +119,11 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               </Col>
               <Col xs={9}>
                 <p className={styles.groupshop_infoBox__pointers}>
-                  <strong> Earn</strong>
+                  If you’re one of the first 5 friends to join, you’ll
                   {' '}
-                  cashback* every time they shop, and keep unlocking additional rewards.
+                  <strong>earn cashback*</strong>
+                  {' '}
+                  on your order when more friends shop.
                 </p>
               </Col>
             </div>
