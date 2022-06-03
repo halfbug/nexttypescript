@@ -54,6 +54,7 @@ import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
 import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
+import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -691,12 +692,10 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
-        {/* {isModalForMobile && (
-          <RewardBox
-            show={showRewards}
-            handleClose={() => setShowRewards(false)}
-          />
-        )} */}
+        <RewardBox2
+          show={showRewards}
+          handleClose={() => setShowRewards(false)}
+        />
         {isModalForMobile && (
         <div>
           <ShoppingBoxMobile />

@@ -2318,6 +2318,110 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system, "Segoe U
       height: 42px;
     }
   }
+  
+  &_rewardBox2_modal {
+    width: 680px;
+    &__closebtnlg {
+      display: flex;
+      justify-content: flex-end;
+      box-shadow: none !important;
+      border-bottom: none;
+      svg {
+        cursor: pointer;
+      }
+    }
+    &__content{
+      border-radius: 12px;
+    }
+    &__body{
+      color: #000000;
+      margin: 0px 90px;
+      padding: 0px 0px 60px 0px;
+    }
+    &__top{
+      margin-bottom: 10px;
+      h2 {
+        @extend .mb-3;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: $font-weight-bolder;
+        font-size: 24px;
+        line-height: 31px;
+        text-align: center;
+        color: #000000;
+        @include media-breakpoint-down(sm) {
+          font-size: 22px;
+        }
+      }
+      p {
+        @extend .mx-3, .mb-0, .d-block;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 18px;
+        line-height: 23px;
+        text-align: center;
+        color: #000000;
+      }
+    }
+    &__info1,&__info2{
+      @extend .d-flex;
+      margin: 16px 0px;
+      padding: 22px 30px;
+      border-radius: 12px;
+      p{
+        margin-left: 50px;
+        margin-bottom: 0px;
+        font-family: 'Mulish';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 23px;
+      }
+    }
+    &__info1{
+      border: 1px dashed #9AB639;
+    }
+    &__info2{
+      border: 1px dashed #C867EA;
+    }
+    &__btnSection{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-top: 26px;
+    }
+    &__blackBtn,&__greenBtn{
+      padding: 10px 0px;
+      width: 192px;
+      font-family: 'DM Sans';
+      font-style: normal;
+      font-weight: $font-weight-bolder;
+      font-size: 16px;
+      line-height: 21px;
+      border-radius: 3px;
+    }
+    &__blackBtn{
+      background: #000000;
+      color: #FFFFFF;
+      &:active, &:focus, &:hover{
+        color: #FFFFFF;
+        box-shadow: none;
+        background-color: #000000;
+      }
+    }
+    &__greenBtn{
+      background: $modern;
+      color: #000000;
+      &:active, &:focus, &:hover{
+        background: $modern;
+        background-color: $modern;
+        color: #000000;
+        box-shadow: none;
+      }
+    }
+  }
   &_shopping_box_mobile {
     display: none;
     position: fixed;
