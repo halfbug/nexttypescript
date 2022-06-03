@@ -216,12 +216,18 @@ const ProductGrid = ({
                 </>
               )}
             >
-              <h5 className="text-center fw-bold text-truncate">Don’t see what you like?</h5>
+              <h5 className="text-center fw-bold text-truncate">Curate your Groupshop</h5>
 
               <p className="text-center  fs-5">
-                Add your favorite product
+                <i>
+                  Add your favorite products for you
+                  {' '}
+                  &
+                  {' '}
+                  your friends to shop
+
+                </i>
               </p>
-              <br />
               <br />
               <div className={styles.groupshop_addtoCart_wrapper}>
                 <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>

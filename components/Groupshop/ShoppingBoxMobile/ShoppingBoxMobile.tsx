@@ -5,20 +5,26 @@ import {
   Col, Row,
 } from 'react-bootstrap';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import useGtm from 'hooks/useGtm';
 
-const ShoppingBoxMobile = () => (
-  <>
+const ShoppingBoxMobile = ({ shareurl }: { shareurl: string }) => {
+  const { googleEventCode, googleButtonCode } = useGtm();
 
-    <div className={styles.groupshop_shopping_box_mobile}>
-      <ShareButton
-        placement="right-start"
-        shareurl=""
-        label=""
-        className="px-2 rounded-pill bg-white ms-2"
-      />
-    </div>
+  return (
+    <>
 
-  </>
-);
+      <div className={styles.groupshop_shopping_box_mobile}>
+        <ShareButton
+          placement="auto"
+          shareurl={shareurl}
+          label="Share with friends"
+          className="px-3 bg-white ms-2"
+          onClick={() => googleEventCode('earn-cashback-modal')}
+        />
+      </div>
+
+    </>
+  );
+};
 
 export default ShoppingBoxMobile;
