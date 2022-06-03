@@ -89,7 +89,14 @@ const usePagination = <T extends {}>({
     return range(start, end);
   }, [currentPage, totalPages]);
   return {
-    breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
+    breakPoint,
+    pageSize,
+    totalPages,
+    renderItems,
+    currentPage,
+    setCurrentPage,
+    getPageNumbers,
+    screens,
   };
 };
 

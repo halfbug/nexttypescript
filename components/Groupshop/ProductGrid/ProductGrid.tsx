@@ -43,7 +43,8 @@ const ProductGrid = ({
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
   const {
-    breakPoint, pageSize, totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
+    screens, breakPoint, pageSize,
+    totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
   } = usePagination<IProduct>({
     dimensions,
     maxrows,
@@ -54,7 +55,7 @@ const ProductGrid = ({
     siblingCount: 4,
   });
 
-  const fillerz = Math.abs(pageSize - (renderItems?.length || 0)) || (breakPoint === 'sm' ? 0 : 0);
+  const fillerz = pageSize === (renderItems?.length) ? 0 : 1;
 
   const {
     gsctx: {
@@ -69,16 +70,13 @@ const ProductGrid = ({
   } = useDeal();
   const { formatNumber } = useUtilityFunction();
 
-  // React.useEffect(() => {
-  //   console.log('im cuurent page changes');
-  //   // Router.push('#allproducts');
-  //   // router.pathname = `${router.pathname}#allproducts`;
-
-  //   // <Link href="#allproducts"><a>My first section</a></Link>
-  // }, [currentPage]);
-
   if (pending) {
-    return (<Placeholder as="h1" bg="secondary" className="w-100" />);
+    return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
+  }
+
+  if (products === undefined || products?.length < 1) {
+    // return (<Placeholder as="h1" bg="secondary" className="w-100" />);
+    return (<div {...props} ref={ref} id={id}>&nbsp;</div>);
   }
   // console.log({ renderItems });
   const { googleButtonCode } = useGtm();
@@ -96,7 +94,7 @@ const ProductGrid = ({
       </Row>
       <Row className="justify-content-center">
         {renderItems?.map((prod) => (
-          <Col xs={xs} md={6} lg={4} xl={3} key={prod.id}>
+          <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
             <ProductCard
               isrc={prod.featuredImage}
               onClick={() => handleDetail(prod)}
