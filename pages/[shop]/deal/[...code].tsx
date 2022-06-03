@@ -284,7 +284,7 @@ const GroupShop: NextPage = () => {
               <InfoBox
                 mes="How does this work?"
                 brandname={brandName}
-                shareUrl={gsShortURL}
+                shareUrl={gsShortURL ?? gsURL}
               />
             )}
           />
@@ -325,7 +325,7 @@ const GroupShop: NextPage = () => {
                   />
                   <ShareButton
                     placement="bottom"
-                    shareurl={gsShortURL}
+                    shareurl={gsShortURL ?? gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
@@ -364,7 +364,7 @@ const GroupShop: NextPage = () => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={gsShortURL}
+                  shareurl={gsShortURL ?? gsURL}
                   label="Share with friends"
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
@@ -474,7 +474,7 @@ const GroupShop: NextPage = () => {
               />
             </div>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
-              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL} />
+              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
             </Row>
           </Container>
         </Hero>
@@ -698,7 +698,7 @@ const GroupShop: NextPage = () => {
         />
         {isModalForMobile && (
         <div>
-          <ShoppingBoxMobile shareurl={gsShortURL} />
+          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} />
         </div>
         )}
       </div>
