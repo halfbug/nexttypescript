@@ -44,7 +44,13 @@ const useProducts = (shop: string) => {
           data?.products || [],
           null,
           'id',
-        ).filter((item: any) => +item.price > 1);
+        ).filter((item: any) => item !== undefined)
+          .filter((item: any) => +item.price > 1);
+        console.log('🚀 ~ file: useProducts.ts ~ line 48 ~ useEffect ~ otherProducts', otherProducts);
+        // otherProducts = otherProducts.length > 0
+        //   ? otherProducts.filter((item: any) => +item.price > 1)
+        //   : otherProducts;
+
         // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
         // .data?.products || [], null, 'id'));
       } else {
