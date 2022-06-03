@@ -44,6 +44,7 @@ export default function UploadButton({
   // }, []);
 
   const [feedback, setfeedback] = React.useState<null | string>(null);
+  const [imagefeedback, setImagefeedback] = React.useState<null | string>(null);
   const [logo, setlogo] = React.useState<null | string>(null);
   const [progress, setprogress] = React.useState<boolean>(false);
   const apiFunc = async () => {
@@ -66,23 +67,29 @@ export default function UploadButton({
         const config = {
           headers: { 'Content-Type': 'multipart/form-data' },
         };
-        const fd = new FormData();
-        const shopName = store.shop.split('.');
-        const imgExt = files[0].name.split('.')[1];
-        fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt}`);
-        setprogress(true);
-        axios.post(`${process.env.API_URL}/image`, fd, config)
-          .then((res) => {
-            const fileS3Url: string = res.data.data.Location;
+        const fileType = files[0].type;
+        if (fileType === 'image/png' || fileType === 'image/jpg' || fileType === 'image/jpeg') {
+          setImagefeedback(null);
+          const fd = new FormData();
+          const shopName = store.shop.split('.');
+          const imgExt = files[0].name.split('.')[1];
+          fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt}`);
+          setprogress(true);
+          axios.post(`${process.env.API_URL}/image`, fd, config)
+            .then((res) => {
+              const fileS3Url: string = res.data.data.Location;
 
-            setFieldValue(field, fileS3Url);
-            setprogress(false);
-            if (handleCustomBg) { handleCustomBg(field, fileS3Url); }
-            if (handleForm) handleForm(field, fileS3Url);
-          })
-          .catch((err) => console.log(err));
+              setFieldValue(field, fileS3Url);
+              setprogress(false);
+              if (handleCustomBg) { handleCustomBg(field, fileS3Url); }
+              if (handleForm) handleForm(field, fileS3Url);
+            })
+            .catch((err) => console.log(err));
 
-        setlogo(URL.createObjectURL(files[0]));
+          setlogo(URL.createObjectURL(files[0]));
+        } else {
+          setImagefeedback('Please upload png, jpg, jpeg format only.');
+        }
       }
     } catch (ex) {
       console.log(ex);
@@ -116,6 +123,7 @@ export default function UploadButton({
           )
           : icon }
       </Form.Group>
+      <div className="invalid-image-feedback">{imagefeedback}</div>
       <Form.Control.Feedback type="invalid">
         {feedback}
       </Form.Control.Feedback>
