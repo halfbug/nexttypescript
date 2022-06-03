@@ -8,6 +8,7 @@ import {
 import Cart from 'assets/images/CartBig.svg';
 import Envelop from 'assets/images/EnvelopeBig.svg';
 import Cross from 'assets/images/CrossLg.svg';
+import ArrowDown from 'assets/images/arrow-down.svg';
 
 interface RewardBox2Props extends RootProps {
     show: boolean;
@@ -38,6 +39,9 @@ const RewardBox2 = ({
         </Modal.Header> */}
         <Modal.Header className={styles.groupshop_rewardBox2_modal__closebtnlg}>
           <Row onClick={handleClose}><Cross /></Row>
+        </Modal.Header>
+        <Modal.Header className={styles.groupshop_rewardBox2_modal__closebtnsm}>
+          <Row onClick={handleClose}><ArrowDown /></Row>
         </Modal.Header>
         <Modal.Body className={styles.groupshop_rewardBox2_modal__body}>
           <Row>

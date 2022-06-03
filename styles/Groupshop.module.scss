@@ -2370,7 +2370,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   
   &_rewardBox2_modal {
     width: 680px;
+    @include media-breakpoint-down(sm){
+      width: auto;
+      bottom: 0;
+      margin: 0;
+    }
     &__closebtnlg {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
       display: flex;
       justify-content: flex-end;
       box-shadow: none !important;
@@ -2379,13 +2387,33 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         cursor: pointer;
       }
     }
+    &__closebtnsm{
+      @include media-breakpoint-up(sm) {
+        display: none;
+      }
+      display: flex;
+      justify-content: center;
+      border-bottom: none;
+      svg {
+        cursor: pointer;
+      }
+    }
     &__content{
       border-radius: 12px;
+      @include media-breakpoint-down(sm) {
+        border-radius: 12px 12px 0px 0px;
+        position: fixed;
+        bottom: 0;
+      }
     }
     &__body{
       color: #000000;
       margin: 0px 90px;
       padding: 0px 0px 60px 0px;
+      @include media-breakpoint-down(sm){
+        margin: 0px 15px;
+        padding: 0px 0px 30px 0px;
+      }
     }
     &__top{
       margin-bottom: 10px;
@@ -2418,6 +2446,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       margin: 16px 0px;
       padding: 22px 30px;
       border-radius: 12px;
+      @include media-breakpoint-down(sm) {
+        padding: 22px 26px;
+      }
       p{
         margin-left: 50px;
         margin-bottom: 0px;
@@ -2426,6 +2457,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-weight: 400;
         font-size: 16px;
         line-height: 23px;
+        @include media-breakpoint-down(sm) {
+          margin-left: 10px;
+        }
       }
     }
     &__info1{
