@@ -52,7 +52,9 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
         contentClassName={styles.groupshop__info_modal__content}
       >
         <Modal.Header className={styles.groupshop__info_modal__closebtnlg}>
-          <Row onClick={handleClose}><Cross /></Row>
+          <Row onClick={handleClose}>
+            <div><Cross /></div>
+          </Row>
         </Modal.Header>
         <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
           <Row onClick={handleClose}><ArrowDown /></Row>

@@ -523,7 +523,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       width: fit-content;
       // border-bottom: 1px solid #fff;
       text-decoration: underline;
-      text-underline-offset: 8px;
+      text-underline-offset: 6px;
       font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
@@ -2084,6 +2084,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     .groupshop__earn {
       height: 41px;
       width: 41px;
+      position: relative;
     }
   }
   &_addtoCart {
@@ -2235,7 +2236,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
   &_firstName {
-    text-decoration: underline 2px solid $purple;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: $purple;
+    text-decoration-style: solid;
     font-weight: 700;
     font-size: 24px;
     color: $black;

@@ -136,7 +136,9 @@ const ProductsSearch = ({
             setShow(false);
           }}
           >
-            <Cross />
+            <div>
+              <Cross />
+            </div>
           </Row>
         </Modal.Header>
         )}
