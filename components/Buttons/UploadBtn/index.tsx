@@ -64,11 +64,13 @@ export default function UploadButton({
 
       if (e.target.files) {
         const files:any = Array.from(e.target.files);
+        console.log("🚀 ~ file: index.tsx ~ line 67 ~ handleImageUpload ~ files", files);
         const config = {
           headers: { 'Content-Type': 'multipart/form-data' },
         };
         const fileType = files[0].type;
-        if (fileType === 'image/png' || fileType === 'image/jpg' || fileType === 'image/jpeg') {
+        const fileSize = files[0].size;
+        if ((fileType === 'image/png' || fileType === 'image/jpg' || fileType === 'image/jpeg') && fileSize < 550000) {
           setImagefeedback(null);
           const fd = new FormData();
           const shopName = store.shop.split('.');
@@ -88,7 +90,8 @@ export default function UploadButton({
 
           setlogo(URL.createObjectURL(files[0]));
         } else {
-          setImagefeedback('Please upload png, jpg, jpeg format only.');
+          if (fileSize > 550000) setImagefeedback('Please upload banner under 500KB.');
+          if (fileType !== 'image/png' && fileType !== 'image/jpg' && fileType !== 'image/jpeg') setImagefeedback('Please upload png, jpg, jpeg format only.');
         }
       }
     } catch (ex) {

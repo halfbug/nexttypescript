@@ -131,7 +131,7 @@ export default function BrandInfo() {
           />
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className={['text-center d-flex align-self-center mx-2', styles.welcome_format].join(' ')}>
-              Under 5 MB
+              Under 500 KB
               <br />
               (Formats: PNG, JPG, JPEG)
 

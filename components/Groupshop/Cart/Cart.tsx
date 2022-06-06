@@ -65,7 +65,7 @@ const Cart = ({
   }, [show]);
 
   const { suggestedProd } = useSuggested();
-  const { setsProduct } = useDetail(suggestedProd);
+  // const { setsProduct } = useDetail(suggestedProd);
   const [upToPercent, setupToPercent] = React.useState<string>();
   const { campaign } = gsctx;
   useEffect(() => {
