@@ -5,20 +5,72 @@ import footerLogo1 from 'public/images/logo-thin.png';
 import SocialButtonLinks from 'components/Buttons/SocialButtonLinks/SocialButtonLinks';
 import styles from 'styles/Groupshop.module.scss';
 import {
-  Col, Row, Button, FormControl, InputGroup, Container,
+  Form, Col, Row, Button, FormControl, InputGroup, Container,
 } from 'react-bootstrap';
 import { ChevronRight } from 'react-bootstrap-icons';
 import useDeal from 'hooks/useDeal';
+import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+import useAlert from 'hooks/useAlert';
+import { useMutation } from '@apollo/client';
+import { CREATE_SIGNUP } from 'store/store.graphql';
 
 interface FooterProps {
   LeftComp: React.ReactNode;
   RightComp: React.ReactNode;
 }
+
+export interface ISignUp {
+  email?: string;
+  createSignUpInput?: object;
+}
+
 const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
   const { getDateDifference, isExpired, socialLinks } = useDeal();
   const { days, hrs, mins } = getDateDifference();
+
+  const [
+    addSignUp,
+    // eslint-disable-next-line no-unused-vars
+    { data, loading, error },
+  ] = useMutation<ISignUp>(CREATE_SIGNUP);
+  const { AlertComponent, showError, showSuccess } = useAlert();
+  const validationSchema = yup.object({
+    email: yup.string().email('Invalid email format').required('Required email address.'),
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    errors,
+    setFieldValue,
+  }: FormikProps<ISignUp> = useFormik<ISignUp>({
+    initialValues: {
+      email: '',
+    },
+    validationSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+    onSubmit: async (valz, { validateForm }: FormikHelpers<ISignUp>) => {
+      if (validateForm) validateForm(valz);
+      const { email } = valz;
+      const signUpObj: null | any = await addSignUp({
+        variables: {
+          createSignUpInput: {
+            email,
+          },
+        },
+      });
+      if (signUpObj.data.createSignUp.email !== '') {
+        showSuccess('You have successfully subscribed!');
+      } else {
+        showError('Email address is already registered');
+      }
+    },
+  });
+
   return (
 
     <Container fluid className={styles.groupshop_footer}>
@@ -112,17 +164,25 @@ const Footer = ({
                 you can shop your favorite brands on Groupshop.
               </p>
             </div>
-            <InputGroup className=" my-3" id="borderclr">
-              <FormControl
-                placeholder="Enter your email"
-                aria-label="Email"
-                aria-describedby="basic-addon2"
-                className="border-bottom rounded-0 border-0 px-2"
-              />
-              <Button size="sm" variant="outline" className={styles.groupshop_footer_sub}>
-                <ChevronRight size={16} />
-              </Button>
-            </InputGroup>
+            <Form noValidate onSubmit={handleSubmit}>
+              <InputGroup className=" my-3" id="borderclr">
+                <FormControl
+                  name="email"
+                  placeholder="Enter your email"
+                  aria-label="Email"
+                  aria-describedby="basic-addon2"
+                  isInvalid={!!errors.email}
+                  className="border-bottom rounded-0 border-0 px-2"
+                  onChange={handleChange}
+                />
+                <Button type="submit" size="sm" variant="outline" className={styles.groupshop_footer_sub}>
+                  <ChevronRight size={16} />
+                </Button>
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form>
           </section>
         </Col>
       </Row>
@@ -133,6 +193,7 @@ const Footer = ({
           <img src={footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
         </div>
       </Row>
+      <AlertComponent />
     </Container>
 
   );
