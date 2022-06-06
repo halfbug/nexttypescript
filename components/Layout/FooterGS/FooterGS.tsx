@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -14,6 +15,7 @@ import * as yup from 'yup';
 import useAlert from 'hooks/useAlert';
 import { useMutation } from '@apollo/client';
 import { CREATE_SIGNUP } from 'store/store.graphql';
+import Link from 'next/link';
 
 interface FooterProps {
   LeftComp: React.ReactNode;
@@ -150,8 +152,12 @@ const Footer = ({
           </Row>
           <Row className={['d-flex', styles.groupshop_footer_link].join(' ')}>
             <div className=" text-center ">
-              <Button variant="link"><strong>About</strong></Button>
-              <Button variant="link"><strong>FAQ</strong></Button>
+              <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
+                <a target="_blank"><strong>About</strong></a>
+              </Link>
+              <Link href="https://groupshop.zendesk.com/hc/en-us/categories/4414265217427-For-Shoppers">
+                <a target="_blank"><strong>FAQ</strong></a>
+              </Link>
             </div>
           </Row>
         </Col>
