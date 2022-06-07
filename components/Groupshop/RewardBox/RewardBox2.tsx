@@ -9,21 +9,27 @@ import Cart from 'assets/images/CartBig.svg';
 import Envelop from 'assets/images/EnvelopeBig.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import ArrowDown from 'assets/images/arrow-down.svg';
+import useGtm from 'hooks/useGtm';
+import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 interface RewardBox2Props extends RootProps {
-    show: boolean;
-    handleClose(e: any): any;
+  show: boolean;
+  discount?: string;
+  handleClose(e: any): any;
+  shareurl: any;
     // addToCart(e: any): any;
 }
 
 const RewardBox2 = ({
-  show = false, handleClose,
+  show = false, handleClose, discount, shareurl,
 }: RewardBox2Props) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
     handleClose(e);
   };
+  const { googleEventCode } = useGtm();
+
   return (
     <>
       <Modal
@@ -66,7 +72,11 @@ const RewardBox2 = ({
                     {' '}
                     exclusive discounts on this Groupshop
                     &
-                    get 20% off your order today.
+                    get
+                    {' '}
+                    { `${discount}%` }
+                    {' '}
+                    off your order today.
 
                   </p>
                 </div>
@@ -87,13 +97,26 @@ const RewardBox2 = ({
             </Col>
             <Col lg={12}>
               <div className={styles.groupshop_rewardBox2_modal__btnSection}>
-                <Button className={styles.groupshop_rewardBox2_modal__blackBtn}>
+                <Button
+                  onClick={handleClose}
+                  className={styles.groupshop_rewardBox2_modal__blackBtn}
+                >
                   Shop & Save
                 </Button>
                 <span className="px-3 fs-5">or</span>
-                <Button className={styles.groupshop_rewardBox2_modal__greenBtn}>
+                {/* <Button
+                  className={styles.groupshop_rewardBox2_modal__greenBtn}
+                  onClick={() => googleEventCode('earn-cashback-modal')}
+                >
                   Share & Earn
-                </Button>
+                </Button> */}
+                <ShareButton
+                  placement="auto"
+                  shareurl={shareurl}
+                  label="Share with friends"
+                  onClick={() => googleEventCode('earn-cashback-modal')}
+                  className={styles.groupshop__hero_share_btn}
+                />
               </div>
             </Col>
           </Row>
@@ -102,6 +125,9 @@ const RewardBox2 = ({
       </Modal>
     </>
   );
+};
+RewardBox2.defaultProps = {
+  discount: '20%',
 };
 
 export default RewardBox2;

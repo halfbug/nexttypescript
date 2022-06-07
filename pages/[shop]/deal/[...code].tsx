@@ -694,6 +694,8 @@ const GroupShop: NextPage = () => {
         <AlertComponent />
         <RewardBox2
           show={showRewards}
+          discount={discount}
+          shareurl={gsShortURL ?? gsURL}
           handleClose={() => setShowRewards(false)}
         />
         {isModalForMobile && (
