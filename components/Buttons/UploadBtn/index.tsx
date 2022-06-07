@@ -126,7 +126,7 @@ export default function UploadButton({
           )
           : icon }
       </Form.Group>
-      <div className="invalid-image-feedback">{imagefeedback}</div>
+      <div className="text-danger">{imagefeedback}</div>
       <Form.Control.Feedback type="invalid">
         {feedback}
       </Form.Control.Feedback>

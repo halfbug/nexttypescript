@@ -115,7 +115,7 @@ const RewardBox2 = ({
                   shareurl={shareurl}
                   label="Share with friends"
                   onClick={() => googleEventCode('earn-cashback-modal')}
-                  className={styles.groupshop__hero_share_btn}
+                  className={styles.groupshop_rewardBox2_modal__greenBtn}
                 />
               </div>
             </Col>

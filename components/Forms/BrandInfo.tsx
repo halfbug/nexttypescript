@@ -120,15 +120,18 @@ export default function BrandInfo() {
       </Row>
       <Row className="mt-4"><h4>Upload your logo</h4></Row>
       <Row>
-        <Form.Group className="mb-3 d-flex " controlId="brandinfoUploadLogo">
+        <Form.Group className="mb-3 d-flex flex-wrap" controlId="brandinfoUploadLogo">
           {/* // eslint-disable-next-line react/jsx-no-bind */}
-          <UploadButton
-            setFieldValue={setFieldValue}
-            field="logoImage"
-            value={values.logoImage}
-            className={styles.welcome_Obupload}
-            url={getKeyFromS3URL(values.logoImage)}
-          />
+          <Col>
+            <UploadButton
+              setFieldValue={setFieldValue}
+              field="logoImage"
+              value={values.logoImage}
+              className={styles.welcome_Obupload}
+              url={getKeyFromS3URL(values.logoImage)}
+            />
+
+          </Col>
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className={['text-center d-flex align-self-center mx-2', styles.welcome_format].join(' ')}>
               Under 500 KB

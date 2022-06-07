@@ -2502,9 +2502,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__greenBtn{
       background: $modern;
       color: #000000;
+      border: 1px solid $modern;
       &:active, &:focus, &:hover{
         background: $modern;
-        background-color: $modern;
         color: #000000;
         box-shadow: none;
       }
