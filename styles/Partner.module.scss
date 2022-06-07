@@ -136,9 +136,11 @@
         font-size: $font-size-medium;
         font-weight: $font-weight-light;
         line-height: $line-height-18;
-        font-family: "Mulish";
+        font-family: "DM Sans";
         opacity: $opacity-medium;
         margin-left: 0px;
+        width: 542px;
+
     }
 
     h3 {
@@ -184,7 +186,7 @@
         min-width: 117px;
         color: #000000;
         font-weight: 700;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-size: 12px;
         line-height: 15px;
         &__txt {
@@ -249,12 +251,12 @@
 
     &__rewards_box {
         @extend .mb-4, .p-4;
-        border: 1px dashed #F28BF4;
+        border: 1px dashed #f28bf4;
         border-radius: $border-radius-medium;
 
         &__header {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 16px;
             line-height: 21px;
@@ -262,12 +264,12 @@
 
         &__heading {
             color: #000000;
-            font-family: 'DM Sans'; 
+            font-family: "DM Sans";
             font-weight: 700;
             font-size: 14px;
             line-height: 18px;
             margin-bottom: 11px;
-            
+
             svg {
                 margin-left: 2px;
             }
@@ -275,19 +277,46 @@
 
         &__percentage {
             padding: 6px 12px;
-            background: #D5FA52;
+            background: #d5fa52;
             border-radius: 6px;
             margin-right: 6px;
         }
 
         &__edit {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 700;
             font-size: 12px;
             line-height: 16px;
             cursor: pointer;
             text-decoration-line: underline;
         }
+    }
+    ::-webkit-input-placeholder {
+        // color: #161414;
+        // opacity: 0.1;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: rgba(29, 35, 41, 0.5);
+    }
+    input[type="text"],
+    textarea {
+        background-color: #fcfcfc;
+        color: #161414;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    &_emailBox {
+        @extend .me-2;
+        width: 313.35px;
+        height: 41.11px !important;
+        line-height: 41.11px;
     }
 }

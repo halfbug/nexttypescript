@@ -14,20 +14,20 @@ export default function NewPartnerForm() {
       </h4>
       <Row className={styles.partner__light_txt}>
         Add your influencer partners and we’ll auto-generate their Groupshop page.
-        Learn more about the benefits of using Groupshop for your affiliate programs here.
+        <br />
+        Learn more about the benefits of using Groupshop for your affiliate programs
+        <span className="text-decoration-underline p-0">here.</span>
 
       </Row>
       <Row className="mt-3 mb-4">
-        <Col xl={7} lg={6} md={8}>
-          <Form.Group className="" controlId="brandNamevalidation">
+        <Col className="d-flex">
+          <Form.Group className={styles.partner_emailBox} controlId="brandNamevalidation">
             <Form.Control
               type="text"
               name="brandName"
-              placeholder="Enter Email Address"
+              placeholder="Enter email address"
             />
           </Form.Group>
-        </Col>
-        <Col xl={5} lg={6} md={8}>
           <ToggleButtonGroup
             type="radio"
             name="bannerProductPage"
