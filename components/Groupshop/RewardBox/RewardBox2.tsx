@@ -17,7 +17,7 @@ interface RewardBox2Props extends RootProps {
   discount?: string;
   handleClose(e: any): any;
   shareurl: any;
-    // addToCart(e: any): any;
+  // addToCart(e: any): any;
 }
 
 const RewardBox2 = ({
@@ -44,10 +44,14 @@ const RewardBox2 = ({
           <Row onClick={handleClose}><ArrowDown /></Row>
         </Modal.Header> */}
         <Modal.Header className={styles.groupshop_rewardBox2_modal__closebtnlg}>
-          <Row onClick={handleClose}><Cross /></Row>
+          <Row onClick={handleClose}>
+            <div><Cross /></div>
+          </Row>
         </Modal.Header>
         <Modal.Header className={styles.groupshop_rewardBox2_modal__closebtnsm}>
-          <Row onClick={handleClose}><ArrowDown /></Row>
+          <Row onClick={handleClose}>
+            <div><ArrowDown /></div>
+          </Row>
         </Modal.Header>
         <Modal.Body className={styles.groupshop_rewardBox2_modal__body}>
           <Row>
@@ -74,7 +78,7 @@ const RewardBox2 = ({
                     &
                     get
                     {' '}
-                    { `${discount}%` }
+                    {`${discount}%`}
                     {' '}
                     off your order today.
 
@@ -113,8 +117,9 @@ const RewardBox2 = ({
                 <ShareButton
                   placement="auto"
                   shareurl={shareurl}
-                  label="Share with friends"
+                  label="Share & Earn"
                   onClick={() => googleEventCode('earn-cashback-modal')}
+                  icon={false}
                   className={styles.groupshop_rewardBox2_modal__greenBtn}
                 />
               </div>

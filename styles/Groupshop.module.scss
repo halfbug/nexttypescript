@@ -729,13 +729,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
     &_owner {
-      @extend .groupshop_dropdownItem, .gradient-block;
+      @extend .groupshop_dropdownItem;
       padding-bottom: unset;
       border: none;
       width: fit-content;
-      a {
-        border: none;
-      }
     }
   }
 
@@ -2481,8 +2478,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       margin-top: 26px;
     }
     &__blackBtn,&__greenBtn{
-      padding: 10px 0px;
-      width: 192px;
+      padding: 10px 13px;
       font-family: 'DM Sans';
       font-style: normal;
       font-weight: $font-weight-bolder;
