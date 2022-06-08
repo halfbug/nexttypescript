@@ -236,13 +236,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
-    console.log('dsfdfsdfdsfsdf');
-
-    // if (field === "brandColor") {
-    //   handleSubmit();
-    // } else {
-    //   debouncedSubmit(handleSubmit);
-    // }
     handleSubmit();
   };
   const handleAddProduct = () => {

@@ -40,14 +40,18 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
   const [title, setTitle] = useState<string | null>(null);
   const [scollections, setscollections] = useState<ICollection[] | undefined>(undefined);
   const [allProductChecked, setAllProductChecked] = useState<boolean | undefined>(false);
+  const CampPrd = store.newCampaign?.products?.filter((item) => item !== undefined);
+  const CampAddPrd = store.newCampaign?.addableProducts?.filter((item) => item !== undefined);
+  const CampCollection = store.newCampaign?.collections?.filter((item) => item !== undefined);
+  console.log("🚀 ~ file: Screen1.tsx ~ line 46 ~ Screen1 ~ CampCollection", CampCollection);
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
-      collections: store.newCampaign?.collections ?? [],
-      products: selectedProducts ?? (ins === "2a" ? store.newCampaign?.products : store.newCampaign?.addableProducts) ?? [],
+      collections: CampCollection ?? [],
+      products: selectedProducts ?? (ins === "2a" ? CampPrd : CampAddPrd) ?? [],
     },
   );
   const getEntityById = (id:string, entity: string):
-   ICollection | IProduct => store?.[entity]?.find(
+   ICollection | IProduct => store?.[entity]?.filter((item: any) => item !== undefined).find(
     (col:IProduct | ICollection) => col.id === id,
   );
 
@@ -66,8 +70,8 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
     if (ins === "2a") {
       setcampaign((prev) => ({
         ...prev,
-        products: store.newCampaign?.products ?? [],
-        collections: store.newCampaign?.collections ?? [],
+        products: CampPrd ?? [],
+        collections: CampCollection ?? [],
       }));
       setscollections(store?.collections);
       setproducts(store?.products);
@@ -164,9 +168,9 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
       }
     } else if (checked === false) {
       if (name === 'collections') {
-        ncamp.collections = campaign?.collections?.filter((col) => col.id !== id);
+        ncamp.collections = campaign?.collections?.filter((item: any) => item !== undefined).filter((col) => col.id !== id);
         const ccol = getEntityById(id, name) as ICollection;
-        ncamp.products = campaign?.products?.filter(
+        ncamp.products = campaign?.products?.filter((item: any) => item !== undefined).filter(
           (prd) => !ccol?.products.find((ccolprd) => ccolprd.id === prd.id),
         );
       } else {
@@ -181,11 +185,13 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
   const isChecked = (id: string, entity?:string):boolean => {
     if (entity) {
       return Boolean(
-        campaign?.collections?.find((col) => col.id === id),
+        campaign?.collections?.filter((item: any) => item !== undefined)
+          .find((col) => col.id === id),
       );
     }
     return Boolean(
-      campaign?.products?.find((cprod) => cprod.id === id),
+      campaign?.products?.filter((item: any) => item !== undefined)
+        .find((cprod: any) => cprod.id === id),
     );
   };
   const { updateSelectedCampaignAddProducts, updateSelectedCampaignProducts } = useCampaign();
@@ -197,10 +203,10 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
           type: 'NEW_CAMPAIGN',
           payload: {
             newCampaign: {
-              products: campaign?.products,
-              collections: campaign?.collections,
-              productsArray: campaign?.products?.map((prod) => prod.id),
-              collectionsArray: campaign?.collections?.map((prod) => prod.id),
+              products: campaign?.products?.filter((item: any) => item !== undefined),
+              collections: campaign?.collections?.filter((item: any) => item !== undefined),
+              productsArray: campaign?.products?.filter((item: any) => item !== undefined).map((prod) => prod.id),
+              collectionsArray: campaign?.collections?.filter((item: any) => item !== undefined).map((prod) => prod.id),
             },
           },
         });
@@ -215,9 +221,9 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
         type: 'NEW_CAMPAIGN',
         payload: {
           newCampaign: {
-            addableProducts: campaign?.products,
-            addableCollections: campaign?.collections,
-            addableProductsArray: campaign?.products?.map((prod) => prod.id),
+            addableProducts: campaign?.products?.filter((item: any) => item !== undefined),
+            addableCollections: campaign?.collections?.filter((item: any) => item !== undefined),
+            addableProductsArray: campaign?.products?.filter((item: any) => item !== undefined).map((prod) => prod.id),
             // productsArray: [],
           },
         },
