@@ -46,7 +46,9 @@ const Footer = ({
   const {
     handleSubmit,
     handleChange,
+    values,
     errors,
+    resetForm,
     setFieldValue,
   }: FormikProps<ISignUp> = useFormik<ISignUp>({
     initialValues: {
@@ -66,9 +68,10 @@ const Footer = ({
         },
       });
       if (signUpObj.data.createSignUp.email !== '') {
+        resetForm({});
         showSuccess('You have successfully subscribed!');
       } else {
-        showError('Email address is already registered');
+        showError('Email address is already registered!');
       }
     },
   });
@@ -174,6 +177,7 @@ const Footer = ({
               <InputGroup className=" my-3" id="borderclr">
                 <FormControl
                   name="email"
+                  value={values.email}
                   placeholder="Enter your email"
                   aria-label="Email"
                   aria-describedby="basic-addon2"
