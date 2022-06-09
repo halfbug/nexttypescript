@@ -60,9 +60,25 @@ const useExcelDocument = () => {
   //     // setsheetData(data);
   //   }
   // }, [data]);
-
+  const monthsArr = (mon: number) => {
+    const months = [
+      { initial: 'Jan', mon: 'January', endDate: 31 },
+      { initial: 'Feb', mon: 'February', endDate: 28 },
+      { initial: 'Mar', mon: 'March', endDate: 31 },
+      { initial: 'Apr', mon: 'April', endDate: 30 },
+      { initial: 'May', mon: 'May', endDate: 31 },
+      { initial: 'Jun', mon: 'June', endDate: 30 },
+      { initial: 'Jul', mon: 'July', endDate: 31 },
+      { initial: 'Aug', mon: 'August', endDate: 31 },
+      { initial: 'Sep', mon: 'September', endDate: 30 },
+      { initial: 'Oct', mon: 'October', endDate: 31 },
+      { initial: 'Nov', mon: 'November', endDate: 30 },
+      { initial: 'Dec', mon: 'December', endDate: 31 },
+    ];
+    return months[mon];
+  };
   return {
-    sheetData, getDayBilling, loading, data, formatDataForExcel,
+    sheetData, getDayBilling, loading, data, formatDataForExcel, monthsArr,
   };
 };
 export default useExcelDocument;

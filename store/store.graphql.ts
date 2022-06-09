@@ -700,8 +700,8 @@ query FindTotalGSMonthly($storeId: String!) {
 }
 `;
 const GET_BILLING_BY_DATE = gql`
-query GetBillingByDate($storeId: String!, $startDate: DateTime!, $endDate: DateTime!) {
-  getBillingByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+query GetBillingByDate($storeId: String!, $month: String!, $year: String!) {
+  getBillingByDate(storeId: $storeId, month: $month, year: $year) {
     _id {
       date
       month

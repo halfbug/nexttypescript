@@ -25,9 +25,10 @@ const ExportToExcel = ({
   // const [sheetData, setsheetData] = React.useState([]);
   const {
     sheetData, getDayBilling, loading, data: excelData,
-    formatDataForExcel,
+    formatDataForExcel, monthsArr,
   } = useExcelDocument();
-  const xlFileName = `groupshop-billing-charges-${month}-${year}`;
+  const monName = monthsArr(month - 1).initial;
+  const xlFileName = `groupshop-billing-charges-${monName}-${year}`;
 
   const exportToCSV: MyFunction = (apiDataIn, fileNameIn) => {
     const ws = XLSX.utils.json_to_sheet(apiDataIn);
@@ -51,15 +52,20 @@ const ExportToExcel = ({
   // console.log({ excelData });
 
   const BillingQueryLoader = () => {
-    const startDate = new Date(year, month - 1, 1); // month -1 because JS start month from 0zero
-    const endDate = new Date(year, month, 0);
-    const data = getDayBilling({
-      variables: {
-        storeId,
-        startDate,
-        endDate,
-      },
-    });
+    try {
+      console.log({ month });
+      // ffddee
+
+      const data = getDayBilling({
+        variables: {
+          storeId,
+          month: `${month}`,
+          year: `${year}`,
+        },
+      });
+    } catch (error) {
+      console.log('getbillingbydate error', error);
+    }
 
     // if (sheetData) exportToCSV(sheetData, xlFileName);
   };
