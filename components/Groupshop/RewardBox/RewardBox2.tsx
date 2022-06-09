@@ -11,6 +11,8 @@ import Cross from 'assets/images/CrossLg.svg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import { useMediaQuery } from 'react-responsive';
+import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
 
 interface RewardBox2Props extends RootProps {
   show: boolean;
@@ -29,6 +31,9 @@ const RewardBox2 = ({
     handleClose(e);
   };
   const { googleEventCode } = useGtm();
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 476px)',
+  });
 
   return (
     <>
@@ -108,20 +113,24 @@ const RewardBox2 = ({
                   Shop & Save
                 </Button>
                 <span className="px-3 fs-5">or</span>
-                {/* <Button
-                  className={styles.groupshop_rewardBox2_modal__greenBtn}
-                  onClick={() => googleEventCode('earn-cashback-modal')}
-                >
-                  Share & Earn
-                </Button> */}
-                <ShareButton
-                  placement="auto"
-                  shareurl={shareurl}
-                  label="Share & Earn"
-                  onClick={() => googleEventCode('earn-cashback-modal')}
-                  icon={false}
-                  className={styles.groupshop_rewardBox2_modal__greenBtn}
-                />
+                {
+                  isDesktop ? (
+                    <ShareButton
+                      placement="auto"
+                      shareurl={shareurl}
+                      label="Share & Earn"
+                      onClick={() => googleEventCode('earn-cashback-modal')}
+                      icon={false}
+                      className={styles.groupshop_rewardBox2_modal__greenBtn}
+                    />
+                  ) : (
+                    <NativeShareButton
+                      label="Share & Earn"
+                      className={styles.groupshop_rewardBox2_modal__greenBtn}
+                      shareurl={shareurl}
+                    />
+                  )
+              }
               </div>
             </Col>
           </Row>
