@@ -123,7 +123,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
           || (campaign?.products?.length)}
                   {' '}
                   product(s)/
-                  {(campaign?.collections && campaign?.collections?.length) || 0}
+                  {(newCampaign?.collections?.length || campaign?.collections?.length)}
                   {' '}
                   collection(s) selected
                   <DeleteButton
