@@ -1038,6 +1038,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         bottom: 10px;
         right: 10px;
         position: absolute;
+        color: #000000;
       }
       &_addedbytop {
         @extend .groupshop__pcard_tag;
@@ -2369,10 +2370,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       height: 42px;
     }
   }
-  
+
   &_rewardBox2_modal {
     width: 680px;
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       width: auto;
       bottom: 0;
       margin: 0;
@@ -2389,7 +2390,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         cursor: pointer;
       }
     }
-    &__closebtnsm{
+    &__closebtnsm {
       @include media-breakpoint-up(sm) {
         display: none;
       }
@@ -2400,7 +2401,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         cursor: pointer;
       }
     }
-    &__content{
+    &__content {
       border-radius: 12px;
       @include media-breakpoint-down(sm) {
         border-radius: 12px 12px 0px 0px;
@@ -2408,20 +2409,20 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         bottom: 0;
       }
     }
-    &__body{
+    &__body {
       color: #000000;
       margin: 0px 90px;
       padding: 0px 0px 60px 0px;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         margin: 0px 15px;
         padding: 0px 0px 30px 0px;
       }
     }
-    &__top{
+    &__top {
       margin-bottom: 10px;
       h2 {
         @extend .mb-3;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: normal;
         font-weight: $font-weight-bolder;
         font-size: 24px;
@@ -2434,7 +2435,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
       p {
         @extend .mx-3, .mb-0, .d-block;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: normal;
         font-weight: 400 !important;
         font-size: 18px;
@@ -2443,7 +2444,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         color: #000000;
       }
     }
-    &__info1,&__info2{
+    &__info1,
+    &__info2 {
       @extend .d-flex;
       margin: 16px 0px;
       padding: 22px 30px;
@@ -2451,10 +2453,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @include media-breakpoint-down(sm) {
         padding: 22px 26px;
       }
-      p{
+      p {
         margin-left: 50px;
         margin-bottom: 0px;
-        font-family: 'Mulish';
+        font-family: "Mulish";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -2464,13 +2466,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         }
       }
     }
-    &__info1{
-      border: 1px dashed #9AB639;
+    &__info1 {
+      border: 1px dashed #9ab639;
     }
-    &__info2{
-      border: 1px dashed #C867EA;
+    &__info2 {
+      border: 1px dashed #c867ea;
     }
-    &__btnSection{
+    &__btnSection {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -2486,20 +2488,24 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       line-height: 21px;
       border-radius: 3px;
     }
-    &__blackBtn{
+    &__blackBtn {
       background: #000000;
-      color: #FFFFFF;
-      &:active, &:focus, &:hover{
-        color: #FFFFFF;
+      color: #ffffff;
+      &:active,
+      &:focus,
+      &:hover {
+        color: #ffffff;
         box-shadow: none;
         background-color: #000000;
       }
     }
-    &__greenBtn{
+    &__greenBtn {
       background: $modern;
       color: #000000;
       border: 1px solid $modern;
-      &:active, &:focus, &:hover{
+      &:active,
+      &:focus,
+      &:hover {
         background: $modern;
         color: #000000;
         box-shadow: none;
