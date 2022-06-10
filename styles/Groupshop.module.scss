@@ -346,23 +346,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .py-1,
       .align-items-center;
     box-sizing: border-box;
-    backdrop-filter: blur(4px);
-    /* Note: backdrop-filter has minimal browser support */
-    border-radius: 10px;
-    &::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      padding: 1px;
-      inset: 0;
-      border-radius: 10px;
-      background: linear-gradient(to right, #ccb2f9, #fee750);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-    }
+    border: 1px solid $purple;
+    border-radius: 4px;
     span {
       @extend .w-75, .text-truncate;
     }
@@ -372,25 +357,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border-radius: 8px !important;
     }
     &_copybtn {
+      margin-left: 5px;
       box-shadow: none !important;
       box-sizing: border-box;
-      backdrop-filter: blur(4px);
-      /* Note: backdrop-filter has minimal browser support */
-      border-radius: 10px;
-      &::before {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        padding: 1px;
-        inset: 0;
-        border-radius: 8px;
-        background: linear-gradient(to right, #ccb2f9, #ecd5d0);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-      }
+      border: 1px solid $purple;
+      border-radius: 4px;
     }
   }
 
@@ -2521,6 +2492,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     button {
       border: 1px solid #ccb2f9;
       font-size: 14px;
+      &:active{
+        color: #212529;
+      }
     }
 
     svg {

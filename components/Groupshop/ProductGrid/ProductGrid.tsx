@@ -229,12 +229,15 @@ const ProductGrid = ({
                 </i>
               </p>
               <br />
-              <div className={styles.groupshop_addtoCart_wrapper}>
-                <Button variant="primary" disabled className={styles.groupshop_addtoCart}>Add to Cart</Button>
-                <Button variant="outline-primary" className={styles.groupshop_disableShareCircle} disabled>
+              {/* <div className={styles.groupshop_addtoCart_wrapper}>
+                <Button variant="primary" disabled className={styles.groupshop_addtoCart}>
+                Add to Cart
+                </Button>
+                <Button variant="outline-primary" className={styles.groupshop_disableShareCircle}
+                disabled>
                   <Send size={16} />
                 </Button>
-              </div>
+              </div> */}
             </ProductCard>
           </Col>
         ))}
