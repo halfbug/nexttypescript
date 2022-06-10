@@ -247,7 +247,7 @@ const ProductGrid = ({
           {totalPages > 1 && (
             <Pagination className={styles.groupshop_pagination}>
               <Pagination.Prev
-                className={styles.groupshop_pagination_prev}
+                className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
                 onClick={() => {
                   setCurrentPage(
                     (currentPage > 1) ? currentPage - 1 : currentPage,
@@ -271,7 +271,7 @@ const ProductGrid = ({
               ))}
 
               <Pagination.Next
-                className={styles.groupshop_pagination_next}
+                className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
                 onClick={() => {
                   setCurrentPage(
                     (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
@@ -279,7 +279,9 @@ const ProductGrid = ({
                   { (id === 'allproducts') && (paginationScroll()); }
                 }}
               />
+
             </Pagination>
+
           )}
         </Col>
       </Row>
