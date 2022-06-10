@@ -8,21 +8,37 @@ import ArrowRightLogo from 'assets/images/arrow-right.svg';
 
 export default function ActiveAffiliate() {
   return (
-    <section className={styles.partner__box_2}>
+    <section className={['ps-0 ms-0 pb-4', styles.partner__box_2].join(' ')}>
       <h4 className="mt-0">
         Active Affiliates
       </h4>
       <Row className={styles.partner__light_txt}>
         Track performance and manage your current affiliates.
       </Row>
-      <h4 className="mt-4 d-flex align-items-center">
-        Active
-        <ToolTip
+      <Row className="">
+        <Col className={['', styles.partner_table_heading].join(' ')}>
+          Active
+          {/* <ToolTip
           className="mx-2"
           icon={<InfoCircle size={13} />}
           popContent="Active"
-        />
-      </h4>
+        /> */}
+        </Col>
+        <Col className={['ps-2', styles.partner_table_heading].join(' ')}>
+
+          Name
+        </Col>
+        <Col className={['ms-5', styles.partner_table_heading].join(' ')}>
+          Commission
+
+        </Col>
+        <Col className={['ms-5', styles.partner_table_heading].join(' ')}>
+          Revenue
+
+        </Col>
+        <Col className="styles.partner_table_heading" />
+
+      </Row>
 
       <Row className={styles.partner__data_row__active}>
         <Col xl={2} lg={2} md={2}>
@@ -38,19 +54,23 @@ export default function ActiveAffiliate() {
           <div>llian Davis</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
-          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+          <div className={styles.partner__data_row__tag2}>15%</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
+          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+        </Col>
+        {/* <Col xl={3} lg={3} md={3}>
           <div className={styles.partner__data_row__tag2}>
             <UniqueClicksLogo />
           </div>
-        </Col>
+        </Col> */}
         <Col xl={1} lg={1} md={1} className="d-flex justify-content-center">
           <ArrowRightLogo />
         </Col>
       </Row>
 
-      <Row className={styles.partner__data_row}>
+      <Row className={['d-flex justify-content-start', styles.partner__data_row].join(' ')}>
+
         <Col xl={2} lg={2} md={2}>
           <Form.Check
             type="switch"
@@ -62,19 +82,22 @@ export default function ActiveAffiliate() {
           <div>Melissa Camps</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
-          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+          <div className={styles.partner__data_row__tag2}>15%</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
+          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+        </Col>
+        {/* <Col xl={3} lg={3} md={3}>
           <div className={styles.partner__data_row__tag2}>
             <UniqueClicksLogo />
           </div>
-        </Col>
+        </Col> */}
         <Col xl={1} lg={1} md={1} className="d-flex justify-content-center">
           <ArrowRightLogo />
         </Col>
       </Row>
 
-      <Row className={styles.partner__data_row}>
+      <Row className={['d-flex justify-content-start', styles.partner__data_row].join(' ')}>
         <Col xl={2} lg={2} md={2}>
           <Form.Check
             type="switch"
@@ -86,13 +109,16 @@ export default function ActiveAffiliate() {
           <div>Jose Guiterrez</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
-          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+          <div className={styles.partner__data_row__tag2}>15%</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
+          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+        </Col>
+        {/* <Col xl={3} lg={3} md={3}>
           <div className={styles.partner__data_row__tag2}>
             <UniqueClicksLogo />
           </div>
-        </Col>
+        </Col> */}
         <Col xl={1} lg={1} md={1} className="d-flex justify-content-center">
           <ArrowRightLogo />
         </Col>
@@ -110,13 +136,16 @@ export default function ActiveAffiliate() {
           <div>Dean Abels</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
-          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+          <div className={styles.partner__data_row__tag2}>15%</div>
         </Col>
         <Col xl={3} lg={3} md={3}>
+          <div className={styles.partner__data_row__tag1}>$428 generated</div>
+        </Col>
+        {/* <Col xl={3} lg={3} md={3}>
           <div className={styles.partner__data_row__tag2}>
             <UniqueClicksLogo />
           </div>
-        </Col>
+        </Col> */}
         <Col xl={1} lg={1} md={1} className="d-flex justify-content-center">
           <ArrowRightLogo />
         </Col>

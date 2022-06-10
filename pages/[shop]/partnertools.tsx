@@ -18,15 +18,14 @@ const PartnerTools: NextPage = () => (
       <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
         <PartnerRewards />
       </Col>
-    </Row>
-    <Row>
-      <Col xxl={8} xl={8} lg={8} md={8} xs={12}>
+      <Col xxl={8} xl={8} lg={8} md={8} xs={12} className="">
         <ActiveAffiliate />
       </Col>
       <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
         <AffiliateDetail />
       </Col>
     </Row>
+    <Row />
   </Page>
 );
 

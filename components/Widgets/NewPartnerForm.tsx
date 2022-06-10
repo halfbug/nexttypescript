@@ -19,7 +19,7 @@ export default function NewPartnerForm() {
         <span className="text-decoration-underline p-0">here.</span>
 
       </Row>
-      <Row className="mt-3 mb-4">
+      <Row className="mt-3 ">
         <Col className="d-flex">
           <Form.Group className={styles.partner_emailBox} controlId="brandNamevalidation">
             <Form.Control
@@ -31,13 +31,14 @@ export default function NewPartnerForm() {
           <ToggleButtonGroup
             type="radio"
             name="bannerProductPage"
+            className="pe-0"
           >
             <ToggleButton
               variant="outline-dark"
-              className={styles.partner__dark_btn}
+              className={['pe-0 me-0', styles.partner__dark_btn].join(' ')}
               value={1}
             >
-              <Check2Circle className="fs-5" />
+              <Check2Circle width={13.67} height={13.26} />
               {' '}
               <span className={styles.partner__dark_btn__txt}>Add Affiliate</span>
             </ToggleButton>
@@ -47,7 +48,7 @@ export default function NewPartnerForm() {
               className={styles.partner__dark_btn}
               value={0}
             >
-              <BoxArrowUp className="fs-5" />
+              <BoxArrowUp width={12.25} height={13.49} />
               {' '}
               <span className={styles.partner__dark_btn__txt}>Bulk Upload</span>
             </ToggleButton>
