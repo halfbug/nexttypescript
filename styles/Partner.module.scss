@@ -20,7 +20,14 @@
         border: 1px dashed $dotted-border-color2;
         border-radius: $border-radius-medium;
     }
-
+    &_wom {
+        @extend .mt-0;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+    }
     &__wom_score {
         @extend .p-1, .px-3, .mx-1;
         font-family: "DM Sans";
@@ -140,7 +147,6 @@
         opacity: $opacity-medium;
         margin-left: 0px;
         width: 542px;
-
     }
 
     h3 {
@@ -184,7 +190,8 @@
         @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
         height: 31px;
         min-width: 117px;
-        color: #000000;
+        border: 1px solid $black;
+        border-radius: 6px!important;
         font-weight: 700;
         font-family: "DM Sans";
         font-size: 12px;

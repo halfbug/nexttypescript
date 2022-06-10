@@ -12,7 +12,7 @@ export default function AffiliateDetail() {
   return (
     <section className={styles.partner__box_last}>
       <div className="pb-3 pe-3">
-        <h4 className="mt-0">
+        <h4 className={styles.partner_wom}>
           llian Davis
           {' '}
           <span className={styles.partner__wom_score}>9</span>
