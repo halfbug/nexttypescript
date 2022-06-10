@@ -29,15 +29,12 @@ const Header = ({
         <Col className={styles.header_btn_div}>
           <div className={styles.header_head_btn1}>
             <Button className={styles.header_btn} size="lg">
-              <FaEye size={20} />
-              {' '}
               View Groupshop
             </Button>
           </div>
 
           <div className={styles.header_head_btn2}>
             Welcome
-            <br />
             {brandName}
             {/* <Button className={styles.header_btn} size="lg">
             LESABLE

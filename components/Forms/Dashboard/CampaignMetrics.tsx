@@ -49,8 +49,6 @@ export default function CampaignMetrics() {
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" arrowIcon={false} />
           </Col>
-        </Row>
-        <Row>
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
           </Col>
@@ -60,9 +58,6 @@ export default function CampaignMetrics() {
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" arrowIcon={false} />
           </Col>
-        </Row>
-
-        <Row>
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Total Revenue " value="-" iconType="RevenueIcon" arrowIcon={false} />
           </Col>
@@ -72,8 +67,6 @@ export default function CampaignMetrics() {
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Average Order Value" value="-" iconType="ScaleIcon" arrowIcon={false} />
           </Col>
-        </Row>
-        <Row>
           <Col lg={4} className={styles.metrics__box__summary_box}>
             <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
           </Col>
@@ -84,7 +77,6 @@ export default function CampaignMetrics() {
             <SummaryBox label="Cashback Given" value="-" iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
-
         <Row className="mt-4">
           <Col lg={6} className="mt-1">
             <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>

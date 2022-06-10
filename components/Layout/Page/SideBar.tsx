@@ -110,16 +110,6 @@ const Sidebar = () => {
             </ul>
           </div>
         </div>
-        <div className={styles.reviewwrap}>
-          <div className={styles.reviewcontain}>
-            <div className="review-img-wrap"><img src={Sidebarpromotion.src} alt="Sidebarpromotion" /></div>
-            <div className={styles.reviewhead}>Leave a review</div>
-            <div className={styles.reviewdesc}>How is your experience with Groupshop so far?</div>
-            <div className="review-btn">
-              <a href="/" className={styles.letusknow}>Let us know</a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 

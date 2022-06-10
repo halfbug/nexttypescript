@@ -10,7 +10,7 @@
     font-size: 28px;
     line-height: 36px;
     color: $black;
-    margin-left: -.75rem;
+    margin: 0;
   }
 
   &_btn_div {
@@ -21,15 +21,16 @@
   }
 
   &_btn {
-    @extend .fw-normal, .fs-5, .lh-base;
+    @extend .fw-normal, .lh-base;
     border-color: $gray-300 !important;
     color: $black !important;
     background-color: transparent;
     font-family: DM Sans;
+    font-size: 14px;
 
     &:hover {
-      color: $white !important;
-      background-color: $gray-900;
+      background: none !important;
+      background-image: none !important;
     }
   }
 
@@ -38,6 +39,6 @@
   }
 
   &_head_btn2 {
-    @extend .d-flex, .ms-3;
+    @extend .d-flex, .ms-3, .align-items-center;
   }
 }

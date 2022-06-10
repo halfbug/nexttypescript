@@ -14,12 +14,12 @@ const ShopMain: NextPage = () => {
   return (
     <Page headingText="Overview" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Container>
-        <Row>
-          <Col lg={7} className="pt-0 pb-5">
+        <Row className="pt-4">
+          <Col lg={7} className="gx-5">
             <CampaignOverview />
             <CampaignMetrics />
           </Col>
-          <Col lg={5} className="p-0">
+          <Col lg={5} className="gx-5">
             <CampaignStrength />
           </Col>
         </Row>

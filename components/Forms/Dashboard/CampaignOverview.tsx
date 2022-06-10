@@ -67,6 +67,12 @@ export default function CampaignOverview() {
                   className={styles.overiew__campaignBox__logo}
                   url=""
                 />
+                <p>
+                  Horizontal.
+                  <br />
+                  {' '}
+                  Stands-out on white.
+                </p>
               </Col>
               <Col lg={8}>
                 <div className={styles.overiew__campaignBox__year}>

@@ -16,11 +16,7 @@
 .rightcontentwrap {
 	width: 80.5%;
 	float: right;
-	padding: 0 75px;
-
-	&__body {
-		width: 107%;
-	}
+	padding: 2rem 75px;
 }
 .sidebarinnerwrap {
 	padding-top: 4rem;
@@ -83,7 +79,7 @@
 	align-items: center;
 	justify-content: flex-start;
 	flex-flow: row nowrap;
-	opacity: 0.2;
+	opacity: 0.4;
 	transition: 400ms;
 	// &:active,
 	// &:focus {
