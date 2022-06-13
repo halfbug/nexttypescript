@@ -180,6 +180,7 @@ const GroupShop: NextPage = () => {
         addedProducts: _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]),
       },
     });
+    console.log('added', _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]));
   }, [dealProducts, popularProducts]);
   useEffect(() => {
     async function gets3logo() {
@@ -247,7 +248,7 @@ const GroupShop: NextPage = () => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
-  console.log('addedProducts', addedProducts?.length);
+  console.log('addedProducts', addedProducts);
   return (
     <>
       <Head>

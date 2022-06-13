@@ -59,16 +59,38 @@ const ProductsSearch = ({
   const {
     discountCode: { percentage },
     store: { products } = { store: { products: [] } },
+    popularProducts, addedProducts,
   } = gsctx;
 
   useEffect(() => {
     // console.log(products);
-    if (!otherProducts) { setotherProducts(products); }
-  }, [otherProducts]);
+    if (products && (!otherProducts || otherProducts?.length < 1)) {
+      setotherProducts(products?.filter(
+        (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
+      ).filter(
+        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+      ));
+    }
+  }, []);
 
   useEffect(() => {
-    if (products && (!otherProducts || otherProducts?.length < 1)) { setotherProducts(products); }
-  }, [products]);
+    if (products && products.length > 0) {
+      setotherProducts(products?.filter(
+        (item) => !popularProducts?.some((item2) => item2.id === item.id),
+      ).filter(
+        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+      ));
+    }
+
+    if (products && (!otherProducts || otherProducts?.length < 1)) {
+      // console.log({ addproducts });
+      setotherProducts(products?.filter(
+        (item) => !popularProducts?.some((item2) => item2.id === item.id),
+      ).filter(
+        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+      ));
+    }
+  }, [products, addedProducts]);
 
   const [selected, setSelected] = useState<string[]|undefined>(undefined);
   const clientDProducts = clientDealProducts();
@@ -81,16 +103,16 @@ const ProductsSearch = ({
   }, [selected, clientDProducts]);
 
   const searchPrd = (name:string) => {
-    if (products && name) {
+    if (otherProducts && name) {
       setotherProducts(
-        products.filter(
+        otherProducts?.filter(
           (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
         ),
       );
     }
   };
   const debouncedSearch = useDebounce(
-    (nextValue:string) => searchPrd(nextValue), 1000, products || [],
+    (nextValue:string) => searchPrd(nextValue), 1000, otherProducts || [],
   );
   const { AlertComponent, showSuccess } = useAlert();
   const handleSubmit = (e:any) => { e.preventDefault(); };
@@ -118,6 +140,10 @@ const ProductsSearch = ({
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other products', products);
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other Popular', popularProducts);
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other', otherProducts);
+
   return (
     <>
       <Modal

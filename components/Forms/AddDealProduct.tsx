@@ -100,10 +100,10 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...gsctx,
-          popularProducts: [...gsctx?.store?.products?.filter(
+          popularProducts: _.uniq([...gsctx?.store?.products?.filter(
             ({ id: pid }:{ id:string}) => products?.includes(pid),
           ) || [],
-          ...gsctx?.popularProducts || []],
+          ...gsctx?.popularProducts || []]),
           dealProducts,
           addedProducts: [...dealProducts || []],
         },
