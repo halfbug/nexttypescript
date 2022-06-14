@@ -9,6 +9,10 @@
 		color: $black;
 	}
 
+	p {
+		line-height: 1.4;
+	}
+
 	&_listHeader {
 		font-family: "DM Sans";
 		font-style: normal;
@@ -113,7 +117,7 @@
 			font-family: "DM Sans";
 			font-style: normal;
 			font-weight: 400;
-			font-size: 18px;
+			font-size: 16px;
 			line-height: 23px;
 			color: #000000;
 		}
