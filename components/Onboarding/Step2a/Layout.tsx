@@ -7,6 +7,7 @@ import styles from 'styles/product.module.scss';
 import { FaSistrix } from 'react-icons/fa';
 import Search from 'assets/images/search-icon.svg';
 import { FiSearch } from 'react-icons/fi';
+import { StoreContext } from 'store/store.context';
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -22,15 +23,18 @@ const Layout = ({ children, handleSearch, campaign }: ILayoutProps) => {
     event.stopPropagation();
   };
   const { products, collections } = campaign;
+  const { store, dispatch } = React.useContext(StoreContext);
+
   return (
     <Container className={styles.product}>
       <Row className="border-bottom">
         <Col className="text-left my-2" xs={12} md={6}><h3>Add products/collections</h3></Col>
         <Col className={styles.product_selected} xs={12} md={6}>
-          {products?.length || 0}
+          {(store.newCampaign?.products?.length)
+          || (products?.length)}
           {' '}
           product(s)/
-          {collections?.length || 0}
+          {(store.newCampaign?.collections?.length || collections?.length)}
           {' '}
           collection(s) selected
         </Col>

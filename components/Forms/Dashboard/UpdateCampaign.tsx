@@ -246,6 +246,9 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     setFieldValue('products', []);
     const mycamp = updateCampaign(campaignid, 'products', []);
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+
+    const mycollections = updateCampaign(campaignid, 'collections', []);
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycollections } });
     handleSubmit();
   };
   const handleDeleteAddProduct = () => {
