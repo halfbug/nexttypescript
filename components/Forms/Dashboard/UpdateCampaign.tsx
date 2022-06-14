@@ -17,7 +17,7 @@ import ProductButton from 'components/Buttons/ProductButton';
 import { useMutation } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { UPDATE_CAMPAIGN } from 'store/store.graphql';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
@@ -68,30 +68,37 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   });
   const { findInArray } = useUtilityFunction();
-  const { campaign, updateCampaign } = useCampaign();
+  const { campaign, updateCampaign, updateStoreForEditCampaignId } = useCampaign();
+  React.useEffect(() => {
+    updateStoreForEditCampaignId(campaignid);
+  }, [campaignid]);
+  console.log(campaign, "campaign");
+
   const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
   const validUrl = /^(https:\/\/?(www.)?instagram.com\/p\/([^/?#&/]+)).*/gm;
+
   React.useEffect(() => {
-    if (store?.campaigns) {
-      const arr:ICampaign[] = store.campaigns.filter((item:any) => item.id === campaignid);
-      if (arr[0].criteria! === "custom") setdisableBtn(false);
-      setHeading(arr[0].name!);
+    if (campaign) {
+      // updateStoreForEditCampaignId(campaignid);
+      // const arr:ICampaign[] = [...campaign];
+      if (campaign.criteria! === "custom") setdisableBtn(false);
+      setHeading(campaign.name!);
 
       const newState:ICampaignForm = {
-        criteria: arr[0]?.criteria!,
-        joinExisting: arr[0]?.joinExisting!,
-        rewards: arr[0]?.rewards!,
-        brandColor: arr[0]?.settings?.brandColor!,
-        customBg: arr[0]?.settings?.customBg!,
-        imageUrl: arr[0]?.settings?.imageUrl!,
-        youtubeUrl: arr[0]?.settings?.youtubeUrl!,
-        media: arr[0]?.settings?.media!,
-        products: arr[0]?.products,
-        facebook: arr[0]?.socialLinks?.facebook ?? '',
-        instagram: arr[0]?.socialLinks?.instagram ?? '',
-        tiktok: arr[0]?.socialLinks?.tiktok ?? '',
+        criteria: campaign?.criteria!,
+        joinExisting: campaign?.joinExisting!,
+        rewards: campaign?.rewards!,
+        brandColor: campaign?.settings?.brandColor!,
+        customBg: campaign?.settings?.customBg!,
+        imageUrl: campaign?.settings?.imageUrl!,
+        youtubeUrl: campaign?.settings?.youtubeUrl!,
+        media: campaign?.settings?.media!,
+        products: campaign?.products,
+        facebook: campaign?.socialLinks?.facebook ?? '',
+        instagram: campaign?.socialLinks?.instagram ?? '',
+        tiktok: campaign?.socialLinks?.tiktok ?? '',
         // pinterest: arr[0]?.socialLinks?.facebook,
-        twitter: arr[0]?.socialLinks?.twitter ?? '',
+        twitter: campaign?.socialLinks?.twitter ?? '',
 
       };
       setstate({ ...newState });
@@ -185,11 +192,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
     },
   });
-
-  // console.log({ campaign });
-  // console.log({ store });
-  // console.log({ errors });
-  // console.log({ values });
 
   React.useEffect(() => {
     if (ins === "2a" && campaign?.products) {
@@ -392,7 +394,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                       >
                         <ToggleButton
                           variant="outline-success"
-                          className={styles.enablebtn}
+                          className={values.joinExisting === true ? styles.enablebtn_dark : styles.enablebtn}
                           id="joinExisting-e"
                           value={1}
                           checked={values.joinExisting}
@@ -407,7 +409,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                         </ToggleButton>
                         <ToggleButton
                           variant="outline-danger"
-                          className={styles.disablebtn}
+                          className={values.joinExisting === false ? styles.disablebtn_dark : styles.disablebtn}
                           id="joinExisting-d"
                           value={0}
                           checked={values.joinExisting === false}

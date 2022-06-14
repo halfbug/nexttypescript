@@ -106,6 +106,9 @@ export default function useCampaign() {
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
+  const updateStoreForEditCampaignId = (campaignid: any) => {
+    dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: campaignid } });
+  };
 
   return {
     getCampaign,
@@ -117,5 +120,6 @@ export default function useCampaign() {
     updateSelectedCampaignAddProducts,
     updateCampaign,
     setValue,
+    updateStoreForEditCampaignId,
   };
 }
