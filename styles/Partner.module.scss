@@ -24,7 +24,7 @@
         @extend .mt-0;
         font-family: "DM Sans";
         font-style: normal;
-        font-weight: 500;
+        font-weight: 700;
         font-size: 16px;
         line-height: 20px;
     }
@@ -324,9 +324,9 @@
 
     &_emailBox {
         @extend .me-2;
-        width: 313.35px;
-        height: 41.11px !important;
-        line-height: 41.11px;
+        width: 314px;
+        height: 42px !important;
+        line-height: 42px;
     }
     &_table_heading {
         @extend .mt-4, .d-flex, .align-items-center;
