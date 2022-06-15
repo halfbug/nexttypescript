@@ -72,7 +72,16 @@ const ProductsSearch = ({
       ));
     }
   }, []);
-
+  useEffect(() => {
+    // console.log(products);
+    if (!otherProducts) {
+      setotherProducts(products?.filter(
+        (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
+      ).filter(
+        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+      ));
+    }
+  }, [otherProducts]);
   useEffect(() => {
     if (products && products.length > 0) {
       setotherProducts(products?.filter(
@@ -103,9 +112,29 @@ const ProductsSearch = ({
   }, [selected, clientDProducts]);
 
   const searchPrd = (name:string) => {
+    setotherProducts(products?.filter(
+      (item) => !popularProducts?.some((item2) => item2.id === item.id),
+    ).filter(
+      (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+    ));
     if (otherProducts && name) {
+      console.log(otherProducts, 'other in seacr');
+
       setotherProducts(
         otherProducts?.filter(
+          (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
+        ),
+      );
+    }
+    if ((!otherProducts || otherProducts?.length < 1) && name) {
+      console.log(otherProducts, 'other in seacr2');
+
+      setotherProducts(
+        products?.filter(
+          (item) => !popularProducts?.some((item2) => item2.id === item.id),
+        ).filter(
+          (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+        )?.filter(
           (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
         ),
       );
@@ -126,7 +155,6 @@ const ProductsSearch = ({
   const handleSearch = (event:any) => {
     const { value: searchText } = event.target;
     const code = event.keyCode || event.key;
-
     if (code !== 37 || code !== 38 || code !== 39 || code !== 40 || code !== 13) {
       debouncedSearch(searchText);
     }
@@ -140,8 +168,8 @@ const ProductsSearch = ({
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other products', products);
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other Popular', popularProducts);
+  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other products', products);
+  // console.log('🚀 ~ProductsSearch.tsx line 73 ~ useEffect ~ other Popular', popularProducts);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other', otherProducts);
 
   return (
