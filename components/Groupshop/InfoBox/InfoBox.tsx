@@ -177,7 +177,6 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
             <div className={styles.groupshop_infoBox_lastLine}>
               *Your cashback gets reimbursed
               automatically to the payment
-              <br />
               method you used for your order.
             </div>
           </div>

@@ -997,9 +997,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         right: 10px;
         position: absolute;
         border-radius: 50rem !important;
-        .iconButton {
-          @extend .rounded-pill;
-        }
       }
 
       &_addedby {
