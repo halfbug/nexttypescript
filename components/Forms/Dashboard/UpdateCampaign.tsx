@@ -68,7 +68,9 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   });
   const { findInArray } = useUtilityFunction();
-  const { campaign, updateCampaign, updateStoreForEditCampaignId } = useCampaign();
+  const {
+    campaign, updateCampaign, updateStoreForEditCampaignId, deleteProductCollections,
+  } = useCampaign();
   React.useEffect(() => {
     updateStoreForEditCampaignId(campaignid);
   }, [campaignid]);
@@ -246,11 +248,10 @@ export default function UpdateCampaign({ setHeading }: IProps) {
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);
-    const mycamp = updateCampaign(campaignid, 'products', []);
-    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+    setFieldValue('collections', []);
 
-    const mycollections = updateCampaign(campaignid, 'collections', []);
-    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycollections } });
+    const mycamp = deleteProductCollections(campaignid);
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
     handleSubmit();
   };
   const handleDeleteAddProduct = () => {

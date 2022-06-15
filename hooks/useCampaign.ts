@@ -86,6 +86,9 @@ export default function useCampaign() {
 
   const updateCampaign = useCallback((id, field, value) => {
     console.log('//////////////////////////');
+    console.log({ id });
+    console.log({ field });
+    console.log({ value });
     let updatedCampaigns: ICampaign[] = [];
     if (store?.campaigns) {
       updatedCampaigns = store?.campaigns?.map((item:any) => {
@@ -103,6 +106,26 @@ export default function useCampaign() {
     }
     return updatedCampaigns;
   }, []);
+
+  const deleteProductCollections = useCallback((id) => {
+    let updatedCampaigns: ICampaign[] = [];
+    if (store?.campaigns) {
+      updatedCampaigns = store?.campaigns?.map((item:any) => {
+        const newItem = { ...item };
+        if (newItem.id === id) {
+          // eslint-disable-next-line no-param-reassign
+          newItem.products = [];
+          newItem.collections = [];
+          setcampaign(newItem);
+          // getCampaign();
+          return newItem;
+        }
+        return newItem;
+      });
+    }
+    return updatedCampaigns;
+  }, []);
+
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
@@ -119,6 +142,7 @@ export default function useCampaign() {
     updateSelectedCampaignProducts,
     updateSelectedCampaignAddProducts,
     updateCampaign,
+    deleteProductCollections,
     setValue,
     updateStoreForEditCampaignId,
   };
