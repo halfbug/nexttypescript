@@ -3,7 +3,9 @@
 /* eslint-disable react/jsx-indent */
 import * as React from 'react';
 import styles from 'styles/UploadLogo.module.scss';
-import { Button, Form, ProgressBar } from 'react-bootstrap';
+import {
+  Row, Button, Form, ProgressBar,
+} from 'react-bootstrap';
 import CloudUp from 'assets/images/cloud-icon.svg';
 import axios from 'axios';
 import { StoreContext } from 'store/store.context';
@@ -137,7 +139,11 @@ export default function UploadButton({
 UploadButton.defaultProps = {
   icon: <>
     <CloudUp className={styles['upload-logo--icon']} />
-    <Form.Label style={{ width: 'min-content' }}>Upload logo</Form.Label>
+    <div className="mt-0">
+      <Form.Label style={{ width: 'min-content' }}>
+      Upload logo
+      </Form.Label>
+    </div>
 
         </>,
   className: '',

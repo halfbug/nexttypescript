@@ -127,14 +127,14 @@ export default function BrandInfo() {
               setFieldValue={setFieldValue}
               field="logoImage"
               value={values.logoImage}
-              className={styles.welcome_Obupload}
+              className={['row', styles.welcome_Obupload].join(' ')}
               url={getKeyFromS3URL(values.logoImage)}
             />
 
           </Col>
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className={['text-center d-flex align-self-center mx-2', styles.welcome_format].join(' ')}>
-              Under 500 KB
+              Under 500 kB
               <br />
               (Formats: PNG, JPG, JPEG)
 
@@ -148,7 +148,7 @@ export default function BrandInfo() {
           {' '}
           <InputGroup>
             <select
-              className="form-select"
+              className={['form-select', styles.welcome__select].join(' ')}
               aria-label="Default select example"
               onChange={handleChange}
               name="industry"
