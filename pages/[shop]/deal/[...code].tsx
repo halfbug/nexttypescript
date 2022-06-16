@@ -274,6 +274,16 @@ const GroupShop: NextPage = () => {
           }}
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
+        <meta name="application-name" content="Groupshop" />
+
+        <meta name="og:type" content="website" />
+        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="og:title" content="Groupshop" />
+        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="keywords" content="group, shop, discount, deal" />
+        <meta name="og:url" content={gsShortURL ?? gsURL} />
+        <link rel="preload" nonce="" href="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" as="image" />
+        <meta name="og:image" content="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" />
       </Head>
       <div className={styles.groupshop}>
         <header>
