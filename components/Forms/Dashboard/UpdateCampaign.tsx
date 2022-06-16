@@ -264,8 +264,8 @@ export default function UpdateCampaign({ setHeading }: IProps) {
   return (
     <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
-      <Row>
-        <Col lg={7} className="mt-4">
+      <Row className="pt-4">
+        <Col lg={7} className="gx-5">
           <Row>
             <Col>
               <h3>Groupshop Product</h3>
@@ -435,14 +435,15 @@ export default function UpdateCampaign({ setHeading }: IProps) {
           </Row>
 
         </Col>
-        <Col lg={5} className="mt-4">
-          <Row className="mb-2">
-            <Col>
-              <h3>Campaign Rewards</h3>
-            </Col>
-          </Row>
-
-          <UpdateRewards />
+        <Col lg={5} className="gx-5">
+          <Container>
+            <Row className="mb-2">
+              <Col>
+                <h3>Campaign Rewards</h3>
+              </Col>
+            </Row>
+            <UpdateRewards />
+          </Container>
         </Col>
       </Row>
       <Row className="mt-2">

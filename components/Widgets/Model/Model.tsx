@@ -21,6 +21,7 @@ export default function Model({
         keyboard={false}
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        contentClassName="campaignModal"
       >
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>
@@ -37,7 +38,7 @@ export default function Model({
           <Button variant="secondary" onClick={handleToggle}>
             Proceed
           </Button>
-          <Button variant="primary" onClick={handleClose}>Go Back</Button>
+          <Button variant="primary" className="btn-go-back" onClick={handleClose}>Go Back</Button>
         </Modal.Footer>
       </Modal>
     </>
