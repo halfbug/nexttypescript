@@ -711,7 +711,7 @@ const GroupShop: NextPage = () => {
         />
         {isModalForMobile && (
         <div>
-          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} />
+          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} onClick={() => setShowRewards(true)} />
         </div>
         )}
       </div>

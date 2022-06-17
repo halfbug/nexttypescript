@@ -2489,7 +2489,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     button {
       border: 1px solid #ccb2f9;
       font-size: 14px;
-      &:active{
+      color: #212529;
+
+      &:active, &:hover{
         color: #212529;
       }
     }
