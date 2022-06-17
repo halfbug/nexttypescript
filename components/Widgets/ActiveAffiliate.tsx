@@ -45,7 +45,7 @@ export default function ActiveAffiliate() {
           <Form.Check
             type="switch"
             id="custom-switch-1"
-            className={styles.partner__switch}
+            className={['d-flex align-items-center', styles.partner__switch].join(' ')}
             checked
             onChange={(e) => {}}
           />
