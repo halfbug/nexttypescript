@@ -113,33 +113,33 @@ const ProductsSearch = ({
   }, [selected, clientDProducts]);
 
   const searchPrd = (name:string) => {
-    setotherProducts(products?.filter(
-      (item) => !popularProducts?.some((item2) => item2.id === item.id),
-    ).filter(
-      (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-    ));
+    let newFilteredSearchArray;
+    // setotherProducts(products?.filter(
+    //   (item) => !popularProducts?.some((item2) => item2.id === item.id),
+    // ).filter(
+    //   (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+    // ));
     if (otherProducts && name) {
-      setotherProducts(
-        otherProducts?.filter(
-          (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
-        ),
+      newFilteredSearchArray = otherProducts?.filter(
+        (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
+      setotherProducts(newFilteredSearchArray);
     }
     if ((!otherProducts || otherProducts?.length < 1) && name) {
-      const newFilteredSearchArray = products?.filter(
+      newFilteredSearchArray = products?.filter(
         (item) => !popularProducts?.some((item2) => item2.id === item.id),
       ).filter(
         (item) => !addedProducts?.some((item2) => item2.productId === item.id),
       )?.filter(
         (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
-      if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
-        setshowMsg('');
-      } else {
-        setshowMsg(`No matches found for ${name}`);
-      }
 
       setotherProducts(newFilteredSearchArray);
+    }
+    if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
+      setshowMsg('');
+    } else {
+      setshowMsg(`No matches found for ${name}`);
     }
   };
   const debouncedSearch = useDebounce(
@@ -305,11 +305,9 @@ const ProductsSearch = ({
                 <p>SEARCH TO FIND YOUR FAVORITE PRODUCTS</p>
               </div>
             )}
-            {otherProducts?.length === 0 && (
-              <div className={styles.groupshop_modal_empty}>
-                <p>{showMsg}</p>
-              </div>
-            )}
+            <div className={styles.groupshop_modal_empty}>
+              <p>{showMsg}</p>
+            </div>
           </Row>
         </Modal.Body>
         {(otherProducts && otherProducts.length > 0) && (
