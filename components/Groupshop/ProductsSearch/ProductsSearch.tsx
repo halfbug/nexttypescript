@@ -42,6 +42,7 @@ const ProductsSearch = ({
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const [showMsg, setshowMsg] = useState('');
   const ref = useRef(null);
 
   const { googleEventCode } = useGtm();
@@ -118,8 +119,6 @@ const ProductsSearch = ({
       (item) => !addedProducts?.some((item2) => item2.productId === item.id),
     ));
     if (otherProducts && name) {
-      console.log(otherProducts, 'other in seacr');
-
       setotherProducts(
         otherProducts?.filter(
           (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
@@ -127,17 +126,20 @@ const ProductsSearch = ({
       );
     }
     if ((!otherProducts || otherProducts?.length < 1) && name) {
-      console.log(otherProducts, 'other in seacr2');
-
-      setotherProducts(
-        products?.filter(
-          (item) => !popularProducts?.some((item2) => item2.id === item.id),
-        ).filter(
-          (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-        )?.filter(
-          (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
-        ),
+      const newFilteredSearchArray = products?.filter(
+        (item) => !popularProducts?.some((item2) => item2.id === item.id),
+      ).filter(
+        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+      )?.filter(
+        (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
+      if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
+        setshowMsg('');
+      } else {
+        setshowMsg(`No matches found for ${name}`);
+      }
+
+      setotherProducts(newFilteredSearchArray);
     }
   };
   const debouncedSearch = useDebounce(
@@ -147,6 +149,7 @@ const ProductsSearch = ({
   const handleSubmit = (e:any) => { e.preventDefault(); };
   const closeModal = (e: any) => {
     setShow(false);
+    setshowMsg('');
     setotherProducts(undefined);
     setSelected(undefined);
     handleClose(e);
@@ -304,7 +307,7 @@ const ProductsSearch = ({
             )}
             {otherProducts?.length === 0 && (
               <div className={styles.groupshop_modal_empty}>
-                <p>No more products left in store</p>
+                <p>{showMsg}</p>
               </div>
             )}
           </Row>
