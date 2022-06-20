@@ -743,14 +743,44 @@ const CREATE_SIGNUP = gql`
   }
 `;
 
+const GET_OVERVIEW_DATA = gql`
+query overviews($storeId: String!) {
+  overviews(storeId: $storeId) {
+    id
+    name
+  }
+}
+`;
+
+const GET_OVERVIEW_METRICS = gql`
+query overviewMetric($storeId: String!) {
+  overviewMetrics(storeId: $storeId) {
+    cashBack
+    revenue
+    feeCharges
+    feeChargesGS
+    totalGS    
+    totalVisitors
+  }
+}
+`;
+
+const GET_TOTAL_ORDERS = gql`
+query getOrderCount($shop: String!) {
+  getOrderCount(shop: $shop) {
+    countTotalOrders
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS,
   GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
-  GET_ACTIVE_STORES, GET_QR_DEAL,
+  GET_ACTIVE_STORES, GET_QR_DEAL, GET_TOTAL_ORDERS,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
-  GET_BILLING_BY_DATE,
+  GET_BILLING_BY_DATE, GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS,
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING, CREATE_SIGNUP,
 };

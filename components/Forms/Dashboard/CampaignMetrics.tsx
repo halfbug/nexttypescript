@@ -1,9 +1,11 @@
 /* eslint-disable jsx-quotes */
-import * as React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Overview.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import CalendarIcon from 'assets/images/calendar-icon.svg';
+import { StoreContext } from 'store/store.context';
+import { useQuery } from '@apollo/client';
 
 // import images
 import ProductLogo from 'assets/images/viral-product-icon.svg';
@@ -11,7 +13,20 @@ import {
   Accordion, Col, Dropdown, Row,
 } from 'react-bootstrap';
 
-export default function CampaignMetrics() {
+export interface ICampaignMatrics {
+  revenue: string | number;
+  numPurchases: string | number;
+  aov: string | number;
+  uniqueClick: string | number;
+  trafficValue: string | number;
+  cashbackGiven: string | number;
+}
+
+export default function CampaignMetrics({
+  revenue, numPurchases, aov, uniqueClick, trafficValue, cashbackGiven,
+} : ICampaignMatrics) {
+  const { store, dispatch } = useContext(StoreContext);
+
   return (
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
@@ -41,40 +56,22 @@ export default function CampaignMetrics() {
       <div className={styles.metrics__box}>
         <Row>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" arrowIcon={false} />
+            <SummaryBox label="Total Revenue " value={revenue} iconType="RevenueIcon" arrowIcon={false} />
           </Col>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" arrowIcon={false} />
+            <SummaryBox label="Number of Purchases" value={numPurchases} iconType="PurchaseIcon" arrowIcon={false} />
           </Col>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" arrowIcon={false} />
+            <SummaryBox label="Average Order Value" value={aov} iconType="ScaleIcon" arrowIcon={false} />
           </Col>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
+            <SummaryBox label="Unique Clicks" value={uniqueClick} iconType="ClickIcon" arrowIcon={false} />
           </Col>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" arrowIcon={false} />
+            <SummaryBox label="Traffic Value" value={trafficValue} iconType="TrafficIcon" arrowIcon={false} />
           </Col>
           <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Total Revenue " value="-" iconType="RevenueIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Number of Purchases" value="-" iconType="PurchaseIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Average Order Value" value="-" iconType="ScaleIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Traffic Value" value="-" iconType="TrafficIcon" arrowIcon={false} />
-          </Col>
-          <Col lg={4} className={styles.metrics__box__summary_box}>
-            <SummaryBox label="Cashback Given" value="-" iconType="CashBackIcon" arrowIcon={false} />
+            <SummaryBox label="Cashback Given" value={cashbackGiven} iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
         <Row className="mt-4">
