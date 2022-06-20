@@ -206,6 +206,7 @@
             opacity: 0.75;
         }
         &_ques {
+            @extend .me-2;
             button {
                 font-family: "DM Sans";
                 font-style: normal;

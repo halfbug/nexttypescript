@@ -3,6 +3,10 @@
 .partner {
     @extend .d-flex, .mt-2, .px-0;
 
+    .form-control{
+        line-height: 1.35;
+    }
+
     &__box_1 {
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
@@ -320,7 +324,7 @@
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
-        line-height: 18px;
+        // line-height: 18px;
     }
 
     &_emailBox {
