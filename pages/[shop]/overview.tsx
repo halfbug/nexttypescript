@@ -80,7 +80,7 @@ const ShopMain: NextPage = () => {
         setRogs('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(formatNumber(cashBack));
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
       } else {
         setCashbackGiven('-');
       }

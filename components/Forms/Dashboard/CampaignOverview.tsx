@@ -34,6 +34,7 @@ export default function CampaignOverview({
   useEffect(() => {
     if (data) {
       setActiveCampaign(data?.overviews);
+      refetch();
     }
   }, [data]);
   return (
@@ -127,7 +128,7 @@ export default function CampaignOverview({
                     Re-enable it to keep earning.
                   </div>
                   <div className="mt-2">
-                    <WhiteButton>Turn on</WhiteButton>
+                    <WhiteButton><Link href={`/${shopName}/campaign`}>Turn on</Link></WhiteButton>
                   </div>
                 </div>
               </div>
