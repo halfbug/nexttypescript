@@ -76,6 +76,40 @@ export interface ICampaignForm {
 
 }
 
+export type DiscountCode ={
+  title: string;
+  percentage: string;
+  priceRuleId: string;
+}
+
+export type partnerDetails ={
+  fname: string;
+  lname: string;
+  email: string;
+  shopifyCustomerId?: string;
+}
+
+export type PartnerRewards ={
+  baseline: number;
+  average: number;
+  maximum: number;
+}
+
+export type DealProduct ={
+  productId: string;
+  type?: 'deal' | 'abandoned';
+  addedBy: string;
+  customerIP: string;
+}
+
+export interface IPartnerTools {
+  updatePartnersInput?: object;
+  email: string;
+  minDiscount: any;
+  maxDiscount: any;
+  partnerCommission: any;
+}
+
 export interface ICollection {
   title: string;
   id: string;

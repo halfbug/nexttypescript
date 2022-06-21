@@ -167,6 +167,93 @@ const CREATE_CAMPAIGN_DB = gql`
   }
 `;
 
+const CREATE_PARTNER_DB = gql`
+  mutation createPartner($createPartnersInput: CreatePartnersInput!) {
+    createPartner(createPartnersInput: $createPartnersInput) {
+    id
+    storeId
+    campaignId
+    url
+    shortUrl
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+    partnerDetails{
+      fname
+      lname
+      email
+      shopifyCustomerId
+    }
+    partnerRewards{
+      baseline
+      average
+      maximum
+    }
+    partnerCommission
+    isActive
+    createdAt
+    }
+  }
+`;
+
+const GET_ALL_PARTERS = gql`
+query partnerGroupShops($storeId: String!) {
+  partnerGroupshops(storeId: $storeId) {  
+    id
+    campaignId
+    url
+    shortUrl
+    partnerCommission
+    isActive  
+    discountCode {
+      title
+      percentage
+      priceRuleId  
+    }
+    partnerRewards {
+      baseline
+      average
+      maximum
+    }
+    partnerDetails {
+      fname
+      lname
+      email
+      shopifyCustomerId 
+    }
+  }
+}
+`;
+
+const UPDATE_PARTNER_GROUPSHOP = gql`
+  mutation updatePartnerGroupshop(
+    $updatePartnersInput: UpdatePartnersInput!
+    ) {
+    updatePartnerGroupshop(updatePartnersInput: $updatePartnersInput) {
+    id
+    isActive
+    partnerCommission
+    }
+  }
+`;
+
+const EXIT_PARTNER_GROUPSHOP = gql`
+query ExistPartnerGroupshop($email: String!, $storeId: String!) {
+  existPartnerGroupshop(email: $email, storeId: $storeId) {    
+    isActive
+  }
+}
+`;
+
 const GET_PRODUCTS = gql`
 query Products($productQueryInput: ProductQueryInput!) {
   products(productQueryInput: $productQueryInput) {
@@ -779,8 +866,9 @@ export {
   UPDATE_STORE_SETTINGS, UPDATE_CAMPAIGN, GET_APPSETTINGS,
   GET_SALES_TARGET, GET_PRODUCT_DETAIL, GET_GROUPSHOP,
   GET_CAMPAIGN_BY_ID, CREATE_CAMPAIGN_DB, ADD_DEAL_PRODUCT, GET_ALL_CAMPAIGNS,
-  GET_ACTIVE_STORES, GET_QR_DEAL, GET_TOTAL_ORDERS,
+  GET_ACTIVE_STORES, GET_QR_DEAL, CREATE_PARTNER_DB, GET_ALL_PARTERS,
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
-  GET_BILLING_BY_DATE, GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS,
+  GET_BILLING_BY_DATE, UPDATE_PARTNER_GROUPSHOP, EXIT_PARTNER_GROUPSHOP,
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING, CREATE_SIGNUP,
+  GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS,
 };

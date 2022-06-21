@@ -1,32 +1,46 @@
 import Page from 'components/Layout/Page/Page';
 import ActiveAffiliate from 'components/Widgets/ActiveAffiliate';
-import AffiliateDetail from 'components/Widgets/AffiliateDetail';
 import NewPartnerForm from 'components/Widgets/NewPartnerForm';
-import PartnerRewards from 'components/Widgets/PartnerRewards';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styles from 'styles/Partner.module.scss';
+import { GET_ALL_PARTERS } from 'store/store.graphql';
+import { StoreContext } from 'store/store.context';
+import { useQuery } from '@apollo/client';
 
-const PartnerTools: NextPage = () => (
-  <Page headingText="Partner Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
-    <Row className={styles.partner}>
-      <h3>Partner Tools</h3>
-      <Col xxl={8} xl={8} lg={8} md={8} xs={12}>
-        <NewPartnerForm />
-      </Col>
-      <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
-        <PartnerRewards />
-      </Col>
-      <Col xxl={8} xl={8} lg={8} md={8} xs={12} className="">
-        <ActiveAffiliate />
-      </Col>
-      <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
-        <AffiliateDetail />
-      </Col>
-    </Row>
-    <Row />
-  </Page>
-);
+const PartnerTools: NextPage = () => {
+  const [partnerList, setPartnerList] = useState<[]>([]);
+  const { store, dispatch } = useContext(StoreContext);
+  const {
+    loading, data, refetch,
+  } = useQuery(GET_ALL_PARTERS, {
+    variables: { storeId: store.id },
+  });
+
+  const handleAfterSubmit = () => {
+    if (data) {
+      refetch();
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      setPartnerList(data.partnerGroupshops);
+    }
+  }, [data]);
+
+  return (
+    <Page headingText="Partner Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
+      <Row className={styles.partner}>
+        <h3>Partner Tools</h3>
+        <NewPartnerForm handleAfterSubmit={handleAfterSubmit} />
+      </Row>
+      <Row className={styles.partner}>
+        <ActiveAffiliate partnerList={partnerList} handleAfterSubmit={handleAfterSubmit} />
+      </Row>
+    </Page>
+  );
+};
 
 export default PartnerTools;

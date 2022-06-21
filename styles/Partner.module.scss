@@ -16,7 +16,34 @@
         @extend .mb-4, .p-4;
         border: 1px dashed $dotted-border-color1;
         border-radius: $border-radius-medium;
-        width: 311px;
+        position: relative;
+        &__name{
+            font-weight: $font-weight-bold;
+            font-size: $size-16px;
+            line-height: 20px;  
+        }
+        &__commission{
+            font-weight: $font-weight-normal;
+            font-size: $size-14px;
+            line-height: 20px;
+            &__score{
+                @extend .p-1, .px-1;
+                font-family: "DM Sans";
+                font-weight: 400 !important;
+                font-size: $font-size-small-medium;
+                color: $black;
+                background: $modern;
+                border-radius: $border-radius-light;
+                margin-left: 20px !important;
+                margin-right: 8px;
+                height: 26px;
+            }
+        }
+        &__text{
+            font-weight: $font-weight-normal;
+            font-size: $size-14px;
+            line-height: 20px;  
+        }
     }
 
     &__box_2 {
@@ -24,16 +51,9 @@
         border: 1px dashed $dotted-border-color2;
         border-radius: $border-radius-medium;
     }
-    &_wom {
-        @extend .mt-0;
-        font-family: "DM Sans";
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 20px;
-    }
+
     &__wom_score {
-        @extend .p-1, .px-3, .mx-1;
+        @extend .p-1, .px-3;
         font-family: "DM Sans";
         font-weight: 400 !important;
         font-size: $font-size-small-medium;
@@ -42,7 +62,7 @@
         background: $classic;
         border-radius: $border-radius-light;
         margin-left: 25px !important;
-        width: 35px;
+        margin-right: 8px;
         height: 26px;
     }
 
@@ -104,7 +124,7 @@
             background-color: $modern;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 112px !important;
+            width: 112px;
         }
         &__tag2 {
             @extend .d-flex, .justify-content-center, .align-items-center;
@@ -147,10 +167,9 @@
         font-size: $font-size-medium;
         font-weight: $font-weight-light;
         line-height: $line-height-18;
-        font-family: "DM Sans";
+        font-family: "Mulish";
         opacity: $opacity-medium;
         margin-left: 0px;
-        width: 542px;
     }
 
     h3 {
@@ -194,13 +213,15 @@
         @extend .me-2, .px-2, .lh-sm, .rounded, .mx-1;
         height: 31px;
         min-width: 117px;
-        border: 1px solid $black;
-        border-radius: 6px!important;
+        color: #000000;
         font-weight: 700;
-        font-family: "DM Sans";
-        border-radius: 6px!important;
+        font-family: 'DM Sans';
         font-size: 12px;
         line-height: 15px;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
         &__txt {
             @extend .ms-1;
             position: relative;
@@ -210,23 +231,23 @@
 
     &__data_row {
         @extend .px-2, .my-2, .d-flex, .justify-content-center, .align-items-center;
-        font-weight: $font-weight-bolder;
+        font-weight: $font-weight-normal;
         font-size: $font-size-small-medium;
         line-height: $line-height-15;
         color: $black;
         background-color: $comp_bg;
         height: $height-large;
-        border-radius: 20px;
+        border-radius: $border-radius-large;
 
         &__active {
             @extend .px-2, .my-2, .d-flex, .justify-content-center, .align-items-center;
-            font-weight: $font-weight-bolder;
+            font-weight: $font-weight-normal;
             font-size: $font-size-small-medium;
             line-height: $line-height-15;
             color: $black;
-            background: rgba(220, 208, 232, 0.5);
+            background-color: $lightClassic;
             height: $height-large;
-            border-radius: 20px;
+            border-radius: $border-radius-large;
         }
 
         &__tag1 {
@@ -235,20 +256,29 @@
             background-color: $modern;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 112px;
+            min-width: 118px;
         }
         &__tag2 {
             @extend .d-flex, .justify-content-center, .align-items-center;
             background-color: $yellow;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 47px;
-            background: #dcd0e8;
+            min-width: 124px;
+        }
+        &__name{
+            font-weight: 700;
+        }
+        &__commission{
+            @extend .d-flex, .justify-content-center, .align-items-center;
+            background-color: $classic;
+            border-radius: $border-radius-light;
+            height: $height-normal;
+            width: inherit;
+            max-width: 40px;
         }
     }
 
     &__switch {
-        padding-bottom: .2em;
         input {
             width: 34px !important;
             height: $height-low;
@@ -265,12 +295,12 @@
 
     &__rewards_box {
         @extend .mb-4, .p-4;
-        border: 1px dashed #f28bf4;
+        border: 1px dashed #F28BF4;
         border-radius: $border-radius-medium;
 
         &__header {
             color: #000000;
-            font-family: "DM Sans";
+            font-family: 'DM Sans';
             font-weight: 400;
             font-size: 16px;
             line-height: 21px;
@@ -278,12 +308,12 @@
 
         &__heading {
             color: #000000;
-            font-family: "DM Sans";
+            font-family: 'DM Sans'; 
             font-weight: 700;
             font-size: 14px;
             line-height: 18px;
             margin-bottom: 11px;
-
+            
             svg {
                 margin-left: 2px;
             }
@@ -291,14 +321,14 @@
 
         &__percentage {
             padding: 6px 12px;
-            background: #d5fa52;
+            background: #D5FA52;
             border-radius: 6px;
             margin-right: 6px;
         }
 
         &__edit {
             color: #000000;
-            font-family: "DM Sans";
+            font-family: 'DM Sans';
             font-weight: 700;
             font-size: 12px;
             line-height: 16px;
@@ -306,16 +336,17 @@
             text-decoration-line: underline;
         }
     }
-    ::-webkit-input-placeholder {
-        // color: #161414;
-        // opacity: 0.1;
-        font-family: "DM Sans";
-        font-style: normal;
+    &__table_head{
+        @extend .px-2;
+        color: $subheadingclr;
         font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
-        color: rgba(29, 35, 41, 0.5);
     }
+  
+    &__womScoreContainer {
+        position: relative;
+        padding: 20px;
+    }
+
     input[type="text"],
     textarea {
         background-color: #fcfcfc;
@@ -325,23 +356,32 @@
         font-weight: 700;
         font-size: 14px;
         // line-height: 18px;
+
     }
 
-    &_emailBox {
-        @extend .me-2;
-        width: 314px;
-        height: 42px !important;
-        line-height: 42px;
+    &__overlay {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        border-radius: 20px;
     }
-    &_table_heading {
-        @extend .mt-4, .d-flex, .align-items-center;
-        font-family: "DM Sans";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        color: $black;
-        mix-blend-mode: normal;
-        opacity: 0.4;
+
+    &__overlayText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 30px;
+        color: white;
+        transform: translate(-50%,-50%);
+        width: 100%;
+        text-align: center;
+        font-family: DM Sans;
     }
 }
