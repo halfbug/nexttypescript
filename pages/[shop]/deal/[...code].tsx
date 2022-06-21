@@ -103,6 +103,7 @@ const GroupShop: NextPage = () => {
       if (groupshop.id && pending) {
       // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
         setpending(false);
+        // setallProducts(groupshop?.allProducts?.filter((item) => item.outofstock === true));
         setallProducts(groupshop?.allProducts);
         setmember(groupshop?.members[0]);
         dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
@@ -170,17 +171,16 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
     // const addedPrds = dealProducts?.filter((item));
-    // check addedPrds has no product which is < 1 price
+    const addedPrdsCtx = filterArray(addedProducts ?? [], ownerProducts ?? [], 'productId', 'id');
 
     console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
     dispatch({
       type: 'UPDATE_GROUPSHOP',
       payload: {
         ...gsctx,
-        addedProducts: _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]),
+        addedProducts: _.uniq([...addedPrdsCtx || [], ...addedPrds || []]),
       },
     });
-    console.log('added', _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]));
   }, [dealProducts, popularProducts]);
   useEffect(() => {
     async function gets3logo() {

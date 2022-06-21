@@ -4,23 +4,37 @@ import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { IProduct } from 'types/store';
 import useIP from './useIP';
+import useUtilityFunction from './useUtilityFunction';
 
 export default function useDeal() {
   const {
     gsctx,
     dispatch,
   } = useContext(GroupshopContext);
+  const { filterArray } = useUtilityFunction();
 
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
   const [allDiscount, setallDiscount] = useState<(string | undefined)[] | undefined>(undefined);
+  const {
+    members: [
+      {
+        products: ownerProducts,
+      },
+    ],
+  } = gsctx;
 
   const clientDealProducts = useCallback(
-    ():string[] | undefined => ([...gsctx?.dealProducts?.filter(
-      ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
-    )?.map(
-      ({ productId }:DealProduct) => productId,
-    ) ?? []]), [clientIP, gsctx.dealProducts],
+    ():string[] | undefined => {
+      const addedPrds = filterArray(gsctx?.dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
+      console.log('🚀 useDeal ~ addedPrds', addedPrds);
+
+      return ([...addedPrds.filter(
+        ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
+      )?.map(
+        ({ productId }:DealProduct) => productId,
+      ) ?? []]);
+    }, [clientIP, gsctx.dealProducts],
   );
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
