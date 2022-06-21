@@ -148,12 +148,13 @@ export interface IProduct {
   purchaseCount?: number;
 }
 export interface ISettings {
-  brandColor: string;
-  customColor: string;
-  customBg: string;
-  imageUrl: string;
-  youtubeUrl: string;
-  media: string;
+  brandColor?: string;
+  customColor?: string;
+  customBg?: string;
+  imageUrl?: string;
+  youtubeUrl?: string;
+  media?: string;
+  s3imageUrl?: string;
 }
 
 export interface RootProps {

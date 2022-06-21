@@ -2,14 +2,11 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
-// import Head from 'next/head';
-// import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { GET_GROUPSHOP } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
-// import { StoreContext } from 'store/store.context';
 import {
   Col, Container, Dropdown, Row,
 } from 'react-bootstrap';
@@ -55,8 +52,10 @@ import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
 import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
+import useBanner from 'hooks/useBanner';
+import useLogo from 'hooks/useLogo';
 
-const GroupShop: NextPage = () => {
+const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { shop, discountCode, status } = useCode();
@@ -80,10 +79,6 @@ const GroupShop: NextPage = () => {
   // load all products
   useProducts(`${shop}.myshopify.com`);
 
-  // console.log('🚀 ~ file: [...code].tsx ~ line74  ~ error', error);
-  console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
-  // console.log('🚀 ~~ line 75 ~ loading', loading);
-
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
     undefined,
   );
@@ -95,29 +90,19 @@ const GroupShop: NextPage = () => {
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
-  const [storeLogo, setStoreLogo] = useState<string>('');
-  const [bannerImage, setBannerImage] = useState<string>('');
 
   useEffect(() => {
-    async function gets3headerBanner() {
-      if (groupshop.id && pending) {
-      // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
-        setpending(false);
-        setallProducts(groupshop?.allProducts?.filter((item) => item.outofstock === false));
-        // setallProducts(groupshop?.allProducts);
-        setmember(groupshop?.members[0]);
-        dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
-        if (groupshop?.campaign?.settings?.imageUrl) {
-          const key = getKeyFromS3URL(groupshop?.campaign?.settings?.imageUrl ?? '');
-          const bannerImageS3 = await getSignedUrlS3(key);
-          if (bannerImageS3) setBannerImage(bannerImageS3);
-        } else {
-          setBannerImage('/images/bg.jpg');
-        }
-      }
+    if (groupshop.id && pending) {
+      setpending(false);
+      setallProducts(groupshop?.allProducts);
+      setmember(groupshop?.members[0]);
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
-    gets3headerBanner();
   }, [groupshop, pending]);
+
+  // banner image and logo load
+  const bannerImage = useBanner();
+  const storeLogo = useLogo();
 
   const {
     gsURL,
@@ -144,8 +129,7 @@ const GroupShop: NextPage = () => {
       },
     ],
     members,
-    store: { brandName } = { brandName: '' },
-    store: { logoImage } = { logoImage: '' },
+    store: { brandName, logoImage } = { brandName: '', logoImage: '' },
     popularProducts,
     dealProducts,
     addedProducts,
@@ -182,15 +166,6 @@ const GroupShop: NextPage = () => {
       },
     });
   }, [dealProducts, popularProducts]);
-  useEffect(() => {
-    async function gets3logo() {
-      const key = getKeyFromS3URL(logoImage ?? '');
-      const logoS3 = await getSignedUrlS3(key);
-      // console.log('🚀 [...code] logoS3', logoS3);
-      if (logoS3) setStoreLogo(logoS3);
-    }
-    gets3logo();
-  }, [logoImage]);
 
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
@@ -277,13 +252,13 @@ const GroupShop: NextPage = () => {
         <meta name="application-name" content="Groupshop" />
 
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get $10 off.`} />
         <meta name="og:title" content="Groupshop" />
-        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get $10 off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" as="image" />
-        <meta name="og:image" content="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" />
+        <link rel="preload" nonce="" href={meta.photo} as="image" />
+        <meta property="og:image" content={meta.photo} />
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -720,3 +695,22 @@ const GroupShop: NextPage = () => {
 };
 
 export default GroupShop;
+
+export const getServerSideProps = async (context: any) => {
+  console.log('🚀 ~ file: [...code].tsx ~ line 725 ~ constgetServerSideProps:GetServerSideProps= ~ context', context.params);
+  const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const res = await fetch(url, requestOptions);
+  const resJson = await res.json();
+  return {
+    props: {
+      meta: resJson,
+    },
+  };
+};

@@ -25,7 +25,7 @@ export const gsInit: IGroupshop = {
     priceRuleId: '',
   },
   milestones: [],
-  store: { brandName: '', products: [] },
+  store: { brandName: '', products: [], logoImage: '' },
   cart: [],
   campaign: {
     socialLinks: {

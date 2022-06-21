@@ -1,13 +1,12 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Send } from 'react-bootstrap-icons';
 import {
   Col, Row,
 } from 'react-bootstrap';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
-import { GroupshopContext } from 'store/groupshop.context';
 import { useQRCode } from 'next-qrcode';
+import useDeal from 'hooks/useDeal';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
 
@@ -19,7 +18,7 @@ type ShareButtonProps = {
 const ShareButton = ({
   label, className, shareurl, placement, disabled, popContent, icon, onClick,
 }: ShareButtonProps) => {
-  const { gsctx, dispatch } = useContext(GroupshopContext);
+  const { gsctx, banner } = useDeal();
   const { discountCode: { percentage } } = gsctx;
   const { Canvas } = useQRCode();
   return (
@@ -39,7 +38,7 @@ const ShareButton = ({
           <Row className="p-3">
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} media={banner} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
           </Row>

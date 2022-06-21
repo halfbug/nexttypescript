@@ -7,6 +7,7 @@ import {
   Facebook, Instagram, Pinterest, Twitter, Tiktok, Youtube, Chat,
 } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
+import { CustomPropsType } from 'types/groupshop';
 
 type SocialButtonProps = React.PropsWithChildren<{
   network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
@@ -14,8 +15,8 @@ type SocialButtonProps = React.PropsWithChildren<{
 }>;
 
 const SocialButton = ({
-  url, network, children,
-}: SocialButtonProps) => (
+  url, network, children, ...props
+}: SocialButtonProps & CustomPropsType) => (
 
   <Button
     className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
@@ -61,7 +62,7 @@ const SocialButton = ({
     {network === 'Pinterest'
       && (
         <PinterestShareButton
-          media="https://uploads-ssl.webflow.com/61897c94beba7addd32eff3a/618b60f014f6282a172433d0_dashboard-new.png"
+          media={props.media}
           title="Groupshop"
           url={url}
         >

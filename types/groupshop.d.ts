@@ -98,3 +98,7 @@ export interface IGroupshop {
   status?: string;
 
 }
+
+export type CustomPropsType = {
+  [key: string]: any;
+};
