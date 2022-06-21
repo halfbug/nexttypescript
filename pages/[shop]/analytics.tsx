@@ -9,8 +9,8 @@ import CustomerData from 'components/Forms/Dashboard/CutomerData';
 const Analytics: NextPage = () => (
   <Page headingText="Analytics" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
     <Container>
-      <Row className="mt-5">
-        <Col lg={7} className="p-0">
+      <Row className="pt-4">
+        <Col lg={7} className="gx-5">
           <CoreMetrics />
         </Col>
         <Col lg={{ span: 4, offset: 1 }} className="p-0">

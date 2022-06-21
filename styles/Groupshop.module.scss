@@ -1002,12 +1002,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       &_addedby {
         @extend .groupshop__pcard_tag;
-        // @extend .p-1, .py-2, .rounded-pill, .m-1;
-        // background-color: white;
-        bottom: 10px;
-        right: 10px;
+        top: 10px;
+        right: 5px;
         position: absolute;
         color: #000000;
+        border: 1px solid #000000;
+        border-radius: 6px !important;
+        @include media-breakpoint-down(md) {
+          font-size: 10px !important;
+        }
       }
       &_addedbytop {
         @extend .groupshop__pcard_tag;
