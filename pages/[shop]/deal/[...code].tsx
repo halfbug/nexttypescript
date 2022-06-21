@@ -103,8 +103,8 @@ const GroupShop: NextPage = () => {
       if (groupshop.id && pending) {
       // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
         setpending(false);
-        // setallProducts(groupshop?.allProducts?.filter((item) => item.outofstock === true));
-        setallProducts(groupshop?.allProducts);
+        setallProducts(groupshop?.allProducts?.filter((item) => item.outofstock === false));
+        // setallProducts(groupshop?.allProducts);
         setmember(groupshop?.members[0]);
         dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
         if (groupshop?.campaign?.settings?.imageUrl) {
