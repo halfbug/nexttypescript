@@ -152,6 +152,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.dealProducts]);
 
+  console.log('🚀 ~ file: [...code].tsx ~ line 165 ~ useEffect ~ allProducts', allProducts?.map((item) => item.outofstock));
   useEffect(() => {
     const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
     // const addedPrds = dealProducts?.filter((item));
