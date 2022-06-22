@@ -94,7 +94,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   useEffect(() => {
     if (groupshop.id && pending) {
       setpending(false);
-      setallProducts(groupshop?.allProducts);
+      // setallProducts(groupshop?.allProducts);
+      setallProducts(groupshop?.allProducts?.filter(
+        (item) => item.outofstock === false,
+      ));
       setmember(groupshop?.members[0]);
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
