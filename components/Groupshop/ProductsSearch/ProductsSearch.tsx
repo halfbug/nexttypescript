@@ -139,7 +139,7 @@ const ProductsSearch = ({
     if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
       setshowMsg('');
     } else {
-      setshowMsg(`No matches found for ${name}`);
+      setshowMsg(`No matches found for "${name}"`);
     }
   };
   const debouncedSearch = useDebounce(
