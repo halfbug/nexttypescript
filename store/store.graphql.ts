@@ -860,6 +860,22 @@ query getOrderCount($shop: String!) {
 }
 `;
 
+const GET_ORDERS_BY_GS = gql`
+query getGsOrders($groupshopUrl: String!) {
+  getGsOrders(groupshopUrl: $groupshopUrl) {    
+    orderId
+  }
+}
+`;
+
+const GET_ORDER_DETAILS_BY_ID = gql`
+query getOrderDetails($orderid: String!) {
+  getOrderDetails(orderid: $orderid) {    
+    orderId
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -870,5 +886,6 @@ export {
   GET_STORE_DETAILS, GET_TOTAL_GS, GET_MONTHLY_GS, GET_TOTAL_REVENUE,
   GET_BILLING_BY_DATE, UPDATE_PARTNER_GROUPSHOP, EXIT_PARTNER_GROUPSHOP,
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING, CREATE_SIGNUP,
-  GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS,
+  GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_ORDERS_BY_GS,
+  GET_ORDER_DETAILS_BY_ID,
 };
