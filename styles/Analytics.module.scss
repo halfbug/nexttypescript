@@ -1,7 +1,5 @@
 @import "./variables.scss";
 
-.analytics {}
-
 .coreMetrics {
     &__header {
         margin: 25px 0 5px 0;
@@ -117,10 +115,15 @@
             margin-bottom: 24px;
         }
     }
+
+    &__summary_box {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-right: 0px;
+    }
 }
 
 .viralityMetrics {
-    max-width: 335px;
     &__header {
         margin: 25px 0 5px 0;
         display: flex;

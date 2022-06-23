@@ -31,24 +31,22 @@ export default function CoreMetrics() {
       </div>
 
       <Row>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Total Revenue " value="$2,300" iconType="RevenueIcon" arrowIcon />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Number of Purchases" value="432" iconType="PurchaseIcon" arrowIcon />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Average Order Value" value="$41" iconType="ScaleIcon" arrowIcon />
         </Col>
-      </Row>
-      <Row>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Unique Clicks" value="8,300" iconType="ClickIcon" arrowIcon />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Traffic Value" value="$432" iconType="TrafficIcon" arrowIcon />
         </Col>
-        <Col lg={4}>
+        <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Cashback Given" value="$41" iconType="CashBackIcon" arrowIcon />
         </Col>
       </Row>

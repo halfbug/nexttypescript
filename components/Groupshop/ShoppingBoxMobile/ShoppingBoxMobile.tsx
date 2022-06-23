@@ -13,7 +13,7 @@ const ShoppingBoxMobile = ({ shareurl, onClick }: { shareurl: string, onClick: a
           className="px-3 bg-white ms-2"
           onClick={() => googleEventCode('earn-cashback-modal')}
         /> */}
-      <Button onClick={onClick} className="px-3 bg-white ms-2">How it Works</Button>
+      <Button onClick={onClick} className="px-3 bg-white ms-2">Share and earn $X</Button>
       {/* <NativeShareButton
           label="How it Works"
           className="px-3 bg-white ms-2"
