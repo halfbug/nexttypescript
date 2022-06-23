@@ -274,7 +274,7 @@ export default function useDeal() {
   const activateURL = `${gsURL}/status&activated`;
 
   const banner = gsctx?.campaign?.settings?.s3imageUrl ?? '/images/bg.jpg';
-  const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
+  // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   return {
     currencySymbol,
     discount,
@@ -303,6 +303,6 @@ export default function useDeal() {
     activateURL,
     banner,
     gsctx,
-    getExpectedCashBack,
+    // getExpectedCashBack,
   };
 }

@@ -97,7 +97,7 @@ export interface IGroupshop {
 
   status?: string;
 
-  expectedCashBack?: number;
+  // expectedCashBack?: number;
 
 }
 

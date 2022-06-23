@@ -1,14 +1,15 @@
 /* eslint-disable no-undef */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Button, Col, Row } from 'react-bootstrap';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
 import { Send } from 'react-bootstrap-icons';
+import useTopBanner from 'hooks/useTopBanner';
 
 const ShoppingBoxMobile = (
   { shareurl, val }: { shareurl: string,
     // onClick: any,
-    val: string | undefined
+    val: undefined | number
   },
 ) => (
   <>

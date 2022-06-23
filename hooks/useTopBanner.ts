@@ -33,7 +33,7 @@ const useTopBanner = () => {
   }, [gsctx, cashbackVal]);
 
   return {
-    text, setText, cashBackText,
+    text, setText, cashBackText, cashbackVal,
   };
 };
 export default useTopBanner;
