@@ -166,7 +166,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
 
               </Row>
               <Row className="mt-3 mb-4">
-                <Col xl={7} lg={6} md={8}>
+                <Col xl={6} lg={6} md={6}>
                   <Form.Group className="" controlId="PartnerFormvalidation">
                     <Form.Control
                       type="email"
@@ -180,7 +180,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
-                <Col xl={5} lg={6} md={4}>
+                <Col xl={6} lg={6} md={6}>
                   <Row>
                     <Col xl={5} lg={5} md={5}>
                       <Button
@@ -194,7 +194,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
                         Add Affiliate
                       </Button>
                     </Col>
-                    <Col xl={7} lg={7} md={7}>
+                    <Col xl={5} lg={5} md={5}>
                       <Button
                         variant="outline-dark"
                         className={styles.partner__dark_btn}
