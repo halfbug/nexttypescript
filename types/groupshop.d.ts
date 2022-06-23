@@ -97,6 +97,8 @@ export interface IGroupshop {
 
   status?: string;
 
+  expectedCashBack?: number;
+
 }
 
 export type CustomPropsType = {

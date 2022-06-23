@@ -117,6 +117,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
     milestones,
     getDateDifference,
     currencySymbol,
+    getExpectedCashBack,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -355,7 +356,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                 <ShareButton
                   placement="bottom"
                   shareurl={gsShortURL ?? gsURL}
-                  label="Share and earn $X"
+                  label={`Share and earn ${getExpectedCashBack}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
@@ -690,7 +691,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         />
         {isModalForMobile && (
         <div>
-          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} onClick={() => setShowRewards(true)} />
+          <ShoppingBoxMobile
+            shareurl={gsShortURL ?? gsURL}
+            onClick={() => setShowRewards(true)}
+            val={getExpectedCashBack}
+          />
         </div>
         )}
       </div>

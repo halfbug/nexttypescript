@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Col, Row, Container } from 'react-bootstrap';
 import useDeal from 'hooks/useDeal';
@@ -13,13 +13,11 @@ const SmallBannerBox = ({
   const {
     milestones, getBannerTotalCashBack, currencySymbol,
   } = useDeal();
+
   const [prev, setprev] = React.useState(0);
   useEffect(() => {
     setprev(milestones.length - 2 < 0 ? 0 : milestones.length - 2);
   }, [milestones]);
-
-  console.log({ prev });
-  console.log(milestones[milestones.length - 1].discount);
 
   return (
 
