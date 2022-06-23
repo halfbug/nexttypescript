@@ -697,7 +697,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         <div>
           <ShoppingBoxMobile
             shareurl={gsShortURL ?? gsURL}
-            onClick={() => setShowRewards(true)}
+            // onClick={() => setShowRewards(true)}
             val={getExpectedCashBack}
           />
         </div>
