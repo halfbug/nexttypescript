@@ -18,6 +18,7 @@ import { Member } from 'types/groupshop';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useGtm from 'hooks/useGtm';
+import { useMediaQuery } from 'react-responsive';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
 
@@ -34,10 +35,11 @@ type ProductGridProps = {
   addProducts(e: boolean): any;
   handleDetail(prd: any): void;
   id?: string;
+  isModalForMobile?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
-  products, pending, children, maxrows = 0, addProducts, handleDetail,
+  products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -84,6 +86,7 @@ const ProductGrid = ({
     e.stopPropagation();
     googleButtonCode('product-share');
   };
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 90 ~ isModalForMobile', isModalForMobile);
 
   return (
     <Container {...props} ref={ref} id={id}>
@@ -143,7 +146,7 @@ const ProductGrid = ({
                     { addedBy, productId },
                   ) => {
                     const show = displayAddedByFunc(productId);
-                    const htmldata = show ? (
+                    let htmldata = show ? (
                       <span
                         className={styles.groupshop__pcard_tag_addedby}
                         key={`${productId}_${Math.random()}`}
@@ -151,6 +154,7 @@ const ProductGrid = ({
                         {`Added by ${addedBy}`}
                       </span>
                     ) : '';
+                    htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
                     return htmldata;
                   })}
                 </button>
@@ -315,6 +319,7 @@ ProductGrid.defaultProps = {
   xxl: 3,
   showHoverButton: false,
   id: 'popularproducts',
+  isModalForMobile: false,
 };
 
 export default ProductGrid;

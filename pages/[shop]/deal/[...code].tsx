@@ -481,6 +481,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           id="shoppedby"
+          isModalForMobile={isModalForMobile}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -551,6 +552,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
             id="popularproducts"
+            isModalForMobile={isModalForMobile}
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
@@ -571,6 +573,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
             id="toppicks"
+            isModalForMobile={isModalForMobile}
           >
             <h2>Top Picks</h2>
           </ProductGrid>
@@ -588,6 +591,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           handleDetail={(prd) => setsProduct(prd)}
           showHoverButton
           id="allproducts"
+          isModalForMobile={isModalForMobile}
         >
           <div className="position-relative">
             <h2>All Products</h2>

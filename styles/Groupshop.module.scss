@@ -1002,7 +1002,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       &_addedby {
         @extend .groupshop__pcard_tag;
-        top: 10px;
+        bottom: 10px;
         right: 5px;
         position: absolute;
         color: #000000;
@@ -2451,9 +2451,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       margin-top: 26px;
     }
-    &__blackBtn,&__greenBtn{
+    &__blackBtn,
+    &__greenBtn {
       padding: 10px 13px;
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: $font-weight-bolder;
       font-size: 16px;
@@ -2495,7 +2496,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 14px;
       color: #212529;
 
-      &:active, &:hover{
+      &:active,
+      &:hover {
         color: #212529;
       }
     }
