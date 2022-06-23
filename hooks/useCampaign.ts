@@ -9,15 +9,18 @@ export default function useCampaign() {
     store,
     dispatch,
   } = useContext(StoreContext);
+
   const [campaign, setcampaign] = useState<ICampaign | undefined>(undefined);
   const [newcampaign, setNewcampaign] = useState<ICampaign | undefined>(undefined);
-
+  // console.log('🚀 ~ file: useCampaign.ts ~ line 12 ~ useCampaign ~ store', store);
   useEffect(() => {
     setcampaign(getCampaign());
     setNewcampaign(getNewCampaign());
   }, [store]);
   // console.log({ campaign });
+
   // useEffect(() => {
+  // console.log('🚀 ~ file: useCampaign.ts ~ line 22 ~ useCampaign ~ store', store);
   //   setcampaign(getCampaign());
   // }, [store.singleEditCampaignId]);
 
@@ -85,10 +88,10 @@ export default function useCampaign() {
   }, []);
 
   const updateCampaign = useCallback((id, field, value) => {
-    console.log('//////////////////////////');
-    console.log({ id });
-    console.log({ field });
-    console.log({ value });
+    // console.log('//////////////////////////');
+    // console.log({ id });
+    // console.log({ field });
+    // console.log({ value });
     let updatedCampaigns: ICampaign[] = [];
     if (store?.campaigns) {
       updatedCampaigns = store?.campaigns?.map((item:any) => {
@@ -124,7 +127,7 @@ export default function useCampaign() {
       });
     }
     return updatedCampaigns;
-  }, []);
+  }, [store]);
 
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
