@@ -20,7 +20,7 @@ const Sidebar = () => {
   // refactor. set loading state and if loading dont show the screen and
   // after loading show the links
   const { store } = useContext(StoreContext);
-  const shopName: string[] | undefined = store?.shop?.split('.', 1);
+  const shop: string[] | undefined = store?.shop?.split('.', 1);
   const { pathname } = useRouter();
   // console.log('🚀 ~ file: SideBar.tsx ~ line 24 ~ Sidebar ~ route', route);
 
@@ -36,7 +36,13 @@ const Sidebar = () => {
           <div className={styles.sidebarmenuwrap}>
             <ul className={styles.sidebarmenu}>
               <li>
-                <Link href={`/${shopName}/overview`}>
+                <Link
+                  // href={`/${shopName}/overview`}
+                  href={{
+                    pathname: '/[shop]/overview',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('overview')}>
                       <span className={styles.linkicon}><Overviewicon /></span>
@@ -46,7 +52,13 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/campaign`}>
+                <Link
+                // href={`/${shopName}/campaign`}
+                  href={{
+                    pathname: '/[shop]/campaign',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('campaign')}>
                       <span className={styles.linkicon}><Campaignicon /></span>
@@ -56,7 +68,13 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/analytics`}>
+                <Link
+                // href={`/${shopName}/analytics`}
+                  href={{
+                    pathname: '/[shop]/analytics',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('analytics')}>
                       <span className={styles.linkicon}><Analyticsicon /></span>
@@ -66,7 +84,13 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/billing`}>
+                <Link
+                // href={`/${shopName}/billing`}
+                  href={{
+                    pathname: '/[shop]/billing',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('billing')}>
                       <span className={styles.linkicon}><Billingicon /></span>
@@ -77,7 +101,13 @@ const Sidebar = () => {
               </li>
 
               <li>
-                <Link href={`/${shopName}/partnertools`}>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/partnertools',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('partnertools')}>
                       <span className={styles.linkicon}><PartnerToolLogo /></span>
@@ -87,7 +117,13 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/settings`}>
+                <Link
+                // href={`/${shopName}/settings`}
+                  href={{
+                    pathname: '/[shop]/settings',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('settings')}>
                       <span className={styles.linkicon}><Settingsicon /></span>
@@ -97,7 +133,13 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${shopName}/knowledgebase`}>
+                <Link
+                // href={`/${shopName}/knowledgebase`}
+                  href={{
+                    pathname: '/[shop]/knowledgebase',
+                    query: { shop },
+                  }}
+                >
                   <a>
                     <span className={linkstyle('knowledgebase')}>
                       <span className={styles.linkicon}><Knowledgebaseicon /></span>
