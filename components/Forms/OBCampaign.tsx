@@ -108,6 +108,11 @@ export default function OBCampaign() {
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
   };
+
+  const handleDeleteProduct = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
+    setdisableBtn(false);
+  };
   const Bstyle = {
     width: '143px',
   };
@@ -197,7 +202,7 @@ export default function OBCampaign() {
           {errors.criteria}
         </Form.Control.Feedback>
       </Row>
-      <ProductButton disableBtn={disableBtn} />
+      <ProductButton disableBtn={disableBtn} handleDelete={handleDeleteProduct} />
       {/* <p>25 product(s)/2 collection(s) selected</p> */}
       <Row className="mt-4">
         <Col lg={12} className="d-flex align-items-center">

@@ -26,7 +26,7 @@ interface IValues {
 
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
-
+  const [logofeedback, setlogofeedback] = React.useState<null | string>(null);
   const [addBI, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
@@ -66,23 +66,29 @@ export default function BrandInfo() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { brandName, industry, logoImage } = valz;
+      if (logoImage !== '') {
+        setlogofeedback('');
 
-      await addBI({
-        variables: {
-          updateStoreInput: {
-            id: store.id,
-            shop: store.shop,
-            brandName,
-            industry,
-            logoImage,
-            installationStep: 2,
+        console.log(logoImage);
+        await addBI({
+          variables: {
+            updateStoreInput: {
+              id: store.id,
+              shop: store.shop,
+              brandName,
+              industry,
+              logoImage,
+              installationStep: 2,
+            },
           },
-        },
-      });
-      dispatch({ type: 'UPDATE_STORE', payload: valz });
-      setParams({ ins: 2 });
-      // console.log(valz);
-      // setTimeout(() => resetForm(), 5000);
+        });
+        dispatch({ type: 'UPDATE_STORE', payload: valz });
+        setParams({ ins: 2 });
+        // console.log(valz);
+        // setTimeout(() => resetForm(), 5000);
+      } else {
+        setlogofeedback('Please upload the Brand Logo.');
+      }
     },
   });
   const { getKeyFromS3URL } = useUtilityFunction();
@@ -130,7 +136,7 @@ export default function BrandInfo() {
               className={['row', styles.welcome_Obupload].join(' ')}
               url={getKeyFromS3URL(values.logoImage)}
             />
-
+            <div className="text-danger">{logofeedback}</div>
           </Col>
           <Col lg={9} className="d-flex align-items-center justify-content-start">
             <Form.Text className={['text-center d-flex align-self-center mx-2', styles.welcome_format].join(' ')}>
