@@ -91,7 +91,6 @@ export default function CampaignOverview({
                 </div>
                 <div className={styles.overiew__performanceBox__multiplier}>
                   {rogs}
-                  X
                 </div>
                 <div className={styles.overiew__performanceBox__rogs}>
                   ROGS

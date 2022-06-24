@@ -846,8 +846,7 @@ query overviewMetric($storeId: String!) {
     revenue
     feeCharges
     feeChargesGS
-    totalGS    
-    totalVisitors
+    totalGS 
   }
 }
 `;
@@ -876,6 +875,15 @@ query getOrderDetails($orderid: String!) {
 }
 `;
 
+const GET_TOTAL_UNIQUE_CLICKS_BY_ID = gql`
+query getUniqueClicks($shop: String!) {
+  getUniqueClicks(shop: $shop) {
+    uniqueVisitors
+    totalOrders
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -887,5 +895,5 @@ export {
   GET_BILLING_BY_DATE, UPDATE_PARTNER_GROUPSHOP, EXIT_PARTNER_GROUPSHOP,
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING, CREATE_SIGNUP,
   GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_ORDERS_BY_GS,
-  GET_ORDER_DETAILS_BY_ID,
+  GET_ORDER_DETAILS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_ID,
 };

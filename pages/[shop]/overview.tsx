@@ -7,7 +7,7 @@ import CampaignMetrics from 'components/Forms/Dashboard/CampaignMetrics';
 import CampaignStrength from 'components/Forms/Dashboard/CampaignStrength';
 import { Col, Container, Row } from 'react-bootstrap';
 import { StoreContext } from 'store/store.context';
-import { GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS } from 'store/store.graphql';
+import { GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
@@ -21,6 +21,7 @@ const ShopMain: NextPage = () => {
   const { getSignedUrlS3, getKeyFromS3URL } = useUtilityFunction();
   const [revenue, setRevenue] = useState<number | string>('-');
   const [numPurchases, setNumPurchases] = useState<any>(undefined);
+  const [uniqueClicks, setUniqueClicks] = useState<any>(undefined);
   const [aov, setAov] = useState<number | string>('-');
   const [uniqueClick, setUniqueClick] = useState<number | string>('-');
   const [trafficValue, setTrafficValue] = useState<number | string>('-');
@@ -38,17 +39,19 @@ const ShopMain: NextPage = () => {
   });
 
   const {
-    data: orderData, refetch: orderRefetch,
-  } = useQuery(GET_TOTAL_ORDERS, {
-    variables: { shop: store?.shop },
+    data: uniqueData, refetch: uniqueRefetch,
+  } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_ID, {
+    variables: { shop: store?.id },
   });
 
   useEffect(() => {
-    if (orderData) {
-      const numOfOrder = orderData?.getOrderCount?.countTotalOrders;
+    if (uniqueData) {
+      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors;
+      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders;
+      setUniqueClicks(numUniqueVisitors);
       setNumPurchases(numOfOrder);
     }
-  }, [orderData]);
+  }, [uniqueData]);
 
   const {
     loading, error, data, refetch,
@@ -57,20 +60,21 @@ const ShopMain: NextPage = () => {
   });
 
   useEffect(() => {
-    if (data && orderData) {
+    if (data && uniqueData) {
       const rev = data.overviewMetrics[0]?.revenue || '0';
       const cashBack = data.overviewMetrics[0]?.cashBack || 0;
-      const getVisitors = data.overviewMetrics[0]?.totalVisitors || 0;
-      setUniqueClick(formatNumber(getVisitors));
+      if (uniqueClicks > 0) {
+        setUniqueClick(formatNumber(uniqueClicks));
+      }
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numPurchases) {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / getVisitors;
+        const calTraffric = rev / uniqueClicks;
         const calRogs = rev / cashBack;
-        setRogs(`${formatNumber(calRogs)}`);
+        setRogs(`${formatNumber(calRogs)}X`);
         setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setTrafficValue('-');
@@ -85,12 +89,7 @@ const ShopMain: NextPage = () => {
         setCashbackGiven('-');
       }
     }
-  }, [data, orderData, numPurchases]);
-
-  useEffect(() => {
-    orderRefetch();
-    refetch();
-  }, []);
+  }, [data, uniqueData, numPurchases]);
 
   return (
     <Page headingText="Overview" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
