@@ -7,7 +7,7 @@ import CampaignMetrics from 'components/Forms/Dashboard/CampaignMetrics';
 import CampaignStrength from 'components/Forms/Dashboard/CampaignStrength';
 import { Col, Container, Row } from 'react-bootstrap';
 import { StoreContext } from 'store/store.context';
-import { GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
+import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
@@ -20,10 +20,9 @@ const ShopMain: NextPage = () => {
   const { logoImage } = store;
   const { getSignedUrlS3, getKeyFromS3URL } = useUtilityFunction();
   const [revenue, setRevenue] = useState<number | string>('-');
-  const [numPurchases, setNumPurchases] = useState<any>(undefined);
-  const [uniqueClicks, setUniqueClicks] = useState<any>(undefined);
+  const [numPurchases, setNumPurchases] = useState<any>('-');
+  const [uniqueClicks, setUniqueClicks] = useState<any>('-');
   const [aov, setAov] = useState<number | string>('-');
-  const [uniqueClick, setUniqueClick] = useState<number | string>('-');
   const [trafficValue, setTrafficValue] = useState<number | string>('-');
   const [cashbackGiven, setCashbackGiven] = useState<number | string>('-');
   const [rogs, setRogs] = useState<number | string>('-');
@@ -63,9 +62,6 @@ const ShopMain: NextPage = () => {
     if (data && uniqueData) {
       const rev = data.overviewMetrics[0]?.revenue || '0';
       const cashBack = data.overviewMetrics[0]?.cashBack || 0;
-      if (uniqueClicks > 0) {
-        setUniqueClick(formatNumber(uniqueClicks));
-      }
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numPurchases) {
@@ -101,7 +97,7 @@ const ShopMain: NextPage = () => {
               revenue={revenue}
               numPurchases={numPurchases}
               aov={aov}
-              uniqueClick={uniqueClick}
+              uniqueClick={uniqueClicks}
               trafficValue={trafficValue}
               cashbackGiven={cashbackGiven}
             />
