@@ -182,7 +182,7 @@ export default function DBSettings({
               </Row>
               <Row>
                 <Col className={values.media === 'image' ? 'd-flex flex-wrap' : 'd-none'}>
-                  -
+                  <span className={styles.dot}>-</span>
                   <UploadButton
                     icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
                     setFieldValue={setFieldValue}

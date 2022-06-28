@@ -44,7 +44,7 @@ export default function CampaignMetrics({
 
           <Dropdown.Menu className={styles.metrics__header__dropdownMenu}>
             <Dropdown.Item className={styles.metrics__header__dropdownItem}>
-              item 1
+              Coming Soon
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
