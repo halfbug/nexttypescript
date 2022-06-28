@@ -62,6 +62,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+  const shareEarnBtn = useMediaQuery({
+    query: '(max-width: 768px)',
+  });
 
   const {
     loading,
@@ -699,7 +702,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           shareurl={gsShortURL ?? gsURL}
           handleClose={() => setShowRewards(false)}
         />
-        {isModalForMobile && (
+        {shareEarnBtn && (
         <div>
           <ShoppingBoxMobile
             shareurl={gsShortURL ?? gsURL}
