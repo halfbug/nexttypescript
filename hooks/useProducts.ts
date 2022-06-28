@@ -1,11 +1,10 @@
 import {
   useCallback, useContext, useEffect, useState,
 } from 'react';
-import { useRouter } from 'next/router';
 import { useLazyQuery } from '@apollo/client';
-import { GET_PRODUCTS, GET_STORE } from 'store/store.graphql';
-import { StoreContext } from 'store/store.context';
+import { GET_PRODUCTS } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
+import _ from 'lodash';
 import { IProduct } from 'types/store';
 import useUtilityFunction from './useUtilityFunction';
 
@@ -64,7 +63,7 @@ const useProducts = (shop: string) => {
         type: 'UPDATE_PRODUCTS',
         payload: {
           ...gsctx,
-          store: { ...gsctx.store, products: otherProducts },
+          store: { ...gsctx.store, products: _.uniq(otherProducts) },
         },
       });
     }
