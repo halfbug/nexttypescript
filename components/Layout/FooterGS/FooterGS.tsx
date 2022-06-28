@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import footerLogo1 from 'public/images/logo-thin.png';
+import footerLogoExpire from 'public/images/logo-thin-expire.png';
 import SocialButtonLinks from 'components/Buttons/SocialButtonLinks/SocialButtonLinks';
 import styles from 'styles/Groupshop.module.scss';
 import {
@@ -200,7 +201,7 @@ const Footer = ({
         <hr />
         <div className={styles.groupshop_footer_f2}>
           <p>Powered by</p>
-          <img src={footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
+          <img src={isExpired ? footerLogoExpire.src : footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
         </div>
       </Row>
       <AlertComponent />
@@ -208,5 +209,8 @@ const Footer = ({
 
   );
 };
+// Footer.defaultProps = {
+//   isExpired: false,
+// };
 
 export default Footer;

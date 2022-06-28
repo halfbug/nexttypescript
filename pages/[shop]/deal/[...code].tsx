@@ -673,7 +673,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         </ProductGrid>
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
-            <p>Don’t see what you like?</p>
+            { isExpired ? (
+              <p>Want to shop these products?</p>
+            )
+              : (
+                <p>Don’t see what you like?</p>
+              ) }
             <Button
               className={['align-self-center my-2 px-5 py-2'].join(' ')}
               onClick={handleAddProduct}
