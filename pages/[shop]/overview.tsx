@@ -45,10 +45,14 @@ const ShopMain: NextPage = () => {
 
   useEffect(() => {
     if (uniqueData) {
-      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors;
-      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders;
-      setUniqueClicks(numUniqueVisitors);
-      setNumPurchases(numOfOrder);
+      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors || 0;
+      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders || 0;
+      if (numUniqueVisitors > 0) {
+        setUniqueClicks(numUniqueVisitors);
+      }
+      if (numOfOrder > 0) {
+        setNumPurchases(numOfOrder);
+      }
     }
   }, [uniqueData]);
 
