@@ -54,6 +54,7 @@ import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBo
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
+import usePopular from 'hooks/usePopularProduct';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -144,6 +145,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
   } = useUtilityFunction();
+  const { popularShuffled } = usePopular(popularProducts);
   const { topPicks } = useTopPicks();
   useEffect(() => {
     // setallProducts(Array.from(new Set(
@@ -556,7 +558,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             products={
               ownerProducts
               && (ownerProducts!.length > 3
-                ? popularProducts?.slice(0, 3)
+                // ? popularProducts?.slice(0, 3)
+                ? popularShuffled
                 : newPopularPrd)
             }
             maxrows={1}

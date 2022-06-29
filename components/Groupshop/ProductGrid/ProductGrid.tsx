@@ -19,6 +19,7 @@ import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
+import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
 
@@ -96,113 +97,121 @@ const ProductGrid = ({
         </Col>
       </Row>
       <Row className="justify-content-center">
-        {renderItems?.map((prod) => (
-          <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
-            <ProductCard
-              isrc={prod.featuredImage}
-              onClick={() => handleDetail(prod)}
-              imgOverlay={(
-                <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
-                  <span className={styles.groupshop__pcard_tag_price}>
-                    {currencySymbol}
-                    {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
-                    {' '}
-                    OFF
-                  </span>
-                  {showHoverButton && (
-                    <Row className={styles.groupshop__pcard_tag_addToCart}>
-                      <Col lg={10} className="p-0">
-                        <Button
-                          variant="primary"
-                          className={styles.groupshop__pcard_tag_addToCart_btn}
-                          onClick={() => handleDetail(prod)}
-                          // () => { setsProduct(prod); setshowDetail(true); }}
-                          disabled={isExpired}
-                        >
-                          Add to Cart
-
-                        </Button>
-                      </Col>
-                      <Col lg={2} className="ps-1">
-                        <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
-                      </Col>
-                    </Row>
-                  )}
-                  <div className={styles.groupshop__pcard_tag_boughtby}>
-                    {topFive(getBuyers(prod.id)?.map(
-                      (member: Member) => (
-                        <span className={styles.groupshop__pcard_tag_buyer}>
-                          {formatName(member.orderDetail.customer)}
-                        </span>
-                      ),
-                    ))}
-
-                    {getBuyers(prod.id).length > 0 && (
-                      <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                  </div>
-                  {dealProducts?.filter(
-                    ({ productId }) => productId === prod.id,
-                  ).map((
-                    { addedBy, productId },
-                  ) => {
-                    const show = displayAddedByFunc(productId);
-                    let htmldata = show ? (
-                      <span
-                        className={styles.groupshop__pcard_tag_addedby}
-                        key={`${productId}_${Math.random()}`}
-                      >
-                        {`Added by ${addedBy}`}
+        {renderItems?.map((prod, index) => (
+          <>
+            {prod.title !== 'AddProductType' ? (
+              <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
+                <ProductCard
+                  isrc={prod.featuredImage}
+                  onClick={() => handleDetail(prod)}
+                  imgOverlay={(
+                    <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
+                      <span className={styles.groupshop__pcard_tag_price}>
+                        {currencySymbol}
+                        {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
+                        {' '}
+                        OFF
                       </span>
-                    ) : '';
-                    htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
-                    return htmldata;
-                  })}
-                </button>
+                      {showHoverButton && (
+                      <Row className={styles.groupshop__pcard_tag_addToCart}>
+                        <Col lg={10} className="p-0">
+                          <Button
+                            variant="primary"
+                            className={styles.groupshop__pcard_tag_addToCart_btn}
+                            onClick={() => handleDetail(prod)}
+                          // () => { setsProduct(prod); setshowDetail(true); }}
+                            disabled={isExpired}
+                          >
+                            Add to Cart
+
+                          </Button>
+                        </Col>
+                        <Col lg={2} className="ps-1">
+                          <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
+                        </Col>
+                      </Row>
+                      )}
+                      <div className={styles.groupshop__pcard_tag_boughtby}>
+                        {topFive(getBuyers(prod.id)?.map(
+                          (member: Member) => (
+                            <span className={styles.groupshop__pcard_tag_buyer}>
+                              {formatName(member.orderDetail.customer)}
+                            </span>
+                          ),
+                        ))}
+
+                        {getBuyers(prod.id).length > 0 && (
+                        <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                      </div>
+                      {dealProducts?.filter(
+                        ({ productId }) => productId === prod.id,
+                      ).map((
+                        { addedBy, productId },
+                      ) => {
+                        const show = displayAddedByFunc(productId);
+                        let htmldata = show ? (
+                          <span
+                            className={styles.groupshop__pcard_tag_addedby}
+                            key={`${productId}_${Math.random()}`}
+                          >
+                            {`Added by ${addedBy}`}
+                          </span>
+                        ) : '';
+                        htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                        return htmldata;
+                      })}
+                    </button>
               )}
-            >
-              <div className={styles.groupshop_product_info}>
-                <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-                {prod.orders?.length > 0 && (
-                <p className="text-center mb-1 fs-5 fw-bold">
-                  🔥
-                  <i>
-                    {prod.orders?.length === 1 ? `${prod.orders?.length} friend shopped`
-                      : `${prod.orders?.length} friends shopped`}
+                >
+                  <div className={styles.groupshop_product_info}>
+                    <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
+                    {prod.orders?.length > 0 && (
+                    <p className="text-center mb-1 fs-5 fw-bold">
+                      🔥
+                      <i>
+                        {prod.orders?.length === 1 ? `${prod.orders?.length} friend shopped`
+                          : `${prod.orders?.length} friends shopped`}
 
-                  </i>
-                </p>
-                )}
+                      </i>
+                    </p>
+                    )}
 
-                <h5 className="pt-2 text-center fw-bold">
-                  <span className="text-decoration-line-through fw-light me-1">
-                    {currencySymbol}
-                    {/* {prod.price} */}
-                    {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                  </span>
-                  {' '}
-                  <span>
-                    {currencySymbol}
-                    {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                  </span>
-                </h5>
-                {!showHoverButton && (
-                <div className={styles.groupshop_addtoCart_wrapper}>
-                  <Button
-                    variant="primary"
-                    className={styles.groupshop_addtoCart}
-                    onClick={() => handleDetail(prod)}
+                    <h5 className="pt-2 text-center fw-bold">
+                      <span className="text-decoration-line-through fw-light me-1">
+                        {currencySymbol}
+                        {/* {prod.price} */}
+                        {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                      </span>
+                      {' '}
+                      <span>
+                        {currencySymbol}
+                        {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                      </span>
+                    </h5>
+                    {!showHoverButton && (
+                    <div className={styles.groupshop_addtoCart_wrapper}>
+                      <Button
+                        variant="primary"
+                        className={styles.groupshop_addtoCart}
+                        onClick={() => handleDetail(prod)}
                     // () => { setsProduct(prod); setshowDetail(true); }}
-                    disabled={isExpired}
-                  >
-                    Add to Cart
+                        disabled={isExpired}
+                      >
+                        Add to Cart
 
-                  </Button>
-                  <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
-                </div>
-                )}
-              </div>
-            </ProductCard>
-          </Col>
+                      </Button>
+                      <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
+                    </div>
+                    )}
+                  </div>
+                </ProductCard>
+              </Col>
+            ) : (
+              <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
+                <AddProduct xs={xs} md={md} lg={lg} xl={xl} key={`addP${prod.id}`} percentage={percentage} isExpired={isExpired} addProducts={() => addProducts(true)} />
+              </Col>
+            )}
+          </>
         ))}
         {[...new Array(fillerz)]?.map((n) => (
           <Col xs={xs} md={6} lg={4} xl={3} key={n}>
