@@ -6,7 +6,7 @@ import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   ButtonGroup,
-  Col, Container, FormControl, Offcanvas, Row, Badge,
+  Col, Container, FormControl, Offcanvas, Row, Badge, Spinner,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import useCart from 'hooks/useCart';
@@ -358,15 +358,19 @@ const Cart = ({
               <Row>
                 <Col className=" mt-2">
                   {loading ? (
-                    <Button
-                      variant="primary"
-                      onClick={handleCheckout}
-                      size="lg"
-                      className={[styles.groupshop_cart_checkout, ''].join(' ')}
-                      disabled
-                    >
-                      Checkout
-                    </Button>
+                    <>
+                      <Button
+                        variant="primary"
+                        onClick={handleCheckout}
+                        size="lg"
+                        className={[styles.groupshop_cart_checkout, ''].join(' ')}
+                        disabled
+                      >
+                        Checkout
+                      </Button>
+                      <Spinner animation="border" className="align-middle" />
+
+                    </>
 
                   ) : (
                     <Button
