@@ -24,7 +24,7 @@ const MarqueeSlider = () => (
           •
         </span>
         share your favorite products with your favorite people
-        <span>
+        <span className="px-3">
           •
         </span>
         get rewarded for your influence
