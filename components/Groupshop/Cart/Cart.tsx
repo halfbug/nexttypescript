@@ -67,6 +67,7 @@ const Cart = ({
   const { suggestedProd } = useSuggested();
   // const { setsProduct } = useDetail(suggestedProd);
   const [upToPercent, setupToPercent] = React.useState<string>();
+  const [loading, setLoading] = React.useState<boolean>(false);
   const { campaign } = gsctx;
   useEffect(() => {
     const rew = { ...campaign?.salesTarget?.rewards };
@@ -76,6 +77,7 @@ const Cart = ({
   const { push } = useRouter();
 
   const handleCheckout = () => {
+    setLoading(true);
     checkoutButtonClick(cartProducts.map((prd) => ({
       productId: prd.id.split('/')[4],
       productName: prd.title,
@@ -334,14 +336,28 @@ const Cart = ({
               </Row>
               <Row>
                 <Col className=" mt-2">
-                  <Button
-                    variant="primary"
-                    onClick={handleCheckout}
-                    size="lg"
-                    className={styles.groupshop_cart_checkout}
-                  >
-                    Checkout
-                  </Button>
+                  {loading ? (
+                    <Button
+                      variant="primary"
+                      onClick={handleCheckout}
+                      size="lg"
+                      className={[styles.groupshop_cart_checkout, ''].join(' ')}
+                      disabled
+                    >
+                      Checkout
+                    </Button>
+
+                  ) : (
+                    <Button
+                      variant="primary"
+                      onClick={handleCheckout}
+                      size="lg"
+                      className={styles.groupshop_cart_checkout}
+                    >
+                      Checkout
+                    </Button>
+
+                  )}
 
                 </Col>
               </Row>
