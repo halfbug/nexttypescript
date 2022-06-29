@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useEffect } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -16,19 +17,20 @@ import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import Image from 'react-bootstrap/Image';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
-
 interface CartProps extends RootProps {
   show : boolean;
   handleClose(): any;
   handleDetail(item:any):void;
-  product : IProduct | undefined
+  product : IProduct | undefined;
+  setShow: any;
 }
 
 const Cart = ({
-  show, pending = false, handleDetail, handleClose, product, ...props
+  show, pending = false, handleDetail, handleClose, product, setShow, ...props
 }: CartProps) => {
   const {
     gsctx,
@@ -154,16 +156,35 @@ const Cart = ({
             ) : cartProducts.map((prd) => (
               <Row className="px-0 m-1 py-2 border-bottom">
                 <Col xs={4}>
-                  <img
+                  <Image
                     src={prd.selectedVariant?.image?.src ?? prd.featuredImage}
                     alt={prd.title}
                     className={styles.groupshop_modal_cart_thumbnail}
+                    onKeyPress={() => {
+                      setShow(false);
+                      handleDetail(prd);
+                    }}
+                    onClick={() => {
+                      setShow(false);
+                      handleDetail(prd);
+                    }}
                   />
                 </Col>
                 <Col className="px-1 d-block align-items-baseline" xs={8}>
 
                   <div className="d-flex justify-content-between pb-0 mb-0">
-                    <div className={styles.groupshop_cartProductHeading}>
+                    <div
+                      className={styles.groupshop_cartProductHeading}
+                      // role={button}
+                      onKeyPress={() => {
+                        setShow(false);
+                        handleDetail(prd);
+                      }}
+                      onClick={() => {
+                        setShow(false);
+                        handleDetail(prd);
+                      }}
+                    >
                       {prd.title}
                     </div>
                     <h5>

@@ -701,6 +701,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         />
         <Cart
           show={showCart}
+          setShow={setshowCart}
           handleClose={() => setshowCart(false)}
           product={undefined}
           handleDetail={(prd) => setsProduct(prd)}
