@@ -165,7 +165,11 @@ const ProductGrid = ({
                 {prod.orders?.length > 0 && (
                 <p className="text-center mb-1 fs-5 fw-bold">
                   🔥
-                  <i>{` ${prod.orders?.length} friends shopped`}</i>
+                  <i>
+                    {prod.orders?.length === 1 ? `${prod.orders?.length} friend shopped`
+                      : `${prod.orders?.length} friends shopped`}
+
+                  </i>
                 </p>
                 )}
 
