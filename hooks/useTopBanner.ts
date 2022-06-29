@@ -6,7 +6,7 @@ import useDeal from './useDeal';
 const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
-  const [cashbackVal, setCashBackVal] = useState<number | undefined | string>('...');
+  const [cashbackVal, setCashBackVal] = useState<undefined | string>(undefined);
   const { unLockCB, currencySymbol } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
@@ -14,6 +14,7 @@ const useTopBanner = () => {
   } = gsctx;
   useEffect(() => {
     if (percentage) setCashBackVal(unLockCB(percentage, milestones, members).toFixed(2).toString().replace('.00', ''));
+    else setCashBackVal('...');
   }, [gsctx]);
 
   useEffect(() => {

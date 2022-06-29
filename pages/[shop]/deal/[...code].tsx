@@ -207,11 +207,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   }, [gsctx.cart]);
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
-  const [value, setvalue] = useState<number | undefined>(undefined);
+  const [value, setvalue] = useState<undefined | string>('...');
   useEffect(() => {
-    if (cashbackVal) {
-      const numInt = parseInt(cashbackVal.toString(), 10);
-      setvalue(numInt);
+    if (cashbackVal && cashbackVal !== '...') {
+      // const numInt = parseInt(cashbackVal.toString(), 10);
+      setvalue((parseInt(cashbackVal, 10)).toString());
+    } else {
+      setvalue('...');
     }
   }, [cashbackVal]);
 
