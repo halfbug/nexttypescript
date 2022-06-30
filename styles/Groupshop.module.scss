@@ -1419,6 +1419,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_thumbnail {
         width: 100%;
         object-fit: cover;
+        cursor: pointer;
       }
 
       &_quantity {
@@ -2031,6 +2032,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_cartProductHeading {
+    cursor: pointer;
     @extend .text-start, .mx-4, .mb-0, .pb-0;
     font-family: "DM Sans";
     font-weight: 500;
