@@ -62,7 +62,6 @@ const ProductDetail = ({
   const handleSelect = (selectedIndex: number, e: any) => {
     setIndex(selectedIndex);
   };
-  console.log({ index });
 
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
@@ -109,8 +108,8 @@ const ProductDetail = ({
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
       setCashBack(totalCashBack(product.price));
-      console.log('.................');
-      console.log(product.price, variantPrice);
+      // console.log('.................');
+      // console.log(product.price, variantPrice);
     }
   }, [product]);
 
@@ -132,14 +131,14 @@ const ProductDetail = ({
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
-      console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
+      // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
       if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);
       setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
     }
-    console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
+    // console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
   }, [selOptions]);
 
   const addToCart = () => {
@@ -190,13 +189,13 @@ const ProductDetail = ({
       const { productById: dproduct } = data;
       // 1. get the select image
       const svImage = dproduct?.images[index - 1]?.src ?? '';
-      console.log('🚀 ~ file: ProductDetail.tsx ~ line 180 ~ useEffect ~ svImage', svImage);
+      // console.log('🚀 ~ file: ProductDetail.tsx ~ line 180 ~ useEffect ~ svImage', svImage);
 
       // 2. get image variant
       const svrnt = dproduct.variants.filter(
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
-      console.log('🚀 ~ file: ProductDetail.tsx ~ line 186 ~ useEffect ~ svrnt', svrnt);
+      // console.log('🚀 ~ file: ProductDetail.tsx ~ line 186 ~ useEffect ~ svrnt', svrnt);
 
       // 3. if selected image related variant not found then select first variant
       // let selectedV =
@@ -226,10 +225,10 @@ const ProductDetail = ({
   }, [index]);
 
   useEffect(() => { // select instock variant as featured variant
-    console.log('inside variant effect');
+    // console.log('inside variant effect');
     if (data) {
       const { productById: dproduct } = data;
-      console.log('inside variat data check');
+      // console.log('inside variat data check');
       const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
 
       setselOptions(instockV?.selectedOptions.reduce((obj: any, { name, value }: any) => (

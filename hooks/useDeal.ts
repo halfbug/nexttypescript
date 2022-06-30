@@ -27,7 +27,7 @@ export default function useDeal() {
   const clientDealProducts = useCallback(
     ():string[] | undefined => {
       const addedPrds = filterArray(gsctx?.dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
-      console.log('🚀 useDeal ~ addedPrds', addedPrds);
+      // console.log('🚀 useDeal ~ addedPrds', addedPrds);
 
       return ([...addedPrds.filter(
         ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
@@ -262,8 +262,6 @@ export default function useDeal() {
     const nextIndex = gsctx.campaign?.salesTarget?.rewards?.findIndex(
       (reward) => reward.discount === `${disc}%`,
     );
-    console.log('🚀 ~ file: useDeal.ts ~ line 183 ~ nextDiscountCalculator ~ nextIndex', nextIndex);
-    console.log(`${disc}%`);
 
     const nextDiscount = (nextIndex === 0 || nextIndex === 1) ? rew[nextIndex + 1].discount
       : rew[0].discount;

@@ -1,13 +1,29 @@
+/* eslint-disable max-len */
 import {
+  useContext,
   useEffect, useState,
 } from 'react';
 import { IProduct } from 'types/store';
 import _, { chunk, flatten } from 'lodash';
+import { GroupshopContext } from 'store/groupshop.context';
+import useUtilityFunction from './useUtilityFunction';
 
 const usePopular = (products:IProduct[] | undefined) => {
   const [popularShuffled, setPopularShuffled] = useState<IProduct[] | undefined>(undefined);
 
-  // Insert AddProduct Tile after every 3 items of Popular Products
+  const {
+    gsctx,
+    dispatch,
+  } = useContext(GroupshopContext);
+
+  const { filterArray } = useUtilityFunction();
+  const {
+    members: [
+      {
+        products: ownerProducts,
+      },
+    ],
+  } = gsctx;
 
   useEffect(() => {
     if (products && popularShuffled === undefined) {
@@ -20,9 +36,16 @@ const usePopular = (products:IProduct[] | undefined) => {
         currencyCode: 'USD',
 
       };
+      const onlyAddProducts = filterArray(gsctx?.popularProducts ?? [], ownerProducts ?? [], 'id', 'id');
+      const onlyBoughtProducts = filterArray(gsctx?.popularProducts ?? [], gsctx?.addedProducts ?? [], 'id', 'productId');
+      // const addedByFirstPopularPrds = [...products];
+      const addedByFirstPopularPrds = _.uniq([...onlyAddProducts, ...onlyBoughtProducts]);
+      console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyBoughtProducts', onlyBoughtProducts);
+      console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyAddProducts', onlyAddProducts);
 
+      // Insert AddProduct Tile after every 3 items of Popular Products
       const data = flatten(
-        chunk(_.uniq(products), ADD_EVERY).map((section) => (
+        chunk(addedByFirstPopularPrds, ADD_EVERY).map((section) => (
           section.length === ADD_EVERY ? [...section, ITEM_TO_ADD] : section
         )),
       );
