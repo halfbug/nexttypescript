@@ -305,9 +305,11 @@ const ProductsSearch = ({
                 <p>SEARCH TO FIND YOUR FAVORITE PRODUCTS</p>
               </div>
             )}
+            {!(otherProducts && otherProducts.length > 0) && (
             <div className={styles.groupshop_modal_empty}>
               <p>{showMsg}</p>
             </div>
+            )}
           </Row>
         </Modal.Body>
         {(otherProducts && otherProducts.length > 0) && (

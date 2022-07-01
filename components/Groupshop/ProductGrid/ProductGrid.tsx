@@ -282,7 +282,7 @@ const ProductGrid = ({
                     { (id === 'allproducts') && (paginationScroll()); }
                   }}
                   className={currentPage === n
-                    ? styles.gropushop_activePage : styles.groupshop_page}
+                    ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
                 >
                   {n}
                 </Pagination.Item>
