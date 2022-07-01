@@ -26,7 +26,8 @@ const usePopular = (products:IProduct[] | undefined) => {
   } = gsctx;
 
   useEffect(() => {
-    if (products && popularShuffled === undefined) {
+    if (products) {
+      // if (products && popularShuffled === undefined) {
       const ADD_EVERY = 3;
       const ITEM_TO_ADD:IProduct = {
         id: '0000A',
@@ -36,10 +37,11 @@ const usePopular = (products:IProduct[] | undefined) => {
         currencyCode: 'USD',
 
       };
-      const onlyAddProducts = filterArray(gsctx?.popularProducts ?? [], ownerProducts ?? [], 'id', 'id');
-      const onlyBoughtProducts = filterArray(gsctx?.popularProducts ?? [], gsctx?.addedProducts ?? [], 'id', 'productId');
+      const onlyAddProducts = filterArray(products ?? [], ownerProducts ?? [], 'id', 'id');
+      const onlyBoughtProducts = filterArray(products ?? [], onlyAddProducts ?? [], 'id', 'productId');
       // const addedByFirstPopularPrds = [...products];
-      const addedByFirstPopularPrds = _.uniq([...onlyAddProducts, ...onlyBoughtProducts]);
+      const addedByFirstPopularPrds = _.uniq([...onlyAddProducts, ...products]);
+      console.log('🚀 ~ file: usePopularProduct.ts ~ line 41 ~ useEffect ~ gsctx?.popularProducts', products);
       console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyBoughtProducts', onlyBoughtProducts);
       console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyAddProducts', onlyAddProducts);
 
@@ -53,7 +55,7 @@ const usePopular = (products:IProduct[] | undefined) => {
       setPopularShuffled(data);
     }
   }, [products]);
-  console.log({ popularShuffled });
+  // console.log({ popularShuffled });
 
   return {
     popularShuffled,
