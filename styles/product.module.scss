@@ -11,6 +11,7 @@
 
 	&_serachicon{
 		position: absolute;
+		color: grey;
 		margin: 1.2% 1.2%;
 	}
 	&_serachform{
@@ -63,9 +64,14 @@
 		padding-left:5%;
 		line-height: 18px;
 		color: $subheadingclr;
-		opacity: 0.2;
+		opacity: 0.6;
 		border-radius: 11px !important;
+		input[type=text] {
+			color: $subheadingclr;
+			opacity: 100;
+		  }
 	}
+
 
 	&_btnSave {
 		font-family: DM Sans;

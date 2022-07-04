@@ -35,6 +35,7 @@ const Header = ({
 
           <div className={styles.header_head_btn2}>
             Welcome
+            {'  '}
             {brandName}
             {/* <Button className={styles.header_btn} size="lg">
             LESABLE
