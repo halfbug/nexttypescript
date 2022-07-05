@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Send } from 'react-bootstrap-icons';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import MyIcon from 'assets/images/Path.svg';
 
 export type PopoverButtonProps ={
   popContent?: React.ReactNode | undefined;
@@ -15,8 +17,8 @@ export type PopoverButtonProps ={
 
 const Popcomp = (content: React.ReactNode) => (
   <Popover id="popover-basic">
-    {/* <Popover.Header as="h3">Popover right</Popover.Header> */}
     <Popover.Body>
+      <MyIcon className={styles.groupshop_popupArrow} />
       {content}
       {/* <CopyToClipboacrd value={copyValue} /> */}
     </Popover.Body>

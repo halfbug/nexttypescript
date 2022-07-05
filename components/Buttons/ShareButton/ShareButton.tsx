@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { Send } from 'react-bootstrap-icons';
