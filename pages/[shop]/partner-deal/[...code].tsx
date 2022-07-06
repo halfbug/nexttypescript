@@ -696,6 +696,7 @@ const GroupShop: NextPage = () => {
         />
         <Cart
           show={showCart}
+          setShow={setshowCart}
           handleClose={() => setshowCart(false)}
           product={undefined}
           handleDetail={(prd) => setsProduct(prd)}
