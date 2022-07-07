@@ -55,6 +55,8 @@ import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
 import usePopular from 'hooks/usePopularProduct';
+import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
+import useExpired from 'hooks/useExpired';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -94,7 +96,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
-
+  const { urlForActivation, loaderInvite } = useExpired();
   useEffect(() => {
     if (groupshop.id && pending) {
       setpending(false);
@@ -370,8 +372,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={gsShortURL ?? gsURL}
-                  label={`Share & Earn $${value}`}
+                  shareurl={isExpired ? urlForActivation ?? '' : gsShortURL ?? gsURL}
+                  label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
@@ -407,19 +409,32 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         <Hero bannerImage={bannerImage}>
           <Container className={styles.groupshop__hero__content}>
             <Row className={styles.groupshop__hero_welcome}>
-              <Col lg={12}>
-                <h3>
-                  Welcome to
-                  {' '}
-                  <span className="text-capitalize">
+              {isExpired ? (
+                <Col lg={12}>
+                  <h3>
+                    <span className="text-capitalize">
+                      {owner?.firstName}
+                    </span>
+                    ’s Groupshop has expired – but it’s not too late!
+                  </h3>
+                  <p>Invite 1 friend to restart the timer and access the discounts below.</p>
+                </Col>
+              ) : (
+                <Col lg={12}>
+                  <h3>
+                    Welcome to
                     {' '}
-                    {owner?.firstName}
-                    {' '}
-                  </span>
-                  ’s Groupshop
-                </h3>
-                <p>The more friends shop, the more discounts and cashback!</p>
-              </Col>
+                    <span className="text-capitalize">
+                      {' '}
+                      {owner?.firstName}
+                      {' '}
+                    </span>
+                    ’s Groupshop
+                  </h3>
+                  <p>The more friends shop, the more discounts and cashback!</p>
+                </Col>
+
+              )}
             </Row>
             <Row className="d-flex justify-content-evenly">
               <Col
@@ -497,6 +512,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           handleDetail={(prd) => setsProduct(prd)}
           id="shoppedby"
           isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -569,6 +585,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             handleDetail={(prd) => setsProduct(prd)}
             id="popularproducts"
             isModalForMobile={isModalForMobile}
+            urlForActivation={urlForActivation}
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
@@ -590,6 +607,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             handleDetail={(prd) => setsProduct(prd)}
             id="toppicks"
             isModalForMobile={isModalForMobile}
+            urlForActivation={urlForActivation}
           >
             <h2>Top Picks</h2>
           </ProductGrid>
@@ -608,6 +626,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           showHoverButton
           id="allproducts"
           isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
         >
           <div className="position-relative">
             <h2>All Products</h2>
@@ -681,17 +700,32 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             { isExpired ? (
-              <p>Want to shop these products?</p>
+              <>
+                <p>Want to shop these products?</p>
+                <ShareUnlockButton
+                  className={['align-self-center my-2 px-5 py-2'].join(' ')}
+                  onClick={() => googleEventCode('earn-cashback-modal')}
+                  label="INVITE A FRIEND TO SHOP WITH YOU"
+                  shareurl={urlForActivation ?? ''}
+                  placement="bottom"
+                />
+
+              </>
+
             )
               : (
-                <p>Don’t see what you like?</p>
+                <>
+                  <p>Don’t see what you like?</p>
+                  <Button
+                    className={['align-self-center my-2 px-5 py-2'].join(' ')}
+                    onClick={handleAddProduct}
+                  >
+                    Add a Product
+                  </Button>
+
+                </>
+
               ) }
-            <Button
-              className={['align-self-center my-2 px-5 py-2'].join(' ')}
-              onClick={handleAddProduct}
-            >
-              Add a Product
-            </Button>
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />

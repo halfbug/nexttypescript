@@ -59,7 +59,7 @@ const Counter = ({
         </span>
         {' '}
         <span className={styles.groupshop_counter_top__expired}>
-          {isExpired && 'EXPIRED'}
+          {isExpired && 'EXPIRED – INVITE 1 FRIEND TO RESTART'}
         </span>
       </p>
     </div>

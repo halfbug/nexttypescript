@@ -19,6 +19,7 @@ import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
+import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -37,11 +38,13 @@ type ProductGridProps = {
   handleDetail(prd: any): void;
   id?: string;
   isModalForMobile?: boolean;
+  urlForActivation?: string | undefined;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
-  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, ...props
+  xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id,
+  urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -115,20 +118,33 @@ const ProductGrid = ({
                       {showHoverButton && (
                       <Row className={styles.groupshop__pcard_tag_addToCart}>
                         <Col lg={10} className="p-0">
-                          <Button
-                            variant="primary"
-                            className={styles.groupshop__pcard_tag_addToCart_btn}
-                            onClick={() => handleDetail(prod)}
-                          // () => { setsProduct(prod); setshowDetail(true); }}
-                            disabled={isExpired}
-                          >
-                            Add to Cart
+                          {isExpired ? (
+                            <ShareUnlockButton
+                              label="share to unlock"
+                              shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
+                              className={styles.groupshop_addtoCart}
+                              onClick={(e) => handleCard(e)}
+                            />
 
-                          </Button>
+                          ) : (
+                            <Button
+                              variant="primary"
+                              className={styles.groupshop__pcard_tag_addToCart_btn}
+                              onClick={() => handleDetail(prod)}
+                              disabled={isExpired}
+                            >
+                              Add to Cart
+
+                            </Button>
+
+                          )}
+
                         </Col>
-                        <Col lg={2} className="ps-1">
-                          <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
-                        </Col>
+                        {!isExpired ? (
+                          <Col lg={2} className="ps-1">
+                            <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
+                          </Col>
+                        ) : ''}
                       </Row>
                       )}
                       <div className={styles.groupshop__pcard_tag_boughtby}>
@@ -190,17 +206,31 @@ const ProductGrid = ({
                     </h5>
                     {!showHoverButton && (
                     <div className={styles.groupshop_addtoCart_wrapper}>
-                      <Button
-                        variant="primary"
-                        className={styles.groupshop_addtoCart}
-                        onClick={() => handleDetail(prod)}
-                    // () => { setsProduct(prod); setshowDetail(true); }}
-                        disabled={isExpired}
-                      >
-                        Add to Cart
+                      {isExpired ? (
+                        <ShareUnlockButton
+                          label="share to unlock"
+                          shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
+                          className={styles.groupshop_addtoCart}
+                          onClick={(e) => handleCard(e)}
+                                          // () => { setsProduct(prod); setshowDetail(true); }}
+                        />
 
-                      </Button>
-                      <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
+                      ) : (
+                        <>
+                          <Button
+                            variant="primary"
+                            className={styles.groupshop_addtoCart}
+                            onClick={() => handleDetail(prod)}
+                              // () => { setsProduct(prod); setshowDetail(true); }}
+                            disabled={isExpired}
+                          >
+                            Add to Cart
+
+                          </Button>
+                          <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
+
+                        </>
+                      )}
                     </div>
                     )}
                   </div>
@@ -333,6 +363,7 @@ ProductGrid.defaultProps = {
   showHoverButton: false,
   id: 'popularproducts',
   isModalForMobile: false,
+  urlForActivation: '',
 };
 
 export default ProductGrid;

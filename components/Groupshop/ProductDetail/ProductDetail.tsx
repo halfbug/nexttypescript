@@ -33,7 +33,7 @@ interface ProductDetailProps extends RootProps {
   show : boolean;
   handleClose(e:any): any;
   // addToCart(e: any): any;
-  product : IProduct | undefined
+  product : IProduct | undefined;
 }
 
 const ProductDetail = ({
@@ -55,7 +55,7 @@ const ProductDetail = ({
   const [index, setIndex] = useState(0);
   const [loaderInvite, setloaderInvite] = useState(false);
   const [addedbyname, setaddedbyname] = useState<string | undefined>('');
-  const [urlForActivation, seturlForActivation] = useState<string | undefined>('');
+  const [activeURL, setActiveURL] = useState<string | undefined>('');
   const [cashBack, setCashBack] = useState<number>(0);
   const router = useRouter();
 
@@ -82,7 +82,7 @@ const ProductDetail = ({
     setloaderInvite(true);
     setTimeout(() => {
       setloaderInvite(false);
-      seturlForActivation(activateURL);
+      setActiveURL(activateURL);
     }, 1000);
   };
   useEffect(() => {
@@ -473,8 +473,10 @@ const ProductDetail = ({
                       onClick={() => addToCart()}
                       disabled={isExpired || outofStock}
                     >
+                      {/* {outofStock && 'Out of Stock'}
+                      {isExpired && 'Share to unlock'}
+                      {!isExpired && 'Add to Cart'} */}
                       {outofStock ? 'Out of Stock' : 'Add to Cart'}
-
                     </Button>
                     {isForMobile === false ? (
                       <Button
@@ -490,9 +492,9 @@ const ProductDetail = ({
                       </Button>
                     ) : (
                       <ShareButton
-                        disabled={isExpired}
+                        // disabled={isExpired}
                         placement="right-start"
-                        shareurl={productShareUrl(product?.id ?? '')}
+                        shareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                       />
@@ -605,7 +607,7 @@ const ProductDetail = ({
                     : (
                       <>
                         <GradiantButton type="button" className="align-self-center mb-2 p-2" onClick={() => inviteForExpiredGS()}>🔗 INVITE NOW</GradiantButton>
-                        { urlForActivation ? (<a href={activateURL}>{urlForActivation}</a>) : '' }
+                        { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
                       </>
                     )}
                   OR SHARE

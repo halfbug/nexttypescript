@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
@@ -84,7 +85,27 @@ const Footer = ({
       <Row className={styles.groupshop_footer_f1}>
         <Col lg={3}>
           <div className={styles.groupshop_footer_counter_wrapper}>
-            <p className="mb-5 w-75 ">{isExpired ? <strong>THIS GROUPSHOP HAS EXPIRED </strong> : <b>Complete your order in time to benefit from these exclusive rewards!</b>}</p>
+            <div className={styles.groupshop_footer_expire_text}>
+              {isExpired ? (
+                <>
+                  <h6>
+                    <strong>THIS GROUPSHOP HAS EXPIRED </strong>
+                  </h6>
+                  <p>
+                    Invite 1 friend to join Groupshop today, and start shopping
+                    {' '}
+                    <br />
+                    with them to get exclusive cashback and discounts.
+                  </p>
+
+                </>
+              ) : (
+                <h6>
+                  <strong>Complete your order in time to benefit from these exclusive rewards!</strong>
+                </h6>
+              )}
+            </div>
+
             <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
               <Col className="d-flex col-3 ">
                 <div className="text-center me-2">

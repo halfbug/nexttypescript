@@ -1749,6 +1749,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-decoration: none !important;
       box-shadow: none !important;
     }
+
+    &_expire_text {
+      h6 {
+        font-family: DM Sans!important;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 16px;
+      }
+    }
     &_counter_wrapper {
       @include media-breakpoint-down(md) {
         display: none;
