@@ -56,9 +56,13 @@ const ShopMain: NextPage = () => {
       const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders || 0;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
+      } else {
+        setUniqueClicks('-');
       }
       if (numOfOrder > 0) {
         setNumPurchases(numOfOrder);
+      } else {
+        setNumPurchases('-');
       }
     }
   }, [uniqueData]);

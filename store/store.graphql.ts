@@ -849,6 +849,15 @@ query overviewMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
 }
 `;
 
+const GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER = gql`
+query overviewCampaignMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
+  overviewCampaignMetric(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
+    cashBack
+    revenue   
+  }
+}
+`;
+
 const GET_TOTAL_ORDERS = gql`
 query getOrderCount($shop: String!) {
   getOrderCount(shop: $shop) {
@@ -876,6 +885,15 @@ query getOrderDetails($orderid: String!) {
 const GET_TOTAL_UNIQUE_CLICKS_BY_ID = gql`
 query getUniqueClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
   getUniqueClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
+    uniqueVisitors
+    totalOrders
+  }
+}
+`;
+
+const GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER = gql`
+query getUniqueCampaignClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
+  getUniqueCampaignClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
     uniqueVisitors
     totalOrders
   }
@@ -912,5 +930,6 @@ export {
   GET_TOTAL_GS_MONTHLY, BILLING_SUBSCRIPTION, GET_TOTAL_GS_FROM_BILLING, CREATE_SIGNUP,
   GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_ORDERS_BY_GS,
   GET_ORDER_DETAILS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
-  GET_CAMPAIGN_METRICS,
+  GET_CAMPAIGN_METRICS, GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER,
+  GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER,
 };

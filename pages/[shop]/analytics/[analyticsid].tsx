@@ -11,7 +11,7 @@ import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import {
   GET_CAMPAIGN_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
-  GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID,
+  GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER,
 } from 'store/store.graphql';
 
 const CampaignAnalytics: NextPage = () => {
@@ -107,14 +107,14 @@ const CampaignAnalytics: NextPage = () => {
 
   const {
     data: uniqueFiterData, refetch: uniqueFiterRefetch,
-  } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_ID, {
+  } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, {
     variables: { storeId: store.id, startFrom, toDate }, skip: dataFilter,
   });
   useEffect(() => {
     console.log('dataFilter');
     if (uniqueFiterData) {
-      const numUniqueVisitors = uniqueFiterData?.getUniqueClicks?.uniqueVisitors;
-      const numOfOrder = uniqueFiterData?.getUniqueClicks?.totalOrders;
+      const numUniqueVisitors = uniqueFiterData?.getUniqueCampaignClicks?.uniqueVisitors;
+      const numOfOrder = uniqueFiterData?.getUniqueCampaignClicks?.totalOrders;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
       } else {
@@ -130,14 +130,15 @@ const CampaignAnalytics: NextPage = () => {
 
   const {
     data: fdata, refetch: frefetch,
-  } = useQuery(GET_OVERVIEW_METRICS, {
+  } = useQuery(GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER, {
     variables: { storeId: store.id, startFrom, toDate }, skip: dataFilter,
   });
 
   useEffect(() => {
     if (fdata && uniqueFiterData) {
-      const rev = fdata.overviewMetrics[0]?.revenue || '0';
-      const cashBack = fdata.overviewMetrics[0]?.cashBack || 0;
+      console.log(JSON.stringify(fdata));
+      const rev = fdata.overviewCampaignMetric[0]?.revenue || '0';
+      const cashBack = fdata.overviewCampaignMetric[0]?.cashBack || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numFilterPurchases) {
