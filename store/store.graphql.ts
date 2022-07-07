@@ -431,6 +431,7 @@ query Groupshop($code: String!, $status: String = "") {
       lineItems{
         quantity
         price
+        discountedPrice
       }
       refund{
         discount

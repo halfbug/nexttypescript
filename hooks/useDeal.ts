@@ -149,7 +149,7 @@ export default function useDeal() {
 
   const getBannerTotalCashBack = useCallback((discountVal) => {
     const total = gsctx?.members.reduce((cashback, member) => {
-      const totalPrice = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
+      const totalPrice:any = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
       // eslint-disable-next-line radix
       const totalDiscountedAmount = totalPrice! * (parseInt(discountVal) / 100);
       // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
@@ -159,11 +159,14 @@ export default function useDeal() {
     return total.toFixed(2);
   }, [gsctx]);
 
-  const getBannerTotalCashBackByOrder = useCallback((discountVal) => {
+  const getBannerTotalCashBackByOrder = useCallback((discountVal:any) => {
     const total = gsctx?.members.reduce((cashback, member) => {
-      const totalPrice = member.lineItems?.reduce(
+      const totalPrice: any = member.role === 'owner' ? member.lineItems?.reduce(
+        (tot:any, prd:any) => tot + ((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
+      ) : member.lineItems?.reduce(
         (tot:any, prd:any) => tot + +(prd.price * prd.quantity), 0,
       );
+
       // eslint-disable-next-line radix
       const totalDiscountedAmount = totalPrice! * (parseInt(discountVal) / 100);
       // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
@@ -171,10 +174,13 @@ export default function useDeal() {
     }, 0);
     return total.toFixed(2);
   }, [gsctx]);
-  const getBannerTotalCashBackByMember = useCallback((memberNum, discountVal) => {
-    const totalPrice = gsctx?.members[memberNum].lineItems?.reduce(
+  const getBannerTotalCashBackByMember = useCallback((memberNum: number, discountVal: any) => {
+    const totalPrice = +memberNum === 0 ? gsctx?.members[memberNum].lineItems?.reduce(
+      (tot:any, prd:any) => tot + +((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
+    ) : gsctx?.members[memberNum].lineItems?.reduce(
       (tot:any, prd:any) => tot + +(prd.price * prd.quantity), 0,
     );
+
     // eslint-disable-next-line radix
     const total = totalPrice! * (parseInt(discountVal) / 100);
     // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
