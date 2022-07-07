@@ -6,6 +6,9 @@ import DownArrow from 'assets/images/DownArrowSmall.svg';
 import CalendarIcon from 'assets/images/calendar-icon.svg';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import 'bootstrap-daterangepicker/daterangepicker.css';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 // import images
 import ProductLogo from 'assets/images/viral-product-icon.svg';
@@ -20,34 +23,56 @@ export interface ICampaignMatrics {
   uniqueClick: string | number;
   trafficValue: string | number;
   cashbackGiven: string | number;
+  handleSearch(startDate:any, endDate:any): any;
 }
 
 export default function CampaignMetrics({
-  revenue, numPurchases, aov, uniqueClick, trafficValue, cashbackGiven,
+  revenue, numPurchases, aov, uniqueClick, trafficValue, cashbackGiven, handleSearch,
 } : ICampaignMatrics) {
   const { store, dispatch } = useContext(StoreContext);
+  const [defaultDate, setDefaultDate] = useState<any>('');
+  const { DateRanges } = useUtilityFunction();
+  const callbackApply = (event: any, picker: any) => {
+    const startDate = picker.startDate.format('YYYY-MM-DD');
+    const endDate = picker.endDate.format('YYYY-MM-DD');
+    handleSearch(startDate, endDate);
+    setDefaultDate(`${picker.startDate.format('YYYY/MM/DD')
+    } - ${
+      picker.endDate.format('YYYY/MM/DD')}`);
+    picker.element.val(
+      `${picker.startDate.format('YYYY/MM/DD')
+      } - ${
+        picker.endDate.format('YYYY/MM/DD')}`,
+    );
+  };
+
+  const callbackCancel = (event: any, picker: any) => {
+    handleSearch('-', '-');
+    setDefaultDate('-');
+    picker.element.val('');
+  };
+  const ranges = DateRanges();
 
   return (
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
         <h3>Campaign Metrics</h3>
-        <Dropdown className="d-inline mx-2">
-          <Dropdown.Toggle
-            id="dropdown-autoclose-true"
-            variant="outline-primary"
-            className={styles.metrics__header__dropdown}
+        <div className="d-inline mx-2">
+          <DateRangePicker
+            onApply={callbackApply}
+            onCancel={callbackCancel}
+            initialSettings={{
+              maxDate: new Date(),
+              ranges,
+              autoUpdateInput: false,
+              locale: {
+                cancelLabel: 'Clear',
+              },
+            }}
           >
-            <CalendarIcon />
-            <span className={styles.metrics__header__dropdown__txt}>This week</span>
-            <DownArrow />
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu className={styles.metrics__header__dropdownMenu}>
-            <Dropdown.Item className={styles.metrics__header__dropdownItem}>
-              Coming Soon
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            <input type="text" className="form-control" defaultValue={defaultDate} placeholder="Select Date Range" />
+          </DateRangePicker>
+        </div>
       </div>
       <div className={styles.metrics__description}>
         ✨ Your Groupshop is still new, you’ll see data appear when you get your first sales.

@@ -162,7 +162,7 @@ const CampaignListing = () => {
               // value={camp.isActive}
               />
             </Col>
-            <Col className="pe-1 "><WhiteButton className={styles.container_Analytics}>View Analytics</WhiteButton></Col>
+            <Col className="pe-1 "><WhiteButton className={styles.container_Analytics}><Link href={`/${shopName}/analytics/${camp.id}`}>View Analytics</Link></WhiteButton></Col>
             <Col className="px-0 mx-0 "><WhiteButton className={styles.container_edit} onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
           </Row>
         ))}

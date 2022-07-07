@@ -1,47 +1,32 @@
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
-// import Head from 'next/head';
 import Page from 'components/Layout/Page/Page';
-import CampaignOverview from 'components/Forms/Dashboard/CampaignOverview';
-import CampaignMetrics from 'components/Forms/Dashboard/CampaignMetrics';
-import CampaignStrength from 'components/Forms/Dashboard/CampaignStrength';
 import { Col, Container, Row } from 'react-bootstrap';
-import { StoreContext } from 'store/store.context';
-import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
+import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
+import ViralityMetrics from 'components/Forms/Dashboard/ViralityMetrics';
+import CustomerData from 'components/Forms/Dashboard/CutomerData';
 import { useQuery } from '@apollo/client';
+import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
 
-// import useStore from 'hooks/useStore';
-
-const ShopMain: NextPage = () => {
+const Analytics: NextPage = () => {
   const { store, dispatch } = useContext(StoreContext);
-  const shopName: string[] | undefined = store?.shop?.split('.', 1);
-  const [brandLogo, setbrandLogo] = useState<string>('');
-  const { logoImage } = store;
-  const { getSignedUrlS3, getKeyFromS3URL } = useUtilityFunction();
-  const [revenue, setRevenue] = useState<number | string>('-');
-  const [numPurchases, setNumPurchases] = useState<any>('-');
-  const [uniqueClicks, setUniqueClicks] = useState<any>('-');
-  const [aov, setAov] = useState<number | string>('-');
-  const [trafficValue, setTrafficValue] = useState<number | string>('-');
-  const [cashbackGiven, setCashbackGiven] = useState<number | string>('-');
-  const [rogs, setRogs] = useState<number | string>('-');
+  const [revenue, setRevenue] = useState<any>('-');
   const [startFrom, setStartFrom] = useState<any>('-');
   const [toDate, setToDate] = useState<any>('-');
+  const [numPurchases, setNumPurchases] = useState<any>('-');
+  const [uniqueClicks, setUniqueClicks] = useState<any>('-');
+  const [aov, setAov] = useState<any>('-');
+  const [trafficValue, setTrafficValue] = useState<any>('-');
+  const [cashbackGiven, setCashbackGiven] = useState<any>('-');
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
 
   const handleSearch = ((startDate:any, endDate:any) => {
     setStartFrom(startDate);
     setToDate(endDate);
-  });
-
-  useEffect(() => {
-    async function gets3logo() {
-      const key = getKeyFromS3URL(logoImage);
-      const logoS3 = await getSignedUrlS3(key);
-      setbrandLogo(logoS3);
-    }
-    gets3logo();
+    // uniqueRefetch();
+    // refetch();
   });
 
   const {
@@ -52,13 +37,17 @@ const ShopMain: NextPage = () => {
 
   useEffect(() => {
     if (uniqueData) {
-      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors || 0;
-      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders || 0;
+      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors;
+      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
+      } else {
+        setUniqueClicks('-');
       }
       if (numOfOrder > 0) {
         setNumPurchases(numOfOrder);
+      } else {
+        setNumPurchases('-');
       }
     }
   }, [uniqueData]);
@@ -71,7 +60,6 @@ const ShopMain: NextPage = () => {
 
   useEffect(() => {
     if (data && uniqueData) {
-      // console.log(JSON.stringify(data));
       const rev = data.overviewMetrics[0]?.revenue || '0';
       const cashBack = data.overviewMetrics[0]?.cashBack || 0;
       if (rev > 0) {
@@ -81,15 +69,12 @@ const ShopMain: NextPage = () => {
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
         const calTraffric = rev / uniqueClicks;
-        const calRogs = rev / cashBack;
-        setRogs(`${formatNumber(calRogs)}X`);
         setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setTrafficValue('-');
         setNumPurchases('-');
         setRevenue('-');
         setAov('-');
-        setRogs('-');
       }
       if (cashBack > 0) {
         setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
@@ -100,28 +85,28 @@ const ShopMain: NextPage = () => {
   }, [data, uniqueData, numPurchases]);
 
   return (
-    <Page headingText="Overview" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
+    <Page headingText="Analytics" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Container>
         <Row className="pt-4">
           <Col lg={7} className="gx-5">
-            <CampaignOverview brandLogo={brandLogo} rogs={rogs} />
-            <CampaignMetrics
+            <CoreMetrics
               revenue={revenue}
               numPurchases={numPurchases}
+              uniqueClicks={uniqueClicks}
               aov={aov}
-              uniqueClick={uniqueClicks}
               trafficValue={trafficValue}
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
             />
           </Col>
-          <Col lg={5} className="gx-5">
-            <CampaignStrength />
+          <Col lg={{ span: 4, offset: 1 }} className="p-0">
+            <ViralityMetrics />
           </Col>
         </Row>
+        <CustomerData />
       </Container>
     </Page>
   );
 };
 
-export default ShopMain;
+export default Analytics;
