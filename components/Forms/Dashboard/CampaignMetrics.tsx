@@ -46,6 +46,13 @@ export default function CampaignMetrics({
     );
   };
 
+  const handleChange = (event: any) => {
+    if (event.target.value === '') {
+      handleSearch('-', '-');
+      setDefaultDate('-');
+    }
+  };
+
   const callbackCancel = (event: any, picker: any) => {
     handleSearch('-', '-');
     setDefaultDate('-');
@@ -70,7 +77,7 @@ export default function CampaignMetrics({
               },
             }}
           >
-            <input type="text" className="form-control" defaultValue={defaultDate} placeholder="Select Date Range" />
+            <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
           </DateRangePicker>
         </div>
       </div>

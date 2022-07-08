@@ -24,6 +24,7 @@ const CampaignAnalytics: NextPage = () => {
   const [numPurchases, setNumPurchases] = useState<any>('-');
   const [numFilterPurchases, setNumFilterPurchases] = useState<any>('-');
   const [uniqueClicks, setUniqueClicks] = useState<any>('-');
+  const [defaultUniqueClicks, setDefaultUniqueClicks] = useState<any>('-');
   const [aov, setAov] = useState<any>('-');
   const [trafficValue, setTrafficValue] = useState<any>('-');
   const [cashbackGiven, setCashbackGiven] = useState<any>('-');
@@ -31,8 +32,6 @@ const CampaignAnalytics: NextPage = () => {
   const { query: { analyticsid } } = useRouter();
 
   const handleSearch = ((startDate:any, endDate:any) => {
-    console.log(startDate);
-    console.log(endDate);
     if (startDate === '-') {
       // window.location.reload();
       setDataFilter(true);
@@ -58,15 +57,16 @@ const CampaignAnalytics: NextPage = () => {
   useEffect(() => {
     if (uniqueData) {
       console.log('uniqueData');
-      const numUniqueVisitors = uniqueData?.getCampaignUniqueClicks?.uniqueVisitors;
-      const numOfOrder = uniqueData?.getCampaignUniqueClicks?.totalOrders;
-      if (numUniqueVisitors > 0) {
-        setUniqueClicks(numUniqueVisitors);
+      const numUniqueVisitor = uniqueData?.getCampaignUniqueClicks?.uniqueVisitors;
+      const numOfOrders = uniqueData?.getCampaignUniqueClicks?.totalOrders;
+      if (numUniqueVisitor > 0) {
+        setUniqueClicks(numUniqueVisitor);
+        setDefaultUniqueClicks(numUniqueVisitor);
       } else {
-        setUniqueClicks('-');
+        setDefaultUniqueClicks('-');
       }
-      if (numOfOrder > 0) {
-        setNumPurchases(numOfOrder);
+      if (numOfOrders > 0) {
+        setNumPurchases(numOfOrders);
       } else {
         setNumPurchases('-');
       }
@@ -89,7 +89,7 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / uniqueClicks;
+        const calTraffric = rev / defaultUniqueClicks;
         setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setTrafficValue('-');
@@ -103,7 +103,7 @@ const CampaignAnalytics: NextPage = () => {
         setCashbackGiven('-');
       }
     }
-  }, [data, uniqueData, numPurchases]);
+  }, [data, uniqueData, numPurchases, defaultUniqueClicks]);
 
   const {
     data: uniqueFiterData, refetch: uniqueFiterRefetch,
@@ -136,7 +136,7 @@ const CampaignAnalytics: NextPage = () => {
 
   useEffect(() => {
     if (fdata && uniqueFiterData) {
-      console.log(JSON.stringify(fdata));
+      // console.log(JSON.stringify(fdata));
       const rev = fdata.overviewCampaignMetric[0]?.revenue || '0';
       const cashBack = fdata.overviewCampaignMetric[0]?.cashBack || 0;
       if (rev > 0) {

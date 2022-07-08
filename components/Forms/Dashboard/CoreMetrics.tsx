@@ -47,6 +47,13 @@ export default function CoreMetrics({
     picker.element.val('');
   };
 
+  const handleChange = (event: any) => {
+    if (event.target.value === '') {
+      handleSearch('-', '-');
+      setDefaultDate('-');
+    }
+  };
+
   const ranges = DateRanges();
   return (
     <div className={styles.coreMetrics}>
@@ -65,7 +72,7 @@ export default function CoreMetrics({
               },
             }}
           >
-            <input type="text" className="form-control" defaultValue={defaultDate} placeholder="Select Date Range" />
+            <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
           </DateRangePicker>
         </div>
       </div>
