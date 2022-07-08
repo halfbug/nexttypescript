@@ -55,6 +55,7 @@ import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
 import usePopular from 'hooks/usePopularProduct';
+import useSaveCart from 'hooks/useSaveCart';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useExpired from 'hooks/useExpired';
 
@@ -112,6 +113,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   // banner image and logo load
   const bannerImage = useBanner();
   const storeLogo = useLogo();
+  useSaveCart();
 
   const {
     gsURL,

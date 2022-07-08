@@ -18,6 +18,7 @@ import Icon from 'assets/images/small-cone.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
+import useSaveCart from 'hooks/useSaveCart';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -77,8 +78,9 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   const { push } = useRouter();
-
+  const { emptyCart } = useSaveCart();
   const handleCheckout = () => {
+    emptyCart();
     setLoading(true);
     checkoutButtonClick(cartProducts.map((prd) => ({
       productId: prd.id.split('/')[4],
