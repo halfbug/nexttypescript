@@ -535,28 +535,29 @@
             justify-content: space-between;
             margin-top: 11px;
             &__genereated {
+                @extend .text-nowrap;
                 color: #000000;
                 font-family: 'DM Sans';
                 font-weight: 500;
-                line-height: 15px;
                 font-size: 12px;
                 text-align: center;
                 background: #D5FA52;
                 border-radius: 6px;
-                padding: 6px 12px;
+                padding: 6px;
                 width: fit-content;
             }
             &__clicks {
+                @extend .text-nowrap;
                 color: #000000;
                 font-family: 'DM Sans';
                 font-weight: 400;
-                line-height: 15px;
                 font-size: 12px;
                 text-align: center;
                 background: #FEE758;
                 border-radius: 6px;
-                padding: 6px 10px;
+                padding: 6px;
                 width: fit-content;
+                margin-left: 4px;
             }
         }
 
@@ -577,7 +578,7 @@
             margin-top: 6px;
             button {
                 box-shadow: none !important;
-                height: 43px !important;
+                height: 23px !important;
                 background: #FFFFFF !important;
                 display: grid;
                 grid-template-columns: 2.5fr 1.5fr .5fr;
