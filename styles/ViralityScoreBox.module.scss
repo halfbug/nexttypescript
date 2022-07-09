@@ -13,12 +13,18 @@
             font-family: 'DM Sans';
         }
         &__tag {
+            width: 25px;
+            height:auto;
+            padding: 3px;
             color: #000000;
+            text-align: center;
+            justify-content: center;
+            align-self: center;
+            align-items: center;
             line-height: 16px;
             font-size: 12px;
             font-weight: 700;
             font-family: 'DM Sans';
-            padding: 3px 6px;
             background: #F28BF4;
             border-radius: 6px;
             margin-left: 5px;
