@@ -215,6 +215,9 @@
                 padding-right: 10px;
                 line-height: 20px;
                 color: $black;
+                &::after {
+                    transform: rotate(270deg);
+                  }
             }
         }
         &_acc_body {
