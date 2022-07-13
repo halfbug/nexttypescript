@@ -1,0 +1,57 @@
+.linkShare {
+    &__modal {
+        max-width: 350px;
+        min-width: 300px;
+        margin: 50px auto;
+
+        &__closebtnlg {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 12px;
+            border-bottom: none !important;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        &__body {
+            padding: 0 26px;
+            padding-bottom: 31px;
+
+            &__social_icons {
+                padding: 11px 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                column-gap: 8px;
+                margin-bottom: 11px;
+            }
+
+            &__heading {
+                font-family: 'DM Sans';
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 23px;
+                color: #000000;
+                margin-bottom: 4px;
+            }
+
+            &__description {
+                font-family: 'Mulish';
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                color: #000000;
+                padding-left: 3px;
+            }
+        }
+    }
+
+    @media (max-width: 425px) {
+        &__modal {
+            max-width: 300px;
+        }
+    }
+}
