@@ -84,10 +84,18 @@ const ShopMain: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / uniqueClicks;
-        const calRogs = rev / cashBack;
-        setRogs(`${formatNumber(calRogs)}X`);
-        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        if (uniqueClicks !== '-' && uniqueClicks > 0) {
+          const calTraffric = rev / uniqueClicks;
+          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        } else {
+          setTrafficValue('-');
+        }
+        if (cashBack > 0) {
+          const calRogs = rev / cashBack;
+          setRogs(`${formatNumber(calRogs)}X`);
+        } else {
+          setRogs('-');
+        }
       } else {
         setTrafficValue('-');
         setNumPurchases('-');

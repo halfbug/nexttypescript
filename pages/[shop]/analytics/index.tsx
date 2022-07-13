@@ -68,8 +68,12 @@ const Analytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / uniqueClicks;
-        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        if (uniqueClicks !== '-' && uniqueClicks > 0) {
+          const calTraffric = rev / uniqueClicks;
+          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        } else {
+          setTrafficValue('-');
+        }
       } else {
         setTrafficValue('-');
         setNumPurchases('-');
