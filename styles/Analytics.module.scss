@@ -271,20 +271,21 @@
                 text-align: center;
                 background: #D5FA52;
                 border-radius: 6px;
-                padding: 6px 12px;
+                padding: 6px;
                 width: fit-content;
             }
             &__clicks {
+                @extend .text-nowrap;
                 color: #000000;
                 font-family: 'DM Sans';
                 font-weight: 400;
-                height: auto;
                 font-size: 12px;
                 text-align: center;
                 background: #FEE758;
                 border-radius: 6px;
-                padding: 6px 10px;
+                padding: 6px;
                 width: fit-content;
+                margin-left: 6px;
             }
         }
     }
