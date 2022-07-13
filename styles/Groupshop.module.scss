@@ -2108,6 +2108,35 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       width: 100% !important;
     }
   }
+  &_unlockToShare {
+    @extend .rounded-pill, .w-75;
+    color: $white;
+    background-color: $unlockToShare;
+    border: $unlockToShare;
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+    width: 212px !important;
+    background-image: none;
+  
+    &:hover {
+      background-color: $addtocart;
+      border: $addtocart; ;
+      background-image: none;
+    }
+  @include media-breakpoint-down(md) {
+    background-color: $unlockToShare;
+    border: $unlockToShare;
+    color: $white;
+    font-size: 14px;
+    line-height: 18px;
+    width: 100% !important;
+  }
+    }
   &_Pd_addtoCart {
     @extend .rounded-2, .w-75, .me-2;
     color: #ffffff;

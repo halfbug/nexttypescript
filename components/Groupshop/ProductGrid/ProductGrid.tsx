@@ -122,7 +122,7 @@ const ProductGrid = ({
                             <ShareUnlockButton
                               label="share to unlock"
                               shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
-                              className={styles.groupshop_addtoCart}
+                              className={styles.groupshop_unlockToShare}
                               onClick={(e) => handleCard(e)}
                             />
 
@@ -210,7 +210,7 @@ const ProductGrid = ({
                         <ShareUnlockButton
                           label="share to unlock"
                           shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
-                          className={styles.groupshop_addtoCart}
+                          className={styles.groupshop_unlockToShare}
                           onClick={(e) => handleCard(e)}
                                           // () => { setsProduct(prod); setshowDetail(true); }}
                         />
