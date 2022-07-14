@@ -265,9 +265,9 @@ const ProductsSearch = ({
 
                                 {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
                               </span>
-                              <IconButton
+                              <X
+                                size={34}
                                 className={styles.groupshop__pcard_tag_cross}
-                                icon={<X size={18} />}
                                 onClick={() => setSelected(
                                   selected?.filter((pid) => pid !== prd.id),
                                 )}
