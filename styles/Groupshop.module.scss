@@ -2538,6 +2538,162 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
   }
+  &_expiredBox_modal {
+    width: 830px;
+    @include media-breakpoint-down(sm) {
+      width: auto;
+      bottom: 0;
+      margin: 0;
+    }
+    &__closebtnlg {
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+      display: flex;
+      justify-content: flex-end;
+      box-shadow: none !important;
+      border-bottom: none;
+      svg {
+        cursor: pointer;
+      }
+    }
+    &__closebtnsm {
+      @include media-breakpoint-up(sm) {
+        display: none;
+      }
+      display: flex;
+      justify-content: center;
+      border-bottom: none;
+      svg {
+        cursor: pointer;
+      }
+    }
+    &__content {
+      border-radius: 12px;
+      @include media-breakpoint-down(sm) {
+        border-radius: 12px 12px 0px 0px;
+        position: fixed;
+        bottom: 0;
+        max-height: 95vh;
+      }
+    }
+    &__body {
+      color: #000000;
+      margin: 15px 60px;
+      padding: 0px 0px 60px 0px;
+      @include media-breakpoint-down(sm) {
+        margin: 10px 15px;
+        padding: 0px 0px 30px 0px;
+      }
+    }
+    &__top {
+      margin-bottom: 10px;
+      h2 {
+        @extend .mb-3;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: $font-weight-bolder;
+        font-size: 24px;
+        line-height: 31px;
+        text-align: center;
+        color: #000000;
+        @include media-breakpoint-down(sm) {
+          font-size: 22px;
+        }
+      }
+      p {
+        @extend .mx-3, .mb-0, .d-block;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 24px;
+        line-height: 20px;
+        text-align: center;
+        color: #000000;
+        @include media-breakpoint-down(sm) {
+          font-size: 18px;
+        }
+      }
+    }
+    &__productsSection{
+      @extend .p-0, .my-3, .d-flex;
+      justify-content: space-between;
+      column-gap: 10px;
+      @include media-breakpoint-down(sm) {
+        justify-content: center;
+      }
+    }
+    &__product{
+      align-items: center;
+      text-align: center;
+      &__image{
+        img{
+          width: 100%;
+        }
+        @include media-breakpoint-down(sm) {
+          img{
+            width: 50%;
+          }
+        }
+      }
+      &__name{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+        margin-top: 4px;
+      }
+      &__amounts{
+        font-size: 16px;
+        margin-top: 4px;
+        span{
+          text-decoration-line: line-through;
+          margin-left: 8px;
+          font-weight: 400;
+        }
+      }
+    }
+    &__bottom{
+      margin: 5px 80px;
+      @include media-breakpoint-down(sm) {
+        margin: 10px 0px;
+      }
+    }
+    &__info1,
+    &__info2 {
+      p {
+        font-family: "Mulish";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        @include media-breakpoint-down(sm) {
+        }
+      }
+    }
+    &__btnSection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    &__inviteBtn {
+      padding: 10px 40px;
+      font-family: "DM Sans";
+      font-style: normal;
+      font-weight: $font-weight-bolder;
+      font-size: 18px;
+      line-height: 24px;
+      border-radius: 3px;
+      box-shadow: none !important;
+      border: 2px solid #ccb2f9 !important;
+
+      &:hover {
+        background: #ccb2f9;
+        color: #ffffff;
+      }
+    }
+  }
   &_shopping_box_mobile {
     position: fixed;
     right: 15px;
