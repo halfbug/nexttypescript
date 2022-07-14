@@ -46,40 +46,45 @@ const Settings: NextPage = () => {
 
                   </Nav.Link>
                 </Nav.Item>
-                <Nav.Item className='mx-1'>
-                  <Nav.Link eventKey="Layout">
-                    <Row
-                      onClick={() => setTab('Layout')}
-                      className={tab === 'Layout' ? styles.setting_tab_layout_active : styles.setting_tab_layout}
-                    >
-                      <Col className='ps-0'>
-                        {tab === 'Layout' ? <LayoutTransparentLogo /> : <LayoutLogo />}
-                        <h4 className='pt-1'>
-                          Layout
-                        </h4>
-                        <TabPane eventKey="Layout" title="Layout" />
-                      </Col>
-                    </Row>
+                <div className={styles.setting_tab__coming_soon}>
+                  <div className={styles.setting_tab__overlay}>
+                    <div className={styles.setting_tab__overlayText}>Coming Soon</div>
+                  </div>
+                  <Nav.Item className='mx-1'>
+                    <Nav.Link eventKey="Layout">
+                      <Row
+                        onClick={() => setTab('Layout')}
+                        className={tab === 'Layout' ? styles.setting_tab_layout_active : styles.setting_tab_layout}
+                      >
+                        <Col className='ps-0'>
+                          {tab === 'Layout' ? <LayoutTransparentLogo /> : <LayoutLogo />}
+                          <h4 className='pt-1'>
+                            Layout
+                          </h4>
+                          <TabPane eventKey="Layout" title="Layout" />
+                        </Col>
+                      </Row>
 
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item className='mx-1'>
-                  <Nav.Link eventKey="Marketing">
-                    <Row
-                      onClick={() => setTab('Marketing')}
-                      className={tab === 'Marketing' ? styles.setting_tab_marketing_tool_active : styles.setting_tab_marketing_tool}
-                    >
-                      <Col className='ps-0'>
-                        {tab === 'Marketing' ? <MarketingTransparentLogo /> : <MarketingLogo />}
-                        <h4 className='pt-1'>
-                          Marketing Tools
-                        </h4>
-                        <TabPane eventKey="Marketing" title="Marketing" />
-                      </Col>
-                    </Row>
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item className='mx-1'>
+                    <Nav.Link eventKey="Marketing">
+                      <Row
+                        onClick={() => setTab('Marketing')}
+                        className={tab === 'Marketing' ? styles.setting_tab_marketing_tool_active : styles.setting_tab_marketing_tool}
+                      >
+                        <Col className='ps-0'>
+                          {tab === 'Marketing' ? <MarketingTransparentLogo /> : <MarketingLogo />}
+                          <h4 className='pt-1'>
+                            Marketing Tools
+                          </h4>
+                          <TabPane eventKey="Marketing" title="Marketing" />
+                        </Col>
+                      </Row>
 
-                  </Nav.Link>
-                </Nav.Item>
+                    </Nav.Link>
+                  </Nav.Item>
+                </div>
               </Nav>
             </Col>
           </Row>

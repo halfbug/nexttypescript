@@ -44,6 +44,9 @@ export default function BillingCalculator() {
         <Form noValidate onSubmit={handleSubmit}>
           <Row>
             <Col className={styles.billing_calculator_rectangle}>
+              <div className={styles.billing__overlay}>
+                <div className={styles.billing__overlayText}>Coming Soon</div>
+              </div>
               <Row>
                 <Col><h5>Estimate your monthly cost</h5></Col>
               </Row>

@@ -6,6 +6,9 @@ import ViralityScoreBox from './ViralityScoreBox';
 export default function ViralityMetrics() {
   return (
     <div className={styles.viralityMetrics}>
+      <div className={styles.viralityMetrics__overlay}>
+        <div className={styles.viralityMetrics__overlayText}>Coming Soon</div>
+      </div>
       <div className={styles.viralityMetrics__header}>
         <h3>Virality Metrics</h3>
       </div>

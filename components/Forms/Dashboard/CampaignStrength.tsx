@@ -10,6 +10,9 @@ export default function CampaignStrength() {
   return (
     <Container>
       <div className={styles.strength}>
+        <div className={styles.strength__overlay}>
+          <div className={styles.strength__overlayText}>Coming Soon</div>
+        </div>
         <div className={styles.strength__header}>
           <h3>Campaign Strength</h3>
         </div>

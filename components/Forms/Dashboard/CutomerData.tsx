@@ -12,6 +12,9 @@ export default function CustomerData() {
   return (
     <>
       <div className={styles.customerData}>
+        <div className={styles.customerData__overlay}>
+          <div className={styles.customerData__overlayText}>Coming Soon</div>
+        </div>
         <div className={styles.customerData__header}>
           <h3>Customer Data</h3>
         </div>

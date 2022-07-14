@@ -78,6 +78,9 @@ export default function DBSettings({
 
     <>
       <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
+        <div className={styles2.dashboard_campaign__overlay}>
+          <div className={styles2.dashboard_campaign__overlayText}>Coming Soon</div>
+        </div>
         <Row><h4 className="mb-0">Set your brand color</h4></Row>
         <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
         <Row>
@@ -120,7 +123,10 @@ export default function DBSettings({
           </Col>
         </Row>
         <Row className="border rounded px-1 py-3 pb-4 mx-1">
-          <Col lg={6}>
+          <Col lg={6} className={styles2.dashboard_campaign__comingsoon}>
+            <div className={styles2.dashboard_campaign__overlay}>
+              <div className={styles2.dashboard_campaign__overlayText1}>Coming Soon</div>
+            </div>
             <h6 className="fs-6 fw-bolder lh-base mb-4">Pre-Set Themes</h6>
             <ButtonGroup className={['d-block mx-0 mb-0', styles.ob_settings__group].join(' ')}>
               {radios.map(({ name, component, value }) => (

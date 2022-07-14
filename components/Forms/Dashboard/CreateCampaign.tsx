@@ -532,6 +532,9 @@ export default function CreateCampaign() {
           </Col>
           <Col lg={5}>
             <section className={styles.dashboard_campaign__box_5}>
+              <div className={styles.dashboard_campaign__overlay}>
+                <div className={styles.dashboard_campaign__overlayText}>Coming Soon</div>
+              </div>
               <CampaignSocialMedia
                 setFieldValue={setFieldValue}
                 values={values}
