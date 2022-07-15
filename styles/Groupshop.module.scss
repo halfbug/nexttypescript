@@ -2740,21 +2740,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     border-top: 1px solid #ebebeb;
   }
 
-  // &_gradBtn {
-  //   @extend  .align-self-center, .mb-2, .p-2;
-  //   border-image: linear-gradient(to left, #fee750, #ccb2f9);
-  //   border-image-slice: 1;
-  //   background-color: $white;
-  //   font-family: "Montserrat";
-  //   font-style: normal;
-  //   font-weight: 600;
-  //   font-size: 18px;
-  //   line-height: 22px;
-  //   text-align: center;
-  //   color: #282828;
-  //   border-radius: 3px !important;
-  //   border-width: 2px;
-  // }
+  &_expInviteFrnd{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: $black;
+  }
   &_popupArrow{
     float: right;
     padding: 0;

@@ -707,7 +707,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                   Want to shop these products?
                 </p>
                 <ShareUnlockButton
-                  className={['align-self-center my-2 px-5 py-2'].join(' ')}
+                  className={['align-self-center my-2 px-3 py-2', styles.groupshop_expInviteFrnd].join(' ')}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   label="INVITE A FRIEND TO SHOP WITH YOU"
                   shareurl={urlForActivation ?? ''}
