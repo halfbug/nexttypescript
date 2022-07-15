@@ -2760,6 +2760,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     padding: 0;
     margin: 0;
   }
+  &_expShopTheseProducts{
+    font-family: 'Montserrat'!important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;/* identical to box height */
+    color: $black;
+  }
 }
 
 .offcanvas-end {

@@ -703,7 +703,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           <Col className="d-flex justify-content-center flex-column">
             { isExpired ? (
               <>
-                <p>Want to shop these products?</p>
+                <p className={styles.groupshop_expShopTheseProducts}>
+                  Want to shop these products?
+                </p>
                 <ShareUnlockButton
                   className={['align-self-center my-2 px-5 py-2'].join(' ')}
                   onClick={() => googleEventCode('earn-cashback-modal')}
