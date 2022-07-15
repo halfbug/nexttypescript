@@ -40,7 +40,15 @@ export default function Collections({
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">
-                    <Form.Check type="checkbox" inline className={['fs-4', styles2.product_check].join(' ')} name="collections" id={id} onChange={handleChecked} checked={isChecked(id, 'collections')} />
+                    {/* <Form.Check
+                      type="checkbox"
+                      inline
+                      className={['fs-4', styles2.product_check].join(' ')}
+                      name="collections"
+                      id={id}
+                      onChange={handleChecked}
+                      checked={isChecked(id, 'collections')}
+                    /> */}
                     <div className={['m-0', styles2.product_all_product].join(' ')}>
                       {title}
                       {' '}
