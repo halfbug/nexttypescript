@@ -553,7 +553,7 @@ const ProductDetail = ({
                       <div className="text-center me-2">
                         <span>
                           {' '}
-                          0
+                          00
                         </span>
                         <p className="mt-1">HOURS</p>
                       </div>
@@ -565,7 +565,7 @@ const ProductDetail = ({
                     <Col xs={2} className="d-flex">
                       <div className="text-center mx-2">
                         <span>
-                          0
+                          00
                         </span>
                         <p className="mt-1">MINUTES</p>
                       </div>
@@ -577,7 +577,7 @@ const ProductDetail = ({
                     <Col xs={1} className="d-flex">
                       <div className="text-center ms-3 ms-lg-2">
                         <span>
-                          0
+                          00
                         </span>
                         <p className="mt-1">SECONDS</p>
                       </div>
