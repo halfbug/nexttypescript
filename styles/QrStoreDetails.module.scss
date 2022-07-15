@@ -165,6 +165,11 @@
   }
 
   &__desktopImage {
+
+    img {
+      width: 100%;
+      height: 100vh;
+    }
  
 
     @media (max-width: 767px) {
@@ -254,8 +259,7 @@
   }
 
   &__fit__image {
-    background-color: $bgClr;
-    object-fit: contain;
+    object-fit: cover;
   }
   &__fit__imageQR3 {
     object-fit: cover;

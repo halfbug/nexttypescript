@@ -1,8 +1,8 @@
 .MarqueeSliderContainer {
-    background: #000000;
-    color: #ffffff;
-    position: fixed;
-    bottom: 25px;
+    background: linear-gradient(98deg, rgb(235, 235, 235) 0%, rgb(227, 214, 242) 100%);
+    color: #000000;
+    position: absolute;
+    bottom: 10px;
     padding: 15px;
     width: 100%;
 
@@ -12,5 +12,6 @@
 
     p {
         margin: 0;
+        font-size: 18px;
     }
 }

@@ -9,7 +9,7 @@ const MarqueeSlider = () => (
   <div className={styles.MarqueeSliderContainer}>
     {/*
  // @ts-ignore */}
-    <marquee width="100%" direction="right">
+    <marquee width="100%" direction="left">
       <p>
         shop with friends, get up to 90% cashback
         <span className="px-3">
