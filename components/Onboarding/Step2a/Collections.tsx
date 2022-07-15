@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import {
   Col, Form, ListGroup, Row, Container,
 } from 'react-bootstrap';
@@ -22,6 +22,10 @@ export interface ICollectionsProps {
 export default function Collections({
   data, handleCollectionButton, handleChecked, isChecked, ...props
 }: ICollectionsProps) {
+  // useEffect(() => {
+  //   console.log(data, 'data collection');
+  // }, [data]);
+
   return (
     <Container {...props}>
       <Row>
@@ -32,7 +36,9 @@ export default function Collections({
       <Row className="m-0">
         <Col xs={12} className={Styles.screen1_collections}>
           <ListGroup as="ol" className="">
-            { data?.map(({ title, productsCount, id }) => (
+            { data?.map(({
+              title, productsCount, id, products,
+            }) => (
               <ListGroup.Item
                 as="li"
                 className={styles2.border_listgroup}
@@ -53,7 +59,8 @@ export default function Collections({
                       {title}
                       {' '}
                       (
-                      {productsCount}
+                      {/* {productsCount} */}
+                      {products.length}
                       )
                     </div>
                   </div>
