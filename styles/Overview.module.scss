@@ -45,11 +45,14 @@
             margin-top: 8px;
         }
         button {
+            text-decoration: none;
             height: 28px;
+            max-height: max-content;
+            width: 102px;
             font-size: 12px;
             line-height: 15px;
             font-weight: 400;
-            padding: 7px 10px !important;
+            padding: 2px !important;
             margin-right: 12px;
         }
         &__logo {

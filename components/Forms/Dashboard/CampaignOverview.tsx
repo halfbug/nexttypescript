@@ -66,16 +66,16 @@ export default function CampaignOverview({
                     <div className={styles.overiew__campaignBox__year}>
                       {activeCampaign[0]?.name}
                     </div>
-                    <div>
+                    <div className="d-flex">
                       <WhiteButton>
                         <Link href={`/${shopName}/analytics`}>
-                          View Analytics
+                          <span className="text-decoration-none">View Analytics</span>
                         </Link>
 
                       </WhiteButton>
                       <WhiteButton>
                         <Link href={`/${shopName}/campaign/${activeCampaign[0]?.id}`}>
-                          Edit Campaign
+                          <span className="text-decoration-none">Edit Campaign</span>
                         </Link>
 
                       </WhiteButton>
