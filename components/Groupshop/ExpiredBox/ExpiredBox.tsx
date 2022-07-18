@@ -182,6 +182,7 @@ const ExpiredBox = ({
                     <ShareButton
                       placement="auto"
                       shareurl={shareurl}
+                      fullshareurl={shareurl}
                       label="Invite Now"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}

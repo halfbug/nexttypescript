@@ -335,6 +335,7 @@ const GroupShop: NextPage = () => {
                   <ShareButton
                     placement="bottom"
                     shareurl={gsShortURL ?? gsURL}
+                    fullshareurl={gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
@@ -374,6 +375,7 @@ const GroupShop: NextPage = () => {
                 <ShareButton
                   placement="bottom"
                   shareurl={gsShortURL ?? gsURL}
+                  fullshareurl={gsURL}
                   label="Share with friends"
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}

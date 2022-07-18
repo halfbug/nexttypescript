@@ -13,11 +13,12 @@ import SocialButton from '../SocialButton/SocialButton';
 
 type ShareButtonProps = {
   shareurl: string;
+  fullshareurl: string;
 
 }& React.ComponentPropsWithoutRef<'button'> & PopoverButtonProps & Omit<PopoverButtonProps, 'icon'>
 
 const ShareButton = ({
-  label, className, shareurl, placement, disabled, popContent, icon, onClick,
+  label, className, shareurl, fullshareurl, placement, disabled, popContent, icon, onClick,
 }: ShareButtonProps) => {
   const { gsctx, banner } = useDeal();
   const { discountCode: { percentage } } = gsctx;
@@ -57,7 +58,7 @@ const ShareButton = ({
         </Col> */}
           <Col>
             <Canvas
-              text={shareurl}
+              text={`${fullshareurl}/qrscan&mobile`}
               options={{
                 type: 'image/jpeg',
                 quality: 0.3,

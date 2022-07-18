@@ -10,6 +10,7 @@ const useCode = () => {
   const { query: { shop, code } } = router;
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
   const [status, setStatus] = useState<string | undefined>(undefined);
+  const [qrscan, setQrscan] = useState<string | undefined>(undefined);
   const [discountCode, setdiscountCode] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -33,6 +34,10 @@ const useCode = () => {
                   setStatus(entity[1]);
                   break;
 
+                case 'qrscan':
+                  setQrscan(entity[1]);
+                  break;
+
                 default:
                   break;
               }
@@ -46,7 +51,7 @@ const useCode = () => {
   }, [code]);
 
   return {
-    shop, discountCode, productCode, status,
+    shop, discountCode, productCode, status, qrscan,
   };
 };
 export default useCode;

@@ -58,6 +58,7 @@ import usePopular from 'hooks/usePopularProduct';
 import useSaveCart from 'hooks/useSaveCart';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useExpired from 'hooks/useExpired';
+import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -222,7 +223,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   }, [cashbackVal]);
 
   const {
-    showDetail, setshowDetail, sProduct, setsProduct,
+    showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
   } = useDetail(allProducts);
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
@@ -336,6 +337,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                   <ShareButton
                     placement="bottom"
                     shareurl={gsShortURL ?? gsURL}
+                    fullshareurl={gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
@@ -375,6 +377,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                 <ShareButton
                   placement="bottom"
                   shareurl={isExpired ? urlForActivation ?? '' : gsShortURL ?? gsURL}
+                  fullshareurl={isExpired ? urlForActivation ?? '' : gsURL ?? gsURL}
                   label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
@@ -734,6 +737,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />
         <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+        <LinkShareMobileView
+          show={showQrscan}
+          handleClose={() => setshowQrscan(false)}
+          shareurl={gsShortURL ?? gsURL}
+        />
         <ProductDetail
           show={showDetail}
           handleClose={() => setshowDetail(false)}

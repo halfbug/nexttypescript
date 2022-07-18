@@ -165,6 +165,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               <ShareButton
                   // placement="bottom"
                 shareurl={shareUrl ?? ''}
+                fullshareurl={shareUrl ?? ''}
                   // label="Invite"
                   // className={styles.groupshop__top_invite}
                 icon={<Send size={18} />}

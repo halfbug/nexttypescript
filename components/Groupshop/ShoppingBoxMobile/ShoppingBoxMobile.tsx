@@ -17,6 +17,7 @@ const ShoppingBoxMobile = (
       {/* <ShareButton
           placement="auto"
           shareurl={shareurl}
+          fullshareurl=={shareurl}
           label="Share with friends"
           className="px-3 bg-white ms-2"
           onClick={() => googleEventCode('earn-cashback-modal')}

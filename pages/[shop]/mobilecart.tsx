@@ -119,6 +119,7 @@ const MobileCart: NextPage = () => (
           placement="auto-end"
           label="Invite more friends"
           shareurl=""
+          fullshareurl=""
           className={styles.mobilecart_InviteBtn}
         />
       </Col>
@@ -140,6 +141,7 @@ const MobileCart: NextPage = () => (
         <ShareButton
           placement="right-start"
           shareurl=""
+          fullshareurl=""
           label=""
           className={styles.mobilecart__InviteBtn_round}
         />

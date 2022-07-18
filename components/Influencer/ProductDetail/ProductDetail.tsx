@@ -494,6 +494,7 @@ const ProductDetail = ({
                         disabled={isExpired}
                         placement="right-start"
                         shareurl={productShareUrl(product?.id ?? '')}
+                        fullshareurl={productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                       />
@@ -525,6 +526,7 @@ const ProductDetail = ({
                           disabled={isExpired}
                           placement="auto-end"
                           shareurl={productShareUrl(product?.id ?? '')}
+                          fullshareurl={productShareUrl(product?.id ?? '')}
                           label="Invite more friends"
                           className={styles.groupshop_InviteBtn}
                         />

@@ -142,7 +142,7 @@ const ProductGrid = ({
                         </Col>
                         {!isExpired ? (
                           <Col lg={2} className="ps-1">
-                            <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
+                            <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} fullshareurl={productShareUrl(prod?.id ?? '')} className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')} onClick={(e) => handleCard(e)} />
                           </Col>
                         ) : ''}
                       </Row>
@@ -227,7 +227,7 @@ const ProductGrid = ({
                             Add to Cart
 
                           </Button>
-                          <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
+                          <ShareButton disabled={isExpired} placement="auto" shareurl={productShareUrl(prod?.id ?? '')} fullshareurl={productShareUrl(prod?.id ?? '')} className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')} onClick={() => googleButtonCode('product-share')} />
 
                         </>
                       )}

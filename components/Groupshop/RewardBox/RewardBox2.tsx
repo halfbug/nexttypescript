@@ -118,6 +118,7 @@ const RewardBox2 = ({
                     <ShareButton
                       placement="auto"
                       shareurl={shareurl}
+                      fullshareurl={shareurl}
                       label="Share & Earn"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}

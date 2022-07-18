@@ -113,6 +113,7 @@ const RewardBox = ({
               <ShareButton
                 placement="bottom"
                 shareurl=""
+                fullshareurl=""
                 label="Invite"
                 className={styles.groupshop_rewardBox_invite}
                 icon={<Plus size={18} className="me-0 pe-0" />}
@@ -124,6 +125,7 @@ const RewardBox = ({
               <ShareButton
                 placement="auto"
                 shareurl=""
+                fullshareurl=""
                 className={styles.groupshop_rewardBox_inviteArrow}
               />
             </Col>
