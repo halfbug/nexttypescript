@@ -156,7 +156,7 @@ const Cart = ({
 
               </>
             ) : cartProducts.map((prd) => (
-              <Row className="px-0 m-1 py-2 border-bottom">
+              <Row className={styles.groupshop_cartImgPointer}>
                 <Col xs={4}>
                   <Image
                     src={prd.selectedVariant?.image?.src ?? prd.featuredImage}

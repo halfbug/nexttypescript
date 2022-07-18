@@ -2761,6 +2761,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     line-height: 17px;/* identical to box height */
     color: $black;
   }
+  &_cartImgPointer{
+    @extend .px-0, .m-1, .py-2, .border-bottom;
+    cursor: pointer;
+  }
 }
 
 .offcanvas-end {
