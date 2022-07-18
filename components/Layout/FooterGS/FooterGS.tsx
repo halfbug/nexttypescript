@@ -93,8 +93,6 @@ const Footer = ({
                   </h6>
                   <p>
                     Invite 1 friend to join Groupshop today, and start shopping
-                    {' '}
-                    <br />
                     with them to get exclusive cashback and discounts.
                   </p>
 
@@ -218,13 +216,13 @@ const Footer = ({
           </section>
         </Col>
       </Row>
-      <Row className={styles.groupshop_footer_f2_wrapper}>
+      {/* <Row className={styles.groupshop_footer_f2_wrapper}>
         <hr />
         <div className={styles.groupshop_footer_f2}>
           <p>Powered by</p>
           <img src={isExpired ? footerLogoExpire.src : footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
         </div>
-      </Row>
+      </Row> */}
       <AlertComponent />
     </Container>
 

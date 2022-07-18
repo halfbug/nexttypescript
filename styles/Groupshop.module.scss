@@ -93,10 +93,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &__expired {
       margin-left: 6px !important;
-      font-family: "Montserrat";
+      font-family: "DM Sans";
       font-style: normal;
-      font-weight: 500;
-      font-size: 10px;
+      font-size: 12px;
       line-height: 12px;
       color: $black;
     }
@@ -1815,7 +1814,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         height: 49px;
         font-weight: 500;
         font-size: 24px !important;
-        border: 2px solid #ffa89a !important;
+        border: 1px solid #000000 !important;
       }
 
       b {
@@ -2755,7 +2754,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     margin: 0;
   }
   &_expShopTheseProducts{
-    font-family: 'Montserrat'!important;
+    font-family: "DM Sans";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;

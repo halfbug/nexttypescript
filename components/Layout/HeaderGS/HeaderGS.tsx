@@ -20,11 +20,11 @@ const Header = ({
   <Navbar bg="light" className={styles.groupshop}>
     <Container fluid>
       <Row className="w-100 align-items-center gx-0">
-        <Col xs={{ span: 3, order: 1 }} md={{ span: 3, order: 1 }}>{LeftComp}</Col>
-        <Col xs={{ span: 6, order: 2 }} md={{ span: 6, order: 2 }} className="text-center"><Navbar.Brand href="#home" className="m-0"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
+        <Col xs={{ span: 4, order: 1 }} md={{ span: 4, order: 1 }}>{LeftComp}</Col>
+        <Col xs={{ span: 4, order: 2 }} md={{ span: 4, order: 2 }} className="text-center"><Navbar.Brand href="#home" className="m-0"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
         <Col
-          xs={{ span: 3, order: 3 }}
-          md={{ span: 3, order: 3 }}
+          xs={{ span: 4, order: 3 }}
+          md={{ span: 4, order: 3 }}
           className={styles.groupshop__last}
         >
           {/* <SettingsIcon className={styles.groupshop__settingsicon} /> */}
