@@ -8,7 +8,7 @@ import type { NextPage } from 'next';
 import styles from 'styles/QrStoreDetails.module.scss';
 import Router, { useRouter } from 'next/router';
 import HeadLogo from 'assets/images/QRLogo.svg';
-import QRMobile from 'assets/images/qr-screen-mobile-1.png';
+import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
 import { GET_ORDER_DETAILS_BY_ID } from 'store/store.graphql';

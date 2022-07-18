@@ -7,7 +7,7 @@ import styles from 'styles/QrStoreDetails.module.scss';
 // import images
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR2 from 'assets/images/qr-screen-2.png';
-import QRMobile from 'assets/images/qr-screen-mobile-1.png';
+import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import YR from 'assets/images/YR.png';
 import Instagram from 'assets/images/instagram-with-border.svg';
 import Pinterest from 'assets/images/pinterest-with-border.svg';

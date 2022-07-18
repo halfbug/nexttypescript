@@ -5,7 +5,7 @@ import {
 import type { NextPage } from 'next';
 import styles from 'styles/QrStoreDetails.module.scss';
 import HeadLogo from 'assets/images/QRLogo.svg';
-import QRMobile from 'assets/images/qr-screen-mobile-1.png';
+import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import Image from 'next/image';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';

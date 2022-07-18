@@ -22,7 +22,7 @@ import styles from 'styles/QrStoreDetails.module.scss';
 // import images
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.jpg';
-import QRMobile from 'assets/images/qr-screen-mobile-1.png';
+import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import Instagram from 'assets/images/instagram.svg';
 import Pinterest from 'assets/images/pinterest.svg';
 import Twitter from 'assets/images/twitter.svg';
@@ -116,7 +116,7 @@ export default function QrStep1({
                   <HeadLogo />
                 </div>
                 <div className={styles.QRContainer__mobileImage}>
-                  <Image src={QRMobile} alt="QR Right Screen" layout="responsive" />
+                  <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__heading}>
