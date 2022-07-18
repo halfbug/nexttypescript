@@ -35,6 +35,17 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   const { id, dealProducts: dealProductsCtx } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
 
+  let app = 0;
+  function paginationScroll() {
+    if (app === 0) {
+      app = (document.getElementById('allproducts')?.offsetHeight) ?? 0;
+    }
+    window.scroll({
+      top: (app ?? 0) + 400,
+      behavior: 'smooth',
+    });
+  }
+
   // get client IP
   const [clientIP] = useIP();
 
@@ -108,6 +119,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           addedProducts: [...dealProducts || []],
         },
       });
+      paginationScroll();
     },
   });
 
