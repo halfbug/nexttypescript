@@ -608,7 +608,14 @@ const ProductDetail = ({
                     ? (<Spinner animation="border" className="align-self-center mb-2" />)
                     : (
                       <>
-                        <GradiantButton type="button" className="align-self-center mb-2 p-2" onClick={() => inviteForExpiredGS()}>🔗 INVITE NOW</GradiantButton>
+                        <Button
+                          type="button"
+                          className={['align-self-center mb-2 p-2', styles.groupshop_expPdInviteNow].join(' ')}
+                          onClick={() => inviteForExpiredGS()}
+                        >
+                          🔗 INVITE NOW
+
+                        </Button>
                         { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
                       </>
                     )}
