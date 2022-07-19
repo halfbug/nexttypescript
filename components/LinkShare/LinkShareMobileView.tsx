@@ -6,6 +6,7 @@ import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard'
 import { RootProps } from 'types/store';
 import useDeal from 'hooks/useDeal';
 import SocialButton from '../Buttons/SocialButton/SocialButton';
+import SocialButtonMobile from '../Buttons/SocialButton/SocialButtonMobile';
 
 interface LinkShareMobileProps extends RootProps {
   show : boolean;
@@ -38,11 +39,11 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
         <Modal.Body className={styles.linkShare__modal__body}>
           <CopyToClipboard value={shareurl} />
           <div className={styles.linkShare__modal__body__social_icons}>
-            <SocialButton network="Email" url={shareurl} />
-            <SocialButton network="Instagram" url={shareurl} />
-            <SocialButton network="Pinterest" url={shareurl} media={banner} />
-            <SocialButton network="Twitter" url={shareurl} />
-            <SocialButton network="Facebook" url={shareurl} />
+            <SocialButtonMobile network="Email" url={shareurl} />
+            <SocialButtonMobile network="Instagram" url={shareurl} />
+            <SocialButtonMobile network="Pinterest" url={shareurl} media={banner} />
+            <SocialButtonMobile network="Twitter" url={shareurl} />
+            <SocialButtonMobile network="Facebook" url={shareurl} />
           </div>
           <div className={styles.linkShare__modal__body__heading}>
             Give friends
