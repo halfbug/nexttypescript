@@ -89,13 +89,8 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (defaultUniqueClicks !== '-' && defaultUniqueClicks > 0) {
-          const clicktimes = 0.98;
-          const calTraffric = (clicktimes * defaultUniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
+        const calTraffric = rev / defaultUniqueClicks;
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setTrafficValue('-');
         setNumPurchases('-');
@@ -150,13 +145,8 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numFilterPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (uniqueClicks !== '-' && uniqueClicks > 0) {
-          const clicktimes = 0.98;
-          const calTraffric = (clicktimes * uniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
+        const calTraffric = rev / uniqueClicks;
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setTrafficValue('-');
         setNumFilterPurchases('-');
