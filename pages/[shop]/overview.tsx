@@ -85,7 +85,8 @@ const ShopMain: NextPage = () => {
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
         if (uniqueClicks !== '-' && uniqueClicks > 0) {
-          const calTraffric = rev / uniqueClicks;
+          const clicktimes = 0.98;
+          const calTraffric = (clicktimes * uniqueClicks);
           setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
         } else {
           setTrafficValue('-');
