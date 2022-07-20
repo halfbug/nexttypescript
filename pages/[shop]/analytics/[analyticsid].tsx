@@ -30,7 +30,7 @@ const CampaignAnalytics: NextPage = () => {
   const [cashbackGiven, setCashbackGiven] = useState<any>('-');
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
   const { query: { analyticsid } } = useRouter();
-
+  const clicktimes = 0.98;
   const handleSearch = ((startDate:any, endDate:any) => {
     if (startDate === '-') {
       // window.location.reload();
@@ -89,8 +89,12 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / defaultUniqueClicks;
-        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        if (defaultUniqueClicks !== '-' && defaultUniqueClicks > 0) {
+          const calTraffric = (clicktimes * defaultUniqueClicks);
+          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        } else {
+          setTrafficValue('-');
+        }
       } else {
         setTrafficValue('-');
         setNumPurchases('-');
@@ -145,8 +149,12 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numFilterPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        const calTraffric = rev / uniqueClicks;
-        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        if (uniqueClicks !== '-' && uniqueClicks > 0) {
+          const calTraffric = (clicktimes * uniqueClicks);
+          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
+        } else {
+          setTrafficValue('-');
+        }
       } else {
         setTrafficValue('-');
         setNumFilterPurchases('-');
