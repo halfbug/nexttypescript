@@ -38,7 +38,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   let app = 0;
   function paginationScroll() {
     if (app === 0) {
-      app = (document.getElementById('allproducts')?.offsetHeight) ?? 0;
+      app = (document.getElementById('popularproducts')?.offsetHeight) ?? 0;
     }
     window.scroll({
       top: (app ?? 0) + 400,
