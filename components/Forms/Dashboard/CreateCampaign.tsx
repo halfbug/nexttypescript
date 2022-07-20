@@ -273,9 +273,13 @@ export default function CreateCampaign() {
     setFieldValue('addableProducts', []);
   };
 
+  const handleAfterUpdate = () => {
+    console.log('create');
+  };
+
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a' || ins === 'addproduct'} />
+      <Screen1 handleAfterUpdate={handleAfterUpdate} show={ins === '2a' || ins === 'addproduct'} />
       <Form noValidate onSubmit={handleSubmit}>
 
         <Row>

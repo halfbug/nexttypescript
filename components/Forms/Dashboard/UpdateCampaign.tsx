@@ -46,6 +46,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const [disableBtn, setdisableBtn] = React.useState(true);
+  const [disableBtnUpdate, setdisableBtnUpdate] = React.useState(true);
   const [selectedProducts, setselectedProducts] = React.useState<IProduct[] | undefined>(undefined);
   const [selectedCollections, setselectedCollections] = React.useState<ICollection[] | undefined>(undefined);
   const [state, setstate] = React.useState<ICampaignForm>({
@@ -83,7 +84,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     if (campaign) {
       // updateStoreForEditCampaignId(campaignid);
       // const arr:ICampaign[] = [...campaign];
-      if (campaign.criteria! === "custom") setdisableBtn(false);
+      if (campaign.criteria! === "custom" && disableBtnUpdate === true) setdisableBtn(false);
       setHeading(campaign.name!);
 
       const newState:ICampaignForm = {
@@ -182,6 +183,8 @@ export default function UpdateCampaign({ setHeading }: IProps) {
           },
         },
       });
+      setdisableBtn(false);
+      setdisableBtnUpdate(true);
       // console.log({ campObj });
       const newObj = campObj.data.updateCampaign;
 
@@ -261,9 +264,14 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
     handleSubmit();
   };
+
+  const handleAfterUpdate = () => {
+    setdisableBtn(true);
+    setdisableBtnUpdate(false);
+  };
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
+      <Screen1 handleAfterUpdate={handleAfterUpdate} show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
       <Row className="pt-4">
         <Col lg={7} className="gx-5">
           <Row>

@@ -22,6 +22,7 @@ import Products from './Products';
 
 interface IScreen1Props {
   show: boolean,
+  handleAfterUpdate?: any;
   selectedProducts?: IProduct[];
   selectedCollections?: ICollection[];
 }
@@ -31,7 +32,9 @@ type SelectedType = {
   products? : IProduct[];
 }
 
-const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props) => {
+const Screen1 = ({
+  show, handleAfterUpdate, selectedProducts, selectedCollections,
+}: IScreen1Props) => {
   const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
   const { store, dispatch } = React.useContext(StoreContext);
@@ -198,6 +201,7 @@ const Screen1 = ({ show, selectedProducts, selectedCollections }: IScreen1Props)
   const handleSave = () => {
     // const finalArray = (ins === '2a') ? 'productsArray' : 'addableProductsArray';
     if (ins === '2a') {
+      handleAfterUpdate();
       if (campaign?.products && campaign?.products?.length < 81) {
         dispatch({
           type: 'NEW_CAMPAIGN',
