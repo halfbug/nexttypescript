@@ -19,11 +19,12 @@ interface RewardBox2Props extends RootProps {
   discount?: string;
   handleClose(e: any): any;
   shareurl: any;
+  fullshareurl: any;
   // addToCart(e: any): any;
 }
 
 const RewardBox2 = ({
-  show = false, handleClose, discount, shareurl,
+  show = false, handleClose, discount, shareurl, fullshareurl,
 }: RewardBox2Props) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -118,7 +119,7 @@ const RewardBox2 = ({
                     <ShareButton
                       placement="auto"
                       shareurl={shareurl}
-                      fullshareurl={shareurl}
+                      fullshareurl={fullshareurl}
                       label="Share & Earn"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}

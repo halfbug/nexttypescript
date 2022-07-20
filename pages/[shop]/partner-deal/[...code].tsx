@@ -708,6 +708,7 @@ const GroupShop: NextPage = () => {
           show={showRewards}
           discount={discount}
           shareurl={gsShortURL ?? gsURL}
+          fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
         /> */}
         {/* {isModalForMobile && (

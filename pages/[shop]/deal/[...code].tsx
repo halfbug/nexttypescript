@@ -766,6 +766,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           show={showRewards}
           discount={discount}
           shareurl={gsShortURL ?? gsURL}
+          fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
         />
         {shareEarnBtn && (
