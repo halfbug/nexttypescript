@@ -45,14 +45,15 @@
             margin-top: 8px;
         }
         button {
+            @extend .text-nowrap;
             text-decoration: none;
-            height: 28px;
+            height: auto;
             max-height: max-content;
             width: 102px;
             font-size: 12px;
             line-height: 15px;
             font-weight: 400;
-            padding: 2px !important;
+            padding: 4px !important;
             margin-right: 12px;
         }
         &__logo {
