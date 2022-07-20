@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
+import { useState } from 'react';
 import styles from 'styles/Marketing.module.scss';
 import {
   Row, Col, ToggleButtonGroup, ToggleButton,
@@ -11,9 +12,11 @@ import DisableButton from 'assets/images/disable-btn-icon.svg';
 import { Check2Circle, InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCustomerBox';
 
 export default function MarketingTools(
 ) {
+  const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
   return (
     <>
       <section className={styles.marketing__box_3}>
@@ -126,11 +129,18 @@ export default function MarketingTools(
               type="submit"
               // variant="outline-primary"
               className={['px-4 py-1 ', styles.marketing_DownloadBtn].join(' ')}
+              onClick={() => {
+                setShowInvitePopup(true);
+              }}
 
             >
               Invite Customers
             </WhiteButton>
           </Col>
+          <InviteCustomerBox
+            show={showInvitePopup}
+            handleClose={() => setShowInvitePopup(false)}
+          />
         </Row>
       </section>
     </>

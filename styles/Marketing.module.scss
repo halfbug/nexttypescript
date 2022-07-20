@@ -217,4 +217,128 @@
         top: 7px;
         right: 9px;
     }
+    &_inviteCustomerBox_modal {
+        width: 750px;
+
+        @include media-breakpoint-down(sm) {
+            width: auto;
+            bottom: 0;
+            margin: 0;
+        }
+
+        &__closebtnlg {
+
+            display: flex;
+            justify-content: flex-end;
+            box-shadow: none !important;
+            border-bottom: none;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        &__content {
+            border-radius: 12px;
+        }
+
+        &__body {
+            color: #000000;
+            padding: 0px;
+            hr{
+                color: #707070;
+                height: 0.9px;
+                opacity: 0.1;
+            }
+        }
+
+        &__top {
+            margin-bottom: 10px;
+            margin-left: 30px;
+            margin-right: 30px;
+
+            h4 {
+                @extend .mb-1;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: $font-weight-bolder;
+                font-size: $size-16px;
+                line-height: 21px;
+                color: $subheadingclr;
+            }
+
+            p {
+                @extend .mb-0, .d-block;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: 400 !important;
+                font-size: $size-14px;
+                line-height: $size-18px;
+                color: #000000;
+            }
+        }
+        &__bottom{
+            margin: 0px 30px 20px 30px;
+            h4{
+                @extend .my-2;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: $font-weight-bolder;
+                font-size: $size-16px;;
+                line-height: 21px;
+                color: $subheadingclr;
+            }
+        }
+        &__label{
+            @extend .my-2;
+            display: inline-block;
+            font-size: $size-14px;
+            line-height: $size-18px;
+            font-weight: $font-weight-light
+        }
+        &__hint{
+            @extend .mb-0;
+            color: $subheadingclr;
+        }
+        &__btnSection {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+
+            margin-top: 26px;
+        }
+        &__btn,
+        &__purpleBtn{
+            @extend .mt-2, .px-3;
+            border-radius: 6px;
+            height: 28px;
+            border: 1px solid $black;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+            &:hover {
+            border-radius: 6px;
+            border: 1px solid $black;
+            }
+        }
+        &__btn{
+            background-color: $white;
+            font-weight: $font-weight-light;
+        }
+        &__purpleBtn{
+            background-color:$classic;
+            font-weight: $font-weight-normal;
+            margin-left: 16px;
+        }
+        &__input{
+            width: 80px;
+            &:focus,
+            &:active {
+                border: 1px solid #000000;
+                box-shadow: none;
+            }
+        }
+    }
 }
