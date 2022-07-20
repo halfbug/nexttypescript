@@ -23,7 +23,7 @@ const useExcelDocument = () => {
       } = bRec;
       console.log({ bRec });
       const thisDate = `${month} ${date}, ${year}`;
-      const isAppTrialForThisDate = isAppTrialOnGivenDate(recStore.isAppTrial, thisDate);
+      const isAppTrialForThisDate = isAppTrialOnGivenDate(recStore.appTrialEnd, thisDate);
       console.log('🚀 ~ file: useExcelDocument.ts ~ line 26 ~ isAppTrialForThisDate', isAppTrialForThisDate);
       const appTrialtext = isAppTrialForThisDate ? ` >> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}0`
         : '';

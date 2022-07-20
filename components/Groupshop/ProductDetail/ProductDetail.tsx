@@ -547,7 +547,11 @@ const ProductDetail = ({
               <div className={styles.groupshop_modal_detail_expire}>
                 <h3 className="fw-bolder">
                   {' '}
-                  This Groupshop has expired, but you can still get 20% off.
+                  This Groupshop has expired, but you can still get
+                  {' '}
+                  {percentage}
+                  %
+                  off.
                 </h3>
                 <section>
                   <Row className={[styles.groupshop_footer_expire, 'justify-content-center w-100'].join(' ')}>
@@ -599,7 +603,12 @@ const ProductDetail = ({
                   to this Groupshop, and start shopping with
                   them to get
                   {' '}
-                  <strong>20% off plus additional cashback</strong>
+                  <strong>
+                    {percentage}
+                    %
+                    {' '}
+                    off plus additional cashback
+                  </strong>
                   {' '}
                   on this and other products you love.
 

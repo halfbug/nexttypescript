@@ -20,11 +20,12 @@ interface ExpiredBoxProps extends RootProps {
   discount?: string;
   handleClose(e: any): any;
   shareurl: any;
+  storeName: string;
   // addToCart(e: any): any;
 }
 
 const ExpiredBox = ({
-  show = false, handleClose, discount, shareurl,
+  show = false, handleClose, discount, shareurl, storeName,
 }: ExpiredBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -68,7 +69,7 @@ const ExpiredBox = ({
             <Col lg={12}>
               <div className={styles.groupshop_expiredBox_modal__top}>
                 <h2>
-                  LE SABLE
+                  {`${storeName}`}
                 </h2>
                 <p>
                   Get
@@ -81,7 +82,7 @@ const ExpiredBox = ({
                   {' '}
                   these and other
                   {' '}
-                  <strong>Insert Name Here</strong>
+                  <strong>{`${storeName}`}</strong>
                   {' '}
                   products.
                 </p>
