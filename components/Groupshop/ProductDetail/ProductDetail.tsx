@@ -498,6 +498,7 @@ const ProductDetail = ({
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                        disabled={isExpired || outofStock}
                       />
 
                     )}
