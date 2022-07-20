@@ -515,7 +515,8 @@
         border-radius: 23px;
         padding: 10px 30px;
         &__trow {
-            width: 220px;
+            // width: 220px;
+            width: auto;
             font-weight: 700;
             font-size: 18px;
             line-height: 24px;
@@ -523,7 +524,7 @@
             margin-bottom: 7px;
         }
         &__brow {
-            width: 240px;
+            width: auto;
             font-weight: 400;
             font-size: 12px;
             line-height: 16px;
