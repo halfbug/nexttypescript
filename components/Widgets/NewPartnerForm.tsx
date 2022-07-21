@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Col, Form, Row, ToggleButton, ToggleButtonGroup, Button,
+  Col, Form, Row, ToggleButton, ToggleButtonGroup, Button, Spinner,
 } from 'react-bootstrap';
 import styles from 'styles/Partner.module.scss';
 import { Check2Circle, BoxArrowUp } from 'react-bootstrap-icons';
@@ -22,6 +22,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
   const [editMin, setEditMin] = React.useState(false);
   const [editMax, setEditMax] = React.useState(false);
   const [exitPartnerRecord, setExitPartnerRecord] = React.useState(false);
+  const [loadingSubmit, setloadingSubmit] = React.useState(false);
   const partnerGroupshopInitial = {
     email: '',
     minDiscount: 10,
@@ -105,6 +106,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IPartnerTools>) => {
       if (validateForm) validateForm(valz);
+      setloadingSubmit(true);
       const {
         email, minDiscount, maxDiscount, partnerCommission,
       } = valz;
@@ -145,8 +147,9 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
           },
 
         });
-        resetForm({});
         handleAfterSubmit();
+        resetForm();
+        setloadingSubmit(false);
         // console.log({ partnerObj });
       }
     },
@@ -171,6 +174,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
                     <Form.Control
                       type="email"
                       name="email"
+                      value={values.email}
                       isInvalid={!!errors.email}
                       onChange={handleChange}
                       placeholder="Enter Email Address"
@@ -183,16 +187,19 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
                 <Col xl={6} lg={6} md={6}>
                   <Row>
                     <Col xl={5} lg={5} md={5}>
-                      <Button
-                        type="submit"
-                        variant="outline-dark"
-                        className={styles.partner__dark_btn}
-                        value={1}
-                      >
-                        <Check2Circle className="fs-5" />
-                        {' '}
-                        Add Affiliate
-                      </Button>
+                      {loadingSubmit ? <Spinner animation="border" /> : (
+                        <Button
+                          type="submit"
+                          variant="outline-dark"
+                          className={styles.partner__dark_btn}
+                          value={1}
+                        >
+                          <Check2Circle className="fs-5" />
+                          {' '}
+                          Add Affiliate
+                        </Button>
+                      )}
+
                     </Col>
                     <Col xl={5} lg={5} md={5}>
                       <Button
