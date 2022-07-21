@@ -199,6 +199,7 @@ const Screen1 = ({
   };
   const { updateSelectedCampaignAddProducts, updateSelectedCampaignProducts } = useCampaign();
   const handleSave = () => {
+    setTitle('Total Products');
     // const finalArray = (ins === '2a') ? 'productsArray' : 'addableProductsArray';
     if (ins === '2a') {
       handleAfterUpdate();

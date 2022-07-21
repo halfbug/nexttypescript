@@ -100,8 +100,8 @@ export default function AddProductButton({ handleDelete }:IProps) {
                   {/* campaign?.addableProducts?.length ? campaign?.addableProducts?.length : '' */}
                   {' '}
                   product(s)/
-                  { campaign?.addableCollections?.length ? campaign?.addableCollections?.length : newCampaign?.addableCollections?.length ? newCampaign?.addableCollections?.length : ''}
-                  collection(s)
+                  {/* { campaign?.addableCollections?.length ? campaign?.addableCollections?.length : newCampaign?.addableCollections?.length ? newCampaign?.addableCollections?.length : ''}
+                  collection(s) */}
 
                   <DeleteButton
                     icon={<XCircle width={14} height={13.5} />}

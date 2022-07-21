@@ -122,10 +122,10 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
                   {(newCampaign?.products?.length)
           || (campaign?.products?.length)}
                   {' '}
-                  product(s)/
-                  {(newCampaign?.collections?.length || campaign?.collections?.length)}
-                  {' '}
-                  collection(s) selected
+                  product(s)
+                  {/* {(newCampaign?.collections?.length || campaign?.collections?.length)}
+                  {'/ '}
+                  collection(s) selected */}
                   <DeleteButton
                     icon={<XCircle width={14} height={13.5} />}
                     handleDelete={handleDelete}

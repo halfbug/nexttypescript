@@ -30,13 +30,12 @@ const Layout = ({ children, handleSearch, campaign }: ILayoutProps) => {
       <Row className="border-bottom">
         <Col className="text-left my-2" xs={12} md={6}><h3>Add products/collections</h3></Col>
         <Col className={styles.product_selected} xs={12} md={6}>
-          {(store.newCampaign?.products?.length)
-          || (products?.length)}
+          {(products?.length)}
           {' '}
-          product(s)/
-          {(store.newCampaign?.collections?.length || collections?.length)}
+          product(s)
+          {/* {(store.newCampaign?.collections?.length || collections?.length)}
           {' '}
-          collection(s) selected
+          / collection(s) selected */}
         </Col>
       </Row>
       <Row className="mt-3">
