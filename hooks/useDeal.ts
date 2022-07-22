@@ -2,31 +2,35 @@ import { useCallback, useContext, useState } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import _ from 'lodash';
 import { IProduct } from 'types/store';
 import useIP from './useIP';
 import useUtilityFunction from './useUtilityFunction';
+import useAppContext from './useAppContext';
 
 export default function useDeal() {
-  const {
-    gsctx,
-    dispatch,
-  } = useContext(GroupshopContext);
-  const { filterArray } = useUtilityFunction();
+  // const {
+  //   gsctx,
+  //   dispatch,
+  // } = useContext(GroupshopContext);
+  const { filterArray, findInArray2 } = useUtilityFunction();
+  const { gsctx, dispatch, isGroupshop } = useAppContext();
 
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
   const [allDiscount, setallDiscount] = useState<(string | undefined)[] | undefined>(undefined);
   const {
-    members: [
-      {
-        products: ownerProducts,
-      },
-    ],
+    dealProducts,
+    members: gmembers,
   } = gsctx;
+  const isInfluencer = !!(!isGroupshop && dealProducts && dealProducts?.length < 1);
+  const isInfluencerGS = !isGroupshop;
+  const isGSnRef = isGroupshop && dealProducts && dealProducts?.length > 1;
+  // const ownerPrds = isInfluencerGS ? [] : gmembers[0]?.products[0] ?? [];
 
   const clientDealProducts = useCallback(
     ():string[] | undefined => {
-      const addedPrds = filterArray(gsctx?.dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
+      const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
       // console.log('🚀 useDeal ~ addedPrds', addedPrds);
 
       return ([...addedPrds.filter(
@@ -90,7 +94,7 @@ export default function useDeal() {
   },
   [gsctx.members]);
 
-  const isExpired = !(getDateDifference().time > -1);
+  const isExpired = isGroupshop ? !(getDateDifference().time > -1) : false;
 
   const totalCashBack = useCallback((price) => {
     const {
@@ -112,7 +116,6 @@ export default function useDeal() {
   [gsctx]);
 
   const addedByName = useCallback((productId) => {
-    const { dealProducts } = gsctx;
     const filtered = dealProducts?.find((item) => item.productId === productId);
 
     return filtered?.addedBy;
@@ -279,6 +282,10 @@ export default function useDeal() {
 
   const banner = gsctx?.campaign?.settings?.s3imageUrl ?? '/images/bg.jpg';
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
+  const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
+  const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
+  const addedProductsByInfluencer: any = _.uniq(findInArray2(gsctx?.popularProducts ?? [], addedByInfluencer ?? [], 'id', 'productId').filter((item:any) => item !== undefined));
+  const baseLine = gsctx?.partnerRewards?.baseline;
   return {
     currencySymbol,
     discount,
@@ -308,5 +315,11 @@ export default function useDeal() {
     banner,
     gsctx,
     // getExpectedCashBack,
+    isInfluencer,
+    addedProductsByInfluencer,
+    baseLine,
+    isInfluencerGS,
+    isGSnRef,
+    addedByRefferal,
   };
 }

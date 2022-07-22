@@ -7,7 +7,7 @@ const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
   const [cashbackVal, setCashBackVal] = useState<undefined | string>(undefined);
-  const { unLockCB, currencySymbol } = useDeal();
+  const { unLockCB, currencySymbol, isInfluencerGS } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
     members, discountCode: { percentage }, milestones,
@@ -20,7 +20,9 @@ const useTopBanner = () => {
   useEffect(() => {
     // if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
     if (members) {
-      if (members.length === 1 || members.length === 3) {
+      if (isInfluencerGS) {
+        setText('all other orders');
+      } else if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');
         setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
       } else if (members.length === 2 || members.length === 4) {

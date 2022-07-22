@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from 'react';
-import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { PartnerGroupshopContext } from 'store/partner-groupshop.context';
 import { IProduct } from 'types/store';
 import useIP from './useIP';
 
@@ -9,7 +9,7 @@ export default function usePartner() {
   const {
     gsctx,
     dispatch,
-  } = useContext(GroupshopContext);
+  } = useContext(PartnerGroupshopContext);
 
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
@@ -51,47 +51,48 @@ export default function usePartner() {
     [gsctx.members],
   );
 
-  const getDateDifference = useCallback(() => {
-    const { expiredAt } = gsctx;
-    const expiryDate = new Date(expiredAt);
-    const currentDate = new Date();
-    const diff = expiryDate.getTime() - currentDate.getTime();
-    if (diff < 0) {
-      return ({
-        time: diff,
-        days: 0,
-        hrs: 0,
-        mins: 0,
-        secs: 0,
-      });
-    }
-    return ({
-      time: diff,
-      days: Math.floor(diff / 86400000), // days
-      hrs: Math.floor((diff % 86400000) / 3600000), // hours
-      mins: Math.round(((diff % 86400000) % 3600000) / 60000), // minutes
-      secs: Math.round((((diff % 86400000) % 3600000) / 60000) / 60000), // seconds
-    });
-  },
-  [gsctx.members]);
+  // const getDateDifference = useCallback(() => {
+  //   const { expiredAt } = gsctx;
+  //   const expiryDate = new Date(expiredAt);
+  //   const currentDate = new Date();
+  //   const diff = expiryDate.getTime() - currentDate.getTime();
+  //   if (diff < 0) {
+  //     return ({
+  //       time: diff,
+  //       days: 0,
+  //       hrs: 0,
+  //       mins: 0,
+  //       secs: 0,
+  //     });
+  //   }
+  //   return ({
+  //     time: diff,
+  //     days: Math.floor(diff / 86400000), // days
+  //     hrs: Math.floor((diff % 86400000) / 3600000), // hours
+  //     mins: Math.round(((diff % 86400000) % 3600000) / 60000), // minutes
+  //     secs: Math.round((((diff % 86400000) % 3600000) / 60000) / 60000), // seconds
+  //   });
+  // },
+  // [gsctx.members]);
 
-  const isExpired = !(getDateDifference().time > -1);
+  // const isExpired = !(getDateDifference().time > -1);
+  const isExpired = false;
 
   const totalCashBack = useCallback((price) => {
-    // const {
-    //   members, discountCode: { percentage },
-    //   campaign,
-    // } = gsctx;
-    // const rew = { ...campaign?.salesTarget?.rewards };
-    // // eslint-disable-next-line radix
-    // const maxdiscount: number = parseInt(rew[2].discount || '0');
+    const {
+      members, discountCode: { percentage },
+      campaign,
+    } = gsctx;
+    const rew = { ...campaign?.salesTarget?.rewards };
+    // eslint-disable-next-line radix
+    const maxdiscount: number = parseInt(rew[2].discount || '0');
 
-    const cashback: number = 0;
-    // if (members.length < 5) {
-    //   cashback = ((maxdiscount - +(percentage)) / 100) * +(price);
-    //   cashback = +(cashback);
-    //   cashback = Math.floor(cashback);
-    // }
+    let cashback: number = 0;
+    if (members.length < 5) {
+      cashback = ((maxdiscount - +(percentage)) / 100) * +(price);
+      cashback = +(cashback);
+      cashback = Math.floor(cashback);
+    }
     return cashback;
   },
   [gsctx]);
@@ -144,7 +145,6 @@ export default function usePartner() {
     getBuyers,
     formatName,
     topFive,
-    getDateDifference,
     isExpired,
     productShareUrl,
     addedByName,

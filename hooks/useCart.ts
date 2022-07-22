@@ -1,13 +1,14 @@
 import { useCallback, useContext } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct } from 'types/groupshop';
+import useAppContext from './useAppContext';
 import useDeal from './useDeal';
 
 export default function useCart() {
   const {
     gsctx,
     dispatch,
-  } = useContext(GroupshopContext);
+  } = useAppContext();
 
   const { dPrice } = useDeal();
 

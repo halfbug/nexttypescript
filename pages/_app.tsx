@@ -6,6 +6,7 @@ import { useApollo } from 'hooks/useApollo';
 import { StoreContextProvider } from 'store/store.context';
 import { useRouter } from 'next/router';
 import { GroupshopContextProvider } from 'store/groupshop.context';
+import { GroupshopPartnerContextProvider } from 'store/partner-groupshop.context';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -17,6 +18,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GroupshopContextProvider>
           <Component {...pageProps} />
         </GroupshopContextProvider>
+      </ApolloProvider>
+    );
+  }
+  if (pathname.includes('/partner-deal/')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <GroupshopPartnerContextProvider>
+          <Component {...pageProps} />
+        </GroupshopPartnerContextProvider>
       </ApolloProvider>
     );
   }

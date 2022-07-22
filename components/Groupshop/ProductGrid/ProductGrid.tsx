@@ -20,6 +20,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
+import useAppContext from 'hooks/useAppContext';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -63,19 +64,23 @@ const ProductGrid = ({
 
   const fillerz = pageSize === (renderItems?.length) ? 0 : 1;
 
+  // const {
+  //   gsctx: {
+  //     discountCode: { percentage },
+  //     dealProducts,
+  //   } = { discountCode: { percentage: 0 }, dealProducts: [] },
+  // } = useContext(GroupshopContext);
   const {
     gsctx: {
       discountCode: { percentage },
       dealProducts,
-    } = { discountCode: { percentage: 0 }, dealProducts: [] },
-  } = useContext(GroupshopContext);
+    } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop,
+  } = useAppContext();
 
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
   } = useDeal();
-  const { formatNumber } = useUtilityFunction();
-
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }

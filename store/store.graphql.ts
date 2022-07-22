@@ -917,6 +917,182 @@ query campaignMetric($storeId: String!, $campaignId: String!) {
   }
 }
 `;
+const GET_PARTNER_GROUPSHOP = gql`
+query PartnerGroupshop($code: String!) {
+  partnerGroupshop(code: $code) {
+    storeId
+    id
+    url
+    shortUrl
+    visitors
+    members {
+      orderId
+      availedDiscount
+      role
+      products{
+        id
+        title
+        price
+        featuredImage
+      }
+    }
+    partnerDetails {
+      fname
+      lname
+      email
+    }
+    partnerRewards {
+      baseline
+      average
+      maximum
+
+    }
+
+    bestSeller{
+      featuredImage
+      id
+      title
+      description
+      price
+      currencyCode
+      outofstock
+      options{
+        id
+        name
+        values
+        position
+      }
+      lineItems{
+        product{
+          id
+        }
+        price
+      }
+       
+    }
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+      type
+      isInfluencer
+    }
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+    createdAt
+    totalProducts
+    memberDetails{
+      orderId
+      lineItems{
+        quantity
+        price
+        discountedPrice
+      }
+        customerInfo{
+          firstName
+          lastName
+          email
+          phone
+          ip
+        }
+    }
+    store{
+      brandName
+      shop
+      logoImage
+      currencyCode
+    }
+  popularProducts{
+    id
+    featuredImage
+    title
+    description
+    price
+    options{
+      id
+      name
+      values
+      position
+    }
+    currencyCode
+    orders{
+      product{
+        id
+      }
+      quantity
+      price
+    }
+  }
+  allProducts{
+    featuredImage
+    id
+    title
+    description
+    price
+    currencyCode
+    purchaseCount
+    outofstock
+    options{
+      id
+      name
+      values
+      position
+    }
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+    campaign{
+      name
+      products
+      collections
+      addableProducts
+      socialLinks{
+        instagram
+        tiktok
+        facebook
+        twitter
+      }
+      settings{
+        brandColor
+        customColor
+        customBg
+        imageUrl
+        youtubeUrl
+        media
+      }   
+      salesTarget{
+        id
+        name
+        rewards{
+          id
+          customerCount
+          discount
+        }    
+      }
+    } 
+  }
+}
+`;
+const ADD_DEAL_PRODUCT_PARTNER = gql`
+  mutation AddDealProductPartner($updatePartnersInput: UpdatePartnersInput!) {
+    addDealProductPartner(updatePartnersInput: $updatePartnersInput) {
+    id
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+    }
+      }
+  }
+`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
@@ -931,5 +1107,5 @@ export {
   GET_OVERVIEW_DATA, GET_OVERVIEW_METRICS, GET_TOTAL_ORDERS, GET_ORDERS_BY_GS,
   GET_ORDER_DETAILS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
   GET_CAMPAIGN_METRICS, GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER,
-  GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER,
+  GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, GET_PARTNER_GROUPSHOP, ADD_DEAL_PRODUCT_PARTNER,
 };

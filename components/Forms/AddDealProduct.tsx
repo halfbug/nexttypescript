@@ -7,11 +7,13 @@ import _ from 'lodash';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
-import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
+import { ADD_DEAL_PRODUCT, ADD_DEAL_PRODUCT_PARTNER } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct, IGroupshop } from 'types/groupshop';
 import useIP from 'hooks/useIP';
 import useGtm from 'hooks/useGtm';
+import useAppContext from 'hooks/useAppContext';
+import useDeal from 'hooks/useDeal';
 
 interface IValues {
   username: string;
@@ -24,16 +26,19 @@ type TAddDealProduct ={
 }
 
 export default function AddDealProduct({ selectedProducts, handleClose }:TAddDealProduct) {
-  const [addDealProduct] = useMutation<IGroupshop>(ADD_DEAL_PRODUCT);
-
   // get grouphshop context
-  const {
-    gsctx,
-    dispatch,
-  } = React.useContext(GroupshopContext);
+  // const {
+  //   gsctx,
+  //   dispatch,
+  // } = React.useContext(GroupshopContext);
+  const { gsctx, dispatch, isGroupshop } = useAppContext();
+  const [addDealProduct] = useMutation<IGroupshop>(
+    isGroupshop ? ADD_DEAL_PRODUCT : ADD_DEAL_PRODUCT_PARTNER,
+  );
 
-  const { id, dealProducts: dealProductsCtx } = gsctx;
+  const { id, dealProducts: dealProductsCtx, partnerDetails: { fname } = { fname: '' } } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
+  console.log('🚀 ~ file: AddDealProduct.tsx ~ line 40 ~ AddDealProduct ~ gsctx', gsctx);
 
   let app = 0;
   function paginationScroll() {
@@ -48,6 +53,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
   // get client IP
   const [clientIP] = useIP();
+  const { isInfluencer } = useDeal();
 
   const { googleButtonCode } = useGtm();
 
@@ -65,7 +71,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     handleSubmit, values, handleChange, touched, errors,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
-      username: '',
+      username: isInfluencer ? gsctx?.partnerDetails?.fname ?? '' : '',
       selectedProducts,
 
     },
@@ -74,19 +80,22 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+      console.log('im in submit');
       setloadingSubmit(true);
       googleButtonCode('addproduct-complete');
-      if (validateForm) validateForm(valz);
+      if (validateForm && !isInfluencer) validateForm(valz);
       const { username, selectedProducts: products } = valz;
-      console.log('🚀 ~ file: AddDealProduct.tsx ~ line 63 ~ onSubmit: ~ products', products);
+      console.log('🚀 ~ file: AddDealProduct.tsx ~ line87 ~ onSubmit: ~ products', products);
 
       // merge selected products with groupshop deal prodcuts
 
       const sdealProducts = products?.map(
         (productId) => {
           const preProduct = dealProductsCtx?.find((prd) => prd.productId === productId);
-          const newProduct:DealProduct = {
+          const newProduct:DealProduct = isGroupshop ? {
             productId, addedBy: username, customerIP: clientIP, type: 'deal',
+          } : {
+            productId, addedBy: isInfluencer ? fname : username, customerIP: clientIP, type: 'deal', isInfluencer,
           };
           return preProduct ?? newProduct;
         },
@@ -94,15 +103,25 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       // unique by complete object
       const dealProducts = _.uniq([...gsctx.dealProducts ?? [], ...sdealProducts ?? []]);
 
-      await addDealProduct({
-        variables: {
-          updateGroupshopInput: {
-            id,
-            dealProducts,
-
+      if (isGroupshop) {
+        await addDealProduct({
+          variables: {
+            updateGroupshopInput: {
+              id,
+              dealProducts,
+            },
           },
-        },
-      });
+        });
+      } else {
+        await addDealProduct({
+          variables: {
+            updatePartnersInput: {
+              id,
+              dealProducts,
+            },
+          },
+        });
+      }
       handleClose({});
       setloadingSubmit(false);
 
@@ -129,11 +148,11 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         <Form.Control
           type="text"
           name="username"
-          value={values.username}
+          value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
           onChange={handleChange}
           isInvalid={touched.username && !!errors.username}
           placeholder="Your Name ..."
-          className="me-1"
+          className={isInfluencer ? 'mx-5 w-75' : 'me-1'}
         />
         <Form.Control.Feedback type="invalid">
           {errors.username}

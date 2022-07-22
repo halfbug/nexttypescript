@@ -1,4 +1,6 @@
-import { IProduct as Product, IStore as Store, ICampaign as Campaign } from './store';
+import {
+  IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards,
+} from './store';
 
 export type DealProduct ={
   productId: string;
@@ -8,6 +10,15 @@ export type DealProduct ={
   addedBy: string;
 
   customerIP: string;
+
+  isInfluencer?: boolean | undefined;
+}
+export type partnerDetails ={
+  fname: string;
+
+  lname?: string;
+
+  email: string;
 }
 
 export type DiscountCode ={
@@ -33,13 +44,44 @@ export type Milestone ={
 
   discount: string;
 }
+export class CustomerInfo {
+  // 'customer_id': string;
 
+  firstName: string;
+
+  lastName: string;
+
+  email: string;
+
+  ip?: string;
+
+  phone: string;
+
+  // 'sms_marketing': string;
+}
+
+export type PartnerMember ={
+  orderId: string;
+
+  orderDetail?: any;
+
+  lineItems?: any;
+
+  comissionAmount?: number;
+
+  orderAmount?: number;
+
+  isRedeem?: boolean;
+
+  customerInfo?: CustomerInfo;
+
+}
 export type Member ={
   orderId: string;
 
-  availedDiscount: number;
+  availedDiscount?: number;
 
-  role: 'owner' | 'referral';
+  role?: 'owner' | 'referral';
 
   refund?: Refund[];
 
@@ -48,6 +90,14 @@ export type Member ={
   orderDetail?: any;
 
   lineItems?: any;
+
+  comissionAmount?: number;
+
+  orderAmount?: number;
+
+  isRedeem?: boolean;
+
+  customerInfo?: CustomerInfo;
 
 }
 
@@ -98,9 +148,20 @@ export interface IGroupshop {
   status?: string;
 
   // expectedCashBack?: number;
+  partnerDetails?: partnerDetails;
 
+  visitors?: number;
+
+  partnerRewards?: PartnerRewards;
+
+  partnerCommission?: string;
+
+  memberDetails?: PartnerMember[];
 }
-
+export interface InfluencerGroupshop {
+  partnerDetails?: partnerDetails | undefined;
+}
+export type IPGroupshop = IGroupshop & InfluencerGroupshop;
 export type CustomPropsType = {
   [key: string]: any;
 };

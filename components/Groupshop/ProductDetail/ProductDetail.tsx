@@ -27,6 +27,7 @@ import { GroupshopContext } from 'store/groupshop.context';
 import { Send } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
+import useAppContext from 'hooks/useAppContext';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -46,7 +47,7 @@ const ProductDetail = ({
     // setSelected(undefined);
     handleClose(e);
   };
-  const { gsctx: { discountCode: { percentage } } } = useContext(GroupshopContext);
+  const { gsctx: { discountCode: { percentage } }, isGroupshop } = useAppContext();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -361,7 +362,7 @@ const ProductDetail = ({
                       {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
                     </span>
-                    {cashBack ? (
+                    {cashBack && isGroupshop ? (
                       <Row className={styles.groupshop_cashback}>
                         <Col className=" mx-0">
                           <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>

@@ -136,7 +136,7 @@ export interface IProduct {
   title: string;
   featuredImage: string;
   price: string;
-  currencyCode: string;
+  currencyCode?: string;
   description?: string;
   orders?: any;
   options?: Ioption[];

@@ -43,10 +43,21 @@ export default function useUtilityFunction() {
     const newArr = searchArr?.find(
       (item2: any) => item2?.[searchField] === searched,
     );
-    // console.log({ newArr });
-    // console.log({ item });
 
     return newArr;
+  });
+  // retrieve common element from 1st array
+  const findInArray2 = (
+    mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
+  ):any => mainArr?.map((item: any) => {
+    // console.log({ item });
+    const searched = arrayfield ? item?.[arrayfield] : item;
+
+    const newArr = searchArr?.find(
+      (item2: any) => item2?.[searchField] === searched,
+    );
+    // console.log({ item });
+    return newArr ? item : undefined;
   });
 
   const filterArray = (
@@ -130,5 +141,6 @@ export default function useUtilityFunction() {
     formatNumber,
     storeCurrencySymbol,
     DateRanges,
+    findInArray2,
   };
 }

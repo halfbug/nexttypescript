@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
-// import Head from 'next/head';
-// import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { GET_GROUPSHOP } from 'store/store.graphql';
+import { GET_PARTNER_GROUPSHOP } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
@@ -24,14 +23,12 @@ import {
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
-import { GroupshopContext, gsInit } from 'store/groupshop.context';
 import { IGroupshop, Member } from 'types/groupshop';
 import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
 import Cart from 'components/Groupshop/Cart/Cart';
-import usePartner from 'hooks/usePartner';
 import useCode from 'hooks/useCode';
 import useAlert from 'hooks/useAlert';
 import Button from 'components/Buttons/Button/Button';
@@ -45,45 +42,50 @@ import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
 import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
 import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
 import TickCircle from 'assets/images/tick-circle.svg';
-import GradientCircle from 'assets/images/gradient-circle.svg';
 import { useMediaQuery } from 'react-responsive';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
 import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
-import ProductDetail from 'components/Influencer/ProductDetail/ProductDetail';
+import { PartnerGroupshopContext, gspInit } from 'store/partner-groupshop.context';
+import useDeal from 'hooks/useDeal';
+import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 
 const GroupShop: NextPage = () => {
-  const { gsctx, dispatch } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+  const { query: { ins } } = useRouter();
 
   const {
     loading,
     error,
-    data: { groupshop } = { groupshop: gsInit },
-  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined, status: string | undefined}>(
-    GET_GROUPSHOP,
+    data: { partnerGroupshop } = { partnerGroupshop: gspInit },
+  } = useQuery<{ partnerGroupshop: IGroupshop }, { code: string | undefined}>(
+    GET_PARTNER_GROUPSHOP,
     {
-      variables: { code: discountCode, status: status ?? '' },
+      variables: { code: discountCode },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },
   );
+  console.log('🚀 ~ file: [...code].tsx ~ line 68 ~ groupshop', partnerGroupshop);
 
   // load all products
   useProducts(`${shop}.myshopify.com`);
 
-  console.log('🚀 ~~ line 75 ~ groupshop', groupshop);
   console.log('partner deal');
 
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
+    undefined,
+  );
+  const [bestSeller, setbestSeller] = useState<IProduct[] | undefined>(
     undefined,
   );
   const [member, setmember] = useState<Member | undefined>(undefined);
@@ -99,14 +101,20 @@ const GroupShop: NextPage = () => {
 
   useEffect(() => {
     async function gets3headerBanner() {
-      if (groupshop.id && pending) {
-      // console.log('🚀 ~ file: [...code].tsx ~ line 52 ~ useEffect ~ groupshop', groupshop);
+      if (partnerGroupshop && partnerGroupshop.id && pending) {
+        console.log('🚀 ~ file: [...code].tsx ~ useEffect ~ data.groupshop', partnerGroupshop);
+        const pctx: IGroupshop = {
+          ...partnerGroupshop,
+          members: partnerGroupshop.members ?? [],
+        };
+
+        dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
         setpending(false);
-        setallProducts(groupshop?.allProducts);
-        setmember(groupshop?.members[0]);
-        dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
-        if (groupshop?.campaign?.settings?.imageUrl) {
-          const key = getKeyFromS3URL(groupshop?.campaign?.settings?.imageUrl ?? '');
+        setallProducts(partnerGroupshop?.allProducts);
+        setbestSeller(partnerGroupshop?.bestSeller);
+        // setmember(partnerGroupshop?.members[0]);
+        if (partnerGroupshop?.campaign?.settings?.imageUrl) {
+          const key = getKeyFromS3URL(partnerGroupshop?.campaign?.settings?.imageUrl ?? '');
           const bannerImageS3 = await getSignedUrlS3(key);
           if (bannerImageS3) setBannerImage(bannerImageS3);
         } else {
@@ -115,71 +123,68 @@ const GroupShop: NextPage = () => {
       }
     }
     gets3headerBanner();
-  }, [groupshop, pending]);
+  }, [partnerGroupshop, pending]);
 
   const {
     gsURL,
     gsShortURL,
     clientDealProducts,
-    isExpired,
     discount,
     getDiscounts,
-    getDateDifference,
+    isExpired,
     currencySymbol,
-  } = usePartner();
-  const {
-    days, hrs, mins, secs,
-  } = getDateDifference();
+    isInfluencer,
+    isGSnRef,
+    isInfluencerGS,
+    addedProductsByInfluencer,
+    addedByRefferal,
+  } = useDeal();
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
   const {
-    members: [
-      {
-        orderDetail: { customer: owner },
-        products: ownerProducts,
-      },
-    ],
-    members,
+    // members: [{
+    //   products: [{
+    //     id, price, title, featuredImage,
+    //   }] = [{
+    //     products: [{
+    //       id: '', price: '', title: '', featuredImage: '',
+    //     }],
+    // memberDetails: [{
+    //   orderId, customerInfo,
+    //   comissionAmount, orderAmount,
+    // }] = [{
+    //   orderId: '',
+    //   customerInfo: {
+    //     firstName: '', lastName: '', email: '', ip: '', phone: '',
+    //   },
+    //   comissionAmount: 0,
+    //   orderAmount: 0,
+    // }],
+    memberDetails = [],
     store: { brandName } = { brandName: '' },
     store: { logoImage } = { logoImage: '' },
-    popularProducts,
-    dealProducts,
-    addedProducts,
-    // allProducts,
+    dealProducts = [],
+    popularProducts = [],
+    discountCode: { title },
   } = gsctx;
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
   } = useUtilityFunction();
-  const { topPicks } = useTopPicks();
   useEffect(() => {
-    // setallProducts(Array.from(new Set(
-    //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
-    //   [...gsctx?.allProducts ?? []],
-    // )));
     setallProducts(
       [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
     );
-
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
-  }, [gsctx, gsctx.dealProducts]);
+  }, [gsctx, gsctx.addedProducts]);
 
-  useEffect(() => {
-    const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
-    // const addedPrds = dealProducts?.filter((item));
-    // check addedPrds has no product which is < 1 price
+  // useEffect(() => {
+  //   if ((!dealProducts || dealProducts.length === 0) && gsctx.discountCode.title) {
+  //     setshowps(true);
+  //   } else if (dealProducts && dealProducts.length > 0) setshowps(false);
+  // }, [dealProducts]);
 
-    console.log('🚀 ~ file: usePartner.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
-    dispatch({
-      type: 'UPDATE_GROUPSHOP',
-      payload: {
-        ...gsctx,
-        addedProducts: _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]),
-      },
-    });
-    console.log('added', _.uniq([...gsctx?.addedProducts || [], ...addedPrds || []]));
-  }, [dealProducts, popularProducts]);
   useEffect(() => {
     async function gets3logo() {
       const key = getKeyFromS3URL(logoImage ?? '');
@@ -189,14 +194,13 @@ const GroupShop: NextPage = () => {
     }
     gets3logo();
   }, [logoImage]);
-
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
         // removing popular prd from topPicks so no duplication
         const uniqueBestSeller = filterArray(
-          topPicks as any[],
+          bestSeller as any[],
           popularProducts as any[],
           'id',
           'id',
@@ -212,7 +216,7 @@ const GroupShop: NextPage = () => {
         setNewPopularPrd([...(popularProducts ?? [])]);
       }
     }
-  }, [popularProducts, topPicks]);
+  }, [popularProducts, bestSeller]);
 
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {
@@ -226,13 +230,11 @@ const GroupShop: NextPage = () => {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
 
-  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
-
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
     if (gsctx?.totalProducts < 101) {
       const cprod = clientDealProducts()?.length || 0;
-      if (cprod >= 5) {
+      if (cprod >= 5 && !isInfluencer) {
         showError(
           'Only 5 products can be added to this Group Shop per person.',
         );
@@ -242,15 +244,18 @@ const GroupShop: NextPage = () => {
     } else showError('Groupshop is full you can not add more products to it');
   };
 
-  if (error) {
-    Router.push('/404');
-    return <p>groupshop not found</p>;
-  }
-  console.log('addedProducts', addedProducts);
+  // if (error) {
+  //   Router.push('/404');
+  //   return <p>groupshop not found</p>;
+  // }
+  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
+  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
+  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
+
   return (
     <>
       <Head>
-        <title>Groupshop</title>
+        <title>Influencer Groupshop</title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -287,7 +292,8 @@ const GroupShop: NextPage = () => {
         <header>
           <Header
             LeftComp={
-              <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+              <div> </div>
+              // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
             RightComp={(
               <InfoBox
@@ -324,9 +330,9 @@ const GroupShop: NextPage = () => {
                 </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
-                    names={gsctx?.members.map(
-                      (mem: any) => `${mem.orderDetail.customer.firstName} ${
-                        mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                    names={memberDetails?.map(
+                      (mem: any) => `${mem.customerInfo.firstName} ${
+                        mem?.customerInfo?.lastName?.charAt(0) || ''
                       }`,
                     )}
                     cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -344,7 +350,7 @@ const GroupShop: NextPage = () => {
                 </div>
               </Col>
               <Col xs={6} className={styles.groupshop__counter}>
-                <h6 className="text-center">Store expires in</h6>
+                {/* <h6 className="text-center">Store expires in</h6>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
                     <span>
@@ -362,7 +368,7 @@ const GroupShop: NextPage = () => {
                       M
                     </span>
                   </p>
-                </div>
+                </div> */}
               </Col>
               <Col
                 md={3}
@@ -418,7 +424,7 @@ const GroupShop: NextPage = () => {
                   {' '}
                   <span className="text-capitalize">
                     {' '}
-                    {owner?.firstName}
+                    {gsctx?.partnerDetails?.fname}
                     {' '}
                   </span>
                   ’s Groupshop
@@ -427,7 +433,7 @@ const GroupShop: NextPage = () => {
               </Col>
             </Row>
             <Row className="d-flex justify-content-evenly">
-              <Col
+              {/* <Col
                 md={4}
                 className={styles.groupshop__hero__small_banner_right}
               >
@@ -440,8 +446,8 @@ const GroupShop: NextPage = () => {
                 ) : (
                   ''
                 )}
-              </Col>
-              <Col md={4} className="text-center mb-5">
+              </Col> */}
+              <Col md={8} className="text-center mb-5">
                 <div className={styles.groupshop__hero_current_reward}>
                   Current Rewards
                 </div>
@@ -451,33 +457,33 @@ const GroupShop: NextPage = () => {
                     setShowRewards(true);
                   }}
                 >
-                  <BigBannerBox text={text} />
+                  <BigBannerBox text={text} isInfluencerGS />
                 </div>
               </Col>
-              <Col md={4} className={styles.groupshop__hero__small_banner_left}>
-                {/* {members.length < 5 ? (
+              {/* <Col md={4} className={styles.groupshop__hero__small_banner_left}>
+                {members.length < 5 ? (
                   <div className="d-flex flex-column justify-content-center align-items-center ">
-                    <div className="mb-2">Next Rewards</div>
+                     <div className="mb-2">Next Rewards</div>
                     <SmallBannerBox2 bannerDiscount={bannerDiscount} />
                     <GradientCircle />
                   </div>
                 ) : (
                   ''
-                )} */}
-              </Col>
+                )}
+              </Col> */}
             </Row>
             <Row>
               <p className="mb-2 text-center">
-                <Icon />
+                {isInfluencerGS ? '' : <Icon />}
                 {' '}
-                {cashBackText}
+                {isInfluencerGS ? 'earns a reward everytime you shop.' : cashBackText}
               </p>
             </Row>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
-                names={gsctx?.members.map(
-                  (mem: any) => `${mem.orderDetail.customer.firstName} ${
-                    mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                names={memberDetails?.map(
+                  (mem: any) => `${mem.customerInfo.firstName} ${
+                    mem.customerInfo?.lastName?.charAt(0) || ''
                   }`,
                 )}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -496,17 +502,17 @@ const GroupShop: NextPage = () => {
           md={6}
           lg={4}
           xl={3}
-          products={member?.products}
+          products={addedProductsByInfluencer}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
-          id="shoppedby"
+          id="curatedby"
         >
           <h2 className={styles.groupshop_col_shoppedby}>
-            SHOPPED BY
+            CURATED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {member?.orderDetail?.customer.firstName}
+              {gsctx?.partnerDetails?.fname}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
@@ -525,14 +531,14 @@ const GroupShop: NextPage = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className={styles.groupshop_dropdownMenu}>
-                  {gsctx?.members.map((mem: any, index) => (
+                  {memberDetails?.map((mem: any, index) => (
                     <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
                       <Dropdown.Item onClick={() => setmember(mem)}>
                         {index === 0 && '👑 '}
                         {`${
-                          mem.orderDetail.customer.firstName
+                          mem.customerInfo.firstName
                         } ${
-                          mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                          mem?.customerInfo?.lastName?.charAt(0) || ''
                         }`}
 
                       </Dropdown.Item>
@@ -548,25 +554,20 @@ const GroupShop: NextPage = () => {
           <p className={styles.groupshop_col_recommendations}>
             Shop from
             {' '}
-            {member?.orderDetail?.customer?.firstName || ''}
+            {gsctx?.partnerDetails?.fname || ''}
             {' '}
             ’s
-            previous pruchases and recommendations.
+            personal favorites and recommendations.
           </p>
         </ProductGrid>
-        {members?.length > 1 || addedProducts?.length ? (
+        {addedByRefferal && addedByRefferal.length > 0 ? (
           <ProductGrid
             xs={6}
             sm={6}
             md={6}
             lg={4}
             xl={3}
-            products={
-              ownerProducts
-              && (ownerProducts!.length > 3
-                ? popularProducts?.slice(0, 3)
-                : newPopularPrd)
-            }
+            products={newPopularPrd ?? []}
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
@@ -581,12 +582,7 @@ const GroupShop: NextPage = () => {
             md={6}
             lg={4}
             xl={3}
-            products={
-              member?.products
-              && (member?.products!.length > 3
-                ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4))
-            }
+            products={bestSeller ?? []}
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
@@ -594,7 +590,8 @@ const GroupShop: NextPage = () => {
           >
             <h2>Top Picks</h2>
           </ProductGrid>
-        )}
+
+        ) }
 
         <ProductGrid
           xs={6}
@@ -689,8 +686,11 @@ const GroupShop: NextPage = () => {
             </Button>
           </Col>
         </Row>
-        <Footer LeftComp={undefined} RightComp={undefined} />
-        <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+        {/* <Footer LeftComp={undefined} RightComp={undefined} /> */}
+        <ProductsSearch
+          show={(showps || dealProducts?.length < 1) && title !== ''}
+          handleClose={() => setshowps(false)}
+        />
         <ProductDetail
           show={showDetail}
           handleClose={() => setshowDetail(false)}

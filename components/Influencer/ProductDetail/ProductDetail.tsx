@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-undef */
@@ -13,7 +14,6 @@ import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
 import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
-import usePartner from 'hooks/usePartner';
 import useAlert from 'hooks/useAlert';
 import Scrollable from 'components/Widgets/Scrollable/Scrollable';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
@@ -23,10 +23,11 @@ import LeftArrowIcon from 'assets/images/left-arrow.svg';
 import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
-import { GroupshopContext } from 'store/groupshop.context';
 import { Send } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
+import { PartnerGroupshopContext } from 'store/partner-groupshop.context';
+import useDeal from 'hooks/useDeal';
 import Members from '../../Groupshop/Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -46,7 +47,7 @@ const ProductDetail = ({
     // setSelected(undefined);
     handleClose(e);
   };
-  const { gsctx: { discountCode: { percentage } } } = useContext(GroupshopContext);
+  const { gsctx: { discountCode: { percentage } } } = useContext(PartnerGroupshopContext);
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -66,11 +67,8 @@ const ProductDetail = ({
 
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
-    totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
-    getDateDifference, activateURL,
-  } = usePartner();
-  const { days, hrs, mins } = getDateDifference();
-
+    totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount, activateURL,
+  } = useDeal();
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
 
     variables: { id: product?.id },
@@ -646,7 +644,7 @@ const ProductDetail = ({
           </Row>
           )}
         </Modal.Body>
-        {isForMobile && !isExpired && (
+        {/* {isForMobile && !isExpired && (
         <Modal.Footer className="bg-transparent d-block">
           <Row className={styles.groupshop_timerRow}>
             <Col xs={1} md={1} />
@@ -695,7 +693,7 @@ const ProductDetail = ({
             <Col xs={1} md={1} />
           </Row>
         </Modal.Footer>
-        )}
+        )} */}
 
       </Modal>
 

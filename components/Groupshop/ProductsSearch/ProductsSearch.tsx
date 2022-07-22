@@ -21,6 +21,8 @@ import SearchIcon from 'assets/images/search-icon.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import CrossGrey from 'assets/images/cross-grey.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import useAppContext from 'hooks/useAppContext';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -32,12 +34,15 @@ interface ProductsSearchProps extends RootProps {
 const ProductsSearch = ({
   show: showSearch, pending = false, handleClose,
 }: ProductsSearchProps) => {
+  // const {
+  //   gsctx,
+  //   dispatch,
+  // } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useAppContext();
+  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
-    gsctx,
-    dispatch,
-  } = useContext(GroupshopContext);
-
-  const { clientDealProducts, currencySymbol, dPrice } = useDeal();
+    clientDealProducts, currencySymbol, dPrice, isInfluencer,
+  } = useDeal();
   const { formatNumber } = useUtilityFunction();
 
   const [show, setShow] = useState(false);
@@ -171,9 +176,8 @@ const ProductsSearch = ({
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
-  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other products', products);
-  // console.log('🚀 ~ProductsSearch.tsx line 73 ~ useEffect ~ other Popular', popularProducts);
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ other', otherProducts);
+  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect otherProducts', otherProducts);
+  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ otherProducts', products);
 
   return (
     <>
@@ -202,6 +206,7 @@ const ProductsSearch = ({
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
+            { !isInfluencer && (
             <p className="text-muted d-flex justify-content-end align-items-center">
               <span className={styles.groupshop_modal_search_body_top_txt}>
                 Add up to 5 products
@@ -210,6 +215,7 @@ const ProductsSearch = ({
                 <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
               ))}
             </p>
+            )}
           </div>
 
           <Form onSubmit={handleSubmit}>
@@ -238,6 +244,7 @@ const ProductsSearch = ({
                 {' '}
                 results found
               </p>
+              { !isInfluencer && (
               <div className={styles.groupshop_modal_search_body_meter}>
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
@@ -246,6 +253,7 @@ const ProductsSearch = ({
                   ))}
                 </p>
               </div>
+              )}
             </div>
           )}
           <Row className={styles.groupshop_search}>
@@ -275,7 +283,7 @@ const ProductsSearch = ({
                             </>
 
                           )
-                            : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
+                            : <Button variant="outline-primary" disabled={selectedCount === 5 && !isInfluencer} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
                         </>
 )}
                     >
@@ -323,13 +331,27 @@ const ProductsSearch = ({
                   {' '}
               </div>
               )}
-              <Button
-                onClick={handleClick}
-                className="rounded-pill text-center text-uppercase px-5 fw-bold"
-              >
-                ADD to groupshop
+              {isInfluencer ? (
+                <AddDealProduct
+                  selectedProducts={selected}
+                  handleClose={(e) => {
+                    closeModal(e);
+                    if (selected && selected?.length > 0) {
+                      showSuccess('Product(s) has been added successfully.');
+                    } else {
+                      showSuccess('No product(s) has been selected.');
+                    }
+                  }}
+                />
+              ) : (
+                <Button
+                  onClick={handleClick}
+                  className="rounded-pill text-center text-uppercase px-5 fw-bold"
+                >
+                  ADD to groupshop
 
-              </Button>
+                </Button>
+              )}
 
               <Overlay
                 show={show}

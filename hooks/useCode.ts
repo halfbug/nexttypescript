@@ -8,6 +8,7 @@ const useCode = () => {
   const router = useRouter();
 
   const { query: { shop, code } } = router;
+  console.log('🚀 ~ file: useCode.ts ~ line 11 ~ useCode ~ router', router);
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
   const [status, setStatus] = useState<string | undefined>(undefined);
   const [qrscan, setQrscan] = useState<string | undefined>(undefined);

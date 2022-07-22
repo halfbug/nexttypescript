@@ -7,13 +7,14 @@ import { GroupshopContext } from 'store/groupshop.context';
 import _ from 'lodash';
 import { IProduct } from 'types/store';
 import useUtilityFunction from './useUtilityFunction';
+import useAppContext from './useAppContext';
 
 const useProducts = (shop: string) => {
-  const {
-    gsctx,
-    dispatch,
-  } = useContext(GroupshopContext);
-
+  // const {
+  //   gsctx,
+  //   dispatch,
+  // } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useAppContext();
   const {
     findInArray,
   } = useUtilityFunction();

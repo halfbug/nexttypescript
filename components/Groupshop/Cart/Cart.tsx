@@ -19,6 +19,7 @@ import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
 import useSaveCart from 'hooks/useSaveCart';
+import useAppContext from 'hooks/useAppContext';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -36,7 +37,7 @@ const Cart = ({
   const {
     gsctx,
     dispatch,
-  } = useContext(GroupshopContext);
+  } = useAppContext();
   const {
     currencySymbol, dPrice, discount,
   } = useDeal();
