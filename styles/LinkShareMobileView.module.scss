@@ -35,7 +35,8 @@
                 font-size: 18px;
                 line-height: 23px;
                 color: #000000;
-                margin-bottom: 4px;
+                margin-bottom: 6px;
+                text-align: center;
             }
 
             &__description {
@@ -45,6 +46,24 @@
                 line-height: 18px;
                 color: #000000;
                 padding-left: 3px;
+            }
+            &__share_btn {
+                box-shadow: none !important;
+                border: 2px solid #ccb2f9 !important;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 21px;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 15px 0px;
+                text-align: center;
+                text-transform: uppercase;
+                cursor: pointer;
+          
+                &:hover {
+                  background: #ccb2f9;
+                  color: #ffffff;
+                }
             }
         }
     }

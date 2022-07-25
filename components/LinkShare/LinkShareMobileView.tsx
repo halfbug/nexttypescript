@@ -37,6 +37,12 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
           </Row>
         </Modal.Header>
         <Modal.Body className={styles.linkShare__modal__body}>
+          <div className={styles.linkShare__modal__body__heading}>
+            Give friends
+            {' '}
+            {percentage}
+            % off
+          </div>
           <CopyToClipboard value={shareurl} />
           <div className={styles.linkShare__modal__body__social_icons}>
             <SocialButtonMobile network="Email" url={shareurl} />
@@ -45,11 +51,8 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
             <SocialButtonMobile network="Twitter" url={shareurl} />
             <SocialButtonMobile network="Facebook" url={shareurl} />
           </div>
-          <div className={styles.linkShare__modal__body__heading}>
-            Give friends
-            {' '}
-            {percentage}
-            % off
+          <div className={styles.linkShare__modal__body__share_btn}>
+            Share Groupshop
           </div>
           <div className={styles.linkShare__modal__body__description}>
             Share the link to give friends access to exclusive discounts and earn cashback

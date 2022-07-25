@@ -368,7 +368,10 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,0.5);
+        background-color: #f3f3F3;
+        opacity: 0.9;
+        border: 1px dashed $purple;
+        border-radius: 5px;
         z-index: 2;
         border-radius: 20px;
     }
@@ -377,8 +380,12 @@
         position: absolute;
         top: 50%;
         left: 50%;
+        width: fit-content;
+        background: white;
+        padding: 0px 10px;
+        border-radius: 5px;
         font-size: 30px;
-        color: white;
+        color: black;
         transform: translate(-50%,-50%);
         width: 100%;
         text-align: center;
