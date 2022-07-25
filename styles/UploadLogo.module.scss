@@ -59,10 +59,16 @@
 			// top: 1px;
 			@extend .position-absolute, .top-50, .start-50, .translate-middle;
 		}
-
+      
 
 }
 
 .invalid-image-feedback {
 	color: red;
+}
+
+.replacBtn{
+	position: absolute;
+	margin-top: -9px;
+	margin-left: 171px;
 }

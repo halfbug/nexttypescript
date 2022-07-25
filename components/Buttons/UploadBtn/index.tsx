@@ -10,6 +10,7 @@ import CloudUp from 'assets/images/cloud-icon.svg';
 import axios from 'axios';
 import { StoreContext } from 'store/store.context';
 import { IStore } from 'types/store';
+import Replace from 'assets/images/replaceIcon.svg';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
@@ -121,7 +122,7 @@ export default function UploadButton({
             <>
             {/* // <div className={styles['upload-logo_replace']}> */}
               <img src={logo} alt="logo" />
-              <WhiteButton>Replace</WhiteButton>
+              <div className={styles.replacBtn}><Button variant=""><Replace /></Button></div>
               { progress
               && <ProgressBar animated now={100} className={styles['upload-logo--progress']} />}
             </>
