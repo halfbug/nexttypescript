@@ -184,7 +184,7 @@ const CampaignAnalytics: NextPage = () => {
               handleSearch={handleSearch}
             />
           </Col>
-          <Col lg={{ span: 4, offset: 1 }} className="p-0">
+          <Col lg={5} className="gx-4">
             <ViralityMetrics />
           </Col>
         </Row>
