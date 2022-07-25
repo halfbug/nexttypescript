@@ -94,9 +94,11 @@ export default function useBilling() {
       const appTrialEndDate = new Date(appTrialEnd);
       const currentDate = new Date();
       const diff = appTrialEndDate.getTime() - currentDate.getTime();
-      if (diff < 0) setappTrial(false);
+      // if (diff < 0) setappTrial(false);
+      if (diff < 0) return false;
     }
-    setappTrial(true);
+    // setappTrial(true);
+    return true;
   };
   const isAppTrialOnGivenDate = (appTrialDate: Date, recordDate: any) => {
     if (appTrialDate) {
@@ -118,5 +120,6 @@ export default function useBilling() {
     currencySymbol,
     appTrial,
     isAppTrialOnGivenDate,
+    isAppTrial,
   };
 }

@@ -17,7 +17,7 @@ import C1 from 'assets/images/CartBag.svg';
 
 export default function PaymentHistory() {
   const {
-    totalGS, totalRevenue, currencySymbol, appTrial,
+    totalGS, totalRevenue, currencySymbol, appTrial, isAppTrial,
   } = useBilling();
   const { convertNumToMonth, storeCurrencySymbol } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
@@ -84,7 +84,7 @@ export default function PaymentHistory() {
               </td>
               <td>
                 {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                { appTrial ? (item.feeCharges).toFixed(2).toString().replace('.00', '')
+                { isAppTrial() ? (item.feeCharges).toFixed(2).toString().replace('.00', '')
                   : (item.totalCharges).toFixed(2).toString().replace('.00', '')}
               </td>
               <td>
