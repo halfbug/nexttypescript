@@ -22,7 +22,7 @@ export default function CustomerData() {
           <Col lg={7} className="gx-5">
             <MostViralCustomers />
           </Col>
-          <Col lg={4} className="gx-5">
+          <Col lg={5} className="gx-5">
             <AnalyticCutomerDetail />
             {/* <AnalyticOrderDetail /> */}
           </Col>
@@ -207,7 +207,7 @@ export default function CustomerData() {
               </div>
             </Container>
           </Col>
-          <Col lg={4} className="gx-5">
+          <Col lg={5} className="gx-5">
             <AnalyticOrderDetail />
           </Col>
         </Row>
