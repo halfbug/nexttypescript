@@ -323,6 +323,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       left: 10px;
       top: 11px;
     }
+    &__popover{
+      z-index: 8;
+    }
   }
 
   &__give_off {

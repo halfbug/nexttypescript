@@ -13,10 +13,11 @@ export type PopoverButtonProps ={
   // displayIcon?: boolean;
   icon?: React.ReactNode | undefined;
   label?: string | undefined;
+  popoverClassName?: string;
 } & React.ComponentPropsWithoutRef<'button'>
 
-const Popcomp = (content: React.ReactNode) => (
-  <Popover id="popover-basic">
+const Popcomp = (content: React.ReactNode, className?: string) => (
+  <Popover id="popover-basic" className={className}>
     <Popover.Body>
       <MyIcon className={styles.groupshop_popupArrow} />
       {content}
@@ -26,14 +27,14 @@ const Popcomp = (content: React.ReactNode) => (
 );
 
 const PopoverButton = ({
-  label, popContent, className, icon, placement, disabled, onClick,
+  label, popContent, className, popoverClassName, icon, placement, disabled, onClick,
 }: PopoverButtonProps) => (
   <OverlayTrigger
     trigger="click"
     // delay={{ show: 250, hide: 400 }}
     rootClose
     placement={placement ?? 'bottom'}
-    overlay={Popcomp(popContent)}
+    overlay={Popcomp(popContent, popoverClassName)}
   >
     <Button variant="outline-primary" disabled={disabled} className={className} onClick={onClick}>
       {' '}
@@ -52,6 +53,7 @@ PopoverButton.defaultProps = {
   placement: 'auto',
   popContent: undefined,
   label: '',
+  popoverClassName: undefined,
 };
 
 export default PopoverButton;

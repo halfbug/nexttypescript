@@ -18,7 +18,8 @@ type ShareButtonProps = {
 }& React.ComponentPropsWithoutRef<'button'> & PopoverButtonProps & Omit<PopoverButtonProps, 'icon'>
 
 const ShareButton = ({
-  label, className, shareurl, fullshareurl, placement, disabled, popContent, icon, onClick,
+  label, className, popoverClassName, shareurl, fullshareurl, placement, disabled, popContent, icon,
+  onClick,
 }: ShareButtonProps) => {
   const { gsctx, banner } = useDeal();
   const { discountCode: { percentage } } = gsctx;
@@ -84,6 +85,7 @@ const ShareButton = ({
       )}
       label={label}
       className={className}
+      popoverClassName={popoverClassName}
       icon={icon ?? <Send size={18} />}
       placement={placement}
     />
