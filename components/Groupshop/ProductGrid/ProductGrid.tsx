@@ -78,7 +78,7 @@ const ProductGrid = ({
   } = useAppContext();
 
   const {
-    currencySymbol, dPrice, getBuyers, formatName, topFive,
+    currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
   } = useDeal();
   if (pending) {
@@ -168,8 +168,17 @@ const ProductGrid = ({
                             </span>
                           ),
                         ))}
+                        {isInfluencerGS && topFive(getBuyers2(prod.id)?.map(
+                          (member: Member) => (
+                            <span className={styles.groupshop__pcard_tag_buyer}>
+                              {formatName(member.customerInfo)}
+                            </span>
+                          ),
+                        ))}
 
                         {getBuyers(prod.id).length > 0 && (
+                        <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                        {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
                         <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                       </div>
                       {dealProducts?.filter(

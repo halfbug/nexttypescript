@@ -61,6 +61,9 @@ export default function useDeal() {
   const getBuyers = useCallback((pid:string) => gsctx.members.filter(
     (mem) => mem.products?.find((prd) => prd.id === pid),
   ), [gsctx.members]);
+  const getBuyers2 = useCallback((pid:string) => gsctx?.memberDetails?.filter(
+    (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
+  ) ?? [], [gsctx.members]);
 
   const formatName = useCallback((customer : any) => `${customer.firstName} ${customer.lastName.charAt(0)}`,
     [gsctx.members]);
@@ -284,7 +287,7 @@ export default function useDeal() {
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
   const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
-  const addedProductsByInfluencer: any = _.uniq(findInArray2(gsctx?.popularProducts ?? [], addedByInfluencer ?? [], 'id', 'productId').filter((item:any) => item !== undefined));
+  const addedProductsByInfluencer: any = _.uniq(findInArray2(_.uniq(gsctx?.popularProducts) ?? [], addedByInfluencer ?? [], 'id', 'productId').filter((item:any) => item !== undefined));
   const baseLine = gsctx?.partnerRewards?.baseline;
   return {
     currencySymbol,
@@ -321,5 +324,6 @@ export default function useDeal() {
     isInfluencerGS,
     isGSnRef,
     addedByRefferal,
+    getBuyers2,
   };
 }

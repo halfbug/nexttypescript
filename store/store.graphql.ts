@@ -991,6 +991,15 @@ query PartnerGroupshop($code: String!) {
         quantity
         price
         discountedPrice
+        product{
+          id
+        }
+        customer{
+          firstName
+          lastName
+          email
+          ip
+        }
       }
         customerInfo{
           firstName

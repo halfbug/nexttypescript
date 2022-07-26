@@ -139,6 +139,8 @@ const GroupShop: NextPage = () => {
     addedProductsByInfluencer,
     addedByRefferal,
   } = useDeal();
+  console.log('🚀 ~ file: [...code] ~ line 142 ~ addedProductsByInfluencer', _.uniq(addedProductsByInfluencer));
+  console.log('partnerdeal');
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
@@ -249,8 +251,8 @@ const GroupShop: NextPage = () => {
   //   return <p>groupshop not found</p>;
   // }
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
-  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
-  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
 
   return (
     <>
@@ -502,7 +504,7 @@ const GroupShop: NextPage = () => {
           md={6}
           lg={4}
           xl={3}
-          products={addedProductsByInfluencer}
+          products={_.uniq(addedProductsByInfluencer)}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
