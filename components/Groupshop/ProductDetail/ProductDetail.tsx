@@ -557,7 +557,7 @@ const ProductDetail = ({
                 <section>
                   <Row className={[styles.groupshop_footer_expire, 'justify-content-center w-100'].join(' ')}>
                     <Col xs={3}>{' '}</Col>
-                    <Col xs={1} className="d-flex justify-content-center">
+                    <Col xs={1} className="d-flex justify-content-center px-3">
                       <div className="text-center me-2">
                         <span>
                           {' '}
@@ -565,25 +565,25 @@ const ProductDetail = ({
                         </span>
                         <p className="mt-1">HOURS</p>
                       </div>
-                      <div className="py-3">
+                      <div className={styles.groupshop_footer_expire_time}>
                         {' '}
                         :
                       </div>
                     </Col>
-                    <Col xs={2} className="d-flex">
+                    <Col xs={2} className="d-flex px-3">
                       <div className="text-center mx-2">
                         <span>
                           00
                         </span>
                         <p className="mt-1">MINUTES</p>
                       </div>
-                      <div className="py-3">
+                      <div className={styles.groupshop_footer_expire_time}>
                         {' '}
                         :
                       </div>
                     </Col>
-                    <Col xs={1} className="d-flex">
-                      <div className="text-center ms-3 ms-lg-2">
+                    <Col xs={1} className="d-flex px-3">
+                      <div className="text-center ms-2 ms-lg-2">
                         <span>
                           00
                         </span>

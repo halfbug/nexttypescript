@@ -1834,6 +1834,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 12px;
         line-height: 16px;
       }
+      &_time{
+        @extend .py-2;
+        font-size: 24px !important;
+        font-weight: 500 !important;
+        line-height: 31px;
+        color: #000000;
+      }
     }
     &_socialIcon {
       @extend .my-3;
