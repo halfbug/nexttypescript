@@ -289,6 +289,10 @@ export default function useDeal() {
   const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
   const addedProductsByInfluencer: any = _.uniq(findInArray2(_.uniq(gsctx?.popularProducts) ?? [], addedByInfluencer ?? [], 'id', 'productId').filter((item:any) => item !== undefined));
   const baseLine = gsctx?.partnerRewards?.baseline;
+  const getOwnerName = useCallback(() => (
+    isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname}`
+      : `${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName}`), [gsctx]);
+
   return {
     currencySymbol,
     discount,
@@ -325,5 +329,6 @@ export default function useDeal() {
     isGSnRef,
     addedByRefferal,
     getBuyers2,
+    getOwnerName,
   };
 }

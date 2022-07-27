@@ -39,7 +39,7 @@ const Cart = ({
     dispatch,
   } = useAppContext();
   const {
-    currencySymbol, dPrice, discount,
+    currencySymbol, dPrice, discount, getOwnerName,
   } = useDeal();
 
   const {
@@ -348,7 +348,7 @@ const Cart = ({
                     {' '}
                     by shopping with
                     {' '}
-                    <strong>GROUPSHOP</strong>
+                    <strong>{getOwnerName()}</strong>
                     {' '}
                     And you can keep earning up to
                     {' '}
