@@ -614,7 +614,7 @@ const ProductDetail = ({
                   on this and other products you love.
 
                 </p>
-                <div className="d-flex flex-column justify-content-center mb-2">
+                <div className="d-flex flex-column justify-content-center mb-2 d-block">
                   { loaderInvite
                     ? (<Spinner animation="border" className="align-self-center mb-2" />)
                     : (
@@ -630,36 +630,38 @@ const ProductDetail = ({
                         { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
                       </>
                     )}
-                  OR SHARE
                 </div>
-                <section className="d-flex justify-content-center px-2 mb-3">
-                  <div className="mx-1">
-                    {' '}
-                    <SocialButton network="Instagram" url={activateURL} />
-                  </div>
+                <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2">OR SHARE </div>
+                <div className="d-none d-lg-block">
+                  <section className="d-flex justify-content-center px-2 mb-3">
+                    <div className="mx-1">
+                      {' '}
+                      <SocialButton network="Instagram" url={activateURL} />
+                    </div>
 
-                  <div className="mx-1">
-                    {' '}
-                    <SocialButton network="Pinterest" url={activateURL} />
-                    {' '}
-                  </div>
+                    <div className="mx-1">
+                      {' '}
+                      <SocialButton network="Pinterest" url={activateURL} />
+                      {' '}
+                    </div>
 
-                  <div className="mx-1">
-                    {' '}
-                    <SocialButton network="Tiktok" url={activateURL} />
-                    {' '}
-                  </div>
-                  <div className="mx-1">
-                    {' '}
-                    <SocialButton network="Twitter" url={activateURL} />
-                    {' '}
-                  </div>
-                  <div className="mx-1">
-                    {' '}
-                    <SocialButton network="Facebook" url={activateURL} />
-                    {' '}
-                  </div>
-                </section>
+                    <div className="mx-1">
+                      {' '}
+                      <SocialButton network="Tiktok" url={activateURL} />
+                      {' '}
+                    </div>
+                    <div className="mx-1">
+                      {' '}
+                      <SocialButton network="Twitter" url={activateURL} />
+                      {' '}
+                    </div>
+                    <div className="mx-1">
+                      {' '}
+                      <SocialButton network="Facebook" url={activateURL} />
+                      {' '}
+                    </div>
+                  </section>
+                </div>
               </div>
             </Col>
           </Row>
