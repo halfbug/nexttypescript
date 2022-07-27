@@ -28,6 +28,8 @@ import { Send } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
+import styles1 from 'styles/Campaign.module.scss';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -297,7 +299,20 @@ const ProductDetail = ({
                       src={product?.featuredImage}
                       alt={`Feature-${Math.random()}`}
                     />
+                    {/* <div className={styles.groupshop__pcard_tag_boughtby}>
+                      {topFive(getBuyers(prod.id)?.map(
+                        (member: Member) => (
+                          <span className={styles.groupshop__pcard_tag_buyer}>
+                            {formatName(member.orderDetail.customer)}
+                          </span>
+                        ),
+                      ))}
+
+                      {getBuyers(prod.id).length > 0 && (
+                      <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                    </div> */}
                   </Carousel.Item>
+
                   {
                  data?.productById?.images?.map((img:any, i:number) => (
                    <Carousel.Item>
@@ -362,10 +377,13 @@ const ProductDetail = ({
                       {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
                     </span>
+                    {' '}
                     {cashBack && isGroupshop ? (
                       <Row className={styles.groupshop_cashback}>
                         <Col className=" mx-0">
-                          <div className={[' m-0 p-0 text-nowrap', styles.groupshop_PlusUpto].join(' ')}>
+                          <div className={[' m-0 p-0 text-nowrap',
+                            styles.groupshop_PlusUpto].join(' ')}
+                          >
                             Plus up to
                             {' '}
                             <strong>
@@ -386,6 +404,19 @@ const ProductDetail = ({
                       </Row>
                     ) : ''}
                   </h3>
+                  <div className="d-flex align-items-center ">
+                    {/* <div className="text-nowrap px-2">
+                      <Icon />
+                    </div> */}
+                    <p className="p-2 my-0 border border-danger rounded-3">
+                      {' '}
+                      🎉
+                      {' '}
+                      {productCustomers.length}
+                      {' '}
+                      people have shopped this!
+                    </p>
+                  </div>
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
                     <ShowMoreText
@@ -504,25 +535,26 @@ const ProductDetail = ({
 
                     )}
                   </div>
+
+                  <ToolTip
+                    className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
+                    label="Terms & Conditions"
+                    placement="bottom"
+                    popContent={(
+                      <p>
+                        If you purchased any of these
+                        items at full price on Le Sable, you cannot
+                        return your original order to keep these discounted ones.
+                      </p>
+)}
+                  />
+
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
                       {productCustomers.length > 0
                   && (
                     <>
-                      <div className="d-flex align-items-center my-2">
-                        <div className="text-nowrap px-2">
-                          <Icon />
-                        </div>
-                        <div>
-                          <p className="pt-3">
-                            Over
-                            {' '}
-                            {productCustomers.length}
-                            {' '}
-                            people have earned cashback and discounts on this item!
-                          </p>
-                        </div>
-                      </div>
+
                       <div className="d-flex align-items-center justify-content-start flex-wrap">
                         <Members names={productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`)} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
                         <ShareButton
