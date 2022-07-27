@@ -22,7 +22,7 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
   };
   return (
     <>
-      <div role="button" tabIndex={0}>onbaording share mobile</div>
+      {/* <div role="button" tabIndex={0}>onbaording share mobile</div> */}
       <Modal
         show={show}
         onHide={closeModal}
