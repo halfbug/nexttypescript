@@ -74,7 +74,8 @@ const ProductDetail = ({
     variables: { id: product?.id },
   });
 
-  const productCustomers = getBuyers(product?.id || '0');
+  const productCustomers = getBuyers(product?.id || '0') ?? [];
+  console.log('🚀 ~ file: ProductDetail.tsx ~ line 78 ~ productCustomers', productCustomers);
   const { googleProductCode, googleEventCode } = useGtm();
 
   const inviteForExpiredGS = () => {
@@ -501,7 +502,7 @@ const ProductDetail = ({
                   </div>
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
-                      {productCustomers.length > 0
+                      {productCustomers && productCustomers.length > 0
                   && (
                     <>
                       <div className="d-flex align-items-center my-2">

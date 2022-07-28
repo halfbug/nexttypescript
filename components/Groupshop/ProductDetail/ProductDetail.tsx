@@ -49,7 +49,7 @@ const ProductDetail = ({
     // setSelected(undefined);
     handleClose(e);
   };
-  const { gsctx: { discountCode: { percentage } }, isGroupshop } = useAppContext();
+  const { gsctx: { discountCode: { percentage } }, gsctx, isGroupshop } = useAppContext();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -404,19 +404,21 @@ const ProductDetail = ({
                       </Row>
                     ) : ''}
                   </h3>
-                  <div className="d-flex align-items-center ">
-                    {/* <div className="text-nowrap px-2">
+                  {(productCustomers && productCustomers.length) ? (
+                    <div className="d-flex align-items-center ">
+                      {/* <div className="text-nowrap px-2">
                       <Icon />
                     </div> */}
-                    <p className="p-2 my-0 border border-danger rounded-3">
-                      {' '}
-                      🎉
-                      {' '}
-                      {productCustomers.length}
-                      {' '}
-                      people have shopped this!
-                    </p>
-                  </div>
+                      <p className="p-2 my-0 border border-danger rounded-3">
+                        {' '}
+                        🎉
+                        {' '}
+                        {productCustomers.length}
+                        {' '}
+                        people have shopped this!
+                      </p>
+                    </div>
+                  ) : '' }
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
                     <ShowMoreText
@@ -543,7 +545,10 @@ const ProductDetail = ({
                     popContent={(
                       <p>
                         If you purchased any of these
-                        items at full price on Le Sable, you cannot
+                        items at full price on
+                        {' '}
+                        {`${gsctx?.store?.brandName}`}
+                        , you cannot
                         return your original order to keep these discounted ones.
                       </p>
 )}
