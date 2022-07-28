@@ -61,6 +61,9 @@ const usePagination = <T extends {}>({
     setPageSize(pagesize);
     const totalpages = Math.ceil((items.length) / pagesize);
     setTotalPages(totalpages);
+    if (totalpages === 1) {
+      setCurrentPage(1);
+    }
 
     const start = (currentPage > 1)
       ? (currentPage - 1) * pagesize : currentPage - 1;
