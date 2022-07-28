@@ -407,21 +407,18 @@ const ProductDetail = ({
                       </Row>
                     ) : ''}
                   </h3>
-                  {(productCustomers && productCustomers.length) ? (
+                  {/* {(productCustomers && productCustomers.length) ? (
                     <div className="d-flex align-items-center ">
-                      {/* <div className="text-nowrap px-2">
-                      <Icon />
-                    </div> */}
                       <p className="p-2 my-0 border border-danger rounded-3">
                         {' '}
-                        🎉
+                        <Icon />
                         {' '}
                         {productCustomers.length}
                         {' '}
                         people have shopped this!
                       </p>
                     </div>
-                  ) : '' }
+                  ) : '' } */}
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
                     <ShowMoreText
