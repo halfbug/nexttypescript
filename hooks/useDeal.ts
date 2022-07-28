@@ -287,7 +287,7 @@ export default function useDeal() {
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
   const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
-  const addedProductsByInfluencer: any = _.uniq(findInArray2(_.uniq(gsctx?.popularProducts) ?? [], addedByInfluencer ?? [], 'id', 'productId').filter((item:any) => item !== undefined));
+  const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
   const baseLine = gsctx?.partnerRewards?.baseline;
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname}`

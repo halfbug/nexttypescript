@@ -936,7 +936,36 @@ query PartnerGroupshop($code: String!) {
         featuredImage
       }
     }
-    partnerDetails {
+    influencerProducts{
+      id
+      featuredImage
+      title
+      description
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+
+    }
+    refferalProducts{
+      id
+      featuredImage
+      title
+      description
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+    }
+      partnerDetails {
       fname
       lname
       email

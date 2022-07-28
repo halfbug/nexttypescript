@@ -23,7 +23,7 @@ import {
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
-import { IGroupshop, Member } from 'types/groupshop';
+import { IGroupshop, Member, PartnerMember } from 'types/groupshop';
 import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -53,6 +53,7 @@ import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import { PartnerGroupshopContext, gspInit } from 'store/partner-groupshop.context';
 import useDeal from 'hooks/useDeal';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
+import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -98,7 +99,15 @@ const GroupShop: NextPage = () => {
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [storeLogo, setStoreLogo] = useState<string>('');
   const [bannerImage, setBannerImage] = useState<string>('');
-
+  const [partnerMembers, setpartnerMembers] = useState<PartnerMember[]>([{
+    customerInfo: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+    },
+    orderId: '',
+  }]);
   useEffect(() => {
     async function gets3headerBanner() {
       if (partnerGroupshop && partnerGroupshop.id && pending) {
@@ -170,6 +179,8 @@ const GroupShop: NextPage = () => {
     popularProducts = [],
     discountCode: { title },
   } = gsctx;
+  const { topPicks } = useTopPicks();
+  const { popularShuffled } = usePopularInfluencer(popularProducts);
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
   } = useUtilityFunction();
@@ -180,12 +191,6 @@ const GroupShop: NextPage = () => {
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.addedProducts]);
-
-  // useEffect(() => {
-  //   if ((!dealProducts || dealProducts.length === 0) && gsctx.discountCode.title) {
-  //     setshowps(true);
-  //   } else if (dealProducts && dealProducts.length > 0) setshowps(false);
-  // }, [dealProducts]);
 
   useEffect(() => {
     async function gets3logo() {
@@ -199,6 +204,8 @@ const GroupShop: NextPage = () => {
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
+      // eslint-disable-next-line max-len
+      // const onlyBoughtnRefProducts = filterArray(popularProducts ?? [], addedProductsByInfluencer ?? [], 'id', 'id');
       if (popularProducts.length < 4) {
         // removing popular prd from topPicks so no duplication
         const uniqueBestSeller = filterArray(
@@ -207,9 +214,6 @@ const GroupShop: NextPage = () => {
           'id',
           'id',
         ).slice(0, 4 - popularProducts.length);
-        // console.log('🚀[...code].tsx topPicks', topPicks);
-        // console.log('🚀[...code].tsx popularProduct', popularProducts);
-        // console.log('🚀[...code].tsx uniqueBestSeller', uniqueBestSeller);
         const newPopularArr = Array.from(
           new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
         );
@@ -225,12 +229,30 @@ const GroupShop: NextPage = () => {
       setshowCart(true);
     }
   }, [gsctx.cart]);
+  useEffect(() => {
+    const arr = gsctx?.memberDetails ?? [];
+    const ownerMember = [{
+      customerInfo: {
+        firstName: gsctx?.partnerDetails?.fname ?? '',
+        lastName: gsctx?.partnerDetails?.lname ?? '',
+        email: gsctx?.partnerDetails?.email ?? '',
+        phone: '',
+      },
+      orderId: '',
+    }];
+    setpartnerMembers([...ownerMember, ...gsctx.memberDetails ?? []]);
+  }, [gsctx.memberDetails]);
 
   const { text, cashBackText } = useTopBanner();
 
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
+  console.log('🚀[...code].tsx popularProduct', popularProducts);
+  console.log('🚀[...code].tsx popularShuffled', popularShuffled);
+  console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
+  console.log('🚀[...code].tsx added', addedProductsByInfluencer);
+  console.log('🚀 ~ file: [...code].tsx ~ line 112 ~ partnerMembers', partnerMembers);
 
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
@@ -332,12 +354,12 @@ const GroupShop: NextPage = () => {
                 </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
-                    names={memberDetails?.map(
+                    names={partnerMembers?.map(
                       (mem: any) => `${mem.customerInfo.firstName} ${
                         mem?.customerInfo?.lastName?.charAt(0) || ''
                       }`,
                     )}
-                    cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
+                    cashback={['']}
                     pending={pending}
                   />
                   <ShareButton
@@ -474,24 +496,22 @@ const GroupShop: NextPage = () => {
                 )}
               </Col> */}
             </Row>
-            <Row>
+            <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
+              <Members
+                names={[`${gsctx?.partnerDetails?.fname} ${
+                  gsctx?.partnerDetails?.lname?.charAt(0) || ''
+                }`]}
+                cashback={['']}
+                pending={pending}
+              />
+            </div>
+            <Row className="mt-1">
               <p className="mb-2 text-center">
                 {isInfluencerGS ? '' : <Icon />}
                 {' '}
                 {isInfluencerGS ? 'earns a reward everytime you shop.' : cashBackText}
               </p>
             </Row>
-            <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
-              <Members
-                names={memberDetails?.map(
-                  (mem: any) => `${mem.customerInfo.firstName} ${
-                    mem.customerInfo?.lastName?.charAt(0) || ''
-                  }`,
-                )}
-                cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
-                pending={pending}
-              />
-            </div>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
               <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
             </Row>
@@ -533,7 +553,7 @@ const GroupShop: NextPage = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className={styles.groupshop_dropdownMenu}>
-                  {memberDetails?.map((mem: any, index) => (
+                  {memberDetails?.map((mem: any, index: number) => (
                     <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
                       <Dropdown.Item onClick={() => setmember(mem)}>
                         {index === 0 && '👑 '}
@@ -569,7 +589,12 @@ const GroupShop: NextPage = () => {
             md={6}
             lg={4}
             xl={3}
-            products={newPopularPrd ?? []}
+            products={
+                addedProductsByInfluencer
+                && (addedProductsByInfluencer.length > 3
+                  ? popularShuffled
+                  : newPopularPrd)
+            }
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
@@ -584,7 +609,13 @@ const GroupShop: NextPage = () => {
             md={6}
             lg={4}
             xl={3}
-            products={bestSeller ?? []}
+            // products={bestSeller ?? []}
+            products={
+              addedProductsByInfluencer
+              && (addedProductsByInfluencer.length > 3
+                ? topPicks?.slice(0, 3)
+                : topPicks?.slice(0, 4))
+            }
             maxrows={1}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}

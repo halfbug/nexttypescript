@@ -2,15 +2,15 @@ import {
   useContext,
   useEffect, useState,
 } from 'react';
-import { GroupshopContext } from 'store/groupshop.context';
 import { IProduct } from 'types/store';
+import useAppContext from './useAppContext';
 import useUtilityFunction from './useUtilityFunction';
 
 const useTopPicks = () => {
   const {
     gsctx,
     dispatch,
-  } = useContext(GroupshopContext);
+  } = useAppContext();
   const { filterArray } = useUtilityFunction();
 
   const [topPicks, setTopPicks] = useState<IProduct[] | undefined>();

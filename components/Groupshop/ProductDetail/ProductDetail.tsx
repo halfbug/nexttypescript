@@ -150,6 +150,9 @@ const ProductDetail = ({
     const selectedVariant = getVariant();
 
     if (selectedVariant?.inventoryQuantity > 0) {
+      // selectedVariant?.inventoryQuantity -1 = 0
+      // get cart product variant with qty
+      // cartProducts from usecart
       addCartProduct({
         ...product, ...dproduct, selectedVariant: { ...selectedVariant, selectedQuantity: 1 },
       });

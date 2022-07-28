@@ -157,6 +157,10 @@ export interface IGroupshop {
   partnerCommission?: string;
 
   memberDetails?: PartnerMember[];
+
+  refferalProducts?: Product[];
+
+  influencerProducts?: Product[];
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;
