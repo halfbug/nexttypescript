@@ -39,6 +39,12 @@ const usePagination = <T extends {}>({
     }
   }, [dimensions, items, currentPage]);
 
+  useEffect(() => {
+    if (items?.length > 0 && currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  }, [items]);
+
   const breakpoints: { [char: string]: number } = {
     // xs: 0,
     // sm: 576,
