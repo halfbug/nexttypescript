@@ -26,7 +26,7 @@ const ToolTip = ({
   label, popContent, className, popoverClassName, icon, placement, disabled,
 }: ToolTipProps) => (
   <OverlayTrigger
-    trigger="hover"
+    trigger={['hover', 'focus', 'click']}
     // delay={{ show: 250, hide: 400 }}
     rootClose
     placement={placement ?? 'right'}

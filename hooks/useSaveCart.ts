@@ -24,15 +24,12 @@ const useSaveCart = () => {
   const { cart, id } = gsctx;
 
   useEffect(() => {
-    if (cart && cart?.length > 0) { setStorage(cart); }
+    if (cart && cart?.length >= 0) { setStorage(cart); }
   }, [cart, discountCode]);
 
   useEffect(() => {
     if (id) {
       if (existStorage() && loading) {
-        console.log('GS 1105 ~ ~ loading', loading);
-        console.log('GS 1105 ~ getStorage', getStorage());
-        // setloading(false);
         dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...getStorage()] } });
       }
       if (existStorage()

@@ -150,7 +150,6 @@ const ProductDetail = ({
     const selectedVariant = getVariant();
 
     if (selectedVariant?.inventoryQuantity > 0) {
-      // selectedVariant?.inventoryQuantity -1 = 0
       // get cart product variant with qty
       // cartProducts from usecart
       const isAdded = addCartProduct({
@@ -460,7 +459,7 @@ const ProductDetail = ({
                     {!isForMobile && (
                     <ShowMoreText
                 /* Default options */
-                      lines={3}
+                      lines={2}
                       more="Show more"
                       less="Show less"
                       className={isExpired
@@ -518,7 +517,7 @@ const ProductDetail = ({
                   <ToolTip
                     className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
                     label="Terms & Conditions"
-                    placement="bottom"
+                    placement={isForMobile ? 'bottom' : 'top'}
                     popContent={(
                       <p>
                         If you purchased any of these

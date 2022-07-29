@@ -906,6 +906,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__modalBody {
       @include media-breakpoint-down(sm) {
         padding: 0px 16px;
+        margin-bottom : 74px;
       }
     }
 
