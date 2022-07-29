@@ -87,8 +87,9 @@
         border: 1px dashed #A68AD6;
         border-radius: 10px;
         background: #FFFFFF;
-        margin-top: 15px;
-        max-width: 500px;
+        //margin-top: 15px;
+        margin-top: -106px;
+        width: 500px;
 
         &__heading {
             margin: 13px 17px;
@@ -201,8 +202,7 @@
 
 .customerData {
     position: relative;
-    padding: 50px;
-    margin-top: 50px;
+    padding: 25px 0px 50px 0px;
 
     &__overlay {
         position: absolute;

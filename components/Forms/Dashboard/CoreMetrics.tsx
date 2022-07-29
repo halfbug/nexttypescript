@@ -76,7 +76,6 @@ export default function CoreMetrics({
           </DateRangePicker>
         </div>
       </div>
-
       <Row>
         <Col lg={4} className={styles.coreMetrics__summary_box}>
           <SummaryBox label="Total Revenue " value={revenue} iconType="RevenueIcon" arrowIcon />
@@ -98,7 +97,7 @@ export default function CoreMetrics({
         </Col>
       </Row>
 
-      <div className={styles.coreMetrics__traffic_box}>
+      {/* <div className={[styles.coreMetrics__traffic_box, ''].join(' ')}>
         <div className={styles.coreMetrics__traffic_box__heading}>
           <BulbIcon />
           <span className={styles.coreMetrics__traffic_box__heading__txt}>
@@ -109,7 +108,7 @@ export default function CoreMetrics({
           Groupshop generates quality traffic from referrals.
           We calculate traffic value using the average CPC in your industry.
         </div>
-      </div>
+      </div> */}
     </div>
 
   );

@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import styles from 'styles/Analytics.module.scss';
+import BulbIcon from 'assets/images/bulb.svg';
 import AnalyticCutomerDetail from './AnalyticCustomerDetail';
 import AnalyticOrderDetail from './AnalyticOrderDetail';
 import MostViralCustomers from './MostViralCustomers';
@@ -11,6 +12,18 @@ import MostViralCustomers from './MostViralCustomers';
 export default function CustomerData() {
   return (
     <>
+      <div className={[styles.coreMetrics__traffic_box, 'd-sm-none d-lg-block mb-3'].join(' ')}>
+        <div className={styles.coreMetrics__traffic_box__heading}>
+          <BulbIcon />
+          <span className={styles.coreMetrics__traffic_box__heading__txt}>
+            How is traffic value calculated?
+          </span>
+        </div>
+        <div className={styles.coreMetrics__traffic_box__detail}>
+          Groupshop generates quality traffic from referrals.
+          We calculate traffic value using the average CPC in your industry.
+        </div>
+      </div>
       <div className={styles.customerData}>
         <div className={styles.customerData__overlay}>
           <div className={styles.customerData__overlayText}>Coming Soon</div>
