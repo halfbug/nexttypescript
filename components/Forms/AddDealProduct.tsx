@@ -65,6 +65,11 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       .max(10, 'Too Long !! only 10 characters allowed.'),
 
   });
+  // useEffect(() => {
+  //   if (gsctx?.partnerDetails?.fname && isInfluencer) {
+  //     values.username = gsctx?.partnerDetails?.fname;
+  //   }
+  // }, [gsctx?.partnerDetails?.fname]);
 
   // const { showSuccess } = useAlert();
   const {
@@ -149,6 +154,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           type="text"
           name="username"
           value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
+          // value={values.username}
           onChange={handleChange}
           isInvalid={touched.username && !!errors.username}
           placeholder="Your Name ..."

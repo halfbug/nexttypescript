@@ -33,7 +33,6 @@ import useCode from 'hooks/useCode';
 import useAlert from 'hooks/useAlert';
 import Button from 'components/Buttons/Button/Button';
 import Footer from 'components/Layout/FooterGS/FooterGS';
-import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
 import useDetail from 'hooks/useDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
@@ -54,6 +53,7 @@ import { PartnerGroupshopContext, gspInit } from 'store/partner-groupshop.contex
 import useDeal from 'hooks/useDeal';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
+import InfoBox from 'components/Influencer/InfoBox/InfoBox';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -248,11 +248,11 @@ const GroupShop: NextPage = () => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct,
   } = useDetail(allProducts);
-  console.log('🚀[...code].tsx popularProduct', popularProducts);
-  console.log('🚀[...code].tsx popularShuffled', popularShuffled);
-  console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
-  console.log('🚀[...code].tsx added', addedProductsByInfluencer);
-  console.log('🚀 ~ file: [...code].tsx ~ line 112 ~ partnerMembers', partnerMembers);
+  // console.log('🚀[...code].tsx popularProduct', popularProducts);
+  // console.log('🚀[...code].tsx popularShuffled', popularShuffled);
+  // console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
+  // console.log('🚀[...code].tsx added', addedProductsByInfluencer);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 112 ~ partnerMembers', partnerMembers);
 
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
@@ -350,7 +350,7 @@ const GroupShop: NextPage = () => {
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">
-                  Shop or invite your friends to shop to get started!
+                  SHOPPING WITH
                 </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
@@ -453,7 +453,13 @@ const GroupShop: NextPage = () => {
                   </span>
                   ’s Groupshop
                 </h3>
-                <p>The more friends shop, the more discounts and cashback!</p>
+                <p>
+                  Explore my favorite
+                  {' '}
+                  {gsctx?.store?.brandName}
+                  {' '}
+                  products and access exclusive discounts when you shop with me!
+                </p>
               </Col>
             </Row>
             <Row className="d-flex justify-content-evenly">
@@ -472,9 +478,9 @@ const GroupShop: NextPage = () => {
                 )}
               </Col> */}
               <Col md={8} className="text-center mb-5">
-                <div className={styles.groupshop__hero_current_reward}>
+                {/* <div className={styles.groupshop__hero_current_reward}>
                   Current Rewards
-                </div>
+                </div> */}
                 <div
                   role="button"
                   onClick={() => {
@@ -534,7 +540,7 @@ const GroupShop: NextPage = () => {
             CURATED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {gsctx?.partnerDetails?.fname}
+              {`${gsctx?.partnerDetails?.fname}`}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (

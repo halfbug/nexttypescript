@@ -67,7 +67,6 @@ const ProductsSearch = ({
       handleClose(false);
     }
   };
-
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
 
   const {
@@ -222,8 +221,11 @@ const ProductsSearch = ({
         )}
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
-            <h3>Search for products</h3>
-            {!allowSelectAll || !isInfluencer ? (
+            {isInfluencer
+              ? <h3>Curate your Groupshop by adding your favorite products from Le Sablé</h3>
+              : <h3>Search for products</h3>}
+
+            {allowSelectAll || !isInfluencer ? (
               <p className="text-muted d-flex justify-content-end align-items-center">
                 <span className={styles.groupshop_modal_search_body_top_txt}>
                   Add up to 5 products
@@ -423,8 +425,8 @@ const ProductsSearch = ({
   );
 };
 
-// ProductsSearch.defaultProps = {
-//   user: {},
-// };
+ProductsSearch.defaultProps = {
+  allowSelectAll: false,
+};
 
 export default ProductsSearch;
