@@ -16,10 +16,17 @@ export default function useCart() {
     const alreadyCartProduct = gsctx.cart?.find(
       (prd) => prd.selectedVariant.id === product.selectedVariant.id,
     );
-    if (alreadyCartProduct) plusQuantity(alreadyCartProduct.selectedVariant.id);
-    else {
-      dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } });
+
+    if (alreadyCartProduct) {
+      if (alreadyCartProduct.selectedVariant?.selectedQuantity
+        < alreadyCartProduct.selectedVariant?.inventoryQuantity!) {
+        plusQuantity(alreadyCartProduct.selectedVariant.id);
+        return true;
+      }
+      return false;
     }
+    dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart ?? [], product] } });
+    return true;
   }, [gsctx.cart]);
 
   const cartProducts = gsctx?.cart || [];

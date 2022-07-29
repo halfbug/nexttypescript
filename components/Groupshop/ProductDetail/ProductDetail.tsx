@@ -153,12 +153,15 @@ const ProductDetail = ({
       // selectedVariant?.inventoryQuantity -1 = 0
       // get cart product variant with qty
       // cartProducts from usecart
-      addCartProduct({
+      const isAdded = addCartProduct({
         ...product, ...dproduct, selectedVariant: { ...selectedVariant, selectedQuantity: 1 },
       });
-      showSuccess('product has been added');
-    } else {
-      showError('product is out of stock');
+
+      if (isAdded) {
+        showSuccess('product has been added');
+      } else {
+        showError('product is out of stock');
+      }
     }
     closeModal({});
   };
