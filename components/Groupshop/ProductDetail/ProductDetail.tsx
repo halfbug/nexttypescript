@@ -201,32 +201,6 @@ const ProductDetail = ({
       const svrnt = dproduct.variants.filter(
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
-      // console.log('🚀 ~ file: ProductDetail.tsx ~ line 186 ~ useEffect ~ svrnt', svrnt);
-
-      // 3. if selected image related variant not found then select first variant
-      // let selectedV =
-
-      if (svrnt?.[0]) {
-      // 4. check if first variant is out of stock
-        // if (selectedV.inventoryQuantity === 0) {
-        //   // get instock variants
-        //   selectedV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
-        // }
-
-        // 3. set selected options to in stock variant
-        setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
-          { ...obj, [name]: value }), {}));
-      }
-      // // 2. get its all variants
-      // const svrnt = dproduct.variants.filter(
-      //   (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
-      // );
-
-      // 3. set selected option state to variant options
-      // if (svrnt?.length) {
-      //   setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
-      //     { ...obj, [name]: value }), {}));
-      // }
     }
   }, [index]);
 
