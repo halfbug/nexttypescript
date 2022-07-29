@@ -45,7 +45,7 @@ import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox
 import TickCircle from 'assets/images/tick-circle.svg';
 import GradientCircle from 'assets/images/gradient-circle.svg';
 import { useMediaQuery } from 'react-responsive';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
 import useTopPicks from 'hooks/useTopPicks';
@@ -54,20 +54,24 @@ import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBo
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
+import useSteps from 'hooks/useSteps';
 import usePopular from 'hooks/usePopularProduct';
 import useSaveCart from 'hooks/useSaveCart';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useExpired from 'hooks/useExpired';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
+import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 
-const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
+const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
+  const { stepModal } = useOwnerOnboarding();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+  const Router = useRouter();
   const shareEarnBtn = useMediaQuery({
     query: '(max-width: 768px)',
   });
@@ -76,7 +80,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
     loading,
     error,
     data: { groupshop } = { groupshop: gsInit },
-  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined, status: string | undefined}>(
+  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined, status: string | undefined }>(
     GET_GROUPSHOP,
     {
       variables: { code: discountCode, status: status ?? '' },
@@ -100,6 +104,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const { urlForActivation, loaderInvite } = useExpired();
+
   useEffect(() => {
     if (groupshop.id && pending) {
       setpending(false);
@@ -308,8 +313,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                     <Link href={`https://${fullStoreName}`}>
                       <Brand
                         name={
-                        (brandName || '').split(' ').slice(0, 2).join(' ') || ''
-                      }
+                          (brandName || '').split(' ').slice(0, 2).join(' ') || ''
+                        }
                         pending={pending}
                       />
                     </Link>
@@ -319,7 +324,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                         <img
                           src={storeLogo}
                           alt={`${brandName}`}
-                      // alt="d"
+                          // alt="d"
                           className="img-fluid"
                         />
                       </a>
@@ -334,8 +339,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
                     names={gsctx?.members.map(
-                      (mem: any) => `${mem.orderDetail.customer.firstName} ${
-                        mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                      (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                       }`,
                     )}
                     cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -498,8 +502,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
                 names={gsctx?.members.map(
-                  (mem: any) => `${mem.orderDetail.customer.firstName} ${
-                    mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                  (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                   }`,
                 )}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -553,10 +556,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
                     <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
                       <Dropdown.Item onClick={() => setmember(mem)}>
                         {index === 0 && '👑 '}
-                        {`${
-                          mem.orderDetail.customer.firstName
-                        } ${
-                          mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                        {`${mem.orderDetail.customer.firstName
+                        } ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                         }`}
 
                       </Dropdown.Item>
@@ -711,7 +712,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
         </ProductGrid>
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
-            { isExpired ? (
+            {isExpired ? (
               <>
                 <p className={styles.groupshop_expShopTheseProducts}>
                   Want to shop these products?
@@ -739,7 +740,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
 
                 </>
 
-              ) }
+              )}
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />
@@ -769,15 +770,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }:{meta:any}) => {
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
         />
-        {shareEarnBtn && (
-        <div>
-          <ShoppingBoxMobile
-            shareurl={gsShortURL ?? gsURL}
-            // onClick={() => setShowRewards(true)}
-            val={value}
-          />
-        </div>
+        {isModalForMobile && (
+          <div>
+            <ShoppingBoxMobile
+              shareurl={gsShortURL ?? gsURL}
+              // onClick={() => setShowRewards(true)}
+              val={value}
+            />
+          </div>
         )}
+        {/* STEP MODALs */}
+        {stepModal()}
       </div>
     </>
   );

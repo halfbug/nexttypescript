@@ -2,7 +2,7 @@ import {
   IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards,
 } from './store';
 
-export type DealProduct ={
+export type DealProduct = {
   productId: string;
 
   type?: 'deal' | 'abandoned';
@@ -21,7 +21,7 @@ export type partnerDetails ={
   email: string;
 }
 
-export type DiscountCode ={
+export type DiscountCode = {
   title: string;
 
   percentage: string;
@@ -29,7 +29,7 @@ export type DiscountCode ={
   priceRuleId: string;
 }
 
-export type Refund ={
+export type Refund = {
   status: 'done' | 'panding';
 
   createdAt: Date;
@@ -39,7 +39,7 @@ export type Refund ={
   amount: number;
 }
 
-export type Milestone ={
+export type Milestone = {
   activatedAt: Date;
 
   discount: string;
@@ -102,9 +102,24 @@ export type Member ={
 }
 
 export type CartProduct = Product & {
- selectedVariant: Product & { selectedQuantity : number};
-//  selectedQuantity: number;
+  selectedVariant: Product & { selectedQuantity: number };
+  //  selectedQuantity: number;
 };
+
+export type ObSettings = {
+  allowEmails?: boolean;
+  allowTexts?: boolean;
+  mobileNumber?: number;
+  email?: string;
+  shopHeader?: string;
+  instagramLink?: string;
+  pinteresrLink?: string;
+  tiktokLink?: string;
+  twitterLink?: string;
+  themeBanner?: string;
+  products?: string[];
+  step?: number;
+}
 
 export interface IGroupshop {
   id: string;
@@ -148,6 +163,8 @@ export interface IGroupshop {
   status?: string;
 
   // expectedCashBack?: number;
+  obSettings?: ObSettings;
+
   partnerDetails?: partnerDetails;
 
   visitors?: number;

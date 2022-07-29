@@ -1,5 +1,5 @@
 import {
-  useCallback, useEffect, useState,
+  useEffect, useState,
 } from 'react';
 import { useRouter } from 'next/router';
 
@@ -13,15 +13,22 @@ const useCode = () => {
   const [status, setStatus] = useState<string | undefined>(undefined);
   const [qrscan, setQrscan] = useState<string | undefined>(undefined);
   const [discountCode, setdiscountCode] = useState<string | undefined>(undefined);
+  const [ownerCode, setOwnerCode] = useState<string | undefined>(undefined);
+  const [stepNumber, setStepNumber] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (Array.isArray(code) && code.length) {
-      code.map((itm:string, idx:number) => {
+      code.map((itm: string, idx: number) => {
         switch (idx) {
           case 0:
             setdiscountCode(code[idx]);
             break;
-
+          case 1:
+            setOwnerCode(code[idx]);
+            break;
+          case 2:
+            setStepNumber(code[idx]);
+            break;
           default:
             if (itm.indexOf('&') > 0) {
               const entity = itm.split('&');
@@ -52,7 +59,7 @@ const useCode = () => {
   }, [code]);
 
   return {
-    shop, discountCode, productCode, status, qrscan,
+    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber,
   };
 };
 export default useCode;

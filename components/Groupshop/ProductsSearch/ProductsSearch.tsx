@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React, {
   useState, useContext, useRef, useEffect,
 } from 'react';
@@ -26,13 +27,15 @@ import useAppContext from 'hooks/useAppContext';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
-  show : boolean;
-  handleClose(e:any): any;
-
+  show: boolean;
+  handleClose(e: any): any;
+  getData?(data: IProduct[], ids: string[]): any;
+  setData?: any;
+  allowSelectAll?: boolean
 }
 
 const ProductsSearch = ({
-  show: showSearch, pending = false, handleClose,
+  show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData,
 }: ProductsSearchProps) => {
   // const {
   //   gsctx,
@@ -56,8 +59,13 @@ const ProductsSearch = ({
   }, [showSearch]);
 
   const handleClick = (event: any) => {
-    setShow(!show);
-    setTarget(event.target);
+    if (!allowSelectAll) {
+      setShow(!show);
+      setTarget(event.target);
+    } else {
+      getData!(selectedProducts, selected!);
+      handleClose(false);
+    }
   };
 
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
@@ -107,7 +115,8 @@ const ProductsSearch = ({
     }
   }, [products, addedProducts]);
 
-  const [selected, setSelected] = useState<string[]|undefined>(undefined);
+  const [selected, setSelected] = useState<string[] | undefined>(undefined);
+  const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
   const clientDProducts = clientDealProducts();
 
   useEffect(() => {
@@ -117,7 +126,12 @@ const ProductsSearch = ({
     }
   }, [selected, clientDProducts]);
 
-  const searchPrd = (name:string) => {
+  useEffect(() => {
+    setSelected(setData?.selectProducts);
+    setSelectedProducts(setData?.productArray);
+  }, [setData]);
+
+  const searchPrd = (name: string) => {
     let newFilteredSearchArray;
     // setotherProducts(products?.filter(
     //   (item) => !popularProducts?.some((item2) => item2.id === item.id),
@@ -126,7 +140,7 @@ const ProductsSearch = ({
     // ));
     if (otherProducts && name) {
       newFilteredSearchArray = otherProducts?.filter(
-        (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
+        (p: IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
       setotherProducts(newFilteredSearchArray);
     }
@@ -136,7 +150,7 @@ const ProductsSearch = ({
       ).filter(
         (item) => !addedProducts?.some((item2) => item2.productId === item.id),
       )?.filter(
-        (p:IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
+        (p: IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
 
       setotherProducts(newFilteredSearchArray);
@@ -148,10 +162,10 @@ const ProductsSearch = ({
     }
   };
   const debouncedSearch = useDebounce(
-    (nextValue:string) => searchPrd(nextValue), 1000, otherProducts || [],
+    (nextValue: string) => searchPrd(nextValue), 1000, otherProducts || [],
   );
   const { AlertComponent, showSuccess } = useAlert();
-  const handleSubmit = (e:any) => { e.preventDefault(); };
+  const handleSubmit = (e: any) => { e.preventDefault(); };
   const closeModal = (e: any) => {
     setShow(false);
     setshowMsg('');
@@ -159,8 +173,11 @@ const ProductsSearch = ({
     setSelected(undefined);
     handleClose(e);
   };
-  const addProducts = (id: string) => setSelected([...selected ?? [], id]);
-  const handleSearch = (event:any) => {
+  const addProducts = (prd: IProduct) => {
+    setSelected([...selected ?? [], prd.id]);
+    setSelectedProducts([...selectedProducts, prd]);
+  };
+  const handleSearch = (event: any) => {
     const { value: searchText } = event.target;
     const code = event.keyCode || event.key;
     if (code !== 37 || code !== 38 || code !== 39 || code !== 40 || code !== 13) {
@@ -191,31 +208,31 @@ const ProductsSearch = ({
         fullscreen="lg-down"
       >
         {!isModalForMobile && (
-        <Modal.Header className={styles.groupshop_modal__closebtnlg}>
-          <Row onClick={(e) => {
-            handleClose(e);
-            setShow(false);
-          }}
-          >
-            <div>
-              <Cross />
-            </div>
-          </Row>
-        </Modal.Header>
+          <Modal.Header className={styles.groupshop_modal__closebtnlg}>
+            <Row onClick={(e) => {
+              handleClose(e);
+              setShow(false);
+            }}
+            >
+              <div>
+                <Cross />
+              </div>
+            </Row>
+          </Modal.Header>
         )}
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             <h3>Search for products</h3>
-            { !isInfluencer && (
-            <p className="text-muted d-flex justify-content-end align-items-center">
-              <span className={styles.groupshop_modal_search_body_top_txt}>
-                Add up to 5 products
-              </span>
-              {[...new Array(5)].map((v, i) => (
-                <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
-              ))}
-            </p>
-            )}
+            {!allowSelectAll || !isInfluencer ? (
+              <p className="text-muted d-flex justify-content-end align-items-center">
+                <span className={styles.groupshop_modal_search_body_top_txt}>
+                  Add up to 5 products
+                </span>
+                {[...new Array(5)].map((v, i) => (
+                  <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                ))}
+              </p>
+            ) : <></>}
           </div>
 
           <Form onSubmit={handleSubmit}>
@@ -261,50 +278,53 @@ const ProductsSearch = ({
               otherProducts.map(
                 (prd) => (
                   (+prd.price > 0) && (
-                  <Col xs={6} sm={6} md={4}>
-                    <ProductCard
-                      isrc={prd.featuredImage}
-                      className={styles.groupshop_search_pcard}
-                      imgOverlay={(
-                        <>
-                          { selected?.includes(prd.id) ? (
-                            <>
-                              <span className={styles.groupshop__pcard_tag_price}>
+                    <Col xs={6} sm={6} md={4}>
+                      <ProductCard
+                        isrc={prd.featuredImage}
+                        className={styles.groupshop_search_pcard}
+                        imgOverlay={(
+                          <>
+                            {selected?.includes(prd.id) ? (
+                              <>
+                                <span className={styles.groupshop__pcard_tag_price}>
 
-                                {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
-                              </span>
-                              <X
-                                size={34}
-                                className={styles.groupshop__pcard_tag_cross}
-                                onClick={() => setSelected(
-                                  selected?.filter((pid) => pid !== prd.id),
-                                )}
-                              />
-                            </>
+                                  {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
+                                </span>
+                                <IconButton
+                                  className={styles.groupshop__pcard_tag_cross}
+                                  icon={<X size={18} />}
+                                  onClick={() => {
+                                    setSelected(selected?.filter((pid) => pid !== prd.id));
+                                    setSelectedProducts(selectedProducts?.filter(
+                                      (pid: any) => pid.id !== prd.id,
+                                    ));
+                                  }}
+                                />
+                              </>
 
-                          )
-                            : <Button variant="outline-primary" disabled={selectedCount === 5 && !isInfluencer} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd.id)}>ADD PRODUCT</Button>}
-                        </>
-)}
-                    >
-                      <h5 className="text-center fw-bold text-truncate">
-                        { prd.title }
-                      </h5>
-                      <p className="text-center fw-bold fs-5 mb-0">
-                        <span className="text-decoration-line-through fw-light me-1">
-                          {currencySymbol}
+                            )
+                              : <Button variant="outline-primary" disabled={!allowSelectAll ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                          </>
+                        )}
+                      >
+                        <h5 className="text-center fw-bold text-truncate">
+                          {prd.title}
+                        </h5>
+                        <p className="text-center fw-bold fs-5 mb-0">
+                          <span className="text-decoration-line-through fw-light me-1">
+                            {currencySymbol}
 
-                          {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                        {' '}
-                        <span className="fw-bolder">
-                          {currencySymbol}
-                          {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
-                        </span>
+                            {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                          </span>
+                          {' '}
+                          <span className="fw-bolder">
+                            {currencySymbol}
+                            {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                          </span>
 
-                      </p>
-                    </ProductCard>
-                  </Col>
+                        </p>
+                      </ProductCard>
+                    </Col>
                   )
                 ),
               )
@@ -314,9 +334,9 @@ const ProductsSearch = ({
               </div>
             )}
             {!(otherProducts && otherProducts.length > 0) && (
-            <div className={styles.groupshop_modal_empty}>
-              <p>{showMsg}</p>
-            </div>
+              <div className={styles.groupshop_modal_empty}>
+                <p>{showMsg}</p>
+              </div>
             )}
           </Row>
         </Modal.Body>
@@ -324,12 +344,12 @@ const ProductsSearch = ({
           <>
             <div ref={ref} className={styles.groupshop_addtocartmodal}>
               {selected && (
-              <div className="pb-3">
-                {selectedCount}
-                {' '}
-                product selected
+                <div className="pb-3">
+                  {selectedCount}
                   {' '}
-              </div>
+                  product selected
+                  {' '}
+                </div>
               )}
               {isInfluencer ? (
                 <AddDealProduct

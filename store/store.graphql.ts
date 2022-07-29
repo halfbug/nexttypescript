@@ -547,7 +547,21 @@ query Groupshop($code: String!, $status: String = "") {
           discount
         }    
       }
-    } 
+    }
+    
+    obSettings{ 
+      allowEmails
+      allowTexts
+      mobileNumber
+      shopHeader
+      instagramLink
+      pinteresrLink
+      tiktokLink
+      twitterLink
+      themeBanner
+      step
+    }
+
   }
 }
 `;
