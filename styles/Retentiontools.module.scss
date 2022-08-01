@@ -1,0 +1,175 @@
+@import "./variables.scss";
+
+.rt {
+    @extend .mt-2, .px-0;
+
+    &__invite_box {
+        @extend .my-4, .p-4;
+
+        border: 1px dashed $dotted-border-color1;
+        border-radius: $border-radius-medium;
+
+        h3 {
+            font-weight: 700;
+            font-size: $size-16px;
+            line-height: 21px;
+
+        }
+        h4 {
+            @extend .mt-3, .mb-1;
+            font-weight: 700;
+            font-size: $size-14px;
+            line-height: 18px;
+        }
+        span{
+            font-weight: $font-weight-light;
+            font-size: $size-14px;
+            line-height: 18px;
+            color: $subheadingclr;
+            opacity: 0.5;
+        }
+        &_btn{
+            @extend .mt-2;
+            button{
+                @extend .py-0;
+                height: 28px;   
+            }
+        }
+    }
+
+    &__rewards_box {
+        @extend .my-4, .p-4;
+
+        border: 1px dashed $dotted-border-color4;
+        border-radius: $border-radius-medium;
+
+        h3 {
+            font-weight: 700;
+            font-size: $size-16px;
+            line-height: 21px;
+
+        }
+        span{
+            font-weight: $font-weight-light;
+            font-size: $size-14px;
+            line-height: 18px;
+            color: $subheadingclr;
+            opacity: 0.5;
+        }
+
+    }
+
+    &__importCustomer_box {
+        @extend .mb-4, .p-4;
+
+        border: 1px dashed $dotted-border-color2;
+        border-radius: $border-radius-medium;
+
+        h3 {
+            font-weight: 700;
+            font-size: $size-16px;
+            line-height: 21px;
+
+        }
+        span{
+            font-weight: $font-weight-light;
+            font-size: $size-14px;
+            line-height: 18px;
+            color: $subheadingclr;
+            opacity: 0.5;
+        }
+    }
+
+    &__importDate_box {
+        @extend .mb-4, .p-4;
+
+        border: 1px dashed $dotted-border-color1;
+        border-radius: $border-radius-medium;
+
+        h3 {
+            font-weight: 700;
+            font-size: $size-16px;
+            line-height: 18px;
+
+        }
+        h4 {
+            font-weight: 700;
+            font-size: $size-14px;
+            line-height: 18px;
+        }
+        span{
+            font-weight: $font-weight-light;
+            font-size: $size-14px;
+            line-height: 18px;
+        }
+
+        &_header{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        hr{
+            @extend .mt-0, .mb-3;
+            opacity: 0.08;
+        }
+
+        &_row{
+            @extend .d-flex, .my-2;
+            justify-content: space-between;
+        }
+    }
+    &__table_head {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 1.5fr 2.5fr 1.5fr;
+        padding-left: 17px;
+        padding-right: 16px;
+        &__txt {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            opacity: 0.6;
+        }
+    }
+    &__acc1 {
+        margin-top: 6px;
+        button {
+            box-shadow: none !important;
+            // background: #F8F8F8 !important;
+            background: rgba(220, 208, 232, 0.5) !important;
+            border-radius: 23px !important;
+            height: 43px !important;
+            display: grid;
+            grid-template-columns: 1.5fr 2.5fr 1.5fr;
+            padding: 0;
+            padding-left: 21px;
+            padding-right: 16px;
+            &::after {
+                transform: rotate(270deg);
+              }
+        }
+
+        &__row {
+            display: flex;
+            align-items: center;
+
+            &__date {
+                color: #000000;
+                font-family: 'DM Sans';
+                font-weight: 700;
+                line-height: 15px;
+                font-size: 12px;
+                text-align: center;
+                background: #DCD0E8;
+                border-radius: 6px;
+                padding: 5px 13px;
+                width: fit-content;
+            }
+            &__count {
+                width: fit-content;
+            }
+        }
+    }
+}

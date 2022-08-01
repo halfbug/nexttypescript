@@ -14,6 +14,7 @@ import Settingsicon from 'assets/images/settings-icon.svg';
 import Knowledgebaseicon from 'assets/images/knowledge-base-icon.svg';
 import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
 import PartnerToolLogo from 'assets/images/partner-tools.svg';
+import RetentionToolLogo from 'assets/images/retention-tools.svg';
 import { useRouter } from 'next/router';
 
 const Sidebar = () => {
@@ -112,6 +113,22 @@ const Sidebar = () => {
                     <span className={linkstyle('partnertools')}>
                       <span className={styles.linkicon}><PartnerToolLogo /></span>
                       <span className={styles.linktext}>Partner Tools</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/retentiontools',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('retentiontools')}>
+                      <span className={styles.linkicon}><RetentionToolLogo /></span>
+                      <span className={styles.linktext}>Retention Tools</span>
                     </span>
                   </a>
                 </Link>
