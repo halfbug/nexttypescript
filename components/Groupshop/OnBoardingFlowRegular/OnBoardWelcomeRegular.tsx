@@ -30,7 +30,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   const handleClose = () => {
     setShow(false);
     if (shop && ownerCode && discountCode) {
-      Router.push(`/${shop}/deal/${discountCode}/${ownerCode}`);
+      Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
     }
   };
   const handleShow = () => setShow(true);
