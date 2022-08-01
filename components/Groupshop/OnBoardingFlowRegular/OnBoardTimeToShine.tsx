@@ -54,7 +54,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
 
     if (shop && ownerCode && discountCode) {
       handleClose();
-      Router.push(`/${shop}/deal/${discountCode}/${ownerCode}`);
+      Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
     }
   };
 

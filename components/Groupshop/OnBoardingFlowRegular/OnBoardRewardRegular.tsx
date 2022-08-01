@@ -38,14 +38,18 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const FormValues: TypeFormValues = {
-    isEmailChecked: false,
-    isTextChecked: false,
+    isEmailChecked: true,
+    isTextChecked: true,
     PhoneNumber: 0,
   };
 
   const validationSchema = yup.object({
     PhoneNumber: yup
-      .number().typeError('you must specify a number'),
+      .number()
+      .when('isTextChecked', {
+        is: true,
+        then: yup.number().required('Must enter number'),
+      }).typeError('you must specify a number'),
   });
 
   const {
@@ -73,10 +77,13 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
   }, [open]);
 
   const moveForward = async () => {
+    if (values.isTextChecked && !values.PhoneNumber) {
+      return;
+    }
     const temp: any = {
       allowEmails: values.isEmailChecked,
       allowTexts: values.isTextChecked,
-      mobileNumber: values.PhoneNumber && (`+1${values.PhoneNumber}`),
+      mobileNumber: values.PhoneNumber ? (`+1${values.PhoneNumber}`) : '0',
     };
     const data = {
       ...gsctx.obSettings,
@@ -97,7 +104,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
     });
 
     // if (shop && ownerCode && discountCode) {
-    //   Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/2`);
+    // Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/2`);
     // }
   };
 
@@ -162,7 +169,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                   type="checkbox"
                   checked={values.isEmailChecked}
                 >
-                  <Form.Check.Input type="checkbox" name="isEmailChecked" onChange={(e) => { handleChange(e); }} className={styles.reward__modal__body__checkArea__checkbox__check} />
+                  <Form.Check.Input type="checkbox" checked={values.isEmailChecked} name="isEmailChecked" onChange={(e) => { handleChange(e); }} className={styles.reward__modal__body__checkArea__checkbox__check} />
                   <Form.Check.Label>
                     Email me notifications
                   </Form.Check.Label>
@@ -180,7 +187,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                 type="checkbox"
                 checked={values.isTextChecked}
               >
-                <Form.Check.Input type="checkbox" name="isTextChecked" onChange={(e) => { handleChange(e); }} isInvalid={touched.isTextChecked && !!errors.isTextChecked} className={styles.reward__modal__body__checkArea__checkbox__check} />
+                <Form.Check.Input type="checkbox" checked={values.isTextChecked} name="isTextChecked" onChange={(e) => { handleChange(e); }} isInvalid={touched.isTextChecked && !!errors.isTextChecked} className={styles.reward__modal__body__checkArea__checkbox__check} />
                 <Form.Check.Label>
                   Text me about my rewards
                 </Form.Check.Label>
@@ -195,14 +202,16 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                   className={styles.reward__modal__body__checkArea__input}
                   name="PhoneNumber"
                   onChange={(e) => { handleChange(e); }}
-                  isInvalid={!!errors.PhoneNumber}
+                  isInvalid={!!errors.PhoneNumber
+                  || (values.isTextChecked && !values.PhoneNumber.length)}
+                  isValid={values.PhoneNumber.length === 10}
                   minLength={10}
                   maxLength={10}
-                  title={errors.PhoneNumber ? 'Phone is invalid' : ''}
+                  title={errors.PhoneNumber ? errors.PhoneNumber : ''}
                 />
               </InputGroup>
               <Form.Control.Feedback type="invalid">
-                {errors.PhoneNumber}
+                {errors?.PhoneNumber}
               </Form.Control.Feedback>
               <div className={styles.reward__modal__body__checkArea__txt1}>
                 By checking this box, you agree to receive recurring personalized marketing text

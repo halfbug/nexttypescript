@@ -89,14 +89,14 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
             New to Groupshop?
           </h2>
-          <div className={styles.welcome__modal__body__description}>
+          {/* <div className={styles.welcome__modal__body__description}>
             The
             <strong> personalized store </strong>
             where you and your friends
             <strong> shop together </strong>
             and
             <strong> earn 100% cashback and discounts. </strong>
-          </div>
+          </div> */}
           <div className={styles.welcome__modal__body__descriptionMobile}>
             Here are the two ways you can earn rewards with
             {' '}
@@ -105,9 +105,10 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           </div>
           <div className={styles.welcome__modal__body__icons}>🛒   📩   🤑</div>
           <div className={styles.welcome__modal__body__getStarted}>
-            3 steps to get started
+            {/* 3 steps to get started */}
+            How it works
           </div>
-          <div className={styles.welcome__modal__body__box1}>
+          {/* <div className={styles.welcome__modal__body__box1}>
             <p className={styles.welcome__modal__body__description}>
               <strong> Customize </strong>
               your Groupshop by adding your favorite
@@ -116,7 +117,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               {' '}
               products.
             </p>
-          </div>
+          </div> */}
           <div className={styles.welcome__modal__body__box2}>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>

@@ -23,12 +23,7 @@ const useCode = () => {
           case 0:
             setdiscountCode(code[idx]);
             break;
-          case 1:
-            setOwnerCode(code[idx]);
-            break;
-          case 2:
-            setStepNumber(code[idx]);
-            break;
+
           default:
             if (itm.indexOf('&') > 0) {
               const entity = itm.split('&');
@@ -44,6 +39,14 @@ const useCode = () => {
 
                 case 'qrscan':
                   setQrscan(entity[1]);
+                  break;
+
+                case 'owner':
+                  setOwnerCode(entity[1]);
+                  break;
+
+                case 'step':
+                  setStepNumber(entity[1]);
                   break;
 
                 default:

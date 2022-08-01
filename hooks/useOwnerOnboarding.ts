@@ -26,7 +26,7 @@ const useOwnerOnboarding = () => {
 
   useEffect(() => {
     if (modelStep >= 0 && modelStep <= 3 && ownerCode) {
-      Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/${modelStep}`);
+      Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}/step&${modelStep}`);
     }
   }, [modelStep]);
 
