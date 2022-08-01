@@ -7,7 +7,8 @@ const useCode = () => {
   // get client IP
   const router = useRouter();
 
-  const { query: { shop, code } } = router;
+  const { query: { shop, code }, pathname } = router;
+
   console.log('🚀 ~ file: useCode.ts ~ line 11 ~ useCode ~ router', router);
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
   const [status, setStatus] = useState<string | undefined>(undefined);
@@ -65,7 +66,7 @@ const useCode = () => {
     if (shop && discountCode) {
       setproductCode(undefined);
       setStatus(undefined);
-      router.push(`/${shop}/deal/${discountCode}`);
+      router.push(`/${shop}/${pathname.split('/')[2]}/${discountCode}`);
     }
   }, [shop, discountCode]);
 
