@@ -1,3 +1,4 @@
+import { Router } from 'next/router';
 import {
   useEffect, useState,
 } from 'react';
@@ -5,7 +6,7 @@ import { IProduct } from 'types/store';
 import useCode from './useCode';
 
 const useDetail = (products:any) => {
-  const { productCode, qrscan } = useCode();
+  const { productCode, qrscan, backHome } = useCode();
   const [showDetail, setshowDetail] = useState<boolean>(false);
   const [showQrscan, setshowQrscan] = useState<boolean>(false);
   const [sProduct, setsProduct] = useState<IProduct | undefined>(undefined);
@@ -26,7 +27,10 @@ const useDetail = (products:any) => {
   }, [qrscan]);
 
   useEffect(() => {
-    if (!showDetail) { setsProduct(undefined); }
+    if (!showDetail) {
+      setsProduct(undefined);
+      backHome();
+    }
   }, [showDetail]);
 
   return {

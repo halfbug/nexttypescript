@@ -1,5 +1,5 @@
 import {
-  useEffect, useState,
+  useEffect, useState, useCallback,
 } from 'react';
 import { useRouter } from 'next/router';
 
@@ -61,8 +61,16 @@ const useCode = () => {
     }
   }, [code]);
 
+  const backHome = useCallback(() => {
+    if (shop && discountCode) {
+      setproductCode(undefined);
+      setStatus(undefined);
+      router.push(`/${shop}/deal/${discountCode}`);
+    }
+  }, [shop, discountCode]);
+
   return {
-    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber,
+    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber, backHome,
   };
 };
 export default useCode;
