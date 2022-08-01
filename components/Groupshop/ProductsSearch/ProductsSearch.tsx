@@ -125,10 +125,12 @@ const ProductsSearch = ({
     }
   }, [selected, clientDProducts]);
 
-  // useEffect(() => {
-  //   setSelected(setData?.selectProducts);
-  //   setSelectedProducts(setData?.productArray);
-  // }, [setData]);
+  useEffect(() => {
+    if (setData) {
+      setSelected(setData?.selectProducts ?? []);
+      setSelectedProducts(setData?.productArray ?? []);
+    }
+  }, [setData]);
 
   const searchPrd = (name: string) => {
     let newFilteredSearchArray;
@@ -225,16 +227,42 @@ const ProductsSearch = ({
               ? <h3>Curate your Groupshop by adding your favorite products from Le Sablé</h3>
               : <h3>Search for products</h3>}
 
-            {allowSelectAll || !isInfluencer ? (
+            {allowSelectAll ? <></>
+              : !isInfluencer && (
               <p className="text-muted d-flex justify-content-end align-items-center">
                 <span className={styles.groupshop_modal_search_body_top_txt}>
                   Add up to 5 products
                 </span>
                 {[...new Array(5)].map((v, i) => (
-                  <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                  <li className={selectedCount > i
+                    ? styles.groupshop_modal_search_meter_fill
+                    : styles.groupshop_modal_search_meter}
+                  >
+                    {' '}
+
+                  </li>
                 ))}
               </p>
-            ) : <></>}
+              )}
+
+            {/* {allowSelectAll
+              ? <></>
+              : !isInfluencer
+                ? (
+                  <p className="text-muted d-flex justify-content-end align-items-center">
+                    <span className={styles.groupshop_modal_search_body_top_txt}>
+                      Add up to 5 products
+                    </span>
+                    {[...new Array(5)].map((v, i) => (
+                      <li className={selectedCount > i
+                        ? styles.groupshop_modal_search_meter_fill
+                        : styles.groupshop_modal_search_meter}
+                      >
+                        {' '}
+                      </li>
+                    ))}
+                  </p>
+                ) : <></>} */}
           </div>
 
           <Form onSubmit={handleSubmit}>
@@ -427,6 +455,7 @@ const ProductsSearch = ({
 
 ProductsSearch.defaultProps = {
   allowSelectAll: false,
+  setData: [],
 };
 
 export default ProductsSearch;

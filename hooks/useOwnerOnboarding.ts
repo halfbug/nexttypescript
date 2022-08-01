@@ -25,7 +25,7 @@ const useOwnerOnboarding = () => {
   }, [gsctx]);
 
   useEffect(() => {
-    if (modelStep >= 0 && modelStep <= 3) {
+    if (modelStep >= 0 && modelStep <= 3 && ownerCode) {
       Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/${modelStep}`);
     }
   }, [modelStep]);

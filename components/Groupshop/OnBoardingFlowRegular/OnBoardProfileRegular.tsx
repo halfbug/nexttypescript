@@ -71,6 +71,7 @@ const OnBoardProfileRegular = ({ open }: Props) => {
   const [show, setShow] = useState<Boolean>(false);
   const [showProduct, setShowProduct] = useState(false);
   const [editHeader, setEditHeader] = useState(false);
+  const [storeData, setStoreData] = useState({});
   const [socialButtons, setSocialButtons] = useState<any>({
     instagram: { isChecked: true, link: '', hasValue: false },
     pinterest: { isChecked: false, link: '', hasValue: false },
@@ -131,7 +132,7 @@ const OnBoardProfileRegular = ({ open }: Props) => {
   };
 
   const {
-    handleChange, values,
+    handleChange, values, setFieldValue,
   } = useFormik({
     initialValues: FormValues,
     // validationSchema,
@@ -162,6 +163,64 @@ const OnBoardProfileRegular = ({ open }: Props) => {
   useEffect(() => {
     if (socialButtons[key].link) { URLValidator(socialButtons[key].link); }
   }, [socialButtons]);
+
+  useEffect(() => {
+    if (gsctx?.obSettings && gsctx?.dealProducts) {
+      setStoreData({
+        store: gsctx?.obSettings,
+        products: gsctx?.dealProducts,
+      });
+      setFieldValue('ShopTitle', gsctx?.obSettings.shopHeader);
+      // setSelectedProducts(gsctx?.dealProducts.map((prd) => prd.productId));
+      // setProductArray(gsctx?.dealProducts);
+
+      let socialLinksObj = {};
+      if (gsctx?.obSettings.instagramLink) {
+        socialLinksObj = {
+          ...socialLinksObj,
+          instagram: {
+            link: gsctx?.obSettings?.instagramLink,
+            hasValue: true,
+          },
+        };
+      }
+
+      if (gsctx?.obSettings.pinteresrLink) {
+        socialLinksObj = {
+          ...socialLinksObj,
+          pinterest: {
+            link: gsctx?.obSettings?.pinteresrLink,
+            hasValue: true,
+          },
+        };
+      }
+
+      if (gsctx?.obSettings.twitterLink) {
+        socialLinksObj = {
+          ...socialLinksObj,
+          twitter: {
+            link: gsctx?.obSettings.twitterLink,
+            hasValue: true,
+          },
+        };
+      }
+
+      if (gsctx?.obSettings.tiktokLink) {
+        socialLinksObj = {
+          ...socialLinksObj,
+          tiktok: {
+            link: gsctx?.obSettings.tiktokLink,
+            hasValue: true,
+          },
+        };
+      }
+
+      setSocialButtons({
+        ...socialButtons,
+        ...socialLinksObj,
+      });
+    }
+  }, [gsctx?.obSettings]);
 
   const URLValidator = (URI: string) => {
     const URI_LIST = [
@@ -215,6 +274,7 @@ const OnBoardProfileRegular = ({ open }: Props) => {
     if (validationChecker()) {
       return;
     }
+
     const productObject:any = selectProducts.map((ele) => ({
       productId: ele,
       type: 'deal',
@@ -230,7 +290,7 @@ const OnBoardProfileRegular = ({ open }: Props) => {
       tiktokLink: socialButtons.tiktok.hasValue ? socialButtons.tiktok.link : '',
       twitterLink: socialButtons.twitter.hasValue ? socialButtons.twitter.link : '',
       themeBanner: 'banner URL',
-      step: 2,
+      step: gsctx?.obSettings?.step === 3 ? gsctx?.obSettings?.step : 2,
     };
     const uniqueDealProducts = _.uniq([...gsctx.dealProducts ?? [], ...productObject ?? []]);
     dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, dealProducts: uniqueDealProducts, obSettings: { ...gsctx.obSettings, ...data } } });
@@ -250,6 +310,9 @@ const OnBoardProfileRegular = ({ open }: Props) => {
     // if (shop && ownerCode && discountCode) {
     //   Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/3`);
     // }
+    if (gsctx?.obSettings?.step === 3) {
+      handleClose();
+    }
   };
 
   const getURL = (e: any) => {
@@ -323,12 +386,13 @@ const OnBoardProfileRegular = ({ open }: Props) => {
 
   return (
     <>
-      <div onClick={() => handleShow()} onKeyDown={() => handleShow()} role="button" tabIndex={0}>onbaording profile</div>
+      <div onClick={() => handleShow()} onKeyDown={() => handleShow()} role="button" tabIndex={0}>{}</div>
       <Modal
         show={show}
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centeredv
+        backdrop="static"
         dialogClassName={styles.profile__modal}
         contentClassName={styles.profile__modal__content}
       >
@@ -341,9 +405,9 @@ const OnBoardProfileRegular = ({ open }: Props) => {
             <div className={styles.profile__modal__body__label}>
               Edit your welcome header
             </div>
-            <Form.Control type="text" name="ShopTitle" maxLength={50} onKeyUp={(e) => { handleChange(e); }} placeholder="Welcome header" className={styles.profile__modal__body__input} />
+            <Form.Control type="text" name="ShopTitle" defaultValue={values.ShopTitle} maxLength={50} onKeyUp={(e) => { handleChange(e); }} placeholder="Welcome header" className={styles.profile__modal__body__input} />
             <div className={styles.profile__modal__body__inputCount}>
-              {values.ShopTitle.length}
+              {values.ShopTitle?.length ?? 0}
               /50
             </div>
             <span>{Error?.ShopTitle}</span>
