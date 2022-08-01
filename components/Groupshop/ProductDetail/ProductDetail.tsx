@@ -30,6 +30,7 @@ import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
 import styles1 from 'styles/Campaign.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import { Member } from 'types/groupshop';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -69,7 +70,7 @@ const ProductDetail = ({
   const {
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
-    getDateDifference, activateURL,
+    getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -306,6 +307,24 @@ const ProductDetail = ({
 
                  ))
                }
+                  <div className="Groupshop_groupshop__pcard_tag_boughtby__2Z6wv">
+                    {isGroupshop && topFive(getBuyers(product?.id ?? '')?.map(
+                      (member: Member) => (
+                        <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">{formatName(member.orderDetail.customer)}</span>
+                      ),
+                    ))}
+                    {isGroupshop && getBuyers(product?.id ?? '').length > 0 && (
+                    <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">Bought By </span>
+                    )}
+                    {isInfluencerGS && topFive(getBuyers2(product?.id ?? '')?.map(
+                      (member: Member) => (
+                        <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">{formatName(member.customerInfo)}</span>
+                      ),
+                    ))}
+                    {isInfluencerGS && getBuyers2(product?.id ?? '').length > 0 && (
+                    <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">Bought By </span>
+                    )}
+                  </div>
                 </Carousel>
                 {data?.productById?.images.length > 1
                 && (
