@@ -125,10 +125,10 @@ const ProductsSearch = ({
     }
   }, [selected, clientDProducts]);
 
-  useEffect(() => {
-    setSelected(setData?.selectProducts);
-    setSelectedProducts(setData?.productArray);
-  }, [setData]);
+  // useEffect(() => {
+  //   setSelected(setData?.selectProducts);
+  //   setSelectedProducts(setData?.productArray);
+  // }, [setData]);
 
   const searchPrd = (name: string) => {
     let newFilteredSearchArray;

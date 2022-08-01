@@ -680,7 +680,7 @@ const ProductDetail = ({
           </Row>
           )}
         </Modal.Body>
-        {isForMobile && !isExpired && (
+        {isForMobile && !isExpired && isGroupshop && (
         <Modal.Footer className="bg-transparent d-block">
           <Row className={styles.groupshop_timerRow}>
             <Col xs={1} md={1} />

@@ -241,7 +241,7 @@ const GroupShop: NextPage = () => {
       orderId: '',
     }];
     setpartnerMembers([...ownerMember, ...gsctx.memberDetails ?? []]);
-  }, [gsctx.memberDetails]);
+  }, [gsctx?.partnerDetails, gsctx.memberDetails]);
 
   const { text, cashBackText } = useTopBanner();
 

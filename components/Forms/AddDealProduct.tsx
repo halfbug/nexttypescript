@@ -65,11 +65,11 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       .max(10, 'Too Long !! only 10 characters allowed.'),
 
   });
-  // useEffect(() => {
-  //   if (gsctx?.partnerDetails?.fname && isInfluencer) {
-  //     values.username = gsctx?.partnerDetails?.fname;
-  //   }
-  // }, [gsctx?.partnerDetails?.fname]);
+  useEffect(() => {
+    if (gsctx?.partnerDetails?.fname && isInfluencer) {
+      values.username = gsctx?.partnerDetails?.fname;
+    }
+  }, [gsctx?.partnerDetails?.fname]);
 
   // const { showSuccess } = useAlert();
   const {
@@ -77,6 +77,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
       username: isInfluencer ? gsctx?.partnerDetails?.fname ?? '' : '',
+      // username: '',
       selectedProducts,
 
     },
@@ -100,7 +101,9 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           const newProduct:DealProduct = isGroupshop ? {
             productId, addedBy: username, customerIP: clientIP, type: 'deal',
           } : {
-            productId, addedBy: isInfluencer ? fname : username, customerIP: clientIP, type: 'deal', isInfluencer,
+            // eslint-disable-next-line max-len
+            // productId, addedBy: isInfluencer ? fname : username, customerIP: clientIP, type: 'deal', isInfluencer,
+            productId, addedBy: username, customerIP: clientIP, type: 'deal', isInfluencer,
           };
           return preProduct ?? newProduct;
         },
@@ -118,6 +121,23 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           },
         });
       } else {
+        if (
+          gsctx?.partnerDetails?.fname === null && gsctx?.partnerDetails?.shopifyCustomerId === null
+        ) {
+          await addDealProduct({
+            variables: {
+              updatePartnersInput: {
+                id,
+                partnerDetails: {
+                  fname: username.split(' ')[0],
+                  lname: username.split(' ')[1],
+                  email: gsctx?.partnerDetails?.email,
+                  shopifyCustomerId: null,
+                },
+              },
+            },
+          });
+        }
         await addDealProduct({
           variables: {
             updatePartnersInput: {
@@ -131,6 +151,25 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       setloadingSubmit(false);
 
       // update context
+      console.log('🚀 ~ file: AddDealProduct.tsx ~ line 155 ~ onSubmit: ~ isInfluencer', isInfluencer);
+      console.log(_.uniq([...gsctx?.store?.products?.filter(
+        ({ id: pid }:{ id:string}) => products?.includes(pid),
+      ) || []]), 'inf2');
+      let influencerProducts;
+      let partnerDetails;
+      if (isInfluencer) {
+        influencerProducts = _.uniq([...gsctx?.store?.products?.filter(
+          ({ id: pid }:{ id:string}) => products?.includes(pid),
+        ) || []]);
+      }
+      if (!isGroupshop && gsctx?.partnerDetails?.fname === null) {
+        partnerDetails = {
+          fname: username.split(' ')[0],
+          lname: username.split(' ')[1] ?? '',
+          email: gsctx?.partnerDetails?.email ?? '',
+          shopifyCustomerId: gsctx?.partnerDetails?.email ?? null,
+        };
+      }
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {
@@ -141,8 +180,12 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           ...gsctx?.popularProducts || []]),
           dealProducts,
           addedProducts: [...dealProducts || []],
+          partnerDetails: !isGroupshop && gsctx?.partnerDetails?.fname === null
+            ? partnerDetails : gsctx?.partnerDetails,
+          influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
         },
       });
+
       paginationScroll();
     },
   });
@@ -153,8 +196,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         <Form.Control
           type="text"
           name="username"
-          value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
-          // value={values.username}
+          // value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
+          value={values.username}
           onChange={handleChange}
           isInvalid={touched.username && !!errors.username}
           placeholder="Your Name ..."

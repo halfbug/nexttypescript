@@ -983,6 +983,7 @@ query PartnerGroupshop($code: String!) {
       fname
       lname
       email
+      shopifyCustomerId
     }
     partnerRewards {
       baseline

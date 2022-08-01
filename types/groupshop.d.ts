@@ -14,6 +14,7 @@ export type DealProduct = {
   isInfluencer?: boolean | undefined;
 }
 export type partnerDetails ={
+  shopifyCustomerId?: string | null;
   fname: string;
 
   lname?: string;
