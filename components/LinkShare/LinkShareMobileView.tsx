@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from 'styles/LinkShareMobileView.module.scss';
-import { Col, Modal, Row } from 'react-bootstrap';
+import {
+  Col, Modal, Row, Button,
+} from 'react-bootstrap';
 import Cross from 'assets/images/cross.svg';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { RootProps } from 'types/store';
@@ -51,9 +53,15 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
             <SocialButtonMobile network="Twitter" url={shareurl} />
             <SocialButtonMobile network="Facebook" url={shareurl} />
           </div>
-          <div className={styles.linkShare__modal__body__share_btn}>
+          <Button
+            className={styles.linkShare__modal__body__share_btn}
+            onClick={() => navigator?.share({
+              title: 'Groupshop',
+              text: `Send special discounts to your friends by sharing this ${shareurl}`,
+            })}
+          >
             Share Groupshop
-          </div>
+          </Button>
           <div className={styles.linkShare__modal__body__description}>
             Share the link to give friends access to exclusive discounts and earn cashback
             everytime they shop with you.
