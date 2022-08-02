@@ -259,7 +259,7 @@ const GroupShop: NextPage = () => {
     googleButtonCode('addproduct-button');
     if (gsctx?.totalProducts < 101) {
       const cprod = checkCustomerDealProducts()?.length || 0;
-      if (cprod >= 5 && !isInfluencer) {
+      if (cprod >= 5) {
         showError(
           'Only 5 products can be added to this Group Shop per person.',
         );

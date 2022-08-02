@@ -39,7 +39,7 @@ const Cart = ({
     dispatch,
   } = useAppContext();
   const {
-    currencySymbol, dPrice, discount, getOwnerName,
+    currencySymbol, dPrice, discount, getOwnerName, isInfluencerGS,
   } = useDeal();
 
   const {
@@ -75,7 +75,8 @@ const Cart = ({
   const { campaign } = gsctx;
   useEffect(() => {
     const rew = { ...campaign?.salesTarget?.rewards };
-    setupToPercent(rew[2]?.discount);
+    const perc = isInfluencerGS ? gsctx?.partnerRewards?.baseline.toString() : rew[2]?.discount;
+    setupToPercent(perc);
   }, [gsctx.campaign]);
 
   const { push } = useRouter();
@@ -354,7 +355,7 @@ const Cart = ({
                     {' '}
                     { upToPercent }
                     {' '}
-                    cashback!
+                    {isInfluencerGS ? 'discount!' : 'cashback!'}
                   </div>
                 </Col>
               </Row>

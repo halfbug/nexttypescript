@@ -208,7 +208,7 @@ const ProductsSearch = ({
         // backdrop="static"
         fullscreen="lg-down"
       >
-        {!isModalForMobile && (
+        {!isModalForMobile && !isInfluencer && (
           <Modal.Header className={styles.groupshop_modal__closebtnlg}>
             <Row onClick={(e) => {
               handleClose(e);
@@ -224,7 +224,13 @@ const ProductsSearch = ({
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             {isInfluencer
-              ? <h3>Curate your Groupshop by adding your favorite products from Le Sablé</h3>
+              ? (
+                <h3>
+                  Curate your Groupshop by adding your favorite products from
+                  {' '}
+                  {gsctx?.store?.brandName}
+                </h3>
+              )
               : <h3>Search for products</h3>}
 
             {allowSelectAll ? <></>
@@ -333,7 +339,7 @@ const ProductsSearch = ({
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={!allowSelectAll && !isInfluencer ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              : <Button variant="outline-primary" disabled={!allowSelectAll ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
                           </>
                         )}
                       >

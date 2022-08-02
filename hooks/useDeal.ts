@@ -299,7 +299,7 @@ export default function useDeal() {
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const baseLine = gsctx?.partnerRewards?.baseline;
   const getOwnerName = useCallback(() => (
-    isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname}`
+    isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`
       : `${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName}`), [gsctx]);
 
   return {
