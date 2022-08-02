@@ -166,7 +166,7 @@ export interface IGroupshop {
   // expectedCashBack?: number;
   obSettings?: ObSettings;
 
-  partnerDetails?: partnerDetails;
+  partnerDetails?: partnerDetails | null;
 
   visitors?: number;
 

@@ -165,7 +165,7 @@ const ProductsSearch = ({
   const debouncedSearch = useDebounce(
     (nextValue: string) => searchPrd(nextValue), 1000, otherProducts || [],
   );
-  const { AlertComponent, showSuccess } = useAlert();
+  const { AlertComponent, showSuccess, showError } = useAlert();
   const handleSubmit = (e: any) => { e.preventDefault(); };
   const closeModal = (e: any) => {
     setShow(false);
@@ -333,7 +333,7 @@ const ProductsSearch = ({
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={!allowSelectAll ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              : <Button variant="outline-primary" disabled={!allowSelectAll && !isInfluencer ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
                           </>
                         )}
                       >
@@ -389,7 +389,7 @@ const ProductsSearch = ({
                     if (selected && selected?.length > 0) {
                       showSuccess('Product(s) has been added successfully.');
                     } else {
-                      showSuccess('No product(s) has been selected.');
+                      showError('No product(s) has been selected.');
                     }
                   }}
                 />

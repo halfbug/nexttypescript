@@ -36,7 +36,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     isGroupshop ? ADD_DEAL_PRODUCT : ADD_DEAL_PRODUCT_PARTNER,
   );
 
-  const { id, dealProducts: dealProductsCtx, partnerDetails: { fname } = { fname: '' } } = gsctx;
+  const { id, dealProducts: dealProductsCtx } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
   console.log('🚀 ~ file: AddDealProduct.tsx ~ line 40 ~ AddDealProduct ~ gsctx', gsctx);
 
@@ -89,7 +89,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       console.log('im in submit');
       setloadingSubmit(true);
       googleButtonCode('addproduct-complete');
-      if (validateForm && !isInfluencer) validateForm(valz);
+      if (validateForm) validateForm(valz);
       const { username, selectedProducts: products } = valz;
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line87 ~ onSubmit: ~ products', products);
 
@@ -121,28 +121,35 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           },
         });
       } else {
-        if (
-          gsctx?.partnerDetails?.fname === null && gsctx?.partnerDetails?.shopifyCustomerId === null
-        ) {
-          await addDealProduct({
-            variables: {
-              updatePartnersInput: {
-                id,
-                partnerDetails: {
-                  fname: username.split(' ')[0],
-                  lname: username.split(' ')[1],
-                  email: gsctx?.partnerDetails?.email,
-                  shopifyCustomerId: null,
-                },
-              },
-            },
-          });
-        }
+        // if (
+        // gsctx?.partnerDetails?.fname === null &&
+        // gsctx?.partnerDetails?.shopifyCustomerId === null
+        // ) {
+        //   await addDealProduct({
+        //     variables: {
+        //       updatePartnersInput: {
+        //         id,
+        //         partnerDetails: {
+        //           fname: username.split(' ')[0],
+        //           lname: username.split(' ')[1],
+        //           email: gsctx?.partnerDetails?.email,
+        //           shopifyCustomerId: null,
+        //         },
+        //       },
+        //     },
+        //   });
+        // }
         await addDealProduct({
           variables: {
             updatePartnersInput: {
               id,
               dealProducts,
+              partnerDetails: {
+                fname: username.split(' ')[0],
+                lname: username.split(' ')[1],
+                email: gsctx?.partnerDetails?.email,
+                shopifyCustomerId: null,
+              },
             },
           },
         });
@@ -162,12 +169,12 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           ({ id: pid }:{ id:string}) => products?.includes(pid),
         ) || []]);
       }
-      if (!isGroupshop && gsctx?.partnerDetails?.fname === null) {
+      if (!isGroupshop) {
         partnerDetails = {
           fname: username.split(' ')[0],
           lname: username.split(' ')[1] ?? '',
           email: gsctx?.partnerDetails?.email ?? '',
-          shopifyCustomerId: gsctx?.partnerDetails?.email ?? null,
+          shopifyCustomerId: gsctx?.partnerDetails?.shopifyCustomerId ?? null,
         };
       }
       dispatch({
@@ -180,8 +187,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           ...gsctx?.popularProducts || []]),
           dealProducts,
           addedProducts: [...dealProducts || []],
-          partnerDetails: !isGroupshop && gsctx?.partnerDetails?.fname === null
-            ? partnerDetails : gsctx?.partnerDetails,
+          partnerDetails: !isGroupshop ? partnerDetails : null,
           influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
         },
       });

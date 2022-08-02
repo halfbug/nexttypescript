@@ -28,6 +28,10 @@ export default function useDeal() {
   const isGSnRef = isGroupshop && dealProducts && dealProducts?.length > 1;
   // const ownerPrds = isInfluencerGS ? [] : gmembers[0]?.products[0] ?? [];
 
+  const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
+  const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
+  const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
+
   const clientDealProducts = useCallback(
     ():string[] | undefined => {
       const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
@@ -39,6 +43,14 @@ export default function useDeal() {
         ({ productId }:DealProduct) => productId,
       ) ?? []]);
     }, [clientIP, gsctx.dealProducts],
+  );
+  // check influencer customer
+  const checkCustomerDealProducts = useCallback(
+    ():string[] | undefined => ([...addedByRefferal?.filter(
+      ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
+    )?.map(
+      ({ productId }:DealProduct) => productId,
+    ) ?? []]), [clientIP, gsctx.dealProducts],
   );
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
@@ -285,9 +297,6 @@ export default function useDeal() {
 
   const banner = gsctx?.campaign?.settings?.s3imageUrl ?? '/images/bg.jpg';
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
-  const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
-  const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
-  const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
   const baseLine = gsctx?.partnerRewards?.baseline;
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname}`
@@ -330,5 +339,6 @@ export default function useDeal() {
     addedByRefferal,
     getBuyers2,
     getOwnerName,
+    checkCustomerDealProducts,
   };
 }

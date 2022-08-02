@@ -147,6 +147,7 @@ const GroupShop: NextPage = () => {
     isInfluencerGS,
     addedProductsByInfluencer,
     addedByRefferal,
+    checkCustomerDealProducts,
   } = useDeal();
   console.log('🚀 ~ file: [...code] ~ line 142 ~ addedProductsByInfluencer', _.uniq(addedProductsByInfluencer));
   console.log('partnerdeal');
@@ -257,7 +258,7 @@ const GroupShop: NextPage = () => {
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
     if (gsctx?.totalProducts < 101) {
-      const cprod = clientDealProducts()?.length || 0;
+      const cprod = checkCustomerDealProducts()?.length || 0;
       if (cprod >= 5 && !isInfluencer) {
         showError(
           'Only 5 products can be added to this Group Shop per person.',
