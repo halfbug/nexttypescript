@@ -325,6 +325,7 @@ const GroupShop: NextPage = () => {
                 mes="How does this work?"
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
+                name={`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`}
               />
             )}
           />
@@ -520,7 +521,12 @@ const GroupShop: NextPage = () => {
               </p>
             </Row>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
-              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
+              <InfoBox
+                mes="How it works"
+                brandname={brandName}
+                shareUrl={gsShortURL ?? gsURL}
+                name={`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`}
+              />
             </Row>
           </Container>
         </Hero>
@@ -589,7 +595,8 @@ const GroupShop: NextPage = () => {
             personal favorites and recommendations.
           </p>
         </ProductGrid>
-        {addedByRefferal && addedByRefferal.length > 0 ? (
+        {(addedByRefferal && addedByRefferal.length > 0)
+        || (gsctx?.memberDetails && gsctx?.memberDetails?.length > 0) ? (
           <ProductGrid
             xs={6}
             sm={6}
@@ -609,29 +616,29 @@ const GroupShop: NextPage = () => {
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
-        ) : (
-          <ProductGrid
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
+          ) : (
+            <ProductGrid
+              xs={6}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={3}
             // products={bestSeller ?? []}
-            products={
+              products={
               addedProductsByInfluencer
               && (addedProductsByInfluencer.length > 3
                 ? topPicks?.slice(0, 3)
                 : topPicks?.slice(0, 4))
             }
-            maxrows={1}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            id="toppicks"
-          >
-            <h2>Top Picks</h2>
-          </ProductGrid>
+              maxrows={1}
+              addProducts={handleAddProduct}
+              handleDetail={(prd) => setsProduct(prd)}
+              id="toppicks"
+            >
+              <h2>Top Picks</h2>
+            </ProductGrid>
 
-        ) }
+          ) }
 
         <ProductGrid
           xs={6}

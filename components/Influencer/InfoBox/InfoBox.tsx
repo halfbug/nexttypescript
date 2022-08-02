@@ -9,21 +9,21 @@ import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
 import Cart from 'assets/images/cart.svg';
-import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
-import { Send } from 'react-bootstrap-icons';
-import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 
 interface mesProps {
   mes: string;
   brandname: any;
   shareUrl?: string;
+  name?: string;
 }
-const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
+const InfoBox = ({
+  mes, brandname, shareUrl, name,
+}: mesProps) => {
   const [show, setShow] = useState(false);
 
   const isModalForMobile = useMediaQuery({
@@ -74,7 +74,10 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
           <div className={styles.groupshop_infoBox}>
             <p>
               Welcome to Groupshop ‒ where you and your
-              friends shop InfluencerName’s favorite products
+              friends shop
+              {' '}
+              {name}
+              ’s favorite products
               and get
               {' '}
               <strong>exclusive discounts.</strong>
@@ -136,6 +139,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
 
 InfoBox.defaultProps = {
   shareUrl: '',
+  name: 'Influencer',
 };
 
 export default InfoBox;

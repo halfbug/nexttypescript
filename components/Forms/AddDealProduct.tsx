@@ -54,6 +54,7 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
   // get client IP
   const [clientIP] = useIP();
   const { isInfluencer } = useDeal();
+  console.log('🚀 ~ file: ~ isInfluencer', isInfluencer);
 
   const { googleButtonCode } = useGtm();
 
@@ -139,17 +140,18 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
         //     },
         //   });
         // }
+        const obj = isInfluencer ? {
+          fname: username.split(' ')[0],
+          lname: username.split(' ')[1],
+          email: gsctx?.partnerDetails?.email,
+          shopifyCustomerId: null,
+        } : gsctx?.partnerDetails ?? null;
         await addDealProduct({
           variables: {
             updatePartnersInput: {
               id,
               dealProducts,
-              partnerDetails: {
-                fname: username.split(' ')[0],
-                lname: username.split(' ')[1],
-                email: gsctx?.partnerDetails?.email,
-                shopifyCustomerId: null,
-              },
+              partnerDetails: obj,
             },
           },
         });
@@ -187,7 +189,8 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
           ...gsctx?.popularProducts || []]),
           dealProducts,
           addedProducts: [...dealProducts || []],
-          partnerDetails: !isGroupshop ? partnerDetails : null,
+          partnerDetails: !isGroupshop && isInfluencer ? partnerDetails
+            : gsctx?.partnerDetails ?? null,
           influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
         },
       });

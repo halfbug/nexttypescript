@@ -24,6 +24,10 @@ export default function useDeal() {
     members: gmembers,
   } = gsctx;
   const isInfluencer = !!(!isGroupshop && dealProducts && dealProducts?.length < 1);
+  // const isInfluencer = useCallback(
+  //   () => !!(!isGroupshop && dealProducts && dealProducts?.length < 1),
+  //   [gsctx],
+  // );
   const isInfluencerGS = !isGroupshop;
   const isGSnRef = isGroupshop && dealProducts && dealProducts?.length > 1;
   // const ownerPrds = isInfluencerGS ? [] : gmembers[0]?.products[0] ?? [];
