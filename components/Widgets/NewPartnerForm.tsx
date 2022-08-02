@@ -16,9 +16,10 @@ import useAlert from 'hooks/useAlert';
 
 interface ActiveAffiliateProps {
   handleAfterSubmit: any;
+  partnerList: any[];
 }
 
-export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliateProps) {
+export default function NewPartnerForm({ handleAfterSubmit, partnerList } : ActiveAffiliateProps) {
   const [editMin, setEditMin] = React.useState(false);
   const [editMax, setEditMax] = React.useState(false);
   const [exitPartnerRecord, setExitPartnerRecord] = React.useState(false);
@@ -41,29 +42,17 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
     setFieldValue(field, value);
   };
 
-  const [exitPartner, { data }] = useLazyQuery(EXIT_PARTNER_GROUPSHOP, {
-    onError() {
-      setExitPartnerRecord(false);
-      showError('Something went wrong!');
-    },
-    onCompleted() {
-      setExitPartnerRecord(data.existPartnerGroupshop.isActive);
-      if (data.existPartnerGroupshop.isActive === true) {
-        setExitPartnerRecord(false);
+  const duplicateEmailCheck = (values: string | undefined) => {
+    if (values !== '' && values !== undefined) {
+      const arr:any = partnerList.filter((item:any) => item.partnerDetails.email === values);
+      if (arr[0]?.id !== '' && arr[0]?.id !== undefined) {
+        setExitPartnerRecord(true);
         return false;
       }
-      setExitPartnerRecord(true);
-      return true;
-    },
-
-  });
-
-  const duplicateEmailCheck = (values: string | undefined) => {
-    exitPartner({ variables: { email: values, storeId } });
-    if (exitPartnerRecord === true) {
+      setExitPartnerRecord(false);
       return true;
     }
-    return false;
+    return true;
   };
 
   const validationSchema = yup.object({
@@ -110,7 +99,7 @@ export default function NewPartnerForm({ handleAfterSubmit } : ActiveAffiliatePr
       const {
         email, minDiscount, maxDiscount, partnerCommission,
       } = valz;
-      if (exitPartnerRecord === true) {
+      if (exitPartnerRecord === false) {
         const minDiscountVal = `${minDiscount}%`;
         const maxDiscountVal = `${maxDiscount}%`;
         const newAverage = ((minDiscount! + maxDiscount!) / 2);

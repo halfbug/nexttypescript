@@ -21,6 +21,11 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
   const { store, dispatch } = useContext(StoreContext);
   const [partnerId, setPartnerId] = useState('');
   const [partnerCommission, setPartnerCommission] = useState('');
+  const [showSidebar, setshowSidebar] = React.useState(true);
+  const [partnerRewards, setpartnerRewards] = useState({
+    minDiscount: '',
+    maxDiscount: '',
+  });
   const [partnerDetails, setPartnerDetails] = useState({
     email: '',
     fname: '',
@@ -62,6 +67,11 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
     setPartnerCommission(currentPartner[0].partnerCommission);
     setPartnerDetails(currentPartner[0].partnerDetails);
     setShowAffiliateDetail(true);
+    setshowSidebar(false);
+    setpartnerRewards({
+      minDiscount: currentPartner[0].partnerRewards.baseline,
+      maxDiscount: currentPartner[0].partnerRewards.maximum,
+    });
   };
 
   return (
@@ -152,7 +162,10 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
           handleAfterSubmit={handleAfterSubmit}
           partnerId={partnerId}
           partnerCommission={partnerCommission}
+          partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}
+          setshowSidebar={setshowSidebar}
+          showSidebar={showSidebar}
         />
         )}
       </Col>

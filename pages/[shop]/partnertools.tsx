@@ -34,7 +34,7 @@ const PartnerTools: NextPage = () => {
     <Page headingText="Partner Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Row className={styles.partner}>
         <h3>Partner Tools</h3>
-        <NewPartnerForm handleAfterSubmit={handleAfterSubmit} />
+        <NewPartnerForm handleAfterSubmit={handleAfterSubmit} partnerList={partnerList} />
       </Row>
       <Row className={styles.partner}>
         <ActiveAffiliate partnerList={partnerList} handleAfterSubmit={handleAfterSubmit} />

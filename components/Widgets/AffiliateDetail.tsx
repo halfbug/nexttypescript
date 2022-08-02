@@ -15,30 +15,46 @@ import OrderFromLogo from 'assets/images/order-from.svg';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { IPartnerTools } from 'types/store';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import InfoIcon from 'assets/images/info-icon.svg';
 
 interface AffiliateProps {
   handleAfterSubmit: any;
   partnerId: string;
   partnerCommission: string;
   partnerDetails: any;
+  partnerRewards: any;
+  showSidebar:boolean;
+  setshowSidebar:any;
 }
 
 export default function AffiliateDetail({
   handleAfterSubmit, partnerId, partnerCommission, partnerDetails,
+  partnerRewards, showSidebar, setshowSidebar,
 }
    : AffiliateProps) {
   const { store, dispatch } = useContext(StoreContext);
   const [show, setShow] = React.useState(false);
+  const [editMin, setEditMin] = React.useState(false);
+  const [editMax, setEditMax] = React.useState(false);
   const [
     editPartnerGroupshopStatus,
   ] = useMutation<IPartnerTools | null>(UPDATE_PARTNER_GROUPSHOP);
 
   const partnerGroupshopInitial = {
     email: '',
-    minDiscount: '',
-    maxDiscount: '',
+    minDiscount: partnerRewards.minDiscount,
+    maxDiscount: partnerRewards.maxDiscount,
     partnerCommission: partnerCommission || 20,
   };
+
+  useEffect(() => {
+    if (showSidebar === false) {
+      setShow(false);
+      setEditMin(false);
+      setEditMax(false);
+    }
+  });
 
   const validationSchema = yup.object({
     partnerCommission: yup
@@ -99,7 +115,7 @@ export default function AffiliateDetail({
               {values.partnerCommission}
             </span>
             {' '}
-            <Button className="fw-bolder" variant="link" onClick={() => setShow(!show)}>Edit</Button>
+            <Button className="fw-bolder" variant="link" onClick={() => { setShow(!show); setshowSidebar(true); }}>Edit</Button>
           </>
           )}
           <div className={show ? 'd-block' : 'd-none'}>
