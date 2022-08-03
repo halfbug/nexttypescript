@@ -2,14 +2,15 @@ import {
   useContext,
   useEffect, useState,
 } from 'react';
-import { GroupshopContext } from 'store/groupshop.context';
 import { IProduct } from 'types/store';
+import useAppContext from './useAppContext';
 
 const useSuggested = () => {
   const {
     gsctx,
     dispatch,
-  } = useContext(GroupshopContext);
+    isGroupshop,
+  } = useAppContext();
 
   const [suggestedProd, setsuggestedProd] = useState<IProduct[] | undefined>(undefined);
 

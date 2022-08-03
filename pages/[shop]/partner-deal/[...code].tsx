@@ -54,6 +54,7 @@ import useDeal from 'hooks/useDeal';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 import InfoBox from 'components/Influencer/InfoBox/InfoBox';
+import Link from 'next/link';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -174,7 +175,7 @@ const GroupShop: NextPage = () => {
     //   orderAmount: 0,
     // }],
     memberDetails = [],
-    store: { brandName } = { brandName: '' },
+    store: { brandName, shop: fullStoreName } = { brandName: '', shop: '' },
     store: { logoImage } = { logoImage: '' },
     dealProducts = [],
     popularProducts = [],
@@ -334,19 +335,25 @@ const GroupShop: NextPage = () => {
               <Col md={3} xs={3}>
                 <div className={styles.groupshop_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
-                    <Brand
-                      name={
+                    <Link href={`https://${fullStoreName}`}>
+                      <Brand
+                        name={
                         (brandName || '').split(' ').slice(0, 2).join(' ') || ''
                       }
-                      pending={pending}
-                    />
+                        pending={pending}
+                      />
+                    </Link>
                   ) : (
-                    <img
-                      src={storeLogo}
-                      alt={`${brandName}`}
-                      // alt="d"
-                      className="img-fluid"
-                    />
+                    <Link href={`https://${fullStoreName}`}>
+                      <a target="_blank" style={{ cursor: 'pointer' }}>
+                        <img
+                          src={storeLogo}
+                          alt={`${brandName}`}
+                          // alt="d"
+                          className="img-fluid"
+                        />
+                      </a>
+                    </Link>
                   )}
                 </div>
               </Col>

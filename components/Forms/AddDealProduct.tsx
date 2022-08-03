@@ -66,11 +66,11 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
       .max(10, 'Too Long !! only 10 characters allowed.'),
 
   });
-  useEffect(() => {
-    if (gsctx?.partnerDetails?.fname && isInfluencer) {
-      values.username = gsctx?.partnerDetails?.fname;
-    }
-  }, [gsctx?.partnerDetails?.fname]);
+  // useEffect(() => {
+  //   if (gsctx?.partnerDetails?.fname && isInfluencer) {
+  //     values.username = gsctx?.partnerDetails?.fname;
+  //   }
+  // }, [gsctx?.partnerDetails?.fname, isInfluencer]);
 
   // const { showSuccess } = useAlert();
   const {
