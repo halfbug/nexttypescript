@@ -55,6 +55,7 @@ import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 import InfoBox from 'components/Influencer/InfoBox/InfoBox';
 import Link from 'next/link';
+import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -248,7 +249,7 @@ const GroupShop: NextPage = () => {
   const { text, cashBackText } = useTopBanner();
 
   const {
-    showDetail, setshowDetail, sProduct, setsProduct,
+    showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
   } = useDetail(allProducts);
   // console.log('🚀[...code].tsx popularProduct', popularProducts);
   // console.log('🚀[...code].tsx popularShuffled', popularShuffled);
@@ -746,6 +747,13 @@ const GroupShop: NextPage = () => {
           handleClose={() => setshowps(false)}
           isCreateGS={!!isInfluencer}
         />
+
+        <LinkShareMobileView
+          show={showQrscan}
+          handleClose={() => setshowQrscan(false)}
+          shareurl={gsShortURL ?? gsURL}
+        />
+
         <ProductDetail
           show={showDetail}
           handleClose={() => setshowDetail(false)}
