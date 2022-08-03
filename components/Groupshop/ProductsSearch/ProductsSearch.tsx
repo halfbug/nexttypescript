@@ -31,11 +31,12 @@ interface ProductsSearchProps extends RootProps {
   handleClose(e: any): any;
   getData?(data: IProduct[], ids: string[]): any;
   setData?: any;
-  allowSelectAll?: boolean
+  allowSelectAll?: boolean,
+  isCreateGS: boolean;
 }
 
 const ProductsSearch = ({
-  show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData,
+  show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData, isCreateGS,
 }: ProductsSearchProps) => {
   // const {
   //   gsctx,
@@ -208,7 +209,7 @@ const ProductsSearch = ({
         // backdrop="static"
         fullscreen="lg-down"
       >
-        {!isModalForMobile && !isInfluencer && (
+        {!isModalForMobile && !isCreateGS && (
           <Modal.Header className={styles.groupshop_modal__closebtnlg}>
             <Row onClick={(e) => {
               handleClose(e);
@@ -223,38 +224,19 @@ const ProductsSearch = ({
         )}
         <Modal.Body className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
-            {isInfluencer
+            {isCreateGS
               ? (
-                <h3>
-                  Curate your Groupshop by adding your favorite products from
-                  {' '}
-                  {gsctx?.store?.brandName}
-                </h3>
-              )
-              : <h3>Search for products</h3>}
-
-            {allowSelectAll ? <></>
-              : !isInfluencer && (
-              <p className="text-muted d-flex justify-content-end align-items-center">
-                <span className={styles.groupshop_modal_search_body_top_txt}>
-                  Add up to 5 products
-                </span>
-                {[...new Array(5)].map((v, i) => (
-                  <li className={selectedCount > i
-                    ? styles.groupshop_modal_search_meter_fill
-                    : styles.groupshop_modal_search_meter}
-                  >
+                <div className="mx-auto">
+                  <h3>
+                    Create your Groupshop by adding your favorite products from
                     {' '}
-
-                  </li>
-                ))}
-              </p>
-              )}
-
-            {/* {allowSelectAll
-              ? <></>
-              : !isInfluencer
-                ? (
+                    {gsctx?.store?.brandName}
+                  </h3>
+                </div>
+              )
+              : (
+                <>
+                  <h3>Search for products</h3>
                   <p className="text-muted d-flex justify-content-end align-items-center">
                     <span className={styles.groupshop_modal_search_body_top_txt}>
                       Add up to 5 products
@@ -265,10 +247,13 @@ const ProductsSearch = ({
                         : styles.groupshop_modal_search_meter}
                       >
                         {' '}
+
                       </li>
                     ))}
                   </p>
-                ) : <></>} */}
+                </>
+              )}
+
           </div>
 
           <Form onSubmit={handleSubmit}>
@@ -297,7 +282,7 @@ const ProductsSearch = ({
                 {' '}
                 results found
               </p>
-              { !isInfluencer && (
+              { !isCreateGS && (
               <div className={styles.groupshop_modal_search_body_meter}>
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
@@ -379,35 +364,45 @@ const ProductsSearch = ({
         {(otherProducts && otherProducts.length > 0) && (
           <>
             <div ref={ref} className={styles.groupshop_addtocartmodal}>
-              {selected && (
-                <div className="pb-3">
-                  {selectedCount}
-                  {' '}
-                  product selected
-                  {' '}
-                </div>
-              )}
-              {isInfluencer ? (
-                <AddDealProduct
-                  selectedProducts={selected}
-                  handleClose={(e) => {
-                    closeModal(e);
-                    if (selected && selected?.length > 0) {
-                      showSuccess('Product(s) has been added successfully.');
-                    } else {
-                      showError('No product(s) has been selected.');
-                    }
-                  }}
-                />
-              ) : (
-                <Button
-                  onClick={handleClick}
-                  className="rounded-pill text-center text-uppercase px-5 fw-bold"
-                >
-                  ADD to groupshop
+              {isCreateGS
+                ? (
+                  <>
+                    <div className="pb-3">
+                      Enter your name to confirm and get started!
+                    </div>
+                    <AddDealProduct
+                      selectedProducts={selected}
+                      isCreateGS={isCreateGS}
+                      handleClose={(e) => {
+                        closeModal(e);
+                        if (selected && selected?.length > 0) {
+                          showSuccess('Product(s) has been added successfully.');
+                        } else {
+                          showError('No product(s) has been selected.');
+                        }
+                      }}
+                    />
+                  </>
+                )
+                : (
+                  <>
+                    {selected && (
+                    <div className="pb-3">
+                      {selectedCount}
+                      {' '}
+                      product selected
+                      {' '}
+                    </div>
+                    )}
+                    <Button
+                      onClick={handleClick}
+                      className="rounded-pill text-center text-uppercase px-5 fw-bold"
+                    >
+                      ADD to groupshop
 
-                </Button>
-              )}
+                    </Button>
+                  </>
+                )}
 
               <Overlay
                 show={show}
@@ -444,6 +439,7 @@ const ProductsSearch = ({
                             showSuccess('No product(s) has been selected.');
                           }
                         }}
+                        isCreateGS={false}
                       />
                     </>
                   </Popover.Body>

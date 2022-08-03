@@ -744,7 +744,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />
-        <ProductsSearch show={showps} handleClose={() => setshowps(false)} />
+        <ProductsSearch
+          show={showps}
+          handleClose={() => setshowps(false)}
+          isCreateGS={false}
+        />
         <LinkShareMobileView
           show={showQrscan}
           handleClose={() => setshowQrscan(false)}

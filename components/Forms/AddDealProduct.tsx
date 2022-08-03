@@ -23,14 +23,13 @@ interface IValues {
 type TAddDealProduct ={
     selectedProducts: string[] | undefined;
     handleClose(e: any): any;
+    isCreateGS: boolean;
 }
 
-export default function AddDealProduct({ selectedProducts, handleClose }:TAddDealProduct) {
-  // get grouphshop context
-  // const {
-  //   gsctx,
-  //   dispatch,
-  // } = React.useContext(GroupshopContext);
+export default function AddDealProduct({
+  selectedProducts, handleClose,
+  isCreateGS,
+}:TAddDealProduct) {
   const { gsctx, dispatch, isGroupshop } = useAppContext();
   const [addDealProduct] = useMutation<IGroupshop>(
     isGroupshop ? ADD_DEAL_PRODUCT : ADD_DEAL_PRODUCT_PARTNER,
@@ -38,7 +37,6 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
   const { id, dealProducts: dealProductsCtx } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
-  console.log('🚀 ~ file: AddDealProduct.tsx ~ line 40 ~ AddDealProduct ~ gsctx', gsctx);
 
   let app = 0;
   function paginationScroll() {
@@ -87,7 +85,6 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
-      console.log('im in submit');
       setloadingSubmit(true);
       googleButtonCode('addproduct-complete');
       if (validateForm) validateForm(valz);
@@ -161,9 +158,6 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
       // update context
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line 155 ~ onSubmit: ~ isInfluencer', isInfluencer);
-      console.log(_.uniq([...gsctx?.store?.products?.filter(
-        ({ id: pid }:{ id:string}) => products?.includes(pid),
-      ) || []]), 'inf2');
       let influencerProducts;
       let partnerDetails;
       if (isInfluencer) {
@@ -201,22 +195,43 @@ export default function AddDealProduct({ selectedProducts, handleClose }:TAddDea
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <Form.Group className="d-flex" controlId="username">
+      {/* {isCreateGS ? (
+        <Form.Group className="d-flex justify-content-center">
+          <Form.Control
+            type="text"
+            placeholder="Enter your first name"
+            className="me-3 w-25"
+          />
+          <Button
+            type="submit"
+            className="rounded-pill fs-5 text-capitalize">Create Groupshop</Button>
+        </Form.Group>
+      )
+        : ( */}
+      <Form.Group className={isCreateGS ? 'd-flex justify-content-center' : 'd-flex'} controlId="username">
         <Form.Control
           type="text"
           name="username"
-          // value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
+            // value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
           value={values.username}
           onChange={handleChange}
           isInvalid={touched.username && !!errors.username}
           placeholder="Your Name ..."
-          className={isInfluencer ? 'mx-5 w-75' : 'me-1'}
+          className={isCreateGS ? 'me-3 w-25' : 'me-1'}
         />
         <Form.Control.Feedback type="invalid">
           {errors.username}
         </Form.Control.Feedback>
-        {loadingSubmit ? <Spinner animation="border" /> : <Button type="submit">Add</Button>}
+        {loadingSubmit ? <Spinner animation="border" /> : (
+          <Button
+            type="submit"
+            className={isCreateGS ? 'rounded-pill fs-5 text-capitalize' : ''}
+          >
+            Add
+          </Button>
+        )}
       </Form.Group>
+      {/* )} */}
 
     </Form>
   );

@@ -18,4 +18,5 @@ export const Main = Template.bind({});
 Main.args = {
   show: true,
   handleClose: () => false,
+  isCreateGS: false,
 };

@@ -744,6 +744,7 @@ const GroupShop: NextPage = () => {
         <ProductsSearch
           show={(showps || dealProducts?.length < 1) && title !== ''}
           handleClose={() => setshowps(false)}
+          isCreateGS={!!isInfluencer}
         />
         <ProductDetail
           show={showDetail}

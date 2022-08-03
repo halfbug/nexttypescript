@@ -1072,6 +1072,7 @@ const OnBoardProfileRegular = ({ open }: Props) => {
         getData={getSelectedProduct}
         setData={{ productArray, selectProducts }}
         allowSelectAll
+        isCreateGS
       />
     </>
   );
