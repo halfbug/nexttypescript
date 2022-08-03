@@ -267,6 +267,30 @@ const ProductDetail = ({
                     </span>
                   )}
                 </Col>
+                <div className={styles.groupshop_left_content_wrapper_boughtby}>
+                  {isGroupshop && topFive(getBuyers(product?.id ?? '')?.map(
+                    (member: Member) => (
+                      <span className={styles.groupshop_left_content_wrapper_buyer}>
+                        {formatName(member.orderDetail.customer)}
+
+                      </span>
+                    ),
+                  ))}
+                  {isGroupshop && getBuyers(product?.id ?? '').length > 0 && (
+                    <span className={styles.groupshop_left_content_wrapper_buyer}>Bought By </span>
+                  )}
+                  {isInfluencerGS && topFive(getBuyers2(product?.id ?? '')?.map(
+                    (member: Member) => (
+                      <span className={styles.groupshop_left_content_wrapper_buyer}>
+                        {formatName(member.customerInfo)}
+
+                      </span>
+                    ),
+                  ))}
+                  {isInfluencerGS && getBuyers2(product?.id ?? '').length > 0 && (
+                    <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>
+                  )}
+                </div>
                 <Carousel
                   activeIndex={index}
                   onSelect={handleSelect}
@@ -307,24 +331,6 @@ const ProductDetail = ({
 
                  ))
                }
-                  <div className="Groupshop_groupshop__pcard_tag_boughtby__2Z6wv">
-                    {isGroupshop && topFive(getBuyers(product?.id ?? '')?.map(
-                      (member: Member) => (
-                        <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">{formatName(member.orderDetail.customer)}</span>
-                      ),
-                    ))}
-                    {isGroupshop && getBuyers(product?.id ?? '').length > 0 && (
-                    <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">Bought By </span>
-                    )}
-                    {isInfluencerGS && topFive(getBuyers2(product?.id ?? '')?.map(
-                      (member: Member) => (
-                        <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">{formatName(member.customerInfo)}</span>
-                      ),
-                    ))}
-                    {isInfluencerGS && getBuyers2(product?.id ?? '').length > 0 && (
-                    <span className="Groupshop_groupshop__pcard_tag_buyer__ucNSo">Bought By </span>
-                    )}
-                  </div>
                 </Carousel>
                 {data?.productById?.images.length > 1
                 && (
