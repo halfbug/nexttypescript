@@ -64,13 +64,13 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
       (item: any) => item.id === id,
     );
     setPartnerId(id);
-    setPartnerCommission(currentPartner[0].partnerCommission);
+    setPartnerCommission(currentPartner[0].partnerCommission.replace('%', ''));
     setPartnerDetails(currentPartner[0].partnerDetails);
     setShowAffiliateDetail(true);
     setshowSidebar(false);
     setpartnerRewards({
-      minDiscount: currentPartner[0].partnerRewards.baseline,
-      maxDiscount: currentPartner[0].partnerRewards.maximum,
+      minDiscount: currentPartner[0].partnerRewards.baseline.replace('%', ''),
+      maxDiscount: currentPartner[0].partnerRewards.maximum.replace('%', ''),
     });
   };
 
@@ -121,7 +121,9 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
               </Col>
               <Col xl={3} lg={3} md={3}>
                 <div className={styles.partner__data_row__name}>
-                  {part.partnerDetails.fname !== null ? `${part.partnerDetails.fname}  ${part.partnerDetails.lname}` : part.partnerDetails.email}
+                  {part.partnerDetails.fname !== null ? `${part.partnerDetails.fname} ` : ''}
+                  {part.partnerDetails.lname !== null ? part.partnerDetails.lname : ''}
+                  {part.partnerDetails.fname === null && part.partnerDetails.lname === null ? part.partnerDetails.email : '' }
 
                 </div>
               </Col>

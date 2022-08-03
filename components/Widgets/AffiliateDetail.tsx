@@ -76,14 +76,26 @@ export default function AffiliateDetail({
     validateOnBlur: false,
     enableReinitialize: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IPartnerTools>) => {
+      console.log(JSON.stringify(valz));
       if (validateForm) validateForm(valz);
       setShow(false);
+
+      const minDiscountVal = `${valz.minDiscount}%`;
+      const maxDiscountVal = `${valz.maxDiscount}%`;
+      const newAverage = ((valz.minDiscount! + valz.maxDiscount!) / 2);
+      const newAverageVal = `${newAverage}%`;
+
       const partnerGroupshopObj: null | any = await editPartnerGroupshopStatus({
         variables: {
           updatePartnersInput: {
             storeId: store.id,
             id: partnerId,
             partnerCommission: `${valz.partnerCommission}%`,
+            partnerRewards: {
+              baseline: minDiscountVal,
+              average: newAverageVal,
+              maximum: maxDiscountVal,
+            },
           },
         },
       });
@@ -95,121 +107,248 @@ export default function AffiliateDetail({
   return (
     <section className={styles.partner__box_last}>
       <div className="pb-3 pe-3">
-        <div className="d-flex align-items-center">
-          <span className={styles.partner__box_last__name}>
-            {partnerDetails.fname !== null ? `${partnerDetails.fname} ${partnerDetails.lname}` : partnerDetails.email}
-          </span>
-          {' '}
-          <span className={styles.partner__wom_score}>9</span>
-          {' '}
-          <span className={styles.partner__box_last__text}>WOM Score</span>
-        </div>
-        <div className="d-flex align-items-center mt-2">
-          {!show && (
-          <>
-            <span className={styles.partner__box_last__commission}>
-              Commission
-            </span>
-            {' '}
-            <span className={styles.partner__box_last__commission__score}>
-              {values.partnerCommission}
-            </span>
-            {' '}
-            <Button className="fw-bolder" variant="link" onClick={() => { setShow(!show); setshowSidebar(true); }}>Edit</Button>
-          </>
-          )}
-          <div className={show ? 'd-block' : 'd-none'}>
-            <Form noValidate onSubmit={handleSubmit}>
-              <Form.Control
-                type="text"
-                name="partnerCommission"
-                onChange={handleChange}
-                className={styles.dbrewards_input}
-                isInvalid={!!errors.partnerCommission}
-                placeholder="Enter %"
-              />
-              <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
-                {errors.partnerCommission}
-              </Form.Control.Feedback>
-              <Button
-                type="submit"
-                className="fw-bolder"
-                variant="link"
-                value={1}
-              >
-                Save
-              </Button>
-            </Form>
-          </div>
-        </div>
-        <hr className={styles.partner__sperator} />
-        <div className={styles.partner__womScoreContainer}>
-          <div className={styles.partner__overlay}>
-            <div className={styles.partner__overlayText}>Coming Soon</div>
-          </div>
-          <Row className="mt-4">
-            <Col lg={6} md={6} xs={6}>
-              <span className={styles.partner__detail_tag__tag1}>$428 generated</span>
-            </Col>
-            <Col lg={6} md={6} xs={6}>
-              <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}>
-                {/* <UniqueClicksLogo /> */}
-                👆 148 unique clicks
+        <Form noValidate onSubmit={handleSubmit}>
+          <Row>
+            <div className="d-flex align-items-center">
+              <span className={styles.partner__box_last__name}>
+                {partnerDetails.fname !== null ? `${partnerDetails.fname} ` : ''}
+                {partnerDetails.lname !== null ? partnerDetails.lname : ''}
+                {partnerDetails.fname === null && partnerDetails.lname === null ? partnerDetails.email : '' }
               </span>
-            </Col>
+              {' '}
+              <span className={styles.partner__wom_score}>9</span>
+              {' '}
+              <span className={styles.partner__box_last__text}>WOM Score</span>
+            </div>
           </Row>
-          <Row className="mt-2">
-            <Col lg={6} md={6} xs={6}>
-              <span className={styles.partner__detail_tag__tag3}>
-                {/* <NewPurchaseLogo /> */}
-                🛒  3 purchases
-              </span>
+          <Row>
+            <Col md={6}>
+              <div className={styles.partner__rewards_box__heading}>
+                Baseline
+                <ToolTip
+                  placement="bottom"
+                  className={styles.dashboard_campaign__pop}
+                  icon={<InfoIcon size={10} />}
+                  popContent={(
+                    <p>
+                      This is the first discount tier offered to friends joining the Groupshop.
+                    </p>
+              )}
+                />
+              </div>
+              <div>
+                {!editMin && (
+                <>
+                  <span className={styles.partner__rewards_box__percentage}>
+                    {values.minDiscount}
+                    %
+                  </span>
+                  <Button className="fw-bolder" variant="link" onClick={() => { setEditMin(!editMin); setshowSidebar(true); }}>Edit</Button>
+                  <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    {errors.minDiscount}
+                  </Form.Control.Feedback>
+                </>
+                )}
+                <div className={editMin ? 'd-block' : 'd-none'}>
+                  <Form.Control
+                    type="text"
+                    name="minDiscount"
+                    value={values.minDiscount}
+                    onChange={handleChange}
+                    className={styles.dbrewards_input}
+                    isInvalid={!!errors.minDiscount}
+                    placeholder="Enter %"
+                  />
+                  <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    {errors.minDiscount}
+                  </Form.Control.Feedback>
+                  <Button
+                    type="submit"
+                    className="fw-bolder"
+                    variant="link"
+                    onClick={() => {
+                      if (!(errors.minDiscount)) {
+                        setEditMin(false);
+                      }
+                    }}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </div>
             </Col>
-            <Col lg={6} md={6} xs={6}>
-              <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}>
-                {/* <NewCustomerLogo /> */}
-                ✨ 2 new customers
-              </span>
-            </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col lg={6} md={6} xs={6}>
-              <span className={styles.partner__detail_tag__tag5}>
-                {/* <CashBackLogo /> */}
-                💸 $112 cashback
-              </span>
-            </Col>
-            <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
-              <div className={styles.partner__btn}>
-                <span>View Groupshop</span>
-                {' '}
-                <ArrowRightLogo />
+            <Col md={6}>
+              <div className={styles.partner__rewards_box__heading}>
+                Maximum
+                <ToolTip
+                  placement="bottom"
+                  className={styles.dashboard_campaign__pop}
+                  icon={<InfoIcon size={10} />}
+                  popContent={(
+                    <p>
+                      This is the maximum rewards offered in discounts to friends joining
+                      the Groupshop. This tier is only accessed for order values significantly
+                      higher than your AOV (at least 2x).
+                    </p>
+              )}
+                />
+              </div>
+              <div>
+                {!editMax && (
+                <>
+                  <span className={styles.partner__rewards_box__percentage}>
+                    {values.maxDiscount}
+                    %
+                  </span>
+                  <Button className="fw-bolder" variant="link" onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}>Edit</Button>
+                </>
+                )}
+              </div>
+              <div className={editMax ? 'd-block' : 'd-none'}>
+                <Form.Control
+                  type="text"
+                  name="maxDiscount"
+                  value={values.maxDiscount}
+                  onChange={handleChange}
+                  className={styles.dbrewards_input}
+                  isInvalid={!!errors.maxDiscount}
+                  placeholder="Enter %"
+                />
+                <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                  {errors.maxDiscount}
+                </Form.Control.Feedback>
+
+                <Button
+                  type="submit"
+                  className="fw-bolder"
+                  variant="link"
+                  onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}
+                >
+                  Edit
+                </Button>
+
               </div>
             </Col>
           </Row>
+          <Row>
+            <div className="d-flex align-items-center mt-2">
+              {!show && (
+              <>
+                <span className={styles.partner__box_last__commission}>
+                  Commission
+                </span>
+                {' '}
+                <span className={styles.partner__box_last__commission__score}>
+                  {values.partnerCommission}
+                  %
+                </span>
+                {' '}
+                <Button className="fw-bolder" variant="link" onClick={() => { setShow(!show); setshowSidebar(true); }}>Edit</Button>
+              </>
+              )}
+              <div className={show ? 'd-block' : 'd-none'}>
+                <Form.Control
+                  type="text"
+                  name="partnerCommission"
+                  value={values.partnerCommission}
+                  onChange={handleChange}
+                  className={styles.dbrewards_input}
+                  isInvalid={!!errors.partnerCommission}
+                  placeholder="Enter %"
+                />
+                <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                  {errors.partnerCommission}
+                </Form.Control.Feedback>
+                <Button
+                  type="submit"
+                  className="fw-bolder"
+                  variant="link"
+                  value={1}
+                >
+                  Save
+                </Button>
 
-          <hr className={styles.partner__sperator} />
+              </div>
+            </div>
+          </Row>
+          <Row>
+            <hr className={styles.partner__sperator} />
+          </Row>
 
-          <Row className={styles.partner_order}>
-            {/* <OrderFromLogo /> */}
-            🔗 Orders from this Groupshop
-          </Row>
-          <Row className="mt-3">
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>03/10/21</Col>
-            <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-          </Row>
-          <Row className="mt-3">
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>03/10/21</Col>
-            <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-          </Row>
-          <Row className="mt-3">
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-            <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>03/10/21</Col>
-            <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-          </Row>
-        </div>
+          <div className={styles.partner__womScoreContainer}>
+            <div className={styles.partner__overlay}>
+              <div className={styles.partner__overlayText}>Coming Soon</div>
+            </div>
+            <Row className="mt-4">
+              <Col lg={6} md={6} xs={6}>
+                <span className={styles.partner__detail_tag__tag1}>$428 generated</span>
+              </Col>
+              <Col lg={6} md={6} xs={6}>
+                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}>
+                  {/* <UniqueClicksLogo /> */}
+                  👆 148 unique clicks
+                </span>
+              </Col>
+            </Row>
+            <Row className="mt-2">
+              <Col lg={6} md={6} xs={6}>
+                <span className={styles.partner__detail_tag__tag3}>
+                  {/* <NewPurchaseLogo /> */}
+                  🛒  3 purchases
+                </span>
+              </Col>
+              <Col lg={6} md={6} xs={6}>
+                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}>
+                  {/* <NewCustomerLogo /> */}
+                  ✨ 2 new customers
+                </span>
+              </Col>
+            </Row>
+            <Row className="mt-2">
+              <Col lg={6} md={6} xs={6}>
+                <span className={styles.partner__detail_tag__tag5}>
+                  {/* <CashBackLogo /> */}
+                  💸 $112 cashback
+                </span>
+              </Col>
+              <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
+                <div className={styles.partner__btn}>
+                  <span>View Groupshop</span>
+                  {' '}
+                  <ArrowRightLogo />
+                </div>
+              </Col>
+            </Row>
+
+            <hr className={styles.partner__sperator} />
+
+            <Row className={styles.partner_order}>
+              {/* <OrderFromLogo /> */}
+              🔗 Orders from this Groupshop
+            </Row>
+            <Row className="mt-3">
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
+                03/10/21
+              </Col>
+              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
+            </Row>
+            <Row className="mt-3">
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
+                03/10/21
+              </Col>
+              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
+            </Row>
+            <Row className="mt-3">
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
+              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
+                03/10/21
+              </Col>
+              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
+            </Row>
+          </div>
+        </Form>
       </div>
     </section>
   );

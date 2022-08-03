@@ -242,6 +242,11 @@ const UPDATE_PARTNER_GROUPSHOP = gql`
     id
     isActive
     partnerCommission
+    partnerRewards {
+      baseline
+      average
+      maximum
+    }
     }
   }
 `;

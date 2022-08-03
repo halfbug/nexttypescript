@@ -164,12 +164,13 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                       type="email"
                       name="email"
                       value={values.email}
-                      isInvalid={!!errors.email}
+                      // @ts-ignore: Unreachable code error
+                      isInvalid={errors.email && touched.email}
                       onChange={handleChange}
                       placeholder="Enter Email Address"
                     />
                     <Form.Control.Feedback type="invalid">
-                      {errors.email}
+                      {errors.email && touched.email && errors.email}
                     </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
