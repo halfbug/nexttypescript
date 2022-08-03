@@ -302,10 +302,19 @@ export default function useDeal() {
   const banner = gsctx?.campaign?.settings?.s3imageUrl ?? '/images/bg.jpg';
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const baseLine = gsctx?.partnerRewards?.baseline;
-  const getOwnerName = useCallback(() => (
-    isInfluencerGS ? `${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`
-      : `${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName}`), [gsctx]);
 
+  const formatNameCase = (name : string) => {
+    const full = name.toLowerCase().split(' ');
+    const fullname = full.map((item: string) => {
+      if (item !== '') return `${item[0].toUpperCase()}${item.slice(1)}`;
+      return '';
+    }).join(' ');
+    return fullname;
+  };
+
+  const getOwnerName = useCallback(() => (
+    isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)
+      : `${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName}`), [gsctx]);
   return {
     currencySymbol,
     discount,
@@ -344,5 +353,6 @@ export default function useDeal() {
     getBuyers2,
     getOwnerName,
     checkCustomerDealProducts,
+    formatNameCase,
   };
 }

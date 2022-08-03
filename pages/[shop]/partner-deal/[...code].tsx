@@ -150,6 +150,7 @@ const GroupShop: NextPage = () => {
     addedProductsByInfluencer,
     addedByRefferal,
     checkCustomerDealProducts,
+    formatNameCase,
   } = useDeal();
   console.log('🚀 ~ file: [...code] ~ line 142 ~ addedProductsByInfluencer', _.uniq(addedProductsByInfluencer));
   console.log('partnerdeal');
@@ -182,6 +183,7 @@ const GroupShop: NextPage = () => {
     popularProducts = [],
     discountCode: { title },
   } = gsctx;
+  console.log('🚀 ~ file: [...code].tsx ~ line 183 ~ popularProducts', popularProducts);
   const { topPicks } = useTopPicks();
   const { popularShuffled } = usePopularInfluencer(popularProducts);
   const {
@@ -210,19 +212,25 @@ const GroupShop: NextPage = () => {
       // eslint-disable-next-line max-len
       // const onlyBoughtnRefProducts = filterArray(popularProducts ?? [], addedProductsByInfluencer ?? [], 'id', 'id');
       if (popularProducts.length < 4) {
-        // removing popular prd from topPicks so no duplication
+        // removing popular prd  and curated prd from topPicks so no duplication
         const uniqueBestSeller = filterArray(
           bestSeller as any[],
           popularProducts as any[],
           'id',
           'id',
+        );
+        const uniqueBestSeller2 = filterArray(
+          uniqueBestSeller as any[],
+          gsctx?.influencerProducts as any[],
+          'id',
+          'id',
         ).slice(0, 4 - popularProducts.length);
         const newPopularArr = Array.from(
-          new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
+          new Set([...(popularProducts ?? []), ...(uniqueBestSeller2 ?? [])]),
         );
-        setNewPopularPrd([...newPopularArr]);
+        setNewPopularPrd(_.uniq([...newPopularArr]));
       } else {
-        setNewPopularPrd([...(popularProducts ?? [])]);
+        setNewPopularPrd(_.uniq([...(popularProducts ?? [])]));
       }
     }
   }, [popularProducts, bestSeller]);
@@ -327,7 +335,7 @@ const GroupShop: NextPage = () => {
                 mes="How does this work?"
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
-                name={`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`}
+                name={formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.lname ?? ''}`)}
               />
             )}
           />
@@ -533,7 +541,7 @@ const GroupShop: NextPage = () => {
                 mes="How it works"
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
-                name={`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`}
+                name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
               />
             </Row>
           </Container>

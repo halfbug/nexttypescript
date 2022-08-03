@@ -21,7 +21,7 @@ const useTopBanner = () => {
     // if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
     if (members) {
       if (isInfluencerGS) {
-        setText('all other orders');
+        setText('on all orders');
       } else if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');
         setCashBackText(`Plus unlock ${currencySymbol}${cashbackVal} cashback for`);
