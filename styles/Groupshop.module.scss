@@ -1685,6 +1685,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-weight: 600;
         margin-bottom: 11px;
       }
+      &_addDeal{
+        display: flex;
+        flex-direction: column;
+        padding-inline-end: 10px;
+      }
+      &_dealBtn{
+        font-size: $size-14px !important;
+        line-height: normal !important;
+        height: fit-content;
+      }
     }
   }
 

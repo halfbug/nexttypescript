@@ -14,6 +14,7 @@ import useIP from 'hooks/useIP';
 import useGtm from 'hooks/useGtm';
 import useAppContext from 'hooks/useAppContext';
 import useDeal from 'hooks/useDeal';
+import styles from 'styles/Groupshop.module.scss';
 
 interface IValues {
   username: string;
@@ -209,23 +210,25 @@ export default function AddDealProduct({
       )
         : ( */}
       <Form.Group className={isCreateGS ? 'd-flex justify-content-center' : 'd-flex'} controlId="username">
-        <Form.Control
-          type="text"
-          name="username"
+        <div className={styles.groupshop_search_popover_addDeal}>
+          <Form.Control
+            type="text"
+            name="username"
             // value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
-          value={values.username}
-          onChange={handleChange}
-          isInvalid={touched.username && !!errors.username}
-          placeholder="Your Name ..."
-          className={isCreateGS ? 'me-3 w-25' : 'me-1'}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.username}
-        </Form.Control.Feedback>
+            value={values.username}
+            onChange={handleChange}
+            isInvalid={touched.username && !!errors.username}
+            placeholder="Your Name ..."
+            className={isCreateGS ? 'me-3' : 'me-1'}
+          />
+          <Form.Control.Feedback type="invalid" className="text-start">
+            {errors.username}
+          </Form.Control.Feedback>
+        </div>
         {loadingSubmit ? <Spinner animation="border" /> : (
           <Button
             type="submit"
-            className={isCreateGS ? 'rounded-pill fs-5 text-capitalize' : ''}
+            className={isCreateGS ? [styles.groupshop_search_popover_dealBtn, 'rounded-pill fs-5 text-capitalize'].join(' ') : styles.groupshop_search_popover_dealBtn}
           >
             Add
           </Button>
