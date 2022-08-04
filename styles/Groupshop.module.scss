@@ -2799,7 +2799,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       position: absolute;
       top: 344px;
       left: 20px;
-      width: 98%;
+      width: fit-content;
       z-index: 10;
       display: flex;
       flex-direction: column-reverse;
