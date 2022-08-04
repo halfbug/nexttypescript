@@ -23,13 +23,14 @@ interface AffiliateProps {
   partnerId: string;
   partnerCommission: string;
   partnerDetails: any;
+  discountDetails: any;
   partnerRewards: any;
   showSidebar:boolean;
   setshowSidebar:any;
 }
 
 export default function AffiliateDetail({
-  handleAfterSubmit, partnerId, partnerCommission, partnerDetails,
+  handleAfterSubmit, partnerId, partnerCommission, partnerDetails, discountDetails,
   partnerRewards, showSidebar, setshowSidebar,
 }
    : AffiliateProps) {
@@ -82,7 +83,7 @@ export default function AffiliateDetail({
 
       const minDiscountVal = `${valz.minDiscount}%`;
       const maxDiscountVal = `${valz.maxDiscount}%`;
-      const newAverage = ((valz.minDiscount! + valz.maxDiscount!) / 2);
+      const newAverage = ((+valz.minDiscount! + +valz.maxDiscount!) / 2);
       const newAverageVal = `${newAverage}%`;
 
       const partnerGroupshopObj: null | any = await editPartnerGroupshopStatus({
@@ -91,6 +92,11 @@ export default function AffiliateDetail({
             storeId: store.id,
             id: partnerId,
             partnerCommission: `${valz.partnerCommission}%`,
+            discountCode: {
+              title: discountDetails.title,
+              percentage: valz.minDiscount,
+              priceRuleId: discountDetails.priceRuleId,
+            },
             partnerRewards: {
               baseline: minDiscountVal,
               average: newAverageVal,

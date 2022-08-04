@@ -26,6 +26,11 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
     minDiscount: '',
     maxDiscount: '',
   });
+  const [discountCode, setdiscountCode] = useState({
+    title: null,
+    percentage: null,
+    priceRuleId: null,
+  });
   const [partnerDetails, setPartnerDetails] = useState({
     email: '',
     fname: '',
@@ -72,6 +77,11 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
       minDiscount: currentPartner[0].partnerRewards.baseline.replace('%', ''),
       maxDiscount: currentPartner[0].partnerRewards.maximum.replace('%', ''),
     });
+    setdiscountCode({
+      title: currentPartner[0].discountCode.title,
+      percentage: currentPartner[0].discountCode.percentage,
+      priceRuleId: currentPartner[0].discountCode.priceRuleId,
+    });
   };
 
   return (
@@ -93,10 +103,10 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
             />
           </h4>
           <Row className={styles.partner__table_head}>
-            <Col xl={2} lg={2} md={2}>
+            {/* <Col xl={2} lg={2} md={2}>
               Active
-            </Col>
-            <Col xl={3} lg={3} md={3}>
+            </Col> */}
+            <Col xl={5} lg={5} md={5}>
               Name
             </Col>
             <Col xl={3} lg={3} md={3}>
@@ -108,7 +118,7 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
           </Row>
           {partnerList.map((part: any, index: number) => (
             <Row className={styles.partner__data_row}>
-              <Col xl={2} lg={2} md={2}>
+              {/* <Col xl={2} lg={2} md={2}>
                 <Form.Check
                   checked={part.isActive}
                   type="switch"
@@ -118,8 +128,8 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
                     handleToggle(part.id);
                   }}
                 />
-              </Col>
-              <Col xl={3} lg={3} md={3}>
+              </Col> */}
+              <Col xl={5} lg={5} md={5}>
                 <div className={styles.partner__data_row__name}>
                   {part.partnerDetails.fname !== null ? `${part.partnerDetails.fname} ` : ''}
                   {part.partnerDetails.lname !== null ? part.partnerDetails.lname : ''}
@@ -166,6 +176,7 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
           partnerCommission={partnerCommission}
           partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}
+          discountDetails={discountCode}
           setshowSidebar={setshowSidebar}
           showSidebar={showSidebar}
         />
