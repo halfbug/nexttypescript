@@ -54,6 +54,7 @@ const ProductsSearch = ({
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const [showMsg, setshowMsg] = useState('');
+  // const [searchValue, setsearchValue] = useState('');
   const ref = useRef(null);
 
   const { googleEventCode } = useGtm();
@@ -78,42 +79,34 @@ const ProductsSearch = ({
     popularProducts, addedProducts,
   } = gsctx;
 
+  const refreshProduct = () => products?.filter(
+    (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
+  ).filter(
+    (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+  );
+
   useEffect(() => {
     // console.log(products);
     if (products && (!otherProducts || otherProducts?.length < 1)) {
-      setotherProducts(products?.filter(
-        (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
-      ).filter(
-        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-      ));
+      const arr = refreshProduct();
+      setotherProducts(arr);
     }
   }, []);
   useEffect(() => {
     // console.log(products);
     if (!otherProducts) {
-      setotherProducts(products?.filter(
-        (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
-      ).filter(
-        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-      ));
+      const arr = refreshProduct();
+      setotherProducts(arr);
     }
   }, [otherProducts]);
   useEffect(() => {
+    const arr = refreshProduct();
     if (products && products.length > 0) {
-      setotherProducts(products?.filter(
-        (item) => !popularProducts?.some((item2) => item2.id === item.id),
-      ).filter(
-        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-      ));
+      setotherProducts(arr);
     }
-
     if (products && (!otherProducts || otherProducts?.length < 1)) {
       // console.log({ addproducts });
-      setotherProducts(products?.filter(
-        (item) => !popularProducts?.some((item2) => item2.id === item.id),
-      ).filter(
-        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-      ));
+      setotherProducts(arr);
     }
   }, [products, addedProducts]);
 
@@ -137,11 +130,6 @@ const ProductsSearch = ({
 
   const searchPrd = (name: string) => {
     let newFilteredSearchArray;
-    // setotherProducts(products?.filter(
-    //   (item) => !popularProducts?.some((item2) => item2.id === item.id),
-    // ).filter(
-    //   (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-    // ));
     if (otherProducts && name) {
       newFilteredSearchArray = otherProducts?.filter(
         (p: IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
@@ -149,11 +137,8 @@ const ProductsSearch = ({
       setotherProducts(newFilteredSearchArray);
     }
     if ((!otherProducts || otherProducts?.length < 1) && name) {
-      newFilteredSearchArray = products?.filter(
-        (item) => !popularProducts?.some((item2) => item2.id === item.id),
-      ).filter(
-        (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-      )?.filter(
+      const arr = refreshProduct();
+      newFilteredSearchArray = arr?.filter(
         (p: IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
 
@@ -214,8 +199,9 @@ const ProductsSearch = ({
         {!isModalForMobile && !isCreateGS && (
           <Modal.Header className={styles.groupshop_modal__closebtnlg}>
             <Row onClick={(e) => {
-              handleClose(e);
-              setShow(false);
+              // handleClose(e);
+              closeModal(e);
+              // setShow(false);
             }}
             >
               <div>
@@ -262,11 +248,18 @@ const ProductsSearch = ({
 
             <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
               <SearchIcon />
-              <Form.Control size="lg" className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')} type="text" placeholder="Start your search..." name="searchField" onChange={(e) => handleSearch(e)} />
+              <Form.Control
+                size="lg"
+                className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')}
+                type="text"
+                placeholder="Start your search..."
+                name="searchField"
+                onChange={(e) => handleSearch(e)}
+                // value={searchValue}
+              />
               {isModalForMobile && (
                 <Row onClick={(e) => {
-                  handleClose(e);
-                  setShow(false);
+                  closeModal(e);
                 }}
                 >
                   <div>
