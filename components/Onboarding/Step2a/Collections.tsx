@@ -43,6 +43,7 @@ export default function Collections({
                 as="li"
                 className={styles2.border_listgroup}
                 key={id}
+                onClick={() => handleCollectionButton(id)}
               >
                 <div className=" p-2 ms-2 me-auto">
                   <div className="fw-bold d-flex align-items-center">

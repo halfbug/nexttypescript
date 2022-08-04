@@ -257,6 +257,7 @@ const Screen1 = ({
             <ListGroup as="ol">
               <ListGroup.Item
                 as="li"
+                onClick={() => handleCollectionButton('all')}
                 className={['d-flex justify-content-between align-items-center ', styles.border_listgroup].join(' ')}
               >
                 <div className="ms-2 me-auto p-2">
