@@ -50,7 +50,8 @@ const Header = ({
             className={styles.groupshop__last}
           >
             {/* <SettingsIcon className={styles.groupshop__settingsicon} /> */}
-            {gsctx?.obSettings?.step === 3 && ownerCode ? <Button2 variant="primary" onClick={() => { editStoreProfile(); }}>Customize</Button2> : <></>}
+            {/* {gsctx?.obSettings?.step === 3 && ownerCode ? <Button2 variant="primary"
+             onClick={() => { editStoreProfile(); }}>Customize</Button2> : <></>} */}
             {RightComp}
             {stepModal()}
           </Col>

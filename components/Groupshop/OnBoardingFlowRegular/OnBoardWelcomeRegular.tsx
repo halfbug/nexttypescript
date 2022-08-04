@@ -79,7 +79,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
           <div className={styles.welcome__modal__body__mainiconarea}>
             {/* <LeEsableIcon /> */}
-            <img src={storeLogo} alt="brand logo" />
+            <img src={storeLogo} className={styles.welcome__modal__body__mainiconMobile} alt="brand logo" />
             <div className={styles.welcome__modal__body__mainiconarea__vertical_seprator} />
             <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
           </div>
@@ -87,7 +87,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             Welcome to Groupshop!
           </h2>
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
-            New to Groupshop?
+            Welcome to Groupshop!
           </h2>
           {/* <div className={styles.welcome__modal__body__description}>
             The
@@ -98,10 +98,15 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             <strong> earn 100% cashback and discounts. </strong>
           </div> */}
           <div className={styles.welcome__modal__body__descriptionMobile}>
-            Here are the two ways you can earn rewards with
-            {' '}
+            The
+            <strong> personalized store</strong>
+            where you and your friends
+            <strong>shop together </strong>
+            and
+            <strong>earn real cashback and discounts.</strong>
+            {/* {' '}
             {gsctx.store?.brandName}
-            :
+            : */}
           </div>
           <div className={styles.welcome__modal__body__icons}>🛒   📩   🤑</div>
           <div className={styles.welcome__modal__body__getStarted}>
@@ -154,26 +159,39 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
 
           <div className={styles.welcome__modal__body__boxMobile}>
             <p className={styles.welcome__modal__body__boxMobile__txt}>
-              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div>
+              {/* <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div> */}
               <div>
-                <strong>Shop </strong>
-                exclusive Insert Name Here discounts and get
-                <strong> 40% off </strong>
-                your  order.
+                Using Groupshop, you can
+                {' '}
+                <strong>earn up to 100% cashback </strong>
+                on your recent
+                {' '}
+                {gsctx.store?.brandName}
+                {' '}
+                order.
               </div>
             </p>
           </div>
           <div className={styles.welcome__modal__body__boxMobile}>
             <p className={styles.welcome__modal__body__boxMobile__txt}>
-              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div>
+              {/* <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div> */}
               <div>
-                <strong>Share </strong>
-                this Groupshop and
-                <strong> earn 100% cashback </strong>
-                on your last order when friends shop after you.
+                You and your friends can get
+                {' '}
+                <strong> up to 40% off</strong>
+                {' '}
+                on your favorite
+                {' '}
+                {gsctx.store?.brandName}
+                {' '}
+                products!
               </div>
             </p>
           </div>
+          {/* <div className={styles.welcome__modal__body__ractengal}></div> */}
+        </Modal.Body>
+        <hr className={styles.welcome__modal__body__horizontal_seprator} />
+        <Modal.Body className={styles.welcome__modal__body}>
           {/* <div className={styles.welcome__modal__body__readytxt}>
             Ready to see your store?
           </div> */}
@@ -183,6 +201,11 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             shop, the
             <strong> more rewards </strong>
             for everyone.
+            <br />
+            <br />
+            <div className={styles.welcome__modal__body__description2}>
+              Customize your Groupshop now and share it when you’re done!
+            </div>
           </div>
 
           <div className="d-flex justify-content-center my-4">

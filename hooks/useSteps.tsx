@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { default as Step0 } from 'components/Groupshop/OnBoardingFlowRegular/OnBoardWelcomeRegular';
 import { default as Step1 } from 'components/Groupshop/OnBoardingFlowRegular/OnBoardRewardRegular';
-import { default as Step2 } from 'components/Groupshop/OnBoardingFlowRegular/OnBoardProfileRegular';
+import { default as Step2 } from 'components/Groupshop/OnBoardingFlowRegular/OnBoardingAddProduct';
 import { default as Step3 } from 'components/Groupshop/OnBoardingFlowRegular/OnBoardTimeToShine';
 
 const useSteps = (stepCount: string | string[] | undefined) => {

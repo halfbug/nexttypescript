@@ -13,12 +13,13 @@
 
         &__body {
             padding: 0 128px;
-            margin-bottom: 52px;
+            margin-bottom: 0px;
             text-align: center;
 
             &__mainicon {
                 margin-top: 40px;
                 width: 50px;
+                margin-right: 250px;
             }
 
             &__mainiconarea {
@@ -34,6 +35,10 @@
             }
 
             &__boxMobile {
+                display: none;
+            }
+
+            &__horizontal_seprator {
                 display: none;
             }
 
@@ -91,6 +96,7 @@
                 text-align: center;
                 text-decoration-line: underline;
                 color: rgba(0, 0, 0, 0.5);
+                margin-bottom: 27px
             }
 
             &__btnskipMobie {
@@ -181,7 +187,7 @@
 
             &__body {
                 padding: 0 50px;
-                margin-bottom: 52px;
+                margin-bottom: 0px;
                 text-align: center;
 
                 &__mainiconarea {
@@ -192,6 +198,10 @@
                     line-height: 40px;
                     margin-top: 27px;
                     margin-bottom: 18px;
+                }
+
+                &__horizontal_seprator {
+                    display: none;
                 }
 
                 &__description {
@@ -236,8 +246,12 @@
 
             &__body {
                 padding: 0 25px;
-                margin-bottom: 52px;
+                margin-bottom: 0px;
                 text-align: center;
+
+                &__horizontal_seprator {
+                    display: none;
+                }
             }
         }
     }
@@ -246,6 +260,8 @@
         &__modal {
             min-width: 100%;
             margin: 0;
+            position: fixed;
+            bottom: -50px;
             margin-top: 60px !important;
 
             &__content {
@@ -266,11 +282,15 @@
 
             &__body {
                 padding: 0 17px;
-                margin-bottom: 30px;
+                margin-bottom: 0px;
                 text-align: center;
 
                 &__mainicon {
                     display: none;
+                }
+
+                &__mainiconMobile {
+                    width: 50px;
                 }
 
                 &__welcomeTxt {
@@ -278,7 +298,9 @@
                 }
 
                 &__icons {
-                    display: none;
+                    display: flex;
+                    column-gap: 5px;
+                    justify-content: center;
                 }
 
                 &__getStarted {
@@ -297,11 +319,11 @@
                     line-height: 18px;
                     text-align: center;
                     color: #333333;
-                    padding: 0 40px;
+                    padding: 0 31px;
                     margin-bottom: 23px;
                 }
 
-                &__description {
+                &__description2 {
                     display: none;
                 }
 
@@ -343,11 +365,15 @@
                     padding: 0 20px;
                 }
 
+                &__horizontal_seprator {
+                    display: block;
+                }
+
                 &__boxMobile {
                     border: 1px dashed #D4C4E3;
                     border-radius: 12px;
                     display: block;
-                    padding: 17px 28px;
+                    padding: 17px 26px;
                     margin-bottom: 15px;
 
                     &__txt {
@@ -357,7 +383,7 @@
                         font-size: 16px;
                         color: #000000;
                         display: flex;
-                        text-align: start;
+                        text-align: center;
 
                         &__icon {
                             margin-right: 16px;
@@ -368,6 +394,7 @@
                 &__btn {
                     display: none;
                 }
+
 
                 &__btnMobile {
                     width: 172px;
@@ -397,6 +424,7 @@
                     text-align: center;
                     text-decoration-line: underline;
                     color: #000000;
+                    margin-bottom: 27px
                 }
             }
         }
@@ -640,6 +668,7 @@
                 padding: 0 50px;
                 margin-bottom: 52px;
                 text-align: center;
+
             }
         }
     }
@@ -648,7 +677,9 @@
         &__modal {
             min-width: 100%;
             margin: 0;
-            margin-top: 50px;
+            // margin-top: 50px;
+            position: absolute;
+            bottom: 0;
 
             &__imgBox {
                 display: none;
@@ -701,9 +732,9 @@
                     line-height: 21px;
                 }
 
-                &__box1 {
-                    display: none;
-                }
+                // &__box1 {
+                //     display: none;
+                // }
 
                 &__iconsRowdollar {
                     text-align: center;
@@ -876,6 +907,11 @@
             text-align: center;
             margin-bottom: 35px !important;
 
+            &__mainicon {
+                margin-top: 40px;
+                width: 50px;
+            }
+
             h2 {
                 color: #333333;
                 font-family: 'DM Sans';
@@ -985,6 +1021,10 @@
                 }
             }
 
+            &__boxMobile {
+                display: none;
+            }
+
             &__btn {
                 margin-top: 12px;
                 padding: 14px 37px;
@@ -1058,6 +1098,10 @@
                     display: none;
                 }
 
+                &__mainiconMobile {
+                    width: 50px;
+                }
+
                 &__mainiconarea {
                     display: flex;
                     justify-content: center;
@@ -1101,6 +1145,7 @@
                     color: #000000;
                     display: block;
                     padding: 0 60px;
+                    margin-bottom: 24px;
                 }
 
                 &__sharingTxt {
@@ -1116,7 +1161,10 @@
                 }
 
                 &__seprator {
-                    display: none;
+                    margin-top: 29px;
+                    margin-bottom: 26px;
+                    border-bottom: 1px solid #202020;
+                    opacity: .1;
                 }
 
                 &__iconsRowdollar {
@@ -1148,6 +1196,15 @@
                     text-align: center;
                     display: flex;
                     justify-content: center;
+
+                    &__txt {
+                        font-family: 'Mulish';
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 23px;
+                        color: #000000;
+                        text-align: center;
+                    }
                 }
 
                 &__btn {

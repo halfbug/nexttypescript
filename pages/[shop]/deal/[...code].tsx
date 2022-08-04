@@ -54,7 +54,6 @@ import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBo
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
-import useSteps from 'hooks/useSteps';
 import usePopular from 'hooks/usePopularProduct';
 import useSaveCart from 'hooks/useSaveCart';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';

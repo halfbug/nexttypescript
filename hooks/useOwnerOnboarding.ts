@@ -51,7 +51,9 @@ const useOwnerOnboarding = () => {
     return totalDiscount;
   };
 
-  return { stepModal, countTotalDiscount };
+  const isOwner = !!ownerCode;
+
+  return { stepModal, countTotalDiscount, isOwner };
 };
 
 export default useOwnerOnboarding;

@@ -76,33 +76,33 @@ const OnBoardTimeToShine = ({ open }: Props) => {
         </div>
         <Modal.Body className={styles.timeToShine__modal__body}>
           {/* <LeEsableIcon className={styles.timeToShine__modal__body__mainicon} /> */}
-          <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
+          <img src={storeLogo} className={styles.timeToShine__modal__body__mainicon} alt="brand logo" />
 
           <div className={styles.timeToShine__modal__body__mainiconarea}>
             {/* <LeEsableIcon /> */}
-            <img src={storeLogo} alt="brand logo" />
+            <img src={storeLogo} className={styles.timeToShine__modal__body__mainiconMobile} alt="brand logo" />
 
             <div className={styles.timeToShine__modal__body__mainiconarea__vertical_seprator} />
             <GroupshopIcon className={styles.timeToShine__modal__body__mainiconarea__icon} />
           </div>
           <h2 className={styles.timeToShine__modal__body__welcomeTxt}>
-            Time to shine ✨
+            That’s it, you did it! 🎉
           </h2>
           <h2 className={styles.timeToShine__modal__body__welcomeTxtMobile}>
-            Ready to customize your Groupshop store?
+            Time to shine ✨
           </h2>
           <div className={styles.timeToShine__modal__body__description1}>
             You’ve claimed your Groupshop and you’re set to
             <strong> earn cash everytime someone shops. </strong>
           </div>
           <div className={styles.timeToShine__modal__body__description2}>
-            Curate your favorite products and
-            <strong> invite your friends </strong>
-            to give them access to exclusive discounts...or shop them yourself!
+            Customize your Groupshop and
+            <strong> invite your friends</strong>
+            to give them access to exclusive discounts.
           </div>
 
           <div className={styles.timeToShine__modal__body__sharingTxt}>
-            Shop, share, earn
+            Start sharing and earning
           </div>
 
           <div className={styles.timeToShine__modal__body__box1}>
@@ -116,7 +116,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
           <div className={styles.timeToShine__modal__body__box}>
             <div className={styles.timeToShine__modal__body__box__img}>👀</div>
             <div className={styles.timeToShine__modal__body__box__txt}>
-              Explore your unique Groupshop.
+              Explore your shop and limited-time offers from Insert Name Here.
             </div>
           </div>
 
@@ -136,19 +136,28 @@ const OnBoardTimeToShine = ({ open }: Props) => {
             </div>
           </div>
 
-          <div className={styles.timeToShine__modal__body__seprator} />
-          <div className={styles.timeToShine__modal__body__iconsRowdollar}>
-            😍 😍 😍
-          </div>
-
           <div className={styles.timeToShine__modal__body__boxMobile}>
-            <div className={styles.timeToShine__modal__body__box__txt}>
+            <div className={styles.timeToShine__modal__body__boxMobile__txt}>
               Every time someone shops, you’ll
-              <strong> receive cashback </strong>
+              <strong> receive cashback* </strong>
               and unlock additional rewards for everyone.
             </div>
           </div>
 
+          <div className={styles.timeToShine__modal__body__seprator} />
+
+          <div className={styles.timeToShine__modal__body__iconsRowdollar}>
+            😍 😍 😍
+          </div>
+
+          <h2 className={styles.timeToShine__modal__body__welcomeTxtMobile}>
+            Ready to customize your Groupshop store?
+          </h2>
+
+          <div className={styles.timeToShine__modal__body__description2}>
+            Curate your favorite products, add a welcome message
+            and link your socials by customizing your Groupshop.
+          </div>
           <div className="d-flex justify-content-center my-4">
             <Button
               className={styles.timeToShine__modal__body__btn}

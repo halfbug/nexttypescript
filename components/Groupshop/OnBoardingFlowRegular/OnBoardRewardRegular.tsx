@@ -48,8 +48,8 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
       .number()
       .when('isTextChecked', {
         is: true,
-        then: yup.number().required('Must enter number'),
-      }).typeError('you must specify a number'),
+        then: yup.number().required('Must enter number').typeError('Please must specify a number'),
+      }),
   });
 
   const {
@@ -77,7 +77,11 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
   }, [open]);
 
   const moveForward = async () => {
+    const regex = /^[0-9\b]+$/;
     if (values.isTextChecked && !values.PhoneNumber) {
+      return;
+    }
+    if (!regex.test(values.PhoneNumber)) {
       return;
     }
     const temp: any = {
@@ -134,14 +138,17 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             Getting rewards
           </h2>
           <div className={styles.reward__modal__body__description}>
-            We’ll
-            <strong> automatically refund </strong>
-            your cashback rewards to the payment
-            method you used on your last
-            {' '}
-            {gsctx.store?.brandName}
-            {' '}
-            order.
+            <strong>
+              We’ll
+              automatically refund
+              your cashback rewards to the payment
+              method you used on your last
+              {' '}
+              {gsctx.store?.brandName}
+              {' '}
+              order.
+
+            </strong>
           </div>
           <div className={styles.reward__modal__body__box1}>
             <p className={styles.reward__modal__body__description}>
@@ -203,7 +210,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                   name="PhoneNumber"
                   onChange={(e) => { handleChange(e); }}
                   isInvalid={!!errors.PhoneNumber
-                  || (values.isTextChecked && !values.PhoneNumber.length)}
+                    || (values.isTextChecked && !values.PhoneNumber.length)}
                   isValid={values.PhoneNumber.length === 10}
                   minLength={10}
                   maxLength={10}

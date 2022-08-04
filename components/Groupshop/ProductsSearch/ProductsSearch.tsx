@@ -24,6 +24,7 @@ import CrossGrey from 'assets/images/cross-grey.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import useAppContext from 'hooks/useAppContext';
+import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -43,6 +44,7 @@ const ProductsSearch = ({
   //   dispatch,
   // } = useContext(GroupshopContext);
   const { gsctx, dispatch } = useAppContext();
+  const { isOwner } = useOwnerOnboarding();
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
     clientDealProducts, currencySymbol, dPrice, isInfluencer,
@@ -324,7 +326,7 @@ const ProductsSearch = ({
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={!allowSelectAll ? selectedCount === 5 : false} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
                           </>
                         )}
                       >
@@ -364,7 +366,7 @@ const ProductsSearch = ({
         {(otherProducts && otherProducts.length > 0) && (
           <>
             <div ref={ref} className={styles.groupshop_addtocartmodal}>
-              {isCreateGS
+              {!isOwner && isCreateGS
                 ? (
                   <>
                     <div className="pb-3">
@@ -386,7 +388,7 @@ const ProductsSearch = ({
                 )
                 : (
                   <>
-                    {selected && (
+                    {!isOwner && selected && (
                     <div className="pb-3">
                       {selectedCount}
                       {' '}
