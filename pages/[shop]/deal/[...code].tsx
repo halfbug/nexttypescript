@@ -773,6 +773,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           shareurl={gsShortURL ?? gsURL}
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
+          brandName={brandName}
+          maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
         />
         {isModalForMobile && (
           <div>
@@ -780,6 +782,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               shareurl={gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
               val={value}
+              brandName={brandName}
+              maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
             />
           </div>
         )}

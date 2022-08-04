@@ -8,11 +8,12 @@ type NativeShareButtonProps = {
   shareurl: string;
   label: string;
   icon?: React.ReactNode;
+  text?: string;
 
 }& React.ComponentPropsWithoutRef<'button'>
 
 const NativeShareButton = ({
-  label, className, onClick, shareurl, icon,
+  label, className, onClick, shareurl, icon, text,
 }: NativeShareButtonProps) => (
   <Button
     id="mobileBtn"
@@ -20,7 +21,7 @@ const NativeShareButton = ({
     className={className}
     onClick={() => navigator?.share({
       title: 'Groupshop',
-      text: `${label} ${shareurl ?? ''}`,
+      text: `${text}`,
     })}
   >
     {icon}
@@ -31,6 +32,7 @@ const NativeShareButton = ({
 
 NativeShareButton.defaultProps = {
   icon: '',
+  text: '',
 };
 
 export default NativeShareButton;

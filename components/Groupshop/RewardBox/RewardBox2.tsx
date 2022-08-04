@@ -21,10 +21,13 @@ interface RewardBox2Props extends RootProps {
   shareurl: any;
   fullshareurl: any;
   // addToCart(e: any): any;
+  brandName?: string;
+  maxPercent?: string | undefined;
+
 }
 
 const RewardBox2 = ({
-  show = false, handleClose, discount, shareurl, fullshareurl,
+  show = false, handleClose, discount, shareurl, fullshareurl, brandName, maxPercent,
 }: RewardBox2Props) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -130,6 +133,7 @@ const RewardBox2 = ({
                       label="Share & Earn"
                       className={styles.groupshop_rewardBox2_modal__greenBtn}
                       shareurl={shareurl}
+                      text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
                     />
                   )
               }
@@ -144,6 +148,9 @@ const RewardBox2 = ({
 };
 RewardBox2.defaultProps = {
   discount: '20%',
+  brandName: '',
+  maxPercent: '',
+
 };
 
 export default RewardBox2;

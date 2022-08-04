@@ -7,9 +7,13 @@ import { Send } from 'react-bootstrap-icons';
 import useTopBanner from 'hooks/useTopBanner';
 
 const ShoppingBoxMobile = (
-  { shareurl, val }: { shareurl: string,
+  {
+    shareurl, val, brandName, maxPercent,
+  }: { shareurl: string,
     // onClick: any,
     val: undefined | string
+    brandName?: string;
+    maxPercent?: string | undefined;
   },
 ) => (
   <>
@@ -28,8 +32,14 @@ const ShoppingBoxMobile = (
         shareurl={shareurl}
         // onClick={onClick}
         icon={<Send size={18} />}
+        text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
       />
     </div>
   </>
 );
+ShoppingBoxMobile.defaultProps = {
+  brandName: '',
+  maxPercent: '',
+};
+
 export default ShoppingBoxMobile;
