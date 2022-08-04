@@ -108,18 +108,20 @@ export default function AffiliateDetail({
     <section className={styles.partner__box_last}>
       <div className="pb-3 pe-3">
         <Form noValidate onSubmit={handleSubmit}>
-          <Row>
-            <div className="d-flex align-items-center">
-              <span className={styles.partner__box_last__name}>
+          <Row className="align-items-center mb-2">
+            <Col md={5}>
+              <div className={styles.partner__box_last__name}>
                 {partnerDetails.fname !== null ? `${partnerDetails.fname} ` : ''}
                 {partnerDetails.lname !== null ? partnerDetails.lname : ''}
                 {partnerDetails.fname === null && partnerDetails.lname === null ? partnerDetails.email : '' }
-              </span>
-              {' '}
-              <span className={styles.partner__wom_score}>9</span>
-              {' '}
-              <span className={styles.partner__box_last__text}>WOM Score</span>
-            </div>
+              </div>
+            </Col>
+            <Col md={7}>
+              <div className="d-flex align-items-center">
+                <span className={styles.partner__wom_score}>9</span>
+                <span className={styles.partner__box_last__text}>WOM Score</span>
+              </div>
+            </Col>
           </Row>
           <Row>
             <Col md={6}>

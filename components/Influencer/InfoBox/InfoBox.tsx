@@ -9,6 +9,7 @@ import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
 import Cart from 'assets/images/cart.svg';
+import CartCone from 'assets/images/cone-small.svg';
 import Envp from 'assets/images/envelop.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
@@ -68,7 +69,9 @@ const InfoBox = ({
             <h2>
               Shopping together is always
               <br />
-              more fun 🎉.
+              more fun.
+              {' '}
+              <CartCone />
             </h2>
           </div>
           <div className={styles.groupshop_infoBox}>
