@@ -66,7 +66,7 @@ const useCode = () => {
     if (shop && discountCode) {
       setproductCode(undefined);
       setStatus(undefined);
-      router.push(`/${shop}/${pathname.split('/')[2]}/${discountCode}`);
+      router.push(`/${shop}/${pathname.split('/')[2]}/${discountCode}`, undefined, { scroll: false });
     }
   }, [shop, discountCode]);
 
