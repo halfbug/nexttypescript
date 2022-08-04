@@ -2718,8 +2718,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     z-index: 999;
 
     button {
-      border: 1px solid #ccb2f9;
-      font-size: 14px;
+      background: #DED5E7!important;
+      border: 1px solid #000000;
+      border-radius: 3px;
+      font-family: 'DM Sans';
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 16px;
       color: #212529;
 
       &:active,
@@ -2818,6 +2823,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
 
   }
+
 }
 .offcanvas-end {
   border: none !important;
