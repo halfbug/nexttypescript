@@ -9,15 +9,26 @@ import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import UniqueClicksLogo from 'assets/images/unique-clicks.svg';
 import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import useDimensions from 'hooks/useDimentions';
+import usePagination from 'hooks/usePagination';
+import Pagination from 'react-bootstrap/Pagination';
 import { IPartnerTools } from 'types/store';
 import AffiliateDetail from './AffiliateDetail';
 
 interface ActiveAffiliateProps {
   partnerList: any[];
   handleAfterSubmit: any;
+  xs?: any,
+  sm?: number,
+  md?: number,
+  lg?: number,
+  xl?: number,
+  xxl?: number,
 }
 
-export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: ActiveAffiliateProps) {
+const ActiveAffiliate = ({
+  partnerList, handleAfterSubmit, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
+}: ActiveAffiliateProps) => {
   const { store, dispatch } = useContext(StoreContext);
   const [partnerId, setPartnerId] = useState('');
   const [partnerCommission, setPartnerCommission] = useState('');
@@ -44,6 +55,20 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
   const [
     editPartnerGroupshopStatus,
   ] = useMutation<IPartnerTools | null>(UPDATE_PARTNER_GROUPSHOP);
+
+  const [ref, dimensions] = useDimensions();
+  const {
+    screens, breakPoint, pageSize,
+    totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
+  } = usePagination<IPartnerTools>({
+    dimensions,
+    maxrows: 10,
+    screens: {
+      xs, sm, md, lg, xl, xxl,
+    },
+    items: partnerList || [],
+    siblingCount: 4,
+  });
 
   const handleToggle = async (id: string) => {
     const currentPartner: any = partnerList?.filter(
@@ -87,7 +112,7 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
   return (
     <>
       <Col xxl={8} xl={8} lg={8} md={8} xs={12}>
-        <section className={styles.partner__box_2}>
+        <section ref={ref} className={styles.partner__box_2}>
           <h4 className="mt-0">
             Active Affiliates
           </h4>
@@ -116,7 +141,7 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
               Revenue
             </Col>
           </Row>
-          {partnerList.map((part: any, index: number) => (
+          {renderItems?.map((part: any, index: number) => (
             <Row className={styles.partner__data_row}>
               {/* <Col xl={2} lg={2} md={2}>
                 <Form.Check
@@ -149,10 +174,10 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
                 </div>
               </Col>
               {/* <Col xl={3} lg={3} md={3}>
-          <div className={styles.partner__data_row__tag2}>
-            <UniqueClicksLogo />
-          </div>
-        </Col> */}
+                <div className={styles.partner__data_row__tag2}>
+                  <UniqueClicksLogo />
+                </div>
+              </Col> */}
               <Col
                 xl={1}
                 lg={1}
@@ -166,6 +191,49 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
               </Col>
             </Row>
           ))}
+          <Row>
+            <Col>
+              {totalPages > 1 && (
+              <Pagination className={styles.groupshop_pagination}>
+                <Pagination.Prev
+                  className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
+                  onClick={() => {
+                    setCurrentPage(
+                      (currentPage > 1) ? currentPage - 1 : currentPage,
+                    );
+                  }}
+                />
+
+                {getPageNumbers().map((n, index) => (
+                  <Pagination.Item
+                    active={currentPage === n}
+                    onClick={() => {
+                      setCurrentPage(n);
+                    }}
+                    className={currentPage === n
+                      ? styles.groupshop_pagination_activeItem
+                      : styles.groupshop_pagination_item}
+                  >
+                    {n}
+                  </Pagination.Item>
+                ))}
+
+                <Pagination.Next
+                  className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
+                  onClick={() => {
+                    setCurrentPage(
+                      (currentPage >= 1 && currentPage < totalPages)
+                        ? currentPage + 1
+                        : currentPage,
+                    );
+                  }}
+                />
+
+              </Pagination>
+
+              )}
+            </Col>
+          </Row>
         </section>
       </Col>
       <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
@@ -184,4 +252,15 @@ export default function ActiveAffiliate({ partnerList, handleAfterSubmit }: Acti
       </Col>
     </>
   );
-}
+};
+
+ActiveAffiliate.defaultProps = {
+  xs: 12,
+  sm: 12,
+  md: 12,
+  lg: 12,
+  xl: 12,
+  xxl: 12,
+};
+
+export default ActiveAffiliate;

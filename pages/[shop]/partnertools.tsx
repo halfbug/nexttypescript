@@ -37,7 +37,15 @@ const PartnerTools: NextPage = () => {
         <NewPartnerForm handleAfterSubmit={handleAfterSubmit} partnerList={partnerList} />
       </Row>
       <Row className={styles.partner}>
-        <ActiveAffiliate partnerList={partnerList} handleAfterSubmit={handleAfterSubmit} />
+        <ActiveAffiliate
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          partnerList={partnerList}
+          handleAfterSubmit={handleAfterSubmit}
+        />
       </Row>
     </Page>
   );
