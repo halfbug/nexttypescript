@@ -33,7 +33,15 @@ const OnBoardingAddProduct = ({ open }: any) => {
       step: 3,
     };
     const uniqueDealProducts = _.uniq([...gsctx.dealProducts ?? [], ...productObject ?? []]);
-    dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, dealProducts: uniqueDealProducts, obSettings: { ...gsctx.obSettings, ...Data } } });
+    dispatch({
+      type: 'UPDATE_GROUPSHOP',
+      payload: {
+        ...gsctx,
+        dealProducts: uniqueDealProducts,
+        obSettings: { ...gsctx.obSettings, ...Data },
+        popularProducts: [...data, ...gsctx?.popularProducts!],
+      },
+    });
 
     await addDealProduct({
       variables: {
