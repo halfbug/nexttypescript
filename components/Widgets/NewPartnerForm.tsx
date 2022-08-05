@@ -109,8 +109,9 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
           variables: {
             createPartnersInput: {
               storeId: store.id,
-              campaignId: (store?.campaigns && store?.campaigns?.length > 0)
-                ? store?.campaigns[0]?.id : null,
+              // campaignId: '',
+              // campaignId: (store?.campaigns && store?.campaigns?.length > 0)
+              // ? store?.campaigns[0]?.id : null,
               url: null,
               shortUrl: null,
               partnerCommission: partnerCommissionVal,
