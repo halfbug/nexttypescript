@@ -21,7 +21,7 @@ const NativeShareButton = ({
     className={className}
     onClick={() => navigator?.share({
       title: 'Groupshop',
-      text: `${text}`,
+      text: `${text} ${shareurl}`,
     })}
   >
     {icon}

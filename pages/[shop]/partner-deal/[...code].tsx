@@ -156,6 +156,7 @@ const GroupShop: NextPage = () => {
   console.log('partnerdeal');
 
   const { googleEventCode, googleButtonCode } = useGtm();
+  console.log(showRewards, 'showRewards');
 
   const {
     // members: [{
@@ -472,11 +473,12 @@ const GroupShop: NextPage = () => {
                   ’s Groupshop
                 </h3>
                 <p>
-                  Explore my favorite
+                  Shop with me & get exclusive discounts on my favorite products
+                  {/* Explore my favorite
                   {' '}
                   {gsctx?.store?.brandName}
                   {' '}
-                  products and access exclusive discounts when you shop with me!
+                  products and access exclusive discounts when you shop with me! */}
                 </p>
               </Col>
             </Row>
@@ -775,6 +777,14 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
+        <InfoBox
+          mes="How it works"
+          brandname={brandName}
+          shareUrl={gsShortURL ?? gsURL}
+          showRewards={showRewards}
+          setShowRewards={setShowRewards}
+          name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
+        />
         {/* <RewardBox2
           show={showRewards}
           discount={discount}

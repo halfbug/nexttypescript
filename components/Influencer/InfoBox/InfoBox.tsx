@@ -21,15 +21,20 @@ interface mesProps {
   brandname: any;
   shareUrl?: string;
   name?: string;
+  showRewards?: boolean;
+  setShowRewards?: any;
 }
 const InfoBox = ({
-  mes, brandname, shareUrl, name,
+  mes, brandname, shareUrl, name, showRewards, setShowRewards,
 }: mesProps) => {
   const [show, setShow] = useState(false);
 
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+  useEffect(() => {
+    if (showRewards) { setShow(true); }
+  }, [showRewards]);
 
   const { googleEventCode } = useGtm();
   useEffect(() => {
@@ -39,11 +44,14 @@ const InfoBox = ({
     query: '(min-width: 476px)',
   });
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setShowRewards(false);
+  };
   const handleShow = () => setShow(true);
   return (
     <>
-      <InfoButton handleClick={handleShow} message={mes} />
+      {!showRewards && <InfoButton handleClick={handleShow} message={mes} />}
       <Modal
         show={show}
         onHide={handleClose}
@@ -143,6 +151,7 @@ const InfoBox = ({
 InfoBox.defaultProps = {
   shareUrl: '',
   name: 'Influencer',
+  showRewards: false,
+  setShowRewards: () => {},
 };
-
 export default InfoBox;
