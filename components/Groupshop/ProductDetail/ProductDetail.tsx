@@ -198,12 +198,23 @@ const ProductDetail = ({
       const { productById: dproduct } = data;
       // 1. get the select image
       const svImage = dproduct?.images[index - 1]?.src ?? '';
-      // console.log('🚀 ~ file: ProductDetail.tsx ~ line 180 ~ useEffect ~ svImage', svImage);
 
       // 2. get image variant
       const svrnt = dproduct.variants.filter(
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
+
+      if (svrnt?.[0]) {
+        // 4. check if first variant is out of stock
+        // if (selectedV.inventoryQuantity === 0) {
+        //   // get instock variants
+        //   selectedV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
+        // }
+
+        // 3. set selected options to in stock variant
+        setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
+          { ...obj, [name]: value }), {}));
+      }
     }
   }, [index]);
 
@@ -303,22 +314,12 @@ const ProductDetail = ({
                       src={product?.featuredImage}
                       alt={`Feature-${Math.random()}`}
                     />
-                    {/* <div className={styles.groupshop__pcard_tag_boughtby}>
-                      {topFive(getBuyers(prod.id)?.map(
-                        (member: Member) => (
-                          <span className={styles.groupshop__pcard_tag_buyer}>
-                            {formatName(member.orderDetail.customer)}
-                          </span>
-                        ),
-                      ))}
 
-                      {getBuyers(prod.id).length > 0 && (
-                      <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                    </div> */}
                   </Carousel.Item>
 
                   {
-                 data?.productById?.images?.map((img:any, i:number) => (
+                 data?.productById?.images?.length > 1
+                 && data?.productById?.images?.map((img:any, i:number) => (
                    <Carousel.Item>
                      <img
                        src={img.src}
