@@ -267,7 +267,7 @@ const ProductDetail = ({
                     </span>
                   )}
                 </Col>
-                <div className={styles.groupshop_left_content_wrapper_boughtby}>
+                {/* <div className={styles.groupshop_left_content_wrapper_boughtby}>
                   {isGroupshop && topFive(getBuyers(product?.id ?? '')?.map(
                     (member: Member) => (
                       <span className={styles.groupshop_left_content_wrapper_buyer}>
@@ -290,7 +290,7 @@ const ProductDetail = ({
                   {isInfluencerGS && getBuyers2(product?.id ?? '').length > 0 && (
                     <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>
                   )}
-                </div>
+                </div> */}
                 <Carousel
                   activeIndex={index}
                   onSelect={handleSelect}
