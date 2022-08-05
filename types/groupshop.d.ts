@@ -108,6 +108,7 @@ export type CartProduct = Product & {
 };
 
 export type ObSettings = {
+  ownerUrl?: string;
   allowEmails?: boolean;
   allowTexts?: boolean;
   mobileNumber?: number;

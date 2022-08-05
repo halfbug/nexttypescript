@@ -35,7 +35,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
   const moveForward = async () => {
     const data = {
       ...gsctx.obSettings,
-      step: 3,
+      step: 4,
     };
 
     dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, ...data } } });
@@ -76,7 +76,13 @@ const OnBoardTimeToShine = ({ open }: Props) => {
         </div>
         <Modal.Body className={styles.timeToShine__modal__body}>
           {/* <LeEsableIcon className={styles.timeToShine__modal__body__mainicon} /> */}
-          <img src={storeLogo} className={styles.timeToShine__modal__body__mainicon} alt="brand logo" />
+          {/* <img src={storeLogo}
+          className={styles.timeToShine__modal__body__mainicon} alt="brand logo" /> */}
+          <div className="d-flex justify-content-center align-items-center">
+            <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
+            <div className={styles.welcome__modal__body__vertical_seprator} />
+            <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
+          </div>
 
           <div className={styles.timeToShine__modal__body__mainiconarea}>
             {/* <LeEsableIcon /> */}

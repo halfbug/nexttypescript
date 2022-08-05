@@ -17,7 +17,7 @@ const useOwnerOnboarding = () => {
   useEffect(() => {
     if (gsctx?.id) {
       if (gsctx?.obSettings && 'step' in gsctx?.obSettings) {
-        setModelStep(gsctx?.obSettings?.step! + 1);
+        setModelStep(gsctx?.obSettings?.step!);
       } else {
         setModelStep(0);
       }
@@ -25,13 +25,13 @@ const useOwnerOnboarding = () => {
   }, [gsctx]);
 
   useEffect(() => {
-    if (modelStep >= 0 && modelStep <= 3 && ownerCode) {
+    if (gsctx?.obSettings?.ownerUrl === `/${shop}/deal/${discountCode}/owner&${ownerCode}` && modelStep >= 0 && modelStep < 4) {
       Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}/step&${modelStep}`);
     }
   }, [modelStep]);
 
   useEffect(() => {
-    if (stepNumber && (+stepNumber! >= 0 || +stepNumber! <= 3)) {
+    if (stepNumber && (+stepNumber! >= 0 || +stepNumber! <= 4)) {
       setStep(stepNumber!);
     } else {
       setStep('');

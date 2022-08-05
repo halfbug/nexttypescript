@@ -92,7 +92,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
     const data = {
       ...gsctx.obSettings,
       ...temp,
-      step: 1,
+      step: 2,
     };
     dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, ...data } } });
 
@@ -248,7 +248,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
               className={styles.reward__modal__body__btn}
               onClick={moveForward}
             >
-              Customize
+              Next
             </Button>
             <Button
               className={styles.reward__modal__body__btnMobile}

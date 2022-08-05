@@ -555,6 +555,7 @@ query Groupshop($code: String!, $status: String = "") {
     }
     
     obSettings{ 
+      ownerUrl
       allowEmails
       allowTexts
       mobileNumber

@@ -9,6 +9,7 @@ import {
   Col, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Row,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
+import { useRouter } from 'next/router';
 import useDebounce from 'hooks/useDebounce';
 
 import { useMediaQuery } from 'react-responsive';
@@ -25,6 +26,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import useAppContext from 'hooks/useAppContext';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
+import useCode from 'hooks/useCode';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -45,6 +47,9 @@ const ProductsSearch = ({
   // } = useContext(GroupshopContext);
   const { gsctx, dispatch } = useAppContext();
   const { isOwner } = useOwnerOnboarding();
+  const {
+    shop, discountCode, ownerCode,
+  } = useCode();
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
     clientDealProducts, currencySymbol, dPrice, isInfluencer,
@@ -56,7 +61,7 @@ const ProductsSearch = ({
   const [showMsg, setshowMsg] = useState('');
   // const [searchValue, setsearchValue] = useState('');
   const ref = useRef(null);
-
+  const Router = useRouter();
   const { googleEventCode } = useGtm();
   useEffect(() => {
     if (showSearch) { googleEventCode('product-search-modal'); }
@@ -185,6 +190,13 @@ const ProductsSearch = ({
   // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect otherProducts', otherProducts);
   // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ otherProducts', products);
 
+  const skipThisStep = () => {
+    handleClose(false);
+    if (shop && ownerCode && discountCode) {
+      Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -193,7 +205,7 @@ const ProductsSearch = ({
         centered
         size="lg"
         dialogClassName={styles.groupshop_modal_search}
-        // backdrop="static"
+        backdrop={isOwner ? 'static' : ''}
         fullscreen="lg-down"
       >
         {!isModalForMobile && !isCreateGS && (
@@ -396,6 +408,11 @@ const ProductsSearch = ({
                       ADD to groupshop
 
                     </Button>
+                    {isOwner && (
+                    <div className={`mt-3 ${styles.welcome__modal__body__btnskip}`} onClick={skipThisStep} onKeyDown={skipThisStep} role="button" tabIndex={0}>
+                      Skip for now
+                    </div>
+                    )}
                   </>
                 )}
 

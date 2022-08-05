@@ -40,14 +40,15 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   }, [open]);
 
   const moveForward = async () => {
-    dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, step: 0 } } });
+    dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, step: 1 } } });
 
     await addDealProduct({
       variables: {
         updateGroupshopInput: {
           id: gsctx.id,
           obSettings: {
-            step: 0,
+            ...gsctx.obSettings,
+            step: 1,
           },
         },
       },
@@ -76,7 +77,11 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
         </div>
         <Modal.Body className={styles.welcome__modal__body}>
           {/* <LeEsableIcon className={styles.welcome__modal__body__mainicon} /> */}
-          <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
+          <div className={styles.welcome__modal__icons}>
+            <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
+            <div className={styles.welcome__modal__body__vertical_seprator} />
+            <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
+          </div>
           <div className={styles.welcome__modal__body__mainiconarea}>
             {/* <LeEsableIcon /> */}
             <img src={storeLogo} className={styles.welcome__modal__body__mainiconMobile} alt="brand logo" />
@@ -213,7 +218,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               className={styles.welcome__modal__body__btn}
               onClick={moveForward}
             >
-              Customize
+              Get Started
             </Button>
 
             <Button
