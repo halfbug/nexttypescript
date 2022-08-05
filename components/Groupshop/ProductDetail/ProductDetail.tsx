@@ -305,10 +305,13 @@ const ProductDetail = ({
                 <Carousel
                   activeIndex={index}
                   onSelect={handleSelect}
-                  // interval={null}
-                  // indicators={false}
+                  // interval={0}
+                  indicators={false}
                 >
-                  <Carousel.Item className={styles.groupshop_modal_detail_featureImage}>
+                  {/* {loading && ( */}
+                  <Carousel.Item
+                    className={styles.groupshop_modal_detail_featureImage}
+                  >
                     <img
                       className="img-fluid"
                       src={product?.featuredImage}
@@ -316,22 +319,19 @@ const ProductDetail = ({
                     />
 
                   </Carousel.Item>
-
-                  {
-                 data?.productById?.images?.length > 1
-                 && data?.productById?.images?.map((img:any, i:number) => (
-                   <Carousel.Item>
-                     <img
-                       src={img.src}
-                       alt={`image_${i}`}
+                  {/* // )} */}
+                  {data?.productById?.images?.map((img:any, i:number) => (
+                    <Carousel.Item>
+                      <img
+                        src={img.src}
+                        alt={`image_${i}`}
                        // eslint-disable-next-line react/no-array-index-key
-                       key={`image_${i}`}
-                       className={styles.groupshop_modal_detail_featureImage}
-                     />
-                   </Carousel.Item>
+                        key={`image_${i}`}
+                        className={styles.groupshop_modal_detail_featureImage}
+                      />
+                    </Carousel.Item>
 
-                 ))
-               }
+                  ))}
                 </Carousel>
                 {data?.productById?.images.length > 1
                 && (

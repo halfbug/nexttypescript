@@ -9,7 +9,7 @@ const useCode = () => {
 
   const { query: { shop, code }, pathname } = router;
 
-  console.log('🚀 ~ file: useCode.ts ~ line 11 ~ useCode ~ router', router);
+  // console.log('🚀 ~ file: useCode.ts ~ line 11 ~ useCode ~ router', router);
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
   const [status, setStatus] = useState<string | undefined>(undefined);
   const [qrscan, setQrscan] = useState<string | undefined>(undefined);
