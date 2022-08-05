@@ -205,7 +205,7 @@ const ProductsSearch = ({
         centered
         size="lg"
         dialogClassName={styles.groupshop_modal_search}
-        backdrop={isOwner ? 'static' : ''}
+        backdrop={isOwner ? 'static' : 'true'}
         fullscreen="lg-down"
       >
         {!isModalForMobile && !isCreateGS && (
