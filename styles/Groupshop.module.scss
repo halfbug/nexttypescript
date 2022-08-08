@@ -133,7 +133,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @include media-breakpoint-down(sm) {
       justify-content: flex-end;
       span {
-        display: none;
+        display: block;
+        text-underline-offset: 6px;
       }
     }
   }
@@ -445,6 +446,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     span {
       color: $white;
       margin-top: 1.5rem;
+      text-decoration: underline;
     }
     &__small_banner_left {
       @extend .d-flex, .align-items-center, .justify-content-start;
@@ -509,6 +511,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 14px;
       line-height: 18px;
       text-align: center;
+
     }
     &_unlocked {
       @extend .mb-2;
