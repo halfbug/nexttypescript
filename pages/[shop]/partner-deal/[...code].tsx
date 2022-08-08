@@ -182,7 +182,7 @@ const GroupShop: NextPage = () => {
     memberDetails = [],
     store: { brandName, shop: fullStoreName } = { brandName: '', shop: '' },
     store: { logoImage } = { logoImage: '' },
-    dealProducts = [],
+    dealProducts,
     popularProducts = [],
     discountCode: { title },
   } = gsctx;
@@ -201,10 +201,12 @@ const GroupShop: NextPage = () => {
   }, [gsctx, gsctx.addedProducts]);
 
   useEffect(() => {
-    if (dealProducts && dealProducts.length < 1 && !showps) {
+    if (dealProducts && dealProducts.length < 1 && showps === false) {
       setshowob1(true);
+    } else {
+      setshowob1(false);
     }
-  }, [dealProducts]);
+  }, [dealProducts, showps]);
 
   useEffect(() => {
     async function gets3logo() {
