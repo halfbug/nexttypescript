@@ -7,6 +7,7 @@ import footerLogo1 from 'public/images/logo-thin.png';
 import footerLogoExpire from 'public/images/logo-thin-expire.png';
 import SocialButtonLinks from 'components/Buttons/SocialButtonLinks/SocialButtonLinks';
 import styles from 'styles/Groupshop.module.scss';
+import styles1 from 'styles/Influencer.module.scss';
 import {
   Form, Col, Row, Button, FormControl, InputGroup, Container,
 } from 'react-bootstrap';
@@ -103,7 +104,7 @@ const Footer = ({
                 <>
                   {isInfluencerGS ? (
                     <h6>
-                      <strong>Want to keep shopping with unlimited rewards?</strong>
+                      <span className={styles1.Influencer_fontMeduim}>Want to keep shopping with unlimited rewards?</span>
                     </h6>
                   ) : (
                     <h6>
@@ -118,9 +119,9 @@ const Footer = ({
               <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
                 <Col className="d-flex col-12">
                   <div className="text-center me-2">
-                    <Button className="" variant="primary">
+                    <Button className={styles1.Influencer_footer_leftBtn} variant="">
                       <Link href="https://www.groupshop.com/consumers#brands">
-                        <a target="_blank">
+                        <a target="_blank" className="text-decoration-none">
                           Explore all Groupshop brands
                           {' '}
                           {'>'}
@@ -215,12 +216,23 @@ const Footer = ({
         <Col lg={3}>
           <section>
             <div className={styles.groupshop_footer_text}>
-              <p>
-                <strong>Want your own store? </strong>
-                Be the first to find out when
-                you can shop your favorite brands on Groupshop.
-              </p>
+              {isInfluencerGS ? (
+                <>
+                  <h6>
+                    <span className={styles1.Influencer_fontMeduim}>Interested in getting your own store?</span>
+                    <span className={styles1.Influencer_fontRegular}>Sign up to become a Groupshop brand partner below.</span>
+                  </h6>
+
+                </>
+              ) : (
+                <p>
+                  <strong>Want your own store? </strong>
+                  Be the first to find out when
+                  you can shop your favorite brands on Groupshop.
+                </p>
+              )}
             </div>
+
             <Form noValidate onSubmit={handleSubmit}>
               <InputGroup className=" my-3" id="borderclr">
                 <FormControl

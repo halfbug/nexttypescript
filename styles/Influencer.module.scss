@@ -1,0 +1,37 @@
+@import "./variables.scss";
+
+.Influencer{
+
+ &_fontMeduim{
+  font-weight: 500 !important;
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+ }
+ &_fontRegular{
+    font-weight: 400 !important;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-size: 14px;
+    line-height: 18px;
+   }
+ &_BoxWidth{
+    width: 280px;
+
+ }
+ &_footer{
+    &_leftBtn{
+        @extend .py-3, .px-2, .rounded-pill;
+        background: rgba(212, 196, 227, 0.5);
+        border-radius: 20px;
+        width: 256px;
+        font-family: 'Mulish';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: $black;
+    }
+ }
+}
