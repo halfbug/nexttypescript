@@ -257,6 +257,9 @@
             margin: 0;
             margin-top: 50px;
 
+            &__icons {
+                display: none;
+            }
 
             &__body {
                 padding: 0 25px;
@@ -710,11 +713,18 @@
                 border-bottom-left-radius: 0px;
                 border-bottom-right-radius: 0px;
             }
+            &__icons {
+                display: none;
+            }
 
             &__body {
                 padding: 0 35px;
                 margin-bottom: 35px;
                 text-align: center;
+                
+                &__mainiconMobile {
+                    width: 50px;
+                }
 
                 &__mainiconarea {
                     display: flex;
@@ -809,7 +819,7 @@
                         font-size: 14px;
                         line-height: 18px;
                         color: #000000;
-                        opacity: 0.5;
+                        // opacity: 0.5;
                         border-left: none;
                         padding: 0px;
                         padding-left: 7px;
@@ -825,7 +835,7 @@
                         font-size: 14px;
                         line-height: 18px;
                         color: #000000;
-                        opacity: 0.5;
+                        // opacity: 0.5;
                         padding-right: 0px;
                         background: #F7F7FA;
                         border: none;

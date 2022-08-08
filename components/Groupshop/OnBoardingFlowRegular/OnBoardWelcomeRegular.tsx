@@ -80,7 +80,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           <div className={styles.welcome__modal__icons}>
             <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
             <div className={styles.welcome__modal__body__vertical_seprator} />
-            <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
+            <GroupshopIcon className={styles.welcome__modal__body__mainicons__icon} />
           </div>
           <div className={styles.welcome__modal__body__mainiconarea}>
             {/* <LeEsableIcon /> */}

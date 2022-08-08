@@ -78,10 +78,10 @@ const OnBoardTimeToShine = ({ open }: Props) => {
           {/* <LeEsableIcon className={styles.timeToShine__modal__body__mainicon} /> */}
           {/* <img src={storeLogo}
           className={styles.timeToShine__modal__body__mainicon} alt="brand logo" /> */}
-          <div className="d-flex justify-content-center align-items-center">
+          <div className={`m-0 ${styles.welcome__modal__icons}`}>
             <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
             <div className={styles.welcome__modal__body__vertical_seprator} />
-            <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
+            <GroupshopIcon className={styles.welcome__modal__body__mainicons__icon} />
           </div>
 
           <div className={styles.timeToShine__modal__body__mainiconarea}>
@@ -175,7 +175,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
               className={styles.timeToShine__modal__body__btnMobile}
               onClick={handleClose}
             >
-              Customize
+              Start Earning
             </Button>
           </div>
           <div className={styles.timeToShine__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>

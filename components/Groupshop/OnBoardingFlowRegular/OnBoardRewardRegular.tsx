@@ -17,6 +17,7 @@ import { useMutation } from '@apollo/client';
 import { IGroupshop } from 'types/groupshop';
 import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
 import useCode from 'hooks/useCode';
+import useLogo from 'hooks/useLogo';
 
 interface Props {
   open: Boolean
@@ -30,6 +31,8 @@ interface TypeFormValues {
 const OnBoardRewardsRegular = ({ open }: Props) => {
   const [addDealProduct] = useMutation<IGroupshop>(ADD_DEAL_PRODUCT);
   const [show, setShow] = useState<Boolean>(false);
+  const storeLogo = useLogo();
+
   const {
     shop, discountCode, ownerCode,
   } = useCode();
@@ -81,7 +84,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
     if (values.isTextChecked && !values.PhoneNumber) {
       return;
     }
-    if (!regex.test(values.PhoneNumber)) {
+    if (values.isTextChecked && !regex.test(values.PhoneNumber)) {
       return;
     }
     const temp: any = {
@@ -130,7 +133,8 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
         </div>
         <Modal.Body className={styles.reward__modal__body}>
           <div className={styles.reward__modal__body__mainiconarea}>
-            <LeEsableIcon />
+            {/* <LeEsableIcon /> */}
+            <img src={storeLogo} className={styles.reward__modal__body__mainiconMobile} alt="brand logo" />
             <div className={styles.reward__modal__body__mainiconarea__vertical_seprator} />
             <GroupshopIcon className={styles.reward__modal__body__mainiconarea__icon} />
           </div>
