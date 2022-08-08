@@ -204,7 +204,7 @@ const ProductDetail = ({
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
 
-      if (svrnt?.[0]) {
+      if (svrnt?.[0]?.inventoryQuantity > 0) {
         // 4. check if first variant is out of stock
         // if (selectedV.inventoryQuantity === 0) {
         //   // get instock variants
