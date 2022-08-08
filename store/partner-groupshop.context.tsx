@@ -56,6 +56,7 @@ export const gspInit: IGroupshop = {
   bestSeller: [],
   allProducts: [],
   partnerDetails: { fname: '', email: '' },
+  partnerCommission: '',
   // dealProducts: [],
 };
 

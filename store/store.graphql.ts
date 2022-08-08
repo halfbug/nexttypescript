@@ -945,6 +945,7 @@ query PartnerGroupshop($code: String!) {
     url
     shortUrl
     visitors
+    partnerCommission
     members {
       orderId
       availedDiscount

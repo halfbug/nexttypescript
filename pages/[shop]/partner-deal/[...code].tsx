@@ -56,6 +56,7 @@ import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 import InfoBox from 'components/Influencer/InfoBox/InfoBox';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
+import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -93,6 +94,7 @@ const GroupShop: NextPage = () => {
   );
   const [member, setmember] = useState<Member | undefined>(undefined);
   const [showps, setshowps] = useState<boolean>(false);
+  const [showob1, setshowob1] = useState<boolean>(false);
   const [showCart, setshowCart] = useState<boolean>(false);
   const [pending, setpending] = useState<boolean>(true);
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
@@ -197,6 +199,12 @@ const GroupShop: NextPage = () => {
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.addedProducts]);
+
+  useEffect(() => {
+    if (dealProducts && dealProducts.length < 1 && !showps) {
+      setshowob1(true);
+    }
+  }, [dealProducts]);
 
   useEffect(() => {
     async function gets3logo() {
@@ -753,9 +761,15 @@ const GroupShop: NextPage = () => {
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />
         <ProductsSearch
-          show={(showps || dealProducts?.length < 1) && title !== ''}
+          show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={!!isInfluencer}
+        />
+        <OBWelcomeInfluencer
+          show={showob1 && title !== ''}
+          handleClose={() => setshowob1(true)}
+          setshowob1={setshowob1}
+          setshowps={setshowps}
         />
 
         <LinkShareMobileView
