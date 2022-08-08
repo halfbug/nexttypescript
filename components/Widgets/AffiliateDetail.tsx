@@ -232,7 +232,7 @@ export default function AffiliateDetail({
                   variant="link"
                   onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}
                 >
-                  Edit
+                  Save
                 </Button>
 
               </div>
