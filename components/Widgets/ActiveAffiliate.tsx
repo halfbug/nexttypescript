@@ -155,7 +155,7 @@ const ActiveAffiliate = ({
                 />
               </Col> */}
               <Col xl={5} lg={5} md={5}>
-                <div className={styles.partner__data_row__name}>
+                <div className={['text-truncate', styles.partner__data_row__name].join(' ')}>
                   {part.partnerDetails.fname !== null ? `${part.partnerDetails.fname} ` : ''}
                   {part.partnerDetails.lname !== null ? part.partnerDetails.lname : ''}
                   {part.partnerDetails.fname === null && part.partnerDetails.lname === null ? part.partnerDetails.email : '' }
@@ -182,7 +182,7 @@ const ActiveAffiliate = ({
                 xl={1}
                 lg={1}
                 md={1}
-                className="d-flex justify-content-center"
+                className={styles.partner_handPointer}
                 onClick={() => {
                   handlePartner(part.id);
                 }}

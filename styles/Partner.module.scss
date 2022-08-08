@@ -394,4 +394,8 @@
         text-align: center;
         font-family: DM Sans;
     }
+    &_handPointer{
+        @extend .d-flex, .justify-content-center;
+        cursor: pointer;
+    }
 }
