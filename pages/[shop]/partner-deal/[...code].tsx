@@ -751,7 +751,7 @@ const GroupShop: NextPage = () => {
             </Button>
           </Col>
         </Row>
-        {/* <Footer LeftComp={undefined} RightComp={undefined} /> */}
+        <Footer LeftComp={undefined} RightComp={undefined} />
         <ProductsSearch
           show={(showps || dealProducts?.length < 1) && title !== ''}
           handleClose={() => setshowps(false)}
@@ -777,14 +777,16 @@ const GroupShop: NextPage = () => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
+        { showRewards && (
         <InfoBox
-          mes="How it works"
+          mes=""
           brandname={brandName}
           shareUrl={gsShortURL ?? gsURL}
           showRewards={showRewards}
           setShowRewards={setShowRewards}
           name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
         />
+        ) }
         {/* <RewardBox2
           show={showRewards}
           discount={discount}

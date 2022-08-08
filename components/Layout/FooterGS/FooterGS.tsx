@@ -32,7 +32,9 @@ export interface ISignUp {
 const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
-  const { getDateDifference, isExpired, socialLinks } = useDeal();
+  const {
+    getDateDifference, isExpired, socialLinks, isInfluencerGS,
+  } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
   const [
@@ -98,47 +100,73 @@ const Footer = ({
 
                 </>
               ) : (
-                <h6>
-                  <strong>Complete your order in time to benefit from these exclusive rewards!</strong>
-                </h6>
+                <>
+                  {isInfluencerGS ? (
+                    <h6>
+                      <strong>Want to keep shopping with unlimited rewards?</strong>
+                    </h6>
+                  ) : (
+                    <h6>
+                      <strong>Complete your order in time to benefit from these exclusive rewards!</strong>
+                    </h6>
+                  )}
+                </>
               )}
             </div>
 
-            <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
-              <Col className="d-flex col-3 ">
-                <div className="text-center me-2">
-                  <span>
+            {isInfluencerGS ? (
+              <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
+                <Col className="d-flex col-12">
+                  <div className="text-center me-2">
+                    <Button className="" variant="primary">
+                      <Link href="https://www.groupshop.com/consumers#brands">
+                        <a target="_blank">
+                          Explore all Groupshop brands
+                          {' '}
+                          {'>'}
+                        </a>
+                      </Link>
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
+            ) : (
+              <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
+                <Col className="d-flex col-3 ">
+                  <div className="text-center me-2">
+                    <span>
+                      {' '}
+                      {days}
+                    </span>
+                    <p className="mt-1">DAYS</p>
+                  </div>
+                  <div className="py-3">
                     {' '}
-                    {days}
-                  </span>
-                  <p className="mt-1">DAYS</p>
-                </div>
-                <div className="py-3">
-                  {' '}
-                  :
-                </div>
-              </Col>
-              <Col className="d-flex col-3  ">
-                <div className="text-center mx-2">
-                  <span>
-                    {hrs}
-                  </span>
-                  <p className="mt-1">HOURS</p>
-                </div>
-                <div className="py-3">
-                  {' '}
-                  :
-                </div>
-              </Col>
-              <Col className="d-flex col-3 ">
-                <div className="text-center mx-3">
-                  <span>
-                    {mins}
-                  </span>
-                  <p className="mt-1">MINUTES</p>
-                </div>
-              </Col>
-            </Row>
+                    :
+                  </div>
+                </Col>
+                <Col className="d-flex col-3  ">
+                  <div className="text-center mx-2">
+                    <span>
+                      {hrs}
+                    </span>
+                    <p className="mt-1">HOURS</p>
+                  </div>
+                  <div className="py-3">
+                    {' '}
+                    :
+                  </div>
+                </Col>
+                <Col className="d-flex col-3 ">
+                  <div className="text-center mx-3">
+                    <span>
+                      {mins}
+                    </span>
+                    <p className="mt-1">MINUTES</p>
+                  </div>
+                </Col>
+              </Row>
+            )}
           </div>
         </Col>
         <Col lg={4}>
