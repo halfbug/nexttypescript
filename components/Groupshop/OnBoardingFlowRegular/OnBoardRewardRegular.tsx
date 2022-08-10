@@ -142,22 +142,28 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             Getting rewards
           </h2>
           <div className={styles.reward__modal__body__description}>
-            <strong>
-              We’ll
-              automatically refund
-              your cashback rewards to the payment
-              method you used on your last
-              {' '}
-              {gsctx.store?.brandName}
-              {' '}
-              order.
-
-            </strong>
+            We’ll
+            automatically refund
+            your cashback rewards to the payment
+            method used on your last
+            {' '}
+            {gsctx.store?.brandName}
+            {' '}
+            order.
           </div>
-          <div className={styles.reward__modal__body__box1}>
-            <p className={styles.reward__modal__body__description}>
+          <div className={[styles.reward__modal__body__box1, styles.reward__modal__body__description2].join(' ')}>
+            <p className={[styles.reward__modal__body__description, styles.reward__modal__body__description2].join(' ')}>
               After you’ve earned 100% of your order in cashback, you’ll
-              <strong> keep earning 15% of every order </strong>
+              <strong>
+                {' '}
+                keep earning
+                {' '}
+                {gsctx?.discountCode?.percentage}
+                %
+                {' '}
+                of every order
+                {' '}
+              </strong>
               made on your Groupshop.
             </p>
           </div>
@@ -170,6 +176,9 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
           <div className={styles.reward__modal__body__info}>
             ✨ Opt-in to email and SMS notifications so we can notify you when someone shops
             from your page and you’ve earned rewards.
+          </div>
+          <div className={styles.reward__modal__body__infoMobile}>
+            Opt-in to email and SMS notifications so we can notify you when you earn cashback.
           </div>
 
           <div className={styles.reward__modal__body__checkArea}>

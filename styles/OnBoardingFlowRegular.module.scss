@@ -266,7 +266,15 @@
                 margin-bottom: 0px;
                 text-align: center;
 
+                &__icons {
+                    display: none;
+                }
+
                 &__horizontal_seprator {
+                    display: none;
+                }
+
+                &__description {
                     display: none;
                 }
             }
@@ -315,7 +323,7 @@
                 }
 
                 &__icons {
-                    display: flex;
+                    display: none;
                     column-gap: 5px;
                     justify-content: center;
                 }
@@ -341,6 +349,10 @@
                 }
 
                 &__description2 {
+                    display: none;
+                }
+
+                &___description {
                     display: none;
                 }
 
@@ -464,6 +476,10 @@
         &__body {
             padding: 0 129px;
             margin-bottom: 40px;
+
+            &__infoMobile {
+                display: none;
+            }
 
             h2 {
                 font-family: 'DM Sans';
@@ -726,6 +742,14 @@
                     width: 50px;
                 }
 
+                &__info {
+                    display: none;
+                }
+
+                &__infoMobile {
+                    display: block;
+                }
+
                 &__mainiconarea {
                     display: flex;
                     justify-content: center;
@@ -740,6 +764,10 @@
                         margin-left: 11px;
                         margin-right: 16px;
                     }
+                }
+
+                &__description2{
+                    display: none;
                 }
 
                 h2 {
@@ -1087,6 +1115,14 @@
                 padding: 0 50px;
                 margin-bottom: 52px;
                 text-align: center;
+
+                &__description2 {
+                    display: none;
+                }
+
+                &__boxMobile{
+                    display: none;
+                }
             }
         }
     }
@@ -1109,8 +1145,8 @@
             &__content {
                 border-top-left-radius: 21px;
                 border-top-right-radius: 21px;
-                border-bottom-left-radius: 0px;
-                border-bottom-right-radius: 0px;
+                border-bottom-left-radius: 21px;
+                border-bottom-right-radius: 21px;
             }
 
             &__body {
@@ -1193,7 +1229,7 @@
 
                 &__iconsRowdollar {
                     display: block;
-                    display: flex;
+                    display: none;
                     justify-content: center;
                     align-items: center;
                     margin-top: 24px;
@@ -1218,7 +1254,7 @@
                     border-radius: 12px;
                     margin: 0 22px;
                     text-align: center;
-                    display: flex;
+                    display: none;
                     justify-content: center;
 
                     &__txt {

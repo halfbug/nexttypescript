@@ -92,23 +92,23 @@ const OnBoardTimeToShine = ({ open }: Props) => {
             <GroupshopIcon className={styles.timeToShine__modal__body__mainiconarea__icon} />
           </div>
           <h2 className={styles.timeToShine__modal__body__welcomeTxt}>
-            That’s it, you did it! 🎉
+            Time to shine ✨
           </h2>
           <h2 className={styles.timeToShine__modal__body__welcomeTxtMobile}>
-            Time to shine ✨
+            Shop, share, earn
           </h2>
           <div className={styles.timeToShine__modal__body__description1}>
             You’ve claimed your Groupshop and you’re set to
             <strong> earn cash everytime someone shops. </strong>
           </div>
           <div className={styles.timeToShine__modal__body__description2}>
-            Customize your Groupshop and
-            <strong> invite your friends</strong>
-            to give them access to exclusive discounts.
+            You’ve customized your Groupshop! Now explore your store,
+            invite your friends to give them access to exclusive discounts,
+            and start earning when they shop.
           </div>
 
           <div className={styles.timeToShine__modal__body__sharingTxt}>
-            Start sharing and earning
+            Shop, share, earn
           </div>
 
           <div className={styles.timeToShine__modal__body__box1}>
@@ -122,23 +122,23 @@ const OnBoardTimeToShine = ({ open }: Props) => {
           <div className={styles.timeToShine__modal__body__box}>
             <div className={styles.timeToShine__modal__body__box__img}>👀</div>
             <div className={styles.timeToShine__modal__body__box__txt}>
-              Explore your shop and limited-time offers from Insert Name Here.
+              Explore your unique Groupshop.
             </div>
           </div>
 
           <div className={styles.timeToShine__modal__body__box}>
             <div className={styles.timeToShine__modal__body__box__img}>📩</div>
             <div className={styles.timeToShine__modal__body__box__txt}>
-              Invite your friends and followers to shop with you to give them access
-              to exclusive discounts.
+              Invite your friends and followers
+              to shop with you to give them access to exclusive discounts.
             </div>
           </div>
 
           <div className={styles.timeToShine__modal__body__box}>
             <div className={styles.timeToShine__modal__body__box__img}>🤑</div>
             <div className={styles.timeToShine__modal__body__box__txt}>
-              Everytime someone shops (including you) you’ll earn cashback* and
-              unlock additional rewards for everyone.
+              Everytime someone shops (including you)
+              you’ll earn cashback* and unlock additional rewards for everyone.
             </div>
           </div>
 
@@ -155,15 +155,6 @@ const OnBoardTimeToShine = ({ open }: Props) => {
           <div className={styles.timeToShine__modal__body__iconsRowdollar}>
             😍 😍 😍
           </div>
-
-          <h2 className={styles.timeToShine__modal__body__welcomeTxtMobile}>
-            Ready to customize your Groupshop store?
-          </h2>
-
-          <div className={styles.timeToShine__modal__body__description2}>
-            Curate your favorite products, add a welcome message
-            and link your socials by customizing your Groupshop.
-          </div>
           <div className="d-flex justify-content-center my-4">
             <Button
               className={styles.timeToShine__modal__body__btn}
@@ -177,12 +168,6 @@ const OnBoardTimeToShine = ({ open }: Props) => {
             >
               Start Earning
             </Button>
-          </div>
-          <div className={styles.timeToShine__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
-            Skip for now
-          </div>
-          <div className={styles.timeToShine__modal__body__btnskipMobie} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
-            Skip to shop
           </div>
         </Modal.Body>
 
