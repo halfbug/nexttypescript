@@ -58,7 +58,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
   const validationSchema = yup.object({
     email: yup
       .string().email('Invalid email format')
-      .test('Unique', 'Email need te be unique', (values) => duplicateEmailCheck(values))
+      .test('Unique', 'This is already a partner, turn on their Groupshop below', (values) => duplicateEmailCheck(values))
       .required('Email Address is required.'),
     minDiscount: yup
       .number().typeError('you must specify a number')

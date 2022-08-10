@@ -128,10 +128,10 @@ const ActiveAffiliate = ({
             />
           </h4>
           <Row className={styles.partner__table_head}>
-            {/* <Col xl={2} lg={2} md={2}>
+            <Col xl={2} lg={2} md={2}>
               Active
-            </Col> */}
-            <Col xl={5} lg={5} md={5}>
+            </Col>
+            <Col xl={3} lg={3} md={3}>
               Name
             </Col>
             <Col xl={3} lg={3} md={3}>
@@ -143,7 +143,7 @@ const ActiveAffiliate = ({
           </Row>
           {renderItems?.map((part: any, index: number) => (
             <Row className={styles.partner__data_row}>
-              {/* <Col xl={2} lg={2} md={2}>
+              <Col xl={2} lg={2} md={2}>
                 <Form.Check
                   checked={part.isActive}
                   type="switch"
@@ -153,8 +153,8 @@ const ActiveAffiliate = ({
                     handleToggle(part.id);
                   }}
                 />
-              </Col> */}
-              <Col xl={5} lg={5} md={5}>
+              </Col>
+              <Col xl={3} lg={3} md={3}>
                 <div className={['text-truncate', styles.partner__data_row__name].join(' ')}>
                   {part.partnerDetails.fname !== null ? `${part.partnerDetails.fname} ` : ''}
                   {part.partnerDetails.lname !== null ? part.partnerDetails.lname : ''}
