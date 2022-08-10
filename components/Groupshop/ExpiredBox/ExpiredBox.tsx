@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/Groupshop.module.scss';
-import { RootProps } from 'types/store';
+import { IProduct, RootProps } from 'types/store';
 import {
   Col, Modal, Row,
 } from 'react-bootstrap';
@@ -14,34 +14,43 @@ import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import { useMediaQuery } from 'react-responsive';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
+import InfoButton from 'components/Buttons/InfoButton/InfoButton';
+import useDeal from 'hooks/useDeal';
 
 interface ExpiredBoxProps extends RootProps {
-  show: boolean;
+  mes: string;
   discount?: string;
-  handleClose(e: any): any;
-  shareurl: any;
-  storeName: string;
-  // addToCart(e: any): any;
+  shareUrl: any;
+  brandname: string;
+  products: IProduct[];
+  maxPercent?: string | undefined;
 }
 
 const ExpiredBox = ({
-  show = false, handleClose, discount, shareurl, storeName,
+  mes, discount, shareUrl, brandname, products, maxPercent,
 }: ExpiredBoxProps) => {
-  const closeModal = (e: any) => {
-    // setotherProducts(undefined);
-    // setSelected(undefined);
-    handleClose(e);
-  };
   const { googleEventCode } = useGtm();
-  const isDesktop = useMediaQuery({
+
+  const isModalForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
 
+  const [show, setShow] = useState(false);
+  const { dPrice } = useDeal();
+
+  useEffect(() => {
+    if (show) { googleEventCode('how-it-works-modal'); }
+  }, [show]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
+      <InfoButton handleClick={handleShow} message={mes} />
       <Modal
         show={show}
-        onHide={closeModal}
+        onHide={handleClose}
         size="lg"
         centered
         dialogClassName={styles.groupshop_expiredBox_modal}
@@ -61,15 +70,15 @@ const ExpiredBox = ({
           </Row>
         </Modal.Header>
         <div className="styles.groupshop_infoBox_imgBox">
-          {isDesktop && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
-          {!isDesktop && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
+          {isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
+          {!isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
         </div>
         <Modal.Body className={styles.groupshop_expiredBox_modal__body}>
           <Row>
             <Col lg={12}>
               <div className={styles.groupshop_expiredBox_modal__top}>
                 <h2>
-                  {`${storeName}`}
+                  {`${brandname}`}
                 </h2>
                 <p>
                   Get
@@ -82,7 +91,7 @@ const ExpiredBox = ({
                   {' '}
                   these and other
                   {' '}
-                  <strong>{`${storeName}`}</strong>
+                  <strong>{`${brandname}`}</strong>
                   {' '}
                   products.
                 </p>
@@ -91,23 +100,28 @@ const ExpiredBox = ({
           </Row>
           <Row>
             <Col lg={12} className={styles.groupshop_expiredBox_modal__productsSection}>
-              <div className={styles.groupshop_expiredBox_modal__product}>
-                <div className={styles.groupshop_expiredBox_modal__product__image}>
-                  <img src={SampleImage.src} alt="product" />
+              {products.map((item) => (
+                <div className={styles.groupshop_expiredBox_modal__product}>
+                  <div className={styles.groupshop_expiredBox_modal__product__image}>
+                    <img src={item.featuredImage} alt="product" />
+                  </div>
+                  <div className={styles.groupshop_expiredBox_modal__product__name}>
+                    {item.title}
+                  </div>
+                  <div className={styles.groupshop_expiredBox_modal__product__amounts}>
+                    <strong>
+                      $
+                      {dPrice(+item.price)}
+                    </strong>
+                    <span>
+                      $
+                      {item.price}
+                    </span>
+                  </div>
                 </div>
-                <div className={styles.groupshop_expiredBox_modal__product__name}>
-                  Oasis Pants
-                </div>
-                <div className={styles.groupshop_expiredBox_modal__product__amounts}>
-                  <strong>
-                    $89
-                  </strong>
-                  <span>
-                    $139
-                  </span>
-                </div>
-              </div>
-              {isDesktop && (
+
+              ))}
+              {/* {isModalForMobile && (
               <div className={styles.groupshop_expiredBox_modal__product}>
                 <div className={styles.groupshop_expiredBox_modal__product__image}>
                   <img src={SampleImage.src} alt="product" />
@@ -124,29 +138,11 @@ const ExpiredBox = ({
                   </span>
                 </div>
               </div>
-              )}
-              {isDesktop && (
-              <div className={styles.groupshop_expiredBox_modal__product}>
-                <div className={styles.groupshop_expiredBox_modal__product__image}>
-                  <img src={SampleImage.src} alt="product" />
-                </div>
-                <div className={styles.groupshop_expiredBox_modal__product__name}>
-                  Azalea Kimono
-                </div>
-                <div className={styles.groupshop_expiredBox_modal__product__amounts}>
-                  <strong>
-                    $89
-                  </strong>
-                  <span>
-                    $139
-                  </span>
-                </div>
-              </div>
-              )}
+              )} */}
             </Col>
           </Row>
           <Row className={styles.groupshop_expiredBox_modal__bottom}>
-            {isDesktop
+            {isModalForMobile
             && (
             <Col lg={12}>
               <div className={styles.groupshop_expiredBox_modal__info1}>
@@ -179,11 +175,11 @@ const ExpiredBox = ({
             <Col lg={12}>
               <div className={styles.groupshop_expiredBox_modal__btnSection}>
                 {
-                  isDesktop ? (
+                  isModalForMobile ? (
                     <ShareButton
                       placement="auto"
-                      shareurl={shareurl}
-                      fullshareurl={shareurl}
+                      shareurl={shareUrl}
+                      fullshareurl={shareUrl}
                       label="Invite Now"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}
@@ -193,7 +189,8 @@ const ExpiredBox = ({
                     <NativeShareButton
                       label="Invite Now"
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
-                      shareurl={shareurl}
+                      shareurl={shareUrl}
+                      text={`Shop ${brandname} on my Groupshop & get up to ${maxPercent} off`}
                     />
                   )
               }
@@ -205,11 +202,11 @@ const ExpiredBox = ({
               or Share
             </Col>
             <Col sm={12} className="d-flex justify-content-center mt-3">
-              <div className="me-2"><SocialButton network="Email" url={shareurl} /></div>
-              <div className="me-2"><SocialButton network="Instagram" url={shareurl} /></div>
-              <div className="me-2"><SocialButton network="Pinterest" url={shareurl} /></div>
-              <div className="me-2"><SocialButton network="Twitter" url={shareurl} /></div>
-              <div className="me-2"><SocialButton network="Facebook" url={shareurl} /></div>
+              <div className="me-2"><SocialButton network="Email" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton network="Instagram" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton network="Pinterest" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton network="Twitter" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton network="Facebook" url={shareUrl} /></div>
             </Col>
           </Row>
         </Modal.Body>
@@ -218,7 +215,8 @@ const ExpiredBox = ({
   );
 };
 ExpiredBox.defaultProps = {
-  discount: '20%',
+  discount: '...',
+  maxPercent: '',
 };
 
 export default ExpiredBox;

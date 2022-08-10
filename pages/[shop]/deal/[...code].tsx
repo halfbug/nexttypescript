@@ -61,6 +61,7 @@ import useExpired from 'hooks/useExpired';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
+import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -131,6 +132,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     milestones,
     getDateDifference,
     currencySymbol,
+    activateURL,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -296,13 +298,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             LeftComp={
               <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
-            RightComp={(
-              <InfoBox
-                mes="How does this work?"
-                brandname={brandName}
-                shareUrl={gsShortURL ?? gsURL}
+            RightComp={isExpired ? (
+              <ExpiredBox
+                discount={gsctx?.discountCode.percentage}
+                mes="How it works"
+                brandname={brandName ?? ''}
+                shareUrl={activateURL ?? ''}
+                products={allProducts?.slice(0, 3) ?? []}
+                maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
               />
+            ) : (
+              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
             )}
+
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
@@ -509,7 +517,18 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               />
             </div>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
-              <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
+              {isExpired ? (
+                <ExpiredBox
+                  discount={gsctx?.discountCode.percentage}
+                  mes="How it works"
+                  brandname={brandName ?? ''}
+                  shareUrl={activateURL ?? ''}
+                  products={allProducts?.slice(0, 3) ?? []}
+                  maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
+                />
+              ) : (
+                <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
+              )}
             </Row>
           </Container>
         </Hero>
