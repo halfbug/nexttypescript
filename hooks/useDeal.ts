@@ -66,7 +66,8 @@ export default function useDeal() {
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   const gsShortURL = gsctx?.shortUrl ?? gsURL;
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
-
+  const maxPercent = gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount;
+  const brandName = gsctx?.store?.brandName;
   const productShareUrl = useCallback((pid:string) => {
     // console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
     const pidbreak = pid.split('/');
@@ -354,5 +355,7 @@ export default function useDeal() {
     getOwnerName,
     checkCustomerDealProducts,
     formatNameCase,
+    maxPercent,
+    brandName,
   };
 }

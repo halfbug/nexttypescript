@@ -30,7 +30,7 @@ import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
 import styles1 from 'styles/Campaign.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
-import { Member } from 'types/groupshop';
+import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -71,6 +71,7 @@ const ProductDetail = ({
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
+    maxPercent, brandName,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -539,7 +540,32 @@ const ProductDetail = ({
 
                     )}
                   </div>
+                  {isExpired && (
+                  <>
+                    <div
+                      className={[styles.groupshop_buttons_wrapper, 'd-md-none bg-white justify-content-center'].join(' ')}
+                    >
+                      { loaderInvite
+                        ? (<Spinner animation="border" className="align-self-center mb-2" />)
+                        : (
+                          <>
+                            <NativeShareButton
+                              label="Invite Now"
+                              className={['align-self-center mb-2 py-2 px-3 w-75 border-0', styles.groupshop_Pd_addtoCart].join(' ')}
+                              shareurl={activateURL}
+                              text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
+                            />
+                          </>
 
+                        )}
+                    </div>
+                    {/* <Row className="d-sm-block">
+                      {activeURL ? (<a href={activeURL}>{activeURL}</a>) : ''}
+                      {' '}
+                    </Row> */}
+
+                  </>
+                  )}
                   <ToolTip
                     className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
                     label="Terms & Conditions"
@@ -549,7 +575,7 @@ const ProductDetail = ({
                         If you purchased any of these
                         items at full price on
                         {' '}
-                        {`${gsctx?.store?.brandName}`}
+                        {`${brandName}`}
                         , you cannot
                         return your original order to keep these discounted ones.
                       </p>
@@ -653,7 +679,7 @@ const ProductDetail = ({
                   on this and other products you love.
 
                 </p>
-                <div className="d-flex flex-column justify-content-center mb-2 d-block">
+                <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2 d-block">
                   { loaderInvite
                     ? (<Spinner animation="border" className="align-self-center mb-2" />)
                     : (
@@ -666,7 +692,9 @@ const ProductDetail = ({
                           🔗 INVITE NOW
 
                         </Button>
-                        { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
+                        <Row>
+                          { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
+                        </Row>
                       </>
                     )}
                 </div>

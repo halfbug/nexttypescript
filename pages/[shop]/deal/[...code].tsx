@@ -133,6 +133,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     getDateDifference,
     currencySymbol,
     activateURL,
+    maxPercent,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -305,7 +306,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 brandname={brandName ?? ''}
                 shareUrl={activateURL ?? ''}
                 products={allProducts?.slice(0, 3) ?? []}
-                maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
+                maxPercent={maxPercent}
               />
             ) : (
               <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
@@ -524,7 +525,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   brandname={brandName ?? ''}
                   shareUrl={activateURL ?? ''}
                   products={allProducts?.slice(0, 3) ?? []}
-                  maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
+                  maxPercent={maxPercent}
                 />
               ) : (
                 <InfoBox mes="How it works" brandname={brandName} shareUrl={gsShortURL ?? gsURL} />
