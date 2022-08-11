@@ -237,11 +237,21 @@ const ProductsSearch = ({
             {isCreateGS
               ? (
                 <div className="mx-auto">
-                  <h3>
-                    Create your Groupshop by adding your favorite products from
-                    {' '}
-                    {gsctx?.store?.brandName}
-                  </h3>
+                  {isInfluencer ? (
+                    <h3>
+                      Add your favorite products from
+                      {' '}
+                      {gsctx?.store?.brandName}
+                      {' '}
+                      store
+                    </h3>
+                  ) : (
+                    <h3>
+                      Create your Groupshop by adding your favorite products from
+                      {' '}
+                      {gsctx?.store?.brandName}
+                    </h3>
+                  )}
                 </div>
               )
               : (
