@@ -78,6 +78,11 @@ const Screen1 = ({
       }));
       setscollections(store?.collections);
       setproducts(store?.products);
+      if (store?.products?.length === campaign?.products?.length) {
+        setAllProductChecked(true);
+      } else {
+        setAllProductChecked(false);
+      }
     } else if (ins === "addproduct") {
       // const searchArr = store?.newCampaign?.collections ? store?.newCampaign?.collections : campaign.collections
       setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
@@ -90,6 +95,11 @@ const Screen1 = ({
         products: store.newCampaign?.addableProducts ?? [],
         collections: store.newCampaign?.addableCollections ?? [],
       }));
+      if (store?.products?.length === campaign?.products?.length) {
+        setAllProductChecked(true);
+      } else {
+        setAllProductChecked(false);
+      }
     }
   }, [ins]);
 
@@ -244,6 +254,13 @@ const Screen1 = ({
     setParams({ ins: 2 });
   };
   console.log({ campaign });
+  React.useEffect(() => {
+    if (store?.products?.length === campaign?.products?.length) {
+      setAllProductChecked(true);
+    } else {
+      setAllProductChecked(false);
+    }
+  });
   // console.log({ store });
   // console.log({ selectedProducts });
   // console.log('....................');
