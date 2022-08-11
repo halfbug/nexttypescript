@@ -71,8 +71,7 @@ const OBWelcomeInfluencer = ({
           <div className={styles.welcome__modal__body__box2}>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
-              your Groupshop with friends and followers
-              <br />
+              your Groupshop with friends & followers
               to give them access to
               <strong>
                 {' '}
