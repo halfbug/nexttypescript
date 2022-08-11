@@ -67,15 +67,6 @@ const ProductsSearch = ({
     if (showSearch) { googleEventCode('product-search-modal'); }
   }, [showSearch]);
 
-  const handleClick = (event: any) => {
-    if (!allowSelectAll) {
-      setShow(!show);
-      setTarget(event.target);
-    } else {
-      getData!(selectedProducts, selected!);
-      handleClose(false);
-    }
-  };
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
 
   const {
@@ -115,16 +106,17 @@ const ProductsSearch = ({
     }
   }, [products, addedProducts]);
 
-  const [selected, setSelected] = useState<string[] | undefined>(undefined);
+  const [selected, setSelected] = useState<string[] | undefined>([]);
   const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
-  const clientDProducts = clientDealProducts();
+  const [selectedCountState, setselectedCountState] = useState<number>(0);
+  const clientDProducts: string[] = clientDealProducts() ?? [];
 
-  useEffect(() => {
-    if ((!selected || selected.length < 1)
-      && (clientDProducts !== undefined && clientDProducts?.length > 0)) {
-      setSelected(clientDealProducts());
-    }
-  }, [selected, clientDProducts]);
+  // useEffect(() => {
+  //   if ((!selected || selected.length < 1)
+  //     && (clientDProducts !== undefined && clientDProducts?.length > 0)) {
+  //     setSelected(clientDealProducts());
+  //   }
+  // }, [selected, clientDProducts]);
 
   useEffect(() => {
     if (setData) {
@@ -180,20 +172,38 @@ const ProductsSearch = ({
 
     if (searchText === '') { setotherProducts(undefined); }
   };
-  const selectedCount = selected?.length || 0;
+  // const selectedCountState = (selected?.length ?? 0 + clientDProducts?.length) || 0;
+  useEffect(() => {
+    if (selected?.length !== clientDealProducts()?.length) {
+      const cdp = clientDealProducts() ?? [];
+      const sp = selected ?? [];
+      setselectedCountState((cdp.length + sp.length));
+    }
+  }, [selected]);
+
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
   }
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
-  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect otherProducts', otherProducts);
-  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 73 ~ useEffect ~ otherProducts', products);
 
   const skipThisStep = () => {
     handleClose(false);
     if (shop && ownerCode && discountCode) {
       Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
+    }
+  };
+
+  const handleClick = (event: any) => {
+    if (selectedProducts.length > clientDealProducts.length) {
+      if (!allowSelectAll) {
+        setShow(!show);
+        setTarget(event.target);
+      } else {
+      getData!(selectedProducts, selected!);
+      handleClose(false);
+      }
     }
   };
 
@@ -210,7 +220,7 @@ const ProductsSearch = ({
       >
         {!isModalForMobile && !isCreateGS && (
           <Modal.Header className={styles.groupshop_modal__closebtnlg}>
-            <Row onClick={(e) => {
+            <Row onClick={(e: any) => {
               // handleClose(e);
               closeModal(e);
               // setShow(false);
@@ -242,7 +252,7 @@ const ProductsSearch = ({
                       Add up to 5 products
                     </span>
                     {[...new Array(5)].map((v, i) => (
-                      <li className={selectedCount > i
+                      <li className={clientDProducts && clientDProducts?.length > i
                         ? styles.groupshop_modal_search_meter_fill
                         : styles.groupshop_modal_search_meter}
                       >
@@ -266,11 +276,11 @@ const ProductsSearch = ({
                 type="text"
                 placeholder="Start your search..."
                 name="searchField"
-                onChange={(e) => handleSearch(e)}
+                onChange={(e: any) => handleSearch(e)}
                 // value={searchValue}
               />
               {isModalForMobile && (
-                <Row onClick={(e) => {
+                <Row onClick={(e: any) => {
                   closeModal(e);
                 }}
                 >
@@ -294,7 +304,7 @@ const ProductsSearch = ({
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
-                    <li className={selectedCount > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                    <li className={selectedCountState > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
                   ))}
                 </p>
               </div>
@@ -331,7 +341,7 @@ const ProductsSearch = ({
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={selectedCount === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              : <Button variant="outline-primary" disabled={selectedCountState === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
                           </>
                         )}
                       >
@@ -393,9 +403,9 @@ const ProductsSearch = ({
                 )
                 : (
                   <>
-                    {!isOwner && selected && (
+                    {!isOwner && selected && selected.length > 0 && (
                     <div className="pb-3">
-                      {selectedCount}
+                      {selected.length}
                       {' '}
                       product selected
                       {' '}
@@ -404,6 +414,7 @@ const ProductsSearch = ({
                     <Button
                       onClick={handleClick}
                       className="rounded-pill text-center text-uppercase px-5 fw-bold"
+                      disabled={selectedProducts?.length === 0}
                     >
                       ADD to groupshop
 
@@ -434,7 +445,7 @@ const ProductsSearch = ({
                         Add
                         <strong>
                           {' '}
-                          {selectedCount}
+                          {selectedCountState}
                           {' '}
                           products
                         </strong>

@@ -37,7 +37,7 @@ export default function useDeal() {
   const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
 
   const clientDealProducts = useCallback(
-    ():string[] | undefined => {
+    ():string[] => {
       const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
       // console.log('🚀 useDeal ~ addedPrds', addedPrds);
 
@@ -46,7 +46,7 @@ export default function useDeal() {
       )?.map(
         ({ productId }:DealProduct) => productId,
       ) ?? []]);
-    }, [clientIP, gsctx.dealProducts],
+    }, [gsctx.dealProducts, clientIP],
   );
   // check influencer customer
   const checkCustomerDealProducts = useCallback(

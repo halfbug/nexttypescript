@@ -454,7 +454,7 @@ const ProductDetail = ({
                         <Form.Select
                           aria-label="option"
                           className="w-50 text-capitalize"
-                          onChange={({ target: { value } }) => {
+                          onChange={({ target: { value } }: any) => {
                             setselOptions({ ...selOptions, [name]: value });
                           }}
                           value={selOptions?.[name]}
