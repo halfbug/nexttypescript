@@ -156,7 +156,7 @@ const ProductsSearch = ({
     setShow(false);
     setshowMsg('');
     setotherProducts(undefined);
-    setSelected(undefined);
+    setSelected([]);
     handleClose(e);
   };
   const addProducts = (prd: IProduct) => {
@@ -177,9 +177,10 @@ const ProductsSearch = ({
     if (selected?.length !== clientDealProducts()?.length) {
       const cdp = clientDealProducts() ?? [];
       const sp = selected ?? [];
+
       setselectedCountState((cdp.length + sp.length));
     }
-  }, [selected]);
+  }, [selected, showSearch]);
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -413,18 +414,18 @@ const ProductsSearch = ({
                 )
                 : (
                   <>
-                    {!isOwner && selected && selected.length > 0 && (
-                    <div className="pb-3">
-                      {selected.length}
-                      {' '}
-                      product selected
-                      {' '}
-                    </div>
-                    )}
+                    {!isOwner && selected && selected.length > 0 ? (
+                      <div className="pb-3">
+                        {selected.length}
+                        {' '}
+                        product selected
+                        {' '}
+                      </div>
+                    ) : (<div className="mt-1 pb-4">{' '}</div>)}
                     <Button
                       onClick={handleClick}
                       className="rounded-pill text-center text-uppercase px-5 fw-bold"
-                      disabled={selectedProducts?.length === 0}
+                      disabled={selected?.length === 0}
                     >
                       ADD to groupshop
 
