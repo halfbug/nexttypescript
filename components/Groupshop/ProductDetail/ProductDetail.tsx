@@ -50,6 +50,7 @@ const ProductDetail = ({
     // setSelected(undefined);
     handleClose(e);
   };
+  console.log(product);
   const { gsctx: { discountCode: { percentage } }, gsctx, isGroupshop } = useAppContext();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
@@ -117,6 +118,7 @@ const ProductDetail = ({
       // console.log(product.price, variantPrice);
     }
   }, [product]);
+  console.log('🚀 ~ file: ProductDetail.tsx ~ line 121 ~ product', product);
 
   const getVariant = () => {
     const { productById: dproduct } = data;
@@ -408,20 +410,20 @@ const ProductDetail = ({
                           </div>
                         </Col>
                       </Row>
-                    ) : ''}
+                    ) : (<></>)}
                   </h3>
-                  {/* {(productCustomers && productCustomers.length) ? (
+                  {(product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center ">
                       <p className="p-2 my-0 border border-danger rounded-3">
                         {' '}
                         <Icon />
                         {' '}
-                        {productCustomers.length}
-                        {' '}
+                        {product?.purchaseCount}
+                        {'+ '}
                         people have shopped this!
                       </p>
                     </div>
-                  ) : '' } */}
+                  ) : `${product?.title}` }
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
                     <ShowMoreText

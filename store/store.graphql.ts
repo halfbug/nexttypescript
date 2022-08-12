@@ -265,6 +265,7 @@ query Products($productQueryInput: ProductQueryInput!) {
     id
     title
     createdAtShopify
+    purchaseCount
     featuredImage
     description                             
     price
@@ -397,6 +398,7 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       description
+      purchaseCount
       price
       currencyCode
       outofstock
@@ -460,6 +462,7 @@ query Groupshop($code: String!, $status: String = "") {
         featuredImage
         description
         price
+        purchaseCount
         options{
       id
       name
@@ -486,6 +489,7 @@ query Groupshop($code: String!, $status: String = "") {
     featuredImage
     title
     description
+    purchaseCount
     price
     options{
       id
@@ -713,6 +717,7 @@ const GET_PRODUCT_DETAIL = gql`
   productById(id: $id) {
     id
     description
+    purchaseCount
     images{
       id
       src
