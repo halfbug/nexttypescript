@@ -37,11 +37,15 @@ const Analytics: NextPage = () => {
 
   useEffect(() => {
     if (uniqueData) {
-      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors;
+      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors || 0;
       const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
+        const clicktimes = 0.98;
+        const calTraffric = (clicktimes * numUniqueVisitors);
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
+        setTrafficValue('-');
         setUniqueClicks('-');
       }
       if (numOfOrder > 0) {
@@ -68,15 +72,7 @@ const Analytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (uniqueClicks !== '-' && uniqueClicks > 0) {
-          const clicktimes = 0.98;
-          const calTraffric = (clicktimes * uniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
       } else {
-        setTrafficValue('-');
         setNumPurchases('-');
         setRevenue('-');
         setAov('-');

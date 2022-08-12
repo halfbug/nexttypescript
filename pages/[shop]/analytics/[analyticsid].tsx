@@ -57,13 +57,16 @@ const CampaignAnalytics: NextPage = () => {
   useEffect(() => {
     if (uniqueData) {
       console.log('uniqueData');
-      const numUniqueVisitor = uniqueData?.getCampaignUniqueClicks?.uniqueVisitors;
+      const numUniqueVisitor = uniqueData?.getCampaignUniqueClicks?.uniqueVisitors || 0;
       const numOfOrders = uniqueData?.getCampaignUniqueClicks?.totalOrders;
       if (numUniqueVisitor > 0) {
         setUniqueClicks(numUniqueVisitor);
         setDefaultUniqueClicks(numUniqueVisitor);
+        const calTraffric = (clicktimes * numUniqueVisitor);
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setDefaultUniqueClicks('-');
+        setTrafficValue('-');
       }
       if (numOfOrders > 0) {
         setNumPurchases(numOfOrders);
@@ -89,14 +92,7 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (defaultUniqueClicks !== '-' && defaultUniqueClicks > 0) {
-          const calTraffric = (clicktimes * defaultUniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
       } else {
-        setTrafficValue('-');
         setNumPurchases('-');
         setRevenue('-');
         setAov('-');
@@ -117,11 +113,14 @@ const CampaignAnalytics: NextPage = () => {
   useEffect(() => {
     console.log('dataFilter');
     if (uniqueFiterData) {
-      const numUniqueVisitors = uniqueFiterData?.getUniqueCampaignClicks?.uniqueVisitors;
+      const numUniqueVisitors = uniqueFiterData?.getUniqueCampaignClicks?.uniqueVisitors || 0;
       const numOfOrder = uniqueFiterData?.getUniqueCampaignClicks?.totalOrders;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
+        const calTraffric = (clicktimes * numUniqueVisitors);
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
+        setTrafficValue('-');
         setUniqueClicks('-');
       }
       if (numOfOrder > 0) {
@@ -149,14 +148,7 @@ const CampaignAnalytics: NextPage = () => {
           const getAov = rev / numFilterPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (uniqueClicks !== '-' && uniqueClicks > 0) {
-          const calTraffric = (clicktimes * uniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
       } else {
-        setTrafficValue('-');
         setNumFilterPurchases('-');
         setRevenue('-');
         setAov('-');
