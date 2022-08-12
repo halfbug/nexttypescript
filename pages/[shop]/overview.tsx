@@ -41,7 +41,9 @@ const ShopMain: NextPage = () => {
       const logoS3 = await getSignedUrlS3(key);
       setbrandLogo(logoS3);
     }
-    gets3logo();
+    if (brandLogo === '') {
+      gets3logo();
+    }
   });
 
   const {
@@ -56,8 +58,12 @@ const ShopMain: NextPage = () => {
       const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders || 0;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
+        const clicktimes = 0.98;
+        const calTraffric = (clicktimes * numUniqueVisitors);
+        setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
       } else {
         setUniqueClicks('-');
+        setTrafficValue('-');
       }
       if (numOfOrder > 0) {
         setNumPurchases(numOfOrder);
@@ -84,13 +90,6 @@ const ShopMain: NextPage = () => {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
-        if (uniqueClicks !== '-' && uniqueClicks > 0) {
-          const clicktimes = 0.98;
-          const calTraffric = (clicktimes * uniqueClicks);
-          setTrafficValue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(calTraffric)}`);
-        } else {
-          setTrafficValue('-');
-        }
         if (cashBack > 0) {
           const calRogs = rev / cashBack;
           setRogs(`${formatNumber(calRogs)}X`);
@@ -98,7 +97,6 @@ const ShopMain: NextPage = () => {
           setRogs('-');
         }
       } else {
-        setTrafficValue('-');
         setNumPurchases('-');
         setRevenue('-');
         setAov('-');
