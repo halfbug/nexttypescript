@@ -1,0 +1,36 @@
+@import "./variables.scss";
+
+.InfoBox {
+   
+    &__getStarted {
+        @extend .mb-3;
+        font-family: 'Mulish';
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+        position: relative;
+    }
+
+    &__getStarted:after {
+        content: "";
+        display: block;
+        width: 15%;
+        height: 1px;
+        background: #E2E2E2;
+        top: 50%;
+        position: absolute;
+        left: 68%;
+    }
+
+    &__getStarted:before {
+        content: "";
+        display: block;
+        width: 15%;
+        height: 1px;
+        background: #E2E2E2;
+        top: 50%;
+        position: absolute;
+        right: 68%;
+    }
+}

@@ -8,6 +8,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
+import styles1 from 'styles/InfoBox.module.scss';
 import Cart from 'assets/images/cart.svg';
 import Face from 'assets/images/face.svg';
 import Envp from 'assets/images/envelop.svg';
@@ -79,7 +80,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               <strong>earn cashback and discounts.</strong>
             </p>
             <div className={styles.groupshop_infoBox_tostart}>
-              <h3>
+              <h3 className={[styles1.InfoBox__getStarted].join(' ')}>
                 To start earning
               </h3>
             </div>

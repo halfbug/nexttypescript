@@ -8,8 +8,9 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
+import styles1 from 'styles/InfoBox.module.scss';
 import Cart from 'assets/images/cart.svg';
-import CartCone from 'assets/images/cone-small.svg';
+import CartCone from 'assets/images/infocele.svg';
 import Envp from 'assets/images/envelop.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
@@ -94,7 +95,7 @@ const InfoBox = ({
               <strong>exclusive discounts.</strong>
             </p>
             <div className={styles.groupshop_infoBox_tostart}>
-              <h3>
+              <h3 className={[styles1.InfoBox__getStarted].join(' ')}>
                 To start earning
               </h3>
             </div>
