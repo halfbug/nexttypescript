@@ -8,6 +8,7 @@
   font-style: normal;
   font-size: 14px;
   line-height: 18px;
+  color:$black;
  }
  &_fontRegular{
     font-weight: 400 !important;
@@ -15,6 +16,7 @@
     font-style: normal;
     font-size: 14px;
     line-height: 18px;
+    color:$black;
    }
  &_BoxWidth{
     width: 280px;
@@ -32,6 +34,10 @@
         font-size: 14px;
         line-height: 20px;
         color: $black;
+
+        a{
+        color: $black;
+        }
     }
  }
 }

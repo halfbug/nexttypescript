@@ -1707,10 +1707,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .justify-content-center,
         .align-items-center,
         .justify-content-around,
-        .mb-2,
-        .mt-2;
+        .my-4;
     }
     &_f2_wrapper {
+      @extend .mt-5, .pt-3;
       @include media-breakpoint-down(md) {
         display: none;
       }

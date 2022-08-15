@@ -256,13 +256,13 @@ const Footer = ({
           </section>
         </Col>
       </Row>
-      {/* <Row className={styles.groupshop_footer_f2_wrapper}>
+      <Row className={styles.groupshop_footer_f2_wrapper}>
         <hr />
-        <div className={styles.groupshop_footer_f2}>
+        <div className={[styles.groupshop_footer_f2].join(' ')}>
           <p>Powered by</p>
           <img src={isExpired ? footerLogoExpire.src : footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
         </div>
-      </Row> */}
+      </Row>
       <AlertComponent />
     </Container>
 
