@@ -102,7 +102,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
       if (exitPartnerRecord === false) {
         const minDiscountVal = `${minDiscount}%`;
         const maxDiscountVal = `${maxDiscount}%`;
-        const newAverage = ((minDiscount! + maxDiscount!) / 2);
+        const newAverage = ((+minDiscount! + +maxDiscount!) / 2);
         const newAverageVal = `${newAverage}%`;
         const partnerCommissionVal = `${partnerCommission}%`;
         const partnerObj = await createPartner({
