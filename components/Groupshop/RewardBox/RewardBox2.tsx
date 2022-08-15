@@ -81,7 +81,20 @@ const RewardBox2 = ({
                 </div>
                 <div>
                   <p>
-                    <b>Shop</b>
+                    { isDesktop ? (
+                      <b>Shop</b>
+                    ) : (
+                      <div
+                        onClick={handleClose}
+                        onKeyUp={handleClose}
+                        onKeyDown={handleClose}
+                        role="button"
+                        tabIndex={0}
+                        className="d-inline"
+                      >
+                        <b>Shop</b>
+                      </div>
+                    )}
                     {' '}
                     exclusive discounts on this Groupshop
                     &
@@ -101,7 +114,29 @@ const RewardBox2 = ({
                 <div>
                   <p>
                     {' '}
-                    <b>Share</b>
+                    { isDesktop ? (
+                      <b>Share</b>
+                    ) : (
+                      <div
+                        onClick={() => navigator?.share({
+                          title: 'Groupshop',
+                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                        })}
+                        onKeyUp={() => navigator?.share({
+                          title: 'Groupshop',
+                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                        })}
+                        onKeyDown={() => navigator?.share({
+                          title: 'Groupshop',
+                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                        })}
+                        role="button"
+                        tabIndex={0}
+                        className="d-inline"
+                      >
+                        <b>Share</b>
+                      </div>
+                    )}
                     {' '}
                     this Groupshop and earn cashback when friends shop after you.
                   </p>
