@@ -225,6 +225,7 @@ const ProductDetail = ({
     // console.log('inside variant effect');
     if (data) {
       const { productById: dproduct } = data;
+      console.log('🚀 ~ file: ProductDetail.tsx ~ line 228 ~ useEffect ~ dproduct', dproduct);
       // console.log('inside variat data check');
       const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
 

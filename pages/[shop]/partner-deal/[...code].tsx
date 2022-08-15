@@ -123,7 +123,10 @@ const GroupShop: NextPage = () => {
 
         dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
         setpending(false);
-        setallProducts(partnerGroupshop?.allProducts);
+        // setallProducts(partnerGroupshop?.allProducts);
+        setallProducts(partnerGroupshop?.allProducts?.filter(
+          (item) => item.outofstock === false,
+        ));
         setbestSeller(partnerGroupshop?.bestSeller);
         // setmember(partnerGroupshop?.members[0]);
         if (partnerGroupshop?.campaign?.settings?.imageUrl) {
