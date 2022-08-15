@@ -2574,6 +2574,22 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       width: auto;
       bottom: 0;
       margin: 0;
+      &__top {
+        margin-top: 20px !important;
+      }
+      &__product{
+        &__name{
+          font-size: 14px !important;
+          line-height: 18px !important;
+        }
+        &__amounts{
+          font-size: 14px !important;
+          line-height: 18px !important;
+        }
+      }
+      &__orShare {
+        margin-top: 8px;
+      }
     }
     &__closebtnlg {
       @include media-breakpoint-down(sm) {
@@ -2594,6 +2610,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       display: flex;
       justify-content: center;
       border-bottom: none;
+      padding: 8px 16px;
       svg {
         cursor: pointer;
       }
@@ -2610,14 +2627,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__body {
       color: #000000;
       margin: 15px 60px;
-      padding: 0px 0px 60px 0px;
+      padding: 0px 0px 40px 0px;
       @include media-breakpoint-down(sm) {
         margin: 10px 15px;
-        padding: 0px 0px 30px 0px;
+        padding: 0px 0px 0px 0px;
       }
     }
     &__top {
       margin-bottom: 10px;
+      margin-top: 25px;
       h2 {
         @extend .mb-3;
         font-family: "DM Sans";
@@ -2627,13 +2645,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 31px;
         text-align: center;
         color: #000000;
+        margin-bottom: 33px !important;
         @include media-breakpoint-down(sm) {
           font-size: 22px;
         }
       }
       p {
         @extend .mx-3, .mb-0, .d-block;
-        font-family: "DM Sans";
+        font-family: "DM Sans" !important;
         font-style: normal;
         font-weight: 400 !important;
         font-size: 24px;
@@ -2651,6 +2670,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       column-gap: 10px;
       @include media-breakpoint-down(sm) {
         justify-content: center;
+        flex-direction: column;
       }
     }
     &__product{
@@ -2671,10 +2691,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 16px;
         line-height: 21px;
         margin-top: 4px;
+        font-family: 'DM Sans';
       }
       &__amounts{
         font-size: 16px;
         margin-top: 4px;
+        line-height: 21px;
         span{
           text-decoration-line: line-through;
           margin-left: 8px;
@@ -2684,6 +2706,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &__bottom{
       margin: 5px 80px;
+      margin-top: 20px;
       @include media-breakpoint-down(sm) {
         margin: 10px 0px;
       }
@@ -2691,12 +2714,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__info1,
     &__info2 {
       p {
-        font-family: "Mulish";
+        font-family: "Mulish" !important;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
         line-height: 24px;
         text-align: center;
+        color: #000000;
         @include media-breakpoint-down(sm) {
         }
       }
@@ -2708,12 +2732,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     }
     &__inviteBtn {
-      padding: 10px 40px;
+      padding: 8px 30px 8px 26px;
       font-family: "DM Sans";
       font-style: normal;
       font-weight: $font-weight-bolder;
       font-size: 18px;
-      line-height: 24px;
+      line-height: 23px;
       border-radius: 3px;
       box-shadow: none !important;
       border: 2px solid #ccb2f9 !important;
@@ -2722,6 +2746,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         background: #ccb2f9;
         color: #ffffff;
       }
+    }
+    &__orShare {
+      font-family: 'DM Sans';
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 17px;
+      text-align: center;
+      color: #282828;
     }
   }
   &_shopping_box_mobile {

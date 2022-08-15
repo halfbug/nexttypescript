@@ -180,14 +180,14 @@ const ExpiredBox = ({
                       placement="auto"
                       shareurl={shareUrl}
                       fullshareurl={shareUrl}
-                      label="Invite Now"
+                      label="🔗 Invite Now"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
                     />
                   ) : (
                     <NativeShareButton
-                      label="Invite Now"
+                      label="🔗 Invite Now"
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
                       shareurl={shareUrl}
                       text={`Shop ${brandname} on my Groupshop & get up to ${maxPercent} off`}
@@ -198,7 +198,7 @@ const ExpiredBox = ({
             </Col>
           </Row>
           <Row className="p-3">
-            <Col sm={12} className="d-flex justify-content-center">
+            <Col sm={12} className={styles.groupshop_expiredBox_modal__orShare}>
               or Share
             </Col>
             <Col sm={12} className="d-flex justify-content-center mt-3">
