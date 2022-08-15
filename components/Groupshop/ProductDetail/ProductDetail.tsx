@@ -62,6 +62,7 @@ const ProductDetail = ({
   const [addedbyname, setaddedbyname] = useState<string | undefined>('');
   const [activeURL, setActiveURL] = useState<string | undefined>('');
   const [cashBack, setCashBack] = useState<number>(0);
+  const [PDBtnText, setPDBtnText] = useState<string>('');
   const router = useRouter();
 
   const handleSelect = (selectedIndex: number, e: any) => {
@@ -196,6 +197,12 @@ const ProductDetail = ({
     if (data) { displayImage(); }
   }, [selOptions]);
 
+  useEffect(() => {
+    if (isExpired) setPDBtnText('Share to unlock');
+    else if (outofStock) setPDBtnText('Out of Stock');
+    else setPDBtnText('Add to Cart');
+  }, [outofStock, isExpired]);
+
   useEffect(() => { // if user select image it will select its options.
     if (data) {
       const { productById: dproduct } = data;
@@ -225,7 +232,6 @@ const ProductDetail = ({
     // console.log('inside variant effect');
     if (data) {
       const { productById: dproduct } = data;
-      console.log('🚀 ~ file: ProductDetail.tsx ~ line 228 ~ useEffect ~ dproduct', dproduct);
       // console.log('inside variat data check');
       const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
 
@@ -516,7 +522,8 @@ const ProductDetail = ({
                       {/* {outofStock && 'Out of Stock'}
                       {isExpired && 'Share to unlock'}
                       {!isExpired && 'Add to Cart'} */}
-                      {outofStock ? 'Out of Stock' : 'Add to Cart'}
+                      {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
+                      {PDBtnText}
                     </Button>
                     {isForMobile === false ? (
                       <Button
