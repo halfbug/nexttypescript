@@ -11175,6 +11175,7 @@ fsevents@^1.2.7:
     jest: ^27.2.5
     jquery: ^3.6.0
     moment: ^2.29.3
+    multiselect-react-dropdown: ^2.0.25
     next: 11.1.2
     next-images: ^1.8.2
     next-qrcode: ^2.0.0
@@ -14353,6 +14354,15 @@ fsevents@^1.2.7:
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
   checksum: aa92de608021b242401676e35cfa5aa42dd70cbdc082b916da7fb925c542173e36bce97ea3e804923fe92c0ad991434e4a38327e15a1b5b5f945d66df615ae6d
+  languageName: node
+  linkType: hard
+
+"multiselect-react-dropdown@npm:^2.0.25":
+  version: 2.0.25
+  resolution: "multiselect-react-dropdown@npm:2.0.25"
+  peerDependencies:
+    react: ^16.7.0 || ^17.0.0 || ^18.0.0
+  checksum: 1dbc249ef27776a39188fe79cbf250718e95229493ec42cfae136f930a1dccc35b046ccd3f16b2f405f3fae92247e095748bf819ffb5d7927d059e0090e4d3de
   languageName: node
   linkType: hard
 

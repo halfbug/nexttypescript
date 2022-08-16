@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from 'styles/GeneralForm.module.scss';
+import Multiselect from 'multiselect-react-dropdown';
 import {
   Col, Row, Form,
 } from 'react-bootstrap';
@@ -20,6 +21,9 @@ export function Industry(
   }
       : IAppProps,
 ) {
+  const updateIndustry = (value: any) => {
+    setFieldValue('industry', value);
+  };
   return (
     <section className={styles.generalform_greenbox}>
       <h4 className={styles.generalform_subheading}>Your Industry</h4>
@@ -28,45 +32,27 @@ export function Industry(
           This informs calculations for your Analytics page.
         </h6>
       </Row>
-      {/* <select
-        aria-label="Default select example"
-        name="industry"
-        className={styles.generalform__select}
-        onChange={(e) => {
-          handleForm('industry', e.currentTarget.value);
+      <Multiselect
+        isObject={false}
+        selectedValues={values.industry}
+        onKeyPressFn={(e) => {
+          updateIndustry(e);
         }}
-        defaultValue={values.industry}
-        value={values.industry}
-      >
-        <option>Click to select</option>
-        <option value="Clothing/Fashion">Clothing/Fashion</option>
-        <option value="Beauty & Self-Care">Beauty & Self-Care</option>
-        <option value="Accessories">Accessories</option>
-        <option value="Wellness">Wellness</option>
-        <option value="Home">Home</option>
-        <option value="Food & Beverage">Food & Beverage</option>
-        <option value="Outdoors">Outdoors</option>
-        <option value="Pets">Pets</option>
-      </select> */}
-      <Form.Select
-        aria-label="Default select example"
-        className={['mt-2', styles.generalform__select].join(' ')}
-        onChange={(e) => {
-          handleForm('industry', e.currentTarget.value);
+        onSearch={(e) => {
+          updateIndustry(e);
         }}
-        defaultValue={values.industry}
-        value={values.industry}
-      >
-        <option>Click to select</option>
-        <option value="Clothing/Fashion">Clothing/Fashion</option>
-        <option value="Beauty & Self-Care">Beauty & Self-Care</option>
-        <option value="Accessories">Accessories</option>
-        <option value="Wellness">Wellness</option>
-        <option value="Home">Home</option>
-        <option value="Food & Beverage">Food & Beverage</option>
-        <option value="Outdoors">Outdoors</option>
-        <option value="Pets">Pets</option>
-      </Form.Select>
+        onRemove={(e) => {
+          updateIndustry(e);
+        }}
+        onSelect={(e) => {
+          updateIndustry(e);
+        }}
+        options={[
+          'Womens Apparel', 'Mens Apparel', 'Kids & Baby', 'Womens footwear', 'Mens Footwear', 'Hair care',
+          'Wellness', 'Make up', 'Skin care', 'Self Care', 'Fitness', 'Food & Drink', 'Home & Garden',
+          'Outdoors', 'Womens Accessories', 'Mens Accessories', 'Jewelry', 'Fitness', 'Health',
+        ]}
+      />
     </section>
 
   );

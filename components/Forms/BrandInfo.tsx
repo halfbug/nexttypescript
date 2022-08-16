@@ -14,6 +14,7 @@ import { UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import UploadButton from 'components/Buttons/UploadBtn';
 import styles from 'styles/Step1.module.scss';
+import Multiselect from 'multiselect-react-dropdown';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
@@ -54,6 +55,9 @@ export default function BrandInfo() {
       .max(20, 'Too Long !! only 20 characters allowed.'),
 
   });
+  const updateIndustry = (value: any) => {
+    setFieldValue('industry', value);
+  };
 
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
@@ -152,28 +156,28 @@ export default function BrandInfo() {
       <Row>
         <Col lg={6}>
           {' '}
-          <InputGroup>
-            <select
-              className={['form-select', styles.welcome__select].join(' ')}
-              aria-label="Default select example"
-              onChange={handleChange}
-              name="industry"
-              defaultValue={values.industry}
-              value={values.industry}
-            >
-              <option className={styles.welcome_select} style={{ opacity: '0.1' }}>
-                Click to select
-              </option>
-              <option value="Clothing/Fashion">Clothing/Fashion</option>
-              <option value="Beauty & Self-Care">Beauty & Self-Care</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Wellness">Wellness</option>
-              <option value="Home">Home</option>
-              <option value="Food & Beverage">Food & Beverage</option>
-              <option value="Outdoors">Outdoors</option>
-              <option value="Pets">Pets</option>
-            </select>
-          </InputGroup>
+          <Multiselect
+            isObject={false}
+            selectedValues={values.industry}
+            className={['form-select', styles.welcome__select].join(' ')}
+            onKeyPressFn={(e) => {
+              updateIndustry(e);
+            }}
+            onSearch={(e) => {
+              updateIndustry(e);
+            }}
+            onRemove={(e) => {
+              updateIndustry(e);
+            }}
+            onSelect={(e) => {
+              updateIndustry(e);
+            }}
+            options={[
+              'Womens Apparel', 'Mens Apparel', 'Kids & Baby', 'Womens footwear', 'Mens Footwear', 'Hair care',
+              'Wellness', 'Make up', 'Skin care', 'Self Care', 'Fitness', 'Food & Drink', 'Home & Garden',
+              'Outdoors', 'Womens Accessories', 'Mens Accessories', 'Jewelry', 'Fitness', 'Health',
+            ]}
+          />
         </Col>
       </Row>
       <Row />
