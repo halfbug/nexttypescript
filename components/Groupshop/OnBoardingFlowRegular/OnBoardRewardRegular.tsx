@@ -234,7 +234,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                 {errors?.PhoneNumber}
               </Form.Control.Feedback>
               <div className={styles.reward__modal__body__checkArea__txt1}>
-                By checking this box, you agree to receive recurring personalized marketing text
+                By entering your number, you agree to receive recurring personalized marketing text
                 messages from Groupshop at the cell number entered below. Msg & data rates may
                 apply. View Terms & Privacy
               </div>
@@ -274,7 +274,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             Skip for now
           </div>
           <div className={styles.reward__modal__body__btnskipMobie} onClick={() => { handleClose(); }} onKeyDown={() => { handleClose(); }} role="button" tabIndex={0}>
-            Skip to shop
+            Skip for now
           </div>
         </Modal.Body>
 
