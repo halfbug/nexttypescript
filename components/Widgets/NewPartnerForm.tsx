@@ -35,7 +35,11 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
   const [
     createPartner,
     { loading, error },
-  ] = useMutation<IPartnerTools>(CREATE_PARTNER_DB);
+  ] = useMutation<IPartnerTools>(CREATE_PARTNER_DB, {
+    onError() {
+      showError('Campaign is being created, Please try after sometime!');
+    },
+  });
   const { store, dispatch } = React.useContext(StoreContext);
   const storeId = store.id;
   const handleForm = (field: string, value: string) => {
