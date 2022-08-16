@@ -32,6 +32,7 @@ export default function CampaignSocialMedia({
   const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
   const [field, setfield] = React.useState('instagram');
+  const [isValidURL, setIsValidURL] = React.useState<any>({});
 
   const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   console.log({ errors });
@@ -39,6 +40,31 @@ export default function CampaignSocialMedia({
 
     width: '248px',
   };
+
+  const URLValidator = (URI: string) => {
+    const URI_LIST = [
+      {
+        key: 'instagram',
+        url: 'https://www.instagram.com/',
+      },
+      {
+        key: 'facebook',
+        url: 'https://www.facebook.com/',
+      },
+      {
+        key: 'twitter',
+        url: 'https://www.twitter.com/',
+      },
+      {
+        key: 'tiktok',
+        url: 'https://www.tiktok.com/',
+      },
+    ];
+    const temp = URI.includes(URI_LIST.find((ele) => ele.key === smUrl)?.url!);
+    setIsValidURL({ ...isValidURL, [smUrl]: temp });
+    return temp;
+  };
+
   return (
 
     <>
@@ -88,6 +114,7 @@ export default function CampaignSocialMedia({
               onChange={(e) => {
                 // setval(e.currentTarget.value);
                 setfield('instagram');
+                URLValidator(e.currentTarget.value);
                 handleForm('instagram', e.currentTarget.value);
               }}
               className={smUrl === 'instagram' ? 'd-block' : 'd-none'}
@@ -97,17 +124,18 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter instagram account URL..."
               value={values.instagram}
-              isInvalid={!!errors.instagram}
+              isInvalid={!isValidURL[smUrl]}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.instagram}
+              {smUrl === 'instagram' && errors[smUrl]}
             </Form.Control.Feedback>
 
             <Form.Control
               onChange={(e) => {
+                setfield('tiktok');
+                URLValidator(e.currentTarget.value);
                 handleForm('tiktok', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                setfield('tiktok');
                 // debouncedSearch('tiktok', e.currentTarget.value);
               }}
               className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
@@ -118,16 +146,18 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter tiktok account URL..."
               value={values.tiktok}
-              isInvalid={!!errors.tiktok}
+              isInvalid={!isValidURL[smUrl]}
+
             />
             <Form.Control.Feedback type="invalid">
-              {errors.tiktok}
+              {smUrl === 'tiktok' && errors[smUrl]}
             </Form.Control.Feedback>
             <Form.Control
               onChange={(e) => {
+                setfield('twitter');
+                URLValidator(e.currentTarget.value);
                 handleForm('twitter', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                setfield('twitter');
                 // debouncedSearch('twitter', e.currentTarget.value);
               }}
               className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
@@ -138,10 +168,10 @@ export default function CampaignSocialMedia({
               size="lg"
               placeholder="Enter twitter account URL..."
               value={values.twitter}
-              isInvalid={!!errors.twitter}
+              isInvalid={!isValidURL[smUrl]}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.twitter}
+              {smUrl === 'twitter' && errors[smUrl]}
             </Form.Control.Feedback>
             <Form.Control
               className={smUrl === 'facebook' ? 'd-block' : 'd-none'}
@@ -151,24 +181,25 @@ export default function CampaignSocialMedia({
               type="text"
               size="lg"
               onChange={(e) => {
+                setfield('facebook');
+                URLValidator(e.currentTarget.value);
                 handleForm('facebook', e.currentTarget.value);
                 // setval(e.currentTarget.value);
-                setfield('facebook');
                 // debouncedSearch('facebook', e.currentTarget.value);
               }}
               placeholder="Enter facebook account URL..."
               value={values.facebook}
-              isInvalid={!!errors.facebook}
+              isInvalid={!isValidURL[smUrl]}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.facebook}
+              {smUrl === 'facebook' && errors[smUrl]}
             </Form.Control.Feedback>
             {/* <Form.Control.Feedback type="invalid">
                 {errors.brandName}
               </Form.Control.Feedback> */}
 
           </Form.Group>
-          {(errors[field] !== undefined) ? (
+          {isValidURL[smUrl] ? (
             <IconButton
               icon={<CheckCircle size={18} color="green" />}
             />
