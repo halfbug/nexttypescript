@@ -111,7 +111,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           <div className={styles.welcome__modal__body__icons}>🛒   📩   🤑</div>
           <div className={styles.welcome__modal__body__getStarted}>
             {/* 3 steps to get started */}
-            How it works
+            How it Works
           </div>
           {/* <div className={styles.welcome__modal__body__box1}>
             <p className={styles.welcome__modal__body__description}>
@@ -203,10 +203,10 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
 
           <div className="d-flex justify-content-center my-4">
             <Button
-              className={styles.welcome__modal__body__btn}
+              className={[styles.welcome__modal__body__btn].join(' ')}
               onClick={moveForward}
             >
-              Get Started
+              Customize
             </Button>
 
             <Button

@@ -75,6 +75,9 @@
                 font-size: 18px;
                 line-height: 23px;
                 text-align: center;
+                strong{
+                    font-weight: 700;
+                }
             }
 
             &__descriptionSmall {
@@ -95,7 +98,7 @@
             }
 
             &__btn {
-                @extend .px-3, .py-1;
+                @extend .px-5, .py-1;
                 width: fit-content;
                 height: 42.96px;
                 box-shadow: none !important;
@@ -144,7 +147,7 @@
                 background: #E2E2E2;
                 top: 50%;
                 position: absolute;
-                left: 62%;
+                left: 70%;
             }
 
             &__getStarted:before {
@@ -155,7 +158,7 @@
                 background: #E2E2E2;
                 top: 50%;
                 position: absolute;
-                right: 62%;
+                right: 70%;
             }
 
             &__box1 {
@@ -180,7 +183,7 @@
                 padding: 23px 45px;
                 border: 1px dashed #9AB639;
                 border-radius: 12px;
-                margin-top: 15px;
+                margin-top: 20px;
 
                 &__p2 {
                     margin-top: 10px;
