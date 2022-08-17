@@ -1,10 +1,13 @@
 import Button from 'components/Buttons/Button/Button';
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 import styles from 'styles/OnBoardingFlowRegular.module.scss';
 // import GroupshopIcon from 'assets/images/groupshop-icon.svg';
 // import useLogo from 'hooks/useLogo';
 import useAppContext from 'hooks/useAppContext';
+
+import GSLogo from 'assets/images/logosmall.svg';
 
 interface OBProps {
   show: boolean;
@@ -23,6 +26,9 @@ const OBWelcomeInfluencer = ({
     setshowob1(false);
     setshowps(true);
   };
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 476px)',
+  });
   return (
     <>
       <Modal
@@ -39,11 +45,28 @@ const OBWelcomeInfluencer = ({
           <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />
         </div>
         <Modal.Body className={styles.welcome__modal__body}>
+          {!isDesktop && (
+          <div className={styles.welcome__modal__body__top}>
+            <div className={styles.welcome__modal__body__top__leftTxt}>
+              <img
+                src={gsctx?.store?.logoImage}
+                alt={gsctx?.store?.brandName}
+                          // alt="d"
+                className="img-fluid"
+              />
+
+            </div>
+            <div className={styles.welcome__modal__body__top__vertical_seprator} />
+            <div className={styles.welcome__modal__body__top__right}>
+              <GSLogo />
+            </div>
+          </div>
+          )}
           <h2 className={styles.welcome__modal__body__welcomeTxt}>
             Welcome to Groupshop!
           </h2>
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
-            Welcome to Groupshop!
+            New to Groupshop?
           </h2>
           {/* <div className={styles.welcome__modal__body__description}>
             The
@@ -54,15 +77,8 @@ const OBWelcomeInfluencer = ({
             <strong> earn 100% cashback and discounts. </strong>
           </div> */}
           <div className={styles.welcome__modal__body__descriptionMobile}>
-            The
-            <strong> personalized store</strong>
-            where you and your friends
-            <strong>shop together </strong>
-            and
-            <strong>earn real cashback and discounts.</strong>
-            {/* {' '}
-            {gsctx.store?.brandName}
-            : */}
+            Here are the two ways you can earn rewards with
+            {gsctx?.store?.brandName}
           </div>
           <div className={styles.welcome__modal__body__getStarted}>
             {/* 3 steps to get started */}
@@ -104,19 +120,34 @@ const OBWelcomeInfluencer = ({
           </div>
 
           <div className={styles.welcome__modal__body__boxMobile}>
-            <p className={styles.welcome__modal__body__boxMobile__txt}>
-              {/* <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div> */}
+            <div className={styles.welcome__modal__body__boxMobile__txt}>
+              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div>
               <div>
-                Using Groupshop, you can
+                <strong> Shop </strong>
+                {gsctx?.store?.brandName}
                 {' '}
-                <strong>earn up to 100% cashback </strong>
-                on your recent
-                {' '}
-                {gsctx.store?.brandName}
-                {' '}
-                order.
+                - you and your firends get
+                <strong>
+                  {' '}
+                  {gsctx.discountCode.percentage}
+                  {' '}
+                  % off
+                  {' '}
+                </strong>
+                your order
               </div>
-            </p>
+            </div>
+          </div>
+          <div className={styles.welcome__modal__body__boxMobile}>
+            <div className={styles.welcome__modal__body__boxMobile__txt}>
+              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div>
+              <div>
+                <strong> Share </strong>
+                this group shop and
+                <strong> earn 100% cashback </strong>
+                on your order when friends shop
+              </div>
+            </div>
           </div>
         </Modal.Body>
         <hr className={styles.welcome__modal__body__horizontal_seprator} />
@@ -139,17 +170,22 @@ const OBWelcomeInfluencer = ({
               className={styles.welcome__modal__body__btnMobile}
               onClick={handleNext}
             >
-              Customize Groupshop
+              Get Started
             </Button>
           </div>
           {/* <div className={styles.welcome__modal__body__btnskip}
           onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
             Skip for now
-          </div>
-          <div className={styles.welcome__modal__body__btnskipMobie}
-          onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
+        </div> */}
+          <div
+            className={styles.welcome__modal__body__btnskipMobie}
+            // onClick={handleClose}
+            // onKeyDown={handleClose}
+            // role="button"
+            // tabIndex={0}
+          >
             Skip to shop
-          </div> */}
+          </div>
         </Modal.Body>
 
       </Modal>

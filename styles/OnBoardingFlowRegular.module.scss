@@ -2,7 +2,6 @@
 .welcome {
     &__modal {
         min-width: 745px;
-        margin-top: 50px !important;
 
         &__content {
             border-radius: 12px;
@@ -290,17 +289,15 @@
 
     @media (max-width: 425px) {
         &__modal {
-            min-width: 100%;
+            //min-width: 100%;
+            width: auto;
+            bottom: 0;
             margin: 0;
-            position: fixed;
-            bottom: -50px;
-            margin-top: 60px !important;
 
             &__content {
-                border-top-left-radius: 21px;
-                border-top-right-radius: 21px;
-                border-bottom-left-radius: 0px;
-                border-bottom-right-radius: 0px;
+                border-radius: 12px 12px 0px 0px;
+                position: fixed;
+                bottom: 0;
             }
 
             &__imgBox {
@@ -323,6 +320,22 @@
 
                 &__mainiconMobile {
                     width: 50px;
+                }
+
+                &__top{
+                    margin: 30px 60px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    &__leftTxt{
+                        font-size: 24px;
+                    }
+                    &__vertical_seprator {
+                        border-left: 1px solid rgba(0, 0, 0, 0.1);
+                        height: 32px;
+                        margin-left: 10px;
+                        margin-right: 16px;
+                    }
                 }
 
                 &__welcomeTxt {
@@ -350,7 +363,7 @@
                     font-size: 14px;
                     line-height: 18px;
                     text-align: center;
-                    color: #333333;
+                    color: $black;
                     padding: 0 31px;
                     margin-bottom: 23px;
                 }
@@ -402,7 +415,7 @@
                 }
 
                 &__horizontal_seprator {
-                    display: block;
+                    display: none;
                 }
 
                 &__boxMobile {
@@ -419,7 +432,7 @@
                         font-size: 16px;
                         color: #000000;
                         display: flex;
-                        text-align: center;
+                        text-align: start;
 
                         &__icon {
                             margin-right: 16px;
@@ -460,7 +473,7 @@
                     text-align: center;
                     text-decoration-line: underline;
                     color: #000000;
-                    margin-bottom: 27px
+                    margin-bottom: 30px
                 }
             }
         }
