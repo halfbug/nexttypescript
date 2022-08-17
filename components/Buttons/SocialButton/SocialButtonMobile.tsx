@@ -12,10 +12,11 @@ import { CustomPropsType } from 'types/groupshop';
 type SocialButtonProps = React.PropsWithChildren<{
   network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
   url: string;
+  text?: string;
 }>;
 
 const SocialButtonMobile = ({
-  url, network, children, ...props
+  url, network, text, children, ...props
 }: SocialButtonProps & CustomPropsType) => (
 
   <Button
@@ -30,7 +31,7 @@ const SocialButtonMobile = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -41,7 +42,7 @@ const SocialButtonMobile = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -52,7 +53,7 @@ const SocialButtonMobile = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -63,7 +64,7 @@ const SocialButtonMobile = ({
         className="fs-3 fw-bold"
         onClick={() => navigator?.share({
           title: 'Groupshop',
-          text: `Send special discounts to your friends by sharing this ${url}`,
+          text: `${text} ${url}`,
         })}
       />
       )}
@@ -74,7 +75,7 @@ const SocialButtonMobile = ({
         className="fs-3 fw-bold"
         onClick={() => navigator?.share({
           title: 'Groupshop',
-          text: `Send special discounts to your friends by sharing this ${url}`,
+          text: `${text} ${url}`,
         })}
       />
       )}
@@ -85,7 +86,7 @@ const SocialButtonMobile = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -96,7 +97,7 @@ const SocialButtonMobile = ({
         className="fs-3 fw-bold"
         onClick={() => navigator?.share({
           title: 'Groupshop',
-          text: `Send special discounts to your friends by sharing this ${url}`,
+          text: `${text} ${url}`,
         })}
       />
       )}
@@ -104,8 +105,8 @@ const SocialButtonMobile = ({
   </Button>
 );
 
-// SocialButton.defaultProps = {
-//   message: undefined,
-// };
+SocialButtonMobile.defaultProps = {
+  text: '',
+};
 
 export default SocialButtonMobile;

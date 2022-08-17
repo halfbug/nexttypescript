@@ -17,6 +17,7 @@ export const gsInit: IGroupshop = {
   totalProducts: 0,
   url: '',
   shortUrl: '',
+  exipredShortLink: '',
   createdAt: new Date(),
   expiredAt: new Date(),
   discountCode: {

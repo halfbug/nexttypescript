@@ -36,7 +36,8 @@ const ExpiredBox = ({
   });
 
   const [show, setShow] = useState(false);
-  const { dPrice } = useDeal();
+  const { dPrice, shortActivateURL } = useDeal();
+  console.log('🚀 ~ file: ExpiredBox.tsx ~ line 40 ~ shortActivateURL', shortActivateURL);
 
   useEffect(() => {
     if (show) { googleEventCode('how-it-works-modal'); }
@@ -189,7 +190,7 @@ const ExpiredBox = ({
                     <NativeShareButton
                       label="🔗 Invite Now"
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
-                      shareurl={shareUrl}
+                      shareurl={shortActivateURL}
                       text={`Shop ${brandname} on my Groupshop & get up to ${maxPercent} off`}
                     />
                   )

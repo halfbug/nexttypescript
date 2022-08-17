@@ -180,6 +180,8 @@ export interface IGroupshop {
   refferalProducts?: Product[];
 
   influencerProducts?: Product[];
+
+  exipredShortLink?: string;
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;

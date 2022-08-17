@@ -7,7 +7,7 @@ import Cross from 'assets/images/cross.svg';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { RootProps } from 'types/store';
 import useDeal from 'hooks/useDeal';
-import SocialButton from '../Buttons/SocialButton/SocialButton';
+import useSharetext from 'hooks/useSharetext';
 import SocialButtonMobile from '../Buttons/SocialButton/SocialButtonMobile';
 
 interface LinkShareMobileProps extends RootProps {
@@ -22,6 +22,7 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
   const closeModal = (e: any) => {
     handleClose(e);
   };
+  const { socialText } = useSharetext();
   return (
     <>
       {/* <div role="button" tabIndex={0}>onbaording share mobile</div> */}
@@ -47,11 +48,11 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
           </div>
           <CopyToClipboard value={shareurl} />
           <div className={styles.linkShare__modal__body__social_icons}>
-            <SocialButtonMobile network="Email" url={shareurl} />
-            <SocialButtonMobile network="Instagram" url={shareurl} />
-            <SocialButtonMobile network="Pinterest" url={shareurl} media={banner} />
-            <SocialButtonMobile network="Twitter" url={shareurl} />
-            <SocialButtonMobile network="Facebook" url={shareurl} />
+            <SocialButtonMobile text={socialText} network="Email" url={shareurl} />
+            <SocialButtonMobile text={socialText} network="Instagram" url={shareurl} />
+            <SocialButtonMobile text={socialText} network="Pinterest" url={shareurl} media={banner} />
+            <SocialButtonMobile text={socialText} network="Twitter" url={shareurl} />
+            <SocialButtonMobile text={socialText} network="Facebook" url={shareurl} />
           </div>
           <Button
             className={styles.linkShare__modal__body__share_btn}

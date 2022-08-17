@@ -389,6 +389,7 @@ query Groupshop($code: String!, $status: String = "") {
     id
     url
     shortUrl
+    exipredShortLink
     milestones{
       discount
       activatedAt

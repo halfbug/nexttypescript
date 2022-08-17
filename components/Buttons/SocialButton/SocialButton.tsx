@@ -12,10 +12,11 @@ import { CustomPropsType } from 'types/groupshop';
 type SocialButtonProps = React.PropsWithChildren<{
   network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
   url: string;
+  text?: string;
 }>;
 
 const SocialButton = ({
-  url, network, children, ...props
+  url, network, text, children, ...props
 }: SocialButtonProps & CustomPropsType) => (
 
   <Button
@@ -30,7 +31,7 @@ const SocialButton = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -41,7 +42,7 @@ const SocialButton = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -50,7 +51,10 @@ const SocialButton = ({
       && (
         <FacebookShareButton
           url={url}
-          quote="Send special discounts to your friends by sharing this Groupshop page with them. If you also shopped from this page, you’ll earn cashback every time they shop with you."
+          // quote="Send special discounts to your friends by sharing this
+          // Groupshop page with them. If you also shopped from this page,
+          // you’ll earn cashback every time they shop with you."
+          quote={`${text} ${url}`}
           hashtag="#Groupshop"
           // description="aiueo"
           className="Demo__some-network__share-button"
@@ -63,7 +67,8 @@ const SocialButton = ({
       && (
         <PinterestShareButton
           media={props.media}
-          title="Groupshop"
+          // title="Groupshop"
+          title={`${text}`}
           url={url}
         >
           <Pinterest className="fs-3 fw-bold" />
@@ -73,7 +78,8 @@ const SocialButton = ({
     {network === 'Twitter'
       && (
         <TwitterShareButton
-          title="Groupshop"
+          // title="Groupshop"
+          title={`${text}`}
           url={url}
           hashtags={['groupshop', 'shopwithfriends']}
         >
@@ -87,7 +93,7 @@ const SocialButton = ({
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
             title: 'Groupshop',
-            text: `Send special discounts to your friends by sharing this ${url}`,
+            text: `${text} ${url}`,
           })}
         />
       )}
@@ -96,7 +102,7 @@ const SocialButton = ({
       && (
         <EmailShareButton
           subject="Groupshop"
-          body="Send special discounts to your friends by sharing your Groupshop"
+          body={`${text}`}
           url={url}
         >
           <Chat className="fs-3 fw-bold" />
@@ -106,8 +112,8 @@ const SocialButton = ({
   </Button>
 );
 
-// SocialButton.defaultProps = {
-//   message: undefined,
-// };
+SocialButton.defaultProps = {
+  text: '',
+};
 
 export default SocialButton;
