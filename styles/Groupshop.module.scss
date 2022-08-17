@@ -1635,6 +1635,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
 
+  &_expiremodal {
+      font-size: 16px;
+      margin: 0;
+  }
+
   &_search {
     height: 300px;
     overflow-y: scroll;

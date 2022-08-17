@@ -54,6 +54,7 @@ import useDeal from 'hooks/useDeal';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 import InfoBox from 'components/Influencer/InfoBox/InfoBox';
+import ExpireModal from 'components/Influencer/ExpireModal/ExpireModal';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer';
