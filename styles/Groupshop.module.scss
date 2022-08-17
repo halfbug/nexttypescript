@@ -1299,8 +1299,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           opacity: 0.1;
         }
         &_meter {
-          @include media-breakpoint-up(sm) {
-            display: none;
+          p{
+            font-size: 10px
           }
         }
       }

@@ -310,7 +310,17 @@ const ProductsSearch = ({
                 {' '}
                 results found
               </p>
-              { !isCreateGS && (
+              {isModalForMobile && (!isCreateGS || isInfluencer) && (
+              <div className={styles.groupshop_modal_search_body_meter}>
+                <p className="text-muted d-flex justify-content-end align-items-center">
+                  Add up to 5 products
+                  {[...new Array(5)].map((v, i) => (
+                    <li className={selectedCountState > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                  ))}
+                </p>
+              </div>
+              )}
+              {!isModalForMobile && isInfluencer && (
               <div className={styles.groupshop_modal_search_body_meter}>
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products

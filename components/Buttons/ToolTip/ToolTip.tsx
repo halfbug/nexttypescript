@@ -10,6 +10,7 @@ export type ToolTipProps ={
   // displayIcon?: boolean;
   icon?: React.ReactNode | undefined;
   label?: string | undefined;
+  trigger?: [] | Array<'hover' | 'click' |'focus'>;
 } & React.ComponentPropsWithoutRef<'button'>
 
 const Popcomp = (content: React.ReactNode, popoverClassName: string) => (
@@ -23,10 +24,10 @@ const Popcomp = (content: React.ReactNode, popoverClassName: string) => (
 );
 
 const ToolTip = ({
-  label, popContent, className, popoverClassName, icon, placement, disabled,
+  label, popContent, className, popoverClassName, icon, placement, disabled, trigger,
 }: ToolTipProps) => (
   <OverlayTrigger
-    trigger={['hover', 'focus', 'click']}
+    trigger={trigger}
     // delay={{ show: 250, hide: 400 }}
     rootClose
     placement={placement ?? 'right'}
@@ -48,6 +49,7 @@ ToolTip.defaultProps = {
   placement: 'right',
   popContent: undefined,
   label: '',
+  trigger: ['hover', 'focus', 'click'],
 };
 
 export default ToolTip;
