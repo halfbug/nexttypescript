@@ -310,8 +310,8 @@ const ProductsSearch = ({
                 {' '}
                 results found
               </p>
-              {isModalForMobile && (!isCreateGS || isInfluencer) && (
-              <div className={styles.groupshop_modal_search_body_meter}>
+              {isModalForMobile && (isCreateGS || isInfluencer) && (
+              <div className={['d-inline', styles.groupshop_modal_search_body_meter].join(' ')}>
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
@@ -320,9 +320,9 @@ const ProductsSearch = ({
                 </p>
               </div>
               )}
-              {!isModalForMobile && isInfluencer && (
+              {!isModalForMobile && (isInfluencer || isCreateGS) && (
               <div className={styles.groupshop_modal_search_body_meter}>
-                <p className="text-muted d-flex justify-content-end align-items-center">
+                <p className="d-inline text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
                     <li className={selectedCountState > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
