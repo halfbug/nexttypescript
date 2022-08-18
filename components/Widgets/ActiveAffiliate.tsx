@@ -33,6 +33,7 @@ const ActiveAffiliate = ({
   const [partnerId, setPartnerId] = useState('');
   const [partnerCommission, setPartnerCommission] = useState('');
   const [showSidebar, setshowSidebar] = React.useState(true);
+  const [groupshopLink, setGroupshopLink] = useState('');
   const [partnerRewards, setpartnerRewards] = useState({
     minDiscount: '',
     maxDiscount: '',
@@ -93,9 +94,11 @@ const ActiveAffiliate = ({
     const currentPartner: any = partnerList?.filter(
       (item: any) => item.id === id,
     );
+    console.log(JSON.stringify(currentPartner[0]));
     setPartnerId(id);
     setPartnerCommission(currentPartner[0].partnerCommission.replace('%', ''));
     setPartnerDetails(currentPartner[0].partnerDetails);
+    setGroupshopLink(currentPartner[0].shortUrl);
     setShowAffiliateDetail(true);
     setshowSidebar(false);
     setpartnerRewards({
@@ -241,6 +244,7 @@ const ActiveAffiliate = ({
         <AffiliateDetail
           handleAfterSubmit={handleAfterSubmit}
           partnerId={partnerId}
+          groupshopLink={groupshopLink}
           partnerCommission={partnerCommission}
           partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}

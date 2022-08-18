@@ -17,12 +17,14 @@ import * as yup from 'yup';
 import { IPartnerTools } from 'types/store';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import InfoIcon from 'assets/images/info-icon.svg';
+import Link from 'next/link';
 
 interface AffiliateProps {
   handleAfterSubmit: any;
   partnerId: string;
   partnerCommission: string;
   partnerDetails: any;
+  groupshopLink: string;
   discountDetails: any;
   partnerRewards: any;
   showSidebar:boolean;
@@ -31,7 +33,7 @@ interface AffiliateProps {
 
 export default function AffiliateDetail({
   handleAfterSubmit, partnerId, partnerCommission, partnerDetails, discountDetails,
-  partnerRewards, showSidebar, setshowSidebar,
+  partnerRewards, showSidebar, setshowSidebar, groupshopLink,
 }
    : AffiliateProps) {
   const { store, dispatch } = useContext(StoreContext);
@@ -321,7 +323,7 @@ export default function AffiliateDetail({
               </Col>
               <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
                 <div className={styles.partner__btn}>
-                  <span>View Groupshop</span>
+                  <Link href={groupshopLink}><a target="_blank">View Groupshop</a></Link>
                   {' '}
                   <ArrowRightLogo />
                 </div>
