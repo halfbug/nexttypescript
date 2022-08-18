@@ -30,7 +30,7 @@ const useTopPicks = () => {
     const finalTP = filterArray(newProd2, popularProducts ?? [], 'id', 'id');
     setTopPicks([...finalTP]);
   }, [gsctx]);
-  // console.log({ topPicks });
+  console.log({ topPicks });
 
   return {
     topPicks,

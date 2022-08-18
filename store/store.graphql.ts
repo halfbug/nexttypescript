@@ -994,6 +994,7 @@ query PartnerGroupshop($code: String!) {
       featuredImage
       title
       description
+      purchaseCount
       price
       options{
         id
@@ -1023,6 +1024,7 @@ query PartnerGroupshop($code: String!) {
       description
       price
       currencyCode
+      purchaseCount
       outofstock
       options{
         id
@@ -1088,6 +1090,7 @@ query PartnerGroupshop($code: String!) {
     featuredImage
     title
     description
+    purchaseCount
     price
     options{
       id
