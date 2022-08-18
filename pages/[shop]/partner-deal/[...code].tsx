@@ -102,6 +102,7 @@ const GroupShop: NextPage = () => {
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
+  const [showExpiredModel, setShowExpiredModel] = useState<boolean>(false);
   const [storeLogo, setStoreLogo] = useState<string>('');
   const [bannerImage, setBannerImage] = useState<string>('');
   const [partnerMembers, setpartnerMembers] = useState<PartnerMember[]>([{
@@ -129,6 +130,8 @@ const GroupShop: NextPage = () => {
           (item) => item.outofstock === false,
         ));
         setbestSeller(partnerGroupshop?.bestSeller);
+        const expireStatus = partnerGroupshop?.isActive !== true;
+        setShowExpiredModel(expireStatus);
         // setmember(partnerGroupshop?.members[0]);
         if (partnerGroupshop?.campaign?.settings?.imageUrl) {
           const key = getKeyFromS3URL(partnerGroupshop?.campaign?.settings?.imageUrl ?? '');
@@ -807,6 +810,12 @@ const GroupShop: NextPage = () => {
           name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
         />
         ) }
+        <ExpireModal
+          storeId={gsctx?.storeId}
+          storeLogo={storeLogo}
+          showExpiredModel={showExpiredModel}
+          setShowExpiredModel={setShowExpiredModel}
+        />
         {/* <RewardBox2
           show={showRewards}
           discount={discount}

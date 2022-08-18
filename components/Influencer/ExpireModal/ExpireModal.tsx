@@ -10,37 +10,63 @@ import styles from 'styles/Groupshop.module.scss';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
 import ArrowDown from 'assets/images/arrow-down.svg';
+import { GET_ACTIVE_GROUPSHOP_BY_SHOP } from 'store/store.graphql';
+import { useQuery } from '@apollo/client';
 import useGtm from 'hooks/useGtm';
+import { string } from 'yup';
+import Link from 'next/link';
 
 interface mesProps {
-  showRewards?: boolean;
-  setShowRewards?: any;
+  storeId? : string;
+  storeLogo? : string;
+  showExpiredModel?: boolean;
+  setShowExpiredModel?: any;
 }
 const InfoBox = ({
-  showRewards, setShowRewards,
+  showExpiredModel, setShowExpiredModel, storeLogo, storeId,
 }: mesProps) => {
   const [show, setShow] = useState(false);
+  const [groupShopURL, setGroupShopURL] = useState<string>('');
+  const [groupShopError, setGroupShopError] = useState<string>('');
 
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
   useEffect(() => {
-    if (showRewards) { setShow(true); }
-  }, [showRewards]);
+    if (showExpiredModel) { setShow(true); }
+  }, [showExpiredModel]);
 
   const { googleEventCode } = useGtm();
   useEffect(() => {
     if (show) { googleEventCode('how-it-works-modal'); }
   }, [show]);
 
+  const {
+    data, refetch,
+  } = useQuery(GET_ACTIVE_GROUPSHOP_BY_SHOP, {
+    variables: { storeId },
+  });
+
+  useEffect(() => {
+    if (groupShopURL === '') {
+      if (data?.getActiveGroupshop?.shortUrl) {
+        setGroupShopURL(data.getActiveGroupshop.shortUrl);
+      }
+    }
+  }, [data]);
+
   const handleClose = () => {
     setShow(false);
-    setShowRewards(false);
+    setShowExpiredModel(false);
+  };
+  const handleError = () => {
+    setGroupShopError('Sorry could not find any running groupshop');
   };
   return (
     <>
       <Modal
         show={show}
+        backdrop="static"
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centeredv
@@ -48,12 +74,10 @@ const InfoBox = ({
         contentClassName={styles.groupshop__info_modal__content}
       >
         <Modal.Header className={styles.groupshop__info_modal__closebtnlg}>
-          <Row onClick={handleClose}>
-            <div><Cross /></div>
-          </Row>
+          <Row onClick={handleClose} />
         </Modal.Header>
         <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
-          <Row onClick={handleClose}><ArrowDown /></Row>
+          <Row onClick={handleClose} />
         </Modal.Header>
         <div className="styles.groupshop_infoBox_imgBox">
           {!isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
@@ -61,7 +85,7 @@ const InfoBox = ({
         </div>
         <Modal.Body className="py-2 px-3 text-center">
           <div className={styles.groupshop_infoBox}>
-            <img src="/images/name-here.png" alt="headtag" className="img-fluid" />
+            <img style={{ maxWidth: 110 }} src={storeLogo} alt="headtag" className="img-fluid" />
             <h2>
               This Groupshop expired!
             </h2>
@@ -75,13 +99,29 @@ const InfoBox = ({
             </div>
           </div>
           <div className="d-flex justify-content-center my-4">
-            <Button
-              className={styles.groupshop_infoBox_shoppingBtn}
-              onClick={handleClose}
+            {groupShopURL !== ''
+            && (
+            <div
+              className={`${'Button_onboarding__button__XLPBP'} ${styles.groupshop_infoBox_shoppingBtn}`}
             >
-              Find a Groupshop
-            </Button>
+              <Link href={groupShopURL}>
+                <a target="_blank" className="text-decoration-none">
+                  Find a Groupshop
+                </a>
+              </Link>
+            </div>
+            )}
+            {groupShopURL === ''
+            && (
+              <Button
+                className={styles.groupshop_infoBox_shoppingBtn}
+                onClick={handleError}
+              >
+                Find a Groupshop
+              </Button>
+            )}
           </div>
+          <div className="text-danger">{groupShopError}</div>
         </Modal.Body>
 
       </Modal>
@@ -90,7 +130,9 @@ const InfoBox = ({
 };
 
 InfoBox.defaultProps = {
-  showRewards: false,
-  setShowRewards: () => {},
+  storeId: string,
+  storeLogo: string,
+  showExpiredModel: false,
+  setShowExpiredModel: () => {},
 };
 export default InfoBox;

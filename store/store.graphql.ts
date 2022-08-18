@@ -917,6 +917,15 @@ query getUniqueClicks($storeId: String!, $startFrom: String!, $toDate: String!) 
 }
 `;
 
+const GET_ACTIVE_GROUPSHOP_BY_SHOP = gql`
+query getActiveGroupshop($storeId: String!) {
+  getActiveGroupshop(storeId: $storeId) {
+    shortUrl
+    url    
+  }
+}
+`;
+
 const GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER = gql`
 query getUniqueCampaignClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
   getUniqueCampaignClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
@@ -952,6 +961,7 @@ query PartnerGroupshop($code: String!) {
     shortUrl
     visitors
     partnerCommission
+    isActive
     members {
       orderId
       availedDiscount
@@ -1175,4 +1185,5 @@ export {
   GET_ORDER_DETAILS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
   GET_CAMPAIGN_METRICS, GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER,
   GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, GET_PARTNER_GROUPSHOP, ADD_DEAL_PRODUCT_PARTNER,
+  GET_ACTIVE_GROUPSHOP_BY_SHOP,
 };

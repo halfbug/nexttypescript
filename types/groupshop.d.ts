@@ -175,6 +175,8 @@ export interface IGroupshop {
 
   partnerCommission?: string;
 
+  isActive?: boolean | undefined;
+
   memberDetails?: PartnerMember[];
 
   refferalProducts?: Product[];
