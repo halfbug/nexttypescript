@@ -233,7 +233,7 @@ const ProductsSearch = ({
             </Row>
           </Modal.Header>
         )}
-        <Modal.Body className={styles.groupshop_modal_search_body}>
+        <Row className={styles.groupshop_modal_search_body}>
           <div className={styles.groupshop_modal_search_body_top}>
             {isCreateGS
               ? (
@@ -332,6 +332,8 @@ const ProductsSearch = ({
               )}
             </div>
           )}
+        </Row>
+        <Modal.Body className={styles.groupshop_modal_search_productSection}>
           <Row className={styles.groupshop_search}>
             {otherProducts ? (
               otherProducts.map(
