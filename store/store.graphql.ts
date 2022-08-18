@@ -966,6 +966,7 @@ query PartnerGroupshop($code: String!) {
     influencerProducts{
       id
       featuredImage
+      purchaseCount
       title
       description
       price

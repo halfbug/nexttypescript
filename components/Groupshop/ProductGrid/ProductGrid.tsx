@@ -61,6 +61,7 @@ const ProductGrid = ({
     items: products || [],
     siblingCount: 4,
   });
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
 
   const fillerz = pageSize === (renderItems?.length) ? 0 : 1;
 
@@ -203,12 +204,12 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-                    {prod.orders?.length > 0 && (
+                    {prod.purchaseCount && (
                     <p className="text-center mb-1 fs-5 fw-bold">
                       🔥
                       <i>
-                        {prod.orders?.length === 1 ? `${prod.orders?.length} friend shopped`
-                          : `${prod.orders?.length} friends shopped`}
+                        {prod.purchaseCount === 1 ? `${prod.purchaseCount} friend shopped`
+                          : `${prod.purchaseCount} friends shopped`}
 
                       </i>
                     </p>
