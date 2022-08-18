@@ -659,7 +659,7 @@ const ProductDetail = ({
                       </div>
                     </Col>
                     <Col xs={1} className="d-flex px-3">
-                      <div className="text-center ms-2 ms-lg-2">
+                      <div className="text-center ms-4 ms-lg-2">
                         <span>
                           00
                         </span>
@@ -669,7 +669,7 @@ const ProductDetail = ({
                     <Col xs={4}>{' '}</Col>
                   </Row>
                 </section>
-                <p>
+                <p className="d-lg-block d-none">
                   Groupshop is all about rewarding you and your friends with real
                   cashback and discounts every time you shop together!
 
