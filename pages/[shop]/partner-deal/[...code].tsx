@@ -836,12 +836,16 @@ const GroupShop: NextPage = () => {
           name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
         />
         ) }
-        <ExpireModal
-          storeId={gsctx?.storeId}
-          storeLogo={storeLogo}
-          showExpiredModel={showExpiredModel}
-          setShowExpiredModel={setShowExpiredModel}
-        />
+
+        {partnerGroupshop?.isActive === false
+          && (
+          <ExpireModal
+            storeId={gsctx?.storeId}
+            storeLogo={storeLogo}
+            showExpiredModel={showExpiredModel}
+            setShowExpiredModel={setShowExpiredModel}
+          />
+          )}
         {/* <RewardBox2
           show={showRewards}
           discount={discount}
