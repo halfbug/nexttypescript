@@ -129,13 +129,13 @@
             }
 
             &__getStarted {
-                @extend .mb-3;
                 font-family: 'Mulish';
                 font-weight: 700;
                 font-size: 16px;
                 line-height: 20px;
                 color: #000000;
                 position: relative;
+                margin-bottom: 21px;
             }
 
             &__getStarted:after {
@@ -280,9 +280,9 @@
                     display: none;
                 }
 
-                &__description {
-                    display: none;
-                }
+                // &__description {
+                //     display: none;
+                // }
             }
         }
     }
@@ -348,8 +348,12 @@
                     justify-content: center;
                 }
 
-                &__getStarted {
-                    display: none;
+                &__getStarted:after {
+                    left: 67%;
+                }
+
+                &__getStarted:before {
+                    right:67%;
                 }
 
                 &__welcomeTxtMobile {
@@ -368,13 +372,13 @@
                     margin-bottom: 23px;
                 }
 
-                &__description2 {
-                    display: none;
-                }
+                // &__description2 {
+                //     display: block;
+                // }
 
-                &___description {
-                    display: none;
-                }
+                // &___description {
+                //     display: none;
+                // }
 
                 &__mainiconarea {
                     display: flex;
