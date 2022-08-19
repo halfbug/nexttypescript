@@ -305,6 +305,33 @@ const GroupShop: NextPage = () => {
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
 
+  const getLogoHTML = () => (
+    <>
+      <div className={styles.groupshop_main_logo}>
+        {logoImage === '' || logoImage === undefined ? (
+          <Link href={`https://${fullStoreName}`}>
+            <Brand
+              name={
+                (brandName || '').split(' ').slice(0, 2).join(' ') || ''
+              }
+              pending={pending}
+            />
+          </Link>
+        ) : (
+          <Link href={`https://${fullStoreName}`}>
+            <a target="_blank" style={{ cursor: 'pointer' }}>
+              <img
+                src={storeLogo}
+                alt={`${brandName}`}
+                // alt="d"
+                className="img-fluid"
+              />
+            </a>
+          </Link>
+        )}
+      </div>
+    </>
+  );
   return (
     <>
       <Head>
@@ -350,7 +377,7 @@ const GroupShop: NextPage = () => {
             }
             RightComp={(
               <InfoBox
-                mes="How does this work?"
+                mes={isModalForMobile ? '' : 'How does this work?'}
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
                 name={formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.lname ?? ''}`)}
@@ -359,30 +386,22 @@ const GroupShop: NextPage = () => {
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
+
               <Col md={3} xs={3}>
-                <div className={styles.groupshop_main_logo}>
-                  {logoImage === '' || logoImage === undefined ? (
-                    <Link href={`https://${fullStoreName}`}>
-                      <Brand
-                        name={
-                        (brandName || '').split(' ').slice(0, 2).join(' ') || ''
-                      }
-                        pending={pending}
-                      />
-                    </Link>
-                  ) : (
-                    <Link href={`https://${fullStoreName}`}>
-                      <a target="_blank" style={{ cursor: 'pointer' }}>
-                        <img
-                          src={storeLogo}
-                          alt={`${brandName}`}
-                          // alt="d"
-                          className="img-fluid"
-                        />
-                      </a>
-                    </Link>
-                  )}
-                </div>
+                {!isModalForMobile ? (
+                  <>
+                    { getLogoHTML() }
+                  </>
+                ) : (
+                  <>
+                    <IconButton
+                      icon={<Search size={24} />}
+                      className={styles.groupshop__hero_iconSearchBtn}
+                      onClick={handleAddProduct}
+                      disabled={isExpired}
+                    />
+                  </>
+                )}
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">
@@ -410,6 +429,11 @@ const GroupShop: NextPage = () => {
                 </div>
               </Col>
               <Col xs={6} className={styles.groupshop__counter}>
+                {isModalForMobile && (
+                  <>
+                    {getLogoHTML()}
+                  </>
+                )}
                 {/* <h6 className="text-center">Store expires in</h6>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
@@ -446,12 +470,14 @@ const GroupShop: NextPage = () => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                <IconButton
-                  icon={<Search size={24} />}
-                  className={styles.groupshop__hero_iconSearchBtn}
-                  onClick={handleAddProduct}
-                  disabled={isExpired}
-                />
+                {!isModalForMobile && (
+                  <IconButton
+                    icon={<Search size={24} />}
+                    className={styles.groupshop__hero_iconSearchBtn}
+                    onClick={handleAddProduct}
+                    disabled={isExpired}
+                  />
+                )}
                 <IconButton
                   icon={<Handbag size={24} />}
                   className={styles.groupshop__hero_iconBtn}
