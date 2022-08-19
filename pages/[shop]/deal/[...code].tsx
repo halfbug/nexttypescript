@@ -302,7 +302,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             RightComp={isExpired ? (
               <ExpiredBox
                 discount={gsctx?.discountCode.percentage}
-                mes="How it works"
+                mes="How does this work?"
                 brandname={brandName ?? ''}
                 shareUrl={activateURL ?? ''}
                 products={allProducts?.slice(0, 3) ?? []}
