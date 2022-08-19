@@ -32,6 +32,8 @@ const ActiveAffiliate = ({
   const { store, dispatch } = useContext(StoreContext);
   const [partnerId, setPartnerId] = useState('');
   const [partnerCommission, setPartnerCommission] = useState('');
+  const [revenue, setRevenue] = useState('');
+  const [purchases, setPurchases] = useState('');
   const [showSidebar, setshowSidebar] = React.useState(true);
   const [groupshopLink, setGroupshopLink] = useState('');
   const [partnerRewards, setpartnerRewards] = useState({
@@ -94,11 +96,12 @@ const ActiveAffiliate = ({
     const currentPartner: any = partnerList?.filter(
       (item: any) => item.id === id,
     );
-    console.log(JSON.stringify(currentPartner[0]));
     setPartnerId(id);
     setPartnerCommission(currentPartner[0].partnerCommission.replace('%', ''));
     setPartnerDetails(currentPartner[0].partnerDetails);
     setGroupshopLink(currentPartner[0].shortUrl);
+    setRevenue(currentPartner[0].revenue);
+    setPurchases(currentPartner[0].purchases);
     setShowAffiliateDetail(true);
     setshowSidebar(false);
     setpartnerRewards({
@@ -173,7 +176,9 @@ const ActiveAffiliate = ({
               <Col xl={3} lg={3} md={3}>
                 <div className={styles.partner__data_row__tag1}>
                   {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                  428 generated
+                  {part.revenue}
+                  {' '}
+                  generated
                 </div>
               </Col>
               {/* <Col xl={3} lg={3} md={3}>
@@ -244,7 +249,10 @@ const ActiveAffiliate = ({
         <AffiliateDetail
           handleAfterSubmit={handleAfterSubmit}
           partnerId={partnerId}
+          storeCurrency={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
           groupshopLink={groupshopLink}
+          revenue={revenue}
+          purchases={purchases}
           partnerCommission={partnerCommission}
           partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}

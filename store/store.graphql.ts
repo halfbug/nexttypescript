@@ -207,8 +207,10 @@ const CREATE_PARTNER_DB = gql`
 
 const GET_ALL_PARTERS = gql`
 query partnerGroupShops($storeId: String!) {
-  partnerGroupshops(storeId: $storeId) {  
-    id
+  partnerGroupshops(storeId: $storeId) {
+    id 
+    revenue
+    purchases 
     campaignId
     url
     shortUrl

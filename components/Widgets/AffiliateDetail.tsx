@@ -25,7 +25,10 @@ interface AffiliateProps {
   partnerCommission: string;
   partnerDetails: any;
   groupshopLink: string;
+  purchases: string;
+  revenue:string;
   discountDetails: any;
+  storeCurrency: any;
   partnerRewards: any;
   showSidebar:boolean;
   setshowSidebar:any;
@@ -33,7 +36,7 @@ interface AffiliateProps {
 
 export default function AffiliateDetail({
   handleAfterSubmit, partnerId, partnerCommission, partnerDetails, discountDetails,
-  partnerRewards, showSidebar, setshowSidebar, groupshopLink,
+  partnerRewards, showSidebar, setshowSidebar, groupshopLink, purchases, revenue, storeCurrency,
 }
    : AffiliateProps) {
   const { store, dispatch } = useContext(StoreContext);
@@ -291,7 +294,12 @@ export default function AffiliateDetail({
             </div>
             <Row className="mt-4">
               <Col lg={6} md={6} xs={6}>
-                <span className={styles.partner__detail_tag__tag1}>$428 generated</span>
+                <span className={styles.partner__detail_tag__tag1}>
+                  {storeCurrency}
+                  {revenue}
+                  {' '}
+                  generated
+                </span>
               </Col>
               <Col lg={6} md={6} xs={6}>
                 <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}>
@@ -304,7 +312,11 @@ export default function AffiliateDetail({
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag3}>
                   {/* <NewPurchaseLogo /> */}
-                  🛒  3 purchases
+                  🛒
+                  {' '}
+                  {purchases}
+                  {' '}
+                  purchases
                 </span>
               </Col>
               <Col lg={6} md={6} xs={6}>
