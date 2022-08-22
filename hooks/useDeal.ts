@@ -86,7 +86,8 @@ export default function useDeal() {
     [gsctx.members]);
 
   const topFive = useCallback(
-    (entity : any) => Array.isArray(entity) && entity.slice(0, entity.length),
+    (entity : any) => (Array.isArray(entity)
+      ? entity.slice(0, entity.length > 5 ? 5 : entity.length) : []),
     [gsctx.members],
   );
 

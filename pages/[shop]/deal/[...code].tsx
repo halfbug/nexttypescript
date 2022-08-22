@@ -134,6 +134,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     currencySymbol,
     activateURL,
     maxPercent,
+    topFive,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -345,10 +346,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
-                    names={gsctx?.members.map(
+                    names={topFive(gsctx?.members.map(
                       (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                       }`,
-                    )}
+                    ))}
                     cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                     pending={pending}
                   />
@@ -508,10 +509,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
-                names={gsctx?.members.map(
+                names={topFive(gsctx?.members.map(
                   (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                   }`,
-                )}
+                ))}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                 pending={pending}
               />
