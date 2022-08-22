@@ -13,6 +13,7 @@ import useGtm from 'hooks/useGtm';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import { useMediaQuery } from 'react-responsive';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
+import useDeal from 'hooks/useDeal';
 
 interface RewardBox2Props extends RootProps {
   show: boolean;
@@ -38,6 +39,10 @@ const RewardBox2 = ({
   const isDesktop = useMediaQuery({
     query: '(min-width: 476px)',
   });
+
+  const {
+    isExpired,
+  } = useDeal();
 
   return (
     <>
@@ -158,14 +163,15 @@ const RewardBox2 = ({
                       placement="auto"
                       shareurl={shareurl}
                       fullshareurl={fullshareurl}
-                      label="Share & Earn"
+                      // label="Share & Unlock"
+                      label={isExpired ? 'Share & Unlock' : 'Share & Earn'}
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}
                       className={styles.groupshop_rewardBox2_modal__greenBtn}
                     />
                   ) : (
                     <NativeShareButton
-                      label="Share & Earn"
+                      label={isExpired ? 'Share & Unlock' : 'Share & Earn'}
                       className={styles.groupshop_rewardBox2_modal__greenBtn}
                       shareurl={shareurl}
                       text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
