@@ -358,7 +358,8 @@ const GroupShop: NextPage = () => {
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
         <meta name="application-name" content="Groupshop" />
-
+        <meta name="googlebot" content="noindex" />
+        <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
         <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
         <meta name="og:title" content="Groupshop" />
