@@ -87,7 +87,7 @@ const Footer = ({
       <hr />
       <Row className={styles.groupshop_footer_f1}>
         <Col lg={3}>
-          <div className={styles.groupshop_footer_counter_wrapper}>
+          <div>
             <div className={styles.groupshop_footer_expire_text}>
               {isExpired ? (
                 <>
@@ -104,10 +104,13 @@ const Footer = ({
                 <>
                   {isInfluencerGS ? (
                     <h6>
-                      <span className={styles1.Influencer_fontMeduim}>Want to keep shopping with unlimited rewards?</span>
+                      <span className={[styles1.Influencer_fontMeduim, ''].join(' ')}>
+                        Want to keep shopping with unlimited rewards?
+
+                      </span>
                     </h6>
                   ) : (
-                    <h6>
+                    <h6 className={styles.groupshop_footer_counter_wrapper}>
                       <strong>Complete your order in time to benefit from these exclusive rewards!</strong>
                     </h6>
                   )}
@@ -116,8 +119,8 @@ const Footer = ({
             </div>
 
             {isInfluencerGS ? (
-              <Row className={[styles.groupshop_footer_counter, 'justify-content-start'].join(' ')}>
-                <Col className="d-flex col-12">
+              <Row>
+                <Col className={styles1.Influencer_MobileView}>
                   <div className="text-center me-2">
                     <Button className={styles1.Influencer_footer_leftBtn} variant="">
                       <Link href="https://www.groupshop.com/consumers#brands">

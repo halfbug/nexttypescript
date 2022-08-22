@@ -9,6 +9,12 @@
   font-size: 14px;
   line-height: 18px;
   color:$black;
+  @include media-breakpoint-down(sm) {
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   margin: 2px 60px;
+ }
  }
  &_fontRegular{
     font-weight: 400 !important;
@@ -24,6 +30,10 @@
  }
  &_footer{
     &_leftBtn{
+      @include media-breakpoint-down(sm) {
+         display: flex;
+         justify-content: center;
+       }
         @extend .py-3, .px-2, .rounded-pill;
         background: rgba(212, 196, 227, 0.5);
         border-radius: 20px;
@@ -38,6 +48,17 @@
         a{
         color: $black;
         }
+    }
+ }
+ &_MobileView{
+   @extend .d-flex;
+   @include media-breakpoint-down(sm) {
+      justify-content: center!important;
+      margin-bottom: 8px;
+    }
+    @include media-breakpoint-down(lg) {
+      justify-content: start;
+
     }
  }
 }
