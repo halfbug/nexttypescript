@@ -67,9 +67,10 @@ const SocialButton = ({
       && (
         <PinterestShareButton
           media={props.media}
-          // title="Groupshop"
-          title={`${text}`}
+          title="Groupshop"
+          // title={`${text}`}
           url={url}
+          description={`${text}`}
         >
           <Pinterest className="fs-3 fw-bold" />
         </PinterestShareButton>

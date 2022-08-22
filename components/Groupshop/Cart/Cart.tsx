@@ -276,9 +276,16 @@ const Cart = ({
                       >
                         <div className={styles.groupshop__pcard_cardBody_PDetail}>
                           <div className={styles.groupshop__pcard_cardBody_pName}>{item.title}</div>
+                          {item.purchaseCount && (
                           <div className={styles.groupshop__pcard_cardBody_PDesc}>
-                            5 friends shopped
+                            {item.purchaseCount}
+                            {' '}
+                            friend
+                            {item.purchaseCount > 1 ? 's' : ''}
+                            {' '}
+                            shopped
                           </div>
+                          )}
                           <Row className="mt-1 d-flex align-items-center">
                             <Button
                               variant="primary"
