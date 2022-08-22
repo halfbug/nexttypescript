@@ -31,6 +31,7 @@ import useAppContext from 'hooks/useAppContext';
 import styles1 from 'styles/Campaign.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
+import useSharetext from 'hooks/useSharetext';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -84,7 +85,7 @@ const ProductDetail = ({
 
   const productCustomers = getBuyers(product?.id || '0');
   const { googleProductCode, googleEventCode } = useGtm();
-
+  const { socialText, nativeShareText } = useSharetext();
   const inviteForExpiredGS = () => {
     setloaderInvite(true);
     setTimeout(() => {
@@ -532,7 +533,7 @@ const ProductDetail = ({
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                         onClick={() => navigator?.share({
                           title: 'Groupshop',
-                          text: `Send special discounts to your friends by sharing this ${productShareUrl(product?.id ?? '')}`,
+                          text: nativeShareText,
                         })}
                       >
                         <Send size={18} />

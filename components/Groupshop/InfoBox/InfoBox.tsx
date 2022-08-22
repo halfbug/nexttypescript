@@ -18,6 +18,7 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { Send } from 'react-bootstrap-icons';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
+import useSharetext from 'hooks/useSharetext';
 
 interface mesProps {
   mes: string;
@@ -38,6 +39,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
+  const { socialText } = useSharetext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -157,10 +159,11 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
                 className={styles.groupshop_infoBox_shareBtn}
                 onClick={() => navigator?.share({
                   title: 'Groupshop',
-                  text: `Send special discounts to your friends by sharing this ${shareUrl ?? ''})}`,
+                  text: socialText,
                 })}
               >
                 <Send size={18} />
+                dd
               </ButtonReact>
             ) : (
               <ShareButton
