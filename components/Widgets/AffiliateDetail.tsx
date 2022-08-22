@@ -97,11 +97,11 @@ export default function AffiliateDetail({
             storeId: store.id,
             id: partnerId,
             partnerCommission: `${valz.partnerCommission}%`,
-            discountCode: {
-              title: discountDetails.title,
-              percentage: valz.minDiscount,
-              priceRuleId: discountDetails.priceRuleId,
-            },
+            // discountCode: {
+            //   title: discountDetails.title,
+            //   percentage: valz.minDiscount,
+            //   priceRuleId: discountDetails.priceRuleId,
+            // },
             partnerRewards: {
               baseline: minDiscountVal,
               average: newAverageVal,
@@ -335,7 +335,7 @@ export default function AffiliateDetail({
               </Col>
               <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
                 <div className={styles.partner__btn}>
-                  <Link href={groupshopLink}><a target="_blank">View Groupshop</a></Link>
+                  <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
                   {' '}
                   <ArrowRightLogo />
                 </div>
