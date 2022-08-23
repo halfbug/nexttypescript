@@ -61,12 +61,14 @@ import useExpired from 'hooks/useExpired';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
+import useSKU from 'hooks/useSKU';
 import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
+  const { SKU, memberProducts } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
@@ -406,12 +408,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                <IconButton
-                  icon={<Search size={24} />}
-                  className={styles.groupshop__hero_iconSearchBtn}
-                  onClick={handleAddProduct}
-                  disabled={isExpired}
-                />
+                {SKU.length > 1 && (
+                  <IconButton
+                    icon={<Search size={24} />}
+                    className={styles.groupshop__hero_iconSearchBtn}
+                    onClick={handleAddProduct}
+                    disabled={isExpired}
+                  />
+                )}
                 <IconButton
                   icon={<Handbag size={24} />}
                   className={styles.groupshop__hero_iconBtn}
@@ -545,13 +549,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={member?.products}
+          products={(SKU.length >= 2 && SKU.length <= 4) ? memberProducts : member?.products}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           id="shoppedby"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
+          skuCount={SKU.length}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -563,6 +568,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             {!pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2" align={{ lg: 'start', sm: 'end' }}>
                 <Dropdown.Toggle
+                  disabled={SKU.length < 5}
                   id="dropdown-autoclose-true"
                   variant="outline-primary"
                   className={styles.groupshop_dropdown}
@@ -603,7 +609,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous pruchases and recommendations.
           </p>
         </ProductGrid>
-        {members?.length > 1 || addedProducts?.length ? (
+        {SKU.length > 4 && (members?.length > 1 || addedProducts?.length ? (
           <ProductGrid
             xs={6}
             sm={6}
@@ -648,8 +654,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           >
             <h2>Top Picks</h2>
           </ProductGrid>
-        )}
+        ))}
 
+        {SKU.length > 1 && (
         <ProductGrid
           xs={6}
           sm={6}
@@ -734,6 +741,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </div>
           </div>
         </ProductGrid>
+        )}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             {isExpired ? (

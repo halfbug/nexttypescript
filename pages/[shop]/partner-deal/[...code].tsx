@@ -51,6 +51,7 @@ import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBo
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import { PartnerGroupshopContext, gspInit } from 'store/partner-groupshop.context';
 import useDeal from 'hooks/useDeal';
+import useSKU from 'hooks/useSKU';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import usePopularInfluencer from 'hooks/usePopularProductInfluencer';
 import InfoBox from 'components/Influencer/InfoBox/InfoBox';
@@ -67,7 +68,7 @@ const GroupShop: NextPage = () => {
     query: '(max-width: 475px)',
   });
   const { query: { ins } } = useRouter();
-
+  const { SKU } = useSKU();
   const {
     loading,
     error,
@@ -471,7 +472,7 @@ const GroupShop: NextPage = () => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {!isModalForMobile && (
+                {SKU.length > 1 && !isModalForMobile && (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
@@ -604,6 +605,7 @@ const GroupShop: NextPage = () => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           id="curatedby"
+          skuCount={SKU.length}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             CURATED BY
@@ -615,6 +617,7 @@ const GroupShop: NextPage = () => {
             {!pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2" align={{ lg: 'start', sm: 'end' }}>
                 <Dropdown.Toggle
+                  disabled={SKU.length < 2}
                   id="dropdown-autoclose-true"
                   variant="outline-primary"
                   className={styles.groupshop_dropdown}
@@ -657,7 +660,7 @@ const GroupShop: NextPage = () => {
             personal favorites and recommendations.
           </p>
         </ProductGrid>
-        {(addedByRefferal && addedByRefferal.length > 0)
+        {SKU.length > 1 && ((addedByRefferal && addedByRefferal.length > 0)
         || (gsctx?.memberDetails && gsctx?.memberDetails?.length > 0) ? (
           <ProductGrid
             xs={6}
@@ -700,8 +703,9 @@ const GroupShop: NextPage = () => {
               <h2>Top Picks</h2>
             </ProductGrid>
 
-          ) }
+          )) }
 
+        {SKU.length > 1 && (
         <ProductGrid
           xs={6}
           sm={6}
@@ -784,6 +788,7 @@ const GroupShop: NextPage = () => {
             </div>
           </div>
         </ProductGrid>
+        )}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             <p>Don’t see what you like?</p>
