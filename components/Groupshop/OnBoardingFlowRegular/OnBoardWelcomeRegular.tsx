@@ -109,9 +109,9 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             :
           </div>
           <div className={styles.welcome__modal__body__icons}>🛒   📩   🤑</div>
-          <div className={styles.welcome__modal__body__getStarted}>
+          <div className={styles.welcome__modal__body__getStarted2}>
             {/* 3 steps to get started */}
-            How it Works
+            Two ways to Earn Rewards
           </div>
           {/* <div className={styles.welcome__modal__body__box1}>
             <p className={styles.welcome__modal__body__description}>

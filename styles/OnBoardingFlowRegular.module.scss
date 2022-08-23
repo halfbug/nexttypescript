@@ -160,6 +160,38 @@
                 right: 70%;
             }
 
+            &__getStarted2 {
+                font-family: 'Mulish';
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 20px;
+                color: #000000;
+                position: relative;
+                margin-bottom: 21px;
+            }
+
+            &__getStarted2:after {
+                content: "";
+                display: block;
+                width: 15%;
+                height: 1px;
+                background: #E2E2E2;
+                top: 50%;
+                position: absolute;
+                left: 72%;
+            }
+
+            &__getStarted2:before {
+                content: "";
+                display: block;
+                width: 15%;
+                height: 1px;
+                background: #E2E2E2;
+                top: 50%;
+                position: absolute;
+                right: 72%;
+            }
+
             &__box1 {
                 padding: 23px 40px;
                 border: 1px dashed #CCB2F9;
