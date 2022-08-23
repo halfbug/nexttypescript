@@ -538,7 +538,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &_big_banner_box {
       @extend .py-2, .align-items-center, .d-flex, .justify-content-center;
       text-align: center;
-      max-width: 300px;
+      width: 300px;
       height: fit-content;
       border: 1px solid #ccb2f9;
       box-sizing: border-box;

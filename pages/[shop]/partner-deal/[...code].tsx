@@ -526,7 +526,7 @@ const GroupShop: NextPage = () => {
                 </p>
               </Col>
             </Row>
-            <Row className="d-flex justify-content-evenly">
+            <div className="d-flex justify-content-evenly">
               {/* <Col
                 md={4}
                 className={styles.groupshop__hero__small_banner_right}
@@ -541,7 +541,7 @@ const GroupShop: NextPage = () => {
                   ''
                 )}
               </Col> */}
-              <Col md={8} className="text-center mb-5">
+              <div className="text-center mb-5">
                 {/* <div className={styles.groupshop__hero_current_reward}>
                   Current Rewards
                 </div> */}
@@ -553,7 +553,7 @@ const GroupShop: NextPage = () => {
                 >
                   <BigBannerBox text={text} isInfluencerGS />
                 </div>
-              </Col>
+              </div>
               {/* <Col md={4} className={styles.groupshop__hero__small_banner_left}>
                 {members.length < 5 ? (
                   <div className="d-flex flex-column justify-content-center align-items-center ">
@@ -565,7 +565,7 @@ const GroupShop: NextPage = () => {
                   ''
                 )}
               </Col> */}
-            </Row>
+            </div>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
                 names={[`${gsctx?.partnerDetails?.fname} ${
