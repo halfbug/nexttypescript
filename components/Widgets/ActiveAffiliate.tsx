@@ -33,6 +33,7 @@ const ActiveAffiliate = ({
   const [partnerId, setPartnerId] = useState('');
   const [partnerCommission, setPartnerCommission] = useState('');
   const [revenue, setRevenue] = useState('');
+  const [comissionAmount, setcomissionAmount] = useState('');
   const [purchases, setPurchases] = useState('');
   const [showSidebar, setshowSidebar] = React.useState(true);
   const [groupshopLink, setGroupshopLink] = useState('');
@@ -101,6 +102,7 @@ const ActiveAffiliate = ({
     setPartnerDetails(currentPartner[0].partnerDetails);
     setGroupshopLink(currentPartner[0].shortUrl);
     setRevenue(currentPartner[0].revenue);
+    setcomissionAmount(currentPartner[0].comissionAmount);
     setPurchases(currentPartner[0].purchases);
     setShowAffiliateDetail(true);
     setshowSidebar(false);
@@ -176,7 +178,7 @@ const ActiveAffiliate = ({
               <Col xl={3} lg={3} md={3}>
                 <div className={styles.partner__data_row__tag1}>
                   {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                  {part.revenue}
+                  {part.comissionAmount}
                   {' '}
                   generated
                 </div>
@@ -254,6 +256,7 @@ const ActiveAffiliate = ({
           revenue={revenue}
           purchases={purchases}
           partnerCommission={partnerCommission}
+          comissionAmount={comissionAmount}
           partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}
           discountDetails={discountCode}

@@ -210,6 +210,7 @@ query partnerGroupShops($storeId: String!) {
   partnerGroupshops(storeId: $storeId) {
     id 
     revenue
+    comissionAmount
     purchases 
     campaignId
     url

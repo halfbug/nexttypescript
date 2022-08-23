@@ -27,6 +27,7 @@ interface AffiliateProps {
   groupshopLink: string;
   purchases: string;
   revenue:string;
+  comissionAmount:string;
   discountDetails: any;
   storeCurrency: any;
   partnerRewards: any;
@@ -36,7 +37,8 @@ interface AffiliateProps {
 
 export default function AffiliateDetail({
   handleAfterSubmit, partnerId, partnerCommission, partnerDetails, discountDetails,
-  partnerRewards, showSidebar, setshowSidebar, groupshopLink, purchases, revenue, storeCurrency,
+  partnerRewards, showSidebar, setshowSidebar, groupshopLink, purchases, revenue,
+  comissionAmount, storeCurrency,
 }
    : AffiliateProps) {
   const { store, dispatch } = useContext(StoreContext);
@@ -296,7 +298,7 @@ export default function AffiliateDetail({
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag1}>
                   {storeCurrency}
-                  {revenue}
+                  {comissionAmount}
                   {' '}
                   generated
                 </span>
