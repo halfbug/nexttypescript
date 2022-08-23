@@ -261,7 +261,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
               className={styles.reward__modal__body__btn}
               onClick={moveForward}
             >
-              Next
+              Customize
             </Button>
             <Button
               className={styles.reward__modal__body__btnMobile}
