@@ -353,6 +353,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                     pending={pending}
                   />
+                  {gsctx?.members.length > 5 && (
+                  <span className="pe-2">
+                    { `+${gsctx?.members.length - 5} user${(gsctx?.members.length - 5) > 1 && 's'}`}
+                  </span>
+                  )}
                   <ShareButton
                     placement="bottom"
                     shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
@@ -509,10 +514,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
-                names={topFive(gsctx?.members.map(
+                names={gsctx?.members.map(
                   (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
                   }`,
-                ))}
+                )}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
                 pending={pending}
               />
