@@ -7,6 +7,7 @@ import {
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { useQRCode } from 'next-qrcode';
 import useDeal from 'hooks/useDeal';
+import useSharetext from 'hooks/useSharetext';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
 
@@ -21,6 +22,8 @@ const ShareUnlockButton = ({
   const { gsctx, banner } = useDeal();
   const { discountCode: { percentage } } = gsctx;
   const { Canvas } = useQRCode();
+  const { socialText } = useSharetext();
+
   return (
     <PopoverButton
       disabled={disabled}
@@ -36,11 +39,11 @@ const ShareUnlockButton = ({
         <CopyToClipboard value={shareurl} />
         <div className={styles.groupshop__share_social_icons}>
           <Row className="p-3">
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Email" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Instagram" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Pinterest" url={shareurl} media={banner} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Twitter" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton network="Facebook" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Email" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Instagram" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Pinterest" url={shareurl} media={banner} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Twitter" url={shareurl} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Facebook" url={shareurl} /></Col>
           </Row>
         </div>
       </div>

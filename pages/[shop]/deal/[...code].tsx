@@ -355,7 +355,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                   <ShareButton
                     placement="bottom"
-                    shareurl={gsShortURL ?? gsURL}
+                    shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
                     fullshareurl={gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
@@ -395,8 +395,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={isExpired ? urlForActivation ?? '' : gsShortURL ?? gsURL}
-                  fullshareurl={isExpired ? urlForActivation ?? '' : gsURL ?? gsURL}
+                  shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+                  fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? gsURL}
                   label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
@@ -771,7 +771,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <LinkShareMobileView
           show={showQrscan}
           handleClose={() => setshowQrscan(false)}
-          shareurl={gsShortURL ?? gsURL}
+          shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
         />
         <ProductDetail
           show={showDetail}
@@ -789,7 +789,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <RewardBox2
           show={showRewards}
           discount={discount}
-          shareurl={gsShortURL ?? gsURL}
+          shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
           brandName={brandName}
@@ -798,9 +798,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
-              shareurl={gsShortURL ?? gsURL}
+              shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
               val={value}
+              label={isExpired ? 'Share to unlock' : 'Share & earn'}
               brandName={brandName}
               maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
             />

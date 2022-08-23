@@ -159,7 +159,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
                 className={styles.groupshop_infoBox_shareBtn}
                 onClick={() => navigator?.share({
                   title: 'Groupshop',
-                  text: socialText,
+                  text: `${socialText} ${shareUrl ?? ''}`,
                 })}
               >
                 <Send size={18} />

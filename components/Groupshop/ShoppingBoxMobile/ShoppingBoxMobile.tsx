@@ -8,12 +8,13 @@ import useTopBanner from 'hooks/useTopBanner';
 
 const ShoppingBoxMobile = (
   {
-    shareurl, val, brandName, maxPercent,
+    shareurl, val, brandName, maxPercent, label,
   }: { shareurl: string,
     // onClick: any,
     val: undefined | string
     brandName?: string;
     maxPercent?: string | undefined;
+    label?: string;
   },
 ) => (
   <>
@@ -27,7 +28,7 @@ const ShoppingBoxMobile = (
           onClick={() => googleEventCode('earn-cashback-modal')}
         /> */}
       <NativeShareButton
-        label={`Share & earn $${val ?? '...'}`}
+        label={`${label} $${val ?? '...'}`}
         className="px-3 py-2 ms-2"
         shareurl={shareurl}
         // onClick={onClick}
@@ -40,6 +41,7 @@ const ShoppingBoxMobile = (
 ShoppingBoxMobile.defaultProps = {
   brandName: '',
   maxPercent: '',
+  label: 'Share & earn',
 };
 
 export default ShoppingBoxMobile;

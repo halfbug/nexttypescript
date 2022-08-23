@@ -533,7 +533,7 @@ const ProductDetail = ({
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
                         onClick={() => navigator?.share({
                           title: 'Groupshop',
-                          text: nativeShareText,
+                          text: `${nativeShareText} ${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`,
                         })}
                       >
                         <Send size={18} />
@@ -605,8 +605,8 @@ const ProductDetail = ({
                         <ShareButton
                           disabled={isExpired}
                           placement="auto-end"
-                          shareurl={productShareUrl(product?.id ?? '')}
-                          fullshareurl={productShareUrl(product?.id ?? '')}
+                          shareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
+                          fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
                           label="Invite more friends"
                           className={styles.groupshop_InviteBtn}
                         />

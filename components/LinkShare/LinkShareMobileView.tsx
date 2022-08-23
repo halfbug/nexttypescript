@@ -58,7 +58,7 @@ const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobilePro
             className={styles.linkShare__modal__body__share_btn}
             onClick={() => navigator?.share({
               title: 'Groupshop',
-              text: socialText,
+              text: `${socialText} ${shareurl}`,
             })}
           >
             Share Groupshop
