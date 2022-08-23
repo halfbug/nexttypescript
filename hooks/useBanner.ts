@@ -25,7 +25,7 @@ const useBanner = () => {
         const bannerImageS3 = await getSignedUrlS3(key);
         if (bannerImageS3) imgBanner = bannerImageS3;
       } else {
-        imgBanner = '/images/bg.jpg';
+        imgBanner = 'https://gsnodeimages.s3.amazonaws.com/bg.jpg';
       }
       setBannerImage(imgBanner);
 

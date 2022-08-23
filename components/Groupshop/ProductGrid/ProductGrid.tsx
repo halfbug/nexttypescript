@@ -62,7 +62,7 @@ const ProductGrid = ({
     items: products || [],
     siblingCount: 4,
   });
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
   console.log('🚀 ~ file: ProductGrid.tsx ~ line 66 ~ skuCount', skuCount);
 
   // const fillerz = (!skuCount || (skuCount && skuCount > 4))
