@@ -11,6 +11,7 @@ import { IGroupshop } from 'types/groupshop';
 import { ADD_DEAL_PRODUCT } from 'store/store.graphql';
 import useCode from 'hooks/useCode';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
+import useDeal from 'hooks/useDeal';
 
 interface Props {
   open: Boolean
@@ -22,6 +23,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   const { countTotalDiscount } = useOwnerOnboarding();
   const storeLogo = useLogo();
   const Router = useRouter();
+  const { brandName } = useDeal();
   const {
     shop, discountCode, ownerCode,
   } = useCode();
@@ -125,28 +127,30 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           </div> */}
           <div className={styles.welcome__modal__body__box2}>
             <p className={styles.welcome__modal__body__description}>
-              <strong> Share </strong>
-              your Groupshop with friends to give them access to
-              <strong>
-                {' '}
-                up to
-                {' '}
-                {gsctx.discountCode.percentage}
-                % off.
-                {' '}
-              </strong>
+              <strong> Shop </strong>
+              exclusive
+              {' '}
+              {brandName}
+              {' '}
+              discounts and get
+              {' '}
+              {gsctx.discountCode.percentage}
+              % off your order.
             </p>
-            <p className={[styles.welcome__modal__body__descriptionSmall, styles.welcome__modal__body__box2__p2].join(' ')}>
+            {/* <p className={[styles.welcome__modal__body__descriptionSmall,
+            styles.welcome__modal__body__box2__p2].join(' ')}>
               You can also shop these discounts yourself, we won’t judge.
-            </p>
+            </p> */}
           </div>
           <div className={styles.welcome__modal__body__box3}>
             <p className={styles.welcome__modal__body__description}>
-              <strong> Earn cashback </strong>
-              on your order -
-              <strong> up to 100% </strong>
-              - everytime someone shops.
-              <p className={[styles.welcome__modal__body__descriptionSmall, styles.welcome__modal__body__box2__p2].join(' ')}>
+              <strong> Share </strong>
+              this Groupshop with friends and
+              <strong> earn 100% cashback</strong>
+              when they shop!
+              <p className={[styles.welcome__modal__body__descriptionSmall,
+                styles.welcome__modal__body__box2__p2].join(' ')}
+              >
                 That’s&nbsp;
                 <strong>
                   $
@@ -159,25 +163,34 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
 
           <div className={styles.welcome__modal__body__boxMobile}>
             <p className={styles.welcome__modal__body__boxMobile__txt}>
-              {/* <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div> */}
-              <strong>Shop </strong>
-              exclusive
-              {' '}
-              {gsctx.store?.brandName}
-              {' '}
-              discounts and get
-
-              {' '}
-              {gsctx.discountCode.percentage}
-              % off your  order.
+              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div>
+              <div>
+                <strong> Shop </strong>
+                exclusive
+                {' '}
+                {gsctx.store?.brandName}
+                {' '}
+                discounts and get
+                {' '}
+                <strong>
+                  {gsctx.discountCode.percentage}
+                  %
+                  {' '}
+                </strong>
+                off your  order.
+              </div>
             </p>
           </div>
           <div className={styles.welcome__modal__body__boxMobile}>
             <p className={styles.welcome__modal__body__boxMobile__txt}>
-              {/* <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div> */}
+              <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div>
               <div>
-                Share this Groupshop and earn 100%
-                cashback on your last order when friends shop after you.
+                <strong> Share </strong>
+                {' '}
+                this Groupshop with friends and
+                {' '}
+                <strong> earn 100% cashback  </strong>
+                when they shop.
               </div>
             </p>
           </div>
@@ -206,7 +219,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               className={[styles.welcome__modal__body__btn].join(' ')}
               onClick={moveForward}
             >
-              Customize
+              Get Started
             </Button>
 
             <Button
