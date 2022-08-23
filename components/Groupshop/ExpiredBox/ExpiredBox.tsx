@@ -181,7 +181,7 @@ const ExpiredBox = ({
                       placement="auto"
                       shareurl={shareUrl}
                       fullshareurl={shareUrl}
-                      label="🔗 Invite Now"
+                      label="🔗  &nbsp; Invite Now"
                       onClick={() => googleEventCode('earn-cashback-modal')}
                       icon={false}
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
