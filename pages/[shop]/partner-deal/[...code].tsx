@@ -412,8 +412,8 @@ const GroupShop: NextPage = () => {
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
                     names={partnerMembers?.map(
-                      (mem: any) => `${mem.customerInfo.firstName} ${
-                        mem?.customerInfo?.lastName?.charAt(0) || ''
+                      (mem: any) => `${mem.customerInfo.firstName ?? ''} ${
+                        mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
                       }`,
                     )}
                     cashback={['']}
@@ -569,9 +569,10 @@ const GroupShop: NextPage = () => {
             </div>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
-                names={[`${gsctx?.partnerDetails?.fname} ${
+                names={[`${gsctx?.partnerDetails?.fname ?? ''} ${
                   gsctx?.partnerDetails?.lname?.charAt(0) || ''
                 }`]}
+                // names={['name']}
                 cashback={['']}
                 pending={pending}
               />
@@ -611,7 +612,7 @@ const GroupShop: NextPage = () => {
             CURATED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {`${gsctx?.partnerDetails?.fname}`}
+              {`${gsctx?.partnerDetails?.fname ?? gsctx?.partnerDetails?.lname}`}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
@@ -654,7 +655,7 @@ const GroupShop: NextPage = () => {
           <p className={styles.groupshop_col_recommendations}>
             Shop from
             {' '}
-            {gsctx?.partnerDetails?.fname || ''}
+            {gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.fname || '' : gsctx?.partnerDetails?.lname ?? ''}
             {' '}
             ’s
             personal favorites and recommendations.

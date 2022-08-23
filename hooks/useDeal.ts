@@ -82,7 +82,7 @@ export default function useDeal() {
     (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
   ) ?? [], [gsctx.members]);
 
-  const formatName = useCallback((customer : any) => `${customer.firstName} ${customer.lastName.charAt(0)}`,
+  const formatName = useCallback((customer : any) => `${customer.firstName ?? ''} ${customer.firstName ? customer.lastName.charAt(0) : customer.lastName}`,
     [gsctx.members]);
 
   const topFive = useCallback(

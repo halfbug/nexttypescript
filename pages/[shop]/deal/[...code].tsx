@@ -349,7 +349,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
                     names={topFive(gsctx?.members.map(
-                      (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                      (mem: any) => `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                       }`,
                     ))}
                     cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -519,7 +519,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
               <Members
                 names={gsctx?.members.map(
-                  (mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                  (mem: any) => `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                   }`,
                 )}
                 cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
@@ -603,7 +603,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <p className={styles.groupshop_col_recommendations}>
             Shop from
             {' '}
-            {member?.orderDetail?.customer?.firstName || ''}
+            {member?.orderDetail?.customer?.firstName ? member?.orderDetail?.customer?.firstName || '' : member?.orderDetail?.customer?.lastName ?? ''}
             {' '}
             ’s
             previous pruchases and recommendations.

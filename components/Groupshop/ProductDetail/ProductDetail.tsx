@@ -601,7 +601,7 @@ const ProductDetail = ({
                     <>
 
                       <div className="d-flex align-items-center justify-content-start flex-wrap">
-                        <Members names={topFive(productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName} ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''}`))} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
+                        <Members names={topFive(productCustomers.map((mem: any) => `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail?.customer?.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName}`))} cashback={[`${currencySymbol}23`, `${currencySymbol}20`]} />
                         <ShareButton
                           disabled={isExpired}
                           placement="auto-end"
