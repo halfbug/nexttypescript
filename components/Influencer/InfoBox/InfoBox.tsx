@@ -67,7 +67,9 @@ const InfoBox = ({
           </Row>
         </Modal.Header>
         <Modal.Header className={styles.groupshop__info_modal__closebtnsm}>
-          <Row onClick={handleClose}><ArrowDown /></Row>
+          <Row onClick={handleClose}>
+            <div><ArrowDown /></div>
+          </Row>
         </Modal.Header>
         <div className="styles.groupshop_infoBox_imgBox">
           {!isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}

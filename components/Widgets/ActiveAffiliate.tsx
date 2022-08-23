@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import {
+  Col, Form, Row, Spinner,
+} from 'react-bootstrap';
 import styles from 'styles/Partner.module.scss';
 import { StoreContext } from 'store/store.context';
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
@@ -152,6 +154,7 @@ const ActiveAffiliate = ({
           {renderItems?.map((part: any, index: number) => (
             <Row className={styles.partner__data_row}>
               <Col xl={2} lg={2} md={2}>
+                {/* {<Spinner animation="border" />} */}
                 <Form.Check
                   checked={part.isActive}
                   type="switch"

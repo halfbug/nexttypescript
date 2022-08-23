@@ -29,15 +29,13 @@
             font-size: $size-14px;
             line-height: 20px;
             &__score{
-                @extend .p-1, .px-1;
+                padding: 6px 12px;
                 font-family: "DM Sans";
                 font-weight: 400 !important;
                 font-size: $font-size-small-medium;
                 color: $black;
                 background: $modern;
                 border-radius: $border-radius-light;
-                margin-left: 20px !important;
-                margin-right: 8px;
                 height: 26px;
             }
         }
@@ -88,7 +86,7 @@
         line-height: 18px;
     }
     &__btn {
-        @extend .px-2;
+        @extend .px-3;
         color: $black;
         font-weight: $font-weight-bolder;
         line-height: $line-height-18;
@@ -308,14 +306,18 @@
             font-size: 16px;
             line-height: 21px;
         }
-
+        &__headrow {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            align-items: center;
+            margin-top: 6px;
+        }
         &__heading {
             color: #000000;
             font-family: 'DM Sans'; 
             font-weight: 700;
             font-size: 14px;
             line-height: 18px;
-            margin-bottom: 11px;
             
             svg {
                 margin-left: 2px;
