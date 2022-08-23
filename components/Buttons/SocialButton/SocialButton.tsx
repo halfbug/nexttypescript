@@ -17,15 +17,20 @@ type SocialButtonProps = React.PropsWithChildren<{
 
 const SocialButton = ({
   url, network, text, children, ...props
-}: SocialButtonProps & CustomPropsType) => (
+}: SocialButtonProps & CustomPropsType) => {
+  // console.log(' dsf');
+  React.useEffect(() => {
+    console.log(text, 'text social button');
+  }, [text]);
 
-  <Button
-    className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
-    variant="default"
-    style={{ color: 'black', background: '#F0F0F0' }}
-    target="_blank"
-  >
-    {network === 'Instagram'
+  return (
+    <Button
+      className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
+      variant="default"
+      style={{ color: 'black', background: '#F0F0F0' }}
+      target="_blank"
+    >
+      {network === 'Instagram'
       && (
         <Instagram
           className="fs-3 fw-bold"
@@ -36,7 +41,7 @@ const SocialButton = ({
         />
       )}
 
-    {network === 'Youtube'
+      {network === 'Youtube'
       && (
         <Youtube
           className="fs-3 fw-bold"
@@ -47,7 +52,7 @@ const SocialButton = ({
         />
       )}
 
-    {network === 'Facebook'
+      {network === 'Facebook'
       && (
         <FacebookShareButton
           url={url}
@@ -63,7 +68,7 @@ const SocialButton = ({
         </FacebookShareButton>
       )}
 
-    {network === 'Pinterest'
+      {network === 'Pinterest'
       && (
         <PinterestShareButton
           media={props.media}
@@ -76,7 +81,7 @@ const SocialButton = ({
         </PinterestShareButton>
       )}
 
-    {network === 'Twitter'
+      {network === 'Twitter'
       && (
         <TwitterShareButton
           // title="Groupshop"
@@ -88,7 +93,7 @@ const SocialButton = ({
         </TwitterShareButton>
       )}
 
-    {network === 'Tiktok'
+      {network === 'Tiktok'
       && (
         <Tiktok
           className="fs-3 fw-bold"
@@ -99,7 +104,7 @@ const SocialButton = ({
         />
       )}
 
-    {network === 'Email'
+      {network === 'Email'
       && (
         <EmailShareButton
           subject="Groupshop"
@@ -110,8 +115,10 @@ const SocialButton = ({
         </EmailShareButton>
       )}
 
-  </Button>
-);
+    </Button>
+
+  );
+};
 
 SocialButton.defaultProps = {
   text: '',

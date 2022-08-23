@@ -715,28 +715,28 @@ const ProductDetail = ({
                   <section className="d-flex justify-content-center px-2 mb-3">
                     <div className="mx-1">
                       {' '}
-                      <SocialButton network="Instagram" url={activateURL} />
+                      <SocialButton text={socialText} network="Instagram" url={activateURL} />
                     </div>
 
                     <div className="mx-1">
                       {' '}
-                      <SocialButton network="Pinterest" url={activateURL} />
+                      <SocialButton text={socialText} network="Pinterest" url={activateURL} />
                       {' '}
                     </div>
 
                     <div className="mx-1">
                       {' '}
-                      <SocialButton network="Tiktok" url={activateURL} />
+                      <SocialButton text={socialText} network="Tiktok" url={activateURL} />
                       {' '}
                     </div>
                     <div className="mx-1">
                       {' '}
-                      <SocialButton network="Twitter" url={activateURL} />
+                      <SocialButton text={socialText} network="Twitter" url={activateURL} />
                       {' '}
                     </div>
                     <div className="mx-1">
                       {' '}
-                      <SocialButton network="Facebook" url={activateURL} />
+                      <SocialButton text={socialText} network="Facebook" url={activateURL} />
                       {' '}
                     </div>
                   </section>

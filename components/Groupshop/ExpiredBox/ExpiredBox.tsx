@@ -16,6 +16,7 @@ import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareB
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import useDeal from 'hooks/useDeal';
+import useSharetext from 'hooks/useSharetext';
 
 interface ExpiredBoxProps extends RootProps {
   mes: string;
@@ -45,6 +46,7 @@ const ExpiredBox = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { socialText } = useSharetext();
 
   return (
     <>
@@ -203,11 +205,11 @@ const ExpiredBox = ({
               or Share
             </Col>
             <Col sm={12} className="d-flex justify-content-center mt-3">
-              <div className="me-2"><SocialButton network="Email" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton network="Instagram" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton network="Pinterest" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton network="Twitter" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton network="Facebook" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Email" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Instagram" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Pinterest" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Twitter" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Facebook" url={shareUrl} /></div>
             </Col>
           </Row>
         </Modal.Body>
