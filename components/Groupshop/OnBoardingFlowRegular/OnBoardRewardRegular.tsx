@@ -234,7 +234,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                 {errors?.PhoneNumber}
               </Form.Control.Feedback>
               <div className={styles.reward__modal__body__checkArea__txt1}>
-                By entering your number, you agree to receive recurring personalized marketing text
+                By checking this box, you agree to receive recurring personalized marketing text
                 messages from Groupshop at the cell number entered below. Msg & data rates may
                 apply. View Terms & Privacy
               </div>

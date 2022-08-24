@@ -1496,6 +1496,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_infoBox {
+
+    &_mobileLogo {
+      text-align: center;
+    max-width: 110px;
+    margin: 0 auto;
+    padding: 25px 0px;
+    }
     svg {
       height: 30px !important;
     }
@@ -1584,7 +1591,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
     h2 {
-      @extend .mt-4, .mb-3;
+      @extend .mb-3;
       font-family: DM Sans;
       font-style: normal;
       font-weight: bold;
@@ -1600,7 +1607,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .mx-3, .d-block;
       font-family: Mulish;
       font-style: normal;
-      font-weight: 400 !important;
+      font-weight: 400;
       font-size: 16px;
       line-height: 23px;
       text-align: center;
@@ -1637,6 +1644,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-align: center;
 
       color: #000000;
+    }
+
+    &_textDiscount {
+      color: #000000;
+      font-weight: 700 !important;
+      font-family: DM Sans !important;
+      font-size: 14px !important;
     }
   }
 

@@ -110,7 +110,13 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             {gsctx.store?.brandName}
             :
           </div>
-          <div className={styles.welcome__modal__body__icons}>🛒   📩   🤑</div>
+          <div className={styles.welcome__modal__body__icons}>
+            🛒
+            {'  '}
+            📩
+            {'  '}
+            🤑
+          </div>
           <div className={styles.welcome__modal__body__getStarted2}>
             {/* 3 steps to get started */}
             Two ways to Earn Rewards
@@ -146,7 +152,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
               this Groupshop with friends and
-              <strong> earn 100% cashback</strong>
+              <strong> earn 100% cashback </strong>
               when they shop!
               <p className={[styles.welcome__modal__body__descriptionSmall,
                 styles.welcome__modal__body__box2__p2].join(' ')}

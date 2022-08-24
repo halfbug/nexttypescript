@@ -85,12 +85,16 @@ const InfoBox = ({
         </div>
         <Modal.Body className="py-2 px-3 text-center">
           <div className={styles.groupshop_infoBox}>
-            <img style={{ maxWidth: 110 }} src={storeLogo} alt="headtag" className="img-fluid" />
+            <div className={styles.groupshop_infoBox_mobileLogo}>
+              <img src={storeLogo} alt="headtag" className="img-fluid" />
+            </div>
             <h2>
               This Groupshop expired!
             </h2>
-            <p>
-              <strong>But you can still get exclusive discounts</strong>
+            <hr />
+            <p className={styles.groupshop_infoBox_textDiscount}>
+              But you can still get exclusive discounts.
+
             </p>
             <div className="my-2 d-flex justify-content-center">
               <p className={styles.groupshop_expiremodal__pointers}>
