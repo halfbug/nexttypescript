@@ -318,6 +318,8 @@ export default function useDeal() {
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)
       : `${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName}`), [gsctx]);
+  const socialText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
+  const nativeShareText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   return {
     currencySymbol,
     discount,
@@ -360,5 +362,7 @@ export default function useDeal() {
     maxPercent,
     brandName,
     shortActivateURL,
+    socialText,
+    nativeShareText,
   };
 }

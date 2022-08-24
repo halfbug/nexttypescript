@@ -7,7 +7,6 @@ import {
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { useQRCode } from 'next-qrcode';
 import useDeal from 'hooks/useDeal';
-import useSharetext from 'hooks/useSharetext';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
 
@@ -22,7 +21,7 @@ const ShareUnlockButton = ({
   const { gsctx, banner } = useDeal();
   const { discountCode: { percentage } } = gsctx;
   const { Canvas } = useQRCode();
-  const { socialText } = useSharetext();
+  const { socialText } = useDeal();
 
   return (
     <PopoverButton

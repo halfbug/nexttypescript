@@ -31,7 +31,6 @@ import useAppContext from 'hooks/useAppContext';
 import styles1 from 'styles/Campaign.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
-import useSharetext from 'hooks/useSharetext';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -74,7 +73,7 @@ const ProductDetail = ({
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
-    maxPercent, brandName,
+    maxPercent, brandName, socialText, nativeShareText,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -85,7 +84,6 @@ const ProductDetail = ({
 
   const productCustomers = getBuyers(product?.id || '0');
   const { googleProductCode, googleEventCode } = useGtm();
-  const { socialText, nativeShareText } = useSharetext();
   const inviteForExpiredGS = () => {
     setloaderInvite(true);
     setTimeout(() => {

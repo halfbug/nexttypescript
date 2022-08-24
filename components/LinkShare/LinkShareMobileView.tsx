@@ -7,7 +7,6 @@ import Cross from 'assets/images/cross.svg';
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { RootProps } from 'types/store';
 import useDeal from 'hooks/useDeal';
-import useSharetext from 'hooks/useSharetext';
 import SocialButtonMobile from '../Buttons/SocialButton/SocialButtonMobile';
 
 interface LinkShareMobileProps extends RootProps {
@@ -17,12 +16,13 @@ interface LinkShareMobileProps extends RootProps {
 }
 
 const LinkShareMobileView = ({ show, handleClose, shareurl }: LinkShareMobileProps) => {
-  const { gsctx, banner } = useDeal();
+  const {
+    gsctx, banner, socialText, nativeShareText,
+  } = useDeal();
   const { discountCode: { percentage } } = gsctx;
   const closeModal = (e: any) => {
     handleClose(e);
   };
-  const { socialText } = useSharetext();
   return (
     <>
       {/* <div role="button" tabIndex={0}>onbaording share mobile</div> */}

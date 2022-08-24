@@ -18,7 +18,7 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { Send } from 'react-bootstrap-icons';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
-import useSharetext from 'hooks/useSharetext';
+import useDeal from 'hooks/useDeal';
 
 interface mesProps {
   mes: string;
@@ -39,7 +39,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
-  const { socialText } = useSharetext();
+  const { socialText } = useDeal();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

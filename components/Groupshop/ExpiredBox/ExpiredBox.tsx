@@ -16,7 +16,6 @@ import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareB
 import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import useDeal from 'hooks/useDeal';
-import useSharetext from 'hooks/useSharetext';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface ExpiredBoxProps extends RootProps {
@@ -40,7 +39,6 @@ const ExpiredBox = ({
   const [show, setShow] = useState(false);
   const { dPrice, shortActivateURL } = useDeal();
   const { formatNumber } = useUtilityFunction();
-  console.log('🚀 ~ file: ExpiredBox.tsx ~ line 40 ~ shortActivateURL', shortActivateURL);
 
   useEffect(() => {
     if (show) { googleEventCode('how-it-works-modal'); }
@@ -48,7 +46,7 @@ const ExpiredBox = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { socialText } = useSharetext();
+  const { socialText } = useDeal();
 
   return (
     <>
