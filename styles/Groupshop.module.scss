@@ -2632,9 +2632,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border-radius: 12px;
       @include media-breakpoint-down(sm) {
         border-radius: 12px 12px 0px 0px;
-        position: fixed;
-        bottom: 0;
-        max-height: 95vh;
       }
     }
     &__body {

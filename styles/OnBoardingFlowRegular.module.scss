@@ -1,5 +1,6 @@
 @import "./variables.scss";
 .welcome {
+    
     &__modal {
         min-width: 745px;
 
@@ -319,7 +320,7 @@
         }
     }
 
-    @media (max-width: 425px) {
+    @media (max-width: 475px) {
         &__modal {
             //min-width: 100%;
             width: auto;

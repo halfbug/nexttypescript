@@ -98,9 +98,10 @@ const OBWelcomeInfluencer = ({
                 {' '}
               </strong>
             </p>
-            <p className={[styles.welcome__modal__body__descriptionSmall, styles.welcome__modal__body__box2__p2].join(' ')}>
+            {/* <p className={[styles.welcome__modal__body__descriptionSmall,
+             styles.welcome__modal__body__box2__p2].join(' ')}>
               You can also shop these discounts yourself, we won’t judge.
-            </p>
+            </p> */}
           </div>
           <div className={styles.welcome__modal__body__box3}>
             <p className={styles.welcome__modal__body__description}>

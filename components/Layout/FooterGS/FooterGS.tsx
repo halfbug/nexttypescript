@@ -221,10 +221,11 @@ const Footer = ({
             <div className={styles.groupshop_footer_text}>
               {isInfluencerGS ? (
                 <>
-                  <h6>
-                    <span className={styles1.Influencer_fontMeduim}>Interested in getting your own store?</span>
-                    <span className={styles1.Influencer_fontRegular}>Sign up to become a Groupshop brand partner below.</span>
-                  </h6>
+                  <p>
+                    <strong>Want your own store? </strong>
+                    Be the first to find out when
+                    you can shop your favorite brands on Groupshop.
+                  </p>
 
                 </>
               ) : (
