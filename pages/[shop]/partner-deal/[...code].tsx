@@ -59,6 +59,8 @@ import ExpireModal from 'components/Influencer/ExpireModal/ExpireModal';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer';
+import useBanner from 'hooks/useBanner';
+import useLogo from 'hooks/useLogo';
 
 const GroupShop: NextPage = () => {
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
@@ -104,8 +106,6 @@ const GroupShop: NextPage = () => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showExpiredModel, setShowExpiredModel] = useState<boolean>(false);
-  const [storeLogo, setStoreLogo] = useState<string>('');
-  const [bannerImage, setBannerImage] = useState<string>('');
   const [partnerMembers, setpartnerMembers] = useState<PartnerMember[]>([{
     customerInfo: {
       firstName: '',
@@ -116,36 +116,25 @@ const GroupShop: NextPage = () => {
     orderId: '',
   }]);
   useEffect(() => {
-    async function gets3headerBanner() {
-      if (partnerGroupshop && partnerGroupshop.id && pending) {
-        console.log('🚀 ~ file: [...code].tsx ~ useEffect ~ data.groupshop', partnerGroupshop);
-        const pctx: IGroupshop = {
-          ...partnerGroupshop,
-          members: partnerGroupshop.members ?? [],
-        };
+    if (partnerGroupshop && partnerGroupshop.id && pending) {
+      const pctx: IGroupshop = {
+        ...partnerGroupshop,
+        members: partnerGroupshop.members ?? [],
+      };
 
-        dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
-        setpending(false);
-        // setallProducts(partnerGroupshop?.allProducts);
-        setallProducts(partnerGroupshop?.allProducts?.filter(
-          (item) => item.outofstock === false,
-        ));
-        setbestSeller(partnerGroupshop?.bestSeller);
-        const expireStatus = partnerGroupshop?.isActive !== true;
-        setShowExpiredModel(expireStatus);
-        // setmember(partnerGroupshop?.members[0]);
-        if (partnerGroupshop?.campaign?.settings?.imageUrl) {
-          const key = getKeyFromS3URL(partnerGroupshop?.campaign?.settings?.imageUrl ?? '');
-          const bannerImageS3 = await getSignedUrlS3(key);
-          if (bannerImageS3) setBannerImage(bannerImageS3);
-        } else {
-          setBannerImage('/images/bg.jpg');
-        }
-      }
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
+      setpending(false);
+      setallProducts(partnerGroupshop?.allProducts?.filter(
+        (item) => item.outofstock === false,
+      ));
+      setbestSeller(partnerGroupshop?.bestSeller);
+      const expireStatus = partnerGroupshop?.isActive !== true;
+      setShowExpiredModel(expireStatus);
     }
-    gets3headerBanner();
   }, [partnerGroupshop, pending]);
-
+  // banner image and logo load
+  const bannerImage = useBanner();
+  const storeLogo = useLogo();
   const {
     gsURL,
     gsShortURL,
@@ -216,15 +205,15 @@ const GroupShop: NextPage = () => {
     }
   }, [dealProducts, showps]);
 
-  useEffect(() => {
-    async function gets3logo() {
-      const key = getKeyFromS3URL(logoImage ?? '');
-      const logoS3 = await getSignedUrlS3(key);
-      // console.log('🚀 [...code] logoS3', logoS3);
-      if (logoS3) setStoreLogo(logoS3);
-    }
-    gets3logo();
-  }, [logoImage]);
+  // useEffect(() => {
+  //   async function gets3logo() {
+  //     const key = getKeyFromS3URL(logoImage ?? '');
+  //     const logoS3 = await getSignedUrlS3(key);
+  //     // console.log('🚀 [...code] logoS3', logoS3);
+  //     if (logoS3) setStoreLogo(logoS3);
+  //   }
+  //   gets3logo();
+  // }, [logoImage]);
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {

@@ -46,7 +46,7 @@ const ExpiredBox = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { socialText } = useDeal();
+  const { socialText, banner } = useDeal();
 
   return (
     <>
@@ -207,7 +207,7 @@ const ExpiredBox = ({
             <Col sm={12} className="d-flex justify-content-center mt-3">
               <div className="me-2"><SocialButton text={socialText} network="Email" url={shareUrl} /></div>
               <div className="me-2"><SocialButton text={socialText} network="Instagram" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton text={socialText} network="Pinterest" url={shareUrl} /></div>
+              <div className="me-2"><SocialButton text={socialText} network="Pinterest" url={shareUrl} media={banner} /></div>
               <div className="me-2"><SocialButton text={socialText} network="Twitter" url={shareUrl} /></div>
               <div className="me-2"><SocialButton text={socialText} network="Facebook" url={shareUrl} /></div>
             </Col>

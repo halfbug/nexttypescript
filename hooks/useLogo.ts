@@ -2,13 +2,13 @@ import {
   useContext,
   useEffect, useState, useCallback,
 } from 'react';
-import { GroupshopContext } from 'store/groupshop.context';
+import useAppContext from './useAppContext';
 import useUtilityFunction from './useUtilityFunction';
 
 const useLogo = () => {
   const {
     gsctx,
-  } = useContext(GroupshopContext);
+  } = useAppContext();
   const {
     getKeyFromS3URL, getSignedUrlS3,
   } = useUtilityFunction();

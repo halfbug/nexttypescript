@@ -73,7 +73,7 @@ const ProductDetail = ({
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
-    maxPercent, brandName, socialText, nativeShareText,
+    maxPercent, brandName, socialText, nativeShareText, banner,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -718,7 +718,7 @@ const ProductDetail = ({
 
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Pinterest" url={activateURL} />
+                      <SocialButton text={socialText} network="Pinterest" url={activateURL} media={banner} />
                       {' '}
                     </div>
 
