@@ -17,6 +17,7 @@ import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import useDeal from 'hooks/useDeal';
 import useSharetext from 'hooks/useSharetext';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface ExpiredBoxProps extends RootProps {
   mes: string;
@@ -38,6 +39,7 @@ const ExpiredBox = ({
 
   const [show, setShow] = useState(false);
   const { dPrice, shortActivateURL } = useDeal();
+  const { formatNumber } = useUtilityFunction();
   console.log('🚀 ~ file: ExpiredBox.tsx ~ line 40 ~ shortActivateURL', shortActivateURL);
 
   useEffect(() => {
@@ -114,11 +116,11 @@ const ExpiredBox = ({
                   <div className={styles.groupshop_expiredBox_modal__product__amounts}>
                     <strong>
                       $
-                      {dPrice(+item.price)}
+                      {formatNumber(dPrice(+item.price))}
                     </strong>
                     <span>
                       $
-                      {item.price}
+                      {formatNumber(item.price)}
                     </span>
                   </div>
                 </div>
