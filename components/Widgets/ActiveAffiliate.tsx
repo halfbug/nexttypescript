@@ -181,7 +181,7 @@ const ActiveAffiliate = ({
               <Col xl={3} lg={3} md={3}>
                 <div className={styles.partner__data_row__tag1}>
                   {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                  {part.comissionAmount}
+                  {formatNumber(part.comissionAmount)}
                   {' '}
                   generated
                 </div>
@@ -256,10 +256,10 @@ const ActiveAffiliate = ({
           partnerId={partnerId}
           storeCurrency={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
           groupshopLink={groupshopLink}
-          revenue={revenue}
+          revenue={formatNumber(revenue)}
           purchases={purchases}
           partnerCommission={partnerCommission}
-          comissionAmount={comissionAmount}
+          comissionAmount={formatNumber(comissionAmount)}
           partnerRewards={partnerRewards}
           partnerDetails={partnerDetails}
           discountDetails={discountCode}
