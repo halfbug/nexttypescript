@@ -39,7 +39,7 @@ const Cart = ({
     dispatch,
   } = useAppContext();
   const {
-    currencySymbol, dPrice, discount, getOwnerName, isInfluencerGS,
+    currencySymbol, dPrice, discount, getOwnerName, isInfluencerGS, brandName,
   } = useDeal();
 
   const {
@@ -354,7 +354,7 @@ const Cart = ({
                       {' '}
                       powered by
                       {' '}
-                      <strong>Young & Reckless. </strong>
+                      <strong>{brandName}</strong>
                     </div>
                   )
                   : (
@@ -424,7 +424,9 @@ const Cart = ({
                   {' '}
                   powered by
                   {' '}
-                  <strong>Young & Reckless. </strong>
+                  <strong>
+                    {brandName}
+                  </strong>
                 </div>
               </Row>
               )}
@@ -443,7 +445,10 @@ const Cart = ({
                   We don’t sell or shareyour information. You can unsubscribe at any time.
                   <br />
                   <br />
-                  If you purchased any of these items at full price on Le Sable,
+                  If you purchased any of these items at full price on
+                  {' '}
+                  {brandName}
+                  ,
                   you cannot return your original order to keep these discounted ones.
                 </div>
               </Row>
