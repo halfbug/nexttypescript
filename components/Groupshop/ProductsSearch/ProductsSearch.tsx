@@ -176,9 +176,13 @@ const ProductsSearch = ({
   useEffect(() => {
     if (selected?.length !== clientDealProducts()?.length) {
       const cdp = clientDealProducts() ?? [];
+      console.log('🚀 ~ file: ProductsSearch.tsx ~ line 179 ~ useEffect ~ cdp ooo', cdp);
       const sp = selected ?? [];
+      console.log('🚀 ~ file: ProductsSearch.tsx ~ line 181 ~ useEffect ~ sp ooo', sp);
 
       setselectedCountState((cdp.length + sp.length));
+    } else {
+      setselectedCountState(0);
     }
   }, [selected, showSearch]);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 184 ~ selected', selected);
@@ -316,7 +320,7 @@ const ProductsSearch = ({
                 <p className="text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
-                    <li className={selectedCountState > i && (selected && selected?.length > 1) ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                    <li className={selectedCountState > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
                   ))}
                 </p>
               </div>
@@ -326,7 +330,7 @@ const ProductsSearch = ({
                 <p className="d-inline text-muted d-flex justify-content-end align-items-center">
                   Add up to 5 products
                   {[...new Array(5)].map((v, i) => (
-                    <li className={selectedCountState > i && (selected && selected?.length > 1) ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
+                    <li className={selectedCountState > i ? styles.groupshop_modal_search_meter_fill : styles.groupshop_modal_search_meter}>{' '}</li>
                   ))}
                 </p>
               </div>
@@ -356,10 +360,10 @@ const ProductsSearch = ({
                                   className={styles.groupshop__pcard_tag_cross}
                                   icon={<X size={18} />}
                                   onClick={() => {
-                                    setSelected(selected?.filter((pid) => pid !== prd.id));
+                                    setSelected(selected?.filter((pid) => pid !== prd.id) ?? []);
                                     setSelectedProducts(selectedProducts?.filter(
                                       (pid: any) => pid.id !== prd.id,
-                                    ));
+                                    ) ?? []);
                                   }}
                                 />
                               </>
