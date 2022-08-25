@@ -65,9 +65,9 @@ const OBWelcomeInfluencer = ({
           <h2 className={styles.welcome__modal__body__welcomeTxt}>
             Welcome to Groupshop!
           </h2>
-          <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
+          {/* <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
             New to Groupshop?
-          </h2>
+          </h2> */}
           {/* <div className={styles.welcome__modal__body__description}>
             The
             <strong> personalized store </strong>
@@ -76,10 +76,10 @@ const OBWelcomeInfluencer = ({
             and
             <strong> earn 100% cashback and discounts. </strong>
           </div> */}
-          <div className={styles.welcome__modal__body__descriptionMobile}>
+          {/* <div className={styles.welcome__modal__body__descriptionMobile}>
             Here are the two ways you can earn rewards with
             {gsctx?.store?.brandName}
-          </div>
+          </div> */}
           <div className={styles.welcome__modal__body__getStarted}>
             {/* 3 steps to get started */}
             How it works
@@ -120,7 +120,7 @@ const OBWelcomeInfluencer = ({
             </p>
           </div>
 
-          <div className={styles.welcome__modal__body__boxMobile}>
+          {/* <div className={styles.welcome__modal__body__boxMobile}>
             <div className={styles.welcome__modal__body__boxMobile__txt}>
               <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div>
               <div>
@@ -138,8 +138,8 @@ const OBWelcomeInfluencer = ({
                 your order
               </div>
             </div>
-          </div>
-          <div className={styles.welcome__modal__body__boxMobile}>
+          </div> */}
+          {/* <div className={styles.welcome__modal__body__boxMobile}>
             <div className={styles.welcome__modal__body__boxMobile__txt}>
               <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div>
               <div>
@@ -149,7 +149,7 @@ const OBWelcomeInfluencer = ({
                 on your order when friends shop
               </div>
             </div>
-          </div>
+          </div> */}
         </Modal.Body>
         <hr className={styles.welcome__modal__body__horizontal_seprator} />
         <Modal.Body className={styles.welcome__modal__body}>
@@ -167,12 +167,12 @@ const OBWelcomeInfluencer = ({
               Customize Groupshop
             </Button>
 
-            <Button
+            {/* <Button
               className={styles.welcome__modal__body__btnMobile}
               onClick={handleNext}
             >
               Get Started
-            </Button>
+            </Button> */}
           </div>
           {/* <div className={styles.welcome__modal__body__btnskip}
           onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>

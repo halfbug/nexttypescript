@@ -329,7 +329,7 @@
 
             &__content {
                 border-radius: 12px 12px 0px 0px;
-                position: fixed;
+                position: absolute;
                 bottom: 0;
             }
 
@@ -369,10 +369,6 @@
                         margin-left: 10px;
                         margin-right: 16px;
                     }
-                }
-
-                &__welcomeTxt {
-                    display: none;
                 }
 
                 &__icons {
@@ -439,13 +435,13 @@
                     display: none;
                 }
 
-                &__box2 {
-                    display: none;
-                }
+                // &__box2 {
+                //     display: none;
+                // }
 
-                &__box3 {
-                    display: none;
-                }
+                // &__box3 {
+                //     display: none;
+                // }
 
                 &__w50 {
                     padding: 0 20px;
@@ -477,9 +473,9 @@
                     }
                 }
 
-                &__btn {
-                    display: none;
-                }
+                // &__btn {
+                //     display: none;
+                // }
 
 
                 &__btnMobile {
@@ -1240,9 +1236,6 @@
                     margin-bottom: 20px;
                 }
 
-                &__welcomeTxt {
-                    display: none;
-                }
 
                 &__welcomeTxtMobile {
                     display: block;
