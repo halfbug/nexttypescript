@@ -357,7 +357,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                   {gsctx?.members.length > 5 && (
                   <span className="pe-2">
-                    { `+${gsctx?.members.length - 5} user${(gsctx?.members.length - 5) > 1 && 's'}`}
+                    { `+${gsctx?.members.length - 5} more`}
                   </span>
                   )}
                   <ShareButton
