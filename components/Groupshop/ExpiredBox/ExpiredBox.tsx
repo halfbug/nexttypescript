@@ -13,10 +13,11 @@ import useGtm from 'hooks/useGtm';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import { useMediaQuery } from 'react-responsive';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
-import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import useDeal from 'hooks/useDeal';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import SocialButtonMobile from 'components/Buttons/SocialButton/SocialButtonMobile';
+import SocialButton from 'components/Buttons/SocialButton/SocialButton';
 
 interface ExpiredBoxProps extends RootProps {
   mes: string;
@@ -205,12 +206,27 @@ const ExpiredBox = ({
               or Share
             </Col>
             <Col sm={12} className="d-flex justify-content-center mt-3">
-              <div className="me-2"><SocialButton text={socialText} network="Email" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton text={socialText} network="Instagram" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton text={socialText} network="Pinterest" url={shareUrl} media={banner} /></div>
-              <div className="me-2"><SocialButton text={socialText} network="Twitter" url={shareUrl} /></div>
-              <div className="me-2"><SocialButton text={socialText} network="Facebook" url={shareUrl} /></div>
+              {
+                  isModalForMobile ? (
+                    <>
+                      <div className="me-2"><SocialButton text={socialText} network="Email" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButton text={socialText} network="Instagram" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButton text={socialText} network="Pinterest" url={shareUrl} media={banner} /></div>
+                      <div className="me-2"><SocialButton text={socialText} network="Twitter" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButton text={socialText} network="Facebook" url={shareUrl} /></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="me-2"><SocialButtonMobile text={socialText} network="Email" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButtonMobile text={socialText} network="Instagram" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButtonMobile text={socialText} network="Pinterest" url={shareUrl} media={banner} /></div>
+                      <div className="me-2"><SocialButtonMobile text={socialText} network="Twitter" url={shareUrl} /></div>
+                      <div className="me-2"><SocialButtonMobile text={socialText} network="Facebook" url={shareUrl} /></div>
+                    </>
+                  )
+}
             </Col>
+
           </Row>
         </Modal.Body>
       </Modal>
