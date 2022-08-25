@@ -214,7 +214,14 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
               </Form.Check>
 
               <InputGroup className={styles.reward__modal__body__checkArea__inputGroup}>
-                <InputGroup.Text id="basic-addon1" className={styles.reward__modal__body__checkArea__preTxt}>+1</InputGroup.Text>
+                <InputGroup.Text
+                  id="basic-addon1"
+                  className={['rounded-0 border-end', styles.reward__modal__body__checkArea__preTxt,
+                  ].join(' ')}
+                >
+                  +1
+
+                </InputGroup.Text>
                 <FormControl
                   placeholder=""
                   aria-label="Username"

@@ -703,11 +703,11 @@
                     font-size: 14px;
                     line-height: 18px;
                     color: #000000;
-                    // opacity: 0.5;
+                    opacity: 0.5;
                     padding-right: 0px;
                     background: #F7F7FA;
                     border: none;
-                    border-right: 1px solid #000000;
+                    border-right: 2px solid $black!important;
                     padding: 0px;
                     padding-right: 7px;
                 }
@@ -718,6 +718,8 @@
                     border-radius: 6px;
                     margin-bottom: 8px;
                     margin-left: 20px;
+                    background: #F7F7FA;
+                    width: 212px;
                 }
             }
 
@@ -916,19 +918,16 @@
                         font-size: 14px;
                         line-height: 18px;
                         color: #000000;
-                        // opacity: 0.5;
-                        padding-right: 0px;
-                        background: #F7F7FA;
-                        border: none;
-                        border-right: 1px solid #000000;
-                        padding: 0px;
+                        border-right: 2px solid $black!important;
                         padding-right: 7px;
+                        opacity: .5;
+
                     }
 
                     &__inputGroup {
-                        width: 75%;
+                        width: 212px;
                         padding: 8px 15px;
-                        background: #F7F7FA;
+                        //background: #F7F7FA;
                     }
                 }
 
