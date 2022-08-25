@@ -164,7 +164,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
             </Button>
             <Button
               className={styles.timeToShine__modal__body__btnMobile}
-              onClick={handleClose}
+              onClick={moveForward}
             >
               Start Earning
             </Button>
