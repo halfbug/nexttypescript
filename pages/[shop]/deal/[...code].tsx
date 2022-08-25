@@ -287,7 +287,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="og:title" content="Groupshop" />
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
@@ -843,7 +843,7 @@ export const getServerSideProps = async (context: any) => {
   const resJson = await res.json();
   return {
     props: {
-      meta: resJson,
+      meta: { ...resJson, photo: resJson.photo ?? 'https://gsnodeimages.s3.amazonaws.com/bg.jpg' },
     },
   };
 };

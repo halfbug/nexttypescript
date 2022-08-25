@@ -62,7 +62,8 @@ import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer'
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
 
-const GroupShop: NextPage = () => {
+const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
+  // console.log({ meta });
   const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { shop, discountCode, status } = useCode();
@@ -205,15 +206,6 @@ const GroupShop: NextPage = () => {
     }
   }, [dealProducts, showps]);
 
-  // useEffect(() => {
-  //   async function gets3logo() {
-  //     const key = getKeyFromS3URL(logoImage ?? '');
-  //     const logoS3 = await getSignedUrlS3(key);
-  //     // console.log('🚀 [...code] logoS3', logoS3);
-  //     if (logoS3) setStoreLogo(logoS3);
-  //   }
-  //   gets3logo();
-  // }, [logoImage]);
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
@@ -351,13 +343,13 @@ const GroupShop: NextPage = () => {
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="og:title" content="Groupshop" />
-        <meta name="description" content={`Shop ${gsctx?.store?.brandName} on my Groupshop and get $10 off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" as="image" />
-        <meta name="og:image" content="https://gsnodeimages.s3.amazonaws.com/youngandrecklessdev_linkImage.png" />
+        <link rel="preload" nonce="" href={`https://gsnodeimages.s3.amazonaws.com/${meta.photo}`} as="image" />
+        <meta property="og:image" content={`https://gsnodeimages.s3.amazonaws.com/${meta.photo}`} />
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -860,3 +852,20 @@ const GroupShop: NextPage = () => {
 };
 
 export default GroupShop;
+export const getServerSideProps = async (context: any) => {
+  const url = `${process.env.API_URL}/me?name=${context.params.shop}&code=${context.params.code}`;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const res = await fetch(url, requestOptions);
+  const resJson = await res.json();
+  return {
+    props: {
+      meta: { ...resJson, photo: resJson.photo ?? 'https://gsnodeimages.s3.amazonaws.com/bg.jpg' },
+    },
+  };
+};
