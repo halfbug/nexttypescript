@@ -2016,7 +2016,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       color: $black;
     }
     &_byChecking {
-      @extend .mt-1, .mb-0, .px-3;
+      @extend .mt-3, .mb-0, .px-0;
       width: 313.88px;
       font-family: "Mulish";
       font-weight: 400 !important;

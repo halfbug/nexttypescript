@@ -343,28 +343,44 @@ const Cart = ({
                 </Col>
               </Row>
               <Row className="d-flex justify-content-center">
-                <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
-                  <Icon className="col-1" />
-                  <div className="col-11">
-                    You’ve saved
-                    {' '}
-                    <strong>
-                      {currencySymbol}
-                      {/* {dPrice(getTotalActualCartTotal())} */}
-                      {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
-                    </strong>
-                    {' '}
-                    by shopping with
-                    {' '}
-                    <strong>{getOwnerName()}</strong>
-                    {' '}
+                {loading
+                  ? (
+                    <div
+                      className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
+                    >
+                      🔒
+                      {' '}
+                      <strong>Secure checkout</strong>
+                      {' '}
+                      powered by
+                      {' '}
+                      <strong>Young & Reckless. </strong>
+                    </div>
+                  )
+                  : (
+                    <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
+                      <Icon className="col-1" />
+                      <div className="col-11">
+                        You’re saving
+                        {' '}
+                        <strong>
+                          {currencySymbol}
+                          {/* {dPrice(getTotalActualCartTotal())} */}
+                          {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
+                        </strong>
+                        {' '}
+                        by shopping with
+                        {' '}
+                        <strong>{getOwnerName()}</strong>
+                        {/* {' '}
                     And you can keep earning up to
                     {' '}
                     { upToPercent }
                     {' '}
-                    {isInfluencerGS ? 'discount!' : 'cashback!'}
-                  </div>
-                </Col>
+                    {isInfluencerGS ? 'discount!' : 'cashback!'} */}
+                      </div>
+                    </Col>
+                  )}
               </Row>
               <Row>
                 <Col className=" mt-2">
@@ -377,7 +393,7 @@ const Cart = ({
                         className={[styles.groupshop_cart_checkout, ''].join(' ')}
                         disabled
                       >
-                        Checkout
+                        We’re preparing your checkout...
                       </Button>
                       <Spinner animation="border" className="align-middle" />
 
@@ -397,20 +413,38 @@ const Cart = ({
 
                 </Col>
               </Row>
+              {!loading && (
               <Row>
+                <div
+                  className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
+                >
+                  🔒
+                  {' '}
+                  <strong>Secure checkout</strong>
+                  {' '}
+                  powered by
+                  {' '}
+                  <strong>Young & Reckless. </strong>
+                </div>
+              </Row>
+              )}
+              {/* <Row>
                 <div
                   className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
                 >
                   Shipping and taxes calculated at checkout.
                 </div>
-              </Row>
+              </Row> */}
               <Row className="d-flex justify-content-center">
                 <div
                   className={['', styles.groupshop_cart_byChecking].join(' ')}
                 >
-                  By checking out with Groupshop you agree to receive email updates
-                  about your order and rewards. We don’t sell or share your information.
-                  You can unsuscribe at any time.
+                  You agree to receive email updates about your order and rewards.
+                  We don’t sell or shareyour information. You can unsubscribe at any time.
+                  <br />
+                  <br />
+                  If you purchased any of these items at full price on Le Sable,
+                  you cannot return your original order to keep these discounted ones.
                 </div>
               </Row>
             </Container>
