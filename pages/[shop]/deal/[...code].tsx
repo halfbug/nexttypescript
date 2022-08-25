@@ -137,6 +137,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     activateURL,
     maxPercent,
     topFive,
+    shortActivateURL,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -306,7 +307,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 discount={gsctx?.discountCode.percentage}
                 mes="How does this work?"
                 brandname={brandName ?? ''}
-                shareUrl={activateURL ?? ''}
+                shareUrl={shortActivateURL ?? activateURL ?? ''}
                 products={allProducts?.slice(0, 3) ?? []}
                 maxPercent={maxPercent}
               />
@@ -362,7 +363,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   )}
                   <ShareButton
                     placement="bottom"
-                    shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+                    shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
                     fullshareurl={gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
@@ -402,7 +403,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+                  shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
                   fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? gsURL}
                   label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
@@ -532,7 +533,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   discount={gsctx?.discountCode.percentage}
                   mes="How it works"
                   brandname={brandName ?? ''}
-                  shareUrl={activateURL ?? ''}
+                  shareUrl={shortActivateURL ?? activateURL ?? ''}
                   products={allProducts?.slice(0, 3) ?? []}
                   maxPercent={maxPercent}
                 />
@@ -753,7 +754,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   className={['align-self-center my-2 px-3 py-2', styles.groupshop_expInviteFrnd].join(' ')}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   label="INVITE A FRIEND TO SHOP WITH YOU"
-                  shareurl={urlForActivation ?? ''}
+                  shareurl={shortActivateURL ?? urlForActivation ?? ''}
                   placement="bottom"
                 />
 
@@ -784,7 +785,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <LinkShareMobileView
           show={showQrscan}
           handleClose={() => setshowQrscan(false)}
-          shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
         />
         <ProductDetail
           show={showDetail}
@@ -802,7 +803,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <RewardBox2
           show={showRewards}
           discount={discount}
-          shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
           brandName={brandName}
@@ -811,7 +812,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
-              shareurl={isExpired ? activateURL ?? '' : gsShortURL ?? gsURL}
+              shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
               val={value}
               label={isExpired ? 'Share to unlock' : 'Share & earn'}

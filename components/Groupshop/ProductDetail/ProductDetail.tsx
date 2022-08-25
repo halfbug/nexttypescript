@@ -73,7 +73,7 @@ const ProductDetail = ({
     currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
-    maxPercent, brandName, socialText, nativeShareText, banner,
+    maxPercent, brandName, socialText, nativeShareText, banner, shortActivateURL,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -703,7 +703,7 @@ const ProductDetail = ({
 
                         </Button>
                         <Row>
-                          { activeURL ? (<a href={activeURL}>{activeURL}</a>) : '' }
+                          { activeURL || shortActivateURL ? (<a href={shortActivateURL ?? activeURL}>{shortActivateURL ?? activeURL}</a>) : '' }
                         </Row>
                       </>
                     )}
@@ -713,28 +713,28 @@ const ProductDetail = ({
                   <section className="d-flex justify-content-center px-2 mb-3">
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Instagram" url={activateURL} />
+                      <SocialButton text={socialText} network="Instagram" url={shortActivateURL ?? activateURL} />
                     </div>
 
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Pinterest" url={activateURL} media={banner} />
+                      <SocialButton text={socialText} network="Pinterest" url={shortActivateURL ?? activateURL} media={banner} />
                       {' '}
                     </div>
 
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Tiktok" url={activateURL} />
+                      <SocialButton text={socialText} network="Tiktok" url={shortActivateURL ?? activateURL} />
                       {' '}
                     </div>
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Twitter" url={activateURL} />
+                      <SocialButton text={socialText} network="Twitter" url={shortActivateURL ?? activateURL} />
                       {' '}
                     </div>
                     <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Facebook" url={activateURL} />
+                      <SocialButton text={socialText} network="Facebook" url={shortActivateURL ?? activateURL} />
                       {' '}
                     </div>
                   </section>

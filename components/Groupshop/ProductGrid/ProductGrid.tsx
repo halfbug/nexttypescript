@@ -86,7 +86,7 @@ const ProductGrid = ({
 
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
-    isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount,
+    isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
   } = useDeal();
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
@@ -238,7 +238,7 @@ const ProductGrid = ({
                         {isExpired ? (
                           <ShareUnlockButton
                             label="share to unlock"
-                            shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
+                            shareurl={shortActivateURL ?? urlForActivation ?? productShareUrl(prod?.id ?? '')}
                             className={styles.groupshop_unlockToShare}
                             onClick={(e) => handleCard(e)}
                           // () => { setsProduct(prod); setshowDetail(true); }}
@@ -256,6 +256,7 @@ const ProductGrid = ({
                               Add to Cart
 
                             </Button>
+                            xxx
                             <ShareButton
                               disabled={isExpired}
                               placement="auto"
