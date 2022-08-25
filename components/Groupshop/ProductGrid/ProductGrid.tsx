@@ -256,7 +256,6 @@ const ProductGrid = ({
                               Add to Cart
 
                             </Button>
-                            xxx
                             <ShareButton
                               disabled={isExpired}
                               placement="auto"

@@ -364,7 +364,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   <ShareButton
                     placement="bottom"
                     shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-                    fullshareurl={gsURL}
+                    fullshareurl={isExpired ? activateURL : gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
@@ -404,7 +404,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <ShareButton
                   placement="bottom"
                   shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-                  fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? gsURL}
+                  fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? ''}
                   label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
@@ -804,7 +804,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showRewards}
           discount={discount}
           shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-          fullshareurl={gsURL}
+          fullshareurl={isExpired ? activateURL : gsURL}
           handleClose={() => setShowRewards(false)}
           brandName={brandName}
           maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
