@@ -7,7 +7,6 @@ import {
   Modal,
 } from 'react-bootstrap';
 import styles from 'styles/OnBoardingFlowRegular.module.scss';
-import LeEsableIcon from 'assets/images/lesable.svg';
 import GroupshopIcon from 'assets/images/groupshop-icon.svg';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
@@ -43,15 +42,17 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
   const FormValues: TypeFormValues = {
     isEmailChecked: true,
     isTextChecked: true,
-    PhoneNumber: 0,
+    PhoneNumber: null,
   };
 
   const validationSchema = yup.object({
     PhoneNumber: yup
-      .number()
+      .number().nullable()
       .when('isTextChecked', {
         is: true,
-        then: yup.number().required('Must enter number').typeError('Please must specify a number'),
+        then: yup.number().required('Must enter number')
+          .test('len', 'Must be exactly 10 digits', (val = 0) => val.toString().length === 10)
+          .typeError('Please must specify a number'),
       }),
   });
 
@@ -63,7 +64,31 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
     enableReinitialize: true,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: () => { },
+    onSubmit: async (value, { validateForm }) => {
+      validateForm(value);
+      const temp: any = {
+        allowEmails: values.isEmailChecked,
+        allowTexts: values.isTextChecked,
+        mobileNumber: values.PhoneNumber ? (`+1${values.PhoneNumber}`) : '0',
+      };
+      const data = {
+        ...gsctx.obSettings,
+        ...temp,
+        step: 2,
+      };
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, ...data } } });
+
+      await addDealProduct({
+        variables: {
+          updateGroupshopInput: {
+            id: gsctx.id,
+            obSettings: {
+              ...data,
+            },
+          },
+        },
+      });
+    },
   });
 
   const handleClose = () => {
@@ -78,42 +103,6 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
   useEffect(() => {
     setShow(open);
   }, [open]);
-
-  const moveForward = async () => {
-    const regex = /^[0-9\b]+$/;
-    if (values.isTextChecked && !values.PhoneNumber) {
-      return;
-    }
-    if (values.isTextChecked && !regex.test(values.PhoneNumber)) {
-      return;
-    }
-    const temp: any = {
-      allowEmails: values.isEmailChecked,
-      allowTexts: values.isTextChecked,
-      mobileNumber: values.PhoneNumber ? (`+1${values.PhoneNumber}`) : '0',
-    };
-    const data = {
-      ...gsctx.obSettings,
-      ...temp,
-      step: 2,
-    };
-    dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...gsctx, obSettings: { ...gsctx.obSettings, ...data } } });
-
-    await addDealProduct({
-      variables: {
-        updateGroupshopInput: {
-          id: gsctx.id,
-          obSettings: {
-            ...data,
-          },
-        },
-      },
-    });
-
-    // if (shop && ownerCode && discountCode) {
-    // Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/2`);
-    // }
-  };
 
   return (
     <>
@@ -229,12 +218,10 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
                   className={styles.reward__modal__body__checkArea__input}
                   name="PhoneNumber"
                   onChange={(e) => { handleChange(e); }}
-                  isInvalid={!!errors.PhoneNumber
-                    || (values.isTextChecked && !values.PhoneNumber.length)}
-                  isValid={values.PhoneNumber.length === 10}
-                  minLength={10}
+                  isInvalid={!!errors.PhoneNumber}
+                  isValid={values.PhoneNumber && !errors.PhoneNumber}
                   maxLength={10}
-                  title={errors.PhoneNumber ? errors.PhoneNumber : ''}
+                  title={errors.PhoneNumber}
                 />
               </InputGroup>
               <Form.Control.Feedback type="invalid">
@@ -266,13 +253,13 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
           <div className="d-flex justify-content-center my-4">
             <Button
               className={styles.reward__modal__body__btn}
-              onClick={moveForward}
+              onClick={handleSubmit}
             >
               Customize
             </Button>
             <Button
               className={styles.reward__modal__body__btnMobile}
-              onClick={moveForward}
+              onClick={handleSubmit}
             >
               Next
             </Button>
