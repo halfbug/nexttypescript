@@ -24,8 +24,8 @@ const BigBannerBox = ({ text, isInfluencerGS }: IProps) => {
           <Row>
             <Col className={styles.groupshop__hero_big_banner_box_off}>
               {milestones.length ? milestones[milestones.length - 1].discount : ''}
-              {' '}
               { isInfluencerGS && baseLine}
+              {' '}
               off
             </Col>
           </Row>
