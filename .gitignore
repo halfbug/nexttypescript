@@ -46,3 +46,7 @@ yarn-error.log*
 /.yarn/install-state.gz
 *install-state.gz
 .yarn/install-state.gz
+
+# IDE - VSCode
+.vscode
+.vscode/*
