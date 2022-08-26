@@ -160,7 +160,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     // allProducts,
   } = gsctx;
   const {
-    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
+    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
   } = useUtilityFunction();
   const { popularShuffled } = usePopular(popularProducts);
   const { topPicks } = useTopPicks();
@@ -550,7 +550,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={(SKU.length >= 2 && SKU.length <= 4) ? memberProducts : member?.products}
+          products={(SKU.length >= 2 && SKU.length <= 4)
+            ? uniqueArray(memberProducts) : uniqueArray(member?.products)}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}

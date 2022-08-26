@@ -3,6 +3,7 @@ import {
   useEffect, useState,
 } from 'react';
 import { IProduct } from 'types/store';
+import _ from 'lodash';
 import useAppContext from './useAppContext';
 import useUtilityFunction from './useUtilityFunction';
 
@@ -11,13 +12,13 @@ const useTopPicks = () => {
     gsctx,
     dispatch,
   } = useAppContext();
-  const { filterArray } = useUtilityFunction();
+  const { filterArray, uniqueArray } = useUtilityFunction();
 
   const [topPicks, setTopPicks] = useState<IProduct[] | undefined>();
 
   const { allProducts, popularProducts } = gsctx;
   useEffect(() => {
-    const campaignAllPrd = [...allProducts ?? []];
+    const campaignAllPrd = [..._.uniq(allProducts) ?? []];
     // newProd will have highest purchasecount sorted array and instock
     const newProd = campaignAllPrd.filter(
       (item) => item.purchaseCount !== null || item.outofstock === false,
@@ -27,7 +28,7 @@ const useTopPicks = () => {
       );
       // filter out the products that are already bought in this groupshop deal
     const newProd2 = newProd.filter((item: any) => item.outofstock === false);
-    const finalTP = filterArray(newProd2, popularProducts ?? [], 'id', 'id');
+    const finalTP = uniqueArray(filterArray(newProd2, popularProducts ?? [], 'id', 'id'));
     setTopPicks([...finalTP]);
   }, [gsctx]);
   console.log({ topPicks });

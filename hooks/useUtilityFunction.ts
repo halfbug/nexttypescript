@@ -4,6 +4,7 @@ import axios from 'axios';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import moment from 'moment';
 import { useCallback, useContext } from 'react';
+import { IProduct } from 'types/store';
 
 export default function useUtilityFunction() {
 //   const router = useRouter();
@@ -127,6 +128,16 @@ export default function useUtilityFunction() {
     };
     return ranges;
   });
+  const uniqueArray = ((arr: any) => {
+    const result = arr.reduce((unique: any, o: any) => {
+      if (!unique.some((obj: any) => obj.id === o.id)) {
+        unique.push(o);
+      }
+      return unique;
+    }, []);
+    console.log({ result });
+    return result;
+  });
 
   return {
     cleanTypename,
@@ -142,5 +153,6 @@ export default function useUtilityFunction() {
     storeCurrencySymbol,
     DateRanges,
     findInArray2,
+    uniqueArray,
   };
 }

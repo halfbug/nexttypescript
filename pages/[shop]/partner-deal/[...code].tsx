@@ -188,7 +188,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { topPicks } = useTopPicks();
   const { popularShuffled } = usePopularInfluencer(popularProducts);
   const {
-    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL,
+    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
   } = useUtilityFunction();
   useEffect(() => {
     setallProducts(
@@ -582,7 +582,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={_.uniq(addedProductsByInfluencer)}
+          products={uniqueArray(_.uniq(addedProductsByInfluencer))}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
@@ -653,8 +653,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             products={
                 addedProductsByInfluencer
                 && (addedProductsByInfluencer.length > 3
-                  ? popularShuffled
-                  : newPopularPrd)
+                  ? uniqueArray(popularShuffled)
+                  : uniqueArray(newPopularPrd))
             }
             maxrows={1}
             addProducts={handleAddProduct}
@@ -694,7 +694,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={allProducts}
+          products={uniqueArray(allProducts ?? [])}
           maxrows={3}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
