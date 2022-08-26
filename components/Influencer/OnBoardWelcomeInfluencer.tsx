@@ -65,9 +65,9 @@ const OBWelcomeInfluencer = ({
           <h2 className={styles.welcome__modal__body__welcomeTxt}>
             Welcome to Groupshop!
           </h2>
-          {/* <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
+          <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
             New to Groupshop?
-          </h2> */}
+          </h2>
           {/* <div className={styles.welcome__modal__body__description}>
             The
             <strong> personalized store </strong>
@@ -84,7 +84,7 @@ const OBWelcomeInfluencer = ({
             {/* 3 steps to get started */}
             How it works
           </div>
-          <div className={styles.welcome__modal__body__box2}>
+          <div className={styles.welcome__modal__body__box2influencer}>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
               your Groupshop with friends & followers
@@ -103,7 +103,7 @@ const OBWelcomeInfluencer = ({
               You can also shop these discounts yourself, we won’t judge.
             </p> */}
           </div>
-          <div className={styles.welcome__modal__body__box3}>
+          <div className={styles.welcome__modal__body__box3influencer}>
             <p className={styles.welcome__modal__body__description}>
               <strong>
                 {' '}
@@ -153,10 +153,9 @@ const OBWelcomeInfluencer = ({
         </Modal.Body>
         <hr className={styles.welcome__modal__body__horizontal_seprator} />
         <Modal.Body className={styles.welcome__modal__body}>
-          <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__w50].join(' ')}>
-            <div className={styles.welcome__modal__body__description2}>
-              Customize your Groupshop now and share it when you’re done!
-            </div>
+          <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__descriptioninfluencer].join(' ')}>
+
+            Customize your Groupshop now and share it when you’re done!
           </div>
 
           <div className="d-flex justify-content-center my-4">
@@ -167,12 +166,12 @@ const OBWelcomeInfluencer = ({
               Customize Groupshop
             </Button>
 
-            {/* <Button
+            <Button
               className={styles.welcome__modal__body__btnMobile}
               onClick={handleNext}
             >
-              Get Started
-            </Button> */}
+              Customize Groupshop
+            </Button>
           </div>
           {/* <div className={styles.welcome__modal__body__btnskip}
           onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
