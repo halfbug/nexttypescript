@@ -129,7 +129,7 @@ export default function useUtilityFunction() {
     return ranges;
   });
   const uniqueArray = ((arr: any) => {
-    const result = arr.reduce((unique: any, o: any) => {
+    const result = arr?.reduce((unique: any, o: any) => {
       if (!unique.some((obj: any) => obj.id === o.id)) {
         unique.push(o);
       }
