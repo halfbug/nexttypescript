@@ -280,8 +280,7 @@ const Cart = ({
                           <div className={styles.groupshop__pcard_cardBody_PDesc}>
                             {item.purchaseCount}
                             {' '}
-                            friend
-                            {item.purchaseCount > 1 ? 's' : ''}
+                            people
                             {' '}
                             shopped
                           </div>
