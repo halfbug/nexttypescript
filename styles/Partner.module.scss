@@ -307,8 +307,11 @@
             line-height: 21px;
         }
         &__headrow {
-            display: grid;
-            grid-template-columns: 3fr 2fr;
+            // display: grid;
+            // grid-template-columns: 3fr 2fr;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             align-items: center;
             margin-top: 6px;
         }
@@ -360,9 +363,6 @@
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
-        text-align: center;
-        width: 43px;
-        // line-height: 18px;
 
     }
 

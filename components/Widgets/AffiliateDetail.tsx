@@ -147,13 +147,13 @@ export default function AffiliateDetail({
               </div>
             </Col>
           </Row>
-          <Row>
-            <Col md={12}>
+          <div>
+            <Row>
               <div className={styles.partner__rewards_box__headrow}>
-                <div className={styles.partner__rewards_box__heading}>
+                <Col className={styles.partner__rewards_box__heading}>
                   Commission
-                </div>
-                <div>
+                </Col>
+                <Col className="d-flex">
                   {!show && (
                   <>
                     <span className={styles.partner__box_last__commission__score}>
@@ -164,7 +164,7 @@ export default function AffiliateDetail({
                     <Button className="fw-bolder" variant="link" onClick={() => { setShow(!show); setshowSidebar(true); }}>Edit</Button>
                   </>
                   )}
-                  <div className={show ? 'd-flex justify-content-end' : 'd-none'}>
+                  <div className={show ? ' ' : 'd-none'}>
                     <Form.Control
                       type="text"
                       name="partnerCommission"
@@ -186,15 +186,15 @@ export default function AffiliateDetail({
                       Save
                     </Button>
                   </div>
-                </div>
+                </Col>
               </div>
-            </Col>
-            <Col md={12}>
+            </Row>
+            <Row>
               <div className={styles.partner__rewards_box__headrow}>
-                <div className={styles.partner__rewards_box__heading}>
+                <Col className={styles.partner__rewards_box__heading}>
                   Baseline Discount
-                </div>
-                <div>
+                </Col>
+                <Col className="d-flex">
                   {!editMin && (
                   <>
                     <span className={styles.partner__rewards_box__percentage}>
@@ -207,7 +207,7 @@ export default function AffiliateDetail({
                     </Form.Control.Feedback>
                   </>
                   )}
-                  <div className={editMin ? 'd-flex justify-content-end' : 'd-none'}>
+                  <div className={editMin ? ' ' : 'd-none'}>
                     <Form.Control
                       type="text"
                       name="minDiscount"
@@ -233,16 +233,16 @@ export default function AffiliateDetail({
                       Save
                     </Button>
                   </div>
-                </div>
+                </Col>
 
               </div>
-            </Col>
-            <Col md={12}>
+            </Row>
+            <Row>
               <div className={styles.partner__rewards_box__headrow}>
-                <div className={styles.partner__rewards_box__heading}>
+                <Col className={styles.partner__rewards_box__heading}>
                   Maximum Discount
-                </div>
-                <div>
+                </Col>
+                <Col className="d-flex">
                   <div>
                     {!editMax && (
                     <>
@@ -254,7 +254,7 @@ export default function AffiliateDetail({
                     </>
                     )}
                   </div>
-                  <div className={editMax ? 'd-flex justify-content-end' : 'd-none'}>
+                  <div className={editMax ? '' : 'd-none'}>
                     <Form.Control
                       type="text"
                       name="maxDiscount"
@@ -277,9 +277,9 @@ export default function AffiliateDetail({
                       Save
                     </Button>
                   </div>
-                </div>
+                </Col>
               </div>
-            </Col>
+            </Row>
             {/* <Col md={6}>
               <div className={styles.partner__rewards_box__heading}>
                 Baseline
@@ -391,7 +391,7 @@ export default function AffiliateDetail({
 
               </div>
             </Col> */}
-          </Row>
+          </div>
           {/* <Row>
             <div className="d-flex align-items-center mt-2">
               {!show && (
