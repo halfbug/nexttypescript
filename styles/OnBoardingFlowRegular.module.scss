@@ -235,12 +235,13 @@
                 border: 1px dashed #9AB639;
                 border-radius: 12px;
                 margin-top: 20px;
+                display: flex;
+
 
                 &__p2 {
                     margin-top: 10px;
                 }
             }
-
 
             &__box3 {
                 padding: 23px 40px;
@@ -256,6 +257,14 @@
                 border-radius: 12px;
                 margin-top: 15px;
                 margin-bottom: 40px;
+                display: flex;
+            }
+
+            &__iconMobile {
+                display: none;
+                @media (max-width: 475px) {
+                    display: block;
+                }
             }
         }
     }
@@ -318,9 +327,9 @@
                     display: none;
                 }
 
-                &__welcomeTxt {
-                    display: none;
-                }
+                // &__welcomeTxt {
+                //     display: none;
+                // }
             }
         }
     }

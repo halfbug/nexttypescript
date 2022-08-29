@@ -7,6 +7,9 @@ import styles from 'styles/OnBoardingFlowRegular.module.scss';
 // import useLogo from 'hooks/useLogo';
 import useAppContext from 'hooks/useAppContext';
 
+// import images
+import Cart from 'assets/images/cart.svg';
+import Envp from 'assets/images/envelop.svg';
 import GSLogo from 'assets/images/logosmall.svg';
 
 interface OBProps {
@@ -65,9 +68,9 @@ const OBWelcomeInfluencer = ({
           <h2 className={styles.welcome__modal__body__welcomeTxt}>
             Welcome to Groupshop!
           </h2>
-          <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
+          {/* <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
             New to Groupshop?
-          </h2>
+          </h2> */}
           {/* <div className={styles.welcome__modal__body__description}>
             The
             <strong> personalized store </strong>
@@ -85,6 +88,7 @@ const OBWelcomeInfluencer = ({
             How it works
           </div>
           <div className={styles.welcome__modal__body__box2influencer}>
+            <span className={styles.welcome__modal__body__iconMobile}><Cart /></span>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
               your Groupshop with friends & followers
@@ -104,6 +108,7 @@ const OBWelcomeInfluencer = ({
             </p> */}
           </div>
           <div className={styles.welcome__modal__body__box3influencer}>
+            <span className={styles.welcome__modal__body__iconMobile}><Envp /></span>
             <p className={styles.welcome__modal__body__description}>
               <strong>
                 {' '}
