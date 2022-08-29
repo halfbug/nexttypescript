@@ -214,8 +214,7 @@ const ProductGrid = ({
                       <p className="text-center mb-1 fs-5 fw-bold">
                         🔥
                         <i>
-                          {prod.purchaseCount === 1 ? `${prod.purchaseCount} friend shopped`
-                            : `${prod.purchaseCount} friends shopped`}
+                          {`${prod.purchaseCount} people shopped`}
 
                         </i>
                       </p>
