@@ -141,9 +141,11 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
           },
 
         });
-        handleAfterSubmit();
-        resetForm();
-        setloadingSubmit(false);
+        setTimeout(() => {
+          handleAfterSubmit();
+          resetForm();
+          setloadingSubmit(false);
+        }, 3000);
         // console.log({ partnerObj });
       }
     },
