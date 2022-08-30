@@ -81,72 +81,99 @@ const RewardBox2 = ({
           <Row className="justify-content-center">
             <Col lg={12}>
               <div className={styles.groupshop_rewardBox2_modal__info1}>
-                <div>
-                  <Cart />
-                </div>
-                <div>
-                  <p>
-                    { isDesktop ? (
-                      <b>Shop</b>
-                    ) : (
-                      <div
-                        onClick={handleClose}
-                        onKeyUp={handleClose}
-                        onKeyDown={handleClose}
-                        role="button"
-                        tabIndex={0}
-                        className="d-inline"
-                      >
+                {isDesktop ? (
+                  <>
+                    <div>
+                      <Cart />
+                    </div>
+                    <div>
+                      <p>
                         <b>Shop</b>
-                      </div>
-                    )}
-                    {' '}
-                    exclusive discounts on this Groupshop
-                    &
-                    get
-                    {' '}
-                    {`${discount}%`}
-                    {' '}
-                    off your order today.
+                        {' '}
+                        exclusive discounts on this Groupshop
+                        &
+                        get
+                        {' '}
+                        {`${discount}%`}
+                        {' '}
+                        off your order today.
 
-                  </p>
-                </div>
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <Cart />
+                    </div>
+                    <div
+                      onClick={handleClose}
+                      onKeyUp={handleClose}
+                      onKeyDown={handleClose}
+                      role="button"
+                      tabIndex={0}
+                      className="d-inline"
+                    >
+                      <p>
+                        <b>Shop</b>
+                        {' '}
+                        exclusive discounts on this Groupshop
+                        &
+                        get
+                        {' '}
+                        {`${discount}%`}
+                        {' '}
+                        off your order today.
+
+                      </p>
+                    </div>
+                  </>
+                ) }
               </div>
-              <div className={styles.groupshop_rewardBox2_modal__info2}>
-                <div>
-                  <Envelop />
-                </div>
-                <div>
-                  <p>
-                    {' '}
-                    { isDesktop ? (
+              { isDesktop ? (
+                <div className={styles.groupshop_rewardBox2_modal__info2}>
+                  <div>
+                    <Envelop />
+                  </div>
+                  <div>
+                    <p>
+                      {' '}
                       <b>Share</b>
-                    ) : (
-                      <div
-                        onClick={() => navigator?.share({
-                          title: 'Groupshop',
-                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
-                        })}
-                        onKeyUp={() => navigator?.share({
-                          title: 'Groupshop',
-                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
-                        })}
-                        onKeyDown={() => navigator?.share({
-                          title: 'Groupshop',
-                          text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
-                        })}
-                        role="button"
-                        tabIndex={0}
-                        className="d-inline"
-                      >
-                        <b>Share</b>
-                      </div>
-                    )}
-                    {' '}
-                    this Groupshop and earn cashback when friends shop after you.
-                  </p>
+                      {' '}
+                      this Groupshop and earn cashback when friends shop after you.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  className={[styles.groupshop_rewardBox2_modal__info2, 'd-inline'].join(' ')}
+                  onClick={() => navigator?.share({
+                    title: 'Groupshop',
+                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                  })}
+                  onKeyUp={() => navigator?.share({
+                    title: 'Groupshop',
+                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                  })}
+                  onKeyDown={() => navigator?.share({
+                    title: 'Groupshop',
+                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                  })}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div>
+                    <Envelop />
+                  </div>
+                  <div>
+                    <p>
+                      <b>Share</b>
+                      {' '}
+                      this Groupshop and earn cashback when friends shop after you.
+                    </p>
+                  </div>
+                </div>
+              )}
             </Col>
             <Col lg={12}>
               <div className={styles.groupshop_rewardBox2_modal__btnSection}>
