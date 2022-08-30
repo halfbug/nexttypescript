@@ -210,15 +210,17 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-                    {prod.purchaseCount && (
+                    {prod.purchaseCount ? (
                       <p className="text-center mb-1 fs-5 fw-bold">
-                        🔥
+                        { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
+                        { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
+                        { prod.purchaseCount > 100 ? <>🎉</> : ''}
                         <i>
                           {`${prod.purchaseCount} people shopped`}
 
                         </i>
                       </p>
-                    )}
+                    ) : ''}
 
                     <h5 className="pt-2 text-center fw-bold">
                       <span className="text-decoration-line-through fw-light me-1">

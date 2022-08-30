@@ -422,7 +422,10 @@ const ProductDetail = ({
                     <div className="d-flex align-items-center ">
                       <p className="p-2 my-0 border border-danger rounded-3">
                         {' '}
-                        <Icon />
+                        {/* <Icon /> */}
+                        { product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
+                        { product?.purchaseCount > 30 && product?.purchaseCount <= 100 ? <>⚡️</> : ''}
+                        { product?.purchaseCount > 100 ? <>🎉</> : ''}
                         {' '}
                         {product?.purchaseCount}
                         {'+ '}
