@@ -771,17 +771,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </div>
         </ProductGrid>
         )}
-        <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
-          <Col className="d-flex justify-content-center flex-column">
-            <p>Don’t see what you like?</p>
-            <Button
-              className={['align-self-center my-2 px-5 py-2'].join(' ')}
-              onClick={handleAddProduct}
-            >
-              Add a Product
-            </Button>
-          </Col>
-        </Row>
+        {SKU.length > 1 ? (
+          <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
+            <Col className="d-flex justify-content-center flex-column">
+              <p>Don’t see what you like?</p>
+              <Button
+                className={['align-self-center my-2 px-5 py-2'].join(' ')}
+                onClick={handleAddProduct}
+              >
+                Add a Product
+              </Button>
+            </Col>
+          </Row>
+        ) : <></>}
         <Footer LeftComp={undefined} RightComp={undefined} />
         <ProductsSearch
           show={showps}

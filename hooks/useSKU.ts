@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
-import { GroupshopContext } from 'store/groupshop.context';
+import { useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
 
 const useSKU = () => {
-  const { gsctx, isGroupshop } = useAppContext();
+  const { gsctx } = useAppContext();
   const [allProducts, setAllProducts] = useState<any[]>([]);
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
 
@@ -16,10 +15,6 @@ const useSKU = () => {
       setMemberProducts(temp);
     }
   }, [gsctx]);
-
-  useEffect(() => {
-    console.log('isGroupshop <===', isGroupshop);
-  }, [isGroupshop]);
 
   return { SKU: allProducts, memberProducts };
 };

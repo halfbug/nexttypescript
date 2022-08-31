@@ -409,14 +409,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 && (
+                {SKU.length > 1 ? (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
                     onClick={handleAddProduct}
                     disabled={isExpired}
                   />
-                )}
+                ) : <></>}
                 <IconButton
                   icon={<Handbag size={24} />}
                   className={styles.groupshop__hero_iconBtn}
@@ -658,92 +658,92 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </ProductGrid>
         ))}
 
-        {SKU.length > 1 && (
-        <ProductGrid
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={allProducts}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="allproducts"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-        >
-          <div className="position-relative">
-            <h2>All Products</h2>
-            <div
-              className={[
-                'position-absolute top-0 end-0',
-                styles.groupshop_sort,
-              ].join(' ')}
-            >
-              <Dropdown align="end" drop="down">
-                <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                  <span
-                    className={[
-                      'd-none d-sm-inline text-capitalize',
-                      styles.groupshop_sort_txt,
-                    ].join(' ')}
-                  >
-                    Sort by
-                  </span>
-                  {/* <ChevronDown width={8} /> */}
-                  <ArrowSort />
-                </Dropdown.Toggle>
+        {SKU.length > 1 ? (
+          <ProductGrid
+            xs={6}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+            products={allProducts}
+            maxrows={3}
+            addProducts={handleAddProduct}
+            handleDetail={(prd) => setsProduct(prd)}
+            showHoverButton
+            id="allproducts"
+            isModalForMobile={isModalForMobile}
+            urlForActivation={urlForActivation}
+          >
+            <div className="position-relative">
+              <h2>All Products</h2>
+              <div
+                className={[
+                  'position-absolute top-0 end-0',
+                  styles.groupshop_sort,
+                ].join(' ')}
+              >
+                <Dropdown align="end" drop="down">
+                  <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                    <span
+                      className={[
+                        'd-none d-sm-inline text-capitalize',
+                        styles.groupshop_sort_txt,
+                      ].join(' ')}
+                    >
+                      Sort by
+                    </span>
+                    {/* <ChevronDown width={8} /> */}
+                    <ArrowSort />
+                  </Dropdown.Toggle>
 
-                <Dropdown.Menu className={styles.groupshop_sort_menu}>
-                  <Dropdown.Item
-                    className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts(
-                      [...(allProducts ?? [])]?.sort(
-                        (a, b) => parseFloat(a.price) - parseFloat(b.price),
-                      ),
-                    )}
-                  >
-                    Price (Low to High)
-                  </Dropdown.Item>
-                  <div className={styles.groupshop_sort_menu_border} />
-                  <Dropdown.Item
-                    className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts(
-                      [...(allProducts ?? [])]?.sort(
-                        (a, b) => parseFloat(b.price) - parseFloat(a.price),
-                      ),
-                    )}
-                  >
-                    Price ( High to Low)
-                  </Dropdown.Item>
-                  <div className={styles.groupshop_sort_menu_border} />
-                  <Dropdown.Item
-                    className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts(
-                      [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
-                    )}
-                  >
-                    Name (a-z)
-                  </Dropdown.Item>
-                  <div className={styles.groupshop_sort_menu_border} />
-                  <Dropdown.Item
-                    className={styles.groupshop_sort_menu_item}
-                    onClick={() => setallProducts(
-                      [...(allProducts ?? [])]
-                        ?.sort((a, b) => a.title.localeCompare(b.title))
-                        .reverse(),
-                    )}
-                  >
-                    Name (z-a)
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                  <Dropdown.Menu className={styles.groupshop_sort_menu}>
+                    <Dropdown.Item
+                      className={styles.groupshop_sort_menu_item}
+                      onClick={() => setallProducts(
+                        [...(allProducts ?? [])]?.sort(
+                          (a, b) => parseFloat(a.price) - parseFloat(b.price),
+                        ),
+                      )}
+                    >
+                      Price (Low to High)
+                    </Dropdown.Item>
+                    <div className={styles.groupshop_sort_menu_border} />
+                    <Dropdown.Item
+                      className={styles.groupshop_sort_menu_item}
+                      onClick={() => setallProducts(
+                        [...(allProducts ?? [])]?.sort(
+                          (a, b) => parseFloat(b.price) - parseFloat(a.price),
+                        ),
+                      )}
+                    >
+                      Price ( High to Low)
+                    </Dropdown.Item>
+                    <div className={styles.groupshop_sort_menu_border} />
+                    <Dropdown.Item
+                      className={styles.groupshop_sort_menu_item}
+                      onClick={() => setallProducts(
+                        [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
+                      )}
+                    >
+                      Name (a-z)
+                    </Dropdown.Item>
+                    <div className={styles.groupshop_sort_menu_border} />
+                    <Dropdown.Item
+                      className={styles.groupshop_sort_menu_item}
+                      onClick={() => setallProducts(
+                        [...(allProducts ?? [])]
+                          ?.sort((a, b) => a.title.localeCompare(b.title))
+                          .reverse(),
+                      )}
+                    >
+                      Name (z-a)
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
-          </div>
-        </ProductGrid>
-        )}
+          </ProductGrid>
+        ) : <></>}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             {isExpired ? (
@@ -762,7 +762,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </>
 
             )
-              : (
+              : (SKU.length > 1 && (
                 <>
                   <p>Don’t see what you like?</p>
                   <Button
@@ -774,7 +774,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
                 </>
 
-              )}
+              )) || <></>}
           </Col>
         </Row>
         <Footer LeftComp={undefined} RightComp={undefined} />

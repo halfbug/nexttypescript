@@ -63,13 +63,13 @@ const ProductGrid = ({
     siblingCount: 4,
   });
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 66 ~ skuCount', skuCount);
 
   // const fillerz = (!skuCount || (skuCount && skuCount > 4))
   //   && pageSize === (renderItems?.length) ? 0 : 1 || 1;
   // || ((skuCount && skuCount > 4) && pageSize === (renderItems?.length) ? 0 : 1 || 1);
   const fillerz = pageSize === (renderItems?.length) ? 0 : 1;
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 67 ~ fillerz', fillerz);
+  // const fillerz = (!skuCount || (skuCount && skuCount > 4))
+  // && pageSize === (renderItems?.length) ? 0 : 1 || 1;
 
   // const {
   //   gsctx: {
@@ -281,7 +281,7 @@ const ProductGrid = ({
             )}
           </>
         ))}
-        {(!skuCount || (skuCount && skuCount > 1)) && [...new Array(fillerz)]?.map((n) => (
+        {(skuCount && skuCount > 1) ? [...new Array(fillerz)]?.map((n) => (
           <Col xs={xs} md={6} lg={4} xl={3} key={n}>
             <ProductCard
               isrc="/images/empty.png"
@@ -326,7 +326,7 @@ const ProductGrid = ({
               </div> */}
             </ProductCard>
           </Col>
-        ))}
+        )) : <></>}
       </Row>
       <Row>
         <Col>
