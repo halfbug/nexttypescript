@@ -101,11 +101,12 @@ const OBWelcomeInfluencer = ({
                 % off.
                 {' '}
               </strong>
+              <p className={[styles.welcome__modal__body__descriptionSmall,
+                styles.welcome__modal__body__box2__p2, 'd-block'].join(' ')}
+              >
+                You can also shop these discounts yourself, we won’t judge.
+              </p>
             </p>
-            {/* <p className={[styles.welcome__modal__body__descriptionSmall,
-             styles.welcome__modal__body__box2__p2].join(' ')}>
-              You can also shop these discounts yourself, we won’t judge.
-            </p> */}
           </div>
           <div className={styles.welcome__modal__body__box3influencer}>
             <span className={styles.welcome__modal__body__iconMobile}><Envp /></span>
