@@ -491,7 +491,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <h3>
                   Welcome to
                   {' '}
-                  <span className="text-capitalize">
+                  <span className="text-capitalize text-decoration-none">
                     {' '}
                     {gsctx?.partnerDetails?.fname}
                     {' '}
