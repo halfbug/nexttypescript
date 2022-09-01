@@ -24,8 +24,11 @@ interface mesProps {
   mes: string;
   brandname: any;
   shareUrl?: string;
+  fullshareurl?: string;
 }
-const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
+const InfoBox = ({
+  mes, brandname, shareUrl, fullshareurl,
+}: mesProps) => {
   const [show, setShow] = useState(false);
 
   const isModalForMobile = useMediaQuery({
@@ -171,7 +174,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
               <ShareButton
                   // placement="bottom"
                 shareurl={shareUrl ?? ''}
-                fullshareurl={shareUrl ?? ''}
+                fullshareurl={fullshareurl ?? ''}
                   // label="Invite"
                   // className={styles.groupshop__top_invite}
                 icon={<Send size={18} />}
@@ -196,6 +199,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
 
 InfoBox.defaultProps = {
   shareUrl: '',
+  fullshareurl: '',
 };
 
 export default InfoBox;
