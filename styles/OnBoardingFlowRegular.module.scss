@@ -173,9 +173,6 @@
                 position: relative;
                 margin-bottom: 21px;
 
-                @media (max-width: 750px) {
-                    display: none;
-                }
 
             }
 
@@ -199,6 +196,7 @@
                 top: 50%;
                 position: absolute;
                 right: 72%;
+
             }
 
             &__box1 {
@@ -428,7 +426,22 @@
                 &__getStarted:before {
                     right:67%;
                 }
+                &__getStarted2 {
+                  display: none;
 
+                }
+    
+                &__getStarted2:after {
+
+                    width: 10%;
+                    left: 80%;
+                }
+    
+                &__getStarted2:before {
+                    width: 10%;
+                    right: 80%;
+    
+                }
                 &__welcomeTxtMobile {
                     display: block;
                 }
