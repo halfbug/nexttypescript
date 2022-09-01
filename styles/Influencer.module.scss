@@ -64,4 +64,18 @@
 
     }
  }
+ &_expired{
+  hr{
+
+    @include media-breakpoint-down(sm) {
+      height: 1px;
+      width: 258px;
+      text-align: center;
+      justify-items: center;
+      display: inline-flex;
+      color: #777777;
+
+    }
+  }
+ }
 }

@@ -7,6 +7,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import Button from 'components/Buttons/Button/Button';
 import styles from 'styles/Groupshop.module.scss';
+import styles1 from 'styles/Influencer.module.scss';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
 import ArrowDown from 'assets/images/arrow-down.svg';
@@ -91,7 +92,9 @@ const InfoBox = ({
             <h2>
               This Groupshop expired!
             </h2>
-            <hr />
+            <div className={styles1.Influencer_expired}>
+              <hr />
+            </div>
             <p className={styles.groupshop_infoBox_textDiscount}>
               But you can still get exclusive discounts.
 
