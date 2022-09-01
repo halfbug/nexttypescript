@@ -218,7 +218,7 @@ export default function AddDealProduct({
             value={values.username}
             onChange={handleChange}
             isInvalid={touched.username && !!errors.username}
-            placeholder="Your Name ..."
+            placeholder="Enter your first name"
             className={isCreateGS ? 'me-3' : 'me-1'}
           />
           <Form.Control.Feedback type="invalid" className="text-start">
