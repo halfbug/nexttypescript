@@ -228,9 +228,11 @@ export default function AddDealProduct({
         {loadingSubmit ? <Spinner animation="border" /> : (
           <Button
             type="submit"
-            className={isCreateGS ? [styles.groupshop_search_popover_dealBtn, 'rounded-pill fs-5 text-capitalize'].join(' ') : styles.groupshop_search_popover_dealBtn}
+            className={isCreateGS ? [styles.groupshop_search_popover_dealBtn,
+              'rounded-pill fs-5 text-capitalize'].join(' ')
+              : styles.groupshop_search_popover_dealBtn}
           >
-            Add
+            {isInfluencer ? 'Create Groupshop' : 'Add'}
           </Button>
         )}
       </Form.Group>
