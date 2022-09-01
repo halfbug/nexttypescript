@@ -165,7 +165,7 @@ const InfoBox = ({ mes, brandname, shareUrl }: mesProps) => {
                 })}
               >
                 <Send size={18} />
-                dd
+
               </ButtonReact>
             ) : (
               <ShareButton
