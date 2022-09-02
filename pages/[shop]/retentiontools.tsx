@@ -1,23 +1,64 @@
 import Page from 'components/Layout/Page/Page';
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import RetentionInvite from 'components/Widgets/RetentionInvite';
 import RetentionImport from 'components/Widgets/RetentionImport';
+import { StoreContext } from 'store/store.context';
+import { GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS } from 'store/store.graphql';
+import { useQuery } from '@apollo/client';
 
-const RetentionTools: NextPage = () => (
-  <Page headingText="Retention Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
-    <Row>
-      <Col>
-        <RetentionInvite />
-      </Col>
-    </Row>
-    <Row>
-      <Col>
-        <RetentionImport />
-      </Col>
-    </Row>
-  </Page>
-);
+export default function RetentionTools() {
+  const { store, dispatch } = useContext(StoreContext);
+  const [retentionList, setRetentionList] = useState<[]>([]);
+  const [activeCampaign, setActiveCampaign] = useState('');
 
-export default RetentionTools;
+  // Get active campaign
+  const {
+    error, data,
+  } = useQuery(GET_ACTIVE_CAMPAIGN, {
+    variables: { storeId: store.id },
+  });
+  useEffect(() => {
+    if (data) {
+      setActiveCampaign(data.getActiveCampaign.id);
+    }
+  }, [data]);
+
+  const handleAfterSubmit = () => {
+    if (retentionData) {
+      refetchRetention();
+    }
+  };
+
+  // Get retention Tools logs
+  const { data: retentionData, refetch: refetchRetention } = useQuery(GET_RETENTION_LOGS, {
+    variables: { storeId: store.id },
+  });
+  useEffect(() => {
+    if (retentionData) {
+      setRetentionList(retentionData.retentiontools);
+    }
+  }, [retentionData]);
+
+  return (
+    <Page headingText="Retention Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
+      <Row>
+        <Col>
+          <RetentionInvite
+            handleAfterSubmit={handleAfterSubmit}
+            activeCampaign={activeCampaign}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <RetentionImport
+            currencyCode={store?.currencyCode ?? 'USD'}
+            retentionList={retentionList}
+          />
+        </Col>
+      </Row>
+    </Page>
+  );
+}

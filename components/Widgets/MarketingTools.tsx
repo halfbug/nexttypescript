@@ -17,6 +17,12 @@ import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCust
 export default function MarketingTools(
 ) {
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [minOrderValue, setMinOrderValue] = useState('');
+  const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
+  const [syncMsg, setsyncMsg] = useState<string>('');
+  const [listCustomers, setListCustomers] = useState<any>([]);
   return (
     <>
       <section className={styles.marketing__box_3}>
@@ -138,7 +144,16 @@ export default function MarketingTools(
             </WhiteButton>
           </Col>
           <InviteCustomerBox
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            minOrderValue={minOrderValue}
+            setMinOrderValue={setMinOrderValue}
             show={showInvitePopup}
+            setListCustomers={setListCustomers}
+            setShowInvitePopup={setShowInvitePopup}
+            setCreateGroupshopPopup={setCreateGroupshopPopup}
             handleClose={() => setShowInvitePopup(false)}
           />
         </Row>

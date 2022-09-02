@@ -110,6 +110,30 @@ export interface IPartnerTools {
   partnerCommission: any;
 }
 
+export type lCustomers ={
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+ }
+
+export type listCustomers ={
+  createDate?: string;
+  haveGroupshop?: string;
+  id?: string;
+  name?: string;
+  price?: string;
+  shopifyCreateAt?: string;
+  customer?: lCustomers;
+}
+
+export interface PastCustomerGroupshop {
+  storeId: string;
+  groupshopsCreated: string;
+  startDate: string;
+  endDate: string;
+  minOrderValue: string;
+}
+
 export interface ICollection {
   title: string;
   id: string;

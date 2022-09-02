@@ -14,6 +14,10 @@ query StoreName($shop: String!) {
   plan
   currencyCode
   appTrialEnd
+  retentiontool{
+    status
+    updatedAt    
+  }
 
   settings{
     media
@@ -87,6 +91,10 @@ query store($id: String!) {
     plan
     totalGroupShop
     appTrialEnd
+    retentiontool{
+      status
+      updatedAt    
+    }
     }
   }
 `;
@@ -1177,6 +1185,61 @@ const ADD_DEAL_PRODUCT_PARTNER = gql`
   }
 `;
 
+const SYNC_STORE_CUSTOMERS = gql`
+query syncStoreCustomers($storeId: String!) {
+  syncStoreCustomers(storeId: $storeId) {
+    status        
+  }
+}
+`;
+
+const FIND_PENDING_GROUPSHOP = gql`
+query findpendinggroupshop($shop: String!, $startDate: String!, $endDate: String!, $minOrderValue: String!) {
+  findpendinggroupshop(shop: $shop, startDate: $startDate, endDate: $endDate, minOrderValue: $minOrderValue) {
+    name
+    id  
+    createDate
+    price
+    haveGroupshop
+    shopifyCreateAt
+    customer{
+      firstName
+      lastName
+      email
+    }      
+  }
+}
+`;
+
+const CREATE_PAST_GROUPSHOP_LOG = gql`
+  mutation createRetentiontool($createRetentiontoolInput: CreateRetentiontoolInput!) {
+    createRetentiontool(createRetentiontoolInput: $createRetentiontoolInput) {
+      status   
+    }
+  }
+`;
+
+const GET_ACTIVE_CAMPAIGN = gql`
+query getActiveCampaign($storeId: String!) {
+  getActiveCampaign(storeId: $storeId) {
+    id
+  }
+}
+`;
+
+const GET_RETENTION_LOGS = gql`
+query retentiontools($storeId: String!) {
+  retentiontools(storeId: $storeId) {
+    id 
+    groupshopsCreated
+    startDate
+    endDate 
+    minOrderValue
+    createdAt    
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -1191,5 +1254,6 @@ export {
   GET_ORDER_DETAILS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
   GET_CAMPAIGN_METRICS, GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER,
   GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, GET_PARTNER_GROUPSHOP, ADD_DEAL_PRODUCT_PARTNER,
-  GET_ACTIVE_GROUPSHOP_BY_SHOP,
+  GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
+  CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS,
 };

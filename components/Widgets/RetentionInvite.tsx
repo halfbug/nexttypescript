@@ -1,13 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  Col, Row,
+  Col, Row, Spinner,
 } from 'react-bootstrap';
 import styles from 'styles/Retentiontools.module.scss';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCustomerBox';
+import CreateGroupshopBox from 'components/Groupshop/InviteCustomerBox/CreateGroupshopBox';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { SYNC_STORE_CUSTOMERS, GET_STORE_DETAILS } from 'store/store.graphql';
+import { StoreContext } from 'store/store.context';
+import useAlert from 'hooks/useAlert';
 
-export default function RetentionInvite() {
+interface RetentionInviteProps {
+  handleAfterSubmit: any;
+  activeCampaign: string;
+}
+
+export default function RetentionInvite({
+  activeCampaign,
+  handleAfterSubmit,
+} : RetentionInviteProps) {
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [minOrderValue, setMinOrderValue] = useState('');
+  const [syncStatus, setsyncStatus] = useState('');
+  const [updatedAt, setupdatedAt] = useState('');
+  const [syncLoading, setsyncLoading] = useState(false);
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
+  const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
+  const [listCustomers, setListCustomers] = useState<any>([]);
+  const { store, dispatch } = React.useContext(StoreContext);
+  const { AlertComponent, showError, showSuccess } = useAlert();
+  const syncCustomers = () => {
+    setsyncLoading(true);
+    syncStoreCustomers({ variables: { storeId: store.id } });
+  };
+
+  const {
+    data: storeData, refetch: storeRefresh,
+  } = useQuery(GET_STORE_DETAILS, {
+    variables: { id: store.id },
+  });
+
+  useEffect(() => {
+    if (storeData) {
+      if (storeData.store.retentiontool?.status) {
+        setsyncStatus(storeData.store.retentiontool?.status);
+        setupdatedAt(storeData.store.retentiontool?.updatedAt);
+      }
+    }
+  }, [storeData]);
+
+  const createCampaignList = () => {
+    if (activeCampaign === '') {
+      showError('Please active/create the campaign first!');
+    } else {
+      setShowInvitePopup(true);
+    }
+  };
+
+  const [syncStoreCustomers, { data }] = useLazyQuery(SYNC_STORE_CUSTOMERS, {
+    fetchPolicy: 'no-cache',
+    onError() {
+      console.log('Record not found!');
+    },
+    onCompleted() {
+      setTimeout(() => {
+        setsyncLoading(false);
+        storeRefresh();
+      }, 1500);
+    },
+  });
+
+  const handleInnerSubmit = () => {
+    handleAfterSubmit();
+  };
+
   return (
     <Row>
       <Col xxl={8} xl={8} lg={8} md={8} xs={12}>
@@ -27,12 +95,21 @@ export default function RetentionInvite() {
             we’re not creating any Groupshop pages yet at this step.
           </span>
           <div className={styles.rt__invite_box_btn}>
-            <WhiteButton onClick={() => {
-              setShowInvitePopup(true);
-            }}
-            >
-              Sync Customers
-            </WhiteButton>
+            {syncStatus !== 'Active' && syncLoading === false
+              ? (
+                <WhiteButton onClick={syncCustomers}>
+                  Sync Customers
+                </WhiteButton>
+
+              )
+              : (
+                <WhiteButton>
+                  Sync Customers
+                </WhiteButton>
+
+              )}
+            {syncLoading && <Spinner animation="border" />}
+            <div className={styles.syncted_at}>{updatedAt}</div>
           </div>
           <h4>
             Step 2
@@ -41,9 +118,18 @@ export default function RetentionInvite() {
             Click below to sort through elligible customers and create Groupshops for them.
           </span>
           <div className={styles.rt__invite_box_btn}>
-            <WhiteButton>
-              Sort & Create Groupshops
-            </WhiteButton>
+            {syncStatus !== 'Active'
+              ? (
+                <WhiteButton>
+                  Sort & Create Groupshops
+                </WhiteButton>
+              )
+              : (
+                <WhiteButton onClick={createCampaignList}>
+                  Sort & Create Groupshops
+                </WhiteButton>
+
+              )}
           </div>
         </div>
       </Col>
@@ -59,9 +145,33 @@ export default function RetentionInvite() {
         </div>
       </Col>
       <InviteCustomerBox
+        startDate={startDate}
+        setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
+        minOrderValue={minOrderValue}
+        setMinOrderValue={setMinOrderValue}
         show={showInvitePopup}
+        setListCustomers={setListCustomers}
+        setShowInvitePopup={setShowInvitePopup}
+        setCreateGroupshopPopup={setCreateGroupshopPopup}
         handleClose={() => setShowInvitePopup(false)}
       />
+
+      <CreateGroupshopBox
+        startDate={startDate}
+        handleInnerSubmit={handleInnerSubmit}
+        endDate={endDate}
+        minOrderValue={minOrderValue}
+        show={showCreateGroupshopPopup}
+        listCustomers={listCustomers}
+        setShowInvitePopup={setShowInvitePopup}
+        setCreateGroupshopPopup={setCreateGroupshopPopup}
+        handleClose={() => setCreateGroupshopPopup(false)}
+      />
+
+      <AlertComponent />
     </Row>
+
   );
 }

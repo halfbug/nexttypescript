@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Marketing.module.scss';
 import { RootProps } from 'types/store';
 import {
@@ -9,20 +9,88 @@ import Cross from 'assets/images/CrossLg.svg';
 import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import { StoreContext } from 'store/store.context';
+// @ts-ignore: Unreachable code error
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useLazyQuery } from '@apollo/client';
+import { FIND_PENDING_GROUPSHOP } from 'store/store.graphql';
 
 interface InviteCustomerBoxProps extends RootProps {
   show: boolean;
+  setShowInvitePopup:any;
+  startDate:string;
+  setStartDate:any;
+  endDate:string;
+  setEndDate:any;
+  minOrderValue:string;
+  setMinOrderValue:any;
   handleClose(e: any): any;
+  setCreateGroupshopPopup: any;
+  setListCustomers:any;
   // addToCart(e: any): any;
 }
 
 const InviteCustomerBox = ({
-  show = false, handleClose,
+  show = false, handleClose, setCreateGroupshopPopup, setListCustomers,
+  setShowInvitePopup, startDate, endDate, setEndDate, minOrderValue,
+  setMinOrderValue, setStartDate,
 }: InviteCustomerBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
     handleClose(e);
+  };
+  const [groupshopLength, setgroupshopLength] = useState(0);
+  const { store, dispatch } = React.useContext(StoreContext);
+
+  const changeDate = (value:any, field:any) => {
+    if (field === 'start') {
+      if (value === null) {
+        setStartDate('');
+      } else {
+        setStartDate(value);
+      }
+    } else if (field === 'end') {
+      if (value === null) {
+        setEndDate('');
+      } else {
+        setEndDate(value);
+      }
+    }
+  };
+
+  const createGroupshopPopup = () => {
+    setShowInvitePopup(false);
+    setCreateGroupshopPopup(true);
+  };
+
+  const [getGroupshop, { data }] = useLazyQuery(FIND_PENDING_GROUPSHOP, {
+    onError() {
+      alert('Record not found!');
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      setgroupshopLength(data?.findpendinggroupshop.length);
+      setListCustomers(data?.findpendinggroupshop);
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    if (startDate !== '' && endDate !== '') {
+      getGroupshop({
+        variables: {
+          shop: store.shop, startDate, endDate, minOrderValue,
+        },
+      });
+    }
+  }, [startDate, endDate, minOrderValue]);
+
+  const clearDateRange = () => {
+    setStartDate('');
+    setEndDate('');
   };
 
   return (
@@ -76,8 +144,13 @@ const InviteCustomerBox = ({
                     icon={<InfoCircle size={13} />}
                     popContent=""
                   />
-                  <Form.Control
-                    type="date"
+                  <DatePicker
+                    className="form-control"
+                    placeholderText="yyyy-mm-dd"
+                    dateFormat="yyyy-MM-dd"
+                    name="startDate"
+                    selected={startDate}
+                    onChange={(sdate:any) => changeDate(sdate, 'start')}
                   />
                 </Col>
                 <Col lg={6}>
@@ -90,13 +163,20 @@ const InviteCustomerBox = ({
                     icon={<InfoCircle size={13} />}
                     popContent=""
                   />
-                  <Form.Control
-                    type="date"
+                  <DatePicker
+                    className="form-control"
+                    placeholderText="yyyy-mm-dd"
+                    dateFormat="yyyy-MM-dd"
+                    maxDate={new Date()}
+                    name="endtDate"
+                    selected={endDate}
+                    onChange={(edate:any) => changeDate(edate, 'end')}
                   />
                 </Col>
               </Row>
               <WhiteButton
                 className={styles.marketing_inviteCustomerBox_modal__btn}
+                onClick={clearDateRange}
               >
                 Clear dates
               </WhiteButton>
@@ -109,11 +189,17 @@ const InviteCustomerBox = ({
                 </span>
               </div>
               <Form.Control
+                name="orderValue"
+                id="orderValue"
                 className={styles.marketing_inviteCustomerBox_modal__input}
                 type="text"
+                onChange={(e:any) => {
+                  setMinOrderValue(e.currentTarget.value);
+                }}
+                value={minOrderValue !== '' ? minOrderValue : ''}
               />
             </Col>
-            <Row className="mt-5" />
+            {/* <Row className="mt-5" />
             <Col lg={6}>
               <h4>Filter by products purchased:</h4>
               <p className={styles.marketing_inviteCustomerBox_modal__hint}>
@@ -134,7 +220,7 @@ const InviteCustomerBox = ({
                 className={styles.marketing_inviteCustomerBox_modal__input}
                 type="text"
               />
-            </Col>
+            </Col> */}
             <Col lg={12}>
               <div className={styles.marketing_inviteCustomerBox_modal__btnSection}>
                 <WhiteButton
@@ -143,11 +229,26 @@ const InviteCustomerBox = ({
                 >
                   Close
                 </WhiteButton>
-                <WhiteButton
-                  className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
-                >
-                  Create Groupshops for 372 customers
-                </WhiteButton>
+                {startDate === '' || endDate === '' ? (
+                  <WhiteButton
+                    className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
+                  >
+                    Please select date range
+                  </WhiteButton>
+
+                ) : (
+                  <WhiteButton
+                    onClick={createGroupshopPopup}
+                    className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
+                  >
+                    Create Groupshops for
+                    {' '}
+                    {groupshopLength}
+                    {' '}
+                    customers
+                  </WhiteButton>
+                )}
+
               </div>
             </Col>
           </Row>

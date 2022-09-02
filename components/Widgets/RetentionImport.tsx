@@ -1,42 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
-  Col, Row, Accordion,
+  Col, Row, Table,
 } from 'react-bootstrap';
+import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import styles from 'styles/Retentiontools.module.scss';
+import moment from 'moment';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
-export default function RetentionImport() {
+interface RetentionImportProps {
+  currencyCode:string;
+  retentionList: [];
+}
+
+export default function RetentionImport({ retentionList, currencyCode } : RetentionImportProps) {
+  const [startDate, setstartDate] = useState('');
+  const [endDate, setendDate] = useState('');
+  const [groupshopsCreated, setGroupshopsCreated] = useState('');
+  const [orderValue, setorderValue] = useState('-');
+  const [importDate, setimportDate] = useState('');
+  const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
+
+  const handleRetention = async (id: string) => {
+    const currentPartner: any = retentionList?.filter(
+      (item: any) => item.id === id,
+    );
+    setstartDate(moment(new Date(currentPartner[0].startDate)).format('YYYY/MM/DD'));
+    setendDate(moment(new Date(currentPartner[0].endDate)).format('YYYY/MM/DD'));
+    setGroupshopsCreated(currentPartner[0].groupshopsCreated);
+    if (currentPartner[0].minOrderValue !== '') {
+      setorderValue(`${storeCurrencySymbol(currencyCode)}${currentPartner[0].minOrderValue}`);
+    } else {
+      setorderValue('-');
+    }
+    setimportDate(moment(new Date(currentPartner[0].createdAt)).format('YYYY/MM/DD'));
+  };
+
   const getCustomerImportTableHTML = () => (
     <Row>
-      <Col xs={9}>
-        <div className={styles.rt__table_head}>
-          <div className={styles.rt__table_head__txt}>Date</div>
-          <div className={styles.rt__table_head__txt}># of Groupshops Created</div>
-          <div />
-        </div>
-        <Accordion className={styles.rt__acc1}>
-          <Accordion.Item eventKey="0" className="border-0 mb-2">
-            <Accordion.Header className={styles.rt__acc1__row}>
-              <div className={styles.rt__acc1__row__date}>
-                02/22/22
-              </div>
-              <div className={styles.rt__acc1__row__count}>
-                7
-              </div>
-            </Accordion.Header>
-            <Accordion.Body />
-          </Accordion.Item>
-          <Accordion.Item eventKey="0" className="border-0 mb-2">
-            <Accordion.Header className={styles.rt__acc1__row}>
-              <div className={styles.rt__acc1__row__date}>
-                02/22/22
-              </div>
-              <div className={styles.rt__acc1__row__count}>
-                7
-              </div>
-            </Accordion.Header>
-            <Accordion.Body className={styles.rt__acc1_body} />
-          </Accordion.Item>
-        </Accordion>
+      <Col xs={12} lg={12}>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th> # of Groupshops Created</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            {retentionList?.map((part: any, index: number) => (
+              <tr>
+                <td>{moment(new Date(part.createdAt)).format('YYYY/MM/DD')}</td>
+                <td>{part.groupshopsCreated}</td>
+                <td>
+                  <ArrowRightLogo
+                    onClick={() => {
+                      handleRetention(part.id);
+                    }}
+                  />
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </Col>
     </Row>
   );
@@ -61,7 +87,7 @@ export default function RetentionImport() {
               Import Date
             </h3>
             <span>
-              07/22/2022
+              {importDate}
             </span>
           </div>
           <hr />
@@ -70,7 +96,7 @@ export default function RetentionImport() {
               # of Groupshops created
             </h4>
             <span>
-              324
+              {groupshopsCreated}
             </span>
           </div>
           <div className={styles.rt__importDate_box_row}>
@@ -78,9 +104,9 @@ export default function RetentionImport() {
               Date Range
             </h4>
             <span>
-              07/14/21
+              {startDate}
               -
-              08/12/21
+              {endDate}
             </span>
           </div>
           <div className={styles.rt__importDate_box_row}>
@@ -88,25 +114,10 @@ export default function RetentionImport() {
               Minimum order value
             </h4>
             <span>
-              $50
+              {orderValue}
             </span>
           </div>
-          <div className={styles.rt__importDate_box_row}>
-            <h4>
-              Minimum # of purchases
-            </h4>
-            <span>
-              2
-            </span>
-          </div>
-          <div>
-            <h4>
-              Products ordered
-            </h4>
-            <span>
-              The product title 1, the product title 2
-            </span>
-          </div>
+          <div />
         </div>
       </Col>
     </Row>
