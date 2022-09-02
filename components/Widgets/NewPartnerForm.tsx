@@ -76,8 +76,6 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
       .required('Max Discount is required.'),
     partnerCommission: yup
       .number().typeError('you must specify a number')
-      .min(5)
-      .max(50)
       .required('partner Commisson is required.'),
   });
 

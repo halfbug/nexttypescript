@@ -67,19 +67,17 @@ export default function AffiliateDetail({
   const validationSchema = yup.object({
     partnerCommission: yup
       .number().typeError('you must specify a number')
-      .min(5, 'Min value 5.')
-      .max(50, 'Max value 50.')
       .required('partner Commisson is required.'),
     minDiscount: yup
       .number().typeError('you must specify a number')
       .min(5, 'Min value 5.')
       .max(50, 'Max value 50.')
-      .required('partner Commisson is required.'),
+      .required('Min discount value is required.'),
     maxDiscount: yup
       .number().typeError('you must specify a number')
       .min(5, 'Min value 5.')
       .max(50, 'Max value 50.')
-      .required('partner Commisson is required.'),
+      .required('Max discount value is required.'),
   });
 
   const {
