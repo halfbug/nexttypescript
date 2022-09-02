@@ -81,7 +81,7 @@
             }
 
             &__descriptionSmall {
-                width: 384px;
+                width: auto;
                 font-size: 14px;
                 font-family: 'Mulish' !important;
                 font-weight: 400;
@@ -452,19 +452,21 @@
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 18px;
-                    text-align: center;
+                    text-align: start;
                     color: $black;
                     padding: 0 31px;
                     margin-bottom: 23px;
+                    width: auto;
+                    text-align: start;
                 }
 
-                // &__description2 {
-                //     display: block;
-                // }
+                &_description{
+                    text-align: start;
+                }
 
-                // &___description {
-                //     display: none;
-                // }
+                &__descriptionSmall {
+                    display: none;
+                }
 
                 &__mainiconarea {
                     display: flex;
