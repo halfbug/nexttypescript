@@ -140,7 +140,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             {' '}
             order.
           </div>
-          <div className={[styles.reward__modal__body__box1, styles.reward__modal__body__description2].join(' ')}>
+          <div className={[styles.reward__modal__body__box1, styles.reward__modal__body__description2, 'd-lg-block d-none'].join(' ')}>
             <p className={[styles.reward__modal__body__description, styles.reward__modal__body__description2].join(' ')}>
               After you’ve earned 100% of your order in cashback, you’ll
               <strong>
