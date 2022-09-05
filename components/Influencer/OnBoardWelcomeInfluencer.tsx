@@ -88,7 +88,7 @@ const OBWelcomeInfluencer = ({
             How it works
           </div>
           <div className={styles.welcome__modal__body__box2influencer}>
-            <span className={styles.welcome__modal__body__iconMobile}><Cart /></span>
+            <span className={styles.welcome__modal__body__iconMobile}><Cart className="me-2" /></span>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
               your Groupshop with friends & followers
@@ -159,7 +159,7 @@ const OBWelcomeInfluencer = ({
         </Modal.Body>
         <hr className={styles.welcome__modal__body__horizontal_seprator} />
         <Modal.Body className={styles.welcome__modal__body}>
-          <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__descriptioninfluencer].join(' ')}>
+          <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__descriptioninfluencer, 'text-center w-100'].join(' ')}>
 
             Customize your Groupshop now and share it when you’re done!
           </div>
