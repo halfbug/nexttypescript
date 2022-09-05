@@ -161,7 +161,7 @@ const OBWelcomeInfluencer = ({
         <Modal.Body className={styles.welcome__modal__body}>
           <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__descriptioninfluencer, 'text-center w-100'].join(' ')}>
 
-            Customize your Groupshop now and share it when you’re done!
+            Customize your Groupshop now and share it when you’re done.
           </div>
 
           <div className="d-flex justify-content-center my-4">
