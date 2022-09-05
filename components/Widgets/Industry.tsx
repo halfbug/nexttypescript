@@ -23,6 +23,7 @@ export function Industry(
 ) {
   const updateIndustry = (value: any) => {
     setFieldValue('industry', value);
+    handleForm();
   };
   return (
     <section className={styles.generalform_greenbox}>
