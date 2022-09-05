@@ -265,7 +265,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
               className={styles.reward__modal__body__btnMobile}
               onClick={handleSubmit}
             >
-              Next
+              Customize
             </Button>
           </div>
           <div className={styles.reward__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
