@@ -12,7 +12,8 @@ const useSKU = () => {
     if (gsctx.members.length) {
       const temp: IProduct[] = [];
       gsctx.members.map((ele) => ele.products?.map((item) => temp.push(item)));
-      setMemberProducts(temp);
+      // const arr = [...temp, ...gsctx?.popularProducts ?? []];
+      setMemberProducts(gsctx?.popularProducts ?? []);
     }
   }, [gsctx]);
 

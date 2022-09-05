@@ -23,7 +23,7 @@ const OnBoardingAddProduct = ({ open }: any) => {
   const getSelectedProduct = async (data: IProduct[], ids: string[]) => {
     const productObject: any = ids.map((ele) => ({
       productId: ele,
-      type: 'deal',
+      type: 'owner',
       addedBy: gsctx.members[0].orderDetail.customer.firstName,
       customerIP: gsctx.members[0].orderDetail.customer.ip,
     }));
@@ -40,6 +40,7 @@ const OnBoardingAddProduct = ({ open }: any) => {
         dealProducts: uniqueDealProducts,
         obSettings: { ...gsctx.obSettings, ...Data },
         popularProducts: [...data, ...gsctx?.popularProducts!],
+        ownerOBProdcuts: [...data],
       },
     });
 

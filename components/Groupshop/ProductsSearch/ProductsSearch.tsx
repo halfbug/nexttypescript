@@ -52,7 +52,7 @@ const ProductsSearch = ({
   } = useCode();
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
-    clientDealProducts, currencySymbol, dPrice, isInfluencer,
+    clientDealProducts, currencySymbol, dPrice, isInfluencer, isInfluencerGS,
   } = useDeal();
   const { formatNumber } = useUtilityFunction();
 
@@ -72,14 +72,19 @@ const ProductsSearch = ({
   const {
     discountCode: { percentage },
     store: { products } = { store: { products: [] } },
-    popularProducts, addedProducts,
+    popularProducts, addedProducts, dealProducts,
   } = gsctx;
 
-  const refreshProduct = () => products?.filter(
-    (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
-  ).filter(
+  // const refreshProduct = () => products?.filter(
+  //   (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
+  // ).filter(
+  //   (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+  // );
+  const refreshProduct = () => (isInfluencerGS ? products?.filter(
+    (item) => !dealProducts?.some((item2) => item2.productId === item.id),
+  ) : products?.filter(
     (item) => !addedProducts?.some((item2) => item2.productId === item.id),
-  );
+  ));
 
   useEffect(() => {
     // console.log(products);

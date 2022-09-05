@@ -44,6 +44,7 @@ export default function useUtilityFunction() {
     const newArr = searchArr?.find(
       (item2: any) => item2?.[searchField] === searched,
     );
+    console.log('🚀 ~ file:  searched newArr', newArr);
 
     return newArr;
   });
@@ -53,10 +54,12 @@ export default function useUtilityFunction() {
   ):any => mainArr?.map((item: any) => {
     // console.log({ item });
     const searched = arrayfield ? item?.[arrayfield] : item;
+    console.log('🚀 ~ file: useUtilityFunction.ts ~ line 56 ~ ):any=>mainArr?.map ~ searched', searched);
 
     const newArr = searchArr?.find(
       (item2: any) => item2?.[searchField] === searched,
     );
+    console.log('🚀 ~ file: useUtilityFunction searched ~ newArr', newArr);
     // console.log({ item });
     return newArr ? item : undefined;
   });

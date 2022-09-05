@@ -5,7 +5,7 @@ import {
 export type DealProduct = {
   productId: string;
 
-  type?: 'deal' | 'abandoned';
+  type?: 'deal' | 'owner' | 'abandoned';
 
   addedBy: string;
 
@@ -184,6 +184,8 @@ export interface IGroupshop {
   influencerProducts?: Product[];
 
   exipredShortLink?: string;
+
+  ownerOBProdcuts?: Product[];
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;

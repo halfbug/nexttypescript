@@ -46,19 +46,8 @@ const useProducts = (shop: string) => {
           'id',
         ).filter((item: any) => item !== undefined)
           .filter((item: any) => +item.price > 1);
-        console.log('🚀 ~ file: useProducts.ts ~ line 48 ~ useEffect ~ otherProducts', otherProducts);
-        // otherProducts = otherProducts.length > 0
-        //   ? otherProducts.filter((item: any) => +item.price > 1)
-        //   : otherProducts;
-
-        // console.log(findInArray(gsctx.campaign?.addableProducts, productsql?
-        // .data?.products || [], null, 'id'));
       } else {
-        otherProducts = data?.products.filter(
-          (o1: IProduct) => !gsctx?.allProducts?.some((o2: IProduct) => o1.id === o2.id),
-        ).filter((item: any) => +item.price > 1);
-        // console.log({ otherProducts });
-        // console.log('otherproduct', otherProducts.filter(({ price }) => +price > 1));
+        otherProducts = data?.products.filter((item: any) => +item.price > 1);
       }
       dispatch({
         type: 'UPDATE_PRODUCTS',

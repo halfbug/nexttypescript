@@ -105,6 +105,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
+  const [showSearch, setshowSearch] = useState<boolean>(true);
+  const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
   const { urlForActivation, loaderInvite } = useExpired();
 
   useEffect(() => {
@@ -138,6 +140,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     maxPercent,
     topFive,
     shortActivateURL,
+    leftOverProducts,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -160,7 +163,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     // allProducts,
   } = gsctx;
   const {
-    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
+    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray, findInArray2,
   } = useUtilityFunction();
   const { popularShuffled } = usePopular(popularProducts);
   const { topPicks } = useTopPicks();
@@ -176,19 +179,40 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.dealProducts]);
+  useEffect(() => {
+    // show ob products with owner products. dont show ob prds with other customer
 
-  console.log('🚀 ~ file: [...code].tsx ~ line 165 ~ useEffect ~ allProducts', allProducts?.map((item) => item.outofstock));
+    const ownerDP = dealProducts?.filter((item) => item.type === 'owner');
+    if (ownerDP && ownerDP.length && gsctx?.store?.products?.length) {
+      const ownerPrds: IProduct[] = _.uniq(findInArray(
+        dealProducts?.filter((item) => item.type === 'owner') ?? [] as any[],
+        gsctx?.store?.products as any[],
+        'productId',
+        'id',
+      ));
+      // .filter((item: IProduct | undefined) => item !== undefined))
+      console.log('🚀 ~ file: [...code].tsx ~ line 189 ~ searched ~ ownerPrds', ownerPrds);
+
+      setshoppedBy(member?.orderId === gsctx?.members[0].orderId
+        ? uniqueArray([...member?.products ?? [], ...ownerPrds ?? []])
+        : uniqueArray([...member?.products ?? []]));
+    } else {
+      setshoppedBy(member?.products);
+    }
+  }, [gsctx?.store?.products, gsctx.dealProducts]);
+
   useEffect(() => {
     const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
     // const addedPrds = dealProducts?.filter((item));
     const addedPrdsCtx = filterArray(addedProducts ?? [], ownerProducts ?? [], 'productId', 'id');
-
+    // check owner prodcut is added. member[0].product ===sDealPrd then move it into addedProducts
     console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
     dispatch({
       type: 'UPDATE_GROUPSHOP',
       payload: {
         ...gsctx,
-        addedProducts: _.uniq([...addedPrdsCtx || [], ...addedPrds || []]),
+        // addedProducts: _.uniq([...addedPrdsCtx || [], ...addedPrds || []]),
+        addedProducts: _.uniq([...addedPrds ?? [], ...addedProducts ?? []]),
       },
     });
   }, [dealProducts, popularProducts]);
@@ -222,6 +246,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       setshowCart(true);
     }
   }, [gsctx.cart]);
+  /// if SKU > 2 and SKU <= 4
+  useEffect(() => {
+    // if all store products are addded
+    console.log(leftOverProducts);
+
+    if (leftOverProducts && leftOverProducts?.length < 1) {
+      setshowSearch(false);
+    } else {
+      setshowSearch(true);
+    }
+  }, [leftOverProducts]);
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
   const [value, setvalue] = useState<undefined | string>('...');
@@ -258,7 +293,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
-  console.log('addedProducts', addedProducts);
   return (
     <>
       <Head>
@@ -267,6 +301,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        console.log("🚀 ~ file: [...code].tsx ~ line 304 ~ useEffect ~ gsctx?.store?.products", gsctx?.store?.products)
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -409,7 +444,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 ? (
+                {SKU.length > 1 && showSearch ? (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
@@ -551,7 +586,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           lg={4}
           xl={3}
           products={(SKU.length >= 2 && SKU.length <= 4)
-            ? uniqueArray(memberProducts) : uniqueArray(member?.products)}
+            ? uniqueArray(memberProducts) : shoppedBy}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
@@ -559,6 +594,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
           skuCount={SKU.length}
+          showSearch={showSearch}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -665,7 +701,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             md={6}
             lg={4}
             xl={3}
-            products={allProducts}
+            // products={allProducts}
+            products={uniqueArray(allProducts)}
             maxrows={3}
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
@@ -762,7 +799,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </>
 
             )
-              : (SKU.length > 1 && (
+              : ((SKU.length > 1 && showSearch) && (
                 <>
                   <p>Don’t see what you like?</p>
                   <Button
