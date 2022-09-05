@@ -246,8 +246,12 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
           </div>
 
           <div className={styles.reward__modal__body__description1}>
-            Curate your favorite products, add a welcome message and link your
-            socials by customizing your Groupshop.
+            Curate your favorite products from
+            {' '}
+            {gsctx.store?.brandName}
+            {' '}
+            so you can
+            shop and share them with friends!
           </div>
 
           <div className="d-flex justify-content-center my-4">
