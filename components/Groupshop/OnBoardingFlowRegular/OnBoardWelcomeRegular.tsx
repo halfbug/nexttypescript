@@ -90,7 +90,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             <div className={styles.welcome__modal__body__mainiconarea__vertical_seprator} />
             <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
           </div>
-          <h2 className={styles.welcome__modal__body__welcomeTxt}>
+          <h2 className={[styles.welcome__modal__body__welcomeTxt, 'd-lg-block d-none'].join(' ')}>
             Welcome to Groupshop!
           </h2>
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
