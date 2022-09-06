@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Marketing.module.scss';
 import { RootProps } from 'types/store';
 import {
-  Col, Modal, Row, Form,
+  Col, Modal, Row, Form, Spinner,
 } from 'react-bootstrap';
 import Cross from 'assets/images/CrossLg.svg';
 import { InfoCircle } from 'react-bootstrap-icons';
@@ -15,6 +15,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useLazyQuery } from '@apollo/client';
 import { FIND_PENDING_GROUPSHOP } from 'store/store.graphql';
+import useAlert from 'hooks/useAlert';
 
 interface InviteCustomerBoxProps extends RootProps {
   show: boolean;
@@ -43,8 +44,11 @@ const InviteCustomerBox = ({
   };
   const [groupshopLength, setgroupshopLength] = useState(0);
   const { store, dispatch } = React.useContext(StoreContext);
+  // const [loading, setLoading] = React.useState<boolean>(false);
+  const { AlertComponent, showError, showSuccess } = useAlert();
 
   const changeDate = (value:any, field:any) => {
+    // setLoading(true);
     if (field === 'start') {
       if (value === null) {
         setStartDate('');
@@ -65,14 +69,15 @@ const InviteCustomerBox = ({
     setCreateGroupshopPopup(true);
   };
 
-  const [getGroupshop, { data }] = useLazyQuery(FIND_PENDING_GROUPSHOP, {
+  const [getGroupshop, { data, loading }] = useLazyQuery(FIND_PENDING_GROUPSHOP, {
     onError() {
-      alert('Record not found!');
+      console.log('Record not found!');
     },
   });
 
   useEffect(() => {
     if (data) {
+      // setLoading(false);
       setgroupshopLength(data?.findpendinggroupshop.length);
       setListCustomers(data?.findpendinggroupshop);
     }
@@ -80,11 +85,15 @@ const InviteCustomerBox = ({
 
   React.useEffect(() => {
     if (startDate !== '' && endDate !== '') {
-      getGroupshop({
-        variables: {
-          shop: store.shop, startDate, endDate, minOrderValue,
-        },
-      });
+      if (endDate > startDate) {
+        getGroupshop({
+          variables: {
+            shop: store.shop, startDate, endDate, minOrderValue,
+          },
+        });
+      } else {
+        showError('You can not select end date greater then start date.');
+      }
     }
   }, [startDate, endDate, minOrderValue]);
 
@@ -149,6 +158,7 @@ const InviteCustomerBox = ({
                     placeholderText="yyyy-mm-dd"
                     dateFormat="yyyy-MM-dd"
                     name="startDate"
+                    maxDate={new Date()}
                     selected={startDate}
                     onChange={(sdate:any) => changeDate(sdate, 'start')}
                   />
@@ -167,6 +177,7 @@ const InviteCustomerBox = ({
                     className="form-control"
                     placeholderText="yyyy-mm-dd"
                     dateFormat="yyyy-MM-dd"
+                    minDate={startDate}
                     maxDate={new Date()}
                     name="endtDate"
                     selected={endDate}
@@ -235,18 +246,29 @@ const InviteCustomerBox = ({
                   >
                     Please select date range
                   </WhiteButton>
-
                 ) : (
-                  <WhiteButton
-                    onClick={createGroupshopPopup}
-                    className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
-                  >
-                    Create Groupshops for
-                    {' '}
-                    {groupshopLength}
-                    {' '}
-                    customers
-                  </WhiteButton>
+                  <>
+                    {!loading && (
+                    <WhiteButton
+                      onClick={createGroupshopPopup}
+                      className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
+                    >
+                      Review Selection (
+                      {groupshopLength}
+                      {' '}
+                      customers found)
+                    </WhiteButton>
+                    )}
+                    {loading && (
+                      <>
+                        <WhiteButton
+                          className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
+                        >
+                          <Spinner animation="border" className="align-middle" />
+                        </WhiteButton>
+                      </>
+                    )}
+                  </>
                 )}
 
               </div>
@@ -254,6 +276,7 @@ const InviteCustomerBox = ({
           </Row>
         </Modal.Body>
       </Modal>
+      <AlertComponent />
     </>
   );
 };

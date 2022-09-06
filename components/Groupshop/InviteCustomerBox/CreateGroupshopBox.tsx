@@ -130,7 +130,7 @@ const CreateGroupshopBox = ({
                         {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
                         {formatNumber(part.price)}
                       </td>
-                      <td>{moment(new Date(part.shopifyCreateAt)).format('YYYY-MM-DD')}</td>
+                      <td>{moment(new Date(part.shopifyCreateAt)).format('DD/MM/YYYY')}</td>
                     </tr>
                   ))}
                 </tbody>

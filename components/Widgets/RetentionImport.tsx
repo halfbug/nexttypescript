@@ -6,13 +6,25 @@ import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import styles from 'styles/Retentiontools.module.scss';
 import moment from 'moment';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import useDimensions from 'hooks/useDimentions';
+import { PastCustomerGroupshop } from 'types/store';
+import usePagination from 'hooks/usePagination';
+import Pagination from 'react-bootstrap/Pagination';
 
 interface RetentionImportProps {
   currencyCode:string;
   retentionList: [];
+  xs?: any,
+  sm?: number,
+  md?: number,
+  lg?: number,
+  xl?: number,
+  xxl?: number,
 }
 
-export default function RetentionImport({ retentionList, currencyCode } : RetentionImportProps) {
+const RetentionImport = ({
+  retentionList, currencyCode, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
+} : RetentionImportProps) => {
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
   const [groupshopsCreated, setGroupshopsCreated] = useState('');
@@ -24,47 +36,62 @@ export default function RetentionImport({ retentionList, currencyCode } : Retent
     const currentPartner: any = retentionList?.filter(
       (item: any) => item.id === id,
     );
-    setstartDate(moment(new Date(currentPartner[0].startDate)).format('YYYY/MM/DD'));
-    setendDate(moment(new Date(currentPartner[0].endDate)).format('YYYY/MM/DD'));
+    setstartDate(moment(new Date(currentPartner[0].startDate)).format('MM/DD/YY'));
+    setendDate(moment(new Date(currentPartner[0].endDate)).format('MM/DD/YY'));
     setGroupshopsCreated(currentPartner[0].groupshopsCreated);
     if (currentPartner[0].minOrderValue !== '') {
       setorderValue(`${storeCurrencySymbol(currencyCode)}${currentPartner[0].minOrderValue}`);
     } else {
       setorderValue('-');
     }
-    setimportDate(moment(new Date(currentPartner[0].createdAt)).format('YYYY/MM/DD'));
+    setimportDate(moment(new Date(currentPartner[0].createdAt)).format('MM/DD/YYYY'));
   };
+  const [ref, dimensions] = useDimensions();
+  const {
+    screens, breakPoint, pageSize,
+    totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
+  } = usePagination<PastCustomerGroupshop>({
+    dimensions,
+    maxrows: 10,
+    screens: {
+      xs, sm, md, lg, xl, xxl,
+    },
+    items: retentionList || [],
+    siblingCount: 4,
+  });
 
   const getCustomerImportTableHTML = () => (
-    <Row>
-      <Col xs={12} lg={12}>
-        <Table striped hover>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th> # of Groupshops Created</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
-            {retentionList?.map((part: any, index: number) => (
+    <>
+      <Row ref={ref}>
+        <Col xs={12} lg={12}>
+          <Table striped hover>
+            <thead>
               <tr>
-                <td>{moment(new Date(part.createdAt)).format('YYYY/MM/DD')}</td>
-                <td>{part.groupshopsCreated}</td>
-                <td>
-                  <ArrowRightLogo
-                    onClick={() => {
-                      handleRetention(part.id);
-                    }}
-                  />
-                </td>
-
+                <th>Date</th>
+                <th> # of Groupshops Created</th>
+                <th>&nbsp;</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
+            </thead>
+            <tbody>
+              {renderItems?.map((part: any, index: number) => (
+                <tr>
+                  <td>{moment(new Date(part.createdAt)).format('MM/DD/YY')}</td>
+                  <td>{part.groupshopsCreated}</td>
+                  <td>
+                    <ArrowRightLogo
+                      onClick={() => {
+                        handleRetention(part.id);
+                      }}
+                    />
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </>
   );
 
   return (
@@ -78,6 +105,47 @@ export default function RetentionImport({ retentionList, currencyCode } : Retent
             Below is a log of every batch of past customers you have created Groupshops for.
           </span>
           {getCustomerImportTableHTML()}
+          <Row>
+            <Col>
+              {totalPages > 1 && (
+              <Pagination className={styles.groupshop_pagination}>
+                <Pagination.Prev
+                  className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
+                  onClick={() => {
+                    setCurrentPage(
+                      (currentPage > 1) ? currentPage - 1 : currentPage,
+                    );
+                  }}
+                />
+
+                {getPageNumbers().map((n, index) => (
+                  <Pagination.Item
+                    active={currentPage === n}
+                    onClick={() => {
+                      setCurrentPage(n);
+                    }}
+                    className={currentPage === n
+                      ? styles.groupshop_pagination_activeItem
+                      : styles.groupshop_pagination_item}
+                  >
+                    {n}
+                  </Pagination.Item>
+                ))}
+
+                <Pagination.Next
+                  className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
+                  onClick={() => {
+                    setCurrentPage(
+                      (currentPage >= 1 && currentPage < totalPages)
+                        ? currentPage + 1
+                        : currentPage,
+                    );
+                  }}
+                />
+              </Pagination>
+              )}
+            </Col>
+          </Row>
         </div>
       </Col>
       <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
@@ -122,4 +190,14 @@ export default function RetentionImport({ retentionList, currencyCode } : Retent
       </Col>
     </Row>
   );
-}
+};
+
+RetentionImport.defaultProps = {
+  xs: 12,
+  sm: 12,
+  md: 12,
+  lg: 12,
+  xl: 12,
+  xxl: 12,
+};
+export default RetentionImport;

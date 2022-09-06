@@ -10,6 +10,7 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import { SYNC_STORE_CUSTOMERS, GET_STORE_DETAILS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 import useAlert from 'hooks/useAlert';
+import moment from 'moment';
 
 interface RetentionInviteProps {
   handleAfterSubmit: any;
@@ -109,7 +110,7 @@ export default function RetentionInvite({
 
               )}
             {syncLoading && <Spinner animation="border" />}
-            <div className={styles.syncted_at}>{updatedAt}</div>
+            <div className={styles.syncted_at}>{ moment(new Date(updatedAt)).format('MM/DD/YYYY') }</div>
           </div>
           <h4>
             Step 2
