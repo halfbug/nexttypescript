@@ -1,72 +1,40 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/require-default-props */
+import _ from 'lodash';
 import * as React from 'react';
 import {
-  Form, Row, Col, InputGroup, Container, Button,
+  Form, Row, Col, Button,
 } from 'react-bootstrap';
-import useQueryString from 'hooks/useQueryString';
-import { useFormik, FormikProps, FormikHelpers } from 'formik';
-import * as yup from 'yup';
-import { StoreContext } from 'store/store.context';
-import { useMutation } from '@apollo/client';
-import { UPDATE_CAMPAIGN } from 'store/store.graphql';
 import {
-  Facebook, Instagram, Pinterest, Twitter, Tiktok, CheckCircle,
+  Facebook, Instagram, Twitter, Tiktok,
 } from 'react-bootstrap-icons';
 import styles from 'styles/Groupshop.module.scss';
-import { IStore } from 'types/store';
-import SocialButton from 'components/Buttons/SocialButton/SocialButton';
-import IconButton from 'components/Buttons/IconButton';
 
 interface IProps {
-  handleForm?: any;
   values?: any;
-  setFieldValue?: any;
-  touched?: any;
   errors?: any;
+  setFieldValue?: any;
+  handleSubmit?: any;
 }
 
 export default function CampaignSocialMedia({
-  handleForm, setFieldValue, values, touched, errors,
+  values, errors, setFieldValue, handleSubmit,
 }: IProps) {
-  const [, setParams] = useQueryString();
   const [smUrl, setsmUrl] = React.useState('instagram');
-  const [field, setfield] = React.useState('instagram');
-  const [isValidURL, setIsValidURL] = React.useState<any>({});
 
-  const [addSM, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
-  console.log({ errors });
   const styleObj = {
-
     width: '248px',
   };
 
-  const URLValidator = (URI: string) => {
-    const URI_LIST = [
-      {
-        key: 'instagram',
-        url: 'https://www.instagram.com/',
-      },
-      {
-        key: 'facebook',
-        url: 'https://www.facebook.com/',
-      },
-      {
-        key: 'twitter',
-        url: 'https://www.twitter.com/',
-      },
-      {
-        key: 'tiktok',
-        url: 'https://www.tiktok.com/',
-      },
-    ];
-    const temp = URI.includes(URI_LIST.find((ele) => ele.key === smUrl)?.url!);
-    setIsValidURL({ ...isValidURL, [smUrl]: temp });
-    return temp;
+  const debounceHandleSubmit = React.useRef(
+    _.debounce(handleSubmit, 500),
+  ).current;
+
+  const updateValues = (name: string, value: string) => {
+    setFieldValue(name, value);
+    debounceHandleSubmit();
   };
 
   return (
-
     <>
       <Row className="mb-2">
         <Col>
@@ -82,6 +50,7 @@ export default function CampaignSocialMedia({
           >
             <Instagram className="fs-3 fw-bold" />
           </Button>
+
           <Button
             className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
@@ -90,14 +59,15 @@ export default function CampaignSocialMedia({
             <Tiktok className="fs-3 fw-bold" />
 
           </Button>
+
           <Button
             className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
             onClick={() => setsmUrl('twitter')}
           >
             <Twitter className="fs-3 fw-bold" />
-
           </Button>
+
           <Button
             className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
@@ -112,103 +82,21 @@ export default function CampaignSocialMedia({
           <Form.Group className="me-1" style={styleObj} controlId="sm">
             <Form.Control
               onChange={(e) => {
-                // setval(e.currentTarget.value);
-                setfield('instagram');
-                URLValidator(e.currentTarget.value);
-                handleForm('instagram', e.currentTarget.value);
+                updateValues(smUrl, e.currentTarget.value);
               }}
-              className={smUrl === 'instagram' ? 'd-block' : 'd-none'}
-              // id={`${smUrl}`}
-              name="instagram"
+              name={smUrl}
               type="text"
               size="lg"
-              placeholder="Enter instagram account URL..."
-              value={values.instagram}
-              isInvalid={!isValidURL[smUrl]}
+              placeholder={`Enter ${smUrl} account URL...`}
+              value={values[smUrl]}
+              isInvalid={values[smUrl]?.length && errors[smUrl]}
+              isValid={(!errors[smUrl] && values[smUrl]?.length)}
+              title={(values[smUrl]?.length && errors[smUrl]) ? errors[smUrl] : ''}
             />
             <Form.Control.Feedback type="invalid">
-              {smUrl === 'instagram' && errors[smUrl]}
+              {smUrl in values ? errors[smUrl] : ''}
             </Form.Control.Feedback>
-
-            <Form.Control
-              onChange={(e) => {
-                setfield('tiktok');
-                URLValidator(e.currentTarget.value);
-                handleForm('tiktok', e.currentTarget.value);
-                // setval(e.currentTarget.value);
-                // debouncedSearch('tiktok', e.currentTarget.value);
-              }}
-              className={smUrl === 'tiktok' ? 'd-block' : 'd-none'}
-              // className="px-2"
-              // id={`${smUrl}`}
-              name="tiktok"
-              type="text"
-              size="lg"
-              placeholder="Enter tiktok account URL..."
-              value={values.tiktok}
-              isInvalid={!isValidURL[smUrl]}
-
-            />
-            <Form.Control.Feedback type="invalid">
-              {smUrl === 'tiktok' && errors[smUrl]}
-            </Form.Control.Feedback>
-            <Form.Control
-              onChange={(e) => {
-                setfield('twitter');
-                URLValidator(e.currentTarget.value);
-                handleForm('twitter', e.currentTarget.value);
-                // setval(e.currentTarget.value);
-                // debouncedSearch('twitter', e.currentTarget.value);
-              }}
-              className={smUrl === 'twitter' ? 'd-block' : 'd-none'}
-              // className="px-2"
-              // id={`${smUrl}`}
-              name="twitter"
-              type="text"
-              size="lg"
-              placeholder="Enter twitter account URL..."
-              value={values.twitter}
-              isInvalid={!isValidURL[smUrl]}
-            />
-            <Form.Control.Feedback type="invalid">
-              {smUrl === 'twitter' && errors[smUrl]}
-            </Form.Control.Feedback>
-            <Form.Control
-              className={smUrl === 'facebook' ? 'd-block' : 'd-none'}
-              // className="px-2 "
-              // id={`${smUrl}`}
-              name="facebook"
-              type="text"
-              size="lg"
-              onChange={(e) => {
-                setfield('facebook');
-                URLValidator(e.currentTarget.value);
-                handleForm('facebook', e.currentTarget.value);
-                // setval(e.currentTarget.value);
-                // debouncedSearch('facebook', e.currentTarget.value);
-              }}
-              placeholder="Enter facebook account URL..."
-              value={values.facebook}
-              isInvalid={!isValidURL[smUrl]}
-            />
-            <Form.Control.Feedback type="invalid">
-              {smUrl === 'facebook' && errors[smUrl]}
-            </Form.Control.Feedback>
-            {/* <Form.Control.Feedback type="invalid">
-                {errors.brandName}
-              </Form.Control.Feedback> */}
-
           </Form.Group>
-          {isValidURL[smUrl] ? (
-            <IconButton
-              icon={<CheckCircle size={18} color="green" />}
-            />
-          )
-            : (
-              <IconButton
-                icon={<CheckCircle size={18} color="black" opacity={0.4} />}
-              />
-            )}
         </Col>
       </Row>
     </>

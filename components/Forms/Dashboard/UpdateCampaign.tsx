@@ -26,6 +26,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import useCampaign from 'hooks/useCampaign';
 import AddProductButton from 'components/Buttons/AddProductButton';
 import useDelay from 'hooks/useDelay';
+import _ from 'lodash';
 import UpdateRewards from './UpdateRewards';
 import DBSettings from './DBSettings';
 import CampaignSocialMedia from './CampaignSocialMedia';
@@ -80,6 +81,13 @@ export default function UpdateCampaign({ setHeading }: IProps) {
   const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
   const validUrl = /^(https:\/\/?(www.)?instagram.com\/p\/([^/?#&/]+)).*/gm;
 
+  const regex = {
+    instagram: /(?:(?:http|https):\/\/)?(?:www.)?(?:instagram.com|instagr.am|instagr.com)\/(\w+)/igm,
+    twitter: /(?:(?:http|https):\/\/)?(?:www.)?(?:twitter.com)\/(\w+)/igm,
+    facebook: /(?:(?:http|https):\/\/)?(?:www.)?(?:facebook.com)\/(\w+)/igm,
+    tiktok: /(?:(?:http|https):\/\/)?(?:www.)?(?:tiktok.com)\/(\w+)/igm,
+  };
+
   React.useEffect(() => {
     if (campaign) {
       // updateStoreForEditCampaignId(campaignid);
@@ -115,10 +123,10 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     brandColor: yup
       .string()
       .required('Brand Color is required.'),
-    facebook: yup.string().matches(re, 'URL is not valid'),
-    instagram: yup.string().matches(re, 'Instagram url is not valid'),
-    tiktok: yup.string().matches(re, 'URL is not valid'),
-    twitter: yup.string().matches(re, 'URL is not valid'),
+    facebook: yup.string().matches(regex.facebook, 'Facebook URL is not valid'),
+    instagram: yup.string().matches(regex.instagram, 'Instagram url is not valid'),
+    tiktok: yup.string().matches(regex.tiktok, 'TikTok URL is not valid'),
+    twitter: yup.string().matches(regex.twitter, 'Twitter is not valid'),
 
   });
 
@@ -128,7 +136,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     initialValues: state,
     validationSchema,
     enableReinitialize: true,
-    validateOnChange: false,
+    validateOnChange: true,
     validateOnBlur: false,
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
@@ -152,7 +160,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
           customCollections = [...campaign?.collections ?? []];
         }
       }
-
       const campObj:null | any = await editCampaign({
         variables: {
           updateCampaignInput: {
@@ -239,6 +246,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
     handleSubmit();
   };
+
   const debouncedSubmit = useDelay(300);
 
   const handleForm = (field: string, value: string) => {
@@ -269,6 +277,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     setdisableBtn(true);
     setdisableBtnUpdate(false);
   };
+
   return (
     <Container className={styles.dashboard_campaign}>
       <Screen1 handleAfterUpdate={handleAfterUpdate} show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
@@ -480,8 +489,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
             <CampaignSocialMedia
               setFieldValue={setFieldValue}
               values={values}
-              handleForm={handleForm}
-              touched={touched}
+              handleSubmit={handleSubmit}
               errors={errors}
             />
           </section>

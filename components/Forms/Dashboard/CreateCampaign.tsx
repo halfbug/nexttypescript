@@ -542,8 +542,7 @@ export default function CreateCampaign() {
               <CampaignSocialMedia
                 setFieldValue={setFieldValue}
                 values={values}
-                handleForm={handleForm}
-                touched={touched}
+                handleSubmit={handleSubmit}
                 errors={errors}
               />
             </section>
