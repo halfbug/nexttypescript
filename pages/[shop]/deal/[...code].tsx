@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
+import QRClickIcon from 'assets/images/qr-click.svg';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
 import ArrowSort from 'assets/images/ArrowSort.svg';
@@ -63,6 +64,7 @@ import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useSKU from 'hooks/useSKU';
 import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
+import QRBox from 'components/Groupshop/QRBox/QRBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -105,6 +107,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
+  const [showQR, setShowQR] = useState<boolean>(false);
   const [showSearch, setshowSearch] = useState<boolean>(true);
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
   const { urlForActivation, loaderInvite } = useExpired();
@@ -335,7 +338,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <header>
           <Header
             LeftComp={
-              <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+              isModalForMobile
+                ? <QRClickIcon onClick={() => { setShowQR(true); }} />
+                : <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
             RightComp={isExpired ? (
               <ExpiredBox
@@ -859,6 +864,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
           </div>
         )}
+        {
+          isModalForMobile
+          && (
+            <QRBox
+              show={showQR}
+              handleClose={() => setShowQR(false)}
+              fullshareurl=""
+            />
+          )
+        }
         {/* STEP MODALs */}
         {stepModal()}
       </div>

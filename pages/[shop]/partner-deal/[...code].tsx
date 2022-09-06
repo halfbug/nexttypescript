@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
+import QRClickIcon from 'assets/images/qr-click.svg';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
 import ArrowSort from 'assets/images/ArrowSort.svg';
@@ -61,6 +62,7 @@ import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
+import QRBox from 'components/Groupshop/QRBox/QRBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // console.log({ meta });
@@ -107,6 +109,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showExpiredModel, setShowExpiredModel] = useState<boolean>(false);
+  const [showQR, setShowQR] = useState<boolean>(false);
   const [partnerMembers, setpartnerMembers] = useState<PartnerMember[]>([{
     customerInfo: {
       firstName: '',
@@ -347,7 +350,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <header>
           <Header
             LeftComp={
-              <div> </div>
+              isModalForMobile
+                ? (
+                  <QRClickIcon
+                    onClick={() => { setShowQR(true); }}
+                  />
+                )
+                : <div> </div>
               // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
             RightComp={(
@@ -831,6 +840,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             setShowExpiredModel={setShowExpiredModel}
           />
           )}
+        {
+          isModalForMobile
+          && (
+            <QRBox
+              show={showQR}
+              handleClose={() => setShowQR(false)}
+              fullshareurl=""
+            />
+          )
+        }
         {/* <RewardBox2
           show={showRewards}
           discount={discount}

@@ -2332,6 +2332,55 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 18px;
     }
   }
+  &_qrBox {
+    &__modal{
+      @extend .m-5;
+    }
+    &__closebtn {
+      @extend .p-2;
+      display: flex;
+      justify-content: flex-end;
+      box-shadow: none !important;
+      border-bottom: none;
+
+      svg {
+        cursor: pointer;
+      }
+    }
+    &__off {
+      @extend .text-center;
+      font-weight: $font-weight-bolder;
+      font-size: 22px;
+      line-height: 29px;
+      /* identical to box height */
+
+      color: #000000;
+    }
+    &__canvas{
+      @extend .text-center;
+      margin-top: 4px;
+      margin-bottom: 26px;
+      p {
+        font-weight: $font-weight-bolder;
+        font-size: 11px;
+        line-height: 14px;
+      }
+    }
+    &__btnShare{
+      padding: 0px 20px;
+      margin-bottom: 10px;
+      height: 42.96px;
+      box-shadow: none !important;
+      display: block;
+      background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
+      color: #FFFFFF;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 15px;
+      text-transform: capitalize;
+      border: none !important;
+    }
+  }
   &_rewardBox {
     .modal-content {
       display: none;
