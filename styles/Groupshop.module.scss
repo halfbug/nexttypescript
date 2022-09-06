@@ -1568,6 +1568,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       width: 192px;
       height: 42.96px;
       box-shadow: none !important;
+      @media (min-width: 375px) and (max-width: 575px) {
+        margin-bottom: 50px;
+      }
     }
     &_shareBtn {
       width: 38px;
