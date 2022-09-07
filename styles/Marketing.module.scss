@@ -309,14 +309,14 @@
         }
         &__btn,
         &__purpleBtn{
-            @extend .mt-2, .px-3;
+            @extend .mt-2, .px-3, .py-1;
             border-radius: 6px;
-            height: 28px;
+            //height: 28px;
             border: 1px solid $black;
             font-family: "DM Sans";
             font-style: normal;
             font-size: 12px;
-            line-height: 15px;
+            //line-height: 15px;
             text-align: center;
             &:hover {
             border-radius: 6px;
