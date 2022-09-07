@@ -151,7 +151,7 @@ const InviteCustomerBox = ({
                     className={styles.marketing__tooltip_1}
                     popoverClassName={styles.marketing__tooltip_1__popover}
                     icon={<InfoCircle size={13} />}
-                    popContent=""
+                    popContent="You can’t select orders older than one year old."
                   />
                   <DatePicker
                     className="form-control"
@@ -171,7 +171,7 @@ const InviteCustomerBox = ({
                     className={styles.marketing__tooltip_1}
                     popoverClassName={styles.marketing__tooltip_1__popover}
                     icon={<InfoCircle size={13} />}
-                    popContent=""
+                    popContent="The latest date you can select is the date your first Groupshop campaign became active."
                   />
                   <DatePicker
                     className="form-control"
