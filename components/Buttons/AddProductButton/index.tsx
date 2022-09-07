@@ -86,6 +86,7 @@ export default function AddProductButton({ handleDelete }:IProps) {
             onClick={handleAddProduct}
             className="text-nowrap"
             // disabled={disableBtn}
+            disabled
           >
             Add Products
           </RButton>

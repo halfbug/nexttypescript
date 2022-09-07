@@ -38,17 +38,20 @@ const useProducts = (shop: string) => {
   useEffect(() => {
     let otherProducts: IProduct[];
     if (data?.products && gsctx.allProducts) {
-      if (gsctx.campaign?.addableProducts?.length) {
-        otherProducts = findInArray(
-          gsctx.campaign?.addableProducts,
-          data?.products || [],
-          null,
-          'id',
-        ).filter((item: any) => item !== undefined)
-          .filter((item: any) => +item.price > 1);
-      } else {
-        otherProducts = data?.products.filter((item: any) => +item.price > 1);
-      }
+      // ...............addable products functionality disable.................
+      // if (gsctx.campaign?.addableProducts?.length) {
+      //   otherProducts = findInArray(
+      //     gsctx.campaign?.addableProducts,
+      //     data?.products || [],
+      //     null,
+      //     'id',
+      //   ).filter((item: any) => item !== undefined)
+      //     .filter((item: any) => +item.price > 1);
+      // } else {
+      otherProducts = data?.products
+        .filter((item: any) => item !== undefined)
+        .filter((item: any) => +item.price > 1);
+      // }
       dispatch({
         type: 'UPDATE_PRODUCTS',
         payload: {
