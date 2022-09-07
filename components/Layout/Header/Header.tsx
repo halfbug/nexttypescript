@@ -27,15 +27,6 @@ const Header = ({
         </Col>
 
         <Col className={styles.header_btn_div}>
-          <div className={styles.header_head_btn1}>
-            <div className={styles.header__overlay}>
-              <div className={styles.header__overlayText}>Coming Soon</div>
-            </div>
-            <Button className={styles.header_btn} size="lg">
-              View Groupshop
-            </Button>
-          </div>
-
           <div className={styles.header_head_btn2}>
             Welcome
             {'  '}
