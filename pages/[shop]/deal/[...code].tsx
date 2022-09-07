@@ -672,6 +672,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             id="popularproducts"
             isModalForMobile={isModalForMobile}
             urlForActivation={urlForActivation}
+            skuCount={SKU.length}
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
@@ -715,6 +716,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             id="allproducts"
             isModalForMobile={isModalForMobile}
             urlForActivation={urlForActivation}
+            skuCount={SKU.length}
           >
             <div className="position-relative">
               <h2>All Products</h2>
