@@ -53,7 +53,11 @@ const useProducts = (shop: string) => {
         type: 'UPDATE_PRODUCTS',
         payload: {
           ...gsctx,
-          store: { ...gsctx.store, products: _.uniq(otherProducts) },
+          store: {
+            ...gsctx.store,
+            products: _.uniq(otherProducts),
+            allInventoryProducts: data.products,
+          },
         },
       });
     }

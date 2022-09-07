@@ -8,7 +8,9 @@ const useSKU = () => {
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    if (gsctx.store?.products?.length) { setAllProducts(gsctx.store?.products); }
+    if (gsctx.store?.allInventoryProducts?.length) {
+      setAllProducts(gsctx.store?.allInventoryProducts);
+    }
     if (gsctx.members.length) {
       const temp: IProduct[] = [];
       gsctx.members.map((ele) => ele.products?.map((item) => temp.push(item)));

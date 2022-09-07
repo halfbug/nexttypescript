@@ -21,6 +21,7 @@ export interface IStore {
   totalGroupShop?: number | undefined;
   currencyCode?: string;
   appTrialEnd?: Date | undefined;
+  allInventoryProducts?: IProduct[];
 }
 export interface ICampaign {
   id?: string | null | undefined;
