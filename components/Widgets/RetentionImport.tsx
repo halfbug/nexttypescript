@@ -68,7 +68,7 @@ const RetentionImport = ({
             <thead>
               <tr>
                 <th>Date</th>
-                <th> # of Groupshops Created</th>
+                <th> # Groupshops Created</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
@@ -161,7 +161,7 @@ const RetentionImport = ({
           <hr />
           <div className={styles.rt__importDate_box_row}>
             <h4>
-              # of Groupshops created
+              # Groupshops created
             </h4>
             <span>
               {groupshopsCreated}
