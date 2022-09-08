@@ -2106,6 +2106,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     width: fit-content;
   }
 
+  &_shopped{
+    @extend .p-2, .my-0, .shadow-sm, .bg-body, .rounded;
+  }
+
   &_cartProductText {
     font-family: "DM Sans";
     font-weight: 400;

@@ -420,7 +420,7 @@ const ProductDetail = ({
                   </h3>
                   {(product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center ">
-                      <p className="p-2 my-0 border border-danger rounded-3">
+                      <p className={styles.groupshop_shopped}>
                         {' '}
                         {/* <Icon /> */}
                         { product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
