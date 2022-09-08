@@ -441,7 +441,7 @@ const Cart = ({
                   className={['', styles.groupshop_cart_byChecking].join(' ')}
                 >
                   You agree to receive email updates about your order and rewards.
-                  We don’t sell or shareyour information. You can unsubscribe at any time.
+                  We don’t sell or share your information. You can unsubscribe at any time.
                   <br />
                   <br />
                   If you purchased any of these items at full price on
