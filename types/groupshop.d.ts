@@ -185,7 +185,12 @@ export interface IGroupshop {
 
   exipredShortLink?: string;
 
-  ownerOBProdcuts?: Product[];
+  ownerDeals?: Product[];
+
+  refferalDealsProducts?: DealProduct[]; // customer of normal GS
+
+  ownerDealsProducts?: DealProduct[]; // products of owner from OB popup
+
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;

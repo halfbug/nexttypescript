@@ -39,8 +39,8 @@ const OnBoardingAddProduct = ({ open }: any) => {
         ...gsctx,
         dealProducts: uniqueDealProducts,
         obSettings: { ...gsctx.obSettings, ...Data },
-        popularProducts: [...data, ...gsctx?.popularProducts!],
-        ownerOBProdcuts: [...data],
+        // popularProducts: [...data, ...gsctx?.popularProducts!],
+        ownerDeals: [...gsctx?.ownerDeals ?? [], ...data],
       },
     });
 

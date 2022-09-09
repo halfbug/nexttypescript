@@ -15,6 +15,7 @@ import useGtm from 'hooks/useGtm';
 import useAppContext from 'hooks/useAppContext';
 import useDeal from 'hooks/useDeal';
 import styles from 'styles/Groupshop.module.scss';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
   username: string;
@@ -53,6 +54,7 @@ export default function AddDealProduct({
   // get client IP
   const [clientIP] = useIP();
   const { isInfluencer } = useDeal();
+  const { uniqueArray } = useUtilityFunction();
   console.log('🚀 ~ file: ~ isInfluencer', isInfluencer);
 
   const { googleButtonCode } = useGtm();
@@ -162,7 +164,7 @@ export default function AddDealProduct({
       let influencerProducts;
       let partnerDetails;
       if (isInfluencer) {
-        influencerProducts = _.uniq([...gsctx?.store?.products?.filter(
+        influencerProducts = uniqueArray([...gsctx?.store?.products?.filter(
           ({ id: pid }:{ id:string}) => products?.includes(pid),
         ) || []]);
       }
@@ -183,7 +185,8 @@ export default function AddDealProduct({
           ) || [],
           ...gsctx?.popularProducts || []]),
           dealProducts,
-          addedProducts: [...dealProducts || []],
+          addedProducts: [...gsctx?.addedProducts ?? [], ...sdealProducts || []],
+          refferalDealsProducts: [...gsctx?.refferalDealsProducts ?? [], ...sdealProducts || []],
           partnerDetails: !isGroupshop && isInfluencer ? partnerDetails
             : gsctx?.partnerDetails ?? null,
           influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,

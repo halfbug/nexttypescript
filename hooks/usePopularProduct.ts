@@ -16,14 +16,7 @@ const usePopular = (products:IProduct[] | undefined) => {
     dispatch,
   } = useContext(GroupshopContext);
 
-  const { filterArray } = useUtilityFunction();
-  const {
-    members: [
-      {
-        products: ownerProducts,
-      },
-    ],
-  } = gsctx;
+  const { filterArray, uniqueArray } = useUtilityFunction();
 
   useEffect(() => {
     if (products) {
@@ -37,13 +30,13 @@ const usePopular = (products:IProduct[] | undefined) => {
         currencyCode: 'USD',
 
       };
-      const onlyAddProducts = filterArray(products ?? [], ownerProducts ?? [], 'id', 'id');
-      const onlyBoughtProducts = filterArray(products ?? [], onlyAddProducts ?? [], 'id', 'productId');
-      // const addedByFirstPopularPrds = [...products];
-      const addedByFirstPopularPrds = _.uniq([...onlyAddProducts, ...products]);
-      console.log('🚀 ~ file: usePopularProduct.ts ~ line 41 ~ useEffect ~ gsctx?.popularProducts', products);
-      console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyBoughtProducts', onlyBoughtProducts);
-      console.log('🚀 ~ file: usePopularProduct.ts ~ line 11 ~ usePopular ~ onlyAddProducts', onlyAddProducts);
+      // added product by refferal + bought products = popular products
+      const reffDealsPrd = gsctx?.store?.products?.filter(
+        (item) => gsctx?.refferalDealsProducts?.find((item2) => item.id === item2.productId),
+      );
+      console.log('🚀 ~ file: usePopularProduct.ts ~ line 37 ~ useEffect ~ reffDealsPrd', reffDealsPrd);
+      const addedByFirstPopularPrds: IProduct[] = uniqueArray([...reffDealsPrd ?? [], ...products]);
+      console.log('🚀 ~ file: usePopularProduct.ts ~ line 41 ~ useEffect === popular', uniqueArray([...reffDealsPrd ?? [], ...products]));
 
       // Insert AddProduct Tile after every 3 items of Popular Products
       const data = flatten(
@@ -51,11 +44,9 @@ const usePopular = (products:IProduct[] | undefined) => {
           section.length === ADD_EVERY ? [...section, ITEM_TO_ADD] : section
         )),
       );
-      console.log('🚀 ~ file: usePopularProduct.ts ~ line 34 ~ useEffect ~ data', data);
       setPopularShuffled(data);
     }
-  }, [products]);
-  // console.log({ popularShuffled });
+  }, [products, gsctx?.refferalDealsProducts]);
 
   return {
     popularShuffled,

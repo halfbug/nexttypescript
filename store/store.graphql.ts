@@ -401,14 +401,36 @@ query Groupshop($code: String!, $status: String = "") {
     url
     shortUrl
     exipredShortLink
+    ownerDeals{
+      id
+      title
+      featuredImage
+      description
+      purchaseCount
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+      orders{
+        product{
+          id
+        }
+        quantity
+        price
+      }
+    }
     milestones{
       discount
       activatedAt
     }
     bestSeller{
-      featuredImage
       id
       title
+      featuredImage
       description
       purchaseCount
       price
@@ -429,6 +451,18 @@ query Groupshop($code: String!, $status: String = "") {
        
     }
     dealProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    ownerDealsProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    refferalDealsProducts{
       productId
       customerIP
       addedBy
@@ -498,8 +532,8 @@ query Groupshop($code: String!, $status: String = "") {
     }
   popularProducts{
     id
-    featuredImage
     title
+    featuredImage
     description
     purchaseCount
     price
@@ -519,9 +553,9 @@ query Groupshop($code: String!, $status: String = "") {
     }
   }
   allProducts{
-    featuredImage
     id
     title
+    featuredImage
     description
     price
     currencyCode

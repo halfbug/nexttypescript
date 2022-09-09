@@ -107,6 +107,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
+  console.log('🚀 ~ file: [...code].tsx ~ line 110 ~ newPopularPrd', newPopularPrd);
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showExpiredModel, setShowExpiredModel] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
@@ -197,31 +198,20 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
-      // eslint-disable-next-line max-len
-      // const onlyBoughtnRefProducts = filterArray(popularProducts ?? [], addedProductsByInfluencer ?? [], 'id', 'id');
       if (popularProducts.length < 4) {
         // removing popular prd  and curated prd from topPicks so no duplication
-        const uniqueBestSeller = filterArray(
-          bestSeller as any[],
-          popularProducts as any[],
-          'id',
-          'id',
-        );
-        const uniqueBestSeller2 = filterArray(
-          uniqueBestSeller as any[],
-          gsctx?.influencerProducts as any[],
-          'id',
-          'id',
-        ).slice(0, 4 - popularProducts.length);
+        const finalTP1 = uniqueArray(filterArray(topPicks ?? [], popularProducts ?? [], 'id', 'id'));
+        const finalTP2 = uniqueArray(filterArray(finalTP1 ?? [], gsctx?.influencerProducts ?? [], 'id', 'id'));
         const newPopularArr = Array.from(
-          new Set([...(popularProducts ?? []), ...(uniqueBestSeller2 ?? [])]),
+          new Set([...(popularProducts ?? []),
+            ...(finalTP2.slice(0, 4 - popularProducts.length) ?? [])]),
         );
         setNewPopularPrd(_.uniq([...newPopularArr]));
       } else {
         setNewPopularPrd(_.uniq([...(popularProducts ?? [])]));
       }
     }
-  }, [popularProducts, bestSeller]);
+  }, [popularProducts, topPicks]);
 
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {
@@ -677,9 +667,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             // products={bestSeller ?? []}
               products={
               addedProductsByInfluencer
-              && (addedProductsByInfluencer.length > 3
+              && addedProductsByInfluencer.length > 3
                 ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4))
+                : topPicks?.slice(0, 4)
             }
               maxrows={1}
               addProducts={handleAddProduct}

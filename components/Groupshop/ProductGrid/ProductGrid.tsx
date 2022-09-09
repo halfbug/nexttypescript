@@ -195,7 +195,7 @@ const ProductGrid = ({
                         { addedBy, productId },
                       ) => {
                         const show = displayAddedByFunc(productId);
-                        let htmldata = show ? (
+                        let htmldata = true ? (
                           <span
                             className={styles.groupshop__pcard_tag_addedby}
                             key={`${productId}_${Math.random()}`}

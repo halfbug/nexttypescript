@@ -34,6 +34,8 @@ export const gsInit: IGroupshop = {
     },
     salesTarget: { id: '', rewards: [] },
   },
+  refferalDealsProducts: [],
+  ownerDealsProducts: [],
 };
 
 export const GroupshopContext = React.createContext<GSContextType>(

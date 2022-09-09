@@ -163,6 +163,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     popularProducts,
     dealProducts,
     addedProducts,
+    refferalDealsProducts,
     // allProducts,
   } = gsctx;
   const {
@@ -182,40 +183,32 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.dealProducts]);
+
   useEffect(() => {
     // show ob products with owner products. dont show ob prds with other customer
-
-    const ownerDP = dealProducts?.filter((item) => item.type === 'owner');
-    if (ownerDP && ownerDP.length && gsctx?.store?.products?.length) {
-      const ownerPrds: IProduct[] = _.uniq(findInArray(
-        dealProducts?.filter((item) => item.type === 'owner') ?? [] as any[],
-        gsctx?.store?.products as any[],
-        'productId',
-        'id',
-      ));
-      // .filter((item: IProduct | undefined) => item !== undefined))
-      console.log('🚀 ~ file: [...code].tsx ~ line 189 ~ searched ~ ownerPrds', ownerPrds);
-
+    if (gsctx?.ownerDeals && gsctx?.ownerDeals.length) {
       setshoppedBy(member?.orderId === gsctx?.members[0].orderId
-        ? uniqueArray([...member?.products ?? [], ...ownerPrds ?? []])
+        ? uniqueArray([...member?.products ?? [], ...gsctx?.ownerDeals ?? []])
         : uniqueArray([...member?.products ?? []]));
     } else {
-      setshoppedBy(member?.products);
+      setshoppedBy(uniqueArray(member?.products));
     }
-  }, [gsctx?.store?.products, gsctx.dealProducts]);
+  }, [gsctx?.ownerDeals, gsctx.dealProducts]);
 
   useEffect(() => {
-    const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
+    // const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
     // const addedPrds = dealProducts?.filter((item));
-    const addedPrdsCtx = filterArray(addedProducts ?? [], ownerProducts ?? [], 'productId', 'id');
+    // const addedPrdsCtx = filterArray(
+    //   addedProducts ?? [], ownerProducts ?? [], 'productId', 'id',
+    // );
     // check owner prodcut is added. member[0].product ===sDealPrd then move it into addedProducts
-    console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
+    // console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
     dispatch({
       type: 'UPDATE_GROUPSHOP',
       payload: {
         ...gsctx,
-        // addedProducts: _.uniq([...addedPrdsCtx || [], ...addedPrds || []]),
-        addedProducts: _.uniq([...addedPrds ?? [], ...addedProducts ?? []]),
+        addedProducts: _.uniq([...gsctx?.refferalDealsProducts ?? [],
+          ...gsctx?.ownerDealsProducts ?? []]),
       },
     });
   }, [dealProducts, popularProducts]);
@@ -224,18 +217,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
     if (popularProducts?.length) {
       if (popularProducts.length < 4) {
-        // removing popular prd from topPicks so no duplication
-        const uniqueBestSeller = filterArray(
-          topPicks as any[],
-          popularProducts as any[],
-          'id',
-          'id',
-        ).slice(0, 4 - popularProducts.length);
-        // console.log('🚀[...code].tsx topPicks', topPicks);
-        // console.log('🚀[...code].tsx popularProduct', popularProducts);
-        // console.log('🚀[...code].tsx uniqueBestSeller', uniqueBestSeller);
+        const finalTP = uniqueArray(filterArray(topPicks ?? [], popularProducts ?? [], 'id', 'id'));
+        const uniqueBestSeller = finalTP?.slice(0, 4 - popularProducts.length);
+        console.log('🚀 ~ file: [...code].tsx ~ uniqueBestSeller', uniqueBestSeller);
         const newPopularArr = Array.from(
-          new Set([...(popularProducts ?? []), ...(uniqueBestSeller ?? [])]),
+          new Set([...[...uniqueArray(popularProducts) ?? []], ...uniqueBestSeller ?? []]),
         );
         setNewPopularPrd([...newPopularArr]);
       } else {
@@ -652,7 +638,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous pruchases and recommendations.
           </p>
         </ProductGrid>
-        {SKU.length > 4 && (members?.length > 1 || addedProducts?.length ? (
+        {SKU.length > 4 && (members?.length > 1 || refferalDealsProducts?.length ? (
           <ProductGrid
             xs={6}
             sm={6}
