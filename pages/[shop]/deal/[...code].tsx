@@ -633,9 +633,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             Shop from
             {' '}
             {member?.orderDetail?.customer?.firstName ? member?.orderDetail?.customer?.firstName || '' : member?.orderDetail?.customer?.lastName ?? ''}
-            {' '}
             ’s
-            previous pruchases and recommendations.
+            previous purchases and recommendations.
           </p>
         </ProductGrid>
         {SKU.length > 4 && (members?.length > 1 || refferalDealsProducts?.length ? (
