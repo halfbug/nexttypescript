@@ -113,7 +113,7 @@ const InviteCustomerBox = ({
         contentClassName={styles.marketing_inviteCustomerBox_modal__content}
       >
         <Modal.Header className={styles.marketing_inviteCustomerBox_modal__closebtnlg}>
-          <Row onClick={handleClose}>
+          <Row onClick={handleClose} className="visually-hidden">
             <div><Cross /></div>
           </Row>
         </Modal.Header>
