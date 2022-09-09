@@ -9,6 +9,7 @@ import styles from 'styles/QrStoreDetails.module.scss';
 
 // import images
 import HeadLogo from 'assets/images/QRLogo.svg';
+import QR from 'assets/images/qr-screen-1.jpg';
 import QR2 from 'assets/images/qr-screen-2.png';
 import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import YR from 'assets/images/YR.png';
@@ -85,7 +86,7 @@ export default function QrStep2({ brandLogo }: IStep2Props) {
               <div className={styles.QRContainer__contentImage}>
                 <div className={styles.QRContainer__desktopImage}>
                   <Image
-                    src={QR2}
+                    src={QR}
                     alt="QR Right Screen"
                     width="100%"
                     height="100%"
