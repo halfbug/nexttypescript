@@ -8,17 +8,20 @@ import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCust
 import CreateGroupshopBox from 'components/Groupshop/InviteCustomerBox/CreateGroupshopBox';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { SYNC_STORE_CUSTOMERS, GET_STORE_DETAILS } from 'store/store.graphql';
-import { StoreContext } from 'store/store.context';
 import useAlert from 'hooks/useAlert';
 import moment from 'moment';
 
 interface RetentionInviteProps {
   handleAfterSubmit: any;
+  setshowRetentionImport: any;
   activeCampaign: string;
+  storeId: any;
 }
 
 export default function RetentionInvite({
   activeCampaign,
+  storeId,
+  setshowRetentionImport,
   handleAfterSubmit,
 } : RetentionInviteProps) {
   const [startDate, setStartDate] = useState('');
@@ -30,17 +33,16 @@ export default function RetentionInvite({
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
   const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
   const [listCustomers, setListCustomers] = useState<any>([]);
-  const { store, dispatch } = React.useContext(StoreContext);
   const { AlertComponent, showError, showSuccess } = useAlert();
   const syncCustomers = () => {
     setsyncLoading(true);
-    syncStoreCustomers({ variables: { storeId: store.id } });
+    syncStoreCustomers({ variables: { storeId } });
   };
 
   const {
     data: storeData, refetch: storeRefresh,
   } = useQuery(GET_STORE_DETAILS, {
-    variables: { id: store.id },
+    variables: { id: storeId },
   });
 
   useEffect(() => {
@@ -53,6 +55,7 @@ export default function RetentionInvite({
   }, [storeData]);
 
   const createCampaignList = () => {
+    setshowRetentionImport(false);
     if (activeCampaign === '') {
       showError('Please active/create the campaign first!');
     } else {
@@ -75,6 +78,9 @@ export default function RetentionInvite({
 
   const handleInnerSubmit = () => {
     handleAfterSubmit();
+    setStartDate('');
+    setEndDate('');
+    setMinOrderValue('');
   };
 
   return (
@@ -165,6 +171,7 @@ export default function RetentionInvite({
         endDate={endDate}
         minOrderValue={minOrderValue}
         show={showCreateGroupshopPopup}
+        showCreateBtn
         listCustomers={listCustomers}
         setShowInvitePopup={setShowInvitePopup}
         setCreateGroupshopPopup={setCreateGroupshopPopup}

@@ -44,7 +44,6 @@ const InviteCustomerBox = ({
   };
   const [groupshopLength, setgroupshopLength] = useState(0);
   const { store, dispatch } = React.useContext(StoreContext);
-  // const [loading, setLoading] = React.useState<boolean>(false);
   const { AlertComponent, showError, showSuccess } = useAlert();
 
   const changeDate = (value:any, field:any) => {

@@ -12,6 +12,7 @@ export default function RetentionTools() {
   const { store, dispatch } = useContext(StoreContext);
   const [retentionList, setRetentionList] = useState<[]>([]);
   const [activeCampaign, setActiveCampaign] = useState('');
+  const [showRetentionImport, setshowRetentionImport] = useState(false);
 
   // Get active campaign
   const {
@@ -46,8 +47,10 @@ export default function RetentionTools() {
       <Row>
         <Col>
           <RetentionInvite
+            storeId={store.id}
             handleAfterSubmit={handleAfterSubmit}
             activeCampaign={activeCampaign}
+            setshowRetentionImport={setshowRetentionImport}
           />
         </Col>
       </Row>
@@ -61,6 +64,8 @@ export default function RetentionTools() {
             xl={12}
             currencyCode={store?.currencyCode ?? 'USD'}
             retentionList={retentionList}
+            showRetentionImport={showRetentionImport}
+            setshowRetentionImport={setshowRetentionImport}
           />
         </Col>
       </Row>
