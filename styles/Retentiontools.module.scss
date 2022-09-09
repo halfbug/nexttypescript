@@ -13,7 +13,6 @@
             font-weight: 700;
             font-size: $size-16px;
             line-height: 21px;
-
         }
         h4 {
             @extend .mt-3, .mb-1;
@@ -21,18 +20,18 @@
             font-size: $size-14px;
             line-height: 18px;
         }
-        span{
+        span {
             font-weight: $font-weight-light;
             font-size: $size-14px;
             line-height: 18px;
             color: $subheadingclr;
             opacity: 0.5;
         }
-        &_btn{
+        &_btn {
             @extend .mt-2;
-            button{
+            button {
                 @extend .py-0;
-                height: 28px;   
+                height: 28px;
             }
         }
     }
@@ -47,16 +46,14 @@
             font-weight: 700;
             font-size: $size-16px;
             line-height: 21px;
-
         }
-        span{
+        span {
             font-weight: $font-weight-light;
             font-size: $size-14px;
             line-height: 18px;
             color: $subheadingclr;
             opacity: 0.5;
         }
-
     }
 
     &__importCustomer_box {
@@ -69,9 +66,8 @@
             font-weight: 700;
             font-size: $size-16px;
             line-height: 21px;
-
         }
-        span{
+        span {
             font-weight: $font-weight-light;
             font-size: $size-14px;
             line-height: 18px;
@@ -90,47 +86,42 @@
             font-weight: 700;
             font-size: $size-16px;
             line-height: 18px;
-
         }
         h4 {
             font-weight: 700;
             font-size: $size-14px;
             line-height: 18px;
         }
-        span{
+        span {
             font-weight: $font-weight-light;
             font-size: $size-14px;
             line-height: 18px;
         }
 
-        &_header{
+        &_header {
             display: flex;
             justify-content: space-between;
         }
 
-        hr{
+        hr {
             @extend .mt-0, .mb-3;
             opacity: 0.08;
         }
 
-        &_row{
+        &_row {
             @extend .d-flex, .my-2;
             justify-content: space-between;
         }
     }
     &__table_head {
-        margin-top: 20px;
-        display: grid;
-        grid-template-columns: 1.5fr 2.5fr 1.5fr;
-        padding-left: 17px;
-        padding-right: 16px;
+        @extend .d-flex, .justify-content-around;
         &__txt {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
-            opacity: 0.6;
+            opacity: 0.4;
         }
     }
     &__acc1 {
@@ -148,7 +139,7 @@
             padding-right: 16px;
             &::after {
                 transform: rotate(270deg);
-              }
+            }
         }
 
         &__row {
@@ -157,12 +148,12 @@
 
             &__date {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 700;
                 line-height: 15px;
                 font-size: 12px;
                 text-align: center;
-                background: #DCD0E8;
+                background: #dcd0e8;
                 border-radius: 6px;
                 padding: 5px 13px;
                 width: fit-content;
@@ -171,5 +162,63 @@
                 width: fit-content;
             }
         }
+    }
+    &_table_row {
+        table {
+            border-collapse: separate;
+            border-spacing: 0 15px;
+          }
+          
+          th {
+            background-color: #4287f5;
+            color: white;
+          }
+          
+          th,
+          td {
+            width: 150px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+          }
+
+        // border: none;
+        &__data_row {
+            display: flexbox;
+             font-weight: $font-weight-normal;
+             font-size: $font-size-small-medium;
+             color: $black;
+             background: $comp_bg;
+             height: $height-large;
+             border-radius: $border-radius-large;
+             margin-bottom: 10px;
+            .table{
+                tr{
+            td:first-child {
+                border-top-left-radius: 23px!important; 
+                border-bottom-left-radius: 23px;
+            }
+            td:last-child {
+                border-bottom-right-radius: 23px; 
+                border-top-right-radius: 23px; 
+            }}
+        }
+            &:hover {
+                background: $lightClassic;
+                border-radius: $border-radius-large;
+            }
+            &:active {
+                background-color: $lightClassic;
+                border-radius: $border-radius-large;
+            }
+
+           
+        }
+        &__tag1 {
+            @extend .d-flex, .justify-content-start, .align-items-center;
+           border-radius: $border-radius-light;
+           background: #DCD0E8!important;
+           width: fit-content;
+       }
     }
 }

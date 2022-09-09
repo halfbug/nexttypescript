@@ -64,27 +64,32 @@ const RetentionImport = ({
     <>
       <Row ref={ref}>
         <Col xs={12} lg={12}>
-          <Table striped hover>
-            <thead>
+          <Table borderless responsive>
+            <thead className={styles.rt__table_head__txt}>
               <tr>
                 <th>Date</th>
                 <th> # Groupshops Created</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="border-0 d-">
               {renderItems?.map((part: any, index: number) => (
-                <tr>
-                  <td>{moment(new Date(part.createdAt)).format('MM/DD/YY')}</td>
-                  <td>{part.groupshopsCreated}</td>
+                <tr className={[styles.rt_table_row__data_row, 'd-table-row border-0 mb-2'].join(' ')}>
+                  <td>
+                    <div className={[styles.rt_table_row__data_row__tag1, ''].join(' ')}>
+                      {moment(new Date(part.createdAt)).format('MM/DD/YY')}
+
+                    </div>
+                  </td>
+                  <td className="">{part.groupshopsCreated}</td>
                   <td>
                     <ArrowRightLogo
+                      className=""
                       onClick={() => {
                         handleRetention(part.id);
                       }}
                     />
                   </td>
-
                 </tr>
               ))}
             </tbody>
