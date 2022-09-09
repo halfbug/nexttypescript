@@ -18,7 +18,7 @@ import Icon from 'assets/images/small-cone.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
-import useSaveCart from 'hooks/useSaveCart';
+// import useSaveCart from 'hooks/useSaveCart';
 import useAppContext from 'hooks/useAppContext';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
@@ -80,9 +80,9 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   const { push } = useRouter();
-  const { emptyCart } = useSaveCart();
+  // const { emptyCart } = useSaveCart();
   const handleCheckout = () => {
-    emptyCart();
+    // emptyCart();
     setLoading(true);
     checkoutButtonClick(cartProducts.map((prd) => ({
       productId: prd.id.split('/')[4],
