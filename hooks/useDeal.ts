@@ -321,8 +321,8 @@ export default function useDeal() {
     (item: any) => !dealProducts?.some((item2) => item2.productId === item.id),
   );
   const getOwnerName = useCallback(() => (
-    isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname?.charAt(0) ?? ''}`)
-      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName} ${gsctx?.members[0].orderDetail.customer.lastName.charAt(0)}`)), [gsctx]);
+    isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
+      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.lastName.charAt(0) : gsctx?.members[0].orderDetail.customer.lastName}`)), [gsctx]);
   const socialText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   const nativeShareText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   return {

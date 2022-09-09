@@ -144,6 +144,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     topFive,
     shortActivateURL,
     leftOverProducts,
+    getOwnerName,
   } = useDeal();
   const {
     days, hrs, mins, secs,
@@ -591,7 +592,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             SHOPPED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {member?.orderDetail?.customer.firstName}
+              {getOwnerName()}
+              {/* {member?.orderDetail?.customer.firstName
+                ? `${member.orderDetail.customer.firstName}`
+                : `${member?.orderDetail.customer.lastName}`} */}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
@@ -615,8 +619,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
                       <Dropdown.Item onClick={() => setmember(mem)}>
                         {index === 0 && '👑 '}
-                        {`${mem.orderDetail.customer.firstName
-                        } ${mem.orderDetail?.customer?.lastName?.charAt(0) || ''
+                        {`${mem.orderDetail.customer.firstName ?? ''
+                        } ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
                         }`}
 
                       </Dropdown.Item>
