@@ -1180,7 +1180,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     button {
       color: #ffffff;
-      background-color: #171717;
+      background-color: #000000;
       font-family: "DM Sans";
       font-style: normal;
       font-weight: 700;
@@ -1189,6 +1189,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       letter-spacing: 0.32px;
       text-transform: uppercase;
       background-image: none;
+
+      &:hover {
+        background-image: none !important;
+        background: #000000;
+    
+      }
     }
   }
 
@@ -1318,7 +1324,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         margin-left: 0.5rem;
         &_fill {
           @extend .groupshop_modal_search_meter;
-          background-color: #ff8f78;
+          background-color: #000000;
         }
       }
     }

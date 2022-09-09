@@ -65,7 +65,7 @@ const OnBoardTimeToShine = ({ open }: Props) => {
         show={show}
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
-        centeredv
+        centered
         backdrop="static"
         dialogClassName={styles.timeToShine__modal}
         contentClassName={styles.timeToShine__modal__content}
@@ -162,12 +162,12 @@ const OnBoardTimeToShine = ({ open }: Props) => {
             >
               Start Earning
             </Button>
-            <Button
+            {/* <Button
               className={styles.timeToShine__modal__body__btnMobile}
               onClick={moveForward}
             >
               Start Earning
-            </Button>
+            </Button> */}
           </div>
         </Modal.Body>
 

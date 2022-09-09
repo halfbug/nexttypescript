@@ -29,7 +29,7 @@ export default function QrStep2({ brandLogo }: IStep2Props) {
       <div className={styles.QRContainer}>
         <Container fluid className="p-0">
           <Row>
-            <Col md={6}>
+            <Col md={7}>
               <div className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
@@ -81,7 +81,7 @@ export default function QrStep2({ brandLogo }: IStep2Props) {
                 </div>
               </div>
             </Col>
-            <Col md={6} className="p-0">
+            <Col md={5} className="p-0">
               <div className={styles.QRContainer__contentImage}>
                 <div className={styles.QRContainer__desktopImage}>
                   <Image

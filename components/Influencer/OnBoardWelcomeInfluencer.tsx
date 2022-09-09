@@ -172,12 +172,12 @@ const OBWelcomeInfluencer = ({
               Customize Groupshop
             </Button>
 
-            <Button
+            {/* <Button
               className={styles.welcome__modal__body__btnMobile}
               onClick={handleNext}
             >
               Customize Groupshop
-            </Button>
+            </Button> */}
           </div>
           {/* <div className={styles.welcome__modal__body__btnskip}
           onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>

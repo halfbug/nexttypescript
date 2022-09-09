@@ -98,13 +98,15 @@
             }
 
             &__btn {
-                @extend .px-5, .py-1;
+                @extend .px-3, .py-2;
                 width: fit-content;
-                height: 42.96px;
                 box-shadow: none !important;
-                @media (max-width: 750px) { 
-                    display: none;
-                }
+                border: 1px solid #000000 !important;
+                background: #000000;
+                color: #ffffff;
+                // @media (max-width: 750px) { 
+                //     display: none;
+                // }
             }
 
             &__btnMobile {
@@ -366,10 +368,8 @@
 
     @media (max-width: 475px) {
         &__modal {
-            //min-width: 100%;
-            width: auto;
-            bottom: 0;
             margin: 0;
+            height: 100%;
 
             &__content {
                 border-radius: 12px 12px 0px 0px;
@@ -541,7 +541,6 @@
 
                 &__btnMobile {
                     padding: 0px 20px;
-                    height: 42.96px;
                     box-shadow: none !important;
                     display: block;
                     background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
@@ -577,10 +576,17 @@
 
 .reward {
     &__modal {
-        min-width: 745px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        height: 100%;
+        max-width: 600px;
 
         &__content {
             border-radius: 12px;
+            max-height: 95vh;
+            overflow: auto;
         }
 
         &__imgBox {
@@ -588,8 +594,7 @@
         }
 
         &__body {
-            padding: 0 129px;
-            margin-bottom: 40px;
+            padding: 0 4rem 2rem 4rem;
 
             &__infoMobile {
                 display: none;
@@ -636,9 +641,11 @@
             }
 
             &__btn {
-                width: 172px;
-                height: 42px;
+                @extend .px-3, .py-2;
                 box-shadow: none !important;
+                border: 1px solid #000000 !important;
+                background: #000000;
+                color: #ffffff;
             }
 
             &__btnMobile {
@@ -810,16 +817,7 @@
 
     @media (max-width: 750px) {
         &__modal {
-            min-width: 100%;
-            margin: 0;
-            margin-top: 50px;
-
-            &__body {
-                padding: 0 50px;
-                margin-bottom: 52px;
-                text-align: center;
-
-            }
+            align-items: flex-end;
         }
     }
 
@@ -1014,24 +1012,21 @@
                     display: none;
                 }
 
-                &__btn {
-                    display: none;
-                }
 
-                &__btnMobile {
-                    width: 172px;
-                    height: 42.96px;
-                    box-shadow: none !important;
-                    display: block;
-                    background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
-                    color: #FFFFFF;
-                    font-family: 'DM Sans';
-                    font-weight: 500;
-                    font-size: 14px;
-                    line-height: 15px;
-                    text-transform: capitalize;
-                    border: none !important;
-                }
+
+                // &__btnMobile {
+                //     width: 172px;
+                //     box-shadow: none !important;
+                //     display: block;
+                //     background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
+                //     color: #FFFFFF;
+                //     font-family: 'DM Sans';
+                //     font-weight: 500;
+                //     font-size: 14px;
+                //     line-height: 15px;
+                //     text-transform: capitalize;
+                //     border: none !important;
+                // }
 
                 &__btnskip {
                     display: none;
@@ -1054,9 +1049,6 @@
 
 .timeToShine {
     &__modal {
-        min-width: 660px;
-        margin-top: 80px !important;
-
         &__content {
             border-radius: 12px;
         }
@@ -1066,9 +1058,8 @@
         }
 
         &__body {
-            padding: 47px 70px;
+            padding: 2rem;
             text-align: center;
-            margin-bottom: 35px !important;
 
             &__mainicon {
                 margin-top: 40px;
@@ -1189,20 +1180,18 @@
             }
 
             &__btn {
-                margin-top: 12px;
                 padding: 14px 37px;
                 box-shadow: none !important;
                 font-weight: 500 !important;
                 font-size: 14px;
                 line-height: 15px;
                 font-family: 'DM Sans';
+                border: 1px solid #000000 !important;
+                background: #000000;
+                color: #ffffff;
             }
 
             &__btnskipMobie {
-                display: none;
-            }
-
-            &__btnMobile {
                 display: none;
             }
 
@@ -1218,13 +1207,8 @@
 
     @media (max-width: 670px) {
         &__modal {
-            min-width: 100%;
-            margin: 0;
-            margin-top: 50px;
-
             &__body {
                 padding: 0 50px;
-                margin-bottom: 52px;
                 text-align: center;
 
                 &__description2 {
@@ -1240,9 +1224,6 @@
 
     @media (max-width: 500px) {
         &__modal {
-            min-width: 100%;
-            margin: 0;
-            margin-top: 50px;
 
             &__imgBox {
                 display: none;
@@ -1262,7 +1243,6 @@
 
             &__body {
                 padding: 0;
-                margin-bottom: 52px;
                 text-align: center;
 
                 &__mainicon {
@@ -1381,13 +1361,9 @@
                     }
                 }
 
-                &__btn {
-                    display: none;
-                }
 
                 &__btnMobile {
                     width: 172px;
-                    height: 42.96px;
                     box-shadow: none !important;
                     display: block;
                     background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
@@ -1566,7 +1542,6 @@
 
             &__btn {
                 width: 192px;
-                height: 42.96px;
                 box-shadow: none !important;
             }
 

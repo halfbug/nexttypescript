@@ -140,8 +140,11 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             {' '}
             order.
           </div>
-          <div className={[styles.reward__modal__body__box1, styles.reward__modal__body__description2, 'd-lg-block d-none'].join(' ')}>
-            <p className={[styles.reward__modal__body__description, styles.reward__modal__body__description2].join(' ')}>
+          {/* <div className={[styles.reward__modal__body__box1, styles.reward__modal__
+          body__description2,
+          'd-lg-block d-none'].join(' ')}>
+            <p className={[styles.reward__modal__body__description, styles.reward__
+              modal__body__description2].join(' ')}>
               After you’ve earned 100% of your order in cashback, you’ll
               <strong>
                 {' '}
@@ -155,7 +158,7 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
               </strong>
               made on your Groupshop.
             </p>
-          </div>
+          </div> */}
 
           <div className={styles.reward__modal__body__iconsRowdollar}>
             🤑 🤑 🤑
@@ -261,12 +264,12 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
             >
               Customize
             </Button>
-            <Button
+            {/* <Button
               className={styles.reward__modal__body__btnMobile}
               onClick={handleSubmit}
             >
               Customize
-            </Button>
+            </Button> */}
           </div>
           <div className={styles.reward__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
             Skip for now

@@ -228,12 +228,12 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               Get Started
             </Button>
 
-            <Button
+            {/* <Button
               className={styles.welcome__modal__body__btnMobile}
               onClick={moveForward}
             >
               Get Started
-            </Button>
+            </Button> */}
           </div>
           <div className={styles.welcome__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
             Skip and shop
