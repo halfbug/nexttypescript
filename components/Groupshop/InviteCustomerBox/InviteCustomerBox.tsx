@@ -185,7 +185,7 @@ const InviteCustomerBox = ({
                 </Col>
               </Row>
               <WhiteButton
-                className={styles.marketing_inviteCustomerBox_modal__btn}
+                className={styles.marketing_inviteCustomerBox_modal__btn_btnClear}
                 onClick={clearDateRange}
               >
                 Clear dates
@@ -234,7 +234,8 @@ const InviteCustomerBox = ({
             <Col lg={12}>
               <div className={styles.marketing_inviteCustomerBox_modal__btnSection}>
                 <WhiteButton
-                  className={styles.marketing_inviteCustomerBox_modal__btn}
+                  className={[styles.marketing_inviteCustomerBox_modal__btn, '']
+                    .join(' ')}
                   onClick={handleClose}
                 >
                   Close

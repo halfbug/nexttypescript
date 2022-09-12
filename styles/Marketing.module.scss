@@ -308,6 +308,7 @@
             margin-top: 26px;
         }
         &__btn,
+        
         &__purpleBtn{
             @extend .mt-2, .px-3, .py-1;
             border-radius: 6px;
@@ -326,12 +327,22 @@
         &__btn{
             background-color: $white;
             font-weight: $font-weight-light;
+            width:117px;
+            &_btnClear{
+                margin-top: 8px;
+                font-weight: $font-weight-light;
+                width:89px;
+                background: $white;
+                border: 1px solid $black;
+                border-radius: 6px;
+              }
         }
         &__purpleBtn{
             background-color:$classic;
             font-weight: $font-weight-normal;
             margin-left: 16px;
         }
+    
         &__input{
             width: 80px;
             &:focus,
