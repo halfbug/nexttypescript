@@ -70,7 +70,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
-  const { SKU, memberProducts } = useSKU();
+  const { SKU, memberProducts, hideSection } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
@@ -691,7 +691,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </ProductGrid>
         ))}
 
-        {SKU.length > 1 ? (
+        {!hideSection && SKU.length > 1 ? (
           <ProductGrid
             xs={6}
             sm={6}
