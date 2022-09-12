@@ -27,7 +27,7 @@ export const gsInit: IGroupshop = {
   },
   milestones: [],
   store: { brandName: '', products: [], logoImage: '' },
-  cart: [],
+  cart: undefined,
   campaign: {
     socialLinks: {
       facebook: '', instagram: '', tiktok: '', twitter: '',

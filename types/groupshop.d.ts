@@ -156,7 +156,7 @@ export interface IGroupshop {
 
   allProducts?: Product[];
 
-  cart?: CartProduct[];
+  cart?: CartProduct[] | undefined ;
 
   bestSeller?: Product[];
 

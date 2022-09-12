@@ -24,7 +24,8 @@ const useSaveCart = () => {
   const { cart, id } = gsctx;
 
   useEffect(() => {
-    if (cart && cart?.length) { setStorage(cart); }
+    if (cart) { setStorage(cart); }
+
     // console.log('🚀 ~ file: useSaveCart.ts ~ line 29 ~ useEffect ~ cart?.length', cart?.length);
   }, [cart, discountCode]);
 

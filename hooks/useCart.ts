@@ -29,7 +29,7 @@ export default function useCart() {
     return true;
   }, [gsctx.cart]);
 
-  const cartProducts = gsctx?.cart || [];
+  const cartProducts = gsctx?.cart ?? [];
 
   const removeProduct = useCallback((pid : string) => {
     dispatch({ type: 'UPDATE_CART', payload: { ...gsctx, cart: [...gsctx.cart?.filter((prd) => prd.selectedVariant.id !== pid) || []] } });
