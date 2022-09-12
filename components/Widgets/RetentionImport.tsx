@@ -198,7 +198,7 @@ const RetentionImport = ({
             <hr />
             <div className={styles.rt__importDate_box_row}>
               <h4>
-                # Groupshops created
+                # of Groupshops created
               </h4>
               <span>
                 {groupshopsCreated}
