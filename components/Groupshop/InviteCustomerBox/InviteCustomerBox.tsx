@@ -162,7 +162,7 @@ const InviteCustomerBox = ({
                     onChange={(sdate:any) => changeDate(sdate, 'start')}
                   />
                 </Col>
-                <Col lg={6}>
+                <Col lg={6} className="pe-5">
                   <span className={styles.marketing_inviteCustomerBox_modal__label}>
                     End Date
                   </span>
@@ -191,7 +191,7 @@ const InviteCustomerBox = ({
                 Clear dates
               </WhiteButton>
             </Col>
-            <Col lg={6}>
+            <Col lg={6} className="ps-5">
               <h4>Filter by order value:</h4>
               <div>
                 <span className={styles.marketing_inviteCustomerBox_modal__label}>
