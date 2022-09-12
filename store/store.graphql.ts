@@ -976,6 +976,7 @@ query getActiveGroupshops($email: String!) {
   getActiveGroupshops(email: $email) {
     name
     groupshops{
+      url
       members {
         role
       }

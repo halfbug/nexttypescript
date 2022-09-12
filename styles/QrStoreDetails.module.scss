@@ -95,7 +95,7 @@
 
   &__content__container {
     // padding-top: 60px !important;
-    padding: 0 20px!important;
+    padding: 67px 20px 0 20px !important;
 
     @media (max-width:991px) {
         padding-top: 30px !important;
@@ -223,7 +223,7 @@
     }
 
     .activeGroupshops{
-      height: 360px;
+      height: 320px;
       overflow: auto;
 
       &::-webkit-scrollbar {

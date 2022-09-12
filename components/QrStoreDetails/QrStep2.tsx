@@ -15,6 +15,7 @@ import Pinterest from 'assets/images/pinterest-with-border.svg';
 import Twitter from 'assets/images/twitter-with-border.svg';
 import Facebook from 'assets/images/facebook-with-border.svg';
 import Arrow from 'assets/images/Arrow.svg';
+import Link from 'next/link';
 
 // import shared component
 
@@ -61,32 +62,34 @@ export default function QrStep2(
                   <div className={styles.activeGroupshops}>
                     {
                       activeGroupshops.length && activeGroupshops.map((gs: any) => (
-                        <div className={styles.cardItem}>
-                          <div className={styles.cardImg}>
-                            <img src={gs?.shop?.logoImage} style={{ width: 100 }} alt="Brand Logo" />
-                          </div>
-                          <div className={styles.cardDetail}>
-                            <h2>
-                              {gs?.shop?.brandName}
-                              <Arrow />
-                            </h2>
-                            <div className={styles.BtnGroup}>
-                              <button type="button" className={styles.cashbackBtn}>$38 cashback</button>
-                              <button type="button" className={styles.friendBtn}>
-                                ✨
-                                `
-                                {gs?.groupshops[0]?.members.filter((m: any) => m.role === 'referral').length}
-                                ` friends joined
-                              </button>
+                        <Link
+                          href={gs?.groupshops[0]?.url ? gs?.groupshops[0]?.url : ''}
+                        >
+                          <a target="_blank" className={styles.cardItem}>
+                            <div className={styles.cardImg}>
+                              <img src={gs?.shop?.logoImage} style={{ width: 100 }} alt="Brand Logo" />
                             </div>
-                          </div>
-                          <div className={styles.order}>
-                            <p>
-                              <span>Order #</span>
-                              <span>{gs.name.replace('#', '')}</span>
-                            </p>
-                          </div>
-                        </div>
+                            <div className={styles.cardDetail}>
+                              <h2>
+                                {gs?.shop?.brandName}
+                                <Arrow />
+                              </h2>
+                              <div className={styles.BtnGroup}>
+                                <button type="button" className={styles.cashbackBtn}>$38 cashback</button>
+                                <button type="button" className={styles.friendBtn}>
+                                  ✨
+                                  {` ${gs?.groupshops[0]?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
+                                </button>
+                              </div>
+                            </div>
+                            <div className={styles.order}>
+                              <p>
+                                <span>Order #</span>
+                                <span>{gs.name.replace('#', '')}</span>
+                              </p>
+                            </div>
+                          </a>
+                        </Link>
                       ))
                     }
                   </div>

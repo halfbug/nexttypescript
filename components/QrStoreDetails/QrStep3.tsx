@@ -55,7 +55,7 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
                         <strong>Haven’t shopped on a Groupshop brand yet? </strong>
                         <br />
                         Check-out all the brands you’re eligible to
-                        earn 100% cashback on your order with
+                        earn 100% cashback on your order with &nbsp;
                         <strong className={`${styles['QRContainer__content'
                           + '__congrats__cursorpointer']}`}
                         >
