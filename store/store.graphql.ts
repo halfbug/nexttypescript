@@ -800,8 +800,8 @@ query ACTIVE_STORES {
 `;
 
 const GET_QR_DEAL = gql`
-query GetQrDealLink($email: String!, $ordernumber: String!) {
-  getQrDealLink(email: $email, ordernumber: $ordernumber) {    
+query GetQrDealLink($email: String!) {
+  getQrDealLink(email: $email) {    
     url, brandname
   }
 }
@@ -971,6 +971,22 @@ query getActiveGroupshop($storeId: String!) {
 }
 `;
 
+const GET_ACTIVE_GROUPSHOPS_BY_EMAIL = gql`
+query getActiveGroupshops($email: String!) {
+  getActiveGroupshops(email: $email) {
+    name
+    groupshops{
+      members {
+        role
+      }
+    }
+    shop {
+      logoImage
+      brandName
+    }
+  }
+}
+`;
 const GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER = gql`
 query getUniqueCampaignClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
   getUniqueCampaignClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
@@ -1305,5 +1321,5 @@ export {
   GET_CAMPAIGN_METRICS, GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER,
   GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, GET_PARTNER_GROUPSHOP, ADD_DEAL_PRODUCT_PARTNER,
   GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
-  CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
+  CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS, GET_ACTIVE_GROUPSHOPS_BY_EMAIL
 };

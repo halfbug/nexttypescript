@@ -10,8 +10,12 @@ const QrCode: NextPage = () => {
   const [showStep1, setShowStep1] = useState(true);
   const [showStep2, setShowStep2] = useState(false);
   const [showStep3, setShowStep3] = useState(false);
+  // eslint-disable-next-line
   const [dealLink, setdealLink] = useState('');
+  // eslint-disable-next-line
   const [brandLogo, setbrandLogo] = useState('');
+  const [activeGroupshops, setactiveGroupshops] = useState([]);
+  const [email, setEmail] = useState('');
 
   return (
     <>
@@ -33,11 +37,16 @@ const QrCode: NextPage = () => {
           setShowStep1={setShowStep1}
           setShowStep2={setShowStep2}
           setShowStep3={setShowStep3}
-          setdealLink={setdealLink}
-          setbrandLogo={setbrandLogo}
+          setactiveGroupshops={setactiveGroupshops}
+          setEmail={setEmail}
         />
       )}
-      {showStep2 && <QrStep2 brandLogo={brandLogo} />}
+      {showStep2 && (
+        <QrStep2
+          activeGroupshops={activeGroupshops}
+          email={email}
+        />
+      )}
       {showStep3 && <QrStep3 dealLink={dealLink} brandLogo={brandLogo} />}
     </>
   );

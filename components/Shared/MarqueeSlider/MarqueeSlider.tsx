@@ -11,6 +11,9 @@ const MarqueeSlider = () => (
  // @ts-ignore */}
     <marquee width="100%" direction="left">
       <p>
+        <span className="px-3">
+          •
+        </span>
         shop with friends, get up to 90% cashback
         <span className="px-3">
           •

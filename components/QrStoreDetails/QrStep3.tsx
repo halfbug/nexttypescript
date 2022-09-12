@@ -7,15 +7,14 @@ import styles from 'styles/QrStoreDetails.module.scss';
 // import images
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.jpg';
-import QR2 from 'assets/images/qr-screen-2.png';
 import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
 import YR from 'assets/images/YR.png';
 import Instagram from 'assets/images/instagram-with-border.svg';
 import Pinterest from 'assets/images/pinterest-with-border.svg';
 import Twitter from 'assets/images/twitter-with-border.svg';
 import Facebook from 'assets/images/facebook-with-border.svg';
+import Smile from 'assets/images/smile.svg';
 import { Container, Row, Col } from 'react-bootstrap';
-import Cone from 'assets/images/small-cone.svg';
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
 
@@ -30,51 +29,47 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
       <div className={styles.QRContainer}>
         <Container fluid>
           <Row>
-            <Col md={7}>
+            <Col md={6} sm={12} className="p-0">
               <div className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
                 </div>
-                <div className={styles.QRContainer__YR__mobileLogo}>
-                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
-                </div>
-                {/* <div className={styles.QRContainer__mobileImage}>
+                {/* <div className={styles.QRContainer__YR__mobileLogo}>
                   <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
                 </div> */}
+                <div className={styles.QRContainer__mobileImage}>
+                  <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
+                </div>
                 <div className={styles.QRContainer__content__container}>
-                  <div className={styles.QRContainer__content__congrats}>
-                    <div className={styles.QRContainer__YR__Logo}>
-                      <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
-                    </div>
-                    <h2>
-                      {' '}
-                      <Cone height="25" width="25" />
-                      Congrats, your Groupshop store is live!
-
-                    </h2>
-                    <p className="mt-3 mb-2">
-                      <strong>Access exclusive discounts and share the link</strong>
-                      {' '}
-                      to your store with friends and followers to
-                      {' '}
-                      <strong>get up to 100%  cashback </strong>
-                      on your recent order whenever they shop on your
-                      Groupshop.
-                    </p>
-                    <div className={[' mb-3', styles.QRContainer__btn__goToStore].join(' ')}>
-                      <a target="_blank" href={dealLink} rel="noreferrer">
-                        Go to my Groupshop
-                      </a>
+                  <div className={styles.QRContainer__content__congratswrapper3}>
+                    <div className={styles.QRContainer__content__congrats}>
+                      <div className={styles.QRContainer__YR__Logo}>
+                        <Smile />
+                        <Smile />
+                        <Smile />
+                      </div>
+                      <h2>
+                        We couldn’t locate a Groupshop with this email!
+                      </h2>
+                      <p className="mt-3 mb-2">
+                        <strong>Haven’t shopped on a Groupshop brand yet? </strong>
+                        <br />
+                        Check-out all the brands you’re eligible to
+                        earn 100% cashback on your order with
+                        <strong className={`${styles['QRContainer__content'
+                          + '__congrats__cursorpointer']}`}
+                        >
+                          here.
+                        </strong>
+                      </p>
                     </div>
                   </div>
-                  <div className={[' mt-5 pt-5', styles.QRContainer__bottom__content].join(' ')}>
+                  <div className={['', styles.QRContainer__bottom__content].join(' ')}>
                     <hr />
-                    <p>
+                    <p className={styles.question}>
                       Have Questions?
-                      {' '}
                       <a href="/">Peep our FAQ</a>
                     </p>
-
                     <div className={styles.QRContainer__social__media}>
                       <div className={styles.QRContainer__social__icons}>
                         <Instagram />
@@ -85,7 +80,6 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
                       <div className={styles.QRContainer__link}>
                         <p>
                           Go to
-                          {' '}
                           <a href="/">groupshop.com</a>
                         </p>
                       </div>
@@ -94,18 +88,9 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
                 </div>
               </div>
             </Col>
-            <Col md={5} className="p-0">
-              <div className={styles.QRContainer__contentImage}>
-                <div className={styles.QRContainer__desktopImage}>
-                  <Image
-                    src={QR}
-                    alt="QR Right Screen"
-                    width="100%"
-                    height="100%"
-                    layout="responsive"
-                    className={styles.QRContainer__fit__imageQR3}
-                  />
-                </div>
+            <Col md={6} sm={12} className="p-0">
+              <div className={styles.QRContainer__desktopImage}>
+                <img src={QR.src} alt="QRImage" className="img-fluid" />
               </div>
             </Col>
           </Row>
