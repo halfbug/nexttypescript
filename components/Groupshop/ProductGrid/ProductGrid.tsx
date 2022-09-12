@@ -90,7 +90,7 @@ const ProductGrid = ({
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts,
   } = useDeal();
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts());
+  // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }

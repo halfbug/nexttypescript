@@ -24,7 +24,9 @@ const OnBoardingAddProduct = ({ open }: any) => {
     const productObject: any = ids.map((ele) => ({
       productId: ele,
       type: 'owner',
-      addedBy: gsctx.members[0].orderDetail.customer.firstName,
+      addedBy: gsctx.members[0].orderDetail.customer.firstName
+        ? gsctx.members[0].orderDetail.customer.firstName
+        : gsctx.members[0].orderDetail.customer.lastName,
       customerIP: gsctx.members[0].orderDetail.customer.ip,
     }));
 

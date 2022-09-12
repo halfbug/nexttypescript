@@ -23,6 +23,7 @@ export default function useDeal() {
     dealProducts,
     members: gmembers,
     addedProducts,
+    ownerDeals,
   } = gsctx;
   const isInfluencer = !!(!isGroupshop && dealProducts && dealProducts?.length < 1);
   // const isInfluencer = useCallback(
@@ -319,7 +320,9 @@ export default function useDeal() {
     (item) => !dealProducts?.some((item2) => item2.productId === item.id),
   ) ?? [] : gsctx?.store?.products?.filter(
     (item: any) => !addedProducts?.some((item2) => item2.productId === item.id),
-  ) ?? []), [gsctx?.store?.products]);
+  ).filter(
+    (item: any) => !ownerDeals?.some((item2) => item2.id === item.id),
+  ) ?? []), [gsctx]);
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
       : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.lastName.charAt(0) : gsctx?.members[0].orderDetail.customer.lastName}`)), [gsctx]);

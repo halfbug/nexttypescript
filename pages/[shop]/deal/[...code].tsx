@@ -247,7 +247,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       setshowSearch(true);
     }
   }, [gsctx, leftOverProducts]);
-  console.log('🚀 ~ file: [...code].tsx ~ line 247 ~ leftOverProducts', leftOverProducts());
+  console.log('🚀 ~ file: [...code] line 247 ~ leftOverProducts', leftOverProducts()?.length);
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
   const [value, setvalue] = useState<undefined | string>('...');
