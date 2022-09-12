@@ -84,6 +84,8 @@ const ProductsSearch = ({
     (item) => !dealProducts?.some((item2) => item2.productId === item.id),
   ) : products?.filter(
     (item) => !addedProducts?.some((item2) => item2.productId === item.id),
+  ).filter(
+    (item) => !gsctx.ownerDeals?.some((item2) => item2.id === item.id),
   ));
 
   useEffect(() => {

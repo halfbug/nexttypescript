@@ -88,7 +88,9 @@ const ProductGrid = ({
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
+    leftOverProducts,
   } = useDeal();
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts());
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }
@@ -104,7 +106,7 @@ const ProductGrid = ({
     googleButtonCode('product-share');
   };
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 90 ~ isModalForMobile', isModalForMobile);
-
+  console.log({ showSearch });
   return (
     <Container {...props} ref={ref} id={id}>
       <Row className={styles.groupshop_row}>
@@ -282,41 +284,42 @@ const ProductGrid = ({
             )}
           </>
         ))}
-        {(skuCount && skuCount > 1 && showSearch) ? [...new Array(fillerz)]?.map((n) => (
-          <Col xs={xs} md={6} lg={4} xl={3} key={n}>
-            <ProductCard
-              isrc="/images/empty.png"
-              imgOverlay={(
-                <>
-                  <span className={styles.groupshop__pcard_tag_price}>
-                    {`${percentage}% OFF`}
-                  </span>
-                  <Button
-                    variant="outline-primary"
-                    className={styles.groupshop__pcard_tag_product}
-                    onClick={() => addProducts(true)}
-                    disabled={isExpired}
-                  >
-                    ADD A PRODUCT
+        {(skuCount && skuCount > 1 && leftOverProducts()?.length > 0)
+          ? [...new Array(fillerz)]?.map((n) => (
+            <Col xs={xs} md={6} lg={4} xl={3} key={n}>
+              <ProductCard
+                isrc="/images/empty.png"
+                imgOverlay={(
+                  <>
+                    <span className={styles.groupshop__pcard_tag_price}>
+                      {`${percentage}% OFF`}
+                    </span>
+                    <Button
+                      variant="outline-primary"
+                      className={styles.groupshop__pcard_tag_product}
+                      onClick={() => addProducts(true)}
+                      disabled={isExpired}
+                    >
+                      ADD A PRODUCT
 
-                  </Button>
-                </>
+                    </Button>
+                  </>
               )}
-            >
-              <h5 className="text-center fw-bold text-truncate">Curate your Groupshop</h5>
+              >
+                <h5 className="text-center fw-bold text-truncate">Curate your Groupshop</h5>
 
-              <p className="text-center  fs-5">
-                <i>
-                  Add your favorite products for you
-                  {' '}
-                  &
-                  {' '}
-                  your friends to shop
+                <p className="text-center  fs-5">
+                  <i>
+                    Add your favorite products for you
+                    {' '}
+                    &
+                    {' '}
+                    your friends to shop
 
-                </i>
-              </p>
-              <br />
-              {/* <div className={styles.groupshop_addtoCart_wrapper}>
+                  </i>
+                </p>
+                <br />
+                {/* <div className={styles.groupshop_addtoCart_wrapper}>
                 <Button variant="primary" disabled className={styles.groupshop_addtoCart}>
                 Add to Cart
                 </Button>
@@ -325,9 +328,9 @@ const ProductGrid = ({
                   <Send size={16} />
                 </Button>
               </div> */}
-            </ProductCard>
-          </Col>
-        )) : <></>}
+              </ProductCard>
+            </Col>
+          )) : <></>}
       </Row>
       <Row>
         <Col>

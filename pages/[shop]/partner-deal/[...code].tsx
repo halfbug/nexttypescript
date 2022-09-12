@@ -158,8 +158,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     formatNameCase,
     leftOverProducts,
   } = useDeal();
-  console.log('🚀 ~ file: [...code].tsx ~ line 157 ~ === leftOverProducts', leftOverProducts);
-  console.log('🚀 ~ file: [...code].tsx ~ line 157 ~ === store', gsctx?.store?.products);
 
   const { googleEventCode, googleButtonCode } = useGtm();
   console.log(showRewards, 'showRewards');
@@ -235,7 +233,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // calculate added products by refferal n influnce in gsctx.addedProducts
   useEffect(() => {
     // // if all store products are addded
-    if (leftOverProducts && leftOverProducts?.length < 1) setshowSearch(false);
+    if (leftOverProducts()?.length < 1) setshowSearch(false);
     else setshowSearch(true);
   }, [leftOverProducts]);
 

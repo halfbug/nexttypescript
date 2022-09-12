@@ -167,6 +167,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     refferalDealsProducts,
     // allProducts,
   } = gsctx;
+  console.log('🚀 ~ file: [...code].tsx ~ line 169 ~ addedProducts', addedProducts);
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray, findInArray2,
   } = useUtilityFunction();
@@ -239,14 +240,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   /// if SKU > 2 and SKU <= 4
   useEffect(() => {
     // if all store products are addded
-    console.log(leftOverProducts);
 
-    if (leftOverProducts && leftOverProducts?.length < 1) {
+    if (leftOverProducts()?.length < 1) {
       setshowSearch(false);
     } else {
       setshowSearch(true);
     }
-  }, [leftOverProducts]);
+  }, [gsctx, leftOverProducts]);
+  console.log('🚀 ~ file: [...code].tsx ~ line 247 ~ leftOverProducts', leftOverProducts());
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
   const [value, setvalue] = useState<undefined | string>('...');
@@ -283,6 +284,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
+  console.log(showSearch, 'showsearch ---code');
   return (
     <>
       <Head>

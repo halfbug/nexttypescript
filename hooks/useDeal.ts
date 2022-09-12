@@ -315,11 +315,11 @@ export default function useDeal() {
     }).join(' ');
     return fullname;
   };
-  const leftOverProducts = isInfluencerGS ? gsctx?.store?.products?.filter(
+  const leftOverProducts = useCallback(() => (isInfluencerGS ? gsctx?.store?.products?.filter(
     (item) => !dealProducts?.some((item2) => item2.productId === item.id),
-  ) : gsctx?.store?.products?.filter(
-    (item: any) => !dealProducts?.some((item2) => item2.productId === item.id),
-  );
+  ) ?? [] : gsctx?.store?.products?.filter(
+    (item: any) => !addedProducts?.some((item2) => item2.productId === item.id),
+  ) ?? []), [gsctx?.store?.products]);
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
       : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.lastName.charAt(0) : gsctx?.members[0].orderDetail.customer.lastName}`)), [gsctx]);
