@@ -209,7 +209,7 @@ const ProductsSearch = ({
   };
 
   const handleClick = (event: any) => {
-    if (selectedProducts.length > clientDealProducts.length) {
+    if (selectedProducts.length > clientDealProducts()?.length) {
       if (!allowSelectAll) {
         setShow(!show);
         setTarget(event.target);
