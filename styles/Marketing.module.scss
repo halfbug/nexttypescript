@@ -2,6 +2,19 @@
 
 .marketing {    
     @extend .d-flex, .px-0;
+
+    &_DatepickerIcon{
+        position: absolute;  
+          left: 162px;  
+            top: 188px;
+            z-index: 10;
+    }
+    &_DatepickerIcon2{
+        position: absolute;  
+          left: 333px;  
+            top: 188px;
+            z-index: 10;
+    }
     &__box_1 {
         @extend .mb-4;
         padding: 24px 34px;

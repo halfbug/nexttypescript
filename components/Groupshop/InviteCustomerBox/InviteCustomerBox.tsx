@@ -16,6 +16,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useLazyQuery } from '@apollo/client';
 import { FIND_PENDING_GROUPSHOP } from 'store/store.graphql';
 import useAlert from 'hooks/useAlert';
+import CalenderIcon from 'assets/images/calender-icon.svg';
+import { FiCalendar } from 'react-icons/fi';
 
 interface InviteCustomerBoxProps extends RootProps {
   show: boolean;
@@ -152,15 +154,19 @@ const InviteCustomerBox = ({
                     icon={<InfoCircle size={13} />}
                     popContent="You can’t select orders older than one year old."
                   />
-                  <DatePicker
-                    className="form-control"
-                    placeholderText="yyyy-mm-dd"
-                    dateFormat="yyyy-MM-dd"
-                    name="startDate"
-                    maxDate={new Date()}
-                    selected={startDate}
-                    onChange={(sdate:any) => changeDate(sdate, 'start')}
-                  />
+                  <div>
+                    <CalenderIcon className={styles.marketing_DatepickerIcon} />
+                    <DatePicker
+                      className="form-control"
+                      placeholderText="yyyy-mm-dd"
+                      dateFormat="yyyy-MM-dd"
+                      name="startDate"
+                      maxDate={new Date()}
+                      selected={startDate}
+                      onChange={(sdate:any) => changeDate(sdate, 'start')}
+                      icon={<FiCalendar />}
+                    />
+                  </div>
                 </Col>
                 <Col lg={6} className="pe-5">
                   <span className={styles.marketing_inviteCustomerBox_modal__label}>
@@ -172,16 +178,19 @@ const InviteCustomerBox = ({
                     icon={<InfoCircle size={13} />}
                     popContent="The latest date you can select is the date your first Groupshop campaign became active."
                   />
-                  <DatePicker
-                    className="form-control"
-                    placeholderText="yyyy-mm-dd"
-                    dateFormat="yyyy-MM-dd"
-                    minDate={startDate}
-                    maxDate={new Date()}
-                    name="endtDate"
-                    selected={endDate}
-                    onChange={(edate:any) => changeDate(edate, 'end')}
-                  />
+                  <div>
+                    <CalenderIcon className={styles.marketing_DatepickerIcon2} />
+                    <DatePicker
+                      className="form-control"
+                      placeholderText="yyyy-mm-dd"
+                      dateFormat="yyyy-MM-dd"
+                      minDate={startDate}
+                      maxDate={new Date()}
+                      name="endtDate"
+                      selected={endDate}
+                      onChange={(edate:any) => changeDate(edate, 'end')}
+                    />
+                  </div>
                 </Col>
               </Row>
               <WhiteButton
