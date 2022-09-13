@@ -102,13 +102,15 @@ const RetentionImport = ({
                 <th>&nbsp;</th>
               </tr>
             </thead>
-            <tbody ref={ref} className="border-0 d-">
+            <tbody ref={ref} className="border-0 ">
               {renderItems?.map((part: any, index: number) => (
-                <tr className={[styles.rt_table_row__data_row, 'd-table-row border-0 mb-2'].join(' ')}>
+                <tr className={[styles.rt_table_row__data_row, 'd-table-row border-0 mb-2 mt-2'].join(' ')}>
                   <td>
-                    <div className={[styles.rt_table_row__data_row__tag1, ''].join(' ')}>
-                      {moment(new Date(part.createdAt)).format('MM/DD/YY')}
-
+                    <div className={[styles.rt_table_row__tag1, 'p-1'].join(' ')}>
+                      <span className="text-dark">
+                        {' '}
+                        {moment(new Date(part.createdAt)).format('MM/DD/YY')}
+                      </span>
                     </div>
                   </td>
                   <td className="">{part.groupshopsCreated}</td>

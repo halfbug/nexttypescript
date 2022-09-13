@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Marketing.module.scss';
+import style1 from 'styles/Retentiontools.module.scss';
 import { RootProps, PastCustomerGroupshop } from 'types/store';
 import {
   Col, Modal, Row, Table, Spinner,
@@ -120,18 +121,18 @@ const CreateGroupshopBoxInner = ({
         </Row>
         <Row className={styles.marketing_inviteCustomerBox_modal__bottom}>
           <Col lg={12}>
-            <Table striped hover>
-              <thead>
+            <Table borderless responsive>
+              <thead className={style1.rt__table_head__txt}>
                 <tr>
-                  <th>Order #</th>
+                  <th className="w-25">Order #</th>
                   <th>Customer Name</th>
                   <th>Order Value</th>
                   <th>Order Date</th>
                 </tr>
               </thead>
-              <tbody ref={ref}>
+              <tbody ref={ref} className="border-0 ">
                 {renderItems?.map((part: any, index: number) => (
-                  <tr>
+                  <tr className={[style1.rt_table_row__data_row, 'd-table-row border-0 mb-2 mt-2'].join(' ')}>
                     <td>{part.name}</td>
                     <td>
                       {part.customer.firstName}

@@ -168,7 +168,7 @@ const InviteCustomerBox = ({
                     />
                   </div>
                 </Col>
-                <Col lg={6} className="pe-5">
+                <Col lg={6} className="">
                   <span className={styles.marketing_inviteCustomerBox_modal__label}>
                     End Date
                   </span>

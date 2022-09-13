@@ -166,59 +166,80 @@
     &_table_row {
         table {
             border-collapse: separate;
-            border-spacing: 0 15px;
-          }
-          
-          th {
+            border-spacing: 0px 25px;
+            display: table;
+        }
+
+        th {
             background-color: #4287f5;
             color: white;
-          }
-          
-          th,
-          td {
+        }
+
+        th,
+        td {
             width: 150px;
             text-align: center;
             border: 1px solid black;
             padding: 5px;
-          }
+        }
 
         // border: none;
         &__data_row {
-            display: flexbox;
-             font-weight: $font-weight-normal;
-             font-size: $font-size-small-medium;
-             color: $black;
-             background: $comp_bg;
-             height: $height-large;
-             border-radius: $border-radius-large;
-             margin-bottom: 10px;
-            .table{
-                tr{
+            @extend .border-0, .border-bottom, .border-5, .border-white, .rounded-pill, .gap-5;
+            font-weight: $font-weight-normal;
+            font-size: $font-size-small-medium;
+            color: $black;
+            background: $comp_bg;
+            border-radius: $border-radius-large!important;
+            margin-bottom: 10px!important;
+            border-width: 3px!important;
+ 
+            table {
+                border-collapse: separate;
+                border-spacing: 0px 25px;
+            }
+
+            table td {
+                padding: 12px;
+                width: 150px;
+            }
+
+
+            tr {
+                background-color: #F8F8F8;
+                border-radius: 23px;
+                border-collapse: separate;
+                border-spacing: 0px 25px;
+    
+
+            }
+            td{
+                vertical-align: middle;
+            }
             td:first-child {
-                border-top-left-radius: 23px!important; 
+                border-top-left-radius: 23px;
                 border-bottom-left-radius: 23px;
             }
             td:last-child {
-                border-bottom-right-radius: 23px; 
-                border-top-right-radius: 23px; 
-            }}
-        }
-            &:hover {
-                background: $lightClassic;
-                border-radius: $border-radius-large;
+                border-top-right-radius: 23px;
+                border-bottom-right-radius: 23px;
             }
+            &:hover{
+                background-color: $lightClassic;
+                border-radius: $border-radius-large; 
+                
+            } 
             &:active {
                 background-color: $lightClassic;
                 border-radius: $border-radius-large;
             }
-
-           
         }
         &__tag1 {
             @extend .d-flex, .justify-content-start, .align-items-center;
-           border-radius: $border-radius-light;
-           background: #DCD0E8!important;
-           width: fit-content;
-       }
+            border-radius: $border-radius-light;
+            background: #dcd0e8 !important;
+            opacity: 100;
+            width: fit-content;
+        }
     }
 }
