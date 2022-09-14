@@ -11,30 +11,24 @@ const MarqueeSlider = () => (
  // @ts-ignore */}
     <marquee width="100%" direction="left">
       <p>
-        <span className="px-3">
-          •
+        <span>
+          shop with friends, get up to 100% cashback
         </span>
-        shop with friends, get up to 90% cashback
-        <span className="px-3">
-          •
+        <span>
+          access exclusive discounts
         </span>
-        access exclusive discounts
-        <span className="px-3">
-          •
+        <span>
+          own your store
         </span>
-        own your store
-        <span className="px-3">
-          •
+        <span>
+          share your favorite products with your favorite people
         </span>
-        share your favorite products with your favorite people
-        <span className="px-3">
-          •
+        <span>
+          get rewarded for your influence
         </span>
-        get rewarded for your influence
-        <span className="px-3">
-          •
+        <span>
+          you win, your friends win
         </span>
-        you win, your friends win
       </p>
       {/*
  // @ts-ignore */}

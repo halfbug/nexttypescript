@@ -10,12 +10,10 @@ import styles from 'styles/QrStoreDetails.module.scss';
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.jpg';
 import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
-import Instagram from 'assets/images/instagram-with-border.svg';
-import Pinterest from 'assets/images/pinterest-with-border.svg';
-import Twitter from 'assets/images/twitter-with-border.svg';
-import Facebook from 'assets/images/facebook-with-border.svg';
 import Arrow from 'assets/images/Arrow.svg';
 import Link from 'next/link';
+import GroupshopRoundLogo1 from 'assets/images/groupshop-round-logo1.svg';
+import SocialLinks from 'components/Shared/SocialLinks/SocialLinks';
 
 // import shared component
 
@@ -39,11 +37,9 @@ export default function QrStep2(
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
                 </div>
-                {/* <div className={styles.QRContainer__YR__mobileLogo}>
-                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
-                </div> */}
                 <div className={styles.QRContainer__mobileImage}>
                   <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
+                  <GroupshopRoundLogo1 className="img-fluid" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__heading}>
@@ -67,7 +63,7 @@ export default function QrStep2(
                         >
                           <a target="_blank" className={styles.cardItem}>
                             <div className={styles.cardImg}>
-                              <img src={gs?.shop?.logoImage} style={{ width: 100 }} alt="Brand Logo" />
+                              <img src={gs?.shop?.logoImage} style={{ width: 80, height: 75 }} alt="Brand Logo" />
                             </div>
                             <div className={styles.cardDetail}>
                               <h2>
@@ -98,15 +94,18 @@ export default function QrStep2(
                     <p className={styles.question}>
                       Have Questions?
                       {' '}
-                      <a href="/">Peep our FAQ</a>
+                      <Link
+                        href={{
+                          pathname: '/[shop]/knowledgebase',
+                        }}
+                      >
+                        <a>Peep our FAQ</a>
+                      </Link>
                     </p>
 
                     <div className={styles.QRContainer__social__media}>
                       <div className={styles.QRContainer__social__icons}>
-                        <Instagram />
-                        <Pinterest />
-                        <Twitter />
-                        <Facebook />
+                        <SocialLinks />
                       </div>
                       <div className={styles.QRContainer__link}>
                         <p className={styles.email}>

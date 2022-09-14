@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import Image from 'next/image';
+import React from 'react';
 
 // import styles
 import styles from 'styles/QrStoreDetails.module.scss';
@@ -8,22 +7,15 @@ import styles from 'styles/QrStoreDetails.module.scss';
 import HeadLogo from 'assets/images/QRLogo.svg';
 import QR from 'assets/images/qr-screen-1.jpg';
 import QRMobile from 'assets/images/qr-screen-mobile-1.jpg';
-import YR from 'assets/images/YR.png';
-import Instagram from 'assets/images/instagram-with-border.svg';
-import Pinterest from 'assets/images/pinterest-with-border.svg';
-import Twitter from 'assets/images/twitter-with-border.svg';
-import Facebook from 'assets/images/facebook-with-border.svg';
 import Smile from 'assets/images/smile.svg';
 import { Container, Row, Col } from 'react-bootstrap';
 // import shared component
 import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
+import Link from 'next/link';
+import GroupshopRoundLogo1 from 'assets/images/groupshop-round-logo1.svg';
+import SocialLinks from 'components/Shared/SocialLinks/SocialLinks';
 
-interface IStep3Props {
-  dealLink: string;
-  brandLogo: string;
-}
-
-export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
+export default function QrStep3() {
   return (
     <>
       <div className={styles.QRContainer}>
@@ -34,11 +26,9 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
                 </div>
-                {/* <div className={styles.QRContainer__YR__mobileLogo}>
-                  <img src={brandLogo} style={{ width: 100 }} alt="Brand Logo" />
-                </div> */}
                 <div className={styles.QRContainer__mobileImage}>
                   <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
+                  <GroupshopRoundLogo1 className="img-fluid" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
                   <div className={styles.QRContainer__content__congratswrapper3}>
@@ -68,19 +58,24 @@ export default function QrStep3({ dealLink, brandLogo }: IStep3Props) {
                     <hr />
                     <p className={styles.question}>
                       Have Questions?
-                      <a href="/">Peep our FAQ</a>
+                      {' '}
+                      <Link
+                        href={{
+                          pathname: '/[shop]/knowledgebase',
+                        }}
+                      >
+                        <a>Peep our FAQ</a>
+                      </Link>
                     </p>
                     <div className={styles.QRContainer__social__media}>
                       <div className={styles.QRContainer__social__icons}>
-                        <Instagram />
-                        <Pinterest />
-                        <Twitter />
-                        <Facebook />
+                        <SocialLinks />
                       </div>
                       <div className={styles.QRContainer__link}>
                         <p>
                           Go to
-                          <a href="/">groupshop.com</a>
+                          {' '}
+                          <Link href="https://www.groupshop.com/"><a target="_blank">groupshop.com</a></Link>
                         </p>
                       </div>
                     </div>

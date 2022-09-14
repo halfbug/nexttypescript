@@ -57,7 +57,21 @@
       font-size: 24px;
       line-height: 31px;
       color: $black;
-       
+      p{
+        font-size: 24px;
+        line-height: 31px;
+        font-weight: 700;
+        padding: 0;
+        @media (max-width:991px) {
+          font-size: 22px;
+          line-height: 26px;
+        }
+        @media (max-width:425px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+
       @media (max-width:991px) {
         font-size: 22px;
         line-height: 26px;
@@ -118,6 +132,8 @@
       }
 
       &__how{
+        cursor: pointer;
+        color: #706f6f;
         color: #5c6064;
         text-align: right;
         font-size: 13px;
@@ -129,16 +145,24 @@
       }
       &__email{
         position: absolute;
-        top: 50%;
-        right: 0;
+        top: 48%;
+        left: 41%;
         bottom: auto;
         
         @media (max-width:767px){
           top: 40%;
         }
         @media (max-width:475px){
-            top: 60%;
-            right: 0;
+          top: 63%;
+          right: 0;
+        }
+        @media (max-width: 425px){
+          top: 58%;
+          left: 37%;
+        }
+        @media (max-width: 320px){
+          top: 61%;
+          left: 15%;
         }
 
         &__notsure{
@@ -408,19 +432,24 @@
       font-feature-settings: "pnum" on, "lnum" on;
     }
 
-    a {
-      color: #000000;
+    div{
+      display: flex;
+      align-items: center;
+      a {
+        color: #000000;
+        padding: 0 4px;
+      }
     }
 
     svg {
       margin-right: 9px;
     }
 
-    @include media-breakpoint-down(lg) {
-      svg {
-        margin-bottom: 10px;
-      }
-    }
+    // @include media-breakpoint-down(lg) {
+    //   svg {
+    //     margin-bottom: 10px;
+    //   }
+    // }
     .question{
       font-family: 'DM Sans';
       font-weight: 400;
@@ -441,9 +470,12 @@
 
   &__desktopImage {
     text-align: right;
+    height: 862px;
+    overflow: hidden;
     img {
       object-fit: fill;
-      height: 100vh;
+      // height: 100%;
+      width: 100%;
     }
     > div {
       height: 100vh;

@@ -47,7 +47,7 @@ const QrCode: NextPage = () => {
           email={email}
         />
       )}
-      {showStep3 && <QrStep3 dealLink={dealLink} brandLogo={brandLogo} />}
+      {showStep3 && <QrStep3 />}
     </>
   );
 };
