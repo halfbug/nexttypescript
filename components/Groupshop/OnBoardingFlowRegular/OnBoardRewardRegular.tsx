@@ -88,6 +88,11 @@ const OnBoardRewardsRegular = ({ open }: Props) => {
           },
         },
       });
+
+      if (shop && ownerCode && discountCode) {
+        setShow(false);
+        Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
+      }
     },
   });
 
