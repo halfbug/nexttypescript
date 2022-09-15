@@ -114,7 +114,7 @@ const RetentionImport = ({
                     </div>
                   </td>
                   <td className="">{part.groupshopsCreated}</td>
-                  <td>
+                  <td className={styles.rt_cursor_pointer}>
                     <ArrowRightLogo
                       className=""
                       onClick={() => {
