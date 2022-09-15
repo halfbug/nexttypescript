@@ -19,7 +19,7 @@ const InfoButton = ({
         {(message !== 'How it works') && (<InfoCircle />)}
         { message
         && (
-        <span>
+        <span className={styles.groupshop_infobutton}>
           {' '}
           {message}
         </span>

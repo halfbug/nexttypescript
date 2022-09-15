@@ -41,6 +41,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &__last {
     @extend .d-flex, .justify-content-end;
+    span {
+      @include media-breakpoint-down(sm) {
+      display: none !important;
+      }
+    }
   }
 
   &__counter {
@@ -136,6 +141,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: block;
         text-underline-offset: 6px;
       }
+    }
+
+    &__headerRightText {
+      @include media-breakpoint-down(sm) { 
+        display: none !important;
+      }
+
     }
   }
 
@@ -324,7 +336,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       left: 10px;
       top: 11px;
     }
-    &__popover{
+    &__popover {
       z-index: 8;
     }
   }
@@ -511,7 +523,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 14px;
       line-height: 18px;
       text-align: center;
-
     }
     &_unlocked {
       @extend .mb-2;
@@ -909,7 +920,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__modalBody {
       @include media-breakpoint-down(sm) {
         padding: 0px 16px;
-        margin-bottom : 74px;
+        margin-bottom: 74px;
       }
     }
 
@@ -1004,7 +1015,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       &_cross {
         @extend .groupshop__pcard_tag;
-        @extend .p-1, .py-2, .m-1,.fs-6;
+        @extend .p-1, .py-2, .m-1, .fs-6;
         background-color: white !important;
         top: 3px;
         right: 10px;
@@ -1193,7 +1204,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &:hover {
         background-image: none !important;
         background: #000000;
-    
       }
     }
   }
@@ -1243,7 +1253,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
     &_search {
-      &_productSection{
+      &_productSection {
         @extend .px-5;
         @include media-breakpoint-down(sm) {
           padding-left: 1.5rem !important;
@@ -1310,8 +1320,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           opacity: 0.1;
         }
         &_meter {
-          p{
-            font-size: 10px
+          p {
+            font-size: 10px;
           }
         }
       }
@@ -1502,12 +1512,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_infoBox {
-
     &_mobileLogo {
       text-align: center;
-    max-width: 110px;
-    margin: 0 auto;
-    padding: 25px 0px;
+      max-width: 110px;
+      margin: 0 auto;
+      padding: 25px 0px;
     }
     svg {
       height: 30px !important;
@@ -1664,8 +1673,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &_expiremodal {
-      font-size: 16px;
-      margin: 0;
+    font-size: 16px;
+    margin: 0;
   }
 
   &_search {
@@ -1721,12 +1730,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-weight: 600;
         margin-bottom: 11px;
       }
-      &_addDeal{
+      &_addDeal {
         display: flex;
         flex-direction: column;
         padding-inline-end: 10px;
       }
-      &_dealBtn{
+      &_dealBtn {
         font-size: $size-14px !important;
         line-height: normal !important;
         height: fit-content;
@@ -1808,7 +1817,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     &_expire_text {
       h6 {
-        font-family: DM Sans!important;
+        font-family: DM Sans !important;
         font-style: normal;
         font-size: 14px;
         line-height: 16px;
@@ -1885,7 +1894,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 12px;
         line-height: 16px;
       }
-      &_time{
+      &_time {
         @extend .py-2;
         font-size: 24px !important;
         font-weight: 500 !important;
@@ -1956,15 +1965,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         border-radius: 15px !important;
       }
     }
-    &_activeItem{
-      span{
+    &_activeItem {
+      span {
         display: flex;
         justify-content: center;
         align-items: center;
       }
     }
-    &_item{
-      a{
+    &_item {
+      a {
         display: flex;
         justify-content: center;
         align-items: end;
@@ -2112,7 +2121,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     width: fit-content;
   }
 
-  &_shopped{
+  &_shopped {
     @extend .p-2, .my-0, .shadow-sm, .bg-body, .rounded;
   }
 
@@ -2192,21 +2201,21 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     text-transform: uppercase;
     width: 212px !important;
     background-image: none;
-  
+
     &:hover {
       background-color: $addtocart;
-      border: $addtocart; ;
+      border: $addtocart;
       background-image: none;
     }
-  @include media-breakpoint-down(md) {
-    background-color: $unlockToShare;
-    border: $unlockToShare;
-    color: $white;
-    font-size: 14px;
-    line-height: 18px;
-    width: 100% !important;
-  }
+    @include media-breakpoint-down(md) {
+      background-color: $unlockToShare;
+      border: $unlockToShare;
+      color: $white;
+      font-size: 14px;
+      line-height: 18px;
+      width: 100% !important;
     }
+  }
   &_Pd_addtoCart {
     @extend .rounded-2, .w-75, .me-2;
     color: #ffffff;
@@ -2343,7 +2352,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
   &_qrBox {
-    &__modal{
+    &__modal {
       @extend .m-5;
     }
     &__closebtn {
@@ -2366,7 +2375,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       color: #000000;
     }
-    &__canvas{
+    &__canvas {
       @extend .text-center;
       margin-top: 4px;
       margin-bottom: 26px;
@@ -2376,14 +2385,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 14px;
       }
     }
-    &__btnShare{
+    &__btnShare {
       padding: 0px 20px;
       margin-bottom: 10px;
       height: 42.96px;
       box-shadow: none !important;
       display: block;
-      background: linear-gradient(0deg, #121212, #121212), #FFFFFF;
-      color: #FFFFFF;
+      background: linear-gradient(0deg, #121212, #121212), #ffffff;
+      color: #ffffff;
       font-weight: 500;
       font-size: 14px;
       line-height: 15px;
@@ -2666,12 +2675,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &__top {
         margin-top: 20px !important;
       }
-      &__product{
-        &__name{
+      &__product {
+        &__name {
           font-size: 14px !important;
           line-height: 18px !important;
         }
-        &__amounts{
+        &__amounts {
           font-size: 14px !important;
           line-height: 18px !important;
         }
@@ -2750,7 +2759,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         }
       }
     }
-    &__productsSection{
+    &__productsSection {
       @extend .p-0, .my-3, .d-flex;
       justify-content: space-between;
       column-gap: 10px;
@@ -2759,38 +2768,38 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         flex-direction: column;
       }
     }
-    &__product{
+    &__product {
       align-items: center;
       text-align: center;
-      &__image{
-        img{
+      &__image {
+        img {
           width: 100%;
         }
         @include media-breakpoint-down(sm) {
-          img{
+          img {
             width: 50%;
           }
         }
       }
-      &__name{
+      &__name {
         font-weight: 400;
         font-size: 16px;
         line-height: 21px;
         margin-top: 4px;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
       }
-      &__amounts{
+      &__amounts {
         font-size: 16px;
         margin-top: 4px;
         line-height: 21px;
-        span{
+        span {
           text-decoration-line: line-through;
           margin-left: 8px;
           font-weight: 400;
         }
       }
     }
-    &__bottom{
+    &__bottom {
       margin: 5px 80px;
       margin-top: 20px;
       @include media-breakpoint-down(sm) {
@@ -2815,7 +2824,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       display: flex;
       justify-content: center;
       align-items: center;
-
     }
     &__inviteBtn {
       padding: 8px 30px 8px 26px;
@@ -2834,7 +2842,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
     &__orShare {
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-weight: 400;
       font-size: 13px;
       line-height: 17px;
@@ -2849,10 +2857,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     z-index: 999;
 
     button {
-      background: #DED5E7!important;
+      background: #ded5e7 !important;
       border: 1px solid #000000;
       border-radius: 3px;
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-weight: 700;
       font-size: 12px;
       line-height: 16px;
@@ -2887,8 +2895,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     border-top: 1px solid #ebebeb;
   }
 
-  &_expInviteFrnd{
-    font-family: 'Montserrat';
+  &_expInviteFrnd {
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -2896,14 +2904,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     text-align: center;
     color: $black;
   }
-  &_popupArrow{
+  &_popupArrow {
     float: right;
     padding: 0;
     margin: 0;
   }
 
-  &_expPdInviteNow{
-    font-family: 'Montserrat'!important;
+  &_expPdInviteNow {
+    font-family: "Montserrat" !important;
     font-style: normal;
     font-weight: 600 !important;
     font-size: 18px;
@@ -2912,20 +2920,20 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     color: #282828;
     border: 2px solid #ccb2f9 !important;
     background: $white;
-    &:hover{
+    &:hover {
       background: $white;
       color: #282828;
     }
-}
-&_expShopTheseProducts{
-  font-family: 'Montserrat'!important;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;/* identical to box height */
-  color: $black;
-}
-  &_cartImgPointer{
+  }
+  &_expShopTheseProducts {
+    font-family: "Montserrat" !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px; /* identical to box height */
+    color: $black;
+  }
+  &_cartImgPointer {
     @extend .px-0, .m-1, .py-2, .border-bottom;
     cursor: pointer;
   }
@@ -2955,9 +2963,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   //   }
 
   // }
-
 }
 .offcanvas-end {
   border: none !important;
 }
-
