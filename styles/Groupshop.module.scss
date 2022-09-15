@@ -133,7 +133,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @include media-breakpoint-down(sm) {
       justify-content: flex-end;
       span {
-        display: none;
+        display: block;
         text-underline-offset: 6px;
       }
     }

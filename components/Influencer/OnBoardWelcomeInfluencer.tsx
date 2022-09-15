@@ -102,7 +102,7 @@ const OBWelcomeInfluencer = ({
                 {' '}
               </strong>
               <p className={[styles.welcome__modal__body__descriptionSmall,
-                styles.welcome__modal__body__box2__p2, 'd-lg-block d-none'].join(' ')}
+                styles.welcome__modal__body__box2__p2, 'd-block'].join(' ')}
               >
                 You can also shop these discounts yourself, we won’t judge.
               </p>

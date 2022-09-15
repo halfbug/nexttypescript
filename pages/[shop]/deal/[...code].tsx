@@ -475,7 +475,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               {isExpired ? (
                 <Col lg={12}>
                   <h3>
-                    <span className="text-capitalize">
+                    <span className="text-capitalize text-decoration-none">
                       {owner?.firstName}
                     </span>
                     ’s Groupshop has expired – but it’s not too late!
