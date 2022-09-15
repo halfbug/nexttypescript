@@ -147,6 +147,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     clientDealProducts,
     discount,
     getDiscounts,
+    socialText,
     isExpired,
     currencySymbol,
     isInfluencer,
@@ -833,8 +834,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           && (
             <QRBox
               show={showQR}
+              discount={gsctx?.discountCode.percentage}
+              text={socialText}
+              shareurl={gsShortURL ?? gsURL}
               handleClose={() => setShowQR(false)}
-              fullshareurl=""
+              fullshareurl={gsURL}
             />
           )
         }

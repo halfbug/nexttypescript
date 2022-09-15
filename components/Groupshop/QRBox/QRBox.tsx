@@ -13,11 +13,13 @@ interface QRBoxProps extends RootProps {
     show: boolean;
     handleClose(e: any): any;
     fullshareurl: string;
-    // addToCart(e: any): any;
+    discount: string;
+    text: string;
+    shareurl: string;
 }
 
 const QRBox = ({
-  show = false, handleClose, fullshareurl,
+  show = false, handleClose, fullshareurl, discount, text, shareurl,
 }: QRBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -44,7 +46,10 @@ const QRBox = ({
         <Modal.Body className="px-0 pt-0 mx-auto bg-white">
           <Row>
             <Col xs={12} sm={12} md={12} className={styles.groupshop_qrBox__off}>
-              Share 15% off
+              Share
+              {' '}
+              {discount}
+              % off
             </Col>
           </Row>
           <Row>
@@ -75,7 +80,10 @@ const QRBox = ({
             <Col xs={12} sm={12} md={12}>
               <Button
                 className={styles.groupshop_qrBox__btnShare}
-                onClick={() => {}}
+                onClick={() => navigator?.share({
+                  title: 'Groupshop',
+                  text: `${text} ${shareurl}`,
+                })}
               >
                 Other sharing options
               </Button>

@@ -138,6 +138,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     getDiscounts,
     milestones,
     getDateDifference,
+    socialText,
     currencySymbol,
     activateURL,
     maxPercent,
@@ -862,12 +863,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           && (
             <QRBox
               show={showQR}
+              discount={gsctx?.discountCode.percentage}
+              text={socialText}
+              shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               handleClose={() => setShowQR(false)}
-              fullshareurl=""
+              fullshareurl={gsURL}
             />
           )
         }
-        {/* STEP MODALs */}
+        {/* STEP MODALs  */}
         {stepModal()}
       </div>
     </>
