@@ -186,7 +186,7 @@ export default function QrStep1({
                       {' '}
                       <Link
                         href={{
-                          pathname: '/[shop]/knowledgebase',
+                          pathname: 'https://www.groupshop.com/drips',
                         }}
                       >
                         <a>Peep our FAQ</a>

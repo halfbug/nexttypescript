@@ -8,10 +8,10 @@ import Facebook from 'assets/images/facebook-with-border.svg';
 function SocialLinks() {
   return (
     <>
-      <Link href="https://www.instagram.com/groupshopit/"><a target="_blank"><Instagram /></a></Link>
-      <Link href="https://pinterest.com/Groupshop/"><a target="_blank"><Pinterest /></a></Link>
-      <Link href="https://twitter.com/groupshopit"><a target="_blank"><Twitter /></a></Link>
-      <Link href="https://www.facebook.com/groupshopit"><a target="_blank"><Facebook /></a></Link>
+      <Link key={1} href="https://www.instagram.com/groupshopit/"><a target="_blank"><Instagram /></a></Link>
+      <Link key={2} href="https://pinterest.com/Groupshop/"><a target="_blank"><Pinterest /></a></Link>
+      <Link key={3} href="https://twitter.com/groupshopit"><a target="_blank"><Twitter /></a></Link>
+      <Link key={4} href="https://www.facebook.com/groupshopit"><a target="_blank"><Facebook /></a></Link>
     </>
   );
 }

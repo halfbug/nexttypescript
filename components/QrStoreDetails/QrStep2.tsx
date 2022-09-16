@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import react bootstrap components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -26,6 +26,13 @@ export default function QrStep2(
     activeGroupshops, email,
   }: IStep2Props,
 ) {
+  const [customerName, setcustomerName] = useState('');
+
+  useEffect(() => {
+    if (activeGroupshops.length) {
+      setcustomerName(`${activeGroupshops[0].customer?.firstName} ${activeGroupshops[0].customer?.lastName}`);
+    }
+  }, [activeGroupshops]);
   console.log('🚀 ~ file: QrStep2.tsx ~ line 30 ~ QrStep2 ~ activeGroupshops', activeGroupshops);
   return (
     <>
@@ -48,7 +55,10 @@ export default function QrStep2(
                   </div>
                   <hr className={styles.QRContainer__content__container__hr1} />
                   <h2 className={styles.QRContainer__content__container__title}>
-                    Hey Akwafina, here are all your Groupshops:
+                    Hey
+                    {' '}
+                    {customerName}
+                    , here are all your Groupshops:
                   </h2>
                   <div className={styles.QRContainer__content__container__groupshopTitle}>
                     Active Groupshops
@@ -59,6 +69,7 @@ export default function QrStep2(
                     {
                       activeGroupshops.length && activeGroupshops.map((gs: any) => (
                         <Link
+                          key={gs?.name}
                           href={gs?.groupshops[0]?.url ? gs?.groupshops[0]?.url : ''}
                         >
                           <a target="_blank" className={styles.cardItem}>
@@ -71,7 +82,12 @@ export default function QrStep2(
                                 <Arrow />
                               </h2>
                               <div className={styles.BtnGroup}>
-                                <button type="button" className={styles.cashbackBtn}>$38 cashback</button>
+                                <button type="button" className={styles.cashbackBtn}>
+                                  $
+                                  {gs?.cashback}
+                                  {' '}
+                                  cashback
+                                </button>
                                 <button type="button" className={styles.friendBtn}>
                                   ✨
                                   {` ${gs?.groupshops[0]?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
@@ -96,7 +112,7 @@ export default function QrStep2(
                       {' '}
                       <Link
                         href={{
-                          pathname: '/[shop]/knowledgebase',
+                          pathname: 'https://www.groupshop.com/drips',
                         }}
                       >
                         <a>Peep our FAQ</a>
@@ -111,7 +127,7 @@ export default function QrStep2(
                         <p className={styles.email}>
                           Go to
                           {' '}
-                          <a href="/">groupshop.com</a>
+                          <Link href="https://www.groupshop.com/"><a target="_blank">groupshop.com</a></Link>
                         </p>
                       </div>
                     </div>
