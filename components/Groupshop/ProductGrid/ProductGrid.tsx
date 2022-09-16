@@ -10,7 +10,7 @@ import {
 import Pagination from 'react-bootstrap/Pagination';
 import ProductCard from 'components/Groupshop/ProductCard/ProductCard';
 import useDimensions from 'hooks/useDimentions';
-import { Send } from 'react-bootstrap-icons';
+import { EmojiHeartEyesFill, Send } from 'react-bootstrap-icons';
 import { GroupshopContext } from 'store/groupshop.context';
 import usePagination from 'hooks/usePagination';
 import useDeal from 'hooks/useDeal';
@@ -202,7 +202,10 @@ const ProductGrid = ({
                             className={styles.groupshop__pcard_tag_addedby}
                             key={`${productId}_${Math.random()}`}
                           >
-                            {`Added by ${addedBy}`}
+                            🤩
+                            {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
+                            {' '}
+                            {`${addedBy}'s favs`}
                           </span>
                         ) : '';
                         htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;

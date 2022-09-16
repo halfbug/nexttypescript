@@ -24,7 +24,7 @@ import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
-import { Send } from 'react-bootstrap-icons';
+import { Send, EmojiHeartEyesFill } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
@@ -281,9 +281,9 @@ const ProductDetail = ({
                 <Col className="d-flex justify-content-end ms-1">
                   {displayAddedByFunc(product?.id) && addedbyname && (
                     <span className={styles.groupshop__pcard_tag_addedbyname}>
-                      Added By
-                      {' '}
+                      🤩
                       {addedbyname}
+                      's favs
                     </span>
                   )}
                 </Col>
