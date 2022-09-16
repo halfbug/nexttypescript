@@ -559,7 +559,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
               <InfoBox
-                mes="How it worksss"
+                mes="How it works"
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
                 name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
