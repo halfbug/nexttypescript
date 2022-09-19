@@ -322,7 +322,7 @@ export default function useDeal() {
     (item: any) => !addedProducts?.some((item2) => item2.productId === item.id),
   ).filter(
     (item: any) => !ownerDeals?.some((item2) => item2.id === item.id),
-  ) ?? []), [gsctx]);
+  ) ?? []), [gsctx, gsctx?.store?.products]);
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
       : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.lastName.charAt(0) : gsctx?.members[0].orderDetail.customer.lastName}`)), [gsctx]);

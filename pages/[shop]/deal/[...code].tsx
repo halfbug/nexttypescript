@@ -119,6 +119,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         (item) => item.outofstock === false,
       ));
       setmember(groupshop?.members[0]);
+      console.log('=== update gs ...code GS');
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
   }, [groupshop, pending]);
@@ -205,6 +206,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     // );
     // check owner prodcut is added. member[0].product ===sDealPrd then move it into addedProducts
     // console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
+    console.log('=== update gs addedPrd ...code GS');
     dispatch({
       type: 'UPDATE_GROUPSHOP',
       payload: {
