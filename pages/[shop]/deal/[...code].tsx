@@ -108,7 +108,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
-  const [showSearch, setshowSearch] = useState<boolean>(true);
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
   const { urlForActivation, loaderInvite } = useExpired();
 
@@ -238,16 +237,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       setshowCart(true);
     }
   }, [gsctx.cart]);
-  /// if SKU > 2 and SKU <= 4
-  useEffect(() => {
-    // if all store products are addded
 
-    if (leftOverProducts()?.length < 1) {
-      setshowSearch(false);
-    } else {
-      setshowSearch(true);
-    }
-  }, [gsctx, leftOverProducts]);
   console.log('🚀 ~ file: [...code] line 247 ~ leftOverProducts', leftOverProducts()?.length);
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
@@ -285,7 +275,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
-  console.log(showSearch, 'showsearch ---code');
   return (
     <>
       <Head>
@@ -439,7 +428,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 && showSearch ? (
+                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
@@ -589,7 +578,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
           skuCount={SKU.length}
-          showSearch={showSearch}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -798,7 +786,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </>
 
             )
-              : ((SKU.length > 1 && showSearch) && (
+              : ((SKU.length > 1 && leftOverProducts()?.length > 0) && (
                 <>
                   <p>Don’t see what you like?</p>
                   <Button

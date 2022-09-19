@@ -41,13 +41,12 @@ type ProductGridProps = {
   isModalForMobile?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
-  showSearch?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  urlForActivation, showSearch, ...props
+  urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -105,8 +104,6 @@ const ProductGrid = ({
     e.stopPropagation();
     googleButtonCode('product-share');
   };
-  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 90 ~ isModalForMobile', isModalForMobile);
-  console.log({ showSearch });
   return (
     <Container {...props} ref={ref} id={id}>
       <Row className={styles.groupshop_row}>
@@ -410,7 +407,6 @@ ProductGrid.defaultProps = {
   isModalForMobile: false,
   urlForActivation: '',
   skuCount: null,
-  showSearch: true,
 };
 
 export default ProductGrid;

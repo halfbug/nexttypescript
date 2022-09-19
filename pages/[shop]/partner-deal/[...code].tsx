@@ -120,7 +120,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     },
     orderId: '',
   }]);
-  const [showSearch, setshowSearch] = useState<boolean>(true);
   useEffect(() => {
     if (partnerGroupshop && partnerGroupshop.id && pending) {
       const pctx: IGroupshop = {
@@ -230,13 +229,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     }];
     setpartnerMembers([...ownerMember, ...gsctx.memberDetails ?? []]);
   }, [gsctx?.partnerDetails, gsctx.memberDetails]);
-
-  // calculate added products by refferal n influnce in gsctx.addedProducts
-  useEffect(() => {
-    // // if all store products are addded
-    if (leftOverProducts()?.length < 1) setshowSearch(false);
-    else setshowSearch(true);
-  }, [leftOverProducts]);
 
   const { text, cashBackText } = useTopBanner();
 
@@ -367,7 +359,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   </>
                 ) : (
                   <>
-                    {showSearch ? (
+                    {leftOverProducts()?.length > 0 ? (
                       <IconButton
                         icon={<Search size={24} />}
                         className={styles.groupshop__hero_iconSearchBtn}
@@ -445,7 +437,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 && !isModalForMobile && showSearch && (
+                {SKU.length > 1 && !isModalForMobile && leftOverProducts()?.length > 0 && (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
@@ -580,7 +572,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleDetail={(prd) => setsProduct(prd)}
           id="curatedby"
           skuCount={SKU.length}
-          showSearch={showSearch}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             CURATED BY
@@ -764,7 +755,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </div>
         </ProductGrid>
         )}
-        {SKU.length > 1 && showSearch ? (
+        {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
           <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
             <Col className="d-flex justify-content-center flex-column">
               <p>Don’t see what you like?</p>
