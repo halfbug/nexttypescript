@@ -34,7 +34,7 @@ const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
   const {
-    getDateDifference, isExpired, socialLinks, isInfluencerGS,
+    getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -219,44 +219,97 @@ const Footer = ({
         <Col lg={3}>
           <section>
             <div className={styles.groupshop_footer_text}>
-              {isInfluencerGS ? (
+              {isExpired ? (
+                <>
+                  <p>
+
+                    Stay on top of new offers from
+                    {' '}
+                    {/* {owner?.firstName} */}
+                    {getOwnerName()}
+                    .
+                    <br />
+                    Subscribe to get instant notifications.
+                  </p>
+                  <Form noValidate onSubmit={handleSubmit}>
+                    <InputGroup id="borderclr">
+                      <FormControl
+                        name="email"
+                        value={values.email}
+                        placeholder="Enter your email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon2"
+                        isInvalid={!!errors.email}
+                        className={styles.groupshop_footer_input2}
+                        onChange={handleChange}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.email}
+                      </Form.Control.Feedback>
+                    </InputGroup>
+                    <Button type="submit" size="lg" variant="outline" className={styles.groupshop_footer_submit}>
+                      Submit
+                    </Button>
+                  </Form>
+                </>
+              ) : (
+                <>
+                  <p>
+                    <strong>Want your own store?</strong>
+                    Be the first to find out when
+                    you can shop your favorite brands on Groupshop.
+                  </p>
+                  <Form noValidate onSubmit={handleSubmit}>
+                    <InputGroup id="borderclr">
+                      <FormControl
+                        name="email"
+                        value={values.email}
+                        placeholder="Enter your email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon2"
+                        isInvalid={!!errors.email}
+                        className={styles.groupshop_footer_input}
+                        onChange={handleChange}
+                      />
+                      <Button type="submit" size="sm" variant="outline" className={styles.groupshop_footer_sub}>
+                        <ChevronRight size={16} />
+                      </Button>
+                      <Form.Control.Feedback type="invalid">
+                        {errors.email}
+                      </Form.Control.Feedback>
+                    </InputGroup>
+                  </Form>
+
+                </>
+              )}
+
+              {/* {isInfluencerGS ? (
                 <>
                   <p>
                     <strong>Want your own store? </strong>
                     Be the first to find out when
                     you can shop your favorite brands on Groupshop.
                   </p>
-
                 </>
-              ) : (
-                <p>
-                  <strong>Want your own store? </strong>
-                  Be the first to find out when
-                  you can shop your favorite brands on Groupshop.
-                </p>
-              )}
+              )
+                : isExpired ? (
+                  <>
+                    <p>
+                      <strong>Want your own store? </strong>
+                      Be the first to find out when
+                      you can shop your favorite brands on Groupshop.
+                    </p>
+                  </>
+                )
+                  : (
+                    <p>
+                      <strong>Want your own store? </strong>
+                      Be the first to find out when
+                      you can shop your favorite brands on Groupshop.
+                    </p>
+                  )} */}
             </div>
 
-            <Form noValidate onSubmit={handleSubmit}>
-              <InputGroup className=" my-3" id="borderclr">
-                <FormControl
-                  name="email"
-                  value={values.email}
-                  placeholder="Enter your email"
-                  aria-label="Email"
-                  aria-describedby="basic-addon2"
-                  isInvalid={!!errors.email}
-                  className="border-bottom rounded-0 border-0 px-2"
-                  onChange={handleChange}
-                />
-                <Button type="submit" size="sm" variant="outline" className={styles.groupshop_footer_sub}>
-                  <ChevronRight size={16} />
-                </Button>
-                <Form.Control.Feedback type="invalid">
-                  {errors.email}
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form>
           </section>
         </Col>
       </Row>

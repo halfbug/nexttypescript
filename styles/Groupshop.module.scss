@@ -1786,14 +1786,23 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .mx-2;
       border: 1px solid $purple !important;
     }
+    &_submit {
+      @extend .mt-2, .px-5;
+      border: 1px solid #FEBCB1 !important;
+    }
     &_text {
       @include media-breakpoint-down(sm) {
         text-align: center;
         padding-top: 20px;
       }
     }
-    input {
+    &_input {
+      @extend .mt-3, .border-bottom, .rounded-0, .border-0, .px-3;
       border-bottom: 1px solid $purple !important;
+    }
+    &_input2 {
+      @extend .mt-3, .border-bottom, .rounded-0, .border-0, .pe-5;
+      border-bottom: 1px solid #FEBCB1 !important;
     }
 
     &_link {
