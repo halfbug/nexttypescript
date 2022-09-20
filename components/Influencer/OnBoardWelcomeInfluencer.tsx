@@ -88,7 +88,7 @@ const OBWelcomeInfluencer = ({
             How it works
           </div>
           <div className={styles.welcome__modal__body__box2influencer}>
-            <span className={styles.welcome__modal__body__iconMobile}><Cart className="me-2" /></span>
+            <span className={styles.welcome__modal__body__iconMobile}><Cart /></span>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
               your Groupshop with friends & followers
@@ -120,9 +120,7 @@ const OBWelcomeInfluencer = ({
                 of every order
               </strong>
               {' '}
-              everytime someone
-              <br />
-              shops. No limits, all cash.
+              everytime someone shops. No limits, all cash.
             </p>
           </div>
 

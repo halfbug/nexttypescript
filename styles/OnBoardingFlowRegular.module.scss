@@ -231,7 +231,7 @@
             }
 
             &__box2influencer {
-                padding: 23px 45px;
+                padding: 23px 40px;
                 border: 1px dashed #9AB639;
                 border-radius: 12px;
                 margin-top: 20px;
@@ -460,6 +460,10 @@
                     margin-bottom: 23px;
                     width: auto;
                     text-align: start;
+                }
+
+                &__description{
+                    margin-left: 16px;
                 }
 
                 &_description{
