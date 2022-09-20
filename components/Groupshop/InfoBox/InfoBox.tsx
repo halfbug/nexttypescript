@@ -19,6 +19,7 @@ import useGtm from 'hooks/useGtm';
 import { Send } from 'react-bootstrap-icons';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useDeal from 'hooks/useDeal';
+import Icon from 'assets/images/model-info-cone.svg';
 
 interface mesProps {
   mes: string;
@@ -76,7 +77,9 @@ const InfoBox = ({
             <h2>
               Shopping together has never
               <br />
-              been so rewarding.
+              been so rewarding
+              {' '}
+              <Icon />
             </h2>
           </div>
           <div className={styles.groupshop_infoBox}>
