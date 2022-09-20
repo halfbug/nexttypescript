@@ -168,7 +168,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     refferalDealsProducts,
     // allProducts,
   } = gsctx;
-  console.log('🚀 ~ file: [...code].tsx ~ line 169 ~ addedProducts', addedProducts);
+  console.log('🚀 ~ file: [...code].tsx ~ line 171 ~ shoppedBy', shoppedBy);
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray, findInArray2,
   } = useUtilityFunction();
@@ -196,7 +196,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     } else {
       setshoppedBy(uniqueArray(member?.products));
     }
-  }, [gsctx?.ownerDeals, gsctx.dealProducts]);
+  }, [gsctx?.ownerDeals, gsctx.dealProducts, member]);
 
   useEffect(() => {
     // const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
@@ -241,6 +241,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   }, [gsctx.cart]);
 
   console.log('🚀 ~ file: [...code] line 247 ~ leftOverProducts', leftOverProducts()?.length);
+  console.log('🚀 ~ file: [...code] line 244 ~ member', member);
 
   const { text, cashBackText, cashbackVal } = useTopBanner();
   const [value, setvalue] = useState<undefined | string>('...');

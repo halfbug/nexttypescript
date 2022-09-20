@@ -12,6 +12,7 @@ module.exports = {
   env: {
     BE_URL: process.env.BE_URL,
     API_URL: process.env.API_URL,
+    NEXT_PUBLIC_IMAGE_PATH: process.env.NEXT_PUBLIC_IMAGE_PATH,
   },
   webpack(config) {
     config.module.rules.push({

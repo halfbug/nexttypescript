@@ -84,7 +84,7 @@ export default function useDeal() {
     (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
   ) ?? [], [gsctx.members]);
 
-  const formatName = useCallback((customer : any) => `${customer.firstName ?? ''} ${customer.firstName ? customer.lastName.charAt(0) : customer.lastName}`,
+  const formatName = useCallback((customer : any) => `${customer.firstName ?? ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,
     [gsctx.members]);
 
   const topFive = useCallback(
@@ -325,7 +325,7 @@ export default function useDeal() {
   ) ?? []), [gsctx, gsctx?.store?.products]);
   const getOwnerName = useCallback(() => (
     isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
-      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.lastName.charAt(0) : gsctx?.members[0].orderDetail.customer.lastName}`)), [gsctx]);
+      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0]?.orderDetail?.customer?.lastName?.charAt(0) ?? '' : gsctx?.members[0]?.orderDetail?.customer?.lastName ?? ''}`)), [gsctx]);
   const socialText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   const nativeShareText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   return {
