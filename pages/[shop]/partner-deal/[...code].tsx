@@ -126,7 +126,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         ...partnerGroupshop,
         members: partnerGroupshop.members ?? [],
       };
-      console.log('=== update gs partner ...code');
+      console.log('=== update gs partner ...code ');
 
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
       setpending(false);
