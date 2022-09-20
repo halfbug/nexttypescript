@@ -74,6 +74,23 @@
             color: $subheadingclr;
             opacity: 0.5;
         }
+        &__tagBox {
+            @extend .d-flex, .justify-content-start, .align-items-center,.p-1, .ms-2;
+            border-radius: $border-radius-light;
+            background: #dcd0e8 !important;
+            opacity: 100;
+            span {
+                //@extend .ms-3;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 15px;
+                text-align: center;
+                color: $black!important;
+            }
+            width: fit-content;
+        }
     }
 
     &__importDate_box {
@@ -116,6 +133,7 @@
     &__table_head {
         @extend .d-flex, .justify-content-around;
         &__txt {
+            @extend .ms-2;
             color: #000000;
             font-family: "DM Sans";
             font-weight: 400;
@@ -190,10 +208,10 @@
             font-size: $font-size-small-medium;
             color: $black;
             background: $comp_bg;
-            border-radius: $border-radius-large!important;
-            margin-bottom: 10px!important;
-            border-width: 3px!important;
- 
+            border-radius: $border-radius-large !important;
+            margin-bottom: 10px !important;
+            border-width: 3px !important;
+
             table {
                 border-collapse: separate;
                 border-spacing: 0px 25px;
@@ -204,18 +222,14 @@
                 width: 150px;
             }
 
-
             tr {
-                background-color: #F8F8F8;
+                background-color: #f8f8f8;
                 border-radius: 23px;
                 border-collapse: separate;
                 border-spacing: 0px 25px;
-    
-
             }
-            td{
+            td {
                 vertical-align: middle;
-                
             }
             td:first-child {
                 border-top-left-radius: 23px;
@@ -225,25 +239,17 @@
                 border-top-right-radius: 23px;
                 border-bottom-right-radius: 23px;
             }
-            &:hover{
+            &:hover {
                 background-color: $lightClassic;
-                border-radius: $border-radius-large; 
-                
-            } 
+                border-radius: $border-radius-large;
+            }
             &:active {
                 background-color: $lightClassic;
                 border-radius: $border-radius-large;
             }
         }
-        &__tag1 {
-            @extend .d-flex, .justify-content-start, .align-items-center;
-            border-radius: $border-radius-light;
-            background: #dcd0e8 !important;
-            opacity: 100;
-            width: fit-content;
-        }
     }
     &_cursor_pointer {
         cursor: pointer;
-      }
+    }
 }

@@ -97,7 +97,7 @@ const RetentionImport = ({
           <Table borderless responsive>
             <thead className={styles.rt__table_head__txt}>
               <tr>
-                <th>Date</th>
+                <th>&nbsp; &nbsp;Date</th>
                 <th> # Groupshops Created</th>
                 <th>&nbsp;</th>
               </tr>
@@ -106,7 +106,7 @@ const RetentionImport = ({
               {renderItems?.map((part: any, index: number) => (
                 <tr className={[styles.rt_table_row__data_row, 'd-table-row border-0 mb-2 mt-2'].join(' ')}>
                   <td>
-                    <div className={[styles.rt_table_row__tag1, 'p-1'].join(' ')}>
+                    <div className={styles.rt__importCustomer_box__tagBox}>
                       <span className="text-dark">
                         {' '}
                         {moment(new Date(part.createdAt)).format('MM/DD/YY')}
