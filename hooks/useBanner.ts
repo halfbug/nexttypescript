@@ -29,7 +29,7 @@ const useBanner = () => {
       // }
       if (bannerImage === '') {
         const key = getKeyFromS3URL(groupshop?.campaign?.settings?.imageUrl ?? '');
-        setBannerImage(`${process.env.IMAGE_PATH}/${key}`);
+        setBannerImage(`${process.env.IMAGE_PATH}/${key ?? 'bg.jpg'}`);
       }
       // eslint-disable-next-line max-len
       // dispatch({ type: 'UPDATE_GROUPSHOP', payload: { ...groupshop, campaign: { ...groupshop.campaign, settings: { ...groupshop?.campaign?.settings, s3imageUrl: imgBanner } } } });
