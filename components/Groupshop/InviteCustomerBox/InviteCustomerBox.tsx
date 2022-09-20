@@ -71,6 +71,7 @@ const InviteCustomerBox = ({
   };
 
   const [getGroupshop, { data, loading }] = useLazyQuery(FIND_PENDING_GROUPSHOP, {
+    fetchPolicy: 'no-cache',
     onError() {
       console.log('Record not found!');
     },
