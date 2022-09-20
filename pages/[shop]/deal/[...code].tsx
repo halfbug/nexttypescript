@@ -591,7 +591,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 : `${member?.orderDetail.customer.lastName}`} */}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
-            {!pending && gsctx?.members?.length > 1 ? (
+            {SKU.length > 4 && !pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2" align={{ lg: 'start', sm: 'end' }}>
                 <Dropdown.Toggle
                   disabled={SKU.length < 5}
