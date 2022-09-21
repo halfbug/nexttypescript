@@ -27,6 +27,11 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   const {
     shop, discountCode, ownerCode,
   } = useCode();
+
+  const {
+    nativeShareText, gsShortURL,
+  } = useDeal();
+
   const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const handleClose = () => {
@@ -57,8 +62,9 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
     });
 
     // if (shop && ownerCode && discountCode) {
-    //   Router.push(`/${shop}/deal/${discountCode}/${ownerCode}/1`);
+    //   Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
     // }
+    handleClose();
   };
 
   return (
@@ -167,7 +173,13 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             </p>
           </div>
 
-          <div className={styles.welcome__modal__body__boxMobile}>
+          <div
+            className={styles.welcome__modal__body__boxMobile}
+            onClick={handleClose}
+            onKeyDown={handleClose}
+            role="button"
+            tabIndex={0}
+          >
             <p className={styles.welcome__modal__body__boxMobile__txt}>
               <div className={styles.welcome__modal__body__boxMobile__txt__icon}>🛒</div>
               <div>
@@ -187,7 +199,20 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               </div>
             </p>
           </div>
-          <div className={styles.welcome__modal__body__boxMobile}>
+          <div
+            role="button"
+            tabIndex={0}
+            className={styles.welcome__modal__body__boxMobile}
+            onClick={() => navigator?.share({
+              title: 'Groupshop',
+              text: `${nativeShareText} ${gsShortURL}`,
+            })}
+            onKeyDown={() => navigator?.share({
+              title: 'Groupshop',
+              text: `${nativeShareText} ${gsShortURL}`,
+            })}
+
+          >
             <p className={styles.welcome__modal__body__boxMobile__txt}>
               <div className={styles.welcome__modal__body__boxMobile__txt__icon}>📩</div>
               <div>
@@ -235,12 +260,24 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               Get Started
             </Button> */}
           </div>
-          <div className={styles.welcome__modal__body__btnskip} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
+          {/* <div
+            className={styles.welcome__modal__body__btnskip}
+            onClick={handleClose}
+            onKeyDown={handleClose}
+            role="button"
+            tabIndex={0}
+          >
             Skip and shop
-          </div>
-          <div className={styles.welcome__modal__body__btnskipMobie} onClick={handleClose} onKeyDown={handleClose} role="button" tabIndex={0}>
+          </div> */}
+          {/* <div
+            className={styles.welcome__modal__body__btnskipMobie}
+            onClick={handleClose}
+            onKeyDown={handleClose}
+            role="button"
+            tabIndex={0}
+          >
             Skip to shop
-          </div>
+          </div> */}
         </Modal.Body>
 
       </Modal>
