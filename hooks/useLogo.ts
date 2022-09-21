@@ -14,17 +14,17 @@ const useLogo = () => {
   } = useUtilityFunction();
   const { store } = gsctx;
   const [storeLogo, setStoreLogo] = useState<string>('');
-  const s3path = store?.logoImage;
+  // const s3path = store?.logoImage;
 
   const gets3logo = useCallback(async (logoImage: string) => {
     const key = getKeyFromS3URL(logoImage);
-    const logoS3 = await getSignedUrlS3(key);
-
-    if (logoS3) setStoreLogo(logoS3);
-  }, [store, s3path]);
+    // const logoS3 = await getSignedUrlS3(key);
+    // setBannerImage(`${process.env.IMAGE_PATH}/${key ?? 'bg.jpg'}`);
+    if (storeLogo === '' && logoImage) setStoreLogo(`${process.env.IMAGE_PATH}/${key}`);
+  }, [store]);
 
   useEffect(() => {
-    gets3logo(s3path ?? '');
+    gets3logo(store?.logoImage ?? '');
   }, [store]);
 
   return storeLogo;
