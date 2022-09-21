@@ -22,10 +22,6 @@ export interface ICollectionsProps {
 export default function Collections({
   data, handleCollectionButton, handleChecked, isChecked, ...props
 }: ICollectionsProps) {
-  // useEffect(() => {
-  //   console.log(data, 'data collection');
-  // }, [data]);
-
   return (
     <Container {...props}>
       <Row>
@@ -55,6 +51,7 @@ export default function Collections({
                       id={id}
                       onChange={handleChecked}
                       checked={isChecked(id, 'collections')}
+                      onClick={(event) => event.stopPropagation()}
                     /> */}
                     <div className={['m-0', styles2.product_all_product].join(' ')}>
                       {title}

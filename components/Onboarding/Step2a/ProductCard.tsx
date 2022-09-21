@@ -32,6 +32,7 @@ const ProductCard = ({
             id={id}
             checked={isChecked(id)}
             onChange={handleChecked}
+            onClick={(event) => event.stopPropagation()}
           />
         </Form.Group>
 

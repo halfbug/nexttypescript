@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import styles from 'styles/product.module.scss';
+import _ from 'lodash';
 import Layout from './Layout';
 import Collections from './Collections';
 import Products from './Products';
@@ -46,13 +47,13 @@ const Screen1 = ({
   const CampPrd = store.newCampaign?.products?.filter((item) => item !== undefined);
   const CampAddPrd = store.newCampaign?.addableProducts?.filter((item) => item !== undefined);
   const CampCollection = store.newCampaign?.collections?.filter((item) => item !== undefined);
-  console.log("🚀 ~ file: Screen1.tsx ~ line 46 ~ Screen1 ~ CampCollection", CampCollection);
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
       collections: CampCollection ?? [],
       products: selectedProducts ?? (ins === "2a" ? CampPrd : CampAddPrd) ?? [],
     },
   );
+  const [showError, setshowError] = useState<boolean>(false);
   const getEntityById = (id:string, entity: string):
    ICollection | IProduct => store?.[entity]?.filter((item: any) => item !== undefined).find(
     (col:IProduct | ICollection) => col.id === id,
@@ -104,6 +105,7 @@ const Screen1 = ({
   }, [ins]);
 
   const backToList = () => {
+    setshowError(false);
     setview('List');
 
     if (ins === "addproduct") {
@@ -117,9 +119,12 @@ const Screen1 = ({
   };
 
   const handleCollectionButton = (id:string) => {
+    setshowError(false);
     setview('Detail');
     if (id === 'all') {
       setproducts(store?.products); setTitle('Total Products');
+    } else if (id === 'selected') {
+      setproducts(campaign?.products); setTitle('Selected Products');
     } else {
       const collection = getEntityById(id, 'collections') as ICollection;
       if (collection) { setproducts(collection.products); setTitle(collection.title); }
@@ -146,12 +151,17 @@ const Screen1 = ({
   };
 
   const clickAllProducts = (e: any) => {
+    setshowError(false);
     const { checked } = e.target;
     if (checked === true) {
-      setcampaign({
-        products: store?.products, collections: store?.collections,
-      });
-      setAllProductChecked(true);
+      if (store?.products && store?.products?.length <= 80) {
+        setcampaign({
+          products: store?.products, collections: store?.collections,
+        });
+        setAllProductChecked(true);
+      } else {
+        setshowError(true);
+      }
     } else {
       setcampaign({
         products: [], collections: [],
@@ -160,18 +170,50 @@ const Screen1 = ({
     }
   };
 
+  const clickSelectedProducts = () => {
+    setshowError(false);
+    setcampaign({
+      products: [], collections: [],
+    });
+    setAllProductChecked(false);
+  };
+
   const handleChecked = (e: any) => {
+    setshowError(false);
     const { checked, id, name } = e.target;
     const ncamp = { ...campaign };
 
     if (checked) {
       if (name === 'collections') {
         const entity = getEntityById(id, name) as ICollection;
-        ncamp.products = [...campaign?.products ?? [], ...entity?.products];
-        ncamp?.collections?.push(entity);
-      } else {
-        const entity = getEntityById(id, name) as IProduct;
-        ncamp?.products?.push(entity);
+        if (campaign?.products && campaign?.products?.length + entity?.products.length <= 80) {
+          ncamp.products = [...campaign?.products ?? []];
+          entity.products.forEach((p: IProduct) => {
+            if (!campaign?.products?.find((cp: IProduct) => cp.id === p.id)) {
+              ncamp.products?.push(p);
+            }
+          });
+          const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.differenceBy(col.products, [...entity.products, ...campaign.products!], "id").length === 0) ?? [];
+          ncamp.collections = _.unionBy(ncamp.collections, tempCol, "id");
+        } else {
+          setshowError(true);
+        }
+      } else if (name === 'products') {
+        if (campaign?.products && campaign?.products?.length < 80) {
+          const entity = getEntityById(id, name) as IProduct;
+          const storeColl = store.collections && store?.collections.filter((col: ICollection) => col !== undefined).filter((col: ICollection) => col.products.find((p: IProduct) => p.id === entity.id));
+          const tempCol: Array<ICollection> = [];
+          const toCompare: Array<IProduct> = [...campaign.products, entity];
+          storeColl?.forEach((col: ICollection) => {
+            if (_.differenceBy(col.products, toCompare, "id").length === 0) {
+              tempCol.push(col);
+            }
+          });
+          ncamp.collections = _.unionBy(ncamp?.collections, _.differenceBy(tempCol, campaign?.collections ?? [], "id"), "id");
+          ncamp?.products?.push(entity);
+        } else {
+          setshowError(true);
+        }
       }
 
       if (store?.collections?.length === ncamp?.collections?.length) {
@@ -181,12 +223,15 @@ const Screen1 = ({
       }
     } else if (checked === false) {
       if (name === 'collections') {
-        ncamp.collections = campaign?.collections?.filter((item: any) => item !== undefined).filter((col) => col.id !== id);
         const ccol = getEntityById(id, name) as ICollection;
+        const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.intersectionBy(col.products, ccol.products, "id").length > 0) ?? [];
+        ncamp.collections = campaign?.collections?.filter((item: any) => item !== undefined).filter((col) => !tempCol.includes(col));
         ncamp.products = campaign?.products?.filter((item: any) => item !== undefined).filter(
           (prd) => !ccol?.products.find((ccolprd) => ccolprd.id === prd.id),
         );
       } else {
+        const storeColl = store.collections && store?.collections.filter((col: ICollection) => col !== undefined).filter((col: ICollection) => col.products.find((p: IProduct) => p.id === id));
+        ncamp.collections = ncamp.collections?.filter((col: ICollection) => !storeColl?.includes(col));
         ncamp.products = ncamp?.products?.filter((prod) => prod.id !== id);
       }
       setAllProductChecked(false);
@@ -253,7 +298,6 @@ const Screen1 = ({
     });
     setParams({ ins: 2 });
   };
-  console.log({ campaign });
   React.useEffect(() => {
     if (store?.products?.length === campaign?.products?.length) {
       setAllProductChecked(true);
@@ -268,7 +312,32 @@ const Screen1 = ({
   return (
     <Dialogue show={show} size="lg" className="p-3 m-0">
       <Layout handleSearch={handleSearch} campaign={campaign}>
-
+        {
+          campaign?.products && campaign?.products?.length > 0
+          && (
+          <Row className={`m-0 ${view !== 'List' ? 'd-none' : ''}`}>
+            <Col xs={12} className="m-0 p-0">
+              <ListGroup as="ol">
+                <ListGroup.Item
+                  as="li"
+                  onClick={() => handleCollectionButton('selected')}
+                  className={['d-flex justify-content-between align-items-center ', styles.border_listgroup].join(' ')}
+                >
+                  <div className="ms-2 me-auto p-2">
+                    <div className={styles.product_all_product}>
+                      { campaign?.products && false && <Form.Check type="checkbox" disabled inline className="fs-4" id="selected-products-handle" onClick={(event) => event.stopPropagation()} checked={!!campaign?.products} onChange={clickSelectedProducts} />}
+                      Selected Products (
+                      {campaign?.products?.length}
+                      )
+                    </div>
+                  </div>
+                  <IconButton icon={<ChevronRight />} onClick={() => handleCollectionButton('selected')} />
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+          </Row>
+          )
+        }
         <Row className={`m-0 ${view !== 'List' ? 'd-none' : ''}`}>
           <Col xs={12} className="m-0 p-0">
             <ListGroup as="ol">
@@ -310,7 +379,7 @@ const Screen1 = ({
           handleChecked={handleChecked}
         />
 
-        <Form.Control.Feedback type="invalid" className={`${campaign?.products && campaign?.products?.length > 80 ? 'd-block' : 'd-none'} text-center`}>
+        <Form.Control.Feedback type="invalid" className={`${showError ? 'd-block' : 'd-none'} text-center`}>
           { ins === "addproduct" ? '' : "you can select only 80 products" }
         </Form.Control.Feedback>
 
