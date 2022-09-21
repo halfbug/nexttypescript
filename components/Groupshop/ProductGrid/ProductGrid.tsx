@@ -67,7 +67,9 @@ const ProductGrid = ({
   // const fillerz = (!skuCount || (skuCount && skuCount > 4))
   //   && pageSize === (renderItems?.length) ? 0 : 1 || 1;
   // || ((skuCount && skuCount > 4) && pageSize === (renderItems?.length) ? 0 : 1 || 1);
-  const fillerz = pageSize === (renderItems?.length) ? 0 : 1;
+  // eslint-disable-next-line max-len
+  // const fillerz = ((pageSize === (renderItems?.length)) || (products && products.length > 3 && id === 'toppicks')) ? 0 : 1;
+  const fillerz = pageSize === renderItems?.length ? 0 : 1;
   // const fillerz = (!skuCount || (skuCount && skuCount > 4))
   // && pageSize === (renderItems?.length) ? 0 : 1 || 1;
 
@@ -93,6 +95,11 @@ const ProductGrid = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ pageSize', pageSize);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ renderItems', renderItems);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ fillerz', fillerz);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ skucount', skuCount);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ leftOverProducts', leftOverProducts()?.length);
 
   if (products === undefined || products?.length < 1) {
     // return (<Placeholder as="h1" bg="secondary" className="w-100" />);

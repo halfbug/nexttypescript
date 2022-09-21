@@ -667,10 +667,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             lg={4}
             xl={3}
             products={
-              member?.products
-              && (member?.products!.length > 3
+              ((SKU.length >= 2 && SKU.length <= 4)
+                ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
                 ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4))
+                : topPicks?.slice(0, 4)
             }
             maxrows={1}
             addProducts={handleAddProduct}
@@ -678,6 +678,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             id="toppicks"
             isModalForMobile={isModalForMobile}
             urlForActivation={urlForActivation}
+            skuCount={SKU.length}
           >
             <h2>Top Picks</h2>
           </ProductGrid>
