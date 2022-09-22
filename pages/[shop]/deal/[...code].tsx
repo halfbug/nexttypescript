@@ -278,6 +278,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
+  console.log('test commit');
   return (
     <>
       <Head>
