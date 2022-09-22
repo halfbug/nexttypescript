@@ -31,7 +31,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   const {
     nativeShareText, gsShortURL,
   } = useDeal();
-
+  console.log('nativeShareText ===', nativeShareText);
   const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const handleClose = () => {
