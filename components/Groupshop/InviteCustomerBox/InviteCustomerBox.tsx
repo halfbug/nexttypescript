@@ -274,7 +274,7 @@ const InviteCustomerBox = ({
                         <WhiteButton
                           className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
                         >
-                          <Spinner animation="border" className="align-middle" />
+                          <Spinner animation="border" size="sm" className="align-middle" />
                         </WhiteButton>
                       </>
                     )}
