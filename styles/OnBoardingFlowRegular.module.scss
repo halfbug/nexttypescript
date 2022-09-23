@@ -627,7 +627,17 @@
                 line-height: 23px;
                 text-align: center;
             }
-
+            &__PurpleBox_desc {
+                @extend .p-3, .mt-4, .d-lg-block, .d-none;
+                border: 1px dashed #F28BF4 !important;
+                border-radius: 12px;
+                color: #000000;
+                font-family: 'Mulish';
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 23px;
+                text-align: center;
+            }
             &__description1 {
                 color: #000000;
                 font-family: 'Mulish';
