@@ -181,23 +181,23 @@ const Footer = ({
           <Row className={styles.groupshop_socialIcon}>
 
             <section className="d-flex justify-content-center px-2">
-              <div className="mx-1">
+              <div>
                 {' '}
                 <SocialButtonLinks network="Instagram" url={socialLinks?.instagram ?? ''} />
               </div>
 
-              <div className="mx-1">
+              <div>
                 {' '}
                 <SocialButtonLinks network="Facebook" url={socialLinks?.facebook ?? ''} />
                 {' '}
               </div>
 
-              <div className="mx-1">
+              <div>
                 {' '}
                 <SocialButtonLinks network="Tiktok" url={socialLinks?.tiktok ?? ''} />
                 {' '}
               </div>
-              <div className="mx-1">
+              <div>
                 {' '}
                 <SocialButtonLinks network="Twitter" url={socialLinks?.twitter ?? ''} />
                 {' '}

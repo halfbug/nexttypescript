@@ -16,7 +16,7 @@ const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
     <div>
       { network === 'Instagram' && url !== '' && (
         <Button
-          className={['rounded-circle p-2', styles.groupshop_instagram].join(' ')}
+          className={['rounded-circle p-2 mx-1', styles.groupshop_instagram].join(' ')}
           variant="default"
           style={{ color: 'black', background: '#F0F0F0' }}
           target="_blank"
@@ -27,7 +27,7 @@ const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
       ) }
       { network === 'Twitter' && url !== '' && (
         <Button
-          className={['rounded-circle p-2', styles.groupshop_instagram].join(' ')}
+          className={['rounded-circle p-2 mx-1', styles.groupshop_instagram].join(' ')}
           variant="default"
           style={{ color: 'black', background: '#F0F0F0' }}
           target="_blank"
@@ -38,7 +38,7 @@ const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
       ) }
       { network === 'Tiktok' && url !== '' && (
         <Button
-          className={['rounded-circle p-2', styles.groupshop_tiktok].join(' ')}
+          className={['rounded-circle p-2 mx-1', styles.groupshop_tiktok].join(' ')}
           variant="default"
           style={{ color: 'black', background: '#F0F0F0' }}
           target="_blank"
@@ -49,7 +49,7 @@ const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
       ) }
       { network === 'Facebook' && url !== '' && (
         <Button
-          className={['rounded-circle p-2', styles.groupshop_facebook].join(' ')}
+          className={['rounded-circle p-2 mx-1', styles.groupshop_facebook].join(' ')}
           variant="default"
           style={{ color: 'black', background: '#F0F0F0' }}
           target="_blank"
