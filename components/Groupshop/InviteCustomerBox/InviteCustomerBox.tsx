@@ -159,8 +159,8 @@ const InviteCustomerBox = ({
                     <CalenderIcon className={styles.marketing_DatepickerIcon} />
                     <DatePicker
                       className="form-control"
-                      placeholderText="yyyy-mm-dd"
-                      dateFormat="yyyy-MM-dd"
+                      placeholderText="dd/mm/yyyy"
+                      dateFormat="dd/MM/yyyy"
                       name="startDate"
                       maxDate={new Date()}
                       selected={startDate}
@@ -183,8 +183,8 @@ const InviteCustomerBox = ({
                     <CalenderIcon className={styles.marketing_DatepickerIcon2} />
                     <DatePicker
                       className="form-control"
-                      placeholderText="yyyy-mm-dd"
-                      dateFormat="yyyy-MM-dd"
+                      placeholderText="dd/mm/yyyy"
+                      dateFormat="dd/MM/yyyy"
                       minDate={startDate}
                       maxDate={new Date()}
                       name="endtDate"
