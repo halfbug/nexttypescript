@@ -77,8 +77,10 @@ export default function UploadButton({
           setImagefeedback(null);
           const fd = new FormData();
           const shopName = store.shop.split('.');
-          const imgExt = files[0].name.split('.')[1];
-          fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt}`);
+          const imgExt = files[0].name.split('.');
+          const imgExt1 = imgExt[imgExt.length - 1];
+          console.log("🚀 ~ file: index.tsx ~ line 83 ~ handleImageUpload ~ imgExt1", imgExt1);
+          fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt1}`);
           setprogress(true);
           axios.post(`${process.env.API_URL}/image`, fd, config)
             .then((res) => {

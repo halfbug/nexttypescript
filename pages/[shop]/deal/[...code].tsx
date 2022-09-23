@@ -215,7 +215,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           ...gsctx?.ownerDealsProducts ?? []]),
       },
     });
-  }, [dealProducts, popularProducts]);
+  }, [gsctx?.refferalDealsProducts, gsctx?.ownerDealsProducts]);
 
   useEffect(() => {
     // mixing popular produt with topPicks to complete the count of 4 if popular are less.
@@ -279,6 +279,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     return <p>groupshop not found</p>;
   }
   console.log('test commit');
+  console.log('popular', refferalDealsProducts);
   return (
     <>
       <Head>
@@ -636,54 +637,55 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous purchases and recommendations.
           </p>
         </ProductGrid>
-        {SKU.length > 4 && (members?.length > 1 || refferalDealsProducts?.length ? (
-          <ProductGrid
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            products={
+        {SKU.length > 4 && (
+          members?.length > 1 || refferalDealsProducts?.length ? (
+            <ProductGrid
+              xs={6}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={3}
+              products={
               ownerProducts
               && (ownerProducts!.length > 3
                 // ? popularProducts?.slice(0, 3)
                 ? popularShuffled
                 : newPopularPrd)
             }
-            maxrows={1}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            id="popularproducts"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          >
-            <h2>Popular with the Group</h2>
-          </ProductGrid>
-        ) : (
-          <ProductGrid
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            products={
+              maxrows={1}
+              addProducts={handleAddProduct}
+              handleDetail={(prd) => setsProduct(prd)}
+              id="popularproducts"
+              isModalForMobile={isModalForMobile}
+              urlForActivation={urlForActivation}
+              skuCount={SKU.length}
+            >
+              <h2>Popular with the Group</h2>
+            </ProductGrid>
+          ) : (
+            <ProductGrid
+              xs={6}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={3}
+              products={
               ((SKU.length >= 2 && SKU.length <= 4)
                 ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
                 ? topPicks?.slice(0, 3)
                 : topPicks?.slice(0, 4)
             }
-            maxrows={1}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            id="toppicks"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          >
-            <h2>Top Picks</h2>
-          </ProductGrid>
-        ))}
+              maxrows={1}
+              addProducts={handleAddProduct}
+              handleDetail={(prd) => setsProduct(prd)}
+              id="toppicks"
+              isModalForMobile={isModalForMobile}
+              urlForActivation={urlForActivation}
+              skuCount={SKU.length}
+            >
+              <h2>Top Picks</h2>
+            </ProductGrid>
+          ))}
 
         {!hideSection && SKU.length > 1 ? (
           <ProductGrid
