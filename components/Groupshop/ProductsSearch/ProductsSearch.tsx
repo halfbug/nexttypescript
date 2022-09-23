@@ -438,7 +438,7 @@ const ProductsSearch = ({
                 )
                 : (
                   <>
-                    {!isOwner && selected && selected.length > 0 ? (
+                    {selected && selected.length > 0 ? (
                       <div className="pb-3">
                         {selected.length}
                         {' '}

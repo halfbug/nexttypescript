@@ -31,7 +31,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   const {
     nativeShareText, gsShortURL,
   } = useDeal();
-  console.log('nativeShareText ===', nativeShareText);
+  // console.log('nativeShareText ===', nativeShareText);
   const { gsctx, dispatch } = useContext(GroupshopContext);
 
   const handleClose = () => {
@@ -175,8 +175,8 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
 
           <div
             className={styles.welcome__modal__body__boxMobile}
-            onClick={handleClose}
-            onKeyDown={handleClose}
+            onClick={moveForward}
+            onKeyDown={moveForward}
             role="button"
             tabIndex={0}
           >
