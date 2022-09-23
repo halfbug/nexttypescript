@@ -562,7 +562,7 @@ const ProductDetail = ({
                         : (
                           <>
                             <NativeShareButton
-                              label="Invite Now"
+                              label="🔗 Invite Now"
                               className={['align-self-center mb-2 py-2 px-3 w-75 border-0', styles.groupshop_Pd_addtoCart].join(' ')}
                               shareurl={activateURL}
                               text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
