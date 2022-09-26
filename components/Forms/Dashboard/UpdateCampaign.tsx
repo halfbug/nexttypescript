@@ -29,7 +29,6 @@ import useDelay from 'hooks/useDelay';
 import _ from 'lodash';
 import UpdateRewards from './UpdateRewards';
 import DBSettings from './DBSettings';
-import CampaignSocialMedia from './CampaignSocialMedia';
 
 interface IProps {
   setHeading: any;
@@ -55,18 +54,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     criteria: '',
     joinExisting: 1,
     rewards: '',
-    brandColor: '#3C3C3C',
-    customColor: '',
-    customBg: '',
-    imageUrl: '',
-    youtubeUrl: '',
-    media: 'image',
     addableProducts: [],
-    facebook: '',
-    instagram: '',
-    tiktok: '',
-    pinterest: '',
-    twitter: '',
 
   });
   const { findInArray } = useUtilityFunction();
@@ -77,16 +65,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     updateStoreForEditCampaignId(campaignid);
   }, [campaignid]);
   console.log(campaign, "campaign");
-
-  const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-  const validUrl = /^(https:\/\/?(www.)?instagram.com\/p\/([^/?#&/]+)).*/gm;
-
-  const regex = {
-    instagram: /(?:(?:http|https):\/\/)?(?:www.)?(?:instagram.com|instagr.am|instagr.com)\/(\w+)/igm,
-    twitter: /(?:(?:http|https):\/\/)?(?:www.)?(?:twitter.com)\/(\w+)/igm,
-    facebook: /(?:(?:http|https):\/\/)?(?:www.)?(?:facebook.com)\/(\w+)/igm,
-    tiktok: /(?:(?:http|https):\/\/)?(?:www.)?(?:tiktok.com)\/(\w+)/igm,
-  };
 
   React.useEffect(() => {
     if (campaign) {
@@ -99,18 +77,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
         criteria: campaign?.criteria!,
         joinExisting: campaign?.joinExisting!,
         rewards: campaign?.rewards!,
-        brandColor: campaign?.settings?.brandColor!,
-        customBg: campaign?.settings?.customBg!,
-        imageUrl: campaign?.settings?.imageUrl!,
-        youtubeUrl: campaign?.settings?.youtubeUrl!,
-        media: campaign?.settings?.media!,
         products: campaign?.products,
-        facebook: campaign?.socialLinks?.facebook ?? '',
-        instagram: campaign?.socialLinks?.instagram ?? '',
-        tiktok: campaign?.socialLinks?.tiktok ?? '',
-        // pinterest: arr[0]?.socialLinks?.facebook,
-        twitter: campaign?.socialLinks?.twitter ?? '',
-
       };
       setstate({ ...newState });
     }
@@ -120,14 +87,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     criteria: yup
       .string()
       .required('Select product options'),
-    brandColor: yup
-      .string()
-      .required('Brand Color is required.'),
-    facebook: yup.string().matches(regex.facebook, 'Facebook URL is not valid'),
-    instagram: yup.string().matches(regex.instagram, 'Instagram url is not valid'),
-    tiktok: yup.string().matches(regex.tiktok, 'TikTok URL is not valid'),
-    twitter: yup.string().matches(regex.twitter, 'Twitter is not valid'),
-
   });
 
   const {
@@ -141,14 +100,10 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
       const {
-        criteria, joinExisting, products, brandColor, customColor, customBg,
-        imageUrl, youtubeUrl, addableProducts,
-        facebook, tiktok, instagram, twitter,
+        criteria, joinExisting, products, addableProducts,
       } = valz;
       console.log({ valz });
-      let { media } = valz;
 
-      if (customBg) media = "";
       let customProducts: any[] = [];
       let customCollections: any[] = [];
       if (criteria === 'custom') {
@@ -168,24 +123,9 @@ export default function UpdateCampaign({ setHeading }: IProps) {
             criteria,
             // eslint-disable-next-line radix
             joinExisting: Boolean(parseInt(joinExisting ?? 1)),
-            socialLinks: {
-              facebook,
-              instagram,
-              tiktok,
-              twitter,
-            },
-
             products: customProducts,
             collections: customCollections,
             addableProducts,
-            settings: {
-              brandColor,
-              customColor,
-              customBg,
-              imageUrl,
-              youtubeUrl,
-              media,
-            },
 
           },
         },
@@ -461,38 +401,6 @@ export default function UpdateCampaign({ setHeading }: IProps) {
             </Row>
             <UpdateRewards />
           </Container>
-        </Col>
-      </Row>
-      <Row className="mt-2">
-        <Col><h3>Groupshop Design</h3></Col>
-      </Row>
-      <Row className="mt-2">
-        <Col lg={7}>
-          <section>
-            {/* <Settings isDB /> */}
-            <DBSettings
-              values={values}
-              handleChange={handleChange}
-              touched={touched}
-              errors={errors}
-              setFieldValue={setFieldValue}
-              handleCustomBg={handleCustomBg}
-              handleForm={handleForm}
-              isEdit
-            />
-          </section>
-          <Row className="mb-4" />
-        </Col>
-        <Col lg={5}>
-          <Row />
-          <section className={styles.dashboard_campaign__box_5}>
-            <CampaignSocialMedia
-              setFieldValue={setFieldValue}
-              values={values}
-              handleSubmit={handleSubmit}
-              errors={errors}
-            />
-          </section>
         </Col>
       </Row>
     </Container>

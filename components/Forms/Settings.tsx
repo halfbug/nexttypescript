@@ -29,7 +29,6 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
     brandColor?: string;
-    customColor?: string;
     customBg?: string;
     imageUrl?: string;
     youtubeUrl?: string;
@@ -44,7 +43,6 @@ export default function Settings({ isDB }: IProps) {
 
   const [settingsState, setstate] = React.useState({
     brandColor: '#3C3C3C',
-    customColor: '#FFF199',
     customBg: '',
     imageUrl: '',
     youtubeUrl: '',
@@ -58,11 +56,11 @@ export default function Settings({ isDB }: IProps) {
       const arr:any = store.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
       const {
         settings: {
-          brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
+          brandColor, customBg, imageUrl, youtubeUrl, media,
         },
       } = arr[0];
       setstate({
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
+        brandColor, customBg, imageUrl, youtubeUrl, media,
       });
       // console.log("🚀 ~ file: Settings.tsx ~ settingsState", settingsState);
     }
@@ -77,7 +75,7 @@ export default function Settings({ isDB }: IProps) {
     // `current` points to the mounted text input element
     ref.current.click();
   };
-  const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
+  // const [addSet, { data, loading, error }] = useMutation<IStore>(UPDATE_CAMPAIGN);
   const [updateStore] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   // console.log(store);
@@ -98,44 +96,69 @@ export default function Settings({ isDB }: IProps) {
       if (validateForm) validateForm(valz);
       // console.log('🚀 ~ file: Settings.tsx ~ line 67 ~ onSubmit: ~ valz', valz);
       const {
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, media,
+        brandColor, customBg, imageUrl, youtubeUrl, media,
       } = valz;
-      const campID = store.newCampaign?.id;
+      // const campID = store.newCampaign?.id;
 
-      const campSettings:null | any = await addSet({
-        variables: {
-          updateCampaignInput: {
-            storeId: store.id,
-            id: campID,
-            settings: {
-              brandColor,
-              customColor,
-              customBg,
-              imageUrl,
-              youtubeUrl,
-              media,
-            },
-            // installationStep: isDB ? null : 5,
-          },
-        },
-      });
-      const updatedCampaigns = store?.campaigns?.map((item:any) => {
-        if (item.id === campSettings.id) {
-          return campSettings;
-        }
-        return item;
-      });
+      // const campSettings:null | any = await addSet({
+      //   variables: {
+      //     updateCampaignInput: {
+      //       storeId: store.id,
+      //       id: campID,
+      //       settings: {
+      //         brandColor,
+      //         customBg,
+      //         imageUrl,
+      //         youtubeUrl,
+      //         media,
+      //       },
+      //       // installationStep: isDB ? null : 5,
+      //     },
+      //   },
+      // });
+      // const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      //   if (item.id === campSettings.id) {
+      //     return campSettings;
+      //   }
+      //   return item;
+      // });
+      // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
 
-      dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
       // update store. progress installationStep if its onboarding
       await updateStore({
         variables: {
           updateStoreInput: {
             id: store.id,
+            settings: {
+              general: {
+                brandColor,
+                customBg,
+                imageUrl,
+                youtubeUrl,
+                media,
+              },
+              layout: {
+                bannerProductPage: true,
+                bannerCartPage: true,
+                bannerStyle: 'Modern',
+                bannerDesign: 'Modern_1',
+                bannerCustomColor: '',
+                callToActionText: '1',
+                bannerSummaryPage: 'Both',
+              },
+              marketing: {
+                recoverAbandoned: true,
+                WhatsAppnotifications: true,
+                facebookPixels: '',
+                tiktokPixels: '',
+                googlePixels: '',
+              },
+            },
             installationStep: 5,
           },
         },
       });
+      dispatch({ type: 'UPDATE_STORE', payload: valz });
       setParams({ ins: 5 });
     },
   });
@@ -145,9 +168,7 @@ export default function Settings({ isDB }: IProps) {
     if (field === 'customBg') {
       setFieldValue('imageUrl', '');
       setFieldValue('youtubeUrl', '');
-      setFieldValue('customColor', '');
     } else {
-      setFieldValue('customColor', '');
       setFieldValue('customBg', '');
     }
     setFieldValue(field, value);
@@ -206,9 +227,8 @@ export default function Settings({ isDB }: IProps) {
         </Col>
       </Row>
       <Row className=" border rounded px-1 py-3 my-1 mx-1 mt-2">
-        <Col md={6}>
+        {/* <Col md={6}>
           <div className={styles.ob_settings_preSet}>Pre-Set Themes</div>
-          {/* <Row> */}
           <ButtonGroup className={["mb-2 d-block mx-0 p-0", styles.ob_settings__group].join(' ')}>
             {radios.map(({ name, component, value }) => (
               <ToggleButton
@@ -229,9 +249,8 @@ export default function Settings({ isDB }: IProps) {
               </ToggleButton>
             ))}
           </ButtonGroup>
-          {/* </Row> */}
-        </Col>
-        <Col md={6} className={styles.vertical}>
+        </Col> */ }
+        <Col md={12} className={styles.vertical}>
           <Row>
             <div className={styles.ob_settings_preSet}>
               Custom background

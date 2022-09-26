@@ -172,14 +172,41 @@ export interface IProduct {
   image?: any;
   purchaseCount?: number;
 }
+
+export interface IGeneralSettings {
+  brandColor?: string | undefined;
+  customBg?: string | undefined;
+  imageUrl?: string | undefined;
+  youtubeUrl?: string | undefined;
+  media?: string | undefined;
+}
+
+export interface ILayoutSettings {
+  bannerProductPage?: number;
+  bannerCartPage?: number;
+  bannerStyle?: string;
+  bannerDesign?: string;
+  bannerCustomColor?: string;
+  callToActionText?: string;
+  bannerSummaryPage?: string;
+}
+
+export interface IMarketingSettings {
+  recoverAbandoned?: number;
+  WhatsAppnotifications?: number;
+  facebookPixels?: string;
+  tiktokPixels?: string;
+  googlePixels?: string;
+}
 export interface ISettings {
+  general?: IGeneralSettings;
+  layout?: ILayoutSettings;
+  marketing?: IMarketingSettings;
   brandColor?: string;
-  customColor?: string;
   customBg?: string;
   imageUrl?: string;
   youtubeUrl?: string;
   media?: string;
-  s3imageUrl?: string;
 }
 
 export interface RootProps {
@@ -201,11 +228,11 @@ export interface IRewards {
   customerCount?: string;
 }
 export interface ISocialLink {
-  instagram?: string;
-  pinterest?: string;
-  tiktok?: string;
-  twitter?: string;
-  facebook?: string;
+  instagram?: string | undefined;
+  pinterest?: string | undefined;
+  tiktok?: string | undefined;
+  twitter?: string | undefined;
+  facebook?: string | undefined;
 }
 export interface IBilling {
   nooforder: number;

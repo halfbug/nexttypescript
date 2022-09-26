@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import * as React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/LayoutForm.module.scss';
 import {
   Row, Col, Form,
 } from 'react-bootstrap';
-import Banner from 'assets/images/display banner.png';
+import LeftBanner from 'assets/images/Left-thankyou.png';
+import RightBanner from 'assets/images/Right-thankyou.png';
+import BothBanner from 'assets/images/Both-thankyou.png';
+import NoneBanner from 'assets/images/None-thankyou.png';
 
 export interface DisplayBannerProps {
   values: any;
@@ -21,6 +24,21 @@ export default function DisplayBanner(
   }
     : DisplayBannerProps,
 ) {
+  const [bannerName, setBannerName] = useState('');
+
+  useEffect(() => {
+    if (values) {
+      if (values?.settings?.layout?.bannerSummaryPage === 'Right') {
+        setBannerName(RightBanner.src);
+      } else if (values?.settings?.layout?.bannerSummaryPage === 'Left') {
+        setBannerName(LeftBanner.src);
+      } else if (values?.settings?.layout?.bannerSummaryPage === 'None') {
+        setBannerName(NoneBanner.src);
+      } else {
+        setBannerName(BothBanner.src);
+      }
+    }
+  }, [values]);
   return (
     <section className={styles.layout__box_orange}>
       <Row>
@@ -34,10 +52,18 @@ export default function DisplayBanner(
             <Col lg={12} className="mt-2 px-1">
               <Form.Check
                 className="p-2"
-                onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Input
+                  type="radio"
+                  value="Both"
+                  checked={values?.settings?.layout?.bannerSummaryPage === 'Both'}
+                  onChange={(e) => {
+                    handleForm('settings.layout.bannerSummaryPage', e.currentTarget.value);
+                  }}
+                  name="bannerSummaryPage"
+                  className={styles.layout__checkbox__input}
+                />
                 <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show both
                   <span className={styles.badge}>Recommended</span>
@@ -45,30 +71,54 @@ export default function DisplayBanner(
               </Form.Check>
               <Form.Check
                 className="p-2"
-                onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Input
+                  type="radio"
+                  value="Left"
+                  checked={values?.settings?.layout?.bannerSummaryPage === 'Left'}
+                  onChange={(e) => {
+                    handleForm('settings.layout.bannerSummaryPage', e.currentTarget.value);
+                  }}
+                  name="bannerSummaryPage"
+                  className={styles.layout__checkbox__input}
+                />
                 <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show left one only
                 </Form.Check.Label>
               </Form.Check>
               <Form.Check
                 className="p-2"
-                onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Input
+                  type="radio"
+                  value="Right"
+                  checked={values?.settings?.layout?.bannerSummaryPage === 'Right'}
+                  onChange={(e) => {
+                    handleForm('settings.layout.bannerSummaryPage', e.currentTarget.value);
+                  }}
+                  name="bannerSummaryPage"
+                  className={styles.layout__checkbox__input}
+                />
                 <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Show right one only
                 </Form.Check.Label>
               </Form.Check>
               <Form.Check
                 className="p-2"
-                onChange={(e) => handleChange(e)}
                 type="radio"
               >
-                <Form.Check.Input type="radio" name="display" className={styles.layout__checkbox__input} />
+                <Form.Check.Input
+                  type="radio"
+                  value="None"
+                  checked={values?.settings?.layout?.bannerSummaryPage === 'None'}
+                  onChange={(e) => {
+                    handleForm('settings.layout.bannerSummaryPage', e.currentTarget.value);
+                  }}
+                  name="bannerSummaryPage"
+                  className={styles.layout__checkbox__input}
+                />
                 <Form.Check.Label className={styles.layout__checkbox__input__label}>
                   Don’t show
                 </Form.Check.Label>
@@ -77,7 +127,7 @@ export default function DisplayBanner(
           </Row>
         </Col>
         <Col xxl={5} xl={6} lg={8} className="d-flex justify-content-end">
-          <img src={Banner.src} alt="Banner" width="413" height="100%" />
+          <img src={`${bannerName}`} alt="Banner" width="413" height="100%" />
         </Col>
       </Row>
     </section>

@@ -23,7 +23,6 @@ import * as constant from 'configs/constant';
 import AddProductButton from 'components/Buttons/AddProductButton';
 import DBRewards from './DBRewards';
 import DBSettings from './DBSettings';
-import CampaignSocialMedia from './CampaignSocialMedia';
 
 export default function CreateCampaign() {
   const { query: { ins } } = useRouter();
@@ -38,7 +37,6 @@ export default function CreateCampaign() {
 
   const { store, dispatch } = React.useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
-  const re = /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
   const [disableBtn, setdisableBtn] = React.useState(true);
 
@@ -48,12 +46,6 @@ export default function CreateCampaign() {
     criteria: '',
     joinExisting: 1,
     rewards: '',
-    brandColor: '#3C3C3C',
-    customColor: '#FFF199',
-    customBg: '',
-    imageUrl: '',
-    youtubeUrl: '',
-    media: 'image',
     maxDiscountVal: '',
     minDiscountVal: '',
     minDiscount: 0,
@@ -77,9 +69,6 @@ export default function CreateCampaign() {
     criteria: yup
       .string()
       .required('Select product options'),
-    brandColor: yup
-      .string()
-      .required('Brand Color is required.'),
     rewards: yup
       .string()
       .required('required.'),
@@ -124,10 +113,6 @@ export default function CreateCampaign() {
           }
           return false;
         }),
-    facebook: yup.string().matches(re, 'URL is not valid'),
-    instagram: yup.string().matches(re, 'URL is not valid'),
-    tiktok: yup.string().matches(re, 'URL is not valid'),
-    twitter: yup.string().matches(re, 'URL is not valid'),
 
   });
 
@@ -200,22 +185,7 @@ export default function CreateCampaign() {
             products: store?.newCampaign?.productsArray,
             collections: store?.newCampaign?.collectionsArray,
             addableProducts,
-            socialLinks: {
-              facebook,
-              instagram,
-              tiktok,
-              pinterest,
-              twitter,
-            },
             salesTarget: newSelectedTarget,
-            settings: {
-              brandColor,
-              customColor,
-              customBg,
-              imageUrl,
-              youtubeUrl,
-              media,
-            },
 
           },
         },
@@ -514,38 +484,6 @@ export default function CreateCampaign() {
               setEditMin={setEditMin}
               handleForm={handleForm}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col><h3>Groupshop Design</h3></Col>
-        </Row>
-        <Row className="mt-2">
-          <Col lg={7}>
-            <section>
-              <DBSettings
-                values={values}
-                handleChange={handleChange}
-                touched={touched}
-                errors={errors}
-                setFieldValue={setFieldValue}
-                handleCustomBg={handleCustomBg}
-                isEdit={false}
-                handleForm={handleForm}
-              />
-            </section>
-          </Col>
-          <Col lg={5}>
-            <section className={styles.dashboard_campaign__box_5}>
-              <div className={styles.dashboard_campaign__overlay}>
-                <div className={styles.dashboard_campaign__overlayText}>Coming Soon</div>
-              </div>
-              <CampaignSocialMedia
-                setFieldValue={setFieldValue}
-                values={values}
-                handleSubmit={handleSubmit}
-                errors={errors}
-              />
-            </section>
           </Col>
         </Row>
         <Col lg={9} className={[styles.dashboard_campaign__lightBg].join(' ')}>

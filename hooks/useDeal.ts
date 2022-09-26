@@ -304,7 +304,7 @@ export default function useDeal() {
   const activateURL = `${gsURL}/status&activated`;
   const shortActivateURL = gsctx?.exipredShortLink ?? activateURL;
 
-  const banner = gsctx?.campaign?.settings?.s3imageUrl ?? 'https://gsnodeimages.s3.amazonaws.com/bg.jpg';
+  const banner = gsctx?.store?.settings?.general?.imageUrl ?? 'https://gsnodeimages.s3.amazonaws.com/bg.jpg';
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const baseLine = gsctx?.partnerRewards?.baseline;
 

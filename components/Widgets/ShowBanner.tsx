@@ -22,7 +22,6 @@ export default function ShowBanner(
   }
     : ShowBannerProps,
 ) {
-  console.log(values);
   return (
     <section className={styles.layout__box_3}>
       <h4 className="mt-0">
@@ -37,18 +36,16 @@ export default function ShowBanner(
           <ToggleButtonGroup
             type="radio"
             name="bannerProductPage"
-            value={values.bannerProductPage}
+            value={+values.settings?.layout?.bannerProductPage}
           >
             <ToggleButton
-              variant="outline-success"
-              className={styles.layout__enable_btn}
+              variant={(+values.settings?.layout?.bannerProductPage) ? 'outline-success' : 'outline-primary'}
+              className={(+values.settings?.layout?.bannerProductPage)
+                ? styles.layout__enable_btn : styles.layout__disable_btn}
               id="bannerProductPage-e"
               value={1}
-              // eslint-disable-next-line eqeqeq
-              // checked={values.bannerProductPage === true}
-              // onClick={handleSubmit}
               onChange={(e) => {
-                handleForm('bannerProductPage', e.currentTarget.value);
+                handleForm('settings.layout.bannerProductPage', e.currentTarget.value);
               }}
             >
               <Check2Circle className="fs-4" />
@@ -61,10 +58,8 @@ export default function ShowBanner(
               className={styles.layout__disable_btn}
               id="bannerProductPage-d"
               value={0}
-              // checked={values.bannerProductPage === false}
-              // onCLick={handleChange}
               onChange={(e) => {
-                handleForm('bannerProductPage', e.currentTarget.value);
+                handleForm('settings.layout.bannerProductPage', e.currentTarget.value);
               }}
             >
               <DisableButton className="fs-5" />
@@ -86,18 +81,18 @@ export default function ShowBanner(
       <Row className="mt-2 me-2 mb-2">
         <Col lg={12} md={6} className="text-right">
           <ToggleButtonGroup
+            value={+values.settings?.layout?.bannerCartPage}
             type="radio"
             name="bannerCartPage"
           >
             <ToggleButton
-              variant="outline-success"
-              className={styles.layout__enable_btn}
+              variant={(+values.settings?.layout?.bannerCartPage) ? 'outline-success' : 'outline-primary'}
+              className={(+values.settings?.layout?.bannerCartPage)
+                ? styles.layout__enable_btn : styles.layout__disable_btn}
               id="bannerCartPage-e"
               value={1}
-              checked={values.bannerCartPage === 1}
-              // onChange={handleChange}
               onChange={(e) => {
-                handleForm('bannerCartPage', e.currentTarget.value);
+                handleForm('settings.layout.bannerCartPage', e.currentTarget.value);
               }}
             >
               <Check2Circle className="fs-4" />
@@ -110,10 +105,8 @@ export default function ShowBanner(
               className={styles.layout__disable_btn}
               id="bannerCartPage-d"
               value={0}
-              checked={values.bannerCartPage === 0}
-              // onChange={handleChange}
               onChange={(e) => {
-                handleForm('bannerCartPage', e.currentTarget.value);
+                handleForm('settings.layout.bannerCartPage', e.currentTarget.value);
               }}
             >
               <DisableButton className="fs-5" />

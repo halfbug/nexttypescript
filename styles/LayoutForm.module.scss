@@ -192,8 +192,7 @@
         font-size: $font-size-medium;
         font-weight: $font-weight-light;
         line-height: $line-height-18;
-        font-family: 'DM Sans';
-        width: 268px;
+        font-family: 'DM Sans';       
     }
 
     &__codesnip {
@@ -202,8 +201,7 @@
         border: 1px solid $lightBorder;
         border-radius: 10px;
         background: $white;
-        height: 105px;
-        max-width: 268px;
+        height: 105px;       
         &__col {
             @extend .pt-2;
             border-right: 1px solid $lightBorder;

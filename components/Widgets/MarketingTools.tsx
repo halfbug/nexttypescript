@@ -7,26 +7,27 @@ import {
 } from 'react-bootstrap';
 import Recover from 'assets/images/recover.svg';
 import Sms from 'assets/images/add-sms.svg';
-import InviteCustomer from 'assets/images/invite-customer.svg';
 import DisableButton from 'assets/images/disable-btn-icon.svg';
 import { Check2Circle, InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
-import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCustomerBox';
+
+export interface MarketingToolsProps {
+  values: any;
+  handleForm: any;
+}
 
 export default function MarketingTools(
+  {
+    values, handleForm,
+  }
+    : MarketingToolsProps,
 ) {
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [minOrderValue, setMinOrderValue] = useState('');
-  const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
-  const [syncMsg, setsyncMsg] = useState<string>('');
-  const [listCustomers, setListCustomers] = useState<any>([]);
   return (
     <>
       <section className={styles.marketing__box_3}>
-        <Row className="position-relative">
+        {/* <Row className="position-relative">
           <Col lg={1} className="position-absolute mt-2">
             <Recover />
           </Col>
@@ -49,13 +50,19 @@ export default function MarketingTools(
             </p>
             <ToggleButtonGroup
               type="radio"
-              name="joinExisting"
+              name="recoverAbandoned"
+              value={+values.settings?.marketing?.recoverAbandoned}
             >
               <ToggleButton
-                variant="outline-success"
-                className={styles.enablebtn}
-                id="joinExisting-e"
+                variant={(+values.settings?.marketing?.recoverAbandoned) ?
+                   'outline-success' : 'outline-primary'}
+                className={(+values.settings?.marketing?.recoverAbandoned)
+                  ? styles.enablebtn : styles.disablebtn}
+                id="recoverAbandoned-e"
                 value={1}
+                onChange={(e) => {
+                  handleForm('settings.marketing.recoverAbandoned', e.currentTarget.value);
+                }}
               >
                 <Check2Circle className="fs-5" />
                 {' '}
@@ -65,8 +72,11 @@ export default function MarketingTools(
               <ToggleButton
                 variant="outline-danger"
                 className={styles.disablebtn}
-                id="joinExisting-d"
+                id="recoverAbandoned-d"
                 value={0}
+                onChange={(e) => {
+                  handleForm('settings.marketing.recoverAbandoned', e.currentTarget.value);
+                }}
               >
                 <DisableButton className="fs-5" />
                 {' '}
@@ -75,8 +85,8 @@ export default function MarketingTools(
 
             </ToggleButtonGroup>
           </Col>
-        </Row>
-        <hr />
+        </Row> */}
+        {/* <hr /> */}
         <Row>
           <Col lg={1} className="position-absolute mt-2">
             <Sms />
@@ -90,12 +100,17 @@ export default function MarketingTools(
             </p>
             <ToggleButtonGroup
               type="radio"
-              name="joinExisting"
+              value={+values?.settings?.marketing?.WhatsAppnotifications}
+              name="WhatsAppnotifications"
             >
               <ToggleButton
-                variant="outline-success"
-                className={styles.enablebtn}
-                id="joinExisting-e"
+                variant={(+values?.settings?.marketing?.WhatsAppnotifications) ? 'outline-success' : 'outline-primary'}
+                className={(+values?.settings?.marketing?.WhatsAppnotifications)
+                  ? styles.enablebtn : styles.disablebtn}
+                id="WhatsAppnotifications-e"
+                onChange={(e) => {
+                  handleForm('settings.marketing.WhatsAppnotifications', e.currentTarget.value);
+                }}
                 value={1}
               >
                 <Check2Circle className="fs-5" />
@@ -106,7 +121,10 @@ export default function MarketingTools(
               <ToggleButton
                 variant="outline-danger"
                 className={styles.disablebtn}
-                id="joinExisting-d"
+                id="WhatsAppnotifications-d"
+                onChange={(e) => {
+                  handleForm('settings.marketing.WhatsAppnotifications', e.currentTarget.value);
+                }}
                 value={0}
               >
                 <DisableButton className="fs-5" />
@@ -116,46 +134,6 @@ export default function MarketingTools(
 
             </ToggleButtonGroup>
           </Col>
-        </Row>
-      </section>
-      <section className={styles.marketing__box_3}>
-        <Row className="">
-          <Col lg={1} className="position-absolute mt-2">
-            <InviteCustomer />
-          </Col>
-          <Col lg={10} className="ps-4 ms-4">
-            <h4 className="mt-0">
-              Invite past customers to Groupshop
-            </h4>
-            <p>
-              Use this tool to create Groupshop pages for customers
-              who shopped before you activated Groupshop for your brand.
-            </p>
-            <WhiteButton
-              type="submit"
-              // variant="outline-primary"
-              className={['px-4 py-1 ', styles.marketing_DownloadBtn].join(' ')}
-              onClick={() => {
-                setShowInvitePopup(true);
-              }}
-
-            >
-              Invite Customers
-            </WhiteButton>
-          </Col>
-          <InviteCustomerBox
-            startDate={startDate}
-            setStartDate={setStartDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-            minOrderValue={minOrderValue}
-            setMinOrderValue={setMinOrderValue}
-            show={showInvitePopup}
-            setListCustomers={setListCustomers}
-            setShowInvitePopup={setShowInvitePopup}
-            setCreateGroupshopPopup={setCreateGroupshopPopup}
-            handleClose={() => setShowInvitePopup(false)}
-          />
         </Row>
       </section>
     </>

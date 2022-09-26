@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import { UPDATE_CAMPAIGN, UPDATE_STORE } from 'store/store.graphql';
-import { IStore } from 'types/store';
+import { IStore, ISettings } from 'types/store';
 import styles from 'styles/Step4.module.scss';
 import styles2 from 'styles/Campaign.module.scss';
 import Image1 from 'assets/images/Ellipse1.png';
@@ -28,14 +28,8 @@ import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
-    brandColor: string;
-    customColor: string;
-    customBg: string;
-    imageUrl: string;
-    youtubeUrl: string;
-    media: string;
-
-  }
+  settings?: ISettings;
+}
   interface IProps {
     handleChange: any;
     values: any;
@@ -78,9 +72,6 @@ export default function DBSettings({
 
     <>
       <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
-        <div className={styles2.dashboard_campaign__overlay}>
-          <div className={styles2.dashboard_campaign__overlayText}>Coming Soon</div>
-        </div>
         <Row><h4 className="mb-0">Set your brand color</h4></Row>
         <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
         <Row>
@@ -90,7 +81,7 @@ export default function DBSettings({
                 <Form.Label htmlFor="brandColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
                 <Form.Control
                   onChange={(e) => {
-                    handleForm('brandColor', e.currentTarget.value);
+                    handleForm('settings.general.brandColor', e.currentTarget.value);
                   }}
                   type="color"
                   // id="brandColor"
@@ -101,7 +92,7 @@ export default function DBSettings({
                   title="Choose your color"
                   className="p-0 m-0 rounded-end"
                   bsPrefix="onboarding"
-                  value={values.brandColor}
+                  value={values.settings?.general?.brandColor}
                 />
               </span>
               {' '}
@@ -123,34 +114,7 @@ export default function DBSettings({
           </Col>
         </Row>
         <Row className="border rounded px-1 py-3 pb-4 mx-1">
-          <Col lg={6} className={styles2.dashboard_campaign__comingsoon}>
-            <div className={styles2.dashboard_campaign__overlay}>
-              <div className={styles2.dashboard_campaign__overlayText1}>Coming Soon</div>
-            </div>
-            <h6 className="fs-6 fw-bolder lh-base mb-4">Pre-Set Themes</h6>
-            <ButtonGroup className={['d-block mx-0 mb-0', styles.ob_settings__group].join(' ')}>
-              {radios.map(({ name, component, value }) => (
-                <ToggleButton
-                  key={name}
-                  id={`radio-${name}`}
-                  type="radio"
-                  variant="none"
-                  name="radio"
-                  value={value}
-                  checked={values.customBg === value}
-                  onChange={(e) => {
-                    handleCustomBg('customBg', e.currentTarget.value);
-                  }}
-                  bsPrefix={styles.ob_settings_hide}
-                  className={styles.ob_settings__radio}
-                >
-                  {component}
-                </ToggleButton>
-              ))}
-            </ButtonGroup>
-
-          </Col>
-          <Col lg={6} className={styles.vertical}>
+          <Col lg={12} className={styles.vertical}>
             <div className="ms-3">
               <h6 className="fs-6 fw-bolder lh-base ">
                 Custom background
@@ -166,9 +130,9 @@ export default function DBSettings({
                     name="media"
                     value="image"
                     type="radio"
-                    checked={values.media === 'image'}
+                    checked={values.settings?.general?.media === 'image'}
                     onChange={(e) => {
-                      handleCustomBg('media', e.currentTarget.value);
+                      handleCustomBg('settings.general.media', e.currentTarget.value);
                     }}
                   />
                   <Form.Check
@@ -178,39 +142,38 @@ export default function DBSettings({
                     name="media"
                     value="youtube"
                     type="radio"
-                    checked={values.media === 'youtube'}
+                    checked={values.settings?.general?.media === 'youtube'}
                     onChange={(e) => {
-                      handleCustomBg('media', e.currentTarget.value);
+                      handleCustomBg('settings.general.media', e.currentTarget.value);
                     }}
                   />
-
                 </Col>
               </Row>
               <Row>
-                <Col className={values.media === 'image' ? 'd-flex flex-wrap' : 'd-none'}>
+                <Col className={values.settings?.general?.media === 'image' ? 'd-flex flex-wrap' : 'd-none'}>
                   <span className={styles.dot}>-</span>
                   <UploadButton
                     icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
                     setFieldValue={setFieldValue}
-                    field="imageUrl"
+                    field="settings.general.imageUrl"
                     className={styles.ob_settings__uploadbtn}
-                    handleCustomBg={handleCustomBg}
-                    url={getKeyFromS3URL(values.imageUrl)}
+                    handleCustomBg={handleForm}
+                    url={values.settings?.general?.imageUrl ? getKeyFromS3URL(values.settings?.general.imageUrl) : ''}
                   />
                 </Col>
-                <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
+                <Col className={values.settings?.general?.media === 'youtube' ? 'd-block' : 'd-none'}>
                   <Form.Control
                     type="text"
                     name="youtubeUrl"
-                    value={values.youtubeUrl}
+                    value={values.settings?.general?.youtubeUrl}
                     isValid={touched.youtubeUrl && !errors.youtubeUrl}
                     onChange={(e) => {
-                      handleCustomBg('youtubeUrl', e.currentTarget.value);
+                      handleCustomBg('settings.general.youtubeUrl', e.currentTarget.value);
                     }}
                   />
                   <p className="text-muted">Please paste youtube video URL</p>
                 </Col>
-                <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
+                <Row className={values.settings?.general?.media === 'image' ? 'd-flex' : 'd-none'}>
                   <Col>
                     <h6 className={styles.smallt}>
                       {' '}

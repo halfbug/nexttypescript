@@ -16,7 +16,7 @@ interface IProps {
   handleSubmit?: any;
 }
 
-export default function CampaignSocialMedia({
+export default function SettingSocialMedia({
   values, errors, setFieldValue, handleSubmit,
 }: IProps) {
   const [smUrl, setsmUrl] = React.useState('instagram');

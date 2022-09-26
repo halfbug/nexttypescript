@@ -4,13 +4,15 @@ import styles from 'styles/Marketing.module.scss';
 import {
   Button,
 } from 'react-bootstrap';
+import Link from 'next/link';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import QrCodeImage from 'assets/images/qr-code-scan.png';
 
 export default function CustomerActivation(
 ) {
+  const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}` : '';
   return (
     <>
-      <h3>Customer Activation</h3>
       <section className={styles.marketing__box_1}>
         <h4 className="d-flex align-items-center">
           Download Brand QR Code
@@ -20,15 +22,30 @@ export default function CustomerActivation(
           Include a Groupshop QR code in your product packages
           to encourage customers to start using Groupshop as soon as they receive their order.
         </p>
-        <WhiteButton
+        <Button
+          variant="link"
           type="submit"
           // variant="outline-primary"
           className={['px-4 py-1 ', styles.marketing_DownloadBtn].join(' ')}
 
         >
-          Download QR Code
-        </WhiteButton>
-        <Button variant="link" className={styles.marketing_LinkBtn}>See how it works</Button>
+          <>
+            <Link href={`${QrCodeImage.src}`}>
+              <a target="_blank" style={{ cursor: 'pointer' }} download>
+                Download QR Code
+              </a>
+            </Link>
+          </>
+        </Button>
+        <Button variant="link" className={styles.marketing_LinkBtn}>
+          <>
+            <Link href={`${gsURL}/qr-code`}>
+              <a target="_blank" style={{ cursor: 'pointer' }}>
+                See how it works
+              </a>
+            </Link>
+          </>
+        </Button>
         <ArrowIcon />
         <hr />
         <h4 className="d-flex align-items-center">

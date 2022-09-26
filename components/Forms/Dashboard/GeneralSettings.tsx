@@ -4,86 +4,40 @@ import styles from 'styles/GeneralForm.module.scss';
 import {
   Row, Col, Form, Button, InputGroup,
 } from 'react-bootstrap';
-import { useFormik, FormikProps, FormikHelpers } from 'formik';
-import * as yup from 'yup';
-import { StoreContext } from 'store/store.context';
-import { useMutation } from '@apollo/client';
-import { UPDATE_STORE } from 'store/store.graphql';
-import { IStore } from 'types/store';
 import BrandName from 'components/Widgets/BrandName';
 import { Industry } from 'components/Widgets/Industry';
+import DBSettings from 'components/Forms/Dashboard/DBSettings';
+import SettingSocialMedia from 'components/Forms/Dashboard/SettingSocialMedia';
 
-interface IValues {
-    brandName: string | undefined;
-    industry: string | undefined;
-    logoImage: string | undefined;
-    // onChange: any;
-    // setFieldValue: ()=>void;
-  }
+export interface SettingsToolsProps {
+    setFieldValue: any;
+    handleSubmit: any;
+    handleChange: any;
+    errors: any;
+    values: any;
+    touched: any;
+}
 
-export default function GeneralSettings() {
-  const [updateBI, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
-  const [formData, setformData] = useState({
-    brandName: '',
-    logoImage: '',
-    industry: '',
-  });
-
-  const { store, dispatch } = React.useContext(StoreContext);
-
-  useEffect(() => {
-    if (store?.brandName || store?.logoImage || store?.industry) {
-    //   const { brandName, logoImage, industry } = store;
-      console.log(store);
-      const newState = {
-        brandName: store?.brandName!,
-        logoImage: store?.logoImage!,
-        industry: store?.industry!,
-      };
-      setformData({ ...newState });
-    }
-  }, [store]);
-
-  const validationSchema = yup.object({
-    brandName: yup
-      .string()
-      .required('Brand Name is required.')
-      .min(5, 'Too Short please give least five characters')
-      .max(20, 'Too Long !! only 20 characters allowed.'),
-
-  });
-  const {
-    handleSubmit, values, handleChange, touched, errors, setFieldValue,
-  }: FormikProps<IValues> = useFormik<IValues>({
-    initialValues: formData,
-    validationSchema,
-    validateOnChange: false,
-    enableReinitialize: true,
-    validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
-      if (validateForm) validateForm(valz);
-      const { brandName, industry, logoImage } = valz;
-      console.log({ valz });
-
-      await updateBI({
-        variables: {
-          updateStoreInput: {
-            id: store.id,
-            shop: store.shop,
-            brandName,
-            industry,
-            logoImage,
-          },
-        },
-      });
-      dispatch({ type: 'UPDATE_STORE', payload: valz });
-    },
-  });
+export default function GeneralSettings({
+  setFieldValue, handleSubmit, handleChange, errors, values, touched,
+} : SettingsToolsProps) {
   const handleForm = (field: string, value: string) => {
     console.log('image uploaded and in db too');
-
     setFieldValue(field, value);
     console.log("🚀 ~ file: GeneralSettings.tsx ~ line 83 ~ handleForm ~ value", field);
+    handleSubmit();
+  };
+
+  const handleCustomBg = (field: string, value: string) => {
+    if (field === 'customBg') {
+      setFieldValue('imageUrl', '');
+      setFieldValue('youtubeUrl', '');
+      setFieldValue('customColor', '');
+    } else {
+      setFieldValue('customColor', '');
+      setFieldValue('customBg', '');
+    }
+    setFieldValue(field, value);
     handleSubmit();
   };
   return (
@@ -108,6 +62,29 @@ export default function GeneralSettings() {
             handleChange={handleChange}
             handleForm={handleForm}
             touched={touched}
+          />
+        </Col>
+      </Row>
+      <Row className={styles.generalform}>
+        <h3 className=" pt-3 pb-2">Branding</h3>
+        <Col lg={7}>
+          <DBSettings
+            values={values}
+            handleChange={handleChange}
+            touched={touched}
+            errors={errors}
+            setFieldValue={setFieldValue}
+            handleCustomBg={handleCustomBg}
+            isEdit={false}
+            handleForm={handleForm}
+          />
+        </Col>
+        <Col lg={5}>
+          <SettingSocialMedia
+            setFieldValue={setFieldValue}
+            values={values}
+            handleSubmit={handleSubmit}
+            errors={errors}
           />
         </Col>
       </Row>

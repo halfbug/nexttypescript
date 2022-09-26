@@ -18,18 +18,37 @@ query StoreName($shop: String!) {
     status
     updatedAt    
   }
-
   settings{
-    media
-    brandColor
-    customBg
-    customColor
-    imageUrl
-    youtubeUrl
-    bannerProductPage
-    bannerCartPage
-    bannerDesign
-    bannerSummaryPage
+    general{
+      media
+      brandColor
+      customBg
+      imageUrl
+      youtubeUrl
+    }
+    layout{
+      bannerProductPage
+      bannerCartPage
+      bannerStyle
+      bannerDesign
+      bannerCustomColor
+      callToActionText
+      bannerSummaryPage
+    }
+    marketing{
+      recoverAbandoned
+      WhatsAppnotifications
+      facebookPixels
+      tiktokPixels
+      googlePixels   
+    }
+  }
+  social{
+    facebook
+    instagram
+    tiktok
+    pinterest
+    twitter       
   }
   campaigns{
     id
@@ -529,6 +548,14 @@ query Groupshop($code: String!, $status: String = "") {
       shop
       logoImage
       currencyCode
+      settings{
+        general{
+          brandColor
+          imageUrl
+          youtubeUrl
+          media
+        }
+      }
     }
   popularProducts{
     id

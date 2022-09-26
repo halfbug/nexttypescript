@@ -26,6 +26,11 @@ export interface ICustomToggleProps {
   [x: string]: any;
 }
 
+export interface IntegrationProps {
+  values: any;
+  handleForm: any;
+}
+
 function CustomToggle({
   children, eventKey,
 }: ICustomToggleProps) {
@@ -38,8 +43,7 @@ function CustomToggle({
   );
 }
 
-export default function Integrations(
-) {
+export default function Integrations({ values, handleForm } : IntegrationProps) {
   const [activeId, setActiveId] = useState('0');
   const [open, setOpen] = useState(true);
 
@@ -70,6 +74,10 @@ export default function Integrations(
                     placeholder="Enter Facebook Pixel"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    value={values?.settings?.marketing?.facebookPixels}
+                    onChange={(e) => {
+                      handleForm('settings.marketing.facebookPixels', e.currentTarget.value);
+                    }}
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
@@ -86,6 +94,10 @@ export default function Integrations(
                     placeholder="Enter Tik Tok Pixel"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    value={values?.settings?.marketing?.tiktokPixels}
+                    onChange={(e) => {
+                      handleForm('settings.marketing.tiktokPixels', e.currentTarget.value);
+                    }}
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
@@ -101,6 +113,10 @@ export default function Integrations(
                     placeholder="Enter Google Pixel"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    value={values?.settings?.marketing?.googlePixels}
+                    onChange={(e) => {
+                      handleForm('settings.marketing.googlePixels', e.currentTarget.value);
+                    }}
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
