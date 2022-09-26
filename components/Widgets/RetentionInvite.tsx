@@ -7,9 +7,10 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import InviteCustomerBox from 'components/Groupshop/InviteCustomerBox/InviteCustomerBox';
 import CreateGroupshopBox from 'components/Groupshop/InviteCustomerBox/CreateGroupshopBox';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { SYNC_STORE_CUSTOMERS, GET_STORE_DETAILS } from 'store/store.graphql';
+import { SYNC_STORE_CUSTOMERS, GET_STORE_DETAILS, RETENTION_GROUPSHOP_PROGRESS } from 'store/store.graphql';
 import useAlert from 'hooks/useAlert';
 import moment from 'moment';
+import Router, { useRouter } from 'next/router';
 
 interface RetentionInviteProps {
   handleAfterSubmit: any;
@@ -31,6 +32,9 @@ export default function RetentionInvite({
   const [updatedAt, setupdatedAt] = useState('');
   const [syncLoading, setsyncLoading] = useState(false);
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
+  const [intervalID, setIntervalID] = useState<any>('');
+  const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(false);
+  const [inProgress, setInProgress] = React.useState<boolean>(false);
   const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
   const [listCustomers, setListCustomers] = useState<any>([]);
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -38,6 +42,14 @@ export default function RetentionInvite({
     setsyncLoading(true);
     syncStoreCustomers({ variables: { storeId } });
   };
+
+  const [progressStatus, { data: rdata }] = useLazyQuery(RETENTION_GROUPSHOP_PROGRESS, {
+    fetchPolicy: 'no-cache',
+    onError() {
+      console.log('progress Status failed!');
+      setInProgress(false);
+    },
+  });
 
   const {
     data: storeData, refetch: storeRefresh,
@@ -54,6 +66,35 @@ export default function RetentionInvite({
     }
   }, [storeData]);
 
+  useEffect(() => {
+    if (inProgress === true) {
+      const myIntervalID = setInterval(progressFunction, 5000);
+      setIntervalID(myIntervalID);
+    }
+  }, [inProgress]);
+
+  useEffect(() => {
+    if (shouldIntervalBeCancelled) {
+      showSuccess('Groupshop creaated successfully!');
+      clearInterval(intervalID);
+    }
+  }, [shouldIntervalBeCancelled]);
+
+  const progressFunction = () => {
+    progressStatus({
+      variables: {
+        storeId,
+      },
+    });
+  };
+  useEffect(() => {
+    if (rdata) {
+      if (rdata?.retentionGroupshopPrgress?.progress === false) {
+        setShouldIntervalBeCancelled(true);
+      }
+    }
+  }, [rdata]);
+
   const createCampaignList = () => {
     setshowRetentionImport(false);
     if (activeCampaign === '') {
@@ -61,6 +102,10 @@ export default function RetentionInvite({
     } else {
       setShowInvitePopup(true);
     }
+  };
+
+  const createCampaignMes = () => {
+    showError('Previous request still in progress, Please try after sometime!');
   };
 
   const [syncStoreCustomers, { data }] = useLazyQuery(SYNC_STORE_CUSTOMERS, {
@@ -134,7 +179,10 @@ export default function RetentionInvite({
                 </WhiteButton>
               )
               : (
-                <WhiteButton onClick={createCampaignList}>
+                <WhiteButton
+                  onClick={() => ((intervalID === '') ? createCampaignList() : createCampaignMes())}
+                >
+                  {' '}
                   Sort & Create Groupshops
                 </WhiteButton>
 
@@ -176,6 +224,8 @@ export default function RetentionInvite({
         showCreateBtn
         listCustomers={listCustomers}
         setShowInvitePopup={setShowInvitePopup}
+        inProgress={inProgress}
+        setInProgress={setInProgress}
         setCreateGroupshopPopup={setCreateGroupshopPopup}
         handleClose={() => setCreateGroupshopPopup(false)}
       />

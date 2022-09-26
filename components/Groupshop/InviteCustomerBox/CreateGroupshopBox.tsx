@@ -16,13 +16,15 @@ interface CreateGroupshopBoxProps extends RootProps {
   endDate:string;
   minOrderValue:string;
   setCreateGroupshopPopup:any;
+  inProgress: boolean;
+  setInProgress: any;
   handleClose(e: any): any;
   listCustomers: any;
 }
 
 const CreateGroupshopBox = ({
   show = false, showCreateBtn, handleInnerSubmit, handleClose, listCustomers, setShowInvitePopup,
-  startDate, endDate, minOrderValue, setCreateGroupshopPopup,
+  startDate, endDate, minOrderValue, setCreateGroupshopPopup, inProgress, setInProgress,
 }: CreateGroupshopBoxProps) => {
   const closeGroupshopModal = (e: any) => {
     setCreateGroupshopPopup(false);
@@ -60,6 +62,8 @@ const CreateGroupshopBox = ({
           listCustomers={listCustomers}
           setShowInvitePopup={setShowInvitePopup}
           setCreateGroupshopPopup={setCreateGroupshopPopup}
+          inProgress={inProgress}
+          setInProgress={setInProgress}
           handleClose={handleClose}
         />
         )}

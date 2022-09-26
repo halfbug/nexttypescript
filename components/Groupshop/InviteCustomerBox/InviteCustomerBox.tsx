@@ -87,7 +87,7 @@ const InviteCustomerBox = ({
 
   React.useEffect(() => {
     if (startDate !== '' && endDate !== '') {
-      if (endDate > startDate) {
+      if (endDate >= startDate) {
         getGroupshop({
           variables: {
             shop: store.shop, startDate, endDate, minOrderValue,

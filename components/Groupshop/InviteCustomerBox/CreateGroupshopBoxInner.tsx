@@ -9,9 +9,9 @@ import Cross from 'assets/images/CrossLg.svg';
 import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
-import { CREATE_PAST_GROUPSHOP_LOG } from 'store/store.graphql';
+import { CREATE_PAST_GROUPSHOP_LOG, RETENTION_GROUPSHOP_PROGRESS } from 'store/store.graphql';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import moment from 'moment';
 import useAlert from 'hooks/useAlert';
@@ -28,6 +28,8 @@ interface CreateGroupshopBoxProps extends RootProps {
   endDate:string;
   minOrderValue:string;
   setCreateGroupshopPopup:any;
+  inProgress: boolean;
+  setInProgress: any;
   handleClose(e: any): any;
   listCustomers: any;
   xs?: any,
@@ -41,7 +43,7 @@ interface CreateGroupshopBoxProps extends RootProps {
 
 const CreateGroupshopBoxInner = ({
   show = false, showCreateBtn, handleInnerSubmit, handleClose, listCustomers, setShowInvitePopup,
-  startDate, endDate, minOrderValue, setCreateGroupshopPopup,
+  startDate, endDate, minOrderValue, setCreateGroupshopPopup, inProgress, setInProgress,
   xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
 }: CreateGroupshopBoxProps) => {
   const closeGroupshopModal = (e: any) => {
@@ -49,12 +51,11 @@ const CreateGroupshopBoxInner = ({
     setShowInvitePopup(true);
   };
 
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = React.useState(false);
   const { store, dispatch } = React.useContext(StoreContext);
   const { AlertComponent, showError, showSuccess } = useAlert();
   const createGroupShops = async () => {
     if (listCustomers.length > 0) {
-      setLoader(true);
       const retentionTool = await createRetentionTool({
         variables: {
           createRetentiontoolInput: {
@@ -68,6 +69,7 @@ const CreateGroupshopBoxInner = ({
         },
 
       });
+      setInProgress(true);
     } else {
       showError('Did not find any pending groupshop');
     }
@@ -96,10 +98,10 @@ const CreateGroupshopBoxInner = ({
       showError('Something went wrong, Please try after sometime!');
     },
     onCompleted() {
+      showSuccess('Groupshop created successfully!');
       setLoader(false);
       setCreateGroupshopPopup(false);
       setShowInvitePopup(false);
-      showSuccess('Groupshop created successfully!');
       handleInnerSubmit();
     },
   });
@@ -209,7 +211,6 @@ const CreateGroupshopBoxInner = ({
                   Create Groupshops
                 </WhiteButton>
               )}
-
             </div>
           </Col>
           )}

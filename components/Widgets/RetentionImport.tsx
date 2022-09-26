@@ -40,6 +40,7 @@ const RetentionImport = ({
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
   const [listCustomers, setListCustomers] = useState<any>([]);
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
+  const [inProgress, setInProgress] = React.useState<boolean>(false);
   const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
 
   const handleRetention = async (id: string) => {
@@ -247,6 +248,8 @@ const RetentionImport = ({
         show={showCreateGroupshopPopup}
         showCreateBtn={false}
         listCustomers={listCustomers}
+        inProgress={inProgress}
+        setInProgress={setInProgress}
         setShowInvitePopup={setShowInvitePopup}
         setCreateGroupshopPopup={setCreateGroupshopPopup}
         handleClose={() => setCreateGroupshopPopup(false)}
