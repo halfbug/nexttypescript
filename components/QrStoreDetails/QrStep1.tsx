@@ -186,7 +186,7 @@ export default function QrStep1({
                       {' '}
                       <Link
                         href={{
-                          pathname: 'https://www.groupshop.com/drips',
+                          pathname: 'https://groupshop.zendesk.com/hc/en-us/sections/4429416770963-FAQ-How-To',
                         }}
                       >
                         <a>Peep our FAQ</a>
@@ -201,7 +201,7 @@ export default function QrStep1({
                         <p>
                           Go to
                           {' '}
-                          <Link href="https://www.groupshop.com/"><a target="_blank">groupshop.com</a></Link>
+                          <Link href="https://www.groupshop.com/"><a target="_blank" className="p-0">groupshop.com</a></Link>
                         </p>
                       </div>
                     </div>

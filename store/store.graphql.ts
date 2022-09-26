@@ -975,7 +975,9 @@ const GET_ACTIVE_GROUPSHOPS_BY_EMAIL = gql`
 query getActiveGroupshops($email: String!) {
   getActiveGroupshops(email: $email) {
     name
-    cashback
+    refundDetail{
+      amount
+    }
     customer {
       firstName
       lastName
