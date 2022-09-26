@@ -588,10 +588,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             SHOPPED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {getOwnerName()}
-              {/* {member?.orderDetail?.customer.firstName
-                ? `${member.orderDetail.customer.firstName}`
-                : `${member?.orderDetail.customer.lastName}`} */}
+              {/* {getOwnerName()} */}
+              {member?.orderDetail?.customer.firstName
+                ? `${member.orderDetail.customer.firstName} ${member.orderDetail.customer.lastName ? member.orderDetail.customer.lastName.charAt(0) : ''}`
+                : `${member?.orderDetail.customer.lastName}`}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {SKU.length > 4 && !pending && gsctx?.members?.length > 1 ? (

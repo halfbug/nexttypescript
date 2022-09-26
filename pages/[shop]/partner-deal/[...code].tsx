@@ -777,7 +777,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         />
         <OBWelcomeInfluencer
           show={showob1 && title !== '' && (partnerGroupshop?.isActive ?? true)}
-          handleClose={() => setshowob1(true)}
+          handleClose={() => setshowob1(false)}
           setshowob1={setshowob1}
           setshowps={setshowps}
         />

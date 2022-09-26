@@ -183,10 +183,10 @@ const OBWelcomeInfluencer = ({
         </div> */}
           <div
             className={styles.welcome__modal__body__btnskipMobie}
-            // onClick={handleClose}
-            // onKeyDown={handleClose}
-            // role="button"
-            // tabIndex={0}
+            onClick={handleClose}
+            onKeyDown={handleClose}
+            role="button"
+            tabIndex={0}
           >
             Skip to shop
           </div>
