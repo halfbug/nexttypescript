@@ -2195,6 +2195,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       line-height: 18px;
       width: 100% !important;
     }
+    @include media-breakpoint-down(sm) {
+      background-color: $white;
+      color: $black;
+      padding-top: 8px;
+      font-size: 14px;
+      line-height: 18px;
+      width: 100% !important;
+    }
   }
   &_unlockToShare {
     @extend .rounded-pill, .w-75;
