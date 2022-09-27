@@ -160,7 +160,7 @@ export default function RetentionInvite({
                 </WhiteButton>
 
               )}
-            {syncLoading && <Spinner animation="border" />}
+            {syncLoading && <Spinner animation="border" size="sm" />}
             {updatedAt !== '' && (
             <div className={styles.syncted_at}>{ moment(new Date(updatedAt)).format('MM/DD/YYYY') }</div>
             )}

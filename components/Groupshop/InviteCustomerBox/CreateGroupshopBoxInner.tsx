@@ -203,7 +203,7 @@ const CreateGroupshopBoxInner = ({
                 Go Back
               </WhiteButton>
 
-              {loader ? <Spinner animation="border" /> : (
+              {loader ? <Spinner animation="border" size="sm" /> : (
                 <WhiteButton
                   className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
                   onClick={createGroupShops}
