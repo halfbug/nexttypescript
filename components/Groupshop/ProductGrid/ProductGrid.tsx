@@ -61,6 +61,7 @@ const ProductGrid = ({
     },
     items: products || [],
     siblingCount: 4,
+    id,
   });
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
 

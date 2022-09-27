@@ -19,11 +19,12 @@ type PaginationProps<T> = {
     screens: ScreensProps
     items: T[],
     siblingCount: number,
+    id?: string,
 //   currentPage: number,
 }
 
 const usePagination = <T extends {}>({
-  maxrows, screens, items, dimensions, siblingCount,
+  maxrows, screens, items, dimensions, siblingCount, id,
 }:PaginationProps<T>) => {
   // const [ref, dimensions] = useDimensions();
   const [breakPoint, setBreakPoint] = useState<string>('sm');
@@ -39,11 +40,11 @@ const usePagination = <T extends {}>({
     }
   }, [dimensions, items, currentPage]);
 
-  // useEffect(() => {
-  //   if (items?.length > 0 && currentPage !== 1) {
-  //     setCurrentPage(1);
-  //   }
-  // }, [items]);
+  useEffect(() => {
+    if (items?.length > 0 && currentPage !== 1 && id === 'shoppedby') {
+      setCurrentPage(1);
+    }
+  }, [items]);
 
   const breakpoints: { [char: string]: number } = {
     // xs: 0,
