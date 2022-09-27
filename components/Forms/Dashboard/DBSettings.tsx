@@ -177,7 +177,7 @@ export default function DBSettings({
                   <Col>
                     <h6 className={styles.smallt}>
                       {' '}
-                      Under 500kb (PNG, JPG, JPEG)
+                      (Formats: PNG, JPG, JPEG)
                       <br />
                       1440px x 500px
                     </h6>

@@ -88,7 +88,7 @@ export default function BrandName(
           />
           <Row className="mx-auto">
             <Form.Text className={styles.generalform_smalltxt}>
-              Under 500 KB (PNG, JPG, JPEG)
+              (Formats: PNG, JPG, JPEG)
             </Form.Text>
           </Row>
         </Form.Group>
