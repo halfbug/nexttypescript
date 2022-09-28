@@ -6,10 +6,13 @@ import {
 import * as yup from 'yup';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import { StoreContext } from 'store/store.context';
+import useDeal from 'hooks/useDeal';
+import useBilling from 'hooks/useBilling';
 
 export default function BillingPackage() {
   const { store } = React.useContext(StoreContext);
   const { findIndexInArray } = useUtilityFunction();
+  const { isAppTrial } = useBilling();
 
   return (
     <Row className={styles.billing}>
@@ -18,13 +21,16 @@ export default function BillingPackage() {
           <Col lg={12} className={['my-2', styles.letsgo].join(' ')}>
             <h3>Plans</h3>
             <Row className={styles.box_row}>
-              <Col className={store.plan === 'EXPLORE' ? styles.box_1__active : styles.box_1}>
-                <div className={styles.box_row_boxheading}>Explore</div>
-                <div className="d-flex justify-content-center">
-                  <div className={styles.free}>Free</div>
-                </div>
-                <p className={styles.billing_first_100}>First 100 Groupshops</p>
-              </Col>
+              {isAppTrial()
+                ? (
+                  <Col className={store.plan === 'EXPLORE' ? styles.box_1__active : styles.box_1}>
+                    <div className={styles.box_row_boxheading}>Explore</div>
+                    <div className="d-flex justify-content-center">
+                      <div className={styles.free}>Free</div>
+                    </div>
+                    <p className={styles.billing_first_100}>First 30 Days</p>
+                  </Col>
+                ) : <></>}
               <Col className={store.plan === 'LAUNCH' ? styles.box_4__active : styles.box_4}>
                 <div className={styles.box_row_boxheading}>Launch</div>
                 <div className="d-flex justify-content-center">
