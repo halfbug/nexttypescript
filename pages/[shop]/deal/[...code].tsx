@@ -429,7 +429,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   placement="bottom"
                   shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
                   fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? ''}
-                  label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn $${value}`}
+                  label={isExpired ? 'SHARE TO UNLOCK' : `Share & Earn ${currencySymbol}${value}`}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
