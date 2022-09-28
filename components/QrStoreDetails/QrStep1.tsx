@@ -125,7 +125,6 @@ export default function QrStep1({
                     <div className={styles.QRContainer__content__container__congratsmain__simply}>
                       <p>
                         Simply enter the email you used to shop with any Groupshop
-                        <br />
                         brand to get started.
                       </p>
                     </div>

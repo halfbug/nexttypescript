@@ -201,6 +201,13 @@
           }
         }
       }
+
+      &__simply {
+        p {
+          font-weight: 500;
+          max-width: 400px;
+        }
+      }
     }
 
     // @extend .pb-3, .pt-5;
