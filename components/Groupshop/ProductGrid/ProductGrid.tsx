@@ -220,31 +220,33 @@ const ProductGrid = ({
                   )}
                 >
                   <div className={styles.groupshop_product_info}>
-                    <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-                    {prod.purchaseCount ? (
-                      <p className="text-center mb-1 fs-5 fw-bold">
-                        { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
-                        { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
-                        { prod.purchaseCount > 100 ? <>🎉</> : ''}
-                        <i>
-                          {`${prod.purchaseCount} people shopped`}
+                    <div className={styles.groupshop_product_desc}>
+                      <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
+                      {prod.purchaseCount ? (
+                        <p className="text-center mb-1 fs-5 fw-bold">
+                          { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
+                          { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
+                          { prod.purchaseCount > 100 ? <>🎉</> : ''}
+                          <i>
+                            {`${prod.purchaseCount} people shopped`}
 
-                        </i>
-                      </p>
-                    ) : ''}
+                          </i>
+                        </p>
+                      ) : ''}
 
-                    <h5 className="pt-2 text-center fw-bold">
-                      <span className="text-decoration-line-through fw-light me-1">
-                        {currencySymbol}
-                        {/* {prod.price} */}
-                        {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                      </span>
-                      {' '}
-                      <span>
-                        {currencySymbol}
-                        {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                      </span>
-                    </h5>
+                      <h5 className="pt-2 text-center fw-bold">
+                        <span className="text-decoration-line-through fw-light me-1">
+                          {currencySymbol}
+                          {/* {prod.price} */}
+                          {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                        {' '}
+                        <span>
+                          {currencySymbol}
+                          {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                      </h5>
+                    </div>
                     {!showHoverButton && (
                       <div className={styles.groupshop_addtoCart_wrapper}>
                         {isExpired ? (
