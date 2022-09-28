@@ -166,7 +166,8 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
                 That’s&nbsp;
                 <strong>
                   $
-                  {countTotalDiscount()}
+                  {Number.isInteger(countTotalDiscount())
+                    ? countTotalDiscount() : countTotalDiscount().toFixed(2)}
                 </strong>
                 , in case you forgot.
               </p>
