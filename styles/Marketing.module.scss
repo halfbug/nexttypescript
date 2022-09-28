@@ -1,19 +1,36 @@
 @import "./variables.scss";
 
-.marketing {    
+.marketing {
     @extend .d-flex, .px-0;
-
-    &_DatepickerIcon{
-        position: absolute;  
-          left: 162px;  
-            top: 188px;
-            z-index: 10;
+    // .react-datepicker__current-month {
+    //     margin-top: -7px !important;
+    // }
+    // .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+    //     margin-top: -7px !important;
+    // }
+    Button{
+    .react-datepicker__navigation react-datepicker__navigation--previous{
+        top: 10px !important;
+    }}
+        Button{
+        .react-datepicker__navigation--previous {
+            top: 10px !important;
+        }
+        .react-datepicker__navigation--next {
+            top: 10px !important;
+        }
     }
-    &_DatepickerIcon2{
-        position: absolute;  
-          left: 333px;  
-            top: 188px;
-            z-index: 10;
+    &_DatepickerIcon {
+        position: absolute;
+        left: 162px;
+        top: 188px;
+        z-index: 10;
+    }
+    &_DatepickerIcon2 {
+        position: absolute;
+        left: 333px;
+        top: 188px;
+        z-index: 10;
     }
     &__box_1 {
         @extend .mb-4;
@@ -22,7 +39,7 @@
         border-radius: 18px;
         &__inte {
             display: flex;
-            justify-content: center
+            justify-content: center;
         }
     }
     &__box_3 {
@@ -37,14 +54,14 @@
         border-radius: 18px;
     }
 
-    &__tooltip_1{
+    &__tooltip_1 {
         @extend .mx-2;
-        &__popover{
+        &__popover {
             border-color: $green;
         }
     }
-    .popover{
-        border:5px solid;
+    .popover {
+        border: 5px solid;
     }
 
     h3 {
@@ -72,7 +89,6 @@
         line-height: 18px;
         color: #1d2329;
         opacity: 0.5;
-        
     }
     .vertical {
         border-top: 1px solid #dee2ed;
@@ -221,12 +237,12 @@
         }
     }
 
-    &__ArrowIcon{
+    &__ArrowIcon {
         position: relative;
         top: 1px;
     }
 
-    &__input_tooltip{
+    &__input_tooltip {
         @extend .position-absolute;
         top: 7px;
         right: 9px;
@@ -241,7 +257,6 @@
         }
 
         &__closebtnlg {
-
             display: flex;
             justify-content: flex-end;
             box-shadow: none !important;
@@ -259,7 +274,7 @@
         &__body {
             color: #000000;
             padding: 0px;
-            hr{
+            hr {
                 color: #707070;
                 height: 0.9px;
                 opacity: 0.1;
@@ -291,26 +306,26 @@
                 color: #000000;
             }
         }
-        &__bottom{
+        &__bottom {
             margin: 0px 30px 20px 30px;
-            h4{
+            h4 {
                 @extend .my-2;
                 font-family: "DM Sans";
                 font-style: normal;
                 font-weight: $font-weight-bolder;
-                font-size: $size-16px;;
+                font-size: $size-16px;
                 line-height: 21px;
                 color: $subheadingclr;
             }
         }
-        &__label{
+        &__label {
             @extend .my-2;
             display: inline-block;
             font-size: $size-14px;
             line-height: $size-18px;
-            font-weight: $font-weight-light
+            font-weight: $font-weight-light;
         }
-        &__hint{
+        &__hint {
             @extend .mb-0;
             color: $subheadingclr;
         }
@@ -322,8 +337,7 @@
             margin-top: 26px;
         }
         &__btn,
-        
-        &__purpleBtn{
+        &__purpleBtn {
             @extend .mt-2, .px-3, .py-1;
             border-radius: 6px;
             //height: 28px;
@@ -334,30 +348,30 @@
             //line-height: 15px;
             text-align: center;
             &:hover {
-            border-radius: 6px;
-            border: 1px solid $black;
+                border-radius: 6px;
+                border: 1px solid $black;
             }
         }
-        &__btn{
+        &__btn {
             background-color: $white;
             font-weight: $font-weight-light;
-            width:117px;
-            &_btnClear{
+            width: 117px;
+            &_btnClear {
                 margin-top: 8px;
                 font-weight: $font-weight-light;
-                width:89px;
+                width: 89px;
                 background: $white;
                 border: 1px solid $black;
                 border-radius: 6px;
-              }
+            }
         }
-        &__purpleBtn{
-            background-color:$classic;
+        &__purpleBtn {
+            background-color: $classic;
             font-weight: $font-weight-normal;
             margin-left: 16px;
         }
-    
-        &__input{
+
+        &__input {
             width: 80px;
             &:focus,
             &:active {
