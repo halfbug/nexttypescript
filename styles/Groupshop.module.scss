@@ -2737,6 +2737,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border-radius: 12px;
       @include media-breakpoint-down(sm) {
         border-radius: 12px 12px 0px 0px;
+        position: fixed;
+        bottom: inherit;
       }
     }
     &__body {
@@ -2779,13 +2781,19 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         }
       }
     }
+    &__productsWrapper {
+      @include media-breakpoint-down(sm) {
+        width: auto;
+        overflow: scroll;
+      }
+    }
     &__productsSection {
       @extend .p-0, .my-3, .d-flex;
       justify-content: space-between;
       column-gap: 10px;
       @include media-breakpoint-down(sm) {
         justify-content: center;
-        flex-direction: column;
+        width: 600px;
       }
     }
     &__product {

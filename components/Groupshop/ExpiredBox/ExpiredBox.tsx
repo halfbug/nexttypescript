@@ -103,29 +103,30 @@ const ExpiredBox = ({
             </Col>
           </Row>
           <Row>
-            <Col lg={12} className={styles.groupshop_expiredBox_modal__productsSection}>
-              {products.map((item) => (
-                <div className={styles.groupshop_expiredBox_modal__product}>
-                  <div className={styles.groupshop_expiredBox_modal__product__image}>
-                    <img src={item.featuredImage} alt="product" />
+            <div className={styles.groupshop_expiredBox_modal__productsWrapper}>
+              <Col lg={12} className={styles.groupshop_expiredBox_modal__productsSection}>
+                {products.map((item) => (
+                  <div className={styles.groupshop_expiredBox_modal__product}>
+                    <div className={styles.groupshop_expiredBox_modal__product__image}>
+                      <img src={item.featuredImage} alt="product" />
+                    </div>
+                    <div className={styles.groupshop_expiredBox_modal__product__name}>
+                      {item.title}
+                    </div>
+                    <div className={styles.groupshop_expiredBox_modal__product__amounts}>
+                      <strong>
+                        $
+                        {formatNumber(dPrice(+item.price))}
+                      </strong>
+                      <span>
+                        $
+                        {formatNumber(item.price)}
+                      </span>
+                    </div>
                   </div>
-                  <div className={styles.groupshop_expiredBox_modal__product__name}>
-                    {item.title}
-                  </div>
-                  <div className={styles.groupshop_expiredBox_modal__product__amounts}>
-                    <strong>
-                      $
-                      {formatNumber(dPrice(+item.price))}
-                    </strong>
-                    <span>
-                      $
-                      {formatNumber(item.price)}
-                    </span>
-                  </div>
-                </div>
 
-              ))}
-              {/* {isModalForMobile && (
+                ))}
+                {/* {isModalForMobile && (
               <div className={styles.groupshop_expiredBox_modal__product}>
                 <div className={styles.groupshop_expiredBox_modal__product__image}>
                   <img src={SampleImage.src} alt="product" />
@@ -143,7 +144,8 @@ const ExpiredBox = ({
                 </div>
               </div>
               )} */}
-            </Col>
+              </Col>
+            </div>
           </Row>
           <Row className={styles.groupshop_expiredBox_modal__bottom}>
             {isModalForMobile
