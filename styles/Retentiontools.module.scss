@@ -47,7 +47,7 @@
         &_btn {
             @extend .mt-2;
             button {
-                @extend .py-0;
+                @extend .py-0 , .me-2;
                 height: 28px;
             }
         }

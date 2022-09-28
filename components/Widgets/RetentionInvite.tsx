@@ -162,7 +162,10 @@ export default function RetentionInvite({
               )}
             {syncLoading && <Spinner animation="border" size="sm" />}
             {updatedAt !== '' && (
-            <div className={styles.syncted_at}>{ moment(new Date(updatedAt)).format('MM/DD/YYYY') }</div>
+            <div className={[styles.syncted_at, 'd-inline'].join(' ')}>
+              { moment(new Date(updatedAt)).format('MM/DD/YYYY') }
+
+            </div>
             )}
           </div>
           <h4>
