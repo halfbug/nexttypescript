@@ -104,7 +104,7 @@ export default function QrStep1({
       <div className={styles.QRContainer}>
         <Container fluid>
           <Row>
-            <Col md={6} sm={12} className="p-0">
+            <Col md={7} sm={12} className="p-0">
               <div ref={leftBlock} className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
@@ -118,9 +118,7 @@ export default function QrStep1({
                     <div className={styles.QRContainer__content__heading}>
                       <h2>
                         Access your personalized store with
-                        <p>
-                          exclusive discounts and cashback for you and your friends.
-                        </p>
+                        exclusive discounts and cashback for you and your friends.
                       </h2>
                       <GroupshopRoundLogo className="img-fluid" />
                     </div>
@@ -131,14 +129,14 @@ export default function QrStep1({
                         brand to get started.
                       </p>
                     </div>
-                    <div
+                    {/* <div
                       className={styles.QRContainer__content__container__congratsmain__how}
                       onMouseEnter={() => setisShown(true)}
                       onMouseLeave={() => setisShown(false)}
                     >
                       How?
-                    </div>
-                    {isShown
+                    </div> */}
+                    {/* {isShown
                     && (
                     <div className={styles.QRContainer__content__container__congratsmain__email}>
                       <div className={`${styles['QRContainer__content'
@@ -157,7 +155,7 @@ export default function QrStep1({
                         </p>
                       </div>
                     </div>
-                    ) }
+                    ) } */}
                     <div className={styles.QRContainer__form__container}>
                       <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group className="mb-4">
@@ -209,10 +207,9 @@ export default function QrStep1({
                 </div>
               </div>
             </Col>
-            <Col md={6} sm={12} className="p-0">
+            <Col md={5} sm={12} className="p-0">
               <div
                 className={styles.QRContainer__desktopImage}
-                style={{ height: rightBlockHeight }}
               >
                 <img src={QR.src} alt="QRImage" className="img-fluid" />
               </div>

@@ -21,7 +21,7 @@ export default function QrStep3() {
       <div className={styles.QRContainer}>
         <Container fluid>
           <Row>
-            <Col md={6} sm={12} className="p-0">
+            <Col md={7} sm={12} className="p-0">
               <div className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
@@ -89,7 +89,7 @@ export default function QrStep3() {
                 </div>
               </div>
             </Col>
-            <Col md={6} sm={12} className="p-0">
+            <Col md={5} sm={12} className="p-0">
               <div className={styles.QRContainer__desktopImage}>
                 <img src={QR.src} alt="QRImage" className="img-fluid" />
               </div>
