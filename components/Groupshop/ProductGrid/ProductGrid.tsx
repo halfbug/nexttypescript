@@ -126,15 +126,59 @@ const ProductGrid = ({
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
                 <ProductCard
                   isrc={prod.featuredImage}
-                  onClick={() => handleDetail(prod)}
+                  // onClick={() => handleDetail(prod)}
                   imgOverlay={(
-                    <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
-                      <span className={styles.groupshop__pcard_tag_price}>
-                        {currencySymbol}
-                        {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
-                        {' '}
-                        OFF
-                      </span>
+                    <>
+                      <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
+                        <span className={styles.groupshop__pcard_tag_price}>
+                          {currencySymbol}
+                          {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
+                          {' '}
+                          OFF
+                        </span>
+
+                        <div className={styles.groupshop__pcard_tag_boughtby}>
+                          {topFive(getBuyers(prod.id)?.map(
+                            (member: Member) => (
+                              <span className={styles.groupshop__pcard_tag_buyer}>
+                                {formatName(member.orderDetail.customer)}
+                              </span>
+                            ),
+                          ))}
+                          {isInfluencerGS && topFive(getBuyers2(prod.id)?.map(
+                            (member: Member) => (
+                              <span className={styles.groupshop__pcard_tag_buyer}>
+                                {formatName(member.customerInfo)}
+                              </span>
+                            ),
+                          ))}
+
+                          {getBuyers(prod.id).length > 0 && (
+                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                          {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
+                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                        </div>
+                        {dealProducts?.filter(
+                          ({ productId }) => productId === prod.id,
+                        ).map((
+                          { addedBy, productId },
+                        ) => {
+                          const show = displayAddedByFunc(productId);
+                          let htmldata = true ? (
+                            <span
+                              className={styles.groupshop__pcard_tag_addedby}
+                              key={`${productId}_${Math.random()}`}
+                            >
+                              🤩
+                              {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
+                              {' '}
+                              {`${addedBy}'s favs`}
+                            </span>
+                          ) : '';
+                          htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                          return htmldata;
+                        })}
+                      </button>
                       {showHoverButton && (
                         <Row className={styles.groupshop__pcard_tag_addToCart}>
                           <Col lg={10} className="p-0">
@@ -175,48 +219,7 @@ const ProductGrid = ({
                           ) : ''}
                         </Row>
                       )}
-                      <div className={styles.groupshop__pcard_tag_boughtby}>
-                        {topFive(getBuyers(prod.id)?.map(
-                          (member: Member) => (
-                            <span className={styles.groupshop__pcard_tag_buyer}>
-                              {formatName(member.orderDetail.customer)}
-                            </span>
-                          ),
-                        ))}
-                        {isInfluencerGS && topFive(getBuyers2(prod.id)?.map(
-                          (member: Member) => (
-                            <span className={styles.groupshop__pcard_tag_buyer}>
-                              {formatName(member.customerInfo)}
-                            </span>
-                          ),
-                        ))}
-
-                        {getBuyers(prod.id).length > 0 && (
-                          <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                        {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
-                          <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                      </div>
-                      {dealProducts?.filter(
-                        ({ productId }) => productId === prod.id,
-                      ).map((
-                        { addedBy, productId },
-                      ) => {
-                        const show = displayAddedByFunc(productId);
-                        let htmldata = true ? (
-                          <span
-                            className={styles.groupshop__pcard_tag_addedby}
-                            key={`${productId}_${Math.random()}`}
-                          >
-                            🤩
-                            {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
-                            {' '}
-                            {`${addedBy}'s favs`}
-                          </span>
-                        ) : '';
-                        htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
-                        return htmldata;
-                      })}
-                    </button>
+                    </>
                   )}
                 >
                   <div className={styles.groupshop_product_info}>
