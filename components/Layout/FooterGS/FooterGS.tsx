@@ -94,7 +94,7 @@ const Footer = ({
                   <h6>
                     <strong>THIS GROUPSHOP HAS EXPIRED </strong>
                   </h6>
-                  <p>
+                  <p className={styles1.GSfooter}>
                     Invite 1 friend to join Groupshop today, and start shopping
                     with them to get exclusive cashback and discounts.
                   </p>
@@ -221,7 +221,7 @@ const Footer = ({
             <div className={styles.groupshop_footer_text}>
               {isExpired ? (
                 <>
-                  <p>
+                  <p className={styles1.GSfooter}>
 
                     Stay on top of new offers from
                     {' '}
