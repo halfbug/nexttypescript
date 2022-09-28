@@ -125,7 +125,7 @@
             background-color: $modern;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 112px;
+            // width: 112px;
         }
         &__tag2 {
             @extend .d-flex, .justify-content-center, .align-items-center;
@@ -134,7 +134,7 @@
             border-radius: $border-radius-light;
             height: $height-normal;
             white-space: nowrap;
-            width: 130px;
+            // width: 130px;
         }
         &__tag3 {
             @extend .d-flex, .justify-content-center, .align-items-center;
@@ -142,7 +142,7 @@
             background-color: $tab3_clr;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 112px;
+            // width: 112px;
         }
         &__tag4 {
             @extend .d-flex, .justify-content-center, .align-items-center;
@@ -151,7 +151,7 @@
             border-radius: $border-radius-light;
             height: $height-normal;
             white-space: nowrap;
-            width: 130px;
+            // width: 130px;
         }
         &__tag5 {
             @extend .d-flex, .justify-content-center, .align-items-center;
@@ -159,7 +159,7 @@
             background-color: $LightPurple;
             border-radius: $border-radius-light;
             height: $height-normal;
-            width: 112px;
+            // width: 112px;
         }
     }
 
@@ -351,8 +351,13 @@
     }
   
     &__womScoreContainer {
-        position: relative;
-        padding: 20px;
+        // position: relative;
+        // padding: 20px;
+
+        &__ordersFromGS {
+            position: relative;
+            padding: 10px 15px;
+        }
     }
 
     input[type="text"],

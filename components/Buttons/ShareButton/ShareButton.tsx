@@ -89,7 +89,7 @@ const ShareButton = ({
       className={className}
       popoverClassName={popoverClassName}
       icon={icon ?? <Send size={18} />}
-      placement={placement}
+      placement="top-start"
     />
   );
 };

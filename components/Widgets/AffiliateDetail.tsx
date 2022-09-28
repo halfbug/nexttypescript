@@ -126,33 +126,32 @@ export default function AffiliateDetail({
   });
 
   return (
-    <section className={styles.partner__box_last}>
-      <div className="pb-3 pe-3">
-        <Form noValidate onSubmit={handleSubmit}>
-          <Row className="align-items-center mb-2">
-            <Col md={5}>
-              <div className={styles.partner__box_last__name}>
-                {partnerDetails.fname !== null ? `${partnerDetails.fname} ` : ''}
-                {partnerDetails.lname !== null ? partnerDetails.lname : ''}
-                {partnerDetails.fname === null && partnerDetails.lname === null ? partnerDetails.email : '' }
-              </div>
-            </Col>
-            <Col md={7} className="d-flex justify-content-start align-items-center">
-              <div className={styles.partner__btn}>
-                <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
-                {' '}
-                <ArrowRightLogo />
-              </div>
-            </Col>
-          </Row>
-          <div>
-            <Row>
-              <div className={styles.partner__rewards_box__headrow}>
-                <Col className={styles.partner__rewards_box__heading}>
-                  Commission
-                </Col>
-                <Col className="d-flex">
-                  {!show && (
+    <div className={styles.partner__box_last}>
+      <Form noValidate onSubmit={handleSubmit}>
+        <Row className="align-items-center mb-2">
+          <Col md={5}>
+            <div className={styles.partner__box_last__name}>
+              {partnerDetails.fname !== null ? `${partnerDetails.fname} ` : ''}
+              {partnerDetails.lname !== null ? partnerDetails.lname : ''}
+              {partnerDetails.fname === null && partnerDetails.lname === null ? partnerDetails.email : '' }
+            </div>
+          </Col>
+          <Col md={7} className="d-flex justify-content-start align-items-center">
+            <div className={styles.partner__btn}>
+              <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
+              {' '}
+              <ArrowRightLogo />
+            </div>
+          </Col>
+        </Row>
+        <div>
+          <Row>
+            <div className={styles.partner__rewards_box__headrow}>
+              <Col className={styles.partner__rewards_box__heading}>
+                Commission
+              </Col>
+              <Col className="d-flex">
+                {!show && (
                   <>
                     <span className={styles.partner__box_last__commission__score}>
                       {values.partnerCommission}
@@ -161,39 +160,39 @@ export default function AffiliateDetail({
                     {' '}
                     <Button className="fw-bolder" variant="link" onClick={() => { setShow(!show); setshowSidebar(true); }}>Edit</Button>
                   </>
-                  )}
-                  <div className={show ? ' ' : 'd-none'}>
-                    <Form.Control
-                      type="text"
-                      name="partnerCommission"
-                      value={values.partnerCommission}
-                      onChange={handleChange}
-                      className={styles.dbrewards_input}
-                      isInvalid={!!errors.partnerCommission}
-                      placeholder="Enter %"
-                    />
-                    <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
-                      {errors.partnerCommission}
-                    </Form.Control.Feedback>
-                    <Button
-                      type="submit"
-                      className="fw-bolder"
-                      variant="link"
-                      value={1}
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </Col>
-              </div>
-            </Row>
-            <Row>
-              <div className={styles.partner__rewards_box__headrow}>
-                <Col className={styles.partner__rewards_box__heading}>
-                  Baseline Discount
-                </Col>
-                <Col className="d-flex">
-                  {!editMin && (
+                )}
+                <div className={show ? ' ' : 'd-none'}>
+                  <Form.Control
+                    type="text"
+                    name="partnerCommission"
+                    value={values.partnerCommission}
+                    onChange={handleChange}
+                    className={styles.dbrewards_input}
+                    isInvalid={!!errors.partnerCommission}
+                    placeholder="Enter %"
+                  />
+                  <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    {errors.partnerCommission}
+                  </Form.Control.Feedback>
+                  <Button
+                    type="submit"
+                    className="fw-bolder"
+                    variant="link"
+                    value={1}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Col>
+            </div>
+          </Row>
+          <Row>
+            <div className={styles.partner__rewards_box__headrow}>
+              <Col className={styles.partner__rewards_box__heading}>
+                Baseline Discount
+              </Col>
+              <Col className="d-flex">
+                {!editMin && (
                   <>
                     <span className={styles.partner__rewards_box__percentage}>
                       {values.minDiscount}
@@ -204,45 +203,45 @@ export default function AffiliateDetail({
                       {errors.minDiscount}
                     </Form.Control.Feedback>
                   </>
-                  )}
-                  <div className={editMin ? ' ' : 'd-none'}>
-                    <Form.Control
-                      type="text"
-                      name="minDiscount"
-                      value={values.minDiscount}
-                      onChange={handleChange}
-                      className={styles.dbrewards_input}
-                      isInvalid={!!errors.minDiscount}
-                      placeholder="Enter %"
-                    />
-                    <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
-                      {errors.minDiscount}
-                    </Form.Control.Feedback>
-                    <Button
-                      type="submit"
-                      className="fw-bolder"
-                      variant="link"
-                      onClick={() => {
-                        if (!(errors.minDiscount)) {
-                          setEditMin(false);
-                        }
-                      }}
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </Col>
+                )}
+                <div className={editMin ? ' ' : 'd-none'}>
+                  <Form.Control
+                    type="text"
+                    name="minDiscount"
+                    value={values.minDiscount}
+                    onChange={handleChange}
+                    className={styles.dbrewards_input}
+                    isInvalid={!!errors.minDiscount}
+                    placeholder="Enter %"
+                  />
+                  <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    {errors.minDiscount}
+                  </Form.Control.Feedback>
+                  <Button
+                    type="submit"
+                    className="fw-bolder"
+                    variant="link"
+                    onClick={() => {
+                      if (!(errors.minDiscount)) {
+                        setEditMin(false);
+                      }
+                    }}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Col>
 
-              </div>
-            </Row>
-            <Row>
-              <div className={styles.partner__rewards_box__headrow}>
-                <Col className={styles.partner__rewards_box__heading}>
-                  Maximum Discount
-                </Col>
-                <Col className="d-flex">
-                  <div>
-                    {!editMax && (
+            </div>
+          </Row>
+          <Row>
+            <div className={styles.partner__rewards_box__headrow}>
+              <Col className={styles.partner__rewards_box__heading}>
+                Maximum Discount
+              </Col>
+              <Col className="d-flex">
+                <div>
+                  {!editMax && (
                     <>
                       <span className={styles.partner__rewards_box__percentage}>
                         {values.maxDiscount}
@@ -250,35 +249,35 @@ export default function AffiliateDetail({
                       </span>
                       <Button className="fw-bolder" variant="link" onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}>Edit</Button>
                     </>
-                    )}
-                  </div>
-                  <div className={editMax ? '' : 'd-none'}>
-                    <Form.Control
-                      type="text"
-                      name="maxDiscount"
-                      value={values.maxDiscount}
-                      onChange={handleChange}
-                      className={styles.dbrewards_input}
-                      isInvalid={!!errors.maxDiscount}
-                      placeholder="Enter %"
-                    />
-                    <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
-                      {errors.maxDiscount}
-                    </Form.Control.Feedback>
+                  )}
+                </div>
+                <div className={editMax ? '' : 'd-none'}>
+                  <Form.Control
+                    type="text"
+                    name="maxDiscount"
+                    value={values.maxDiscount}
+                    onChange={handleChange}
+                    className={styles.dbrewards_input}
+                    isInvalid={!!errors.maxDiscount}
+                    placeholder="Enter %"
+                  />
+                  <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    {errors.maxDiscount}
+                  </Form.Control.Feedback>
 
-                    <Button
-                      type="submit"
-                      className="fw-bolder"
-                      variant="link"
-                      onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}
-                    >
-                      Save
-                    </Button>
-                  </div>
-                </Col>
-              </div>
-            </Row>
-            {/* <Col md={6}>
+                  <Button
+                    type="submit"
+                    className="fw-bolder"
+                    variant="link"
+                    onClick={() => { setEditMax(!editMax); setshowSidebar(true); }}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Col>
+            </div>
+          </Row>
+          {/* <Col md={6}>
               <div className={styles.partner__rewards_box__heading}>
                 Baseline
                 <ToolTip
@@ -335,7 +334,7 @@ export default function AffiliateDetail({
                 </div>
               </div>
             </Col> */}
-            {/* <Col md={6}>
+          {/* <Col md={6}>
               <div className={styles.partner__rewards_box__heading}>
                 Maximum
                 <ToolTip
@@ -389,8 +388,8 @@ export default function AffiliateDetail({
 
               </div>
             </Col> */}
-          </div>
-          {/* <Row>
+        </div>
+        {/* <Row>
             <div className="d-flex align-items-center mt-2">
               {!show && (
               <>
@@ -433,14 +432,12 @@ export default function AffiliateDetail({
               </div>
             </div>
           </Row> */}
-          <Row>
-            <hr className={styles.partner__sperator} />
-          </Row>
+        <Row>
+          <hr className={styles.partner__sperator} />
+        </Row>
 
-          <div className={styles.partner__womScoreContainer}>
-            <div className={styles.partner__overlay}>
-              <div className={styles.partner__overlayText}>Coming Soon</div>
-            </div>
+        <div className={styles.partner__womScoreContainer}>
+          <div>
             <Row className="mt-4">
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag1}>
@@ -456,8 +453,6 @@ export default function AffiliateDetail({
                   👆 148 unique clicks
                 </span>
               </Col>
-            </Row>
-            <Row className="mt-2">
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag3}>
                   {/* <NewPurchaseLogo /> */}
@@ -474,8 +469,6 @@ export default function AffiliateDetail({
                   ✨ 2 new customers
                 </span>
               </Col>
-            </Row>
-            <Row className="mt-2">
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag5}>
                   {/* <CashBackLogo /> */}
@@ -490,8 +483,12 @@ export default function AffiliateDetail({
                 </div>
               </Col>
             </Row>
-
-            <hr className={styles.partner__sperator} />
+          </div>
+          <hr className={styles.partner__sperator} />
+          <div className={styles.partner__womScoreContainer__ordersFromGS}>
+            <div className={styles.partner__overlay}>
+              <div className={styles.partner__overlayText}>Coming Soon</div>
+            </div>
             <Row className={styles.partner_order}>
               {/* <OrderFromLogo /> */}
               🔗 Orders from this Groupshop
@@ -502,15 +499,11 @@ export default function AffiliateDetail({
                 03/10/21
               </Col>
               <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-            </Row>
-            <Row className="mt-3">
               <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
               <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
                 03/10/21
               </Col>
               <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-            </Row>
-            <Row className="mt-3">
               <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
               <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
                 03/10/21
@@ -518,8 +511,8 @@ export default function AffiliateDetail({
               <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
             </Row>
           </div>
-        </Form>
-      </div>
-    </section>
+        </div>
+      </Form>
+    </div>
   );
 }
