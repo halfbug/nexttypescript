@@ -5542,6 +5542,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^8.3.4":
+  version: 8.3.4
+  resolution: "@types/uuid@npm:8.3.4"
+  checksum: 6f11f3ff70f30210edaa8071422d405e9c1d4e53abbe50fdce365150d3c698fe7bbff65c1e71ae080cbfb8fded860dbb5e174da96fdbbdfcaa3fb3daa474d20f
+  languageName: node
+  linkType: hard
+
 "@types/warning@npm:^3.0.0":
   version: 3.0.0
   resolution: "@types/warning@npm:3.0.0"
@@ -11162,6 +11169,7 @@ fsevents@^1.2.7:
     "@types/react-color": ^3.0.6
     "@types/react-copy-to-clipboard": ^5.0.2
     "@types/react-show-more-text": ^1.4.2
+    "@types/uuid": ^8.3.4
     "@types/yup": ^0.29.13
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
@@ -11215,6 +11223,7 @@ fsevents@^1.2.7:
     style-loader: 2.0.0
     tsconfig-paths-webpack-plugin: ^3.5.1
     typescript: 4.4.4
+    uuid: ^9.0.0
     xlsx: ^0.18.5
     yup: ^0.32.11
   languageName: unknown
@@ -19527,6 +19536,15 @@ typescript@4.4.4:
   bin:
     uuid: ./bin/uuid
   checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "uuid@npm:9.0.0"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
   languageName: node
   linkType: hard
 

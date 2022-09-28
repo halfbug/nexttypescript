@@ -11,6 +11,7 @@ import axios from 'axios';
 import { StoreContext } from 'store/store.context';
 import { IStore } from 'types/store';
 import Replace from 'assets/images/replaceIcon.svg';
+import { v4 as uuid } from 'uuid';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
@@ -79,8 +80,11 @@ export default function UploadButton({
           const shopName = store.shop.split('.');
           const imgExt = files[0].name.split('.');
           const imgExt1 = imgExt[imgExt.length - 1];
+          const uniqueId = uuid();
+          const uniqueLimitId = uniqueId.substring(uniqueId.length - 12);
           console.log("🚀 ~ file: index.tsx ~ line 83 ~ handleImageUpload ~ imgExt1", imgExt1);
-          fd.append('image', files[0], `${shopName[0]}_${_.uniqueId(field)}.${imgExt1}`);
+          fd.append('image', files[0], `${shopName[0]}_${uniqueLimitId}.${imgExt1}`);
+          fd.append('previousimage', `${url}`);
           setprogress(true);
           axios.post(`${process.env.API_URL}/image`, fd, config)
             .then((res) => {
