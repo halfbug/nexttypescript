@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {
-  Col, Row, Table,
+  Col, Row, Table, Button,
 } from 'react-bootstrap';
 import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import styles from 'styles/Retentiontools.module.scss';
@@ -225,15 +225,16 @@ const RetentionImport = ({
                 {orderValue}
               </span>
             </div>
-            <div className={styles.rt__importDate_box_row}>
-              <button
-                type="button"
+            <div className={[styles.rt__importDate_box_row, 'justify-content-center'].join(' ')}>
+              <Button
+                variant="link"
+                className={styles.rt__btn}
                 onClick={() => {
                   handleRetentionAnalytics(activeId);
                 }}
               >
                 View Analytics
-              </button>
+              </Button>
             </div>
             <div />
           </div>

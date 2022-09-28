@@ -2,7 +2,24 @@
 
 .rt {
     @extend .mt-2, .px-0;
-
+    &__btn {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 18px;
+        text-decoration-line: underline;
+        color: $black;
+        // @extend .px-3;
+        // color: $black;
+        // font-weight: $font-weight-bolder;
+        // line-height: $line-height-18;
+        // text-decoration: underline;
+        // cursor: pointer;
+        // font-family: "DM Sans";
+        // font-size: 14px;
+        // white-space: nowrap;
+    }
     &__invite_box {
         @extend .my-4, .p-4;
 
