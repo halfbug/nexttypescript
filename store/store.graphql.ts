@@ -527,6 +527,7 @@ query Groupshop($code: String!, $status: String = "") {
         featuredImage
         description
         price
+        outofstock
         purchaseCount
         options{
       id

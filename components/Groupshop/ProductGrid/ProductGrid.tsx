@@ -112,6 +112,7 @@ const ProductGrid = ({
     e.stopPropagation();
     googleButtonCode('product-share');
   };
+
   return (
     <Container {...props} ref={ref} id={id}>
       <Row className={styles.groupshop_row}>
@@ -195,9 +196,9 @@ const ProductGrid = ({
                                 variant="primary"
                                 className={styles.groupshop__pcard_tag_addToCart_btn}
                                 onClick={() => handleDetail(prod)}
-                                disabled={isExpired}
+                                disabled={isExpired || prod.outofstock}
                               >
-                                Add to Cart
+                                {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
 
                               </Button>
 
@@ -268,9 +269,9 @@ const ProductGrid = ({
                               className={styles.groupshop_addtoCart}
                               onClick={() => handleDetail(prod)}
                               // () => { setsProduct(prod); setshowDetail(true); }}
-                              disabled={isExpired}
+                              disabled={isExpired || prod.outofstock}
                             >
-                              Add to Cart
+                              {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
 
                             </Button>
                             <ShareButton
