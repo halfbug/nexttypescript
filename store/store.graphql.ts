@@ -1321,7 +1321,8 @@ query retentiontools($storeId: String!) {
     startDate
     endDate 
     minOrderValue
-    createdAt    
+    createdAt
+    progress    
   }
 }
 `;

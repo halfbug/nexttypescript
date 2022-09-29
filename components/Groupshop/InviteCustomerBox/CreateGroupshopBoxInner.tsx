@@ -69,6 +69,7 @@ const CreateGroupshopBoxInner = ({
         },
 
       });
+      setLoader(true);
       setInProgress(true);
     } else {
       showError('Did not find any pending groupshop');
@@ -206,9 +207,10 @@ const CreateGroupshopBoxInner = ({
               {loader ? <Spinner animation="border" size="sm" /> : (
                 <WhiteButton
                   className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
-                  onClick={createGroupShops}
+                  onClick={() => {
+                    setLoader(true); createGroupShops();
+                  }}
                 >
-                  <Spinner animation="border" size="sm" />
                   {' '}
                   Create Groupshops
                 </WhiteButton>

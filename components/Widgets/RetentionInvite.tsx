@@ -48,6 +48,7 @@ export default function RetentionInvite({
     onError() {
       console.log('progress Status failed!');
       setInProgress(false);
+      handleAfterSubmit();
     },
   });
 
@@ -75,8 +76,10 @@ export default function RetentionInvite({
 
   useEffect(() => {
     if (shouldIntervalBeCancelled) {
-      showSuccess('Groupshop creaated successfully!');
+      showSuccess('Groupshop creaated successfully!!!');
+      setIntervalID('');
       clearInterval(intervalID);
+      handleAfterSubmit();
     }
   }, [shouldIntervalBeCancelled]);
 

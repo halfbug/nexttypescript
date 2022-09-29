@@ -65,6 +65,7 @@ export default function RetentionTools() {
             currencyCode={store?.currencyCode ?? 'USD'}
             retentionList={retentionList}
             showRetentionImport={showRetentionImport}
+            handleAfterSubmit={handleAfterSubmit}
             setshowRetentionImport={setshowRetentionImport}
           />
         </Col>

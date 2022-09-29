@@ -18,6 +18,7 @@ interface RetentionImportProps {
   currencyCode:string;
   showRetentionImport:boolean;
   setshowRetentionImport: any;
+  handleAfterSubmit: any;
   retentionList: [];
   xs?: any,
   sm?: number,
@@ -29,7 +30,7 @@ interface RetentionImportProps {
 
 const RetentionImport = ({
   retentionList, currencyCode, showRetentionImport,
-  setshowRetentionImport, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
+  setshowRetentionImport, handleAfterSubmit, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
 } : RetentionImportProps) => {
   const [startDate, setstartDate] = useState('');
   const [endDate, setendDate] = useState('');
@@ -42,7 +43,6 @@ const RetentionImport = ({
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
   const [inProgress, setInProgress] = React.useState<boolean>(false);
   const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
-
   const handleRetention = async (id: string) => {
     const currentPartner: any = retentionList?.filter(
       (item: any) => item.id === id,
@@ -100,6 +100,7 @@ const RetentionImport = ({
               <tr>
                 <th>&nbsp; &nbsp;Date</th>
                 <th> # Groupshops Created</th>
+                <th> Status</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
@@ -115,6 +116,7 @@ const RetentionImport = ({
                     </div>
                   </td>
                   <td className="">{part.groupshopsCreated}</td>
+                  <td className="">{(part.progress) ? 'In progress' : 'Completed'}</td>
                   <td className={styles.rt_cursor_pointer}>
                     <ArrowRightLogo
                       className=""
