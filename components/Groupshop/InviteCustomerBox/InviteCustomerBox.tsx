@@ -166,6 +166,7 @@ const InviteCustomerBox = ({
                       selected={startDate}
                       onChange={(sdate:any) => changeDate(sdate, 'start')}
                       icon={<FiCalendar />}
+                      calendarClassName="calendarArrow"
                     />
                   </div>
                 </Col>
@@ -190,6 +191,7 @@ const InviteCustomerBox = ({
                       name="endtDate"
                       selected={endDate}
                       onChange={(edate:any) => changeDate(edate, 'end')}
+                      calendarClassName="calendarArrow"
                     />
                   </div>
                 </Col>
