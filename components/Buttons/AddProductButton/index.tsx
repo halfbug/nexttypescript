@@ -88,7 +88,7 @@ export default function AddProductButton({ handleDelete }:IProps) {
             // disabled={disableBtn}
             disabled
           >
-            Add Products
+            Add Products/collections
           </RButton>
 
         </Col>
