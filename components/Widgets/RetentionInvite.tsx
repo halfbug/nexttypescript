@@ -180,7 +180,7 @@ export default function RetentionInvite({
           <div className={styles.rt__invite_box_btn}>
             {syncStatus !== 'Active'
               ? (
-                <WhiteButton>
+                <WhiteButton disabled>
                   Sort & Create Groupshops
                 </WhiteButton>
               )
