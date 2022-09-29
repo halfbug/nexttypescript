@@ -140,7 +140,7 @@ const Footer = ({
                   <div className="text-center me-2">
                     <span>
                       {' '}
-                      {days}
+                      {(isExpired) ? '00' : days}
                     </span>
                     <p className="mt-1">DAYS</p>
                   </div>
@@ -152,7 +152,7 @@ const Footer = ({
                 <Col className="d-flex col-3  ">
                   <div className="text-center mx-2">
                     <span>
-                      {hrs}
+                      {(isExpired) ? '00' : hrs}
                     </span>
                     <p className="mt-1">HOURS</p>
                   </div>
@@ -164,7 +164,7 @@ const Footer = ({
                 <Col className="d-flex col-3 ">
                   <div className="text-center mx-3">
                     <span>
-                      {mins}
+                      {(isExpired) ? '00' : mins}
                     </span>
                     <p className="mt-1">MINUTES</p>
                   </div>
