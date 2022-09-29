@@ -234,69 +234,43 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                 <section className={styles.dashboard_campaign__box_1}>
                   <Row>
                     <h4>
-                      Add your products to Groupshop
+                      Select and add products to Groupshop
                     </h4>
                   </Row>
-                  <Row><p>All the products you select below will be available on your customers’ Groupshops.</p></Row>
-                  <Row className="">
-                    <Col className="ps-0">
-                      <Row className="ms-2">
-                        <Form.Check
-                          inline
-                          label="All products (Recommended)"
-                          className={values.criteria === 'allproducts' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
-                          onChange={(e) => {
-                            handleChange(e);
-                            handleSubmit();
-                          }}
-                          type="checkbox"
-                          name="criteria"
-                          isInvalid={touched.criteria && !!errors.criteria}
-                          value="allproducts"
-                          checked={values.criteria === 'allproducts'}
-                        />
-                        {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
-                      </Row>
-                      <Row className="row mb-2 ms-0"><p className="mb-0 mt-1"><strong>Or select as many collections as you want below:</strong></p></Row>
-                      <Row className="ms-2">
-                        <Form.Check
-                          inline
-                          onChange={(e) => {
-                            handleChange(e);
-                            handleSubmit();
-                          }}
-                          label="Newest products"
-                          className={values.criteria === 'newest' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
-                          type="checkbox"
-                          name="criteria"
-                          value="newest"
-                          isInvalid={touched.criteria && !!errors.criteria}
-                          checked={values.criteria === 'newest'}
-                        />
-                      </Row>
-                      <Row className="ms-2">
-                        <Form.Check
-                          inline
-                          label="Best sellers"
-                          className={values.criteria === 'bestseller' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
-                          onChange={(e) => {
-                            handleChange(e);
-                            handleSubmit();
-                          }}
-                          type="checkbox"
-                          name="criteria"
-                          isInvalid={touched.criteria && !!errors.criteria}
-                          value="bestseller"
-                          checked={values.criteria === 'bestseller'}
-                        />
-                      </Row>
-                      <Row>
-                        <Row className="row mb-2 ms-0"><p className="mb-0 mt-1"><strong>Specific products/collections (up to 80 products)</strong></p></Row>
-
-                      </Row>
+                  <Row><p>Customers get cashback and discounts on the products selected below by default</p></Row>
+                  <Row>
+                    <Col>
+                      <Form.Check
+                        inline
+                        label="Best sellers"
+                        className={values.criteria === 'bestseller' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
+                        onChange={(e) => {
+                          handleChange(e);
+                          handleSubmit();
+                        }}
+                        type="radio"
+                        name="criteria"
+                        isInvalid={touched.criteria && !!errors.criteria}
+                        value="bestseller"
+                        checked={values.criteria === 'bestseller'}
+                      />
+                      <Form.Check
+                        inline
+                        onChange={(e) => {
+                          handleChange(e);
+                          handleSubmit();
+                        }}
+                        label="Newest products"
+                        className={values.criteria === 'newest' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
+                        type="radio"
+                        name="criteria"
+                        value="newest"
+                        isInvalid={touched.criteria && !!errors.criteria}
+                        checked={values.criteria === 'newest'}
+                      />
                     </Col>
                   </Row>
-                  {/* <Row className="mt-2">
+                  <Row className="mt-2">
                     <Col>
                       <Form.Check
                         inline
@@ -315,18 +289,19 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                         value="custom"
                         checked={values.criteria === 'custom'}
                       />
+
                     </Col>
                     <Form.Control.Feedback type="invalid">
                       {errors.criteria}
                     </Form.Control.Feedback>
-                  </Row> */}
-                  {/* <ProductButton
+                  </Row>
+                  <ProductButton
                     disableBtn={disableBtn}
                     totalProducts={(values.products?.length) ? values.products?.length : 0}
                     handleDelete={handleDeleteProduct}
                   />
-                  <hr /> */}
-                  {/* <Row>
+                  <hr />
+                  <Row>
                     <Col>
                       <h4>
                         Allow customers to add products from your store
@@ -340,8 +315,8 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                         />
                       </h4>
                     </Col>
-                  </Row> */}
-                  {/* <Row className="text-muted"><p>Select the products that customers can add to personalize their Groupshop</p></Row> */}
+                  </Row>
+                  <Row className="text-muted"><p>Select the products that customers can add to personalize their Groupshop</p></Row>
                   <Row className="text-start">
                     <Col>
                       <AddProductButton
@@ -412,6 +387,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                 </section>
 
               </Form>
+
             </Col>
           </Row>
 
