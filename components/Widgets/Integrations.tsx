@@ -91,13 +91,14 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
               <Col lg={6}>
                 <InputGroup className="mb-3 ">
                   <FormControl
-                    placeholder="Enter Tik Tok Pixel"
+                    placeholder="Enter Tik Tok Pixel (Coming soon)"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     value={values?.settings?.marketing?.tiktokPixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.tiktokPixels', e.currentTarget.value);
                     }}
+                    disabled
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>

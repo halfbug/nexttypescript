@@ -556,6 +556,11 @@ query Groupshop($code: String!, $status: String = "") {
           youtubeUrl
           media
         }
+        marketing{
+          facebookPixels
+          tiktokPixels
+          googlePixels          
+        }
       }
     }
   popularProducts{
