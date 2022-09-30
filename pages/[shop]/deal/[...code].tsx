@@ -120,6 +120,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       ));
       setmember(groupshop?.members[0]);
       console.log('=== update gs ...code GS');
+      console.log('new testing console', process.env.IMAGE_PATH);
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
     }
   }, [groupshop, pending]);
@@ -231,7 +232,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         );
         setNewPopularPrd([...newPopularArr]);
       } else {
-        setNewPopularPrd([...(popularProducts ?? [])]);
+        setNewPopularPrd([...uniqueArray(popularProducts ?? [])]);
       }
     }
   }, [popularProducts, topPicks]);
@@ -925,7 +926,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 export default GroupShop;
 
 export const getServerSideProps = async (context: any) => {
-  console.log('🚀 ~ file: [...code].tsx ~ line 725 ~ constgetServerSideProps:GetServerSideProps= ~ context', context.params);
+  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
   const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
   const requestOptions = {
     method: 'GET',
