@@ -50,15 +50,12 @@ const OBWelcomeInfluencer = ({
         <Modal.Body className={styles.welcome__modal__body}>
           {!isDesktop && (
           <div className={styles.welcome__modal__body__top}>
-            <div className={styles.welcome__modal__body__top__leftTxt}>
-              <img
-                src={gsctx?.store?.logoImage}
-                alt={gsctx?.store?.brandName}
-                          // alt="d"
-                className="img-fluid"
-              />
+            <img
+              src={gsctx?.store?.logoImage}
+              alt={gsctx?.store?.brandName}
+              className={styles.welcome__modal__body__mainiconMobile}
+            />
 
-            </div>
             <div className={styles.welcome__modal__body__top__vertical_seprator} />
             <div className={styles.welcome__modal__body__top__right}>
               <GSLogo />
@@ -157,7 +154,7 @@ const OBWelcomeInfluencer = ({
         </Modal.Body>
         <hr className={styles.welcome__modal__body__horizontal_seprator} />
         <Modal.Body className={styles.welcome__modal__body}>
-          <div className={[styles.welcome__modal__body__description, styles.welcome__modal__body__descriptioninfluencer, 'text-center w-100'].join(' ')}>
+          <div className={[styles.welcome__modal__body__description, 'text-center w-100'].join(' ')}>
 
             Customize your Groupshop now and share it when you’re done.
           </div>

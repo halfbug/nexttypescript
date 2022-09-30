@@ -2,8 +2,6 @@
 .welcome {
     
     &__modal {
-        min-width: 745px;
-
         &__content {
             border-radius: 12px;
         }
@@ -20,7 +18,6 @@
         }
 
         &__body {
-            padding: 0 128px;
             margin-bottom: 0px;
             text-align: center;
 
@@ -231,7 +228,7 @@
             }
 
             &__box2influencer {
-                padding: 23px 40px;
+                padding: 23px 35px;
                 border: 1px dashed #9AB639;
                 border-radius: 12px;
                 margin-top: 20px;
@@ -244,26 +241,30 @@
             }
 
             &__box3 {
-                padding: 23px 40px;
+                padding: 23px 35px;
                 border: 1px dashed #C867EA;
                 border-radius: 12px;
                 margin-top: 15px;
-                margin-bottom: 40px;
             }
 
             &__box3influencer {
-                padding: 23px 40px;
+                padding: 23px 35px;
                 border: 1px dashed #C867EA;
                 border-radius: 12px;
                 margin-top: 15px;
-                margin-bottom: 40px;
                 display: flex;
+
+                @media (max-width: 745px) {
+                    margin-bottom: 40px;
+                    
+                }
             }
 
             &__iconMobile {
                 display: none;
                 @media (max-width: 475px) {
                     display: block;
+                    margin-right: 16px;
                 }
             }
         }
@@ -285,7 +286,6 @@
                 }
 
                 h2 {
-                    line-height: 40px;
                     margin-top: 27px;
                     margin-bottom: 18px;
                 }
@@ -400,13 +400,13 @@
                 }
 
                 &__top{
-                    margin: 30px 60px;
+                    margin-top: 21px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    &__leftTxt{
-                        font-size: 24px;
-                    }
+                    // &__leftTxt{
+                    //     font-size: 24px;
+                    // }
                     &__vertical_seprator {
                         border-left: 1px solid rgba(0, 0, 0, 0.1);
                         height: 32px;
@@ -462,9 +462,9 @@
                     text-align: start;
                 }
 
-                &__description{
-                    margin-left: 16px;
-                }
+                // &__description{
+                //     margin-left: 16px;
+                // }
 
                 &_description{
                     text-align: start!important;
@@ -491,9 +491,7 @@
                 }
 
                 h2 {
-                    line-height: 40px;
                     margin-top: 27px;
-                    margin-bottom: 18px;
                 }
 
                 &__box1 {

@@ -1,6 +1,5 @@
 .welcome {
     &__modal {
-        min-width: 745px;
 
         &__content {
             border-radius: 12px;
@@ -125,19 +124,25 @@
 
 .reward {
     &__modal {
-        min-width: 745px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        height: 100%;
+        max-width: 600px;
 
         &__content {
             border-radius: 12px;
+            max-height: 95vh;
+            overflow: auto;
         }
 
         &__imgBox {
-            width: 107.7%;
+            width: 100%;
         }
 
         &__body {
-            padding: 0 110px;
-            margin-bottom: 40px;
+            padding: 0 4rem 2rem 4rem;
 
             h2 {
                 font-family: 'DM Sans';
