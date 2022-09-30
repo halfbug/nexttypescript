@@ -1008,6 +1008,7 @@ const GET_ACTIVE_GROUPSHOPS_BY_EMAIL = gql`
 query getActiveGroupshops($email: String!) {
   getActiveGroupshops(email: $email) {
     name
+    isExpired
     refundDetail{
       amount
     }
@@ -1015,7 +1016,8 @@ query getActiveGroupshops($email: String!) {
       firstName
       lastName
     }
-    groupshops{
+    groupshop{
+      expiredAt
       url
       members {
         role

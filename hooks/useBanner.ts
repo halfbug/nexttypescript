@@ -19,7 +19,7 @@ const useBanner = () => {
 
   useEffect(() => {
     if (groupshop?.store?.settings && bannerImage === '') {
-      if (groupshop?.store?.settings?.general?.imageUrl !== '') {
+      if (groupshop?.store?.settings?.general?.imageUrl !== '' && groupshop?.store?.settings?.general?.imageUrl) {
         const s3path = getKeyFromS3URL(groupshop?.store?.settings?.general?.imageUrl);
         const banner = `${process.env.IMAGE_PATH}/${s3path}`;
         setBannerImage(banner);

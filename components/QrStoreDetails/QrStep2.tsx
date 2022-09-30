@@ -62,7 +62,7 @@ export default function QrStep2(
                     , here are all your Groupshops:
                   </h2>
                   <div className={styles.QRContainer__content__container__groupshopTitle}>
-                    Active Groupshops
+                    Groupshops
                   </div>
                   <hr className={styles.QRContainer__content__container__hr2} />
 
@@ -71,7 +71,7 @@ export default function QrStep2(
                       activeGroupshops.length && activeGroupshops.map((gs: any) => (
                         <Link
                           key={gs?.name}
-                          href={gs?.groupshops[0]?.url ? gs?.groupshops[0]?.url : ''}
+                          href={gs?.groupshop?.url ? gs?.groupshop?.url : ''}
                         >
                           <a target="_blank" className={styles.cardItem}>
                             <div className={styles.cardImg}>
@@ -91,8 +91,15 @@ export default function QrStep2(
                                 </button>
                                 <button type="button" className={styles.friendBtn}>
                                   ✨
-                                  {` ${gs?.groupshops[0]?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
+                                  {` ${gs?.groupshop?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
                                 </button>
+                                {
+                                  gs?.isExpired && (
+                                  <button type="button" className={styles.cashbackBtn}>
+                                    Expired
+                                  </button>
+                                  )
+                                }
                               </div>
                             </div>
                             <div className={styles.order}>
