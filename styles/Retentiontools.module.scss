@@ -112,7 +112,7 @@
 
     &__importDate_box {
         @extend .mb-4, .p-4;
-
+        padding-bottom: 8px !important;
         border: 1px dashed $dotted-border-color1;
         border-radius: $border-radius-medium;
 
