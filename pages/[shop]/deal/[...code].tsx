@@ -230,9 +230,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         const newPopularArr = Array.from(
           new Set([...[...uniqueArray(popularProducts) ?? []], ...uniqueBestSeller ?? []]),
         );
-        setNewPopularPrd([...newPopularArr]);
+        setNewPopularPrd([...newPopularArr].filter((prd) => prd.outofstock !== true));
       } else {
-        setNewPopularPrd([...uniqueArray(popularProducts ?? [])]);
+        setNewPopularPrd([...uniqueArray(popularProducts ?? [])]
+          .filter((prd) => prd.outofstock !== true));
       }
     }
   }, [popularProducts, topPicks]);

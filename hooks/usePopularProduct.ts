@@ -44,7 +44,7 @@ const usePopular = (products:IProduct[] | undefined) => {
           section.length === ADD_EVERY ? [...section, ITEM_TO_ADD] : section
         )),
       );
-      setPopularShuffled(data);
+      setPopularShuffled(data.filter((prd) => prd.outofstock !== true));
     }
   }, [products, gsctx?.refferalDealsProducts]);
 

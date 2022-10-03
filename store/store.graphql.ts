@@ -570,6 +570,7 @@ query Groupshop($code: String!, $status: String = "") {
     description
     purchaseCount
     price
+    outofstock
     options{
       id
       name
