@@ -61,9 +61,9 @@ export default function QrStep2(
                     {customerName}
                     , here are all your Groupshops:
                   </h2>
-                  <div className={styles.QRContainer__content__container__groupshopTitle}>
+                  {/* <div className={styles.QRContainer__content__container__groupshopTitle}>
                     Groupshops
-                  </div>
+                  </div> */}
                   <hr className={styles.QRContainer__content__container__hr2} />
 
                   <div className={styles.activeGroupshops}>
