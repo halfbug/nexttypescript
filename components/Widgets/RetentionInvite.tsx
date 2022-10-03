@@ -34,7 +34,7 @@ export default function RetentionInvite({
   const [showInvitePopup, setShowInvitePopup] = useState<boolean>(false);
   const [intervalID, setIntervalID] = useState<any>('');
   const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(false);
-  const [inProgress, setInProgress] = React.useState<boolean>(false);
+  const [inProgress, setInProgress] = useState<boolean>(false);
   const [showCreateGroupshopPopup, setCreateGroupshopPopup] = useState<boolean>(false);
   const [listCustomers, setListCustomers] = useState<any>([]);
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -76,9 +76,11 @@ export default function RetentionInvite({
 
   useEffect(() => {
     if (shouldIntervalBeCancelled) {
-      showSuccess('Groupshop creaated successfully!!!');
+      showSuccess('Groupshop created successfully!');
       setIntervalID('');
       clearInterval(intervalID);
+      setShouldIntervalBeCancelled(false);
+      setInProgress(false);
       handleAfterSubmit();
     }
   }, [shouldIntervalBeCancelled]);

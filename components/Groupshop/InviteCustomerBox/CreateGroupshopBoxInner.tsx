@@ -208,7 +208,7 @@ const CreateGroupshopBoxInner = ({
                 <WhiteButton
                   className={styles.marketing_inviteCustomerBox_modal__purpleBtn}
                   onClick={() => {
-                    setLoader(true); createGroupShops();
+                    setLoader(true); setInProgress(true); createGroupShops();
                   }}
                 >
                   {' '}
