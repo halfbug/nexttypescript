@@ -268,7 +268,7 @@
     
     .cardItem{
       display: flex;
-      padding: 1.2rem;
+      padding: 1.2rem 1.2rem 1.2rem 0;
       cursor: pointer;
       text-decoration: none;
       &:not(:last-child){
