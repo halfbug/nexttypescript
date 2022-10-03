@@ -4,6 +4,7 @@ import {
 } from 'react';
 import { StoreContext } from 'store/store.context';
 import { GET_BILLING_BY_DATE } from 'store/store.graphql';
+import moment from 'moment';
 import useBilling from './useBilling';
 import useUtilityFunction from './useUtilityFunction';
 
@@ -22,11 +23,17 @@ const useExcelDocument = () => {
         feeformGroupshop, storeTotalGS, todaysTotalGS, storePlan, store: recStore,
       } = bRec;
       console.log({ bRec });
+
       const thisDate = `${month} ${date}, ${year}`;
-      const isAppTrialForThisDate = isAppTrialOnGivenDate(recStore.appTrialEnd, thisDate);
+      const trail = moment(recStore.appTrialEnd);
+      const rec = moment.utc(`${year} ${month}, ${date}`);
+
+      const isAppTrialForThisDate = isAppTrialOnGivenDate(trail, rec);
+      console.log('🚀 ~ file: useExcelDocument.ts ~ line 27 ~ constsheetresult:any=sourceData.map ~ thisDate', thisDate);
       console.log('🚀 ~ file: useExcelDocument.ts ~ line 26 ~ isAppTrialForThisDate', isAppTrialForThisDate);
-      const appTrialtext = isAppTrialForThisDate ? ` >> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}0`
+      const appTrialtext = isAppTrialForThisDate ? ` >> Free Trial ${storeCurrencySymbol(store?.currencyCode ?? 'USD')}`
         : '';
+      console.log('🚀 ~ file: useExcelDocument.ts ~ line 29 ~ constsheetresult:any=sourceData.map ~ isAppTrialForThisDate', isAppTrialForThisDate);
 
       const GSUsageCharges = feeformGroupshop.map((item: any) => {
         const formattedTotalCharged = +(item.totalCharged).toFixed(2).toString().replace('.00', '');

@@ -100,14 +100,23 @@ export default function useBilling() {
     // setappTrial(true);
     return true;
   };
-  const isAppTrialOnGivenDate = (appTrialDate: Date, recordDate: any) => {
+  const isAppTrialOnGivenDate = (appTrialDate: any, recordDate: any) => {
+    console.log('🚀 ~ file: useBilling.ts ~ line 104 ~ isAppTrialOnGivenDate ~ recordDate', recordDate);
+    console.log('🚀 ~ file: useBilling.ts ~ line 104 ~ isAppTrialOnGivenDate ~ appTrialDate', appTrialDate);
+    let flag = false;
     if (appTrialDate) {
+      // date = new Date(Date.UTC(year, month, day, hour, minute, second));
       const appTrialEndDate = new Date(appTrialDate);
+      console.log('🚀 ~ file: useBilling.ts ~ line 107 ~ isAppTrialOnGivenDate --- appTrialEndDate', appTrialEndDate);
       const recDate = new Date(recordDate);
-      const diff = appTrialEndDate.getTime() - recDate.getTime();
-      if (diff < 0) return false;
+      console.log('🚀 ~ file: useBilling.ts ~ line 109 ~ isAppTrialOnGivenDate --- recDate', recDate);
+      // if (recordDate.getTime() >= appTrialEndDate.getTime()) {
+      if (recordDate > appTrialDate) {
+        console.log('🚀 ~ file: useBilling.ts ~ line 108 ~ isAppTrialOnGivenDate ~ recDate', recDate);
+        flag = false;
+      } else flag = true;
     }
-    return true;
+    return flag;
   };
 
   return {
