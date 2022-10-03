@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
@@ -16,11 +15,13 @@ const useSKU = () => {
     if (gsctx.members.length) {
       const temp: IProduct[] = [];
       gsctx.members.map((ele) => ele.products?.map((item) => temp.push(item)));
-      // const arr = [...temp, ...gsctx?.popularProducts ?? []];
       setMemberProducts([...gsctx?.popularProducts ?? [], ...gsctx?.ownerDeals ?? []]);
     }
     if (gsctx.allProducts?.length && gsctx.popularProducts?.length) {
-      setHideSection(_.isEqual(gsctx.allProducts, gsctx.popularProducts));
+      const products = gsctx.allProducts.map((ele) => ele.id);
+      const popularProducts = gsctx.popularProducts.map((ele) => ele.id);
+      const arr = JSON.stringify(products) === JSON.stringify(popularProducts);
+      setHideSection(arr);
     }
   }, [gsctx]);
 
