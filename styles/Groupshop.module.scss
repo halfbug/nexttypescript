@@ -190,7 +190,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       position: absolute;
       bottom: 0;
       margin: 0;
-      max-height: 90vh;
+      // max-height: 90vh;
       &__closebtnsm {
         display: flex;
         justify-content: center;
@@ -1584,7 +1584,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       height: 42.96px;
       box-shadow: none !important;
       @media (min-width: 375px) and (max-width: 575px) {
-        margin-bottom: 50px;
+        // margin-bottom: 50px;
       }
     }
     &_shareBtn {
