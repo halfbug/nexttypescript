@@ -271,15 +271,17 @@
       padding: 1.2rem 1.2rem 1.2rem 0;
       cursor: pointer;
       text-decoration: none;
+      justify-content: space-between;
+      align-items: baseline;
       &:not(:last-child){
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       }
 
       .cardImg{
-        background: rgba(0, 0, 0, 0.04);
+        // background: rgba(0, 0, 0, 0.04);
         border-radius: 6px;
-        width: 79px;
-        height: 70px;
+        // width: 79px;
+        // height: 70px;
         margin-right: 18px;
         overflow: hidden;
       }
@@ -351,6 +353,16 @@
               text-decoration-line: underline;
             }
           }
+        }
+      }
+
+      &__Wrapper {
+        display: flex;
+
+        img {
+          height: 62px;
+          object-fit: contain;
+          width: 93px;
         }
       }
     }
