@@ -181,13 +181,13 @@ const ProductsSearch = ({
   };
   // const selectedCountState = (selected?.length ?? 0 + clientDProducts?.length) || 0;
   useEffect(() => {
-    if (selected?.length !== clientDealProducts()?.length) {
+    if (selected && selected?.length) {
       const cdp = clientDealProducts() ?? [];
       console.log('🚀 ~ file: ProductsSearch.tsx ~ line 179 ~ useEffect ~ cdp ooo', cdp);
       const sp = selected ?? [];
       console.log('🚀 ~ file: ProductsSearch.tsx ~ line 181 ~ useEffect ~ sp ooo', sp);
 
-      setselectedCountState((cdp.length + sp.length));
+      setselectedCountState((sp.length));
     } else {
       setselectedCountState(0);
     }
@@ -209,7 +209,7 @@ const ProductsSearch = ({
   };
 
   const handleClick = (event: any) => {
-    if (selectedProducts.length > clientDealProducts()?.length) {
+    if (selectedProducts && selectedProducts.length) {
       if (!allowSelectAll) {
         setShow(!show);
         setTarget(event.target);
