@@ -175,6 +175,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       @include media-breakpoint-down(sm) {
         border-radius: 21px 21px 0px 0px !important;
+        max-height: 90vh;
+        overflow: auto;
       }
     }
     &__closebtnsm {
