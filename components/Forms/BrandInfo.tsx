@@ -158,12 +158,6 @@ export default function BrandInfo() {
             isObject={false}
             selectedValues={values.industry}
             className={['form-select', styles.welcome__select].join(' ')}
-            onKeyPressFn={(e) => {
-              updateIndustry(e);
-            }}
-            onSearch={(e) => {
-              updateIndustry(e);
-            }}
             onRemove={(e) => {
               updateIndustry(e);
             }}

@@ -36,12 +36,6 @@ export function Industry(
       <Multiselect
         isObject={false}
         selectedValues={values.industry}
-        onKeyPressFn={(e) => {
-          updateIndustry(e);
-        }}
-        onSearch={(e) => {
-          updateIndustry(e);
-        }}
         onRemove={(e) => {
           updateIndustry(e);
         }}
