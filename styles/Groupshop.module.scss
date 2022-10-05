@@ -24,6 +24,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     width: 100%;
     z-index: 9;
   }
+  &__big_banner_wrapper {
+    width: 300px;
+    margin: 0 auto;
+  }
   &_main_logo {
     img {
       max-height: 48px;
@@ -549,7 +553,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &_big_banner_box {
       @extend .py-2, .align-items-center, .d-flex, .justify-content-center;
       text-align: center;
-      width: 300px;
       height: fit-content;
       border: 1px solid #ccb2f9;
       box-sizing: border-box;
