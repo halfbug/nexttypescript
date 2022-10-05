@@ -25,6 +25,7 @@ import Star from 'assets/images/star.svg';
 import Bulb from 'assets/images/bulb.svg';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import EditRewardsBox from './EditRewardsBox';
 
 interface IValues {
   rewards: string;
@@ -43,6 +44,7 @@ export default function UpdateRewards() {
   // const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
   const [editMin, setEditMin] = useState(false);
   const [editMax, setEditMax] = useState(false);
+  const [editRewardBox, setEditRewardBox] = useState(false);
   const [initvalz, setInitValz] = useState<IValues>({
     rewards: '',
     selectedTarget: '',
@@ -200,8 +202,8 @@ export default function UpdateRewards() {
         return item;
       });
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
-      setEditMin(false);
-      setEditMax(false);
+      // setEditMin(false);
+      // setEditMax(false);
     },
   });
   useEffect(() => {
@@ -290,6 +292,16 @@ export default function UpdateRewards() {
             {/* {!editMin && (
               <> */}
             <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
+            <Button
+              variant="link"
+              onClick={() => {
+                setEditMin(!editMin);
+                setEditRewardBox(true);
+              }}
+            >
+              Edit
+
+            </Button>
             {/*  <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>Edit</span>
               </>
             )} */}
@@ -339,6 +351,16 @@ export default function UpdateRewards() {
             {/* {!editMax && (
               <> */}
             <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
+            <Button
+              variant="link"
+              onClick={() => {
+                setEditMax(!editMax);
+                setEditRewardBox(true);
+              }}
+            >
+              Edit
+
+            </Button>
             {/* <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>Edit</span>
               </>
             )} */}
@@ -377,7 +399,10 @@ export default function UpdateRewards() {
             </Col>
           </Row>
         </div>
-
+        <EditRewardsBox
+          show={editRewardBox}
+          handleClose={() => setEditRewardBox(false)}
+        />
       </Form>
     </section>
   );

@@ -422,3 +422,76 @@
         border-radius: 0.3rem !important;
     }
 }
+.editRewardsBox_modal {
+    width: 680px;
+    &__content {
+      border-radius: 12px;
+    }
+    &__closebtnlg {
+        display: flex;
+        justify-content: flex-end;
+        box-shadow: none !important;
+        border-bottom: none;
+        svg {
+          cursor: pointer;
+        }
+    }
+    &__body {
+      color: #000000;
+      margin: 0px 45px;
+      padding: 0px 0px 30px 0px;
+      h5{
+        font-weight: $font-weight-bolder;
+        font-size: 14px;
+        line-height: 18px;
+        margin-bottom: 4px;
+        margin-top: 10px;
+      }
+    }
+    &__top {
+      margin-bottom: 10px;
+      h3 {
+        @extend .mb-3;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: $font-weight-normal;
+        font-size: 22px;
+        line-height: 28px;
+        color: #000000;
+      }
+      p {
+        @extend .mb-0, .d-block;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 14px;
+        line-height: 18px;
+        color: #000000;
+      }
+    }
+    &_text_lg {
+        @extend .fs-5, .fw-normal, .lh-base;
+        font-family: DM Sans;
+        color: $subheadingclr;
+        p {
+            @extend .mb-0;
+        }
+    }
+    &__btnSection {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+
+      margin-top: 40px;
+    }
+    &__whiteBtn{
+        @extend .px-4;
+        background: #ffffff;
+        color: #000000;
+    }
+    &__purpleBtn{
+        background: $classic;
+        color: #000000;
+        margin-left: 10px;
+    }
+  }
