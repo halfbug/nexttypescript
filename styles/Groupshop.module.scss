@@ -10,6 +10,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   /* Chrome/Opera/Safari */
   color: pink;
 }
+
 .groupshop {
   background-color: white !important;
   font-family: "DM Sans" !important;
@@ -27,6 +28,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &__big_banner_wrapper {
     width: 300px;
     margin: 0 auto;
+  }
+  &__member_line_break {
+    width: 100%;
   }
   &_main_logo {
     img {
