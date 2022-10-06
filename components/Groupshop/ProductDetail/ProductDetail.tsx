@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-undef */
 import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -139,7 +136,8 @@ const ProductDetail = ({
     if (data) {
       const selectedVariant = getVariant();
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
-      if (selectedVariant?.inventoryQuantity < 1) {
+      if (product?.outofstock) setoutofStock(true);
+      else if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);

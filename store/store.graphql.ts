@@ -798,6 +798,7 @@ const GET_PRODUCT_DETAIL = gql`
     id
     description
     purchaseCount
+    outofstock
     images{
       id
       src
