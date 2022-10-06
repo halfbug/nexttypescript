@@ -106,10 +106,10 @@
   }
 
   &__content__container {
-    padding: 3rem 2rem;
+    padding: 1rem 2rem;
 
     @media (max-width:991px) {
-        padding-top: 30px !important;
+        padding-top: 10px !important;
         padding-left: 25px;
         padding-right: 20px;
     }
@@ -122,7 +122,7 @@
         padding-top: 60px !important;
       }
       @media (max-width: 1024px) {
-        padding: 0 0 60px!important;
+        padding: 0 0 10px!important;
       } 
       @media (max-width: 767px) {
         padding-bottom: 0 !important;
@@ -212,7 +212,7 @@
 
     // @extend .pb-3, .pt-5;
     @media(max-width: 1024px){
-      padding: 50px 0 !important;
+      padding: 30px 0px 0px 0px !important;
     }
     @media(max-width: 767px){
       padding: 34px !important;;
@@ -433,7 +433,7 @@
 
     hr {
       color: $black;
-      margin: 25px 0;
+      margin: 5px 0;
     }
     p {
       color: $black;
@@ -627,7 +627,7 @@
     }
   }
   .question{
-    margin-bottom: 64px !important;
+    margin-bottom: 10px !important;
     @media (max-width:475px) {
         margin-bottom: 44px !important;
     }
