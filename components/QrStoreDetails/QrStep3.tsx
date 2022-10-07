@@ -26,7 +26,7 @@ export default function QrStep3() {
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />
                 </div>
-                <div className={styles.QRContainer__mobileImage}>
+                <div className={['mx-2', styles.QRContainer__mobileImage].join(' ')}>
                   <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
                   <GroupshopRoundLogo1 className="img-fluid" />
                 </div>
