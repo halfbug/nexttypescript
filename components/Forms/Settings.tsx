@@ -140,8 +140,8 @@ export default function Settings({ isDB }: IProps) {
               layout: {
                 bannerProductPage: true,
                 bannerCartPage: true,
-                bannerStyle: 'Modern',
-                bannerDesign: 'Modern_1',
+                bannerStyle: '0',
+                bannerDesign: '001',
                 bannerCustomColor: '',
                 callToActionText: '1',
                 bannerSummaryPage: 'Both',

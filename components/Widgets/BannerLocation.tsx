@@ -4,6 +4,7 @@ import styles from 'styles/LayoutForm.module.scss';
 import {
   Row, Col, Form,
 } from 'react-bootstrap';
+import useAppContext from 'hooks/useAppContext';
 
 export interface BannerLocationProps {
   values: any;
@@ -21,6 +22,8 @@ export default function BannerLocation(
     : BannerLocationProps,
 ) {
   const [check, setCheck] = React.useState(true);
+  const { gsctx } = useAppContext();
+  const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   return (
     <section className={styles.layout__box_1}>
       <h4 className="mt-0">
@@ -100,7 +103,7 @@ export default function BannerLocation(
                     <div className={['ps-2', styles.layout__codesnip__code].join(' ')}>
                       {'<'}
                       script defer="defer" id="groupshop-banner" src="
-                      {process.env.API_URL}
+                      {gsURL}
                       /groupshop-pdp.js"
                       {'>'}
                     </div>

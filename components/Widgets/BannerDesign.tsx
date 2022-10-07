@@ -27,7 +27,7 @@ export default function BannerDesign(
   }
     : BannerDesignProps,
 ) {
-  const [bannerDesignStyle, setbannerDesignStyle] = useState('Modern');
+  const [bannerDesignStyle, setbannerDesignStyle] = useState('0');
   const [customColor, setcustomColor] = useState('#3C3C3C');
   const [modernClass, setmodernClass] = useState('');
   const [classicClass, setclassicClass] = useState('');
@@ -36,21 +36,21 @@ export default function BannerDesign(
     if (values.settings?.layout) {
       setbannerDesignStyle(values.settings?.layout?.bannerStyle);
       setcustomColor(values.settings?.layout?.bannerCustomColor);
-      setmodernClass((values.settings?.layout?.bannerStyle === 'Modern') ? 'active-btn' : '');
-      setclassicClass((values.settings?.layout?.bannerStyle === 'Classic') ? 'active-btn' : '');
+      setmodernClass((values.settings?.layout?.bannerStyle === '0') ? 'active-btn' : '');
+      setclassicClass((values.settings?.layout?.bannerStyle === '1') ? 'active-btn' : '');
     }
   }, [values]);
 
   const handleFields = (field: string, value: string) => {
     if (field === 'bannerDesign') {
-      setFieldValue('settings.layout.bannerStyle', 'Classic');
+      setFieldValue('settings.layout.bannerStyle', '1');
       setFieldValue('settings.layout.bannerDesign', value);
       setFieldValue('settings.layout.bannerCustomColor', customColor);
     } else {
       setFieldValue('settings.layout.bannerStyle', bannerDesignStyle);
       setFieldValue(field, value);
-      setmodernClass((bannerDesignStyle === 'Modern') ? 'active-btn' : '');
-      setclassicClass((bannerDesignStyle === 'Classic') ? 'active-btn' : '');
+      setmodernClass((bannerDesignStyle === '0') ? 'active-btn' : '');
+      setclassicClass((bannerDesignStyle === '1') ? 'active-btn' : '');
     }
     handleSubmit();
   };
@@ -66,18 +66,18 @@ export default function BannerDesign(
           Select style:
 
         </div>
-        <Button onClick={() => { setbannerDesignStyle('Modern'); setmodernClass('active-btn'); setclassicClass(''); }} variant="outline-primary" className={`${styles.layout__modern_btn} ${modernClass}`}>
+        <Button onClick={() => { setbannerDesignStyle('0'); setmodernClass('active-btn'); setclassicClass(''); }} variant="outline-primary" className={`${styles.layout__modern_btn} ${modernClass}`}>
           Modern
 
         </Button>
         {' '}
-        <Button onClick={() => { setbannerDesignStyle('Classic'); setclassicClass('active-btn'); setmodernClass('Modern'); }} variant="outline-primary" className={`${styles.layout__classic_btn} ${classicClass}`}>
+        <Button onClick={() => { setbannerDesignStyle('1'); setclassicClass('active-btn'); setmodernClass('0'); }} variant="outline-primary" className={`${styles.layout__classic_btn} ${classicClass}`}>
           Classic
 
         </Button>
         {' '}
       </div>
-      <Row className={bannerDesignStyle === 'Modern' ? 'd-flex flex-wrap' : 'd-none'}>
+      <Row className={bannerDesignStyle === '0' ? 'd-flex flex-wrap' : 'd-none'}>
         <Col lg={12} className="mt-2 px-1">
           <Form.Check
             className={styles.layout__checkbox}
@@ -86,11 +86,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Modern_1'}
+              checked={values?.settings?.layout?.bannerDesign === '001'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Modern_1"
+              value="001"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -107,11 +107,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Modern_2'}
+              checked={values?.settings?.layout?.bannerDesign === '002'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Modern_2"
+              value="002"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -128,11 +128,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Modern_3'}
+              checked={values?.settings?.layout?.bannerDesign === '003'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Modern_3"
+              value="003"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -149,11 +149,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Modern_4'}
+              checked={values?.settings?.layout?.bannerDesign === '004'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Modern_4"
+              value="004"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -164,7 +164,7 @@ export default function BannerDesign(
           </Form.Check>
         </Col>
       </Row>
-      <Row className={bannerDesignStyle === 'Classic' ? 'd-flex flex-wrap' : 'd-none'}>
+      <Row className={bannerDesignStyle === '1' ? 'd-flex flex-wrap' : 'd-none'}>
         <Col lg={12} className="mt-2 px-1">
 
           <Form.Check
@@ -174,11 +174,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Classic_1'}
+              checked={values?.settings?.layout?.bannerDesign === '101'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Classic_1"
+              value="101"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -195,11 +195,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Classic_2'}
+              checked={values?.settings?.layout?.bannerDesign === '102'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Classic_2"
+              value="102"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -216,11 +216,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'Classic_3'}
+              checked={values?.settings?.layout?.bannerDesign === '103'}
               onChange={(e) => {
                 handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
-              value="Classic_3"
+              value="103"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
@@ -237,11 +237,11 @@ export default function BannerDesign(
             <Form.Check.Input
               type="radio"
               name="bnr"
-              checked={values?.settings?.layout?.bannerDesign === 'bannerCustomColor'}
+              checked={values?.settings?.layout?.bannerDesign === '104'}
               onChange={(e) => {
                 handleFields('bannerDesign', e.currentTarget.value);
               }}
-              value="bannerCustomColor"
+              value="104"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
