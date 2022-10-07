@@ -367,6 +367,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href={meta.photo} as="image" />
         <meta property="og:image" content={meta.photo} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -940,7 +942,7 @@ export const getServerSideProps = async (context: any) => {
   const resJson = await res.json();
   return {
     props: {
-      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}${resJson.photo ?? 'bg.jpg'}` },
+      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}${resJson.photo ?? '/bg.jpg'}` },
     },
   };
 };

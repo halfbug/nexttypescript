@@ -1190,6 +1190,19 @@ query PartnerGroupshop($code: String!) {
       shop
       logoImage
       currencyCode
+      settings{
+        general{
+          brandColor
+          imageUrl
+          youtubeUrl
+          media
+        }
+        marketing{
+          facebookPixels
+          tiktokPixels
+          googlePixels          
+        }
+      }
     }
   popularProducts{
     id

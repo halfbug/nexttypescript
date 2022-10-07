@@ -140,6 +140,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   }, [partnerGroupshop, pending]);
   // banner image and logo load
   const bannerImage = useBanner();
+  console.log('🚀 ~ file: [...code].tsx ~ line 143 ~ bannerImage', bannerImage);
   const storeLogo = useLogo();
   const {
     gsURL,
@@ -325,8 +326,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href={`https://gsnodeimages.s3.amazonaws.com/${meta.photo}`} as="image" />
-        <meta property="og:image" content={`https://gsnodeimages.s3.amazonaws.com/${meta.photo}`} />
+        <link rel="preload" nonce="" href={meta.photo} as="image" />
+        <meta property="og:image" content={meta.photo} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -854,7 +857,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
 export default GroupShop;
 export const getServerSideProps = async (context: any) => {
-  const url = `${process.env.API_URL}/me?name=${context.params.shop}&code=${context.params.code}`;
+  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
+  const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
   const requestOptions = {
     method: 'GET',
     headers: {
@@ -866,7 +870,7 @@ export const getServerSideProps = async (context: any) => {
   const resJson = await res.json();
   return {
     props: {
-      meta: { ...resJson, photo: resJson.photo ?? 'https://gsnodeimages.s3.amazonaws.com/bg.jpg' },
+      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}${resJson.photo ?? '/bg.jpg'}` },
     },
   };
 };
