@@ -517,6 +517,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => {
                     setShowRewards(true);
                   }}
+                  className={styles.groupshop__big_banner_wrapper}
                 >
                   <BigBannerBox text={text} isInfluencerGS />
                 </div>
