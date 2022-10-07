@@ -447,12 +447,12 @@ export default function AffiliateDetail({
                   generated
                 </span>
               </Col>
-              <Col lg={6} md={6} xs={6}>
-                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}>
-                  {/* <UniqueClicksLogo /> */}
-                  👆 148 unique clicks
-                </span>
-              </Col>
+              {/* <Col lg={6} md={6} xs={6}> */}
+              {/* <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}> */}
+              {/* <UniqueClicksLogo /> */}
+              {/* 👆 148 unique clicks */}
+              {/* </span> */}
+              {/* </Col> */}
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag3}>
                   {/* <NewPurchaseLogo /> */}
@@ -463,18 +463,18 @@ export default function AffiliateDetail({
                   purchases
                 </span>
               </Col>
-              <Col lg={6} md={6} xs={6}>
-                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}>
-                  {/* <NewCustomerLogo /> */}
-                  ✨ 2 new customers
-                </span>
-              </Col>
-              <Col lg={6} md={6} xs={6}>
-                <span className={styles.partner__detail_tag__tag5}>
-                  {/* <CashBackLogo /> */}
-                  💸 $112 cashback
-                </span>
-              </Col>
+              {/* <Col lg={6} md={6} xs={6}> */}
+              {/* <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}> */}
+              {/* <NewCustomerLogo /> */}
+              {/* ✨ 2 new customers */}
+              {/* </span> */}
+              {/* </Col> */}
+              {/* <Col lg={6} md={6} xs={6}> */}
+              {/* <span className={styles.partner__detail_tag__tag5}> */}
+              {/* <CashBackLogo /> */}
+              {/* 💸 $112 cashback */}
+              {/* </span> */}
+              {/* </Col> */}
               <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
                 <div className={styles.partner__btn}>
                   <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
