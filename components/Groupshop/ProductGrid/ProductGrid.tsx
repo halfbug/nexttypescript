@@ -83,7 +83,7 @@ const ProductGrid = ({
   const {
     gsctx: {
       discountCode: { percentage },
-      dealProducts,
+      dealProducts, addedProducts,
     } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop,
   } = useAppContext();
 
@@ -159,7 +159,7 @@ const ProductGrid = ({
                           {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                         </div>
-                        {dealProducts?.filter(
+                        {addedProducts?.filter(
                           ({ productId }) => productId === prod.id,
                         ).map((
                           { addedBy, productId },
