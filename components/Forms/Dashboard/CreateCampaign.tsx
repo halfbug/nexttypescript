@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Form, Row, Col, ToggleButtonGroup, ToggleButton, Container, Button, Tooltip, Popover,
+  Form, Row, Col, ToggleButtonGroup, ToggleButton, Container,
 } from 'react-bootstrap';
 import styles from 'styles/Campaign.module.scss';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
@@ -8,9 +8,9 @@ import * as yup from 'yup';
 import { StoreContext } from 'store/store.context';
 import { ICampaign, ICampaignForm } from 'types/store';
 import ProductButton from 'components/Buttons/ProductButton';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
-import { CREATE_CAMPAIGN_DB } from 'store/store.graphql';
+import { CREATE_CAMPAIGN_DB, GET_SALES_TARGET } from 'store/store.graphql';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
@@ -21,8 +21,9 @@ import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import * as constant from 'configs/constant';
 import AddProductButton from 'components/Buttons/AddProductButton';
+import Bulb from 'assets/images/bulb.svg';
+import Star from 'assets/images/star.svg';
 import DBRewards from './DBRewards';
-import DBSettings from './DBSettings';
 
 export default function CreateCampaign() {
   const { query: { ins } } = useRouter();
@@ -53,11 +54,14 @@ export default function CreateCampaign() {
     isRewardEdit: false,
 
   });
-  const { clearNewCampaign, updateCampaign, setValue } = useCampaign();
+  const { clearNewCampaign, setValue } = useCampaign();
   React.useEffect(() => {
     clearNewCampaign();
     dispatch({ type: 'SINGLE_CAMPAIGN', payload: { singleEditCampaignId: '' } });
   }, []);
+  const {
+    loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
+  } = useQuery(GET_SALES_TARGET);
   const { multiple5, isMultiple5 } = useUtilityFunction();
 
   const validationSchema = yup.object({
@@ -127,10 +131,8 @@ export default function CreateCampaign() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
       if (validateForm) validateForm(valz);
       const {
-        name, criteria, joinExisting, products, rewards, selectedTarget, isActive,
-        brandColor, customColor, customBg, imageUrl, youtubeUrl, instagram, pinterest,
-        tiktok, facebook, twitter, addableProducts,
-        minDiscount, maxDiscount, isRewardEdit,
+        name, criteria, joinExisting, rewards, selectedTarget, isActive,
+        customBg, addableProducts, minDiscount, maxDiscount, isRewardEdit,
       } = valz;
       // let { minDiscountVal, maxDiscountVal } = valz;
       const minDiscountVal = `${minDiscount}%`;
@@ -142,7 +144,6 @@ export default function CreateCampaign() {
 
       if (isRewardEdit) {
         const baseline = minDiscount;
-        const maximum = maxDiscount;
         const lowBaseline = 10;
         const avgBaseline = 15;
         const highBaseline = 20;
@@ -150,12 +151,16 @@ export default function CreateCampaign() {
 
         if (baseline! <= lowBaseline) {
           newSelectedTarget.name = 'Low';
+          selectedTarget.name = 'Low';
         } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
           newSelectedTarget.name = 'Average';
+          selectedTarget.name = 'Average';
         } else if (baseline! >= highBaseline && baseline! < superBaseline) {
           newSelectedTarget.name = 'High';
+          selectedTarget.name = 'High';
         } else if (baseline! >= superBaseline) {
           newSelectedTarget.name = 'Super-charged';
+          selectedTarget.name = 'Super-charged';
         }
         const newAverage = multiple5((+minDiscount! + +maxDiscount!) / 2);
         // if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
@@ -179,8 +184,7 @@ export default function CreateCampaign() {
             name,
             criteria,
             rewards,
-            // eslint-disable-next-line radix
-            joinExisting: Boolean(parseInt(joinExisting ?? 1)),
+            joinExisting: Boolean(parseInt(joinExisting ?? 1, 10)),
             isActive,
             products: store?.newCampaign?.productsArray,
             collections: store?.newCampaign?.collectionsArray,
@@ -469,21 +473,55 @@ export default function CreateCampaign() {
                 <h3>Campaign Rewards</h3>
               </Col>
             </Row>
-
-            <DBRewards
-              values={values}
-              handleChange={handleChange}
-              touched={touched}
-              errors={errors}
-              setFieldValue={setFieldValue}
-              campaignInitial={campaignInitial}
-              setcampaignInitial={setcampaignInitial}
-              editMax={editMax}
-              editMin={editMin}
-              setEditMax={setEditMax}
-              setEditMin={setEditMin}
-              handleForm={handleForm}
-            />
+            <section className={['mt-2', styles.dbrewards, styles.dbrewards_box].join(' ')}>
+              <Row><Col><h4>Set your rewards</h4></Col></Row>
+              <Row className={styles.dbrewards_text_lg}>
+                <p className="mt-1">
+                  Set the discount and chashback percentages your customers will earn on their order
+                  as they reach different milestones.
+                </p>
+              </Row>
+              <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
+              <Row className={styles.dbrewards_text_lg}>
+                <p className="mt-1">
+                  We’ll set your reward tiers based on our
+                  recommendations.
+                </p>
+              </Row>
+              <DBRewards
+                values={values}
+                handleChange={handleChange}
+                errors={errors}
+                setFieldValue={setFieldValue}
+                setcampaignInitial={setcampaignInitial}
+                editMax={editMax}
+                editMin={editMin}
+                setEditMax={setEditMax}
+                setEditMin={setEditMin}
+              />
+              <div className="border-top mt-4 mb-1">
+                <Row className=" mt-3 d-inline-flex justify-content-center">
+                  <Col lg={1}>
+                    <Bulb size={16} />
+                  </Col>
+                  <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
+                    Not sure what to set? Use the sales volume picker above and we’ll fill
+                    these based on our recommendations.
+                  </Col>
+                </Row>
+                <Row className="mt-2 d-inline-flex justify-content-center">
+                  <Col lg={1} className={styles.dbrewards_icon_text}>
+                    <Star size={16} />
+                  </Col>
+                  <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
+                    Be generous – reward your customers the same
+                    way you reward Facebook or Google for finding
+                    you leads. We’ll do the math to make sure you’re
+                    always winning, and so are your customers.
+                  </Col>
+                </Row>
+              </div>
+            </section>
           </Col>
         </Row>
         <Col lg={9} className={[styles.dashboard_campaign__lightBg].join(' ')}>

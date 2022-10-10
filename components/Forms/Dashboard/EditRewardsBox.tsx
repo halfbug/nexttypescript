@@ -1,28 +1,290 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/Campaign.module.scss';
-import { RootProps } from 'types/store';
+import { RootProps, ICampaignForm } from 'types/store';
 import {
-  Col, Modal, Row, Button,
+  Form, Col, Modal, Row, Button,
 } from 'react-bootstrap';
 import Cross from 'assets/images/CrossLg.svg';
 import Bulb from 'assets/images/bulb.svg';
-import { InfoCircle } from 'react-bootstrap-icons';
-import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import { useMutation, useQuery } from '@apollo/client';
+import { CREATE_CAMPAIGN, GET_ALL_CAMPAIGNS, GET_SALES_TARGET } from 'store/store.graphql';
+import { StoreContext } from 'store/store.context';
+import useCampaign from 'hooks/useCampaign';
+import useUtilityFunction from 'hooks/useUtilityFunction';
+import { useRouter } from 'next/router';
+import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import * as yup from 'yup';
+import * as constant from 'configs/constant';
+import useCode from '../../../hooks/useCode';
+import DBRewards from './DBRewards';
 
 interface EditRewardsBoxProps extends RootProps {
   show: boolean;
-  handleClose(e: any): any;
+  handleClose(): any;
   // addToCart(e: any): any;
+}
+interface IValues {
+  rewards: string;
+  selectedTarget: any;
+  maxDiscountVal: string;
+  minDiscountVal: string;
+  minDiscount: number,
+  maxDiscount: number,
+  isRewardEdit: boolean
 }
 
 const EditRewardsBox = ({
   show = false, handleClose,
 }: EditRewardsBoxProps) => {
-  const closeModal = (e: any) => {
-    // setotherProducts(undefined);
-    // setSelected(undefined);
-    handleClose(e);
+  const { store, dispatch } = React.useContext(StoreContext);
+  const { campaign } = useCampaign();
+  const { multiple5, isMultiple5, duplicateCampaignName } = useUtilityFunction();
+  const { shop } = useCode();
+  const Router = useRouter();
+  const {
+    data: { campaigns } = { campaigns: [] }, refetch,
+  } = useQuery(GET_ALL_CAMPAIGNS, {
+    variables: { storeId: store.id },
+  });
+
+  const [
+    addCampaign,
+    // eslint-disable-next-line no-unused-vars
+    { data, loading, error },
+  ] = useMutation<any | null>(CREATE_CAMPAIGN);
+
+  const {
+    loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
+  } = useQuery(GET_SALES_TARGET);
+
+  const [editMin, setEditMin] = useState(false);
+  const [editMax, setEditMax] = useState(false);
+  const [mainError, setmainError] = useState('');
+  const [initvalz, setInitValz] = useState<IValues>({
+    rewards: '',
+    selectedTarget: '',
+    maxDiscountVal: '',
+    minDiscountVal: '',
+    minDiscount: 0,
+    maxDiscount: 0,
+    isRewardEdit: false,
+  });
+
+  useEffect(() => {
+    /// initial value display
+    if (campaign?.salesTarget) {
+      if (campaign?.salesTarget?.rewards?.length) {
+        setInitValz({
+          rewards: campaign?.salesTarget?.id,
+          minDiscountVal: campaign?.salesTarget?.rewards[0]?.discount || '',
+          maxDiscountVal: campaign?.salesTarget?.rewards[2]?.discount || '',
+          selectedTarget: campaign?.salesTarget,
+          minDiscount: campaign?.salesTarget?.rewards[0]?.discount
+            ? parseInt(campaign?.salesTarget?.rewards[0]?.discount, 10) : 0,
+          maxDiscount: campaign?.salesTarget?.rewards[2]?.discount
+            ? parseInt(campaign?.salesTarget?.rewards[2]?.discount, 10) : 0,
+          isRewardEdit: false,
+        });
+      }
+    }
+  }, [campaign]);
+
+  const validationSchema = yup.object({
+    minDiscount: yup
+      .number().typeError('you must specify a number')
+      .min(5)
+      .max(40)
+      .test('is-empty',
+        'This field should not be empty',
+        (value) => {
+          if (!value) {
+            return false;
+          }
+          return true;
+        })
+      .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
+      .test('diff', constant.EDIT_REWARDS_MSG1,
+        (val: number | undefined, context) => {
+          if (val && (context.parent.maxDiscount - val) < 10) {
+            // console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            // console.log('val', val);
+            return true;
+          }
+
+          return false;
+        }),
+    maxDiscount: yup
+      .number().typeError('you must specify a number')
+      .moreThan(yup.ref('minDiscount'), constant.EDIT_REWARDS_MSG4)
+      .max(50)
+      .test('is-empty',
+        'This field should not be empty',
+        (value) => {
+          if (!value) {
+            return false;
+          }
+          return true;
+        })
+      .test('diff', constant.EDIT_REWARDS_MSG1,
+        (val: number | undefined, context) => {
+          if (val && (val - context.parent.minDiscount) < 10) {
+            // console.log(context);
+            return false;
+          }
+          return true;
+        })
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
+
+  });
+
+  const {
+    handleSubmit, values, handleChange, touched, errors, setFieldValue,
+  }: FormikProps<ICampaignForm> = useFormik<ICampaignForm>({
+    initialValues: initvalz,
+    validationSchema,
+    enableReinitialize: true,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaignForm>) => {
+      if (validateForm) validateForm(valz);
+      const {
+        selectedTarget, customBg, minDiscount, maxDiscount, isRewardEdit,
+      } = valz;
+      // let { minDiscountVal, maxDiscountVal } = valz;
+      const minDiscountVal = `${minDiscount}%`;
+      const maxDiscountVal = `${maxDiscount}%`;
+      // console.log({ valz });
+      let { media } = valz;
+      if (customBg) media = '';
+      const newSelectedTarget = { ...selectedTarget };
+
+      if (isRewardEdit) {
+        const baseline = minDiscount;
+        const lowBaseline = 10;
+        const avgBaseline = 15;
+        const highBaseline = 20;
+        const superBaseline = 25;
+
+        if (baseline! <= lowBaseline) {
+          newSelectedTarget.name = 'Low';
+          selectedTarget.name = 'Low';
+        } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
+          newSelectedTarget.name = 'Average';
+          selectedTarget.name = 'Average';
+        } else if (baseline! >= highBaseline && baseline! < superBaseline) {
+          newSelectedTarget.name = 'High';
+          selectedTarget.name = 'High';
+        } else if (baseline! >= superBaseline) {
+          newSelectedTarget.name = 'Super-charged';
+          selectedTarget.name = 'Super-charged';
+        }
+        const newAverage = multiple5((+minDiscount! + +maxDiscount!) / 2);
+        // if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
+        //   minDiscountVal = `${minDiscountVal}%`;
+        // }
+        // if (maxDiscountVal && maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
+        //   maxDiscountVal = `${maxDiscountVal}%`;
+        // }
+
+        newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
+          { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },
+          { ...newSelectedTarget.rewards[2], discount: maxDiscountVal }];
+
+        // console.log({ valz });
+      }
+
+      if (editMin || editMax) {
+        setmainError('Save your changes first');
+      } else if (!newSelectedTarget || (newSelectedTarget.rewards[0].discount
+          === campaign?.salesTarget?.rewards?.[0]?.discount
+          && newSelectedTarget.rewards[2].discount
+          === campaign?.salesTarget?.rewards?.[2]?.discount)) {
+        setmainError('There is no change in baseline or in maximum');
+      } else {
+        const names = campaigns.filter((item: any) => item !== undefined)
+          .map((item: any) => item.name);
+        const res = await addCampaign({
+          variables: {
+            createCampaignInput: {
+              storeId: store.id,
+              name: duplicateCampaignName(names, campaign),
+              criteria: campaign?.criteria,
+              rewards: campaign?.rewards,
+              joinExisting: campaign?.joinExisting,
+              isActive: true,
+              products: campaign?.products,
+              collections: campaign?.collections,
+              addableProducts: campaign?.addableProducts,
+              salesTarget: { ...newSelectedTarget, isActive: true },
+            },
+          },
+        });
+        closeModal();
+        Router.push(`/${shop}/campaign`);
+      }
+    },
+  });
+
+  useEffect(() => {
+    setmainError('');
+  }, [values]);
+
+  useEffect(() => {
+    const {
+      minDiscount,
+      maxDiscount,
+      selectedTarget,
+    } = values;
+    if (selectedTarget) {
+      const baseline = minDiscount;
+      const maximum = maxDiscount;
+      const lowBaseline = 10;
+      const avgBaseline = 15;
+      const highBaseline = 20;
+      const superBaseline = 25;
+
+      if (baseline! <= lowBaseline) {
+        selectedTarget.name = 'Low';
+      } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
+        selectedTarget.name = 'Average';
+      } else if (baseline! >= highBaseline && baseline! < superBaseline) {
+        selectedTarget.name = 'High';
+      } else if (baseline! >= superBaseline) {
+        selectedTarget.name = 'Super-charged';
+      }
+    }
+  }, [values.minDiscount]);
+
+  const closeModal = () => {
+    setInitValz({
+      rewards: campaign?.salesTarget?.id || '',
+      minDiscountVal: campaign?.salesTarget?.rewards?.[0]?.discount || '',
+      maxDiscountVal: campaign?.salesTarget?.rewards?.[2]?.discount || '',
+      selectedTarget: campaign?.salesTarget,
+      minDiscount: campaign?.salesTarget?.rewards?.[0]?.discount
+        ? parseInt(campaign?.salesTarget?.rewards[0]?.discount, 10) : 0,
+      maxDiscount: campaign?.salesTarget?.rewards?.[2]?.discount
+        ? parseInt(campaign?.salesTarget?.rewards[2]?.discount, 10) : 0,
+      isRewardEdit: false,
+    });
+    setEditMax(false);
+    setEditMin(false);
+    handleClose();
   };
+
   return (
     <>
       <Modal
@@ -37,117 +299,74 @@ const EditRewardsBox = ({
           <Row onClick={handleClose}><ArrowDown /></Row>
         </Modal.Header> */}
         <Modal.Header className={styles.editRewardsBox_modal__closebtnlg}>
-          <Row onClick={handleClose}>
+          <Row onClick={closeModal}>
             <div><Cross /></div>
           </Row>
         </Modal.Header>
         <Modal.Body className={styles.editRewardsBox_modal__body}>
-          <Row>
-            <Col lg={12}>
-              <div className={styles.editRewardsBox_modal__top}>
-                <h3>
-                  You’ll need to duplicate your campaign
-                </h3>
-                <p>
-                  <Bulb />
-                  You can’t edit your rewards after your campaign is created.
-                  Want to set different rewards?
-                  Duplicate this campaign to set new rewards -  all
-                  your other settings will stay the same.
-                </p>
-              </div>
-            </Col>
-          </Row>
-          <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
-          <Row className={styles.editRewardsBox_modal_text_lg}>
-            <p>
-              We’ll set your reward tiers based on our
-              recommendations.
-            </p>
-          </Row>
-          <Row className="px-0">
-            <Col className="text-start" id="rbtn">
-              {salesTargetMock.map((starget: any, index: number) => (
-                <Button
-                  key={starget.id}
-                  id={starget.id}
-                  variant="none"
-                  value={JSON.stringify(starget)}
-                  className={valuesMock[0].selectedTarget?.name === starget.name
-                    ? btns[index].dark : btns[index].light}
-                >
-                  {btns[index].text}
-                </Button>
-              ))}
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col sm={3}>
-              <h5>
-                Baseline
-                {' '}
-                <ToolTip
-                  className={styles.dashboard_campaign__pop}
-                  icon={<InfoCircle size={10} />}
-                  popContent={(
-                    <p>
-                      This is the first discount tier and
-                      the ongoing commission your customer earns on new orders after
-                      they have received all their cashback. Learn more about how rewards work
-                      {' '}
-                      <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
-                      .
-                    </p>
-                  )}
-                />
-              </h5>
-              <div className={styles.dbrewards__percent_btn}>{valuesMock[0].minDiscountVal}</div>
-              <Button variant="link" onClick={() => { }}>Edit</Button>
-            </Col>
-            <Col sm={9}>
-              <h5>
-                Maximum
-                {' '}
-                <ToolTip
-                  placement="bottom"
-                  className={styles.dashboard_campaign__pop}
-                  icon={<InfoCircle size={10} />}
-                  popContent={(
-                    <p>
-                      This is the maximum discount and cashback
-                      that you are willing to give per conversion.
-                      We won’t offer the maximum discount unless your customer’s
-                      Groupshop is performing really well.
-                      Think of this as an ‘up to X% off’. Learn more about how rewards work
-                      {' '}
-                      <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
-                      .
-                    </p>
-                  )}
-                />
-              </h5>
-              <div className={styles.dbrewards__percent_btn}>{valuesMock[0].maxDiscountVal}</div>
-              <Button variant="link" onClick={() => { }}>Edit</Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <div className={styles.editRewardsBox_modal__btnSection}>
-                <Button
-                  onClick={handleClose}
-                  className={styles.editRewardsBox_modal__whiteBtn}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={handleClose}
-                  className={styles.editRewardsBox_modal__purpleBtn}
-                >
-                  Duplicate with new rewards
-                </Button>
-              </div>
-            </Col>
-          </Row>
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col lg={12}>
+                <div className={styles.editRewardsBox_modal__top}>
+                  <h3>
+                    You’ll need to duplicate your campaign
+                  </h3>
+                  <p>
+                    <Bulb />
+                    You can’t edit your rewards after your campaign is created.
+                    Want to set different rewards?
+                    Duplicate this campaign to set new rewards -  all
+                    your other settings will stay the same.
+                  </p>
+                </div>
+              </Col>
+            </Row>
+            <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
+            <Row className={styles.editRewardsBox_modal_text_lg}>
+              <p>
+                We’ll set your reward tiers based on our
+                recommendations.
+              </p>
+            </Row>
+            <DBRewards
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              setFieldValue={setFieldValue}
+              setcampaignInitial={setInitValz}
+              editMax={editMax}
+              editMin={editMin}
+              setEditMax={setEditMax}
+              setEditMin={setEditMin}
+            />
+            <Row>
+              <Col lg={12}>
+                { mainError && (
+                <div className={styles.dbrewards_error}>
+                  {mainError}
+                </div>
+                )}
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={12}>
+                <div className={styles.editRewardsBox_modal__btnSection}>
+                  <Button
+                    onClick={closeModal}
+                    className={styles.editRewardsBox_modal__whiteBtn}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className={styles.editRewardsBox_modal__purpleBtn}
+                    type="submit"
+                  >
+                    Duplicate with new rewards
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Form>
           <Row />
         </Modal.Body>
       </Modal>
@@ -158,85 +377,3 @@ EditRewardsBox.defaultProps = {
 };
 
 export default EditRewardsBox;
-
-const salesTargetMock = [{
-  id: '696d5547-e956-47a2-a319-6cbabb538cd7',
-  name: 'Low',
-  rewards: [
-    { id: '2751f335-4cf6-45a7-b4dd-913266ad561f', customerCount: '1', discount: '10%' },
-    { id: 'fca62019-9170-477b-8e7d-18facbcb716a', customerCount: '3', discount: '15%' },
-    { id: 'ad377702-9c6f-4596-8581-b0a822adb4e1', customerCount: '5', discount: '20%' },
-  ],
-  rogsMax: '10',
-  rogsMin: '5',
-  status: 'active',
-},
-{
-  id: '8c48eec7-caac-42a4-840f-d4962eb9ad54',
-  name: 'Average',
-  rewards: [
-    { id: '2751f335-4cf6-45a7-b4dd-913266ad561f', customerCount: '1', discount: '10%' },
-    { id: 'fca62019-9170-477b-8e7d-18facbcb716a', customerCount: '3', discount: '15%' },
-    { id: 'ad377702-9c6f-4596-8581-b0a822adb4e1', customerCount: '5', discount: '20%' }],
-  rogsMax: '6.6',
-  rogsMin: '4',
-  status: 'active',
-},
-{
-  id: '50d02be0-930e-4531-b359-6df38fe4a702',
-  name: 'High',
-  rewards: [
-    { id: '2751f335-4cf6-45a7-b4dd-913266ad561f', customerCount: '1', discount: '10%' },
-    { id: 'fca62019-9170-477b-8e7d-18facbcb716a', customerCount: '3', discount: '15%' },
-    { id: 'ad377702-9c6f-4596-8581-b0a822adb4e1', customerCount: '5', discount: '20%' }],
-  rogsMax: '5',
-  rogsMin: '3.3',
-  status: 'active',
-},
-{
-  id: 'b1012814-fe04-4f02-8fca-63f17fb64f03',
-  name: 'Super-charged',
-  rewards: [
-    { id: '2751f335-4cf6-45a7-b4dd-913266ad561f', customerCount: '1', discount: '10%' },
-    { id: 'fca62019-9170-477b-8e7d-18facbcb716a', customerCount: '3', discount: '15%' },
-    { id: 'ad377702-9c6f-4596-8581-b0a822adb4e1', customerCount: '5', discount: '20%' }],
-  rogsMax: '4',
-  rogsMin: '2.8',
-  status: 'active',
-},
-];
-
-const btns = [
-  { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
-  { text: 'Average', light: styles.avg_btn, dark: styles.avg_btn_dark },
-  { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
-  { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
-];
-
-const valuesMock = [
-  {
-    rewards: 'b1012814-fe04-4f02-8fca-63f17fb64f03',
-    minDiscountVal: '25%',
-    maxDiscountVal: '40%',
-    selectedTarget: {
-      id: 'b1012814-fe04-4f02-8fca-63f17fb64f03',
-      name: 'Super-charged',
-      rewards: [
-        {
-          id: '17924c9a-ae53-44dc-b96c-368835055fb4',
-          discount: '25%',
-        },
-        {
-          id: 'aef8d8d8-332c-4101-8ab0-f4a91a7e7d23',
-          discount: '30%',
-        },
-        {
-          id: '1605877a-a486-4158-92d4-0821ffc421cf',
-          discount: '40%',
-        },
-      ],
-    },
-    minDiscount: 25,
-    maxDiscount: 40,
-  },
-];

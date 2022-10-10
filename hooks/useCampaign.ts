@@ -31,7 +31,7 @@ export default function useCampaign() {
     if (store?.campaigns && store.singleEditCampaignId) {
       const arr:any = store.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
       //   console.log({ arr });
-      const filteredProducts = _.intersection(store.products?.filter((p: any) => p !== undefined).map((p: any) => p.id), arr[0].products);
+      const filteredProducts = _.intersection(store?.products?.filter((p: any) => p !== undefined).map((p: any) => p.id), arr[0]?.products);
       Incampaign = { ...arr[0], products: [...filteredProducts] };
     }
     return Incampaign;

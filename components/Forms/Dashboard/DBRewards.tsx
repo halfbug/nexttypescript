@@ -1,26 +1,18 @@
-/* eslint-disable radix */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-param-reassign */
-/* eslint-disable dot-notation */
-/* eslint-disable quotes */
-/* eslint-disable max-len */
 import React, {
-  useEffect, useState, Dispatch, SetStateAction,
+  useState, Dispatch, SetStateAction,
 } from 'react';
 import {
-  Form, Row, Col, ButtonGroup, ToggleButton, Button,
+  Form, Row, Col, Button,
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import styles from 'styles/Campaign.module.scss';
-import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
-import Star from 'assets/images/star.svg';
-import Bulb from 'assets/images/bulb.svg';
-import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import { GET_SALES_TARGET } from 'store/store.graphql';
+import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
-import Link from 'next/link';
+import useUtilityFunction from 'hooks/useUtilityFunction';
+import useCampaign from 'hooks/useCampaign';
 
 interface IValues {
   rewards: string;
@@ -30,22 +22,23 @@ interface IProps {
   handleChange: any;
   values: any;
   setFieldValue: any;
-  touched: any;
+  // touched?: any;
   errors: any;
-  campaignInitial: any;
+  // campaignInitial: any;
   editMin: boolean;
   editMax: boolean;
   setEditMin: any;
   setEditMax: any;
-  handleForm: any;
+  // handleForm: any;
   setcampaignInitial: Dispatch<SetStateAction<any>>;
 }
 
 export default function DBRewards({
-  handleChange, values, setFieldValue, touched, errors, campaignInitial,
-  editMax, editMin, setEditMax, setEditMin, handleForm, setcampaignInitial,
+  handleChange, values, setFieldValue, errors, editMax, editMin,
+  setEditMax, setEditMin, setcampaignInitial,
 }: IProps) {
   const [, setParams] = useQueryString();
+  const { campaign } = useCampaign();
 
   // const [minDiscount, setMinDiscount] = useState('');
   // const [maxDiscount, setMaxDiscount] = useState('');
@@ -55,8 +48,9 @@ export default function DBRewards({
   } = useQuery(GET_SALES_TARGET);
 
   const { store, dispatch } = React.useContext(StoreContext);
+  const { multiple5, isMultiple5 } = useUtilityFunction();
 
-  useEffect(() => {
+  React.useEffect(() => {
     /// initial value display
     if (salesTarget.length > 0) {
       setcampaignInitial((prev: any) => {
@@ -71,18 +65,20 @@ export default function DBRewards({
           brandColor: values.brandColor,
           selectedTarget: values.selectedTarget,
           rewards: values.selectedTarget?.id,
-          minDiscountVal: values.selectedTarget?.rewards[0].discount || '',
-          maxDiscountVal: values.selectedTarget?.rewards[2].discount || '',
-          minDiscount: values.selectedTarget?.rewards[0]?.discount ? parseInt(values.selectedTarget?.rewards[0]?.discount) : 0,
-          maxDiscount: values.selectedTarget?.rewards[2]?.discount ? parseInt(values.selectedTarget?.rewards[2]?.discount) : 0,
+          minDiscountVal: values.selectedTarget?.rewards?.[0]?.discount || '',
+          maxDiscountVal: values.selectedTarget?.rewards?.[2]?.discount || '',
+          minDiscount: values.selectedTarget?.rewards?.[0]?.discount
+            ? parseInt(values.selectedTarget?.rewards[0]?.discount, 10) : 0,
+          maxDiscount: values.selectedTarget?.rewards?.[2]?.discount
+            ? parseInt(values.selectedTarget?.rewards[2]?.discount, 10) : 0,
           isRewardEdit: false,
         };
       });
     }
   }, [values.selectedTarget]);
-  useEffect(() => {
+  React.useEffect(() => {
     /// initial value display
-    if (salesTarget.length > 0) {
+    if (campaign?.salesTarget) {
       setcampaignInitial((prev: any) => {
         console.log({ prev });
         return {
@@ -92,16 +88,18 @@ export default function DBRewards({
           addableProducts: store?.newCampaign?.addableProductsArray || [],
           criteria: values.criteria,
           brandColor: values.brandColor,
-          rewards: salesTarget[3].id,
-          minDiscountVal: salesTarget[3].rewards[0].discount || '',
-          maxDiscountVal: salesTarget[3].rewards[0].discount || '',
-          selectedTarget: salesTarget[3],
-          maxDiscount: salesTarget[3].rewards[2]?.discount ? parseInt(salesTarget[3].rewards[2]?.discount) : 0,
-          minDiscount: salesTarget[3].rewards[0]?.discount ? parseInt(salesTarget[3].rewards[0]?.discount) : 0,
+          rewards: campaign?.salesTarget?.id,
+          minDiscountVal: campaign?.salesTarget?.rewards?.[0]?.discount || '',
+          maxDiscountVal: campaign?.salesTarget?.rewards?.[2]?.discount || '',
+          selectedTarget: campaign?.salesTarget,
+          minDiscount: campaign?.salesTarget?.rewards?.[0]?.discount
+            ? parseInt(campaign?.salesTarget?.rewards[0]?.discount, 10) : 0,
+          maxDiscount: campaign?.salesTarget?.rewards?.[2]?.discount
+            ? parseInt(campaign?.salesTarget?.rewards[2]?.discount, 10) : 0,
         };
       });
     }
-  }, [salesTarget]);
+  }, [campaign?.salesTarget]);
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
@@ -114,23 +112,9 @@ export default function DBRewards({
   // console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
   // const menuItems = ["Easy", "Medium", "Hard"];
-  const [activeButton, setActiveButton] = useState("");
+  const [activeButton, setActiveButton] = useState('');
   return (
-    <section className={['mt-2', styles.dbrewards, styles.dbrewards_box].join(' ')}>
-      <Row><Col><h4>Set your rewards</h4></Col></Row>
-      <Row className={styles.dbrewards_text_lg}>
-        <p className="mt-1">
-          Set the discount and chashback percentages your customers will earn on their order
-          as they reach different milestones.
-        </p>
-      </Row>
-      <Row><Col><h5>Select your desired sales volume:</h5></Col></Row>
-      <Row className={styles.dbrewards_text_lg}>
-        <p className="mt-1">
-          We’ll set your reward tiers based on our
-          recommendations.
-        </p>
-      </Row>
+    <>
       <Row>
         <Col className="text-start" id="rbtn">
 
@@ -139,11 +123,13 @@ export default function DBRewards({
               key={starget.id}
               id={starget.id}
               variant="none"
-              className={values?.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
-              onClick={(e) => {
+              className={values?.selectedTarget?.name
+                === starget.name ? btns[index].dark : btns[index].light}
+              onClick={async (e) => {
                 const selectedTarget = starget;
                 setFieldValue('rewards', selectedTarget.id);
                 setFieldValue('selectedTarget', { ...selectedTarget });
+                await setFieldValue('minDiscount', parseInt(selectedTarget.rewards[0].discount, 10));
               }}
             >
               {btns[index].text}
@@ -163,7 +149,8 @@ export default function DBRewards({
               icon={<InfoCircle size={10} />}
               popContent={(
                 <p>
-                  This is the first discount tier and  the ongoing commission your customer earns on new orders after
+                  This is the first discount tier and  the ongoing commission
+                  your customer earns on new orders after
                   they have received all their cashback. Learn more about how rewards work
                   {' '}
                   <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
@@ -178,7 +165,18 @@ export default function DBRewards({
               {values.minDiscount}
               %
             </div>
-            <Button variant="link" onClick={() => setEditMin(!editMin)}>Edit</Button>
+            <Button
+              variant="link"
+              onClick={() => {
+                if (errors.maxDiscount === '' || (errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype)) {
+                  setEditMin(true);
+                  setEditMax(false);
+                }
+              }}
+            >
+              Edit
+
+            </Button>
           </>
           )}
           <div className={editMin ? 'd-block' : 'd-none'}>
@@ -186,7 +184,8 @@ export default function DBRewards({
               type="text"
               name="minDiscount"
               value={values.minDiscount}
-              // value={values.minDiscountVal[values.minDiscountVal.length - 1] !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
+              // value={values.minDiscountVal[values.minDiscountVal.length - 1]
+              // !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
               onChange={handleChange}
               className={styles.dbrewards_input}
               isInvalid={!!errors.minDiscount}
@@ -203,6 +202,7 @@ export default function DBRewards({
                 if (!(errors.minDiscount)) {
                   setEditMin(false);
                   setFieldValue('isRewardEdit', true);
+                  // handleSubmit();
                 }
               }}
             >
@@ -222,14 +222,15 @@ export default function DBRewards({
               icon={<InfoCircle size={10} />}
               popContent={(
                 <p>
-                  This is the maximum discount and cashback that you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
+                  This is the maximum discount and cashback that you are willing to
+                  give per conversion. We won’t offer the maximum discount unless your
+                  customer’s Groupshop is performing really well.
                   Think of this as an ‘up to X% off’. Learn more about how rewards work
                   {' '}
                   <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
                   .
                 </p>
 )}
-
             />
           </h4>
           {!editMax && (
@@ -238,7 +239,18 @@ export default function DBRewards({
               {values.maxDiscount}
               %
             </div>
-            <Button variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
+            <Button
+              variant="link"
+              onClick={() => {
+                if (errors.minDiscount === '' || (errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype)) {
+                  setEditMax(true);
+                  setEditMin(false);
+                }
+              }}
+            >
+              Edit
+
+            </Button>
           </>
           )}
           <div className={editMax ? 'd-block' : 'd-none'}>
@@ -260,6 +272,7 @@ export default function DBRewards({
                 if (!(errors.maxDiscount)) {
                   setEditMax(false);
                   setFieldValue('isRewardEdit', true);
+                  // handleSubmit();
                 }
               }}
             >
@@ -271,27 +284,6 @@ export default function DBRewards({
 
         </Col>
       </Row>
-      <div className="border-top mt-4 mb-1">
-        <Row className=" mt-3 d-inline-flex justify-content-center">
-          <Col lg={1}>
-            <Bulb size={16} />
-          </Col>
-          <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
-            Not sure what to set? Use the sales volume picker above and we’ll fill these based on our recommendations.
-          </Col>
-        </Row>
-        <Row className="mt-2 d-inline-flex justify-content-center">
-          <Col lg={1} className={styles.dbrewards_icon_text}>
-            <Star size={16} />
-          </Col>
-          <Col lg={10} className={['ms-1 px-0', styles.dbrewards_icon_text].join(' ')}>
-            Be generous – reward your customers the same
-            way you reward Facebook or Google for finding
-            you leads. We’ll do the math to make sure you’re
-            always winning, and so are your customers.
-          </Col>
-        </Row>
-      </div>
-    </section>
+    </>
   );
 }

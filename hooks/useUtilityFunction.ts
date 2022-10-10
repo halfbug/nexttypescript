@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
@@ -90,7 +91,7 @@ export default function useUtilityFunction() {
   const getKeyFromS3URL = useCallback((key) => {
     console.log('🚀=====key', key);
     // console.log('🚀 ~ file: useUtilityFunction.ts ~ line 88 ~ getKeyFromS3URL ~ key', key);
-    // this function extract the file name froms store logo store in db
+    // this function extract the file prevCampaign.name froms store logo store in db
     const newKey = key.split('/');
     // console.log('🚀 ~ file: useUtilityFunction.ts ~ line 90 ~ getKeyFromS3URL ~ newKey', newKey);
     return newKey[4];
@@ -143,6 +144,45 @@ export default function useUtilityFunction() {
     return result;
   });
 
+   const duplicateCampaignName = (names: Array<string>, prevCampaign: any) => {
+    const currentDate = new Date().toLocaleString('en-us', {
+      day: 'numeric',
+      month: 'short',
+    });
+    const str = prevCampaign.name.split(' ');
+    if (str.length > 2 && str[str.length - 1].includes('(') && str[str.length - 3].includes('(') && `${str[str.length - 3]} ${str[str.length - 2]}` === `(${currentDate})`) {
+      return getNameWithCopyNumber(1, names, prevCampaign.name);
+    } if (str.length > 2 && str[str.length - 1].includes('(') && str[str.length - 3].includes('(') && `${str[str.length - 3]} ${str[str.length - 2]}` !== `(${currentDate})`) {
+      if (names.includes(`${prevCampaign.name.substring(0, prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1).lastIndexOf('(') - 1)} (${currentDate})`)) {
+        return getNameWithCopyNumber(1, names, `${prevCampaign.name.substring(0, prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1).lastIndexOf('(') - 1)} (${currentDate}) (1)`);
+      }
+      return `${prevCampaign.name.substring(0, prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1).lastIndexOf('(') - 1)} (${currentDate})`;
+    } if (str.length > 1 && str[str.length - 2].includes('(') && `${str[str.length - 2]} ${str[str.length - 1]}` === `(${currentDate})`) {
+      if (names.includes(`${prevCampaign.name} (1)`)) {
+        return getNameWithCopyNumber(2, names, `${prevCampaign.name} (1)`);
+      }
+      return `${prevCampaign.name} (1)`;
+    } if (str.length > 1 && str[str.length - 2].includes('(') && `${str[str.length - 2]} ${str[str.length - 1]}` !== `(${currentDate})`) {
+      if (names.includes(`${prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1)} (${currentDate})`)) {
+        return getNameWithCopyNumber(1, names, `${prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1)} (${currentDate}) (1)`);
+      }
+      return `${prevCampaign.name.substring(0, prevCampaign.name.lastIndexOf('(') - 1)} (${currentDate})`;
+    }
+    if (names.includes(`${prevCampaign.name} (${currentDate})`)) {
+      return getNameWithCopyNumber(1, names, `${prevCampaign.name} (${currentDate}) (1)`);
+    }
+    return `${prevCampaign.name} (${currentDate})`;
+  };
+
+  const getNameWithCopyNumber = (i: any, names: Array<string>, name: string) => {
+    while (true) {
+      const temp = `${name.substring(0, name.lastIndexOf('(') - 1)} (${i})`;
+      if (!names.includes(temp)) {
+        return temp;
+      }
+      i += 1;
+    }
+  };
   const getUniqueArray = ((arr: any) => {
     const result = arr?.reduce((unique: any, o: any) => {
       if (!unique.some((obj: any) => obj.id !== o.id)) {
@@ -168,6 +208,7 @@ export default function useUtilityFunction() {
     DateRanges,
     findInArray2,
     uniqueArray,
+    duplicateCampaignName,
     getUniqueArray,
   };
 }

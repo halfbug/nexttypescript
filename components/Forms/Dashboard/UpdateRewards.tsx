@@ -8,7 +8,7 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import {
-  Form, Row, Col, ButtonGroup, ToggleButton, Button,
+  Form, Row, Col, ButtonGroup, ToggleButton, Button, Button as RButton,
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
@@ -253,10 +253,10 @@ export default function UpdateRewards() {
                 // checked={starget.id === values.rewards}
                 className={values.selectedTarget?.name === starget.name ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
-                  const selectedTarget = starget;
-                  setFieldValue('rewards', selectedTarget.id);
-                  setFieldValue('selectedTarget', { ...selectedTarget });
-                  handleSubmit();
+                  // const selectedTarget = starget;
+                  // setFieldValue('rewards', selectedTarget.id);
+                  // setFieldValue('selectedTarget', { ...selectedTarget });
+                  // handleSubmit();
                 }}
               >
                 {btns[index].text}
@@ -292,7 +292,7 @@ export default function UpdateRewards() {
             {/* {!editMin && (
               <> */}
             <div className={styles.dbrewards__percent_btn}>{values.minDiscountVal}</div>
-            <Button
+            {/* <Button
               variant="link"
               onClick={() => {
                 setEditMin(!editMin);
@@ -301,7 +301,7 @@ export default function UpdateRewards() {
             >
               Edit
 
-            </Button>
+            </Button> */}
             {/*  <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMin(!editMin)}>Edit</span>
               </>
             )} */}
@@ -351,7 +351,7 @@ export default function UpdateRewards() {
             {/* {!editMax && (
               <> */}
             <div className={styles.dbrewards__percent_btn}>{values.maxDiscountVal}</div>
-            <Button
+            {/* <Button
               variant="link"
               onClick={() => {
                 setEditMax(!editMax);
@@ -360,7 +360,7 @@ export default function UpdateRewards() {
             >
               Edit
 
-            </Button>
+            </Button> */}
             {/* <span className={styles.dbrewards_rewardBtn} onClick={() => setEditMax(!editMax)}>Edit</span>
               </>
             )} */}
@@ -386,6 +386,16 @@ export default function UpdateRewards() {
 
           </Col>
         </Row>
+
+        <div className="mt-3">
+          <RButton
+            variant="outline-primary"
+            onClick={() => setEditRewardBox(true)}
+            className="text-nowrap"
+          >
+            Edit rewards
+          </RButton>
+        </div>
 
         <div className="border-top mt-4 mb-1">
           <Row className=" mt-3 d-inline-flex justify-content-center">
