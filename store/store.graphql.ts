@@ -562,6 +562,13 @@ query Groupshop($code: String!, $status: String = "") {
           googlePixels          
         }
       }
+      social{
+        facebook
+        instagram
+        tiktok
+        pinterest
+        twitter       
+      }
     }
   popularProducts{
     id

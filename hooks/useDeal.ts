@@ -166,7 +166,7 @@ export default function useDeal() {
     return discountedPrice.toFixed(2);
   });
 
-  const socialLinks = gsctx?.campaign?.socialLinks;
+  const socialLinks = gsctx?.store?.social;
 
   const getDiscounts = useCallback(() => {
     const allDiscountArr = gsctx.campaign?.salesTarget?.rewards?.map((rew) => rew.discount);
