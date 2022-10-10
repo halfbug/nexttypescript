@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
+import useUtilityFunction from './useUtilityFunction';
 
 const useSKU = () => {
   const { gsctx } = useAppContext();
@@ -8,6 +9,7 @@ const useSKU = () => {
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
   const [inventoryProducts, setInventoryProducts] = useState<any[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
+  const { getUniqueArray } = useUtilityFunction();
 
   useEffect(() => {
     if (gsctx.campaign?.products?.length) {
@@ -24,7 +26,8 @@ const useSKU = () => {
     if (gsctx.allProducts?.length && gsctx.popularProducts?.length) {
       const products = gsctx.allProducts.map((ele) => ele.id);
       const popularProducts = gsctx.popularProducts.map((ele) => ele.id);
-      const arr = JSON.stringify(products) === JSON.stringify(popularProducts);
+      const arr = JSON.stringify(getUniqueArray(products))
+        === JSON.stringify(getUniqueArray(popularProducts));
       setHideSection(arr);
     }
   }, [gsctx]);

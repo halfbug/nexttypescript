@@ -143,6 +143,16 @@ export default function useUtilityFunction() {
     return result;
   });
 
+  const getUniqueArray = ((arr: any) => {
+    const result = arr?.reduce((unique: any, o: any) => {
+      if (!unique.some((obj: any) => obj.id !== o.id)) {
+        unique.push(o);
+      }
+      return unique;
+    }, []);
+    return result;
+  });
+
   return {
     cleanTypename,
     multiple5,
@@ -158,5 +168,6 @@ export default function useUtilityFunction() {
     DateRanges,
     findInArray2,
     uniqueArray,
+    getUniqueArray,
   };
 }
