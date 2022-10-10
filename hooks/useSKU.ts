@@ -6,11 +6,15 @@ const useSKU = () => {
   const { gsctx } = useAppContext();
   const [allProducts, setAllProducts] = useState<any[]>([]);
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
+  const [inventoryProducts, setInventoryProducts] = useState<any[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
 
   useEffect(() => {
+    if (gsctx.campaign?.products?.length) {
+      setAllProducts(gsctx.campaign?.products);
+    }
     if (gsctx.store?.allInventoryProducts?.length) {
-      setAllProducts(gsctx.store?.allInventoryProducts);
+      setInventoryProducts(gsctx.store?.allInventoryProducts);
     }
     if (gsctx.members.length) {
       const temp: IProduct[] = [];
@@ -25,7 +29,9 @@ const useSKU = () => {
     }
   }, [gsctx]);
 
-  return { SKU: allProducts, memberProducts, hideSection };
+  return {
+    SKU: allProducts, memberProducts, hideSection, inventoryProducts,
+  };
 };
 
 export default useSKU;

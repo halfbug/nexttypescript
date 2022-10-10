@@ -71,7 +71,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
-  const { SKU, memberProducts, hideSection } = useSKU();
+  const {
+    SKU, memberProducts, hideSection, inventoryProducts,
+  } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
@@ -487,14 +489,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
-                  <IconButton
-                    icon={<Search size={24} />}
-                    className={styles.groupshop__hero_iconSearchBtn}
-                    onClick={handleAddProduct}
-                    disabled={isExpired}
-                  />
-                ) : <></>}
+                {(SKU.length > 1 || inventoryProducts.length > 4)
+                  && leftOverProducts()?.length > 0 ? (
+                    <IconButton
+                      icon={<Search size={24} />}
+                      className={styles.groupshop__hero_iconSearchBtn}
+                      onClick={handleAddProduct}
+                      disabled={isExpired}
+                    />
+                  ) : <></>}
                 <IconButton
                   icon={<Handbag size={24} />}
                   className={styles.groupshop__hero_iconBtn}
@@ -638,6 +641,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
           skuCount={SKU.length}
+          inventoryCount={inventoryProducts.length}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -848,7 +852,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </>
 
             )
-              : ((SKU.length > 1 && leftOverProducts()?.length > 0) && (
+              : (((SKU.length > 1 || inventoryProducts.length > 4)
+                && leftOverProducts()?.length > 0) && (
                 <>
                   <p>Don’t see what you like?</p>
                   <Button
