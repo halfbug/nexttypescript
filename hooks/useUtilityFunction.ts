@@ -88,6 +88,7 @@ export default function useUtilityFunction() {
   };
 
   const getKeyFromS3URL = useCallback((key) => {
+    console.log('🚀=====key', key);
     // console.log('🚀 ~ file: useUtilityFunction.ts ~ line 88 ~ getKeyFromS3URL ~ key', key);
     // this function extract the file name froms store logo store in db
     const newKey = key.split('/');

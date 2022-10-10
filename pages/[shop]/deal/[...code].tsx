@@ -65,6 +65,7 @@ import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useSKU from 'hooks/useSKU';
 import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
+import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -392,6 +393,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             )}
 
           />
+          <VideoWidget />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
               <Col md={3} xs={3}>

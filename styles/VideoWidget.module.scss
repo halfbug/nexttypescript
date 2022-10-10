@@ -1,0 +1,75 @@
+@import "./variables.scss";
+
+.videoWidget {
+    &__box {
+        position: fixed;
+        width: fit-content;
+        right: 0;
+        bottom: 0;
+
+        &:hover {
+            .videoWidget__closeBox__icon {
+                display: flex;
+            }
+            .videoWidget__playBox__icon {
+                display: flex;
+            }
+        }
+
+        @include media-breakpoint-down(md) {
+            bottom: 100px;
+        }
+    }
+
+    &__closeBox {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        &__icon {
+            display: none;
+            cursor: pointer;
+            color: white;
+            z-index: 5;
+            height: 16px;
+            @include media-breakpoint-down(md) {
+                display: flex;
+            }
+        }
+    }
+
+    &__barBox{
+        position: absolute;
+        top: 16px;
+        left: 10px;
+        &__progress {
+            color: red;
+            background-color: unset;
+            height: 5px;
+            border-radius: 5px;
+            &::-webkit-progress-value{
+                background: whitesmoke;
+                border-radius: 20px;
+            }
+            &::-webkit-progress-bar {
+                border-radius: 20px;
+                background-color: #e5e5e5;
+            }
+        }
+    }
+
+    &__playBox {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        &__icon {
+            display: none;
+            cursor: pointer;
+            @include media-breakpoint-down(md) {
+                display: flex;
+            }
+        }
+    }
+}
