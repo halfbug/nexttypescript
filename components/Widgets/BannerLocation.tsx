@@ -83,11 +83,9 @@ export default function BannerLocation(
                   {' '}
                   {'<body>'}
                   {' '}
-                  tag of your website.
-                  {' '}
-                  <br />
-                  Add the following code anywhere you want to display the Groupshop banner.
-                  We recommend placing them on your product page and on your cart page or modal.
+                  tag of your website. Add the following code anywhere you want to display
+                  the Groupshop banner. We recommend placing them on your product page and
+                  on your cart page or modal.
                   {' '}
                   <br />
                   The code only needs to be added once per page – add it on all the pages you will
