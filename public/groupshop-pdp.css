@@ -32,6 +32,7 @@
     align-items: center;
     background-color: var(--modernLogoBG);
     display: flex;
+    justify-content: center;
 }
 
 .logo-pdp {

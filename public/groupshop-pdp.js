@@ -42,14 +42,14 @@ async function getUI() {
   const logoBG = document.getElementsByClassName('modern-image');
   addModal(APIResponse);
 
-  if (APIResponse.settings.layout.bannerStyle === 'Classic') {
+  if (APIResponse.settings.layout.bannerStyle === '1') {
     MainDiv.innerHTML = `<div class="banner-pdp">
     <span id="text">Only <strong>${APIResponse.discount}</strong> when you shop with friends</span>&nbsp;
     <img class="logo-pdp" src=${APP_URL}${logoURL} />
     </div>`;
   }
 
-  if (APIResponse.settings.layout.bannerStyle === 'Modern') {
+  if (APIResponse.settings.layout.bannerStyle === '0') {
     MainDiv.innerHTML = `<div class="modern-banner-pdp">
         <div class="modern-image"><img class="logo-pdp modern-logo" src=${APP_URL}${logoURL} /></div>&nbsp;
         <span id="text-pdp">Shop with friends,<br/>
@@ -69,12 +69,21 @@ async function getUI() {
 getUI();
 
 function manipulateUI(div, logoBG, APIResponse) {
-  if (APIResponse.settings.layout.bannerStyle === 'Modern') {
-    logoBG[0].style.setProperty('--modernLogoBG', APIResponse.settings.layout.bannerCustomColor);
+  if (APIResponse.settings.layout.bannerStyle === '0') {
+    if (APIResponse.settings.layout.bannerColor === '#000000') {
+      logoBG[0].style.setProperty('--modernLogoBG', APIResponse.settings.layout.bannerColor);
+      logoBG[0].style.setProperty('--logoColor', 'invert(1)');
+    } else {
+      logoBG[0].style.setProperty('--modernLogoBG', APIResponse.settings.layout.bannerColor);
+    }
   }
 
-  if (APIResponse.settings.layout.bannerStyle === 'Classic') {
-    div.style.setProperty('--bg', APIResponse.settings.layout.bannerCustomColor);
+  if (APIResponse.settings.layout.bannerStyle === '1') {
+    if (APIResponse.settings.layout.bannerCustomColor.length) {
+      div.style.setProperty('--bg', APIResponse.settings.layout.bannerCustomColor);
+    } else {
+      div.style.setProperty('--bg', APIResponse.settings.layout.bannerColor);
+    }
   }
 }
 
