@@ -870,7 +870,7 @@ export const getServerSideProps = async (context: any) => {
   const resJson = await res.json();
   return {
     props: {
-      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}${resJson.photo ?? '/bg.jpg'}` },
+      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}/${resJson.photo ?? '/bg.jpg'}` },
     },
   };
 };

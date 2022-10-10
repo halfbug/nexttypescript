@@ -17,9 +17,10 @@ const useBanner = () => {
   console.log('🚀 ~ file: useBanner.ts ~ line 14 ~ useBanner ~ groupshop', groupshop);
 
   const [bannerImage, setBannerImage] = useState<string>('');
+  console.log('🚀 ~ file: useBanner.ts ~ line 20 ~ useBanner ~ bannerImage', bannerImage);
 
   useEffect(() => {
-    if (groupshop?.store?.settings && bannerImage === '') {
+    if (groupshop?.store?.settings) {
       if (groupshop?.store?.settings?.general?.imageUrl !== '' && groupshop?.store?.settings?.general?.imageUrl) {
         const s3path = getKeyFromS3URL(groupshop?.store?.settings?.general?.imageUrl);
         const banner = `${process.env.IMAGE_PATH}/${s3path}`;

@@ -8,6 +8,7 @@ import {
 import CopyToClipboard from 'components/Buttons/CopyToClipboard/CopyToClipboard';
 import { useQRCode } from 'next-qrcode';
 import useDeal from 'hooks/useDeal';
+import useBanner from 'hooks/useBanner';
 import PopoverButton, { PopoverButtonProps } from '../PopoverButton/PopoverButton';
 import SocialButton from '../SocialButton/SocialButton';
 
@@ -22,8 +23,9 @@ const ShareButton = ({
   onClick,
 }: ShareButtonProps) => {
   const {
-    gsctx, banner, socialText, nativeShareText,
+    gsctx, socialText, nativeShareText,
   } = useDeal();
+  const bannerImage = useBanner();
   const { discountCode: { percentage } } = gsctx;
   const { Canvas } = useQRCode();
   return (
@@ -43,7 +45,7 @@ const ShareButton = ({
           <Row className="p-3">
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Email" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Instagram" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Pinterest" url={shareurl} media={banner} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Pinterest" url={shareurl} media={bannerImage} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Twitter" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Facebook" url={shareurl} /></Col>
           </Row>
