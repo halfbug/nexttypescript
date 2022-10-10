@@ -386,11 +386,25 @@ const Screen1 = ({
         <Row className="mt-4 d-flex justify-content-end">
           <Col xs={6} className="text-end">
             {/* <RBButton >Go Back</RBButton> */}
-            <Button variant="outline-primary" className={styles.product_btnClose} onClick={() => setParams({ ins: 2 })}>
+            <Button
+              variant="outline-primary"
+              className={styles.product_btnClose}
+              onClick={() => {
+                setview('List');
+                setParams({ ins: 2 });
+              }}
+            >
               Close
             </Button>
             {/* <RBButton>Save</RBButton> */}
-            <Button variant="outline-primary" className={styles.product_btnSave} onClick={handleSave}>
+            <Button
+              variant="outline-primary"
+              className={styles.product_btnSave}
+              onClick={() => {
+                setview('List');
+                handleSave();
+              }}
+            >
               Save
             </Button>
           </Col>
