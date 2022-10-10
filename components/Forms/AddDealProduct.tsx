@@ -106,7 +106,7 @@ export default function AddDealProduct({
             // productId, addedBy: isInfluencer ? fname : username, customerIP: clientIP, type: 'deal', isInfluencer,
             productId, addedBy: username, customerIP: clientIP, type: 'deal', isInfluencer,
           };
-          return preProduct ?? newProduct;
+          return preProduct?.type === 'first' ? newProduct : preProduct ?? newProduct;
         },
       );
       // unique by complete object

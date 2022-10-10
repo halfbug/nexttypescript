@@ -5,7 +5,7 @@ import {
 export type DealProduct = {
   productId: string;
 
-  type?: 'deal' | 'owner' | 'abandoned';
+  type?: 'deal' | 'owner' | 'abandoned' | 'first';
 
   addedBy: string;
 
