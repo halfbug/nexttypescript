@@ -23,21 +23,17 @@ export interface BannerDesignProps {
 
 export default function BannerDesign(
   {
-    values, errors, touched, handleChange, handleSubmit, handleForm, setFieldValue,
+    values, errors, touched, handleSubmit, handleForm, setFieldValue,
   }
     : BannerDesignProps,
 ) {
   const [bannerDesignStyle, setbannerDesignStyle] = useState('0');
   const [customColor, setcustomColor] = useState('#3C3C3C');
-  const [modernClass, setmodernClass] = useState('');
-  const [classicClass, setclassicClass] = useState('');
 
   useEffect(() => {
     if (values.settings?.layout) {
       setbannerDesignStyle(values.settings?.layout?.bannerStyle);
       setcustomColor(values.settings?.layout?.bannerCustomColor);
-      setmodernClass((values.settings?.layout?.bannerStyle === '0') ? 'active-btn' : '');
-      setclassicClass((values.settings?.layout?.bannerStyle === '1') ? 'active-btn' : '');
     }
   }, [values]);
 
@@ -49,8 +45,6 @@ export default function BannerDesign(
     } else {
       setFieldValue('settings.layout.bannerStyle', bannerDesignStyle);
       setFieldValue(field, value);
-      setmodernClass((bannerDesignStyle === '0') ? 'active-btn' : '');
-      setclassicClass((bannerDesignStyle === '1') ? 'active-btn' : '');
     }
     handleSubmit();
   };
@@ -66,12 +60,22 @@ export default function BannerDesign(
           Select style:
 
         </div>
-        <Button onClick={() => { setbannerDesignStyle('0'); setmodernClass('active-btn'); setclassicClass(''); }} variant="outline-primary" className={`${styles.layout__modern_btn} ${modernClass}`}>
+        <Button
+          onClick={() => { setbannerDesignStyle('0'); }}
+          variant="outline-primary"
+          style={{ backgroundColor: bannerDesignStyle === '0' ? '#D5FA52' : '' }}
+          className={`${styles.layout__modern_btn}`}
+        >
           Modern
 
         </Button>
         {' '}
-        <Button onClick={() => { setbannerDesignStyle('1'); setclassicClass('active-btn'); setmodernClass('0'); }} variant="outline-primary" className={`${styles.layout__classic_btn} ${classicClass}`}>
+        <Button
+          onClick={() => { setbannerDesignStyle('1'); }}
+          variant="outline-primary"
+          style={{ backgroundColor: bannerDesignStyle === '1' ? '#DCD0E8' : '' }}
+          className={`${styles.layout__classic_btn}`}
+        >
           Classic
 
         </Button>
