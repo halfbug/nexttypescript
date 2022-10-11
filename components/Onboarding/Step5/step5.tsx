@@ -142,7 +142,7 @@ const Step5 = () => {
                 <div className="d-flex justify-content-center">
                   <div className={styles.free}>Free</div>
                 </div>
-                <p className="my-1">First 100 Groupshops</p>
+                <p className="my-1">First 30 Days</p>
               </Col>
               <Col className={styles.box_4}>
                 <div className={styles.box_row_boxheading}>Launch</div>
