@@ -35,10 +35,10 @@ export default function MarketingSettings({
     <Row className={styles.marketing}>
       <Col lg={8}>
         <h3 className="pb-1">Marketing Tools</h3>
-        <MarketingTools
+        {/* <MarketingTools
           values={values}
           handleForm={handleForm}
-        />
+        /> */}
         <CustomerActivation />
         <Integrations
           values={values}

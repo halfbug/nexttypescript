@@ -47,7 +47,7 @@ export default function CustomerActivation(
           </>
         </Button>
         <ArrowIcon />
-        <hr />
+        {/* <hr />
         <h4 className="d-flex align-items-center">
           Add a Groupshop info page to your footer
           <span className={styles.badge}>Recommended</span>
@@ -55,8 +55,9 @@ export default function CustomerActivation(
         <p className="mb-0">
           Educate your customers on how Groupshop works with how to’s and FAQs.
         </p>
-        <Button variant="link" className={[' ms-0 ps-0 mt-0', styles.marketing_LinkBtn].join(' ')}>View and download our customizable template</Button>
-        <ArrowIcon />
+        <Button variant="link" className={[' ms-0 ps-0 mt-0',
+        styles.marketing_LinkBtn].join(' ')}>View and download our customizable template</Button>
+        <ArrowIcon /> */}
       </section>
 
     </>

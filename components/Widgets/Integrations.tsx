@@ -137,7 +137,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
             </h4>
             <p>Enhance your Groupshop experience with email and SMS marketing solutions.</p>
             <Accordion defaultActiveKey={activeId}>
-              <Card className={styles.marketing__collapse}>
+              {/* <Card className={styles.marketing__collapse}>
                 <Card.Header className={styles.marketing__collapse__header}>
                   <div>
                     <PrivateKeyIcon />
@@ -170,7 +170,8 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                         Test API
                       </WhiteButton>
                     </div>
-                    <section className={['mt-2 ms-1 d-flex align-items-center', styles.marketing__valid].join(' ')}>
+                    <section className={['mt-2 ms-1 d-flex align-items-center',
+                    styles.marketing__valid].join(' ')}>
                       <GreenTickIcon />
                       <span className="ms-2">Your Private API Key is Valid</span>
                     </section>
@@ -188,7 +189,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                     </Row>
                   </Card.Body>
                 </Accordion.Collapse>
-              </Card>
+              </Card> */}
               <Card className={styles.marketing__collapse}>
                 <Card.Header className={styles.marketing__collapse__header}>
                   <div>
