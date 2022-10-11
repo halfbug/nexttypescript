@@ -105,24 +105,31 @@ export default function DBSettings({
       </section>
       <section className={['mt-4', styles2.dashboard_campaign__box_3].join(' ')}>
         <Row>
-          <Col lg={7}>
-            <h4>Select a banner background</h4>
+          <Col>
+            <h4>
+              Select a banner background
+              {' '}
+              <span className={styles.badge}>Recommended</span>
+            </h4>
             <Form.Text>
-              <p className="mt-0 text-nowrap">This will serve as the banner for your Groupshop page</p>
+              <p className="mt-2 ">
+                This will serve as the banner for your Groupshop page. Pick a banner that isn’t too
+                distracting and adapts well to both mobile and desktop.
+              </p>
               {' '}
             </Form.Text>
           </Col>
         </Row>
-        <Row className="border rounded px-1 py-3 pb-4 mx-1">
-          <Col lg={12} className={styles.vertical}>
+        <Row className=" px-1 py-3 pb-4 mx-1">
+          <Col lg={12}>
             <div className="ms-3">
-              <h6 className="fs-6 fw-bolder lh-base ">
+              {/* <h6 className="fs-6 fw-bolder lh-base ">
                 Custom background
                 <span className={styles.badge}>Recommended</span>
                 {' '}
-              </h6>
+              </h6> */}
               <Row>
-                <Col lg={12} className="d-line-flex text-nowrap align-middle ">
+                <Col lg={6} className="d-line-flex text-nowrap align-middle border-end">
                   <Form.Check
                     inline
                     label="Image"
@@ -135,6 +142,29 @@ export default function DBSettings({
                       handleCustomBg('settings.general.media', e.currentTarget.value);
                     }}
                   />
+                  <Col className={values.settings?.general?.media === 'image' ? 'd-flex flex-wrap' : 'd-none'}>
+                    <span className={styles.dot}>-</span>
+                    <UploadButton
+                      icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
+                      setFieldValue={setFieldValue}
+                      field="settings.general.imageUrl"
+                      className={styles.ob_settings__uploadbtn}
+                      handleCustomBg={handleForm}
+                      url={values.settings?.general?.imageUrl ? getKeyFromS3URL(values.settings?.general.imageUrl) : ''}
+                    />
+                  </Col>
+                  <Row className={values.settings?.general?.media === 'image' ? 'd-flex' : 'd-none'}>
+                    <Col className="d-flex  justify-content-center text-center">
+                      <h6 className={styles.smallt}>
+                        {' '}
+                        (Formats: PNG, JPG, JPEG)
+                        <br />
+                        1440px x 500px
+                      </h6>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col lg={6}>
                   <Form.Check
                     inline
                     label="Youtube video"
@@ -146,44 +176,27 @@ export default function DBSettings({
                     onChange={(e) => {
                       handleCustomBg('settings.general.media', e.currentTarget.value);
                     }}
+
                   />
+                  <Row>
+
+                    <Col className={values.settings?.general?.media === 'youtube' ? 'd-block' : 'd-none'}>
+                      <Form.Control
+                        type="text"
+                        name="youtubeUrl"
+                        value={values.settings?.general?.youtubeUrl}
+                        isValid={touched.youtubeUrl && !errors.youtubeUrl}
+                        onChange={(e) => {
+                          handleCustomBg('settings.general.youtubeUrl', e.currentTarget.value);
+                        }}
+                      />
+                      <p className="text-muted">Please paste youtube video URL</p>
+                    </Col>
+
+                  </Row>
                 </Col>
               </Row>
-              <Row>
-                <Col className={values.settings?.general?.media === 'image' ? 'd-flex flex-wrap' : 'd-none'}>
-                  <span className={styles.dot}>-</span>
-                  <UploadButton
-                    icon={(<WhiteButton><span className="mx-3">Upload</span></WhiteButton>)}
-                    setFieldValue={setFieldValue}
-                    field="settings.general.imageUrl"
-                    className={styles.ob_settings__uploadbtn}
-                    handleCustomBg={handleForm}
-                    url={values.settings?.general?.imageUrl ? getKeyFromS3URL(values.settings?.general.imageUrl) : ''}
-                  />
-                </Col>
-                <Col className={values.settings?.general?.media === 'youtube' ? 'd-block' : 'd-none'}>
-                  <Form.Control
-                    type="text"
-                    name="youtubeUrl"
-                    value={values.settings?.general?.youtubeUrl}
-                    isValid={touched.youtubeUrl && !errors.youtubeUrl}
-                    onChange={(e) => {
-                      handleCustomBg('settings.general.youtubeUrl', e.currentTarget.value);
-                    }}
-                  />
-                  <p className="text-muted">Please paste youtube video URL</p>
-                </Col>
-                <Row className={values.settings?.general?.media === 'image' ? 'd-flex' : 'd-none'}>
-                  <Col>
-                    <h6 className={styles.smallt}>
-                      {' '}
-                      (Formats: PNG, JPG, JPEG)
-                      <br />
-                      1440px x 500px
-                    </h6>
-                  </Col>
-                </Row>
-              </Row>
+
             </div>
           </Col>
         </Row>
