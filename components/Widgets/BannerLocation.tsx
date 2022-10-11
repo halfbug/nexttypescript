@@ -25,7 +25,7 @@ export default function BannerLocation(
   const { gsctx } = useAppContext();
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   return (
-    <section className={styles.layout__box_1}>
+    <section>
       <h4 className="mt-0">
         Add banners to store
       </h4>

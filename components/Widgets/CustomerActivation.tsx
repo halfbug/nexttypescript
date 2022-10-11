@@ -20,7 +20,7 @@ export default function CustomerActivation(
         </h4>
         <p>
           Include a Groupshop QR code in your product packages
-          to encourage customers to start using Groupshop as soon as they receive their order.
+          to encourage customers to claim using Groupshop as soon as they receive their order.
         </p>
         <Button
           variant="link"

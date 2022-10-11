@@ -42,24 +42,26 @@ export default function LayoutSettings({
             handleSubmit={handleSubmit}
             touched={touched}
           /> */}
-
-          <BannerDesign
-            values={values}
-            errors={errors}
-            handleForm={handleForm}
-            setFieldValue={setFieldValue}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            touched={touched}
-          />
-          <BannerLocation
-            values={values}
-            errors={errors}
-            setFieldValue={setFieldValue}
-            handleChange={handleChange}
-            handleForm={handleForm}
-            touched={touched}
-          />
+          <section className={styles.layout__box_1}>
+            <BannerDesign
+              values={values}
+              errors={errors}
+              handleForm={handleForm}
+              setFieldValue={setFieldValue}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              touched={touched}
+            />
+            <hr className={styles.layout__bannerDivider} />
+            <BannerLocation
+              values={values}
+              errors={errors}
+              setFieldValue={setFieldValue}
+              handleChange={handleChange}
+              handleForm={handleForm}
+              touched={touched}
+            />
+          </section>
         </Col>
         <Col xl={5} lg={8} md={12} />
         <Col xl={12} lg={12} md={12}>

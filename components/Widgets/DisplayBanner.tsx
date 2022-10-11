@@ -47,7 +47,10 @@ export default function DisplayBanner(
             Display banners on your order summary page
 
           </h4>
-          <h6 className="text-muted mt-2">Showcase Groupshop's exclusive benefits with dedicated banners after checkout.</h6>
+          <h6 className="mt-2">
+            Let your customers know they can share your brand and earn cashback with dedicated
+            banners after checkout. We recommend keeping these turned on.
+          </h6>
           <Row>
             <Col lg={12} className="mt-2 px-1">
               <Form.Check

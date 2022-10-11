@@ -50,7 +50,7 @@ export default function BannerDesign(
   };
 
   return (
-    <section className={styles.layout__box_1}>
+    <section>
       <h4 className="mt-0">
         Banner Design
 

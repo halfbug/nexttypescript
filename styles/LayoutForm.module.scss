@@ -24,6 +24,14 @@
         padding-bottom: 20px;
         border: 1px dashed $average;
         border-radius: 18px;
+
+        h6 {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 500;
+            color: #1D2329;
+            opacity: 0.5;
+        }
     }
 
     &_settings {
@@ -253,6 +261,11 @@
         }
     }
 
+    &__bannerDivider {
+        margin-top: 34px;
+        margin-bottom: 18px;
+        color: #000;
+        opacity: 0.08;
     &_BannerBox{
         margin-left: 10px;
         background: $white;
