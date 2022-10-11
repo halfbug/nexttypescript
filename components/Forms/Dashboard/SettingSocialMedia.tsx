@@ -44,7 +44,7 @@ export default function SettingSocialMedia({
       <Row>
         <div className="col-8 d-flex ">
           <Button
-            className={['px-1 me-1', styles.groupshop_btn_circle].join(' ')}
+            className={['px-1 me-1', (smUrl === 'instagram') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
             onClick={() => setsmUrl('instagram')}
           >
@@ -52,7 +52,7 @@ export default function SettingSocialMedia({
           </Button>
 
           <Button
-            className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
+            className={['px-1 mx-1', (smUrl === 'tiktok') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
             onClick={() => setsmUrl('tiktok')}
           >
@@ -61,7 +61,7 @@ export default function SettingSocialMedia({
           </Button>
 
           <Button
-            className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
+            className={['px-1 mx-1', (smUrl === 'twitter') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
             onClick={() => setsmUrl('twitter')}
           >
@@ -69,7 +69,7 @@ export default function SettingSocialMedia({
           </Button>
 
           <Button
-            className={['px-1 mx-1', styles.groupshop_btn_circle].join(' ')}
+            className={['px-1 mx-1', (smUrl === 'facebook') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
             variant="secondary"
             onClick={() => setsmUrl('facebook')}
           >
