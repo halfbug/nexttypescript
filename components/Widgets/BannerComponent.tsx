@@ -3,6 +3,7 @@ import {
   Row, Col,
 } from 'react-bootstrap';
 import B1 from 'assets/images/GS-1.png';
+import styles from 'styles/LayoutForm.module.scss';
 
 export interface BannerProps {
   image: any
@@ -16,8 +17,8 @@ export default function BannerComponent(
 ) {
   return (
 
-    <section>
-      <div className="ms-2 w-75 shadow-sm p-1 bg-body rounded">
+    <section className={[styles.layout_BannerBox, 'w-75'].join(' ')}>
+      <div className="ms-2 p-1 bg-body rounded">
         <Row className=" d-flex flex-row mx-0 d-flex align-items-center align-self-center">
           <Col lg={5}>
             <img src={image.src} alt="B1" width="94" height="27" />
