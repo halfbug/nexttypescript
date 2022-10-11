@@ -75,8 +75,8 @@ export default function BannerLocation(
 
           {check && (
             <>
-              <div className="m-2 mt-3 ms-0">
-                <h4>Step 1</h4>
+              <div className="ms-0">
+                {/* <h4>Step 1</h4>  */}
                 <div className={styles.layout__description}>
                   When you’re done customizing your banner above, paste the code below right
                   after the opening

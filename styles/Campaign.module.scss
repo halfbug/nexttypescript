@@ -1,6 +1,7 @@
 @import "./variables.scss";
 
 .dashboard_campaign {
+
     @extend .mt-2, .px-0;
     ::-webkit-input-placeholder {
         // color: #161414;

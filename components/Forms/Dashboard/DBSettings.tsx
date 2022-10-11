@@ -72,8 +72,15 @@ export default function DBSettings({
 
     <>
       <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
-        <Row><h4 className="mb-0">Set your brand color</h4></Row>
-        <Form.Text><p className="mt-0">You’ll want a color that stands out on a white background</p></Form.Text>
+        <div className={styles2.dashboard_campaign__overlay}>
+          <div className={styles2.dashboard_campaign__overlayText}>Coming Soon</div>
+        </div>
+        <Row>
+          <h4 className="mb-0">Set your brand color</h4>
+        </Row>
+        <Form.Text>
+          <p className="mt-0">You’ll want a color that stands out on a white background</p>
+        </Form.Text>
         <Row>
           <Col lg={12}>
             <Form.Group className="d-flex ">
@@ -164,7 +171,7 @@ export default function DBSettings({
                     </Col>
                   </Row>
                 </Col>
-                <Col lg={6}>
+                {/* <Col lg={6}>
                   <Form.Check
                     inline
                     label="Youtube video"
@@ -194,7 +201,7 @@ export default function DBSettings({
                     </Col>
 
                   </Row>
-                </Col>
+                </Col> */}
               </Row>
 
             </div>

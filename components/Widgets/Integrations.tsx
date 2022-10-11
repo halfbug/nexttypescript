@@ -68,7 +68,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
           <Row>
             <div className="d-flex">
               <Fa className="me-2" />
-              <Col lg={6} className="style.marketing_inputIconBox">
+              <Col lg={6} className={styles.marketing_inputIconBox}>
                 <InputGroup className="mb-3 ">
                   <FormControl
                     placeholder="Enter Facebook Pixel"
@@ -127,6 +127,9 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
         </div>
       </section>
       <section className={styles.marketing__box_1}>
+        <div className={styles.marketing__overlay}>
+          <div className={styles.marketing__overlayText}>Coming Soon</div>
+        </div>
         <Row>
           <Col lg={1} className={['me-0 mt-2', styles.marketing__box_1__inte].join(' ')}>
             <Inte />
