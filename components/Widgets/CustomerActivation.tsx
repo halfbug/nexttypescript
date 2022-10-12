@@ -26,12 +26,12 @@ export default function CustomerActivation(
           variant="link"
           type="submit"
           // variant="outline-primary"
-          className={['px-4 py-1 ', styles.marketing_DownloadBtn].join(' ')}
+          className={['px-4 py-1 text-decoration-none', styles.marketing_DownloadBtn].join(' ')}
 
         >
           <>
             <Link href={`${QrCodeImage.src}`}>
-              <a target="_blank" style={{ cursor: 'pointer' }} download>
+              <a className="text-decoration-none" target="_blank" style={{ cursor: 'pointer' }} download>
                 Download QR Code
               </a>
             </Link>
