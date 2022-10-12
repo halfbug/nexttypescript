@@ -131,11 +131,14 @@ const VideoWidget = () => {
               onClick={() => handleClick()}
             />
             {control.height !== '350' && (
-              <div style={{
-                position: 'absolute', left: '45px', top: '170px', color: 'white',
-              }}
+              <div
+                className={styles.videoWidget__howToBox}
               >
-                how to use
+                <img
+                  src={PlayIcon.src}
+                  alt=""
+                />
+                <p>How To Use</p>
               </div>
             )}
           </>
@@ -155,11 +158,14 @@ const VideoWidget = () => {
             onClick={() => mobileViewClick()}
             onTimeUpdate={(e) => handleChange(e)}
           />
-          <div style={{
-            position: 'absolute', left: '50px', top: '5px', color: 'white',
-          }}
+          <div
+            className={styles.videoWidget__howToBox}
           >
-            how to use
+            <img
+              src={PlayIcon.src}
+              alt=""
+            />
+            <p>How To Use</p>
           </div>
         </div>
       )}
@@ -264,11 +270,14 @@ const VideoWidget = () => {
               onClick={() => handleClick()}
             />
             {control.height !== '350' && (
-              <div style={{
-                position: 'absolute', left: '45px', top: '170px', color: 'white',
-              }}
+              <div
+                className={styles.videoWidget__howToBox}
               >
-                how to use
+                <img
+                  src={PlayIcon.src}
+                  alt=""
+                />
+                <p>How To Use</p>
               </div>
             )}
           </>

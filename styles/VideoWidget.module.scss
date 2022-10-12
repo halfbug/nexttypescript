@@ -4,8 +4,8 @@
     &__box {
         position: fixed;
         width: fit-content;
-        right: 0;
-        bottom: 0;
+        right: 20px;
+        bottom: 20px;
 
         &:hover {
             .videoWidget__closeBox__icon {
@@ -53,7 +53,7 @@
             }
             &::-webkit-progress-bar {
                 border-radius: 20px;
-                background-color: #e5e5e5;
+                background-color: #a4a2a4;
             }
         }
     }
@@ -70,6 +70,26 @@
             @include media-breakpoint-down(md) {
                 display: flex;
             }
+        }
+    }
+    &__howToBox {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 25px;
+        top: 170px;
+        cursor: pointer;
+
+        img {
+            height: 13px;
+        }
+
+        p {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            color: #FFFFFF;
+            padding-inline-start: 6px;
         }
     }
 }
