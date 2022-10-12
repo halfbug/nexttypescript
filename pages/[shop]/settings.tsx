@@ -107,14 +107,14 @@ const Settings: NextPage = () => {
     validateOnChange: false,
     enableReinitialize: true,
     validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<IValues>) => {
+    onSubmit: (valz, { validateForm }:FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const {
         brandName, industry, logoImage, facebook, twitter, tiktok, instagram,
       } = valz;
       // console.log('SUBMIT');
       // console.log({ valz });
-      await updateBI({
+      updateBI({
         variables: {
           updateStoreInput: {
             id: store.id,

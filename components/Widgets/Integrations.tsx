@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from 'styles/Marketing.module.scss';
 import {
   Row, Col, FormControl, InputGroup, Accordion, Card, useAccordionButton, ToggleButton,
@@ -16,7 +16,6 @@ import GreenTickIcon from 'assets/images/green-tick.svg';
 import PlusIcon from 'assets/images/plus-icon.svg';
 import MinusIcon from 'assets/images/minus-icon.svg';
 import TooltipIcon from 'assets/images/tooltip-icon.svg';
-import { useState } from 'react';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { Check2Circle } from 'react-bootstrap-icons';
 
@@ -72,9 +71,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                 <InputGroup className="mb-3 ">
                   <FormControl
                     placeholder="Enter Facebook Pixel"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    value={values?.settings?.marketing?.facebookPixels}
+                    value={values.settings?.marketing?.facebookPixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.facebookPixels', e.currentTarget.value);
                     }}
@@ -112,8 +109,6 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                 <InputGroup className="mb-3 ">
                   <FormControl
                     placeholder="Enter Google Pixel"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
                     value={values?.settings?.marketing?.googlePixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.googlePixels', e.currentTarget.value);
