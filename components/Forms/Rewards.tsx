@@ -49,8 +49,8 @@ export default function Rewards() {
   });
 
   const initvalz: IValues = {
-    rewards: '',
-    selectedTarget: '',
+    rewards: (salesTarget[3]?.id) ? salesTarget[3]?.id : '',
+    selectedTarget: (salesTarget[3]) ? salesTarget[3] : '',
   };
   const { newcampaign } = useCampaign();
   console.log({ newcampaign });
@@ -93,18 +93,6 @@ export default function Rewards() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { rewards, selectedTarget } = valz;
-
-      if (selectedTarget) {
-        delete selectedTarget["__typename"];
-        if (selectedTarget.rewards.length) {
-          const newR = selectedTarget?.rewards.map((item: any) => {
-            const { __typename, ...valWithoutTypename } = item;
-            return valWithoutTypename;
-          });
-          selectedTarget.rewards = [...newR];
-        }
-      }
-
       const id = store?.newCampaign?.id;
       if (id) {
         await addReward({
