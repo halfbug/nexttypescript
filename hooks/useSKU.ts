@@ -24,14 +24,16 @@ const useSKU = () => {
       setMemberProducts([...gsctx?.popularProducts ?? [], ...gsctx?.ownerDeals ?? []]);
     }
     if (gsctx.allProducts?.length && gsctx.popularProducts?.length) {
-      const products = new Set(gsctx.allProducts.map((ele) => ele.id));
-      const popularProducts = new Set(gsctx.popularProducts.map((ele) => ele.id));
+      const products = gsctx.allProducts.map((ele) => ele.id)
+        .filter((value, index, self) => self.indexOf(value) === index);
+      const popularProducts = gsctx.popularProducts.map((ele) => ele.id)
+        .filter((value, index, self) => self.indexOf(value) === index);
       const arr = JSON.stringify(products)
         === JSON.stringify(popularProducts);
       setHideSection(arr);
-      console.log('🎈 products', products);
-      console.log('🎈 popularProducts', popularProducts);
-      console.log('🎈 arr', arr);
+      // console.log('🎈 products', products);
+      // console.log('🎈 popularProducts', popularProducts);
+      // console.log('🎈 arr', arr);
     }
   }, [gsctx]);
 
