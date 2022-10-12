@@ -78,18 +78,18 @@ export default function BannerLocation(
               <div className="ms-0">
                 {/* <h4>Step 1</h4>  */}
                 <div className={styles.layout__description}>
-                  When you’re done customizing your banner above, paste the code below right
-                  after the opening
+                  When you're done customizing your banner above, paste the code within
                   {' '}
                   {'<body>'}
                   {' '}
-                  tag of your website. Add the following code anywhere you want to display
-                  the Groupshop banner. We recommend placing them on your product page and
-                  on your cart page or modal.
+                  tag of your webpage.
                   {' '}
                   <br />
-                  The code only needs to be added once per page – add it on all the pages you will
-                  be displaying the Groupshop banner.
+                  We recommend placing them on your product page and on your cart page or modal.
+                  {' '}
+                  <br />
+                  The code needs to be added once per page - Add it on all the pages you will be
+                  displaying the Groupshop banner.
                 </div>
                 <Row className={styles.layout__codesnip}>
                   <Col lg={2} className={styles.layout__codesnip__col}>
