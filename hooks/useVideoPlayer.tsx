@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
+import { useQuery } from '@apollo/client';
 import {
   useEffect, useState,
 } from 'react';
+import { GET_ALL_VIDEOS } from 'store/store.graphql';
+import useAppContext from './useAppContext';
 
 interface controlType {
   autoPlay: boolean,
@@ -15,8 +18,15 @@ interface controlType {
 }
 
 const useVideoPlayer = (videoRef: any) => {
-  const source = ['https://s3.amazonaws.com/gsnodeimages/f5c2e5d62890.mp4', 'https://s3.amazonaws.com/gsnodeimages/f5c2e5d62890.mp4'];
+  const { gsctx, dispatch, isGroupshop } = useAppContext();
 
+  const {
+    data, refetch,
+  } = useQuery(GET_ALL_VIDEOS, {
+    variables: { storeId: gsctx.storeId },
+  });
+
+  const [source, setSource] = useState<any[]>([]);
   const [control, setControl] = useState<controlType>({
     autoPlay: true,
     mute: true,
@@ -24,13 +34,30 @@ const useVideoPlayer = (videoRef: any) => {
     width: '150',
     currentTime: 0,
     endTime: 0,
-    loop: false,
+    loop: true,
     range: 0,
   });
   const [closeType, setCloseType] = useState<boolean>(false);
   const [type, setType] = useState<number>(1);
   const [display, setDisplay] = useState<string>('');
   const [videoNo, setVideoNo] = useState<number>(0);
+  const [videoError, setVideoError] = useState<boolean>(false);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  useEffect(() => {
+    if (data?.videos?.length > 0) {
+      const temp:any[] = [];
+      data.videos.map((ele:any) => temp.push(ele.type));
+      setSource(temp);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log('🚀🚀🚀source', source);
+  }, [source]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -49,7 +76,8 @@ const useVideoPlayer = (videoRef: any) => {
 
   const handleChange = (e: any) => {
     if (control.height === '200' || type === 2) {
-      if (e.target.currentTime > 5) {
+      if ((videoRef.current.duration < 5
+        && e.target.currentTime === videoRef.current.duration) || e.target.currentTime > 5) {
         videoRef.current.currentTime = 0;
       }
     } else {
@@ -74,6 +102,7 @@ const useVideoPlayer = (videoRef: any) => {
         height: '350',
         width: '200',
         mute: false,
+        loop: !(source.length > 1),
       });
     } else if (control.autoPlay) {
       setControl({ ...control, autoPlay: false });
@@ -118,6 +147,14 @@ const useVideoPlayer = (videoRef: any) => {
     setVideoNo(0);
   };
 
+  const handleError = () => {
+    if (source.length === videoNo + 1) {
+      setVideoError(true);
+    } else {
+      setVideoNo(videoNo + 1);
+    }
+  };
+
   return {
     control,
     type,
@@ -131,6 +168,8 @@ const useVideoPlayer = (videoRef: any) => {
     videoNo,
     mobileViewClick,
     updateTime,
+    videoError,
+    handleError,
   };
 };
 

@@ -1380,6 +1380,20 @@ query retentionGroupshopPrgress($storeId: String!) {
 }
 `;
 
+const GET_ALL_VIDEOS = gql`
+  query videos($storeId: String!) {
+    videos(storeId: $storeId) {
+    _id
+    name
+    type
+    status
+    storeId
+    createdAt
+    updatedAt
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -1397,4 +1411,5 @@ export {
   GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS,
+  GET_ALL_VIDEOS,
 };

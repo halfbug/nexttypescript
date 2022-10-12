@@ -27,14 +27,16 @@ const VideoWidget = () => {
     videoNo,
     mobileViewClick,
     updateTime,
+    videoError,
+    handleError,
   } = useVideoPlayer(videoRef);
 
   return (
     <div
       className={styles.videoWidget__box}
     >
-      {display === 'mobile' && type === 1
-        && (
+      {display === 'mobile' && type === 1 && source.length > 0 && !videoError
+        ? (
           <>
             <div
               className="t-control"
@@ -56,7 +58,7 @@ const VideoWidget = () => {
               {(control.height === '350' && videoRef && videoRef.current && videoRef.current.currentTime)
                 && (
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    {source.map((ele: any, i: number) => (
+                    {source.length > 1 ? source.map((ele: any, i: number) => (
                       <progress
                         max="100"
                         value={videoNo === i
@@ -77,7 +79,7 @@ const VideoWidget = () => {
                       //   style={{ width: 200 / source.length }}
                       //   disabled={videoNo > i}
                       // />
-                    ))}
+                    )) : ''}
                   </div>
                 )}
               {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -129,6 +131,7 @@ const VideoWidget = () => {
               loop={control.loop}
               onTimeUpdate={(e) => handleChange(e)}
               onClick={() => handleClick()}
+              onError={() => handleError()}
             />
             {control.height !== '350' && (
               <div
@@ -142,8 +145,8 @@ const VideoWidget = () => {
               </div>
             )}
           </>
-        )}
-      {display === 'mobile' && type === 2 && (
+        ) : ''}
+      {display === 'mobile' && type === 2 && source.length > 0 && !videoError ? (
         <div onClick={() => handleLiveClick()} style={{ display: 'flex' }}>
           <video
             key={source[videoNo]}
@@ -157,6 +160,7 @@ const VideoWidget = () => {
             loop={control.loop}
             onClick={() => mobileViewClick()}
             onTimeUpdate={(e) => handleChange(e)}
+            onError={() => handleError()}
           />
           <div
             className={styles.videoWidget__howToBox}
@@ -168,9 +172,9 @@ const VideoWidget = () => {
             <p>How To Use</p>
           </div>
         </div>
-      )}
-      {display === 'desktop' && type === 1
-        && (
+      ) : ''}
+      {display === 'desktop' && type === 1 && source.length > 0 && !videoError
+        ? (
           <>
             <div
               className="t-control"
@@ -194,7 +198,7 @@ const VideoWidget = () => {
               {(control.height === '350' && videoRef && videoRef.current && videoRef.current.currentTime)
                     && (
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
-                      {source.map((ele: any, i: number) => (
+                      {source.length > 1 ? source.map((ele: any, i: number) => (
                         <progress
                           max="100"
                           value={videoNo === i
@@ -216,7 +220,7 @@ const VideoWidget = () => {
                         //   style={{ width: 160 / source.length }}
                         //   disabled={videoNo !== i}
                         // />
-                      ))}
+                      )) : ''}
                     </div>
                     )}
               {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -268,6 +272,7 @@ const VideoWidget = () => {
               loop={control.loop}
               onTimeUpdate={(e) => handleChange(e)}
               onClick={() => handleClick()}
+              onError={() => handleError()}
             />
             {control.height !== '350' && (
               <div
@@ -281,7 +286,7 @@ const VideoWidget = () => {
               </div>
             )}
           </>
-        )}
+        ) : ''}
     </div>
   );
 };
