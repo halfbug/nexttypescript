@@ -203,6 +203,12 @@
         border-radius: 18px;
         background: #f3f3f3;
     }
+    &_badge {
+        @extend .m-1, .p-1, .px-2, .fw-bold, .rounded, .lh-sm;
+        font-size: 8px;
+        background: $recommended !important;
+        color: $black !important;
+    }
 }
 .dbrewards {
     &_input {
@@ -431,6 +437,7 @@
         background-color: $disable;
         border-radius: 0.3rem !important;
     }
+ 
 }
 .editRewardsBox_modal {
     width: 680px;
