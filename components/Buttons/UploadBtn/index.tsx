@@ -70,7 +70,7 @@ export default function UploadButton({
         const files:any = Array.from(e.target.files);
         console.log("🚀 ~ file: index.tsx ~ line 67 ~ handleImageUpload ~ files", files);
         const config = {
-          headers: { 'Content-Type': 'multipart/form-data' },
+          headers: { 'Content-Type': 'multipart/form-data', 'Access-Control-Allow-Origin': '*' },
         };
         const fileType = files[0].type;
         const fileSize = files[0].size;
