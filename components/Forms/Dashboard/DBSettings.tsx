@@ -79,7 +79,7 @@ export default function DBSettings({
           <h4 className="mb-0">Set your brand color</h4>
         </Row>
         <Form.Text>
-          <p className="mt-0">You’ll want a color that stands out on a white background</p>
+          <p className="mt-0">You’ll want a color that stands out on a white background.</p>
         </Form.Text>
         <Row>
           <Col lg={12}>
