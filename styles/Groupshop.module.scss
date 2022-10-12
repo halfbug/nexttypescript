@@ -1555,35 +1555,36 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @media (max-width: 390px) {
       &_tostart {
         h3:before {
-          left: 255px !important;
+          left: 50px !important;
         }
         h3:after {
-          right: 255px !important;
+           margin-left: 5px!important;
+          right: 50px !important;
         }
       }
     }
 
-    @media (min-width: 390px) and (max-width: 425px) {
-      &_tostart {
-        h3:before {
-          left: 270px !important;
-        }
-        h3:after {
-          right: 270px !important;
-        }
-      }
-    }
+    // @media (min-width: 390px) and (max-width: 425px) {
+    //   &_tostart {
+    //     h3:before {
+    //       left: 270px !important;
+    //     }
+    //     h3:after {
+    //       right: 270px !important;
+    //     }
+    //   }
+    // }
 
-    @media (min-width: 425px) and (max-width: 575px) {
-      &_tostart {
-        h3:before {
-          left: 280px !important;
-        }
-        h3:after {
-          right: 280px !important;
-        }
-      }
-    }
+    // @media (min-width: 425px) and (max-width: 575px) {
+    //   &_tostart {
+    //     h3:before {
+    //       left: 280px !important;
+    //     }
+    //     h3:after {
+    //       right: 280px !important;
+    //     }
+    //   }
+    // }
 
     &__pointers {
       @extend .text-start;
@@ -1660,7 +1661,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         .justify-content-center,
         .align-content-center,
         .text-center,
-        .mb-4;
+        .mb-4, .mx-4;
       font-family: Mulish;
       font-style: normal;
       font-weight: normal;
