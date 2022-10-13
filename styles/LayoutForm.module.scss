@@ -266,11 +266,12 @@
         margin-bottom: 18px;
         color: #000;
         opacity: 0.08;
-    &_BannerBox{
-        margin-left: 10px;
-        background: $white;
-        box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
-        border-radius: 3px;
-    }
+
+}
+&_BannerBox{
+    margin-left: 10px;
+    background: $white;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
 }
 }
