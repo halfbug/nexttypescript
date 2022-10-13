@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-tabs */
 /* eslint-disable no-undef */
 
@@ -45,7 +46,7 @@ async function getUI() {
   if (APIResponse.settings.layout.bannerStyle === '1') {
     MainDiv.innerHTML = `<div class="banner-pdp">
     <span id="text">Only <strong>${APIResponse.discount}</strong> when you shop with friends</span>&nbsp;
-    <img class="logo-pdp" src=${APP_URL}${logoURL} />
+    <img class="modern-image logo-pdp" src=${APP_URL}${logoURL} />
     </div>`;
   }
 
@@ -79,8 +80,12 @@ function manipulateUI(div, logoBG, APIResponse) {
   }
 
   if (APIResponse.settings.layout.bannerStyle === '1') {
-    if (APIResponse.settings.layout.bannerCustomColor.length) {
+    if (APIResponse.settings.layout.bannerDesign === '104') {
       div.style.setProperty('--bg', APIResponse.settings.layout.bannerCustomColor);
+    } else if (APIResponse.settings.layout.bannerDesign === '102') {
+      div.style.setProperty('--bg', APIResponse.settings.layout.bannerColor);
+      div.style.color = 'white';
+      logoBG[0].style.setProperty('--logoColor', 'invert(1)');
     } else {
       div.style.setProperty('--bg', APIResponse.settings.layout.bannerColor);
     }
