@@ -317,8 +317,29 @@ export default function CreateCampaign() {
                       Customers get cashback and discounts on the products selected below by default
                     </p>
                   </Row>
-                  <Row>
-                    <Col>
+                  <Row className="ms-3">
+                    <Form.Check
+                      inline
+                      label="All products (Recommended)"
+                      className={values.criteria === 'allproducts'
+                        ? styles.dashboard_campaign_active_radio_option
+                        : styles.dashboard_campaign_radio_label}
+                      onChange={(e) => {
+                        handleChange(e);
+                        // handleSubmit();
+                      }}
+                      onClick={() => { setValue('criteria', 'allproducts'); setdisableBtn(true); }}
+                      type="radio"
+                      name="criteria"
+                      isInvalid={touched.criteria && !!errors.criteria}
+                      value="allproducts"
+                      checked={values.criteria === 'allproducts'}
+                    />
+                    {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
+                  </Row>
+                  <Row className="row mb-2 ms-0"><p className="mb-0 mt-1 p-0"><strong>Or select as many collections as you want below:</strong></p></Row>
+                  <Row className="ms-3">
+                    <Col className="p-0">
                       <Form.Check
                         inline
                         label="Best sellers"
@@ -331,6 +352,10 @@ export default function CreateCampaign() {
                         onClick={() => setValue('criteria', 'bestseller')}
                         checked={values.criteria === 'bestseller'}
                       />
+                    </Col>
+                  </Row>
+                  <Row className="ms-3">
+                    <Col className="p-0">
                       <Form.Check
                         inline
                         onChange={(e) => handleChange(e)}
@@ -345,8 +370,8 @@ export default function CreateCampaign() {
                       />
                     </Col>
                   </Row>
-                  <Row className="mt-2">
-                    <Col>
+                  <Row className="ms-3">
+                    <Col className="p-0">
                       <Form.Check
                         inline
                         label="Specific products/collections (up to 80 products)"
@@ -372,7 +397,7 @@ export default function CreateCampaign() {
                     disableBtn={disableBtn}
                     handleDelete={handleDeleteProduct}
                   />
-                  <Row className="mt-4 border-top">
+                  {/* <Row className="mt-4 border-top">
                     <Col>
                       <h4 className="mt-3">
                         Allow customers to add products from your store
@@ -381,7 +406,8 @@ export default function CreateCampaign() {
                           className={styles.dashboard_campaign__pop}
                           icon={<InfoCircle size={13} />}
                           popContent="You choose which products your customers will earn
-                        cashback and discounts on. Use this feature to select which additional products
+                        cashback and discounts on. Use this feature to select which
+                         additional products
                         customers can add from your store to personalize their Groupshop."
                         />
                       </h4>
@@ -400,7 +426,7 @@ export default function CreateCampaign() {
                       />
 
                     </Col>
-                  </Row>
+                  </Row> */}
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>

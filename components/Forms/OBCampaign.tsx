@@ -172,6 +172,7 @@ export default function OBCampaign() {
                 handleChange(e);
                 // handleSubmit();
               }}
+              onClick={() => { setValue('criteria', 'allproducts'); setdisableBtn(true); }}
               type="radio"
               name="criteria"
               isInvalid={touched.criteria && !!errors.criteria}
@@ -225,38 +226,42 @@ export default function OBCampaign() {
             </Row>
 
           </Row> */}
-          <Form.Check
-            inline
-            label="Best sellers"
-            className={values.criteria === 'bestseller'
-              ? styles.dashboard_campaign_active_radio_option
-              : styles.dashboard_campaign_radio_label}
-            onChange={handleChange}
-            type="radio"
-            name="criteria"
-            isInvalid={touched.criteria && !!errors.criteria}
-            value="bestseller"
-            onClick={() => { setValue('criteria', 'bestseller'); setdisableBtn(true); }}
-            checked={values.criteria === 'bestseller'}
-          />
-          <Form.Check
-            inline
-            onChange={handleChange}
-            label="Newest products"
-            className={values.criteria === 'newest'
-              ? styles.dashboard_campaign_active_radio_option
-              : styles.dashboard_campaign_radio_label}
-            type="radio"
-            name="criteria"
-            value="newest"
-            isInvalid={touched.criteria && !!errors.criteria}
-            onClick={() => { setValue('criteria', 'newest'); setdisableBtn(true); }}
-            checked={values.criteria === 'newest'}
-          />
+          <Row className="ms-2">
+            <Form.Check
+              inline
+              label="Best sellers"
+              className={values.criteria === 'bestseller'
+                ? styles.dashboard_campaign_active_radio_option
+                : styles.dashboard_campaign_radio_label}
+              onChange={handleChange}
+              type="radio"
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
+              value="bestseller"
+              onClick={() => { setValue('criteria', 'bestseller'); setdisableBtn(true); }}
+              checked={values.criteria === 'bestseller'}
+            />
+          </Row>
+          <Row className="ms-2">
+            <Form.Check
+              inline
+              onChange={handleChange}
+              label="Newest products"
+              className={values.criteria === 'newest'
+                ? styles.dashboard_campaign_active_radio_option
+                : styles.dashboard_campaign_radio_label}
+              type="radio"
+              name="criteria"
+              value="newest"
+              isInvalid={touched.criteria && !!errors.criteria}
+              onClick={() => { setValue('criteria', 'newest'); setdisableBtn(true); }}
+              checked={values.criteria === 'newest'}
+            />
+          </Row>
         </Col>
       </Row>
-      <Row className="mt-2 ">
-        <Col>
+      <Row>
+        <Col className="ms-2 p-0">
           <Form.Check
             inline
             label="Specific products/collections (up to 80 products)"

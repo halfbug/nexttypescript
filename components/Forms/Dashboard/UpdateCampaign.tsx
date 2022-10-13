@@ -240,7 +240,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                   <Row><p>All the products you select below will be available on your customers’ Groupshops.</p></Row>
                   <Row className="">
                     <Col className="ps-0">
-                      <Row className="ms-2">
+                      <Row className="ms-3">
                         <Form.Check
                           inline
                           label="All products (Recommended)"
@@ -261,7 +261,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                         {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
                       </Row>
                       <Row className="row mb-2 ms-0"><p className="mb-0 mt-1"><strong>Or select as many collections as you want below:</strong></p></Row>
-                      <Row className="ms-2">
+                      <Row className="ms-3">
                         <Form.Check
                           inline
                           onChange={(e) => {
@@ -280,7 +280,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                           checked={values.criteria === 'newest'}
                         />
                       </Row>
-                      <Row className="ms-2">
+                      <Row className="ms-3">
                         <Form.Check
                           inline
                           label="Best sellers"
@@ -300,7 +300,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                         />
                       </Row>
                       <Row>
-                        <Col className="ms-2">
+                        <Col className="ms-3">
                           <Form.Check
                             inline
                             label="Specific products/collections (up to 80 products)"
