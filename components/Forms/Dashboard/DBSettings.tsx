@@ -164,7 +164,7 @@ export default function DBSettings({
                     <Col className="d-flex  justify-content-center text-center">
                       <h6 className={styles.smallt}>
                         {' '}
-                        (Formats: PNG, JPG, JPEG)
+                        Under 3MB (Formats: PNG, JPG, JPEG)
                         <br />
                         1440px x 500px
                       </h6>

@@ -310,7 +310,7 @@ export default function Settings({ isDB }: IProps) {
             </Col>
             <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
               <Col className="text-muted align-right text-end">
-                <div className={styles.smallt}> (Formats: PNG, JPG, JPEG)</div>
+                <div className={styles.smallt}> Under 3MB (Formats: PNG, JPG, JPEG)</div>
                 <div className={styles.smallt}> 1440px x 500px</div>
               </Col>
             </Row>
