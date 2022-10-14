@@ -241,9 +241,9 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             for everyone.
             <br />
             <br />
-            <div className={styles.welcome__modal__body__description2}>
+            {/* <div className={styles.welcome__modal__body__description2}>
               Customize your Groupshop now and share it when you’re done!
-            </div>
+            </div> */}
           </div>
 
           <div className="d-flex justify-content-center my-4">
