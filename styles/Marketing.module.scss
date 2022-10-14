@@ -76,6 +76,10 @@
             display: flex;
             justify-content: center;
         }
+
+        input {
+            padding-right: 35px;
+        }
     }
     &__box_3 {
         @extend .mb-4;
@@ -239,9 +243,6 @@
         @extend .d-flex;
         position: relative;
 
-        input {
-            padding-right: 35px;
-        }
     }
     &_inputIcon {
         // @extend .mt-2;
