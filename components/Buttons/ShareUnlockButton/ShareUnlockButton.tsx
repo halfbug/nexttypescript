@@ -19,6 +19,7 @@ const ShareUnlockButton = ({
   label, className, shareurl, placement, disabled, popContent, icon, onClick,
 }: ShareButtonProps) => {
   const { gsctx, banner } = useDeal();
+  console.log('🚀 ~ file: ShareUnlockButton.tsx ~ line 22 ~ banner', banner);
   const { discountCode: { percentage } } = gsctx;
   const { Canvas } = useQRCode();
   const { socialText } = useDeal();

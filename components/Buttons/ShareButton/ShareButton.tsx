@@ -23,7 +23,7 @@ const ShareButton = ({
   onClick,
 }: ShareButtonProps) => {
   const {
-    gsctx, socialText, nativeShareText,
+    gsctx, socialText, nativeShareText, banner,
   } = useDeal();
   const bannerImage = useBanner();
   const { discountCode: { percentage } } = gsctx;
@@ -45,7 +45,7 @@ const ShareButton = ({
           <Row className="p-3">
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Email" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Instagram" url={shareurl} /></Col>
-            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Pinterest" url={shareurl} media={bannerImage} /></Col>
+            <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Pinterest" url={shareurl} media={banner} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Twitter" url={shareurl} /></Col>
             <Col className="p-0 d-flex justify-content-center"><SocialButton text={socialText} network="Facebook" url={shareurl} /></Col>
           </Row>

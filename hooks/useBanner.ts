@@ -25,9 +25,10 @@ const useBanner = () => {
         const s3path = getKeyFromS3URL(groupshop?.store?.settings?.general?.imageUrl);
         const banner = `${process.env.IMAGE_PATH}/${s3path}`;
         setBannerImage(banner);
-      } else {
-        setBannerImage(`${process.env.IMAGE_PATH}/${'bg.jpg'}`);
       }
+      // else {
+      //   setBannerImage(`${process.env.IMAGE_PATH}/${'bg.jpg'}`);
+      // }
     }
   });
   return bannerImage;
