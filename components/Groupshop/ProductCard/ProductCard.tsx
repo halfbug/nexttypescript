@@ -20,11 +20,12 @@ const ProductCard = ({
     case 'large':
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
-          <div className={styles.groupshop__pcard_image_wrapper}>
+          <div className={styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
             <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
               {imgOverlay}
             </Card.ImgOverlay>
-            <Card.Img variant="top" src={isrc} className={[' img-fluid', styles.groupshop__pcard_image].join(' ')} />
+            {/* <Card.Img variant="top" src={isrc} className=
+            {[' img-fluid', styles.groupshop__pcard_image].join(' ')} /> */}
           </div>
           <Card.Body className="px-2">
             {children}

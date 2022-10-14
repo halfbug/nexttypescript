@@ -795,6 +795,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     width: 100%;
     padding-bottom: 100%;
     position: relative;
+    background-size: cover;
+    background-position: 50% 90%;
 
     img {
       object-fit: cover;
