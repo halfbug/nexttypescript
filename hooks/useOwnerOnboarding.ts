@@ -25,13 +25,16 @@ const useOwnerOnboarding = () => {
   }, [gsctx]);
 
   useEffect(() => {
+    if (gsctx?.obSettings?.ownerUrl === `/${shop}/deal/${discountCode}/owner&${ownerCode}` && modelStep === 1) {
+      Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}`);
+    }
     if (gsctx?.obSettings?.ownerUrl === `/${shop}/deal/${discountCode}/owner&${ownerCode}` && modelStep >= 0 && modelStep < 1) {
       Router.push(`/${shop}/deal/${discountCode}/owner&${ownerCode}/step&${modelStep}`);
     }
   }, [modelStep]);
 
   useEffect(() => {
-    if (stepNumber && (+stepNumber! >= 0 || +stepNumber! < 1)) {
+    if (stepNumber && (+stepNumber! >= 0 || +stepNumber! < 1) && modelStep < 1) {
       setStep(stepNumber!);
     } else {
       setStep('');
