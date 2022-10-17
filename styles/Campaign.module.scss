@@ -231,6 +231,10 @@
         font-size: 12px;
         line-height: 16px;
         color: #ff0000;
+        margin-top: 10px;
+    }
+    &_error::first-letter {
+        text-transform: uppercase;
     }
     &_box {
         @extend .mb-4, .p-4;
