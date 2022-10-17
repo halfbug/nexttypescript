@@ -208,7 +208,7 @@ export default function BannerDesign(
               name="bnr"
               checked={values?.settings?.layout?.bannerDesign === '102'}
               onChange={(e) => {
-                handleFields('', e.currentTarget.value);
+                handleFields('settings.layout.bannerDesign', e.currentTarget.value);
               }}
               value="102"
               className={styles.layout__checkbox__input}
