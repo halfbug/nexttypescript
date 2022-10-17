@@ -180,35 +180,36 @@ export default function DBRewards({
           </>
           )}
           <div className={editMin ? 'd-block' : 'd-none'}>
-            <Form.Control
-              type="text"
-              name="minDiscount"
-              value={values.minDiscount}
+            <div className="d-flex">
+              <Form.Control
+                type="text"
+                name="minDiscount"
+                value={values.minDiscount}
               // value={values.minDiscountVal[values.minDiscountVal.length - 1]
               // !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
-              onChange={handleChange}
-              className={styles.dbrewards_input}
-              isInvalid={!!errors.minDiscount}
+                onChange={handleChange}
+                className={styles.dbrewards_input}
+                isInvalid={!!errors.minDiscount}
               // isInvalid={!!errors.minDiscount}
-              placeholder="Enter %"
-            />
+                placeholder="Enter %"
+              />
+              <Button
+                variant="link"
+                onClick={() => {
+                  if (!(errors.minDiscount)) {
+                    setEditMin(false);
+                    setFieldValue('isRewardEdit', true);
+                  // handleSubmit();
+                  }
+                }}
+              >
+                Save
+
+              </Button>
+            </div>
             <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
               {errors.minDiscount}
             </Form.Control.Feedback>
-
-            <Button
-              variant="link"
-              onClick={() => {
-                if (!(errors.minDiscount)) {
-                  setEditMin(false);
-                  setFieldValue('isRewardEdit', true);
-                  // handleSubmit();
-                }
-              }}
-            >
-              Save
-
-            </Button>
           </div>
 
         </Col>
@@ -254,31 +255,33 @@ export default function DBRewards({
           </>
           )}
           <div className={editMax ? 'd-block' : 'd-none'}>
-            <Form.Control
-              type="text"
-              name="maxDiscount"
-              value={values.maxDiscount}
-              onChange={handleChange}
-              className={styles.dbrewards_input}
-              isInvalid={!!errors.maxDiscount}
-              placeholder="Enter %"
-            />
+            <div className="d-flex">
+              <Form.Control
+                type="text"
+                name="maxDiscount"
+                value={values.maxDiscount}
+                onChange={handleChange}
+                className={styles.dbrewards_input}
+                isInvalid={!!errors.maxDiscount}
+                placeholder="Enter %"
+              />
+              <Button
+                variant="link"
+                onClick={() => {
+                  if (!(errors.maxDiscount)) {
+                    setEditMax(false);
+                    setFieldValue('isRewardEdit', true);
+                  // handleSubmit();
+                  }
+                }}
+              >
+                Save
+
+              </Button>
+            </div>
             <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
               {errors.maxDiscount}
             </Form.Control.Feedback>
-            <Button
-              variant="link"
-              onClick={() => {
-                if (!(errors.maxDiscount)) {
-                  setEditMax(false);
-                  setFieldValue('isRewardEdit', true);
-                  // handleSubmit();
-                }
-              }}
-            >
-              Save
-
-            </Button>
             {/* <span className={styles.dbrewards_rewardBtn}>save</span> */}
           </div>
 
