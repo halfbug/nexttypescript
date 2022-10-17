@@ -349,7 +349,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         isInvalid={touched.criteria && !!errors.criteria}
                         value="bestseller"
-                        onClick={() => setValue('criteria', 'bestseller')}
+                        onClick={() => { setValue('criteria', 'bestseller'); setdisableBtn(true); }}
                         checked={values.criteria === 'bestseller'}
                       />
                     </Col>
@@ -365,7 +365,7 @@ export default function CreateCampaign() {
                         name="criteria"
                         value="newest"
                         isInvalid={touched.criteria && !!errors.criteria}
-                        onClick={() => setValue('criteria', 'newest')}
+                        onClick={() => { setValue('criteria', 'newest'); setdisableBtn(true); }}
                         checked={values.criteria === 'newest'}
                       />
                     </Col>
