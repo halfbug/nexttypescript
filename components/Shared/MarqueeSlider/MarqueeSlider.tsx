@@ -6,7 +6,7 @@ import styles from './MarqueeSlider.module.scss';
 // @ts-ignore
 
 const MarqueeSlider = () => (
-  <div className={styles.MarqueeSliderContainer}>
+  <div className={[styles.MarqueeSliderContainer, 'd-flex align-items-center'].join(' ')}>
     {/*
  // @ts-ignore */}
     <marquee width="100%" direction="left">
