@@ -119,7 +119,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       setpending(false);
       // setallProducts(groupshop?.allProducts);
       setallProducts(groupshop?.allProducts?.filter(
-        (item) => item.outofstock === false,
+        (item) => item.outofstock === false || item.outofstock === null,
       ));
       setmember(groupshop?.members[0]);
       console.log('=== update gs ...code GS');
