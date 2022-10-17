@@ -107,7 +107,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
       let customProducts: any[] = [];
       let customCollections: any[] = [];
       if (criteria === 'custom') {
-        if (store?.newCampaign?.productsArray?.length) {
+        if (store?.newCampaign?.productsArray) {
           customProducts = [...store?.newCampaign?.productsArray ?? []];
           customCollections = [...store?.newCampaign?.collectionsArray ?? []];
         } else {
@@ -116,7 +116,11 @@ export default function UpdateCampaign({ setHeading }: IProps) {
         }
         setdisableBtn(false);
         setdisableBtnUpdate(true);
+      } else {
+        setdisableBtn(true);
+        setdisableBtnUpdate(false);
       }
+
       const campObj:null | any = await editCampaign({
         variables: {
           updateCampaignInput: {
@@ -158,44 +162,46 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     }
 
     if (ins === '2') {
-      if (store?.newCampaign?.productsArray?.length) {
+      if (store?.newCampaign?.productsArray && store?.newCampaign?.productsArray?.length >= 0) {
         setFieldValue('products', store?.newCampaign?.productsArray);
         setFieldValue('collections', store?.newCampaign?.collections);
         setTimeout(handleSubmit, 2000);
+        // handleSubmit();
       }
       if (store?.newCampaign?.addableProductsArray?.length) {
         setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
         setTimeout(handleSubmit, 2000);
+        // handleSubmit();
       }
       setParams({ ins: undefined });
     }
   }, [ins]);
 
-  const handleCustomBg = (field: string, value: string) => {
-    // empty other bg and keep only one
-    if (field === 'customBg') {
-      setFieldValue('imageUrl', '');
-      setFieldValue('youtubeUrl', '');
-      setFieldValue('customColor', '');
-    } else {
-      setFieldValue('customColor', '');
-      setFieldValue('customBg', '');
-    }
+  // const handleCustomBg = (field: string, value: string) => {
+  //   // empty other bg and keep only one
+  //   if (field === 'customBg') {
+  //     setFieldValue('imageUrl', '');
+  //     setFieldValue('youtubeUrl', '');
+  //     setFieldValue('customColor', '');
+  //   } else {
+  //     setFieldValue('customColor', '');
+  //     setFieldValue('customBg', '');
+  //   }
 
-    setFieldValue(field, value);
+  //   setFieldValue(field, value);
 
-    handleSubmit();
-  };
+  //   handleSubmit();
+  // };
 
-  const debouncedSubmit = useDelay(300);
+  // const debouncedSubmit = useDelay(300);
 
-  const handleForm = (field: string, value: string) => {
-    setFieldValue(field, value);
-    handleSubmit();
-  };
-  const handleAddProduct = () => {
-    setParams({ ins: 'addproduct' });
-  };
+  // const handleForm = (field: string, value: string) => {
+  //   setFieldValue(field, value);
+  //   handleSubmit();
+  // };
+  // const handleAddProduct = () => {
+  //   setParams({ ins: 'addproduct' });
+  // };
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);
@@ -205,13 +211,13 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
     handleSubmit();
   };
-  const handleDeleteAddProduct = () => {
-    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
-    setFieldValue('addableProducts', []);
-    const mycamp = updateCampaign(campaignid, 'addableProducts', []);
-    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
-    handleSubmit();
-  };
+  // const handleDeleteAddProduct = () => {
+  //   dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
+  //   setFieldValue('addableProducts', []);
+  //   const mycamp = updateCampaign(campaignid, 'addableProducts', []);
+  //   dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
+  //   handleSubmit();
+  // };
 
   const handleAfterUpdate = () => {
     setdisableBtn(true);
