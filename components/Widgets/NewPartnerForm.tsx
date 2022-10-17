@@ -181,7 +181,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                 </Col>
                 <Col xl={6} lg={6} md={6}>
                   <Row>
-                    <Col xl={5} lg={5} md={5}>
+                    <Col>
                       {loadingSubmit ? <Spinner animation="border" /> : (
                         <Button
                           type="submit"
@@ -189,20 +189,20 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                           className={styles.partner__dark_btn}
                           value={1}
                         >
-                          <Check2Circle className="fs-5" />
+                          <Check2Circle className="fs-5 me-1" />
                           {' '}
                           Add Affiliate
                         </Button>
                       )}
 
                     </Col>
-                    <Col xl={5} lg={5} md={5}>
+                    <Col>
                       <Button
                         variant="outline-dark"
                         className={styles.partner__dark_btn}
                         value={0}
                       >
-                        <BoxArrowUp className="fs-5" />
+                        <BoxArrowUp className="fs-5 me-1" />
                         {' '}
                         Bulk Upload
                       </Button>
