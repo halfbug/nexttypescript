@@ -9,7 +9,13 @@ import B1 from 'assets/images/GS-1.png';
 import B2 from 'assets/images/GS-2.png';
 import B3 from 'assets/images/GS-3.png';
 import B4 from 'assets/images/GS-4.png';
+import Classic1 from 'assets/images/BannerLight.svg';
+import Classic2 from 'assets/images/BannerDark.svg';
+import Classic3 from 'assets/images/BannerCustom.svg';
+
 import BannerComponent from './BannerComponent';
+
+// import Classic2 from 'assets/images/BannerDark.png';
 
 export interface BannerDesignProps {
   values: any;
@@ -187,7 +193,8 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B2} />
+                {/* <BannerComponent image={Classic1} /> */}
+                <Classic1 />
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -201,14 +208,15 @@ export default function BannerDesign(
               name="bnr"
               checked={values?.settings?.layout?.bannerDesign === '102'}
               onChange={(e) => {
-                handleFields('settings.layout.bannerDesign', e.currentTarget.value);
+                handleFields('', e.currentTarget.value);
               }}
               value="102"
               className={styles.layout__checkbox__input}
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B3} />
+                <Classic2 />
+
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -229,7 +237,7 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B1} />
+                <Classic3 />
               </div>
             </Form.Check.Label>
           </Form.Check>
