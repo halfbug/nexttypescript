@@ -1,4 +1,6 @@
-import { useCallback, useContext, useState } from 'react';
+import {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -213,6 +215,113 @@ export default function useDeal() {
     return total.toFixed(2);
   }, [gsctx]);
 
+  const calculation = (memberIndex: number, amount: number, self: any) => {
+    if (memberIndex === 0) {
+      return { discount: 0, cashback: [0] };
+    }
+    if (memberIndex === 1) {
+      // MILESTONE 1 UNLOCKED
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const count = (amount * milestone1Value) / 100;
+      self[0].cashbackAmount.cashback.push((self[0].purchaseCount * milestone1Value) / 100);
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex === 2) {
+      // MILESTONE 1 COMPLETE
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const count = (amount * milestone1Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex === 3) {
+      // MILESTONE 2 UNLOCKED
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
+      self[0].cashbackAmount.cashback.push(
+        (self[0].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+      );
+      self[1].cashbackAmount.cashback.push(
+        (self[1].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+      );
+      self[2].cashbackAmount.cashback.push(
+        (self[2].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+      );
+      const count = (amount * milestone2Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex === 4) {
+      // MILESTONE 2 COMPLETE
+      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
+      const count = (amount * milestone2Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex === 5) {
+      // MILESTONE 3 UNLOCKED
+      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
+      const milestone3Value : number = parseInt(gsctx.milestones[2].discount, 10);
+      self[1].cashbackAmount.cashback.push(
+        (self[1].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+      );
+      self[2].cashbackAmount.cashback.push(
+        (self[2].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+      );
+      self[3].cashbackAmount.cashback.push(
+        (self[3].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+      );
+      self[4].cashbackAmount.cashback.push(
+        (self[4].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+      );
+      self[0].cashbackAmount.cashback.push(
+        (self[0].purchaseCount * (50 - milestone2Value)) / 100,
+      );
+      const count = (amount * milestone2Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex >= 6 && memberIndex <= 8) {
+      // MILESTONE 3 COMPLETE
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const count = (amount * milestone1Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex === 9) {
+      const count = (amount * 40) / 100;
+      self[0].cashbackAmount.cashback.push(
+        (self[0].purchaseCount * (40)) / 100,
+      );
+      return { discount: count, cashback: [0] };
+    }
+    if (memberIndex > 9) {
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const count = (amount * milestone1Value) / 100;
+      return { discount: count, cashback: [0] };
+    }
+
+    return [];
+  };
+
+  const cashback = () => {
+    if (gsctx.members.length) {
+      const spent:any[] = [];
+      gsctx.members.map((ele, i) => {
+        const d = ele.lineItems
+          ?.map((item:any) => +item.price * item.quantity)
+          ?.reduce((total: any, curr: any) => total + curr, 0);
+        spent.push({
+          member: i,
+          purchaseCount: d,
+          cashbackAmount: calculation(i, d, spent),
+        });
+        return false;
+      });
+      // console.log('🎈', spent);
+      const totalCashbackAmount = spent.map((ele) => (
+        ele.cashbackAmount.discount
+        + ele.cashbackAmount.cashback.reduce((total: number, curr:number) => total + curr, 0)
+      )).reduce((total: number, curr:number) => total + curr, 0).toFixed(2);
+      return totalCashbackAmount;
+    }
+    return 0;
+  };
+
   const unLockCB = useCallback((discountVal, milestones, members) => {
     let cb = 0;
     setallDiscount(getDiscounts());
@@ -374,5 +483,6 @@ export default function useDeal() {
     socialText,
     nativeShareText,
     leftOverProducts,
+    cashback,
   };
 }

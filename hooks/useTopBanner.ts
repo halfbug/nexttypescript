@@ -7,13 +7,20 @@ const useTopBanner = () => {
   const [cashBackText, setCashBackText] = useState('');
   const [text, setText] = useState('');
   const [cashbackVal, setCashBackVal] = useState<undefined | string>(undefined);
-  const { unLockCB, currencySymbol, isInfluencerGS } = useDeal();
+  const {
+    unLockCB, currencySymbol, isInfluencerGS, cashback,
+  } = useDeal();
   const { gsctx, dispatch } = useContext(GroupshopContext);
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
   useEffect(() => {
-    if (percentage) setCashBackVal(unLockCB(percentage, milestones, members).toFixed(2).toString().replace('.00', ''));
+    // if (percentage)
+    // setCashBackVal(
+    // unLockCB(percentage, milestones, members).toFixed(2).toString().replace('.00', '')
+    // );
+    // else setCashBackVal('...');
+    if (percentage) setCashBackVal(cashback().toString().replace('.00', ''));
     else setCashBackVal('...');
   }, [gsctx]);
 
