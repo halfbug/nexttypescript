@@ -34,12 +34,12 @@ const useOwnerOnboarding = () => {
   }, [modelStep]);
 
   useEffect(() => {
-    if (stepNumber && (+stepNumber! >= 0 || +stepNumber! < 1) && modelStep < 1) {
+    if ((parseInt(stepNumber!, 10) === 0 && modelStep < 1)) {
       setStep(stepNumber!);
     } else {
       setStep('');
     }
-  }, [stepNumber]);
+  }, [stepNumber, modelStep]);
 
   const countTotalDiscount = () => {
     let totalDiscount = 0;
