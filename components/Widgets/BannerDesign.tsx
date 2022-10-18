@@ -9,11 +9,11 @@ import B1 from 'assets/images/GS-1.png';
 import B2 from 'assets/images/GS-2.png';
 import B3 from 'assets/images/GS-3.png';
 import B4 from 'assets/images/GS-4.png';
-import Classic1 from 'assets/images/BannerLight.svg';
-import Classic2 from 'assets/images/BannerDark.svg';
-import Classic3 from 'assets/images/BannerCustom.svg';
 
 import BannerComponent from './BannerComponent';
+import ClassicBanner from './ClassicBanner';
+import ClassicBannerBlack from './ClassicBannerBlack';
+import ClassicCustomBanner from './ClassicCustomBanner';
 
 // import Classic2 from 'assets/images/BannerDark.png';
 
@@ -194,7 +194,7 @@ export default function BannerDesign(
             <Form.Check.Label>
               <div className="mx-2">
                 {/* <BannerComponent image={Classic1} /> */}
-                <Classic1 />
+                <ClassicBanner />
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -215,7 +215,7 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <Classic2 />
+                <ClassicBannerBlack />
 
               </div>
             </Form.Check.Label>
@@ -237,7 +237,7 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <Classic3 />
+                <ClassicCustomBanner />
               </div>
             </Form.Check.Label>
           </Form.Check>

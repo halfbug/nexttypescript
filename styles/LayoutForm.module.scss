@@ -270,8 +270,28 @@
 }
 &_BannerBox{
     margin-left: 10px;
-    background: $white;
+    // background: $white;
     box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
+}
+&_CustomBanner{
+    @extend .my-1, .p-1, .rounded;
+    background: #D3DEDC;
+}
+&_ClassicBannerText{
+    @extend .pt-2;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    color: $black;
+}
+&_ClassicBannerTextWhite{
+    @extend .pt-2;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    color: $white;
 }
 }
