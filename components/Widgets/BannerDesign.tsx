@@ -269,7 +269,7 @@ export default function BannerDesign(
             defaultValue="#D3DEDC"
             title="Choose your color"
           /> */}
-          <div className="row mx-3">
+          <div className="row mx-3 col-8">
             <Form.Group className="row mx-3">
               <span className={[styles.ob_settings__bannerCustomColor, 'w-50 d-flex align-items-center  border border-2 rounded-3 pe-0'].join(' ')}>
                 <Form.Label htmlFor="bannerCustomColor" className="text-nowrap mb-0  pt-0  form-label form-labelGS">Custom Color</Form.Label>
@@ -284,7 +284,7 @@ export default function BannerDesign(
                   // defaultValue="#D3DEDC"
                   defaultValue={customColor}
                   title="Choose your color"
-                  className="ms-4 w-100 border-dark p-0 m-0 rounded-end pe-0 onboarding onboarding-color"
+                  className="ms-3 w-100 border-dark p-0 m-0 rounded-end pe-0"
                   bsPrefix="onboarding"
                   value={values?.settings?.layout?.bannerCustomColor}
                 />
