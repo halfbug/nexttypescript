@@ -242,11 +242,11 @@ export default function BannerDesign(
             </Form.Check.Label>
           </Form.Check>
 
-          <Form.Check
+          {/* <Form.Check
             className="p-2 d-flex align-items-center"
             type="radio"
-          >
-            <Form.Check.Input
+          > */}
+          {/* <Form.Check.Input
               type="radio"
               name="bnr"
               checked={values?.settings?.layout?.bannerDesign === '104'}
@@ -255,37 +255,46 @@ export default function BannerDesign(
               }}
               value="104"
               className={styles.layout__checkbox__input}
-            />
-            <Form.Check.Label>
-              <div className=" mx-2">
-                Custom Color
-              </div>
-            </Form.Check.Label>
-          </Form.Check>
-
-          <Form.Group className="d-flex ">
-            <span className={styles.ob_settings__bannerCustomColor}>
-              <Form.Label htmlFor="bannerCustomColor" className="m-0 py-1 px-3 pe-5">Click to pick</Form.Label>
-              <Form.Control
-                onChange={(e) => {
-                  handleForm('settings.layout.bannerCustomColor', e.currentTarget.value);
-                }}
-                type="color"
-                name="bannerCustomColor"
-                id="bannerCustomColor"
-                isInvalid={touched?.bannerCustomColor && !!errors?.bannerCustomColor}
-                defaultValue={customColor}
-                title="Choose your color"
-                className="p-0 m-0 rounded-end"
-                bsPrefix="onboarding"
-                value={values?.settings?.layout?.bannerCustomColor}
-              />
-            </span>
-            {' '}
-            <Form.Control.Feedback type="invalid">
-              {errors?.bannerCustomColor}
-            </Form.Control.Feedback>
-          </Form.Group>
+            /> */}
+          {/* <Form.Check.Label>
+            <div className=" mx-2">
+              Custom Color
+            </div>
+          </Form.Check.Label> */}
+          {/* </Form.Check> */}
+          {/* <Form.Label htmlFor="exampleColorInput">Custom Color</Form.Label>
+          <Form.Control
+            type="color"
+            id="exampleColorInput"
+            defaultValue="#D3DEDC"
+            title="Choose your color"
+          /> */}
+          <div className="row mx-3">
+            <Form.Group className="row mx-3">
+              <span className={[styles.ob_settings__bannerCustomColor, 'w-50 d-flex align-items-center  border border-2 rounded-3 pe-0'].join(' ')}>
+                <Form.Label htmlFor="bannerCustomColor" className="text-nowrap mb-0  pt-0  form-label form-labelGS">Custom Color</Form.Label>
+                <Form.Control
+                  onChange={(e) => {
+                    handleForm('settings.layout.bannerCustomColor', e.currentTarget.value);
+                  }}
+                  type="color"
+                  name="bannerCustomColor"
+                  id="bannerCustomColor"
+                  isInvalid={touched?.bannerCustomColor && !!errors?.bannerCustomColor}
+                  // defaultValue="#D3DEDC"
+                  defaultValue={customColor}
+                  title="Choose your color"
+                  className="ms-4 w-100 border-dark p-0 m-0 rounded-end pe-0 onboarding onboarding-color"
+                  bsPrefix="onboarding"
+                  value={values?.settings?.layout?.bannerCustomColor}
+                />
+              </span>
+              {' '}
+              <Form.Control.Feedback type="invalid">
+                {errors?.bannerCustomColor}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </div>
 
         </Col>
       </Row>
