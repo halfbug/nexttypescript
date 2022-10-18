@@ -130,7 +130,7 @@ export default function DisplayBanner(
           </Row>
         </Col>
         <Col xxl={5} xl={6} lg={8} className="d-flex justify-content-end">
-          <img src={`${bannerName}`} alt="Banner" width="413" height="100%" />
+          <img src={`${bannerName}`} alt="Banner" className="img-fluid" />
         </Col>
       </Row>
     </section>
