@@ -8,6 +8,7 @@ import {
   Row,
 } from 'react-bootstrap';
 import PaymentHistory from 'components/Forms/Dashboard/PaymentHistory';
+import BillingPartnerTools from 'components/Forms/Dashboard/BillingPartnerTools';
 
 const Billing: NextPage = () => (
   <Page headingText="Billing" onLogin={() => {}} onLogout={() => {}} onCreateAccount={() => {}}>
@@ -27,6 +28,7 @@ const Billing: NextPage = () => (
       <BillingPackage />
       <BulbInfo />
       <BillingCalculator />
+      <BillingPartnerTools />
       <PaymentHistory />
     </Row>
   </Page>

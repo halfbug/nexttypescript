@@ -529,6 +529,105 @@
       line-height: 15px;
     }
   }
+
+  &__partnerTools {
+    margin-left: 1px;
+    &__header {
+      margin: 30px 0 10px 0;
+      h3 {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+    &__activeBox{
+      display: grid;
+      grid-template-columns: 5fr 6fr;
+      column-gap: 10px;
+      border: 1px dashed #CCB2F9;
+      border-radius: 23px;
+      align-items: center;
+      padding: 26px 16px;
+      &__leftBox{
+        @extend .text-center, .pe-3;
+        border-right: 1px solid #e5e5e5;
+      }
+      &__rightBox{
+        @extend .ps-3;
+      }
+      &__amount{
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 29px;
+        /* identical to box height */
+        
+        
+        color: #000000;
+        
+      }
+      &__partner{
+        margin-top: 4px;
+        padding: 4px 10px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        /* identical to box height, or 125% */
+        text-align: center;
+        background: #D5FA52;
+        border-radius: 6px;
+      }
+      &__free{
+        margin-top: 16px;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 14px;
+        color: #1D2329;
+        opacity: 0.5;
+
+      }
+      &__activePartner{
+        margin-bottom: 8px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+        color: #000000;
+        span{
+          color: #D5FA52;
+          font-weight: bold;
+        }
+      }
+    }
+    &__tierBox{
+      @extend .p-3, .text-center;
+      width: fit-content;
+      border: 1px dashed #C4C4C4;
+      border-radius: 23px;
+      margin: 24px;
+      h4{
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 14px;
+        color: #1D2329;
+      }
+      &__amount{
+        margin-top: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        /* identical to box height */
+        text-align: center;
+        color: #000000;
+      }
+      &__upto{
+        margin-top: 4px;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 14px;
+        
+        color: #1D2329;
+      }
+    }
+  }
+
   &__paymenthistory {
     margin-left: 1px;
     &__header {
