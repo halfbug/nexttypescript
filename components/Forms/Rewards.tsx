@@ -27,6 +27,11 @@ interface IValues {
   selectedTarget: any;
 }
 
+const initvalz: IValues = {
+  rewards: '',
+  selectedTarget: '',
+};
+
 export default function Rewards() {
   const [, setParams] = useQueryString();
 
@@ -48,10 +53,6 @@ export default function Rewards() {
 
   });
 
-  const initvalz: IValues = {
-    rewards: (salesTarget[3]?.id) ? salesTarget[3]?.id : '',
-    selectedTarget: (salesTarget[3]) ? salesTarget[3] : '',
-  };
   const { newcampaign } = useCampaign();
   console.log({ newcampaign });
 
