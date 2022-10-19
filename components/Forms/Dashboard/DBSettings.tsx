@@ -129,14 +129,14 @@ export default function DBSettings({
         </Row>
         <Row className=" px-1 py-3 pb-4 mx-1">
           <Col lg={12}>
-            <div className="ms-3">
+            <div className="pe-0">
               {/* <h6 className="fs-6 fw-bolder lh-base ">
                 Custom background
                 <span className={styles.badge}>Recommended</span>
                 {' '}
               </h6> */}
               <Row>
-                <Col lg={6} className="d-line-flex text-nowrap align-middle border-end">
+                <Col lg={6} className=" text-nowrap  border-end">
                   <Form.Check
                     inline
                     label="Image"
