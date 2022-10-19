@@ -196,7 +196,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                       )}
 
                     </Col>
-                    <Col>
+                    {/* <Col>
                       <Button
                         variant="outline-dark"
                         className={styles.partner__dark_btn}
@@ -206,7 +206,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                         {' '}
                         Bulk Upload
                       </Button>
-                    </Col>
+                    </Col> */}
                   </Row>
                 </Col>
               </Row>
