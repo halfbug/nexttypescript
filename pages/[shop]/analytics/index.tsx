@@ -25,8 +25,8 @@ const Analytics: NextPage = () => {
   const handleSearch = ((startDate:any, endDate:any) => {
     setStartFrom(startDate);
     setToDate(endDate);
-    // uniqueRefetch();
-    // refetch();
+    uniqueRefetch();
+    refetch();
   });
 
   const {
@@ -101,7 +101,12 @@ const Analytics: NextPage = () => {
             />
           </Col>
           <Col lg={{ span: 4, offset: 1 }} className="p-0">
-            <ViralityMetrics />
+            <ViralityMetrics
+              startDate={startFrom}
+              endDate={toDate}
+              currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+              shop={store.shop}
+            />
           </Col>
         </Row>
         <CustomerData />

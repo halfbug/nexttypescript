@@ -177,7 +177,12 @@ const CampaignAnalytics: NextPage = () => {
             />
           </Col>
           <Col lg={5} className="gx-4">
-            <ViralityMetrics />
+            <ViralityMetrics
+              startDate={startFrom}
+              endDate={toDate}
+              currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+              shop={store.shop}
+            />
           </Col>
         </Row>
         <CustomerData />
