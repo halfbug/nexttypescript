@@ -1,105 +1,88 @@
-import React, {
-  useState, Dispatch, SetStateAction,
-} from 'react';
+import React from 'react';
 import {
   Form, Row, Col, Button,
 } from 'react-bootstrap';
 import useQueryString from 'hooks/useQueryString';
-import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import styles from 'styles/Campaign.module.scss';
 import { GET_SALES_TARGET } from 'store/store.graphql';
 import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import useUtilityFunction from 'hooks/useUtilityFunction';
-import useCampaign from 'hooks/useCampaign';
 
-interface IValues {
-  rewards: string;
-  selectedTarget: any;
-}
 interface IProps {
   handleChange: any;
   values: any;
   setFieldValue: any;
-  // touched?: any;
   errors: any;
-  // campaignInitial: any;
   editMin: boolean;
   editMax: boolean;
   setEditMin: any;
   setEditMax: any;
-  // handleForm: any;
-  setcampaignInitial: Dispatch<SetStateAction<any>>;
 }
 
 export default function DBRewards({
   handleChange, values, setFieldValue, errors, editMax, editMin,
-  setEditMax, setEditMin, setcampaignInitial,
+  setEditMax, setEditMin,
 }: IProps) {
-  const [, setParams] = useQueryString();
-  const { campaign } = useCampaign();
-
-  // const [minDiscount, setMinDiscount] = useState('');
-  // const [maxDiscount, setMaxDiscount] = useState('');
-
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
   } = useQuery(GET_SALES_TARGET);
 
-  const { store, dispatch } = React.useContext(StoreContext);
-  const { multiple5, isMultiple5 } = useUtilityFunction();
+  // const { store, dispatch } = React.useContext(StoreContext);
+  const { multiple5 } = useUtilityFunction();
 
-  React.useEffect(() => {
-    /// initial value display
-    if (salesTarget.length > 0) {
-      setcampaignInitial((prev: any) => {
-        console.log({ prev });
+  const currentPreset = () => {
+    // setting current preset on change in minDiscount value
+    const minDiscountVal = `${values.minDiscount}%`;
+    const maxDiscountVal = `${values.maxDiscount}%`;
+    const lowBaseline = parseInt(salesTarget[0].rewards[0].discount, 10);
+    const avgBaseline = parseInt(salesTarget[1].rewards[0].discount, 10);
+    const highBaseline = parseInt(salesTarget[2].rewards[0].discount, 10);
+    const superBaseline = parseInt(salesTarget[3].rewards[0].discount, 10);
 
-        return {
-          ...prev,
-          name: values.name,
-          products: store?.newCampaign?.productsArray || [],
-          addableProducts: store?.newCampaign?.addableProductsArray || [],
-          criteria: values.criteria,
-          brandColor: values.brandColor,
-          selectedTarget: values.selectedTarget,
-          rewards: values.selectedTarget?.id,
-          minDiscountVal: values.selectedTarget?.rewards?.[0]?.discount || '',
-          maxDiscountVal: values.selectedTarget?.rewards?.[2]?.discount || '',
-          minDiscount: values.selectedTarget?.rewards?.[0]?.discount
-            ? parseInt(values.selectedTarget?.rewards[0]?.discount, 10) : 0,
-          maxDiscount: values.selectedTarget?.rewards?.[2]?.discount
-            ? parseInt(values.selectedTarget?.rewards[2]?.discount, 10) : 0,
-          isRewardEdit: false,
-        };
-      });
+    if (values.minDiscount! <= lowBaseline) {
+      setFieldValueByPreset(0, minDiscountVal, maxDiscountVal);
+    } else if (values.minDiscount! > lowBaseline
+      && values.minDiscount! <= avgBaseline) {
+      setFieldValueByPreset(1, minDiscountVal, maxDiscountVal);
+    } else if (values.minDiscount! >= highBaseline
+      && values.minDiscount! < superBaseline) {
+      setFieldValueByPreset(2, minDiscountVal, maxDiscountVal);
+    } else if (values.minDiscount! >= superBaseline) {
+      setFieldValueByPreset(3, minDiscountVal, maxDiscountVal);
     }
-  }, [values.selectedTarget]);
-  React.useEffect(() => {
-    /// initial value display
-    if (campaign?.salesTarget) {
-      setcampaignInitial((prev: any) => {
-        console.log({ prev });
-        return {
-          ...prev,
-          name: values.name,
-          products: store?.newCampaign?.productsArray || [],
-          addableProducts: store?.newCampaign?.addableProductsArray || [],
-          criteria: values.criteria,
-          brandColor: values.brandColor,
-          rewards: campaign?.salesTarget?.id,
-          minDiscountVal: campaign?.salesTarget?.rewards?.[0]?.discount || '',
-          maxDiscountVal: campaign?.salesTarget?.rewards?.[2]?.discount || '',
-          selectedTarget: campaign?.salesTarget,
-          minDiscount: campaign?.salesTarget?.rewards?.[0]?.discount
-            ? parseInt(campaign?.salesTarget?.rewards[0]?.discount, 10) : 0,
-          maxDiscount: campaign?.salesTarget?.rewards?.[2]?.discount
-            ? parseInt(campaign?.salesTarget?.rewards[2]?.discount, 10) : 0,
-        };
-      });
-    }
-  }, [campaign?.salesTarget]);
+  };
+
+  const setFieldValueByPreset = (index: number, minDiscountVal: string, maxDiscountVal: string) => {
+    const newAverage = multiple5((+values.minDiscount! + +values.maxDiscount!) / 2);
+    setFieldValue('rewards', salesTarget[index].id);
+    setFieldValue('selectedTarget', {
+      ...values.selectedTarget,
+      id: salesTarget[index].id,
+      name: salesTarget[index].name,
+      rogsMin: salesTarget[index]?.rogsMin,
+      rogsMax: salesTarget[index]?.rogsMax,
+      status: salesTarget[index]?.status,
+      rewards: [
+        {
+          ...salesTarget[index].rewards?.[0],
+          ...values.selectedTarget?.rewards?.[0],
+          discount: minDiscountVal,
+        },
+        {
+          ...salesTarget[index].rewards?.[1],
+          ...values.selectedTarget?.rewards?.[1],
+          discount: `${newAverage}%`,
+        },
+        {
+          ...salesTarget[index].rewards?.[2],
+          ...values.selectedTarget?.rewards?.[2],
+          discount: maxDiscountVal,
+        },
+      ],
+    });
+  };
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
@@ -107,12 +90,7 @@ export default function DBRewards({
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  console.log({ values });
-  // console.log({ campaignInitial });
-  // console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
 
-  // const menuItems = ["Easy", "Medium", "Hard"];
-  const [activeButton, setActiveButton] = useState('');
   return (
     <>
       <Row>
@@ -129,7 +107,8 @@ export default function DBRewards({
                 const selectedTarget = starget;
                 setFieldValue('rewards', selectedTarget.id);
                 setFieldValue('selectedTarget', { ...selectedTarget });
-                await setFieldValue('minDiscount', parseInt(selectedTarget.rewards[0].discount, 10));
+                await setFieldValue('minDiscount', parseInt(selectedTarget.rewards?.[0].discount, 10));
+                await setFieldValue('maxDiscount', parseInt(selectedTarget.rewards?.[2].discount, 10));
               }}
             >
               {btns[index].text}
@@ -168,7 +147,7 @@ export default function DBRewards({
             <Button
               variant="link"
               onClick={() => {
-                if (errors.maxDiscount === '' || (errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype)) {
+                if ((errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype) || errors.maxDiscount === '' || (errors && !Object.keys(errors).includes('maxDiscount'))) {
                   setEditMin(true);
                   setEditMax(false);
                 }
@@ -185,21 +164,18 @@ export default function DBRewards({
                 type="text"
                 name="minDiscount"
                 value={values.minDiscount}
-              // value={values.minDiscountVal[values.minDiscountVal.length - 1]
-              // !== '%' ? `${values.minDiscountVal}%` : values.minDiscountVal}
                 onChange={handleChange}
                 className={styles.dbrewards_input}
                 isInvalid={!!errors.minDiscount}
-              // isInvalid={!!errors.minDiscount}
                 placeholder="Enter %"
               />
+
               <Button
                 variant="link"
                 onClick={() => {
                   if (!(errors.minDiscount)) {
                     setEditMin(false);
-                    setFieldValue('isRewardEdit', true);
-                  // handleSubmit();
+                    currentPreset();
                   }
                 }}
               >
@@ -243,9 +219,10 @@ export default function DBRewards({
             <Button
               variant="link"
               onClick={() => {
-                if (errors.minDiscount === '' || (errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype)) {
+                if ((errors && Object.keys(errors).length === 0 && Object.getPrototypeOf(errors) === Object.prototype) || errors.minDiscount === '' || (errors && !Object.keys(errors).includes('minDiscount'))) {
                   setEditMax(true);
                   setEditMin(false);
+                  currentPreset();
                 }
               }}
             >
@@ -270,8 +247,7 @@ export default function DBRewards({
                 onClick={() => {
                   if (!(errors.maxDiscount)) {
                     setEditMax(false);
-                    setFieldValue('isRewardEdit', true);
-                  // handleSubmit();
+                    currentPreset();
                   }
                 }}
               >

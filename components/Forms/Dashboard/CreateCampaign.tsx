@@ -20,7 +20,6 @@ import useQueryString from 'hooks/useQueryString';
 import useCampaign from 'hooks/useCampaign';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import * as constant from 'configs/constant';
-import AddProductButton from 'components/Buttons/AddProductButton';
 import Bulb from 'assets/images/bulb.svg';
 import Star from 'assets/images/star.svg';
 import DBRewards from './DBRewards';
@@ -51,8 +50,6 @@ export default function CreateCampaign() {
     minDiscountVal: '',
     minDiscount: 0,
     maxDiscount: 0,
-    isRewardEdit: false,
-
   });
   const { clearNewCampaign, setValue } = useCampaign();
   React.useEffect(() => {
@@ -62,7 +59,7 @@ export default function CreateCampaign() {
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
   } = useQuery(GET_SALES_TARGET);
-  const { multiple5, isMultiple5 } = useUtilityFunction();
+  const { isMultiple5 } = useUtilityFunction();
 
   const validationSchema = yup.object({
     name: yup
@@ -84,7 +81,6 @@ export default function CreateCampaign() {
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
-            // console.log(context);
             return false;
           }
           return true;
@@ -92,7 +88,6 @@ export default function CreateCampaign() {
       .test('multiple', constant.EDIT_REWARDS_MSG3,
         (val: number | undefined) => {
           if (val && isMultiple5(val)) {
-            console.log('val', val);
             return true;
           }
 
@@ -105,7 +100,6 @@ export default function CreateCampaign() {
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (val - context.parent.minDiscount) < 10) {
-            // console.log(context);
             return false;
           }
           return true;
@@ -132,50 +126,11 @@ export default function CreateCampaign() {
       if (validateForm) validateForm(valz);
       const {
         name, criteria, joinExisting, rewards, selectedTarget, isActive,
-        customBg, addableProducts, minDiscount, maxDiscount, isRewardEdit,
+        customBg, addableProducts,
       } = valz;
-      // let { minDiscountVal, maxDiscountVal } = valz;
-      const minDiscountVal = `${minDiscount}%`;
-      const maxDiscountVal = `${maxDiscount}%`;
-      console.log({ valz });
       let { media } = valz;
       if (customBg) media = '';
       const newSelectedTarget = { ...selectedTarget };
-
-      if (isRewardEdit) {
-        const baseline = minDiscount;
-        const lowBaseline = 10;
-        const avgBaseline = 15;
-        const highBaseline = 20;
-        const superBaseline = 25;
-
-        if (baseline! <= lowBaseline) {
-          newSelectedTarget.name = 'Low';
-          selectedTarget.name = 'Low';
-        } else if (baseline! > lowBaseline && baseline! <= avgBaseline) {
-          newSelectedTarget.name = 'Average';
-          selectedTarget.name = 'Average';
-        } else if (baseline! >= highBaseline && baseline! < superBaseline) {
-          newSelectedTarget.name = 'High';
-          selectedTarget.name = 'High';
-        } else if (baseline! >= superBaseline) {
-          newSelectedTarget.name = 'Super-charged';
-          selectedTarget.name = 'Super-charged';
-        }
-        const newAverage = multiple5((+minDiscount! + +maxDiscount!) / 2);
-        // if (minDiscountVal && minDiscountVal[minDiscountVal.length - 1] !== '%') {
-        //   minDiscountVal = `${minDiscountVal}%`;
-        // }
-        // if (maxDiscountVal && maxDiscountVal[maxDiscountVal.length - 1] !== '%') {
-        //   maxDiscountVal = `${maxDiscountVal}%`;
-        // }
-
-        newSelectedTarget.rewards = [{ ...newSelectedTarget.rewards[0], discount: minDiscountVal },
-          { ...newSelectedTarget.rewards[1], discount: `${newAverage}%` },
-          { ...newSelectedTarget.rewards[2], discount: maxDiscountVal }];
-
-        // console.log({ valz });
-      }
 
       const campObj: null | any = await addCampaign({
         variables: {
@@ -208,6 +163,53 @@ export default function CreateCampaign() {
   });
 
   React.useEffect(() => {
+    /// initial value display
+
+    if (salesTarget.length > 0 && values.selectedTarget?.rewards !== '') {
+      // on click event in preset
+
+      setcampaignInitial((prev: any) => ({
+        ...prev,
+        name: values.name,
+        products: store?.newCampaign?.productsArray || [],
+        addableProducts: store?.newCampaign?.addableProductsArray || [],
+        criteria: values.criteria,
+        brandColor: values.brandColor,
+        selectedTarget: values.selectedTarget,
+        rewards: values.selectedTarget?.id,
+        minDiscountVal: values.selectedTarget?.rewards?.[0]?.discount || '',
+        maxDiscountVal: values.selectedTarget?.rewards?.[2]?.discount || '',
+        minDiscount: values.selectedTarget?.rewards?.[0]?.discount
+          ? parseInt(values.selectedTarget?.rewards[0]?.discount, 10) : 0,
+        maxDiscount: values.selectedTarget?.rewards?.[2]?.discount
+          ? parseInt(values.selectedTarget?.rewards[2]?.discount, 10) : 0,
+      }));
+    }
+  }, [values.selectedTarget?.rewards]);
+  React.useEffect(() => {
+    // For create campaign initial value
+
+    if (salesTarget.length && values.rewards === '') {
+      setcampaignInitial((prev: any) => ({
+        ...prev,
+        name: values.name,
+        products: store?.newCampaign?.productsArray || [],
+        addableProducts: store?.newCampaign?.addableProductsArray || [],
+        criteria: values.criteria,
+        brandColor: values.brandColor,
+        rewards: salesTarget[0]?.id,
+        minDiscountVal: salesTarget[0]?.rewards?.[0]?.discount || '',
+        maxDiscountVal: salesTarget[0]?.rewards?.[2]?.discount || '',
+        selectedTarget: salesTarget[0],
+        minDiscount: salesTarget[0]?.rewards?.[0]?.discount
+          ? parseInt(salesTarget[0]?.rewards[0]?.discount, 10) : 0,
+        maxDiscount: salesTarget[0]?.rewards?.[2]?.discount
+          ? parseInt(salesTarget[0]?.rewards[2]?.discount, 10) : 0,
+      }));
+    }
+  }, [salesTarget]);
+
+  React.useEffect(() => {
     if (ins === '2') {
       if (store?.newCampaign?.productsArray?.length) {
         setFieldValue('products', store?.newCampaign?.productsArray);
@@ -220,35 +222,13 @@ export default function CreateCampaign() {
     }
   }, [ins]);
 
-  const handleCustomBg = (field: string, value: string) => {
-    if (field === 'customBg') {
-      setFieldValue('imageUrl', '');
-      setFieldValue('youtubeUrl', '');
-      setFieldValue('customColor', '');
-    } else {
-      setFieldValue('customColor', '');
-      setFieldValue('customBg', '');
-    }
-
-    setFieldValue(field, value);
-  };
-  const handleForm = (field: string, value: string) => {
-    setFieldValue(field, value);
-  };
-  const handleAddProduct = () => {
-    setParams({ ins: 'addproduct' });
-  };
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);
   };
-  const handleDeleteAddProduct = () => {
-    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { addableProducts: [], addableCollections: [], addableProductsArray: [] } } });
-    setFieldValue('addableProducts', []);
-  };
 
   const handleAfterUpdate = () => {
-    console.log('create');
+    // console.log('create');
   };
 
   return (
@@ -397,36 +377,6 @@ export default function CreateCampaign() {
                     disableBtn={disableBtn}
                     handleDelete={handleDeleteProduct}
                   />
-                  {/* <Row className="mt-4 border-top">
-                    <Col>
-                      <h4 className="mt-3">
-                        Allow customers to add products from your store
-                        {' '}
-                        <ToolTip
-                          className={styles.dashboard_campaign__pop}
-                          icon={<InfoCircle size={13} />}
-                          popContent="You choose which products your customers will earn
-                        cashback and discounts on. Use this feature to select which
-                         additional products
-                        customers can add from your store to personalize their Groupshop."
-                        />
-                      </h4>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <p>
-                      Select the products that customers can add to
-                      personalize their Groupshop
-                    </p>
-                  </Row>
-                  <Row className="text-start">
-                    <Col>
-                      <AddProductButton
-                        handleDelete={handleDeleteAddProduct}
-                      />
-
-                    </Col>
-                  </Row> */}
                 </section>
 
                 <section className={styles.dashboard_campaign__box_2}>
@@ -519,7 +469,6 @@ export default function CreateCampaign() {
                 handleChange={handleChange}
                 errors={errors}
                 setFieldValue={setFieldValue}
-                setcampaignInitial={setcampaignInitial}
                 editMax={editMax}
                 editMin={editMin}
                 setEditMax={setEditMax}

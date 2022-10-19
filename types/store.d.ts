@@ -72,7 +72,6 @@ export interface ICampaignForm {
   minDiscountVal?: string;
   minDiscount?: number;
   maxDiscount?: number;
-  isRewardEdit?: boolean;
   socialLinks?: ISocialLink;
 
 }
