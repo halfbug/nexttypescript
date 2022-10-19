@@ -709,12 +709,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     padding: 20px;
     min-width: 0px !important;
     margin-top: 10px !important;
+    max-height: 263px;
+    overflow :auto;
+    z-index :1;
   }
 
   &_dropdownItem {
     padding-top: 10px;
     margin-top: 10px;
-    border-top: 1px solid $lightBorder;
+    //border-top: 1px solid $lightBorder;
     &:first-child {
       padding-top: 0px;
       margin-top: 0px;
