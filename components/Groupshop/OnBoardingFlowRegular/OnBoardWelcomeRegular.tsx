@@ -29,7 +29,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   } = useCode();
 
   const {
-    nativeShareText, gsShortURL,
+    nativeShareText, gsShortURL, currencySymbol,
   } = useDeal();
   // console.log('nativeShareText ===', nativeShareText);
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -165,7 +165,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               >
                 That’s&nbsp;
                 <strong>
-                  $
+                  {currencySymbol}
                   {Number.isInteger(countTotalDiscount())
                     ? countTotalDiscount() : countTotalDiscount().toFixed(2)}
                 </strong>
