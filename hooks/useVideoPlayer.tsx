@@ -50,14 +50,10 @@ const useVideoPlayer = (videoRef: any) => {
   useEffect(() => {
     if (data?.videos?.length > 0) {
       const temp:any[] = [];
-      data.videos.map((ele:any) => temp.push(ele.type));
+      data.videos.map((ele:any) => ele.status === 'Active' && temp.push(ele.type));
       setSource(temp);
     }
   }, [data]);
-
-  useEffect(() => {
-    console.log('🚀🚀🚀source', source);
-  }, [source]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
