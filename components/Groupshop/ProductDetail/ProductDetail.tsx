@@ -316,16 +316,18 @@ const ProductDetail = ({
                   indicators={false}
                 >
                   {/* {loading && ( */}
-                  <Carousel.Item
-                    className={styles.groupshop_modal_detail_featureImage}
-                  >
-                    <img
-                      className="img-fluid"
-                      src={product?.featuredImage}
-                      alt={`Feature-${Math.random()}`}
-                    />
+                  {product?.featuredImage?.length ? (
+                    <Carousel.Item
+                      className={styles.groupshop_modal_detail_featureImage}
+                    >
+                      <img
+                        className="img-fluid"
+                        src={product?.featuredImage}
+                        alt={`Feature-${Math.random()}`}
+                      />
 
-                  </Carousel.Item>
+                    </Carousel.Item>
+                  ) : ''}
                   {/* // )} */}
                   {data?.productById?.images?.map((img:any, i:number) => (
                     <Carousel.Item>
@@ -338,6 +340,17 @@ const ProductDetail = ({
                       />
                     </Carousel.Item>
 
+                  ))}
+                  {data?.productById?.videos?.map((img:any) => (
+                    <Carousel.Item>
+                      <video
+                        src={img.src}
+                        key={`video_${Math.random()}`}
+                        className={styles.groupshop_modal_detail_featureImage}
+                        muted
+                        autoPlay
+                      />
+                    </Carousel.Item>
                   ))}
                 </Carousel>
                 {data?.productById?.images.length > 1
@@ -365,6 +378,33 @@ const ProductDetail = ({
                             </button>
                           </>
                         ))}
+                        {
+                          data.productById?.videos.map((ele:any, i:number) => (
+                            <>
+
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  handleSelect((data?.productById?.images.length + i + 1), e);
+                                }}
+                                className={i === index
+                                  ? styles.groupshop_modal_detail_button_selected
+                                  : styles.groupshop_modal_detail_button}
+                                key={ele.id}
+                              >
+
+                                <video
+                                  src={ele.src}
+                                  onClick={(e) => handleSelect((i + 1), e)}
+                                  className={styles.groupshop_modal_detail_thumbnail}
+                                  autoPlay
+                                  muted
+                                  loop
+                                />
+                              </button>
+                            </>
+                          ))
+                        }
                       </div>
                     </Scrollable>
                   </Row>

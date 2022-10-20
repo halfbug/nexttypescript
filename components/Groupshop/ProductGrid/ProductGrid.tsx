@@ -128,6 +128,7 @@ const ProductGrid = ({
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
                 <ProductCard
                   isrc={prod.featuredImage}
+                  vsrc={prod.featuredVideo}
                   // onClick={() => handleDetail(prod)}
                   imgOverlay={(
                     <>

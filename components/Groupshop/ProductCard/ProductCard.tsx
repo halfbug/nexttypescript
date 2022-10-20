@@ -9,11 +9,12 @@ import { RootProps } from 'types/store';
 type IProductCardProps = {
   imgOverlay : React.ReactNode;
   isrc: string;
+  vsrc?: string;
   type?: 'small' | 'large';
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, children, type, imgOverlay, pending, onClick, ...rest
+  isrc, vsrc, children, type, imgOverlay, pending, onClick, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
@@ -21,6 +22,9 @@ const ProductCard = ({
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
           <div className={styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
+            {
+            !isrc && <video src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
+            }
             <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
               {imgOverlay}
             </Card.ImgOverlay>
@@ -38,7 +42,10 @@ const ProductCard = ({
           <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
-          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
+          {
+           isrc ? <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
+             : <video src={vsrc} muted autoPlay loop />
+          }
           <Card.Body>
             {children}
           </Card.Body>
@@ -48,7 +55,10 @@ const ProductCard = ({
     default:
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
-          <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+          {
+           isrc ? <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
+             : <video src={vsrc} muted autoPlay loop />
+          }
           <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay}>
             {imgOverlay}
           </Card.ImgOverlay>
@@ -62,6 +72,7 @@ const ProductCard = ({
 
 ProductCard.defaultProps = {
   type: 'large',
+  vsrc: undefined,
 };
 
 export default ProductCard;

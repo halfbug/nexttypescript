@@ -159,6 +159,7 @@ export interface IProduct {
   id: string,
   title: string;
   featuredImage: string;
+  featuredVideo?: string;
   price: string;
   currencyCode?: string;
   description?: string;

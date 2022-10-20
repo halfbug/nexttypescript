@@ -424,6 +424,7 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
+      featuredVideo
       description
       purchaseCount
       price
@@ -450,6 +451,7 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
+      featuredVideo
       description
       purchaseCount
       price
@@ -525,6 +527,7 @@ query Groupshop($code: String!, $status: String = "") {
         id
         title
         featuredImage
+        featuredVideo
         description
         price
         outofstock
@@ -574,6 +577,7 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
+    featuredVideo
     description
     purchaseCount
     price
@@ -597,6 +601,7 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
+    featuredVideo
     description
     price
     currencyCode
@@ -807,6 +812,10 @@ const GET_PRODUCT_DETAIL = gql`
     purchaseCount
     outofstock
     images{
+      id
+      src
+    }
+    videos{
       id
       src
     }
