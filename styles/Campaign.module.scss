@@ -314,7 +314,7 @@
 
 .low_btn {
     @include button-variant($low, $low);
-    @extend .me-1, .px-1, .py-1, .lh-sm, .text-center;
+    @extend .me-1, .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 66px;
@@ -337,7 +337,7 @@
 }
 .avg_btn {
     @include button-variant($average, $average);
-    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-center;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 75px;
@@ -361,7 +361,7 @@
 
 .high_btn {
     @include button-variant($btnhigh, $btnhigh);
-    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-center;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .text-end;
     color: $white;
     opacity: 50%;
     width: 75px;
@@ -385,7 +385,7 @@
 
 .super_btn {
     @include button-variant($supercharged, $supercharged);
-    @extend .mx-1, .px-1, .py-1, .lh-sm, .my-2, .text-center;
+    @extend .mx-1, .px-1, .py-1, .lh-sm, .my-2, .text-end;
     color: $white;
     opacity: 50%;
     width: 100px;
