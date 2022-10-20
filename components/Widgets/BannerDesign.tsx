@@ -237,7 +237,7 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <ClassicCustomBanner />
+                <ClassicCustomBanner color={values?.settings?.layout?.bannerCustomColor} />
               </div>
             </Form.Check.Label>
           </Form.Check>

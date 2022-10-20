@@ -80,7 +80,7 @@ function manipulateUI(div, logoBG, APIResponse) {
   }
 
   if (APIResponse.settings.layout.bannerStyle === '1') {
-    if (APIResponse.settings.layout.bannerDesign === '104') {
+    if (APIResponse.settings.layout.bannerDesign === '103') {
       div.style.setProperty('--bg', APIResponse.settings.layout.bannerCustomColor);
     } else if (APIResponse.settings.layout.bannerDesign === '102') {
       div.style.setProperty('--bg', APIResponse.settings.layout.bannerColor);

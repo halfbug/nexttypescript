@@ -9,12 +9,11 @@ export interface BannerProps {
   image: any
 }
 
-export default function ClassicCustomBanner(
-) {
+export default function ClassicCustomBanner({ color }:any) {
   return (
 
     <section className={[styles.layout_BannerBox, ''].join(' ')}>
-      <div className={styles.layout_CustomBanner}>
+      <div className={styles.layout_CustomBanner} style={{ backgroundColor: color }}>
         <Row className=" d-flex flex-row mx-0 d-flex align-items-center align-self-center">
 
           <div className="">
