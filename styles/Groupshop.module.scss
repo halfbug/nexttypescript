@@ -982,7 +982,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         @include media-breakpoint-down(md) {
           font-size: 10px !important;
         }
-        z-index: 8;
+        //z-index: 8;
       }
       &_priceMobile {
         @extend .groupshop__pcard_tag;
