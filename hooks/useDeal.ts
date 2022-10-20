@@ -273,7 +273,7 @@ export default function useDeal() {
       self[0].cashbackAmount.cashback.push(
         (self[0].purchaseCount * (50 - milestone2Value)) / 100,
       );
-      const count = (amount * milestone2Value) / 100;
+      const count = (amount * milestone3Value) / 100;
       return { discount: count, cashback: [0] };
     }
     if (memberIndex >= 6 && memberIndex <= 8) {
@@ -283,7 +283,8 @@ export default function useDeal() {
       return { discount: count, cashback: [0] };
     }
     if (memberIndex === 9) {
-      const count = (amount * 40) / 100;
+      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
+      const count = (amount * milestone1Value) / 100;
       self[0].cashbackAmount.cashback.push(
         (self[0].purchaseCount * (40)) / 100,
       );
