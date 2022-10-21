@@ -409,26 +409,25 @@
 
 .enablebtn {
     @extend .rounded-3, .me-2;
-    width: 96px;
     &:hover {
-        color: $white;
+        @extend .rounded-3, .me-2;
         opacity: 100%;
-        border-color: $black;
+        border-color: $black!important;
     }
     &:active,
     &:focus,
     &_dark {
-        color: $white;
-        opacity: 100%;
-        border-color: $black;
+        @extend .rounded-3, .me-2;
+        color: $white!important;
+        border-color: $btnhigh!important;
         background-color: $btnhigh;
     }
 }
 
 .disablebtn {
     @extend .rounded-3;
-    width: 96px;
     &:hover {
+        @extend .rounded-3;
         color: $black;
         opacity: 100%;
         border-color: $black;
@@ -436,6 +435,7 @@
     &:active,
     &:focus,
     &_dark {
+        @extend .rounded-3;
         color: $black;
         opacity: 100%;
         border-color: $black;
