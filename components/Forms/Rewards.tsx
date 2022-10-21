@@ -1,11 +1,6 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-param-reassign */
-/* eslint-disable dot-notation */
-/* eslint-disable quotes */
-/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import {
-  Form, Row, Col, ButtonGroup, ToggleButton, Button as MyButton,
+  Form, Row, Col, Button as MyButton,
 } from 'react-bootstrap';
 import Button from 'components/Buttons/Button/Button';
 import useQueryString from 'hooks/useQueryString';
@@ -19,7 +14,7 @@ import Placeholder from 'react-bootstrap/Placeholder';
 import { GET_SALES_TARGET, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import Star from 'assets/images/star.svg';
-import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
+import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 interface IValues {
@@ -43,7 +38,6 @@ export default function Rewards() {
   } = useQuery(GET_SALES_TARGET);
 
   const [addReward] = useMutation<ICampaign>(UPDATE_CAMPAIGN);
-  // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
 
   const validationSchema = yup.object({
@@ -54,7 +48,6 @@ export default function Rewards() {
   });
 
   const { newcampaign } = useCampaign();
-  console.log({ newcampaign });
 
   useEffect(() => {
     if (salesTarget.length > 0) {
@@ -68,8 +61,6 @@ export default function Rewards() {
     }
   }, [salesTarget]);
   useEffect(() => {
-    console.log({ initvalz });
-
     /// initial value display
     if (newcampaign?.selectedTarget) {
       initvalz.rewards = newcampaign?.selectedTarget.id;
@@ -81,7 +72,6 @@ export default function Rewards() {
       }
     }
   }, [newcampaign]);
-  console.log({ initvalz });
 
   const {
     handleSubmit, values, setFieldValue,
@@ -115,7 +105,6 @@ export default function Rewards() {
 
   useEffect(() => {
     if (values.selectedTarget !== '') {
-      console.log(values.selectedTarget.name);
       setMinDiscount(values.selectedTarget?.rewards[0].discount);
       setMaxDiscount(values.selectedTarget?.rewards[2].discount);
     }
@@ -153,7 +142,6 @@ export default function Rewards() {
       </section>
     );
   }
-  const bars = [45, 77, 102, 125];
 
   const btns = [
     { text: 'Low', light: styles.low_btn, dark: styles.low_btn_dark },
@@ -161,9 +149,6 @@ export default function Rewards() {
     { text: 'High', light: styles.high_btn, dark: styles.high_btn_dark },
     { text: 'SuperCharged', light: styles.super_btn, dark: styles.super_btn_dark },
   ];
-  // const Icon = (idx: number, imgidex: number) => (idx === imgidex ? 'd-block' : 'd-none');
-
-  console.log({ values });
 
   return (
     <section className={styles.rewards}>
@@ -194,7 +179,8 @@ export default function Rewards() {
                 key={starget.id}
                 id={starget.id}
                 variant="none"
-                className={(newcampaign?.selectedTarget?.name === starget.name) ? btns[index].dark : btns[index].light}
+                className={(values?.selectedTarget?.name === starget.name)
+                  ? btns[index].dark : btns[index].light}
                 onClick={(e) => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);
@@ -217,7 +203,8 @@ export default function Rewards() {
                 icon={<InfoCircle size={10} />}
                 popContent={(
                   <p>
-                    This is the first discount tier and  the ongoing commission your customer earns on new orders after
+                    This is the first discount tier and  the ongoing commission your
+                    customer earns on new orders after
                     they have received all their cashback. Learn more about how rewards work
                     {' '}
                     <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
@@ -239,7 +226,8 @@ export default function Rewards() {
                 popContent={(
                   <p>
                     This is the maximum discount and cashback that
-                    you are willing to give per conversion. We won’t offer the maximum discount unless your customer’s Groupshop is performing really well.
+                    you are willing to give per conversion. We won’t offer the maximum discount
+                    unless your customer’s Groupshop is performing really well.
                     Think of this as an ‘up to X% off’. Learn more about how rewards work
                     {' '}
                     <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
@@ -266,7 +254,9 @@ export default function Rewards() {
         </Row>
         <Row className="mt-5">
           <Col xs={4}>
-            <Button className={styles.rewards_btn_pre} onClick={() => setParams({ ins: 2 })}>Previous</Button>
+            <Button className={styles.rewards_btn_pre} onClick={() => setParams({ ins: 2 })}>
+              Previous
+            </Button>
           </Col>
           <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
             <span className="text-muted">3/4</span>
