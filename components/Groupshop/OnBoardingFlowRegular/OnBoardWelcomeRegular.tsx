@@ -75,7 +75,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        backdrop="static"
+        // backdrop="static"
         dialogClassName={styles.welcome__modal}
         contentClassName={styles.welcome__modal__content}
       >
