@@ -135,8 +135,9 @@ const ProductDetail = ({
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
+      const { productById } = data;
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
-      if (product?.outofstock) setoutofStock(true);
+      if (productById?.outofstock) setoutofStock(true);
       else if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
@@ -144,7 +145,7 @@ const ProductDetail = ({
       setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
     }
     // console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
-  }, [selOptions]);
+  }, [selOptions, data]);
 
   const addToCart = () => {
     const { productById: dproduct } = data;
