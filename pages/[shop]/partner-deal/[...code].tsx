@@ -175,7 +175,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   } = gsctx;
   console.log('🚀 ~ file: [...code].tsx ~ line 183 ~ popularProducts', popularProducts);
   const { topPicks } = useTopPicks();
-  const { popularShuffled } = usePopularInfluencer(popularProducts);
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
   } = useUtilityFunction();
@@ -213,6 +212,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     }
   }, [popularProducts, topPicks]);
 
+  const { popularShuffled } = usePopularInfluencer(newPopularPrd);
+
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {
       setshowCart(true);
@@ -237,9 +238,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
   } = useDetail(allProducts);
-  // console.log('🚀[...code].tsx popularProduct', popularProducts);
-  // console.log('🚀[...code].tsx popularShuffled', popularShuffled);
-  // console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
+  console.log('🚀[...code].tsx popularProduct', popularProducts);
+  console.log('🚀[...code].tsx popularShuffled', popularShuffled);
+  console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
   // console.log('🚀[...code].tsx added', addedProductsByInfluencer);
   // console.log('🚀 ~ file: [...code].tsx ~ line 112 ~ partnerMembers', partnerMembers);
 
