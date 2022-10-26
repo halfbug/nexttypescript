@@ -485,5 +485,6 @@ export default function useDeal() {
     nativeShareText,
     leftOverProducts,
     cashback,
+    addedByInfluencer,
   };
 }

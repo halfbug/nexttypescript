@@ -258,10 +258,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     } else showError('Groupshop is full you can not add more products to it');
   };
 
-  // if (error) {
-  //   Router.push('/404');
-  //   return <p>groupshop not found</p>;
-  // }
+  if (error) {
+    Router.push('/404');
+    return <p>groupshop not found</p>;
+  }
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
