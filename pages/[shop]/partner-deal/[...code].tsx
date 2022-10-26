@@ -184,7 +184,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     );
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
-  }, [gsctx, gsctx.addedProducts]);
+  }, [gsctx]);
 
   useEffect(() => {
     if (dealProducts && dealProducts.length < 1 && showps === false) {

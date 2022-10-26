@@ -91,7 +91,7 @@ const ProductGrid = ({
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
-    leftOverProducts, addedByInfluencer,
+    leftOverProducts, addedByInfluencer, addedByRefferal,
   } = useDeal();
   console.log('🚀 ~ file: ProductGrid.tsx ~ line 96 ~ addedByInfluencer', addedByInfluencer);
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
@@ -162,7 +162,9 @@ const ProductGrid = ({
                           {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                         </div>
-                        {[...addedProducts ?? [], ...addedByInfluencer ?? []]?.filter(
+                        {[...addedProducts ?? [],
+                          ...addedByInfluencer ?? [],
+                          ...addedByRefferal ?? []]?.filter(
                           ({ productId }) => productId === prod.id,
                         ).map((
                           { addedBy, productId },
