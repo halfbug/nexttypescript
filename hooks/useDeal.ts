@@ -318,7 +318,11 @@ export default function useDeal() {
         ele.cashbackAmount.discount
         + ele.cashbackAmount.cashback.reduce((total: number, curr:number) => total + curr, 0)
       )).reduce((total: number, curr:number) => total + curr, 0).toFixed(2);
-      return totalCashbackAmount;
+      // if only owner exist then orderamount milestone1 % else do all the total cashback
+      const tota = gsctx.members.length === 1 ? getBannerTotalCashBackByOrder(
+        parseInt(gsctx.milestones[0].discount, 10),
+      ) : totalCashbackAmount;
+      return tota;
     }
     return 0;
   };
