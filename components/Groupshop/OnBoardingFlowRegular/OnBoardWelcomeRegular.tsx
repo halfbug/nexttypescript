@@ -29,7 +29,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   } = useCode();
 
   const {
-    nativeShareText, gsShortURL, currencySymbol,
+    nativeShareText, gsShortURL, currencySymbol, getOwnerFirstName,
   } = useDeal();
   // console.log('nativeShareText ===', nativeShareText);
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -97,7 +97,10 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
           </div>
           <h2 className={[styles.welcome__modal__body__welcomeTxt, 'd-lg-block d-none'].join(' ')}>
-            Welcome to Groupshop!
+            Welcome
+            {' '}
+            {getOwnerFirstName()}
+            !
           </h2>
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
             New to Groupshop?
