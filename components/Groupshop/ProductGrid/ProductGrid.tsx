@@ -98,11 +98,11 @@ const ProductGrid = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ pageSize', pageSize);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ renderItems', renderItems);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ fillerz', fillerz);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ skucount', skuCount);
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ leftOverProducts', leftOverProducts()?.length);
+  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ isModalForMobile', isModalForMobile);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ renderItems', renderItems);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ fillerz', fillerz);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ skucount', skuCount);
+  // console.log('🚀 ~ file: ProductGrid.tsx === leftOverProducts', leftOverProducts()?.length);
 
   if (products === undefined || products?.length < 1) {
     // return (<Placeholder as="h1" bg="secondary" className="w-100" />);
@@ -181,7 +181,8 @@ const ProductGrid = ({
                               {`${addedBy}'s favs`}
                             </span>
                           ) : '';
-                          htmldata = isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                          htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                          htmldata = isInfluencerGS && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
                           return htmldata;
                         })}
                       </button>

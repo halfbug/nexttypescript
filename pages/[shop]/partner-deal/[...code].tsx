@@ -577,6 +577,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           id="curatedby"
+          isModalForMobile={isModalForMobile}
           skuCount={SKU.length}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
@@ -640,6 +641,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             md={6}
             lg={4}
             xl={3}
+            isModalForMobile={isModalForMobile}
             products={
                 addedProductsByInfluencer
                 && (addedProductsByInfluencer.length > 3
@@ -661,6 +663,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               lg={4}
               xl={3}
             // products={bestSeller ?? []}
+              isModalForMobile={isModalForMobile}
               products={
               addedProductsByInfluencer
               && addedProductsByInfluencer.length > 3
@@ -684,6 +687,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
+          isModalForMobile={isModalForMobile}
           products={uniqueArray(allProducts ?? [])}
           maxrows={3}
           addProducts={handleAddProduct}
