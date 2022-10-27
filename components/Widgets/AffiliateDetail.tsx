@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   Form, Button, Col, Row,
 } from 'react-bootstrap';
@@ -485,12 +486,12 @@ export default function AffiliateDetail({
             </Row>
           </div>
           <hr className={styles.partner__sperator} />
-          <div className={styles.partner__womScoreContainer__ordersFromGS}>
+          {/* <div className={styles.partner__womScoreContainer__ordersFromGS}>
             <div className={styles.partner__overlay}>
               <div className={styles.partner__overlayText}>Coming Soon</div>
             </div>
             <Row className={styles.partner_order}>
-              {/* <OrderFromLogo /> */}
+              <OrderFromLogo />
               🔗 Orders from this Groupshop
             </Row>
             <Row className="mt-3">
@@ -510,7 +511,7 @@ export default function AffiliateDetail({
               </Col>
               <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
             </Row>
-          </div>
+          </div> */}
         </div>
       </Form>
     </div>
