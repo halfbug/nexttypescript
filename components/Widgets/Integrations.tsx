@@ -121,7 +121,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
           </Row>
         </div>
       </section>
-      <section className={styles.marketing__box_1}>
+      {/* <section className={styles.marketing__box_1}>
         <div className={styles.marketing__overlay}>
           <div className={styles.marketing__overlayText}>Coming Soon</div>
         </div>
@@ -135,7 +135,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
             </h4>
             <p>Enhance your Groupshop experience with email and SMS marketing solutions.</p>
             <Accordion defaultActiveKey={activeId}>
-              {/* <Card className={styles.marketing__collapse}>
+              <Card className={styles.marketing__collapse}>
                 <Card.Header className={styles.marketing__collapse__header}>
                   <div>
                     <PrivateKeyIcon />
@@ -187,7 +187,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                     </Row>
                   </Card.Body>
                 </Accordion.Collapse>
-              </Card> */}
+              </Card>
               <Card className={styles.marketing__collapse}>
                 <Card.Header className={styles.marketing__collapse__header}>
                   <div>
@@ -255,7 +255,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
             </Accordion>
           </Col>
         </Row>
-      </section>
+      </section> */}
     </>
   );
 }

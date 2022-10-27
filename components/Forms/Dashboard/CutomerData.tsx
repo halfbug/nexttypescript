@@ -24,7 +24,7 @@ export default function CustomerData() {
           We calculate traffic value using the average CPC in your industry.
         </div>
       </div>
-      <div className={styles.customerData}>
+      {/* <div className={styles.customerData}>
         <div className={styles.customerData__overlay}>
           <div className={styles.customerData__overlayText}>Coming Soon</div>
         </div>
@@ -37,7 +37,7 @@ export default function CustomerData() {
           </Col>
           <Col lg={5} className="gx-5">
             <AnalyticCutomerDetail />
-            {/* <AnalyticOrderDetail /> */}
+            <AnalyticOrderDetail />
           </Col>
         </Row>
         <Row>
@@ -224,7 +224,7 @@ export default function CustomerData() {
             <AnalyticOrderDetail />
           </Col>
         </Row>
-      </div>
+      </div> */}
 
     </>
   );

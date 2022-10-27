@@ -106,7 +106,7 @@ export default function CampaignMetrics({
             <SummaryBox label="Cashback Given" value={cashbackGiven} iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
-        <div className={styles.metrics__box__coming_soon}>
+        {/* <div className={styles.metrics__box__coming_soon}>
           <div className={styles.metrics__box__overlay}>
             <div className={styles.metrics__box__overlayText}>Coming Soon</div>
           </div>
@@ -200,7 +200,7 @@ export default function CampaignMetrics({
               </div>
             </Col>
           </Row>
-        </div>
+        </div> */}
       </div>
     </div>
 

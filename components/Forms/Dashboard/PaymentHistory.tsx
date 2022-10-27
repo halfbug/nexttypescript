@@ -103,7 +103,7 @@ export default function PaymentHistory() {
           ))}
         </tbody>
       </Table>
-      <Row>
+      {/* <Row>
         <Col className="text-end">
           <WhiteButton
             className={styles.billing_learn}
@@ -112,7 +112,7 @@ export default function PaymentHistory() {
           </WhiteButton>
 
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
   return (

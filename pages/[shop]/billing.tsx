@@ -26,8 +26,8 @@ const Billing: NextPage = () => (
     </Col> */}
     <Row>
       <BillingPackage />
-      <BulbInfo />
-      <BillingCalculator />
+      {/* <BulbInfo /> */}
+      {/* <BillingCalculator /> */}
       <BillingPartnerTools />
       <PaymentHistory />
     </Row>

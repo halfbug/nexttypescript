@@ -71,7 +71,7 @@ export default function DBSettings({
   return (
 
     <>
-      <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
+      {/* <section className={[styles2.dashboard_campaign__box_4, '', ''].join(' ')}>
         <div className={styles2.dashboard_campaign__overlay}>
           <div className={styles2.dashboard_campaign__overlayText}>Coming Soon</div>
         </div>
@@ -109,7 +109,7 @@ export default function DBSettings({
             </Form.Group>
           </Col>
         </Row>
-      </section>
+      </section> */}
       <section className={['mt-4', styles2.dashboard_campaign__box_3].join(' ')}>
         <Row>
           <Col>

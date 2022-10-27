@@ -126,9 +126,9 @@ const ShopMain: NextPage = () => {
               handleSearch={handleSearch}
             />
           </Col>
-          <Col lg={5} className="gx-5">
+          {/* <Col lg={5} className="gx-5">
             <CampaignStrength />
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </Page>
