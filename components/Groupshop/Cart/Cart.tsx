@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
@@ -42,6 +42,8 @@ const Cart = ({
     currencySymbol, dPrice, discount, getOwnerName, isInfluencerGS, brandName,
   } = useDeal();
 
+  const [currencyName, setCurrencyName] = useState<any>('USD');
+
   const {
     cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
     isCartEmpty, getShopifyUrl, getSuggestedProducts, addCartProduct,
@@ -67,6 +69,31 @@ const Cart = ({
       })), getTotal() ?? 0);
     }
   }, [show]);
+
+  useEffect(() => {
+    const cartDetails:any = [];
+    cartProducts.forEach((item, index) => {
+      const productId = item.id.replace('gid://shopify/Product/', '');
+      setCurrencyName(item?.currencyCode);
+      cartDetails.push({
+        id: productId,
+        title: item.title,
+        price: dPrice(+(item.selectedVariant.price)).toFixed(2),
+        qty: item.selectedVariant.selectedQuantity,
+        variants: item.selectedVariant.title,
+      });
+    });
+
+    if (cartDetails[0]) {
+      // @ts-ignore
+    // eslint-disable-next-line no-undef
+      fbq('track', 'AddToCart', {
+        contents: cartDetails,
+        currency: currencyName,
+        content_type: 'product',
+      });
+    }
+  }, [cartProducts]);
 
   const { suggestedProd } = useSuggested();
   // const { setsProduct } = useDetail(suggestedProd);
