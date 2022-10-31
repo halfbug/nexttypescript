@@ -79,10 +79,12 @@ export default function useBilling() {
   const averageNoOfGS = useCallback(() => {
     const { appTrialEnd } = store;
     const trialMonth = appTrialEnd ? new Date(appTrialEnd).getMonth() : 0;
+    console.log('🚀 ~ file: useBilling.ts ~ line 82 ~ averageNoOfGS ~ trialMonth', trialMonth);
     const currentMonth = (new Date()).getMonth();
-    const totalMonth = (currentMonth + 1) - (trialMonth + 1 ?? 0);
-    return totalGS / Math.abs(totalMonth);
-  }, [store, totalGS]);
+    console.log('🚀 ~ file: useBilling.ts ~ line 84 ~ averageNoOfGS ~ currentMonth', currentMonth);
+    const totalMonth = currentMonth === trialMonth ? 1 : (currentMonth + 1) - (trialMonth + 1 ?? 0);
+    return totalGS <= 0 ? 0 : totalGS / Math.abs(totalMonth);
+  }, [totalGS]);
 
   const isAppTrial = () => {
     const { appTrialEnd } = store;
