@@ -40,6 +40,7 @@ const OBWelcomeInfluencer = ({
         aria-labelledby="contained-modal-title-vcenter"
         centered
         backdrop="static"
+        keyboard={false}
         dialogClassName={styles.welcome__modal}
         contentClassName={styles.welcome__modal__content}
       >
