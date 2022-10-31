@@ -39,7 +39,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const [disableBtn, setdisableBtn] = React.useState(true);
-  const [disableBtnUpdate, setdisableBtnUpdate] = React.useState(true);
+  // const [disableBtnUpdate, setdisableBtnUpdate] = React.useState(true);
   const [selectedProducts, setselectedProducts] = React.useState<IProduct[] | undefined>(undefined);
   const [selectedCollections, setselectedCollections] = React.useState<ICollection[]
   | undefined>(undefined);
@@ -61,7 +61,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   React.useEffect(() => {
     if (campaign) {
-      if (campaign.criteria! === 'custom' && disableBtnUpdate === true) setdisableBtn(false);
+      // if (campaign.criteria! === 'custom') setdisableBtn(false);
       setHeading(campaign.name!);
 
       const newState:ICampaignForm = {
@@ -176,7 +176,29 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
     const mycamp = deleteProductCollections(campaignid);
     dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
-    handleSubmit();
+    // handleSubmit();
+  };
+
+  const clearCustom = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
+    setFieldValue('products', []);
+    setFieldValue('collections', []);
+
+    const updatedCampaigns = store?.campaigns?.map((item:any) => {
+      const newItem = { ...item };
+      if (newItem.id === campaignid) {
+        // eslint-disable-next-line no-param-reassign
+        newItem.products = [];
+        newItem.collections = [];
+        newItem.criteria = 'custom';
+        // getCampaign();
+        return newItem;
+      }
+      return newItem;
+    });
+
+    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: updatedCampaigns } });
+    // handleSubmit();
   };
 
   return (
@@ -273,7 +295,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                             className={values.criteria === 'custom' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                             onChange={(e) => {
                               handleChange(e);
-                              handleSubmit();
+                              clearCustom();
                             }}
                             onClick={() => {
                               setdisableBtn(false);

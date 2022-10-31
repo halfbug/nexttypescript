@@ -226,6 +226,12 @@ export default function CreateCampaign() {
     setFieldValue('products', []);
   };
 
+  const clearCustom = () => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
+    setFieldValue('products', []);
+    setFieldValue('collections', []);
+  };
+
   return (
     <Container className={styles.dashboard_campaign}>
       <Screen1 show={ins === '2a' || ins === 'addproduct'} />
@@ -355,6 +361,7 @@ export default function CreateCampaign() {
                         onClick={() => {
                           setdisableBtn(false);
                           setValue('criteria', 'custom');
+                          clearCustom();
                         }}
                         type="radio"
                         name="criteria"
