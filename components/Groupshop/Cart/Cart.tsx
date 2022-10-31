@@ -84,7 +84,7 @@ const Cart = ({
       });
     });
 
-    if (cartDetails[0]) {
+    if (cartDetails[0] && show) {
       // @ts-ignore
     // eslint-disable-next-line no-undef
       fbq('track', 'AddToCart', {
@@ -93,7 +93,7 @@ const Cart = ({
         content_type: 'product',
       });
     }
-  }, [cartProducts]);
+  }, [cartProducts, show]);
 
   const { suggestedProd } = useSuggested();
   // const { setsProduct } = useDetail(suggestedProd);
