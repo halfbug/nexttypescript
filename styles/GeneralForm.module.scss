@@ -132,4 +132,9 @@
             fill: #CFB9E4;
         }
     }
+    &_pinkBox {
+        @extend .mb-5, .p-4;
+        border: 1px dashed $dotted-border-color4;
+        border-radius: 18px;
+    }
 }

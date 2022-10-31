@@ -8,6 +8,7 @@ import {
   Facebook, Instagram, Twitter, Tiktok,
 } from 'react-bootstrap-icons';
 import styles from 'styles/Groupshop.module.scss';
+import styles2 from 'styles/GeneralForm.module.scss';
 
 interface IProps {
   values?: any;
@@ -36,68 +37,70 @@ export default function SettingSocialMedia({
 
   return (
     <>
-      <Row className="mb-2">
-        <Col>
-          <h4 className="">Add your social links</h4>
-        </Col>
-      </Row>
-      <Row>
-        <div className="col-8 d-flex ">
-          <Button
-            className={['px-1 me-1', (smUrl === 'instagram') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
-            variant="secondary"
-            onClick={() => setsmUrl('instagram')}
-          >
-            <Instagram className="fs-3 fw-bold" />
-          </Button>
+      <Row className={['mt-4 ', styles2.generalform_pinkBox].join('')}>
+        <Row className="mb-2">
+          <Col>
+            <h4 className="">Add your social links</h4>
+          </Col>
+        </Row>
+        <Row>
+          <div className="col-8 d-flex ">
+            <Button
+              className={['px-1 me-1', (smUrl === 'instagram') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
+              variant="secondary"
+              onClick={() => setsmUrl('instagram')}
+            >
+              <Instagram className="fs-3 fw-bold" />
+            </Button>
 
-          <Button
-            className={['px-1 mx-1', (smUrl === 'tiktok') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
-            variant="secondary"
-            onClick={() => setsmUrl('tiktok')}
-          >
-            <Tiktok className="fs-3 fw-bold" />
+            <Button
+              className={['px-1 mx-1', (smUrl === 'tiktok') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
+              variant="secondary"
+              onClick={() => setsmUrl('tiktok')}
+            >
+              <Tiktok className="fs-3 fw-bold" />
 
-          </Button>
+            </Button>
 
-          <Button
-            className={['px-1 mx-1', (smUrl === 'twitter') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
-            variant="secondary"
-            onClick={() => setsmUrl('twitter')}
-          >
-            <Twitter className="fs-3 fw-bold" />
-          </Button>
+            <Button
+              className={['px-1 mx-1', (smUrl === 'twitter') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
+              variant="secondary"
+              onClick={() => setsmUrl('twitter')}
+            >
+              <Twitter className="fs-3 fw-bold" />
+            </Button>
 
-          <Button
-            className={['px-1 mx-1', (smUrl === 'facebook') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
-            variant="secondary"
-            onClick={() => setsmUrl('facebook')}
-          >
-            <Facebook className="fs-3 fw-bold" />
-          </Button>
-        </div>
-      </Row>
-      <Row className="p-1 mt-2 ">
-        <Col lg={10} className="d-flex">
-          <Form.Group className="me-1" style={styleObj} controlId="sm">
-            <Form.Control
-              onChange={(e) => {
-                updateValues(smUrl, e.currentTarget.value);
-              }}
-              name={smUrl}
-              type="text"
-              size="lg"
-              placeholder={`Enter ${smUrl} account URL...`}
-              value={values[smUrl]}
-              isInvalid={values[smUrl]?.length && errors[smUrl]}
-              isValid={(!errors[smUrl] && values[smUrl]?.length)}
-              title={(values[smUrl]?.length && errors[smUrl]) ? errors[smUrl] : ''}
-            />
-            <Form.Control.Feedback type="invalid">
-              {smUrl in values ? errors[smUrl] : ''}
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Col>
+            <Button
+              className={['px-1 mx-1', (smUrl === 'facebook') ? 'social_active' : '', styles.groupshop_btn_circle].join(' ')}
+              variant="secondary"
+              onClick={() => setsmUrl('facebook')}
+            >
+              <Facebook className="fs-3 fw-bold" />
+            </Button>
+          </div>
+        </Row>
+        <Row className="p-1 mt-2 ">
+          <Col lg={10} className="d-flex">
+            <Form.Group className="me-1" style={styleObj} controlId="sm">
+              <Form.Control
+                onChange={(e) => {
+                  updateValues(smUrl, e.currentTarget.value);
+                }}
+                name={smUrl}
+                type="text"
+                size="lg"
+                placeholder={`Enter ${smUrl} account URL...`}
+                value={values[smUrl]}
+                isInvalid={values[smUrl]?.length && errors[smUrl]}
+                isValid={(!errors[smUrl] && values[smUrl]?.length)}
+                title={(values[smUrl]?.length && errors[smUrl]) ? errors[smUrl] : ''}
+              />
+              <Form.Control.Feedback type="invalid">
+                {smUrl in values ? errors[smUrl] : ''}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
       </Row>
     </>
   );
