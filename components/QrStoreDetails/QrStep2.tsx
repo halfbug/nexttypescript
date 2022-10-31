@@ -34,7 +34,7 @@ export default function QrStep2(
       setcustomerName(`${activeGroupshops[0].customer?.firstName} ${activeGroupshops[0].customer?.lastName}`);
     }
   }, [activeGroupshops]);
-  console.log('🚀 ~ file: QrStep2.tsx ~ line 30 ~ QrStep2 ~ activeGroupshops', activeGroupshops);
+
   return (
     <>
       <div className={styles.QRContainer}>
@@ -73,7 +73,7 @@ export default function QrStep2(
                       activeGroupshops.length && activeGroupshops.map((gs: any) => (
                         <Link
                           key={gs?.name}
-                          href={gs?.groupshop?.url ? gs?.groupshop?.url : ''}
+                          href={gs?.isExpired ? `${gs?.groupshop?.url}/status&activated` : gs?.groupshop?.url}
                         >
                           <a target="_blank" className={styles.cardItem}>
                             <div className={styles.cardItem__Wrapper}>
@@ -96,13 +96,13 @@ export default function QrStep2(
                                     ✨
                                     {` ${gs?.groupshop?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
                                   </button>
-                                  {
+                                  {/* {
                                   gs?.isExpired && (
                                   <button type="button" className={styles.cashbackBtn}>
                                     Expired
                                   </button>
                                   )
-                                }
+                                } */}
                                 </div>
                               </div>
                             </div>
