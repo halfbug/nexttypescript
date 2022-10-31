@@ -24,6 +24,7 @@ export interface IStore {
   allInventoryProducts?: IProduct[];
 }
 export interface ICampaign {
+  isActive?: boolean;
   id?: string | null | undefined;
   name?: string;
   criteria?: string;

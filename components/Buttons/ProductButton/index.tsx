@@ -30,19 +30,6 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
 
     variables: { shop },
   });
-  // const [criteria, setcriteria] = React.useState('');
-
-  // console.log(store);
-
-  // React.useEffect(() => {
-  //   if (store?.singleEditCampaignId && store?.campaigns) {
-  //     const arr:any = store?.campaigns.filter((item:any) => item.id === store.singleEditCampaignId);
-  //     const camp = { ...arr[0] };
-  //     setcriteria(camp.criteria);
-  //   } else {
-  //     setcriteria('');
-  //   }
-  // }, []);
   const { newcampaign } = useCampaign();
   const { campaign } = useCampaign();
   // console.log({ campaign }, '....campaign.....');
@@ -52,9 +39,6 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
     if (data) {
       dispatch({ type: 'UPDATE_TOTALPRODUCTS', payload: { totalProducts: data.TotalProducts.count } });
     }
-    // return () => {
-    //   cleanup
-    // }
   }, [data]);
 
   const collectionsql = useQuery(GET_COLLECTIONS, {
@@ -66,9 +50,6 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
     if (collectionsql.data) {
       dispatch({ type: 'SET_COLLECTIONS', payload: { collections: collectionsql.data.collections } });
     }
-    // return () => {
-    //   cleanup
-    // }
   }, [collectionsql.data]);
 
   const productsql = useQuery(GET_PRODUCTS, {
@@ -86,9 +67,6 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
     if (productsql.data) {
       dispatch({ type: 'SET_PRODUCTS', payload: { products: productsql.data.products } });
     }
-    // return () => {
-    //   cleanup
-    // }
   }, [productsql.data]);
 
   const handleEditProduct = () => {

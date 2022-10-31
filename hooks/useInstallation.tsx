@@ -13,9 +13,6 @@ const useInstallation = (ins: string | string[] | undefined) => {
   const installationDialogue = useCallback((): React.ReactNode => {
     const { store, dispatch } = React.useContext(StoreContext);
     const { show } = store;
-    const handleAfterUpdate = () => {
-      console.log('create');
-    };
 
     switch (ins) {
       case '0':
@@ -32,7 +29,7 @@ const useInstallation = (ins: string | string[] | undefined) => {
         );
       case '2a':
         return (
-          <Screen1 show handleAfterUpdate={handleAfterUpdate} />
+          <Screen1 show />
         );
       case '3':
         return (

@@ -1,8 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable quotes */
 /* eslint-disable react/require-default-props */
-/* eslint-disable array-callback-return */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Dialogue from 'components/Layout/Dialogue/dialogue';
 import {
   Col, Form, ListGroup, Row, Button,
@@ -23,7 +20,6 @@ import Products from './Products';
 
 interface IScreen1Props {
   show: boolean,
-  handleAfterUpdate?: any;
   selectedProducts?: IProduct[];
   selectedCollections?: ICollection[];
 }
@@ -34,7 +30,7 @@ type SelectedType = {
 }
 
 const Screen1 = ({
-  show, handleAfterUpdate, selectedProducts, selectedCollections,
+  show, selectedProducts, selectedCollections,
 }: IScreen1Props) => {
   const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
@@ -50,7 +46,7 @@ const Screen1 = ({
   const [campaign, setcampaign] = useState<SelectedType | undefined>(
     {
       collections: CampCollection ?? [],
-      products: selectedProducts ?? (ins === "2a" ? CampPrd : CampAddPrd) ?? [],
+      products: selectedProducts ?? (ins === '2a' ? CampPrd : CampAddPrd) ?? [],
     },
   );
   const [showError, setshowError] = useState<boolean>(false);
@@ -62,16 +58,20 @@ const Screen1 = ({
   React.useEffect(() => {
     // if (selectedProducts && !campaign?.products?.length) {
     if (selectedProducts) {
-      setcampaign({ ...campaign, products: selectedProducts, collections: selectedCollections ?? [] });
+      setcampaign({
+        ...campaign,
+        products: selectedProducts,
+        collections: selectedCollections ?? [],
+      });
     }
   }, [selectedProducts]);
-  const { filterArray, findInArray } = useUtilityFunction();
+  const { filterArray } = useUtilityFunction();
   React.useEffect(() => {
   //
     // setcampaign({
     //   products: [], collections: [],
     // });
-    if (ins === "2a") {
+    if (ins === '2a') {
       setcampaign((prev) => ({
         ...prev,
         products: CampPrd ?? [],
@@ -84,12 +84,9 @@ const Screen1 = ({
       } else {
         setAllProductChecked(false);
       }
-    } else if (ins === "addproduct") {
-      // const searchArr = store?.newCampaign?.collections ? store?.newCampaign?.collections : campaign.collections
-      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
-      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
-      // console.log(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
-      // console.log(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
+    } else if (ins === 'addproduct') {
+      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], 'id', 'id'));
+      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], 'id', 'id'));
 
       setcampaign((prev) => ({
         ...prev,
@@ -108,10 +105,9 @@ const Screen1 = ({
     setshowError(false);
     setview('List');
 
-    if (ins === "addproduct") {
-    // const searchArr = store?.newCampaign?.collections ? store?.newCampaign?.collections : campaign.collections
-      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id"));
-      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id"));
+    if (ins === 'addproduct') {
+      setscollections(filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], 'id', 'id'));
+      setproducts(filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], 'id', 'id'));
     } else {
       setscollections(store.collections);
       setproducts(store.products);
@@ -135,8 +131,8 @@ const Screen1 = ({
     const { value } = e.target;
 
     setview(value.length === 0 ? 'List' : 'Search');
-    const baseCollectionArray = ins === "2a" ? store?.collections : filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], "id", "id");
-    const baseProductArray = ins === "2a" ? store?.products : filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], "id", "id");
+    const baseCollectionArray = ins === '2a' ? store?.collections : filterArray(store?.collections ?? [], store?.newCampaign?.collections ?? [], 'id', 'id');
+    const baseProductArray = ins === '2a' ? store?.products : filterArray(store?.products ?? [], store?.newCampaign?.products ?? [], 'id', 'id');
     const filteredCollections = baseCollectionArray?.filter((col: any):boolean | undefined => {
       if (col.title.toLowerCase().includes(value)) return true;
       return false;
@@ -193,23 +189,25 @@ const Screen1 = ({
               ncamp.products?.push(p);
             }
           });
-          const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.differenceBy(col.products, [...entity.products, ...campaign.products!], "id").length === 0) ?? [];
-          ncamp.collections = _.unionBy(ncamp.collections, tempCol, "id");
+          const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.differenceBy(col.products, [...entity.products, ...campaign.products!], 'id').length === 0) ?? [];
+          ncamp.collections = _.unionBy(ncamp.collections, tempCol, 'id');
         } else {
           setshowError(true);
         }
       } else if (name === 'products') {
         if (campaign?.products && campaign?.products?.length < 80) {
           const entity = getEntityById(id, name) as IProduct;
-          const storeColl = store.collections && store?.collections.filter((col: ICollection) => col !== undefined).filter((col: ICollection) => col.products.find((p: IProduct) => p.id === entity.id));
+          const storeColl = store.collections
+          && store?.collections.filter((col: ICollection) => col !== undefined)
+            .filter((col: ICollection) => col.products.find((p: IProduct) => p.id === entity.id));
           const tempCol: Array<ICollection> = [];
           const toCompare: Array<IProduct> = [...campaign.products, entity];
           storeColl?.forEach((col: ICollection) => {
-            if (_.differenceBy(col.products, toCompare, "id").length === 0) {
+            if (_.differenceBy(col.products, toCompare, 'id').length === 0) {
               tempCol.push(col);
             }
           });
-          ncamp.collections = _.unionBy(ncamp?.collections, _.differenceBy(tempCol, campaign?.collections ?? [], "id"), "id");
+          ncamp.collections = _.unionBy(ncamp?.collections, _.differenceBy(tempCol, campaign?.collections ?? [], 'id'), 'id');
           ncamp?.products?.push(entity);
         } else {
           setshowError(true);
@@ -224,14 +222,18 @@ const Screen1 = ({
     } else if (checked === false) {
       if (name === 'collections') {
         const ccol = getEntityById(id, name) as ICollection;
-        const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.intersectionBy(col.products, ccol.products, "id").length > 0) ?? [];
-        ncamp.collections = campaign?.collections?.filter((item: any) => item !== undefined).filter((col) => !tempCol.includes(col));
+        const tempCol: Array<ICollection> = store.collections?.filter((col: ICollection) => _.intersectionBy(col.products, ccol.products, 'id').length > 0) ?? [];
+        ncamp.collections = campaign?.collections?.filter((item: any) => item !== undefined)
+          .filter((col) => !tempCol.includes(col));
         ncamp.products = campaign?.products?.filter((item: any) => item !== undefined).filter(
           (prd) => !ccol?.products.find((ccolprd) => ccolprd.id === prd.id),
         );
       } else {
-        const storeColl = store.collections && store?.collections.filter((col: ICollection) => col !== undefined).filter((col: ICollection) => col.products.find((p: IProduct) => p.id === id));
-        ncamp.collections = ncamp.collections?.filter((col: ICollection) => !storeColl?.includes(col));
+        const storeColl = store.collections && store?.collections
+          .filter((col: ICollection) => col !== undefined)
+          .filter((col: ICollection) => col.products.find((p: IProduct) => p.id === id));
+        ncamp.collections = ncamp.collections
+          ?.filter((col: ICollection) => !storeColl?.includes(col));
         ncamp.products = ncamp?.products?.filter((prod) => prod.id !== id);
       }
       setAllProductChecked(false);
@@ -257,7 +259,6 @@ const Screen1 = ({
     setTitle('Total Products');
     // const finalArray = (ins === '2a') ? 'productsArray' : 'addableProductsArray';
     if (ins === '2a') {
-      handleAfterUpdate();
       if (campaign?.products && campaign?.products?.length < 81) {
         dispatch({
           type: 'NEW_CAMPAIGN',
@@ -265,8 +266,10 @@ const Screen1 = ({
             newCampaign: {
               products: campaign?.products?.filter((item: any) => item !== undefined),
               collections: campaign?.collections?.filter((item: any) => item !== undefined),
-              productsArray: campaign?.products?.filter((item: any) => item !== undefined).map((prod) => prod.id),
-              collectionsArray: campaign?.collections?.filter((item: any) => item !== undefined).map((prod) => prod.id),
+              productsArray: campaign?.products?.filter((item: any) => item !== undefined)
+                .map((prod) => prod.id),
+              collectionsArray: campaign?.collections?.filter((item: any) => item !== undefined)
+                .map((prod) => prod.id),
             },
           },
         });
@@ -283,7 +286,8 @@ const Screen1 = ({
           newCampaign: {
             addableProducts: campaign?.products?.filter((item: any) => item !== undefined),
             addableCollections: campaign?.collections?.filter((item: any) => item !== undefined),
-            addableProductsArray: campaign?.products?.filter((item: any) => item !== undefined).map((prod) => prod.id),
+            addableProductsArray: campaign?.products?.filter((item: any) => item !== undefined)
+              .map((prod) => prod.id),
             // productsArray: [],
           },
         },
@@ -380,7 +384,7 @@ const Screen1 = ({
         />
 
         <Form.Control.Feedback type="invalid" className={`${showError ? 'd-block' : 'd-none'} text-center`}>
-          { ins === "addproduct" ? '' : "you can select only 80 products" }
+          { ins === 'addproduct' ? '' : 'you can select only 80 products' }
         </Form.Control.Feedback>
 
         <Row className="mt-4 d-flex justify-content-end">

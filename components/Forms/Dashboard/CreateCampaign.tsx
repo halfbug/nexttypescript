@@ -29,7 +29,6 @@ export default function CreateCampaign() {
   const [, setParams] = useQueryString();
   const [
     addCampaign,
-    // eslint-disable-next-line no-unused-vars
     { data, loading, error },
   ] = useMutation<any, ICampaign | null>(CREATE_CAMPAIGN_DB);
   const [editMin, setEditMin] = React.useState(false);
@@ -77,7 +76,7 @@ export default function CreateCampaign() {
       .number().typeError('you must specify a number')
       .min(5)
       .max(40)
-      .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
+      .lessThan(yup.ref('maxDiscount'), constant.EDIT_REWARDS_MSG2)
       .test('diff', constant.EDIT_REWARDS_MSG1,
         (val: number | undefined, context) => {
           if (val && (context.parent.maxDiscount - val) < 10) {
@@ -227,13 +226,9 @@ export default function CreateCampaign() {
     setFieldValue('products', []);
   };
 
-  const handleAfterUpdate = () => {
-    // console.log('create');
-  };
-
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 handleAfterUpdate={handleAfterUpdate} show={ins === '2a' || ins === 'addproduct'} />
+      <Screen1 show={ins === '2a' || ins === 'addproduct'} />
       <Form noValidate onSubmit={handleSubmit}>
 
         <Row>
