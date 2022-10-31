@@ -76,18 +76,14 @@ export default function useBilling() {
     console.log(store.plan);
     return store.plan;
   }, []);
-  const getMonthlyEstimateCost = useCallback((orderno) => {
-    console.log({ orderno });
-    return 'orderno';
-  }, []);
-  const getCashBack = useCallback((gsid) => {
-    console.log({ gsid });
-    return 'gsid';
-  }, []);
-  const getRevenue = useCallback((gsid) => {
-    console.log({ gsid });
-    return 'gsid';
-  }, []);
+  const averageNoOfGS = useCallback(() => {
+    const { appTrialEnd } = store;
+    const trialMonth = appTrialEnd ? new Date(appTrialEnd).getMonth() : 0;
+    const currentMonth = (new Date()).getMonth();
+    const totalMonth = (currentMonth + 1) - (trialMonth + 1 ?? 0);
+    return totalGS / Math.abs(totalMonth);
+  }, [store, totalGS]);
+
   const isAppTrial = () => {
     const { appTrialEnd } = store;
     if (appTrialEnd) {
@@ -121,14 +117,12 @@ export default function useBilling() {
 
   return {
     // getMonthlyGSCount,
-    getCashBack,
-    getMonthlyEstimateCost,
-    getRevenue,
     totalGS,
     totalRevenue,
     currencySymbol,
     appTrial,
     isAppTrialOnGivenDate,
     isAppTrial,
+    averageNoOfGS,
   };
 }
