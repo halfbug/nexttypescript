@@ -91,6 +91,7 @@ const Cart = ({
         contents: cartDetails,
         currency: currencyName,
         content_type: 'product',
+        value: getTotal() ?? 0,
       });
     }
   }, [cartProducts, show]);
@@ -111,6 +112,29 @@ const Cart = ({
   const handleCheckout = () => {
     // emptyCart();
     setLoading(true);
+
+    const cartDetails:any = [];
+    cartProducts.forEach((item, index) => {
+      const productId = item.id.replace('gid://shopify/Product/', '');
+      setCurrencyName(item?.currencyCode);
+      cartDetails.push({
+        id: productId,
+        title: item.title,
+        price: dPrice(+(item.selectedVariant.price)).toFixed(2),
+        qty: item.selectedVariant.selectedQuantity,
+        variants: item.selectedVariant.title,
+      });
+    });
+
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    fbq('track', 'Purchase', {
+      contents: cartDetails,
+      currency: currencyName,
+      content_type: 'product',
+      value: getTotal() ?? 0,
+    });
+
     checkoutButtonClick(cartProducts.map((prd) => ({
       productId: prd.id.split('/')[4],
       productName: prd.title,
