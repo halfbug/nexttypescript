@@ -19,6 +19,8 @@ import WhiteButton from '../WhiteButton/WhiteButton';
 
 interface IUploadButtonProps {
  setFieldValue(field: string, value: string): any;
+ setisUploading?: any;
+ setlogofeedback?: any;
  icon? : React.ReactNode;
  field: string;
  className?: string;
@@ -30,8 +32,8 @@ interface IUploadButtonProps {
 
 // eslint-disable-next-line no-unused-vars
 export default function UploadButton({
-  setFieldValue, icon, field, className, value, handleForm, handleCustomBg,
-  url,
+  setFieldValue, icon, field, className, value, handleForm, handleCustomBg, setisUploading,
+  url, setlogofeedback,
 }:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
@@ -85,6 +87,7 @@ export default function UploadButton({
           console.log("🚀 ~ file: index.tsx ~ line 83 ~ handleImageUpload ~ imgExt1", imgExt1);
           fd.append('image', files[0], `${shopName[0]}_${uniqueLimitId}.${imgExt1}`);
           fd.append('previousimage', `${url}`);
+          setisUploading(true);
           setprogress(true);
           axios.post(`${process.env.API_URL}/image`, fd, config)
             .then((res) => {
@@ -92,6 +95,8 @@ export default function UploadButton({
 
               setFieldValue(field, fileS3Url);
               setprogress(false);
+              setisUploading(false);
+              setlogofeedback('');
               if (handleCustomBg) { handleCustomBg(field, fileS3Url); }
               if (handleForm) handleForm(field, fileS3Url);
             })

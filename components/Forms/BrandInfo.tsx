@@ -28,6 +28,7 @@ interface IValues {
 export default function BrandInfo() {
   const [, setParams] = useQueryString();
   const [logofeedback, setlogofeedback] = React.useState<null | string>(null);
+  const [isUploading, setisUploading] = React.useState<boolean>(false);
   const [addBI, { data, loading, error }] = useMutation<IStore>(UPDATE_STORE);
   // if (error) return `Submission error! ${error.message}`;
   const { store, dispatch } = React.useContext(StoreContext);
@@ -70,7 +71,9 @@ export default function BrandInfo() {
     onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
       if (validateForm) validateForm(valz);
       const { brandName, industry, logoImage } = valz;
-      if (logoImage !== '') {
+      if (isUploading) {
+        setlogofeedback('Uploading please wait..');
+      } else if (logoImage !== '') {
         setlogofeedback('');
 
         console.log(logoImage);
@@ -139,6 +142,8 @@ export default function BrandInfo() {
               value={values.logoImage}
               className={['row', styles.welcome_Obupload].join(' ')}
               url={getKeyFromS3URL(values.logoImage)}
+              setisUploading={setisUploading}
+              setlogofeedback={setlogofeedback}
             />
             <div className="text-danger">{logofeedback}</div>
           </Col>
