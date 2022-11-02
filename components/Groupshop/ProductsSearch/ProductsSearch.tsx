@@ -116,6 +116,8 @@ const ProductsSearch = ({
   const [selected, setSelected] = useState<string[] | undefined>([]);
   const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
   const [selectedCountState, setselectedCountState] = useState<number>(0);
+  // if > 5 disable selection of product in popup
+  const [disableSelection, setDisableSelection] = useState<number>(0);
   const clientDProducts: string[] = clientDealProducts() ?? [];
 
   // useEffect(() => {
@@ -183,13 +185,15 @@ const ProductsSearch = ({
   useEffect(() => {
     if (selected && selected?.length) {
       const cdp = clientDealProducts() ?? [];
-      console.log('🚀 ~ file: ProductsSearch.tsx ~ line 179 ~ useEffect ~ cdp ooo', cdp);
+      console.log('🚀 ~ file: ProductsSearch.tsx ~ line 179 ~ useEffect selected ~ cdp ooo', cdp);
       const sp = selected ?? [];
       console.log('🚀 ~ file: ProductsSearch.tsx ~ line 181 ~ useEffect ~ sp ooo', sp);
-
+      // total sleected plus prev selected count
+      setDisableSelection(sp.length + cdp.length);
       setselectedCountState((sp.length));
     } else {
       setselectedCountState(0);
+      setDisableSelection(0);
     }
   }, [selected, showSearch]);
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 184 ~ selected', selected);
@@ -376,7 +380,7 @@ const ProductsSearch = ({
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={selectedCountState === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              : <Button variant="outline-primary" disabled={disableSelection === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
                           </>
                         )}
                       >

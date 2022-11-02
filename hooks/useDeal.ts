@@ -42,7 +42,9 @@ export default function useDeal() {
 
   const clientDealProducts = useCallback(
     ():string[] => {
-      const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
+      // eslint-disable-next-line max-len
+      // const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
+      const addedPrds = gsctx?.dealProducts?.filter((item) => item.type === 'deal') ?? [];
       // console.log('🚀 useDeal ~ addedPrds', addedPrds);
 
       return ([...addedPrds.filter(
