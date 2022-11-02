@@ -198,6 +198,7 @@ export interface IMarketingSettings {
   facebookPixels?: string;
   tiktokPixels?: string;
   googlePixels?: string;
+  snapchatPixels?: string;
 }
 export interface ISettings {
   general?: IGeneralSettings;

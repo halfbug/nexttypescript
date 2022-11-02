@@ -70,6 +70,7 @@ const Settings: NextPage = () => {
         facebookPixels: (store?.settings?.marketing?.facebookPixels ? store?.settings?.marketing?.facebookPixels : ''),
         tiktokPixels: (store?.settings?.marketing?.tiktokPixels ? store?.settings?.marketing?.tiktokPixels : ''),
         googlePixels: (store?.settings?.marketing?.googlePixels ? store?.settings?.marketing?.googlePixels : ''),
+        snapchatPixels: (store?.settings?.marketing?.snapchatPixels ? store?.settings?.marketing?.snapchatPixels : ''),
       },
     },
     instagram: store?.social?.instagram ?? '',
@@ -145,6 +146,7 @@ const Settings: NextPage = () => {
                 facebookPixels: (valz?.settings?.marketing?.facebookPixels!) ? valz?.settings?.marketing?.facebookPixels! : '',
                 tiktokPixels: (valz?.settings?.marketing?.tiktokPixels!) ? valz?.settings?.marketing?.tiktokPixels! : '',
                 googlePixels: (valz?.settings?.marketing?.googlePixels!) ? valz?.settings?.marketing?.googlePixels! : '',
+                snapchatPixels: (valz?.settings?.marketing?.snapchatPixels!) ? valz?.settings?.marketing?.snapchatPixels! : '',
               },
             },
             social: {

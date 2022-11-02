@@ -40,7 +40,8 @@ query StoreName($shop: String!) {
       WhatsAppnotifications
       facebookPixels
       tiktokPixels
-      googlePixels   
+      googlePixels
+      snapchatPixels   
     }
   }
   social{
@@ -562,7 +563,8 @@ query Groupshop($code: String!, $status: String = "") {
         marketing{
           facebookPixels
           tiktokPixels
-          googlePixels          
+          googlePixels
+          snapchatPixels          
         }
       }
       social{
@@ -1216,7 +1218,8 @@ query PartnerGroupshop($code: String!) {
         marketing{
           facebookPixels
           tiktokPixels
-          googlePixels          
+          googlePixels
+          snapchatPixels          
         }
       }
     }
@@ -1402,7 +1405,7 @@ query mostViralProducts($shop: String!, $startDate: String!, $endDate: String!) 
   }
 }
 `;
-  
+
 const GET_ALL_VIDEOS = gql`
   query videos($storeId: String!) {
     videos(storeId: $storeId) {
@@ -1433,6 +1436,6 @@ export {
   GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, GET_PARTNER_GROUPSHOP, ADD_DEAL_PRODUCT_PARTNER,
   GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
-  GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,   
+  GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS,
 };

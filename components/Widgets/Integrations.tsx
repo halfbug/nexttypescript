@@ -8,6 +8,7 @@ import Inte from 'assets/images/Integrations.svg';
 import Fa from 'assets/images/FacebookPixel.svg';
 import Ga from 'assets/images/GooglePixel.svg';
 import Ta from 'assets/images/TikTokPixel.svg';
+import Sc from 'assets/images/Snapchat.svg';
 import PrivateKeyIcon from 'assets/images/private-key-icon.svg';
 import AttentiveSetupIcon from 'assets/images/attentive-setup.svg';
 import PostscriptSetupIcon from 'assets/images/postscript-setup.svg';
@@ -71,7 +72,7 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                 <InputGroup className="mb-3 ">
                   <FormControl
                     placeholder="Enter Facebook Pixel"
-                    value={values.settings?.marketing?.facebookPixels}
+                    value={values?.settings?.marketing?.facebookPixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.facebookPixels', e.currentTarget.value);
                     }}
@@ -88,14 +89,11 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
               <Col lg={6}>
                 <InputGroup className="mb-3 ">
                   <FormControl
-                    placeholder="Enter Tik Tok Pixel (Coming soon)"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
+                    placeholder="Enter Tik Tok Pixel"
                     value={values?.settings?.marketing?.tiktokPixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.tiktokPixels', e.currentTarget.value);
                     }}
-                    disabled
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
                 </InputGroup>
@@ -112,6 +110,23 @@ export default function Integrations({ values, handleForm } : IntegrationProps) 
                     value={values?.settings?.marketing?.googlePixels}
                     onChange={(e) => {
                       handleForm('settings.marketing.googlePixels', e.currentTarget.value);
+                    }}
+                  />
+                  <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>
+                </InputGroup>
+              </Col>
+            </div>
+          </Row>
+          <Row>
+            <div className="d-flex">
+              <Sc className="me-2" />
+              <Col lg={6}>
+                <InputGroup className="mb-3 ">
+                  <FormControl
+                    placeholder="Enter Snapchat Pixel Id"
+                    value={values?.settings?.marketing?.snapchatPixels}
+                    onChange={(e) => {
+                      handleForm('settings.marketing.snapchatPixels', e.currentTarget.value);
                     }}
                   />
                   <div className={styles.marketing__input_tooltip}><TooltipIcon /></div>

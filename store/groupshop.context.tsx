@@ -35,6 +35,7 @@ export const gsInit: IGroupshop = {
         facebookPixels: '',
         tiktokPixels: '',
         googlePixels: '',
+        snapchatPixels: '',
       },
     },
   },

@@ -152,6 +152,7 @@ export default function Settings({ isDB }: IProps) {
                 facebookPixels: '',
                 tiktokPixels: '',
                 googlePixels: '',
+                snapchatPixels: '',
               },
             },
             installationStep: 5,
