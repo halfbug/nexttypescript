@@ -72,7 +72,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
   const {
-    SKU, memberProducts, hideSection, inventoryProducts,
+    SKU, memberProducts, hideSection, inventoryProducts, dealProductsCTX,
   } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
@@ -655,7 +655,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={(SKU.length >= 2 && SKU.length <= 4)
+          products={(SKU.length >= 2 && SKU.length <= 4 && dealProductsCTX.length < 5)
             ? uniqueArray(memberProducts) : shoppedBy}
           maxrows={1}
           addProducts={handleAddProduct}
@@ -719,7 +719,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous purchases and recommendations.
           </p>
         </ProductGrid>
-        {SKU.length > 4 && (
+        {(SKU.length > 4 || dealProductsCTX.length > 4) && (
           members?.length > 1 || refferalDealsProducts?.length ? (
             <ProductGrid
               xs={6}

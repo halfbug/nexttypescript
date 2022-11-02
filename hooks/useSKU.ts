@@ -7,6 +7,7 @@ const useSKU = () => {
   const { gsctx } = useAppContext();
   const [allProducts, setAllProducts] = useState<any[]>([]);
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
+  const [dealProductsCTX, setDealProducts] = useState<any[]>([]);
   const [inventoryProducts, setInventoryProducts] = useState<any[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
   const { getUniqueArray } = useUtilityFunction();
@@ -14,6 +15,9 @@ const useSKU = () => {
   useEffect(() => {
     if (gsctx.campaign?.products?.length) {
       setAllProducts(gsctx.campaign?.products);
+    }
+    if (gsctx.dealProducts?.length) {
+      setDealProducts(gsctx.dealProducts);
     }
     if (gsctx.store?.allInventoryProducts?.length) {
       setInventoryProducts(gsctx.store?.allInventoryProducts);
@@ -38,7 +42,7 @@ const useSKU = () => {
   }, [gsctx]);
 
   return {
-    SKU: allProducts, memberProducts, hideSection, inventoryProducts,
+    SKU: allProducts, memberProducts, hideSection, inventoryProducts, dealProductsCTX,
   };
 };
 
