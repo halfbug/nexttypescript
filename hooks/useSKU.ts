@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
-import useUtilityFunction from './useUtilityFunction';
 
 const useSKU = () => {
   const { gsctx } = useAppContext();
@@ -10,7 +9,6 @@ const useSKU = () => {
   const [dealProductsCTX, setDealProducts] = useState<any[]>([]);
   const [inventoryProducts, setInventoryProducts] = useState<any[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
-  const { getUniqueArray } = useUtilityFunction();
 
   useEffect(() => {
     if (gsctx.campaign?.products?.length) {
@@ -32,12 +30,14 @@ const useSKU = () => {
         .filter((value, index, self) => self.indexOf(value) === index);
       const popularProducts = gsctx.popularProducts.map((ele) => ele.id)
         .filter((value, index, self) => self.indexOf(value) === index);
-      const arr = JSON.stringify(products)
-        === JSON.stringify(popularProducts);
-      setHideSection(arr);
-      // console.log('🎈 products', products);
-      // console.log('🎈 popularProducts', popularProducts);
-      // console.log('🎈 arr', arr);
+      const isSame = () => popularProducts.map((ele) => (
+        products.includes(ele)
+      )).reduce((curr, next) => curr === next);
+      if (gsctx.campaign?.products!?.length < 5) {
+        setHideSection(isSame());
+      } else {
+        setHideSection(false);
+      }
     }
   }, [gsctx]);
 
