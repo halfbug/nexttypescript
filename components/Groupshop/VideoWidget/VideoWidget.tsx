@@ -82,40 +82,6 @@ const VideoWidget = () => {
                     )) : ''}
                   </div>
                 ) : ''}
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {(control.height === '350' && videoRef && videoRef.current
-                && videoRef.current.currentTime) && (
-                  <>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={control.range}
-                      style={{ zIndex: 1000 }}
-                      onChange={(e) => handleRangeUpdate(e)}
-                      className={styles.videoWidget__barBox__range}
-                    />
-                    <span>
-                      {Math.floor(videoRef.current.currentTime / 60) < 10
-                        ? `0${Math.floor(videoRef.current.currentTime / 60)}`
-                        : Math.floor(videoRef.current.currentTime / 60)}
-                      :
-                      {Math.floor(videoRef.current.currentTime % 60) < 10
-                        ? `0${Math.floor(videoRef.current.currentTime % 60)}`
-                        : Math.floor(videoRef.current.currentTime % 60)}
-                    </span>
-                    <span>
-                      {Math.floor(videoRef.current.duration / 60) < 10
-                        ? `0${Math.floor(videoRef.current.duration / 60)}`
-                        : Math.floor(videoRef.current.duration / 60)}
-                      :
-                      {Math.floor(videoRef.current.duration % 60) < 10
-                        ? `0${Math.floor(videoRef.current.duration % 60)}`
-                        : Math.floor(videoRef.current.duration % 60)}
-                    </span>
-                  </>
-                )}
-              </div>
             </div>
             {control.height === '350' ? (
               <div
@@ -128,6 +94,42 @@ const VideoWidget = () => {
                 />
               </div>
             ) : ''}
+            <div className={styles.videoWidget__barBox__bottom}>
+              {(control.height === '350' && videoRef && videoRef.current
+              && videoRef.current.currentTime) && (
+                <>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={control.range}
+                    style={{ zIndex: 1000, width: '160px' }}
+                    onChange={(e) => handleRangeUpdate(e)}
+                    className={styles.videoWidget__barBox__range}
+                  />
+                  <div className={styles.videoWidget__barBox__bottom__time}>
+                    <div>
+                      {Math.floor(videoRef.current.currentTime / 60) < 10
+                        ? `0${Math.floor(videoRef.current.currentTime / 60)}`
+                        : Math.floor(videoRef.current.currentTime / 60)}
+                      :
+                      {Math.floor(videoRef.current.currentTime % 60) < 10
+                        ? `0${Math.floor(videoRef.current.currentTime % 60)}`
+                        : Math.floor(videoRef.current.currentTime % 60)}
+                    </div>
+                    <div>
+                      {Math.floor(videoRef.current.duration / 60) < 10
+                        ? `0${Math.floor(videoRef.current.duration / 60)}`
+                        : Math.floor(videoRef.current.duration / 60)}
+                      :
+                      {Math.floor(videoRef.current.duration % 60) < 10
+                        ? `0${Math.floor(videoRef.current.duration % 60)}`
+                        : Math.floor(videoRef.current.duration % 60)}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
             <video
               key={source[videoNo]}
               ref={videoRef}
@@ -232,40 +234,6 @@ const VideoWidget = () => {
                     )) : ''}
                   </div>
                 ) : ''}
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {(control.height === '350' && videoRef && videoRef.current
-                && videoRef.current.currentTime) ? (
-                  <>
-                    <input
-                      type="range"
-                      min="0"
-                      max="100"
-                      value={control.range}
-                      style={{ zIndex: 1000 }}
-                      onChange={(e) => handleRangeUpdate(e)}
-                      className={styles.videoWidget__barBox__range}
-                    />
-                    <span>
-                      {Math.floor(videoRef.current.currentTime / 60) < 10
-                        ? `0${Math.floor(videoRef.current.currentTime / 60)}`
-                        : Math.floor(videoRef.current.currentTime / 60)}
-                      :
-                      {Math.floor(videoRef.current.currentTime % 60) < 10
-                        ? `0${Math.floor(videoRef.current.currentTime % 60)}`
-                        : Math.floor(videoRef.current.currentTime % 60)}
-                    </span>
-                    <span>
-                      {Math.floor(videoRef.current.duration / 60) < 10
-                        ? `0${Math.floor(videoRef.current.duration / 60)}`
-                        : Math.floor(videoRef.current.duration / 60)}
-                      :
-                      {Math.floor(videoRef.current.duration % 60) < 10
-                        ? `0${Math.floor(videoRef.current.duration % 60)}`
-                        : Math.floor(videoRef.current.duration % 60)}
-                    </span>
-                  </>
-                  ) : ''}
-              </div>
             </div>
             {control.height === '350' ? (
               <div
@@ -278,6 +246,43 @@ const VideoWidget = () => {
                 />
               </div>
             ) : ''}
+
+            <div className={styles.videoWidget__barBox__bottom}>
+              {(control.height === '350' && videoRef && videoRef.current
+                && videoRef.current.currentTime) ? (
+                  <>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={control.range}
+                      style={{ zIndex: 1000, width: '160px' }}
+                      onChange={(e) => handleRangeUpdate(e)}
+                      className={styles.videoWidget__barBox__range}
+                    />
+                    <div className={styles.videoWidget__barBox__bottom__time}>
+                      <div>
+                        {Math.floor(videoRef.current.currentTime / 60) < 10
+                          ? `0${Math.floor(videoRef.current.currentTime / 60)}`
+                          : Math.floor(videoRef.current.currentTime / 60)}
+                        :
+                        {Math.floor(videoRef.current.currentTime % 60) < 10
+                          ? `0${Math.floor(videoRef.current.currentTime % 60)}`
+                          : Math.floor(videoRef.current.currentTime % 60)}
+                      </div>
+                      <div>
+                        {Math.floor(videoRef.current.duration / 60) < 10
+                          ? `0${Math.floor(videoRef.current.duration / 60)}`
+                          : Math.floor(videoRef.current.duration / 60)}
+                        :
+                        {Math.floor(videoRef.current.duration % 60) < 10
+                          ? `0${Math.floor(videoRef.current.duration % 60)}`
+                          : Math.floor(videoRef.current.duration % 60)}
+                      </div>
+                    </div>
+                  </>
+                ) : ''}
+            </div>
             <video
               key={source[videoNo]}
               ref={videoRef}
