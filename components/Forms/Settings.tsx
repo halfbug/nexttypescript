@@ -13,6 +13,7 @@ import { StoreContext } from 'store/store.context';
 import { UPDATE_CAMPAIGN, UPDATE_STORE } from 'store/store.graphql';
 import { IStore } from 'types/store';
 import styles from 'styles/Step4.module.scss';
+import styles1 from 'styles/Step3.module.scss';
 import Image1 from 'assets/images/Ellipse1.png';
 import Image2 from 'assets/images/Ellipse2.png';
 import Image3 from 'assets/images/Ellipse3.png';
@@ -184,16 +185,19 @@ export default function Settings({ isDB }: IProps) {
     { name: 'image4', value: 'image4', component: <img src={Image4.src} alt="imageone" /> },
     { name: 'image5', value: 'image5', component: <img src={Image5.src} alt="imageone" /> },
   ];
+  const Bstyle = {
+    width: '143px',
+  };
   console.log({ values });
 
   return (
 
     <Form noValidate onSubmit={handleSubmit} className="mx-4">
-      <Row><h4>Set your brand color</h4></Row>
+      {/* <Row><h4>Set your brand color</h4></Row>
       <Row>
         <Form.Text className={styles.ob_settings_detail}>You’ll want a color that stands out on a white background</Form.Text>
-      </Row>
-      <Row className="mt-2">
+      </Row> */}
+      {/* <Row className="mt-2">
         <Col lg={12}>
           <Form.Group className="d-flex ">
             <span className={styles.ob_settings__brandcolor}>
@@ -220,14 +224,14 @@ export default function Settings({ isDB }: IProps) {
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
-      </Row>
+      </Row> */}
       <Row className="mt-4"><h4>Select a banner background</h4></Row>
       <Row>
         <Col>
           <Form.Text className={styles.ob_settings_detail}>This will serve as the banner for your Groupshop page </Form.Text>
         </Col>
       </Row>
-      <Row className=" border rounded px-1 py-3 my-1 mx-1 mt-2">
+      <Row className="rounded px-1 py-3 my-1 mx-1 mt-2">
         {/* <Col md={6}>
           <div className={styles.ob_settings_preSet}>Pre-Set Themes</div>
           <ButtonGroup className={["mb-2 d-block mx-0 p-0", styles.ob_settings__group].join(' ')}>
@@ -251,14 +255,14 @@ export default function Settings({ isDB }: IProps) {
             ))}
           </ButtonGroup>
         </Col> */ }
-        <Col md={12} className={styles.vertical}>
-          <Row>
+        <Col md={12}>
+          {/* <Row>
             <div className={styles.ob_settings_preSet}>
               Custom background
               <span className={styles.badge}>Recommended</span>
             </div>
 
-          </Row>
+          </Row> */}
           <Row>
             <Col lg={12} className="align-middle mt-2">
               <Form.Check
@@ -272,7 +276,7 @@ export default function Settings({ isDB }: IProps) {
                   handleCustomBg('media', e.currentTarget.value);
                 }}
               />
-              <Form.Check
+              {/* <Form.Check
                 inline
                 label="Youtube video"
                 name="media"
@@ -282,12 +286,14 @@ export default function Settings({ isDB }: IProps) {
                 onChange={(e) => {
                   handleCustomBg('media', e.currentTarget.value);
                 }}
-              />
+              /> */}
 
             </Col>
           </Row>
           <Row className="">
-            <Col className={values.media === 'image' ? 'd-flex' : 'd-none'}>
+            {/* <Col className={values.media === 'image' ?
+            'd-flex' : 'd-none'}> */}
+            <Col className="col-6">
               <UploadButton
                 icon={(<WhiteButton>Upload</WhiteButton>)}
                 setFieldValue={setFieldValue}
@@ -297,7 +303,15 @@ export default function Settings({ isDB }: IProps) {
                 url={getKeyFromS3URL(values.imageUrl)}
               />
             </Col>
-            <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
+            {/* <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}> */}
+            <Col className="text-muted align-right text-end mt-4 pt-3">
+              <Row className="d-flex justify-align-center ">
+                <div className={styles.smallt}> Under 3MB (Formats: PNG, JPG, JPEG)</div>
+                <div className={styles.smallt}> 1440px x 500px</div>
+              </Row>
+            </Col>
+            {/* </Row> */}
+            {/* <Col className={values.media === 'youtube' ? 'd-block' : 'd-none'}>
               <Form.Control
                 type="text"
                 name="youtubeUrl"
@@ -308,13 +322,7 @@ export default function Settings({ isDB }: IProps) {
                 }}
               />
               <p className="text-muted">Please paste youtube video URL</p>
-            </Col>
-            <Row className={values.media === 'image' ? 'd-flex' : 'd-none'}>
-              <Col className="text-muted align-right text-end">
-                <div className={styles.smallt}> Under 3MB (Formats: PNG, JPG, JPEG)</div>
-                <div className={styles.smallt}> 1440px x 500px</div>
-              </Col>
-            </Row>
+            </Col> */}
           </Row>
         </Col>
       </Row>
@@ -323,13 +331,21 @@ export default function Settings({ isDB }: IProps) {
         && (
         <Row className="mt-5">
           <Col xs={4}>
-            <Button onClick={() => setParams({ ins: 3 })}>Previous</Button>
+            <Button
+              // className="bg-light"
+              className={styles1.rewards_btn_pre}
+              style={Bstyle}
+              onClick={() => setParams({ ins: 3 })}
+            >
+              Previous
+
+            </Button>
           </Col>
           <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
             <span className="text-muted">4/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button type="submit"> Publish </Button>
+            <Button style={Bstyle} className="px-5" type="submit"> Next </Button>
             {/* onClick={() => setParams({ ins: 3 })} */}
           </Col>
           {/* <Col xs={3} md={4}>&nbsp; </Col> */}
