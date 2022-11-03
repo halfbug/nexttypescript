@@ -1406,6 +1406,52 @@ query mostViralProducts($shop: String!, $startDate: String!, $endDate: String!) 
 }
 `;
 
+const GET_MOST_VIRAL_CUSTOMERS = gql`
+query mostViralCustomers($storeId: String!, $startDate: String!, $endDate: String!) {
+  mostViralCustomers(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+    _id
+    url
+    shortUrl
+    uniqueClicks
+    numMembers
+    lineItemsCount
+    refund
+    revenue
+    members{
+      id
+      name
+      createdAt      
+      shop
+      price 
+      totalDiscounts
+      customer{
+        firstName
+        lastName
+        email
+        phone
+        ip
+      }  
+    }     
+  }
+}
+`;
+
+const GET_ORDER_LINEITEMS = gql`
+query orderLineItems($parentId: String!) {
+  orderLineItems(parentId: $parentId) {
+    _id
+    price
+    discountedPrice
+    quantity
+    totalDiscounts
+    product{
+      title
+      featuredImage
+    }     
+  }
+}
+`;
+
 const GET_ALL_VIDEOS = gql`
   query videos($storeId: String!) {
     videos(storeId: $storeId) {
@@ -1437,5 +1483,5 @@ export {
   GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
-  GET_ALL_VIDEOS,
+  GET_ALL_VIDEOS, GET_MOST_VIRAL_CUSTOMERS, GET_ORDER_LINEITEMS,
 };

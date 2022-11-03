@@ -46,6 +46,13 @@ const usePagination = <T extends {}>({
     }
   }, [items]);
 
+  useEffect(() => {
+    if (id === 'MostViral' && items?.length === 0) {
+      setRenderItems(items);
+      setCurrentPage(1);
+    }
+  }, [dimensions, items, currentPage]);
+
   const breakpoints: { [char: string]: number } = {
     // xs: 0,
     // sm: 576,
@@ -98,6 +105,7 @@ const usePagination = <T extends {}>({
 
     return range(start, end);
   }, [currentPage, totalPages]);
+
   return {
     breakPoint,
     pageSize,

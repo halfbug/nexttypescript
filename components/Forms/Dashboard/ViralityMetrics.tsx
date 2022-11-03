@@ -72,6 +72,9 @@ export default function ViralityMetrics({
             <div className={styles.viralityMetrics__body__hr} />
           </>
         ))}
+        {mostViralProducts.length === 0 && (
+          <div className={styles.customerData__mostViral__noRecord}>No product found!</div>
+        )}
 
       </div>
     </div>
