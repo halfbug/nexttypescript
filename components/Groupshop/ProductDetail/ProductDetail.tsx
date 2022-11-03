@@ -321,24 +321,27 @@ const ProductDetail = ({
                     <Carousel.Item
                       className={styles.groupshop_modal_detail_featureImage}
                     >
-                      <img
-                        className="img-fluid"
-                        src={product?.featuredImage}
-                        alt={`Feature-${Math.random()}`}
-                      />
+                      {/* <img
+                      className="img-fluid"
+                      src={product?.featuredImage}
+                      alt={`Feature-${Math.random()}`}
+                    /> */}
+                      <div className={styles.groupshop_modal_detail_featureImage} style={{ backgroundImage: `url(${product?.featuredImage})` }} />
 
                     </Carousel.Item>
                   ) : ''}
                   {/* // )} */}
                   {data?.productById?.images?.map((img:any, i:number) => (
                     <Carousel.Item>
-                      <img
+                      {/* <img
                         src={img.src}
                         alt={`image_${i}`}
                        // eslint-disable-next-line react/no-array-index-key
                         key={`image_${i}`}
                         className={styles.groupshop_modal_detail_featureImage}
-                      />
+                      /> */}
+                      <div className={styles.groupshop_modal_detail_featureImage} style={{ backgroundImage: `url(${img.src})` }} />
+
                     </Carousel.Item>
 
                   ))}

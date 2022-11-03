@@ -1399,9 +1399,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
 
       &_featureImage {
-        width: 100%;
+        // width: 100%;
+        // height: 400px; 
+        // object-fit: cover;
         height: 400px;
-        object-fit: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 65%;
 
         img {
           object-fit: cover;
