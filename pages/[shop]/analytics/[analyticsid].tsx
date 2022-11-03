@@ -185,7 +185,12 @@ const CampaignAnalytics: NextPage = () => {
             />
           </Col>
         </Row>
-        <CustomerData />
+        <CustomerData
+          startDate={startFrom}
+          endDate={toDate}
+          currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+          storeId={store.id}
+        />
       </Container>
     </Page>
   );
