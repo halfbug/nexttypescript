@@ -6,7 +6,8 @@ import {
 import { GroupshopContext } from 'store/groupshop.context';
 import { StoreContext } from 'store/store.context';
 import {
-  GET_MONTHLY_GS, GET_TOTAL_GS, GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_REVENUE,
+  GET_MONTHLY_GS, GET_MONTH_COUNT, GET_TOTAL_GS,
+  GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_REVENUE,
 } from 'store/store.graphql';
 import { MonthlyGSType } from 'types/billing';
 
@@ -17,6 +18,7 @@ export default function useBilling() {
   const [totalGS, settotalGS] = useState(0);
   const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
+  const [totalMonths, settotalMonths] = useState<undefined | number>(undefined);
   const [appTrial, setappTrial] = useState(true);
   const [appTrialDay, setappTrialDay] = useState(true);
 
@@ -38,6 +40,17 @@ export default function useBilling() {
   // } = useQuery(GET_TOTAL_GS_MONTHLY, {
   //   variables: { storeId: store.id },
   // });
+  const {
+    data: data3, refetch: refetch3,
+  } = useQuery(GET_MONTH_COUNT, {
+    variables: { storeId: store.id },
+  });
+
+  useEffect(() => {
+    if (data3?.getStoreMonthsCount) {
+      settotalMonths(data3?.getStoreMonthsCount.count);
+    }
+  }, [data3]);
   useEffect(() => {
     if (data2?.findTotalRevenue) { settotalRevenue(data2.findTotalRevenue.revenue); }
   }, [data2]);
@@ -77,14 +90,10 @@ export default function useBilling() {
     return store.plan;
   }, []);
   const averageNoOfGS = useCallback(() => {
-    const { appTrialEnd } = store;
-    const trialMonth = appTrialEnd ? new Date(appTrialEnd).getMonth() : 0;
-    console.log('🚀 ~ file: useBilling.ts ~ line 82 ~ averageNoOfGS ~ trialMonth', trialMonth);
-    const currentMonth = (new Date()).getMonth();
-    console.log('🚀 ~ file: useBilling.ts ~ line 84 ~ averageNoOfGS ~ currentMonth', currentMonth);
-    const totalMonth = currentMonth === trialMonth ? 1 : (currentMonth + 1) - (trialMonth + 1 ?? 0);
-    return totalGS <= 0 ? 0 : totalGS / Math.abs(totalMonth);
-  }, [totalGS]);
+    console.log('🚀 ~ file: useBilling ~ averageNoOfGS ~ totalMonths', totalMonths);
+    if (totalMonths) return totalGS <= 0 ? 0 : Math.floor(totalGS / totalMonths);
+    return '';
+  }, [totalGS, totalMonths]);
 
   const isAppTrial = () => {
     const { appTrialEnd } = store;
