@@ -17,7 +17,7 @@ const ConnectSocialMedia = () => (
 
       <div className="mx-1">
         {' '}
-        <SocialButton network="Youtube" url="" />
+        <SocialButton network="Youtube" url="https://www.youtube.com/channel/UC5wNrCmFz1CYt4jfY5pA5fA" />
         {' '}
       </div>
 
@@ -28,7 +28,7 @@ const ConnectSocialMedia = () => (
       </div>
       <div className="mx-1">
         {' '}
-        <SocialButton network="Twitter" url="https://twitter.com/groupshopit" />
+        <SocialButton network="Twitter" url="https://www.instagram.com/groupshopit/" />
         {' '}
       </div>
     </section>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from 'styles/Knowledgebase.module.scss';
 import Quick from 'assets/images/quick.svg';
 import ConnectSocialMedia from 'components/Widgets/ConnectSocialMedia';
@@ -91,13 +92,13 @@ export default function FAQs(
           </Accordion.Item>
         </Accordion>
         <div className="mt-2 d-flex justify-content-end">
-          <WhiteButton
+          <Link href="https://groupshop.zendesk.com/hc/en-us">
+            <a className={styles.Kb_btnFAQ}>View all FAQs</a>
+          </Link>
+          {/* <WhiteButton
             type="submit"
             className={styles.Kb_btnFAQ}
-
-          >
-            View all FAQs
-          </WhiteButton>
+          /> */}
         </div>
       </Row>
       <ConnectSocialMedia />
