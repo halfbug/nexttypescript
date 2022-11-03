@@ -311,7 +311,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                     </Col>
                   </Row>
                   <ProductButton
-                    disableBtn={disableBtn}
+                    disableBtn={values.criteria === 'custom' ? false : disableBtn}
                     totalProducts={(values.products?.length) ? values.products?.length : 0}
                     handleDelete={handleDeleteProduct}
                   />
