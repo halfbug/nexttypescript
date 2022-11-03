@@ -159,4 +159,6 @@ UploadButton.defaultProps = {
 
         </>,
   className: '',
+  setisUploading: () => {},
+  setlogofeedback: () => {},
 };
