@@ -21,7 +21,8 @@ const Step2 = ({ show }: IStep0Props) => (
         <LeftPanel
           heading="Create a Groupshop"
           content="Now, let’s set up your first Groupshop
-          campaign so you can start selling."
+          campaign so you can start making
+          sales."
         />
         <Col className="text-sm-start mt-3 border-start" lg={7}>
           <OBCampaign />

@@ -102,9 +102,7 @@ export default function Rewards() {
       setParams({ ins: 4 });
     },
   });
-  const Bstyle = {
-    width: '143px',
-  };
+
   useEffect(() => {
     if (values.selectedTarget !== '') {
       setMinDiscount(values.selectedTarget?.rewards[0].discount);
@@ -256,11 +254,7 @@ export default function Rewards() {
         </Row>
         <Row className="mt-5">
           <Col xs={4}>
-            <Button
-              style={Bstyle}
-              className={styles.rewards_btn_pre}
-              onClick={() => setParams({ ins: 2 })}
-            >
+            <Button className={styles.rewards_btn_pre} onClick={() => setParams({ ins: 2 })}>
               Previous
             </Button>
           </Col>
@@ -268,7 +262,7 @@ export default function Rewards() {
             <span className="text-muted">3/4</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button style={Bstyle} type="submit"> Next </Button>
+            <Button className={styles.rewards_btn_pre} type="submit"> Next </Button>
           </Col>
         </Row>
       </Form>

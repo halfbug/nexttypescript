@@ -76,15 +76,15 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
   // console.log({ campaign });
   return (
     <>
-      <Row className="mt-1 ms-2">
+      <Row className="mt-3">
         <Col lg={4} md={6} sm={12}>
           <RButton
             variant="outline-primary"
             onClick={handleEditProduct}
             disabled={disableBtn}
-            className="text-nowrap mb-4"
+            className="text-nowrap"
           >
-            Add products/collections
+            Edit products/collections
           </RButton>
 
         </Col>

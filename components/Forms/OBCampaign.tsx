@@ -14,8 +14,6 @@ import { Check2Circle, InfoCircle, XCircle } from 'react-bootstrap-icons';
 import { CREATE_CAMPAIGN, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import AddProductButton from 'components/Buttons/AddProductButton';
 import styles from 'styles/Campaign.module.scss';
-import styles1 from 'styles/Step3.module.scss';
-import styles2 from 'styles/GeneralForm.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 export default function OBCampaign() {
@@ -155,38 +153,36 @@ export default function OBCampaign() {
           </Form.Text>
         </Col>
       </Row>
-      <section className={styles2.generalform_purplebox}>
-        <Row className="mt-2">
-          <h4>
-            Add your products to Groupshop
-          </h4>
-        </Row>
-        <Row className="text-muted"><p>All the products you select below will be available on your customers’ Groupshops.</p></Row>
-        <Row className="mt-2">
-          <Col className="ps-0">
-            <Row className="ms-2">
-              <Form.Check
-                inline
-                label="All products (Recommended)"
-                className={values.criteria === 'allproducts'
-                  ? styles.dashboard_campaign_active_radio_option
-                  : styles.dashboard_campaign_radio_label}
-                onChange={(e) => {
-                  handleChange(e);
+      <Row className="mt-3">
+        <h4>
+          Add your products to Groupshop
+        </h4>
+      </Row>
+      <Row className="text-muted"><p>All the products you select below will be available on your customers’ Groupshops.</p></Row>
+      <Row className="mt-2">
+        <Col className="ps-0">
+          <Row className="ms-2">
+            <Form.Check
+              inline
+              label="All products (Recommended)"
+              className={values.criteria === 'allproducts'
+                ? styles.dashboard_campaign_active_radio_option
+                : styles.dashboard_campaign_radio_label}
+              onChange={(e) => {
+                handleChange(e);
                 // handleSubmit();
-                }}
-                onClick={() => { setValue('criteria', 'allproducts'); setdisableBtn(true); }}
-                // type="radio"
-                name="criteria"
-                isInvalid={touched.criteria && !!errors.criteria}
-                value="allproducts"
-                checked={values.criteria === 'allproducts'}
-              />
-              {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
-            </Row>
-            {/* <Row className="row mb-2 ms-0"><p className="mb-0 mt-1">
-          <strong>Or select as many collections as you want below:</strong></p></Row> */}
-            {/* <Row className="ms-2">
+              }}
+              onClick={() => { setValue('criteria', 'allproducts'); setdisableBtn(true); }}
+              type="radio"
+              name="criteria"
+              isInvalid={touched.criteria && !!errors.criteria}
+              value="allproducts"
+              checked={values.criteria === 'allproducts'}
+            />
+            {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
+          </Row>
+          <Row className="row mb-2 ms-0"><p className="mb-0 mt-1"><strong>Or select as many collections as you want below:</strong></p></Row>
+          {/* <Row className="ms-2">
             <Form.Check
               inline
               onChange={(e) => {
@@ -204,7 +200,7 @@ export default function OBCampaign() {
               checked={values.criteria === 'newest'}
             />
           </Row> */}
-            {/* <Row className="ms-2">
+          {/* <Row className="ms-2">
             <Form.Check
               inline
               label="Best sellers"
@@ -222,7 +218,7 @@ export default function OBCampaign() {
               checked={values.criteria === 'bestseller'}
             />
           </Row> */}
-            {/* <Row>
+          {/* <Row>
             <Row className="row mb-2 ms-0">
               <p className="mb-0 mt-1">
                 <strong>Specific products/collections (up to 80 products)</strong>
@@ -230,7 +226,7 @@ export default function OBCampaign() {
             </Row>
 
           </Row> */}
-            {/* <Row className="ms-2">
+          <Row className="ms-2">
             <Form.Check
               inline
               label="Best sellers"
@@ -261,41 +257,32 @@ export default function OBCampaign() {
               onClick={() => { setValue('criteria', 'newest'); setdisableBtn(true); }}
               checked={values.criteria === 'newest'}
             />
-          </Row> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col className="mt-1 ms-2 p-0">
-            <Form.Check
-              inline
-              label="Specific products/collections (up to 80 products)"
-              className={values.criteria === 'custom'
-                ? styles.dashboard_campaign_active_radio_option
-                : styles.dashboard_campaign_radio_label}
-              onChange={handleChange}
-              onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
-              // type="radio"
-              name="criteria"
-              isInvalid={touched.criteria && !!errors.criteria}
-              value="custom"
-              checked={values.criteria === 'custom'}
-            />
+          </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="ms-2 p-0">
+          <Form.Check
+            inline
+            label="Specific products/collections (up to 80 products)"
+            className={values.criteria === 'custom'
+              ? styles.dashboard_campaign_active_radio_option
+              : styles.dashboard_campaign_radio_label}
+            onChange={handleChange}
+            onClick={() => { setdisableBtn(false); setValue('criteria', 'custom'); }}
+            type="radio"
+            name="criteria"
+            isInvalid={touched.criteria && !!errors.criteria}
+            value="custom"
+            checked={values.criteria === 'custom'}
+          />
 
-          </Col>
-          <Form.Control.Feedback type="invalid">
-            {errors.criteria}
-          </Form.Control.Feedback>
-          <p className="ms-3 text-muted">
-            The more products you select, the
-            better your customers’ shopping experience.
-
-          </p>
-        </Row>
-        <ProductButton
-          disableBtn={disableBtn}
-          handleDelete={handleDeleteProduct}
-        />
-      </section>
+        </Col>
+        <Form.Control.Feedback type="invalid">
+          {errors.criteria}
+        </Form.Control.Feedback>
+      </Row>
+      <ProductButton disableBtn={disableBtn} handleDelete={handleDeleteProduct} />
       {/* <p>25 product(s)/2 collection(s) selected</p> */}
       {/* <Row className="mt-4">
         <Col lg={12} className="d-flex align-items-center">
@@ -318,14 +305,7 @@ export default function OBCampaign() {
       {/* <AddProductButton /> */}
       <Row className="mt-5">
         <Col lg={4}>
-          <Button
-            className={styles1.rewards_btn_pre}
-            style={Bstyle}
-            onClick={() => setParams({ ins: 1 })}
-          >
-            Previous
-
-          </Button>
+          <Button style={Bstyle} onClick={() => setParams({ ins: 1 })}>Previous</Button>
         </Col>
         <Col lg={4} className="text-center d-flex align-items-center justify-content-center">
           <span className="text-muted">2/4</span>
