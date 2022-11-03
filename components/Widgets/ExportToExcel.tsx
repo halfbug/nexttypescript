@@ -8,9 +8,12 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     // eslint-disable-next-line react/require-default-props
     apiData?: any;
     fileName: string;
-    month: number;
-    year: number;
+    month?: number;
+    year?: number;
+    sDate?: Date;
+    eDate?: Date;
     storeId: string | undefined;
+    customBilling: boolean;
 }
 type MyFunction = (
     apiDataIn: any,
@@ -18,7 +21,7 @@ type MyFunction = (
     ) => void
 
 const ExportToExcel = ({
-  apiData, fileName, storeId, month, year, children,
+  apiData, fileName, storeId, month, year, sDate, eDate, customBilling, children,
 }: IProps) => {
   const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   const fileExtension = '.xlsx';
@@ -27,8 +30,13 @@ const ExportToExcel = ({
     sheetData, getDayBilling, loading, data: excelData,
     formatDataForExcel, monthsArr,
   } = useExcelDocument();
-  const monName = monthsArr(month - 1).initial;
+  const monName = monthsArr(month ?? 1 - 1).initial;
+  const monNameCustom = monthsArr(sDate?.getMonth() ?? 1 - 1).initial;
+  const sdateCustom = sDate?.getDate() ?? 1;
+  const syearCustom = sDate?.getFullYear() ?? 2022;
+  // change file name custom billing
   const xlFileName = `groupshop-billing-charges-${monName}-${year}`;
+  const xlFileNameCustom = `groupshop-billing-charges-${sdateCustom}-${monNameCustom}-${syearCustom}`;
 
   const exportToCSV: MyFunction = (apiDataIn, fileNameIn) => {
     const ws = XLSX.utils.json_to_sheet(apiDataIn);
@@ -85,5 +93,11 @@ const ExportToExcel = ({
       ) : children }
     </Button>
   );
+};
+ExportToExcel.defaultProps = {
+  sDate: new Date(),
+  eDate: new Date(),
+  month: 1,
+  year: 1,
 };
 export default ExportToExcel;

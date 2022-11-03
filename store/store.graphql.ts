@@ -907,6 +907,21 @@ query GetMonthlyGSBilling($storeId: String!) {
     }
 }
 `;
+const GET_CUSTOM_MONTHLY_GS = gql`
+query GetCustomMonthlyGSBilling($storeId: String!) {
+  getCustomBilling(storeId: $storeId) {
+    _id
+    feeCharges
+    feeChargesGS
+    totalCharges
+    cashBack
+    revenue
+    count
+    totalGS
+    }
+}
+`;
+
 const GET_TOTAL_GS_MONTHLY = gql`
 query FindTotalGSMonthly($storeId: String!) {
   findTotalGSMonthly(storeId: $storeId) {
@@ -1490,5 +1505,6 @@ export {
   GET_ACTIVE_GROUPSHOP_BY_SHOP, SYNC_STORE_CUSTOMERS, FIND_PENDING_GROUPSHOP,
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
-  GET_ALL_VIDEOS, GET_MOST_VIRAL_CUSTOMERS, GET_ORDER_LINEITEMS, GET_MONTH_COUNT,
+  GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
+  GET_ORDER_LINEITEMS, GET_MONTH_COUNT,
 };

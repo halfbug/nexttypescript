@@ -6,7 +6,7 @@ import { Row, Col, Table } from 'react-bootstrap';
 import DownloadIcon from 'assets/images/download-icon.svg';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import useBilling from 'hooks/useBilling';
-import { GET_MONTHLY_GS } from 'store/store.graphql';
+import { GET_CUSTOM_MONTHLY_GS, GET_MONTHLY_GS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import { BillingType } from 'types/billing';
@@ -14,6 +14,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import ExportToExcel from 'components/Widgets/ExportToExcel';
 import R1 from 'assets/images/Revenue.svg';
 import C1 from 'assets/images/CartBag.svg';
+import moment from 'moment';
 
 export default function PaymentHistory() {
   const {
@@ -36,22 +37,107 @@ export default function PaymentHistory() {
     totalCharges: 0,
     feeChargesGS: 0,
   }]);
-
+  const [monthlyCustomGS, setmonthlyCustomGS] = React.useState([{
+    _id: new Date(),
+    count: 0,
+    revenue: 0,
+    feeCharges: 0,
+    cashBack: 0,
+    totalGS: 0,
+    totalCharges: 0,
+    feeChargesGS: 0,
+  }]);
+  const [showCustomBilling, setshowCustomBilling] = React.useState(true);
+  console.log('🚀 ~ file: PaymentHistory.tsx ~ line 51 ~ PaymentHistory ~ showCustomBilling', showCustomBilling);
   const {
     loading, data, refetch,
   } = useQuery(GET_MONTHLY_GS, {
     variables: { storeId: store.id },
   });
+  const {
+    loading: loading2, data: data2, refetch: refetch2,
+  } = useQuery(GET_CUSTOM_MONTHLY_GS, {
+    variables: { storeId: store.id },
+  });
   // console.log('🚀 ~ file: PaymentHistory.tsx ~ line 22 ~ PaymentHistory ~ data', data);
   React.useEffect(() => {
-    if (data?.getMonthlyGSBilling.length) { setmonthlyGS(data.getMonthlyGSBilling); }
+    if (data?.getMonthlyGSBilling.length) {
+      setmonthlyGS(data.getMonthlyGSBilling);
+    }
   }, [data]);
   React.useEffect(() => {
+    console.log('....', data2?.getCustomBilling.length);
+
+    if (data2?.getCustomBilling.length) {
+      setmonthlyCustomGS(data2.getCustomBilling);
+      setshowCustomBilling(true);
+    } else setshowCustomBilling(false);
+  }, [data2]);
+
+  React.useEffect(() => {
     refetch();
+    refetch2();
   }, []);
   // console.log('monthlyGS', monthlyGS);
 
   const getBillingTableHTML = () => (
+    <div>
+      <Table borderless hover className='mb-0'>
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={`${column.displayTitle}`}>
+                {column.displayTitle}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {monthlyCustomGS.map((item) => (
+            <tr key={`${item.cashBack}-${Math.random()}`}>
+              <td>
+                { moment(new Date(item._id)).format('MM/DD/YYYY') }
+                {' - '}
+                { moment(new Date(item._id)).add(30, 'days').format('MM/DD/YYYY') }
+                {' '}
+              </td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                {(item.revenue).toFixed(2).toString().replace('.00', '')}
+              </td>
+              <td>
+                {item.totalGS}
+              </td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                {(item.cashBack).toFixed(2).toString().replace('.00', '')}
+              </td>
+              <td>
+                {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+                { isAppTrial() ? (item.feeCharges).toFixed(2).toString().replace('.00', '')
+                  : (item.totalCharges).toFixed(2).toString().replace('.00', '')}
+              </td>
+              <td>
+                <ExportToExcel
+                  apiData={mockData}
+                  fileName="groupshop"
+                  storeId={store.id}
+                  sDate={new Date(item._id)}
+                  eDate={new Date(item._id)}
+                  customBilling
+                >
+                  <DownloadIcon />
+                </ExportToExcel>
+
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
+    </div>
+  );
+  const getOldBillingTableHTML = () => (
     <div>
       <Table borderless hover className='mb-0'>
         <thead>
@@ -94,6 +180,7 @@ export default function PaymentHistory() {
                   month={item._id.month as unknown as number}
                   year={item._id.year as unknown as number}
                   storeId={store.id}
+                  customBilling={false}
                 >
                   <DownloadIcon />
                 </ExportToExcel>
@@ -150,7 +237,7 @@ export default function PaymentHistory() {
         </Row>
         <Row className={styles.billing__paymenthistory__tableContainer}>
           <Col lg={12}>
-            {getBillingTableHTML()}
+            {showCustomBilling ? getBillingTableHTML() : getOldBillingTableHTML()}
           </Col>
         </Row>
         <Row>
