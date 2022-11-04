@@ -24,34 +24,36 @@ const Step0 = ({ show }: IStep0Props) => {
       <Container fluid className={styles.welcome}>
         <Row>
           <Col lg={5} className={styles.sideImg} />
-          <Col lg={7} d-flex justify-content-center>
+          <Col lg={7} className="d-flex justify-content-center">
             <Container fluid className="mt-4">
               <Row>
-                <Row className={styles.welcome_taghead}>
-                  <Col lg={6} className="me-4 mt-5">
-                    <h3 className="text-center pr-4">Welcome to</h3>
-                    <HeadLogo />
-                  </Col>
-                  <Col lg={2}>
+                <Row className={[styles.welcome_taghead, ''].join('')}>
+                  <div className="d-flex justify-content-end pe-0 me-0">
                     <img src={Brand1.src} alt="Brand1" />
-                  </Col>
+                  </div>
                 </Row>
               </Row>
-              <section className="mx-4">
-                <Row className="mb-1  mx-3 ">
+              <section className="mx-2">
+                <Row className="d-flex justify-content-center">
+                  <h3 className="mb-4 text-center">Welcome to </h3>
+                  <div className="d-flex justify-content-center mb-5">
+                    <HeadLogo />
+                  </div>
+                </Row>
+                <Row className="mb-1">
                   <Col>
-                    <h4 className="">We know that nothing beats a friend’s recommendation.</h4>
+                    <h4 className="">We know that nothing beats a recommendation.</h4>
                   </Col>
                 </Row>
-                <Row className="justify-content-center mx-3">
+                <Row className="justify-content-center mx-1 mb-3">
                   <Col>
                     <h4 className="">
-                      Groupshop makes shopping together
-                      a breeze with rewards that get your customers excited.
+                      Groupshop makes shopping & sharing a breeze
+                      with rewards that get your customers excited.
                     </h4>
                   </Col>
                 </Row>
-                <Row className="mt-3 mx-5">
+                {/* <Row className="mt-3 mx-5">
                   <Col xs={2} className="mx-2">
                     <Cart />
                   </Col>
@@ -96,8 +98,8 @@ const Step0 = ({ show }: IStep0Props) => {
                       <b>TLDR - Fewer paid ads, more organic leads.</b>
                     </p>
                   </Col>
-                </Row>
-                <Row className="mt-4 justify-content-center">
+                </Row> */}
+                <Row className="mt-5 justify-content-center">
                   {/* <Col xs={3} md={4}> </Col> */}
                   <Col xs={6} md={4} className="mx-2 d-flex justify-content-center ">
                     <Button onClick={() => setParams({ ins: 1 })}>Get Started</Button>

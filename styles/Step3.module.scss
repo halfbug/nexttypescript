@@ -28,14 +28,12 @@
         opacity: 0.5;
     }
     &_btn_pre {
-        width: 124px;
-        font-family: DM Sans;
+        font-family: 'DM Sans';
         font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 18px;
+        font-weight: 500;
+        font-size: 16px;
         text-align: center;
-        color: #282828;
+        background: $white;
         
     }
     &__radio {

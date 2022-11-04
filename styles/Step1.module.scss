@@ -16,6 +16,10 @@
         background-color: #fcfcfc;
         // width: 248px;
     }
+	search-wrapper searchWrapper {
+		border: none !important;
+	}
+
 	&__select {
         @extend .p-2;
 		background-color: #fcfcfc;

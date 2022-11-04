@@ -76,7 +76,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
   // console.log({ campaign });
   return (
     <>
-      <Row className="mt-3">
+      <Row className="mt-3 mb-4">
         <Col lg={4} md={6} sm={12}>
           <RButton
             variant="outline-primary"
@@ -88,7 +88,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
           </RButton>
 
         </Col>
-        <Col lg={8} md={6} sm={12} className="ps-4 d-flex align-items-center">
+        <Col lg={8} md={6} sm={12} className="ps-4 mt-1">
           { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
       // || (totalProducts !== 0 && criteria === 'custom'))
       || (campaign?.products?.length && campaign?.criteria === 'custom')

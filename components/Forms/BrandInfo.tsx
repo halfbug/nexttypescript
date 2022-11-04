@@ -159,12 +159,12 @@ export default function BrandInfo() {
       </Row>
       <Row><h4>Select your industry</h4></Row>
       <Row>
-        <Col lg={6}>
+        <Col lg={6} className="border-0">
           {' '}
           <Multiselect
             isObject={false}
             selectedValues={values.industry}
-            className={['form-select', styles.welcome__select].join(' ')}
+            className={['form-select border-0', styles.welcome__select].join(' ')}
             onRemove={(e) => {
               updateIndustry(e);
             }}

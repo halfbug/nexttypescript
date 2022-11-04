@@ -20,7 +20,9 @@ const Step4 = ({ show }: IStep4Props) => (
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Make it look right"
-          content="Control how your customers will see your Groupshop page as they shop from it. You want your customer experience to feel on-brand. Oh, and you’re almost done!"
+          content="We want your customers’ experience with Groupshop to
+          feel on-brand. Add a custom banner and brand color to customize
+           the look & feel of your Groupshops. Oh, and you’re almost done!"
         />
         <Col className="text-sm-start mt-3 border-start" lg={7}>
           <Settings isDB={false} />
