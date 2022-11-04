@@ -96,7 +96,7 @@ const CampaignListing = () => {
   };
 
   return (
-    <Page headingText="Campaign" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
+    <Page headingText="Post-Purchase" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Container fluid className={styles.container}>
         <Model
           show={show}

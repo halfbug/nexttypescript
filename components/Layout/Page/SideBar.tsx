@@ -14,7 +14,8 @@ import Settingsicon from 'assets/images/settings-icon.svg';
 import Knowledgebaseicon from 'assets/images/knowledge-base-icon.svg';
 import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
 import PartnerToolLogo from 'assets/images/partner-tools.svg';
-import RetentionToolLogo from 'assets/images/retention-tools.svg';
+import ReActivationLogo from 'assets/images/re-activation.svg';
+import DiscoveryLogo from 'assets/images/discovery.svg';
 import { useRouter } from 'next/router';
 
 const Sidebar = () => {
@@ -52,6 +53,7 @@ const Sidebar = () => {
                   </a>
                 </Link>
               </li>
+
               <li>
                 <Link
                 // href={`/${shopName}/campaign`}
@@ -63,11 +65,62 @@ const Sidebar = () => {
                   <a>
                     <span className={linkstyle('campaign')}>
                       <span className={styles.linkicon}><Campaignicon /></span>
-                      <span className={styles.linktext}>Campaign</span>
+                      <span className={styles.linktext}>Post-Purchase</span>
                     </span>
                   </a>
                 </Link>
               </li>
+
+              <li>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/partnertools',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('partnertools')}>
+                      <span className={styles.linkicon}><PartnerToolLogo /></span>
+                      <span className={styles.linktext}>Partners</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/retentiontools',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('retentiontools')}>
+                      <span className={styles.linkicon}><ReActivationLogo /></span>
+                      <span className={styles.linktext}>Re-Activation</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/discovery',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('discovery')}>
+                      <span className={styles.linkicon}><DiscoveryLogo /></span>
+                      <span className={styles.linktext}>Discovery</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
               <li>
                 <Link
                 // href={`/${shopName}/analytics`}
@@ -84,6 +137,24 @@ const Sidebar = () => {
                   </a>
                 </Link>
               </li>
+
+              <li>
+                <Link
+                // href={`/${shopName}/settings`}
+                  href={{
+                    pathname: '/[shop]/settings',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('settings')}>
+                      <span className={styles.linkicon}><Settingsicon /></span>
+                      <span className={styles.linktext}>Settings</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
               <li>
                 <Link
                 // href={`/${shopName}/billing`}
@@ -101,54 +172,6 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              <li>
-                <Link
-                //  href={`/${shopName}/partnertools`}
-                  href={{
-                    pathname: '/[shop]/partnertools',
-                    query: { shop },
-                  }}
-                >
-                  <a>
-                    <span className={linkstyle('partnertools')}>
-                      <span className={styles.linkicon}><PartnerToolLogo /></span>
-                      <span className={styles.linktext}>Partner Tools</span>
-                    </span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link
-                //  href={`/${shopName}/partnertools`}
-                  href={{
-                    pathname: '/[shop]/retentiontools',
-                    query: { shop },
-                  }}
-                >
-                  <a>
-                    <span className={linkstyle('retentiontools')}>
-                      <span className={styles.linkicon}><RetentionToolLogo /></span>
-                      <span className={styles.linktext}>Retention Tools</span>
-                    </span>
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link
-                // href={`/${shopName}/settings`}
-                  href={{
-                    pathname: '/[shop]/settings',
-                    query: { shop },
-                  }}
-                >
-                  <a>
-                    <span className={linkstyle('settings')}>
-                      <span className={styles.linkicon}><Settingsicon /></span>
-                      <span className={styles.linktext}>Settings</span>
-                    </span>
-                  </a>
-                </Link>
-              </li>
               <li>
                 <Link
                 // href={`/${shopName}/knowledgebase`}
