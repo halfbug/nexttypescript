@@ -178,7 +178,7 @@ const ProductGrid = ({
                               🤩
                               {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
                               {' '}
-                              {`${addedBy}'s favs`}
+                              {`${addedBy.length > 7 ? addedBy.slice(0, 7) : addedBy}'s favs`}
                             </span>
                           ) : '';
                           htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
