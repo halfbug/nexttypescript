@@ -41,13 +41,12 @@ type ProductGridProps = {
   isModalForMobile?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
-  inventoryCount?: number | null;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  inventoryCount, urlForActivation, ...props
+  urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -64,23 +63,9 @@ const ProductGrid = ({
     siblingCount: 4,
     id,
   });
-  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 64 ~ renderItems', renderItems);
 
-  // const fillerz = (!skuCount || (skuCount && skuCount > 4))
-  //   && pageSize === (renderItems?.length) ? 0 : 1 || 1;
-  // || ((skuCount && skuCount > 4) && pageSize === (renderItems?.length) ? 0 : 1 || 1);
-  // eslint-disable-next-line max-len
-  // const fillerz = ((pageSize === (renderItems?.length)) || (products && products.length > 3 && id === 'toppicks')) ? 0 : 1;
   const fillerz = pageSize === renderItems?.length ? 0 : 1;
-  // const fillerz = (!skuCount || (skuCount && skuCount > 4))
-  // && pageSize === (renderItems?.length) ? 0 : 1 || 1;
 
-  // const {
-  //   gsctx: {
-  //     discountCode: { percentage },
-  //     dealProducts,
-  //   } = { discountCode: { percentage: 0 }, dealProducts: [] },
-  // } = useContext(GroupshopContext);
   const {
     gsctx: {
       discountCode: { percentage },
@@ -305,8 +290,7 @@ const ProductGrid = ({
           </>
         ))}
 
-        {((skuCount! > 1 || inventoryCount! > 4)
-        && leftOverProducts()?.length > 0)
+        {(skuCount! > 1 && leftOverProducts()?.length > 0)
           ? [...new Array(fillerz)]?.map((n) => (
             <Col xs={xs} md={6} lg={4} xl={3} key={n}>
               <ProductCard
@@ -429,7 +413,6 @@ ProductGrid.defaultProps = {
   isModalForMobile: false,
   urlForActivation: '',
   skuCount: 0,
-  inventoryCount: 0,
 };
 
 export default ProductGrid;

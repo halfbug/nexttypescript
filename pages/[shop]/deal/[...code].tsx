@@ -72,7 +72,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
   const {
-    SKU, memberProducts, hideSection, inventoryProducts, dealProductsCTX,
+    SKU, memberProducts, hideSection, hideTopPicks,
   } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
@@ -118,9 +118,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     if (groupshop.id && pending) {
       setpending(false);
       // setallProducts(groupshop?.allProducts);
-      setallProducts(groupshop?.allProducts?.filter(
+      const filteredProducts = groupshop?.allProducts?.filter(
         (item) => item.outofstock === false || item.outofstock === null,
-      ));
+      ).sort((a, b) => a.title.localeCompare(b.title));
+      setallProducts(filteredProducts);
       setmember(groupshop?.members[0]);
       console.log('=== update gs ...code GS');
       console.log('new testing console', process.env.IMAGE_PATH);
@@ -188,9 +189,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
     //   [...gsctx?.allProducts ?? []],
     // )));
-    setallProducts(
-      [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
-    );
+    // setallProducts(
+    //   [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
+    // );
 
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
@@ -330,7 +331,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           }}
         />
         <noscript
-        // eslint-disable-next-line react/no-danger
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `<img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=3371804206430685&ev=PageView&noscript=1"
@@ -340,11 +341,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
 
         {facebookPixels !== '' && (
-        <>
-          <script
-          // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `!function(f,b,e,v,n,t,s)
+          <>
+            <script
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `!function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -354,49 +355,49 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${facebookPixels}');
             fbq('track', 'PageView');`,
-            }}
-          />
-          <noscript
-          // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `<img height="1" width="1" style="display:none"
+              }}
+            />
+            <noscript
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `<img height="1" width="1" style="display:none"
                 src="https://www.facebook.com/tr?id=${facebookPixels}&ev=PageView&noscript=1"
                 />`,
-            }}
-          />
-        </>
+              }}
+            />
+          </>
         )}
 
         {googlePixels !== '' && (
-        <>
+          <>
 
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${googlePixels}`} />
-          <script
-          // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${googlePixels}`} />
+            <script
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
               function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());
             
               gtag('config', '${googlePixels}');`,
-            }}
-          />
-        </>
+              }}
+            />
+          </>
         )}
 
         {tiktokPixels !== '' && (
-        <>
-          <script
-          // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `!function (w, d, t) {
+          <>
+            <script
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `!function (w, d, t) {
                 w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};              
                 ttq.load('${tiktokPixels}');
                 ttq.page();
               }(window, document, 'ttq');`,
-            }}
-          />
-        </>
+              }}
+            />
+          </>
         )}
 
         {snapchatPixels !== '' && (
@@ -495,9 +496,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     pending={pending}
                   />
                   {gsctx?.members.length > 5 && (
-                  <span className="pe-2">
-                    { `+${gsctx?.members.length - 5} more`}
-                  </span>
+                    <span className="pe-2">
+                      {`+${gsctx?.members.length - 5} more`}
+                    </span>
                   )}
                   <ShareButton
                     placement="bottom"
@@ -547,15 +548,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {(SKU.length > 1 || inventoryProducts.length > 4)
-                  && leftOverProducts()?.length > 0 ? (
-                    <IconButton
-                      icon={<Search size={24} />}
-                      className={styles.groupshop__hero_iconSearchBtn}
-                      onClick={handleAddProduct}
-                      disabled={isExpired}
-                    />
-                  ) : <></>}
+                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
+                  <IconButton
+                    icon={<Search size={24} />}
+                    className={styles.groupshop__hero_iconSearchBtn}
+                    onClick={handleAddProduct}
+                    disabled={isExpired}
+                  />
+                ) : <></>}
                 <IconButton
                   icon={<Handbag size={24} />}
                   className={styles.groupshop__hero_iconBtn}
@@ -690,7 +690,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={(SKU.length >= 2 && SKU.length <= 4 && dealProductsCTX.length < 5)
+          products={(SKU.length >= 2 && SKU.length <= 4)
             ? uniqueArray(memberProducts) : shoppedBy}
           maxrows={1}
           addProducts={handleAddProduct}
@@ -699,7 +699,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
           skuCount={SKU.length}
-          inventoryCount={inventoryProducts.length}
         >
           <h2 className={styles.groupshop_col_shoppedby}>
             SHOPPED BY
@@ -754,7 +753,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous purchases and recommendations.
           </p>
         </ProductGrid>
-        {(SKU.length > 4 || dealProductsCTX.length > 4) && (
+        {SKU.length > 4 && (
           members?.length > 1 || refferalDealsProducts?.length ? (
             <ProductGrid
               xs={6}
@@ -763,12 +762,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               lg={4}
               xl={3}
               products={
-              ownerProducts
-              && (ownerProducts!.length > 3
-                // ? popularProducts?.slice(0, 3)
-                ? popularShuffled
-                : newPopularPrd)
-            }
+                ownerProducts
+                && (ownerProducts!.length > 3
+                  // ? popularProducts?.slice(0, 3)
+                  ? popularShuffled
+                  : newPopularPrd)
+              }
               maxrows={1}
               addProducts={handleAddProduct}
               handleDetail={(prd) => setsProduct(prd)}
@@ -780,28 +779,32 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <h2>Popular with the Group</h2>
             </ProductGrid>
           ) : (
-            <ProductGrid
-              xs={6}
-              sm={6}
-              md={6}
-              lg={4}
-              xl={3}
-              products={
-              ((SKU.length >= 2 && SKU.length <= 4)
-                ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
-                ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4)
-            }
-              maxrows={1}
-              addProducts={handleAddProduct}
-              handleDetail={(prd) => setsProduct(prd)}
-              id="toppicks"
-              isModalForMobile={isModalForMobile}
-              urlForActivation={urlForActivation}
-              skuCount={SKU.length}
-            >
-              <h2>Top Picks</h2>
-            </ProductGrid>
+            <>
+              {!hideTopPicks && (
+              <ProductGrid
+                xs={6}
+                sm={6}
+                md={6}
+                lg={4}
+                xl={3}
+                products={
+                ((SKU.length >= 2 && SKU.length <= 4)
+                  ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
+                  ? topPicks?.slice(0, 3)
+                  : topPicks?.slice(0, 4)
+              }
+                maxrows={1}
+                addProducts={handleAddProduct}
+                handleDetail={(prd) => setsProduct(prd)}
+                id="toppicks"
+                isModalForMobile={isModalForMobile}
+                urlForActivation={urlForActivation}
+                skuCount={SKU.length}
+              >
+                <h2>Top Picks</h2>
+              </ProductGrid>
+              )}
+            </>
           ))}
 
         {!hideSection && SKU.length > 1 ? (
@@ -910,8 +913,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </>
 
             )
-              : (((SKU.length > 1 || inventoryProducts.length > 4)
-                && leftOverProducts()?.length > 0) && (
+              : ((SKU.length > 1 && leftOverProducts()?.length > 0) && (
                 <>
                   <p>Don’t see what you like?</p>
                   <Button
