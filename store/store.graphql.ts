@@ -883,6 +883,14 @@ query FindTotalRevenue($storeId: String!) {
   }
 }
 `;
+const GET_TOTAL_PARTNER_REVENUE = gql`
+query FindPartnerTotalRevenue($storeId: String!) {
+  getPartnerRevenue(storeId: $storeId) {
+    _id
+    revenue
+  }
+}
+`;
 const GET_MONTH_COUNT = gql`
 query GetStoreMonthsCount($storeId: String!) {
   getStoreMonthsCount(storeId: $storeId) {
@@ -1506,5 +1514,5 @@ export {
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
-  GET_ORDER_LINEITEMS, GET_MONTH_COUNT,
+  GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE,
 };

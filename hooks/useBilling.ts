@@ -7,7 +7,7 @@ import { GroupshopContext } from 'store/groupshop.context';
 import { StoreContext } from 'store/store.context';
 import {
   GET_MONTHLY_GS, GET_MONTH_COUNT, GET_TOTAL_GS,
-  GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_REVENUE,
+  GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_PARTNER_REVENUE, GET_TOTAL_REVENUE,
 } from 'store/store.graphql';
 import { MonthlyGSType } from 'types/billing';
 
@@ -18,6 +18,7 @@ export default function useBilling() {
   const [totalGS, settotalGS] = useState(0);
   const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
+  const [totalPartnerRevenue, settotalPartnerRevenue] = useState(0);
   const [totalMonths, settotalMonths] = useState<undefined | number>(undefined);
   const [appTrial, setappTrial] = useState(true);
   const [appTrialDay, setappTrialDay] = useState(true);
@@ -45,7 +46,17 @@ export default function useBilling() {
   } = useQuery(GET_MONTH_COUNT, {
     variables: { storeId: store.id },
   });
+  const {
+    data: data4, refetch: refetch4,
+  } = useQuery(GET_TOTAL_PARTNER_REVENUE, {
+    variables: { storeId: store.id },
+  });
 
+  useEffect(() => {
+    if (data4?.getPartnerRevenue) {
+      settotalPartnerRevenue(data4?.getPartnerRevenue.revenue);
+    }
+  }, [data4]);
   useEffect(() => {
     if (data3?.getStoreMonthsCount) {
       settotalMonths(data3?.getStoreMonthsCount.count);
@@ -135,5 +146,6 @@ export default function useBilling() {
     isAppTrialOnGivenDate,
     isAppTrial,
     averageNoOfGS,
+    totalPartnerRevenue,
   };
 }

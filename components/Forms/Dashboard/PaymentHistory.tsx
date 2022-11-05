@@ -18,7 +18,7 @@ import moment from 'moment';
 
 export default function PaymentHistory() {
   const {
-    totalGS, totalRevenue, currencySymbol, appTrial, isAppTrial,
+    totalGS, totalRevenue, currencySymbol, appTrial, isAppTrial, totalPartnerRevenue,
   } = useBilling();
   const { convertNumToMonth, storeCurrencySymbol } = useUtilityFunction();
   const { store } = React.useContext(StoreContext);
@@ -218,7 +218,7 @@ export default function PaymentHistory() {
             </div>
             <div className={styles.billing__paymenthistory__summaryBox__s1_box__value}>
               {currencySymbol}
-              {totalRevenue.toFixed(2).toString().replace('.00', '')}
+              {(totalRevenue + totalPartnerRevenue).toFixed(2).toString().replace('.00', '')}
             </div>
           </Col>
 
