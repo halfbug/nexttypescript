@@ -7,8 +7,10 @@ import RetentionImport from 'components/Widgets/RetentionImport';
 import { StoreContext } from 'store/store.context';
 import { GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
+import HintBox from 'components/Groupshop/HintBox/HintBox';
 
 export default function RetentionTools() {
+  const [showHint, setShowHint] = useState<boolean>(false);
   const { store, dispatch } = useContext(StoreContext);
   const [retentionList, setRetentionList] = useState<[]>([]);
   const [activeCampaign, setActiveCampaign] = useState('');
@@ -24,6 +26,7 @@ export default function RetentionTools() {
     if (data) {
       setActiveCampaign(data.getActiveCampaign.id);
     }
+    setShowHint(true);
   }, [data]);
 
   const handleAfterSubmit = () => {
@@ -70,6 +73,15 @@ export default function RetentionTools() {
           />
         </Col>
       </Row>
+      <HintBox
+        show={showHint}
+        handleClose={() => { setShowHint(false); }}
+        title="Use Re-Activationn Tools to..."
+        hints={[
+          'Create Groupshop pages for customers that placed orders before you installed Groupshop.',
+          'Re-engage with past customers who may want to earn by sharing your brand with friends & family.',
+        ]}
+      />
     </Page>
   );
 }
