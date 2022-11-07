@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+.hintBox {
+    width: 600px;
+    position: fixed;
+    left: calc(100vw - 650px);
+    bottom: 20px;
+    padding: 25px 30px;
+    background: #F8F8F8;
+    border: 1px dashed #061624;
+    border-radius: 23px;
+    transition: left 2s;
+    &__closeBtn{
+        @extend .d-flex, .justify-content-end;
+        svg {
+                cursor: pointer;
+        }
+    }
+    &__heading {
+        @extend .mb-1;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: $font-weight-bolder;
+        font-size: $size-16px;
+        line-height: 21px;
+        color: $subheadingclr;
+    }
+
+    &__point {
+        @extend .my-1;
+    }
+}
+.hintBox__transition__enter{
+    opacity: 0;
+}
+.hintBox__transition__enterActive{
+    left: -300px;
+    opacity: 0;
+    transition: left 700ms;
+}
+.hintBox__transition__enterDone{
+    left: calc(100vw - 650px);
+    opacity: 1;
+    transition: all 600ms;
+}
+.hintBox__transition__exit{
+    left: unset;
+    right: 30px;
+}
+.hintBox__transition__exitActive{
+    right: -300px;
+    opacity: 0;
+    transition: all 400ms;
+}
+.hintBox__transition__exitDone{
+    display: none;
+}
