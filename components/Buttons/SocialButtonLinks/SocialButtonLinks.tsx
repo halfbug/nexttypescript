@@ -25,6 +25,17 @@ const SocialButtonLinks = ({ url, network }: SocialButtonLinksProps) => {
           <Instagram className="fs-3 fw-bold" size={18} />
         </Button>
       ) }
+      { network === 'Youtube' && url !== '' && (
+        <Button
+          className={['rounded-circle p-2 mx-1', styles.groupshop_youtube].join(' ')}
+          variant="default"
+          style={{ color: 'black', background: '#F0F0F0' }}
+          target="_blank"
+          href={url}
+        >
+          <Youtube className="fs-3 fw-bold" size={18} />
+        </Button>
+      ) }
       { network === 'Twitter' && url !== '' && (
         <Button
           className={['rounded-circle p-2 mx-1', styles.groupshop_instagram].join(' ')}
