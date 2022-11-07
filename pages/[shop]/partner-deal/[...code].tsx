@@ -886,7 +886,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 export default GroupShop;
 export const getServerSideProps = async (context: any) => {
   // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
-  const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
+  const url = `${process.env.API_URL}/mepartner?name=${context.params.code}`;
   const requestOptions = {
     method: 'GET',
     headers: {
