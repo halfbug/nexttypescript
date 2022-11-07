@@ -10,8 +10,7 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     fileName: string;
     month?: number;
     year?: number;
-    sDate?: Date;
-    eDate?: Date;
+    sdate?: string;
     storeId: string | undefined;
     customBilling: boolean;
 }
@@ -21,22 +20,22 @@ type MyFunction = (
     ) => void
 
 const ExportToExcel = ({
-  apiData, fileName, storeId, month, year, sDate, eDate, customBilling, children,
+  apiData, fileName, storeId, month, year, sdate, customBilling, children,
 }: IProps) => {
   const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   const fileExtension = '.xlsx';
   // const [sheetData, setsheetData] = React.useState([]);
   const {
-    sheetData, getDayBilling, loading, data: excelData,
-    formatDataForExcel, monthsArr,
+    sheetData, getDayBilling, loading, data: excelData, getCustomDayBilling,
+    formatDataForExcel, monthsArr, data2: customExcelData,
   } = useExcelDocument();
   const monName = monthsArr(month ?? 1 - 1).initial;
-  const monNameCustom = monthsArr(sDate?.getMonth() ?? 1 - 1).initial;
-  const sdateCustom = sDate?.getDate() ?? 1;
-  const syearCustom = sDate?.getFullYear() ?? 2022;
+  // const monNameCustom = monthsArr(new Date(sdate).getMonth() ?? 1 - 1).initial;
+  // const sdateCustom = sdate?.getDate() ?? 1;
+  // const syearCustom = sdate?.getFullYear() ?? 2022;
   // change file name custom billing
   const xlFileName = `groupshop-billing-charges-${monName}-${year}`;
-  const xlFileNameCustom = `groupshop-billing-charges-${sdateCustom}-${monNameCustom}-${syearCustom}`;
+  const xlFileNameCustom = `groupshop-billing-charges-${sdate}`;
 
   const exportToCSV: MyFunction = (apiDataIn, fileNameIn) => {
     const ws = XLSX.utils.json_to_sheet(apiDataIn);
@@ -57,14 +56,26 @@ const ExportToExcel = ({
       // setsheetData(data);
     }
   }, [excelData]);
-  // console.log({ excelData });
+  React.useEffect(() => {
+    if (customExcelData) {
+      // foramt data then assign in sheetdata
+      const sheetRes = formatDataForExcel(customExcelData.getCustomBillingByDate);
+      exportToCSV(sheetRes, xlFileNameCustom);
+    }
+  }, [customExcelData]);
 
   const BillingQueryLoader = () => {
     try {
       console.log({ month });
       // ffddee
 
-      const data = getDayBilling({
+      const data = customBilling ? getCustomDayBilling({
+        variables: {
+          storeId,
+          sdate,
+          // edate,
+        },
+      }) : getDayBilling({
         variables: {
           storeId,
           month: `${month}`,
@@ -95,8 +106,8 @@ const ExportToExcel = ({
   );
 };
 ExportToExcel.defaultProps = {
-  sDate: new Date(),
-  eDate: new Date(),
+  sdate: new Date(),
+  // edate: new Date(),
   month: 1,
   year: 1,
 };

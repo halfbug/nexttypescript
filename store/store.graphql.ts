@@ -968,6 +968,33 @@ query GetBillingByDate($storeId: String!, $month: String!, $year: String!) {
     }
 }
 `;
+const GET_CUSTOM_BILLING_BY_DATE = gql`
+query GetCustomBillingByDate($storeId: String!, $sdate: String!) {
+  getCustomBillingByDate(storeId: $storeId, sdate: $sdate) {
+    _id {
+      date
+      month
+      year
+    }
+    revenue
+    totalfeeByCashback
+    totalfeeByGS
+    totalCashback
+    todaysTotalGS
+    storeTotalGS
+    storePlan
+    store{
+      appTrialEnd
+      plan
+    }
+    feeformGroupshop{
+       plan
+      totalGS
+      totalCharged
+      }
+    }
+}
+`;
 
 const BILLING_SUBSCRIPTION = gql`
   mutation  BillingSubscription($shop: String!, $accessToken: String!){
@@ -1514,5 +1541,5 @@ export {
   CREATE_PAST_GROUPSHOP_LOG, GET_ACTIVE_CAMPAIGN, GET_RETENTION_LOGS, GET_RETENTION_ANALYTICS,
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
-  GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE,
+  GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
 };

@@ -3,7 +3,7 @@ import {
   useEffect, useState, useContext,
 } from 'react';
 import { StoreContext } from 'store/store.context';
-import { GET_BILLING_BY_DATE } from 'store/store.graphql';
+import { GET_BILLING_BY_DATE, GET_CUSTOM_BILLING_BY_DATE } from 'store/store.graphql';
 import moment from 'moment';
 import useBilling from './useBilling';
 import useUtilityFunction from './useUtilityFunction';
@@ -11,6 +11,9 @@ import useUtilityFunction from './useUtilityFunction';
 const useExcelDocument = () => {
   const [sheetData, setsheetData] = useState(undefined);
   const [getDayBilling, { data, loading }] = useLazyQuery(GET_BILLING_BY_DATE);
+  const [getCustomDayBilling, {
+    data: data2, loading: loading2,
+  }] = useLazyQuery(GET_CUSTOM_BILLING_BY_DATE);
   const { storeCurrencySymbol } = useUtilityFunction();
   const { isAppTrialOnGivenDate } = useBilling();
   const { store } = useContext(StoreContext);
@@ -85,7 +88,14 @@ const useExcelDocument = () => {
     return months[mon];
   };
   return {
-    sheetData, getDayBilling, loading, data, formatDataForExcel, monthsArr,
+    sheetData,
+    getDayBilling,
+    loading,
+    data,
+    formatDataForExcel,
+    monthsArr,
+    getCustomDayBilling,
+    data2,
   };
 };
 export default useExcelDocument;

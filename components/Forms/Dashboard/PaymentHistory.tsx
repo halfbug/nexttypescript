@@ -122,8 +122,7 @@ export default function PaymentHistory() {
                   apiData={mockData}
                   fileName="groupshop"
                   storeId={store.id}
-                  sDate={new Date(item._id)}
-                  eDate={new Date(item._id)}
+                  sdate={item._id as unknown as string}
                   customBilling
                 >
                   <DownloadIcon />
