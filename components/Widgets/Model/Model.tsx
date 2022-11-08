@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import styles from 'styles/Campaign.module.scss';
 
 interface ModelProps {
     show : boolean;
@@ -21,25 +22,38 @@ export default function Model({
         keyboard={false}
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        contentClassName="campaignModal"
+        dialogClassName={styles.campaignDeactivate_modal}
+        contentClassName={styles.campaignDeactivate_modal_content}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
+          <Modal.Title>Are you sure? 👀 </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          If you turn off this campaign, your Groupshop will become inactive.
-
+          <strong>
+            If you turn off this campaign, your Post-Purchase Groupshop will
+            become inactive.
+          </strong>
+          <br />
+          <br />
           Meant to switch to a different campaign instead?
           Simply toggle an existing campaign on or create a new one.
           {' '}
-
+          <div className={styles.campaignDeactivate_modal__btnSection}>
+            <Button
+              className={styles.campaignDeactivate_modal__whiteBtn}
+              onClick={handleToggle}
+            >
+              Proceed
+            </Button>
+            <Button
+              className={styles.campaignDeactivate_modal__purpleBtn}
+              onClick={handleClose}
+              variant="primary"
+            >
+              Go Back
+            </Button>
+          </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleToggle}>
-            Proceed
-          </Button>
-          <Button variant="primary" className="btn-go-back" onClick={handleClose}>Go Back</Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

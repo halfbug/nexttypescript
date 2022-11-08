@@ -531,3 +531,29 @@
         margin-left: 10px;
     }
   }
+  .campaignDeactivate_modal {
+      width: 550px;
+      &__content {
+          border-radius: 12px;
+      }
+      &__btnSection {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+  
+        margin-top: 40px;
+      }
+      &__whiteBtn{
+        @extend .px-4;
+        background: #ffffff;
+        color: #000000;
+        border-radius: 6px;
+    }
+      &__purpleBtn{
+        @extend .px-4;
+        background: $classic;
+        color: #000000;
+        margin-left: 10px;
+        border-radius: 6px;
+    }
+  }

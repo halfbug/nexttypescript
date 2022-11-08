@@ -16,8 +16,10 @@ import { GET_ALL_CAMPAIGNS, UPDATE_CAMPAIGN } from 'store/store.graphql';
 import useCampaign from 'hooks/useCampaign';
 import Model from 'components/Widgets/Model/Model';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import HintBox from 'components/Groupshop/HintBox/HintBox';
 
 const CampaignListing = () => {
+  const [showHint, setShowHint] = useState<boolean>(false);
   const [show, setShow] = useState(false);
   const [campId, setCampId] = useState('');
   const handleClose = () => {
@@ -47,6 +49,7 @@ const CampaignListing = () => {
       setCampaignList(data.campaigns);
       dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: data.campaigns } });
     }
+    setShowHint(true);
   }, [data]);
 
   useEffect(() => {
@@ -171,6 +174,16 @@ const CampaignListing = () => {
             <Link href={`/${shopName}/campaign/new`}>+ Create New Campaign</Link>
           </Col>
         </Row>
+        <HintBox
+          show={showHint}
+          handleClose={() => { setShowHint(false); }}
+          title="Use Post-Purchase to..."
+          hints={[
+            'Enable your customers to share your brands with friends & family',
+            'Acquire new customers organically',
+            'Measure and grow your word-of-mouth sales',
+            'Increase average order values and boost customer retention']}
+        />
       </Container>
     </Page>
   );
