@@ -31,10 +31,11 @@
             cursor: pointer;
             color: white;
             z-index: 5;
-            height: 16px;
+            height: 14px;
             @include media-breakpoint-down(md) {
                 display: flex;
             }
+
         }
     }
 
@@ -64,7 +65,8 @@
         &__bottom{
             position: absolute;
             bottom: 16px;
-            left: 20px;
+            margin: 0px 20px;
+            width: -webkit-fill-available;
             z-index: 99;
             input[type='range'] {
                 overflow: hidden;

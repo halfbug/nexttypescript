@@ -55,7 +55,7 @@ const VideoWidget = () => {
             </div>
 
             <div className={styles.videoWidget__barBox}>
-              {(control.height === '350' && videoRef && videoRef.current && videoRef.current.currentTime)
+              {(control.height === '440' && videoRef && videoRef.current && videoRef.current.currentTime)
                 ? (
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {source.length > 1 ? source.map((ele: any, i: number) => (
@@ -83,7 +83,7 @@ const VideoWidget = () => {
                   </div>
                 ) : ''}
             </div>
-            {control.height === '350' ? (
+            {control.height === '440' ? (
               <div
                 className={styles.videoWidget__playBox}
               >
@@ -95,7 +95,7 @@ const VideoWidget = () => {
               </div>
             ) : ''}
             <div className={styles.videoWidget__barBox__bottom}>
-              {(control.height === '350' && videoRef && videoRef.current
+              {(control.height === '440' && videoRef && videoRef.current
               && videoRef.current.currentTime) && (
                 <>
                   <input
@@ -103,7 +103,7 @@ const VideoWidget = () => {
                     min="0"
                     max="100"
                     value={control.range}
-                    style={{ zIndex: 1000, width: '160px' }}
+                    style={{ zIndex: 1000, width: 'inherit' }}
                     onChange={(e) => handleRangeUpdate(e)}
                     className={styles.videoWidget__barBox__range}
                   />
@@ -144,7 +144,7 @@ const VideoWidget = () => {
               onClick={() => handleClick()}
               onError={() => handleError()}
             />
-            {control.height !== '350' ? (
+            {control.height !== '440' ? (
               <div
                 className={styles.videoWidget__howToBox}
               >
@@ -193,7 +193,7 @@ const VideoWidget = () => {
                 position: 'absolute', width: '90%', transform: 'translate(-50%)', left: '50%', top: '10px', zIndex: 5, alignItems: 'center',
               }}
             >
-              {control.height === '350' ? (
+              {control.height === '440' ? (
                 <div className={styles.videoWidget__closeBox}>
                   <img
                     className={styles.videoWidget__closeBox__icon}
@@ -203,10 +203,18 @@ const VideoWidget = () => {
                   />
                 </div>
               ) : ''}
+              {/* <div className={styles.videoWidget__closeBox}>
+                <img
+                  className={styles.videoWidget__closeBox__icon}
+                  src={CloseIcon.src}
+                  alt="close"
+                  onClick={() => handleClose()}
+                />
+              </div> */}
             </div>
 
             <div className={styles.videoWidget__barBox}>
-              {(control.height === '350' && videoRef && videoRef.current && videoRef.current.currentTime)
+              {(control.height === '440' && videoRef && videoRef.current && videoRef.current.currentTime)
                 ? (
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {source.length > 1 ? source.map((ele: any, i: number) => (
@@ -235,7 +243,7 @@ const VideoWidget = () => {
                   </div>
                 ) : ''}
             </div>
-            {control.height === '350' ? (
+            {control.height === '440' ? (
               <div
                 className={styles.videoWidget__playBox}
               >
@@ -248,7 +256,7 @@ const VideoWidget = () => {
             ) : ''}
 
             <div className={styles.videoWidget__barBox__bottom}>
-              {(control.height === '350' && videoRef && videoRef.current
+              {(control.height === '440' && videoRef && videoRef.current
                 && videoRef.current.currentTime) ? (
                   <>
                     <input
@@ -256,7 +264,7 @@ const VideoWidget = () => {
                       min="0"
                       max="100"
                       value={control.range}
-                      style={{ zIndex: 1000, width: '160px' }}
+                      style={{ zIndex: 1000, width: 'inherit' }}
                       onChange={(e) => handleRangeUpdate(e)}
                       className={styles.videoWidget__barBox__range}
                     />
@@ -297,7 +305,7 @@ const VideoWidget = () => {
               onClick={() => handleClick()}
               onError={() => handleError()}
             />
-            {control.height !== '350' ? (
+            {control.height !== '440' ? (
               <div
                 className={styles.videoWidget__howToBox}
               >

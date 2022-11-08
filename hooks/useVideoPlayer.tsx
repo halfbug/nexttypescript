@@ -95,8 +95,8 @@ const useVideoPlayer = (videoRef: any) => {
       videoRef.current.currentTime = 0;
       setControl({
         ...control,
-        height: '350',
-        width: '200',
+        height: '440',
+        width: '250',
         mute: false,
         loop: !(source.length > 1),
       });
@@ -120,13 +120,13 @@ const useVideoPlayer = (videoRef: any) => {
     if (control.height === '200') {
       setCloseType(true);
       setType(2);
-    } else if (control.height === '350' && !closeType) {
+    } else if (control.height === '440' && !closeType) {
       setControl({
         ...control, height: '200', width: '150', mute: true, autoPlay: true,
       });
       videoRef.current.play();
       setVideoNo(0);
-    } else if (control.height === '350' && closeType) {
+    } else if (control.height === '440' && closeType) {
       setType(2);
       videoRef.current.play();
     }
@@ -135,7 +135,7 @@ const useVideoPlayer = (videoRef: any) => {
   const handleLiveClick = () => {
     setType(1);
     setControl({
-      ...control, height: '350', width: '200', mute: false, autoPlay: true,
+      ...control, height: '440', width: '250', mute: false, autoPlay: true,
     });
   };
 
