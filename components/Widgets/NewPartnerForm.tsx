@@ -13,6 +13,7 @@ import { IPartnerTools } from 'types/store';
 import { CREATE_PARTNER_DB, EXIT_PARTNER_GROUPSHOP } from 'store/store.graphql';
 import UploadLogo from 'assets/images/upload.svg';
 import useAlert from 'hooks/useAlert';
+import AddMultiplePartnerBox from 'components/Groupshop/AddPartnerBox/AddMultiplePartnerBox';
 
 interface ActiveAffiliateProps {
   handleAfterSubmit: any;
@@ -20,6 +21,7 @@ interface ActiveAffiliateProps {
 }
 
 export default function NewPartnerForm({ handleAfterSubmit, partnerList } : ActiveAffiliateProps) {
+  const [openAddMultiplePartner, setOpenAddMultiplePartner] = React.useState(false);
   const [editMin, setEditMin] = React.useState(false);
   const [editMax, setEditMax] = React.useState(false);
   const [exitPartnerRecord, setExitPartnerRecord] = React.useState(false);
@@ -196,17 +198,18 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                       )}
 
                     </Col>
-                    {/* <Col>
+                    <Col>
                       <Button
                         variant="outline-dark"
                         className={styles.partner__dark_btn}
                         value={0}
+                        onClick={() => setOpenAddMultiplePartner(true)}
                       >
                         <BoxArrowUp className="fs-5 me-1" />
                         {' '}
                         Bulk Upload
                       </Button>
-                    </Col> */}
+                    </Col>
                   </Row>
                 </Col>
               </Row>
@@ -229,6 +232,10 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
             />
           </Col>
         </Row>
+        <AddMultiplePartnerBox
+          show={openAddMultiplePartner}
+          handleClose={() => setOpenAddMultiplePartner(false)}
+        />
       </Form>
       <AlertComponent />
     </>

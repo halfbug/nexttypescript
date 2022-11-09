@@ -8,8 +8,10 @@ import styles from 'styles/Partner.module.scss';
 import { GET_ALL_PARTERS } from 'store/store.graphql';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
+import HintBox from 'components/Groupshop/HintBox/HintBox';
 
 const PartnerTools: NextPage = () => {
+  const [showHint, setShowHint] = useState<boolean>(false);
   const [partnerList, setPartnerList] = useState<[]>([]);
   const { store, dispatch } = useContext(StoreContext);
   const {
@@ -28,6 +30,7 @@ const PartnerTools: NextPage = () => {
     if (data) {
       setPartnerList(data.partnerGroupshops);
     }
+    setShowHint(true);
   }, [data]);
 
   return (
@@ -47,6 +50,15 @@ const PartnerTools: NextPage = () => {
           handleAfterSubmit={handleAfterSubmit}
         />
       </Row>
+      <HintBox
+        show={showHint}
+        handleClose={() => { setShowHint(false); }}
+        title="Use Partner Tools to..."
+        hints={[
+          'Create Groupshop pages for influencers, affiliates, or other commission-based partners.',
+          'Easily track sales and engagement for your influencer & affiliate campaigns.',
+        ]}
+      />
     </Page>
   );
 };
