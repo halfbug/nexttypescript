@@ -148,6 +148,7 @@ const VideoWidget = () => {
             {control.height !== '440' ? (
               <div
                 className={styles.videoWidget__howToBox}
+                onClick={() => handleClick()}
               >
                 <img
                   src={PlayIcon.src}
@@ -177,6 +178,7 @@ const VideoWidget = () => {
           />
           <div
             className={styles.videoWidget__howToBox}
+            onClick={() => handleClick()}
           >
             <img
               src={PlayIcon.src}
@@ -311,6 +313,7 @@ const VideoWidget = () => {
             {control.height !== '440' ? (
               <div
                 className={styles.videoWidget__howToBox}
+                onClick={() => handleClick()}
               >
                 <img
                   src={PlayIcon.src}
