@@ -256,6 +256,7 @@ const Footer = ({
                 <>
                   <p>
                     <strong>Want your own store?</strong>
+                    {' '}
                     Be the first to find out when
                     you can shop your favorite brands on Groupshop.
                   </p>

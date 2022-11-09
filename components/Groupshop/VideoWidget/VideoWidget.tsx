@@ -143,6 +143,7 @@ const VideoWidget = () => {
               onTimeUpdate={(e) => handleChange(e)}
               onClick={() => handleClick()}
               onError={() => handleError()}
+              playsInline
             />
             {control.height !== '440' ? (
               <div
@@ -172,6 +173,7 @@ const VideoWidget = () => {
             onClick={() => mobileViewClick()}
             onTimeUpdate={(e) => handleChange(e)}
             onError={() => handleError()}
+            playsInline
           />
           <div
             className={styles.videoWidget__howToBox}
@@ -304,6 +306,7 @@ const VideoWidget = () => {
               onTimeUpdate={(e) => handleChange(e)}
               onClick={() => handleClick()}
               onError={() => handleError()}
+              playsInline
             />
             {control.height !== '440' ? (
               <div
