@@ -25,7 +25,7 @@ interface IWelcomeProps {
 }
 
 export default function QrWelcomeScreen({
-  brandLogo,
+  // brandLogo,
   setShowWelcome,
   setShowAuth,
   setShowError,
