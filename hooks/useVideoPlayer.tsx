@@ -30,8 +30,8 @@ const useVideoPlayer = (videoRef: any) => {
   const [control, setControl] = useState<controlType>({
     autoPlay: true,
     mute: true,
-    height: '200',
-    width: '150',
+    height: '207',
+    width: '152',
     currentTime: 0,
     endTime: 0,
     loop: true,
@@ -71,7 +71,7 @@ const useVideoPlayer = (videoRef: any) => {
   };
 
   const handleChange = (e: any) => {
-    if (control.height === '200' || type === 2) {
+    if (control.height === '207' || type === 2) {
       if ((videoRef.current.duration < 5
         && e.target.currentTime === videoRef.current.duration) || e.target.currentTime > 5) {
         videoRef.current.currentTime = 0;
@@ -91,11 +91,11 @@ const useVideoPlayer = (videoRef: any) => {
   };
 
   const handleClick = () => {
-    if (control.height === '200') {
+    if (control.height === '207') {
       videoRef.current.currentTime = 0;
       setControl({
         ...control,
-        height: '440',
+        height: '444',
         width: '250',
         mute: false,
         loop: !(source.length > 1),
@@ -117,16 +117,16 @@ const useVideoPlayer = (videoRef: any) => {
 
   const handleClose = () => {
     videoRef.current.currentTime = 0;
-    if (control.height === '200') {
+    if (control.height === '207') {
       setCloseType(true);
       setType(2);
-    } else if (control.height === '440' && !closeType) {
+    } else if (control.height === '444' && !closeType) {
       setControl({
-        ...control, height: '200', width: '150', mute: true, autoPlay: true,
+        ...control, height: '207', width: '152', mute: true, autoPlay: true,
       });
       videoRef.current.play();
       setVideoNo(0);
-    } else if (control.height === '440' && closeType) {
+    } else if (control.height === '444' && closeType) {
       setType(2);
       videoRef.current.play();
     }
@@ -135,7 +135,7 @@ const useVideoPlayer = (videoRef: any) => {
   const handleLiveClick = () => {
     setType(1);
     setControl({
-      ...control, height: '440', width: '250', mute: false, autoPlay: true,
+      ...control, height: '444', width: '250', mute: false, autoPlay: true,
     });
   };
 

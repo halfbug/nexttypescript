@@ -55,9 +55,9 @@ const VideoWidget = () => {
             </div>
 
             <div className={styles.videoWidget__barBox}>
-              {(control.height === '440' && videoRef && videoRef.current && videoRef.current.currentTime)
+              {(control.height === '444' && videoRef && videoRef.current && videoRef.current.currentTime)
                 ? (
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div className={styles.videoWidget__barBox__row}>
                     {source.length > 1 ? source.map((ele: any, i: number) => (
                       <progress
                         max="100"
@@ -83,7 +83,7 @@ const VideoWidget = () => {
                   </div>
                 ) : ''}
             </div>
-            {control.height === '440' ? (
+            {control.height === '444' ? (
               <div
                 className={styles.videoWidget__playBox}
               >
@@ -95,7 +95,7 @@ const VideoWidget = () => {
               </div>
             ) : ''}
             <div className={styles.videoWidget__barBox__bottom}>
-              {(control.height === '440' && videoRef && videoRef.current
+              {(control.height === '444' && videoRef && videoRef.current
               && videoRef.current.currentTime) && (
                 <>
                   <input
@@ -145,7 +145,7 @@ const VideoWidget = () => {
               onError={() => handleError()}
               playsInline
             />
-            {control.height !== '440' ? (
+            {control.height !== '444' ? (
               <div
                 className={styles.videoWidget__howToBox}
                 onClick={() => handleClick()}
@@ -166,7 +166,7 @@ const VideoWidget = () => {
             ref={videoRef}
             style={{ objectFit: 'fill', borderRadius: '15px' }}
             height={30}
-            width={150}
+            width={152}
             src={source[videoNo]}
             autoPlay={control.autoPlay}
             muted={control.mute}
@@ -197,7 +197,7 @@ const VideoWidget = () => {
                 position: 'absolute', width: '90%', transform: 'translate(-50%)', left: '50%', top: '10px', zIndex: 5, alignItems: 'center',
               }}
             >
-              {control.height === '440' ? (
+              {control.height === '444' ? (
                 <div className={styles.videoWidget__closeBox}>
                   <img
                     className={styles.videoWidget__closeBox__icon}
@@ -218,9 +218,9 @@ const VideoWidget = () => {
             </div>
 
             <div className={styles.videoWidget__barBox}>
-              {(control.height === '440' && videoRef && videoRef.current && videoRef.current.currentTime)
+              {(control.height === '444' && videoRef && videoRef.current && videoRef.current.currentTime)
                 ? (
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div className={styles.videoWidget__barBox__row}>
                     {source.length > 1 ? source.map((ele: any, i: number) => (
                       <progress
                         max="100"
@@ -247,7 +247,7 @@ const VideoWidget = () => {
                   </div>
                 ) : ''}
             </div>
-            {control.height === '440' ? (
+            {control.height === '444' ? (
               <div
                 className={styles.videoWidget__playBox}
               >
@@ -260,7 +260,7 @@ const VideoWidget = () => {
             ) : ''}
 
             <div className={styles.videoWidget__barBox__bottom}>
-              {(control.height === '440' && videoRef && videoRef.current
+              {(control.height === '444' && videoRef && videoRef.current
                 && videoRef.current.currentTime) ? (
                   <>
                     <input
@@ -310,7 +310,7 @@ const VideoWidget = () => {
               onError={() => handleError()}
               playsInline
             />
-            {control.height !== '440' ? (
+            {control.height !== '444' ? (
               <div
                 className={styles.videoWidget__howToBox}
                 onClick={() => handleClick()}
