@@ -443,7 +443,7 @@ export default function AffiliateDetail({
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag1}>
                   {storeCurrency}
-                  {comissionAmount}
+                  {revenue}
                   {' '}
                   generated
                 </span>

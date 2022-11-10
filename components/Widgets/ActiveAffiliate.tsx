@@ -181,7 +181,7 @@ const ActiveAffiliate = ({
               <Col xl={3} lg={3} md={3}>
                 <div className={styles.partner__data_row__tag1}>
                   {storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-                  {formatNumber(part.comissionAmount)}
+                  {formatNumber(part.revenue)}
                   {' '}
                   generated
                 </div>
