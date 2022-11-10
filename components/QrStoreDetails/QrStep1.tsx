@@ -170,8 +170,8 @@ export default function QrStep1({
                             {errors.email}
                           </Form.Control.Feedback>
                         </Form.Group>
-                        <div className={styles.QRContainer__btnGroupShop}>
-                          <Button type="submit">Find my Groupshop</Button>
+                        <div>
+                          <Button className={styles.QRContainer__btnGroupShop} type="submit">Find my Groupshop</Button>
                         </div>
                       </Form>
                     </div>
@@ -206,9 +206,9 @@ export default function QrStep1({
                 </div>
               </div>
             </Col>
-            <Col md={5} sm={12} className="p-0">
+            <Col md={5} sm={12} className="p-0 gray-200">
               <div
-                className={styles.QRContainer__desktopImage}
+                className={[styles.QRContainer__desktopImage, ''].join('')}
               >
                 <img src={QR.src} alt="QRImage" className="img-fluid" />
               </div>

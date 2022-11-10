@@ -7,9 +7,11 @@ import {
 import Link from 'next/link';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import QrCodeImage from 'assets/images/qr-code-scan.png';
+import useCode from 'hooks/useCode';
 
 export default function CustomerActivation(
 ) {
+  const { shop } = useCode();
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}` : '';
   return (
     <>
@@ -39,7 +41,7 @@ export default function CustomerActivation(
         </Button>
         <Button variant="link" className={styles.marketing_LinkBtn}>
           <>
-            <Link href={`${gsURL}/qr-code`}>
+            <Link href={`${gsURL}/qr-code/${shop}`}>
               <a target="_blank" style={{ cursor: 'pointer' }}>
                 See how it works
               </a>

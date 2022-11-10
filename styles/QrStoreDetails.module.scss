@@ -7,6 +7,44 @@
     height: auto;
   }
 
+  &_WhiteBox{
+    @extend .m-2;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 100px;
+    width: fit-content;
+    text-align: center;
+
+    p{
+      font-family: 'Epilogue';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      color: $black;
+      margin: 10px;
+    }
+  }
+  &_DottedBox{
+    @extend .m-2;
+    border: 1px dashed $black !important;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 100px;
+    width: fit-content;
+    text-align: center;
+
+    p{
+      font-family: 'Epilogue';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      margin: 10px;
+      color: $black;
+    }
+  }
+  &_bgLight{
+    @extend .bg-light;
+  }
   &__Logo {
     @media (max-width: 767px) {
       text-align: center;
@@ -16,7 +54,7 @@
   }
 
   &__form__wrapper {
-    padding: 4rem;
+    padding: 2rem 4rem;
     font-size: 18px;
     margin: 0;
     font-family: 'Mulish';
@@ -47,10 +85,12 @@
     h2 {
       font-family: "DM Sans";
       font-style: normal;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 24px;
       line-height: 31px;
       color: $black;
+      font-family: 'DM Sans';
+
       p{
         font-size: 24px;
         line-height: 31px;
@@ -204,8 +244,11 @@
 
       &__simply {
         p {
-          font-weight: 500;
           max-width: 400px;
+          font-family: 'DM Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
         }
       }
     }
@@ -235,6 +278,7 @@
     }
 
     &__title{
+      @extend .mb-4, .pb-2;
       font-family: 'DM Sans';
       font-weight: 700;
       font-size: 18px;
@@ -250,7 +294,7 @@
     }
 
     .activeGroupshops{
-      height: 320px;
+      // height: 320px;
       overflow: auto;
 
       &::-webkit-scrollbar {
@@ -371,7 +415,7 @@
 
   &__form__container {
     max-width: 300px;
-    padding-top: 20px;
+    padding-top: 10px;
 
     @media (max-width: 767px) {
       max-width: none;
@@ -474,6 +518,7 @@
   }
 
   &__social__media {
+    // @extend .mb-3;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -524,6 +569,11 @@
   }
 
   &__btnGroupShop {
+    @extend .px-3, .py-2, .text-nowrap;
+    color: #ffffff;
+    border-radius: 6px;
+    background-color: $black;
+    width: fit-content;
     @extend .mb-4;
     @media (max-width: 767px) {
       text-align: center;

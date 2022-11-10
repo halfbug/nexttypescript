@@ -14,14 +14,39 @@ import MarqueeSlider from 'components/Shared/MarqueeSlider/MarqueeSlider';
 import Link from 'next/link';
 import GroupshopRoundLogo1 from 'assets/images/groupshop-round-logo1.svg';
 import SocialLinks from 'components/Shared/SocialLinks/SocialLinks';
+import LeftArrow from 'assets/images/back-arrow-icon.svg';
 
-export default function QrStep3() {
+interface IStep3Props {
+  setShowStep1: any;
+  setShowStep3: any;
+}
+
+export default function QrStep3({
+  setShowStep1, setShowStep3,
+}: IStep3Props) {
   return (
     <>
       <div className={styles.QRContainer}>
         <Container fluid>
           <Row>
             <Col md={7} sm={12} className="p-0">
+              <div>
+                <Link
+                  href={{
+                    pathname: '/qr-code',
+                  }}
+                >
+                  <a
+                    href=""
+                    onClick={() => {
+                      setShowStep1(true);
+                      setShowStep3(false);
+                    }}
+                  >
+                    <LeftArrow />
+                  </a>
+                </Link>
+              </div>
               <div className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />

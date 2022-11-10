@@ -15,16 +15,19 @@ import Arrow from 'assets/images/Arrow.svg';
 import Link from 'next/link';
 import GroupshopRoundLogo1 from 'assets/images/groupshop-round-logo1.svg';
 import SocialLinks from 'components/Shared/SocialLinks/SocialLinks';
+import LeftArrow from 'assets/images/back-arrow-icon.svg';
 
 // import shared component
 
 interface IStep2Props {
+  setShowStep1: any;
+  setShowStep2: any;
   activeGroupshops: any;
   email: string;
 }
 export default function QrStep2(
   {
-    activeGroupshops, email,
+    activeGroupshops, email, setShowStep1, setShowStep2,
   }: IStep2Props,
 ) {
   const [customerName, setcustomerName] = useState('');
@@ -41,6 +44,23 @@ export default function QrStep2(
         <Container fluid className="p-0">
           <Row>
             <Col md={7} sm={12} className="p-0">
+              <div className="m-4">
+                <Link
+                  href={{
+                    pathname: '/qr-code',
+                  }}
+                >
+                  <a
+                    href=""
+                    onClick={() => {
+                      setShowStep1(true);
+                      setShowStep2(false);
+                    }}
+                  >
+                    <LeftArrow />
+                  </a>
+                </Link>
+              </div>
               <div className={styles.QRContainer__form__wrapper}>
                 <div className={styles.QRContainer__Logo}>
                   <HeadLogo />

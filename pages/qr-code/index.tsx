@@ -43,11 +43,13 @@ const QrCode: NextPage = () => {
       )}
       {showStep2 && (
         <QrStep2
+          setShowStep1={setShowStep1}
+          setShowStep2={setShowStep2}
           activeGroupshops={activeGroupshops}
           email={email}
         />
       )}
-      {showStep3 && <QrStep3 />}
+      {showStep3 && <QrStep3 setShowStep1={setShowStep1} setShowStep3={setShowStep3} />}
     </>
   );
 };
