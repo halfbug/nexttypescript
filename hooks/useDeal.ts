@@ -41,25 +41,25 @@ export default function useDeal() {
   const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
 
   const clientDealProducts = useCallback(
-    ():string[] => {
+    (): string[] => {
       // eslint-disable-next-line max-len
       // const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
       const addedPrds = gsctx?.dealProducts?.filter((item) => item.type === 'deal') ?? [];
       // console.log('🚀 useDeal ~ addedPrds', addedPrds);
 
       return ([...addedPrds.filter(
-        ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
+        ({ customerIP }: { customerIP: string }) => customerIP === clientIP,
       )?.map(
-        ({ productId }:DealProduct) => productId,
+        ({ productId }: DealProduct) => productId,
       ) ?? []]);
     }, [gsctx.dealProducts, clientIP],
   );
   // check influencer customer
   const checkCustomerDealProducts = useCallback(
-    ():string[] | undefined => ([...addedByRefferal?.filter(
-      ({ customerIP } :{customerIP: string}) => customerIP === clientIP,
+    (): string[] | undefined => ([...addedByRefferal?.filter(
+      ({ customerIP }: { customerIP: string }) => customerIP === clientIP,
     )?.map(
-      ({ productId }:DealProduct) => productId,
+      ({ productId }: DealProduct) => productId,
     ) ?? []]), [clientIP, gsctx.dealProducts],
   );
 
@@ -75,25 +75,25 @@ export default function useDeal() {
   const maxPercent = isGroupshop ? gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount
     : gsctx?.partnerRewards?.baseline;
   const brandName = gsctx?.store?.brandName;
-  const productShareUrl = useCallback((pid:string) => {
+  const productShareUrl = useCallback((pid: string) => {
     // console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
     const pidbreak = pid.split('/');
     // console.log('🚀 ~ file: useDeal.ts ~ line 38 ~ productShareUrl ~ pidbreak', pidbreak);
     return `${gsURL}/product&${pidbreak[4]}`;
   }, [gsctx.url]);
 
-  const getBuyers = useCallback((pid:string) => gsctx.members.filter(
+  const getBuyers = useCallback((pid: string) => gsctx.members.filter(
     (mem) => mem.products?.find((prd) => prd.id === pid),
   ), [gsctx.members]);
-  const getBuyers2 = useCallback((pid:string) => gsctx?.memberDetails?.filter(
+  const getBuyers2 = useCallback((pid: string) => gsctx?.memberDetails?.filter(
     (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
   ) ?? [], [gsctx.members]);
 
-  const formatName = useCallback((customer : any) => `${(customer.firstName.length > 7 ? customer.firstName.slice(0, 7) : customer.firstName) || ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,
+  const formatName = useCallback((customer: any) => `${(customer.firstName.length > 7 ? customer.firstName.slice(0, 7) : customer.firstName) || ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,
     [gsctx.members]);
 
   const topFive = useCallback(
-    (entity : any) => (Array.isArray(entity)
+    (entity: any) => (Array.isArray(entity)
       ? entity.slice(0, entity.length > 5 ? 5 : entity.length) : []),
     [gsctx.members],
   );
@@ -180,22 +180,22 @@ export default function useDeal() {
 
   const getBannerTotalCashBack = useCallback((discountVal) => {
     const total = gsctx?.members.reduce((cashback, member) => {
-      const totalPrice:any = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
+      const totalPrice: any = member.products?.reduce((tot, prd) => tot + +(prd.price), 0);
       // eslint-disable-next-line radix
       const totalDiscountedAmount = totalPrice! * (parseInt(discountVal) / 100);
-      // console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
+      console.log('🚀useDeal totalDiscountedAmount', totalDiscountedAmount);
       return cashback + (totalDiscountedAmount);
     }, 0);
 
     return total.toFixed(2);
   }, [gsctx]);
 
-  const getBannerTotalCashBackByOrder = useCallback((discountVal:any) => {
+  const getBannerTotalCashBackByOrder = useCallback((discountVal: any) => {
     const total = gsctx?.members.reduce((cashback, member) => {
       const totalPrice: any = member.role === 'owner' ? member.lineItems?.reduce(
-        (tot:any, prd:any) => tot + ((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
+        (tot: any, prd: any) => tot + ((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
       ) : member.lineItems?.reduce(
-        (tot:any, prd:any) => tot + +(prd.price * prd.quantity), 0,
+        (tot: any, prd: any) => tot + +(prd.price * prd.quantity), 0,
       );
 
       // eslint-disable-next-line radix
@@ -207,9 +207,9 @@ export default function useDeal() {
   }, [gsctx]);
   const getBannerTotalCashBackByMember = useCallback((memberNum: number, discountVal: any) => {
     const totalPrice = +memberNum === 0 ? gsctx?.members[memberNum].lineItems?.reduce(
-      (tot:any, prd:any) => tot + +((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
+      (tot: any, prd: any) => tot + +((prd.discountedPrice ?? prd.price) * prd.quantity), 0,
     ) : gsctx?.members[memberNum].lineItems?.reduce(
-      (tot:any, prd:any) => tot + +(prd.price * prd.quantity), 0,
+      (tot: any, prd: any) => tot + +(prd.price * prd.quantity), 0,
     );
 
     // eslint-disable-next-line radix
@@ -219,95 +219,174 @@ export default function useDeal() {
   }, [gsctx]);
 
   const calculation = (memberIndex: number, amount: number, self: any) => {
+    if (!gsctx.id) {
+      return false;
+    }
+
+    const milestone1: any = gsctx.campaign?.salesTarget?.rewards?.length
+    && parseInt(`${gsctx.campaign?.salesTarget?.rewards[0].discount}`, 10);
+
+    const milestone2: any = gsctx.campaign?.salesTarget?.rewards?.length
+          && parseInt(`${gsctx.campaign?.salesTarget?.rewards[1].discount}`, 10);
+
+    const milestone3: any = gsctx.campaign?.salesTarget?.rewards?.length
+    && parseInt(`${gsctx.campaign?.salesTarget?.rewards[2].discount}`, 10);
+
     if (memberIndex === 0) {
       return { discount: 0, cashback: [0] };
     }
+
     if (memberIndex === 1) {
-      // MILESTONE 1 UNLOCKED
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const count = (amount * milestone1Value) / 100;
-      self[0].cashbackAmount.cashback.push((self[0].purchaseCount * milestone1Value) / 100);
+      const count = (amount * milestone1) / 100;
+      self[0].cashbackAmount.cashback.push((self[0].purchaseCount * milestone1) / 100);
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex === 2) {
       // MILESTONE 1 COMPLETE
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const count = (amount * milestone1Value) / 100;
+      const count = (amount * milestone1) / 100;
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex === 3) {
       // MILESTONE 2 UNLOCKED
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
       self[0].cashbackAmount.cashback.push(
-        (self[0].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+        (self[0].purchaseCount * (milestone2 - milestone1)) / 100,
       );
       self[1].cashbackAmount.cashback.push(
-        (self[1].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+        (self[1].purchaseCount * (milestone2 - milestone1)) / 100,
       );
       self[2].cashbackAmount.cashback.push(
-        (self[2].purchaseCount * (milestone2Value - milestone1Value)) / 100,
+        (self[2].purchaseCount * (milestone2 - milestone1)) / 100,
       );
-      const count = (amount * milestone2Value) / 100;
+      const count = (amount * milestone2) / 100;
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex === 4) {
       // MILESTONE 2 COMPLETE
-      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
-      const count = (amount * milestone2Value) / 100;
+      const count = (amount * milestone2) / 100;
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex === 5) {
       // MILESTONE 3 UNLOCKED
-      const milestone2Value : number = parseInt(gsctx.milestones[1].discount, 10);
-      const milestone3Value : number = parseInt(gsctx.milestones[2].discount, 10);
       self[1].cashbackAmount.cashback.push(
-        (self[1].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+        (self[1].purchaseCount * (milestone3 - milestone2)) / 100,
       );
       self[2].cashbackAmount.cashback.push(
-        (self[2].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+        (self[2].purchaseCount * (milestone3 - milestone2)) / 100,
       );
       self[3].cashbackAmount.cashback.push(
-        (self[3].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+        (self[3].purchaseCount * (milestone3 - milestone2)) / 100,
       );
       self[4].cashbackAmount.cashback.push(
-        (self[4].purchaseCount * (milestone3Value - milestone2Value)) / 100,
+        (self[4].purchaseCount * (milestone3 - milestone2)) / 100,
       );
       self[0].cashbackAmount.cashback.push(
-        (self[0].purchaseCount * (50 - milestone2Value)) / 100,
+        (self[0].purchaseCount * (50 - milestone2)) / 100,
       );
-      const count = (amount * milestone3Value) / 100;
+      const count = (amount * milestone3) / 100;
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex >= 6 && memberIndex <= 8) {
       // MILESTONE 3 COMPLETE
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const count = (amount * milestone1Value) / 100;
+      const count = (amount * milestone1) / 100;
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex === 9) {
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const count = (amount * milestone1Value) / 100;
+      const count = (amount * milestone1) / 100;
       self[0].cashbackAmount.cashback.push(
         (self[0].purchaseCount * (40)) / 100,
       );
       return { discount: count, cashback: [0] };
     }
+
     if (memberIndex > 9) {
-      const milestone1Value : number = parseInt(gsctx.milestones[0].discount, 10);
-      const count = (amount * milestone1Value) / 100;
+      const count = (amount * milestone1) / 100;
       return { discount: count, cashback: [0] };
     }
 
     return [];
   };
 
-  const cashback = () => {
-    if (gsctx.members.length) {
-      const spent:any[] = [];
-      gsctx.members.map((ele, i) => {
+  const getRewads = (unlockedAmount: number, arr: any[], members: any[]) => {
+    const milestone1: any = gsctx.campaign?.salesTarget?.rewards?.length
+    && parseInt(`${gsctx.campaign?.salesTarget?.rewards[0].discount}`, 10);
+
+    const milestone2: any = gsctx.campaign?.salesTarget?.rewards?.length
+          && parseInt(`${gsctx.campaign?.salesTarget?.rewards[1].discount}`, 10);
+
+    const milestone3: any = gsctx.campaign?.salesTarget?.rewards?.length
+    && parseInt(`${gsctx.campaign?.salesTarget?.rewards[2].discount}`, 10);
+
+    const applyPercent1 = milestone2 - milestone1;
+    const applyPercent2 = milestone3 - milestone2;
+    const applyPercent3 = 50 - milestone2;
+
+    if (members.length === 1) {
+      const percentAmount = (+arr[members.length - 1].purchaseCount * milestone1) / 100;
+      const currentReward = (+unlockedAmount + +percentAmount).toFixed(4);
+      const nextReward = +currentReward
+      + (+arr[members.length - 1].purchaseCount * applyPercent1) / 100;
+      return { currentReward, nextReward };
+    }
+    if (members.length === 2) {
+      const percentAmount = arr.map((ele) => (ele.purchaseCount * applyPercent1) / 100)
+        .reduce((curr, next) => curr + next);
+      const currentReward = (+unlockedAmount + +percentAmount).toFixed(4);
+
+      const percent0 = (arr[0].purchaseCount * applyPercent3) / 100;
+      const percent1 = (arr[1].purchaseCount * applyPercent2) / 100;
+      const nextReward = +currentReward + +percent0 + +percent1;
+      return { currentReward, nextReward };
+    }
+    if (members.length === 3) {
+      const percentAmount = arr.map((ele) => (ele.purchaseCount * applyPercent1) / 100)
+        .reduce((curr, next) => curr + next);
+      const currentReward = (+unlockedAmount + +percentAmount).toFixed(4);
+
+      const percent0 = (arr[0].purchaseCount * applyPercent3) / 100;
+      const percent1 = (arr[1].purchaseCount * applyPercent2) / 100;
+      const percent2 = (arr[2].purchaseCount * applyPercent2) / 100;
+      const nextReward = +currentReward + +percent0 + +percent1 + +percent2;
+      return { currentReward, nextReward };
+    }
+    if (members.length === 4 || members.length === 5) {
+      const percentAmount = arr.map((ele, i) => (i === 0
+        ? (ele.purchaseCount * applyPercent3) / 100 : (ele.purchaseCount * applyPercent2) / 100))
+        .reduce((curr, next) => curr + next);
+      const currentReward = (+unlockedAmount + +percentAmount).toFixed(4);
+
+      const percent0 = (arr[0].purchaseCount * 40) / 100;
+      const nextReward = +currentReward + +percent0;
+      return { currentReward, nextReward };
+    }
+    if (members.length > 5 && members.length < 10) {
+      const percentAmount = (arr[0].purchaseCount * 40) / 100;
+      const currentReward = (+unlockedAmount + +percentAmount).toFixed(4);
+      const nextReward = 'NA';
+      // console.log('🎈 currentReward', currentReward, nextReward);
+      return { currentReward, nextReward };
+    }
+    if (members.length >= 10) {
+      const currentReward = (+unlockedAmount).toFixed(4);
+      const nextReward = 'NA';
+      return { currentReward, nextReward };
+    }
+
+    return { currentReward: 0, nextReward: 0 };
+  };
+
+  const cashback = useCallback(() => {
+    if (gsctx.id) {
+      const { members } = gsctx;
+      const spent: any[] = [];
+      members.map((ele, i) => {
         const d = ele.lineItems
-          ?.map((item:any) => +item.price * item.quantity)
+          ?.map((item: any) => +item.price * item.quantity)
           ?.reduce((total: any, curr: any) => total + curr, 0);
         spent.push({
           member: i,
@@ -318,17 +397,26 @@ export default function useDeal() {
       });
       // console.log('🎈', spent);
       const totalCashbackAmount = spent.map((ele) => (
-        ele.cashbackAmount.discount
-        + ele.cashbackAmount.cashback.reduce((total: number, curr:number) => total + curr, 0)
-      )).reduce((total: number, curr:number) => total + curr, 0).toFixed(2);
+        ele.cashbackAmount?.discount
+        + ele.cashbackAmount.cashback.reduce((total: number, curr: number) => total + curr, 0)
+      )).reduce((total: number, curr: number) => total + curr, 0);
+
+      const temp = getRewads(totalCashbackAmount, spent, members);
+      const currentAmout = temp.currentReward;
+      const nextAmount = temp.nextReward;
+
       // if only owner exist then orderamount milestone1 % else do all the total cashback
-      const tota = gsctx.members.length === 1 ? getBannerTotalCashBackByOrder(
-        parseInt(gsctx.milestones[0].discount, 10),
-      ) : totalCashbackAmount;
-      return tota;
+      const finalAmount = {
+        currentAmout: !Number.isNaN(+currentAmout) ? (+currentAmout).toFixed(2) : 'NA',
+        nextAmount: !Number.isNaN(+nextAmount) ? (+nextAmount).toFixed(2) : 'NA',
+        totalUnlockedAmount: members.length === 1
+          ? (+currentAmout).toFixed(2) : (+totalCashbackAmount).toFixed(2),
+      };
+
+      return finalAmount;
     }
-    return 0;
-  };
+    return { nextAmount: 0, currentAmout: 0, totalUnlockedAmount: 0 };
+  }, [gsctx]);
 
   const unLockCB = useCallback((discountVal, milestones, members) => {
     let cb = 0;
@@ -347,56 +435,56 @@ export default function useDeal() {
     } else if (members.length === 2) { // 1st frnd
       const nextCB = parseInt(secDis!, 10) - discountVal; // next cb can be availed
       cb = +(getBannerTotalCashBackByMember(0, discountVal))
-      + +(getBannerTotalCashBackByMember(1, nextCB))
-      + +(getBannerTotalCashBackByMember(0, nextCB));
+        + +(getBannerTotalCashBackByMember(1, nextCB))
+        + +(getBannerTotalCashBackByMember(0, nextCB));
     } else if (members.length === 3) { // 2nd frnd
       // no cashback m2 unlock
       const nextCB = parseInt(secDis!, 10) - parseInt(firstDis!, 10); // next cb can be availed
       cb = +(getBannerTotalCashBackByMember(0, firstDis)) //
-      + +(getBannerTotalCashBackByMember(1, nextCB)) //
-      + +(getBannerTotalCashBackByMember(2, nextCB)) //
-      + +(getBannerTotalCashBackByMember(0, nextCB));
+        + +(getBannerTotalCashBackByMember(1, nextCB)) //
+        + +(getBannerTotalCashBackByMember(2, nextCB)) //
+        + +(getBannerTotalCashBackByMember(0, nextCB));
     } else if (members.length === 4) { // 3rd frnd
       const oldCB = parseInt(secDis!, 10) - parseInt(firstDis!, 10); // next cb can be availed
       const nextCB1 = parseInt(thirdDis!, 10) - parseInt(secDis!, 10); // next cb can be availed
       const nextCBOwner = ownerCB1 - parseInt(secDis!, 10);
       cb = +(getBannerTotalCashBackByMember(0, firstDis)) // old upper calc
-      + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, nextCBOwner))
-      + +(getBannerTotalCashBackByMember(1, nextCB1))
-      + +(getBannerTotalCashBackByMember(2, nextCB1))
-      + +(getBannerTotalCashBackByMember(3, nextCB1));
+        + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, nextCBOwner))
+        + +(getBannerTotalCashBackByMember(1, nextCB1))
+        + +(getBannerTotalCashBackByMember(2, nextCB1))
+        + +(getBannerTotalCashBackByMember(3, nextCB1));
     } else if (members.length === 5) {
       // no cashback m3 unlock
       const oldCB = parseInt(secDis!, 10) - parseInt(firstDis!, 10); // next cb can be availed
       const nextCB1 = parseInt(thirdDis!, 10) - parseInt(secDis!, 10); // next cb can be availed
       const nextCBOwner = ownerCB1 - parseInt(secDis!, 10);
       cb = +(getBannerTotalCashBackByMember(0, firstDis)) // old upper calc
-      + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, nextCBOwner))
-      + +(getBannerTotalCashBackByMember(1, nextCB1))
-      + +(getBannerTotalCashBackByMember(2, nextCB1))
-      + +(getBannerTotalCashBackByMember(3, nextCB1))
-      + +(getBannerTotalCashBackByMember(4, nextCB1));
+        + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, nextCBOwner))
+        + +(getBannerTotalCashBackByMember(1, nextCB1))
+        + +(getBannerTotalCashBackByMember(2, nextCB1))
+        + +(getBannerTotalCashBackByMember(3, nextCB1))
+        + +(getBannerTotalCashBackByMember(4, nextCB1));
     } else if (members.length >= 6) {
       const oldCB = parseInt(secDis!, 10) - parseInt(firstDis!, 10); // next cb can be availed
       const nextCB1 = parseInt(thirdDis!, 10) - parseInt(secDis!, 10); // next cb can be availed
       const nextCBOwner = ownerCB1 - parseInt(secDis!, 10);
       const nextCBOwner2 = ownerCB2 - ownerCB1;
       cb = +(getBannerTotalCashBackByMember(0, firstDis)) // old upper calc
-      + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
-      + +(getBannerTotalCashBackByMember(0, nextCBOwner))
-      + +(getBannerTotalCashBackByMember(1, nextCB1))
-      + +(getBannerTotalCashBackByMember(2, nextCB1))
-      + +(getBannerTotalCashBackByMember(3, nextCB1))
-      + +(getBannerTotalCashBackByMember(4, nextCB1)) //
-      + +(getBannerTotalCashBackByMember(0, nextCBOwner2));
+        + +(getBannerTotalCashBackByMember(1, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(2, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, oldCB)) // old upper calc
+        + +(getBannerTotalCashBackByMember(0, nextCBOwner))
+        + +(getBannerTotalCashBackByMember(1, nextCB1))
+        + +(getBannerTotalCashBackByMember(2, nextCB1))
+        + +(getBannerTotalCashBackByMember(3, nextCB1))
+        + +(getBannerTotalCashBackByMember(4, nextCB1)) //
+        + +(getBannerTotalCashBackByMember(0, nextCBOwner2));
     }
     // else if (members.length === 8) {
     //   // add 3rd person product discount only
@@ -425,7 +513,7 @@ export default function useDeal() {
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const baseLine = gsctx?.partnerRewards?.baseline;
 
-  const formatNameCase = (name : string) => {
+  const formatNameCase = (name: string) => {
     const full = name.toLowerCase().split(' ');
     const fullname = full.map((item: string) => {
       if (item !== '') return `${item[0].toUpperCase()}${item.slice(1)}`;

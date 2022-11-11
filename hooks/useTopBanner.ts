@@ -20,7 +20,9 @@ const useTopBanner = () => {
     // unLockCB(percentage, milestones, members).toFixed(2).toString().replace('.00', '')
     // );
     // else setCashBackVal('...');
-    if (percentage) setCashBackVal(cashback().toString().replace('.00', ''));
+    const calculated: any = cashback();
+    // console.log('🎈 calculated', calculated);
+    if (percentage) setCashBackVal(calculated.currentAmout.toString().replace('.00', ''));
     else setCashBackVal('...');
   }, [gsctx]);
 

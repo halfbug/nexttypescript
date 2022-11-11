@@ -12,7 +12,7 @@ const SmallBannerBox2 = ({
   bannerDiscount,
 }: IProps) => {
   const {
-    milestones, getBannerTotalCashBack, currencySymbol,
+    milestones, getBannerTotalCashBack, currencySymbol, cashback,
   } = useDeal();
   return (
     <>
@@ -31,7 +31,8 @@ const SmallBannerBox2 = ({
                 ? (
                   <>
                     {currencySymbol}
-                    {getBannerTotalCashBack(bannerDiscount[milestones.length] ?? 0)}
+                    {/* {getBannerTotalCashBack(bannerDiscount[milestones.length] ?? 0)} */}
+                    {cashback().nextAmount.toString().replace('.00', '') || 0}
                     {' '}
                     cashback
                   </>

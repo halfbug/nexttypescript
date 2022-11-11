@@ -614,7 +614,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 md={4}
                 className={styles.groupshop__hero__small_banner_right}
               >
-                {members.length > 2 && members.length < 6 ? (
+                {members.length > 1 && members.length < 6 ? (
                   <div className="d-flex flex-column justify-content-center align-items-center ">
                     <div className="mb-2">Unlocked</div>
                     <SmallBannerBox bannerDiscount={bannerDiscount} />

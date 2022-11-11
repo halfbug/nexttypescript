@@ -11,7 +11,7 @@ const SmallBannerBox = ({
   bannerDiscount,
 }: IProps) => {
   const {
-    milestones, getBannerTotalCashBack, currencySymbol,
+    milestones, getBannerTotalCashBack, currencySymbol, cashback,
   } = useDeal();
 
   const [prev, setprev] = React.useState(0);
@@ -40,7 +40,8 @@ const SmallBannerBox = ({
                     +
                     {' '}
                     {currencySymbol}
-                    {getBannerTotalCashBack(bannerDiscount[prev])}
+                    {/* {getBannerTotalCashBack(bannerDiscount[prev])} */}
+                    {cashback().totalUnlockedAmount.toString().replace('.00', '') || 0}
                     {' '}
                     cashback
                   </>
