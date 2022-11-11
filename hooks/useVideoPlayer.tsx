@@ -42,6 +42,7 @@ const useVideoPlayer = (videoRef: any) => {
   const [display, setDisplay] = useState<string>('');
   const [videoNo, setVideoNo] = useState<number>(0);
   const [videoError, setVideoError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     refetch();
@@ -151,6 +152,14 @@ const useVideoPlayer = (videoRef: any) => {
     }
   };
 
+  const loadingStart = () => {
+    setIsLoading(true);
+  };
+
+  const loadingEnd = () => {
+    setIsLoading(false);
+  };
+
   return {
     control,
     type,
@@ -166,6 +175,9 @@ const useVideoPlayer = (videoRef: any) => {
     updateTime,
     videoError,
     handleError,
+    loadingStart,
+    loadingEnd,
+    isLoading,
   };
 };
 
