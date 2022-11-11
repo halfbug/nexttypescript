@@ -23,21 +23,25 @@ export default function Model({
         aria-labelledby="contained-modal-title-vcenter"
         centered
         dialogClassName={styles.campaignDeactivate_modal}
-        contentClassName={styles.campaignDeactivate_modal_content}
+        contentClassName={styles.campaignDeactivate_modal__content}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure? 👀 </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <strong>
-            If you turn off this campaign, your Post-Purchase Groupshop will
-            become inactive.
-          </strong>
-          <br />
-          <br />
-          Meant to switch to a different campaign instead?
-          Simply toggle an existing campaign on or create a new one.
-          {' '}
+        <Modal.Header className="border-bottom-0" closeButton />
+        <Modal.Body className={styles.campaignDeactivate_modal__body}>
+          <h2>
+            Are you sure? 👀
+          </h2>
+          <div className={styles.campaignDeactivate_modal__body__info}>
+            <span>
+              If you turn off this campaign, your Post-Purchase Groupshop will
+              become inactive.
+            </span>
+            <br />
+            <br />
+            <span>
+              Meant to switch to a different campaign instead?
+              Simply toggle an existing campaign on or create a new one.
+            </span>
+          </div>
           <div className={styles.campaignDeactivate_modal__btnSection}>
             <Button
               className={styles.campaignDeactivate_modal__whiteBtn}

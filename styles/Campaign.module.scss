@@ -532,13 +532,34 @@
     }
   }
   .campaignDeactivate_modal {
-      width: 550px;
+      max-width: 550px;
       &__content {
-          border-radius: 12px;
+          border-radius: 10px;
+      }
+      &__body {
+        padding: 10px 60px 60px 60px;
+        h2 {
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 29px;
+        color: #1D2329;
+        }
+        &__info {
+            span {
+                font-family: 'Mulish';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+
+                color: #000000;
+            }
+        }
       }
       &__btnSection {
         display: flex;
-        justify-content: end;
         align-items: center;
   
         margin-top: 40px;
