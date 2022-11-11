@@ -158,6 +158,7 @@ const useVideoPlayer = (videoRef: any) => {
 
   const loadingEnd = () => {
     setIsLoading(false);
+    videoRef.current.currentTime = 0;
   };
 
   return {
