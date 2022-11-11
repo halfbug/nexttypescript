@@ -447,7 +447,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 brandname={brandName ?? ''}
                 shareUrl={shortActivateURL ?? activateURL ?? ''}
                 products={allProducts?.slice(0, 3) ?? []}
-                maxPercent={maxPercent}
+                // maxPercent={maxPercent}
               />
             ) : (
               <InfoBox mes="How does this work?" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
@@ -675,7 +675,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   brandname={brandName ?? ''}
                   shareUrl={shortActivateURL ?? activateURL ?? ''}
                   products={allProducts?.slice(0, 3) ?? []}
-                  maxPercent={maxPercent}
+                  // maxPercent={maxPercent}
                 />
               ) : (
                 <InfoBox mes="How it works" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />

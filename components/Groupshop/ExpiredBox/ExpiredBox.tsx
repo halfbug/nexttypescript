@@ -25,11 +25,11 @@ interface ExpiredBoxProps extends RootProps {
   shareUrl: any;
   brandname: string;
   products: IProduct[];
-  maxPercent?: string | undefined;
+  // maxPercent?: string | undefined | number;
 }
 
 const ExpiredBox = ({
-  mes, discount, shareUrl, brandname, products, maxPercent,
+  mes, discount, shareUrl, brandname, products,
 }: ExpiredBoxProps) => {
   const { googleEventCode } = useGtm();
 
@@ -38,7 +38,9 @@ const ExpiredBox = ({
   });
 
   const [show, setShow] = useState(false);
-  const { dPrice, shortActivateURL } = useDeal();
+  const {
+    dPrice, shortActivateURL, socialText, banner,
+  } = useDeal();
   const { formatNumber } = useUtilityFunction();
 
   useEffect(() => {
@@ -47,7 +49,6 @@ const ExpiredBox = ({
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { socialText, banner } = useDeal();
 
   return (
     <>
@@ -196,7 +197,7 @@ const ExpiredBox = ({
                       label="🔗 Invite Now"
                       className={styles.groupshop_expiredBox_modal__inviteBtn}
                       shareurl={shortActivateURL}
-                      text={`Shop ${brandname} on my Groupshop & get up to ${maxPercent} off`}
+                      text={socialText}
                     />
                   )
               }
@@ -237,7 +238,6 @@ const ExpiredBox = ({
 };
 ExpiredBox.defaultProps = {
   discount: '...',
-  maxPercent: '',
 };
 
 export default ExpiredBox;
