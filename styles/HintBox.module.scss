@@ -11,7 +11,7 @@
     border-radius: 23px;
     transition: left 2s;
     &__closeBtn{
-        @extend .d-flex, .justify-content-end;
+        @extend .d-flex, .justify-content-end, .px-0;
         svg {
                 cursor: pointer;
         }
@@ -22,12 +22,17 @@
         font-style: normal;
         font-weight: $font-weight-bolder;
         font-size: $size-16px;
-        line-height: 21px;
+        line-height: 24px;
         color: $subheadingclr;
     }
 
     &__point {
-        @extend .my-1;
+        @extend .my-1, .pe-4;
+        font-family: 'Mulish';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
     }
 }
 .hintBox__transition__enter{
