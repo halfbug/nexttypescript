@@ -10,6 +10,7 @@ import CloseIcon from 'assets/images/close.png';
 import PauseIcon from 'assets/images/pause.png';
 import PlayIcon from 'assets/images/play.png';
 import styles from 'styles/VideoWidget.module.scss';
+import loaderCss from 'styles/Loader.module.scss';
 
 const VideoWidget = () => {
   const videoRef = useRef<any>(null);
@@ -48,14 +49,14 @@ const VideoWidget = () => {
               }}
             >
               {!isLoading && (
-              <div className={styles.videoWidget__closeBox}>
-                <img
-                  className={styles.videoWidget__closeBox__icon}
-                  src={CloseIcon.src}
-                  alt="close"
-                  onClick={() => handleClose()}
-                />
-              </div>
+                <div className={styles.videoWidget__closeBox}>
+                  <img
+                    className={styles.videoWidget__closeBox__icon}
+                    src={CloseIcon.src}
+                    alt="close"
+                    onClick={() => handleClose()}
+                  />
+                </div>
               )}
             </div>
 
@@ -142,12 +143,17 @@ const VideoWidget = () => {
               onLoadedData={() => loadingEnd()}
             />
             {isLoading && (
-            <div style={{
-              height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
-            }}
-            >
-              <div className="spinner-border text-secondary" role="status" />
-            </div>
+              <div style={{
+                height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
+              }}
+              >
+                <div className={loaderCss.loading}>
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot1}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot2}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot3}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot4}`} />
+                </div>
+              </div>
             )}
             {!isLoading && control.height !== '444' ? (
               <div
@@ -299,12 +305,18 @@ const VideoWidget = () => {
               onLoadedData={() => loadingEnd()}
             />
             {isLoading && (
-            <div style={{
-              height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
-            }}
-            >
-              <div className="spinner-border text-secondary" role="status" />
-            </div>
+              <div
+                style={{
+                  height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
+                }}
+              >
+                <div className={loaderCss.loading}>
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot1}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot2}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot3}`} />
+                  <span className={`${loaderCss.dot} ${loaderCss.dot__dot4}`} />
+                </div>
+              </div>
             )}
             {!isLoading && control.height !== '444' ? (
               <div

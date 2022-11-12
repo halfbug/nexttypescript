@@ -159,6 +159,7 @@ const useVideoPlayer = (videoRef: any) => {
   const loadingEnd = () => {
     setIsLoading(false);
     videoRef.current.currentTime = 0;
+    videoRef.current.play();
     console.log('🚀🚀🚀control', control);
     setControl({ ...control, autoPlay: true });
   };
