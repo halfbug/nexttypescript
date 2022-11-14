@@ -144,7 +144,7 @@ const VideoWidget = () => {
             />
             {isLoading && (
               <div style={{
-                height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
+                height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.2)', backgroundColor: '#fff', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
               }}
               >
                 <div className={loaderCss.loading}>
@@ -188,6 +188,20 @@ const VideoWidget = () => {
             onLoadStart={() => loadingStart()}
             onLoadedData={() => loadingEnd()}
           />
+          {isLoading && (
+          <div
+            style={{
+              height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.2)', backgroundColor: '#fff', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
+            }}
+          >
+            <div className={loaderCss.loading}>
+              <span className={`${loaderCss.dot} ${loaderCss.dot__dot1}`} />
+              <span className={`${loaderCss.dot} ${loaderCss.dot__dot2}`} />
+              <span className={`${loaderCss.dot} ${loaderCss.dot__dot3}`} />
+              <span className={`${loaderCss.dot} ${loaderCss.dot__dot4}`} />
+            </div>
+          </div>
+          )}
           <div
             className={styles.videoWidget__howToBox}
             onClick={() => handleClick()}
@@ -307,7 +321,7 @@ const VideoWidget = () => {
             {isLoading && (
               <div
                 style={{
-                  height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)', backgroundColor: '#c5c5c5', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
+                  height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.2)', backgroundColor: '#fff', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
                 }}
               >
                 <div className={loaderCss.loading}>
