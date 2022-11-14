@@ -154,13 +154,14 @@ const useVideoPlayer = (videoRef: any) => {
 
   const loadingStart = () => {
     setIsLoading(true);
+    videoRef.current.pause();
+    setControl({ ...control, autoPlay: false });
   };
 
   const loadingEnd = () => {
     setIsLoading(false);
     videoRef.current.currentTime = 0;
     videoRef.current.play();
-    console.log('🚀🚀🚀control', control);
     setControl({ ...control, autoPlay: true });
   };
 
