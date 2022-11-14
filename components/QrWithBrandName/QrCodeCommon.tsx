@@ -81,7 +81,7 @@ export default function QrCodeCommon() {
                     </Link>
                   </div>
                 )}
-              <div className={[styles.QRContainer__Logo, 'ms-5 ps-3 mt-5'].join(' ')}>
+              <div className={[styles.QRContainer__Logo, 'ms-4 mt-5'].join(' ')}>
                 { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
                 <Link
                   href={{

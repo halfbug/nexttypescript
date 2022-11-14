@@ -74,7 +74,7 @@
     font-family: 'Mulish';
 
     @media (max-width: 1270px) {
-      padding: 40px 37px;
+      padding: 35px ;
     }
     @media (max-width: 991px) {
       padding: 30px 28px 40px;
@@ -577,6 +577,8 @@
 
   &__desktopImage {
     background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
     background-size: cover;
     background-position: center center;
     img {
