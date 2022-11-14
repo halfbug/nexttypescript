@@ -393,14 +393,17 @@
             font-size: 12px;
           }
         }
+
         .BtnGroup{
           .cashbackBtn, .friendBtn{
+            // @extend .shadow-sm;
             font-size: 12px;
             font-family: 'DM Sans';
+            font-weight: 600;
             border-radius: 6px;
             padding: 5px 10px 4px;
             border: none;
-
+           color: $black;
             @media (max-width:475px) {
               padding: 5px 6px 4px;
               font-size: 11px;
@@ -444,9 +447,9 @@
         display: flex;
 
         img {
-          height: 62px;
-          object-fit: contain;
-          width: 93px;
+          height: 79px;
+          object-fit: cover;
+          width: 79px;
         }
       }
     }
@@ -626,7 +629,17 @@
       text-align: center;
     }
   }
-
+  &__ViewGroupShop {
+    @extend .px-2, .py-1, .text-nowrap;
+    color: #ffffff;
+    border-radius: 6px;
+    height: fit-content;
+    background-color: $black;
+    width: fit-content;
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+  }
   &__link {
     .email{
       font-family: 'DM Sans';
