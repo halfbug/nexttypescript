@@ -102,6 +102,7 @@ const CardItem = ({ gs }: ICardItemProps) => {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+    alert('Link copied!');
   };
 
   return (
