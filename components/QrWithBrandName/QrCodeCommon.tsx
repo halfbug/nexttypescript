@@ -61,41 +61,44 @@ export default function QrCodeCommon() {
             <Col md={7} sm={12} className="p-0">
               { ShowAuth
                 && (
-                  <Link
-                    href={{
-                      pathname: '/qr-code/[shop]',
-                      query: { shop },
-                    }}
-                  >
-                    <a
-                      href=""
-                      onClick={() => {
-                        setShowWelcome(true);
-                        setShowAuth(false);
+                  <div>
+                    <Link
+                      href={{
+                        pathname: '/qr-code/[shop]',
+                        query: { shop },
                       }}
                     >
-                      {/* <LeftArrow size={12}/> */}
-                      <FaArrowLeft size={18} />
-                      <div className={[styles.QRContainer__Logo, 'ms-5 ps-3'].join(' ')}>
-                        { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
-                        <Link
-                          href={{
-                            pathname: `https://${state.storeLink}`,
-                          }}
-                        >
-                          <a target="_blank">
-                            <img style={{ cursor: 'pointer' }} src={state.logoImage} alt="brand_logo" />
-                          </a>
-                        </Link>
-                        ) }
-                      </div>
-                    </a>
-                  </Link>
+                      <a
+                        href=""
+                        onClick={() => {
+                          setShowWelcome(true);
+                          setShowAuth(false);
+                        }}
+                      >
+                        {/* <LeftArrow size={12}/> */}
+                        <FaArrowLeft className="m-3" size={18} />
+                      </a>
+                    </Link>
+                  </div>
                 )}
+              <div className={[styles.QRContainer__Logo, 'ms-5 ps-3 mt-5'].join(' ')}>
+                { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
+                <Link
+                  href={{
+                    pathname: `https://${state.storeLink}`,
+                  }}
+                >
+                  <a target="_blank">
+                    <img width="200" style={{ cursor: 'pointer' }} src={state.logoImage} alt="brand_logo" />
+                  </a>
+                </Link>
+                ) }
+              </div>
               <div className={styles.QRContainer__form__wrapper}>
 
-                <div className={styles.QRContainer__mobileImage}>
-                  <img src={state.banner} alt="QR Right Screen" className="img-fluid" />
+                <div style={{ backgroundImage: `url(${state.banner})` }} className={styles.QRContainer__mobileImage}>
+                  {/* <img src={state.banner} alt="" className="img-fluid" /> */}
+                  <QrRight />
                 </div>
                 { ShowWelcome && (
                   <QrWelcomeScreen
@@ -125,22 +128,24 @@ export default function QrCodeCommon() {
                 )}
                 <div className={styles.QRContainer__bottom__content}>
                   <hr />
-                  <div className={[styles.QRContainer__social__media, 'mb-2 row '].join('')}>
-                    <div className={[styles.QRContainer__social__icons, 'mt-4 d-flex justify-content-start'].join()}>
+                  <div className={[styles.QRContainer__social__media, 'mb-2 row '].join(' ')}>
+                    <div className={[styles.QRContainer__social__icons, 'mt-2 col-6 d-flex justify-content-start'].join(' ')}>
                       <SocialLinks />
                     </div>
-                    <div className={[styles.QRContainer__link, 'col d-flex justify-content-end'].join()}>
-                      <p className={styles.question}>
-                        Have Questions?
-                        {' '}
-                        <Link
-                          href={{
-                            pathname: 'https://groupshop.zendesk.com/hc/en-us/sections/4429416770963-FAQ-How-To',
-                          }}
-                        >
-                          <a>Peep our FAQ</a>
-                        </Link>
-                      </p>
+                    <div className={[styles.QRContainer__link, ' col-6 d-flex justify-content-end'].join(' ')}>
+                      <div className="d-flex align-items-end mt-2">
+                        <p className={[styles.question, ''].join(' ')}>
+                          Have Questions?
+                          {' '}
+                          <Link
+                            href={{
+                              pathname: 'https://groupshop.zendesk.com/hc/en-us/sections/4429416770963-FAQ-How-To',
+                            }}
+                          >
+                            <a>Peep our FAQ</a>
+                          </Link>
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <br />
@@ -163,14 +168,15 @@ export default function QrCodeCommon() {
                 </div>
               </div>
             </Col>
-            <Col md={5} sm={12} className="p-0 bg-light">
+            <Col md={5} sm={12} className="p-0">
               <div
                 className={styles.QRContainer__desktopImage}
+                style={{ backgroundImage: `url(${state.banner})` }}
               >
-                <img src={state.banner} alt="QRImage" className="img-fluid" />
+                {/* <img src={state.banner} alt="QRImage" className="img-fluid" /> */}
+                <QrRight />
               </div>
               {/* This Banner should be in background */}
-              <QrRight />
             </Col>
           </Row>
         </Container>

@@ -90,53 +90,56 @@ export default function QrWelcomeScreen({
   const { gsctx, dispatch } = useAppContext();
 
   return (
-    <div className={styles.QRContainer__content__container}>
-      {gsctx?.store?.logoImage}
-      <div className={[styles.QRContainer__content__congratswrapper, styles.QRContainer__content__container__congratsmain].join(' ')}>
-        {/* {brandLogo} */}
-        <div className={styles.QRContainer__content__heading}>
-          <h2>
-            Access your personalized store with
-            <strong> exclusive discounts</strong>
-            {' '}
-            and
-            {' '}
-            <strong>cashback </strong>
-            for you and your friends.
-          </h2>
-          {/* <GroupshopRoundLogo className="img-fluid" /> */}
+    <>
+      {/* <div className={styles.QRContainer_Brandlogo}><Brandlogo /></div> */}
+      <div className={styles.QRContainer__content__container}>
+        {/* {gsctx?.store?.logoImage} */}
+        <div className={[styles.QRContainer__content__congratswrapper, styles.QRContainer__content__container__congratsmain, ''].join(' ')}>
+          {/* {brandLogo} */}
+          <div className={styles.QRContainer__content__heading}>
+            <h2>
+              Access your personalized store with
+              <strong> exclusive discounts</strong>
+              {' '}
+              and
+              {' '}
+              <strong>cashback </strong>
+              for you and your friends.
+            </h2>
+            {/* <GroupshopRoundLogo className="img-fluid" /> */}
+          </div>
+          <div className={styles.QRContainer__content__container__congratsmain__simply}>
+            <p className="mt-3">
+              It’s called a Groupshop! Simply enter the email you used to shop with
+              {' '}
+              {brandName}
+              {' '}
+              to get started.
+            </p>
+          </div>
+          <div className={styles.QRContainer__form__container}>
+            <Form noValidate onSubmit={handleSubmit}>
+              <Form.Group className="mb-4">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter your email"
+                  name="email"
+                  isInvalid={!!errors.email}
+                  onChange={(e) => handleChange(e)}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <div>
+                <Button className={styles.QRContainer__btnGroupShop} type="submit">Find my Groupshop</Button>
+              </div>
+            </Form>
+          </div>
         </div>
-        <div className={styles.QRContainer__content__container__congratsmain__simply}>
-          <p className="mt-3">
-            It’s called a Groupshop! Simply enter the email you used to shop with
-            {' '}
-            {brandName}
-            {' '}
-            to get started.
-          </p>
-        </div>
-        <div className={styles.QRContainer__form__container}>
-          <Form noValidate onSubmit={handleSubmit}>
-            <Form.Group className="mb-4">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                name="email"
-                isInvalid={!!errors.email}
-                onChange={(e) => handleChange(e)}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.email}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <div>
-              <Button className={styles.QRContainer__btnGroupShop} type="submit">Find my Groupshop</Button>
-            </div>
-          </Form>
-        </div>
+        <AlertComponent />
       </div>
-      <AlertComponent />
-    </div>
+    </>
   );
 }

@@ -67,14 +67,14 @@ export default function QrAuthScreen({
       {activeGroupshops.length && activeGroupshops
         .filter((gs: any) => gs?.shop?.brandName !== brandName).length !== 0
         && (
-        <div>
+        <div className="mb-3">
           <div>
             <p>
               You have Groupshops with other brands...
             </p>
             <hr className={styles.QRContainer__content__container__hr2} />
           </div>
-          <div className={styles.activeGroupshops}>
+          <div style={{ maxHeight: '320px', overflowY: 'auto' }} className={[styles.activeGroupshops, 'overflow-y-scroll'].join(' ')}>
             {
             activeGroupshops.length && activeGroupshops
               .filter((gs: any) => gs?.shop?.brandName !== brandName)
@@ -161,8 +161,8 @@ const CardItem = ({ gs }: ICardItemProps) => {
             </a>
           </Link>
         </div>
-        <div style={{ cursor: 'pointer' }}>
-          <CopyIcon />
+        <div className="d-flex justify-content-end" style={{ cursor: 'pointer' }}>
+          <CopyIcon className="mt-2" />
           <button
             type="button"
             className="btn btn-link p-1"
