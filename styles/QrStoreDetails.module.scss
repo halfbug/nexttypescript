@@ -68,7 +68,7 @@
   }
 
   &__form__wrapper {
-    padding: 2rem 4rem;
+    padding: 3rem 4rem;
     font-size: 18px;
     margin: 0;
     font-family: 'Mulish';
@@ -90,7 +90,8 @@
   }
 
   &__content__heading {
-    max-width: 90%;
+    @extend .text-wrap;
+    max-width: 549px;
     font-size: 14px;
     color: #000000;
     position: relative;
