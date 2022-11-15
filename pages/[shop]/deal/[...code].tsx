@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
+import Gmembers from 'components/Groupshop/Members/Gmembers';
 import QRClickIcon from 'assets/images/qr-click.svg';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
@@ -487,12 +488,20 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   Shop or invite your friends to shop to get started!
                 </h5>
                 <div className="d-flex flex-row justify-content-center align-items-center">
-                  <Members
+                  <Gmembers
                     names={topFive(gsctx?.members.map(
-                      (mem: any) => `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
-                      }`,
+                      (mem: any) => ({
+                        name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
+                        }`,
+                        price: mem.orderDetail.price,
+                        refund: (mem.refund) ? mem.refund : [],
+                      }),
                     ))}
-                    cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
+                    brandname={brandName}
+                    fullshareurl={gsURL}
+                    shareUrl={gsShortURL ?? gsURL}
+                    discount={gsctx?.discountCode.percentage}
+                    currencySymbol={currencySymbol}
                     pending={pending}
                   />
                   {gsctx?.members.length > 5 && (
@@ -658,12 +667,20 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </p>
             </Row>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
-              <Members
+              <Gmembers
                 names={gsctx?.members.map(
-                  (mem: any) => `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
-                  }`,
+                  (mem: any) => ({
+                    name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
+                    }`,
+                    price: mem.orderDetail.price,
+                    refund: (mem.refund) ? mem.refund : [],
+                  }),
                 )}
-                cashback={[`${currencySymbol}23`, `${currencySymbol}20`]}
+                brandname={brandName}
+                fullshareurl={gsURL}
+                shareUrl={gsShortURL ?? gsURL}
+                discount={gsctx?.discountCode.percentage}
+                currencySymbol={currencySymbol}
                 pending={pending}
               />
             </div>

@@ -24,11 +24,12 @@ import Icon from 'assets/images/model-info-cone.svg';
 interface mesProps {
   mes: string;
   brandname: any;
+  handleRewardsModel?: any;
   shareUrl?: string;
   fullshareurl?: string;
 }
 const InfoBox = ({
-  mes, brandname, shareUrl, fullshareurl,
+  mes, brandname, shareUrl, handleRewardsModel, fullshareurl,
 }: mesProps) => {
   const [show, setShow] = useState(false);
 
@@ -45,8 +46,13 @@ const InfoBox = ({
   });
   const { socialText } = useDeal();
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    handleRewardsModel();
+    setShow(false);
+  };
+  const handleShow = () => {
+    setShow(true);
+  };
   return (
     <>
       <InfoButton handleClick={handleShow} message={mes} />
@@ -201,6 +207,7 @@ const InfoBox = ({
 };
 
 InfoBox.defaultProps = {
+  handleRewardsModel: () => {},
   shareUrl: '',
   fullshareurl: '',
 };

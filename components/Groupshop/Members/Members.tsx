@@ -49,7 +49,6 @@ const Members = ({
               {' '}
               {member}
             </Button>
-
             <Overlay
               rootClose
               show={show[`m-${idx}`] || false}
