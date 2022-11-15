@@ -59,7 +59,8 @@ export default function QrCodeCommon() {
         <Container fluid>
           <Row>
             <Col md={7} sm={12} className="p-0">
-              { ShowAuth
+              <div>
+                { ShowAuth
                 && (
                   <div>
                     <Link
@@ -81,23 +82,23 @@ export default function QrCodeCommon() {
                     </Link>
                   </div>
                 )}
-              <div className={[styles.QRContainer__Logo, 'ms-4 ps-2 mt-5'].join(' ')}>
-                { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
-                <Link
-                  href={{
-                    pathname: `https://${state.storeLink}`,
-                  }}
-                >
-                  <a target="_blank">
-                    <img width="200" style={{ cursor: 'pointer' }} src={state.logoImage} alt="brand_logo" />
-                  </a>
-                </Link>
-                ) }
+                <div className={styles.QRContainer__Logo}>
+                  { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
+                  <Link
+                    href={{
+                      pathname: `https://${state.storeLink}`,
+                    }}
+                  >
+                    <a target="_blank">
+                      <img src={state.logoImage} alt="brand_logo" className="img-fluid" />
+                    </a>
+                  </Link>
+                  ) }
+                </div>
               </div>
-              <div className={styles.QRContainer__form__wrapper}>
 
-                <div style={{ backgroundImage: `url(${state.banner})` }} className={styles.QRContainer__mobileImage}>
-                  {/* <img src={state.banner} alt="" className="img-fluid" /> */}
+              <div className={styles.QRContainer__form__wrapper}>
+                <div style={{ backgroundImage: `url(${state.banner})` }} className={[styles.QRContainer__mobileImage, 'justify-content-center align-items-center'].join(' ')}>
                   <QrRight />
                 </div>
                 { ShowWelcome && (
@@ -128,12 +129,12 @@ export default function QrCodeCommon() {
                 )}
                 <div className={styles.QRContainer__bottom__content}>
                   <hr />
-                  <div className={[styles.QRContainer__social__media, 'mb-2 row '].join(' ')}>
-                    <div className={[styles.QRContainer__social__icons, 'mt-2 col-6 d-flex justify-content-start'].join(' ')}>
+                  <div className={[styles.QRContainer__social__media, ' row '].join(' ')}>
+                    <div className={[styles.QRContainer__social__icons, 'col-6 d-flex justify-content-start'].join(' ')}>
                       <SocialLinks />
                     </div>
                     <div className={[styles.QRContainer__link, ' col-6 d-flex justify-content-end'].join(' ')}>
-                      <div className="d-flex align-items-end mt-2">
+                      <div className="d-flex align-items-end">
                         <p className={[styles.question, ''].join(' ')}>
                           Have Questions?
                           {' '}

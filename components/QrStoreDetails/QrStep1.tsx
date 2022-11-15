@@ -169,14 +169,15 @@ export default function QrStep1({
                             {errors.email}
                           </Form.Control.Feedback>
                         </Form.Group>
-                        <div>
+                        <div className={styles.QRContainer__form__container__btnFindMyGS}>
                           <Button className={styles.QRContainer__btnGroupShop} type="submit">Find my Groupshop</Button>
                         </div>
                       </Form>
                     </div>
                   </div>
+                  <hr />
+
                   <div className={styles.QRContainer__bottom__content}>
-                    <hr />
                     <p className={styles.question}>
                       Have Questions?
                       {' '}

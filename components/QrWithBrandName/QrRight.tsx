@@ -6,7 +6,7 @@ import styles from 'styles/QrStoreDetails.module.scss';
 
 export default function QrRight() {
   return (
-    <div className={[styles.QRContainer__content__container, 'd-flex justify-content-center align-items-center'].join(' ')}>
+    <div className="d-flex justify-content-center align-items-center">
       <div className="d-flex justify-content-center align-items-center flex-column">
         <div className={[styles.QRContainer_WhiteBox, ''].join(' ')}>
           <p>What’s inside?</p>
