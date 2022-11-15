@@ -108,23 +108,27 @@ const AvailableRewardsBox = ({
                   </>
                 ) : (
                   <>
-                    <h2>
-                      How to Earn?
-                    </h2>
-                    <p>
-                      1. Invite friends to shop & unlock up to
-                      {' '}
-                      {currencySymbol}
-                      {reward}
-                      {' '}
-                      in cashback.
-                    </p>
-                    <p>
-                      2. Shop from this Groupshop & get
-                      {' '}
-                      {discount}
-                      % off.
-                    </p>
+                    {owner && (
+                    <>
+                      <h2>
+                        How to Earn?
+                      </h2>
+                      <p>
+                        1. Invite friends to shop & unlock up to
+                        {' '}
+                        {currencySymbol}
+                        {reward}
+                        {' '}
+                        in cashback.
+                      </p>
+                      <p>
+                        2. Shop from this Groupshop & get
+                        {' '}
+                        {discount}
+                        % off.
+                      </p>
+                    </>
+                    ) }
                   </>
                 ) }
               </div>
