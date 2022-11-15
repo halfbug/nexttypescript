@@ -129,6 +129,9 @@ const useVideoPlayer = (videoRef: any) => {
       setVideoNo(0);
     } else if (control.height === '444' && closeType) {
       setType(2);
+      setControl({
+        ...control, mute: true,
+      });
       videoRef.current.play();
     }
   };

@@ -83,6 +83,7 @@ const VideoWidget = () => {
                 className={styles.videoWidget__playBox}
               >
                 <img
+                  onTouchStart={() => handleClick()}
                   className={styles.videoWidget__playBox__icon}
                   src={control.autoPlay ? PauseIcon.src : PlayIcon.src}
                   alt=""
@@ -91,7 +92,7 @@ const VideoWidget = () => {
             ) : ''}
             <div className={styles.videoWidget__barBox__bottom}>
               {(!isLoading && control.height === '444' && videoRef && videoRef.current
-                && videoRef.current.currentTime) && (
+                && videoRef.current.currentTime) ? (
                   <>
                     <input
                       type="range"
@@ -123,7 +124,7 @@ const VideoWidget = () => {
                       </div>
                     </div>
                   </>
-              )}
+                ) : ''}
             </div>
             <video
               key={source[videoNo]}
@@ -131,16 +132,17 @@ const VideoWidget = () => {
               style={{ objectFit: 'fill', borderRadius: '15px' }}
               height={control.height}
               width={control.width}
-              src={source[videoNo]}
+              src={`${source[videoNo]}#t=0.001`}
               autoPlay={control.autoPlay}
               muted={control.mute}
               loop={control.loop}
               onTimeUpdate={(e) => handleChange(e)}
-              onClick={() => handleClick()}
               onError={() => handleError()}
               playsInline
               onLoadStart={() => loadingStart()}
               onLoadedData={() => loadingEnd()}
+              preload="metadata"
+              onTouchStart={() => handleClick()}
             />
             {isLoading && (
               <div style={{
@@ -177,41 +179,30 @@ const VideoWidget = () => {
             style={{ objectFit: 'fill', borderRadius: '15px' }}
             height={30}
             width={152}
-            src={source[videoNo]}
+            src={`${source[videoNo]}#t=0.001`}
             autoPlay={control.autoPlay}
             muted={control.mute}
             loop={control.loop}
-            onClick={() => mobileViewClick()}
             onTimeUpdate={(e) => handleChange(e)}
             onError={() => handleError()}
             playsInline
             onLoadStart={() => loadingStart()}
             onLoadedData={() => loadingEnd()}
+            preload="metadata"
+            onTouchStart={() => mobileViewClick()}
           />
-          {isLoading && (
-          <div
-            style={{
-              height: `${control.height}px`, width: `${control.width}px`, color: 'black', boxShadow: '3px 3px 12px rgba(0, 0, 0, 0.2)', backgroundColor: '#fff', borderRadius: '15px', justifyContent: 'center', display: 'flex', alignItems: 'center',
-            }}
-          >
-            <div className={loaderCss.loading}>
-              <span className={`${loaderCss.dot} ${loaderCss.dot__dot1}`} />
-              <span className={`${loaderCss.dot} ${loaderCss.dot__dot2}`} />
-              <span className={`${loaderCss.dot} ${loaderCss.dot__dot3}`} />
-              <span className={`${loaderCss.dot} ${loaderCss.dot__dot4}`} />
+          {!isLoading ? (
+            <div
+              className={styles.videoWidget__howToBox}
+              onClick={() => mobileViewClick()}
+            >
+              <img
+                src={PlayIcon.src}
+                alt=""
+              />
+              <p>How To Use</p>
             </div>
-          </div>
-          )}
-          <div
-            className={styles.videoWidget__howToBox}
-            onClick={() => handleClick()}
-          >
-            <img
-              src={PlayIcon.src}
-              alt=""
-            />
-            <p>How To Use</p>
-          </div>
+          ) : ''}
         </div>
       ) : ''}
       {display === 'desktop' && type === 1 && source.length > 0 && !videoError
@@ -258,6 +249,7 @@ const VideoWidget = () => {
                 className={styles.videoWidget__playBox}
               >
                 <img
+                  onClick={() => handleClick()}
                   className={styles.videoWidget__playBox__icon}
                   src={control.autoPlay ? PauseIcon.src : PlayIcon.src}
                   alt=""
