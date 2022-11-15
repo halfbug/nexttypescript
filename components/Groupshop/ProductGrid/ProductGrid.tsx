@@ -76,7 +76,7 @@ const ProductGrid = ({
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
-    leftOverProducts, addedByInfluencer, addedByRefferal,
+    leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid,
   } = useDeal();
   console.log('🚀 ~ file: ProductGrid.tsx ~ line 96 ~ addedByInfluencer', addedByInfluencer);
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
@@ -130,7 +130,7 @@ const ProductGrid = ({
                           {topFive(getBuyers(prod.id)?.map(
                             (member: Member) => (
                               <span className={styles.groupshop__pcard_tag_buyer}>
-                                {formatName(member.orderDetail.customer)}
+                                {nameOnProductGrid(member.orderDetail.customer)}
                               </span>
                             ),
                           ))}

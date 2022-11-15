@@ -89,8 +89,21 @@ export default function useDeal() {
     (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
   ) ?? [], [gsctx.members]);
 
-  const formatName = useCallback((customer: any) => `${(customer.firstName.length > 7 ? customer.firstName.slice(0, 7) : customer.firstName) || ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,
+  const formatName = useCallback((customer : any) => `${customer.firstName ?? ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,
     [gsctx.members]);
+
+  const nameOnProductGrid = useCallback((customer) => {
+    if (!customer?.firstName?.length) {
+      if (customer?.lastName?.length > 7) {
+        return customer.lastName.slice(0, 7);
+      }
+      return customer?.lastName;
+    }
+    if (customer?.firstName?.length > 7) {
+      return `${customer.firstName.slice(0, 7)} ${customer?.lastName?.charAt(0)}`;
+    }
+    return `${customer.firstName} ${customer?.lastName?.charAt(0)}`;
+  }, [gsctx.members]);
 
   const topFive = useCallback(
     (entity: any) => (Array.isArray(entity)
@@ -585,5 +598,6 @@ export default function useDeal() {
     cashback,
     addedByInfluencer,
     getOwnerFirstName,
+    nameOnProductGrid,
   };
 }
