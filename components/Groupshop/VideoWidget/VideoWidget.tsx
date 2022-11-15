@@ -49,7 +49,7 @@ const VideoWidget = () => {
               }}
             >
               {!isLoading && (
-                <div className={styles.videoWidget__closeBox}>
+                <div className={[styles.videoWidget__closeBox, 'px-1 py-2'].join(' ')}>
                   <img
                     className={styles.videoWidget__closeBox__icon}
                     src={CloseIcon.src}
@@ -215,7 +215,7 @@ const VideoWidget = () => {
               }}
             >
               {control.height === '444' ? (
-                <div className={styles.videoWidget__closeBox}>
+                <div className={[styles.videoWidget__closeBox, 'px-1 py-2'].join(' ')}>
                   <img
                     className={styles.videoWidget__closeBox__icon}
                     src={CloseIcon.src}
