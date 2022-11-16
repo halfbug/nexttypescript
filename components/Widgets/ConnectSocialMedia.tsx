@@ -28,7 +28,7 @@ const ConnectSocialMedia = () => (
       </div>
       <div className="mx-1">
         {' '}
-        <SocialButtonLinks network="Twitter" url="https://www.instagram.com/groupshopit/" />
+        <SocialButtonLinks network="Twitter" url="https://twitter.com/groupshopit" />
         {' '}
       </div>
     </section>
