@@ -37,9 +37,11 @@ export default function Model({
             </span>
             <br />
             <br />
-            <span className={styles.campaignDeactivate_modal_italic}>
+            <span className={styles.campaignDeactivate_modal_modeltext_normal}>
               Meant to switch to a different campaign instead?
-              Simply toggle an existing campaign on or create a new one.
+              Simply toggle an existing campaign on or
+              {' '}
+              <span className={styles.campaignDeactivate_modal_italic}>create a new one.</span>
             </span>
           </div>
           <div className={styles.campaignDeactivate_modal__btnSection}>

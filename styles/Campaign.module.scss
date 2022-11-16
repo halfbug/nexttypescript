@@ -582,9 +582,18 @@
         
         font-family: 'Mulish';
         font-style: italic!important;
-        font-weight: 400;
+        font-weight: 400!important;
         font-size: 14px;
         line-height: 18px;
         color: $black;
+    }
+
+    &_modeltext_normal{
+
+font-family: Mulish;
+font-size: 14px;
+font-weight: 400!important;
+line-height: 18px;
+ 
     }
   }
