@@ -645,7 +645,16 @@
     @media (max-width: 767px) {
       text-align: center;
     }
+
   }
+
+   &_centered{
+
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+
+}
   &__ViewGroupShop {
     @extend .px-2, .py-1, .text-nowrap;
     color: #ffffff;

@@ -133,8 +133,8 @@ export default function QrCodeCommon() {
                     <div className={[styles.QRContainer__social__icons, 'col-6 d-flex justify-content-start'].join(' ')}>
                       <SocialLinks />
                     </div>
-                    <div className={[styles.QRContainer__link, ' col-6 d-flex justify-content-end'].join(' ')}>
-                      <div className="d-flex align-items-end">
+                    <div className={[styles.QRContainer__link, 'w-auto d-flex col-sm-12 justify-content-sm-center col-md-6 justify-content-md-end col-lg-6 justify-content-lg-end'].join(' ')}>
+                      <div className="">
                         <p className={[styles.question, ''].join(' ')}>
                           Have Questions?
                           {' '}

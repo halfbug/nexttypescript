@@ -132,7 +132,7 @@ export default function QrWelcomeScreen({
                   {errors.email}
                 </Form.Control.Feedback>
               </Form.Group>
-              <div>
+              <div className={styles.QRContainer_centered}>
                 <Button className={styles.QRContainer__btnGroupShop} type="submit">Find my Groupshop</Button>
               </div>
             </Form>
