@@ -577,4 +577,14 @@
         margin-left: 10px;
         border-radius: 6px;
     }
+
+    &_italic{
+        
+        font-family: 'Mulish';
+        font-style: italic!important;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: $black;
+    }
   }
