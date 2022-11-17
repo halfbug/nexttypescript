@@ -96,9 +96,9 @@ export default function PaymentHistory() {
           {monthlyCustomGS.map((item) => (
             <tr key={`${item.cashBack}-${Math.random()}`}>
               <td>
-                { moment(new Date(item._id)).format('MM/DD/YYYY') }
+                { moment(new Date(item._id)).format('MM/DD/YY') }
                 {' - '}
-                { moment(new Date(item._id)).add(30, 'days').format('MM/DD/YYYY') }
+                { moment(new Date(item._id)).add(30, 'days').format('MM/DD/YY') }
                 {' '}
               </td>
               <td>
