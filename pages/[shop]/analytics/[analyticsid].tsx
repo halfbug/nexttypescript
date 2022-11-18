@@ -176,21 +176,21 @@ const CampaignAnalytics: NextPage = () => {
               handleSearch={handleSearch}
             />
           </Col>
-          <Col lg={5} className="gx-4">
+          {/* <Col lg={5} className="gx-4">
             <ViralityMetrics
               startDate={startFrom}
               endDate={toDate}
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
               shop={store.shop}
             />
-          </Col>
+          </Col> */}
         </Row>
-        <CustomerData
+        {/* <CustomerData
           startDate={startFrom}
           endDate={toDate}
           currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
           storeId={store.id}
-        />
+        /> */}
       </Container>
     </Page>
   );

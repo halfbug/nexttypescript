@@ -133,6 +133,32 @@ export default function useUtilityFunction() {
     };
     return ranges;
   });
+
+  const GraphDateRanges = (() => {
+    const ranges = {
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month': [moment().startOf('month'), moment().endOf('month')],
+      'Last Month': [
+        moment()
+          .subtract(1, 'month')
+          .startOf('month'),
+        moment()
+          .subtract(1, 'month')
+          .endOf('month'),
+      ],
+      'Last Year': [
+        moment()
+          .subtract(1, 'year')
+          .startOf('year'),
+        moment()
+          .subtract(1, 'year')
+          .endOf('year'),
+      ],
+    };
+    return ranges;
+  });
+
   const uniqueArray = ((arr: any) => {
     const result = arr?.reduce((unique: any, o: any) => {
       if (!unique.some((obj: any) => obj.id === o.id)) {
@@ -144,7 +170,7 @@ export default function useUtilityFunction() {
     return result;
   });
 
-   const duplicateCampaignName = (names: Array<string>, prevCampaign: any) => {
+  const duplicateCampaignName = (names: Array<string>, prevCampaign: any) => {
     const currentDate = new Date().toLocaleString('en-us', {
       day: 'numeric',
       month: 'short',
@@ -193,6 +219,51 @@ export default function useUtilityFunction() {
     return result;
   });
 
+  const getDatesBetween = (startDate:any, endDate:any) => {
+    const dates:string[] = [];
+    // Strip hours minutes seconds etc.
+    const year = startDate.getFullYear();
+    const month = (`0${startDate.getMonth() + 1}`).slice(-2);
+    const day = (`0${startDate.getDate()}`).slice(-2);
+    const currentDate = new Date(`${year}${'-'}${month}${'-'}${day}`);
+    while (currentDate <= endDate) {
+      dates.push(`${(`0${currentDate.getMonth() + 1}`).slice(-2)}${'-'}${(`0${currentDate.getDate()}`).slice(-2)}`);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return dates;
+  };
+
+  const getMonthsBetween = (startDate:any, endDate:any) => {
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+    const dates = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = startYear; i <= endYear; i++) {
+      const endMonth = i !== endYear ? 11 : endDate.getMonth();
+      const startMon = i === startYear ? startDate.getMonth() : 0;
+      for (let j = startMon; j <= endMonth; j = j > 12 ? j % 12 || 11 : j + 1) {
+        const month = j + 1;
+        const displayMonth = month < 10 ? `0${month}` : month;
+        dates.push([i, displayMonth].join('-'));
+      }
+    }
+    return dates;
+  };
+
+  const getYearsBetween = (startDate:any, endDate:any) => {
+    const startYear = startDate.getFullYear();
+    const endYear = endDate.getFullYear();
+    const dates = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = startYear; i <= endYear; i++) dates.push(i);
+    return dates;
+  };
+
+  const graphFormatNumber = ((num: number | string) => {
+    const newNum = Math.abs(+num) > 999 ? `${Math.sign(+num) * (+(Math.abs(+num) / 1000).toFixed(1))}k` : formatNumber(Math.sign(+num) * Math.abs(+num));
+    return newNum;
+  });
+
   return {
     cleanTypename,
     multiple5,
@@ -206,9 +277,14 @@ export default function useUtilityFunction() {
     formatNumber,
     storeCurrencySymbol,
     DateRanges,
+    GraphDateRanges,
     findInArray2,
     uniqueArray,
     duplicateCampaignName,
     getUniqueArray,
+    getDatesBetween,
+    getMonthsBetween,
+    getYearsBetween,
+    graphFormatNumber,
   };
 }

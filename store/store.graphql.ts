@@ -1523,6 +1523,32 @@ const GET_ALL_VIDEOS = gql`
 }
 `;
 
+const GET_GRAPH_REVENUE = gql`
+query GetGraphRevenue($storeId: String!) {
+  getGraphRevenue(storeId: $storeId) {
+    _id { 
+      month
+      year
+    }    
+    revenue
+    }
+}
+`;
+
+const GET_GRAPH_REVENUE_BY_DATE = gql`
+query GetGraphRevenueByDate($storeId: String!, $startDate: String!, $endDate: String!) {
+  getGraphRevenueByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+    _id { 
+      day
+      month
+      year
+    }               
+      revenue
+      graphView
+    }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -1542,4 +1568,5 @@ export {
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
+  GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE,
 };

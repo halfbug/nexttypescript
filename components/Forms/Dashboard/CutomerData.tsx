@@ -78,6 +78,7 @@ export default function CustomerData({
           We calculate traffic value using the average CPC in your industry.
         </div>
       </div>
+
       <div className={styles.customerData}>
         <div className={styles.customerData__header}>
           <h3>Customer Data</h3>

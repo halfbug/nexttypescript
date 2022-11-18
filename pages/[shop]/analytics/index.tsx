@@ -8,6 +8,7 @@ import CustomerData from 'components/Forms/Dashboard/CutomerData';
 import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import GraphRevenue from 'components/Forms/Dashboard/GraphRevenue';
 import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
 
 const Analytics: NextPage = () => {
@@ -98,6 +99,9 @@ const Analytics: NextPage = () => {
               trafficValue={trafficValue}
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
+            />
+            <GraphRevenue
+              currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
             />
           </Col>
           <Col lg={{ span: 4, offset: 1 }} className="p-0">

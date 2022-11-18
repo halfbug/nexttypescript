@@ -27,7 +27,6 @@ export default function AnalyticCutomerDetail({
 
   useEffect(() => {
     if (customersData) {
-      console.log(JSON.stringify(customersData));
       const { revenue } = customersData[0];
       // eslint-disable-next-line no-return-assign, no-param-reassign, max-len
       const firstOrder = +customersData[0].members[0].price;
