@@ -38,6 +38,7 @@ export default function CustomerData({
   });
   useEffect(() => {
     if (data?.mostViralCustomers) {
+      setShowCustomerDetail(false);
       const myObjArray: { orderNumber: any; customerName: string;
       revenueGenerated: string; uniqueClicks: any; cashBack: any;
       totalLineItems: any; Members: any; }[] = [];
