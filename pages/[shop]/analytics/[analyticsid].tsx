@@ -86,6 +86,7 @@ const CampaignAnalytics: NextPage = () => {
     if (data && uniqueData) {
       const rev = data.campaignMetric[0]?.revenue || '0';
       const cashBack = data.campaignMetric[0]?.cashBack || 0;
+      const feeCharge = data.campaignMetric[0]?.feeCharges || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numPurchases) {
@@ -98,7 +99,7 @@ const CampaignAnalytics: NextPage = () => {
         setAov('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
       } else {
         setCashbackGiven('-');
       }
@@ -142,6 +143,7 @@ const CampaignAnalytics: NextPage = () => {
       // console.log(JSON.stringify(fdata));
       const rev = fdata.overviewCampaignMetric[0]?.revenue || '0';
       const cashBack = fdata.overviewCampaignMetric[0]?.cashBack || 0;
+      const feeCharge = fdata.overviewCampaignMetric[0]?.feeCharges || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numFilterPurchases) {
@@ -154,7 +156,7 @@ const CampaignAnalytics: NextPage = () => {
         setAov('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
       } else {
         setCashbackGiven('-');
       }

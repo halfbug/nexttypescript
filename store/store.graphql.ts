@@ -1025,6 +1025,7 @@ const GET_OVERVIEW_METRICS = gql`
 query overviewMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
   overviewMetrics(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
     cashBack
+    feeCharges
     revenue   
   }
 }
@@ -1034,6 +1035,7 @@ const GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER = gql`
 query overviewCampaignMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
   overviewCampaignMetric(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
     cashBack
+    feeCharges
     revenue   
   }
 }
@@ -1129,6 +1131,7 @@ const GET_CAMPAIGN_METRICS = gql`
 query campaignMetric($storeId: String!, $campaignId: String!) {
   campaignMetric(storeId: $storeId,campaignId: $campaignId) {
     cashBack
+    feeCharges
     revenue    
   }
 }

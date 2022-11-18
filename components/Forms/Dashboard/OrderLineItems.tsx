@@ -18,8 +18,8 @@ export default function OrderLineItems({
     setShowCustomerDetail(true);
     setShowLineitemsBox(false);
   };
-  // eslint-disable-next-line no-return-assign, no-param-reassign
-  const totalPrice = customerLineItems.reduce((a:any, b:any) => a += b.discountedPrice, 0);
+  // eslint-disable-next-line no-return-assign, no-param-reassign, max-len
+  const totalPrice = customerLineItems.reduce((a:any, b:any) => a += b.discountedPrice * b.quantity, 0);
   return (
     <div className={styles.customerData__cutomerDetail}>
       <div className={styles.customerData__cutomerDetail__name}>

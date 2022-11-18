@@ -67,6 +67,7 @@ const Analytics: NextPage = () => {
     if (data && uniqueData) {
       const rev = data.overviewMetrics[0]?.revenue || '0';
       const cashBack = data.overviewMetrics[0]?.cashBack || 0;
+      const feeCharge = data.overviewMetrics[0]?.feeCharges || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numPurchases) {
@@ -79,7 +80,7 @@ const Analytics: NextPage = () => {
         setAov('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
       } else {
         setCashbackGiven('-');
       }
