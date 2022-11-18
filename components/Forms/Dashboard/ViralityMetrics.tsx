@@ -6,6 +6,7 @@ import vstyles from 'styles/ViralityScoreBox.module.scss';
 import { useQuery } from '@apollo/client';
 import { GET_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import ViralityScoreBox from './ViralityScoreBox';
 
 interface ViralityProp{
@@ -37,9 +38,15 @@ export default function ViralityMetrics({
         <h3>Virality Metrics</h3>
       </div>
       <div className={styles.viralityMetrics__body}>
-        <div className={styles.viralityMetrics__body__heading}>
+        <div className={[styles.viralityMetrics__body__heading, 'mb-3'].join(' ')}>
           Most Viral Products
-          <InfoIcon />
+
+          <ToolTip
+            className={['d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
+            icon={<InfoIcon />}
+            popContent="Your products’ Virality Score takes into account the
+            amount of revenue, sales, and unique clicks generated on Groupshop pages."
+          />
         </div>
         {mostViralProducts?.map((part: any, index: number) => (
           <>
