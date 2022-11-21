@@ -110,6 +110,7 @@ export default function QrStep1({
                   <HeadLogo />
                 </div>
                 <div className={styles.QRContainer__mobileImage}>
+                  <img src={QRMobile.src} alt="QR Right Screen" className="img-fluid" />
                   <GroupshopRoundLogo1 className="img-fluid" />
                 </div>
                 <div className={styles.QRContainer__content__container}>
