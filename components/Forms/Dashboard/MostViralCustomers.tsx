@@ -10,6 +10,7 @@ import Pagination from 'react-bootstrap/Pagination';
 import InfoIcon from 'assets/images/info-icon-medium.svg';
 import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import styles from 'styles/Analytics.module.scss';
+import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 
 interface ViralCustomersProp{
   xs?: any,
@@ -57,7 +58,13 @@ const MostViralCustomers = ({
       <section ref={ref} className={styles.customerData__viralCustomer}>
         <div className={styles.customerData__viralCustomer__heading}>
           Most Viral Customers
-          <InfoIcon />
+          <ToolTip
+            className={['d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
+            icon={<InfoIcon />}
+            popContent="Viral customers earn you the most revenue, sales, and referrals.
+            Check the leaderboard
+            to find potential influencers and affiliates among your existing customers."
+          />
         </div>
         <div className={styles.customerData__viralCustomer__description}>
           These metrics help you identify your most promising brand influencers and affiliates.

@@ -44,7 +44,7 @@ export default function ViralityMetrics({
           <ToolTip
             className={['d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
             icon={<InfoIcon />}
-            popContent="Your products’ Virality Score takes into account the
+            popContent="Your products Virality Score takes into account the
             amount of revenue, sales, and unique clicks generated on Groupshop pages."
           />
         </div>
