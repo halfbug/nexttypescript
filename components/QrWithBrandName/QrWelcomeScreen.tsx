@@ -50,17 +50,38 @@ export default function QrWelcomeScreen({
           const arr = data?.getActiveGroupshops
             .filter((gs: any) => gs?.shop?.brandName === brandName);
           if (arr.length) {
+            // @ts-ignore
+            // eslint-disable-next-line no-undef
+            fbq('trackCustom', 'QrSearch', {
+              GSURL: arr[0]?.groupshop?.url,
+              Brand: brandName,
+              status: 'Groupshop Found',
+            });
             if (arr[0].isExpired) {
               Router.push(`${arr[0]?.groupshop?.url}/status&activated`);
             } else {
               Router.push(`${arr[0]?.groupshop?.url}`);
             }
           } else {
-            setShowWelcome(false);
-            setShowAuth(true);
-            setactiveGroupshops(data?.getActiveGroupshops || []);
+            // @ts-ignore
+            // eslint-disable-next-line no-undef
+            fbq('trackCustom', 'QrSearch', {
+              GSURL: '',
+              Brand: brandName,
+              status: 'Groupshop Not Found',
+            });
+            // setShowWelcome(false);
+            // setShowAuth(true);
+            // setactiveGroupshops(data?.getActiveGroupshops || []);
           }
         } else {
+          // @ts-ignore
+          // eslint-disable-next-line no-undef
+          fbq('trackCustom', 'QrSearch', {
+            GSURL: '',
+            Brand: brandName,
+            status: 'Groupshop Not Found',
+          });
           setShowWelcome(false);
           setShowError(true);
         }

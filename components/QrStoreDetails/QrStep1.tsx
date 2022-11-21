@@ -63,11 +63,24 @@ export default function QrStep1({
   useEffect(() => {
     async function gets3logo() {
       if (data) {
+        const groupshopUrl:any = [];
         if (data?.getActiveGroupshops.length) {
+          data?.getActiveGroupshops.forEach((item:any, index:any) => {
+            groupshopUrl.push(item.groupshop.url);
+          });
+          // @ts-ignore
+          // eslint-disable-next-line no-undef
+          fbq('track', 'Search', { content_ids: groupshopUrl, status: 'Groupshop Found' });
           setShowStep1(false);
           setShowStep2(true);
           setactiveGroupshops(data?.getActiveGroupshops || []);
         } else {
+          // @ts-ignore
+          // eslint-disable-next-line no-undef
+          fbq('track', 'Search', {
+            content_ids: [],
+            status: 'Groupshop Not Found',
+          });
           setShowStep1(false);
           setShowStep3(true);
         }

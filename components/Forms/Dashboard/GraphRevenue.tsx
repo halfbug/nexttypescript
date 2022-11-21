@@ -181,6 +181,9 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     options: {
       chart: {
         id: 'basic-bar',
+        toolbar: {
+          show: false,
+        },
       },
       plotOptions: {
         bar: {

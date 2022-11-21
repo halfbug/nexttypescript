@@ -38,6 +38,16 @@ export default function QrStep2(
     }
   }, [activeGroupshops]);
 
+  const handleFbEvent = (url:any, brand:any) => {
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    fbq('trackCustom', 'QrSearch', {
+      GSURL: url,
+      Brand: brand,
+      status: 'Groupshop Found',
+    });
+  };
+
   return (
     <>
       <div className={styles.QRContainer}>
@@ -91,49 +101,57 @@ export default function QrStep2(
                   <div className={styles.activeGroupshops}>
                     {
                       activeGroupshops.length && activeGroupshops.map((gs: any) => (
-                        <Link
-                          key={gs?.name}
-                          href={gs?.isExpired ? `${gs?.groupshop?.url}/status&activated` : gs?.groupshop?.url}
+
+                        // @ts-ignore
+                        // eslint-disable-next-line no-undef, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+                        <div onClick={() => {
+                          handleFbEvent(gs?.groupshop?.url, gs?.shop?.brandName);
+                        }}
                         >
-                          <a target="_blank" className={styles.cardItem}>
-                            <div className={styles.cardItem__Wrapper}>
-                              <div className={styles.cardImg}>
-                                <img src={gs?.shop?.logoImage} className="img-fluid" alt="Brand Logo" />
-                              </div>
-                              <div className={styles.cardDetail}>
-                                <h2>
-                                  {gs?.shop?.brandName}
-                                  <Arrow />
-                                </h2>
-                                <div className={styles.BtnGroup}>
-                                  <button type="button" className={styles.cashbackBtn}>
-                                    $
-                                    {gs.refundDetail ? Math.abs(gs?.refundDetail.reduce((previousValue: any, currentValue: any) => (Number(previousValue) + Number(currentValue.amount)), 0)) : 0}
-                                    {' '}
-                                    cashback
-                                  </button>
-                                  <button type="button" className={styles.friendBtn}>
-                                    ✨
-                                    {` ${gs?.groupshop?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
-                                  </button>
-                                  {/* {
+                          <Link
+                            key={gs?.name}
+                            href={gs?.isExpired ? `${gs?.groupshop?.url}/status&activated` : gs?.groupshop?.url}
+                          >
+                            <a target="_blank" className={styles.cardItem}>
+                              <div className={styles.cardItem__Wrapper}>
+                                <div className={styles.cardImg}>
+                                  <img src={gs?.shop?.logoImage} className="img-fluid" alt="Brand Logo" />
+                                </div>
+                                <div className={styles.cardDetail}>
+                                  <h2>
+                                    {gs?.shop?.brandName}
+                                    <Arrow />
+                                  </h2>
+                                  <div className={styles.BtnGroup}>
+                                    <button type="button" className={styles.cashbackBtn}>
+                                      $
+                                      {gs.refundDetail ? Math.abs(gs?.refundDetail.reduce((previousValue: any, currentValue: any) => (Number(previousValue) + Number(currentValue.amount)), 0)) : 0}
+                                      {' '}
+                                      cashback
+                                    </button>
+                                    <button type="button" className={styles.friendBtn}>
+                                      ✨
+                                      {` ${gs?.groupshop?.members.filter((m: any) => m.role === 'referral').length || 0} friends joined`}
+                                    </button>
+                                    {/* {
                                   gs?.isExpired && (
                                   <button type="button" className={styles.cashbackBtn}>
                                     Expired
                                   </button>
                                   )
                                 } */}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className={styles.order}>
-                              <p>
-                                <span>Order #</span>
-                                <span>{gs.name.replace('#', '')}</span>
-                              </p>
-                            </div>
-                          </a>
-                        </Link>
+                              <div className={styles.order}>
+                                <p>
+                                  <span>Order #</span>
+                                  <span>{gs.name.replace('#', '')}</span>
+                                </p>
+                              </div>
+                            </a>
+                          </Link>
+                        </div>
                       ))
                     }
                   </div>
