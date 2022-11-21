@@ -9,6 +9,7 @@ import { useQuery } from '@apollo/client';
 import { GET_MOST_VIRAL_CUSTOMERS } from 'store/store.graphql';
 import { read, utils, writeFileXLSX } from 'xlsx';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import AnalyticCutomerDetail from './AnalyticCustomerDetail';
 import AnalyticOrderDetail from './AnalyticOrderDetail';
 import MostViralCustomers from './MostViralCustomers';
@@ -102,8 +103,11 @@ export default function CustomerData({
               />
               { viralCustomersList.length > 0 && (
                 <div className={styles.customerData__btnRow}>
-                  <Button className={styles.customerData__btnRow__csv} onClick={exportFile}>
+                  <Button variant="" className={styles.customerData__btnRow__csv} onClick={exportFile}>
                     Export all to CSV
+                    {' '}
+                    {'>'}
+                    {/* <ArrowRightLogo /> */}
                   </Button>
                 </div>
               )}

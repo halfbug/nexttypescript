@@ -72,10 +72,11 @@ export default function AnalyticCutomerDetail({
         </div>
       </div>
       <Button
+        variant=""
         onClick={() => {
           handleLineitems(customersData[0].members[0].id);
         }}
-        className={styles.customerData__orderDetail__viewProducts}
+        className={[styles.customerData__orderDetail__viewProducts, 'text-decoration-underline'].join(' ')}
       >
         View Products Purchased
         <ArrowRightLogo />

@@ -42,6 +42,7 @@ export default function ViralityMetrics({
           Most Viral Products
 
           <ToolTip
+            placement="bottom"
             className={['d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
             icon={<InfoIcon />}
             popContent="Your products Virality Score takes into account the
