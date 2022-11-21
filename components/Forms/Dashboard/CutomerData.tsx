@@ -86,7 +86,7 @@ export default function CustomerData({
           <h3>Customer Data</h3>
         </div>
         <Row>
-          <Col lg={7} className="gx-5">
+          <Col lg={8} className="ge-5">
             <Container className="p-0">
               <MostViralCustomers
                 xs={12}
@@ -109,7 +109,7 @@ export default function CustomerData({
               )}
             </Container>
           </Col>
-          <Col lg={5} className="gx-5">
+          <Col lg={4} className="gs-5">
             {showCustomerDetail && (
             <AnalyticCutomerDetail
               currencyCode={currencyCode}

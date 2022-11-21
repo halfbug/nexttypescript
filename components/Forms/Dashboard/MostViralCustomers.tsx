@@ -79,7 +79,7 @@ const MostViralCustomers = ({
             <div>
               Customer Name
             </div>
-            <div>
+            <div className="text-nowrap mx-2">
               Revenue Generated
             </div>
             <div>
