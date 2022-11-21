@@ -143,6 +143,7 @@ export default function AnalyticCutomerDetail({
           </div>
           <div className={styles.customerData__cutomerDetail__acc__row__name}>
             <ArrowRightLogo
+              className={styles.customerData_Cursor}
               onClick={() => {
                 handleLineitems(mem.id);
               }}

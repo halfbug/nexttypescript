@@ -123,6 +123,7 @@ const MostViralCustomers = ({
                 className={styles.customer_handPointer}
               >
                 <ArrowRightLogo
+                  className={styles.customerData_Cursor}
                   onClick={() => {
                     handleCustomer(part._id);
                   }}
