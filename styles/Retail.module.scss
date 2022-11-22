@@ -1,0 +1,316 @@
+@import "./variables.scss";
+
+.retail {
+    &__customChannels {
+        &__heading {
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 29px;
+            color: #000000;
+
+        }
+
+        &__subHeading {
+            margin-top: 42px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: #000000;
+            opacity: 0.4;
+
+        }
+
+        &__text {
+            @extend .my-2;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            
+            color: #1D2329;
+        }
+
+        &__channel {
+            @extend .d-flex, .justify-content-between;
+            padding: 10px 30px;
+            background: #F8F8F8;
+            border-radius: 23px;
+            margin: 10px 20px 10px 0px;
+            &__active {
+                @extend .retail__customChannels__channel;
+                background: rgba(220, 208, 232, 0.5);
+            }
+            &__name {
+                font-family: 'DM Sans';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 20px;
+                /* identical to box height, or 143% */
+
+
+                /* Colors / Black / 100% */
+
+                color: #000000;
+            }
+            &__arrow {
+                cursor: pointer;
+            }
+        }
+
+        &__addBtn {
+            button {
+                @extend .py-0, .px-3, .mt-3;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 15px;
+                height: 28px;
+            }
+        }
+
+        &__channelInfo {
+            padding: 30px 40px;
+            border: 1px dashed $dotted-border-color1;
+            border-radius: 23px;
+
+            &__name {
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 20px;
+                /* identical to box height, or 125% */
+
+
+                /* Colors / Black / 100% */
+
+                color: #000000;
+            }
+            
+            &__amountsRow {
+                @extend .d-flex, .justify-content-between, .align-items-center;
+                margin: 10px 0px;
+            }
+
+            &__amount {
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 18px;
+                
+                color: #000000;
+            }
+
+            &__percentage {
+                display: inline-block;
+                font-weight: 700;
+                font-size: 10px;
+                line-height: 15px;
+                margin-right: 10px;
+                padding: 5px 10px;
+                background: #D5FA52;
+                border-radius: 6px;
+                min-width: 40px;
+            }
+
+            &__lineBtn {
+                font-family: 'DM Sans';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 16px;
+                /* identical to box height */
+                
+                text-decoration-line: underline;
+                
+                color: #000000;
+                cursor: pointer;
+            }
+            &__delete {
+                @extend .retail__customChannels__channelInfo__lineBtn;
+                margin-top: 20px;
+            }
+            &__qr {
+                font-family: 'DM Sans';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+
+                color: $subheadingclr;
+            }
+        }
+    }
+    &__retailProducts {
+        margin-top: 60px;
+        &__heading {
+            font-weight: $font-weight-bolder;
+            font-size: 22px;
+            line-height: 29px;
+            /* identical to box height */
+
+
+            color: #000000;
+        }
+        &__container{
+            padding: 24px 30px;
+            border: 1px dashed $dotted-border-color1;
+            border-radius: 23px;
+        }
+        &__specific {
+            margin-top: 30px;
+            margin-bottom: 0;
+            font-weight: $font-weight-bolder;
+            font-size: 14px;
+            line-height: 18px;
+            color: #1D2329;
+
+        }
+        &__productBtn {
+            svg {
+                cursor: pointer;
+            }
+        }
+        &__recommended {
+            margin-left: 10px;
+            padding: 6px 10px;
+            background: $recommended;
+            border-radius: 6px;
+        }
+    }
+    &__exportCustomerData {
+        padding: 24px 30px 60px 30px;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 23px;
+        &__heading {
+            font-weight: $font-weight-bolder;
+            font-size: 16px;
+            line-height: 24px;
+            color: #000000;
+
+        }
+        &__text {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            
+            color: #1D2329;
+
+        }
+        &__label {
+            @extend .my-2;
+            display: inline-block;
+            font-size: $size-14px;
+            line-height: $size-18px;
+            font-weight: $font-weight-light;
+        }
+        &__tooltip {
+            @extend .mx-2;
+            &__popover {
+                border-color: $green;
+            }
+        }
+        &_dropdown {
+            @extend .rounded-pill, .text-center;
+            line-height: 24px;
+            padding: 8px 16px;
+            height: 38px;
+            background: #F8F8F8;
+            border: none;
+            border-radius: 8px !important;
+            font-weight: $font-weight-bold;
+            &::after {
+              @extend .border-0;
+            }
+            &:focus {
+              box-shadow: none;
+            }
+            &:hover {
+              background-color: $comp_bg;
+              color: $black;
+            }
+            
+          }
+        
+          &_dropdownMenu {
+            border-radius: 10px;
+            padding: 10px 30px;
+            min-width: 0px !important;
+            margin-top: 14px !important;
+            max-height: 263px;
+            overflow :auto;
+            z-index :1;
+          }
+        
+          &_dropdownItem {
+            padding-top: 10px;
+            margin-top: 10px;
+            //border-top: 1px solid $lightBorder;
+            &:first-child {
+              padding-top: 0px;
+              margin-top: 0px;
+            }
+            a {
+              width: fit-content;
+              border: 1px solid $purple;
+              border-radius: 4px;
+              font-weight: $font-weight-bold;
+              padding: 6px 8px;
+        
+              &:hover {
+                background: none !important;
+              }
+            }
+            &_owner {
+              @extend .retail__exportCustomerData_dropdownItem;
+              padding-bottom: unset;
+              border: none;
+              width: fit-content;
+            }
+          }
+    }
+
+    &__signups {
+        &__heading {
+            font-weight: $font-weight-bolder;
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        &__listHeader {
+            @extend .mt-3;
+            font-family: "DM Sans";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: $black;
+            opacity: 0.7;
+            padding: 0px 36px;
+        }
+        
+        &__listRow {
+            @extend .my-2;
+            padding: 12px 36px;
+            background: #F8F8F8;
+            border-radius: 23px;
+        }
+
+        &__channel {
+            font-weight: $font-weight-bolder;
+            font-size: 14px;
+            line-height: 20px;
+
+        }
+
+        &__name {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        &__more {
+            @extend .retail__signups__channel;
+            padding: 0px 36px;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+
+    }
+}

@@ -16,6 +16,7 @@ import Sidebarpromotion from 'assets/images/sidebar-promotion.png';
 import PartnerToolLogo from 'assets/images/partner-tools.svg';
 import ReActivationLogo from 'assets/images/re-activation.svg';
 import DiscoveryLogo from 'assets/images/discovery.svg';
+import RetailLogo from 'assets/images/retail.svg';
 import { useRouter } from 'next/router';
 
 const Sidebar = () => {
@@ -116,6 +117,23 @@ const Sidebar = () => {
                     <span className={linkstyle('discovery')}>
                       <span className={styles.linkicon}><DiscoveryLogo /></span>
                       <span className={styles.linktext}>Discovery</span>
+                    </span>
+                  </a>
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                //  href={`/${shopName}/partnertools`}
+                  href={{
+                    pathname: '/[shop]/retail',
+                    query: { shop },
+                  }}
+                >
+                  <a>
+                    <span className={linkstyle('retail')}>
+                      <span className={styles.linkicon}><RetailLogo /></span>
+                      <span className={styles.linktext}>Retail</span>
                     </span>
                   </a>
                 </Link>
