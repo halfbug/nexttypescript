@@ -5,6 +5,7 @@ import ScaleIcon from 'assets/images/average-of-order.png';
 import ClickIcon from 'assets/images/unique-clicks.png';
 import TrafficIcon from 'assets/images/traffic-value.png';
 import PurchaseIcon from 'assets/images/number-of-purchase.png';
+import ViewsIcon from 'assets/images/product-views.png';
 import Arrow1 from 'assets/images/arrow1.png';
 import styles from './SummaryBox.module.scss';
 
@@ -30,6 +31,8 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; arrowIcon: b
         return TrafficIcon.src;
       case 'PurchaseIcon':
         return PurchaseIcon.src;
+      case 'ViewsIcon':
+        return ViewsIcon.src;
       default:
         return '';
     }
@@ -49,6 +52,8 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; arrowIcon: b
         return Arrow1.src;
       case 'PurchaseIcon':
         return Arrow1.src;
+      case 'ViewsIcon':
+        return ViewsIcon.src;
       default:
         return '';
     }
@@ -68,6 +73,8 @@ const SummaryBox = (props: { label: any; value: any; iconType: any; arrowIcon: b
         return styles.traffic;
       case 'PurchaseIcon':
         return styles.purchase;
+      case 'ViewsIcon':
+        return styles.views;
       default:
         return '';
     }

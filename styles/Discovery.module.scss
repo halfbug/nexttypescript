@@ -1,0 +1,38 @@
+@import "./variables.scss";
+
+.Discovery {
+    @extend .pt-4;
+&_activateDiscoveryTool {
+    @extend .p-4;
+    border: 1px dashed #A68AD6;
+    border-radius: 18px;
+
+    h4 {
+    font-family: DM Sans;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    color: #1d2329;
+    }
+}
+
+h3 {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 29px;
+    color: #000000;
+    }
+
+    &_enablebtn {
+        border-radius: 8px !important;
+        margin-right: 5px;
+    }
+
+    &_disablebtn {
+        border-radius: 8px !important;
+    }
+
+}
