@@ -22,9 +22,9 @@ import { FiCalendar } from 'react-icons/fi';
 interface InviteCustomerBoxProps extends RootProps {
   show: boolean;
   setShowInvitePopup:any;
-  startDate:string;
+  startDate:Date | string;
   setStartDate:any;
-  endDate:string;
+  endDate:Date | string;
   setEndDate:any;
   minOrderValue:string;
   setMinOrderValue:any;
@@ -163,9 +163,8 @@ const InviteCustomerBox = ({
                       dateFormat="dd/MM/yyyy"
                       name="startDate"
                       maxDate={new Date()}
-                      selected={startDate}
+                      selected={startDate as Date}
                       onChange={(sdate:any) => changeDate(sdate, 'start')}
-                      icon={<FiCalendar />}
                       calendarClassName="calendarArrow"
                     />
                   </div>
@@ -186,10 +185,10 @@ const InviteCustomerBox = ({
                       className="form-control"
                       placeholderText="dd/mm/yyyy"
                       dateFormat="dd/MM/yyyy"
-                      minDate={startDate}
+                      minDate={startDate as Date}
                       maxDate={new Date()}
                       name="endtDate"
-                      selected={endDate}
+                      selected={endDate as Date}
                       onChange={(edate:any) => changeDate(edate, 'end')}
                       calendarClassName="calendarArrow"
                     />

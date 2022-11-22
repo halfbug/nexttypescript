@@ -14,6 +14,7 @@
 		"@apollo/client": "^3.4.16",
 		"@svgr/webpack": "^5.5.0",
 		"@types/jquery": "^3.5.14",
+		"@types/moment": "^2.13.0",
 		"@types/uuid": "^8.3.4",
 		"@types/yup": "^0.29.13",
 		"apexcharts": "^3.36.0",

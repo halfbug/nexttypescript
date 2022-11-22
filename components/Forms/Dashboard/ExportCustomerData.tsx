@@ -12,6 +12,10 @@ import DropdownArrow from 'assets/images/dropdown-arrow.svg';
 import FilterIcon from 'assets/images/filter-icon.svg';
 import { InfoCircle } from 'react-bootstrap-icons';
 
+const changeDate = (value:any, field:any) => {
+  console.log('date change');
+};
+
 const ExportCustomerData = () => (
   <>
     <Row>
@@ -48,7 +52,7 @@ const ExportCustomerData = () => (
                     name="startDate"
                     maxDate={new Date()}
                                     //   selected={startDate}
-                                    //   onChange={(sdate:any) => changeDate(sdate, 'start')}
+                    onChange={(sdate:any) => changeDate(sdate, 'start')}
                                     //   icon={<FiCalendar />}
                     calendarClassName="calendarArrow"
                   />
@@ -69,7 +73,7 @@ const ExportCustomerData = () => (
                     maxDate={new Date()}
                     name="endtDate"
                                     //   selected={endDate}
-                                    //   onChange={(edate:any) => changeDate(edate, 'end')}
+                    onChange={(edate:any) => changeDate(edate, 'end')}
                     calendarClassName="calendarArrow"
                   />
                 </div>
