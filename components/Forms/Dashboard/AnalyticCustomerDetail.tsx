@@ -53,7 +53,7 @@ export default function AnalyticCutomerDetail({
         <div className={styles.customerData__orderDetail__orderRow__number}>
           Order
           {' '}
-          {customersData[0].members[0].name}
+          {(customersData[0].members[0].name).replace('#', '')}
         </div>
         <div className={styles.customerData__orderDetail__orderRow__date}>
           { moment(new Date(customersData[0].members[0].createdAt)).format('MM/DD/YY') }
