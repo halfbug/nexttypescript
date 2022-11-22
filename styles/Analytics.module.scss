@@ -218,6 +218,12 @@
             padding: 5px;
             border-radius: 20px;
             align-items: center; 
+
+            &:hover,
+            &:active{
+                background: #EDE7F3;
+
+            }
         }
 
         &__noRecord{         
