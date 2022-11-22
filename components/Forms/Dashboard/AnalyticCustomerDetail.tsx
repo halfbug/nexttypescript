@@ -76,7 +76,7 @@ export default function AnalyticCutomerDetail({
         onClick={() => {
           handleLineitems(customersData[0].members[0].id);
         }}
-        className={[styles.customerData__orderDetail__viewProducts, 'text-decoration-underline'].join(' ')}
+        className={[styles.customerData__orderDetail__viewProducts, 'text-decoration-underline px-0'].join(' ')}
       >
         View Products Purchased
         <ArrowRightLogo />

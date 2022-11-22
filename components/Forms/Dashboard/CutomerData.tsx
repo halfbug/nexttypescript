@@ -103,7 +103,7 @@ export default function CustomerData({
               />
               { viralCustomersList.length > 0 && (
                 <div className={styles.customerData__btnRow}>
-                  <Button variant="" className={styles.customerData__btnRow__csv} onClick={exportFile}>
+                  <Button variant="" className={[styles.customerData__btnRow__csv, 'px-0'].join(' ')} onClick={exportFile}>
                     Export all to CSV
                     {' '}
                     {'>'}
