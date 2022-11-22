@@ -50,7 +50,7 @@ export default function CustomerData({
           orderNumber: part.members[0].name,
           customerName: `${part.members[0].customer.firstName} ${part.members[0].customer.lastName}`,
           revenueGenerated: currencyCode + formatNumber(part.revenue),
-          cashBack: part.refund,
+          cashBack: currencyCode + formatNumber(part.refund),
           uniqueClicks: part.uniqueClicks,
           totalLineItems: part.lineItemsCount,
           Members: part.numMembers,
