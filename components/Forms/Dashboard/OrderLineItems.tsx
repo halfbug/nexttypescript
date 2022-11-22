@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Accordion } from 'react-bootstrap';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { BsArrowLeft } from 'react-icons/bs';
 import styles from 'styles/Analytics.module.scss';
 
 interface CustomerDetailProp{
@@ -25,37 +26,45 @@ export default function OrderLineItems({
       <div className={styles.customerData__cutomerDetail__name}>
         <button
           type="button"
+          className="mb-2"
           onClick={() => {
             handleBackBtn();
           }}
           style={{ background: 'transparent', border: 'none' }}
         >
-          <span> Back </span>
+          <span>
+            <BsArrowLeft />
+            {' '}
+            Back
+            {' '}
+          </span>
         </button>
       </div>
-      <div className={styles.customerData__cutomerDetail__name}>
+      <div className={[styles.customerData__cutomerDetail__name, 'mx-4 mt-2'].join(' ')}>
         Products Purchased
       </div>
-      {customerLineItems?.map((items: any, index: number) => (
-        <div className={styles.customerData__cutomerDetail__lists}>
-          <div className={styles.customerData__cutomerDetail__acc__row__name}>
-            <img style={{ width: 100 }} src={items.product[0].featuredImage} alt="Product" />
+      <div className="mx-4">
+        {customerLineItems?.map((items: any, index: number) => (
+          <div className={styles.customerData__cutomerDetail__lists}>
+            <div className={styles.customerData__cutomerDetail__acc__row__name}>
+              <img style={{ width: 100 }} src={items.product[0].featuredImage} alt="Product" />
+            </div>
+            <div className={styles.customerData__cutomerDetail__acc__row__name}>
+              {items.product[0].title}
+            </div>
+            <div className={styles.customerData__cutomerDetail__acc__row__name}>
+              {currencyCode}
+              {formatNumber(items.discountedPrice)}
+            </div>
           </div>
-          <div className={styles.customerData__cutomerDetail__acc__row__name}>
-            {items.product[0].title}
-          </div>
-          <div className={styles.customerData__cutomerDetail__acc__row__name}>
-            {currencyCode}
-            {formatNumber(items.discountedPrice)}
-          </div>
+        ))}
+        <div className={styles.customerData__cutomerDetail__border} />
+        <div className={styles.customerData__order_totalprice}>
+          Total:
+          {' '}
+          {currencyCode}
+          {formatNumber(totalPrice)}
         </div>
-      ))}
-      <div className={styles.customerData__cutomerDetail__border} />
-      <div className={styles.customerData__order_totalprice}>
-        Total:
-        {' '}
-        {currencyCode}
-        {formatNumber(totalPrice)}
       </div>
     </div>
   );
