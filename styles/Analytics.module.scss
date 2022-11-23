@@ -291,7 +291,7 @@
         border: 1px dashed #A7C737;
         border-radius: 23px;
         padding: 25px 27px;
-
+        
         &__heading {
             font-family: 'DM Sans';
             color: #000000;
@@ -960,5 +960,10 @@
             text-align: center;
             margin-top: 11px;
         }
+    }
+
+    &_tooltipIcon{
+        position: absolute;
+        
     }
 }

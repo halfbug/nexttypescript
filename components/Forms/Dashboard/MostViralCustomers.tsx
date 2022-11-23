@@ -59,7 +59,7 @@ const MostViralCustomers = ({
         <div className={styles.customerData__viralCustomer__heading}>
           Most Viral Customers
           <ToolTip
-            className={['d-flex align-item-center', styles.dashboard_campaign__pop].join(' ')}
+            className={['pt-1 d-flex align-item-center', styles.customerData_tooltipIcon].join(' ')}
             icon={<InfoIcon />}
             popContent="Viral customers earn you the most revenue, sales, and referrals.
             Check the leaderboard
