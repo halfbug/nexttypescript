@@ -839,6 +839,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-weight: 400;
       line-height: 20px;
       color: $black;
+      max-height: 215px;
+      overflow: auto;
     }
 
     &_headingExpired {

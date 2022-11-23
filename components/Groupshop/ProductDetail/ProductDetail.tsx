@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -491,8 +492,7 @@ const ProductDetail = ({
                       width={406}
                       truncatedEndingComponent="... "
                     >
-                      {product?.description}
-
+                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
                     </ShowMoreText>
                     )}
 
@@ -551,8 +551,7 @@ const ProductDetail = ({
                       width={406}
                       truncatedEndingComponent="... "
                     >
-                      {product?.description}
-
+                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
                     </ShowMoreText>
                     )}
                   </div>
