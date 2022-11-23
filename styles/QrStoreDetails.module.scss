@@ -103,9 +103,9 @@
     color: #000000;
     position: relative;
     z-index: 0;
-    @include media-breakpoint-down(sm) {
-      margin-top: 40px;
-    }
+    // @include media-breakpoint-down(sm) {
+    //   margin-top: 40px;
+    // }
     h2 {
       font-family: "DM Sans";
       font-style: normal;
@@ -300,9 +300,10 @@
     hr {
       border: 0.3px solid #000000;
       opacity: 1;
-      @media (max-width: 575.98px) {
-        margin: 0 0;
-        margin-bottom: 20px;
+      @media (max-width: 767px) {
+        margin: 0 auto;
+    margin-bottom: 20px;
+    width: 90%;
 
       }
     }
@@ -533,12 +534,13 @@
   }
 
   &__bottom__content {
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @media (max-width: 767px) {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 20px;
+      flex-direction: column-reverse;
+      padding-bottom: 30px;
     }
 
     p {
@@ -551,15 +553,6 @@
       line-height: 18px;
       letter-spacing: 0.03em;
       font-feature-settings: "pnum" on, "lnum" on;
-    }
-
-    div{
-      display: flex;
-      align-items: center;
-      a {
-        color: #000000;
-        padding: 0 4px;
-      }
     }
 
     // svg {
@@ -579,15 +572,17 @@
     }
   }
 
-  &__social__media {
-    // @extend .mb-3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media (max-width: 767px) {
-      flex-direction: column-reverse;
+  &__social__icons {
+    padding-bottom: 50px;
+    @media (max-width:767px) {
+      text-align: center;
+      padding-top: 20px;
     }
+  }
+
+  &__question {
+    padding-bottom: 50px;
+
   }
 
   &__desktopImage {
@@ -673,18 +668,16 @@
       font-size: 14px;
       color: #000000;
     }
+  }
 
-    @media (max-width: 767px) {
-      p {
-        margin-bottom: 30px;
-      }
-    }
-    @media (max-width: 767px) {
-      p {
-        margin-bottom: 14px;
-      }
+  &__learn__more__mobile {
+    justify-content: center;
+
+    @media (max-width:767px){
+      display: flex !important;
     }
   }
+
 
   &__YR__mobileLogo {
     display: none;

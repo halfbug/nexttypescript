@@ -127,43 +127,41 @@ export default function QrCodeCommon() {
                   storeLink={state.storeLink}
                 />
                 )}
+                <hr />
                 <div className={styles.QRContainer__bottom__content}>
-                  <hr />
-                  <div className={[styles.QRContainer__social__media, ' row '].join(' ')}>
-                    <div className={[styles.QRContainer__social__icons, 'col-6 d-flex justify-content-start'].join(' ')}>
+                  <div className={styles.QRContainer__social__media}>
+                    <div className={styles.QRContainer__social__icons}>
                       <SocialLinks />
                     </div>
-                    <div className={[styles.QRContainer__link, 'w-auto d-flex col-sm-12 justify-content-sm-center col-md-6 justify-content-md-end col-lg-6 justify-content-lg-end'].join(' ')}>
-                      <div className="">
-                        <p className={[styles.question, ''].join(' ')}>
-                          Have Questions?
-                          {' '}
-                          <Link
-                            href={{
-                              pathname: 'https://groupshop.zendesk.com/hc/en-us/sections/4429416770963-FAQ-How-To',
-                            }}
-                          >
-                            <a>Peep our FAQ</a>
-                          </Link>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <br />
-                  <div className={[styles.QRContainer__social__media, ''].join('')}>
-                    <div className={styles.QRContainer__social__icons}>
+                    <div className={styles.QRContainer__powered__by}>
                       <p>
                         Powered by
-                        {' '}
                         <HeadLogo />
                       </p>
                     </div>
-                    <div className={styles.QRContainer__link}>
-                      <p>
-                        Learn more at
+                  </div>
+                  <div className={styles.QRContainer__link}>
+                    <div className="">
+                      <p className={styles.QRContainer__question}>
+                        Have Questions?
                         {' '}
-                        <Link href="https://www.groupshop.com/"><a target="_blank" className="p-0">groupshop.com</a></Link>
+                        <Link
+                          href={{
+                            pathname: 'https://groupshop.zendesk.com/hc/en-us/sections/4429416770963-FAQ-How-To',
+                          }}
+                        >
+                          <a>Peep our FAQ</a>
+                        </Link>
                       </p>
+                    </div>
+                    <div className={[styles.QRContainer__social__media, ''].join('')}>
+                      <div className={styles.QRContainer__learn__more__desktop}>
+                        <p>
+                          Learn more at
+                          {' '}
+                          <Link href="https://www.groupshop.com/"><a target="_blank" className="p-0">groupshop.com</a></Link>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
