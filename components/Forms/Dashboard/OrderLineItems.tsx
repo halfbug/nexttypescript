@@ -33,7 +33,7 @@ export default function OrderLineItems({
           style={{ background: 'transparent', border: 'none' }}
         >
           <span>
-            <BsArrowLeft />
+            <BsArrowLeft className="mb-1 d-absolute d-inline-flex" />
             {' '}
             Back
             {' '}
