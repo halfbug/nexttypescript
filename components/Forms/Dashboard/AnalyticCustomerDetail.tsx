@@ -142,7 +142,7 @@ export default function AnalyticCutomerDetail({
           <div className={styles.customerData__cutomerDetail__acc__row__name}>
             { moment(new Date(mem.createdAt)).format('MM/DD/YY') }
           </div>
-          <div className={styles.customerData__cutomerDetail__acc__row__name}>
+          <div className={styles.customerData__cutomerDetail__acc__row__orderNdate}>
             <ArrowRightLogo
               className={styles.customerData_Cursor}
               onClick={() => {

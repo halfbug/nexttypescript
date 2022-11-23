@@ -120,7 +120,8 @@ const MostViralCustomers = ({
                 </div>
               </div>
               <div
-                className={styles.customer_handPointer}
+                className={styles.customerData_Cursor}
+
               >
                 <ArrowRightLogo
                   className={styles.customerData_Cursor}

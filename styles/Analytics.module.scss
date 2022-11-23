@@ -726,6 +726,9 @@
                     font-size: 12px;
                     line-height: 18px;
                 }
+                &__orderNdate {
+                    cursor: pointer;
+                }
                 &__price {
                     @extend .d-flex, .justify-content-end;
                     font-family: 'DM Sans';
