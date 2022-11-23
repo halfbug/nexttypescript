@@ -59,7 +59,7 @@ export default function OrderLineItems({
           </div>
         ))}
         <div className={[styles.customerData__cutomerDetail__border, 'mt-4'].join(' ')} />
-        <div className={styles.customerData__orderDetail__totalprice}>
+        <div className={styles.customerData__orderDetail__Ptotalprice}>
           <Col>
             Total:
             {' '}

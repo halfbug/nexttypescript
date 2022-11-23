@@ -26,7 +26,7 @@
             width: 138px;
             height: 38px;
             border-color: #fff !important;
-            background: #F8F8F8 !important;
+            background: #f8f8f8 !important;
             display: flex;
             align-items: center;
 
@@ -84,9 +84,9 @@
     }
 
     &__traffic_box {
-        border: 1px dashed #A68AD6;
+        border: 1px dashed #a68ad6;
         border-radius: 10px;
-        background: #FFFFFF;
+        background: #ffffff;
         //margin-top: 15px;
         width: 500px;
 
@@ -97,18 +97,18 @@
             align-items: center;
             justify-content: flex-start;
             &__txt {
-                color: #1D2329;
+                color: #1d2329;
                 line-height: 18px;
                 font-size: 14px;
                 font-weight: 700;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
             }
         }
 
         &__detail {
             margin: 0 45px;
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
@@ -136,14 +136,14 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #f3f3F3;
+        background-color: #f3f3f3;
         opacity: 0.9;
         border: 1px dashed $purple;
         border-radius: 5px;
         z-index: 99;
-        }
-    
-        &__overlayText {
+    }
+
+    &__overlayText {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -153,10 +153,9 @@
         border-radius: 5px;
         font-size: 30px;
         color: black;
-        transform: translate(-50%,-50%);
-        }
+        transform: translate(-50%, -50%);
+    }
 
-    
     &__header {
         margin: 25px 0 5px 0;
         display: flex;
@@ -173,7 +172,7 @@
     }
 
     &__body {
-        background: #F8F8F8;
+        background: #f8f8f8;
         border-radius: 23px;
         padding: 17px 31px 25px 27px;
         margin-top: 24px;
@@ -183,7 +182,7 @@
             line-height: 24px;
             font-size: 16px;
             font-weight: 700;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             display: flex;
             align-items: center;
 
@@ -193,7 +192,7 @@
         }
 
         &__hr {
-            border-top: 1px solid #DCDCDC;
+            border-top: 1px solid #dcdcdc;
             margin: 16px 0px;
         }
     }
@@ -203,13 +202,13 @@
     position: relative;
     padding: 25px 0px 50px 0px;
 
-    &_Cursor{
+    &_Cursor {
         cursor: pointer;
     }
-    &__mostViral{
-        background: #FFFFFF;
+    &__mostViral {
+        background: #ffffff;
 
-        &__listing{
+        &__listing {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             text-align: center;
@@ -221,26 +220,24 @@
             margin: 10px 0px;
             padding: 5px;
             border-radius: 20px;
-            align-items: center; 
+            align-items: center;
 
             &:hover,
-            &:active{
-                background: #EDE7F3;
-
+            &:active {
+                background: #ede7f3;
             }
         }
 
-        &__noRecord{         
+        &__noRecord {
             text-align: center;
-            margin: 10px 0px; 
+            margin: 10px 0px;
         }
 
-        &__table_heading{
+        &__table_heading {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            text-align: center; 
-            align-items: center; 
-
+            text-align: center;
+            align-items: center;
         }
     }
 
@@ -253,25 +250,25 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #f3f3F3;
+        background-color: #f3f3f3;
         opacity: 0.9;
         border: 1px dashed $purple;
         border-radius: 5px;
         z-index: 99;
-        }
-    
-        &__overlayText {
+    }
+
+    &__overlayText {
         position: absolute;
         width: fit-content;
         top: 50%;
-        left: 50%;    
+        left: 50%;
         background: white;
         padding: 0px 10px;
         border-radius: 5px;
         font-size: 30px;
         color: black;
-        transform: translate(-50%,-50%);
-        }
+        transform: translate(-50%, -50%);
+    }
     &__header {
         margin: 25px 0 16px 0;
         display: flex;
@@ -288,12 +285,12 @@
     }
 
     &__viralCustomer {
-        border: 1px dashed #A7C737;
+        border: 1px dashed #a7c737;
         border-radius: 23px;
         padding: 25px 27px;
         
         &__heading {
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             color: #000000;
             font-weight: 700;
             font-size: 16px;
@@ -305,16 +302,16 @@
         }
 
         &__description {
-            color: #1D2329;
+            color: #1d2329;
             opacity: 0.5;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
         }
 
         &__heading1 {
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             color: #000000;
             font-weight: 500;
             font-size: 14px;
@@ -338,14 +335,13 @@
             border-radius: 23px !important;
             height: 43px !important;
             display: grid;
-            grid-template-columns: 1fr 2fr 2fr 2fr .5fr;
+            grid-template-columns: 1fr 2fr 2fr 2fr 0.5fr;
             padding: 0;
             padding-left: 21px;
             padding-right: 16px;
             &::after {
                 transform: rotate(270deg);
-              }
-            
+            }
         }
 
         &__row {
@@ -353,7 +349,7 @@
             align-items: center;
             &__count {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 700;
                 height: auto;
                 font-size: 12px;
@@ -362,7 +358,7 @@
                 align-self: center;
                 align-items: center;
                 text-align: center;
-                background: #DCD0E8;
+                background: #dcd0e8;
                 border-radius: 6px;
                 padding: 5px 13px;
                 width: fit-content;
@@ -370,12 +366,12 @@
             }
             &__genereated {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 height: auto;
                 font-size: 12px;
                 text-align: center;
-                background: #D5FA52;
+                background: #d5fa52;
                 border-radius: 6px;
                 padding: 6px;
                 width: fit-content;
@@ -383,11 +379,11 @@
             &__clicks {
                 @extend .text-nowrap;
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 400;
                 font-size: 12px;
                 text-align: center;
-                background: #FEE758;
+                background: #fee758;
                 border-radius: 6px;
                 padding: 6px;
                 width: fit-content;
@@ -405,13 +401,13 @@
             border-radius: 23px !important;
             height: 43px !important;
             display: grid;
-            grid-template-columns: 1.5fr 2.5fr 1.5fr 2.5fr .5fr;
+            grid-template-columns: 1.5fr 2.5fr 1.5fr 2.5fr 0.5fr;
             padding: 0;
             padding-left: 21px;
             padding-right: 16px;
             &::after {
                 transform: rotate(270deg);
-              }
+            }
         }
 
         &__row {
@@ -420,36 +416,36 @@
 
             &__count {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 700;
                 line-height: 15px;
                 font-size: 12px;
                 text-align: center;
-                background: #DCD0E8;
+                background: #dcd0e8;
                 border-radius: 6px;
                 padding: 5px 13px;
                 width: fit-content;
             }
             &__genereated {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 line-height: 15px;
                 font-size: 12px;
                 text-align: center;
-                background: #D5FA52;
+                background: #d5fa52;
                 border-radius: 6px;
                 padding: 6px 12px;
                 width: fit-content;
             }
             &__clicks {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 400;
                 line-height: 15px;
                 font-size: 12px;
                 text-align: center;
-                background: #FEE758;
+                background: #fee758;
                 border-radius: 6px;
                 padding: 6px 10px;
                 width: fit-content;
@@ -471,7 +467,7 @@
             line-height: 24px;
             margin-bottom: 0px !important;
             color: $black;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
         }
 
         &__dropdown {
@@ -485,7 +481,7 @@
             width: 138px;
             height: 38px;
             border-color: #fff !important;
-            background: #F8F8F8 !important;
+            background: #f8f8f8 !important;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -545,12 +541,12 @@
 
     &__table_head {
         display: grid;
-        grid-template-columns: 1.5fr 2.5fr 1.5fr 2.5fr .5fr;
+        grid-template-columns: 1.5fr 2.5fr 1.5fr 2.5fr 0.5fr;
         padding-left: 17px;
         padding-right: 16px;
         &__txt {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
@@ -566,31 +562,31 @@
         padding-left: 20px;
 
         &__btn {
-            background: #FFFFFF;
+            background: #ffffff;
             border: 1px solid #000000;
             border-radius: 6px;
             color: #000000;
             font-weight: 500;
             font-size: 12px;
             line-height: 15px;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             padding: 7px 25px;
         }
         &__btn:hover {
-            background: #FFFFFF;
+            background: #ffffff;
             border: 1px solid #000000;
-            color: #000000; 
+            color: #000000;
         }
         &__btn:focus {
-            background: #FFFFFF;
+            background: #ffffff;
             border: 1px solid #000000;
-            color: #000000; 
+            color: #000000;
         }
 
         &__csv {
             color: #000000;
             font-weight: 500;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-size: 12px;
             line-height: 24px;
             cursor: pointer;
@@ -599,7 +595,7 @@
     }
 
     &__cutomerDetail {
-        border: 1px dashed #A7C737;
+        border: 1px dashed #a7c737;
         border-radius: 23px;
         padding: 12px;
 
@@ -622,7 +618,7 @@
             align-items: center;
             color: #000000;
             font-weight: 500;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-size: 14px;
             line-height: 18px;
             margin-top: 6px;
@@ -633,10 +629,10 @@
                 line-height: 15px;
                 font-size: 12px;
                 text-align: center;
-                background: #DCD0E8;
+                background: #dcd0e8;
                 border-radius: 6px;
                 padding: 5px 13px;
-                width: fit-content;       
+                width: fit-content;
                 margin-right: 9px;
             }
 
@@ -658,11 +654,11 @@
             &__genereated {
                 @extend .text-nowrap;
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 font-size: 12px;
                 text-align: center;
-                background: #D5FA52;
+                background: #d5fa52;
                 border-radius: 6px;
                 padding: 6px;
                 width: fit-content;
@@ -670,11 +666,11 @@
             &__clicks {
                 @extend .text-nowrap;
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 400;
                 font-size: 12px;
                 text-align: center;
-                background: #FEE758;
+                background: #fee758;
                 border-radius: 6px;
                 padding: 6px;
                 width: fit-content;
@@ -688,7 +684,7 @@
             margin-top: 21px;
             &__txt {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 font-size: 14px;
                 line-height: 18px;
@@ -700,15 +696,15 @@
             button {
                 box-shadow: none !important;
                 height: 23px !important;
-                background: #FFFFFF !important;
+                background: #ffffff !important;
                 display: grid;
-                grid-template-columns: 2.5fr 1.5fr .5fr;
+                grid-template-columns: 2.5fr 1.5fr 0.5fr;
                 padding: 0;
                 &::after {
                     transform: rotate(270deg);
-                  }
+                }
             }
-    
+
             &__row {
                 display: flex;
                 align-items: center;
@@ -741,11 +737,10 @@
                 }
             }
         }
-        
     }
 
     &__orderDetail {
-        border: 1px dashed #A7C737;
+        border: 1px dashed #a7c737;
         border-radius: 23px;
         padding: 25px 30px;
         padding-bottom: 16px;
@@ -755,21 +750,34 @@
             align-items: center;
             justify-content: space-between;
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             line-height: 18px;
             font-size: 14px;
 
             &__number {
-                font-weight: 500;
+                font-family: "DM Sans";
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                color: $black;
             }
-            &__date{
+            &__date {
                 font-weight: 400;
             }
         }
 
         &__totalprice {
+            color: $black;
+            font-family: 'DM Sans';
+            font-weight: 500!important;
+            font-size: 14px;
+            line-height: 18px;
+            margin-bottom: 6px;
+            margin-top: 3px;
+        }
+        &__Ptotalprice {
             @extend .my-2, .d-flex;
-            color: #000000;
+            color: $black;
             font-family: 'DM Sans';
             font-weight: 500!important;
             font-size: 12px;
@@ -792,7 +800,7 @@
 
             &__name {
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 20px;
@@ -801,18 +809,18 @@
                 display: flex;
                 align-items: center;
                 color: #000000;
-                font-family: 'DM Sans';
+                font-family: "DM Sans";
                 font-weight: 500;
                 font-size: 14px;
                 line-height: 18px;
                 &__count {
                     color: #000000;
-                    font-family: 'DM Sans';
+                    font-family: "DM Sans";
                     font-weight: 700;
                     line-height: 15px;
                     font-size: 12px;
                     text-align: center;
-                    background: #DCD0E8;
+                    background: #dcd0e8;
                     border-radius: 6px;
                     padding: 5px 13px;
                     width: fit-content;
@@ -822,7 +830,6 @@
                     margin-left: 13px;
                 }
             }
-            
         }
 
         &__viewProducts {
@@ -830,7 +837,7 @@
             line-height: 18px;
             font-size: 14px;
             font-weight: 500;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             margin-bottom: 12px;
             display: flex;
             align-items: center;
@@ -845,7 +852,7 @@
         &__tagrow {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             color: #000000;
             font-size: 12px;
             line-height: 15px;
@@ -857,7 +864,7 @@
             &__genereated {
                 @extend .d-flex, .align-items-center, .justify-content-center;
                 font-weight: 500;
-                background: #D5FA52;
+                background: #d5fa52;
                 border-radius: 6px;
                 text-align: center;
                 padding: 6px 0px;
@@ -865,7 +872,7 @@
             &__clicks {
                 @extend .d-flex, .align-items-center, .justify-content-center;
                 font-weight: 400;
-                background: #FEE758;
+                background: #fee758;
                 border-radius: 6px;
                 text-align: center;
                 padding: 6px 0px;
@@ -873,7 +880,7 @@
             &__purchases {
                 @extend .d-flex, .align-items-center, .justify-content-center;
                 font-weight: 400;
-                background: #F28BF4;
+                background: #f28bf4;
                 border-radius: 6px;
                 text-align: center;
                 padding: 6px 0px;
@@ -881,7 +888,7 @@
             &__customer {
                 @extend .d-flex, .align-items-center, .justify-content-center;
                 font-weight: 400;
-                background: #CDC5F9;
+                background: #cdc5f9;
                 border-radius: 6px;
                 text-align: center;
                 padding: 6px 0px;
@@ -889,7 +896,7 @@
             &__cashback {
                 @extend .d-flex, .align-items-center, .justify-content-center;
                 font-weight: 400;
-                background: #7DD8C7;
+                background: #7dd8c7;
                 height: fit-content;
                 border-radius: 6px;
                 text-align: center;
@@ -915,7 +922,7 @@
 
         &__table_head {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-size: 14px;
             font-weight: 500;
             line-height: 18px;
@@ -929,21 +936,21 @@
             button {
                 box-shadow: none !important;
                 height: 33px !important;
-                background: #FFFFFF !important;
+                background: #ffffff !important;
                 display: grid;
-                grid-template-columns: 2.5fr 1.5fr .5fr;
+                grid-template-columns: 2.5fr 1.5fr 0.5fr;
                 padding: 0;
                 &::after {
                     transform: rotate(270deg);
-                  }
+                }
             }
-    
+
             &__row {
                 display: flex;
                 align-items: center;
                 &__name {
                     color: #000000;
-                    font-family: 'DM Sans';
+                    font-family: "DM Sans";
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 18px;
@@ -953,7 +960,7 @@
 
         &__footer {
             color: #000000;
-            font-family: 'DM Sans';
+            font-family: "DM Sans";
             font-weight: 400;
             font-size: 14px;
             line-height: 18px;
