@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Accordion } from 'react-bootstrap';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { Col } from 'react-bootstrap';
 import { BsArrowLeft } from 'react-icons/bs';
 import styles from 'styles/Analytics.module.scss';
 
@@ -40,30 +40,34 @@ export default function OrderLineItems({
           </span>
         </button>
       </div>
-      <div className={[styles.customerData__cutomerDetail__name, 'mx-4 mt-2'].join(' ')}>
+      <div className={[styles.customerData__cutomerDetail__name, 'mx-4 mt-2 mb-3 pb-1'].join(' ')}>
         Products Purchased
       </div>
       <div className="mx-4">
         {customerLineItems?.map((items: any, index: number) => (
           <div className={styles.customerData__cutomerDetail__lists}>
-            <div className={styles.customerData__cutomerDetail__acc__row__name}>
+            <div className={styles.customerData__cutomerDetail__acc__row__product}>
               <img style={{ width: 100 }} src={items.product[0].featuredImage} alt="Product" />
             </div>
             <div className={styles.customerData__cutomerDetail__acc__row__name}>
               {items.product[0].title}
             </div>
-            <div className={styles.customerData__cutomerDetail__acc__row__name}>
+            <div className={styles.customerData__cutomerDetail__acc__row__price}>
               {currencyCode}
               {formatNumber(items.discountedPrice)}
             </div>
           </div>
         ))}
-        <div className={styles.customerData__cutomerDetail__border} />
-        <div className={styles.customerData__order_totalprice}>
-          Total:
-          {' '}
-          {currencyCode}
-          {formatNumber(totalPrice)}
+        <div className={[styles.customerData__cutomerDetail__border, 'mt-4'].join(' ')} />
+        <div className={styles.customerData__orderDetail__totalprice}>
+          <Col>
+            Total:
+            {' '}
+          </Col>
+          <Col className="d-flex justify-content-end ">
+            {currencyCode}
+            {formatNumber(totalPrice)}
+          </Col>
         </div>
       </div>
     </div>

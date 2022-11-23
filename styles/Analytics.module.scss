@@ -612,7 +612,7 @@
         &__name {
             color: #000000;
             font-family: 'DM Sans';
-            font-weight: 700;
+            font-weight: 500;
             font-size: 16px;
             line-height: 20px;
         }
@@ -712,12 +712,32 @@
             &__row {
                 display: flex;
                 align-items: center;
+
+              
+                &__product {
+
+                    border: 1px dashed #000000;
+                    border-radius: 8px;
+                    padding: 5px;
+                    width: fit-content;
+                    height: auto;
+                }
                 &__name {
-                    color: #000000;
+                    @extend  .ps-4;
+                    color: $black;
                     font-family: 'DM Sans';
-                    font-weight: 400;
-                    font-size: 14px;
+                    font-weight: 500;
+                    font-size: 12px;
                     line-height: 18px;
+                }
+                &__price {
+                    @extend .d-flex, .justify-content-end;
+                    font-family: 'DM Sans';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: $black;
                 }
             }
         }
@@ -748,9 +768,11 @@
         }
 
         &__totalprice {
+            @extend .my-2, .d-flex;
             color: #000000;
             font-family: 'DM Sans';
-            font-weight: 500;
+            font-weight: 500!important;
+            font-size: 12px;
             line-height: 18px;
             margin-bottom: 6px;
             margin-top: 3px;
