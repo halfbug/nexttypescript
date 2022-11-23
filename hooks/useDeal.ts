@@ -105,11 +105,18 @@ export default function useDeal() {
     return `${customer.firstName} ${customer?.lastName?.charAt(0)}`;
   }, [gsctx.members]);
 
-  const topFive = useCallback(
-    (entity: any) => (Array.isArray(entity)
-      ? entity.slice(0, entity.length > 5 ? 5 : entity.length) : []),
-    [gsctx.members],
-  );
+  const topFive = useCallback((entity: any) => {
+    // On mobile it'll show 2 members
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 500;
+      if (isMobile) {
+        return Array.isArray(entity)
+          ? entity.slice(0, entity.length > 2 ? 2 : entity.length) : [];
+      }
+    }
+    return Array.isArray(entity)
+      ? entity.slice(0, entity.length > 5 ? 5 : entity.length) : [];
+  }, [gsctx.members]);
 
   const getDateDifference = useCallback(() => {
     const { expiredAt } = gsctx;
