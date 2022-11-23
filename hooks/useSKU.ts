@@ -43,8 +43,7 @@ const useSKU = () => {
   }, [gsctx]);
 
   useEffect(() => {
-    if (ownerProducts.length && campaignProducts.length < 5
-      && (allProducts.length > 1 && allProducts.length < 5)) {
+    if (ownerProducts.length && campaignProducts.length < 5) {
       const temp = ownerProducts.map((ele) => {
         if (campaignProducts.includes(ele.id)) {
           return true;

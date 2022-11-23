@@ -130,6 +130,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     }
   }, [groupshop, pending]);
 
+  useEffect(() => {
+    if (gsctx.id && allProducts && gsctx.popularProducts) {
+      const temp = [...allProducts, ...gsctx.popularProducts]
+        .sort((a: any, b: any) => a.title.localeCompare(b.title));
+      setallProducts(temp);
+    }
+  }, [gsctx.popularProducts]);
+
   // banner image and logo load
   const bannerImage = useBanner();
   const storeLogo = useLogo();
