@@ -7,6 +7,7 @@ import {
 import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { useState } from 'react';
+import AddChannelBox from 'components/Groupshop/AddChannelBox/AddChannelBox';
 
 interface CustomChannelsProps {
   channel: any;
@@ -15,6 +16,7 @@ interface CustomChannelsProps {
 const CustomChannels = () => {
   const [showChannelInfo, setShowChannelInfo] = useState<boolean>(false);
   const [channelInfoData, setChannelInfoData] = useState<any>();
+  const [showAddChannelPopup, setShowAddChannelPopup] = useState<boolean>(false);
 
   const handleChannelClick = (channel: any) => {
     setShowChannelInfo(true);
@@ -129,7 +131,7 @@ const CustomChannels = () => {
             </>
           ))}
           <div className={styles.retail__customChannels__addBtn}>
-            <WhiteButton>
+            <WhiteButton onClick={() => { setShowAddChannelPopup(true); }}>
               Add Channel
             </WhiteButton>
           </div>
@@ -139,6 +141,15 @@ const CustomChannels = () => {
             && <ChannelInfo channel={channelInfoData} />}
         </Col>
       </Row>
+      <AddChannelBox
+        show={showAddChannelPopup}
+        values={{
+          minDiscount: '10',
+          maxDiscount: '40',
+          commission: '10',
+        }}
+        handleClose={() => setShowAddChannelPopup(false)}
+      />
     </>
   );
 };

@@ -352,3 +352,121 @@
         }
     }
 }
+
+.addChannelBox_modal {
+    width: 700px;
+
+    &__content {
+        border-radius: 12px;
+
+        @include media-breakpoint-down(sm) {
+            border-radius: 12px 12px 0px 0px;
+            position: fixed;
+            bottom: 0;
+        }
+    }
+
+    &__body {
+        padding: 30px 50px;
+    }
+
+    &__nameBox {
+        padding: 24px 30px;
+        margin: 20px 0px;
+        border: 1px dashed $dotted-border-color1;
+        border-radius: 18px;
+
+        h5 {
+            font-weight: $font-weight-bolder;
+            font-size: 16px;
+            line-height: 21px;
+        }
+
+    }
+
+    &__rewardBox {
+        padding: 24px 30px;
+        margin: 20px 0px;
+        border: 1px dashed $dotted-border-color4;
+        border-radius: 18px;
+
+        h5 {
+            font-weight: $font-weight-bolder;
+            font-size: 16px;
+            line-height: 21px;
+        }
+
+        &__header {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+        }
+
+        &__headrow {
+            // display: grid;
+            // grid-template-columns: 3fr 2fr;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        &__heading {
+            color: #000000;
+            font-family: 'DM Sans';
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+
+            svg {
+                margin-left: 2px;
+            }
+        }
+
+        &__percentage {
+            padding: 6px 12px;
+            background: #D5FA52;
+            border-radius: 6px;
+            margin-right: 6px;
+        }
+
+        &__input {
+            border: 1px solid #000000;
+            border-radius: 6px;
+            width: 75px;
+
+            &:focus,
+            &:active {
+                border: 1px solid #000000;
+                border-radius: 6px;
+                width: 75px;
+                box-shadow: none;
+            }
+        }
+    }
+
+    &__btnSection {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 40px;
+    }
+
+    &__whiteBtn {
+        @extend .px-4;
+        background: #ffffff;
+        color: #000000;
+        border-radius: 6px;
+    }
+
+    &__purpleBtn {
+        @extend .px-4;
+        background: $classic;
+        color: #000000;
+        margin-left: 10px;
+        border-radius: 6px;
+    }
+}

@@ -20,7 +20,7 @@ const Retail: NextPage = () => {
         <Col lg={12}>
           <CustomChannels />
         </Col>
-        <Col lg={12}>
+        <Col lg={12} className="mt-5">
           <AnalyticsOverview />
         </Col>
         <Col lg={8}>
