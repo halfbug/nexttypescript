@@ -70,9 +70,9 @@ export default function QrWelcomeScreen({
               Brand: brandName,
               status: 'Groupshop Not Found',
             });
-            // setShowWelcome(false);
-            // setShowAuth(true);
-            // setactiveGroupshops(data?.getActiveGroupshops || []);
+            setShowWelcome(false);
+            setShowAuth(true);
+            setactiveGroupshops(data?.getActiveGroupshops || []);
           }
         } else {
           // @ts-ignore
