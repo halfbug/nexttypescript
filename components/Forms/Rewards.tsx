@@ -16,22 +16,30 @@ import useCampaign from 'hooks/useCampaign';
 import Star from 'assets/images/star.svg';
 import { InfoCircle } from 'react-bootstrap-icons';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
+import styles1 from 'styles/Campaign.module.scss';
+import * as constant from 'configs/constant';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 
 interface IValues {
   rewards: string;
   selectedTarget: any;
+  minValue: number;
+  maxValue: number;
 }
 
 const initvalz: IValues = {
   rewards: '',
   selectedTarget: '',
+  minValue: 0,
+  maxValue: 0,
 };
 
 export default function Rewards() {
   const [, setParams] = useQueryString();
 
-  const [minDiscount, setMinDiscount] = useState<string | undefined>('');
-  const [maxDiscount, setMaxDiscount] = useState<string | undefined>('');
+  const [editMin, setEditMin] = useState(false);
+  const [editMax, setEditMax] = useState(false);
+  const { isMultiple5, multiple5 } = useUtilityFunction();
 
   const {
     loading: appLodaing, data: { salesTarget } = { salesTarget: [] },
@@ -44,19 +52,108 @@ export default function Rewards() {
     rewards: yup
       .string()
       .required('required.'),
+    minValue: yup
+      .number().typeError('you must specify a number')
+      .min(5)
+      .max(40)
+      .test('is-empty',
+        'This field should not be empty',
+        (value) => {
+          if (!value) {
+            return false;
+          }
+          return true;
+        })
+      .lessThan(yup.ref('maxValue'), constant.EDIT_REWARDS_MSG2) // .test("diff", "diff",
+      .test('diff', constant.EDIT_REWARDS_MSG1,
+        (val: number | undefined, context) => {
+          if (val && (context.parent.maxValue - val) < 10) {
+            return false;
+          }
+          return true;
+        })
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+
+          return false;
+        }),
+    maxValue: yup
+      .number().typeError('you must specify a number')
+      .moreThan(yup.ref('minValue'), constant.EDIT_REWARDS_MSG4)
+      .max(50)
+      .test('is-empty',
+        'This field should not be empty',
+        (value) => {
+          if (!value) {
+            return false;
+          }
+          return true;
+        })
+      .test('diff', constant.EDIT_REWARDS_MSG1,
+        (val: number | undefined, context) => {
+          if (val && (val - context.parent.minDiscount) < 10) {
+            return false;
+          }
+          return true;
+        })
+      .test('multiple', constant.EDIT_REWARDS_MSG3,
+        (val: number | undefined) => {
+          if (val && isMultiple5(val)) {
+            return true;
+          }
+          return false;
+        }),
 
   });
 
   const { newcampaign } = useCampaign();
+
+  const {
+    handleSubmit, values, setFieldValue, handleChange, errors,
+  }: FormikProps<IValues> = useFormik<IValues>({
+    initialValues: initvalz,
+    validationSchema,
+    enableReinitialize: true,
+    validateOnChange: true,
+    validateOnBlur: false,
+    onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
+      if (validateForm) validateForm(valz);
+      const { rewards, selectedTarget } = valz;
+      const id = store?.newCampaign?.id;
+      const newAverage = multiple5((+values.minValue! + +values.maxValue!) / 2);
+      const newPayload = JSON.parse(JSON.stringify(selectedTarget));
+      newPayload.rewards[0].discount = `${values.minValue}%`;
+      newPayload.rewards[1].discount = `${newAverage}%`;
+      newPayload.rewards[2].discount = `${values.maxValue}%`;
+      if (id) {
+        await addReward({
+          variables: {
+            updateCampaignInput: {
+              storeId: store.id,
+              id: store?.newCampaign?.id,
+              rewards,
+              salesTarget: newPayload,
+
+            },
+          },
+        });
+      }
+      dispatch({ type: 'UPDATE_CAMPAIGN_REWARDS', payload: { rewards: { rewards, selectedTarget: newPayload } } });
+      setParams({ ins: 4 });
+    },
+  });
 
   useEffect(() => {
     if (salesTarget.length > 0) {
       initvalz.rewards = salesTarget[3].id;
       // eslint-disable-next-line prefer-destructuring
       initvalz.selectedTarget = salesTarget[3];
-      if (minDiscount === '' && maxDiscount === '') {
-        setMinDiscount(salesTarget[3].rewards[0].discount);
-        setMaxDiscount(salesTarget[3].rewards[2].discount);
+      if (values.minValue === 0 && values.maxValue === 0) {
+        setFieldValue('minValue', parseInt(salesTarget[3].rewards[0].discount, 10));
+        setFieldValue('maxValue', parseInt(salesTarget[3].rewards[2].discount, 10));
       }
     }
   }, [salesTarget]);
@@ -67,41 +164,11 @@ export default function Rewards() {
       // eslint-disable-next-line prefer-destructuring
       initvalz.selectedTarget = newcampaign?.selectedTarget;
       if (newcampaign?.selectedTarget?.rewards) {
-        setMinDiscount(newcampaign?.selectedTarget?.rewards[0]?.discount);
-        setMaxDiscount(newcampaign?.selectedTarget?.rewards[2]?.discount);
+        setFieldValue('minValue', parseInt(newcampaign?.selectedTarget?.rewards[0]?.discount!, 10));
+        setFieldValue('maxValue', parseInt(newcampaign?.selectedTarget?.rewards[2]?.discount!, 10));
       }
     }
   }, [newcampaign]);
-
-  const {
-    handleSubmit, values, setFieldValue,
-  }: FormikProps<IValues> = useFormik<IValues>({
-    initialValues: initvalz,
-    validationSchema,
-    enableReinitialize: true,
-    validateOnChange: false,
-    validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }: FormikHelpers<IValues>) => {
-      if (validateForm) validateForm(valz);
-      const { rewards, selectedTarget } = valz;
-      const id = store?.newCampaign?.id;
-      if (id) {
-        await addReward({
-          variables: {
-            updateCampaignInput: {
-              storeId: store.id,
-              id: store?.newCampaign?.id,
-              rewards,
-              salesTarget: selectedTarget,
-
-            },
-          },
-        });
-      }
-      dispatch({ type: 'UPDATE_CAMPAIGN_REWARDS', payload: { rewards: valz } });
-      setParams({ ins: 4 });
-    },
-  });
 
   const Bstyle = {
     width: '143px',
@@ -109,8 +176,8 @@ export default function Rewards() {
 
   useEffect(() => {
     if (values.selectedTarget !== '') {
-      setMinDiscount(values.selectedTarget?.rewards[0].discount);
-      setMaxDiscount(values.selectedTarget?.rewards[2].discount);
+      setFieldValue('minValue', parseInt(values.selectedTarget?.rewards[0].discount, 10));
+      setFieldValue('maxValue', parseInt(values.selectedTarget?.rewards[2].discount, 10));
     }
   }, [values.selectedTarget]);
 
@@ -185,10 +252,12 @@ export default function Rewards() {
                 variant="none"
                 className={(values?.selectedTarget?.name === starget.name)
                   ? btns[index].dark : btns[index].light}
-                onClick={(e) => {
+                onClick={async () => {
                   const selectedTarget = starget;
                   setFieldValue('rewards', selectedTarget.id);
                   setFieldValue('selectedTarget', { ...selectedTarget });
+                  await setFieldValue('minValue', parseInt(selectedTarget?.rewards[0].discount, 10));
+                  await setFieldValue('maxValue', parseInt(selectedTarget?.rewards[2].discount, 10));
                 }}
               >
                 {btns[index].text}
@@ -214,11 +283,51 @@ export default function Rewards() {
                     <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
                     .
                   </p>
-)}
+                )}
               />
             </div>
-            <div className={styles.rewards__percent_btn}>{minDiscount}</div>
-
+            <div className="d-flex align-items-center">
+              {!editMin
+                ? <div className={styles.rewards__percent_btn}>{`${values.minValue}%`}</div>
+                : (
+                  <Form.Control
+                    type="text"
+                    name="minValue"
+                    style={{ width: '60px' }}
+                    value={values.minValue}
+                    onChange={handleChange}
+                    className={styles1.dbrewards_input}
+                    isInvalid={!!errors.minValue}
+                    placeholder="Enter %"
+                  />
+                )}
+              {!editMin
+                ? (
+                  <MyButton
+                    variant="link"
+                    onClick={() => {
+                      setEditMin(true);
+                    }}
+                  >
+                    Edit
+                  </MyButton>
+                )
+                : (
+                  <>
+                    <MyButton
+                      variant="link"
+                      onClick={() => {
+                        setEditMin(false);
+                      }}
+                    >
+                      Save
+                    </MyButton>
+                  </>
+                )}
+            </div>
+            <Form.Control.Feedback type="invalid" className={styles1.dbrewards_error}>
+              {errors.minValue}
+            </Form.Control.Feedback>
           </Col>
           <Col lg={6}>
             <div className={styles.rewards_BaseMax}>
@@ -237,10 +346,48 @@ export default function Rewards() {
                     <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
                     .
                   </p>
-)}
+                )}
               />
             </div>
-            <div className={styles.rewards__percent_btn}>{maxDiscount}</div>
+            <div className="d-flex align-items-center">
+              {!editMax ? <div className={styles.rewards__percent_btn}>{`${values.maxValue}%`}</div>
+                : (
+                  <Form.Control
+                    type="text"
+                    name="maxValue"
+                    style={{ width: '60px' }}
+                    value={values.maxValue}
+                    onChange={handleChange}
+                    className={styles1.dbrewards_input}
+                    isInvalid={!!errors.maxValue}
+                    placeholder="Enter %"
+                  />
+                )}
+              {!editMax
+                ? (
+                  <MyButton
+                    variant="link"
+                    onClick={() => {
+                      setEditMax(true);
+                    }}
+                  >
+                    Edit
+                  </MyButton>
+                )
+                : (
+                  <MyButton
+                    variant="link"
+                    onClick={() => {
+                      setEditMax(false);
+                    }}
+                  >
+                    Save
+                  </MyButton>
+                )}
+            </div>
+            <Form.Control.Feedback type="invalid" className={styles1.dbrewards_error}>
+              {errors.maxValue}
+            </Form.Control.Feedback>
           </Col>
 
         </Row>
