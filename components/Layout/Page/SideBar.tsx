@@ -32,7 +32,7 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebarwrap}>
       <div className={styles.sidebarinnerwrap}>
-        <div className="sidebar-section">
+        <div className={styles.sidebarSection}>
           <div className="sidebar-header">
             <Mainlogo />
           </div>

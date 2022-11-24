@@ -24,8 +24,14 @@
 	flex-flow: column nowrap;
 	align-items: center;
 	justify-content: space-between;
+	height: 100%;
 	// position: -webkit-sticky;
 	// top: 0;
+}
+.sidebarSection {
+	@extend .w-100, .ps-5;
+	
+	height: 100%;
 }
 .sidebarmenu {
 	display: block;
@@ -35,6 +41,8 @@
 }
 .sidebarmenuwrap {
 	margin-top: 65px;
+	height: 600px;
+	overflow-y: auto;
 }
 .sidebarmenu a {
 	text-decoration: none;
