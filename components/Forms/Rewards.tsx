@@ -147,16 +147,29 @@ export default function Rewards() {
   });
 
   useEffect(() => {
-    if (salesTarget.length > 0) {
-      initvalz.rewards = salesTarget[3].id;
-      // eslint-disable-next-line prefer-destructuring
-      initvalz.selectedTarget = salesTarget[3];
-      if (values.minValue === 0 && values.maxValue === 0) {
-        setFieldValue('minValue', parseInt(salesTarget[3].rewards[0].discount, 10));
-        setFieldValue('maxValue', parseInt(salesTarget[3].rewards[2].discount, 10));
+    if (store.id) {
+      if (store.newCampaign && 'newCampaign' in store && 'rewards' in store.newCampaign) {
+        const {
+          newCampaign: { rewards: newRewards, selectedTarget: newSelectedTarget },
+        }:any = store;
+        initvalz.rewards = newRewards;
+        initvalz.selectedTarget = newSelectedTarget;
+        if (values.minValue === 0 && values.maxValue === 0) {
+          setFieldValue('minValue', parseInt(newSelectedTarget.rewards[0].discount, 10));
+          setFieldValue('maxValue', parseInt(newSelectedTarget.rewards[2].discount, 10));
+        }
+      } else if (salesTarget.length) {
+        const [,,, obj] = salesTarget;
+        initvalz.rewards = obj.id;
+        initvalz.selectedTarget = obj;
+        if (values.minValue === 0 && values.maxValue === 0) {
+          setFieldValue('minValue', parseInt(obj.rewards[0].discount, 10));
+          setFieldValue('maxValue', parseInt(obj.rewards[2].discount, 10));
+        }
       }
     }
-  }, [salesTarget]);
+  }, [store, salesTarget]);
+
   useEffect(() => {
     /// initial value display
     if (newcampaign?.selectedTarget) {
