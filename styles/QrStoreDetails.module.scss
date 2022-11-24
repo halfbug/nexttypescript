@@ -68,7 +68,27 @@
     @media (max-width: 767px) {
       text-align: center;
       padding-bottom: 30px;
+      margin-top: 24px;
     }
+  }
+  &__desktopLogo {
+    @extend .QRContainer__Logo;
+    @include media-breakpoint-down(md) {
+      display: none;
+      margin-top: 24px;
+    }
+  }
+
+  &__mobileLogo {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    @include media-breakpoint-down(md) {
+      display: block;
+    }
+    
   }
 
   &__form__wrapper {

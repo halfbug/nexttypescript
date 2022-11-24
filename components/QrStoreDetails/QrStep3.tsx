@@ -30,25 +30,30 @@ export default function QrStep3({
         <Container fluid>
           <Row>
             <Col md={7} sm={12} className="p-0">
-              <div>
-                <Link
-                  href={{
-                    pathname: '/qr-code',
-                  }}
-                >
-                  <a
-                    href=""
-                    onClick={() => {
-                      setShowStep1(true);
-                      setShowStep3(false);
+              <div className="d-flex align-items-center">
+                <div className={styles.QRContainer__mobileLogo}>
+                  <HeadLogo />
+                </div>
+                <div className="m-4">
+                  <Link
+                    href={{
+                      pathname: '/qr-code',
                     }}
                   >
-                    <LeftArrow />
-                  </a>
-                </Link>
+                    <a
+                      href=""
+                      onClick={() => {
+                        setShowStep1(true);
+                        setShowStep3(false);
+                      }}
+                    >
+                      <LeftArrow />
+                    </a>
+                  </Link>
+                </div>
               </div>
               <div className={styles.QRContainer__form__wrapper}>
-                <div className={styles.QRContainer__Logo}>
+                <div className={styles.QRContainer__desktopLogo}>
                   <HeadLogo />
                 </div>
                 <div className={['mx-2', styles.QRContainer__mobileImage].join(' ')}>
