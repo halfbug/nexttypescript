@@ -63,12 +63,19 @@ export default function QrWelcomeScreen({
               Router.push(`${arr[0]?.groupshop?.url}`);
             }
           } else {
+            const altGshopUrl:any = [];
+            if (data?.getActiveGroupshops) {
+              data?.getActiveGroupshops.forEach((item:any, index:any) => {
+                altGshopUrl.push(item.groupshop.url);
+              });
+            }
             // @ts-ignore
             // eslint-disable-next-line no-undef
             fbq('trackCustom', 'QrSearch', {
               GSURL: '',
               Brand: brandName,
               status: 'Groupshop Not Found',
+              AltGsURL: altGshopUrl,
             });
             setShowWelcome(false);
             setShowAuth(true);
