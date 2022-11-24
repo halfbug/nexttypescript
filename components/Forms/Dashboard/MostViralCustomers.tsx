@@ -73,21 +73,24 @@ const MostViralCustomers = ({
         <div className={styles.customerData__viralCustomer__heading1} />
         <Row className={styles.customerData__table_heading}>
           <div className={styles.customerData__mostViral__table_heading}>
-            <div>
+            <div className="ms-4">
               Order #
             </div>
-            <div>
+            <div className="">
               Customer Name
             </div>
-            <div className="text-nowrap mx-2">
+            <div className="">
               Revenue Generated
             </div>
             <div>
               Unique Clicks
             </div>
+            <div>
+              {' '}
+            </div>
           </div>
         </Row>
-        <Row className={styles.customerData__mostViral}>
+        <div className={styles.customerData__mostViral}>
           {renderItems?.map((part: any, index: number) => (
             <div className={styles.customerData__mostViral__listing}>
               <div>
@@ -95,14 +98,14 @@ const MostViralCustomers = ({
                   {part.members[0].name}
                 </div>
               </div>
-              <div>
+              <div className="">
                 <div className={styles.customerData__acc__row__name}>
                   {part.members[0].customer.firstName}
                   {' '}
                   {part.members[0].customer.lastName}
                 </div>
               </div>
-              <div>
+              <div className="ms-2 text-nowrap">
                 <div className={styles.customerData__acc__row__genereated}>
                   {currencyCode}
                   {formatNumber(part.revenue)}
@@ -135,7 +138,7 @@ const MostViralCustomers = ({
           {viralCustomersList.length === 0 && (
             <div className={styles.customerData__mostViral__noRecord}>No customer found!</div>
           )}
-        </Row>
+        </div>
         <Row>
           <Col>
             {totalPages > 1 && viralCustomersList.length > 5 && (
