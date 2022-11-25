@@ -100,6 +100,7 @@ export default function useBilling() {
   useEffect(() => {
     refetch();
     refetch2();
+    refetch5();
     // refetch3();
   }, []);
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currency || 'USD');
