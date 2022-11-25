@@ -62,44 +62,56 @@ export default function QrCodeCommon() {
               <div>
                 { ShowAuth
                 && (
-                  <div>
-                    <Link
-                      href={{
-                        pathname: '/qr-code/[shop]',
-                        query: { shop },
-                      }}
-                    >
-                      <a
-                        href=""
-                        onClick={() => {
-                          setShowWelcome(true);
-                          setShowAuth(false);
+                  <div className="d-flex align-items-center">
+                    <div className={styles.QRContainer__mobileLogo}>
+                      <HeadLogo />
+                    </div>
+                    <div>
+                      <Link
+                        href={{
+                          pathname: '/qr-code/[shop]',
+                          query: { shop },
                         }}
                       >
-                        {/* <LeftArrow size={12}/> */}
-                        <FaArrowLeft className="m-3" size={18} />
-                      </a>
-                    </Link>
+                        <a
+                          href=""
+                          onClick={() => {
+                            setShowWelcome(true);
+                            setShowAuth(false);
+                          }}
+                        >
+                          {/* <LeftArrow size={12}/> */}
+                          <FaArrowLeft className="m-3" size={18} />
+                        </a>
+                      </Link>
+                    </div>
                   </div>
+
                 )}
-                <div className={styles.QRContainer__Logo}>
-                  { ShowAuth ? <HeadLogo /> : state.logoImage !== '' && (
-                  <Link
-                    href={{
-                      pathname: `https://${state.storeLink}`,
-                    }}
-                  >
-                    <a target="_blank">
-                      <img src={state.logoImage} alt="brand_logo" className="img-fluid" />
-                    </a>
-                  </Link>
-                  ) }
-                </div>
+                { !ShowAuth
+                    && (
+                    <div className={styles.QRContainer__Logo}>
+                      {state.logoImage !== '' && (
+                      <Link
+                        href={{
+                          pathname: `https://${state.storeLink}`,
+                        }}
+                      >
+                        <a target="_blank">
+                          <img src={state.logoImage} alt="brand_logo" className="img-fluid" />
+                        </a>
+                      </Link>
+                      )}
+                    </div>
+                    )}
               </div>
 
               <div className={styles.QRContainer__form__wrapper}>
                 <div style={{ backgroundImage: `url(${state.banner})` }} className={[styles.QRContainer__mobileImage, 'justify-content-center align-items-center'].join(' ')}>
                   <QrRight />
+                </div>
+                <div className={styles.QRContainer__Logo}>
+                  {ShowAuth && <HeadLogo />}
                 </div>
                 { ShowWelcome && (
                   <QrWelcomeScreen
