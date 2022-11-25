@@ -4,8 +4,16 @@ import * as React from 'react';
 import styles from 'styles/Billing.module.scss';
 import { Row, Col } from 'react-bootstrap';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
+import useBilling from 'hooks/useBilling';
+import { StoreContext } from 'store/store.context';
+import Link from 'next/link';
 
 export default function BillingPartnerTools() {
+  const {
+    totalActivePartner, partnerTier, partnerTierFee, partnerTierLimit,
+  } = useBilling();
+  const { store, dispatch } = React.useContext(StoreContext);
+  const shopName: string[] | undefined = store?.shop?.split('.', 1);
   return (
     <Row className={styles.billing__partnerTools}>
       <Col lg={12}>
@@ -29,14 +37,20 @@ export default function BillingPartnerTools() {
               <div className={styles.billing__partnerTools__activeBox__activePartner}>
                 You currently have
                 {' '}
-                <span>4 active</span>
+                <span>
+                  {totalActivePartner}
+                  {' '}
+                  active
+                </span>
                 {' '}
                 partners.
               </div>
               <div>
-                <WhiteButton>
-                  Manage Partners
-                </WhiteButton>
+                <Link href={`/${shopName}/partnertools`}>
+                  <WhiteButton>
+                    Manage Partners
+                  </WhiteButton>
+                </Link>
               </div>
             </div>
           </Col>
@@ -45,10 +59,16 @@ export default function BillingPartnerTools() {
               Next Tier
             </h4>
             <div className={styles.billing__partnerTools__tierBox__amount}>
-              $100/mo
+              $
+              {partnerTierFee}
+              /mo
             </div>
             <div className={styles.billing__partnerTools__tierBox__upto}>
-              Up to 10 partners
+              Up to
+              {' '}
+              {partnerTierLimit}
+              {' '}
+              partners
             </div>
           </Col>
           <Col lg={2} />

@@ -6,6 +6,7 @@ import {
 import { GroupshopContext } from 'store/groupshop.context';
 import { StoreContext } from 'store/store.context';
 import {
+  GET_ACTIVE_PARTNER_COUNT,
   GET_MONTHLY_GS, GET_MONTH_COUNT, GET_TOTAL_GS,
   GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_PARTNER_REVENUE, GET_TOTAL_REVENUE,
 } from 'store/store.graphql';
@@ -19,6 +20,10 @@ export default function useBilling() {
   const [totalGSByMonth, settotalGSByMonth] = useState<MonthlyGSType[] | []>([]);
   const [totalRevenue, settotalRevenue] = useState(0);
   const [totalPartnerRevenue, settotalPartnerRevenue] = useState(0);
+  const [totalActivePartner, settotalActivePartner] = useState(0);
+  const [partnerTier, setpartnerTier] = useState(0);
+  const [partnerTierFee, setpartnerTierFee] = useState(0);
+  const [partnerTierLimit, setpartnerTierLimit] = useState('');
   const [totalMonths, settotalMonths] = useState<undefined | number>(undefined);
   const [appTrial, setappTrial] = useState(true);
   const [appTrialDay, setappTrialDay] = useState(true);
@@ -51,7 +56,20 @@ export default function useBilling() {
   } = useQuery(GET_TOTAL_PARTNER_REVENUE, {
     variables: { storeId: store.id },
   });
+  const {
+    data: data5, refetch: refetch5,
+  } = useQuery(GET_ACTIVE_PARTNER_COUNT, {
+    variables: { storeId: store.id },
+  });
 
+  useEffect(() => {
+    if (data5?.getActivePartnersCount) {
+      settotalActivePartner(data5?.getActivePartnersCount.count);
+      setpartnerTier(data5?.getActivePartnersCount.tierName);
+      setpartnerTierFee(data5?.getActivePartnersCount.tierCharges);
+      setpartnerTierLimit(data5?.getActivePartnersCount.tierLimit);
+    }
+  }, [data5]);
   useEffect(() => {
     if (data4?.getPartnerRevenue) {
       settotalPartnerRevenue(data4?.getPartnerRevenue.revenue);
@@ -147,5 +165,9 @@ export default function useBilling() {
     isAppTrial,
     averageNoOfGS,
     totalPartnerRevenue,
+    totalActivePartner,
+    partnerTier,
+    partnerTierFee,
+    partnerTierLimit,
   };
 }

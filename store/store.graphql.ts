@@ -1551,6 +1551,16 @@ query GetGraphRevenueByDate($storeId: String!, $startDate: String!, $endDate: St
     }
 }
 `;
+const GET_ACTIVE_PARTNER_COUNT = gql`
+query GetActivePartnersCount($storeId: String!) {
+  getActivePartnersCount(storeId: $storeId) {
+    count
+    tierName
+    tierCharges
+    tierLimit
+    }
+}
+`;
 
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
@@ -1571,5 +1581,5 @@ export {
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
-  GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE,
+  GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, GET_ACTIVE_PARTNER_COUNT,
 };
