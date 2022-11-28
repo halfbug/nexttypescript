@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
 import { Col, Container, Row } from 'react-bootstrap';
 import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
@@ -197,5 +197,15 @@ const CampaignAnalytics: NextPage = () => {
     </Page>
   );
 };
-
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req);
+  const { cookies: { token } } = context.req;
+  // console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default CampaignAnalytics;

@@ -1,10 +1,10 @@
 export interface IStore {
   show?: boolean;
   id?: string;
-  shopifySessionId?: string;
+  // shopifySessionId?: string;
   brandName?: string;
   shop?: string;
-  accessToken?: string;
+  // accessToken?: string;
   installationStep?: number | null;
   logoImage?: string;
   industry?: string;
@@ -250,3 +250,5 @@ export interface MatchingBrandName {
   id?: string,
   brandName?: string,
 }
+
+export type IUser ={ firstName: string; lastName: string;}

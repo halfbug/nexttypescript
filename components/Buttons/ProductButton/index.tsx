@@ -27,7 +27,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
   } = React.useContext(StoreContext);
 
   const { data } = useQuery(TOTAL_PRODUCTS, {
-
+    skip: !shop,
     variables: { shop },
   });
   const { newcampaign } = useCampaign();

@@ -1,11 +1,9 @@
 import { gql } from '@apollo/client';
 
 const GET_STORE = gql`
-query StoreName($shop: String!) {
-  storeName(shop: $shop) {
+query StoreName  {
+  storeName  {
     id
-  shopifySessionId
-  accessToken
   installationStep
   shop
   brandName
@@ -1011,8 +1009,8 @@ query GetCustomBillingByDate($storeId: String!, $sdate: String!) {
 `;
 
 const BILLING_SUBSCRIPTION = gql`
-  mutation  BillingSubscription($shop: String!, $accessToken: String!){
-  billingSubscription(shop:$shop, accessToken:$accessToken){
+  mutation  BillingSubscription{
+  billingSubscription{
     redirectUrl
   }
 }

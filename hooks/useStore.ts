@@ -11,10 +11,7 @@ const useStore = () => {
 
   const {
     loading, data, refetch,
-  } = useQuery(GET_STORE, {
-
-    variables: { shop },
-  });
+  } = useQuery(GET_STORE);
 
   const { store, dispatch } = useContext(StoreContext);
   console.log('🚀 ~ file: overview.tsx ~ line 28 ~ store', store);

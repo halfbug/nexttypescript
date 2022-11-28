@@ -17,6 +17,7 @@ import useCampaign from 'hooks/useCampaign';
 import Model from 'components/Widgets/Model/Model';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import HintBox from 'components/Groupshop/HintBox/HintBox';
+import { GetServerSidePropsContext } from 'next';
 
 const CampaignListing = () => {
   const [showHint, setShowHint] = useState<boolean>(false);
@@ -188,4 +189,15 @@ const CampaignListing = () => {
     </Page>
   );
 };
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req);
+  const { cookies: { token } } = context.req;
+  // console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default CampaignListing;

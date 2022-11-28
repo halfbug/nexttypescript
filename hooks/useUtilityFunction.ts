@@ -5,12 +5,14 @@ import axios from 'axios';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import moment from 'moment';
 import { useCallback, useContext } from 'react';
+import { AuthContext } from 'store/auth.context';
 import { IProduct } from 'types/store';
 
 export default function useUtilityFunction() {
 //   const router = useRouter();
 
   //   const { pathname, query: params } = router;
+  const { token } = useContext(AuthContext);
 
   const cleanTypename = useCallback((obj: any) => {
     try {
@@ -98,7 +100,12 @@ export default function useUtilityFunction() {
   }, []);
   const getSignedUrlS3 = async (url: string) => {
     if (url === '' || url === undefined) return '';
-    const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
+
+    const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`, {
+      headers: {
+        authorization: `Bearer ${token}`, // the token is a variable which holds the token
+      },
+    });
     return dbUrl;
   };
   const formatNumber = ((num: number | string) => {

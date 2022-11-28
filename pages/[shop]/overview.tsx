@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 // import Head from 'next/head';
 import Page from 'components/Layout/Page/Page';
 import CampaignOverview from 'components/Forms/Dashboard/CampaignOverview';
@@ -136,4 +136,15 @@ const ShopMain: NextPage = () => {
   );
 };
 
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req.cookies);
+  const { cookies: { token } } = context.req;
+  console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default ShopMain;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-quotes */
 import React, { useState, useEffect } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
 import {
   Row, Col,
@@ -322,5 +322,15 @@ const Settings: NextPage = () => {
     // </div>
   );
 };
-
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req);
+  const { cookies: { token } } = context.req;
+  // console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default Settings;

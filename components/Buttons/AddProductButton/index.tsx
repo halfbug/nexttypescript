@@ -28,7 +28,7 @@ export default function AddProductButton({ handleDelete }:IProps) {
   } = React.useContext(StoreContext);
 
   const { data } = useQuery(TOTAL_PRODUCTS, {
-
+    skip: !shop,
     variables: { shop },
   });
   const { newcampaign } = useCampaign();

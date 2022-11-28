@@ -15,6 +15,7 @@ import { v4 as uuid } from 'uuid';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
+import { AuthContext } from 'store/auth.context';
 import WhiteButton from '../WhiteButton/WhiteButton';
 
 interface IUploadButtonProps {
@@ -37,7 +38,9 @@ export default function UploadButton({
 }:IUploadButtonProps) {
   const front = React.useRef(null);
   const { store }: IStore = React.useContext(StoreContext);
+  const { user, token } = React.useContext(AuthContext);
 
+  console.log("🚀 ~ file: index.tsx ~ line 40 ~ token", token);
   const onButtonClick = (ref:any) => {
     // `current` points to the mounted text input element
     ref.current.click();
@@ -55,14 +58,18 @@ export default function UploadButton({
   const [progress, setprogress] = React.useState<boolean>(false);
   const apiFunc = async () => {
     if (url) {
-      const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`);
+      const { data: { data: dbUrl } } = await axios.get(`${process.env.API_URL}/image?key=${url}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // the token is a variable which holds the token
+        },
+      });
       console.log("🚀 ~ file: index.tsx ~ line 51 ~ apiFunc ~ res", dbUrl);
       setlogo(dbUrl);
     }
   };
   React.useEffect(() => {
     apiFunc();
-  }, [url]);
+  }, [url, user]);
 
   const handleImageUpload = (e: any) => {
     try {

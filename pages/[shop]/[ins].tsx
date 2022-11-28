@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 // import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import Page from 'components/Layout/Page/Page';
@@ -13,10 +13,7 @@ import { Spinner } from 'react-bootstrap';
 const ShopMain: NextPage = () => {
   const { query: { shop, ins } } = useRouter();
 
-  const { loading, error, data } = useQuery(GET_STORE, {
-
-    variables: { shop },
-  });
+  const { loading, error, data } = useQuery(GET_STORE);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ data', data);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ error', error);
   // console.log('🚀 ~ file: [ins].tsx ~ line 21 ~ loading', loading);
@@ -47,4 +44,15 @@ const ShopMain: NextPage = () => {
   );
 };
 
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req);
+  const { cookies: { token } } = context.req;
+  // console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default ShopMain;

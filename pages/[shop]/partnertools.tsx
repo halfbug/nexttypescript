@@ -1,7 +1,7 @@
 import Page from 'components/Layout/Page/Page';
 import ActiveAffiliate from 'components/Widgets/ActiveAffiliate';
 import NewPartnerForm from 'components/Widgets/NewPartnerForm';
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import React, { useState, useEffect, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import styles from 'styles/Partner.module.scss';
@@ -62,5 +62,15 @@ const PartnerTools: NextPage = () => {
     </Page>
   );
 };
-
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // console.log('🚀 ~ file: [ins].tsx ~ line 51 ~ getServerSideProps ~ context', context?.req);
+  const { cookies: { token } } = context.req;
+  // console.log(' ~ token', token);
+  if (token) {
+    return {
+      props: { token }, // Will be passed to the page component as props
+    };
+  }
+  return { props: {} };
+}
 export default PartnerTools;
