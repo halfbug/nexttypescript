@@ -292,8 +292,8 @@ export default function Rewards() {
                     This is the first discount tier and  the ongoing commission your
                     customer earns on new orders after
                     they have received all their cashback. Learn more about how rewards work
-                    {' '}
-                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
+                    {/* {' '}
+                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a> */}
                     .
                   </p>
                 )}
@@ -355,8 +355,8 @@ export default function Rewards() {
                     you are willing to give per conversion. We won’t offer the maximum discount
                     unless your customer’s Groupshop is performing really well.
                     Think of this as an ‘up to X% off’. Learn more about how rewards work
-                    {' '}
-                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a>
+                    {/* {' '}
+                    <a rel="noreferrer" href="https://groupshop.zendesk.com/hc/en-us/articles/4414348927635-How-do-I-set-cashback-and-discounts-" target="_blank">here</a> */}
                     .
                   </p>
                 )}
