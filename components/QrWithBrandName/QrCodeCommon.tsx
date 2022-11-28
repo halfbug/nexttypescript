@@ -148,7 +148,7 @@ export default function QrCodeCommon() {
                     <div className={styles.QRContainer__powered__by}>
                       <p>
                         Powered by
-                        <HeadLogo />
+                        <HeadLogo className="ms-2" />
                       </p>
                     </div>
                   </div>
