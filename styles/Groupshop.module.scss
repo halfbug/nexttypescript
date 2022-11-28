@@ -3123,6 +3123,76 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   //   }
 
   // }
+  &__ready {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    width: fit-content;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background: rgba(212, 196, 227, 0.5);
+    border-radius: 20px;
+    
+  }
+  &__discover {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 30px;
+    /* identical to box height, or 143% */
+
+    text-align: center;
+  }
+  &__shopWith {
+    @extend .d-flex, .align-items-center, .justify-content-between;
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 10px;
+    &__img {
+      position: absolute;
+      img {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        border: 1px solid #D9D9D9;
+        @include media-breakpoint-down (md) {
+          height: 50px;
+          width: 50px;
+        }
+      }
+    }
+    &__txt {
+      text-align: left;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      margin-left: 100px;
+      @include media-breakpoint-down (md) {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        margin-left: 60px;
+        margin-right: 20px;
+      }
+
+    }
+    &__btn {
+      background: #1E1E1E;
+      border-radius: 10px;
+      padding: 6px 20px;
+      font-size: 18px;
+      line-height: 23px;
+      letter-spacing: 0.32px;
+      @include media-breakpoint-down (md) {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+        padding: 6px 10px;
+      }
+    }
+  }
 }
 .offcanvas-end {
   border: none !important;

@@ -8,7 +8,7 @@ import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
 import {
-  Col, Container, Dropdown, Row,
+  Col, Container, Dropdown, Row, Button as Button2,
 } from 'react-bootstrap';
 import Brand from 'components/Groupshop/Brand/Brand';
 import Members from 'components/Groupshop/Members/Members';
@@ -920,6 +920,84 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </div>
           </ProductGrid>
         ) : <></>}
+        {/* Discover Section */}
+        <Row className="mx-0">
+          <Col xs={12}>
+            <hr />
+            <div className={styles.groupshop__ready}>
+              Ready for something new?
+            </div>
+          </Col>
+          <Col xs={12}>
+            <div className={styles.groupshop__discover}>
+              Discover new brands with Groupshop and get exclusive discounts!
+            </div>
+          </Col>
+          {mockDiscoverBrands.map((brand) => (
+            <>
+              <Col xs={12} md={6}>
+                <ProductGrid
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={5}
+                  xl={5}
+                  products={
+                    ownerProducts
+                    && (ownerProducts!.length > 3
+                      // ? popularProducts?.slice(0, 3)
+                      ? popularShuffled
+                      : newPopularPrd)
+                  }
+                  maxrows={2}
+                  addProducts={handleAddProduct}
+                  handleDetail={(prd) => setsProduct(prd)}
+                  id="discoverproducts1"
+                  isModalForMobile={isModalForMobile}
+                  urlForActivation={urlForActivation}
+                  skuCount={SKU.length}
+                  showHoverButton
+                >
+                  <div className={styles.groupshop__shopWith}>
+                    <div className={styles.groupshop__shopWith__img}>
+                      <img
+                        src={storeLogo}
+                        alt={`${brand.name}`}
+                        // alt="d"
+                        className="img-fluid"
+                        style={{ maxWidth: '80px' }}
+                      />
+                    </div>
+                    <div className={styles.groupshop__shopWith__txt}>
+                      Shop
+                      {' '}
+                      <strong>{brand.name}</strong>
+                      {' '}
+                      with
+                      {' '}
+                      {brand.with}
+                      {' '}
+                      and get
+                      {' '}
+                      <strong>
+                        {brand.discount}
+                      </strong>
+                      {' '}
+                      % off
+                    </div>
+                    <Button2
+                      variant="primary"
+                      className={styles.groupshop__shopWith__btn}
+                      onClick={() => { }}
+                    >
+                      Shop
+                    </Button2>
+                  </div>
+                </ProductGrid>
+              </Col>
+            </>
+          ))}
+        </Row>
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             {isExpired ? (
@@ -1038,3 +1116,27 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 };
+
+const mockDiscoverBrands = [
+  {
+    name: 'Jelice',
+    with: 'Iman',
+    discount: '15',
+  },
+  {
+    name: 'The Renatural',
+    with: 'Lala',
+    discount: '10',
+  },
+  {
+    name: 'Sani',
+    with: 'Iman',
+    discount: '20',
+  },
+  {
+    name: 'Sani',
+    with: 'Jelice',
+    discount: '5',
+  },
+
+];
