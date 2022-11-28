@@ -14,6 +14,13 @@ query StoreName($shop: String!) {
   plan
   currencyCode
   appTrialEnd
+  discoveryTool{
+    status
+    matchingBrandName{
+      id
+      brandName
+    },
+  }
   retentiontool{
     status
     updatedAt    
@@ -573,6 +580,13 @@ query Groupshop($code: String!, $status: String = "") {
         tiktok
         pinterest
         twitter       
+      }
+      discoveryTool{
+        status
+        matchingBrandName{
+          id
+          brandName
+        },
       }
     }
   popularProducts{
@@ -1549,6 +1563,303 @@ query GetGraphRevenueByDate($storeId: String!, $startDate: String!, $endDate: St
       revenue
       graphView
     }
+}`;
+
+const GET_MATCHING_GS = gql`
+  query MatchingGS($storeId: [String!]!) {
+    matchingGS(storeId: $storeId) {
+      storeId
+    id
+    url
+    numMembers
+    shortUrl
+    exipredShortLink
+    ownerDeals{
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+      orders{
+        product{
+          id
+        }
+        quantity
+        price
+      }
+    }
+    milestones{
+      discount
+      activatedAt
+    }
+    bestSeller{
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      options{
+        id
+        name
+        values
+        position
+      }
+      lineItems{
+        product{
+          id
+        }
+        price
+      }
+       
+    }
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    ownerDealsProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    refferalDealsProducts{
+      productId
+      customerIP
+      addedBy
+      type
+    }
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+    expiredAt
+    createdAt
+    totalProducts
+    members{
+      orderId
+      availedDiscount
+      role
+      lineItems{
+        quantity
+        price
+        discountedPrice
+      }
+      refund{
+        discount
+        amount
+      }
+      orderDetail{
+        customer{
+          firstName
+          lastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      products{
+        id
+        title
+        featuredImage
+        featuredVideo
+        description
+        price
+        outofstock
+        purchaseCount
+        options{
+      id
+      name
+      values
+      position
+    }
+        orders{
+          product{
+            id
+            
+          }
+          price
+        }
+      }
+    }
+    store{
+      brandName
+      shop
+      logoImage
+      currencyCode
+      settings{
+        general{
+          brandColor
+          imageUrl
+          youtubeUrl
+          media
+        }
+        marketing{
+          facebookPixels
+          tiktokPixels
+          googlePixels
+          snapchatPixels          
+        }
+      }
+      social{
+        facebook
+        instagram
+        tiktok
+        pinterest
+        twitter       
+      }
+      discoveryTool{
+        status
+        matchingBrandName{
+          id
+          brandName
+        },
+      }
+    }
+  popularProducts{
+    id
+    title
+    featuredImage
+    featuredVideo
+    description
+    purchaseCount
+    price
+    outofstock
+    options{
+      id
+      name
+      values
+      position
+    }
+    currencyCode
+    orders{
+      product{
+        id
+      }
+      quantity
+      price
+    }
+  }
+  allProducts{
+    id
+    title
+    featuredImage
+    featuredVideo
+    description
+    price
+    currencyCode
+    purchaseCount
+    outofstock
+    options{
+      id
+      name
+      values
+      position
+    }
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+    campaign{
+      name
+      products
+      collections
+      addableProducts
+      socialLinks{
+        instagram
+        tiktok
+        facebook
+        twitter
+      }
+      settings{
+        brandColor
+        customColor
+        customBg
+        imageUrl
+        youtubeUrl
+        media
+      }   
+      salesTarget{
+        id
+        name
+        rewards{
+          id
+          customerCount
+          discount
+        }    
+      }
+    }
+
+    InventoryProducts{
+      id
+    title
+    createdAtShopify
+    purchaseCount
+    featuredImage
+    description                             
+    price
+    options{
+      id
+      name
+      values
+      position
+    }
+    currencyCode
+    }
+    
+    obSettings{ 
+      ownerUrl
+      allowEmails
+      allowTexts
+      mobileNumber
+      shopHeader
+      instagramLink
+      pinteresrLink
+      tiktokLink
+      twitterLink
+      themeBanner
+      step
+    }
+    }
+  }
+`;
+
+const DISCOVERYTOOLS_UPDATE = gql`
+  mutation UpdateDiscoveryTools($updateDiscoveryTools: UpdateStoreInput!) {
+    updateDiscoveryTools(UpdateDiscoveryTools: $updateDiscoveryTools) {
+      id
+      status
+      discoveryTool{
+        status
+        matchingBrandName{
+          id
+          brandName
+        }
+      }
+      createdAt
+  }
 }
 `;
 const GET_ACTIVE_PARTNER_COUNT = gql`
@@ -1581,5 +1892,6 @@ export {
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
+  GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
   GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, GET_ACTIVE_PARTNER_COUNT,
 };

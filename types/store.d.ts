@@ -22,6 +22,7 @@ export interface IStore {
   currencyCode?: string;
   appTrialEnd?: Date | undefined;
   allInventoryProducts?: IProduct[];
+  discoveryTool?: DiscoveryTools;
 }
 export interface ICampaign {
   isActive?: boolean;
@@ -238,4 +239,14 @@ export interface ISocialLink {
 }
 export interface IBilling {
   nooforder: number;
+}
+
+export interface DiscoveryTools {
+  status?: string,
+  matchingBrandName?: MatchingBrandName[],
+}
+
+export interface MatchingBrandName {
+  id?: string,
+  brandName?: string,
 }

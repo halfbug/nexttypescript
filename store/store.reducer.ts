@@ -1,7 +1,7 @@
 import { IStore } from 'types/store';
 
 export type StoreAction = {
-  type: 'UPDATE_STEP' | 'UPDATE_STORE' | 'NEW_CAMPAIGN' | 'UPDATE_TOTALPRODUCTS' | 'SET_COLLECTIONS' | 'SET_PRODUCTS' | 'UPDATE_STORE_SETTINGS' | 'UPDATE_CAMPAIGN' | 'CLOSE_DIALOUGE' | 'UPDATE_CAMPAIGN_REWARDS' | 'SINGLE_CAMPAIGN';
+  type: 'UPDATE_STEP' | 'UPDATE_STORE' | 'NEW_CAMPAIGN' | 'UPDATE_TOTALPRODUCTS' | 'SET_COLLECTIONS' | 'SET_PRODUCTS' | 'UPDATE_STORE_SETTINGS' | 'UPDATE_CAMPAIGN' | 'CLOSE_DIALOUGE' | 'UPDATE_CAMPAIGN_REWARDS' | 'SINGLE_CAMPAIGN' | 'UPDATE_DISCOVERYTOOLS';
   payload: IStore;
 };
 
@@ -44,5 +44,7 @@ export const reducer = (
   if (action.type === 'SET_PRODUCTS') { return { ...state, products: action.payload.products }; }
 
   if (action.type === 'CLOSE_DIALOUGE') { return { ...state, ...action.payload }; }
+
+  if (action.type === 'UPDATE_DISCOVERYTOOLS') { return { ...state, ...action.payload }; }
   return state;
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 
 import Page from 'components/Layout/Page/Page';
@@ -9,12 +9,55 @@ import { Check2Circle, XCircle } from 'react-bootstrap-icons';
 import styles from 'styles/Discovery.module.scss';
 import HintBox from 'components/Groupshop/HintBox/HintBox';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
+import { StoreContext } from 'store/store.context';
+import { useMutation } from '@apollo/client';
+import { DiscoveryTools } from 'types/store';
+import { DISCOVERYTOOLS_UPDATE } from 'store/store.graphql';
 
 const Discovery: NextPage = () => {
+  const { store, dispatch } = useContext(StoreContext);
   const [showHint, setShowHint] = useState<boolean>(false);
+  const [discoveryToolBtn, setDiscoveryToolBtn] = useState<number>();
+
+  const [discoveryToolsUpdate] = useMutation<DiscoveryTools>(DISCOVERYTOOLS_UPDATE);
+
   useEffect(() => {
     setShowHint(true);
   }, []);
+
+  useEffect(() => {
+    if (store?.discoveryTool?.status === 'Active') {
+      setDiscoveryToolBtn(1);
+    } else if (store?.discoveryTool?.status === 'InActive') {
+      setDiscoveryToolBtn(0);
+    }
+  }, [store?.discoveryTool?.status]);
+
+  const handleChange = (e:any) => {
+    if (e === 1) {
+      setDiscoveryToolBtn(1);
+      changeDiscoveryTool('Active');
+    } else {
+      setDiscoveryToolBtn(0);
+      changeDiscoveryTool('InActive');
+    }
+  };
+
+  const changeDiscoveryTool = (discoveryStatus:any) => {
+    discoveryToolsUpdate({
+      variables: {
+        updateDiscoveryTools: {
+          id: store?.id,
+          discoveryTool: {
+            matchingBrandName: store?.discoveryTool?.matchingBrandName,
+            status: discoveryStatus,
+          },
+        },
+      },
+    });
+    dispatch({ type: 'UPDATE_DISCOVERYTOOLS', payload: { discoveryTool: { ...store?.discoveryTool, status: discoveryStatus } } });
+  };
+
   return (
     <Page headingText="Discovery" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <div className={styles.Discovery}>
@@ -36,6 +79,8 @@ const Discovery: NextPage = () => {
                   <ToggleButtonGroup
                     type="radio"
                     name="joinExisting"
+                    value={discoveryToolBtn}
+                    onChange={(e) => handleChange(e)}
                   >
                     <ToggleButton
                       variant="outline-success"

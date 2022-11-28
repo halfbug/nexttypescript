@@ -20,6 +20,10 @@ const initialState: IStore = {
     products: [], collections: [], productsArray: [], collectionsArray: [],
   },
   currencyCode: '',
+  discoveryTools: {
+    status: '',
+    matchingBrandName: {},
+  },
   // appTrialEnd: '',
 };
 
