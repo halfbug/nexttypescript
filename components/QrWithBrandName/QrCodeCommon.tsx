@@ -42,7 +42,7 @@ export default function QrCodeCommon() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    if (store.brandName) {
+    if (store && store.brandName) {
       const newState: IValues = {
         brandName: store?.brandName!,
         banner: store?.settings?.general?.imageUrl!,

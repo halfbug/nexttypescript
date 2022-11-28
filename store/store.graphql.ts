@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 const GET_STORE = gql`
-query StoreName  {
-  storeName  {
+query StoreName($shop: String!) {
+  storeName(shop: $shop) {
     id
   installationStep
   shop

@@ -7,31 +7,10 @@ import { StoreContextProvider } from 'store/store.context';
 import { useRouter } from 'next/router';
 import { GroupshopContextProvider } from 'store/groupshop.context';
 import { GroupshopPartnerContextProvider } from 'store/partner-groupshop.context';
-import { AuthContextProvider } from 'store/auth.context';
-import axios from 'axios';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log('🚀 ~ file: _app.tsx ~ line 13 ~ MyApp ~ pageProps', pageProps);
   const { pathname } = useRouter();
-  const apolloClient = useApollo(pageProps);
-
-  // const instance = axios.create({
-  //   headers: {
-  //     post: { // can be common or any other method
-  //       header1: 'value1',
-  //     },
-  //   },
-  // });
-
-  // // - or after instance has been created
-  // instance.defaults.headers.post.header1 = 'value';
-
-  // // - or before a request is made
-  // // using Interceptors
-  // instance.interceptors.request.use((config) => {
-  //   config.headers.post.header1 = 'value';
-  //   return config;
-  // });
+  const apolloClient = useApollo(pageProps.initialApolloState);
 
   if (['/deal/', '/partner-deal/', '/qr-code/'].includes(pathname)) {
     return (
@@ -52,16 +31,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   //   );
   // }
 
-  return (
-  // <ApolloProvider client={apolloClient}>
-    <AuthContextProvider>
+  if (pathname.includes('/qr-code/')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <StoreContextProvider>
+          <Component {...pageProps} />
+        </StoreContextProvider>
+      </ApolloProvider>
+    );
+  }
 
+  return (
+    <ApolloProvider client={apolloClient}>
       <StoreContextProvider>
         <Component {...pageProps} />
       </StoreContextProvider>
-    </AuthContextProvider>
-
-  // </ApolloProvider>
+    </ApolloProvider>
   );
 }
 export default MyApp;

@@ -8,10 +8,15 @@ import { StoreContext } from 'store/store.context';
 
 const useStore = () => {
   const { query: { shop } } = useRouter();
+  console.log('🚀 ~ file: useStore.ts ~ line 11 ~ useStore ~ shop', shop);
 
   const {
     loading, data, refetch,
-  } = useQuery(GET_STORE);
+  } = useQuery(GET_STORE, {
+
+    variables: { shop },
+    skip: !shop,
+  });
 
   const { store, dispatch } = useContext(StoreContext);
   console.log('🚀 ~ file: overview.tsx ~ line 28 ~ store', store);
