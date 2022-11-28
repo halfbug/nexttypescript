@@ -73,7 +73,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { AlertComponent, showError } = useAlert();
   const { stepModal } = useOwnerOnboarding();
   const {
-    SKU, memberProducts, hideSection, hideTopPicks,
+    SKU, memberProducts, hideSection, hideTopPicks, hidePopular,
   } = useSKU();
   const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
@@ -778,7 +778,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             previous purchases and recommendations.
           </p>
         </ProductGrid>
-        {SKU.length > 4 && (
+        {!hidePopular && SKU.length > 4 && (
           members?.length > 1 || refferalDealsProducts?.length ? (
             <ProductGrid
               xs={6}

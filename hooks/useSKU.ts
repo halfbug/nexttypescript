@@ -10,6 +10,9 @@ const useSKU = () => {
   const [memberProducts, setMemberProducts] = useState<any[]>([]);
   const [hideSection, setHideSection] = useState<boolean>(false);
   const [hideTopPicks, setHideTopPicks] = useState<boolean>(false);
+  const [hidePopular, setHidePopular] = useState<boolean>(false);
+
+  const { dealProducts } = gsctx;
 
   useEffect(() => {
     if (gsctx.store?.allInventoryProducts?.length) {
@@ -56,8 +59,22 @@ const useSKU = () => {
     }
   }, [ownerProducts]);
 
+  useEffect(() => {
+    if (dealProducts?.length) {
+      const temp = dealProducts.map((ele) => {
+        if (campaignProducts.includes(ele.productId)) {
+          return true;
+        }
+        return false;
+      }).reduce((curr, next) => curr === next);
+      setHidePopular(temp);
+    } else {
+      setHidePopular(false);
+    }
+  }, [dealProducts]);
+
   return {
-    SKU: allProducts, memberProducts, hideSection, campaignProducts, hideTopPicks,
+    SKU: allProducts, memberProducts, hideSection, campaignProducts, hideTopPicks, hidePopular,
   };
 };
 
