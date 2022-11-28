@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
   const apolloClient = useApollo(pageProps.initialApolloState);
 
-  if (['/deal/', '/partner-deal/', '/qr-code/'].includes(pathname)) {
+  if (pathname.includes('/deal/')) {
     return (
       <ApolloProvider client={apolloClient}>
         <GroupshopContextProvider>
@@ -21,15 +21,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ApolloProvider>
     );
   }
-  // if (pathname.includes('/partner-deal/')) {
-  //   return (
-  //     <ApolloProvider client={apolloClient}>
-  //       <GroupshopPartnerContextProvider>
-  //         <Component {...pageProps} />
-  //       </GroupshopPartnerContextProvider>
-  //     </ApolloProvider>
-  //   );
-  // }
+  if (pathname.includes('/partner-deal/')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <GroupshopPartnerContextProvider>
+          <Component {...pageProps} />
+        </GroupshopPartnerContextProvider>
+      </ApolloProvider>
+    );
+  }
 
   if (pathname.includes('/qr-code/')) {
     return (
