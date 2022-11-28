@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   //   return config;
   // });
 
-  if (pathname.includes('/deal/')) {
+  if (['/deal/', '/partner-deal/', '/qr-code/'].includes(pathname)) {
     return (
       <ApolloProvider client={apolloClient}>
         <GroupshopContextProvider>
@@ -42,15 +42,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ApolloProvider>
     );
   }
-  if (pathname.includes('/partner-deal/')) {
-    return (
-      <ApolloProvider client={apolloClient}>
-        <GroupshopPartnerContextProvider>
-          <Component {...pageProps} />
-        </GroupshopPartnerContextProvider>
-      </ApolloProvider>
-    );
-  }
+  // if (pathname.includes('/partner-deal/')) {
+  //   return (
+  //     <ApolloProvider client={apolloClient}>
+  //       <GroupshopPartnerContextProvider>
+  //         <Component {...pageProps} />
+  //       </GroupshopPartnerContextProvider>
+  //     </ApolloProvider>
+  //   );
+  // }
 
   return (
   // <ApolloProvider client={apolloClient}>
