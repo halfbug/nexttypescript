@@ -10,8 +10,9 @@ import Link from 'next/link';
 
 export default function BillingPartnerTools() {
   const {
-    totalActivePartner, partnerTier, partnerTierFee, partnerTierLimit,
+    totalActivePartner, partnerTier, partnerTierFee, partnerTierLimit, partnerInfo,
   } = useBilling();
+  console.log('🚀 ~ file: BillingPartnerTools.tsx ~ line 15 ~ BillingPartnerTools ~ partnerInfo', partnerInfo);
   const { store, dispatch } = React.useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
   return (
@@ -24,10 +25,16 @@ export default function BillingPartnerTools() {
           <Col lg={6} className={styles.billing__partnerTools__activeBox}>
             <div className={styles.billing__partnerTools__activeBox__leftBox}>
               <div className={styles.billing__partnerTools__activeBox__amount}>
-                $50/mo
+                $
+                {partnerInfo?.currentTierCharges}
+                /mo
               </div>
               <div className={styles.billing__partnerTools__activeBox__partner}>
-                up to 5 active partners
+                up to
+                {' '}
+                {partnerInfo?.currentTierLimit}
+                {' '}
+                active partners
               </div>
               <p className={styles.billing__partnerTools__activeBox__free}>
                 First 3 partners are free.
@@ -60,7 +67,7 @@ export default function BillingPartnerTools() {
             </h4>
             <div className={styles.billing__partnerTools__tierBox__amount}>
               $
-              {partnerTierFee}
+              {partnerInfo?.tierCharges}
               /mo
             </div>
             <div className={styles.billing__partnerTools__tierBox__upto}>

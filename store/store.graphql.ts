@@ -1867,6 +1867,9 @@ query GetActivePartnersCount($storeId: String!) {
     tierName
     tierCharges
     tierLimit
+    currentTierName
+    currentTierCharges
+    currentTierLimit
     }
 }
 `;

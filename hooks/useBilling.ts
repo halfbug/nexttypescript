@@ -10,7 +10,7 @@ import {
   GET_MONTHLY_GS, GET_MONTH_COUNT, GET_TOTAL_GS,
   GET_TOTAL_GS_FROM_BILLING, GET_TOTAL_GS_MONTHLY, GET_TOTAL_PARTNER_REVENUE, GET_TOTAL_REVENUE,
 } from 'store/store.graphql';
-import { MonthlyGSType } from 'types/billing';
+import { MonthlyGSType, partnerTierInfo } from 'types/billing';
 
 export default function useBilling() {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -24,6 +24,7 @@ export default function useBilling() {
   const [partnerTier, setpartnerTier] = useState(0);
   const [partnerTierFee, setpartnerTierFee] = useState(0);
   const [partnerTierLimit, setpartnerTierLimit] = useState('');
+  const [partnerInfo, setPartnerInfo] = useState<partnerTierInfo | undefined>(undefined);
   const [totalMonths, settotalMonths] = useState<undefined | number>(undefined);
   const [appTrial, setappTrial] = useState(true);
   const [appTrialDay, setappTrialDay] = useState(true);
@@ -68,6 +69,7 @@ export default function useBilling() {
       setpartnerTier(data5?.getActivePartnersCount.tierName);
       setpartnerTierFee(data5?.getActivePartnersCount.tierCharges);
       setpartnerTierLimit(data5?.getActivePartnersCount.tierLimit);
+      setPartnerInfo(data5?.getActivePartnersCount);
     }
   }, [data5]);
   useEffect(() => {
@@ -170,5 +172,6 @@ export default function useBilling() {
     partnerTier,
     partnerTierFee,
     partnerTierLimit,
+    partnerInfo,
   };
 }
