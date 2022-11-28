@@ -7,6 +7,7 @@ import { StoreContextProvider } from 'store/store.context';
 import { useRouter } from 'next/router';
 import { GroupshopContextProvider } from 'store/groupshop.context';
 import { GroupshopPartnerContextProvider } from 'store/partner-groupshop.context';
+import { AuthContextProvider } from 'store/auth.context';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -42,11 +43,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <AuthContextProvider>
       <StoreContextProvider>
         <Component {...pageProps} />
       </StoreContextProvider>
-    </ApolloProvider>
+    </AuthContextProvider>
   );
 }
 export default MyApp;
