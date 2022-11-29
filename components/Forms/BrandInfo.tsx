@@ -185,7 +185,7 @@ export default function BrandInfo() {
           {/* <Button>Previous</Button> */}
         </Col>
         <Col lg={4} className="text-center d-flex align-items-center ">
-          <span className="text-muted">1/4</span>
+          <span className="text-muted">1/5</span>
         </Col>
         <Col lg={4} className="d-flex justify-content-end ">
           <Button type="submit" className={styles.welcome_btn_next}> Next </Button>

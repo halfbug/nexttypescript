@@ -333,14 +333,14 @@ export default function Settings({ isDB }: IProps) {
             <Button
               className={styles1.rewards_btn_pre}
               style={Bstyle}
-              onClick={() => setParams({ ins: 3 })}
+              onClick={() => setParams({ ins: '3a' })}
             >
               Previous
 
             </Button>
           </Col>
           <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
-            <span className="text-muted">4/4</span>
+            <span className="text-muted">5/5</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
             <Button style={Bstyle} type="submit"> Next </Button>

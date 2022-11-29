@@ -16,7 +16,7 @@ const Step4 = ({ show }: IStep4Props) => (
   <Dialogue show={show}>
     {/* <div className={styles.WelcomeModal}> */}
     <Container className={styles.ob_settings}>
-      <ProgressBar progress="80" />
+      <ProgressBar progress="84" />
       <Row className="my-4 d-flex align-items-center">
         <LeftPanel
           heading="Make it look right"

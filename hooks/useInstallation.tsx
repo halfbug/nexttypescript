@@ -5,6 +5,7 @@ import Step1 from 'components/Onboarding/Step1/step1';
 import Step2 from 'components/Onboarding/Step2/step2';
 import Screen1 from 'components/Onboarding/Step2a/Screen1';
 import Step3 from 'components/Onboarding/Step3/step3';
+import Step3a from 'components/Onboarding/Step3a/step3a';
 import Step4 from 'components/Onboarding/Step4/step4';
 import Step5 from 'components/Onboarding/Step5/step5';
 import { StoreContext } from 'store/store.context';
@@ -34,6 +35,10 @@ const useInstallation = (ins: string | string[] | undefined) => {
       case '3':
         return (
           <Step3 show />
+        );
+      case '3a':
+        return (
+          <Step3a show />
         );
       case '4':
         return (

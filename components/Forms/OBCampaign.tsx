@@ -334,7 +334,7 @@ export default function OBCampaign() {
           </Button>
         </Col>
         <Col lg={4} className="text-center d-flex align-items-center justify-content-center">
-          <span className="text-muted">2/4</span>
+          <span className="text-muted">2/5</span>
         </Col>
         <Col lg={4} className="d-flex justify-content-end">
           <Button style={Bstyle} type="submit"> Next </Button>

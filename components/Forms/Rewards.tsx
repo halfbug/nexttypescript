@@ -142,7 +142,7 @@ export default function Rewards() {
         });
       }
       dispatch({ type: 'UPDATE_CAMPAIGN_REWARDS', payload: { rewards: { rewards, selectedTarget: newPayload } } });
-      setParams({ ins: 4 });
+      setParams({ ins: '3a' });
     },
   });
 
@@ -427,7 +427,7 @@ export default function Rewards() {
             </Button>
           </Col>
           <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
-            <span className="text-muted">3/4</span>
+            <span className="text-muted">3/5</span>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
             <Button style={Bstyle} type="submit"> Next </Button>
