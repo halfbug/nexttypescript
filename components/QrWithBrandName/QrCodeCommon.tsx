@@ -90,7 +90,7 @@ export default function QrCodeCommon() {
                 )}
                 { !ShowAuth
                     && (
-                    <div className={styles.QRContainer__Logo}>
+                    <div className={styles.QRContainer__desktopLogo}>
                       {state.logoImage !== '' && (
                       <Link
                         href={{
@@ -110,7 +110,7 @@ export default function QrCodeCommon() {
                 <div style={{ backgroundImage: `url(${state.banner})` }} className={[styles.QRContainer__mobileImage, 'justify-content-center align-items-center'].join(' ')}>
                   <QrRight />
                 </div>
-                <div className={styles.QRContainer__Logo}>
+                <div className={styles.QRContainer__desktopLogo}>
                   {ShowAuth && <HeadLogo />}
                 </div>
                 { ShowWelcome && (
