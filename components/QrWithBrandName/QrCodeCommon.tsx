@@ -54,7 +54,7 @@ export default function QrCodeCommon() {
   }, [store]);
 
   return (
-    <div className={styles.QRContainer__content__container}>
+    <div className={styles.QRContainer__common__container}>
       <div className={styles.QRContainer}>
         <Container fluid>
           <Row>
@@ -62,7 +62,7 @@ export default function QrCodeCommon() {
               <div>
                 { ShowAuth
                 && (
-                  <div className="d-flex align-items-center">
+                  <div className="d-flex align-items-center my-4">
                     <div className={styles.QRContainer__mobileLogo}>
                       <HeadLogo />
                     </div>
@@ -90,7 +90,7 @@ export default function QrCodeCommon() {
                 )}
                 { !ShowAuth
                     && (
-                    <div className={styles.QRContainer__desktopLogo}>
+                    <div className={styles.QRContainer__Logo}>
                       {state.logoImage !== '' && (
                       <Link
                         href={{

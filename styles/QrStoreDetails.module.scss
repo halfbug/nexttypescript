@@ -66,9 +66,11 @@
       }
     }
     @media (max-width: 767px) {
-      text-align: center;
-      padding-bottom: 30px;
-      margin-top: 24px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      height: 100px;
     }
   }
   &__desktopLogo {
@@ -86,9 +88,11 @@
     right: 0;
     text-align: center;
     @include media-breakpoint-down(md) {
-      display: block;
+      display: flex;
       margin: auto;
       width: fit-content;
+      height: 100px;
+      align-items: center;
     }
     
   }
@@ -193,7 +197,17 @@
     display: flex;
   }
 
-  &__content__container {
+  &__common__container {
+    @media(max-width: 1024px){
+      padding: 30px 0px 0px 0px;
+    }
+
+    @media (max-width:991px) {
+        padding-top: 0;
+    }
+  }
+
+  &__content__container, &__common__container {
     
 
     @media(max-width: 1024px){
@@ -201,7 +215,7 @@
     }
 
     @media (max-width:991px) {
-        padding-top: 10px !important;
+        padding-top: 10px;
     }
 
     &__brands {
