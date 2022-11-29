@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
-import { useQuery } from '@apollo/client';
-import { GET_GROUPSHOP } from 'store/store.graphql';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { GET_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
@@ -24,7 +24,7 @@ import {
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { GroupshopContext, gsInit } from 'store/groupshop.context';
-import { IGroupshop, Member } from 'types/groupshop';
+import { IGroupshop, MatchingGS, Member } from 'types/groupshop';
 import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -67,6 +67,7 @@ import useSKU from 'hooks/useSKU';
 import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
 import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
+import { min } from 'moment';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -113,6 +114,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
+  const [matchingStoreIds, setMatchingStoreIds] = useState([]);
   const { urlForActivation, loaderInvite } = useExpired();
 
   useEffect(() => {
@@ -189,7 +191,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   console.log('🚀 ~ file: [...code].tsx ~ line 171 ~ shoppedBy', shoppedBy);
   const {
-    findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray, findInArray2,
+    findInArray,
+    filterArray,
+    getSignedUrlS3,
+    getKeyFromS3URL,
+    uniqueArray,
+    findInArray2,
+    getSortingGS,
   } = useUtilityFunction();
   const { popularShuffled } = usePopular(popularProducts);
   const { topPicks } = useTopPicks();
@@ -205,6 +213,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     setbannerDiscount(getDiscounts());
     // fillAddedPrdInCTX();
   }, [gsctx, gsctx.dealProducts]);
+
+  const [getMatchingGS] = useLazyQuery<MatchingGS>(GET_MATCHING_GS, {
+    fetchPolicy: 'network-only',
+    onCompleted: async (matchingAllStore: any) => {
+      if (matchingAllStore?.matchingGS?.length > 0 && matchingStoreIds?.length > 0) {
+        const matchedGS = await getSortingGS(matchingAllStore?.matchingGS, matchingStoreIds);
+        console.log('🚀🚀🚀 matchedGS', matchedGS);
+      }
+    },
+  });
 
   useEffect(() => {
     // show ob products with owner products. dont show ob prds with other customer
@@ -259,6 +277,20 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       setshowCart(true);
     }
   }, [gsctx.cart]);
+
+  useEffect(() => {
+    if (gsctx?.store?.discoveryTool && gsctx?.store?.discoveryTool?.status === 'Active' && gsctx?.store?.discoveryTool?.matchingBrandName) {
+      const machingStoreId: any = gsctx?.store?.discoveryTool?.matchingBrandName?.map(
+        (el: any) => el.id,
+      );
+      setMatchingStoreIds(machingStoreId);
+      getMatchingGS({
+        variables: {
+          storeId: machingStoreId,
+        },
+      });
+    }
+  }, [gsctx?.store?.discoveryTool]);
 
   console.log('🚀 ~ file: [...code] line 247 ~ leftOverProducts', leftOverProducts()?.length);
   console.log('🚀 ~ file: [...code] line 244 ~ member', member);
@@ -456,7 +488,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 brandname={brandName ?? ''}
                 shareUrl={shortActivateURL ?? activateURL ?? ''}
                 products={allProducts?.slice(0, 3) ?? []}
-                // maxPercent={maxPercent}
+              // maxPercent={maxPercent}
               />
             ) : (
               <InfoBox mes="How does this work?" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
@@ -700,7 +732,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   brandname={brandName ?? ''}
                   shareUrl={shortActivateURL ?? activateURL ?? ''}
                   products={allProducts?.slice(0, 3) ?? []}
-                  // maxPercent={maxPercent}
+                // maxPercent={maxPercent}
                 />
               ) : (
                 <InfoBox mes="How it works" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
@@ -806,28 +838,28 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           ) : (
             <>
               {!hideTopPicks && (
-              <ProductGrid
-                xs={6}
-                sm={6}
-                md={6}
-                lg={4}
-                xl={3}
-                products={
-                ((SKU.length >= 2 && SKU.length <= 4)
-                  ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
-                  ? topPicks?.slice(0, 3)
-                  : topPicks?.slice(0, 4)
-              }
-                maxrows={1}
-                addProducts={handleAddProduct}
-                handleDetail={(prd) => setsProduct(prd)}
-                id="toppicks"
-                isModalForMobile={isModalForMobile}
-                urlForActivation={urlForActivation}
-                skuCount={SKU.length}
-              >
-                <h2>Top Picks</h2>
-              </ProductGrid>
+                <ProductGrid
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  products={
+                    ((SKU.length >= 2 && SKU.length <= 4)
+                      ? uniqueArray(memberProducts).length > 3 : shoppedBy && shoppedBy.length > 3)
+                      ? topPicks?.slice(0, 3)
+                      : topPicks?.slice(0, 4)
+                  }
+                  maxrows={1}
+                  addProducts={handleAddProduct}
+                  handleDetail={(prd) => setsProduct(prd)}
+                  id="toppicks"
+                  isModalForMobile={isModalForMobile}
+                  urlForActivation={urlForActivation}
+                  skuCount={SKU.length}
+                >
+                  <h2>Top Picks</h2>
+                </ProductGrid>
               )}
             </>
           ))}

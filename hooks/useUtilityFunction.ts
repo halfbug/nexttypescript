@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable dot-notation */
 /* eslint-disable no-param-reassign */
@@ -9,7 +11,7 @@ import { AuthContext } from 'store/auth.context';
 import { IProduct } from 'types/store';
 
 export default function useUtilityFunction() {
-//   const router = useRouter();
+  //   const router = useRouter();
 
   //   const { pathname, query: params } = router;
   const { token } = useContext(AuthContext);
@@ -40,7 +42,7 @@ export default function useUtilityFunction() {
   // retrieve common element
   const findInArray = (
     mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
-  ):any => mainArr?.map((item: any) => {
+  ): any => mainArr?.map((item: any) => {
     // console.log({ item });
     const searched = arrayfield ? item?.[arrayfield] : item;
 
@@ -54,7 +56,7 @@ export default function useUtilityFunction() {
   // retrieve common element from 1st array
   const findInArray2 = (
     mainArr: any[], searchArr: any[], arrayfield: any, searchField: string | number,
-  ):any => mainArr?.map((item: any) => {
+  ): any => mainArr?.map((item: any) => {
     // console.log({ item });
     const searched = arrayfield ? item?.[arrayfield] : item;
     console.log('🚀 ~ file: useUtilityFunction.ts ~ line 56 ~ ):any=>mainArr?.map ~ searched', searched);
@@ -69,7 +71,7 @@ export default function useUtilityFunction() {
 
   const filterArray = (
     mainArr: any[], filterArr: any[], arrayfield: any, filterField: string | number,
-  ):any => mainArr?.filter((item: any) => {
+  ): any => mainArr?.filter((item: any) => {
     // console.log({ item });
     // const searched = arrayfield ? item?.[arrayfield] : item;
 
@@ -85,7 +87,7 @@ export default function useUtilityFunction() {
   // eslint-disable-next-line max-len
   const findIndexInArray = useCallback((arr, searchField, searchValue) => arr.findIndex((item: any) => item[searchField] === searchValue), []);
 
-  const convertNumToMonth = (num:number) => {
+  const convertNumToMonth = (num: number) => {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return monthNames[num];
   };
@@ -226,8 +228,8 @@ export default function useUtilityFunction() {
     return result;
   });
 
-  const getDatesBetween = (startDate:any, endDate:any) => {
-    const dates:string[] = [];
+  const getDatesBetween = (startDate: any, endDate: any) => {
+    const dates: string[] = [];
     // Strip hours minutes seconds etc.
     const year = startDate.getFullYear();
     const month = (`0${startDate.getMonth() + 1}`).slice(-2);
@@ -240,7 +242,7 @@ export default function useUtilityFunction() {
     return dates;
   };
 
-  const getMonthsBetween = (startDate:any, endDate:any) => {
+  const getMonthsBetween = (startDate: any, endDate: any) => {
     const startYear = startDate.getFullYear();
     const endYear = endDate.getFullYear();
     const dates = [];
@@ -257,7 +259,7 @@ export default function useUtilityFunction() {
     return dates;
   };
 
-  const getYearsBetween = (startDate:any, endDate:any) => {
+  const getYearsBetween = (startDate: any, endDate: any) => {
     const startYear = startDate.getFullYear();
     const endYear = endDate.getFullYear();
     const dates = [];
@@ -270,6 +272,79 @@ export default function useUtilityFunction() {
     const newNum = Math.abs(+num) > 999 ? `${Math.sign(+num) * (+(Math.abs(+num) / 1000).toFixed(1))}k` : formatNumber(Math.sign(+num) * Math.abs(+num));
     return newNum;
   });
+
+  const getSortingGS = (matchingGS: any, matchingStoreIds: any) => {
+    const showingGS: any = [];
+    const matchingGs: any = JSON.parse(JSON.stringify(matchingGS));
+    if (matchingGs.length && matchingStoreIds.length) {
+      matchingGs.sort((a: any, b: any) => a.numMembers - b.numMembers);
+      matchingStoreIds.forEach((ele: any) => {
+        showingGS.push({ storeId: ele, groupshops: [] });
+      });
+      matchingGs?.forEach((ele: any) => {
+        const tempEle: any = ele.dealProducts.map((item: any) => ({
+          ...item,
+          productData: ele.InventoryProducts.find(
+            (InvProd: any) => InvProd.id === item.productId,
+          ),
+        }));
+        ele.dealProducts = tempEle;
+        showingGS.forEach((item: any) => item.storeId === ele.storeId
+          && item.groupshops.push(ele));
+      });
+      showingGS.forEach((item: any) => {
+        if (item.groupshops.length) {
+          const minVal: any = Math.min(...item.groupshops.map((data: any) => data.numMembers));
+          const minRandom: any = item.groupshops.filter((data: any) => data.numMembers === minVal);
+          const random: any = getRandomNumber(minRandom.length);
+          item.groupshops = item.groupshops[random];
+        } else {
+          item.groupshops = {};
+        }
+      });
+      const temp: any[] = [];
+      if (showingGS.length > 0) {
+        const tempGS:any = JSON.parse(JSON.stringify(showingGS));
+        tempGS.forEach((el:any) => {
+          const tempProd:any = [];
+          const tempIds:any = [];
+          el.groupshops?.popularProducts?.forEach((elem:any) => {
+            if (tempIds.length < 4) {
+              tempProd.push(elem); tempIds.push(elem.id);
+            }
+          });
+          if (tempIds.length < 4) {
+            el.groupshops?.dealProducts?.forEach((elem:any) => {
+              if (!tempIds.includes(elem.productId) && tempIds.length < 4) {
+                tempProd.push(elem.productData); tempIds.push(elem.productData.id);
+              }
+            });
+          }
+          if (tempIds.length < 4) {
+            el.groupshops?.bestSeller?.forEach((elem:any) => {
+              if (!tempIds.includes(elem.id) && tempIds.length < 4) {
+                tempProd.push(elem); tempIds.push(elem.id);
+              }
+            });
+          }
+          if (el?.groupshops?.storeId) {
+            temp.push({
+              logoImage: el?.groupshops?.store?.logoImage,
+              brandName: el?.groupshops?.store?.brandName,
+              customerName: el?.groupshops?.members,
+              discount: el?.groupshops?.discountCode?.percentage,
+              storeId: el.storeId,
+              products: tempProd,
+            });
+          }
+        });
+      }
+      return temp;
+    }
+    return false;
+  };
+
+  const getRandomNumber = (num: any) => Math.floor(Math.random() * num);
 
   return {
     cleanTypename,
@@ -293,5 +368,7 @@ export default function useUtilityFunction() {
     getMonthsBetween,
     getYearsBetween,
     graphFormatNumber,
+    getSortingGS,
+    getRandomNumber,
   };
 }

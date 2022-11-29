@@ -199,3 +199,30 @@ export type IPGroupshop = IGroupshop & InfluencerGroupshop;
 export type CustomPropsType = {
   [key: string]: any;
 };
+
+export type MatchingGS = {
+  id: string;
+  members: Member[];
+  numMembers?: number;
+  campaignId: string;
+  storeId: string;
+  totalProducts: number;
+  dealProducts?: DealProduct[];
+  url: string;
+  shortUrl?: string;
+  exipredShortLink?: string;
+  createdAt: Date;
+  expiredAt: Date;
+  discountCode?: DiscountCode;
+  milestones: Milestone[];
+  store?: Store;
+  popularProducts?: Product[];
+  campaign?: Campaign;
+  allProducts?: Product[];
+  bestSeller?: Product[];
+  obSettings?: ObSettings;
+  ownerDeals?: Product[];
+  reffDeals?: Product[];
+  ownerDealsProducts?: DealProduct[];
+  refferalDealsProducts?: DealProduct[];
+};

@@ -38,6 +38,10 @@ export const gsInit: IGroupshop = {
         snapchatPixels: '',
       },
     },
+    discoveryTool: {
+      status: '',
+      matchingBrandName: [],
+    },
   },
   cart: undefined,
   campaign: {
