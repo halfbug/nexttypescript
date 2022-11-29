@@ -241,6 +241,14 @@ export interface IBilling {
   nooforder: number;
 }
 
+export interface IRetailTools {
+  updateChannelInput?: object;
+  channelname: string;
+  slugName: string;
+  minDiscount: any;
+  maxDiscount: any;
+  commission: any;
+}
 export interface DiscoveryTools {
   status?: string,
   matchingBrandName?: MatchingBrandName[],

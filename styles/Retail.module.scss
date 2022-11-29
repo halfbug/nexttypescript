@@ -125,6 +125,19 @@
             &__delete {
                 @extend .retail__customChannels__channelInfo__lineBtn;
                 margin-top: 20px;
+                background: transparent;
+                border: none;
+                &:focus {
+                    color: #000000;
+                    background: transparent;
+                    border: none;
+                }
+                &:hover {
+                    color: #000000;
+                    background: transparent;
+                    border: none;
+
+                 }
             }
             &__qr {
                 font-family: 'DM Sans';

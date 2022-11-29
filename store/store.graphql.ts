@@ -1874,6 +1874,58 @@ query GetActivePartnersCount($storeId: String!) {
 }
 `;
 
+const CREATE_CHANNEL_DB = gql`
+  mutation createChannel($createChannelInput: CreateChannelInput!) {
+    createChannel(createChannelInput: $createChannelInput) {
+    id
+    storeId
+    name
+    slugName    
+    rewards{
+      baseline
+      average
+      maximum
+      commission
+    } 
+    isActive
+    }
+  }
+`;
+
+const GET_ALL_RETAIL_TOOLS = gql`
+query getChannels($storeId: String!) {
+  getChannels(storeId: $storeId) {
+    id         
+    name
+    slugName
+    isActive      
+    rewards {
+      baseline
+      maximum
+      commission
+    }  
+  }
+}
+`;
+
+const UPDATE_CHANNEL = gql`
+  mutation updateChannel(
+    $updateChannelInput: UpdateChannelInput!
+    ) {
+    updateChannel(updateChannelInput: $updateChannelInput) {
+    id    
+    name
+    slugName
+    rewards {
+      commission
+      baseline
+      average
+      maximum
+    }
+    }
+  }
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -1893,6 +1945,6 @@ export {
   GET_ACTIVE_GROUPSHOPS_BY_EMAIL, RETENTION_GROUPSHOP_PROGRESS, GET_MOST_VIRAL_PRODUCTS,
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
-  GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
-  GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, GET_ACTIVE_PARTNER_COUNT,
+  GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, CREATE_CHANNEL_DB, GET_ALL_RETAIL_TOOLS,
+  UPDATE_CHANNEL, GET_ACTIVE_PARTNER_COUNT, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
 };
