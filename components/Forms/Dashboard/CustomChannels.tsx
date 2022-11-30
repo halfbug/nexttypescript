@@ -9,6 +9,9 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { GET_ALL_RETAIL_TOOLS } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
+import useDimensions from 'hooks/useDimentions';
+import usePagination from 'hooks/usePagination';
+import Pagination from 'react-bootstrap/Pagination';
 import AddChannelBox from 'components/Groupshop/AddChannelBox/AddChannelBox';
 import UpdateChannel from './UpdateChannel';
 
@@ -17,9 +20,10 @@ const CustomChannels = () => {
   const [refreshChannelList, setRefreshChannelList] = React.useState(false);
   const [showAddChannelPopup, setShowAddChannelPopup] = useState<boolean>(false);
   const [channelInfoData, setChannelInfoData] = useState<any>();
-  const [channelList, setChannelList] = useState<[]>([]);
+  const [channelList, setChannelList] = useState<any>([]);
 
   const { store, dispatch } = useContext(StoreContext);
+  const [ref, dimensions] = useDimensions();
   const {
     loading, data, refetch,
   } = useQuery(GET_ALL_RETAIL_TOOLS, {
@@ -31,6 +35,19 @@ const CustomChannels = () => {
       setChannelList(data.getChannels);
     }
   }, [data]);
+
+  const {
+    screens, breakPoint, pageSize,
+    totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
+  } = usePagination({
+    dimensions,
+    maxrows: 7,
+    screens: {
+      xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12,
+    },
+    items: channelList,
+    siblingCount: 4,
+  });
 
   useEffect(() => {
     if (refreshChannelList) {
@@ -65,8 +82,8 @@ const CustomChannels = () => {
             Active Channels
           </h5>
         </Col>
-        <Col lg={8} className="px-2">
-          {channelList.map((channel:any) => (
+        <Col ref={ref} lg={8} className="px-2">
+          {renderItems !== undefined && renderItems.map((channel:any) => (
             <>
               <div className={channel.isActive
                 ? styles.retail__customChannels__channel__active
@@ -81,6 +98,45 @@ const CustomChannels = () => {
               </div>
             </>
           ))}
+          {totalPages > 1 && (
+          <Pagination className={styles.groupshop_pagination}>
+            <Pagination.Prev
+              className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
+              onClick={() => {
+                setCurrentPage(
+                  (currentPage > 1) ? currentPage - 1 : currentPage,
+                );
+              }}
+            />
+
+            {getPageNumbers().map((n, index) => (
+              <Pagination.Item
+                active={currentPage === n}
+                onClick={() => {
+                  setCurrentPage(n);
+                }}
+                className={currentPage === n
+                  ? styles.groupshop_pagination_activeItem
+                  : styles.groupshop_pagination_item}
+              >
+                {n}
+              </Pagination.Item>
+            ))}
+
+            <Pagination.Next
+              className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
+              onClick={() => {
+                setCurrentPage(
+                  (currentPage >= 1 && currentPage < totalPages)
+                    ? currentPage + 1
+                    : currentPage,
+                );
+              }}
+            />
+
+          </Pagination>
+
+          )}
           <div className={styles.retail__customChannels__addBtn}>
             <WhiteButton onClick={() => { setShowAddChannelPopup(true); }}>
               Add Channel
