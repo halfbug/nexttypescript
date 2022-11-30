@@ -4,7 +4,7 @@ import {
   Container, Row, Col,
 } from 'react-bootstrap';
 import styles from 'styles/Step3.module.scss';
-import LeftPanel from '../LeftPanel/LeftPanel1';
+import LeftPanel from '../LeftPanel/LeftPanel';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import DiscoveryOnBoarding from './DiscoveryOnBoarding';
 

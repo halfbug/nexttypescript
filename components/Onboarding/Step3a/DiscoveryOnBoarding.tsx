@@ -81,18 +81,17 @@ const DiscoveryOnBoarding = () => {
                   <Row>
                     <Col lg={12}>
                       <div>
-                        <h4>Activate Discovery Tools</h4>
+                        <h4 className="styles.Discovery_activateDiscoveryTool">Activate Discovery Tools</h4>
                         <span>
                           When this is on, we’ll feature your products on the Groupshop
                           pages of other
-                          <br />
                           {' '}
                           partner brands with
                           similar audience demographics.
                         </span>
-                        <Row className="mt-2">
+                        <Row className="my-4">
 
-                          <Col xs={12} md={6} className="text-right">
+                          <Col xs={12} md={6} className="text-right pb-4">
                             <ToggleButtonGroup
                               type="radio"
                               name="status"
@@ -105,7 +104,7 @@ const DiscoveryOnBoarding = () => {
                                 onChange={handleChange}
                                 value="Active"
                               >
-                                <Check2Circle className="fs-4" />
+                                <Check2Circle className="fs-4 " />
                                 {' '}
                                 Enable
                               </ToggleButton>
@@ -117,7 +116,7 @@ const DiscoveryOnBoarding = () => {
                                 onChange={handleChange}
                                 value="InActive"
                               >
-                                <XCircle className="fs-5" />
+                                <XCircle className="fs-5 " />
                                 {' '}
                                 Disable
                               </ToggleButton>
@@ -125,6 +124,7 @@ const DiscoveryOnBoarding = () => {
                             </ToggleButtonGroup>
                           </Col>
                         </Row>
+                        <Row className="my-5 visibilty-hidden" />
                       </div>
                       <div style={{ color: 'red', marginTop: '10px' }}>
                         {errors.status}
@@ -146,7 +146,7 @@ const DiscoveryOnBoarding = () => {
               </Button>
             </Col>
             <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
-              <span className="text-muted">4/5</span>
+              {/* <span className="text-muted">4/5</span> */}
             </Col>
             <Col xs={4} className="d-flex justify-content-end">
               <Button style={{ width: '143px' }} type="submit"> Next </Button>
