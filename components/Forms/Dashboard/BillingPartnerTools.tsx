@@ -45,6 +45,7 @@ export default function BillingPartnerTools() {
                 You currently have
                 {' '}
                 <span>
+                  {' '}
                   {totalActivePartner}
                   {' '}
                   active
