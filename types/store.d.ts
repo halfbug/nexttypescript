@@ -23,6 +23,7 @@ export interface IStore {
   appTrialEnd?: Date | undefined;
   allInventoryProducts?: IProduct[];
   discoveryTool?: DiscoveryTools;
+  tier?: any;
 }
 export interface ICampaign {
   isActive?: boolean;
@@ -260,3 +261,24 @@ export interface MatchingBrandName {
 }
 
 export type IUser ={ firstName: string; lastName: string;}
+
+export type partnerTierInfo = {
+  count?: number;
+  tierName?: any;
+  tierCharges?: number;
+  tierLimit?: string;
+  currentTierName?: string;
+  currentTierCharges?: number;
+  currentTierLimit?: string;
+  switchCount?: number[];
+  allTiersInfo?: allTierInfo[];
+
+}
+export type allTierInfo = {
+  index?: number;
+  name?: any;
+  fee?: number;
+  limit?: string;
+  switchStartCount?: number;
+  staticName?: string;
+}

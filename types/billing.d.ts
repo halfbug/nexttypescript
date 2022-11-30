@@ -19,13 +19,3 @@ export type MonthlyGSType ={
     count: number;
 
   }
-export type partnerTierInfo = {
-  count?: number;
-  tierName?: string;
-  tierCharges?: number;
-  tierLimit?: string;
-  currentTierName?: string;
-  currentTierCharges?: number;
-  currentTierLimit?: string;
-
-}

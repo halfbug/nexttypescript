@@ -93,6 +93,7 @@ query StoreName($shop: String!) {
     addableProducts
 
   }
+  tier
   }
 }
 `;
@@ -1860,9 +1861,9 @@ const DISCOVERYTOOLS_UPDATE = gql`
   }
 }
 `;
-const GET_ACTIVE_PARTNER_COUNT = gql`
-query GetActivePartnersCount($storeId: String!) {
-  getActivePartnersCount(storeId: $storeId) {
+const GET_PARTNER_INFO = gql`
+query GetAllPartnerTiersInfo($storeId: String!) {
+  getAllPartnerTiersInfo(storeId: $storeId) {
     count
     tierName
     tierCharges
@@ -1870,6 +1871,16 @@ query GetActivePartnersCount($storeId: String!) {
     currentTierName
     currentTierCharges
     currentTierLimit
+    allTiersInfo {
+      staticName
+      index
+      name
+      fee
+      limit
+      switchStartCount
+    }
+    switchCount
+
     }
 }
 `;
@@ -1946,5 +1957,5 @@ export {
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
   GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, CREATE_CHANNEL_DB, GET_ALL_RETAIL_TOOLS,
-  UPDATE_CHANNEL, GET_ACTIVE_PARTNER_COUNT, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
+  UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
 };

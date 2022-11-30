@@ -32,6 +32,9 @@ const PartnerTools: NextPage = () => {
     }
     setShowHint(true);
   }, [data]);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <Page headingText="Partner Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>

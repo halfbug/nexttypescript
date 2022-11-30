@@ -7,11 +7,10 @@ import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import useBilling from 'hooks/useBilling';
 import { StoreContext } from 'store/store.context';
 import Link from 'next/link';
+import usePartner from 'hooks/usePartner';
 
 export default function BillingPartnerTools() {
-  const {
-    totalActivePartner, partnerTier, partnerTierFee, partnerTierLimit, partnerInfo,
-  } = useBilling();
+  const { partnerInfo } = usePartner();
   console.log('🚀 ~ file: BillingPartnerTools.tsx ~ line 15 ~ BillingPartnerTools ~ partnerInfo', partnerInfo);
   const { store, dispatch } = React.useContext(StoreContext);
   const shopName: string[] | undefined = store?.shop?.split('.', 1);
@@ -45,8 +44,7 @@ export default function BillingPartnerTools() {
                 You currently have
                 {' '}
                 <span>
-                  {' '}
-                  {totalActivePartner}
+                  {partnerInfo?.count}
                   {' '}
                   active
                 </span>
@@ -74,7 +72,7 @@ export default function BillingPartnerTools() {
             <div className={styles.billing__partnerTools__tierBox__upto}>
               Up to
               {' '}
-              {partnerTierLimit}
+              {partnerInfo?.tierLimit}
               {' '}
               partners
             </div>

@@ -14,6 +14,8 @@ import { CREATE_PARTNER_DB, EXIT_PARTNER_GROUPSHOP } from 'store/store.graphql';
 import UploadLogo from 'assets/images/upload.svg';
 import useAlert from 'hooks/useAlert';
 import AddMultiplePartnerBox from 'components/Groupshop/AddPartnerBox/AddMultiplePartnerBox';
+import usePartner from 'hooks/usePartner';
+import TierSwitchModel from './Model/TierSwitchModel';
 
 interface ActiveAffiliateProps {
   handleAfterSubmit: any;
@@ -42,11 +44,38 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
       showError('Campaign is being created, Please try after sometime!');
     },
   });
+
   const { store, dispatch } = React.useContext(StoreContext);
   const storeId = store.id;
   const handleForm = (field: string, value: string) => {
     setFieldValue(field, value);
   };
+  const {
+    tierSwitch, currentTier,
+  } = usePartner();
+  console.log('🚀 ~ file: NewPartnerForm.tsx:54 ~ NewPartnerForm ~ currentTier', currentTier);
+  // for tier switch show modal
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => {
+    setShow(false);
+    handleForm('email', '');
+  };
+  const handleShow = () => setShow(true);
+  const handleCheckTier = () => {
+    // 1. check if tier is switched
+    // 2. if yes show modal if no create partner
+    const activePartner = partnerList?.filter((item) => item.isActive === true);
+    const len = (activePartner.length ?? 0) + 1;
+    console.log('🚀 ~ file: NewPartnerForm.tsx ~ line 82 ~ handleCheckTier ~ len', len);
+    if (values.email && tierSwitch.includes(len) && currentTier
+    && len > (currentTier?.switchStartCount ?? 0)) {
+      // && len > current tier start count
+      setShow(true);
+    } else {
+      handleSubmit();
+    }
+  };
+  const { partnerInfo } = usePartner();
 
   const duplicateEmailCheck = (values: string | undefined) => {
     if (values !== '' && values !== undefined) {
@@ -109,6 +138,7 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
         const newAverage = ((+minDiscount! + +maxDiscount!) / 2);
         const newAverageVal = `${newAverage}%`;
         const partnerCommissionVal = `${partnerCommission}%`;
+        setShow(false);
         const partnerObj = await createPartner({
           variables: {
             createPartnersInput: {
@@ -153,6 +183,14 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
   return (
     <>
       <Form noValidate onSubmit={handleSubmit}>
+        <TierSwitchModel
+          show={show}
+          handleClose={handleClose}
+          handleShow={handleShow}
+          handleToggle={() => handleSubmit()}
+          id={'tierswitch' ?? ''}
+          partnerInfo={partnerInfo}
+        />
         <Row>
           <Col xxl={8} xl={8} lg={8} md={8} xs={12}>
             <section className={styles.partner__box_1}>
@@ -186,10 +224,12 @@ export default function NewPartnerForm({ handleAfterSubmit, partnerList } : Acti
                     <Col>
                       {loadingSubmit ? <Spinner animation="border" /> : (
                         <Button
-                          type="submit"
+                          // type="submit"
                           variant="outline-dark"
                           className={styles.partner__dark_btn}
                           value={1}
+                          // if tier switch count is hit show modal else create instantly
+                          onClick={() => handleCheckTier()}
                         >
                           <Check2Circle className="fs-5 me-1" />
                           {' '}
