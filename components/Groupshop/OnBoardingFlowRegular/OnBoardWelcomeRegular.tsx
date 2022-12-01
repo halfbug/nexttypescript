@@ -72,7 +72,10 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
       <div onClick={handleShow} onKeyDown={handleShow} role="button" tabIndex={0}>ON-BOARDING FLOW - REGULAR/DEFAULT</div>
       <Modal
         show={show}
-        onHide={handleClose}
+        onHide={() => {
+          moveForward();
+          handleClose();
+        }}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         // backdrop="static"
