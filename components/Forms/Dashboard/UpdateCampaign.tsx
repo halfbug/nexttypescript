@@ -203,7 +203,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
+      <Screen1 editCampaign show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
       <Row className="pt-4">
         <Col lg={7} className="gx-5">
           <Row>

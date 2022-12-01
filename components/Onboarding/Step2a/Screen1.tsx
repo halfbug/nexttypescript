@@ -22,6 +22,7 @@ interface IScreen1Props {
   show: boolean,
   selectedProducts?: IProduct[];
   selectedCollections?: ICollection[];
+  editCampaign?: boolean;
 }
 
 type SelectedType = {
@@ -30,7 +31,7 @@ type SelectedType = {
 }
 
 const Screen1 = ({
-  show, selectedProducts, selectedCollections,
+  show, selectedProducts, selectedCollections, editCampaign = false,
 }: IScreen1Props) => {
   const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
@@ -395,7 +396,11 @@ const Screen1 = ({
               className={styles.product_btnClose}
               onClick={() => {
                 setview('List');
-                setParams({ ins: 2 });
+                if (editCampaign) {
+                  setParams({ ins: undefined });
+                } else {
+                  setParams({ ins: 2 });
+                }
               }}
             >
               Close
