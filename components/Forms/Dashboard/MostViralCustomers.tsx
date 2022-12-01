@@ -72,73 +72,78 @@ const MostViralCustomers = ({
 
         <div className={styles.customerData__viralCustomer__heading1} />
         <Row className={styles.customerData__table_heading}>
-          <div className={styles.customerData__mostViral__table_heading}>
-            <div className="ms-4">
-              Order #
-            </div>
-            <div className="">
-              Customer Name
-            </div>
-            <div className="">
-              Revenue Generated
-            </div>
-            <div>
-              Unique Clicks
-            </div>
-            <div>
-              {' '}
-            </div>
-          </div>
-        </Row>
-        <div className={styles.customerData__mostViral}>
-          {renderItems?.map((part: any, index: number) => (
-            <div className={styles.customerData__mostViral__listing}>
-              <div>
-                <div className={styles.customerData__acc__row__count}>
-                  {part.members[0].name}
-                </div>
+          <Col xs={12}>
+            <div className={styles.customerData__mostViral__table_heading}>
+              <div className="ms-4">
+                Order #
               </div>
               <div className="">
-                <div className={styles.customerData__acc__row__name}>
-                  {part.members[0].customer.firstName}
-                  {' '}
-                  {part.members[0].customer.lastName}
-                </div>
+                Customer Name
               </div>
-              <div className="ms-2 text-nowrap">
-                <div className={styles.customerData__acc__row__genereated}>
-                  {currencyCode}
-                  {formatNumber(part.revenue)}
-                  {' '}
-                  generated
-                </div>
+              <div className="">
+                Revenue Generated
               </div>
               <div>
-                <div className={styles.customerData__acc__row__clicks}>
-                  👆
-                  {' '}
-                  {part.uniqueClicks}
-                  {' '}
-                  unique clicks
-                </div>
+                Unique Clicks
               </div>
-              <div
-                className={styles.customerData_Cursor}
-
-              >
-                <ArrowRightLogo
-                  className={styles.customerData_Cursor}
-                  onClick={() => {
-                    handleCustomer(part._id);
-                  }}
-                />
+              <div>
+                {' '}
               </div>
             </div>
-          ))}
-          {viralCustomersList.length === 0 && (
-            <div className={styles.customerData__mostViral__noRecord}>No customer found!</div>
-          )}
-        </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div className={styles.customerData__mostViral}>
+              {renderItems?.map((part: any, index: number) => (
+                <div className={styles.customerData__mostViral__listing}>
+                  <div>
+                    <div className={styles.customerData__acc__row__count}>
+                      {part.members[0].name}
+                    </div>
+                  </div>
+                  <div className="">
+                    <div className={styles.customerData__acc__row__name}>
+                      {part.members[0].customer.firstName}
+                      {' '}
+                      {part.members[0].customer.lastName}
+                    </div>
+                  </div>
+                  <div className="text-nowrap">
+                    <div className={styles.customerData__acc__row__genereated}>
+                      {currencyCode}
+                      {formatNumber(part.revenue)}
+                      {' '}
+                      generated
+                    </div>
+                  </div>
+                  <div>
+                    <div className={styles.customerData__acc__row__clicks}>
+                      👆
+                      {' '}
+                      {part.uniqueClicks}
+                      {' '}
+                      unique clicks
+                    </div>
+                  </div>
+                  <div
+                    className={styles.customerData__acc__row__cursor}
+                  >
+                    <ArrowRightLogo
+                      className={styles.customerData__acc__row__cursor}
+                      onClick={() => {
+                        handleCustomer(part._id);
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+              {viralCustomersList.length === 0 && (
+                <div className={styles.customerData__mostViral__noRecord}>No customer found!</div>
+              )}
+            </div>
+          </Col>
+        </Row>
         <Row>
           <Col>
             {totalPages > 1 && viralCustomersList.length > 5 && (

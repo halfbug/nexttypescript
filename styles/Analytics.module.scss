@@ -211,14 +211,14 @@
         &__listing {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr .5fr;
-            grid-gap: 20px;
+            grid-gap: 10px;
             font-weight: 400;
             font-family: 'DM Sans';
             font-size: 14px;
             line-height: 20px;
             background: #F8F8F8;
             margin: 10px 0px;
-            padding: 5px;
+            padding: 10px 20px;
             border-radius: 20px;
             align-items: center;
 
@@ -237,7 +237,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr .5fr;
             grid-gap: 10px;
-            padding: 5px;
+            padding: 5px 20px;
         }
     }
 
@@ -348,21 +348,17 @@
             display: flex;
             align-items: center;
             &__count {
+                @extend .ms-4;
                 color: #000000;
                 font-family: "DM Sans";
                 font-weight: 700;
                 height: auto;
                 font-size: 12px;
                 text-align: center;
-                justify-content: center;
-                align-self: center;
-                align-items: center;
-                text-align: center;
                 background: #dcd0e8;
                 border-radius: 6px;
-                padding: 5px 13px;
+                padding: 5px 10px;
                 width: fit-content;
-                margin: auto;
             }
             &__genereated {
                 color: #000000;
@@ -373,7 +369,7 @@
                 text-align: center;
                 background: #d5fa52;
                 border-radius: 6px;
-                padding: 6px;
+                padding: 5px 10px;
                 width: fit-content;
             }
             &__clicks {
@@ -385,9 +381,12 @@
                 text-align: center;
                 background: #fee758;
                 border-radius: 6px;
-                padding: 6px;
+                padding: 5px 10px;
                 width: fit-content;
-                margin-left: 6px;
+            }
+            &__cursor {
+                @extend .text-end, .me-1;
+                cursor: pointer;
             }
         }
     }
