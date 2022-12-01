@@ -24,12 +24,15 @@ const ExportToExcel = ({
 }: IProps) => {
   const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   const fileExtension = '.xlsx';
+  console.log('🚀 ~ file: ExportToExcel.tsx:33 ~ month', month);
   // const [sheetData, setsheetData] = React.useState([]);
   const {
     sheetData, getDayBilling, loading, data: excelData, getCustomDayBilling,
     formatDataForExcel, monthsArr, data2: customExcelData,
   } = useExcelDocument();
-  const monName = monthsArr(month ?? 1 - 1).initial;
+  const monName1 = monthsArr(month ?? 1 - 1);
+  const monName = monName1?.initial;
+  // const mom = moment.
   // const monNameCustom = monthsArr(new Date(sdate).getMonth() ?? 1 - 1).initial;
   // const sdateCustom = sdate?.getDate() ?? 1;
   // const syearCustom = sdate?.getFullYear() ?? 2022;
