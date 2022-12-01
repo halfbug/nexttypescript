@@ -83,7 +83,7 @@ export default function UploadButton({
         };
         const fileType = files[0].type;
         const fileSize = files[0].size;
-        if ((fileType === 'image/png' || fileType === 'image/jpg' || fileType === 'image/jpeg') && fileSize < 3000000) {
+        if (fileType === 'image/png' || fileType === 'image/jpg' || fileType === 'image/jpeg') {
           setImagefeedback(null);
           const fd = new FormData();
           const shopName = store.shop.split('.');
@@ -111,8 +111,7 @@ export default function UploadButton({
 
           setlogo(URL.createObjectURL(files[0]));
         } else {
-          if (fileSize > 3000000) setImagefeedback('Please upload image under 3MB.');
-          if (fileType !== 'image/png' && fileType !== 'image/jpg' && fileType !== 'image/jpeg') setImagefeedback('Please upload png, jpg, jpeg format only.');
+          setImagefeedback('Please upload png, jpg, jpeg format only.');
         }
       }
     } catch (ex) {
