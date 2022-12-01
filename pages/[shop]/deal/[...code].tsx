@@ -134,8 +134,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   useEffect(() => {
     if (gsctx.id && allProducts && gsctx.popularProducts) {
-      const temp = [...allProducts, ...gsctx.popularProducts]
-        .sort((a: any, b: any) => a.title.localeCompare(b.title));
+      const temp = [...allProducts, ...gsctx.popularProducts].filter(
+        (item) => item.outofstock === false || item.outofstock === null,
+      ).sort((a, b) => a.title.localeCompare(b.title));
       setallProducts(temp);
     }
   }, [gsctx.popularProducts]);
