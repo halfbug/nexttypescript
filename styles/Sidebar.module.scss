@@ -41,9 +41,17 @@
 }
 .sidebarmenuwrap {
 	margin-top: 65px;
-	height: 600px;
-	overflow-y: auto;
+	height: fit-content;
+	overflow-y: hidden;
+
 }
+@media (min-width: 576px) {
+    .sidebarmenuwrap {
+		height: 100%;
+    overflow-y: auto;
+}
+
+	}
 .sidebarmenu a {
 	text-decoration: none;
 }
