@@ -1937,6 +1937,33 @@ const UPDATE_CHANNEL = gql`
   }
 `;
 
+const GET_ALL_RECENT_SIGNUP = gql`
+query getRecentSignup($storeId: String!) {
+  getRecentSignup(storeId: $storeId) {
+    id         
+    url
+    shortUrl
+    channel{
+      name
+      slugName
+      isActive
+      rewards {
+        commission
+        baseline
+        average
+        maximum
+      }
+    }          
+    customerDetail {
+      firstName
+      lastName
+      email
+      phone
+    }  
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -1957,5 +1984,5 @@ export {
   GET_ALL_VIDEOS, GET_CUSTOM_MONTHLY_GS, GET_MOST_VIRAL_CUSTOMERS,
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
   GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, CREATE_CHANNEL_DB, GET_ALL_RETAIL_TOOLS,
-  UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE,
+  UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE, GET_ALL_RECENT_SIGNUP,
 };

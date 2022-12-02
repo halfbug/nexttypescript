@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
 import Page from 'components/Layout/Page/Page';
 import {
@@ -8,9 +8,11 @@ import HintBox from 'components/Groupshop/HintBox/HintBox';
 import CustomChannels from 'components/Forms/Dashboard/CustomChannels';
 import RetailProducts from 'components/Forms/Dashboard/RetailProducts';
 import AnalyticsOverview from 'components/Forms/Dashboard/AnalyticsOverview';
+import { StoreContext } from 'store/store.context';
 
 const Retail: NextPage = () => {
   const [showHint, setShowHint] = useState<boolean>(false);
+  const { store, dispatch } = useContext(StoreContext);
   useEffect(() => {
     setShowHint(true);
   }, []);
@@ -18,14 +20,18 @@ const Retail: NextPage = () => {
     <Page headingText="Retail Tools" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
       <Row className="mt-4">
         <Col lg={12}>
-          <CustomChannels />
+          <CustomChannels
+            storeId={store.id}
+          />
         </Col>
         <Col lg={12} className="mt-5">
-          <AnalyticsOverview />
+          <AnalyticsOverview
+            storeId={store.id}
+          />
         </Col>
-        <Col lg={8}>
+        {/* <Col lg={8}>
           <RetailProducts />
-        </Col>
+        </Col> */}
       </Row>
       <HintBox
         show={showHint}

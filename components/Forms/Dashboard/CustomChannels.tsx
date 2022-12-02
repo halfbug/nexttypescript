@@ -8,26 +8,27 @@ import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
 import { GET_ALL_RETAIL_TOOLS } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
-import { StoreContext } from 'store/store.context';
 import useDimensions from 'hooks/useDimentions';
 import usePagination from 'hooks/usePagination';
 import Pagination from 'react-bootstrap/Pagination';
 import AddChannelBox from 'components/Groupshop/AddChannelBox/AddChannelBox';
 import UpdateChannel from './UpdateChannel';
 
-const CustomChannels = () => {
+interface CustomChannelsProps {
+  storeId:any;
+}
+
+const CustomChannels = ({ storeId } : CustomChannelsProps) => {
   const [showChannelInfo, setShowChannelInfo] = useState<boolean>(false);
   const [refreshChannelList, setRefreshChannelList] = React.useState(false);
   const [showAddChannelPopup, setShowAddChannelPopup] = useState<boolean>(false);
   const [channelInfoData, setChannelInfoData] = useState<any>();
   const [channelList, setChannelList] = useState<any>([]);
-
-  const { store, dispatch } = useContext(StoreContext);
   const [ref, dimensions] = useDimensions();
   const {
     loading, data, refetch,
   } = useQuery(GET_ALL_RETAIL_TOOLS, {
-    variables: { storeId: store.id },
+    variables: { storeId },
   });
 
   useEffect(() => {
@@ -93,7 +94,9 @@ const CustomChannels = () => {
                   {channel?.name}
                 </div>
                 <div className={styles.retail__customChannels__channel__arrow}>
-                  <ArrowRightLogo onClick={() => handleChannelClick(channel)} />
+                  {channel.isActive && (
+                    <ArrowRightLogo onClick={() => handleChannelClick(channel)} />
+                  )}
                 </div>
               </div>
             </>
@@ -155,7 +158,7 @@ const CustomChannels = () => {
       <AddChannelBox
         show={showAddChannelPopup}
         handleClose={() => setShowAddChannelPopup(false)}
-        storeId={store.id}
+        storeId={storeId}
         channelList={channelList}
         refreshChannelList={setRefreshChannelList}
       />
