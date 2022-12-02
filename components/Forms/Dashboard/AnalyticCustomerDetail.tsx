@@ -119,7 +119,7 @@ export default function AnalyticCutomerDetail({
           cashback
         </div>
         <a
-          href={customersData[0].shortUrl}
+          href={customersData[0].shortUrl ?? customersData[0].url}
           className={styles.customerData__orderDetail__tagrow__viewgroupshop}
           target="_blank"
           rel="noreferrer"
