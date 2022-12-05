@@ -422,6 +422,7 @@ export default function Rewards() {
               style={Bstyle}
               className={styles.rewards_btn_pre}
               onClick={() => setParams({ ins: 2 })}
+              type="button"
             >
               Previous
             </Button>

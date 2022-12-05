@@ -328,6 +328,7 @@ export default function OBCampaign() {
             className={styles1.rewards_btn_pre}
             style={Bstyle}
             onClick={() => setParams({ ins: 1 })}
+            type="button"
           >
             Previous
 

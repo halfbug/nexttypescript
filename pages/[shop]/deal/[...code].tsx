@@ -67,7 +67,7 @@ import useSKU from 'hooks/useSKU';
 import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
 import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
-import { min } from 'moment';
+import useDiscoverSortingGS from 'hooks/useDiscoverSortingGS';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -116,6 +116,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
   const [matchingStoreIds, setMatchingStoreIds] = useState([]);
   const { urlForActivation, loaderInvite } = useExpired();
+  const [matchingGroupshop, setMatchingGroupshop] = useState<any[]>([]);
 
   useEffect(() => {
     if (groupshop.id && pending) {
@@ -198,7 +199,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     getKeyFromS3URL,
     uniqueArray,
     findInArray2,
-    getSortingGS,
   } = useUtilityFunction();
   const { popularShuffled } = usePopular(popularProducts);
   const { topPicks } = useTopPicks();
@@ -219,8 +219,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     fetchPolicy: 'network-only',
     onCompleted: async (matchingAllStore: any) => {
       if (matchingAllStore?.matchingGS?.length > 0 && matchingStoreIds?.length > 0) {
-        const matchedGS = await getSortingGS(matchingAllStore?.matchingGS, matchingStoreIds);
-        console.log('🚀🚀🚀 matchedGS', matchedGS);
+        const finalMathingGSData = useDiscoverSortingGS(
+          matchingAllStore?.matchingGS, matchingStoreIds,
+        );
+        setMatchingGroupshop(finalMathingGSData);
       }
     },
   });
@@ -284,12 +286,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       const machingStoreId: any = gsctx?.store?.discoveryTool?.matchingBrandName?.map(
         (el: any) => el.id,
       );
-      setMatchingStoreIds(machingStoreId);
-      getMatchingGS({
-        variables: {
-          storeId: machingStoreId,
-        },
-      });
+      if (machingStoreId.length > 0) {
+        setMatchingStoreIds(machingStoreId);
+        getMatchingGS({
+          variables: {
+            storeId: machingStoreId,
+          },
+        });
+      }
     }
   }, [gsctx?.store?.discoveryTool]);
 
@@ -954,83 +958,83 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </ProductGrid>
         ) : <></>}
         {/* Discover Section */}
-        <Row className="mx-0">
-          <Col xs={12}>
-            <hr />
-            <div className={styles.groupshop__ready}>
-              Ready for something new?
-            </div>
-          </Col>
-          <Col xs={12}>
-            <div className={styles.groupshop__discover}>
-              Discover new brands with Groupshop and get exclusive discounts!
-            </div>
-          </Col>
-          {mockDiscoverBrands.map((brand) => (
-            <>
-              <Col xs={12} md={6}>
-                <ProductGrid
-                  xs={6}
-                  sm={6}
-                  md={6}
-                  lg={5}
-                  xl={5}
-                  products={
-                    ownerProducts
-                    && (ownerProducts!.length > 3
-                      // ? popularProducts?.slice(0, 3)
-                      ? popularShuffled
-                      : newPopularPrd)
+        {matchingGroupshop?.length > 0 ? (
+          <Row className="mx-0">
+            <Col xs={12}>
+              <hr />
+              <div className={styles.groupshop__ready}>
+                Ready for something new?
+              </div>
+            </Col>
+            <Col xs={12}>
+              <div className={styles.groupshop__discover}>
+                Discover new brands with Groupshop and get exclusive discounts!
+              </div>
+            </Col>
+            {matchingGroupshop?.map((brand) => (
+              <>
+                <Col xs={12} md={6}>
+                  <ProductGrid
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={5}
+                    xl={5}
+                    products={
+                    brand?.products?.length
+                    && brand?.products
                   }
-                  maxrows={2}
-                  addProducts={handleAddProduct}
-                  handleDetail={(prd) => setsProduct(prd)}
-                  id="discoverproducts1"
-                  isModalForMobile={isModalForMobile}
-                  urlForActivation={urlForActivation}
-                  skuCount={SKU.length}
-                  showHoverButton
-                >
-                  <div className={styles.groupshop__shopWith}>
-                    <div className={styles.groupshop__shopWith__img}>
-                      <img
-                        src={storeLogo}
-                        alt={`${brand.name}`}
-                        // alt="d"
-                        className="img-fluid"
-                        style={{ maxWidth: '80px' }}
-                      />
+                    maxrows={2}
+                    addProducts={handleAddProduct}
+                    handleDetail={(prd) => setsProduct(prd)}
+                    id="discoverproducts1"
+                    isModalForMobile={isModalForMobile}
+                    urlForActivation={urlForActivation}
+                    skuCount={SKU.length}
+                    showHoverButton
+                    isSuggestion
+                    membersForDiscover={brand.members}
+                  >
+                    <div className={styles.groupshop__shopWith}>
+                      <div className={styles.groupshop__shopWith__img}>
+                        <img
+                          src={`${brand?.logoImage}`}
+                          alt={`${brand?.brandName}`}
+                          className="img-fluid"
+                          style={{ maxWidth: '80px' }}
+                        />
+                      </div>
+                      <div className={styles.groupshop__shopWith__txt}>
+                        Shop
+                        {' '}
+                        <strong>{brand?.brandName}</strong>
+                        {' '}
+                        with
+                        {' '}
+                        {brand.customerName[0]?.orderDetail?.customer?.lastName}
+                        {' '}
+                        and get
+                        {' '}
+                        <strong>
+                          {brand?.discount}
+                        </strong>
+                        {' '}
+                        % off
+                      </div>
+                      <Button2
+                        variant="primary"
+                        className={styles.groupshop__shopWith__btn}
+                        onClick={() => window.open(`${window.location.origin}${brand.url}`, '_blank')}
+                      >
+                        Shop
+                      </Button2>
                     </div>
-                    <div className={styles.groupshop__shopWith__txt}>
-                      Shop
-                      {' '}
-                      <strong>{brand.name}</strong>
-                      {' '}
-                      with
-                      {' '}
-                      {brand.with}
-                      {' '}
-                      and get
-                      {' '}
-                      <strong>
-                        {brand.discount}
-                      </strong>
-                      {' '}
-                      % off
-                    </div>
-                    <Button2
-                      variant="primary"
-                      className={styles.groupshop__shopWith__btn}
-                      onClick={() => { }}
-                    >
-                      Shop
-                    </Button2>
-                  </div>
-                </ProductGrid>
-              </Col>
-            </>
-          ))}
-        </Row>
+                  </ProductGrid>
+                </Col>
+              </>
+            ))}
+          </Row>
+        ) : ''}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             {isExpired ? (

@@ -13,6 +13,7 @@ import { StoreContext } from 'store/store.context';
 import { useMutation } from '@apollo/client';
 import { DISCOVERYTOOLS_UPDATE } from 'store/store.graphql';
 import { DiscoveryTools } from 'types/store';
+import styles2 from 'styles/Campaign.module.scss';
 
 interface BValues {
   status?: string;
@@ -36,7 +37,7 @@ const DiscoveryOnBoarding = () => {
   });
 
   const {
-    handleSubmit, values, handleChange, touched, errors, setFieldValue,
+    handleSubmit, values, handleChange, errors, setFieldValue,
   }: FormikProps<BValues> = useFormik<BValues>({
     initialValues: initVal,
     validationSchema,
@@ -98,7 +99,8 @@ const DiscoveryOnBoarding = () => {
                             >
                               <ToggleButton
                                 variant="outline-success"
-                                className={styles.Discovery_enablebtn}
+                                className={values.status === 'Active' ? styles2.enablebtn_dark : styles2.enablebtn}
+                                // className={styles.Discovery_enablebtn}
                                 id="joinExisting-e"
                                 checked={values.status === 'Active'}
                                 onChange={handleChange}
@@ -110,7 +112,8 @@ const DiscoveryOnBoarding = () => {
                               </ToggleButton>
                               <ToggleButton
                                 variant="outline-danger"
-                                className={styles.Discovery_disablebtn}
+                                className={values.status === 'InActive' ? styles2.disablebtn_dark : styles2.disablebtn}
+                                // className={styles.Discovery_disablebtn}
                                 id="joinExisting-d"
                                 checked={values.status === 'InActive'}
                                 onChange={handleChange}
@@ -141,12 +144,13 @@ const DiscoveryOnBoarding = () => {
                 className={styles1.rewards_btn_pre}
                 style={{ width: '143px' }}
                 onClick={() => setParams({ ins: 3 })}
+                type="button"
               >
                 Previous
               </Button>
             </Col>
             <Col xs={4} className="text-center d-flex align-items-center justify-content-center">
-              {/* <span className="text-muted">4/5</span> */}
+              <span className="text-muted">4/5</span>
             </Col>
             <Col xs={4} className="d-flex justify-content-end">
               <Button style={{ width: '143px' }} type="submit"> Next </Button>

@@ -41,11 +41,14 @@ type ProductGridProps = {
   isModalForMobile?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
+  isSuggestion?: boolean;
+  membersForDiscover?: any[];
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
+  isSuggestion, membersForDiscover,
   urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -76,7 +79,7 @@ const ProductGrid = ({
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
-    leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid,
+    leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
   } = useDeal();
   console.log('🚀 ~ file: ProductGrid.tsx ~ line 96 ~ addedByInfluencer', addedByInfluencer);
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
@@ -118,7 +121,8 @@ const ProductGrid = ({
                   // onClick={() => handleDetail(prod)}
                   imgOverlay={(
                     <>
-                      <button onClick={() => handleDetail(prod)} type="button" className={styles.groupshop_btnBgClr}>
+
+                      <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
                         <span className={styles.groupshop__pcard_tag_price}>
                           {currencySymbol}
                           {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
@@ -134,6 +138,14 @@ const ProductGrid = ({
                               </span>
                             ),
                           ))}
+                          {isSuggestion && topFive(getBuyersDiscover(prod.id, membersForDiscover)
+                            ?.map(
+                              (member: Member) => (
+                                <span className={styles.groupshop__pcard_tag_buyer}>
+                                  {nameOnProductGrid(member.orderDetail.customer)}
+                                </span>
+                              ),
+                            ))}
                           {isInfluencerGS && topFive(getBuyers2(prod.id)?.map(
                             (member: Member) => (
                               <span className={styles.groupshop__pcard_tag_buyer}>
@@ -145,6 +157,8 @@ const ProductGrid = ({
                           {getBuyers(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                           {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
+                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                          {getBuyersDiscover(prod.id, membersForDiscover).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                         </div>
                         {[...addedProducts ?? [],
@@ -171,7 +185,7 @@ const ProductGrid = ({
                           return htmldata;
                         })}
                       </button>
-                      {showHoverButton && (
+                      {!isSuggestion && showHoverButton && (
                         <Row className={styles.groupshop__pcard_tag_addToCart}>
                           <Col lg={10} className="p-0">
                             {isExpired ? (
@@ -413,6 +427,8 @@ ProductGrid.defaultProps = {
   isModalForMobile: false,
   urlForActivation: '',
   skuCount: 0,
+  isSuggestion: false,
+  membersForDiscover: [],
 };
 
 export default ProductGrid;

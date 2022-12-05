@@ -334,6 +334,7 @@ export default function Settings({ isDB }: IProps) {
               className={styles1.rewards_btn_pre}
               style={Bstyle}
               onClick={() => setParams({ ins: '3a' })}
+              type="button"
             >
               Previous
 

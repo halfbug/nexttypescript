@@ -20,6 +20,7 @@ const Button = ({
     className={[styles.onboarding__button, className].join(' ')}
     {...props}
     onClick={onClick}
+    type={type}
   >
     {children}
   </button>
