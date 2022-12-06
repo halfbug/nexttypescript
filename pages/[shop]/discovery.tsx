@@ -107,20 +107,23 @@ const Discovery: NextPage = () => {
                 </Col>
               </Row>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <h3>Discovery Metrics</h3>
               <Row>
                 <Col lg={4} className={styles.metrics__box__summary_box}>
-                  <SummaryBox label="New Audience" value="432" iconType="PurchaseIcon" arrowIcon={false} />
+                  <SummaryBox label="New Audience" value="432" iconType="PurchaseIcon"
+                  arrowIcon={false} />
                 </Col>
                 <Col lg={4} className={styles.metrics__box__summary_box}>
-                  <SummaryBox label="Product Views " value="432" iconType="ViewsIcon" arrowIcon={false} />
+                  <SummaryBox label="Product Views " value="432" iconType="ViewsIcon"
+                  arrowIcon={false} />
                 </Col>
                 <Col lg={4} className={styles.metrics__box__summary_box}>
-                  <SummaryBox label="Average Order Value" value="432" iconType="TrafficIcon" arrowIcon={false} />
+                  <SummaryBox label="Average Order Value" value="432" iconType="TrafficIcon"
+                  arrowIcon={false} />
                 </Col>
               </Row>
-            </div>
+            </div> */}
           </Col>
         </Row>
       </div>
