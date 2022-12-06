@@ -12,7 +12,7 @@ import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
 
-interface AvailableRewardsBoxProps extends RootProps {
+interface AvailablePartnerRewardsBoxProps extends RootProps {
   show: boolean;
   reward: any;
   name: string;
@@ -28,10 +28,10 @@ interface AvailableRewardsBoxProps extends RootProps {
 
 }
 
-const AvailableRewardsBox = ({
+const AvailablePartnerRewardsBox = ({
   show = false, handlesetShow, handleClose, reward, memberLength, currencySymbol, name, brandname,
   fullshareurl, shareUrl, discount, owner,
-}: AvailableRewardsBoxProps) => {
+}: AvailablePartnerRewardsBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
@@ -85,30 +85,18 @@ const AvailableRewardsBox = ({
                   : <span>GROUPSHOP MEMBER</span>}
               </div>
             </Col>
+            {reward > 0 && (
             <Col lg={12}>
               <div className={styles.groupshop_availableRewardsBox_modal__available}>
-                {reward > 0 && (
-                  <>
-                    {(memberLength <= 9 && owner) || (memberLength <= 5) ? (
-                      <span>
-                        {currencySymbol}
-                        {reward}
-                        {' '}
-                        reward available
-                      </span>
-                    )
-                      : (
-                        <span>
-                          {currencySymbol}
-                          {reward}
-                          {' '}
-                          rewards earned
-                        </span>
-                      )}
-                  </>
-                )}
+                <span>
+                  {currencySymbol}
+                  {reward}
+                  {' '}
+                  rewards earned
+                </span>
               </div>
             </Col>
+            )}
           </Row>
           <Row className="justify-content-center">
             <Col lg={12}>
@@ -153,4 +141,4 @@ const AvailableRewardsBox = ({
   );
 };
 
-export default AvailableRewardsBox;
+export default AvailablePartnerRewardsBox;

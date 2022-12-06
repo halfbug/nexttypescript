@@ -6,24 +6,53 @@ import styles from 'styles/Groupshop.module.scss';
 import CrossICon from 'assets/images/cross.svg';
 import { useMediaQuery } from 'react-responsive';
 import { RootProps } from 'types/store';
+import useUtilityFunction from 'hooks/useUtilityFunction';
+import AvailablePartnerRewardsBox from '../RewardBox/AvailablePartnerRewardsBox';
 
 interface MembersProps extends RootProps{
-  names : string[];
+  names : any[];
   cashback : string[];
+  discount: string;
+  fullshareurl:string;
+  rewards:any;
+  shareUrl:string;
+  brandname:any;
+  currencySymbol : any;
 }
 
 const Members = ({
-  names, cashback, pending,
+  names, cashback, discount, fullshareurl, rewards, currencySymbol, shareUrl, brandname, pending,
 }: MembersProps) => {
   const [show, setShow] = useState<any>({});
   const [target, setTarget] = useState(null);
+  const [custName, setCustName] = useState('');
+  const [showRewardModel, setshowRewardModel] = useState(false);
+  const [pendingRewards, setpendingRewards] = useState(0);
+  const [isOwner, setIsOwner] = useState(true);
+  const { formatNumber } = useUtilityFunction();
 
-  const handleClick = (event: any, state: string) => {
-    setShow({ [state]: true });
-    setTarget(event.target);
+  const countTotalPrice = (lineItems: any) => {
+    let totalPrice = 0;
+    // eslint-disable-next-line array-callback-return
+    lineItems?.map((item: any) => {
+      totalPrice += item.price * item.quantity;
+    });
+    return totalPrice;
+  };
+
+  const handleClick = (member: any, index: any) => {
+    setCustName(member.fname);
+    const orderPrice = countTotalPrice(member.lineItems);
+    setpendingRewards(((orderPrice * (parseInt(rewards[0].discount, 10))) / 100));
+    setshowRewardModel(true);
+    if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
   };
   const handleClose = (event: any, state: string) => {
     setShow({ [state]: false });
+  };
+
+  const handlesetShow = () => {
+    setshowRewardModel(false);
   };
 
   const isLargeScreen = useMediaQuery({
@@ -44,10 +73,10 @@ const Members = ({
       {names?.map((member, idx) => (
         <>
           <div>
-            <Button onClick={(e) => handleClick(e, `m-${idx}`)} variant="light" className={styles.groupshop__top_item}>
+            <Button onClick={(e) => handleClick(member, idx)} variant="light" className={styles.groupshop__top_item}>
               {idx === 0 && '👑'}
               {' '}
-              {member}
+              {member.fname}
             </Button>
             <Overlay
               rootClose
@@ -65,7 +94,7 @@ const Members = ({
                     <CrossICon onClick={(e: any) => handleClose(e, `m-${idx}`)} />
                   </div>
                   <h4>
-                    {member}
+                    {member.fname}
                   </h4>
                   <p className="mb-2">
                     {idx === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
@@ -85,6 +114,21 @@ const Members = ({
           )}
         </>
       ))}
+
+      <AvailablePartnerRewardsBox
+        show={showRewardModel}
+        name={custName}
+        discount={discount}
+        brandname={brandname}
+        fullshareurl={fullshareurl}
+        shareUrl={shareUrl}
+        owner={isOwner}
+        handlesetShow={handlesetShow}
+        currencySymbol={currencySymbol}
+        reward={formatNumber(pendingRewards)}
+        memberLength="1"
+        handleClose={() => setshowRewardModel(false)}
+      />
     </>
   );
 };

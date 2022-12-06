@@ -106,10 +106,9 @@ const RewardBox = ({
               SHOPPING WITH
             </Col>
             <Col xs={12} className="d-flex justify-content-center mt-4 align-items-center">
-              <Members names={['Elisa C.a', 'Neil D.', 'Paul B.']} cashback={['$23', '$20']} />
+              Members
             </Col>
             <Col xs={12} className="d-flex justify-content-center mt-2 align-items-center">
-              <Members names={['Maddy S.']} cashback={['$23', '$20']} />
               <ShareButton
                 placement="bottom"
                 shareurl=""

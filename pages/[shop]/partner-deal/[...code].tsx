@@ -405,11 +405,20 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <div className="d-flex flex-row justify-content-center align-items-center">
                   <Members
                     names={partnerMembers?.map(
-                      (mem: any) => `${mem.customerInfo.firstName ?? ''} ${
-                        mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
-                      }`,
+                      (mem: any, index: any) => ({
+                        fname: `${mem.customerInfo.firstName ?? ''} ${
+                          mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
+                        }`,
+                        lineItems: mem.lineItems,
+                      }),
                     )}
                     cashback={['']}
+                    discount={discount}
+                    fullshareurl={gsShortURL}
+                    shareUrl={gsURL}
+                    rewards={gsctx?.campaign?.salesTarget?.rewards}
+                    brandname={brandName}
+                    currencySymbol={currencySymbol}
                     pending={pending}
                   />
                   <ShareButton
@@ -562,12 +571,23 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col> */}
             </div>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
+
               <Members
-                names={[`${gsctx?.partnerDetails?.fname ?? ''} ${
-                  gsctx?.partnerDetails?.lname?.charAt(0) || ''
-                }`]}
-                // names={['name']}
+                names={partnerMembers?.slice(0, 1).map(
+                  (mem: any) => ({
+                    fname: `${mem.customerInfo.firstName ?? ''} ${
+                      mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
+                    }`,
+                    lineItems: mem.lineItems,
+                  }),
+                )}
                 cashback={['']}
+                discount={discount}
+                fullshareurl={gsShortURL}
+                shareUrl={gsURL}
+                rewards={gsctx?.campaign?.salesTarget?.rewards}
+                brandname={brandName}
+                currencySymbol={currencySymbol}
                 pending={pending}
               />
             </div>

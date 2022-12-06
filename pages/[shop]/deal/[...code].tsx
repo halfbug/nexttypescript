@@ -538,13 +538,18 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       (mem: any) => ({
                         name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                         }`,
+                        availedDiscount: mem.availedDiscount,
+                        role: mem.role,
+                        lineItems: mem.lineItems,
                         price: mem.orderDetail.price,
                         refund: (mem.refund) ? mem.refund : [],
                       }),
                     ))}
+                    memberLength={gsctx?.members.length}
                     brandname={brandName}
                     fullshareurl={gsURL}
                     shareUrl={gsShortURL ?? gsURL}
+                    rewards={gsctx?.campaign?.salesTarget?.rewards}
                     discount={gsctx?.discountCode.percentage}
                     currencySymbol={currencySymbol}
                     pending={pending}
@@ -717,13 +722,18 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   (mem: any) => ({
                     name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                     }`,
+                    availedDiscount: mem.availedDiscount,
+                    role: mem.role,
+                    lineItems: mem.lineItems,
                     price: mem.orderDetail.price,
                     refund: (mem.refund) ? mem.refund : [],
                   }),
                 )}
+                memberLength={gsctx?.members.length}
                 brandname={brandName}
                 fullshareurl={gsURL}
                 shareUrl={gsShortURL ?? gsURL}
+                rewards={gsctx?.campaign?.salesTarget?.rewards}
                 discount={gsctx?.discountCode.percentage}
                 currencySymbol={currencySymbol}
                 pending={pending}

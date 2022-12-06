@@ -14,12 +14,15 @@ interface GMembersProps extends RootProps{
   discount: string;
   brandname:any;
   fullshareurl:string;
+  memberLength: any;
   shareUrl:string;
+  rewards: any;
   currencySymbol : any;
 }
 
 const Gmembers = ({
-  names, currencySymbol, discount, brandname, fullshareurl, shareUrl, pending,
+  names, currencySymbol, discount, brandname, memberLength, fullshareurl,
+  shareUrl, rewards, pending,
 }: GMembersProps) => {
   const [showRewardModel, setshowRewardModel] = useState(false);
   const [custName, setCustName] = useState('');
@@ -27,16 +30,43 @@ const Gmembers = ({
   const [isOwner, setIsOwner] = useState(true);
   const { formatNumber } = useUtilityFunction();
 
+  const milestoneCalc = (dis:any) => {
+    const availDiscount = parseInt(dis, 10);
+    const maxDiscount = parseInt(rewards[2].discount, 10);
+    return maxDiscount - availDiscount;
+  };
+
+  const countTotalPrice = (lineItems: any) => {
+    let totalPrice = 0;
+    // eslint-disable-next-line array-callback-return
+    lineItems?.map((item: any) => {
+      totalPrice += item.price * item.quantity;
+    });
+    return totalPrice;
+  };
+
   const handleClick = (member: any, index: any) => {
+    let maxRefund = 0;
     setCustName(member.name);
-    const orderPrice = +member.price;
+    const mileCalc = milestoneCalc(member?.availedDiscount ?? 0);
+    const orderPrice = countTotalPrice(member.lineItems);
+    const discountPercentage = (index === 0) ? 90 : mileCalc;
     // eslint-disable-next-line max-len
     const refundAmount = (member?.refund) ? member.refund.reduce((a:any, b:any) => a + b.amount, 0) : 0;
-    const maXRefund = ((orderPrice * (90)) / 100) - refundAmount;
-    setpendingRewards(maXRefund);
+    if ((memberLength <= 9 && index === 0) || (memberLength <= 5)) {
+      maxRefund = ((orderPrice * (discountPercentage)) / 100) - refundAmount;
+    } else if (index === 5) {
+      maxRefund = ((orderPrice * (parseInt(rewards[2].discount, 10))) / 100);
+    } else if (index > 5) {
+      maxRefund = ((orderPrice * (parseInt(rewards[0].discount, 10))) / 100);
+    } else {
+      maxRefund = refundAmount;
+    }
+    setpendingRewards(maxRefund);
     if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
     setshowRewardModel(true);
   };
+
   const handleClose = (event: any, state: string) => {
     setshowRewardModel(false);
   };
@@ -85,6 +115,7 @@ const Gmembers = ({
         handlesetShow={handlesetShow}
         currencySymbol={currencySymbol}
         reward={formatNumber(pendingRewards)}
+        memberLength={memberLength}
         handleClose={() => setshowRewardModel(false)}
       />
     </>
