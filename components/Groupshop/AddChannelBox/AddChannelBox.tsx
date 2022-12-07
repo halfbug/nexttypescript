@@ -155,7 +155,7 @@ const AddChannelBox = ({
                   {values.channelname.length}
                   /20
                 </div>
-                <Form.Control.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid" className="ms-2 fs-6 mt-0">
                   {errors.channelname}
                 </Form.Control.Feedback>
               </div>
