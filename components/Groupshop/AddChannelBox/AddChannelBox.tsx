@@ -75,6 +75,8 @@ const AddChannelBox = ({
       .required('Max Discount is required.'),
     commission: yup
       .number().typeError('you must specify a number')
+      .min(0)
+      .max(50)
       .required('channel Commisson is required.'),
   });
 

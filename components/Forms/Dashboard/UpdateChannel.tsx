@@ -89,6 +89,8 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
       .required('Max Discount is required.'),
     commission: yup
       .number().typeError('you must specify a number')
+      .min(0)
+      .max(50)
       .required('channel Commisson is required.'),
   });
 
@@ -101,7 +103,7 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
   }: FormikProps<IRetailTools> = useFormik<IRetailTools>({
     initialValues: channelInitial,
     validationSchema,
-    validateOnChange: false,
+    validateOnChange: true,
     validateOnBlur: false,
     enableReinitialize: true,
     onSubmit: async (valz, { validateForm }: FormikHelpers<IRetailTools>) => {
@@ -158,15 +160,22 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
                   </>
                   )}
                   <div className={editChannel ? ' ' : 'd-none'}>
-                    <Form.Control
-                      type="text"
-                      name="channelname"
-                      onChange={handleChange}
-                      value={values.channelname}
-                      className={styles.customChannels_modal__rewardBox__input}
-                      placeholder="Enter Channel name"
-                      isInvalid={touched.channelname && !!errors.channelname}
-                    />
+                    <div className="d-flex align-items-center">
+                      <Form.Control
+                        type="text"
+                        name="channelname"
+                        onChange={handleChange}
+                        value={values.channelname}
+                        className={styles.customChannels_modal__rewardBox__input}
+                        placeholder="Enter Channel name"
+                        isInvalid={touched.channelname && !!errors.channelname}
+                        maxLength={20}
+                      />
+                      <div className="ms-4 text-muted">
+                        {values.channelname.length}
+                        /20
+                      </div>
+                    </div>
                     <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
                       {errors.channelname}
                     </Form.Control.Feedback>
