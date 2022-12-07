@@ -91,8 +91,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // load all products
   useProducts(`${shop}.myshopify.com`);
 
-  console.log('partner deal');
-
   const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
     undefined,
   );
@@ -892,12 +890,21 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           shareurl={gsShortURL ?? gsURL}
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
+          brandName={brandName}
+          maxPercent={(gsctx?.partnerRewards?.baseline)?.toString() ?? ''}
         /> */}
-        {/* {isModalForMobile && (
-        <div>
-          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} />
-        </div>
-        )} */}
+        {isModalForMobile && (
+          <div>
+            <ShoppingBoxMobile
+              shareurl={gsShortURL ?? gsURL}
+              // onClick={() => setShowRewards(true)}
+              val=""
+              label="Share with friends"
+              brandName={brandName}
+              maxPercent={(gsctx?.partnerRewards?.baseline)?.toString() ?? ''}
+            />
+          </div>
+        )}
       </div>
     </>
   );
