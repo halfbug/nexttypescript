@@ -102,6 +102,8 @@ const Analytics: NextPage = () => {
               handleSearch={handleSearch}
             />
             <GraphRevenue
+              startFrom={startFrom}
+              toDate={toDate}
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
             />
           </Col>

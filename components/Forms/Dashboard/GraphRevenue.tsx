@@ -3,8 +3,6 @@ import React, {
 } from 'react';
 import { Col, Dropdown, Row } from 'react-bootstrap';
 import styles from 'styles/Analytics.module.scss';
-import DateRangePicker from 'react-bootstrap-daterangepicker';
-import 'bootstrap-daterangepicker/daterangepicker.css';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import { StoreContext } from 'store/store.context';
 import { useQuery, useLazyQuery } from '@apollo/client';
@@ -13,20 +11,19 @@ import moment from 'moment';
 import { GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE } from 'store/store.graphql';
 
 interface GraphRevenueProp{
+  startFrom: any;
+  toDate: any;
   currencyCode: any;
 }
 
-export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
-  const [defaultDate, setDefaultDate] = useState<any>('');
-  const [startFrom, setStartFrom] = useState<any>('-');
-  const [toDate, setToDate] = useState<any>('-');
+export default function GraphRevenue({ startFrom, toDate, currencyCode } : GraphRevenueProp) {
   const defaultgraphlabel = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const defaultGraphValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const [graphlabel, setGraphlabel] = React.useState(defaultgraphlabel);
   const [graphValue, setGraphValue] = React.useState(defaultGraphValue);
   const { store } = React.useContext(StoreContext);
   const {
-    graphFormatNumber, formatNumber, GraphDateRanges, getDatesBetween,
+    graphFormatNumber, formatNumber, getDatesBetween,
     getMonthsBetween, getYearsBetween,
   } = useUtilityFunction();
 
@@ -39,7 +36,7 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     onError() { console.log('Error in graph revenue by date!'); },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (graphRevenueRange) {
       const date1 = new Date(startFrom);
       const date2 = new Date(toDate);
@@ -105,8 +102,9 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     onError() { console.log('Error in graph revenue by date!'); },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (graphRevenue?.getGraphRevenue.length) {
+      setGraphlabel(defaultgraphlabel);
       const newTodos = [...graphValue];
       graphRevenue?.getGraphRevenue.forEach((item: any) => {
         const rev = item.revenue;
@@ -115,6 +113,9 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
         newTodos[dataMonth] = rev;
         setGraphValue(newTodos);
       });
+    } else {
+      setGraphlabel(defaultgraphlabel);
+      setGraphValue(defaultGraphValue);
     }
   }, [graphRevenue]);
 
@@ -124,7 +125,7 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     variables: { storeId: store.id },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data?.getGraphRevenue.length) {
       const newTodos = [...graphValue];
       data?.getGraphRevenue.forEach((item: any) => {
@@ -137,38 +138,21 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     }
   }, [data]);
 
-  const callbackApply = (event: any, picker: any) => {
-    const startDate = picker.startDate.format('YYYY-MM-DD');
-    const endDate = picker.endDate.format('YYYY-MM-DD');
-    getRangeGraphRevenue({ variables: { storeId: store.id, startDate, endDate } });
-    setStartFrom(startDate);
-    setToDate(endDate);
-    setDefaultDate(`${picker.startDate.format('YYYY/MM/DD')
-    } - ${
-      picker.endDate.format('YYYY/MM/DD')}`);
-    picker.element.val(
-      `${picker.startDate.format('YYYY/MM/DD')
-      } - ${
-        picker.endDate.format('YYYY/MM/DD')}`,
-    );
-  };
-
-  const callbackCancel = (event: any, picker: any) => {
-    setDefaultDate('-');
-    picker.element.val('');
-    setGraphlabel(defaultgraphlabel);
-    setGraphValue(defaultGraphValue);
-    getGraphRevenue({ variables: { storeId: store.id } });
-  };
-
-  const handleChange = (event: any) => {
-    if (event.target.value === '') {
-      setDefaultDate('-');
-      setGraphlabel(defaultgraphlabel);
-      setGraphValue(defaultGraphValue);
+  useEffect(() => {
+    if (startFrom === '-') {
+      // setGraphlabel(defaultgraphlabel);
+      // setGraphValue(defaultGraphValue);
       getGraphRevenue({ variables: { storeId: store.id } });
+    } else {
+      getRangeGraphRevenue({
+        variables: {
+          storeId: store.id,
+          startDate: startFrom,
+          endDate: toDate,
+        },
+      });
     }
-  };
+  }, [startFrom, toDate]);
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -250,27 +234,10 @@ export default function GraphRevenue({ currencyCode } : GraphRevenueProp) {
     ],
   };
 
-  const ranges = GraphDateRanges();
   return (
     <div className={styles.coreMetrics}>
       <div className={styles.coreMetrics__header}>
         <h3>Total Revenue</h3>
-        <div className="d-inline mx-2">
-          <DateRangePicker
-            onApply={callbackApply}
-            onCancel={callbackCancel}
-            initialSettings={{
-              maxDate: new Date(),
-              ranges,
-              autoUpdateInput: false,
-              locale: {
-                cancelLabel: 'Clear',
-              },
-            }}
-          >
-            <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
-          </DateRangePicker>
-        </div>
       </div>
       <Row>
         <Col lg={12} className={styles.coreMetrics__summary_box}>
