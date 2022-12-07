@@ -168,10 +168,10 @@ const AddChannelBox = ({
                     Baseline Discount
                     <ToolTip
                       placement="bottom"
-                      className={cstyles.dashboard_campaign__pop}
+                      className={styles.dashboard_campaign__pop}
                       icon={<InfoIcon size={10} />}
                       popContent={(
-                        <p>
+                        <p className="mb-0 ">
                           This is the minimum discount.
                         </p>
                         )}
@@ -184,7 +184,7 @@ const AddChannelBox = ({
                         {values.minDiscount}
                         %
                       </span>
-                      <Button className="fw-bolder" variant="link" onClick={() => setEditMin(!editMin)}>Edit</Button>
+                      <Button className="fw-bolder ps-0" variant="link" onClick={() => setEditMin(!editMin)}>Edit</Button>
                     </>
                     )}
                     <div className={editMin ? 'd-flex' : 'd-none'}>
@@ -223,10 +223,10 @@ const AddChannelBox = ({
                     Maximum Discount
                     <ToolTip
                       placement="bottom"
-                      className={cstyles.dashboard_campaign__pop}
+                      className={styles.dashboard_campaign__pop}
                       icon={<InfoIcon size={10} />}
                       popContent={(
-                        <p>
+                        <p className="mb-0">
                           This is the maximum discount.
                         </p>
                         )}
@@ -239,7 +239,7 @@ const AddChannelBox = ({
                         {values.maxDiscount}
                         %
                       </span>
-                      <Button className="fw-bolder" variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
+                      <Button className="fw-bolder ps-0" variant="link" onClick={() => setEditMax(!editMax)}>Edit</Button>
                     </>
                     )}
                   </div>
@@ -278,10 +278,10 @@ const AddChannelBox = ({
                     Commission
                     <ToolTip
                       placement="bottom"
-                      className={cstyles.dashboard_campaign__pop}
+                      className={styles.dashboard_campaign__pop}
                       icon={<InfoIcon size={10} />}
                       popContent={(
-                        <p>
+                        <p className="mb-0">
                           This is commission percentage.
                         </p>
                         )}
@@ -294,7 +294,7 @@ const AddChannelBox = ({
                         {values.commission}
                         %
                       </span>
-                      <Button className="fw-bolder" variant="link" onClick={() => setEditCommission(!editCommission)}>Edit</Button>
+                      <Button className="fw-bolder ps-0" variant="link" onClick={() => setEditCommission(!editCommission)}>Edit</Button>
                     </>
                     )}
                   </div>

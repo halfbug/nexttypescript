@@ -375,7 +375,19 @@
         margin: 20px 0px;
         border: 1px dashed $dotted-border-color1;
         border-radius: 18px;
-
+        ::-webkit-input-placeholder {
+            font-family: 'Mulish';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: #161414;
+            opacity: 0.1;
+        }
+        input[type="text"],
+        textarea {
+            background-color: #fcfcfc;
+        }
         h5 {
             font-weight: $font-weight-bolder;
             font-size: 16px;

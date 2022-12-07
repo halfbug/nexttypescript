@@ -66,7 +66,7 @@ const CustomChannels = ({ storeId } : CustomChannelsProps) => {
   return (
     <>
       <Row>
-        <Col lg={7}>
+        <Col lg={7} className="mt-5">
           <h2 className={styles.retail__customChannels__heading}>
             Custom Channels
           </h2>
