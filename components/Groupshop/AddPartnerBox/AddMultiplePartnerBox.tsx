@@ -39,17 +39,18 @@ const AddMultiplePartnerBox = ({
           <Row>
             <Col lg={12}>
               <div className={styles.partner_addMultiplePartner_modal__top}>
-                <h4>
+                <h4 className="fw-500">
                   Add multiple partners
                 </h4>
                 <Form.Control
                   as="textarea"
                   rows={6}
-                  placeholder="Enter each email address seperated by a comma as follow hi@gmail.com,example@gmail.com"
-                  className={styles.partner_addMultiplePartner_modal__textarea}
+                  placeholder="Enter each email address seperated by a comma as follows
+                  hi@gmail.com,example@gmail.com"
+                  className={[styles.partner_addMultiplePartner_modal__textarea, 'p-3'].join(' ')}
                 />
                 <div className={styles.partner_addMultiplePartner_modal__btnSection}>
-                  <WhiteButton onClick={handleClose}>
+                  <WhiteButton onClick={handleClose} className="border-dark bg-white fw-500 mb-2">
                     Done
                   </WhiteButton>
                 </div>

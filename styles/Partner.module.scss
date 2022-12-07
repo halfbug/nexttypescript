@@ -3,6 +3,9 @@
 .partner {
     @extend .d-flex, .mt-2, .px-0;
 
+    .fw-500{
+        font-weight: 500;
+    }
     .form-control{
         line-height: 1.35;
     }
@@ -445,7 +448,7 @@
                 @extend .mb-1;
                 font-family: "DM Sans";
                 font-style: normal;
-                font-weight: $font-weight-bolder;
+                font-weight: $font-weight-normal;
                 font-size: $size-16px;
                 line-height: 21px;
                 color: $subheadingclr;
