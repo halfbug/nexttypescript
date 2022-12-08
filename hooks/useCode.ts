@@ -7,7 +7,7 @@ const useCode = () => {
   // get client IP
   const router = useRouter();
 
-  const { query: { shop, code }, pathname } = router;
+  const { query: { shop, code, channel }, pathname } = router;
 
   // console.log('🚀 ~ file: useCode.ts ~ line 11 ~ useCode ~ router', router);
   const [productCode, setproductCode] = useState<string | undefined>(undefined);
@@ -16,8 +16,10 @@ const useCode = () => {
   const [discountCode, setdiscountCode] = useState<string | undefined>(undefined);
   const [ownerCode, setOwnerCode] = useState<string | undefined>(undefined);
   const [stepNumber, setStepNumber] = useState<string | undefined>(undefined);
+  const [channelName, setchannelName] = useState<string | undefined>(undefined);
 
   useEffect(() => {
+    setchannelName(channel as string);
     if (Array.isArray(code) && code.length) {
       code.map((itm: string, idx: number) => {
         switch (idx) {
@@ -66,12 +68,12 @@ const useCode = () => {
     if (shop && discountCode) {
       setproductCode(undefined);
       setStatus(undefined);
-      router.push(`/${shop}/${pathname.split('/')[2]}/${discountCode}`, undefined, { scroll: false });
+      router.push(`/${shop}/${pathname.split('/')[2]}/${channel ? `${channel}/` : ''}${discountCode}`, undefined, { scroll: false });
     }
   }, [shop, discountCode]);
 
   return {
-    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber, backHome,
+    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber, backHome, channelName,
   };
 };
 export default useCode;

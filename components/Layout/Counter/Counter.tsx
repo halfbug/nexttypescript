@@ -9,10 +9,11 @@ import useDeal from 'hooks/useDeal';
 
 interface CounterProps extends RootProps{
   expireDate : Date;
+  isRetail?: boolean;
 }
 
 const Counter = ({
-  expireDate, pending,
+  expireDate, pending, isRetail,
 }: CounterProps) => {
   const { getDateDifference, isExpired } = useDeal();
 
@@ -59,15 +60,15 @@ const Counter = ({
         </span>
         {' '}
         <span className={styles.groupshop_counter_top__expired}>
-          {isExpired && 'EXPIRED – INVITE 1 FRIEND TO RESTART'}
+          {isExpired && !isRetail && 'EXPIRED – INVITE 1 FRIEND TO RESTART'}
         </span>
       </p>
     </div>
   );
 };
 
-// Counter.defaultProps = {
-//   user: {},
-// };
+Counter.defaultProps = {
+  isRetail: false,
+};
 
 export default Counter;

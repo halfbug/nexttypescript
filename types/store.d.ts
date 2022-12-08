@@ -98,6 +98,13 @@ export type PartnerRewards ={
   maximum: number;
 }
 
+export type ChannelRewards = {
+  baseline: string;
+  average: string;
+  maximum: string;
+  commission: string;
+}
+
 export type DealProduct ={
   productId: string;
   type?: 'deal' | 'abandoned';

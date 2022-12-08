@@ -1385,6 +1385,19 @@ const ADD_DEAL_PRODUCT_PARTNER = gql`
   }
 `;
 
+const ADD_DEAL_PRODUCT_CHANNEL = gql`
+  mutation updateChannelGroupshop($updateChannelGroupshopInput: UpdateChannelGroupshopInput!) {
+    updateChannelGroupshop(updateChannelGroupshopInput: $updateChannelGroupshopInput) {
+    id
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+    }
+      }
+  }
+`;
+
 const SYNC_STORE_CUSTOMERS = gql`
 query syncStoreCustomers($storeId: String!) {
   syncStoreCustomers(storeId: $storeId) {
@@ -1885,6 +1898,61 @@ query GetAllPartnerTiersInfo($storeId: String!) {
 }
 `;
 
+const GET_ACTIVE_CAMPAIGN_PRODUCTS = gql`
+query activeCampaignWithProducts($shop: String!){
+  activeCampaignWithProducts(shop: $shop) {
+    allProducts{
+      id
+      title
+      createdAtShopify
+      purchaseCount
+      featuredImage
+      description                             
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+    }
+  }
+}
+`;
+
+const CREATE_CHANNEL_GROUPSHOP = gql`
+mutation createChannelGroupshop($createChannelGroupshopInput: CreateChannelGroupshopInput!) {
+  createChannelGroupshop(createChannelGroupshopInput: $createChannelGroupshopInput) {
+    id
+    storeId
+    campaignId
+    url
+    shortUrl
+    discountCode{
+      title
+      percentage
+      priceRuleId
+    }
+  }
+}
+`;
+
+const GET_CHANNEL_BY_NAME = gql`
+query getChannelByName ($getChannelByName: GetChannelByName!) {
+  getChannelByName(getChannelByName: $getChannelByName) {
+    id
+    name
+    rewards {
+      baseline
+      maximum
+      commission 
+    }
+    isActive
+    storeId
+  }
+}`;
+
 const CREATE_CHANNEL_DB = gql`
   mutation createChannel($createChannelInput: CreateChannelInput!) {
     createChannel(createChannelInput: $createChannelInput) {
@@ -1918,6 +1986,222 @@ query getChannels($storeId: String!) {
   }
 }
 `;
+
+const GET_CHANNEL_GROUPSHOP = gql`
+query getChannelGroupshopByCode($code: String!) {
+  getChannelGroupshopByCode(code: $code) {
+    id
+    storeId
+    shortUrl
+    url
+    ownerProducts{
+      id
+      featuredImage
+      purchaseCount
+      title
+      description
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+    }
+    refferalProducts{
+      id
+      featuredImage
+      title
+      description
+      purchaseCount
+      price
+      options{
+        id
+        name
+        values
+        position
+      }
+      currencyCode
+    }
+
+    customerDetail{
+      firstName
+      lastName
+      email
+      phone
+    }
+
+    members {
+      orderId
+      availedDiscount
+      role
+      products{
+        id
+        title
+        price
+        featuredImage
+      }
+      orderDetail{
+        customer{
+          firstName
+          lastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      lineItems{
+        product{
+          id
+        }
+        price
+        quantity
+      }
+    }
+
+    bestSeller{
+      featuredImage
+      id
+      title
+      description
+      price
+      currencyCode
+      purchaseCount
+      outofstock
+      options{
+        id
+        name
+        values
+        position
+      }
+      lineItems{
+        product{
+          id
+        }
+        price
+      }
+       
+    }
+
+    dealProducts{
+      productId
+      customerIP
+      addedBy
+      type
+      isInfluencer
+    }
+
+    discountCode{
+      title
+      percentage
+      priceRuleId
+      
+    }
+
+    createdAt
+    expiredAt
+    totalProducts
+    
+    store{
+      brandName
+      shop
+      logoImage
+      currencyCode
+      settings{
+        general{
+          brandColor
+          imageUrl
+          youtubeUrl
+          media
+        }
+        marketing{
+          facebookPixels
+          tiktokPixels
+          googlePixels
+          snapchatPixels          
+        }
+      }
+    }
+  popularProducts{
+    id
+    featuredImage
+    title
+    description
+    purchaseCount
+    price
+    options{
+      id
+      name
+      values
+      position
+    }
+    currencyCode
+    orders{
+      product{
+        id
+      }
+      quantity
+      price
+    }
+  }
+
+  allProducts{
+    featuredImage
+    id
+    title
+    description
+    price
+    currencyCode
+    purchaseCount
+    outofstock
+    options{
+      id
+      name
+      values
+      position
+    }
+    lineItems{
+      product{
+        id
+      }
+      price
+    }
+  }
+    campaign{
+      name
+      products
+      collections
+      addableProducts
+      socialLinks{
+        instagram
+        tiktok
+        facebook
+        twitter
+      }
+      settings{
+        brandColor
+        customColor
+        customBg
+        imageUrl
+        youtubeUrl
+        media
+      }   
+      salesTarget{
+        id
+        name
+        rewards{
+          id
+          customerCount
+          discount
+        }    
+      }
+    } 
+  }
+}`;
 
 const UPDATE_CHANNEL = gql`
   mutation updateChannel(
@@ -1985,4 +2269,6 @@ export {
   GET_ORDER_LINEITEMS, GET_MONTH_COUNT, GET_TOTAL_PARTNER_REVENUE, GET_CUSTOM_BILLING_BY_DATE,
   GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, CREATE_CHANNEL_DB, GET_ALL_RETAIL_TOOLS,
   UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE, GET_ALL_RECENT_SIGNUP,
+  GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
+  GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL,
 };

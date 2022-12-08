@@ -19,6 +19,7 @@ import useAlert from 'hooks/useAlert';
 import { useMutation } from '@apollo/client';
 import { CREATE_SIGNUP } from 'store/store.graphql';
 import Link from 'next/link';
+import useAppContext from 'hooks/useAppContext';
 
 interface FooterProps {
   LeftComp: React.ReactNode;
@@ -33,6 +34,7 @@ export interface ISignUp {
 const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
+  const { isChannel } = useAppContext();
   const {
     getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
   } = useDeal();
@@ -102,7 +104,7 @@ const Footer = ({
                 </>
               ) : (
                 <>
-                  {isInfluencerGS ? (
+                  {isInfluencerGS || isChannel ? (
                     <h6>
                       <span className={[styles1.Influencer_fontMeduim, ''].join(' ')}>
                         Want to keep shopping with unlimited rewards?
@@ -118,7 +120,7 @@ const Footer = ({
               )}
             </div>
 
-            {isInfluencerGS ? (
+            {isInfluencerGS || isChannel ? (
               <Row>
                 <Col className={styles1.Influencer_MobileView}>
                   <div className="text-center me-2">

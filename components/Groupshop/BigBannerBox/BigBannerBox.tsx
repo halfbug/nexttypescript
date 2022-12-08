@@ -10,11 +10,12 @@ import { Member } from 'types/groupshop';
 interface IProps {
   text: string;
   isInfluencerGS?: boolean;
+  isChannel?: boolean;
 }
 
-const BigBannerBox = ({ text, isInfluencerGS }: IProps) => {
+const BigBannerBox = ({ text, isInfluencerGS, isChannel }: IProps) => {
   const {
-    milestones, getBannerTotalCashBack, currencySymbol, baseLine,
+    milestones, getBannerTotalCashBack, currencySymbol, baseLine, channelBaseLine,
   } = useDeal();
 
   return (
@@ -25,6 +26,7 @@ const BigBannerBox = ({ text, isInfluencerGS }: IProps) => {
             <Col className={styles.groupshop__hero_big_banner_box_off}>
               {milestones.length ? milestones[milestones.length - 1].discount : ''}
               { isInfluencerGS && baseLine}
+              { isChannel && channelBaseLine}
               {' '}
               off
             </Col>
@@ -57,6 +59,7 @@ const BigBannerBox = ({ text, isInfluencerGS }: IProps) => {
 };
 BigBannerBox.defaultProps = {
   isInfluencerGS: false,
+  isChannel: false,
 };
 
 export default BigBannerBox;

@@ -73,7 +73,7 @@ const ProductGrid = ({
     gsctx: {
       discountCode: { percentage },
       dealProducts, addedProducts,
-    } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop,
+    } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop, isChannel,
   } = useAppContext();
   // stage db and check with gs 4 bought prd
   const {
@@ -81,7 +81,6 @@ const ProductGrid = ({
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
   } = useDeal();
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 96 ~ addedByInfluencer', addedByInfluencer);
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
@@ -146,7 +145,7 @@ const ProductGrid = ({
                                 </span>
                               ),
                             ))}
-                          {isInfluencerGS && topFive(getBuyers2(prod.id)?.map(
+                          {(isInfluencerGS && !isChannel) && topFive(getBuyers2(prod.id)?.map(
                             (member: Member) => (
                               <span className={styles.groupshop__pcard_tag_buyer}>
                                 {formatName(member.customerInfo)}
@@ -156,7 +155,7 @@ const ProductGrid = ({
 
                           {getBuyers(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                          {isInfluencerGS && getBuyers2(prod.id).length > 0 && (
+                          {(isInfluencerGS) && getBuyers2(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                           {getBuyersDiscover(prod.id, membersForDiscover).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
@@ -181,7 +180,7 @@ const ProductGrid = ({
                             </span>
                           ) : '';
                           htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
-                          htmldata = isInfluencerGS && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
+                          htmldata = (isInfluencerGS || isChannel) && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
                           return htmldata;
                         })}
                       </button>

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { Member } from 'types/groupshop';
+import useAppContext from './useAppContext';
 import useDeal from './useDeal';
 
 const useTopBanner = () => {
@@ -10,7 +11,8 @@ const useTopBanner = () => {
   const {
     unLockCB, currencySymbol, isInfluencerGS, cashback,
   } = useDeal();
-  const { gsctx, dispatch } = useContext(GroupshopContext);
+  const { gsctx, dispatch, isChannel } = useAppContext();
+  console.log('🚀 ~ file: useTopBanner.ts ~ line 15 ~ useTopBanner ~ gsctx', gsctx, cashbackVal);
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
@@ -29,7 +31,7 @@ const useTopBanner = () => {
   useEffect(() => {
     // if (percentage) setCashBackVal(unLockCB(percentage, milestones, members));
     if (members) {
-      if (isInfluencerGS) {
+      if (isInfluencerGS || isChannel) {
         setText('on all orders');
       } else if (members.length === 1 || members.length === 3) {
         setText('For the next two shoppers only');

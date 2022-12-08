@@ -3,8 +3,8 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState, useEffect, useContext } from 'react';
 import type { NextPage } from 'next';
-import { useQuery } from '@apollo/client';
-import { GET_PARTNER_GROUPSHOP } from 'store/store.graphql';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { GET_CHANNEL_BY_NAME, GET_CHANNEL_GROUPSHOP, GET_STORE } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Groupshop.module.scss';
@@ -25,7 +25,7 @@ import {
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
 import { IGroupshop, Member, PartnerMember } from 'types/groupshop';
-import { IProduct } from 'types/store';
+import { IProduct, IStore } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import _ from 'lodash';
@@ -50,7 +50,6 @@ import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
 import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
-import { PartnerGroupshopContext, gspInit } from 'store/partner-groupshop.context';
 import useDeal from 'hooks/useDeal';
 import useSKU from 'hooks/useSKU';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
@@ -60,33 +59,124 @@ import ExpireModal from 'components/Influencer/ExpireModal/ExpireModal';
 import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
 import OBWelcomeInfluencer from 'components/Influencer/OnBoardWelcomeInfluencer';
+import GetRewardBox from 'components/Groupshop/RewardBox/GetRewardBox';
 import useBanner from 'hooks/useBanner';
 import useLogo from 'hooks/useLogo';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
+import WhatsInsideBox from 'components/Groupshop/RewardBox/WhatsInsideBox';
+import useAppContext from 'hooks/useAppContext';
+import { gspInit } from 'store/channel-groupshop.context';
 
-const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
+const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // console.log({ meta });
-  const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
+  const { gsctx, dispatch } = useAppContext();
   const { AlertComponent, showError } = useAlert();
-  const { shop, discountCode, status } = useCode();
+  const {
+    shop, discountCode, status, channelName,
+  } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
+
+  const {
+    data, refetch,
+  } = useQuery(GET_STORE, {
+
+    variables: { shop },
+  });
+
+  const [store, setstore] = useState<IStore>({});
+  const [Channel, setChannel] = useState({
+    rewards: {
+      baseline: '',
+      avarage: '',
+      commission: '',
+      maximum: '',
+    },
+    name: '',
+    id: '',
+  });
+  const [Error1, setError1] = useState<string>('');
+
+  const [callFun, { data: channelData }] = useLazyQuery(GET_CHANNEL_BY_NAME, {
+    fetchPolicy: 'network-only',
+  });
+
+  useEffect(() => {
+    if (data) {
+      setstore(data?.storeName);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (store.id && channelName) {
+      callFun({
+        variables: {
+          getChannelByName: {
+            storeId: store?.id,
+            name: channelName,
+          },
+        },
+      });
+    }
+  }, [store.id, channelName]);
+
+  useEffect(() => {
+    if (channelData?.getChannelByName) {
+      const {
+        rewards: {
+          baseline,
+          avarage,
+          commission,
+          maximum,
+        },
+        name,
+        id,
+        isActive,
+      } = channelData?.getChannelByName;
+      if (isActive === true) {
+        setChannel({
+          rewards: {
+            baseline,
+            avarage,
+            commission,
+            maximum,
+          },
+          name,
+          id,
+        });
+        const pctx: IGroupshop = {
+          ...gsctx,
+          channelId: id,
+          channelRewards: {
+            baseline,
+            average: avarage,
+            commission,
+            maximum,
+          },
+        };
+        dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
+      } else {
+        setError1('channel is Inactive');
+      }
+    }
+  }, [channelData?.getChannelByName]);
+
   const { query: { ins } } = useRouter();
   const { SKU } = useSKU();
   const {
     loading,
     error,
-    data: { partnerGroupshop } = { partnerGroupshop: gspInit },
-  } = useQuery<{ partnerGroupshop: IGroupshop }, { code: string | undefined}>(
-    GET_PARTNER_GROUPSHOP,
+    refetch: recallQuery,
+    data: { getChannelGroupshopByCode } = { getChannelGroupshopByCode: gspInit },
+  } = useQuery(
+    GET_CHANNEL_GROUPSHOP,
     {
       variables: { code: discountCode },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },
   );
-  console.log('🚀 ~ file: [...code].tsx ~ line 68 ~ groupshop', partnerGroupshop);
 
   // load all products
   useProducts(`${shop}.myshopify.com`);
@@ -105,7 +195,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
     >(undefined);
   const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
-  console.log('🚀 ~ file: [...code].tsx ~ line 110 ~ newPopularPrd', newPopularPrd);
+  // console.log('🚀 ~ file: [...code].tsx ~ line 110 ~ newPopularPrd', newPopularPrd);
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showExpiredModel, setShowExpiredModel] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
@@ -117,28 +207,38 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       phone: '',
     },
     orderId: '',
+    lineItems: [],
   }]);
   useEffect(() => {
-    if (partnerGroupshop && partnerGroupshop.id && pending) {
+    if (getChannelGroupshopByCode && getChannelGroupshopByCode.id && pending) {
+      let arr = [];
+      if (getChannelGroupshopByCode.members && getChannelGroupshopByCode.members.length) {
+        arr = getChannelGroupshopByCode.members.filter((m: any) => m !== undefined)
+          .filter((m: any) => m.orderDetail !== undefined)
+          .filter((m: any) => m.orderDetail.customer !== undefined)
+          .map((m: any) => ({
+            customerInfo: m.orderDetail.customer,
+            orderId: m.orderId,
+            lineItems: m.lineItems,
+          }));
+      }
       const pctx: IGroupshop = {
-        ...partnerGroupshop,
-        members: partnerGroupshop.members ?? [],
+        ...getChannelGroupshopByCode,
+        expiredAt: new Date(getChannelGroupshopByCode?.expiredAt),
+        members: getChannelGroupshopByCode.members ?? [],
+        memberDetails: arr,
       };
-      console.log('=== update gs partner ...code ');
-
       dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
       setpending(false);
-      setallProducts(partnerGroupshop?.allProducts?.filter(
-        (item) => item.outofstock === false,
+      setallProducts(getChannelGroupshopByCode?.allProducts?.filter(
+        (item: any) => item.outofstock === false,
       ));
-      setbestSeller(partnerGroupshop?.bestSeller);
-      const expireStatus = partnerGroupshop?.isActive !== true;
-      setShowExpiredModel(expireStatus);
+      setbestSeller(getChannelGroupshopByCode?.bestSeller);
+      setShowExpiredModel(isExpired);
     }
-  }, [partnerGroupshop, pending]);
+  }, [getChannelGroupshopByCode, pending]);
   // banner image and logo load
   const bannerImage = useBanner();
-  console.log('🚀 ~ file: [...code].tsx ~ line 143 ~ bannerImage', bannerImage);
   const storeLogo = useLogo();
   const {
     gsURL,
@@ -152,15 +252,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     isInfluencer,
     isGSnRef,
     isInfluencerGS,
+    addedProductsByOwner,
     addedProductsByInfluencer,
     addedByRefferal,
     checkCustomerDealProducts,
     formatNameCase,
     leftOverProducts,
+    isChannelOwner,
   } = useDeal();
 
   const { googleEventCode, googleButtonCode } = useGtm();
-  console.log(showRewards, 'showRewards');
+  // console.log(showRewards, 'showRewards');
 
   const {
     memberDetails = [],
@@ -171,7 +273,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     discountCode: { title },
     refferalProducts, influencerProducts,
   } = gsctx;
-  console.log('🚀 ~ file: [...code].tsx ~ line 183 ~ popularProducts', popularProducts);
   const { topPicks } = useTopPicks();
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
@@ -198,7 +299,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       if (popularProducts.length < 4) {
         // removing popular prd  and curated prd from topPicks so no duplication
         const finalTP1 = uniqueArray(filterArray(topPicks ?? [], popularProducts ?? [], 'id', 'id'));
-        const finalTP2 = uniqueArray(filterArray(finalTP1 ?? [], gsctx?.influencerProducts ?? [], 'id', 'id'));
+        const finalTP2 = uniqueArray(filterArray(finalTP1 ?? [], gsctx?.ownerProducts ?? [], 'id', 'id'));
         const newPopularArr = Array.from(
           new Set([...(popularProducts ?? []),
             ...(finalTP2.slice(0, 4 - popularProducts.length) ?? [])]),
@@ -221,25 +322,25 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     const arr = gsctx?.memberDetails ?? [];
     const ownerMember = [{
       customerInfo: {
-        firstName: gsctx?.partnerDetails?.fname ?? '',
-        lastName: gsctx?.partnerDetails?.lname ?? '',
-        email: gsctx?.partnerDetails?.email ?? '',
-        phone: '',
+        firstName: gsctx?.customerDetail?.firstName ?? '',
+        lastName: gsctx?.customerDetail?.lastName ?? '',
+        email: gsctx?.customerDetail?.email ?? '',
+        phone: gsctx?.customerDetail?.phone ?? '',
       },
       orderId: '',
     }];
     setpartnerMembers([...ownerMember, ...gsctx.memberDetails ?? []]);
-  }, [gsctx?.partnerDetails, gsctx.memberDetails]);
+  }, [gsctx?.customerDetail, gsctx.memberDetails]);
 
   const { text, cashBackText } = useTopBanner();
 
   const {
     showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
   } = useDetail(allProducts);
-  console.log('🚀[...code].tsx popularProduct', popularProducts);
-  console.log('🚀[...code].tsx popularShuffled', popularShuffled);
-  console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
-  // console.log('🚀[...code].tsx added', addedProductsByInfluencer);
+  // console.log('🚀[...code].tsx popularProduct', popularProducts);
+  // console.log('🚀[...code].tsx popularShuffled', popularShuffled);
+  // console.log('🚀[...code].tsx newPopularPrd', newPopularPrd);
+  // console.log('🚀[...code].tsx added', uniqueArray(_.uniq(addedProductsByOwner)));
   // console.log('🚀 ~ file: [...code].tsx ~ line 112 ~ partnerMembers', partnerMembers);
 
   const handleAddProduct = () => {
@@ -256,9 +357,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     } else showError('Groupshop is full you can not add more products to it');
   };
 
-  if (error) {
+  if (error && error.message === 'Not Found channel groupshop') {
     Router.push('/404');
     return <p>groupshop not found</p>;
+  }
+
+  if (Error1 !== '') {
+    return <p>{Error1}</p>;
   }
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
@@ -294,7 +399,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   return (
     <>
       <Head>
-        <title>Influencer Groupshop</title>
+        <title>Consumer groupshop</title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -339,19 +444,25 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           }}
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
-        <meta name="application-name" content="Groupshop" />
+        {/* <meta name="application-name" content="Groupshop" />
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
+        <meta
+          name="description"
+          content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`}
+        />
         <meta name="og:title" content="Groupshop" />
-        <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
+        <meta
+          name="description"
+          content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`}
+        />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href={meta.photo} as="image" />
         <meta property="og:image" content={meta.photo} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:height" content="630" /> */}
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -363,15 +474,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     onClick={() => { setShowQR(true); }}
                   />
                 )
-                : <div> </div>
-              // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+                : <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
             RightComp={(
               <InfoBox
                 mes={isModalForMobile ? '' : 'How does this work?'}
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
-                name={formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.lname ?? ''}`)}
+                name={formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.lastName ?? ''}`)}
               />
             )}
           />
@@ -411,13 +521,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       }),
                     )}
                     cashback={['']}
+                    pending={pending}
                     discount={discount}
                     fullshareurl={gsShortURL}
                     shareUrl={gsURL}
-                    rewards={gsctx?.partnerRewards}
+                    rewards={gsctx?.channelRewards}
                     brandname={brandName}
                     currencySymbol={currencySymbol}
-                    pending={pending}
                   />
                   <ShareButton
                     placement="bottom"
@@ -512,7 +622,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   {' '}
                   <span className="text-capitalize text-decoration-none">
                     {' '}
-                    {gsctx?.partnerDetails?.fname}
+                    {gsctx?.customerDetail?.firstName}
                     {' '}
                   </span>
                   ’s Groupshop
@@ -553,7 +663,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   }}
                   className={styles.groupshop__big_banner_wrapper}
                 >
-                  <BigBannerBox text={text} isInfluencerGS />
+                  <BigBannerBox text={text} isChannel />
                 </div>
               </div>
               {/* <Col md={4} className={styles.groupshop__hero__small_banner_left}>
@@ -569,7 +679,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col> */}
             </div>
             <div className="flex-wrap mt-2 d-flex justify-content-center align-items-center">
-
               <Members
                 names={partnerMembers?.slice(0, 1).map(
                   (mem: any) => ({
@@ -579,21 +688,21 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     lineItems: mem.lineItems,
                   }),
                 )}
+                // names={['name']}
                 cashback={['']}
+                pending={pending}
                 discount={discount}
                 fullshareurl={gsShortURL}
                 shareUrl={gsURL}
-                rewards={gsctx?.partnerRewards}
+                rewards={gsctx?.channelRewards}
                 brandname={brandName}
                 currencySymbol={currencySymbol}
-                pending={pending}
               />
             </div>
             <Row className="mt-1">
               <p className="mb-2 text-center">
-                {isInfluencerGS ? '' : <Icon />}
                 {' '}
-                {isInfluencerGS ? 'earns a reward everytime you shop.' : cashBackText}
+                earns a reward everytime you shop.
               </p>
             </Row>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
@@ -601,7 +710,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 mes="How it works"
                 brandname={brandName}
                 shareUrl={gsShortURL ?? gsURL}
-                name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
+                name={formatNameCase(`${gsctx?.customerDetail?.firstName} ${gsctx?.customerDetail?.lastName ?? ''}`)}
               />
             </Row>
           </Container>
@@ -613,7 +722,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           md={6}
           lg={4}
           xl={3}
-          products={uniqueArray(_.uniq(addedProductsByInfluencer))}
+          products={uniqueArray(_.uniq(addedProductsByOwner))}
           maxrows={1}
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
@@ -625,7 +734,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             CURATED BY
             {' '}
             <span className={styles.groupshop_firstName}>
-              {`${gsctx?.partnerDetails?.fname ?? gsctx?.partnerDetails?.lname}`}
+              {`${gsctx?.customerDetail?.firstName ?? gsctx?.customerDetail?.lastName}`}
             </span>
             {/* !pending && gsctx?.members?.length > 1 */}
             {!pending && gsctx?.members?.length > 1 ? (
@@ -668,7 +777,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <p className={styles.groupshop_col_recommendations}>
             Shop from
             {' '}
-            {gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.fname || '' : gsctx?.partnerDetails?.lname ?? ''}
+            {gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.firstName || '' : gsctx?.customerDetail?.lastName ?? ''}
             {' '}
             ’s
             personal favorites and recommendations.
@@ -684,7 +793,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             xl={3}
             isModalForMobile={isModalForMobile}
             products={
-                addedProductsByInfluencer
+              addedProductsByInfluencer
                 && (addedProductsByInfluencer.length > 3
                   ? uniqueArray(popularShuffled)
                   : uniqueArray(newPopularPrd))
@@ -706,10 +815,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             // products={bestSeller ?? []}
               isModalForMobile={isModalForMobile}
               products={
-              addedProductsByInfluencer
+                addedProductsByInfluencer
               && addedProductsByInfluencer.length > 3
-                ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4)
+                  ? topPicks?.slice(0, 3)
+                  : topPicks?.slice(0, 4)
             }
               maxrows={1}
               addProducts={handleAddProduct}
@@ -820,15 +929,31 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </Row>
         ) : <></>}
         <Footer LeftComp={undefined} RightComp={undefined} />
-        <ProductsSearch
+        {/* <ProductsSearch
           show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={!!isInfluencer}
         />
         <OBWelcomeInfluencer
-          show={showob1 && title !== '' && (partnerGroupshop?.isActive ?? true)}
+          show={showob1 && title !== '' && (getChannelGroupshopByCode?.isActive ?? true)}
           handleClose={() => setshowob1(false)}
           setshowob1={setshowob1}
+          setshowps={setshowps}
+        /> */}
+
+        {/* gs */}
+        <ProductsSearch
+          show={showps}
+          handleClose={() => setshowps(false)}
+          isCreateGS={!!isChannelOwner}
+          isChannel
+        />
+        <WhatsInsideBox
+          show={!!isChannelOwner && !showps && !!getChannelGroupshopByCode.storeId}
+          handleClose={() => {}}
+          store={store}
+          Channel={Channel}
+          owner={partnerMembers[0].customerInfo}
           setshowps={setshowps}
         />
 
@@ -858,17 +983,18 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           shareUrl={gsShortURL ?? gsURL}
           showRewards={showRewards}
           setShowRewards={setShowRewards}
-          name={formatNameCase(`${gsctx?.partnerDetails?.fname} ${gsctx?.partnerDetails?.lname ?? ''}`)}
+          name={formatNameCase(`${gsctx?.customerDetail?.firstName} ${gsctx?.customerDetail?.lastName ?? ''}`)}
         />
         ) }
 
-        {partnerGroupshop?.isActive === false
+        {isExpired === true
           && (
           <ExpireModal
             storeId={gsctx?.storeId}
             storeLogo={storeLogo}
             showExpiredModel={showExpiredModel}
             setShowExpiredModel={setShowExpiredModel}
+            isChannel
           />
           )}
         {
@@ -890,42 +1016,33 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           shareurl={gsShortURL ?? gsURL}
           fullshareurl={gsURL}
           handleClose={() => setShowRewards(false)}
-          brandName={brandName}
-          maxPercent={(gsctx?.partnerRewards?.baseline)?.toString() ?? ''}
         /> */}
-        {isModalForMobile && (
-          <div>
-            <ShoppingBoxMobile
-              shareurl={gsShortURL ?? gsURL}
-              // onClick={() => setShowRewards(true)}
-              val=""
-              label="Share with friends"
-              brandName={brandName}
-              maxPercent={(gsctx?.partnerRewards?.baseline)?.toString() ?? ''}
-            />
-          </div>
-        )}
+        {/* {isModalForMobile && (
+        <div>
+          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} />
+        </div>
+        )} */}
       </div>
     </>
   );
 };
 
-export default GroupShop;
-export const getServerSideProps = async (context: any) => {
-  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
-  const url = `${process.env.API_URL}/mepartner?name=${context.params.code}`;
-  const requestOptions = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export default ChannelGroupShop;
+// export const getServerSideProps = async (context: any) => {
+//   // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
+//   const url = `${process.env.API_URL}/mepartner?name=${context.params.code}`;
+//   const requestOptions = {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   };
 
-  const res = await fetch(url, requestOptions);
-  const resJson = await res.json();
-  return {
-    props: {
-      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}/${resJson.photo ?? '/bg.jpg'}` },
-    },
-  };
-};
+//   const res = await fetch(url, requestOptions);
+//   const resJson = await res.json();
+//   return {
+//     props: {
+//       meta: { ...resJson, photo: `${process.env.IMAGE_PATH}/${resJson.photo ?? '/bg.jpg'}` },
+//     },
+//   };
+// };

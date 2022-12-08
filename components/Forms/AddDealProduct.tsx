@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { useMutation } from '@apollo/client';
-import { ADD_DEAL_PRODUCT, ADD_DEAL_PRODUCT_PARTNER } from 'store/store.graphql';
+import { ADD_DEAL_PRODUCT, ADD_DEAL_PRODUCT_CHANNEL, ADD_DEAL_PRODUCT_PARTNER } from 'store/store.graphql';
 import { GroupshopContext } from 'store/groupshop.context';
 import { DealProduct, IGroupshop } from 'types/groupshop';
 import useIP from 'hooks/useIP';
@@ -32,12 +32,23 @@ export default function AddDealProduct({
   selectedProducts, handleClose,
   isCreateGS,
 }:TAddDealProduct) {
-  const { gsctx, dispatch, isGroupshop } = useAppContext();
-  const [addDealProduct] = useMutation<IGroupshop>(
-    isGroupshop ? ADD_DEAL_PRODUCT : ADD_DEAL_PRODUCT_PARTNER,
-  );
+  const {
+    gsctx, dispatch, isGroupshop, isChannel,
+  } = useAppContext();
+  let dynamicFunc: any;
+  if (isChannel) {
+    [dynamicFunc] = useMutation<IGroupshop>(
+      ADD_DEAL_PRODUCT_CHANNEL,
+    );
+  } else {
+    [dynamicFunc] = useMutation<IGroupshop>(
+      isGroupshop ? ADD_DEAL_PRODUCT : ADD_DEAL_PRODUCT_PARTNER,
+    );
+  }
 
-  const { id, dealProducts: dealProductsCtx } = gsctx;
+  const {
+    id, dealProducts: dealProductsCtx, discountCode, storeId,
+  } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
 
   let app = 0;
@@ -53,7 +64,7 @@ export default function AddDealProduct({
 
   // get client IP
   const [clientIP] = useIP();
-  const { isInfluencer } = useDeal();
+  const { isInfluencer, isChannelOwner, getDealUserName } = useDeal();
   const { uniqueArray } = useUtilityFunction();
   console.log('🚀 ~ file: ~ isInfluencer', isInfluencer);
 
@@ -78,7 +89,7 @@ export default function AddDealProduct({
     handleSubmit, values, handleChange, touched, errors,
   }: FormikProps<IValues> = useFormik<IValues>({
     initialValues: {
-      username: isInfluencer ? gsctx?.partnerDetails?.fname ?? '' : '',
+      username: getDealUserName(),
       // username: '',
       selectedProducts,
 
@@ -95,28 +106,52 @@ export default function AddDealProduct({
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line87 ~ onSubmit: ~ products', products);
 
       // merge selected products with groupshop deal prodcuts
+      let ownerIP = '';
 
+      if (dealProductsCtx && dealProductsCtx.length) {
+        dealProductsCtx.forEach((p) => {
+          if (p.type === 'owner') {
+            ownerIP = p.customerIP;
+          }
+        });
+      }
       const sdealProducts = products?.map(
         (productId) => {
           const preProduct = dealProductsCtx?.find((prd) => prd.productId === productId);
-          const newProduct:DealProduct = isGroupshop ? {
+          let newProduct:DealProduct = isGroupshop ? {
             productId, addedBy: username, customerIP: clientIP, type: 'deal',
           } : {
             // eslint-disable-next-line max-len
             // productId, addedBy: isInfluencer ? fname : username, customerIP: clientIP, type: 'deal', isInfluencer,
             productId, addedBy: username, customerIP: clientIP, type: 'deal', isInfluencer,
           };
+
+          if (isChannel) {
+            newProduct = {
+              productId, addedBy: username, customerIP: clientIP, type: isChannelOwner || !!ownerIP ? 'owner' : 'deal',
+            };
+          }
           return preProduct?.type === 'first' ? newProduct : preProduct ?? newProduct;
         },
       );
       // unique by complete object
       const dealProducts = _.uniq([...gsctx.dealProducts ?? [], ...sdealProducts ?? []]);
-
       if (isGroupshop) {
-        await addDealProduct({
+        await dynamicFunc({
           variables: {
             updateGroupshopInput: {
               id,
+              dealProducts,
+            },
+          },
+        });
+      } else if (isChannel) {
+        await dynamicFunc({
+          variables: {
+            updateChannelGroupshopInput: {
+              id,
+              storeId,
+              discountCode,
               dealProducts,
             },
           },
@@ -146,7 +181,7 @@ export default function AddDealProduct({
           email: gsctx?.partnerDetails?.email,
           shopifyCustomerId: null,
         } : gsctx?.partnerDetails ?? null;
-        await addDealProduct({
+        await dynamicFunc({
           variables: {
             updatePartnersInput: {
               id,
@@ -162,13 +197,17 @@ export default function AddDealProduct({
       // update context
       console.log('🚀 ~ file: AddDealProduct.tsx ~ line 155 ~ onSubmit: ~ isInfluencer', isInfluencer);
       let influencerProducts;
+      let ownerChannelProducts;
       let partnerDetails;
-      if (isInfluencer) {
+      if (isInfluencer || isChannel) {
         influencerProducts = uniqueArray([...gsctx?.store?.products?.filter(
           ({ id: pid }:{ id:string}) => products?.includes(pid),
         ) || []]);
+        ownerChannelProducts = uniqueArray([...gsctx?.store?.products?.filter(
+          ({ id: pid }:{ id:string}) => products?.includes(pid),
+        ) || []]);
       }
-      if (!isGroupshop) {
+      if (!isGroupshop && !isChannel) {
         partnerDetails = {
           fname: username.split(' ')[0],
           lname: username.split(' ')[1] ?? '',
@@ -180,16 +219,19 @@ export default function AddDealProduct({
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...gsctx,
-          popularProducts: _.uniq([...gsctx?.store?.products?.filter(
-            ({ id: pid }:{ id:string}) => products?.includes(pid),
-          ) || [],
-          ...gsctx?.popularProducts || []]),
+          popularProducts: !(isInfluencer || isChannelOwner)
+            ? _.uniq([...gsctx?.store?.products?.filter(
+              ({ id: pid }:{ id:string}) => products?.includes(pid),
+            ) || [],
+            ...gsctx?.popularProducts || []]) : [],
           dealProducts,
           addedProducts: [...gsctx?.addedProducts ?? [], ...sdealProducts || []],
-          refferalDealsProducts: [...gsctx?.refferalDealsProducts ?? [], ...sdealProducts || []],
+          refferalDealsProducts: [...gsctx?.refferalDealsProducts ?? [], ...sdealProducts?.filter((p) => p.type === 'deal') || []],
           partnerDetails: !isGroupshop && isInfluencer ? partnerDetails
             : gsctx?.partnerDetails ?? null,
           influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
+          ownerProducts: isChannelOwner || ownerIP === clientIP
+            ? [...gsctx?.ownerProducts ?? [], ...ownerChannelProducts] : gsctx?.ownerProducts,
         },
       });
 
@@ -213,6 +255,7 @@ export default function AddDealProduct({
       )
         : ( */}
       <Form.Group className={isCreateGS ? 'd-flex justify-content-center' : 'd-flex'} controlId="username">
+        { !isChannelOwner && (
         <div className={styles.groupshop_search_popover_addDeal}>
           <Form.Control
             type="text"
@@ -228,6 +271,7 @@ export default function AddDealProduct({
             {errors.username}
           </Form.Control.Feedback>
         </div>
+        )}
         {loadingSubmit ? <Spinner animation="border" /> : (
           <Button
             type="submit"
@@ -235,7 +279,8 @@ export default function AddDealProduct({
               'fs-5 text-capitalize'].join(' ')
               : styles.groupshop_search_popover_dealBtn}
           >
-            {isInfluencer ? 'Create Groupshop' : 'Add'}
+            {!isChannelOwner && (isInfluencer ? 'Create Groupshop' : 'Add')}
+            {isChannelOwner && 'Save My Favs'}
           </Button>
         )}
       </Form.Group>

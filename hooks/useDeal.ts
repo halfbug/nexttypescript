@@ -16,7 +16,9 @@ export default function useDeal() {
   //   dispatch,
   // } = useContext(GroupshopContext);
   const { filterArray, findInArray2 } = useUtilityFunction();
-  const { gsctx, dispatch, isGroupshop } = useAppContext();
+  const {
+    gsctx, dispatch, isGroupshop, isChannel,
+  } = useAppContext();
 
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
@@ -27,26 +29,39 @@ export default function useDeal() {
     addedProducts,
     ownerDeals,
   } = gsctx;
-  const isInfluencer = !!(!isGroupshop && dealProducts && dealProducts?.length < 1);
+  const isInfluencer = !!(!isGroupshop && !isChannel && dealProducts && dealProducts?.length < 1);
+  const isChannelOwner = isChannel
+  && ((!dealProducts) || (dealProducts && dealProducts?.length < 1));
   // const isInfluencer = useCallback(
   //   () => !!(!isGroupshop && dealProducts && dealProducts?.length < 1),
   //   [gsctx],
   // );
-  const isInfluencerGS = !isGroupshop;
+  const isInfluencerGS = !isGroupshop && !isChannel;
   const isGSnRef = isGroupshop && dealProducts && dealProducts?.length > 1;
   // const ownerPrds = isInfluencerGS ? [] : gmembers[0]?.products[0] ?? [];
 
-  const addedByRefferal = dealProducts?.filter((item) => item.isInfluencer === false);
-  const addedByInfluencer = dealProducts?.filter((item) => item.isInfluencer === true);
+  const addedByRefferal = !isChannel ? dealProducts?.filter((item) => item.isInfluencer === false) : dealProducts?.filter((item) => item.type === 'deal');
+  const addedByInfluencer = !isChannel ? dealProducts?.filter((item) => item.isInfluencer === true) : dealProducts?.filter((item) => item.type === 'owner');
   const addedProductsByInfluencer: any = _.uniq(gsctx?.influencerProducts);
+  const addedProductsByOwner: any = _.uniq(gsctx?.ownerProducts);
+
+  const getDealUserName = () => {
+    if (isInfluencerGS) {
+      return gsctx?.partnerDetails?.fname ?? '';
+    }
+
+    if (isChannel) {
+      return gsctx.customerDetail?.firstName ?? '';
+    }
+
+    return '';
+  };
 
   const clientDealProducts = useCallback(
     (): string[] => {
       // eslint-disable-next-line max-len
       // const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
-      const addedPrds = gsctx?.dealProducts?.filter((item) => item.type === 'deal') ?? [];
-      // console.log('🚀 useDeal ~ addedPrds', addedPrds);
-
+      const addedPrds = isChannel ? gsctx?.dealProducts?.filter((item) => item.type === 'deal' || item.type === 'owner') ?? [] : gsctx?.dealProducts?.filter((item) => item.type === 'deal') ?? [];
       return ([...addedPrds.filter(
         ({ customerIP }: { customerIP: string }) => customerIP === clientIP,
       )?.map(
@@ -72,8 +87,14 @@ export default function useDeal() {
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   const gsShortURL = gsctx?.shortUrl ?? gsURL;
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
-  const maxPercent = isGroupshop ? gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount
-    : gsctx?.partnerRewards?.baseline;
+
+  let maxPercent;
+  if (isChannel) {
+    maxPercent = gsctx?.channelRewards?.baseline;
+  } else {
+    maxPercent = isGroupshop ? gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount
+      : gsctx?.partnerRewards?.baseline;
+  }
   const brandName = gsctx?.store?.brandName;
   const productShareUrl = useCallback((pid: string) => {
     // console.log('🚀 ~ file: useDeal.ts ~ line 36 ~ productShareUrl ~ pid', pid);
@@ -146,7 +167,7 @@ export default function useDeal() {
   },
   [gsctx.members]);
 
-  const isExpired = isGroupshop ? !(getDateDifference().time > -1) : false;
+  const isExpired = isGroupshop || isChannel ? !(getDateDifference().time > -1) : false;
 
   const totalCashBack = useCallback((price) => {
     const {
@@ -537,6 +558,8 @@ export default function useDeal() {
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';
   const baseLine = gsctx?.partnerRewards?.baseline;
 
+  const channelBaseLine = isChannel ? gsctx.channelRewards?.baseline : '';
+
   const formatNameCase = (name: string) => {
     const full = name.toLowerCase().split(' ');
     const fullname = full.map((item: string) => {
@@ -552,12 +575,29 @@ export default function useDeal() {
   ).filter(
     (item: any) => !ownerDeals?.some((item2) => item2.id === item.id),
   ) ?? []), [gsctx, gsctx?.store?.products]);
-  const getOwnerName = useCallback(() => (
-    isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`)
-      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0]?.orderDetail?.customer?.lastName?.charAt(0) ?? '' : gsctx?.members[0]?.orderDetail?.customer?.lastName ?? ''}`)), [gsctx]);
-  const getOwnerFirstName = useCallback(() => (
-    isInfluencerGS ? formatNameCase(`${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.fname : gsctx?.partnerDetails?.lname}`)
-      : formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.firstName : gsctx?.members[0]?.orderDetail?.customer?.lastName}`)), [gsctx]);
+
+  const getOwnerName = useCallback(() => {
+    if (isChannel) {
+      return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.lastName?.charAt(0) ?? '' : gsctx?.customerDetail?.lastName ?? ''}`);
+    }
+
+    if (isInfluencerGS) {
+      return formatNameCase(`${gsctx?.partnerDetails?.fname ?? ''} ${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.lname?.charAt(0) ?? '' : gsctx?.partnerDetails?.lname ?? ''}`);
+    }
+    return formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ?? ''} ${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0]?.orderDetail?.customer?.lastName?.charAt(0) ?? '' : gsctx?.members[0]?.orderDetail?.customer?.lastName ?? ''}`);
+  }, [gsctx]);
+
+  const getOwnerFirstName = useCallback(() => {
+    if (isChannel) {
+      return formatNameCase(`${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.firstName : gsctx?.customerDetail?.lastName}`);
+    }
+
+    if (isInfluencerGS) {
+      return formatNameCase(`${gsctx?.partnerDetails?.fname ? gsctx?.partnerDetails?.fname : gsctx?.partnerDetails?.lname}`);
+    }
+    return formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.firstName : gsctx?.members[0]?.orderDetail?.customer?.lastName}`);
+  }, [gsctx]);
+
   const socialText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
   const nativeShareText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
 
@@ -592,6 +632,7 @@ export default function useDeal() {
     // getExpectedCashBack,
     isInfluencer,
     addedProductsByInfluencer,
+    addedProductsByOwner,
     baseLine,
     isInfluencerGS,
     isGSnRef,
@@ -610,6 +651,9 @@ export default function useDeal() {
     addedByInfluencer,
     getOwnerFirstName,
     nameOnProductGrid,
+    isChannelOwner,
+    channelBaseLine,
+    getDealUserName,
     getBuyersDiscover,
   };
 }

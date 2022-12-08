@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from 'styles/Modal.module.scss';
-import { RootProps } from 'types/store';
+import { IStore, RootProps } from 'types/store';
 import {
   Button,
   Col, Form, Modal, Row,
@@ -11,16 +11,21 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import Link from 'next/link';
 
 interface WhatsInsideBoxProps extends RootProps {
   show: boolean;
   handleClose(e: any): any;
-
+  store: IStore;
+  Channel: any;
+  owner: any;
+  setshowps: any;
 }
 
 const WhatsInsideBox = ({
-  show = false, handleClose,
+  show = false, handleClose, store, Channel, owner, setshowps,
 }: WhatsInsideBoxProps) => {
+  console.log('🚀 ~ file: WhatsInsideBox.tsx ~ line 28 ~ owner', owner);
   const closeModal = (e: any) => {
     handleClose(e);
   };
@@ -44,24 +49,38 @@ const WhatsInsideBox = ({
         contentClassName={styles.whatsInsideBox_modal__content}
       >
         <Modal.Header className={styles.whatsInsideBox_modal__closebtnlg}>
-          <Row onClick={handleClose}>
+          {/* <Row onClick={handleClose}>
             <div><Cross /></div>
-          </Row>
+          </Row> */}
         </Modal.Header>
         <Modal.Header className={styles.whatsInsideBox_modal__closebtnsm}>
-          <Row onClick={handleClose}>
+          {/* <Row onClick={handleClose}>
             <div><ArrowDown /></div>
-          </Row>
+          </Row> */}
         </Modal.Header>
         <Modal.Body className={styles.whatsInsideBox_modal__body}>
           <Row>
             <Col lg={12} className="px-0">
               <div className={styles.whatsInsideBox_modal__top}>
                 <div className={styles.whatsInsideBox_modal__top__icon}>
-                  <LeEsableIcon />
+                  {/* <LeEsableIcon /> */}
+                  <Link
+                    href={{
+                      pathname: `https://${store?.shop}`,
+                    }}
+                  >
+                    <a target="_blank">
+                      <img width="130" src={store.logoImage} alt="brand_logo" className="img-fluid" />
+                    </a>
+                  </Link>
                 </div>
                 <h2>
-                  Welcome to your Groupshop Jane!
+                  Welcome to your Groupshop
+                  {' '}
+                  {owner?.firstName ?? ''}
+                  {' '}
+                  {owner?.lastName ?? ''}
+                  !
                 </h2>
                 <div className={styles.whatsInsideBox_modal__top__inside}>
                   <span className={styles.whatsInsideBox_modal__top__inside__border} />
@@ -81,12 +100,20 @@ const WhatsInsideBox = ({
             </Col>
             <Col lg={12} className="px-3">
               <div className={styles.whatsInsideBox_modal__tile}>
-                🎁 20% off for you and friends to shop
+                🎁
+                {' '}
+                {Channel.rewards.baseline}
+                {' '}
+                off for you and friends to shop
               </div>
             </Col>
             <Col lg={12} className="px-2">
               <div className={styles.whatsInsideBox_modal__tile}>
-                🤑 earn 15% cash of every order when friends shop from your store
+                🤑 earn
+                {' '}
+                {Channel.rewards.commission}
+                {' '}
+                cash of every order when friends shop from your store
               </div>
             </Col>
             <Col lg={12} className="px-0">
@@ -98,7 +125,7 @@ const WhatsInsideBox = ({
           <Row className="justify-content-center">
             <Col lg={12}>
               <div className={styles.whatsInsideBox_modal__btnSection}>
-                <Button variant="dark" onClick={handleClose}>
+                <Button variant="dark" onClick={() => setshowps(true)}>
                   Add Your Favorite Products
                 </Button>
               </div>

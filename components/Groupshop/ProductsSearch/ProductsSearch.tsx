@@ -36,10 +36,12 @@ interface ProductsSearchProps extends RootProps {
   setData?: any;
   allowSelectAll?: boolean,
   isCreateGS: boolean;
+  isChannel?: boolean;
 }
 
 const ProductsSearch = ({
   show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData, isCreateGS,
+  isChannel,
 }: ProductsSearchProps) => {
   // const {
   //   gsctx,
@@ -423,9 +425,13 @@ const ProductsSearch = ({
               {!isOwner && isCreateGS
                 ? (
                   <>
-                    <div className="pb-3">
-                      Enter your name to confirm and get started!
-                    </div>
+                    {
+                      !isChannel && (
+                      <div className="pb-3">
+                        Enter your name to confirm and get started!
+                      </div>
+                      )
+                    }
                     <AddDealProduct
                       selectedProducts={selected}
                       isCreateGS={isCreateGS}
@@ -455,7 +461,7 @@ const ProductsSearch = ({
                       className="rounded-pill text-center text-uppercase px-5 fw-bold"
                       disabled={selected?.length === 0}
                     >
-                      ADD to groupshop
+                      {isChannel ? 'Save My Favs' : 'ADD to groupshop' }
 
                     </Button>
                     {isOwner && (
@@ -465,7 +471,6 @@ const ProductsSearch = ({
                     )}
                   </>
                 )}
-
               <Overlay
                 show={show}
                 target={target}
@@ -520,6 +525,7 @@ const ProductsSearch = ({
 ProductsSearch.defaultProps = {
   allowSelectAll: false,
   setData: [],
+  isChannel: false,
 };
 
 export default ProductsSearch;

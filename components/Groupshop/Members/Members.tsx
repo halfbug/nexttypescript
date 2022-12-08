@@ -43,7 +43,7 @@ const Members = ({
   const handleClick = (member: any, index: any) => {
     setCustName(member.fname);
     const orderPrice = countTotalPrice(member.lineItems);
-    setpendingRewards(((orderPrice * (parseInt(rewards[0].discount, 10))) / 100));
+    setpendingRewards(((orderPrice * (parseInt(rewards.baseline, 10))) / 100));
     setshowRewardModel(true);
     if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
   };

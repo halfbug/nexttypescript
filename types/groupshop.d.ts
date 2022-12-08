@@ -1,5 +1,5 @@
 import {
-  IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards,
+  IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards, ChannelRewards,
 } from './store';
 
 export type DealProduct = {
@@ -126,6 +126,12 @@ export type ObSettings = {
 export interface IGroupshop {
   id: string;
 
+  channelId?: string;
+
+  customerDetail?: CustomerInfo;
+
+  consumerCommmission?: string;
+
   campaignId: string;
 
   storeId: string;
@@ -173,6 +179,8 @@ export interface IGroupshop {
 
   partnerRewards?: PartnerRewards;
 
+  channelRewards?: ChannelRewards;
+
   partnerCommission?: string;
 
   isActive?: boolean | undefined;
@@ -182,6 +190,8 @@ export interface IGroupshop {
   refferalProducts?: Product[];
 
   influencerProducts?: Product[];
+
+  ownerProducts?: Product[];
 
   exipredShortLink?: string;
 

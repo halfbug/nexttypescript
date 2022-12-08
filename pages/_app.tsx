@@ -7,6 +7,7 @@ import { StoreContextProvider } from 'store/store.context';
 import { useRouter } from 'next/router';
 import { GroupshopContextProvider } from 'store/groupshop.context';
 import { GroupshopPartnerContextProvider } from 'store/partner-groupshop.context';
+import { GroupshopChannelContextProvider } from 'store/channel-groupshop.context';
 import { AuthContextProvider } from 'store/auth.context';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -28,6 +29,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GroupshopPartnerContextProvider>
           <Component {...pageProps} />
         </GroupshopPartnerContextProvider>
+      </ApolloProvider>
+    );
+  }
+
+  if (pathname.includes('/ch/')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <GroupshopChannelContextProvider>
+          <Component {...pageProps} />
+        </GroupshopChannelContextProvider>
       </ApolloProvider>
     );
   }

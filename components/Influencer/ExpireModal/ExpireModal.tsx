@@ -22,9 +22,10 @@ interface mesProps {
   storeLogo? : string;
   showExpiredModel?: boolean;
   setShowExpiredModel?: any;
+  isChannel?: boolean;
 }
 const InfoBox = ({
-  showExpiredModel, setShowExpiredModel, storeLogo, storeId,
+  showExpiredModel, setShowExpiredModel, storeLogo, storeId, isChannel,
 }: mesProps) => {
   const [show, setShow] = useState(false);
   const [groupShopURL, setGroupShopURL] = useState<string>('');
@@ -46,6 +47,7 @@ const InfoBox = ({
     data, refetch,
   } = useQuery(GET_ACTIVE_GROUPSHOP_BY_SHOP, {
     variables: { storeId },
+    skip: isChannel,
   });
 
   useEffect(() => {
@@ -92,43 +94,52 @@ const InfoBox = ({
             <h2>
               This Groupshop expired!
             </h2>
-            <div className={styles1.Influencer_expired}>
-              <hr />
-            </div>
-            <p className={styles.groupshop_infoBox_textDiscount}>
-              But you can still get exclusive discounts.
+            { !isChannel && (
+            <>
+              <div className={styles1.Influencer_expired}>
+                <hr />
+              </div>
+              <p className={styles.groupshop_infoBox_textDiscount}>
+                But you can still get exclusive discounts.
 
-            </p>
-            <div className="my-2 d-flex justify-content-center">
-              <p className={styles.groupshop_expiremodal__pointers}>
-                Click below and we'll pair you with another Groupshop to shop. share and earn!
               </p>
-            </div>
+              <div className="my-2 d-flex justify-content-center">
+                <p className={styles.groupshop_expiremodal__pointers}>
+                  Click below and we'll pair you with another Groupshop to shop. share and earn!
+                </p>
+              </div>
+            </>
+            ) }
+
           </div>
-          <div className="d-flex justify-content-center my-4">
-            {groupShopURL !== ''
-            && (
-            <div
-              className={`${'Button_onboarding__button__XLPBP'} ${styles.groupshop_infoBox_shoppingBtn}`}
-            >
-              <Link href={groupShopURL}>
-                <a target="_blank" className="text-decoration-none">
+          { !isChannel && (
+          <>
+            <div className="d-flex justify-content-center my-4">
+              {groupShopURL !== ''
+              && (
+                <div
+                  className={`${'Button_onboarding__button__XLPBP'} ${styles.groupshop_infoBox_shoppingBtn}`}
+                >
+                  <Link href={groupShopURL}>
+                    <a target="_blank" className="text-decoration-none">
+                      Find a Groupshop
+                    </a>
+                  </Link>
+                </div>
+              )}
+              {groupShopURL === ''
+              && (
+                <Button
+                  className={styles.groupshop_infoBox_shoppingBtn}
+                  onClick={handleError}
+                >
                   Find a Groupshop
-                </a>
-              </Link>
+                </Button>
+              )}
             </div>
-            )}
-            {groupShopURL === ''
-            && (
-              <Button
-                className={styles.groupshop_infoBox_shoppingBtn}
-                onClick={handleError}
-              >
-                Find a Groupshop
-              </Button>
-            )}
-          </div>
-          <div className="text-danger">{groupShopError}</div>
+            <div className="text-danger">{groupShopError}</div>
+          </>
+          ) }
         </Modal.Body>
 
       </Modal>
@@ -141,5 +152,6 @@ InfoBox.defaultProps = {
   storeLogo: string,
   showExpiredModel: false,
   setShowExpiredModel: () => {},
+  isChannel: false,
 };
 export default InfoBox;
