@@ -3,7 +3,7 @@ import React from 'react';
 import styles from 'styles/Partner.module.scss';
 import { RootProps } from 'types/store';
 import {
-  Col, Form, Modal, Row,
+  Col, Form, Modal, Row, Button,
 } from 'react-bootstrap';
 import Cross from 'assets/images/CrossLg.svg';
 import WhiteButton from 'components/Buttons/WhiteButton/WhiteButton';
@@ -50,9 +50,9 @@ const AddMultiplePartnerBox = ({
                   className={[styles.partner_addMultiplePartner_modal__textarea, 'p-3'].join(' ')}
                 />
                 <div className={styles.partner_addMultiplePartner_modal__btnSection}>
-                  <WhiteButton onClick={handleClose} className="border-dark bg-white fw-500 mb-2">
+                  <Button onClick={handleClose} className="fs-12 text-black border-dark bg-white fw-500 mb-2">
                     Done
-                  </WhiteButton>
+                  </Button>
                 </div>
               </div>
             </Col>
