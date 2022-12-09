@@ -111,7 +111,7 @@ export default function useDeal() {
   ) ?? [], [gsctx.members]);
 
   const getBuyersDiscover = (pid: string, member:any) => (
-    member.filter((mem:any) => mem.products.find((prd:any) => prd.id === pid))
+    member?.filter((mem:any) => mem?.products?.find((prd:any) => prd?.id === pid))
   );
 
   const formatName = useCallback((customer : any) => `${customer.firstName ?? ''} ${customer.firstName ? customer?.lastName?.charAt(0) ?? '' : customer?.lastName ?? ''}`,

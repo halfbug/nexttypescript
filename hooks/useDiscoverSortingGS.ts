@@ -37,20 +37,20 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
         const tempIds: any = [];
         el.groupshops?.popularProducts?.forEach((elem: any) => {
           if (tempIds.length < 4) {
-            tempProd.push(elem); tempIds.push(elem.id);
+            tempProd.push(elem); tempIds.push(elem?.id);
           }
         });
         if (tempIds.length < 4) {
           el.groupshops?.dealProducts?.forEach((elem: any) => {
             if (!tempIds.includes(elem.productId) && tempIds.length < 4) {
-              tempProd.push(elem.productData); tempIds.push(elem.productData.id);
+              tempProd.push(elem.productData); tempIds.push(elem.productData?.id);
             }
           });
         }
         if (tempIds.length < 4) {
           el.groupshops?.bestSeller?.forEach((elem: any) => {
-            if (!tempIds.includes(elem.id) && tempIds.length < 4) {
-              tempProd.push(elem); tempIds.push(elem.id);
+            if (!tempIds.includes(elem?.id) && tempIds.length < 4) {
+              tempProd.push(elem); tempIds.push(elem?.id);
             }
           });
         }
@@ -61,7 +61,7 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
             customerName: el?.groupshops?.members,
             discount: el?.groupshops?.discountCode?.percentage,
             storeId: el.storeId,
-            products: tempProd,
+            products: tempProd.filter((ele:any) => ele),
             url: el?.groupshops?.url,
             members: el?.groupshops?.members,
           });

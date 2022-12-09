@@ -222,6 +222,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         const finalMathingGSData = useDiscoverSortingGS(
           matchingAllStore?.matchingGS, matchingStoreIds,
         );
+        console.log('🚀🚀🚀finalMathingGSData', finalMathingGSData);
         setMatchingGroupshop(finalMathingGSData);
       }
     },

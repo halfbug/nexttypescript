@@ -303,7 +303,7 @@ const ProductGrid = ({
           </>
         ))}
 
-        {(skuCount! > 1 && leftOverProducts()?.length > 0)
+        {(!isSuggestion && skuCount! > 1 && leftOverProducts()?.length > 0)
           ? [...new Array(fillerz)]?.map((n) => (
             <Col xs={xs} md={6} lg={4} xl={3} key={n}>
               <ProductCard
