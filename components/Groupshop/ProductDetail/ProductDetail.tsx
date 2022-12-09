@@ -138,8 +138,11 @@ const ProductDetail = ({
       const selectedVariant = getVariant();
       const { productById } = data;
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
-      if (productById?.outofstock) setoutofStock(true);
-      else if (selectedVariant?.inventoryQuantity < 1) {
+      if (productById?.outofstock) {
+        setoutofStock(true);
+      } else if (selectedVariant?.inventoryPolicy === 'continue') {
+        setoutofStock(false);
+      } else if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);
@@ -153,7 +156,8 @@ const ProductDetail = ({
 
     const selectedVariant = getVariant();
 
-    if (selectedVariant?.inventoryQuantity > 0) {
+    if (selectedVariant?.inventoryQuantity > 0
+      || (selectedVariant?.inventoryPolicy === 'continue')) {
       // get cart product variant with qty
       // cartProducts from usecart
       const isAdded = addCartProduct({
@@ -212,8 +216,8 @@ const ProductDetail = ({
       const svrnt = dproduct.variants.filter(
         (vrt: { image: { src: any; }; }) => vrt?.image?.src === svImage,
       );
-
-      if (svrnt?.[0]?.inventoryQuantity > 0) {
+      if (svrnt?.[0]?.inventoryQuantity > 0
+        || svrnt?.[0]?.inventoryPolicy === 'continue') {
         // 4. check if first variant is out of stock
         // if (selectedV.inventoryQuantity === 0) {
         //   // get instock variants
@@ -232,8 +236,8 @@ const ProductDetail = ({
     if (data) {
       const { productById: dproduct } = data;
       // console.log('inside variat data check');
-      const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
-
+      const instockV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0
+        || vrt?.inventoryPolicy === 'continue');
       setselOptions(instockV?.selectedOptions.reduce((obj: any, { name, value }: any) => (
         { ...obj, [name]: value }), {}));
     }
