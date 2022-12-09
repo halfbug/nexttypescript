@@ -2,8 +2,23 @@
 
 const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
   const showingGS: any = [];
-  const matchingGs: any = JSON.parse(JSON.stringify(matchingGS));
+  let matchingGs: any = JSON.parse(JSON.stringify(matchingGS));
+  console.log('🚀🚀🚀matchingGs', matchingGs);
   if (matchingGs.length && matchingStoreIds.length) {
+    matchingGs = matchingGs.filter((el:any) => {
+      let tempmember = true;
+      el.members.forEach((ele:any) => {
+        if (tempmember) {
+          if (ele.products !== null && !ele.products.includes(null)) {
+            tempmember = true;
+          } else {
+            tempmember = false;
+          }
+        }
+      });
+      return tempmember;
+    });
+    console.log('🚀🚀🚀matchingGs', matchingGs);
     matchingGs.sort((a: any, b: any) => a.numMembers - b.numMembers);
     matchingStoreIds.forEach((ele: any) => {
       showingGS.push({ storeId: ele, groupshops: [] });
