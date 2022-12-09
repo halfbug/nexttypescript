@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import GraphRevenue from 'components/Forms/Dashboard/GraphRevenue';
-import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID } from 'store/store.graphql';
+import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
 
 const Analytics: NextPage = () => {
   const { store, dispatch } = useContext(StoreContext);
@@ -21,15 +21,31 @@ const Analytics: NextPage = () => {
   const [aov, setAov] = useState<any>('-');
   const [trafficValue, setTrafficValue] = useState<any>('-');
   const [cashbackGiven, setCashbackGiven] = useState<any>('-');
+  const [mostViralProducts, setMostViralProducts] = useState<any>([]);
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
 
   const handleSearch = ((startDate:any, endDate:any) => {
     setStartFrom(startDate);
     setToDate(endDate);
+    viralProductRefresh();
     uniqueRefetch();
     refetch();
   });
 
+  // get Most Viral Products
+  const {
+    data: viralProductData, refetch: viralProductRefresh,
+  } = useQuery(GET_MOST_VIRAL_PRODUCTS, {
+    variables: { shop: store.shop, startDate: startFrom, endDate: toDate },
+  });
+
+  useEffect(() => {
+    if (viralProductData) {
+      setMostViralProducts(viralProductData?.mostViralProducts);
+    }
+  }, [viralProductData]);
+
+  // get Unique Clicks & Traffic Value
   const {
     data: uniqueData, refetch: uniqueRefetch,
   } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_ID, {
@@ -57,6 +73,7 @@ const Analytics: NextPage = () => {
     }
   }, [uniqueData]);
 
+  // get Total Revenue, Number of Purchases, Average Order Value & Cashback Given
   const {
     loading, error, data, refetch,
   } = useQuery(GET_OVERVIEW_METRICS, {
@@ -107,12 +124,10 @@ const Analytics: NextPage = () => {
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
             />
           </Col>
-          <Col lg={{ span: 4, offset: 1 }} className="p-0">
+          <Col lg={5} className="gx-4">
             <ViralityMetrics
-              startDate={startFrom}
-              endDate={toDate}
+              mostViralProducts={mostViralProducts}
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-              shop={store.shop}
             />
           </Col>
         </Row>

@@ -12,6 +12,7 @@ import { StoreContext } from 'store/store.context';
 import {
   GET_CAMPAIGN_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN,
   GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER, GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER,
+  GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN, GET_MOST_VIRAL_PRODUCTS,
 } from 'store/store.graphql';
 
 const CampaignAnalytics: NextPage = () => {
@@ -28,16 +29,18 @@ const CampaignAnalytics: NextPage = () => {
   const [aov, setAov] = useState<any>('-');
   const [trafficValue, setTrafficValue] = useState<any>('-');
   const [cashbackGiven, setCashbackGiven] = useState<any>('-');
+  const [mostViralProducts, setMostViralProducts] = useState<any>([]);
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
   const { query: { analyticsid } } = useRouter();
   const clicktimes = 0.98;
+
   const handleSearch = ((startDate:any, endDate:any) => {
     if (startDate === '-') {
-      // window.location.reload();
       setDataFilter(true);
       setCampaignFilter(false);
       uniqueRefetch();
       refetch();
+      uniqueCamRefetch();
     } else {
       setStartFrom(startDate);
       setToDate(endDate);
@@ -45,9 +48,24 @@ const CampaignAnalytics: NextPage = () => {
       setCampaignFilter(true);
       uniqueFiterRefetch();
       frefetch();
+      viralProductRefresh();
     }
   });
 
+  // get Most Viral Products by campaign
+  const {
+    data: uniqueCamData, refetch: uniqueCamRefetch,
+  } = useQuery(GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN, {
+    variables: { storeId: store.id, campaignId: analyticsid }, skip: campaignFilter,
+  });
+
+  useEffect(() => {
+    if (uniqueCamData) {
+      setMostViralProducts(uniqueCamData?.mostCampaignViralProducts);
+    }
+  }, [uniqueCamData]);
+
+  // get Unique Clicks & Traffic Value by campaign
   const {
     data: uniqueData, refetch: uniqueRefetch,
   } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN, {
@@ -76,6 +94,7 @@ const CampaignAnalytics: NextPage = () => {
     }
   }, [uniqueData, analyticsid]);
 
+  // get Total Revenue, Number of Purchases, Average Order Value & Cashback Given by campaign
   const {
     data, refetch,
   } = useQuery(GET_CAMPAIGN_METRICS, {
@@ -106,6 +125,20 @@ const CampaignAnalytics: NextPage = () => {
     }
   }, [data, uniqueData, numPurchases, defaultUniqueClicks]);
 
+  // get Most Viral Products by datepicker filter
+  const {
+    data: viralProductData, refetch: viralProductRefresh,
+  } = useQuery(GET_MOST_VIRAL_PRODUCTS, {
+    variables: { shop: store.shop, startDate: startFrom, endDate: toDate },
+  });
+
+  useEffect(() => {
+    if (viralProductData) {
+      setMostViralProducts(viralProductData?.mostViralProducts);
+    }
+  }, [viralProductData]);
+
+  // get Unique Clicks & Traffic Value by datepicker filter
   const {
     data: uniqueFiterData, refetch: uniqueFiterRefetch,
   } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_CAMPAIGN_FILTER, {
@@ -132,6 +165,8 @@ const CampaignAnalytics: NextPage = () => {
     }
   }, [uniqueFiterData]);
 
+  // get Total Revenue, Number of Purchases, Average Order Value
+  // & Cashback Given by datepicker filter
   const {
     data: fdata, refetch: frefetch,
   } = useQuery(GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER, {
@@ -162,6 +197,7 @@ const CampaignAnalytics: NextPage = () => {
       }
     }
   }, [fdata, uniqueFiterData, numFilterPurchases]);
+
   const numresult = (dataFilter === false) ? numFilterPurchases : numPurchases;
   return (
     <Page headingText="Campaign Analytics" onLogin={() => { }} onLogout={() => { }} onCreateAccount={() => { }}>
@@ -178,14 +214,12 @@ const CampaignAnalytics: NextPage = () => {
               handleSearch={handleSearch}
             />
           </Col>
-          {/* <Col lg={5} className="gx-4">
+          <Col lg={5} className="gx-4">
             <ViralityMetrics
-              startDate={startFrom}
-              endDate={toDate}
+              mostViralProducts={mostViralProducts}
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-              shop={store.shop}
             />
-          </Col> */}
+          </Col>
         </Row>
         {/* <CustomerData
           startDate={startFrom}

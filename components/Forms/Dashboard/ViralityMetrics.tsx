@@ -10,28 +10,15 @@ import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import ViralityScoreBox from './ViralityScoreBox';
 
 interface ViralityProp{
-  startDate: any;
-  endDate: any;
+  mostViralProducts: any;
   currencyCode: any;
-  shop: any;
 }
 
 export default function ViralityMetrics({
-  startDate, endDate, currencyCode, shop,
+  mostViralProducts, currencyCode,
 } : ViralityProp) {
-  const [mostViralProducts, setMostViralProducts] = useState<any>([]);
   const { formatNumber } = useUtilityFunction();
-  const {
-    loading, error, data, refetch,
-  } = useQuery(GET_MOST_VIRAL_PRODUCTS, {
-    variables: { shop, startDate, endDate },
-  });
 
-  useEffect(() => {
-    if (data) {
-      setMostViralProducts(data?.mostViralProducts);
-    }
-  }, [data]);
   return (
     <div className={styles.viralityMetrics}>
       <div className={styles.viralityMetrics__header}>

@@ -1493,6 +1493,20 @@ query mostViralProducts($shop: String!, $startDate: String!, $endDate: String!) 
 }
 `;
 
+const GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN = gql`
+query mostCampaignViralProducts($campaignId: String!) {
+  mostCampaignViralProducts(campaignId: $campaignId) {
+    _id
+    purchaseCount
+    revenue
+    productDetails{
+      title
+      featuredImage
+    }  
+  }
+}
+`;
+
 const GET_MOST_VIRAL_CUSTOMERS = gql`
 query mostViralCustomers($storeId: String!, $startDate: String!, $endDate: String!) {
   mostViralCustomers(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
@@ -2271,5 +2285,5 @@ export {
   GET_GRAPH_REVENUE, GET_GRAPH_REVENUE_BY_DATE, CREATE_CHANNEL_DB, GET_ALL_RETAIL_TOOLS,
   UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE, GET_ALL_RECENT_SIGNUP,
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
-  GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL,
+  GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
 };
