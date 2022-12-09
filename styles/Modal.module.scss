@@ -2,7 +2,7 @@
 
 .getRewardBox_modal {
     width: 750px;
-
+ 
     @include media-breakpoint-down(sm) {
         width: auto;
         bottom: 0;
@@ -119,7 +119,8 @@
 
         input {
             height: 42px;
-
+            border-color: #D3D3DB;
+            background-color:  #F7F7FA;
             &::placeholder {
                 font-family: 'Mulish';
                 font-style: normal;
@@ -130,7 +131,7 @@
         }
 
         &__agree {
-            font-family: 'Mulish';
+            font-family: 'Mulish'!important;
             font-style: normal;
             font-weight: 400;
             font-size: 8px;
