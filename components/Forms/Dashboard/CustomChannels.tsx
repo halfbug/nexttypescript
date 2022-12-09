@@ -151,6 +151,7 @@ const CustomChannels = ({ storeId } : CustomChannelsProps) => {
           <UpdateChannel
             channel={channelInfoData}
             refreshChannelList={setRefreshChannelList}
+            channelList={channelList}
           />
           )}
         </Col>

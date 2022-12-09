@@ -107,6 +107,9 @@ const AnalyticsOverview = ({ storeId } : AnalyticsOverviewProps) => {
               </Col>
             </Row>
           ))}
+          { (renderItems === undefined || renderItems.length === 0) && (
+            <div className={styles.retail__signups__noRecord}>No record found!</div>
+          )}
           { renderItems !== undefined && renderItems.length > 4 && (
             <Button onClick={exportFile} className={styles.retail__signups__more}>
               +

@@ -30,7 +30,7 @@ export default function DeleteConfirmModel({
           </h2>
           <div className={styles.campaignDeactivate_modal__body__info}>
             <span>
-              Are you sure you want to delete this channel? 👀
+              Are you sure you want to deactivate this channel? 👀
             </span>
             <br />
           </div>

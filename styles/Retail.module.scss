@@ -305,6 +305,11 @@
             border-radius: 23px;
         }
 
+        &__noRecord {
+           text-align: center;
+           margin: 20px auto;
+        }
+
         &__channel {
             font-weight: $font-weight-bolder;
             font-size: 14px;

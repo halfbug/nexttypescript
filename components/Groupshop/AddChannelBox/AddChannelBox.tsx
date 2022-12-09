@@ -49,7 +49,7 @@ const AddChannelBox = ({
   const duplicateChannel = (values: string | undefined) => {
     if (values !== '' && values !== undefined) {
       // eslint-disable-next-line max-len
-      const arr:any = channelList.filter((item:any) => item.name.toLowerCase() === values.toLowerCase());
+      const arr:any = channelList.filter((item:any) => item.name.toLowerCase().trim() === values.toLowerCase().trim());
       if (arr[0]?.id !== '' && arr[0]?.id !== undefined) {
         return false;
       }

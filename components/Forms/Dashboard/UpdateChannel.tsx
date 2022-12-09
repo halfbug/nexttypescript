@@ -17,10 +17,11 @@ import DeleteConfirmModel from 'components/Widgets/Model/DeleteConfirmModel';
 
 interface CustomChannelsProps {
   channel: any;
+  channelList:any
   refreshChannelList: any;
 }
 
-const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) => {
+const UpdateChannel = ({ channel, refreshChannelList, channelList } : CustomChannelsProps) => {
   const [editChannel, setEditChannel] = React.useState(false);
   const [editCommission, setEditCommission] = React.useState(false);
   const [editBaseline, setEditBaseline] = React.useState(false);
@@ -28,7 +29,6 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
   const [deleteStatus, setDeleteStatus] = React.useState(false);
   const { AlertComponent, showError, showSuccess } = useAlert();
   const [editMaximum, setEditMaximum] = React.useState(false);
-  const [channelList, setChannelList] = useState<[]>([]);
   const channelInitial = {
     channelname: channel.name,
     slugName: channel?.name.replace(' ', '-').toLowerCase(),
@@ -56,7 +56,7 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
   const duplicateChannel = (values: string | undefined) => {
     if (values !== '' && values !== undefined) {
       // eslint-disable-next-line max-len
-      const arr:any = channelList.filter((item:any) => item.name.toLowerCase() === values.toLowerCase());
+      const arr:any = channelList.filter((item:any) => item.name.toLowerCase().trim() === values.toLowerCase().trim() && item.id !== channel.id);
       if (arr[0]?.id !== '' && arr[0]?.id !== undefined) {
         return false;
       }
@@ -75,7 +75,7 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
   const validationSchema = yup.object({
     channelname: yup
       .string()
-      // .test('Unique', 'Channel name should be unique. ', (values) => duplicateChannel(values))
+      .test('Unique', 'Channel name should be unique. ', (values) => duplicateChannel(values))
       .required('Channel Name is required.'),
     minDiscount: yup
       .number().typeError('you must specify a number')
@@ -176,9 +176,9 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
                         /20
                       </div>
                     </div>
-                    <Form.Control.Feedback type="invalid" className={styles.dbrewards_error}>
+                    <div className="text-danger ms-2 fs-6 mt-0">
                       {errors.channelname}
-                    </Form.Control.Feedback>
+                    </div>
                     <Button
                       type="submit"
                       className="fw-bolder"
@@ -338,7 +338,7 @@ const UpdateChannel = ({ channel, refreshChannelList } : CustomChannelsProps) =>
                 onClick={() => setDeleteStatus(true)}
                 className={styles.retail__customChannels__channelInfo__delete}
               >
-                Delete Channel
+                Deactivate Channel
               </Button>
             </Form>
           </div>
