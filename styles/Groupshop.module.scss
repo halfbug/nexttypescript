@@ -1297,6 +1297,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
             font-weight: 700;
             line-height: 21px;
             color: #1d2329;
+            margin-top: 22px;
           }
           &_txt {
             font-size: 12px;
@@ -1700,7 +1701,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_search {
     height: 300px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     @include media-breakpoint-down(sm) {
       height: auto !important;
