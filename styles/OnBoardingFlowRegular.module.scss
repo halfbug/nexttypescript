@@ -375,6 +375,9 @@
                 border-radius: 12px 12px 0px 0px;
                 position: absolute;
                 bottom: 0;
+                max-height: -webkit-fill-available;
+                max-height: -moz-available;
+                overflow: scroll;
             }
 
             &__imgBox {
@@ -855,6 +858,9 @@
                 border-top-right-radius: 21px;
                 border-bottom-left-radius: 0px;
                 border-bottom-right-radius: 0px;
+                max-height: -webkit-fill-available;
+                max-height: -moz-available;
+                overflow: scroll;
             }
             &__icons {
                 display: none;
