@@ -4,7 +4,7 @@ import Page from 'components/Layout/Page/Page';
 import { Col, Container, Row } from 'react-bootstrap';
 import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
 import ViralityMetrics from 'components/Forms/Dashboard/ViralityMetrics';
-import CustomerData from 'components/Forms/Dashboard/CutomerData';
+import CustomerCampaignData from 'components/Forms/Dashboard/CustomerCampaignData';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Router, { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
@@ -129,7 +129,7 @@ const CampaignAnalytics: NextPage = () => {
   const {
     data: viralProductData, refetch: viralProductRefresh,
   } = useQuery(GET_MOST_VIRAL_PRODUCTS, {
-    variables: { shop: store.shop, startDate: startFrom, endDate: toDate },
+    variables: { shop: store.shop, startDate: startFrom, endDate: toDate }, skip: dataFilter,
   });
 
   useEffect(() => {
@@ -221,12 +221,17 @@ const CampaignAnalytics: NextPage = () => {
             />
           </Col>
         </Row>
-        {/* <CustomerData
-          startDate={startFrom}
-          endDate={toDate}
-          currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-          storeId={store.id}
-        /> */}
+        {analyticsid && startFrom && toDate && store.id && (
+          <CustomerCampaignData
+            startDate={startFrom}
+            endDate={toDate}
+            currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+            storeId={store.id}
+            campaignId={analyticsid}
+            campaignFilter={campaignFilter}
+            dataFilter={dataFilter}
+          />
+        )}
       </Container>
     </Page>
   );
