@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Form, Row, Col, ToggleButtonGroup, ToggleButton, Container,
+  Form, Row, Col, ToggleButtonGroup, ToggleButton, Container, Spinner,
 } from 'react-bootstrap';
 import styles from 'styles/Campaign.module.scss';
 import useQueryString from 'hooks/useQueryString';
@@ -25,6 +25,11 @@ import UpdateRewards from './UpdateRewards';
 
 interface IProps {
   setHeading: any;
+}
+
+interface CriteriaState {
+  initialState: string;
+  currentState: string;
 }
 export default function UpdateCampaign({ setHeading }: IProps) {
   const { query: { campaignid, ins } } = useRouter();
@@ -51,6 +56,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     addableProducts: [],
 
   });
+  const [prevState, setPrevState] = React.useState<CriteriaState>({ initialState: '', currentState: '' });
   const { findInArray } = useUtilityFunction();
   const {
     campaign, updateStoreForEditCampaignId, deleteProductCollections,
@@ -79,6 +85,13 @@ export default function UpdateCampaign({ setHeading }: IProps) {
       .string()
       .required('Select product options'),
   });
+  const resetCriteria = () => {
+    if (campaign?.criteria === 'custom') {
+      setFieldValue('criteria', prevState.currentState);
+    }
+    setFieldValue('criteria', prevState.initialState);
+    setdisableBtn(true);
+  };
 
   const {
     handleSubmit, values, handleChange, touched, errors, setFieldValue,
@@ -133,6 +146,18 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     },
   });
 
+  React.useEffect(() => {
+    if (campaign && campaign.criteria && prevState.initialState === '') {
+      setPrevState({ ...prevState, initialState: campaign.criteria });
+    }
+    if (data) {
+      const { updateCampaign: { criteria } } = data;
+      if (criteria) {
+        setPrevState({ ...prevState, initialState: criteria, currentState: '' });
+      }
+    }
+  }, [campaign, data]);
+
   const updateCampaignContext = (newObj: ICampaign) => {
     const updatedCampaigns = store?.campaigns?.map((item:any) => {
       if (item.id === newObj.id) {
@@ -174,9 +199,11 @@ export default function UpdateCampaign({ setHeading }: IProps) {
     setFieldValue('products', []);
     setFieldValue('collections', []);
 
-    const mycamp = deleteProductCollections(campaignid);
-    dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
-    // handleSubmit();
+    setFieldValue('criteria', 'allproducts');
+    handleSubmit();
+    setdisableBtn(true);
+    // const mycamp = deleteProductCollections(campaignid);
+    // dispatch({ type: 'UPDATE_CAMPAIGN', payload: { campaigns: mycamp } });
   };
 
   const clearCustom = () => {
@@ -203,7 +230,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
 
   return (
     <Container className={styles.dashboard_campaign}>
-      <Screen1 editCampaign show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
+      <Screen1 resetCriteria={resetCriteria} editCampaign show={ins === '2a' || ins === 'addproduct'} selectedProducts={selectedProducts || []} selectedCollections={selectedCollections || []} />
       <Row className="pt-4">
         <Col lg={7} className="gx-5">
           <Row>
@@ -214,7 +241,8 @@ export default function UpdateCampaign({ setHeading }: IProps) {
           <Row className="mt-2">
             <Col>
               <Form noValidate onSubmit={handleSubmit}>
-                <section className={styles.dashboard_campaign__box_1}>
+                <section className={`position-relative ${styles.dashboard_campaign__box_1}`}>
+                  {loading ? <Spinner animation="border" size="sm" className="position-absolute top-50 start-50" /> : <></>}
                   <Row>
                     <h4>
                       Add your products to Groupshop
@@ -245,6 +273,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                           isInvalid={touched.criteria && !!errors.criteria}
                           value="allproducts"
                           checked={values.criteria === 'allproducts'}
+                          disabled={loading}
                         />
                         {/* <span className={styles.dashboard_campaign_badge}>Recommended</span> */}
                       </Row>
@@ -266,6 +295,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                           value="newest"
                           isInvalid={touched.criteria && !!errors.criteria}
                           checked={values.criteria === 'newest'}
+                          disabled={loading}
                         />
                       </Row>
                       <Row className="ms-3">
@@ -285,6 +315,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                           isInvalid={touched.criteria && !!errors.criteria}
                           value="bestseller"
                           checked={values.criteria === 'bestseller'}
+                          disabled={loading}
                         />
                       </Row>
                       <Row>
@@ -294,6 +325,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                             label="Specific products/collections (up to 80 products)"
                             className={values.criteria === 'custom' ? styles.dashboard_campaign_active_radio_option : styles.dashboard_campaign_radio_label}
                             onChange={(e) => {
+                              setPrevState({ ...prevState, currentState: 'custom' });
                               handleChange(e);
                               clearCustom();
                             }}
@@ -305,6 +337,7 @@ export default function UpdateCampaign({ setHeading }: IProps) {
                             isInvalid={touched.criteria && !!errors.criteria}
                             value="custom"
                             checked={values.criteria === 'custom'}
+                            disabled={loading}
                           />
                         </Col>
                       </Row>

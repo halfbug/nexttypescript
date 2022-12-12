@@ -35,7 +35,7 @@ export default function OBCampaign() {
   const campaignInitial = store?.newCampaign ?? {
 
     name: '',
-    criteria: '',
+    criteria: 'allproducts',
     joinExisting: 1,
   };
 
@@ -115,6 +115,10 @@ export default function OBCampaign() {
       setdisableBtn(true);
     }
   }, [values.criteria]);
+
+  React.useEffect(() => {
+    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { criteria: 'allproducts' } } });
+  }, []);
 
   const setValue = (field: string, value: string | number) => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { [field]: value } } });
@@ -338,7 +342,13 @@ export default function OBCampaign() {
           <span className="text-muted">2/5</span>
         </Col>
         <Col lg={4} className="d-flex justify-content-end">
-          <Button style={Bstyle} type="submit"> Next </Button>
+          <Button
+            style={Bstyle}
+            type="submit"
+            disabled={(store.newCampaign?.products?.length === 0 && store.newCampaign.criteria === 'custom') || !store.newCampaign?.criteria}
+          >
+            Next
+          </Button>
         </Col>
       </Row>
 

@@ -23,6 +23,7 @@ interface IScreen1Props {
   selectedProducts?: IProduct[];
   selectedCollections?: ICollection[];
   editCampaign?: boolean;
+  resetCriteria?: () => void;
 }
 
 type SelectedType = {
@@ -31,7 +32,7 @@ type SelectedType = {
 }
 
 const Screen1 = ({
-  show, selectedProducts, selectedCollections, editCampaign = false,
+  show, selectedProducts, selectedCollections, editCampaign = false, resetCriteria = () => { },
 }: IScreen1Props) => {
   const { query: { ins } } = useRouter();
   const [, setParams] = useQueryString();
@@ -52,7 +53,7 @@ const Screen1 = ({
   );
   const [showError, setshowError] = useState<boolean>(false);
   const getEntityById = (id:string, entity: string):
-   ICollection | IProduct => store?.[entity]?.filter((item: any) => item !== undefined).find(
+  ICollection | IProduct => store?.[entity]?.filter((item: any) => item !== undefined).find(
     (col:IProduct | ICollection) => col.id === id,
   );
 
@@ -385,7 +386,7 @@ const Screen1 = ({
         />
 
         <Form.Control.Feedback type="invalid" className={`${showError ? 'd-block' : 'd-none'} text-center`}>
-          { ins === 'addproduct' ? '' : 'you can select only 80 products' }
+          { ins === 'addproduct' ? '' : 'you can select only 80 products'}
         </Form.Control.Feedback>
 
         <Row className="mt-4 d-flex justify-content-end">
@@ -395,10 +396,14 @@ const Screen1 = ({
               variant="outline-primary"
               className={styles.product_btnClose}
               onClick={() => {
+                resetCriteria();
                 setview('List');
                 if (editCampaign) {
                   setParams({ ins: undefined });
                 } else {
+                  if (store.newCampaign?.products?.length === 0 && store.newCampaign.criteria === 'custom') {
+                    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { criteria: 'allproducts' } } });
+                  }
                   setParams({ ins: 2 });
                 }
               }}
@@ -413,6 +418,7 @@ const Screen1 = ({
                 setview('List');
                 handleSave();
               }}
+              disabled={campaign?.products?.length === 0}
             >
               Save
             </Button>
