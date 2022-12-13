@@ -970,81 +970,84 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         ) : <></>}
         {/* Discover Section */}
         {matchingGroupshop?.length > 0 ? (
-          <Row className="mx-0">
-            <Col xs={12}>
-              <hr />
-              <div className={styles.groupshop__ready}>
-                Ready for something new?
-              </div>
-            </Col>
-            <Col xs={12}>
-              <div className={styles.groupshop__discover}>
-                Discover new brands with Groupshop and get exclusive discounts!
-              </div>
-            </Col>
-            {matchingGroupshop?.map((brand) => (
-              <>
-                <Col xs={12} md={6}>
-                  <ProductGrid
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={5}
-                    xl={5}
-                    products={
-                    brand?.products?.length
-                    && brand?.products
-                  }
-                    maxrows={2}
-                    addProducts={handleAddProduct}
-                    handleDetail={(prd) => setsProduct(prd)}
-                    id="discoverproducts1"
-                    isModalForMobile={isModalForMobile}
-                    urlForActivation={urlForActivation}
-                    skuCount={SKU.length}
-                    showHoverButton
-                    isSuggestion
-                    membersForDiscover={brand.members}
-                  >
-                    <div className={styles.groupshop__shopWith}>
-                      <div className={styles.groupshop__shopWith__img}>
-                        <img
-                          src={`${brand?.logoImage}`}
-                          alt={`${brand?.brandName}`}
-                          className="img-fluid"
-                          style={{ maxWidth: '80px' }}
-                        />
+          <Container>
+            <Row>
+              <Col xs={12} className="px-0">
+                <hr />
+                <div className={styles.groupshop__ready}>
+                  Ready for something new?
+                </div>
+              </Col>
+              <Col xs={12} className="px-0">
+                <div className={styles.groupshop__discover}>
+                  Discover new brands with Groupshop and get exclusive discounts!
+                </div>
+              </Col>
+              {matchingGroupshop?.map((brand) => (
+                <>
+                  <Col xs={12} md={6} className="px-0">
+                    <ProductGrid
+                      xs={6}
+                      sm={6}
+                      md={6}
+                      lg={5}
+                      xl={5}
+                      products={
+                        brand?.products?.length
+                        && brand?.products
+                      }
+                      maxrows={2}
+                      addProducts={handleAddProduct}
+                      handleDetail={(prd) => setsProduct(prd)}
+                      id="discoverproducts1"
+                      isModalForMobile={isModalForMobile}
+                      urlForActivation={urlForActivation}
+                      skuCount={SKU.length}
+                      showHoverButton
+                      isSuggestion
+                      membersForDiscover={brand.members}
+                      className="px-3"
+                    >
+                      <div className={styles.groupshop__shopWith}>
+                        <div className={styles.groupshop__shopWith__img}>
+                          <img
+                            src={`${brand?.logoImage}`}
+                            alt={`${brand?.brandName}`}
+                            className="img-fluid"
+                            style={{ maxWidth: '80px' }}
+                          />
+                        </div>
+                        <div className={styles.groupshop__shopWith__txt}>
+                          Shop
+                          {' '}
+                          <strong>{brand?.brandName}</strong>
+                          {' '}
+                          with
+                          {' '}
+                          {brand.customerName[0]?.orderDetail?.customer?.lastName}
+                          {' '}
+                          and get
+                          {' '}
+                          <strong>
+                            {brand?.discount}
+                          </strong>
+                          {' '}
+                          % off
+                        </div>
+                        <Button2
+                          variant="primary"
+                          className={styles.groupshop__shopWith__btn}
+                          onClick={() => window.open(`${window.location.origin}${brand.url}`, '_blank')}
+                        >
+                          Shop
+                        </Button2>
                       </div>
-                      <div className={styles.groupshop__shopWith__txt}>
-                        Shop
-                        {' '}
-                        <strong>{brand?.brandName}</strong>
-                        {' '}
-                        with
-                        {' '}
-                        {brand.customerName[0]?.orderDetail?.customer?.lastName}
-                        {' '}
-                        and get
-                        {' '}
-                        <strong>
-                          {brand?.discount}
-                        </strong>
-                        {' '}
-                        % off
-                      </div>
-                      <Button2
-                        variant="primary"
-                        className={styles.groupshop__shopWith__btn}
-                        onClick={() => window.open(`${window.location.origin}${brand.url}`, '_blank')}
-                      >
-                        Shop
-                      </Button2>
-                    </div>
-                  </ProductGrid>
-                </Col>
-              </>
-            ))}
-          </Row>
+                    </ProductGrid>
+                  </Col>
+                </>
+              ))}
+            </Row>
+          </Container>
         ) : ''}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
