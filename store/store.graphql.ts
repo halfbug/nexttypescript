@@ -1609,6 +1609,18 @@ query GetGraphRevenue($storeId: String!) {
 }
 `;
 
+const GET_GRAPH_REVENUE_BY_CAMPAIGN = gql`
+query GetGraphRevenueByCampaign($storeId: String!, $campaignId: String!) {
+  getGraphRevenueByCampaign(storeId: $storeId, campaignId: $campaignId) {
+    _id { 
+      month
+      year
+    }    
+    revenue
+    }
+}
+`;
+
 const GET_GRAPH_REVENUE_BY_DATE = gql`
 query GetGraphRevenueByDate($storeId: String!, $startDate: String!, $endDate: String!) {
   getGraphRevenueByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
@@ -2316,5 +2328,5 @@ export {
   UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE, GET_ALL_RECENT_SIGNUP,
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
-  GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN,
+  GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN,
 };

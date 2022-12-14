@@ -6,6 +6,7 @@ import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
 import ViralityMetrics from 'components/Forms/Dashboard/ViralityMetrics';
 import CustomerCampaignData from 'components/Forms/Dashboard/CustomerCampaignData';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import GraphCampaignRevenue from 'components/Forms/Dashboard/GraphCampaignRevenue';
 import Router, { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
@@ -213,6 +214,17 @@ const CampaignAnalytics: NextPage = () => {
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
             />
+            {analyticsid && startFrom && toDate && (
+            <GraphCampaignRevenue
+              startFrom={startFrom}
+              toDate={toDate}
+              campaignId={analyticsid}
+              campaignFilter={campaignFilter}
+              dataFilter={dataFilter}
+              currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+              storeId={store.id}
+            />
+            )}
           </Col>
           <Col lg={5} className="gx-4">
             <ViralityMetrics
