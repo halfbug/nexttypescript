@@ -243,15 +243,15 @@ const ProductGrid = ({
                       ) : ''}
 
                       <h5 className="pt-2 text-center fw-bold">
+                        <span>
+                          {currencySymbol}
+                          {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                        {' '}
                         <span className="text-decoration-line-through fw-light me-1">
                           {currencySymbol}
                           {/* {prod.price} */}
                           {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                        {' '}
-                        <span>
-                          {currencySymbol}
-                          {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
                         </span>
                       </h5>
                     </div>
