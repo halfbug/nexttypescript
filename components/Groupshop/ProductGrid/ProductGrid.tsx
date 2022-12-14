@@ -109,7 +109,7 @@ const ProductGrid = ({
           {children}
         </Col>
       </Row>
-      <Row className="justify-content-center">
+      <Row className="justify-content-lg-center justify-content-sm-start justify-content-md-start" id="productGrid">
         {renderItems?.map((prod, index) => (
           <>
             {prod.title !== 'AddProductType' ? (
