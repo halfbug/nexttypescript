@@ -129,7 +129,7 @@ const VideoWidget = () => {
             <video
               key={source[videoNo]}
               ref={videoRef}
-              style={{ objectFit: 'fill', borderRadius: '15px' }}
+              style={{ objectFit: 'cover', borderRadius: '15px' }}
               height={control.height}
               width={control.width}
               src={`${source[videoNo]}#t=0.001`}
@@ -176,7 +176,7 @@ const VideoWidget = () => {
           <video
             key={source[videoNo]}
             ref={videoRef}
-            style={{ objectFit: 'fill', borderRadius: '15px' }}
+            style={{ objectFit: 'cover', borderRadius: '15px' }}
             height={30}
             width={152}
             src={`${source[videoNo]}#t=0.001`}
@@ -296,7 +296,7 @@ const VideoWidget = () => {
             <video
               key={source[videoNo]}
               ref={videoRef}
-              style={{ objectFit: 'fill', borderRadius: '15px' }}
+              style={{ objectFit: 'cover', borderRadius: '15px' }}
               height={control.height}
               width={control.width}
               src={source[videoNo]}
