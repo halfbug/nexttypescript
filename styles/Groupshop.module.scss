@@ -1289,16 +1289,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           display: flex;
           border-bottom: 1px solid rgba(112, 112, 112, 0.1);
           margin-bottom: 11px;
-
-          @include media-breakpoint-down(sm) {
-            display: none;
-          }
           h3 {
             font-size: 16px;
             font-weight: 700;
             line-height: 21px;
             color: #1d2329;
             margin-top: 22px;
+            text-align: center;
           }
           &_txt {
             font-size: 12px;
