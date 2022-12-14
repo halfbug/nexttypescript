@@ -55,11 +55,11 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
   const productsql = useQuery(GET_PRODUCTS, {
 
     variables: {
-      productQueryInput: {
-        shop,
-        sort: -1,
-        limit: 10000,
-      },
+      // productQueryInput: {
+      shop,
+      sort: -1,
+      limit: 10000,
+      // },
     },
   });
 

@@ -56,11 +56,11 @@ export default function AddProductButton({ handleDelete }:IProps) {
   const productsql = useQuery(GET_PRODUCTS, {
 
     variables: {
-      productQueryInput: {
-        shop,
-        sort: -1,
-        limit: 10000,
-      },
+      // productQueryInput: {
+      shop,
+      sort: -1,
+      limit: 10000,
+      // },
     },
   });
 

@@ -297,8 +297,8 @@ query ExistPartnerGroupshop($email: String!, $storeId: String!) {
 `;
 
 const GET_PRODUCTS = gql`
-query Products($productQueryInput: ProductQueryInput!) {
-  products(productQueryInput: $productQueryInput) {
+query Products($shop: String!, $sort: Float!, $limit: Float!) {
+  products(shop: $shop, sort: $sort, limit: $limit) {
     id
     title
     createdAtShopify
