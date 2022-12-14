@@ -24,11 +24,11 @@ const useProducts = (shop: string) => {
     if (gsctx.store?.brandName !== '') {
       getStoreProducts({
         variables: {
-          // productQueryInput: {
-          shop,
-          sort: -1,
-          limit: 10000,
-          // },
+          productQueryInput: {
+            shop,
+            sort: -1,
+            limit: 10000,
+          },
         },
 
       });
