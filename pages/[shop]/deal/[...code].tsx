@@ -1030,9 +1030,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           {' '}
                           <strong>
                             {brand?.discount}
+                            %
+                            {' '}
+                            off
                           </strong>
-                          {' '}
-                          % off
                         </div>
                         <Button2
                           variant="primary"

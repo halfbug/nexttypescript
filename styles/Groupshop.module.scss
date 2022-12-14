@@ -976,6 +976,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_price {
         @extend .groupshop__pcard_tag;
         top: 10px;
+        font-weight: 700!important;
         position: absolute;
         left: 5px;
         border: 1px solid #000000;
