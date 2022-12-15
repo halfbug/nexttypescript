@@ -69,6 +69,13 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
             }
           });
         }
+        if (tempIds.length < 4) {
+          el.groupshops?.allProducts?.forEach((elem: any) => {
+            if (!tempIds.includes(elem?.id) && tempIds.length < 4) {
+              tempProd.push(elem); tempIds.push(elem?.id);
+            }
+          });
+        }
         if (el?.groupshops?.storeId) {
           temp.push({
             logoImage: el?.groupshops?.store?.logoImage,
