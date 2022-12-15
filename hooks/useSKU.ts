@@ -66,14 +66,17 @@ const useSKU = () => {
   }, [ownerProducts, popularProductsStore]);
 
   useEffect(() => {
-    if (dealProducts?.length && campaignProducts.length < 5) {
-      const temp = dealProducts.map((ele) => {
-        if (campaignProducts.includes(ele.productId)) {
-          return true;
-        }
-        return false;
-      }).reduce((curr, next) => curr === next);
-      setHidePopular(temp);
+    if (dealProducts?.length && campaignProducts?.length < 5) {
+      const addedProducts = dealProducts.filter((item) => item.type === 'deal');
+      if (addedProducts.length) {
+        const res = addedProducts.map((ele) => {
+          if (campaignProducts.includes(ele.productId)) {
+            return true;
+          }
+          return false;
+        }).reduce((curr, next) => curr === next);
+        setHidePopular(res);
+      }
     } else {
       setHidePopular(false);
     }
