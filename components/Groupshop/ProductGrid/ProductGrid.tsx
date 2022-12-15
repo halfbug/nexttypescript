@@ -39,6 +39,7 @@ type ProductGridProps = {
   handleDetail(prd: any): void;
   id?: string;
   isModalForMobile?: boolean;
+  isDiscoveryTool?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
   isSuggestion?: boolean;
@@ -48,7 +49,7 @@ type ProductGridProps = {
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  isSuggestion, membersForDiscover,
+  isSuggestion, membersForDiscover, isDiscoveryTool,
   urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -109,7 +110,7 @@ const ProductGrid = ({
           {children}
         </Col>
       </Row>
-      <Row className="justify-content-lg-center justify-content-sm-start justify-content-md-start" id="productGrid">
+      <Row className={['justify-content-sm-start justify-content-md-start', (renderItems && renderItems?.length > 1) ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-start'].join(' '))].join(' ')} id="productGrid">
         {renderItems?.map((prod, index) => (
           <>
             {prod.title !== 'AddProductType' ? (
@@ -424,6 +425,7 @@ ProductGrid.defaultProps = {
   showHoverButton: false,
   id: 'popularproducts',
   isModalForMobile: false,
+  isDiscoveryTool: false,
   urlForActivation: '',
   skuCount: 0,
   isSuggestion: false,

@@ -1007,6 +1007,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       isSuggestion
                       membersForDiscover={brand.members}
                       className="px-3"
+                      isDiscoveryTool
                     >
                       <div className={styles.groupshop__shopWith}>
                         <div className={styles.groupshop__shopWith__img}>
