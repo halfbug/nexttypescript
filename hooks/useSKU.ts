@@ -66,7 +66,7 @@ const useSKU = () => {
   }, [ownerProducts, popularProductsStore]);
 
   useEffect(() => {
-    if (dealProducts?.length) {
+    if (dealProducts?.length && campaignProducts.length < 5) {
       const temp = dealProducts.map((ele) => {
         if (campaignProducts.includes(ele.productId)) {
           return true;
@@ -77,7 +77,7 @@ const useSKU = () => {
     } else {
       setHidePopular(false);
     }
-  }, [dealProducts]);
+  }, [dealProducts, campaignProducts]);
 
   return {
     SKU: allProducts, memberProducts, hideSection, campaignProducts, hideTopPicks, hidePopular,
