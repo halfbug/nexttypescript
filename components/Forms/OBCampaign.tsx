@@ -51,18 +51,18 @@ export default function OBCampaign() {
   });
 
   const {
-    handleSubmit, values, handleChange, touched, errors,
+    handleSubmit, values, handleChange, touched, errors, setFieldValue,
   }: FormikProps<ICampaign> = useFormik<ICampaign>({
     initialValues: campaignInitial,
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: async (valz, { validateForm }:FormikHelpers<ICampaign>) => {
+    onSubmit: async (valz, { validateForm }: FormikHelpers<ICampaign>) => {
       if (validateForm) validateForm(valz);
       console.log({ valz });
 
       const { name, criteria, joinExisting } = valz;
-      let campObj:null | any;
+      let campObj: null | any;
       let newObj;
 
       if (store?.newCampaign?.id) {
@@ -117,7 +117,9 @@ export default function OBCampaign() {
   }, [values.criteria]);
 
   React.useEffect(() => {
-    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { criteria: 'allproducts' } } });
+    if (!store?.newCampaign?.criteria) {
+      dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { criteria: 'allproducts' } } });
+    }
   }, []);
 
   const setValue = (field: string, value: string | number) => {
@@ -125,8 +127,16 @@ export default function OBCampaign() {
   };
 
   const handleDeleteProduct = () => {
-    dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
-    setdisableBtn(false);
+    dispatch({
+      type: 'NEW_CAMPAIGN',
+      payload: {
+        newCampaign: {
+          criteria: 'allproducts', products: [], collections: [], productsArray: [],
+        },
+      },
+    });
+    setFieldValue('criteria', 'allproducts');
+    setdisableBtn(true);
   };
   const Bstyle = {
     width: '143px',
@@ -178,7 +188,7 @@ export default function OBCampaign() {
                   : styles.dashboard_campaign_radio_label}
                 onChange={(e) => {
                   handleChange(e);
-                // handleSubmit();
+                  // handleSubmit();
                 }}
                 onClick={() => { setValue('criteria', 'allproducts'); setdisableBtn(true); }}
                 type="radio"
@@ -279,8 +289,9 @@ export default function OBCampaign() {
                 ? styles.dashboard_campaign_active_radio_option
                 : styles.dashboard_campaign_radio_label}
               onChange={(e) => {
+                dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
                 handleChange(e);
-                handleDeleteProduct();
+                // handleDeleteProduct();
               }}
               onClick={() => { setValue('criteria', 'custom'); }}
               type="radio"

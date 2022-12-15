@@ -42,7 +42,7 @@ export default function CreateCampaign() {
   const [campaignInitial, setcampaignInitial] = React.useState({
     id: '',
     name: '',
-    criteria: '',
+    criteria: 'allproducts',
     joinExisting: 1,
     rewards: '',
     maxDiscountVal: '',
@@ -216,14 +216,19 @@ export default function CreateCampaign() {
       if (store?.newCampaign?.addableProductsArray?.length) {
         setFieldValue('addableProducts', store?.newCampaign?.addableProductsArray);
       }
-
       setParams({ ins: undefined });
+    }
+    if (ins === '' && store?.newCampaign?.products?.length === 0 && values.criteria === 'custom') {
+      setFieldValue('criteria', 'allproducts');
+      setdisableBtn(true);
     }
   }, [ins]);
 
   const handleDeleteProduct = () => {
     dispatch({ type: 'NEW_CAMPAIGN', payload: { newCampaign: { products: [], collections: [], productsArray: [] } } });
     setFieldValue('products', []);
+    setFieldValue('criteria', 'allproducts');
+    setdisableBtn(true);
   };
 
   const clearCustom = () => {
@@ -511,6 +516,7 @@ export default function CreateCampaign() {
             onClick={(e) => {
               setFieldValue('isActive', true);
             }}
+            disabled={!store.newCampaign?.products?.length && values?.criteria === 'custom'}
           >
             Save and activate
           </WhiteButton>
@@ -521,6 +527,7 @@ export default function CreateCampaign() {
             onClick={(e) => {
               setFieldValue('isActive', false);
             }}
+            disabled={!store.newCampaign?.products?.length && values?.criteria === 'custom'}
           >
             Save for later
           </WhiteButton>

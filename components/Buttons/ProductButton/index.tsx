@@ -89,7 +89,7 @@ export default function ProductButton({ disableBtn, totalProducts, handleDelete 
 
         </Col>
         <Col lg={8} md={6} sm={12} className="ps-4 mt-1">
-          { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom' || newCampaign?.criteria === ''))
+          { (((newCampaign?.products) && (newCampaign?.products?.length > 0) && (newCampaign?.criteria === 'custom'))
       // || (totalProducts !== 0 && criteria === 'custom'))
       || (campaign?.products?.length && campaign?.criteria === 'custom')
       // || (newcampaign?.products?.length)
