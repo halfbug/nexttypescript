@@ -3144,6 +3144,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     /* identical to box height, or 143% */
 
     text-align: center;
+    @include media-breakpoint-down (md) {
+      padding: 0px 30px;
+    }
   }
   &__shopWith {
     @extend .d-flex, .align-items-center, .justify-content-between;
