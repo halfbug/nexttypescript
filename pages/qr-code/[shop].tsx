@@ -7,6 +7,10 @@ const QrCodeBrandName: NextPage = () => (
   <>
     <Head>
       <title>Groupshop - QR code</title>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
       <script
           // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
