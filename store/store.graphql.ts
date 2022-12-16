@@ -1666,7 +1666,6 @@ const GET_MATCHING_GS = gql`
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -1693,7 +1692,6 @@ const GET_MATCHING_GS = gql`
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -1769,7 +1767,6 @@ const GET_MATCHING_GS = gql`
         id
         title
         featuredImage
-        featuredVideo
         description
         price
         outofstock
@@ -1827,7 +1824,6 @@ const GET_MATCHING_GS = gql`
     id
     title
     featuredImage
-    featuredVideo
     description
     purchaseCount
     price
@@ -1851,7 +1847,6 @@ const GET_MATCHING_GS = gql`
     id
     title
     featuredImage
-    featuredVideo
     description
     price
     currencyCode
