@@ -110,7 +110,7 @@ const ProductGrid = ({
           {children}
         </Col>
       </Row>
-      <Row className={['justify-content-sm-start justify-content-md-start', (renderItems && renderItems?.length > 1) ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-start'].join(' '))].join(' ')} id="productGrid">
+      <Row className={['justify-content-sm-start justify-content-md-start', (!isDiscoveryTool || (renderItems && renderItems?.length % 2 === 0)) ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-start'].join(' '))].join(' ')} id="productGrid">
         {renderItems?.map((prod, index) => (
           <>
             {prod.title !== 'AddProductType' ? (
