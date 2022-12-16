@@ -34,6 +34,7 @@ const CampaignAnalytics: NextPage = () => {
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
   const { query: { analyticsid } } = useRouter();
   const clicktimes = 0.98;
+  const shopName: string[] | undefined = store?.shop?.split('.', 1);
 
   const handleSearch = ((startDate:any, endDate:any) => {
     if (startDate === '-') {
@@ -213,6 +214,7 @@ const CampaignAnalytics: NextPage = () => {
               trafficValue={trafficValue}
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
+              shopName={shopName}
             />
             {analyticsid && startFrom && toDate && (
             <GraphCampaignRevenue

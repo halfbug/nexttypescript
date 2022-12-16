@@ -1045,6 +1045,16 @@ query overviewMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
 }
 `;
 
+const GET_PARTNER_OVERVIEW_METRICS = gql`
+query overviewPartnerMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
+  overviewPartnerMetric(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
+    cashBack
+    feeCharges
+    revenue   
+  }
+}
+`;
+
 const GET_OVERVIEW_METRICS_BY_CAMPAIGN_FILTER = gql`
 query overviewCampaignMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
   overviewCampaignMetric(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
@@ -1082,6 +1092,15 @@ query getOrderDetails($orderid: String!) {
 const GET_TOTAL_UNIQUE_CLICKS_BY_ID = gql`
 query getUniqueClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
   getUniqueClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
+    uniqueVisitors
+    totalOrders
+  }
+}
+`;
+
+const GET_PARTNER_UNIQUE_CLICKS_BY_ID = gql`
+query getPartnerUniqueClicks($storeId: String!, $startFrom: String!, $toDate: String!) {
+  getPartnerUniqueClicks(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
     uniqueVisitors
     totalOrders
   }
@@ -2328,5 +2347,6 @@ export {
   UPDATE_CHANNEL, GET_PARTNER_INFO, GET_MATCHING_GS, DISCOVERYTOOLS_UPDATE, GET_ALL_RECENT_SIGNUP,
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
-  GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN,
+  GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
+  GET_PARTNER_UNIQUE_CLICKS_BY_ID,
 };

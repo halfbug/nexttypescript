@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import GraphRevenue from 'components/Forms/Dashboard/GraphRevenue';
-import { GET_OVERVIEW_METRICS, GET_TOTAL_UNIQUE_CLICKS_BY_ID, GET_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
+import { GET_PARTNER_OVERVIEW_METRICS, GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
 
 const Analytics: NextPage = () => {
   const { store, dispatch } = useContext(StoreContext);
@@ -49,14 +49,14 @@ const Analytics: NextPage = () => {
   // get Unique Clicks & Traffic Value
   const {
     data: uniqueData, refetch: uniqueRefetch,
-  } = useQuery(GET_TOTAL_UNIQUE_CLICKS_BY_ID, {
+  } = useQuery(GET_PARTNER_UNIQUE_CLICKS_BY_ID, {
     variables: { storeId: store.id, startFrom, toDate },
   });
 
   useEffect(() => {
     if (uniqueData) {
-      const numUniqueVisitors = uniqueData?.getUniqueClicks?.uniqueVisitors || 0;
-      const numOfOrder = uniqueData?.getUniqueClicks?.totalOrders;
+      const numUniqueVisitors = uniqueData?.getPartnerUniqueClicks?.uniqueVisitors || 0;
+      const numOfOrder = uniqueData?.getPartnerUniqueClicks?.totalOrders;
       if (numUniqueVisitors > 0) {
         setUniqueClicks(numUniqueVisitors);
         const clicktimes = 0.98;
@@ -77,15 +77,14 @@ const Analytics: NextPage = () => {
   // get Total Revenue, Number of Purchases, Average Order Value & Cashback Given
   const {
     loading, error, data, refetch,
-  } = useQuery(GET_OVERVIEW_METRICS, {
+  } = useQuery(GET_PARTNER_OVERVIEW_METRICS, {
     variables: { storeId: store.id, startFrom, toDate },
   });
 
   useEffect(() => {
     if (data && uniqueData) {
-      const rev = data.overviewMetrics[0]?.revenue || '0';
-      const cashBack = data.overviewMetrics[0]?.cashBack || 0;
-      const feeCharge = data.overviewMetrics[0]?.feeCharges || 0;
+      const rev = data.overviewPartnerMetric[0]?.revenue || '0';
+      const cashBack = data.overviewPartnerMetric[0]?.cashBack || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
         if (numPurchases) {
@@ -98,7 +97,7 @@ const Analytics: NextPage = () => {
         setAov('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(cashBack)}`);
       } else {
         setCashbackGiven('-');
       }

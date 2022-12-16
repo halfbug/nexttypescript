@@ -5,6 +5,7 @@ import { Col, Dropdown, Row } from 'react-bootstrap';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import CalendarIcon from 'assets/images/calendar-icon.svg';
 import BulbIcon from 'assets/images/bulb.svg';
+import Router from 'next/router';
 import styles from 'styles/Analytics.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
@@ -17,13 +18,14 @@ interface MetricsProp{
   numPurchases: string;
   uniqueClicks: string;
   aov: string;
+  shopName: any;
   trafficValue: string;
   cashbackGiven: string;
   handleSearch(startDate:any, endDate:any): any;
 }
 
 export default function CoreMetrics({
-  revenue, numPurchases, uniqueClicks, aov, trafficValue, cashbackGiven, handleSearch,
+  revenue, numPurchases, uniqueClicks, aov, trafficValue, cashbackGiven, shopName, handleSearch,
 } : MetricsProp) {
   const [defaultDate, setDefaultDate] = useState<any>('');
 
@@ -54,6 +56,14 @@ export default function CoreMetrics({
     }
   };
 
+  const handleFilter = (event: any) => {
+    if (event.target.value === '1') {
+      Router.push(`/${shopName}/analytics`);
+    } else {
+      Router.push(`/${shopName}/partner-analytics`);
+    }
+  };
+
   const ranges = DateRanges();
   return (
     <div className={styles.coreMetrics}>
@@ -74,6 +84,17 @@ export default function CoreMetrics({
           >
             <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
           </DateRangePicker>
+        </div>
+        <div className="d-inline mx-2">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            name="search-analytics"
+            onChange={(e) => handleFilter(e)}
+          >
+            <option value="1">Post-Purchase Analytics</option>
+            <option value="2">Partner Analytics</option>
+          </select>
         </div>
       </div>
       <Row>
