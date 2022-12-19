@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
 
@@ -12,7 +12,24 @@ const useSKU = () => {
   const [hideTopPicks, setHideTopPicks] = useState<boolean>(false);
   const [hidePopular, setHidePopular] = useState<boolean>(false);
 
-  const { dealProducts, popularProducts: popularProductsStore } = gsctx;
+  const {
+    dealProducts,
+    popularProducts: popularProductsStore,
+    campaign,
+  } = gsctx;
+
+  const deal: any = useCallback(() => {
+    if (dealProducts && dealProducts.length && campaign && campaign?.products) {
+      const arr: any = [];
+      dealProducts?.forEach((ele: any) => {
+        if (!campaign?.products?.includes(ele.productId)) {
+          arr.push(ele.productId);
+        }
+      });
+      return [...arr, ...campaign?.products];
+    }
+    return [];
+  }, [gsctx]);
 
   useEffect(() => {
     if (gsctx.store?.allInventoryProducts?.length) {
@@ -28,6 +45,10 @@ const useSKU = () => {
       setMemberProducts([...gsctx?.popularProducts ?? [], ...gsctx?.ownerDeals ?? []]);
     }
     if (gsctx.allProducts?.length && gsctx.popularProducts?.length) {
+      if (deal().length > 4) {
+        setHideSection(false);
+        return;
+      }
       const products = gsctx.allProducts.map((ele) => ele.id)
         .filter((value, index, self) => self.indexOf(value) === index);
       const popularProducts = gsctx.popularProducts.map((ele) => ele.id)
@@ -35,7 +56,7 @@ const useSKU = () => {
       const isSame = popularProducts.map((ele) => (
         products.includes(ele)
       )).reduce((curr, next) => curr === next);
-      if (gsctx.campaign?.products!?.length < 5
+      if (dealProducts && (gsctx.campaign?.products!?.length + dealProducts?.length) < 5
         && products.length === popularProducts.length
         && allProducts.length < 5) {
         setHideSection(isSame);
@@ -46,6 +67,10 @@ const useSKU = () => {
   }, [gsctx]);
 
   useEffect(() => {
+    if (deal().length > 4) {
+      setHideTopPicks(false);
+      return;
+    }
     if (popularProductsStore
       && ownerProducts.length
       && campaignProducts.length < 5) {
@@ -66,6 +91,14 @@ const useSKU = () => {
   }, [ownerProducts, popularProductsStore]);
 
   useEffect(() => {
+    if (deal().length > 4) {
+      setHidePopular(false);
+      return;
+    }
+    if (deal().length < 5) {
+      setHidePopular(true);
+      return;
+    }
     if (dealProducts?.length && campaignProducts?.length < 5) {
       const addedProducts = dealProducts.filter((item) => item.type === 'deal');
       if (addedProducts.length) {

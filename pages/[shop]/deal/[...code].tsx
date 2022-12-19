@@ -135,12 +135,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   useEffect(() => {
     if (gsctx.id && allProducts && gsctx.popularProducts) {
-      const temp = [...allProducts, ...gsctx.popularProducts].filter(
-        (item) => item.outofstock === false || item.outofstock === null,
-      ).sort((a, b) => a.title.localeCompare(b.title));
-      setallProducts(temp);
+      const arr = [...allProducts, ...gsctx.popularProducts];
+      const temp = arr.filter((item) => !item.outofstock)
+        .sort((a, b) => a.title.localeCompare(b.title));
+      setallProducts(JSON.parse(JSON.stringify(temp)));
     }
-  }, [gsctx.popularProducts]);
+  }, [gsctx]);
 
   // banner image and logo load
   const bannerImage = useBanner();
