@@ -44,12 +44,13 @@ type ProductGridProps = {
   skuCount?: number | null;
   isSuggestion?: boolean;
   membersForDiscover?: any[];
+  brandurl?: string;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  isSuggestion, membersForDiscover, isDiscoveryTool,
+  isSuggestion, membersForDiscover, isDiscoveryTool, brandurl,
   urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -119,6 +120,13 @@ const ProductGrid = ({
                   isrc={prod.featuredImage}
                   vsrc={prod.featuredVideo}
                   // onClick={() => handleDetail(prod)}
+                  onClick={() => {
+                    if (isSuggestion) {
+                      const Arr = prod.id.split('/');
+                      const prodId = Arr[Arr.length - 1];
+                      window.open(`${window.location.origin}${brandurl}/product&${prodId}`, '_blank');
+                    }
+                  }}
                   imgOverlay={(
                     <>
 
@@ -430,6 +438,7 @@ ProductGrid.defaultProps = {
   skuCount: 0,
   isSuggestion: false,
   membersForDiscover: [],
+  brandurl: '',
 };
 
 export default ProductGrid;
