@@ -19,11 +19,11 @@ const useSKU = () => {
   } = gsctx;
 
   const deal: any = useCallback(() => {
-    if (dealProducts && dealProducts.length && campaign && campaign?.products) {
+    if (popularProductsStore && popularProductsStore.length && campaign && campaign?.products) {
       const arr: any = [];
-      dealProducts?.forEach((ele: any) => {
-        if (!campaign?.products?.includes(ele.productId)) {
-          arr.push(ele.productId);
+      popularProductsStore?.forEach((ele: any) => {
+        if (!campaign?.products?.includes(ele.id)) {
+          arr.push(ele.id);
         }
       });
       return [...arr, ...campaign?.products];
@@ -69,50 +69,49 @@ const useSKU = () => {
   useEffect(() => {
     if (deal().length > 4) {
       setHideTopPicks(false);
-      return;
+    } else if (deal().length <= 4) {
+      setHideTopPicks(true);
     }
-    if (popularProductsStore
-      && ownerProducts.length
-      && campaignProducts.length < 5) {
-      const temp = ownerProducts.map((ele) => {
-        if (campaignProducts.includes(ele.id)) {
-          return true;
-        }
-        return false;
-      }).reduce((curr, next) => curr === next);
-      if (temp) {
-        setHideTopPicks(true);
-      } else if (!temp && (campaignProducts.length + popularProductsStore?.length) > 4) {
-        setHideTopPicks(false);
-      } else if (!temp && (campaignProducts.length + popularProductsStore?.length) < 5) {
-        setHideTopPicks(true);
-      }
-    }
+    // if (popularProductsStore
+    //   && ownerProducts.length
+    //   && campaignProducts.length < 5) {
+    //   const temp = ownerProducts.map((ele) => {
+    //     if (campaignProducts.includes(ele.id)) {
+    //       return true;
+    //     }
+    //     return false;
+    //   }).reduce((curr, next) => curr === next);
+    //   if (temp) {
+    //     setHideTopPicks(true);
+    //   } else if (!temp && (campaignProducts.length + popularProductsStore?.length) > 4) {
+    //     setHideTopPicks(false);
+    //   } else if (!temp && (campaignProducts.length + popularProductsStore?.length) < 5) {
+    //     setHideTopPicks(true);
+    //   }
+    // }
   }, [ownerProducts, popularProductsStore]);
 
   useEffect(() => {
     if (deal().length > 4) {
       setHidePopular(false);
-      return;
     }
     if (deal().length < 5) {
       setHidePopular(true);
-      return;
     }
-    if (dealProducts?.length && campaignProducts?.length < 5) {
-      const addedProducts = dealProducts.filter((item) => item.type === 'deal');
-      if (addedProducts.length) {
-        const res = addedProducts.map((ele) => {
-          if (campaignProducts.includes(ele.productId)) {
-            return true;
-          }
-          return false;
-        }).reduce((curr, next) => curr === next);
-        setHidePopular(res);
-      }
-    } else {
-      setHidePopular(false);
-    }
+    // if (dealProducts?.length && campaignProducts?.length < 5) {
+    //   const addedProducts = dealProducts.filter((item) => item.type === 'deal');
+    //   if (addedProducts.length) {
+    //     const res = addedProducts.map((ele) => {
+    //       if (campaignProducts.includes(ele.productId)) {
+    //         return true;
+    //       }
+    //       return false;
+    //     }).reduce((curr, next) => curr === next);
+    //     setHidePopular(res);
+    //   }
+    // } else {
+    //   setHidePopular(false);
+    // }
   }, [dealProducts, campaignProducts]);
 
   return {
