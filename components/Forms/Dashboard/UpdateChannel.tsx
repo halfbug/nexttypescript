@@ -338,7 +338,7 @@ const UpdateChannel = ({ channel, refreshChannelList, channelList } : CustomChan
                 onClick={() => setDeleteStatus(true)}
                 className={styles.retail__customChannels__channelInfo__delete}
               >
-                Deactivate Channel
+                Delete Channel
               </Button>
             </Form>
           </div>
