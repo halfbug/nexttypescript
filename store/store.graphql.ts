@@ -1610,6 +1610,7 @@ const GET_ALL_VIDEOS = gql`
     type
     status
     storeId
+    orderId
     createdAt
     updatedAt
   }

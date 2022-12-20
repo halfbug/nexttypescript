@@ -51,7 +51,8 @@ const useVideoPlayer = (videoRef: any) => {
   useEffect(() => {
     if (data?.videos?.length > 0) {
       const temp:any[] = [];
-      data.videos.map((ele:any) => ele.status === 'Active' && temp.push(ele.type));
+      const showVideos = data.videos.filter((el: any) => el.status === 'Active').sort((a: any, b: any) => a.orderId - b.orderId);
+      showVideos.forEach((ele: any) => temp.push(ele.type));
       setSource(temp);
     }
   }, [data]);
