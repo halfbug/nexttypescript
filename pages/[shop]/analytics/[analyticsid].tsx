@@ -215,6 +215,7 @@ const CampaignAnalytics: NextPage = () => {
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
               shopName={shopName}
+              page="analytics-id"
             />
             {analyticsid && startFrom && toDate && (
             <GraphCampaignRevenue

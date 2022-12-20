@@ -4,12 +4,12 @@ import Page from 'components/Layout/Page/Page';
 import { Col, Container, Row } from 'react-bootstrap';
 import CoreMetrics from 'components/Forms/Dashboard/CoreMetrics';
 import ViralityMetrics from 'components/Forms/Dashboard/ViralityMetrics';
-import CustomerData from 'components/Forms/Dashboard/CutomerData';
+import CutomerPartnerData from 'components/Forms/Dashboard/CutomerPartnerData';
 import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import GraphRevenue from 'components/Forms/Dashboard/GraphRevenue';
-import { GET_PARTNER_OVERVIEW_METRICS, GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
+import { GET_PARTNER_OVERVIEW_METRICS, GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
 
 const Analytics: NextPage = () => {
   const { store, dispatch } = useContext(StoreContext);
@@ -36,13 +36,13 @@ const Analytics: NextPage = () => {
   // get Most Viral Products
   const {
     data: viralProductData, refetch: viralProductRefresh,
-  } = useQuery(GET_MOST_VIRAL_PRODUCTS, {
+  } = useQuery(GET_PARTNER_MOST_VIRAL_PRODUCTS, {
     variables: { shop: store.shop, startDate: startFrom, endDate: toDate },
   });
 
   useEffect(() => {
     if (viralProductData) {
-      setMostViralProducts(viralProductData?.mostViralProducts);
+      setMostViralProducts(viralProductData?.partnerMostViralProducts);
     }
   }, [viralProductData]);
 
@@ -118,6 +118,7 @@ const Analytics: NextPage = () => {
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
               shopName={shopName}
+              page="partner"
             />
             <GraphRevenue
               startFrom={startFrom}
@@ -132,7 +133,7 @@ const Analytics: NextPage = () => {
             />
           </Col>
         </Row>
-        <CustomerData
+        <CutomerPartnerData
           startDate={startFrom}
           endDate={toDate}
           currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}

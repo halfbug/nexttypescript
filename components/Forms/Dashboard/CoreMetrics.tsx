@@ -2,16 +2,12 @@ import React, {
   useState, useEffect, useContext, Component,
 } from 'react';
 import { Col, Dropdown, Row } from 'react-bootstrap';
-import DownArrow from 'assets/images/DownArrowSmall.svg';
-import CalendarIcon from 'assets/images/calendar-icon.svg';
-import BulbIcon from 'assets/images/bulb.svg';
 import Router from 'next/router';
 import styles from 'styles/Analytics.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 import useUtilityFunction from 'hooks/useUtilityFunction';
-import moment from 'moment';
 
 interface MetricsProp{
   revenue: string;
@@ -19,16 +15,18 @@ interface MetricsProp{
   uniqueClicks: string;
   aov: string;
   shopName: any;
+  page: string;
   trafficValue: string;
   cashbackGiven: string;
   handleSearch(startDate:any, endDate:any): any;
 }
 
 export default function CoreMetrics({
-  revenue, numPurchases, uniqueClicks, aov, trafficValue, cashbackGiven, shopName, handleSearch,
+  revenue, numPurchases, uniqueClicks, page, aov, trafficValue, cashbackGiven, shopName,
+  handleSearch,
 } : MetricsProp) {
   const [defaultDate, setDefaultDate] = useState<any>('');
-
+  const pathName = 'partner-analytics';
   const callbackApply = (event: any, picker: any) => {
     const startDate = picker.startDate.format('YYYY-MM-DD');
     const endDate = picker.endDate.format('YYYY-MM-DD');
@@ -85,17 +83,20 @@ export default function CoreMetrics({
             <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
           </DateRangePicker>
         </div>
+        {page !== 'analytics-id' && (
         <div className="d-inline mx-2">
           <select
             className="form-select"
             aria-label="Default select example"
             name="search-analytics"
+            value={page === 'partner' ? '2' : '1'}
             onChange={(e) => handleFilter(e)}
           >
             <option value="1">Post-Purchase Analytics</option>
             <option value="2">Partner Analytics</option>
           </select>
         </div>
+        )}
       </div>
       <Row>
         <Col lg={4} className={styles.coreMetrics__summary_box}>

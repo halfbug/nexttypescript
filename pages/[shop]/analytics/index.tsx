@@ -119,6 +119,7 @@ const Analytics: NextPage = () => {
               cashbackGiven={cashbackGiven}
               handleSearch={handleSearch}
               shopName={shopName}
+              page="analytics"
             />
             <GraphRevenue
               startFrom={startFrom}

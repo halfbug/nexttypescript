@@ -1513,6 +1513,20 @@ query mostViralProducts($shop: String!, $startDate: String!, $endDate: String!) 
 }
 `;
 
+const GET_PARTNER_MOST_VIRAL_PRODUCTS = gql`
+query partnerMostViralProducts($shop: String!, $startDate: String!, $endDate: String!) {
+  partnerMostViralProducts(shop: $shop, startDate: $startDate, endDate: $endDate) {
+    _id
+    purchaseCount
+    revenue
+    productDetails{
+      title
+      featuredImage
+    }  
+  }
+}
+`;
+
 const GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN = gql`
 query mostCampaignViralProducts($campaignId: String!) {
   mostCampaignViralProducts(campaignId: $campaignId) {
@@ -1552,6 +1566,49 @@ query mostViralCustomers($storeId: String!, $startDate: String!, $endDate: Strin
         phone
         ip
       }  
+    }     
+  }
+}
+`;
+
+const GET_PARTNER_MOST_VIRAL_CUSTOMERS = gql`
+query partnerViralCustomers($storeId: String!, $startDate: String!, $endDate: String!) {
+  partnerViralCustomers(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+    _id
+    url
+    shortUrl
+    partnerCommission
+    uniqueClicks
+    numMembers
+    lineItemsCount
+    refund
+    storeId  
+    revenue
+    createdAt
+    discountCode{
+      percentage
+    }
+    partnerDetails{
+      fname
+      email
+    }
+    members{
+      groupshopId
+      orderId
+      orderAmount
+      comissionAmount
+      customerInfo{
+        firstName
+        lastName
+        email      
+      }  
+    }
+    orderName{
+      id
+      name
+      createdAt
+      price
+      totalDiscounts       
     }     
   }
 }
@@ -2345,5 +2402,6 @@ export {
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
   GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
-  GET_PARTNER_UNIQUE_CLICKS_BY_ID,
+  GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS,
+  GET_PARTNER_MOST_VIRAL_CUSTOMERS,
 };
