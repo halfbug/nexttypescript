@@ -845,6 +845,7 @@ const GET_PRODUCT_DETAIL = gql`
       title
       inventoryQuantity
       inventoryPolicy
+      inventoryManagement
       selectedOptions{
         name
         value
