@@ -55,6 +55,7 @@ export const gspInit: IGroupshop = {
       facebook: '', instagram: '', tiktok: '', twitter: '',
     },
     salesTarget: { id: '', rewards: [] },
+    products: [],
   },
   bestSeller: [],
   allProducts: [],

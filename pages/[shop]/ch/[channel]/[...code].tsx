@@ -345,7 +345,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
-    if (gsctx?.totalProducts < 101) {
+    if (gsctx?.totalProducts < 100) {
       const cprod = clientDealProducts()?.length || 0;
       if (cprod >= 5) {
         showError(

@@ -74,7 +74,7 @@ const ProductsSearch = ({
   const {
     discountCode: { percentage },
     store: { products } = { store: { products: [] } },
-    popularProducts, addedProducts, dealProducts,
+    popularProducts, addedProducts, dealProducts, totalProducts,
   } = gsctx;
 
   // const refreshProduct = () => products?.filter(
@@ -215,13 +215,17 @@ const ProductsSearch = ({
   };
 
   const handleClick = (event: any) => {
-    if (selectedProducts && selectedProducts.length) {
-      if (!allowSelectAll) {
-        setShow(!show);
-        setTarget(event.target);
+    if (selectedProducts && selectedProducts.length && selected && selected.length) {
+      if ((selected.length + totalProducts) < 101) {
+        if (!allowSelectAll) {
+          setShow(!show);
+          setTarget(event.target);
+        } else {
+        getData!(selectedProducts, selected!);
+        handleClose(false);
+        }
       } else {
-      getData!(selectedProducts, selected!);
-      handleClose(false);
+        showError(`Groupshop is full you can not add more products to it, There is still place for ${(100 - totalProducts)} products, select only ${(100 - totalProducts)} products`);
       }
     }
   };
@@ -438,7 +442,12 @@ const ProductsSearch = ({
                       handleClose={(e) => {
                         closeModal(e);
                         if (selected && selected?.length > 0) {
-                          showSuccess('Product(s) has been added successfully.');
+                          if (!isChannel
+                            || (isChannel && (selected.length + totalProducts) < 101)) {
+                            showSuccess('Product(s) has been added successfully.');
+                          } else {
+                            showError(`Groupshop is full you can not add more products to it, There is still place for ${(100 - totalProducts)} products, select only ${(100 - totalProducts)} products`);
+                          }
                         } else {
                           showError('No product(s) has been selected.');
                         }
@@ -501,7 +510,12 @@ const ProductsSearch = ({
                         handleClose={(e) => {
                           closeModal(e);
                           if (selected && selected?.length > 0) {
-                            showSuccess('Product(s) has been added successfully.');
+                            if (!isChannel
+                              || (isChannel && (selected.length + totalProducts) < 101)) {
+                              showSuccess('Product(s) has been added successfully.');
+                            } else {
+                              showError(`Groupshop is full you can not add more products to it, There is still place for ${(100 - totalProducts)} products, select only ${(100 - totalProducts)} products`);
+                            }
                           } else {
                             showSuccess('No product(s) has been selected.');
                           }

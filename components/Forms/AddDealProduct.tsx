@@ -16,6 +16,7 @@ import useAppContext from 'hooks/useAppContext';
 import useDeal from 'hooks/useDeal';
 import styles from 'styles/Groupshop.module.scss';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import useAlert from 'hooks/useAlert';
 
 interface IValues {
   username: string;
@@ -35,6 +36,7 @@ export default function AddDealProduct({
   const {
     gsctx, dispatch, isGroupshop, isChannel,
   } = useAppContext();
+  const { showError } = useAlert();
   let dynamicFunc: any;
   if (isChannel) {
     [dynamicFunc] = useMutation<IGroupshop>(
@@ -47,7 +49,7 @@ export default function AddDealProduct({
   }
 
   const {
-    id, dealProducts: dealProductsCtx, discountCode, storeId,
+    id, dealProducts: dealProductsCtx, discountCode, storeId, totalProducts,
   } = gsctx;
   const [loadingSubmit, setloadingSubmit] = useState(false);
 
@@ -136,6 +138,11 @@ export default function AddDealProduct({
       );
       // unique by complete object
       const dealProducts = _.uniq([...gsctx.dealProducts ?? [], ...sdealProducts ?? []]);
+
+      const boughtProducts = [] as string[];
+      let cproducts: any;
+      let temp = [] as string[];
+
       if (isGroupshop) {
         await dynamicFunc({
           variables: {
@@ -146,16 +153,27 @@ export default function AddDealProduct({
           },
         });
       } else if (isChannel) {
-        await dynamicFunc({
-          variables: {
-            updateChannelGroupshopInput: {
-              id,
-              storeId,
-              discountCode,
-              dealProducts,
-            },
-          },
+        gsctx?.members?.forEach((m) => {
+          m.lineItems.forEach((l: any) => {
+            boughtProducts.push(l.product.id);
+          });
         });
+        cproducts = gsctx.campaign?.products;
+        temp = _.unionBy([...dealProducts.map((d) => d.productId)],
+          [...cproducts, ...boughtProducts]);
+        if (temp.length < 101) {
+          await dynamicFunc({
+            variables: {
+              updateChannelGroupshopInput: {
+                id,
+                storeId,
+                discountCode,
+                dealProducts,
+                allProducts: temp,
+              },
+            },
+          });
+        }
       } else {
         // if (
         // gsctx?.partnerDetails?.fname === null &&
@@ -191,51 +209,57 @@ export default function AddDealProduct({
           },
         });
       }
+
       handleClose({});
       setloadingSubmit(false);
+      if (!isChannel || (isChannel && temp.length < 101)) {
+        // update context
+        console.log('🚀 ~ file: AddDealProduct.tsx ~ line 155 ~ onSubmit: ~ isInfluencer', isInfluencer);
+        let influencerProducts;
+        let ownerChannelProducts;
+        let partnerDetails;
+        if (isInfluencer || isChannel) {
+          influencerProducts = uniqueArray([...gsctx?.store?.products?.filter(
+            ({ id: pid }:{ id:string}) => products?.includes(pid),
+          ) || []]);
+          ownerChannelProducts = uniqueArray([...gsctx?.store?.products?.filter(
+            ({ id: pid }:{ id:string}) => products?.includes(pid),
+          ) || []]);
+        }
+        if (!isGroupshop && !isChannel) {
+          partnerDetails = {
+            fname: username.split(' ')[0],
+            lname: username.split(' ')[1] ?? '',
+            email: gsctx?.partnerDetails?.email ?? '',
+            shopifyCustomerId: gsctx?.partnerDetails?.shopifyCustomerId ?? null,
+          };
+        }
 
-      // update context
-      console.log('🚀 ~ file: AddDealProduct.tsx ~ line 155 ~ onSubmit: ~ isInfluencer', isInfluencer);
-      let influencerProducts;
-      let ownerChannelProducts;
-      let partnerDetails;
-      if (isInfluencer || isChannel) {
-        influencerProducts = uniqueArray([...gsctx?.store?.products?.filter(
-          ({ id: pid }:{ id:string}) => products?.includes(pid),
-        ) || []]);
-        ownerChannelProducts = uniqueArray([...gsctx?.store?.products?.filter(
-          ({ id: pid }:{ id:string}) => products?.includes(pid),
-        ) || []]);
-      }
-      if (!isGroupshop && !isChannel) {
-        partnerDetails = {
-          fname: username.split(' ')[0],
-          lname: username.split(' ')[1] ?? '',
-          email: gsctx?.partnerDetails?.email ?? '',
-          shopifyCustomerId: gsctx?.partnerDetails?.shopifyCustomerId ?? null,
-        };
-      }
-      dispatch({
-        type: 'UPDATE_GROUPSHOP',
-        payload: {
-          ...gsctx,
-          popularProducts: !(isInfluencer || isChannelOwner)
-            ? _.uniq([...gsctx?.store?.products?.filter(
-              ({ id: pid }:{ id:string}) => products?.includes(pid),
-            ) || [],
-            ...gsctx?.popularProducts || []]) : [],
-          dealProducts,
-          addedProducts: [...gsctx?.addedProducts ?? [], ...sdealProducts || []],
-          refferalDealsProducts: [...gsctx?.refferalDealsProducts ?? [], ...sdealProducts?.filter((p) => p.type === 'deal') || []],
-          partnerDetails: !isGroupshop && isInfluencer ? partnerDetails
-            : gsctx?.partnerDetails ?? null,
-          influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
-          ownerProducts: isChannelOwner || ownerIP === clientIP
-            ? [...gsctx?.ownerProducts ?? [], ...ownerChannelProducts] : gsctx?.ownerProducts,
-        },
-      });
+        dispatch({
+          type: 'UPDATE_GROUPSHOP',
+          payload: {
+            ...gsctx,
+            totalProducts: isChannel
+              ? temp.length
+              : gsctx?.totalProducts ?? 0,
+            popularProducts: !(isInfluencer || isChannelOwner)
+              ? _.uniq([...gsctx?.store?.products?.filter(
+                ({ id: pid }:{ id:string}) => products?.includes(pid),
+              ) || [],
+              ...gsctx?.popularProducts || []]) : [],
+            dealProducts,
+            addedProducts: [...gsctx?.addedProducts ?? [], ...sdealProducts || []],
+            refferalDealsProducts: [...gsctx?.refferalDealsProducts ?? [], ...sdealProducts?.filter((p) => p.type === 'deal') || []],
+            partnerDetails: !isGroupshop && isInfluencer ? partnerDetails
+              : gsctx?.partnerDetails ?? null,
+            influencerProducts: isInfluencer ? influencerProducts : gsctx?.influencerProducts,
+            ownerProducts: isChannelOwner || ownerIP === clientIP
+              ? [...gsctx?.ownerProducts ?? [], ...ownerChannelProducts] : gsctx?.ownerProducts,
+          },
+        });
 
-      paginationScroll();
+        paginationScroll();
+      }
     },
   });
 
