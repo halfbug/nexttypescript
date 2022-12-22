@@ -8,7 +8,7 @@ import CutomerPartnerData from 'components/Forms/Dashboard/CutomerPartnerData';
 import { useQuery } from '@apollo/client';
 import { StoreContext } from 'store/store.context';
 import useUtilityFunction from 'hooks/useUtilityFunction';
-import GraphRevenue from 'components/Forms/Dashboard/GraphRevenue';
+import GraphPartnerRevenue from 'components/Forms/Dashboard/GraphPartnerRevenue';
 import { GET_PARTNER_OVERVIEW_METRICS, GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS } from 'store/store.graphql';
 
 const Analytics: NextPage = () => {
@@ -120,7 +120,7 @@ const Analytics: NextPage = () => {
               shopName={shopName}
               page="partner"
             />
-            <GraphRevenue
+            <GraphPartnerRevenue
               startFrom={startFrom}
               toDate={toDate}
               currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}

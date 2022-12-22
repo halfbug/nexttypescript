@@ -51,7 +51,7 @@ export default function AnalyticCustomerPartnerDetail({
       <div className={styles.customerData__orderDetail__tagrow}>
         <div className={styles.customerData__orderDetail__tagrow__genereated}>
           {currencyCode}
-          {formatNumber(customersData?.revenue - customersData.refund) }
+          {formatNumber(customersData?.revenue) }
           {' '}
           generated
         </div>

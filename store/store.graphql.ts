@@ -1687,6 +1687,18 @@ query GetGraphRevenue($storeId: String!) {
 }
 `;
 
+const GET_GRAPH_PARTNER_REVENUE = gql`
+query graphPartnerRevenue($storeId: String!) {
+  graphPartnerRevenue(storeId: $storeId) {
+    _id { 
+      month
+      year
+    }    
+    revenue
+    }
+}
+`;
+
 const GET_GRAPH_REVENUE_BY_CAMPAIGN = gql`
 query GetGraphRevenueByCampaign($storeId: String!, $campaignId: String!) {
   getGraphRevenueByCampaign(storeId: $storeId, campaignId: $campaignId) {
@@ -1702,6 +1714,19 @@ query GetGraphRevenueByCampaign($storeId: String!, $campaignId: String!) {
 const GET_GRAPH_REVENUE_BY_DATE = gql`
 query GetGraphRevenueByDate($storeId: String!, $startDate: String!, $endDate: String!) {
   getGraphRevenueByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
+    _id { 
+      day
+      month
+      year
+    }               
+      revenue
+      graphView
+    }
+}`;
+
+const GET_GRAPH__PARTNER_REVENUE_BY_DATE = gql`
+query getGraphPartnerRevenueByDate($storeId: String!, $startDate: String!, $endDate: String!) {
+  getGraphPartnerRevenueByDate(storeId: $storeId, startDate: $startDate, endDate: $endDate) {
     _id { 
       day
       month
@@ -2403,5 +2428,5 @@ export {
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
   GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
   GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS,
-  GET_PARTNER_MOST_VIRAL_CUSTOMERS,
+  GET_PARTNER_MOST_VIRAL_CUSTOMERS, GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE,
 };
