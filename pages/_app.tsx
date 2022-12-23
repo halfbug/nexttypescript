@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
 
-  if (pathname.includes('/qr-code/')) {
+  if (pathname.includes('/qr-code')) {
     return (
       <ApolloProvider client={apolloClient}>
         <StoreContextProvider>
