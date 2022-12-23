@@ -672,8 +672,8 @@ const ProductDetail = ({
                           ))}
                           cashback={['']}
                           discount={discount}
-                          fullshareurl=""
-                          shareUrl=""
+                          shareUrl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                          fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                           rewards={gsctx?.campaign?.salesTarget?.rewards}
                           brandname={brandName}
                           currencySymbol={currencySymbol}
