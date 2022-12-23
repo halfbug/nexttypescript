@@ -15,6 +15,7 @@ import useDimensions from 'hooks/useDimentions';
 import usePagination from 'hooks/usePagination';
 import Pagination from 'react-bootstrap/Pagination';
 import { IPartnerTools } from 'types/store';
+import OrderLineItems from 'components/Forms/Dashboard/OrderLineItems';
 import AffiliateDetail from './AffiliateDetail';
 
 interface ActiveAffiliateProps {
@@ -32,30 +33,11 @@ const ActiveAffiliate = ({
   partnerList, handleAfterSubmit, xs = 12, sm = 12, md = 12, lg = 12, xl = 12, xxl = 12,
 }: ActiveAffiliateProps) => {
   const { store, dispatch } = useContext(StoreContext);
-  const [partnerId, setPartnerId] = useState('');
-  const [partnerCommission, setPartnerCommission] = useState('');
-  const [revenue, setRevenue] = useState('');
-  const [comissionAmount, setcomissionAmount] = useState('');
-  const [purchases, setPurchases] = useState('');
   const [showSidebar, setshowSidebar] = React.useState(true);
-  const [groupshopLink, setGroupshopLink] = useState('');
-  const [partnerRewards, setpartnerRewards] = useState({
-    minDiscount: '',
-    maxDiscount: '',
-  });
-  const [discountCode, setdiscountCode] = useState({
-    title: null,
-    percentage: null,
-    priceRuleId: null,
-  });
-  const [partnerDetails, setPartnerDetails] = useState({
-    email: '',
-    fname: '',
-    lname: '',
-    shopifyCustomerId: '',
-  });
-
-  const [showAffiliateDetail, setShowAffiliateDetail] = useState(false);
+  const [activePartnerData, setActivePartnerData] = useState<any>([]);
+  const [showLineitemsBox, setShowLineitemsBox] = useState(false);
+  const [showCustomerDetail, setShowCustomerDetail] = useState(false);
+  const [customerLineItems, setCustomerLineItems] = useState<any>([]);
   const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
 
   const [
@@ -95,28 +77,10 @@ const ActiveAffiliate = ({
     console.log({ partnerGroupshopObj });
   };
 
-  const handlePartner = async (id: string) => {
-    const currentPartner: any = partnerList?.filter(
-      (item: any) => item.id === id,
-    );
-    setPartnerId(id);
-    setPartnerCommission(currentPartner[0].partnerCommission.replace('%', ''));
-    setPartnerDetails(currentPartner[0].partnerDetails);
-    setGroupshopLink(currentPartner[0].shortUrl);
-    setRevenue(currentPartner[0].revenue);
-    setcomissionAmount(currentPartner[0].comissionAmount);
-    setPurchases(currentPartner[0].purchases);
-    setShowAffiliateDetail(true);
+  const handlePartner = async (currentPartner: any) => {
+    setActivePartnerData(currentPartner);
+    setShowCustomerDetail(true);
     setshowSidebar(false);
-    setpartnerRewards({
-      minDiscount: currentPartner[0].partnerRewards.baseline.replace('%', ''),
-      maxDiscount: currentPartner[0].partnerRewards.maximum.replace('%', ''),
-    });
-    setdiscountCode({
-      title: currentPartner[0].discountCode.title,
-      percentage: currentPartner[0].discountCode.percentage,
-      priceRuleId: currentPartner[0].discountCode.priceRuleId,
-    });
   };
 
   return (
@@ -197,7 +161,7 @@ const ActiveAffiliate = ({
                 md={1}
                 className={styles.partner_handPointer}
                 onClick={() => {
-                  handlePartner(part.id);
+                  handlePartner(part);
                 }}
               >
                 <ArrowRightLogo />
@@ -250,21 +214,25 @@ const ActiveAffiliate = ({
         </section>
       </Col>
       <Col xxl={4} xl={4} lg={4} md={4} xs={12}>
-        {showAffiliateDetail && (
+        {showCustomerDetail && (
         <AffiliateDetail
           handleAfterSubmit={handleAfterSubmit}
-          partnerId={partnerId}
+          partnerData={activePartnerData}
           storeCurrency={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
-          groupshopLink={groupshopLink}
-          revenue={formatNumber(revenue)}
-          purchases={purchases}
-          partnerCommission={partnerCommission}
-          comissionAmount={formatNumber(comissionAmount)}
-          partnerRewards={partnerRewards}
-          partnerDetails={partnerDetails}
-          discountDetails={discountCode}
           setshowSidebar={setshowSidebar}
           showSidebar={showSidebar}
+          setCustomerLineItems={setCustomerLineItems}
+          setShowCustomerDetail={setShowCustomerDetail}
+          setShowLineitemsBox={setShowLineitemsBox}
+        />
+        )}
+
+        {showLineitemsBox && (
+        <OrderLineItems
+          setShowCustomerDetail={setShowCustomerDetail}
+          setShowLineitemsBox={setShowLineitemsBox}
+          currencyCode={storeCurrencySymbol(store?.currencyCode ?? 'USD')}
+          customerLineItems={customerLineItems}
         />
         )}
       </Col>

@@ -7,14 +7,16 @@ import { StoreContext } from 'store/store.context';
 import styles from 'styles/Partner.module.scss';
 import UniqueClicksLogo from 'assets/images/unique-clicks.svg';
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client';
-import { UPDATE_PARTNER_GROUPSHOP } from 'store/store.graphql';
+import { UPDATE_PARTNER_GROUPSHOP, GET_ORDER_LINEITEMS } from 'store/store.graphql';
 import NewPurchaseLogo from 'assets/images/new-purchase.svg';
 import NewCustomerLogo from 'assets/images/new-customer.svg';
 import CashBackLogo from 'assets/images/cashback.svg';
 import ArrowRightLogo from 'assets/images/arrow-right.svg';
 import OrderFromLogo from 'assets/images/order-from.svg';
 import { useFormik, FormikProps, FormikHelpers } from 'formik';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import * as yup from 'yup';
+import moment from 'moment';
 import { IPartnerTools } from 'types/store';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import InfoIcon from 'assets/images/info-icon.svg';
@@ -22,39 +24,47 @@ import Link from 'next/link';
 
 interface AffiliateProps {
   handleAfterSubmit: any;
-  partnerId: string;
-  partnerCommission: string;
-  partnerDetails: any;
-  groupshopLink: string;
-  purchases: string;
-  revenue:string;
-  comissionAmount:string;
-  discountDetails: any;
+  partnerData: any;
+  setCustomerLineItems:any;
+  setShowCustomerDetail:any;
+  setShowLineitemsBox:any;
   storeCurrency: any;
-  partnerRewards: any;
   showSidebar:boolean;
   setshowSidebar:any;
 }
 
 export default function AffiliateDetail({
-  handleAfterSubmit, partnerId, partnerCommission, partnerDetails, discountDetails,
-  partnerRewards, showSidebar, setshowSidebar, groupshopLink, purchases, revenue,
-  comissionAmount, storeCurrency,
+  handleAfterSubmit, partnerData, showSidebar, setshowSidebar, storeCurrency, setCustomerLineItems,
+  setShowCustomerDetail, setShowLineitemsBox,
 }
    : AffiliateProps) {
   const { store, dispatch } = useContext(StoreContext);
   const [show, setShow] = React.useState(false);
   const [editMin, setEditMin] = React.useState(false);
   const [editMax, setEditMax] = React.useState(false);
+  const { formatNumber, storeCurrencySymbol } = useUtilityFunction();
+  const [getLineItems, { data: lineItems }] = useLazyQuery(GET_ORDER_LINEITEMS, {
+    onError() { console.log('Error in finding Groupshops!'); },
+  });
+
+  useEffect(() => {
+    if (lineItems) {
+      if (lineItems?.orderLineItems) {
+        setCustomerLineItems(lineItems.orderLineItems);
+        setShowCustomerDetail(false);
+        setShowLineitemsBox(true);
+      }
+    }
+  }, [lineItems]);
+
   const [
     editPartnerGroupshopStatus,
   ] = useMutation<IPartnerTools | null>(UPDATE_PARTNER_GROUPSHOP);
-
   const partnerGroupshopInitial = {
     email: '',
-    minDiscount: partnerRewards.minDiscount,
-    maxDiscount: partnerRewards.maxDiscount,
-    partnerCommission: partnerCommission || 20,
+    minDiscount: partnerData?.partnerRewards.baseline.replace('%', ''),
+    maxDiscount: partnerData?.partnerRewards.maximum.replace('%', ''),
+    partnerCommission: partnerData?.partnerCommission.replace('%', '') || 20,
   };
 
   useEffect(() => {
@@ -108,7 +118,7 @@ export default function AffiliateDetail({
         variables: {
           updatePartnersInput: {
             storeId: store.id,
-            id: partnerId,
+            id: partnerData?.id,
             partnerCommission: `${valz.partnerCommission}%`,
             // discountCode: {
             //   title: discountDetails.title,
@@ -128,20 +138,24 @@ export default function AffiliateDetail({
     },
   });
 
+  const handleLineitems = async (id: string) => {
+    getLineItems({ variables: { parentId: id } });
+  };
+
   return (
     <div className={styles.partner__box_last}>
       <Form noValidate onSubmit={handleSubmit}>
         <Row className="align-items-center mb-2">
           <Col md={5}>
             <div className={styles.partner__box_last__name}>
-              {partnerDetails.fname !== null ? `${partnerDetails.fname} ` : ''}
-              {partnerDetails.lname !== null ? partnerDetails.lname : ''}
-              {partnerDetails.fname === null && partnerDetails.lname === null ? partnerDetails.email : '' }
+              {partnerData?.partnerDetails.fname !== null ? `${partnerData?.partnerDetails.fname} ` : ''}
+              {partnerData?.partnerDetails.lname !== null ? partnerData?.partnerDetails.lname : ''}
+              {partnerData?.partnerDetails.fname === null && partnerData?.partnerDetails.lname === null ? partnerData?.partnerDetails.email : '' }
             </div>
           </Col>
           <Col md={7} className="d-flex justify-content-start align-items-center">
             <div className={styles.partner__btn}>
-              <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
+              <Link href={partnerData?.shortUrl ?? ''}><a target="_blank">View Groupshop</a></Link>
               {' '}
               <ArrowRightLogo />
             </div>
@@ -445,42 +459,53 @@ export default function AffiliateDetail({
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag1}>
                   {storeCurrency}
-                  {revenue}
+                  {formatNumber(partnerData?.revenue)}
                   {' '}
                   generated
                 </span>
               </Col>
-              {/* <Col lg={6} md={6} xs={6}> */}
-              {/* <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}> */}
-              {/* <UniqueClicksLogo /> */}
-              {/* 👆 148 unique clicks */}
-              {/* </span> */}
-              {/* </Col> */}
+              <Col lg={6} md={6} xs={6}>
+                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag2].join(' ')}>
+                  👆
+                  {' '}
+                  {partnerData?.visitors}
+                  {' '}
+                  unique clicks
+                </span>
+              </Col>
               <Col lg={6} md={6} xs={6}>
                 <span className={styles.partner__detail_tag__tag3}>
                   {/* <NewPurchaseLogo /> */}
                   🛒
                   {' '}
-                  {purchases}
+                  {partnerData?.lineitemsCount}
                   {' '}
                   purchases
                 </span>
               </Col>
-              {/* <Col lg={6} md={6} xs={6}> */}
-              {/* <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}> */}
-              {/* <NewCustomerLogo /> */}
-              {/* ✨ 2 new customers */}
-              {/* </span> */}
-              {/* </Col> */}
-              {/* <Col lg={6} md={6} xs={6}> */}
-              {/* <span className={styles.partner__detail_tag__tag5}> */}
-              {/* <CashBackLogo /> */}
-              {/* 💸 $112 cashback */}
-              {/* </span> */}
-              {/* </Col> */}
+              <Col lg={6} md={6} xs={6}>
+                <span className={['pe-2 ps-1', styles.partner__detail_tag__tag4].join(' ')}>
+                  <NewCustomerLogo />
+                  ✨
+                  {' '}
+                  {partnerData?.purchases}
+                  {' '}
+                  new customers
+                </span>
+              </Col>
+              <Col lg={6} md={6} xs={6}>
+                <span className={styles.partner__detail_tag__tag5}>
+                  💸
+                  {' '}
+                  {storeCurrency}
+                  {formatNumber(partnerData?.comissionAmount)}
+                  {' '}
+                  commission
+                </span>
+              </Col>
               <Col lg={6} md={6} xs={6} className="d-flex justify-content-start align-items-center">
                 <div className={styles.partner__btn}>
-                  <Link href={groupshopLink ?? ''}><a target="_blank">View Groupshop</a></Link>
+                  <Link href={partnerData?.shortUrl ?? ''}><a target="_blank">View Groupshop</a></Link>
                   {' '}
                   <ArrowRightLogo />
                 </div>
@@ -488,32 +513,27 @@ export default function AffiliateDetail({
             </Row>
           </div>
           <hr className={styles.partner__sperator} />
-          {/* <div className={styles.partner__womScoreContainer__ordersFromGS}>
-            <div className={styles.partner__overlay}>
-              <div className={styles.partner__overlayText}>Coming Soon</div>
-            </div>
+          <div className={styles.partner__womScoreContainer__ordersFromGS}>
             <Row className={styles.partner_order}>
-              <OrderFromLogo />
               🔗 Orders from this Groupshop
             </Row>
-            <Row className="mt-3">
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
-                03/10/21
-              </Col>
-              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
-                03/10/21
-              </Col>
-              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>W83HFSD</Col>
-              <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
-                03/10/21
-              </Col>
-              <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4"><ArrowRightLogo /></Col>
-            </Row>
-          </div> */}
+            {partnerData.orders?.map((mem: any, index: number) => (
+              <Row className="mt-3">
+                <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt}>{mem.name}</Col>
+                <Col lg={4} md={4} xs={4} className={styles.partner__simple_txt__aligned}>
+                  { moment(new Date(mem.shopifyCreatedAt)).format('MM/DD/YY') }
+                </Col>
+                <Col lg={4} md={4} xs={4} className="d-flex justify-content-end align-items-center px-4">
+                  <ArrowRightLogo
+                    onClick={() => {
+                      handleLineitems(mem.id);
+                    }}
+                  />
+
+                </Col>
+              </Row>
+            ))}
+          </div>
         </div>
       </Form>
     </div>

@@ -245,7 +245,9 @@ query partnerGroupShops($storeId: String!) {
     id 
     revenue
     comissionAmount
+    lineitemsCount
     purchases 
+    visitors
     campaignId
     url
     shortUrl
@@ -266,6 +268,11 @@ query partnerGroupShops($storeId: String!) {
       lname
       email
       shopifyCustomerId 
+    }
+    orders{
+      id
+      name
+      shopifyCreatedAt
     }
   }
 }
