@@ -562,18 +562,30 @@ const ProductDetail = ({
                     )}
                   </div>
                   <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center'].join(' ')}>
-                    <Button
-                      variant="primary"
-                      className={styles.groupshop_Pd_addtoCart}
-                      onClick={() => addToCart()}
-                      disabled={isExpired || outofStock}
-                    >
-                      {/* {outofStock && 'Out of Stock'}
+                    {!isExpired ? (
+                      <Button
+                        variant="primary"
+                        className={styles.groupshop_Pd_addtoCart}
+                        onClick={() => addToCart()}
+                        disabled={outofStock}
+                      >
+                        {/* {outofStock && 'Out of Stock'}
                       {isExpired && 'Share to unlock'}
                       {!isExpired && 'Add to Cart'} */}
-                      {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
-                      {PDBtnText}
-                    </Button>
+                        {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
+                        {PDBtnText}
+                      </Button>
+                    ) : (
+                      <ShareButton
+                        label="share to unlock"
+                        shareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                        fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                        className={styles.groupshop_Pd_addtoCart}
+                        // onClick={(e) => handleCard(e)}
+                        disabled={outofStock}
+                      />
+                    )}
+
                     {isForMobile === false ? (
                       <Button
                         id="mobileBtn"
@@ -594,7 +606,7 @@ const ProductDetail = ({
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                        disabled={isExpired || outofStock}
+                        disabled={outofStock}
                       />
 
                     )}
@@ -668,7 +680,7 @@ const ProductDetail = ({
                           pending={pending}
                         />
                         <ShareButton
-                          disabled={isExpired}
+                          // disabled={isExpired}
                           placement="auto-end"
                           shareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
                           fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
@@ -780,6 +792,11 @@ const ProductDetail = ({
                   <section className="d-flex justify-content-center px-2 mb-3">
                     <div className="mx-1">
                       {' '}
+                      <SocialButton text={socialText} network="Email" url={shortActivateURL ?? activateURL} />
+                      {' '}
+                    </div>
+                    <div className="mx-1">
+                      {' '}
                       <SocialButton text={socialText} network="Instagram" url={shortActivateURL ?? activateURL} />
                     </div>
 
@@ -789,11 +806,15 @@ const ProductDetail = ({
                       {' '}
                     </div>
 
-                    <div className="mx-1">
+                    {/* <div className="mx-1">
                       {' '}
-                      <SocialButton text={socialText} network="Tiktok" url={shortActivateURL ?? activateURL} />
+                      <SocialButton
+                        text={socialText}
+                        network="Tiktok"
+                        url={shortActivateURL ?? activateURL}
+                      />
                       {' '}
-                    </div>
+                    </div> */}
                     <div className="mx-1">
                       {' '}
                       <SocialButton text={socialText} network="Twitter" url={shortActivateURL ?? activateURL} />
