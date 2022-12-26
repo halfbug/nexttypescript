@@ -218,6 +218,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [getMatchingGS] = useLazyQuery<MatchingGS>(GET_MATCHING_GS, {
     fetchPolicy: 'network-only',
     onCompleted: async (matchingAllStore: any) => {
+      console.log('matchingAllStore🚀🚀🚀', matchingAllStore);
       if (matchingAllStore?.matchingGS?.length > 0 && matchingStoreIds?.length > 0) {
         const finalMathingGSData = useDiscoverSortingGS(
           matchingAllStore?.matchingGS, matchingStoreIds,
@@ -1026,7 +1027,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           {' '}
                           with
                           {' '}
-                          {brand.customerName[0]?.orderDetail?.customer?.lastName}
+                          {brand.customerName?.lastName}
                           {' '}
                           and get
                           {' '}
