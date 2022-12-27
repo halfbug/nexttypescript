@@ -6,12 +6,20 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
   if (matchingGs.length && matchingStoreIds.length) {
     matchingGs.forEach((el: any) => {
       const tempProduct: any = [];
-      el?.bestSeller?.sort((a: any, b: any) => b.purchaseCount - a.purchaseCount);
-      el?.bestSeller?.forEach((ele: any) => {
-        if (tempProduct.length < 4 && !tempProduct.includes(ele)) {
+      el?.popularProducts?.sort((a: any, b: any) => b.purchaseCount - a.purchaseCount);
+      el?.popularProducts?.forEach((ele: any) => {
+        if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id)) {
           tempProduct.push(ele);
         }
       });
+      if (tempProduct.length < 4) {
+        el?.bestSeller?.sort((a: any, b: any) => b.purchaseCount - a.purchaseCount);
+        el?.bestSeller?.forEach((ele: any) => {
+          if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id)) {
+            tempProduct.push(ele);
+          }
+        });
+      }
       showingGS.push({
         logoImage: el?.logoImage,
         brandName: el?.brandName,
@@ -23,6 +31,10 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
         members: el?.members,
       });
     });
+    const finalGS:any = matchingStoreIds.map((prod:any) => showingGS.find(
+      (el:any) => el.storeId === prod,
+    ));
+    return finalGS;
   }
   return showingGS;
 };
