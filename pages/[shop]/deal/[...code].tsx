@@ -997,13 +997,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               {matchingGroupshop?.map((brand) => (
                 <>
-                  <Col xs={12} md={6} className="px-0">
+                  <Col xs={12} md={matchingGroupshop.length === 1 ? 12 : 6} className="px-0">
                     <ProductGrid
                       xs={6}
                       sm={6}
                       md={6}
                       lg={5}
-                      xl={5}
+                      xl={matchingGroupshop.length === 1 ? 3 : 5}
                       products={
                         brand?.products?.length
                         && brand?.products
