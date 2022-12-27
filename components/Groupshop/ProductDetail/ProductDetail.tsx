@@ -132,11 +132,13 @@ const ProductDetail = ({
   };
 
   // handle variant change disable add to cart for out of stock variant
+  console.log('🚀 ~ file: ProductDetail.tsx:138 ~ useEffect ~ data', data);
   const [outofStock, setoutofStock] = useState<boolean>(false);
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
       const { productById } = data;
+      console.log('🚀 ~ file: ProductDetail.tsx:140 ~ useEffect ~ productById', productById);
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
       if (productById?.outofstock) {
         setoutofStock(true);
@@ -149,6 +151,8 @@ const ProductDetail = ({
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);
       setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
+    } else {
+      setoutofStock(true);
     }
     // console.log('🚀 ~ file: ProductDetail.tsx ~ line 114 ~ useEffect ~ data', data);
   }, [selOptions, data]);
