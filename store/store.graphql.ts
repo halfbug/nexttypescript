@@ -1949,44 +1949,6 @@ const GET_MATCHING_GS = gql`
           price
         }
       }
-      allProducts{
-        id
-        title
-        featuredImage
-        description
-        price
-        currencyCode
-        purchaseCount
-        outofstock
-        options{
-          id
-          name
-          values
-          position
-        }
-        lineItems{
-          product{
-            id
-          }
-          price
-        }
-      }
-      InventoryProducts{
-        id
-      title
-      createdAtShopify
-      purchaseCount
-      featuredImage
-      description                             
-      price
-      options{
-        id
-        name
-        values
-        position
-      }
-      currencyCode
-      }
       members{
         orderId
         availedDiscount
