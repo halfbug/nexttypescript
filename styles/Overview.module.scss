@@ -10,6 +10,81 @@
             color: $black;
         }
     }
+
+    &_tag {
+        @extend .py-1, .px-2, .text-nowrap;
+        background: #dcd0e8;
+        border-radius: 6px;
+        width: fit-content;
+        font-family: "DM Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        text-align: center;
+        color: $black;
+    }
+    &__mainCampaignBox {
+        @extend .my-3, .d-flex, .align-items-center;
+        background: transparent;        ;
+        border: 1px  dashed #DCD0E8;
+        border-radius: 23px;
+        padding: 20px;
+        &__name {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 23px;
+            color: $black;
+
+        }
+        &__AddPartnerText {
+            @extend .ms-2, .text-nowrap;
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+            color: $black;
+        }
+        &_ActivePartnerText{
+            color: #A7C737;
+        }
+        button {
+            @extend .text-nowrap, .px-2;
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            text-align: center;
+            color: $black
+        }
+        // &_buttonBold{
+        //     @extend .text-nowrap, .px-2, .d-flex, .align-items-center;
+        //     font-family: 'DM Sans';
+        //     font-style: normal;
+        //     font-weight: 700;
+        //     font-size: 12px;
+        //     text-align: center;
+        //     color: $black
+        // }
+        p {
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            padding-top: 5px;
+            text-align: center;
+        }
+        &_ReturnOn{
+            @extend .px-2, .text-start ;
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            color: $black;
+        }
+    }
     &__description {
         color: #000000;
         line-height: 23px;
