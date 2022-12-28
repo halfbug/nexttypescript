@@ -608,7 +608,7 @@ const ProductDetail = ({
                       <ShareButton
                         // disabled={isExpired}
                         placement="right-start"
-                        shareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                        shareurl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
@@ -629,7 +629,7 @@ const ProductDetail = ({
                             <NativeShareButton
                               label="🔗 Invite Now"
                               className={['align-self-center mb-2 py-2 px-3 w-75 border-0', styles.groupshop_Pd_addtoCart].join(' ')}
-                              shareurl={activateURL}
+                              shareurl={shortActivateURL ?? activateURL}
                               text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
                             />
                           </>
@@ -678,7 +678,7 @@ const ProductDetail = ({
                           ))}
                           cashback={['']}
                           discount={discount}
-                          shareUrl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                          shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
                           fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                           rewards={gsctx?.campaign?.salesTarget?.rewards}
                           brandname={brandName}
@@ -688,7 +688,7 @@ const ProductDetail = ({
                         <ShareButton
                           // disabled={isExpired}
                           placement="auto-end"
-                          shareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
+                          shareurl={`${isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}`}
                           fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
                           label="Invite more friends"
                           className={styles.groupshop_InviteBtn}
