@@ -31,7 +31,7 @@ const UpdateChannel = ({ channel, refreshChannelList, channelList } : CustomChan
   const [editMaximum, setEditMaximum] = React.useState(false);
   const channelInitial = {
     channelname: channel.name,
-    slugName: channel?.name.replace(' ', '-').toLowerCase(),
+    slugName: channel?.slugName,
     commission: channel?.rewards.commission.replace('%', ''),
     minDiscount: channel?.rewards.baseline.replace('%', ''),
     maxDiscount: channel?.rewards.maximum.replace('%', ''),
