@@ -11,7 +11,7 @@ import styles1 from 'styles/Influencer.module.scss';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
 import ArrowDown from 'assets/images/arrow-down.svg';
-import { GET_ACTIVE_GROUPSHOP_BY_SHOP } from 'store/store.graphql';
+import { GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP, GET_ACTIVE_GROUPSHOP_BY_SHOP } from 'store/store.graphql';
 import { useQuery } from '@apollo/client';
 import useGtm from 'hooks/useGtm';
 import { string } from 'yup';
@@ -47,16 +47,25 @@ const InfoBox = ({
     data, refetch,
   } = useQuery(GET_ACTIVE_GROUPSHOP_BY_SHOP, {
     variables: { storeId },
-    skip: isChannel,
+  });
+
+  const {
+    data: data1,
+  } = useQuery(GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP, {
+    variables: { storeId },
+    fetchPolicy: 'network-only',
+    skip: !isChannel,
   });
 
   useEffect(() => {
-    if (groupShopURL === '') {
-      if (data?.getActiveGroupshop?.shortUrl) {
-        setGroupShopURL(data.getActiveGroupshop.shortUrl);
-      }
+    if (data?.getActiveGroupshop?.shortUrl) {
+      setGroupShopURL(data.getActiveGroupshop.shortUrl);
     }
-  }, [data]);
+    if (!data?.getActiveGroupshop?.shortUrl
+      && isChannel && data1?.getActiveChannelGroupshopURL?.shortUrl) {
+      setGroupShopURL(data1.getActiveChannelGroupshopURL.shortUrl);
+    }
+  }, [data, data1]);
 
   const handleClose = () => {
     setShow(false);
@@ -92,54 +101,45 @@ const InfoBox = ({
               <img src={storeLogo} alt="headtag" className="img-fluid" />
             </div>
             <h2>
-              This Groupshop expired!
+              {isChannel ? 'Channel is expired' : 'This Groupshop expired!'}
             </h2>
-            { !isChannel && (
-            <>
-              <div className={styles1.Influencer_expired}>
-                <hr />
-              </div>
-              <p className={styles.groupshop_infoBox_textDiscount}>
-                But you can still get exclusive discounts.
-
-              </p>
-              <div className="my-2 d-flex justify-content-center">
-                <p className={styles.groupshop_expiremodal__pointers}>
-                  Click below and we'll pair you with another Groupshop to shop. share and earn!
-                </p>
-              </div>
-            </>
-            ) }
-
-          </div>
-          { !isChannel && (
-          <>
-            <div className="d-flex justify-content-center my-4">
-              {groupShopURL !== ''
-              && (
-                <div
-                  className={`${'Button_onboarding__button__XLPBP'} ${styles.groupshop_infoBox_shoppingBtn}`}
-                >
-                  <Link href={groupShopURL}>
-                    <a target="_blank" className="text-decoration-none">
-                      Find a Groupshop
-                    </a>
-                  </Link>
-                </div>
-              )}
-              {groupShopURL === ''
-              && (
-                <Button
-                  className={styles.groupshop_infoBox_shoppingBtn}
-                  onClick={handleError}
-                >
-                  Find a Groupshop
-                </Button>
-              )}
+            <div className={styles1.Influencer_expired}>
+              <hr />
             </div>
-            <div className="text-danger">{groupShopError}</div>
-          </>
-          ) }
+            <p className={styles.groupshop_infoBox_textDiscount}>
+              But you can still get exclusive discounts.
+
+            </p>
+            <div className="my-2 d-flex justify-content-center">
+              <p className={styles.groupshop_expiremodal__pointers}>
+                Click below and we'll pair you with another Groupshop to shop. share and earn!
+              </p>
+            </div>
+          </div>
+          <div className="d-flex justify-content-center my-4">
+            {groupShopURL !== ''
+            && (
+              <div
+                className={`${'Button_onboarding__button__XLPBP'} ${styles.groupshop_infoBox_shoppingBtn}`}
+              >
+                <Link href={groupShopURL}>
+                  <a target="_blank" className="text-decoration-none">
+                    Find a Groupshop
+                  </a>
+                </Link>
+              </div>
+            )}
+            {groupShopURL === ''
+            && (
+              <Button
+                className={styles.groupshop_infoBox_shoppingBtn}
+                onClick={handleError}
+              >
+                Find a Groupshop
+              </Button>
+            )}
+          </div>
+          <div className="text-danger">{groupShopError}</div>
         </Modal.Body>
 
       </Modal>

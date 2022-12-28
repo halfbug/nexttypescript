@@ -40,6 +40,7 @@ export const gspInit: IGroupshop = {
   shortUrl: '',
   createdAt: new Date(),
   expiredAt: new Date(),
+  expiredShortLink: '',
   discountCode: {
     title: '',
     percentage: '',

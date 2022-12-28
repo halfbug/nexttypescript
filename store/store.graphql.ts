@@ -1133,6 +1133,15 @@ query getActiveGroupshop($storeId: String!) {
 }
 `;
 
+const GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP = gql`
+query getActiveChannelGroupshopURL($storeId: String!) {
+  getActiveChannelGroupshopURL(storeId: $storeId) {
+    shortUrl
+    url    
+  }
+}
+`;
+
 const GET_ACTIVE_GROUPSHOPS_BY_EMAIL = gql`
 query getActiveGroupshops($email: String!) {
   getActiveGroupshops(email: $email) {
@@ -2095,6 +2104,7 @@ query getChannelByName ($getChannelByName: GetChannelByName!) {
       baseline
       maximum
       commission 
+      average
     }
     isActive
     storeId
@@ -2136,12 +2146,13 @@ query getChannels($storeId: String!) {
 `;
 
 const GET_CHANNEL_GROUPSHOP = gql`
-query getChannelGroupshopByCode($code: String!) {
-  getChannelGroupshopByCode(code: $code) {
+query getChannelGroupshopByCode($code: String!, $status: String = "") {
+  getChannelGroupshopByCode(code: $code, status: $status) {
     id
     storeId
     shortUrl
     url
+    expiredShortLink
     ownerProducts{
       id
       featuredImage
@@ -2420,6 +2431,7 @@ export {
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
   GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
-  GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS,
-  GET_PARTNER_MOST_VIRAL_CUSTOMERS, GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE,
+  GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP,
+  GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
+  GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE,
 };

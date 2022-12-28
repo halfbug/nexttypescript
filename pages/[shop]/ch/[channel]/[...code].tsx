@@ -66,6 +66,9 @@ import QRBox from 'components/Groupshop/QRBox/QRBox';
 import WhatsInsideBox from 'components/Groupshop/RewardBox/WhatsInsideBox';
 import useAppContext from 'hooks/useAppContext';
 import { gspInit } from 'store/channel-groupshop.context';
+import useExpired from 'hooks/useExpired';
+import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
+import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 
 const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // console.log({ meta });
@@ -89,14 +92,16 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [Channel, setChannel] = useState({
     rewards: {
       baseline: '',
-      avarage: '',
+      average: '',
       commission: '',
       maximum: '',
     },
     name: '',
     id: '',
+    isActive: true,
   });
   const [Error1, setError1] = useState<string>('');
+  const [isChannelDeactivated, setisChannelDeactivated] = useState<boolean>(false);
 
   const [callFun, { data: channelData }] = useLazyQuery(GET_CHANNEL_BY_NAME, {
     fetchPolicy: 'network-only',
@@ -126,7 +131,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       const {
         rewards: {
           baseline,
-          avarage,
+          average,
           commission,
           maximum,
         },
@@ -134,31 +139,32 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         id,
         isActive,
       } = channelData?.getChannelByName;
-      if (isActive === true) {
-        setChannel({
-          rewards: {
-            baseline,
-            avarage,
-            commission,
-            maximum,
-          },
-          name,
-          id,
-        });
-        const pctx: IGroupshop = {
-          ...gsctx,
-          channelId: id,
-          channelRewards: {
-            baseline,
-            average: avarage,
-            commission,
-            maximum,
-          },
-        };
-        dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
-      } else {
-        setError1('channel is Inactive');
-      }
+      setChannel({
+        rewards: {
+          baseline,
+          average,
+          commission,
+          maximum,
+        },
+        name,
+        id,
+        isActive,
+      });
+      const pctx: IGroupshop = {
+        ...gsctx,
+        channelId: id,
+        channelRewards: {
+          baseline,
+          average,
+          commission,
+          maximum,
+        },
+      };
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: pctx });
+      // if (isActive !== true) {
+      //   setisChannelDeactivated(true);
+      //   // setError1('channel is Inactive');
+      // }
     }
   }, [channelData?.getChannelByName]);
 
@@ -172,7 +178,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   } = useQuery(
     GET_CHANNEL_GROUPSHOP,
     {
-      variables: { code: discountCode },
+      variables: { code: discountCode, status: status ?? '' },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },
@@ -234,7 +240,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         (item: any) => item.outofstock === false,
       ));
       setbestSeller(getChannelGroupshopByCode?.bestSeller);
-      setShowExpiredModel(isExpired);
+      setShowExpiredModel(isChannelDeactivated);
     }
   }, [getChannelGroupshopByCode, pending]);
   // banner image and logo load
@@ -259,7 +265,14 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     formatNameCase,
     leftOverProducts,
     isChannelOwner,
+    shortActivateURL,
+    activateURL,
+    getDateDifference,
   } = useDeal();
+  const {
+    days, hrs, mins, secs,
+  } = getDateDifference();
+  const { urlForActivation, loaderInvite } = useExpired();
 
   const { googleEventCode, googleButtonCode } = useGtm();
   // console.log(showRewards, 'showRewards');
@@ -277,6 +290,14 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const {
     findInArray, filterArray, getSignedUrlS3, getKeyFromS3URL, uniqueArray,
   } = useUtilityFunction();
+
+  useEffect(() => {
+    if (isExpired === true && Channel.isActive === false) {
+      setisChannelDeactivated(true);
+    } else {
+      setisChannelDeactivated(false);
+    }
+  }, [isExpired, Channel.isActive]);
   useEffect(() => {
     setallProducts(
       [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
@@ -399,7 +420,11 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   return (
     <>
       <Head>
-        <title>Consumer groupshop</title>
+        <title>
+          Groupshop -
+          {' '}
+          {Channel?.name ?? channelName ?? ''}
+        </title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -476,6 +501,25 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 )
                 : <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
+            // RightComp={isExpired ? (
+            //   <ExpiredBox
+            //     discount={gsctx?.discountCode.percentage}
+            //     mes="How does this work?"
+            //     brandname={brandName ?? ''}
+            //     shareUrl={shortActivateURL ?? activateURL ?? ''}
+            //     products={allProducts?.slice(0, 3) ?? []}
+            //   />
+            // ) : (
+            //   <InfoBox
+            //     mes={isModalForMobile ? '' : 'How does this work?'}
+            //     brandname={brandName}
+            //     shareUrl={gsShortURL ?? gsURL}
+            //     name={formatNameCase(
+            //       `${gsctx?.customerDetail?.firstName ?? ''}
+            // ${gsctx?.customerDetail?.lastName ?? ''}`,
+            //     )}
+            //   />
+            // )}
             RightComp={(
               <InfoBox
                 mes={isModalForMobile ? '' : 'How does this work?'}
@@ -483,13 +527,14 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 shareUrl={gsShortURL ?? gsURL}
                 name={formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.lastName ?? ''}`)}
               />
-            )}
+)}
           />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
 
               <Col md={3} xs={3}>
-                {!isModalForMobile ? (
+                {getLogoHTML()}
+                {/* {isModalForMobile ? (
                   <>
                     { getLogoHTML() }
                   </>
@@ -504,7 +549,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       />
                     ) : <></> }
                   </>
-                )}
+                )} */}
               </Col>
               <Col md={6} className={styles.groupshop__top_members}>
                 <h5 className="text-center">
@@ -531,8 +576,8 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                   <ShareButton
                     placement="bottom"
-                    shareurl={gsShortURL ?? gsURL}
-                    fullshareurl={gsURL}
+                    shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+                    fullshareurl={isExpired ? activateURL : gsURL}
                     label="Invite"
                     className={styles.groupshop__top_invite}
                     icon={<Plus size={18} className="me-0 pe-0" />}
@@ -541,12 +586,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </div>
               </Col>
               <Col xs={6} className={styles.groupshop__counter}>
-                {isModalForMobile && (
-                  <>
-                    {getLogoHTML()}
-                  </>
-                )}
-                {/* <h6 className="text-center">Store expires in</h6>
+                <h6 className="text-center">Store expires in</h6>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
                     <span>
@@ -564,7 +604,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       M
                     </span>
                   </p>
-                </div> */}
+                </div>
               </Col>
               <Col
                 md={3}
@@ -576,13 +616,13 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               >
                 <ShareButton
                   placement="bottom"
-                  shareurl={gsShortURL ?? gsURL}
-                  fullshareurl={gsURL}
-                  label="Share with friends"
+                  shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+                  fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? ''}
+                  label={(isExpired ? 'SHARE TO UNLOCK' : 'Share with friends')}
                   onClick={() => googleEventCode('earn-cashback-modal')}
                   className={styles.groupshop__hero_share_btn}
                 />
-                {SKU.length > 1 && !isModalForMobile && leftOverProducts()?.length > 0 && (
+                {SKU.length > 1 && leftOverProducts()?.length > 0 && (
                   <IconButton
                     icon={<Search size={24} />}
                     className={styles.groupshop__hero_iconSearchBtn}
@@ -616,26 +656,31 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <Hero bannerImage={bannerImage}>
           <Container className={styles.groupshop__hero__content}>
             <Row className={styles.groupshop__hero_welcome}>
-              <Col lg={12}>
-                <h3>
-                  Welcome to
-                  {' '}
-                  <span className="text-capitalize text-decoration-none">
+              {isExpired ? (
+                <Col lg={12}>
+                  <h3>
+                    <span className="text-capitalize text-decoration-none">
+                      {gsctx?.customerDetail?.firstName}
+                    </span>
+                    ’s Groupshop has expired – but it’s not too late!
+                  </h3>
+                  <p>Invite 1 friend to restart the timer and access the discounts below.</p>
+                </Col>
+              ) : (
+                <Col lg={12}>
+                  <h3>
+                    Welcome to
                     {' '}
-                    {gsctx?.customerDetail?.firstName}
-                    {' '}
-                  </span>
-                  ’s Groupshop
-                </h3>
-                <p>
-                  Shop with me & get exclusive discounts on my favorite products
-                  {/* Explore my favorite
-                  {' '}
-                  {gsctx?.store?.brandName}
-                  {' '}
-                  products and access exclusive discounts when you shop with me! */}
-                </p>
-              </Col>
+                    <span className="text-capitalize text-decoration-none">
+                      {' '}
+                      {gsctx?.customerDetail?.firstName}
+                      {' '}
+                    </span>
+                    ’s Groupshop
+                  </h3>
+                  <p>The more friends shop, the more discounts and cashback!</p>
+                </Col>
+              )}
             </Row>
             <div className="d-flex justify-content-evenly">
               {/* <Col
@@ -706,6 +751,23 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </p>
             </Row>
             <Row className={['mt-4', styles.groupshop__hero_how_to].join(' ')}>
+              {/* {isExpired ? (
+                <ExpiredBox
+                  discount={gsctx?.discountCode.percentage}
+                  mes="How it works"
+                  brandname={brandName ?? ''}
+                  shareUrl={shortActivateURL ?? activateURL ?? ''}
+                  products={allProducts?.slice(0, 3) ?? []}
+                />
+              ) : (
+                <InfoBox
+                  mes="How it works"
+                  brandname={brandName}
+                  shareUrl={gsShortURL ?? gsURL}
+                  name={formatNameCase(`${gsctx?.customerDetail?.firstName}
+                  ${gsctx?.customerDetail?.lastName ?? ''}`)}
+                />
+              ) } */}
               <InfoBox
                 mes="How it works"
                 brandname={brandName}
@@ -843,6 +905,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           showHoverButton
+          urlForActivation={shortActivateURL ?? urlForActivation}
           id="allproducts"
         >
           <div className="position-relative">
@@ -918,13 +981,35 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
           <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
             <Col className="d-flex justify-content-center flex-column">
-              <p>Don’t see what you like?</p>
-              <Button
-                className={['align-self-center my-2 px-5 py-2'].join(' ')}
-                onClick={handleAddProduct}
-              >
-                Add a Product
-              </Button>
+              {isExpired ? (
+                <>
+                  <p className={styles.groupshop_expShopTheseProducts}>
+                    Want to shop these products?
+                  </p>
+                  <ShareUnlockButton
+                    className={['align-self-center my-2 px-3 py-2', styles.groupshop_expInviteFrnd].join(' ')}
+                    onClick={() => googleEventCode('earn-cashback-modal')}
+                    label="INVITE A FRIEND TO SHOP WITH YOU"
+                    shareurl={shortActivateURL ?? urlForActivation ?? ''}
+                    placement="bottom"
+                  />
+
+                </>
+
+              )
+                : ((SKU.length > 1 && leftOverProducts()?.length > 0) && (
+                <>
+                  <p>Don’t see what you like?</p>
+                  <Button
+                    className={['align-self-center my-2 px-5 py-2'].join(' ')}
+                    onClick={handleAddProduct}
+                  >
+                    Add a Product
+                  </Button>
+
+                </>
+
+                )) || <></>}
             </Col>
           </Row>
         ) : <></>}
@@ -960,13 +1045,14 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <LinkShareMobileView
           show={showQrscan}
           handleClose={() => setshowQrscan(false)}
-          shareurl={gsShortURL ?? gsURL}
+          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
         />
 
         <ProductDetail
           show={showDetail}
           handleClose={() => setshowDetail(false)}
           product={sProduct}
+          isChannel
         />
         <Cart
           show={showCart}
@@ -976,18 +1062,8 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleDetail={(prd) => setsProduct(prd)}
         />
         <AlertComponent />
-        { showRewards && (
-        <InfoBox
-          mes=""
-          brandname={brandName}
-          shareUrl={gsShortURL ?? gsURL}
-          showRewards={showRewards}
-          setShowRewards={setShowRewards}
-          name={formatNameCase(`${gsctx?.customerDetail?.firstName} ${gsctx?.customerDetail?.lastName ?? ''}`)}
-        />
-        ) }
 
-        {isExpired === true
+        {isChannelDeactivated === true
           && (
           <ExpireModal
             storeId={gsctx?.storeId}
@@ -1004,24 +1080,41 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               show={showQR}
               discount={gsctx?.discountCode.percentage}
               text={socialText}
-              shareurl={gsShortURL ?? gsURL}
+              shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               handleClose={() => setShowQR(false)}
               fullshareurl={gsURL}
             />
           )
         }
+        { showRewards && (
+        <InfoBox
+          mes=""
+          brandname={brandName}
+          shareUrl={gsShortURL ?? gsURL}
+          showRewards={showRewards}
+          setShowRewards={setShowRewards}
+          name={formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.lastName ?? ''}`)}
+        />
+        ) }
         {/* <RewardBox2
           show={showRewards}
           discount={discount}
-          shareurl={gsShortURL ?? gsURL}
-          fullshareurl={gsURL}
+          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+          fullshareurl={isExpired ? activateURL : gsURL}
           handleClose={() => setShowRewards(false)}
         /> */}
-        {/* {isModalForMobile && (
-        <div>
-          <ShoppingBoxMobile shareurl={gsShortURL ?? gsURL} />
-        </div>
-        )} */}
+        {isModalForMobile && (
+          <div>
+            <ShoppingBoxMobile
+              shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+              // onClick={() => setShowRewards(true)}
+              val=""
+              label={isExpired ? 'Share to unlock' : 'Share & earn'}
+              brandName={brandName}
+              maxPercent={(gsctx?.partnerRewards?.baseline)?.toString() ?? ''}
+            />
+          </div>
+        )}
       </div>
     </>
   );

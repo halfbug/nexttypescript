@@ -34,7 +34,7 @@ export interface ISignUp {
 const Footer = ({
   LeftComp, RightComp,
 }: FooterProps) => {
-  const { isChannel } = useAppContext();
+  // const { isChannel } = useAppContext();
   const {
     getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
   } = useDeal();
@@ -104,7 +104,7 @@ const Footer = ({
                 </>
               ) : (
                 <>
-                  {isInfluencerGS || isChannel ? (
+                  {isInfluencerGS ? (
                     <h6>
                       <span className={[styles1.Influencer_fontMeduim, ''].join(' ')}>
                         Want to keep shopping with unlimited rewards?
@@ -120,7 +120,7 @@ const Footer = ({
               )}
             </div>
 
-            {isInfluencerGS || isChannel ? (
+            {isInfluencerGS ? (
               <Row>
                 <Col className={styles1.Influencer_MobileView}>
                   <div className="text-center me-2">

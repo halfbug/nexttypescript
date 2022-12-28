@@ -120,17 +120,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         id,
         isActive,
       } = channelData?.getChannelByName;
-      if (isActive === true) {
-        setChannel({
-          rewards: {
-            baseline,
-            commission,
-            maximum,
-          },
-          name,
-          id,
-        });
-      } else {
+      setChannel({
+        rewards: {
+          baseline,
+          commission,
+          maximum,
+        },
+        name,
+        id,
+      });
+      if (isActive !== true) {
         setError1('channel is Inactive');
       }
     }
@@ -193,7 +192,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   return (
     <>
       <Head>
-        <title>Consumer groupshop signup</title>
+        <title>
+          Groupshop -
+          {' '}
+          {Channel?.name ?? channelName ?? ''}
+        </title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{

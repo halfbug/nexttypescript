@@ -195,6 +195,8 @@ export interface IGroupshop {
 
   exipredShortLink?: string;
 
+  expiredShortLink?: string;
+
   ownerDeals?: Product[];
 
   refferalDealsProducts?: DealProduct[]; // customer of normal GS

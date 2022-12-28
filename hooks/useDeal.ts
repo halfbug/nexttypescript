@@ -552,7 +552,8 @@ export default function useDeal() {
   const milestones = gsctx?.milestones;
   // const activateURL = `${gsURL}?activated=${Math.floor((Math.random() * 6) + 1).toFixed(2)}-GS`;
   const activateURL = `${gsURL}/status&activated`;
-  const shortActivateURL = gsctx?.exipredShortLink ?? activateURL;
+  const shortActivateURL = isChannel
+    ? gsctx?.expiredShortLink ?? activateURL : gsctx?.exipredShortLink ?? activateURL;
 
   const banner = gsctx?.store?.settings?.general?.imageUrl ? gsctx?.store?.settings?.general?.imageUrl : `${process.env.IMAGE_PATH}/bg.jpg`;
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';

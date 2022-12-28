@@ -36,10 +36,11 @@ interface ProductDetailProps extends RootProps {
   handleClose(e:any): any;
   // addToCart(e: any): any;
   product : IProduct | undefined;
+  isChannel?: boolean;
 }
 
 const ProductDetail = ({
-  show, pending = false, handleClose, product,
+  show, pending = false, handleClose, product, isChannel,
 }: ProductDetailProps) => {
   const { addCartProduct } = useCart();
 
@@ -752,27 +753,33 @@ const ProductDetail = ({
                     <Col xs={4}>{' '}</Col>
                   </Row>
                 </section>
-                <p className="d-lg-block d-none">
-                  Groupshop is all about rewarding you and your friends with real
-                  cashback and discounts every time you shop together!
+                {
+                  !isChannel && (
+                  <>
+                    <p className="d-lg-block d-none">
+                      Groupshop is all about rewarding you and your friends with real
+                      cashback and discounts every time you shop together!
 
-                </p>
-                <p>
-                  <strong>Invite 1 friend</strong>
-                  {' '}
-                  to this Groupshop, and start shopping with
-                  them to get
-                  {' '}
-                  <strong>
-                    {percentage}
-                    %
-                    {' '}
-                    off plus additional cashback
-                  </strong>
-                  {' '}
-                  on this and other products you love.
+                    </p>
+                    <p>
+                      <strong>Invite 1 friend</strong>
+                      {' '}
+                      to this Groupshop, and start shopping with
+                      them to get
+                      {' '}
+                      <strong>
+                        {percentage}
+                        %
+                        {' '}
+                        off plus additional cashback
+                      </strong>
+                      {' '}
+                      on this and other products you love.
 
-                </p>
+                    </p>
+                  </>
+                  )
+                }
                 <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2 d-block">
                   { loaderInvite
                     ? (<Spinner animation="border" className="align-self-center mb-2" />)
@@ -894,8 +901,8 @@ const ProductDetail = ({
   );
 };
 
-// ProductDetail.defaultProps = {
-//   user: {},
-// };
+ProductDetail.defaultProps = {
+  isChannel: false,
+};
 
 export default ProductDetail;
