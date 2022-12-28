@@ -252,6 +252,7 @@ const ProductDetail = ({
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
+  console.log(data?.productById?.images, '===images');
   // console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
   return (
     <>
@@ -368,7 +369,7 @@ const ProductDetail = ({
                     </Carousel.Item>
                   ))}
                 </Carousel>
-                {data?.productById?.images.length > 1
+                {product?.status !== 'DELETED' && data?.productById?.images.length > 1
                 && (
                   <Row className={[styles.groupshop__pcard_tag__photoSlider].join(' ')}>
                     <Scrollable width="100%">

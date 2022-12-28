@@ -181,6 +181,7 @@ export interface IProduct {
   selectedOptions?: any;
   image?: any;
   purchaseCount?: number;
+  status?: string;
 }
 
 export interface IGeneralSettings {
