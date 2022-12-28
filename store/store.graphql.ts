@@ -1054,6 +1054,14 @@ query overviewMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
 }
 `;
 
+const GET_ACTIVE_PARTNERS = gql`
+query activePartners($storeId: String!) {
+  activePartners(storeId: $storeId) {
+    id    
+  }
+}
+`;
+
 const GET_PARTNER_OVERVIEW_METRICS = gql`
 query overviewPartnerMetric($storeId: String!, $startFrom: String!, $toDate: String!) {
   overviewPartnerMetric(storeId: $storeId, startFrom: $startFrom, toDate: $toDate) {
@@ -2412,6 +2420,6 @@ export {
   GET_ACTIVE_CAMPAIGN_PRODUCTS, CREATE_CHANNEL_GROUPSHOP, GET_CHANNEL_GROUPSHOP,
   GET_CHANNEL_BY_NAME, ADD_DEAL_PRODUCT_CHANNEL, GET_MOST_VIRAL_PRODUCTS_BY_CAMPAIGN,
   GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
-  GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS,
+  GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS,
   GET_PARTNER_MOST_VIRAL_CUSTOMERS, GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE,
 };
