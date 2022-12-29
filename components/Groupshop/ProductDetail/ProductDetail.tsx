@@ -490,22 +490,30 @@ const ProductDetail = ({
                   ) : `${product?.title}` }
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
-                    <ShowMoreText
-                /* Default options */
-                      lines={3}
-                      more="Show more"
-                      less="Show less"
+                    //     <ShowMoreText
+                    // /* Default options */
+                    //       lines={3}
+                    //       more="Show more"
+                    //       less="Show less"
+                    //       className={isExpired
+                    //         ? styles.groupshop_modal_detail_height_descriptionExpired
+                    //         : styles.groupshop_modal_detail_height_descriptionNormal}
+                    //       anchorClass="my-anchor-css-class"
+                    //   // onClick={this.executeOnClick}
+                    //       expanded={false}
+                    //       width={406}
+                    //       truncatedEndingComponent="... "
+                    //     >
+                    //       {product?.description ?
+                    //        <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                    //     </ShowMoreText>
+                    <div
                       className={isExpired
                         ? styles.groupshop_modal_detail_height_descriptionExpired
                         : styles.groupshop_modal_detail_height_descriptionNormal}
-                      anchorClass="my-anchor-css-class"
-                  // onClick={this.executeOnClick}
-                      expanded={false}
-                      width={406}
-                      truncatedEndingComponent="... "
                     >
                       {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                    </ShowMoreText>
+                    </div>
                     )}
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
