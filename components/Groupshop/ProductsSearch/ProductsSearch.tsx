@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import useDebounce from 'hooks/useDebounce';
 
 import { useMediaQuery } from 'react-responsive';
-import { X } from 'react-bootstrap-icons';
+import { X, StarFill, Star } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
 import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDeal from 'hooks/useDeal';
@@ -279,7 +279,7 @@ const ProductsSearch = ({
               )
               : (
                 <>
-                  <h3>Search for products</h3>
+                  <h3>Search for products & feature your favorites</h3>
                   <p className="text-muted d-flex justify-content-end align-items-center">
                     <span className={styles.groupshop_modal_search_body_top_txt}>
                       Add up to 5 products
@@ -383,10 +383,38 @@ const ProductsSearch = ({
                                     ) ?? []);
                                   }}
                                 />
+                                <Button
+                                  variant="outline-primary"
+                                  className={styles.groupshop_search_pcard_addProduct}
+                                  onClick={() => {
+                                    setSelected(selected?.filter((pid) => pid !== prd.id) ?? []);
+                                    setSelectedProducts(selectedProducts?.filter(
+                                      (pid: any) => pid.id !== prd.id,
+                                    ) ?? []);
+                                  }}
+                                >
+                                  <StarFill style={{ color: '#FFD700' }} />
+                                  <span>Selected</span>
+                                </Button>
                               </>
 
                             )
-                              : <Button variant="outline-primary" disabled={disableSelection === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>ADD PRODUCT</Button>}
+                              // : (
+                              //   <Button
+                              //     variant="outline-primary"
+                              //     disabled={disableSelection === 5}
+                              //     className={styles.groupshop_search_pcard_addProduct}
+                              //     onClick={() => addProducts(prd)}
+                              //   >
+                              //     ADD PRODUCT
+                              //   </Button>
+                              // )
+                              : (
+                                <Button variant="outline-primary" disabled={disableSelection === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>
+                                  <Star />
+                                  <span>ADD TO FAVS</span>
+                                </Button>
+                              )}
                           </>
                         )}
                       >
@@ -470,7 +498,7 @@ const ProductsSearch = ({
                       className="rounded-pill text-center text-uppercase px-5 fw-bold"
                       disabled={selected?.length === 0}
                     >
-                      {isChannel ? 'Save My Favs' : 'ADD to groupshop' }
+                      {isChannel ? 'Save My Favs' : 'Add to FAVORITES' }
 
                     </Button>
                     {isOwner && (
@@ -495,7 +523,7 @@ const ProductsSearch = ({
                   <Popover.Body>
                     <>
                       <p className={styles.groupshop_search_popover_txt}>
-                        Add
+                        {/* Add
                         <strong>
                           {' '}
                           {selectedCountState}
@@ -503,7 +531,8 @@ const ProductsSearch = ({
                           products
                         </strong>
                         {' '}
-                        to this Groupshop
+                        to this Groupshop */}
+                        Enter your name to personalize your store
                       </p>
                       <AddDealProduct
                         selectedProducts={selected}

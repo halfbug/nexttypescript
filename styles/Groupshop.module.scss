@@ -1496,6 +1496,29 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       letter-spacing: 0.48px;
       font-family: "DM Sans" !important;
     }
+    &_favbtn {
+      @extend .groupshop__pcard_tag, .rounded-pill;
+        display: flex;
+        align-items: center;
+        padding: 6px 10px !important;
+        line-height: 16px;
+        height: 30px;
+        margin: 0 auto !important;
+        text-transform: uppercase;
+        color: #000000;
+        span {
+          width: max-content;
+          font-size: 12px !important;
+          font-weight: 700 !important;
+          @include media-breakpoint-down(sm) {
+            font-size: 10px !important;
+          }
+        }
+        svg {
+          margin-right: 6px;
+          margin-bottom: 2px;
+        }
+    }
     &_price {
       font-size: 18px;
       line-height: 23px;
@@ -1715,17 +1738,28 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       &_addProduct {
         @extend .groupshop__pcard_tag, .rounded-pill;
-        height: 40px;
-        font-size: 12px !important;
-        font-weight: 700 !important;
+        display: flex;
+        align-items: center;
+        padding: 6px 10px !important;
+        margin: 0 auto !important;
+        height: 28px;
         line-height: 16px;
         position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 75%;
-        margin: 0 auto !important;
+        right: 6px;
+        bottom: 6px;
+        color: #000000;
+        span {
+          font-size: 12px !important;
+          font-weight: 700 !important;
+          @include media-breakpoint-down(sm) {
+            font-size: 10px !important;
+          }
+        }
+        svg {
+          margin-right: 6px;
+          margin-bottom: 2px;
+
+        }
 
         // &::before {
         //   content: "";
@@ -1754,6 +1788,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         display: flex;
         flex-direction: column;
         padding-inline-end: 10px;
+        width: 100%;
       }
       &_dealBtn {
         font-size: $size-14px !important;

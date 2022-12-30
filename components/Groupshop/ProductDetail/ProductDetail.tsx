@@ -22,7 +22,7 @@ import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
-import { Send, EmojiHeartEyesFill } from 'react-bootstrap-icons';
+import { Send, EmojiHeartEyesFill, Star } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
@@ -432,9 +432,18 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div className={styles.groupshop_right_content_wrapper}>
                 <div className={styles.groupshop_right_content}>
-                  <p className={styles.groupshop_right_content_title}>
-                    {product?.title}
-                  </p>
+                  <div className="d-flex">
+                    <p className={styles.groupshop_right_content_title}>
+                      {product?.title}
+                    </p>
+                    <Button
+                      variant="outline-primary"
+                      className={styles.groupshop_right_content_favbtn}
+                    >
+                      <Star />
+                      <span>ADD TO FAVS</span>
+                    </Button>
+                  </div>
                   <h3 className="d-flex align-items-center">
                     <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
                       {currencySymbol}

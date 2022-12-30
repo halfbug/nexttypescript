@@ -281,16 +281,23 @@ export default function AddDealProduct({
       <Form.Group className={isCreateGS ? 'd-flex justify-content-center' : 'd-flex'} controlId="username">
         { !isChannelOwner && (
         <div className={styles.groupshop_search_popover_addDeal}>
-          <Form.Control
-            type="text"
-            name="username"
+          <div className="d-flex align-items-center position-relative">
+            <div className="me-2 text-muted position-absolute end-0">
+              {values.username.length}
+              /10
+            </div>
+            <Form.Control
+              type="text"
+              name="username"
             // value={isInfluencer ? gsctx?.partnerDetails?.fname : values.username}
-            value={values.username}
-            onChange={handleChange}
-            isInvalid={touched.username && !!errors.username}
-            placeholder="Enter your first name"
-            className={isCreateGS ? 'me-3' : 'me-1'}
-          />
+              value={values.username}
+              onChange={handleChange}
+              isInvalid={touched.username && !!errors.username}
+              placeholder="Enter your name"
+              className={isCreateGS ? 'me-3' : 'me-1'}
+              maxLength={10}
+            />
+          </div>
           <Form.Control.Feedback type="invalid" className="text-start">
             {errors.username}
           </Form.Control.Feedback>
