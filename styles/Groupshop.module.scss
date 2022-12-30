@@ -3166,7 +3166,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__img {
       position: absolute;
       img {
-        height: 80px;
+        height: 82px;
+        object-fit: contain;
+        padding: 5px;
         width: 80px;
         border-radius: 50%;
         border: 1px solid #D9D9D9;
