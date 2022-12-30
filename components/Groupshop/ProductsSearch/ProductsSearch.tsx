@@ -70,8 +70,9 @@ const ProductsSearch = ({
   }, [showSearch]);
 
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
-
+  const { uniqueArray } = useUtilityFunction();
   const {
+    allProducts,
     discountCode: { percentage },
     store: { products } = { store: { products: [] } },
     popularProducts, addedProducts, dealProducts, totalProducts,
@@ -82,13 +83,13 @@ const ProductsSearch = ({
   // ).filter(
   //   (item) => !addedProducts?.some((item2) => item2.productId === item.id),
   // );
-  const refreshProduct = () => (isInfluencerGS ? products?.filter(
+  const refreshProduct = () => uniqueArray((isInfluencerGS ? allProducts?.filter(
     (item) => !dealProducts?.some((item2) => item2.productId === item.id),
-  ) : products?.filter(
+  ) : allProducts?.filter(
     (item) => !addedProducts?.some((item2) => item2.productId === item.id),
   ).filter(
     (item) => !gsctx.ownerDeals?.some((item2) => item2.id === item.id),
-  ));
+  )));
 
   useEffect(() => {
     // console.log(products);
@@ -98,7 +99,6 @@ const ProductsSearch = ({
     }
   }, []);
   useEffect(() => {
-    // console.log(products);
     if (!otherProducts) {
       const arr = refreshProduct();
       setotherProducts(arr);
