@@ -38,33 +38,36 @@ export default function ViralityMetrics({
         </div>
         {mostViralProducts?.map((part: any, index: number) => (
           <>
-            <div className={vstyles.viralityScoreBox}>
-              <div className={vstyles.viralityScoreBox__infoBox}>
-                <div className={vstyles.viralityScoreBox__infoBox__logo}>
-                  <img className="img-responsive" style={{ width: '88px' }} src={part?.productDetails[0].featuredImage} alt="product" />
-                </div>
-                <div className={vstyles.viralityScoreBox__infoBox__detail}>
-                  <div className={vstyles.viralityScoreBox__infoBox__detail__txt}>
-                    {part?.productDetails[0].title}
+            {part?.productDetails[0]?.title && (
+            <>
+              <div className={vstyles.viralityScoreBox}>
+                <div className={vstyles.viralityScoreBox__infoBox}>
+                  <div className={vstyles.viralityScoreBox__infoBox__logo}>
+                    <img className="img-responsive" style={{ width: '88px' }} src={part?.productDetails[0]?.featuredImage} alt="product" />
                   </div>
-                  <div className={vstyles.viralityScoreBox__infoBox__detail__generated}>
-                    {currencyCode}
-                    {formatNumber(part?.revenue)}
-                    {' '}
-                    generated
-                  </div>
-                  <div className={vstyles.viralityScoreBox__infoBox__detail__buys}>
-                    🛒
-                    {' '}
-                    {part?.purchaseCount}
-                    {' '}
-                    buys
+                  <div className={vstyles.viralityScoreBox__infoBox__detail}>
+                    <div className={vstyles.viralityScoreBox__infoBox__detail__txt}>
+                      {part?.productDetails[0]?.title}
+                    </div>
+                    <div className={vstyles.viralityScoreBox__infoBox__detail__generated}>
+                      {currencyCode}
+                      {formatNumber(part?.revenue)}
+                      {' '}
+                      generated
+                    </div>
+                    <div className={vstyles.viralityScoreBox__infoBox__detail__buys}>
+                      🛒
+                      {' '}
+                      {part?.purchaseCount}
+                      {' '}
+                      buys
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className={styles.viralityMetrics__body__hr} />
+              <div className={styles.viralityMetrics__body__hr} />
+            </>
+            )}
           </>
         ))}
         {mostViralProducts.length === 0 && (
