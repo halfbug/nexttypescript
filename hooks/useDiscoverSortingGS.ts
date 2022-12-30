@@ -8,14 +8,14 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
       const tempProduct: any = [];
       el?.popularProducts?.sort((a: any, b: any) => b.purchaseCount - a.purchaseCount);
       el?.popularProducts?.forEach((ele: any) => {
-        if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id)) {
+        if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id) && ele.status === 'ACTIVE') {
           tempProduct.push(ele);
         }
       });
       if (tempProduct.length < 4) {
         el?.bestSeller?.sort((a: any, b: any) => b.purchaseCount - a.purchaseCount);
         el?.bestSeller?.forEach((ele: any) => {
-          if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id)) {
+          if (tempProduct.length < 4 && !tempProduct.map((item:any) => item.id).includes(ele.id) && ele.status === 'ACTIVE') {
             tempProduct.push(ele);
           }
         });

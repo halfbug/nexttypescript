@@ -45,12 +45,13 @@ type ProductGridProps = {
   isSuggestion?: boolean;
   membersForDiscover?: any[];
   brandurl?: string;
+  discoveryDiscount?: string;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  isSuggestion, membersForDiscover, isDiscoveryTool, brandurl,
+  isSuggestion, membersForDiscover, isDiscoveryTool, brandurl, discoveryDiscount,
   urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -82,6 +83,7 @@ const ProductGrid = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
+    disPrice,
   } = useDeal();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -133,13 +135,13 @@ const ProductGrid = ({
                       <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
                         <span className={styles.groupshop__pcard_tag_price}>
                           {currencySymbol}
-                          {(+(productPriceDiscount(+(prod.price), +percentage))).toFixed(2).toString().replace('.00', '')}
+                          {(+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                           {' '}
                           OFF
                         </span>
 
                         <div className={styles.groupshop__pcard_tag_boughtby}>
-                          {topFive(getBuyers(prod.id)?.map(
+                          {!isSuggestion && topFive(getBuyers(prod.id)?.map(
                             (member: Member) => (
                               <span className={styles.groupshop__pcard_tag_buyer}>
                                 {nameOnProductGrid(member.orderDetail.customer)}
@@ -154,20 +156,21 @@ const ProductGrid = ({
                                 </span>
                               ),
                             ))}
-                          {(isInfluencerGS && !isChannel) && topFive(getBuyers2(prod.id)?.map(
-                            (member: Member) => (
+                          {(!isSuggestion && isInfluencerGS && !isChannel)
+                          && topFive(getBuyers2(prod.id)
+                            ?.map((member: Member) => (
                               <span className={styles.groupshop__pcard_tag_buyer}>
                                 {formatName(member.customerInfo)}
                               </span>
-                            ),
-                          ))}
+                            )))}
 
-                          {getBuyers(prod.id).length > 0 && (
+                          {!isSuggestion && getBuyers(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                          {(isInfluencerGS) && getBuyers2(prod.id).length > 0 && (
+                          {(!isSuggestion && isInfluencerGS) && getBuyers2(prod.id).length > 0 && (
                             <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                          {getBuyersDiscover(prod.id, membersForDiscover).length > 0 && (
-                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
+                          {isSuggestion && getBuyersDiscover(prod.id, membersForDiscover).length > 0
+                          && (
+                          <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
                         </div>
                         {[...addedProducts ?? [],
                           ...addedByInfluencer ?? [],
@@ -254,7 +257,8 @@ const ProductGrid = ({
                       <h5 className="pt-2 text-center fw-bold">
                         <span>
                           {currencySymbol}
-                          {dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                          {!isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                          {isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
                         </span>
                         {' '}
                         <span className="text-decoration-line-through fw-light me-1">
@@ -439,6 +443,7 @@ ProductGrid.defaultProps = {
   isSuggestion: false,
   membersForDiscover: [],
   brandurl: '',
+  discoveryDiscount: '',
 };
 
 export default ProductGrid;

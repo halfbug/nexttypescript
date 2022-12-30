@@ -1925,6 +1925,7 @@ const GET_MATCHING_GS = gql`
         price
         currencyCode
         outofstock
+        status
         options{
           id
           name
@@ -1952,6 +1953,7 @@ const GET_MATCHING_GS = gql`
         purchaseCount
         price
         outofstock
+        status
         options{
           id
           name
@@ -1997,6 +1999,7 @@ const GET_MATCHING_GS = gql`
           price
           outofstock
           purchaseCount
+          status
           options{
             id
             name

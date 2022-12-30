@@ -84,6 +84,8 @@ export default function useDeal() {
 
   const dPrice = useCallback((price: number) => price - ((+discount / 100) * price), [gsctx]);
 
+  const disPrice = useCallback((price: number, disDiscount: number) => price - ((+disDiscount / 100) * price), [gsctx]);
+
   const gsURL = typeof window !== 'undefined' ? `${window?.location?.origin}${gsctx?.url}` : '';
   const gsShortURL = gsctx?.shortUrl ?? gsURL;
   //   `https://appfornt.groupshop.co${gsctx?.url}`;
@@ -656,5 +658,6 @@ export default function useDeal() {
     channelBaseLine,
     getDealUserName,
     getBuyersDiscover,
+    disPrice,
   };
 }

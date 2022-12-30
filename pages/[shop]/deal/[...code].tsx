@@ -1021,6 +1021,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       className="px-3"
                       isDiscoveryTool
                       brandurl={brand.url}
+                      discoveryDiscount={brand?.discount}
                     >
                       <div className={styles.groupshop__shopWith}>
                         <div className={styles.groupshop__shopWith__img}>
