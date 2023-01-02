@@ -46,7 +46,7 @@ export default function CutomerPartnerData({
       data.partnerViralCustomers.forEach((part: any, index: number) => {
         myObjArray.push({
           partnerName: `${part.partnerDetails.fname}`,
-          revenueGenerated: currencyCode + formatNumber(part.revenue),
+          revenueGenerated: currencyCode + formatNumber(part.revenue - part.refund),
           discount: currencyCode + formatNumber(part.refund),
           uniqueClicks: part.uniqueClicks,
           totalLineItems: part.lineItemsCount,

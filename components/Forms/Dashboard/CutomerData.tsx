@@ -49,7 +49,7 @@ export default function CustomerData({
         myObjArray.push({
           orderNumber: part.members[0].name,
           customerName: `${part.members[0].customer.firstName} ${part.members[0].customer.lastName}`,
-          revenueGenerated: currencyCode + formatNumber(part.revenue),
+          revenueGenerated: currencyCode + formatNumber(part.revenue - part.refund),
           cashBack: currencyCode + formatNumber(part.refund),
           uniqueClicks: part.uniqueClicks,
           totalLineItems: part.lineItemsCount,
