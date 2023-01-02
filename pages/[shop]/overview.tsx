@@ -92,7 +92,7 @@ const ShopMain: NextPage = () => {
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
         }
         if (cashBack > 0) {
-          const calRogs = rev / (Math.ceil(cashBack + feeCharge));
+          const calRogs = rev / (Math.ceil(cashBack));
           setRogs(`${formatNumber(calRogs)}X`);
         } else {
           setRogs('-');
@@ -104,7 +104,7 @@ const ShopMain: NextPage = () => {
         setRogs('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack))}`);
       } else {
         setCashbackGiven('-');
       }
