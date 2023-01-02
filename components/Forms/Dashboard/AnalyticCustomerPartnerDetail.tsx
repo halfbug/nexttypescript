@@ -41,7 +41,8 @@ export default function AnalyticCustomerPartnerDetail({
     <div className={styles.customerData__orderDetail}>
       <div className={styles.customerData__orderDetail__orderRow}>
         <div className={styles.customerData__orderDetail__orderRow__number}>
-          {customersData?.partnerDetails?.fname}
+          {customersData?.partnerDetails?.fname
+          ?? customersData?.partnerDetails?.email.substring(0, 15)}
         </div>
         <div className={styles.customerData__orderDetail__orderRow__date}>
           { moment(new Date(customersData?.createdAt)).format('MM/DD/YY') }
@@ -51,7 +52,7 @@ export default function AnalyticCustomerPartnerDetail({
       <div className={styles.customerData__orderDetail__tagrow}>
         <div className={styles.customerData__orderDetail__tagrow__genereated}>
           {currencyCode}
-          {formatNumber(customersData?.revenue) }
+          {formatNumber(customersData?.revenue - customersData.refund) }
           {' '}
           generated
         </div>

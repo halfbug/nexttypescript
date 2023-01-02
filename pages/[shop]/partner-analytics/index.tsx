@@ -87,9 +87,11 @@ const Analytics: NextPage = () => {
       const cashBack = data.overviewPartnerMetric[0]?.cashBack || 0;
       if (rev > 0) {
         setRevenue(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(rev)}`);
-        if (numPurchases) {
+        if (numPurchases > 0) {
           const getAov = rev / numPurchases;
           setAov(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(getAov)}`);
+        } else {
+          setAov('-');
         }
       } else {
         setNumPurchases('-');

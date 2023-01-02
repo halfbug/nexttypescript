@@ -96,13 +96,13 @@ const MostViralPartnerCustomers = ({
                 <div className={styles.customerData__mostViral__listing}>
                   <div>
                     <div className={styles.customerData__acc__row__name}>
-                      {part.partnerDetails.fname}
+                      {part.partnerDetails.fname ?? part.partnerDetails.email.substring(0, 15) }
                     </div>
                   </div>
                   <div className="text-nowrap">
                     <div className={styles.customerData__acc__row__genereated}>
                       {currencyCode}
-                      {formatNumber(part.revenue)}
+                      {formatNumber(part.revenue - part.refund)}
                       {' '}
                       generated
                     </div>
