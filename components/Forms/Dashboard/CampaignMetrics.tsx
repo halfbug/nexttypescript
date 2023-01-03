@@ -4,7 +4,6 @@ import styles from 'styles/Overview.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import CalendarIcon from 'assets/images/calendar-icon.svg';
-import CalenderB from 'assets/images/calender_black.svg';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
@@ -65,9 +64,7 @@ export default function CampaignMetrics({
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
         <h3>Campaign Metrics</h3>
-        <div className="d-inline mx-2 ps-3 position-relative">
-          <CalenderB className="position-absolute mt-2 mx-1" />
-          {/* <DownArrow className="position-absolute mt-3" /> */}
+        <div className="d-inline mx-2">
           <DateRangePicker
             onApply={callbackApply}
             onCancel={callbackCancel}
@@ -80,7 +77,7 @@ export default function CampaignMetrics({
               },
             }}
           >
-            <input type="text" className="rounded-3 w-auto border-0 bg-light form-control ps-4 py-2 text-black" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="This week" />
+            <input type="text" className="form-control" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="Select Date Range" />
           </DateRangePicker>
         </div>
       </div>
@@ -109,96 +106,6 @@ export default function CampaignMetrics({
             <SummaryBox label="Cashback Given" value={cashbackGiven} iconType="CashBackIcon" arrowIcon={false} />
           </Col>
         </Row>
-        <Row className="mt-4">
-          <Col lg={6} className="mt-1">
-            <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>
-              <div className={styles.metrics__box__customers__header}>
-                Most Viral Customers
-              </div>
-              <Accordion className={styles.metrics__box__customers__acc}>
-                <Accordion.Item eventKey="0" className="border-0 border-bottom">
-                  <Accordion.Header className={styles.metrics__box__customers__ques}>
-                    <div className={styles.metrics__box__customers__ques__name}>
-                      Ilian Davis
-                    </div>
-                    <div className={styles.metrics__box__customers__node__value}>
-                      $428 generated
-                    </div>
-                  </Accordion.Header>
-                  <Accordion.Body className={styles.metrics__box__customers__acc_body}>
-                    It’s a personalized shopping page we create
-                  </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1" className="border-0 border-bottom">
-                  <Accordion.Header className={styles.metrics__box__customers__ques}>
-                    <div className={styles.metrics__box__customers__ques__name}>
-                      Anna Karter
-                    </div>
-                    <div className={styles.metrics__box__customers__node__value}>
-                      $213 generated
-                    </div>
-                  </Accordion.Header>
-                  <Accordion.Body className={styles.metrics__box__customers__acc_body}>
-                    It’s a personalized shopping page we create
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-          </Col>
-          <Col lg={6} className="mt-1">
-            <div className={[styles.metrics__box__products, 'h-100 p-4'].join(' ')}>
-              <div className={styles.metrics__box__products__header}>
-                <div>Most Viral Product</div>
-                <div className='text-end'>
-                  <ArrowIcon />
-                </div>
-              </div>
-              <div className={styles.metrics__box__products__detail}>
-                <div className={styles.metrics__box__products__detail__image}>
-                  <ProductLogo />
-                </div>
-                <div className={styles.metrics__box__products__detail_ptext}>
-                  <div className={styles.metrics__box__products__detail__title}>
-                    Insert Waves Here
-                  </div>
-                  <div className={styles.metrics__box__products__detail__value1}>
-                    $395 generated
-                  </div>
-                  <div className={styles.metrics__box__products__detail__value2}>
-                    🛒 39 Buys
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Col>
-        </Row>
-
-        {/* <Row className="mt-4">
-          <Col lg={6} className="mt-1">
-            <div className={[styles.metrics__box__customers, 'h-100'].join(' ')}>
-              <div className={styles.metrics__box__customers__header}>
-                Most Viral Customers
-              </div>
-              <div className={styles.metrics__emptytxt}>
-                <div className='mb-1'>👀 It looks empty in here!</div>
-                Let us help you promote Groupshop and get more sales.
-                <div className={styles.metrics__emptytxt__light}>Set up marketing tools</div>
-              </div>
-            </div>
-          </Col>
-          <Col lg={6} className="mt-1">
-            <div className={[styles.metrics__box__products, 'h-100 p-4'].join(' ')}>
-              <div className={styles.metrics__box__products__header}>
-                <div>Most Viral Product</div>
-              </div>
-              <div className={styles.metrics__emptytxt}>
-                <div className='mb-1'>🛒 No products to show yet.</div>
-                Add more to increase your chances of getting a sale.
-                <div className={styles.metrics__emptytxt__light}>Edit campaign settings</div>
-              </div>
-            </div>
-          </Col>
-        </Row> */}
         {/* <div className={styles.metrics__box__coming_soon}>
           <div className={styles.metrics__box__overlay}>
             <div className={styles.metrics__box__overlayText}>Coming Soon</div>
