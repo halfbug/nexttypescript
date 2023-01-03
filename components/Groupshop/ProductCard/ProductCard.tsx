@@ -11,10 +11,11 @@ type IProductCardProps = {
   isrc: string;
   vsrc?: string;
   type?: 'small' | 'large';
+  onImageClick?: any;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, vsrc, children, type, imgOverlay, pending, onClick, ...rest
+  isrc, vsrc, children, type, imgOverlay, pending, onClick, onImageClick, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
@@ -23,7 +24,7 @@ const ProductCard = ({
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
           <div className={styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
             {
-            !isrc && <video src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
+            !isrc && <video onClick={onImageClick} src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
             }
             <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
               {imgOverlay}
@@ -73,6 +74,7 @@ const ProductCard = ({
 ProductCard.defaultProps = {
   type: 'large',
   vsrc: undefined,
+  onImageClick: () => {},
 };
 
 export default ProductCard;

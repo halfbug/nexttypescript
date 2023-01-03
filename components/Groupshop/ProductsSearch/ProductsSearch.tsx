@@ -50,7 +50,7 @@ const ProductsSearch = ({
   const { gsctx, dispatch } = useAppContext();
   const { isOwner } = useOwnerOnboarding();
   const {
-    shop, discountCode, ownerCode,
+    shop, discountCode, ownerCode, productSearch, setProductSearch,
   } = useCode();
   console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
@@ -169,8 +169,11 @@ const ProductsSearch = ({
     setotherProducts(undefined);
     setSelected([]);
     handleClose(e);
+    setProductSearch(undefined);
+    Router.push(`/${shop}/deal/${discountCode}`);
   };
-  const addProducts = (prd: IProduct) => {
+  const addProducts = (e: any, prd: IProduct) => {
+    e.stopPropagation();
     setSelected([...selected ?? [], prd.id]);
     setSelectedProducts([...selectedProducts, prd]);
   };
@@ -230,10 +233,17 @@ const ProductsSearch = ({
     }
   };
 
+  const openDetail = (e: any, prd: any) => {
+    const Arr = prd.id.split('/');
+    const prodId = Arr[Arr.length - 1];
+    Router.push(`${window.location.href}/product&${prodId}`);
+    closeModal(e);
+  };
+
   return (
     <>
       <Modal
-        show={showSearch}
+        show={showSearch || productSearch}
         onHide={closeModal}
         centered
         size="lg"
@@ -363,6 +373,8 @@ const ProductsSearch = ({
                   (+prd.price > 0) && (
                     <Col xs={6} sm={6} md={4}>
                       <ProductCard
+                        onClick={(e) => openDetail(e, prd)}
+                        onImageClick={(e: any) => openDetail(e, prd)}
                         isrc={prd.featuredImage}
                         className={styles.groupshop_search_pcard}
                         imgOverlay={(
@@ -376,7 +388,8 @@ const ProductsSearch = ({
                                 <IconButton
                                   className={styles.groupshop__pcard_tag_cross}
                                   icon={<X size={18} />}
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.stopPropagation();
                                     setSelected(selected?.filter((pid) => pid !== prd.id) ?? []);
                                     setSelectedProducts(selectedProducts?.filter(
                                       (pid: any) => pid.id !== prd.id,
@@ -386,7 +399,8 @@ const ProductsSearch = ({
                                 <Button
                                   variant="outline-primary"
                                   className={styles.groupshop_search_pcard_addProduct}
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.stopPropagation();
                                     setSelected(selected?.filter((pid) => pid !== prd.id) ?? []);
                                     setSelectedProducts(selectedProducts?.filter(
                                       (pid: any) => pid.id !== prd.id,
@@ -410,7 +424,7 @@ const ProductsSearch = ({
                               //   </Button>
                               // )
                               : (
-                                <Button variant="outline-primary" disabled={disableSelection === 5} className={styles.groupshop_search_pcard_addProduct} onClick={() => addProducts(prd)}>
+                                <Button variant="outline-primary" disabled={disableSelection === 5} className={styles.groupshop_search_pcard_addProduct} onClick={(e) => addProducts(e, prd)}>
                                   <Star />
                                   <span>ADD TO FAVS</span>
                                 </Button>
@@ -418,9 +432,17 @@ const ProductsSearch = ({
                           </>
                         )}
                       >
-                        <h5 className="text-center fw-bold text-truncate">
-                          {prd.title}
-                        </h5>
+                        <div
+                          role="button"
+                          className="text-center fw-bold text-truncate"
+                          onClick={(e) => openDetail(e, prd)}
+                          onKeyDown={(e) => openDetail(e, prd)}
+                          tabIndex={0}
+                        >
+                          <h4>
+                            {prd.title}
+                          </h4>
+                        </div>
                         <p className="text-center fw-bold fs-5 mb-0">
                           <span className="text-decoration-line-through fw-light me-1">
                             {currencySymbol}
@@ -498,7 +520,7 @@ const ProductsSearch = ({
                       className="rounded-pill text-center text-uppercase px-5 fw-bold"
                       disabled={selected?.length === 0}
                     >
-                      {isChannel ? 'Save My Favs' : 'Add to FAVORITES' }
+                      {isChannel ? 'Save My Favs' : 'Add to FAVORITES'}
 
                     </Button>
                     {isOwner && (

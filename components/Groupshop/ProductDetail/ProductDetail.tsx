@@ -1,11 +1,13 @@
 /* eslint-disable react/no-danger */
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  useState, useEffect, useContext, useCallback, useRef,
+} from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
   Carousel,
-  Col, Form, Modal, Row, Spinner,
+  Col, Form, Modal, Overlay, Popover, Row, Spinner,
 } from 'react-bootstrap';
 import { useLazyQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
@@ -22,13 +24,17 @@ import Icon from 'assets/images/cart-cone.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
-import { Send, EmojiHeartEyesFill, Star } from 'react-bootstrap-icons';
+import {
+  Send, EmojiHeartEyesFill, Star, StarFill,
+} from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
 import useAppContext from 'hooks/useAppContext';
 import styles1 from 'styles/Campaign.module.scss';
 import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
+import useCode from 'hooks/useCode';
+import AddDealProduct from 'components/Forms/AddDealProduct';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -43,14 +49,20 @@ const ProductDetail = ({
   show, pending = false, handleClose, product, isChannel,
 }: ProductDetailProps) => {
   const { addCartProduct } = useCart();
-
+  const { shop, discountCode, ownerCode } = useCode();
+  const ref = useRef(null);
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
+    setDealProduct('');
+    setShowOverlay(false);
     handleClose(e);
   };
   console.log(product);
-  const { gsctx: { discountCode: { percentage } }, gsctx, isGroupshop } = useAppContext();
+  const {
+    gsctx: { discountCode: { percentage }, totalProducts }, gsctx,
+    isGroupshop,
+  } = useAppContext();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -62,6 +74,10 @@ const ProductDetail = ({
   const [activeURL, setActiveURL] = useState<string | undefined>('');
   const [cashBack, setCashBack] = useState<number>(0);
   const [PDBtnText, setPDBtnText] = useState<string>('');
+  const [dealProduct, setDealProduct] = useState('');
+  const [target, setTarget] = useState(null);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [filterDeal, setFilterDeal] = useState<string[]>([]);
   const router = useRouter();
 
   const handleSelect = (selectedIndex: number, e: any) => {
@@ -73,6 +89,7 @@ const ProductDetail = ({
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
     maxPercent, brandName, socialText, nativeShareText, banner, shortActivateURL,
+    clientDealProducts,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
 
@@ -94,7 +111,23 @@ const ProductDetail = ({
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
 
-  const [selOptions, setselOptions] = useState<any| undefined>();
+  useEffect(() => {
+    const filteredDealProducts = gsctx.dealProducts?.filter((item) => item.type === 'deal')
+      .map((ele) => ele.productId);
+    if (filteredDealProducts) {
+      setFilterDeal(filteredDealProducts);
+    }
+  }, [gsctx]);
+
+  useEffect(() => {
+    if (data?.productById?.id) {
+      const temp: any = filterDeal
+        .find((ele) => ele === data?.productById?.id);
+      setDealProduct(temp);
+    }
+  }, [data, filterDeal]);
+
+  const [selOptions, setselOptions] = useState<any | undefined>();
   // add to cart
   useEffect(() => {
     if (product) {
@@ -199,8 +232,19 @@ const ProductDetail = ({
     // }
   };
 
-  const handleCloseClick = () => {
-    closeModal({});
+  const backToSearch = (e: any) => {
+    setShowOverlay(false);
+    closeModal(e);
+    if (gsctx?.totalProducts < 101) {
+      const cprod = clientDealProducts()?.length || 0;
+      if (cprod >= 5) {
+        showError(
+          'Only 5 products can be added to this Group Shop per person.',
+        );
+      } else {
+        router.push(`/${shop}/deal/${discountCode}/open&product_search`);
+      }
+    } else showError('Groupshop is full you can not add more products to it');
   };
 
   useEffect(() => {
@@ -255,6 +299,12 @@ const ProductDetail = ({
   });
   console.log(data?.productById?.images, '===images');
   // console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
+
+  const addToFav = useCallback((e) => {
+    setTarget(e.target);
+    setDealProduct(data?.productById?.id);
+    setShowOverlay(true);
+  }, [data]);
   return (
     <>
       <AlertComponent />
@@ -273,7 +323,7 @@ const ProductDetail = ({
           <div className="position-absolute mt-2 ms-2">
             <Button
               variant="link"
-              onClick={handleCloseClick}
+              onClick={backToSearch}
               className={[styles.groupshop__pcard__headerMobile__txt, 'text-decoration-none text-center border-0 bg-transparent'].join(' ')}
               type="button"
             >
@@ -375,78 +425,136 @@ const ProductDetail = ({
                   ))}
                 </Carousel>
                 {product?.status !== 'DELETED' && data?.productById?.images.length > 1
-                && (
-                  <Row className={[styles.groupshop__pcard_tag__photoSlider].join(' ')}>
-                    <Scrollable width="100%">
-                      <div className="d-flex">
-                        {data?.productById?.images?.map((img: any, i: number) => (
-                          <>
-
-                            <button
-                              type="button"
-                              onClick={(e) => handleSelect((i + 1), e)}
-                              className={i === index
-                                ? styles.groupshop_modal_detail_button_selected
-                                : styles.groupshop_modal_detail_button}
-                              key={img.id}
-                            >
-
-                              <img
-                                src={img.src}
-                                alt={`image_${i}`}
-                                className={styles.groupshop_modal_detail_thumbnail}
-                              />
-                            </button>
-                          </>
-                        ))}
-                        {
-                          data.productById?.videos.map((ele:any, i:number) => (
+                  && (
+                    <Row className={[styles.groupshop__pcard_tag__photoSlider].join(' ')}>
+                      <Scrollable width="100%">
+                        <div className="d-flex">
+                          {data?.productById?.images?.map((img: any, i: number) => (
                             <>
 
                               <button
                                 type="button"
-                                onClick={(e) => {
-                                  handleSelect((data?.productById?.images.length + i + 1), e);
-                                }}
+                                onClick={(e) => handleSelect((i + 1), e)}
                                 className={i === index
                                   ? styles.groupshop_modal_detail_button_selected
                                   : styles.groupshop_modal_detail_button}
-                                key={ele.id}
+                                key={img.id}
                               >
 
-                                <video
-                                  src={ele.src}
-                                  onClick={(e) => handleSelect((i + 1), e)}
+                                <img
+                                  src={img.src}
+                                  alt={`image_${i}`}
                                   className={styles.groupshop_modal_detail_thumbnail}
-                                  autoPlay
-                                  muted
-                                  loop
                                 />
                               </button>
                             </>
-                          ))
-                        }
-                      </div>
-                    </Scrollable>
-                  </Row>
-                )}
+                          ))}
+                          {
+                            data.productById?.videos.map((ele: any, i: number) => (
+                              <>
+
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    handleSelect((data?.productById?.images.length + i + 1), e);
+                                  }}
+                                  className={i === index
+                                    ? styles.groupshop_modal_detail_button_selected
+                                    : styles.groupshop_modal_detail_button}
+                                  key={ele.id}
+                                >
+
+                                  <video
+                                    src={ele.src}
+                                    onClick={(e) => handleSelect((i + 1), e)}
+                                    className={styles.groupshop_modal_detail_thumbnail}
+                                    autoPlay
+                                    muted
+                                    loop
+                                  />
+                                </button>
+                              </>
+                            ))
+                          }
+                        </div>
+                      </Scrollable>
+                    </Row>
+                  )}
               </div>
 
             </Col>
             <Col xs={12} md={6}>
-              <div className={styles.groupshop_right_content_wrapper}>
+              <div ref={ref} className={styles.groupshop_right_content_wrapper}>
                 <div className={styles.groupshop_right_content}>
                   <div className="d-flex">
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
-                    <Button
-                      variant="outline-primary"
-                      className={styles.groupshop_right_content_favbtn}
+                    {!dealProduct ? (
+                      <Button
+                        variant="outline-primary"
+                        className={styles.groupshop_right_content_favbtn}
+                        onClick={(e) => addToFav(e)}
+                      >
+                        <Star />
+                        <span>ADD TO FAVS</span>
+                      </Button>
+                    )
+                      : (
+                        <Button
+                          variant="outline-primary"
+                          className={styles.groupshop_right_content_favbtn}
+                          onClick={() => {
+                            if (!filterDeal.includes(dealProduct)) {
+                              setShowOverlay(false);
+                              setDealProduct('');
+                            }
+                          }}
+                          disabled={!!filterDeal.find((ele) => ele === dealProduct)}
+                        >
+                          <StarFill style={{ color: '#FFD700' }} />
+                          <span>Selected</span>
+                        </Button>
+                      )}
+
+                    <Overlay
+                      show={showOverlay}
+                      target={target}
+                      placement="bottom"
+                      container={ref}
+                      containerPadding={20}
                     >
-                      <Star />
-                      <span>ADD TO FAVS</span>
-                    </Button>
+                      <Popover
+                        id="popover-contained"
+                        className={styles.groupshop_search_popover}
+                        style={{ maxWidth: '325px' }}
+                      >
+                        <Popover.Body>
+                          <>
+                            <p className={styles.groupshop_search_popover_txt}>
+                              Enter your name to personalize your store
+                            </p>
+                            <AddDealProduct
+                              selectedProducts={[dealProduct]}
+                              handleClose={(e) => {
+                                closeModal(e);
+                                if (true) {
+                                  if ((totalProducts + 1) < 101) {
+                                    showSuccess('Product(s) has been added successfully.');
+                                  } else {
+                                    showError(`Groupshop is full you can not add more products to it, There is still place for ${(100 - totalProducts)} products, select only ${(100 - totalProducts)} products`);
+                                  }
+                                } else {
+                                  showSuccess('No product(s) has been selected.');
+                                }
+                              }}
+                              isCreateGS={false}
+                            />
+                          </>
+                        </Popover.Body>
+                      </Popover>
+                    </Overlay>
+
                   </div>
                   <h3 className="d-flex align-items-center">
                     <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
@@ -457,7 +565,7 @@ const ProductDetail = ({
                     <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
                       {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
-                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '') }
+                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '')}
                     </span>
                     {' '}
                     {cashBack && isGroupshop ? (
@@ -471,7 +579,7 @@ const ProductDetail = ({
                             <strong>
                               {' '}
                               {currencySymbol}
-                              { cashBack }
+                              {cashBack}
                               {' '}
                               cashback
                               {' '}
@@ -491,42 +599,43 @@ const ProductDetail = ({
                       <p className={styles.groupshop_shopped}>
                         {' '}
                         {/* <Icon /> */}
-                        { product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
-                        { product?.purchaseCount > 30 && product?.purchaseCount <= 100 ? <>⚡️</> : ''}
-                        { product?.purchaseCount > 100 ? <>🎉</> : ''}
+                        {product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
+                        {product?.purchaseCount > 30 && product?.purchaseCount <= 100 ? <>⚡️</> : ''}
+                        {product?.purchaseCount > 100 ? <>🎉</> : ''}
                         {' '}
                         {product?.purchaseCount}
                         {'+ '}
                         people have shopped this!
                       </p>
                     </div>
-                  ) : `${product?.title}` }
+                  ) : `${product?.title}`}
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
-                    //     <ShowMoreText
-                    // /* Default options */
-                    //       lines={3}
-                    //       more="Show more"
-                    //       less="Show less"
-                    //       className={isExpired
-                    //         ? styles.groupshop_modal_detail_height_descriptionExpired
-                    //         : styles.groupshop_modal_detail_height_descriptionNormal}
-                    //       anchorClass="my-anchor-css-class"
-                    //   // onClick={this.executeOnClick}
-                    //       expanded={false}
-                    //       width={406}
-                    //       truncatedEndingComponent="... "
-                    //     >
-                    //       {product?.description ?
-                    //        <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                    //     </ShowMoreText>
-                    <div
-                      className={isExpired
-                        ? styles.groupshop_modal_detail_height_descriptionExpired
-                        : styles.groupshop_modal_detail_height_descriptionNormal}
-                    >
-                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                    </div>
+                      //     <ShowMoreText
+                      // /* Default options */
+                      //       lines={3}
+                      //       more="Show more"
+                      //       less="Show less"
+                      //       className={isExpired
+                      //         ? styles.groupshop_modal_detail_height_descriptionExpired
+                      //         : styles.groupshop_modal_detail_height_descriptionNormal}
+                      //       anchorClass="my-anchor-css-class"
+                      //   // onClick={this.executeOnClick}
+                      //       expanded={false}
+                      //       width={406}
+                      //       truncatedEndingComponent="... "
+                      //     >
+                      //       {product?.description ?
+                      //        <p dangerouslySetInnerHTML=
+                      // {{ __html: product?.description }} /> : ''}
+                      //     </ShowMoreText>
+                      <div
+                        className={isExpired
+                          ? styles.groupshop_modal_detail_height_descriptionExpired
+                          : styles.groupshop_modal_detail_height_descriptionNormal}
+                      >
+                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                      </div>
                     )}
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
@@ -570,22 +679,22 @@ const ProductDetail = ({
                       </div>
                     ))}
                     {!isForMobile && (
-                    <ShowMoreText
-                /* Default options */
-                      lines={2}
-                      more="Show more"
-                      less="Show less"
-                      className={isExpired
-                        ? styles.groupshop_modal_detail_height_descriptionExpired
-                        : styles.groupshop_modal_detail_height_descriptionNormal}
-                      anchorClass="my-anchor-css-class"
-                  // onClick={this.executeOnClick}
-                      expanded={false}
-                      width={406}
-                      truncatedEndingComponent="... "
-                    >
-                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                    </ShowMoreText>
+                      <ShowMoreText
+                        /* Default options */
+                        lines={2}
+                        more="Show more"
+                        less="Show less"
+                        className={isExpired
+                          ? styles.groupshop_modal_detail_height_descriptionExpired
+                          : styles.groupshop_modal_detail_height_descriptionNormal}
+                        anchorClass="my-anchor-css-class"
+                        // onClick={this.executeOnClick}
+                        expanded={false}
+                        width={406}
+                        truncatedEndingComponent="... "
+                      >
+                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                      </ShowMoreText>
                     )}
                   </div>
                   <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center'].join(' ')}>
@@ -633,36 +742,36 @@ const ProductDetail = ({
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         label=""
                         className={['m-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                        // disabled={outofStock}
+                      // disabled={outofStock}
                       />
 
                     )}
                   </div>
                   {isExpired && (
-                  <>
-                    <div
-                      className={[styles.groupshop_buttons_wrapper, 'd-md-none bg-white justify-content-center'].join(' ')}
-                    >
-                      { loaderInvite
-                        ? (<Spinner animation="border" className="align-self-center mb-2" />)
-                        : (
-                          <>
-                            <NativeShareButton
-                              label="🔗 Invite Now"
-                              className={['align-self-center mb-2 py-2 px-3 w-75 border-0', styles.groupshop_Pd_addtoCart].join(' ')}
-                              shareurl={shortActivateURL ?? activateURL}
-                              text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
-                            />
-                          </>
+                    <>
+                      <div
+                        className={[styles.groupshop_buttons_wrapper, 'd-md-none bg-white justify-content-center'].join(' ')}
+                      >
+                        {loaderInvite
+                          ? (<Spinner animation="border" className="align-self-center mb-2" />)
+                          : (
+                            <>
+                              <NativeShareButton
+                                label="🔗 Invite Now"
+                                className={['align-self-center mb-2 py-2 px-3 w-75 border-0', styles.groupshop_Pd_addtoCart].join(' ')}
+                                shareurl={shortActivateURL ?? activateURL}
+                                text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
+                              />
+                            </>
 
-                        )}
-                    </div>
-                    {/* <Row className="d-sm-block">
+                          )}
+                      </div>
+                      {/* <Row className="d-sm-block">
                       {activeURL ? (<a href={activeURL}>{activeURL}</a>) : ''}
                       {' '}
                     </Row> */}
 
-                  </>
+                    </>
                   )}
                   <ToolTip
                     className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
@@ -678,45 +787,44 @@ const ProductDetail = ({
                         , you cannot
                         return your original order to keep these discounted ones.
                       </p>
-)}
+                    )}
                   />
 
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
                       {productCustomers.length > 0
-                  && (
-                    <>
+                        && (
+                          <>
 
-                      <div className="d-flex align-items-center justify-content-start flex-wrap">
-                        <Members
-                          names={topFive(productCustomers.map(
-                            (mem: any, mindex: any) => ({
-                              fname: `${mem.orderDetail.customer.firstName ?? ''} ${
-                                mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
-                              }`,
-                              lineItems: mem.lineItems,
-                            }),
-                          ))}
-                          cashback={['']}
-                          discount={discount}
-                          shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
-                          fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
-                          rewards={gsctx?.campaign?.salesTarget?.rewards}
-                          brandname={brandName}
-                          currencySymbol={currencySymbol}
-                          pending={pending}
-                        />
-                        <ShareButton
-                          // disabled={isExpired}
-                          placement="auto-end"
-                          shareurl={`${isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}`}
-                          fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
-                          label="Invite more friends"
-                          className={styles.groupshop_InviteBtn}
-                        />
-                      </div>
-                    </>
-                  )}
+                            <div className="d-flex align-items-center justify-content-start flex-wrap">
+                              <Members
+                                names={topFive(productCustomers.map(
+                                  (mem: any, mindex: any) => ({
+                                    fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
+                                    }`,
+                                    lineItems: mem.lineItems,
+                                  }),
+                                ))}
+                                cashback={['']}
+                                discount={discount}
+                                shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
+                                fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                                rewards={gsctx?.campaign?.salesTarget?.rewards}
+                                brandname={brandName}
+                                currencySymbol={currencySymbol}
+                                pending={pending}
+                              />
+                              <ShareButton
+                                // disabled={isExpired}
+                                placement="auto-end"
+                                shareurl={`${isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}`}
+                                fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
+                                label="Invite more friends"
+                                className={styles.groupshop_InviteBtn}
+                              />
+                            </div>
+                          </>
+                        )}
                     </Col>
                   </div>
                 </div>
@@ -724,122 +832,122 @@ const ProductDetail = ({
             </Col>
           </Row>
           {isExpired && (
-          <Row className="border-top mt-4">
-            <Col className="d-flex justify-content-center mt-4">
-              <div className={styles.groupshop_modal_detail_expire}>
-                <h3 className="fw-bolder">
-                  {' '}
-                  This Groupshop has expired, but you can still get
-                  {' '}
-                  {percentage}
-                  %
-                  off.
-                </h3>
-                <section>
-                  <Row className={[styles.groupshop_footer_expire, 'justify-content-center w-100'].join(' ')}>
-                    <Col xs={3}>{' '}</Col>
-                    <Col xs={1} className="d-flex justify-content-center px-3">
-                      <div className="text-center me-2">
-                        <span>
+            <Row className="border-top mt-4">
+              <Col className="d-flex justify-content-center mt-4">
+                <div className={styles.groupshop_modal_detail_expire}>
+                  <h3 className="fw-bolder">
+                    {' '}
+                    This Groupshop has expired, but you can still get
+                    {' '}
+                    {percentage}
+                    %
+                    off.
+                  </h3>
+                  <section>
+                    <Row className={[styles.groupshop_footer_expire, 'justify-content-center w-100'].join(' ')}>
+                      <Col xs={3}>{' '}</Col>
+                      <Col xs={1} className="d-flex justify-content-center px-3">
+                        <div className="text-center me-2">
+                          <span>
+                            {' '}
+                            00
+                          </span>
+                          <p className="mt-1">HOURS</p>
+                        </div>
+                        <div className={styles.groupshop_footer_expire_time}>
                           {' '}
-                          00
-                        </span>
-                        <p className="mt-1">HOURS</p>
-                      </div>
-                      <div className={styles.groupshop_footer_expire_time}>
-                        {' '}
-                        :
-                      </div>
-                    </Col>
-                    <Col xs={2} className="d-flex px-3">
-                      <div className="text-center mx-2">
-                        <span>
-                          00
-                        </span>
-                        <p className="mt-1">MINUTES</p>
-                      </div>
-                      <div className={styles.groupshop_footer_expire_time}>
-                        {' '}
-                        :
-                      </div>
-                    </Col>
-                    <Col xs={1} className="d-flex px-3">
-                      <div className="text-center ms-4 ms-lg-2">
-                        <span>
-                          00
-                        </span>
-                        <p className="mt-1">SECONDS</p>
-                      </div>
-                    </Col>
-                    <Col xs={4}>{' '}</Col>
-                  </Row>
-                </section>
-                {
-                  !isChannel && (
-                  <>
-                    <p className="d-lg-block d-none">
-                      Groupshop is all about rewarding you and your friends with real
-                      cashback and discounts every time you shop together!
-
-                    </p>
-                    <p>
-                      <strong>Invite 1 friend</strong>
-                      {' '}
-                      to this Groupshop, and start shopping with
-                      them to get
-                      {' '}
-                      <strong>
-                        {percentage}
-                        %
-                        {' '}
-                        off plus additional cashback
-                      </strong>
-                      {' '}
-                      on this and other products you love.
-
-                    </p>
-                  </>
-                  )
-                }
-                <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2 d-block">
-                  { loaderInvite
-                    ? (<Spinner animation="border" className="align-self-center mb-2" />)
-                    : (
+                          :
+                        </div>
+                      </Col>
+                      <Col xs={2} className="d-flex px-3">
+                        <div className="text-center mx-2">
+                          <span>
+                            00
+                          </span>
+                          <p className="mt-1">MINUTES</p>
+                        </div>
+                        <div className={styles.groupshop_footer_expire_time}>
+                          {' '}
+                          :
+                        </div>
+                      </Col>
+                      <Col xs={1} className="d-flex px-3">
+                        <div className="text-center ms-4 ms-lg-2">
+                          <span>
+                            00
+                          </span>
+                          <p className="mt-1">SECONDS</p>
+                        </div>
+                      </Col>
+                      <Col xs={4}>{' '}</Col>
+                    </Row>
+                  </section>
+                  {
+                    !isChannel && (
                       <>
-                        <Button
-                          type="button"
-                          className={['align-self-center mb-2 p-2', styles.groupshop_expPdInviteNow].join(' ')}
-                          onClick={() => inviteForExpiredGS()}
-                        >
-                          🔗 INVITE NOW
+                        <p className="d-lg-block d-none">
+                          Groupshop is all about rewarding you and your friends with real
+                          cashback and discounts every time you shop together!
 
-                        </Button>
-                        <Row>
-                          { activeURL || shortActivateURL ? (<a href={shortActivateURL ?? activeURL}>{shortActivateURL ?? activeURL}</a>) : '' }
-                        </Row>
+                        </p>
+                        <p>
+                          <strong>Invite 1 friend</strong>
+                          {' '}
+                          to this Groupshop, and start shopping with
+                          them to get
+                          {' '}
+                          <strong>
+                            {percentage}
+                            %
+                            {' '}
+                            off plus additional cashback
+                          </strong>
+                          {' '}
+                          on this and other products you love.
+
+                        </p>
                       </>
-                    )}
-                </div>
-                <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2">OR SHARE </div>
-                <div className="d-none d-lg-block">
-                  <section className="d-flex justify-content-center px-2 mb-3">
-                    <div className="mx-1">
-                      {' '}
-                      <SocialButton text={socialText} network="Email" url={shortActivateURL ?? activateURL} />
-                      {' '}
-                    </div>
-                    <div className="mx-1">
-                      {' '}
-                      <SocialButton text={socialText} network="Instagram" url={shortActivateURL ?? activateURL} />
-                    </div>
+                    )
+                  }
+                  <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2 d-block">
+                    {loaderInvite
+                      ? (<Spinner animation="border" className="align-self-center mb-2" />)
+                      : (
+                        <>
+                          <Button
+                            type="button"
+                            className={['align-self-center mb-2 p-2', styles.groupshop_expPdInviteNow].join(' ')}
+                            onClick={() => inviteForExpiredGS()}
+                          >
+                            🔗 INVITE NOW
 
-                    <div className="mx-1">
-                      {' '}
-                      <SocialButton text={socialText} network="Pinterest" url={shortActivateURL ?? activateURL} media={banner} />
-                      {' '}
-                    </div>
+                          </Button>
+                          <Row>
+                            {activeURL || shortActivateURL ? (<a href={shortActivateURL ?? activeURL}>{shortActivateURL ?? activeURL}</a>) : ''}
+                          </Row>
+                        </>
+                      )}
+                  </div>
+                  <div className="d-none d-lg-block d-flex flex-column justify-content-center mb-2">OR SHARE </div>
+                  <div className="d-none d-lg-block">
+                    <section className="d-flex justify-content-center px-2 mb-3">
+                      <div className="mx-1">
+                        {' '}
+                        <SocialButton text={socialText} network="Email" url={shortActivateURL ?? activateURL} />
+                        {' '}
+                      </div>
+                      <div className="mx-1">
+                        {' '}
+                        <SocialButton text={socialText} network="Instagram" url={shortActivateURL ?? activateURL} />
+                      </div>
 
-                    {/* <div className="mx-1">
+                      <div className="mx-1">
+                        {' '}
+                        <SocialButton text={socialText} network="Pinterest" url={shortActivateURL ?? activateURL} media={banner} />
+                        {' '}
+                      </div>
+
+                      {/* <div className="mx-1">
                       {' '}
                       <SocialButton
                         text={socialText}
@@ -848,72 +956,72 @@ const ProductDetail = ({
                       />
                       {' '}
                     </div> */}
-                    <div className="mx-1">
-                      {' '}
-                      <SocialButton text={socialText} network="Twitter" url={shortActivateURL ?? activateURL} />
-                      {' '}
-                    </div>
-                    <div className="mx-1">
-                      {' '}
-                      <SocialButton text={socialText} network="Facebook" url={shortActivateURL ?? activateURL} />
-                      {' '}
-                    </div>
-                  </section>
+                      <div className="mx-1">
+                        {' '}
+                        <SocialButton text={socialText} network="Twitter" url={shortActivateURL ?? activateURL} />
+                        {' '}
+                      </div>
+                      <div className="mx-1">
+                        {' '}
+                        <SocialButton text={socialText} network="Facebook" url={shortActivateURL ?? activateURL} />
+                        {' '}
+                      </div>
+                    </section>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
+              </Col>
+            </Row>
           )}
         </Modal.Body>
         {isForMobile && !isExpired && isGroupshop && (
-        <Modal.Footer className="bg-transparent d-block">
-          <Row className={styles.groupshop_timerRow}>
-            <Col xs={1} md={1} />
-            <Col xs={10} md={10} className={styles.groupshop_timerRow_content}>
-              <div className="mt-1">
-                <b className={styles.groupshop_timerRow_text}>
-                  Complete your order in time to benefit from these exclusive discounts!
-                </b>
-                <Row className={['mx-auto', styles.groupshop_footer_counter].join(' ')}>
-                  <Col className={['d-flex col-3 p-0 ', styles.groupshop_timerRow_days].join(' ')}>
-                    <div className={['text-center ', styles.groupshop_timerRow_days_timeArea].join(' ')}>
-                      <span className={styles.groupshop_timerRow_days_time}>
+          <Modal.Footer className="bg-transparent d-block">
+            <Row className={styles.groupshop_timerRow}>
+              <Col xs={1} md={1} />
+              <Col xs={10} md={10} className={styles.groupshop_timerRow_content}>
+                <div className="mt-1">
+                  <b className={styles.groupshop_timerRow_text}>
+                    Complete your order in time to benefit from these exclusive discounts!
+                  </b>
+                  <Row className={['mx-auto', styles.groupshop_footer_counter].join(' ')}>
+                    <Col className={['d-flex col-3 p-0 ', styles.groupshop_timerRow_days].join(' ')}>
+                      <div className={['text-center ', styles.groupshop_timerRow_days_timeArea].join(' ')}>
+                        <span className={styles.groupshop_timerRow_days_time}>
+                          {' '}
+                          {days}
+                        </span>
+                        <p className="mt-1">DAYS</p>
+                      </div>
+                      <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
                         {' '}
-                        {days}
-                      </span>
-                      <p className="mt-1">DAYS</p>
-                    </div>
-                    <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
-                      {' '}
-                      :
-                    </div>
-                  </Col>
-                  <Col className="d-flex col-3 p-0 ">
-                    <div className={['text-center mx-2 ', styles.groupshop_timerRow_days_timeArea1].join(' ')}>
-                      <span className={styles.groupshop_timerRow_days_time}>
-                        {hrs}
-                      </span>
-                      <p className="mt-1">HOURS</p>
-                    </div>
-                    <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
-                      {' '}
-                      :
-                    </div>
-                  </Col>
-                  <Col className="d-flex col-3 p-0 ">
-                    <div className="text-center mx-3">
-                      <span className={styles.groupshop_timerRow_days_time}>
-                        {mins}
-                      </span>
-                      <p className="mt-1">MINUTES</p>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-            <Col xs={1} md={1} />
-          </Row>
-        </Modal.Footer>
+                        :
+                      </div>
+                    </Col>
+                    <Col className="d-flex col-3 p-0 ">
+                      <div className={['text-center mx-2 ', styles.groupshop_timerRow_days_timeArea1].join(' ')}>
+                        <span className={styles.groupshop_timerRow_days_time}>
+                          {hrs}
+                        </span>
+                        <p className="mt-1">HOURS</p>
+                      </div>
+                      <div className={['py-2 ', styles.groupshop_timerRow_days_time].join(' ')}>
+                        {' '}
+                        :
+                      </div>
+                    </Col>
+                    <Col className="d-flex col-3 p-0 ">
+                      <div className="text-center mx-3">
+                        <span className={styles.groupshop_timerRow_days_time}>
+                          {mins}
+                        </span>
+                        <p className="mt-1">MINUTES</p>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+              <Col xs={1} md={1} />
+            </Row>
+          </Modal.Footer>
         )}
 
       </Modal>

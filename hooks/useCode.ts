@@ -17,6 +17,7 @@ const useCode = () => {
   const [ownerCode, setOwnerCode] = useState<string | undefined>(undefined);
   const [stepNumber, setStepNumber] = useState<string | undefined>(undefined);
   const [channelName, setchannelName] = useState<string | undefined>(undefined);
+  const [productSearch, setProductSearch] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     setchannelName(channel as string);
@@ -52,6 +53,10 @@ const useCode = () => {
                   setStepNumber(entity[1]);
                   break;
 
+                case 'open':
+                  setProductSearch(entity[1]);
+                  break;
+
                 default:
                   break;
               }
@@ -73,7 +78,17 @@ const useCode = () => {
   }, [shop, discountCode]);
 
   return {
-    shop, discountCode, productCode, status, qrscan, ownerCode, stepNumber, backHome, channelName,
+    shop,
+    discountCode,
+    productCode,
+    status,
+    qrscan,
+    ownerCode,
+    stepNumber,
+    backHome,
+    channelName,
+    productSearch,
+    setProductSearch,
   };
 };
 export default useCode;
