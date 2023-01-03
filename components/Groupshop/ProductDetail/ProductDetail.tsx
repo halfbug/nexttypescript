@@ -268,18 +268,22 @@ const ProductDetail = ({
         fullscreen="lg-down"
         contentClassName={styles.groupshop_modal_content}
       >
-        <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
-        <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
-          <LeftArrowIcon />
-          <button
-            onClick={handleCloseClick}
-            className={styles.groupshop__pcard__headerMobile__txt}
-            type="button"
-          >
-            Back To All
 
-          </button>
-        </Modal.Header>
+        <div className="position-relative">
+          <div className="position-absolute mt-2 ms-2">
+            <Button
+              variant="link"
+              onClick={handleCloseClick}
+              className={[styles.groupshop__pcard__headerMobile__txt, 'text-decoration-none text-center border-0 bg-transparent'].join(' ')}
+              type="button"
+            >
+              <LeftArrowIcon />
+              <span className="ms-2 text-black">back to search</span>
+
+            </Button>
+          </div>
+          <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
+        </div>
         <Modal.Body className={['bg-white', styles.groupshop__pcard__modalBody].join(' ')}>
           <Row>
             <Col xs={12} md={6}>
