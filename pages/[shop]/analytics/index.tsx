@@ -98,7 +98,7 @@ const Analytics: NextPage = () => {
         setAov('-');
       }
       if (cashBack > 0) {
-        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack))}`);
+        setCashbackGiven(`${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(Math.ceil(cashBack + feeCharge))}`);
       } else {
         setCashbackGiven('-');
       }
