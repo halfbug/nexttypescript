@@ -39,7 +39,7 @@ export default function AnalyticCustomerPartnerDetail({
   };
   return (
     <div className={styles.customerData__orderDetail}>
-      <div className={styles.customerData__orderDetail__orderRow}>
+      <div className={[styles.customerData__orderDetail__orderRow, 'pb-2'].join(' ')}>
         <div className={styles.customerData__orderDetail__orderRow__number}>
           {customersData?.partnerDetails?.fname
           ?? customersData?.partnerDetails?.email.substring(0, 15)}
