@@ -1,6 +1,26 @@
 @import "./variables.scss";
 
 .overiew {
+
+    @extend .mt-2, .px-0;
+
+    .DateRangePicker{
+        ::-webkit-input-placeholder {
+
+            font-family: "DM Sans";
+            width: fit-content;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: rgba(29, 35, 41, 0.5);
+        }
+    input[type="text"],
+    textarea {
+        background-color: #F8F8F8 !important;
+        // width: 248px;
+    }
+}
     &__header {
         margin: 30px 0 27px 0;
         h3 {
@@ -18,14 +38,15 @@
         width: fit-content;
         font-family: "DM Sans";
         font-style: normal;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 14px;
         text-align: center;
         color: $black;
     }
     &__mainCampaignBox {
         @extend .my-3, .d-flex, .align-items-center;
-        background: transparent;        ;
+        background: transparent;
+        justify-content: space-between!important;
         border: 1px  dashed #DCD0E8;
         border-radius: 23px;
         padding: 20px;
@@ -39,7 +60,7 @@
 
         }
         &__AddPartnerText {
-            @extend .ms-2, .text-nowrap;
+            @extend .ms-2,;
             font-family: 'DM Sans';
             font-style: normal;
             font-weight: 400;
@@ -84,6 +105,9 @@
             font-size: 14px;
             color: $black;
         }
+    }
+    &_justifySpaceBetween{
+        justify-content: space-between;
     }
     &__description {
         color: #000000;

@@ -128,7 +128,11 @@ export default function CampaignOverview({
                   No Active Campaigns
                 </span>
                 <div className="ms-4 mt-3 mb-2">
-                  <WhiteButton><Link href={`/${shopName}/campaign`}>Activate Campaign</Link></WhiteButton>
+                  <WhiteButton>
+                    <Link href={`/${shopName}/campaign`}>
+                      <span className="text-decoration-none">Activate Campaign</span>
+                    </Link>
+                  </WhiteButton>
                 </div>
               </Col>
               <Col className="mx-2">
@@ -141,17 +145,17 @@ export default function CampaignOverview({
           )}
 
       </div>
-      <div className={[styles.overiew__mainCampaignBox, 'd-flex'].join(' ')}>
-        <div className="d-flex align-items-center justify-around">
+      <div className={styles.overiew__mainCampaignBox}>
+        <div className={[styles.overiew_justifySpaceBetween, 'd-flex align-items-center'].join(' ')}>
           { (activePartners?.length && activePartners?.length > 0)
             ? (
               <>
 
-                <Col lg={9} className="d-flex justify-content-start align-items-center">
+                <div className="col-10 me-auto d-flex align-items-center">
                   {' '}
-                  <div className={styles.overiew_tag}>
+                  <span className={styles.overiew_tag}>
                     Partner Tools
-                  </div>
+                  </span>
                   <span className={styles.overiew__mainCampaignBox__AddPartnerText}>
                     You have
                     {' '}
@@ -163,20 +167,20 @@ export default function CampaignOverview({
                     {' '}
                     partners
                   </span>
-                </Col>
-                <Col lg={3}>
+                </div>
+                <div className="col-2 ms-auto">
 
-                  <Button variant="">
+                  <Button variant="" className="text-end">
                     <Link href={`/${shopName}/partnertools`}><strong>Manage Partners</strong></Link>
                     {' '}
                     <IoIosArrowForward className="ms-1" />
                   </Button>
-                </Col>
+                </div>
               </>
             )
             : (
               <>
-                <Col lg={9} className="d-flex justify-content-start align-items-center">
+                <Col lg={10} className="d-flex justify-content-start align-items-center">
                   {' '}
                   <div className={styles.overiew_tag}>
                     Partner Tools
@@ -185,9 +189,9 @@ export default function CampaignOverview({
                     You haven’t added partners yet!
                   </span>
                 </Col>
-                <Col lg={3}>
+                <Col lg={2}>
 
-                  <Button variant="">
+                  <Button variant="" className="ms-auto">
                     <Link href={`/${shopName}/partnertools`}><strong>Add Partners</strong></Link>
                     {' '}
                     <IoIosArrowForward className="ms-1" />
