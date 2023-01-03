@@ -305,6 +305,33 @@ const ProductDetail = ({
     setDealProduct(data?.productById?.id);
     setShowOverlay(true);
   }, [data]);
+
+  const cleanDescription = useCallback((description) => {
+    if (description) {
+      const re = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+      const unescaped: any = {
+        '&amp;': '&',
+        '&#38;': '&',
+        '&lt;': '<',
+        '&#60;': '<',
+        '&gt;': '>',
+        '&#62;': '>',
+        '&apos;': "'",
+        '&#39;': "'",
+        '&quot;': '"',
+        '&#34;': '"',
+      };
+      const replaceTags = description.replace(re, (m: any) => unescaped[m]);
+      const filteredStyle = replaceTags.replace(/<style.*?<\/style>/g, '');
+      const filteredImages = filteredStyle.replace(/<img[^>]*>/g, '');
+      const filteredScript = filteredImages.replace(/<script[^>]*>(?:(?!<\/script>)[^])*<\/script>/g, '');
+      const filteredButton = filteredScript.replace(/<button[^>]*>(?:(?!<\/button>)[^])*<\/button>/g, '');
+      const filteredLinks = filteredButton.replace(/<a[^>]*>(?:(?!<\/a>)[^])*<\/a>/g, '');
+      return filteredLinks;
+    }
+    return '';
+  }, []);
+
   return (
     <>
       <AlertComponent />
@@ -611,31 +638,30 @@ const ProductDetail = ({
                   ) : `${product?.title}`}
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
-                      //     <ShowMoreText
-                      // /* Default options */
-                      //       lines={3}
-                      //       more="Show more"
-                      //       less="Show less"
-                      //       className={isExpired
-                      //         ? styles.groupshop_modal_detail_height_descriptionExpired
-                      //         : styles.groupshop_modal_detail_height_descriptionNormal}
-                      //       anchorClass="my-anchor-css-class"
-                      //   // onClick={this.executeOnClick}
-                      //       expanded={false}
-                      //       width={406}
-                      //       truncatedEndingComponent="... "
-                      //     >
-                      //       {product?.description ?
-                      //        <p dangerouslySetInnerHTML=
-                      // {{ __html: product?.description }} /> : ''}
-                      //     </ShowMoreText>
-                      <div
-                        className={isExpired
-                          ? styles.groupshop_modal_detail_height_descriptionExpired
-                          : styles.groupshop_modal_detail_height_descriptionNormal}
-                      >
-                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                      </div>
+                    //     <ShowMoreText
+                    // /* Default options */
+                    //       lines={3}
+                    //       more="Show more"
+                    //       less="Show less"
+                    //       className={isExpired
+                    //         ? styles.groupshop_modal_detail_height_descriptionExpired
+                    //         : styles.groupshop_modal_detail_height_descriptionNormal}
+                    //       anchorClass="my-anchor-css-class"
+                    //   // onClick={this.executeOnClick}
+                    //       expanded={false}
+                    //       width={406}
+                    //       truncatedEndingComponent="... "
+                    //     >
+                    //       {product?.description ?
+                    //        <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                    //     </ShowMoreText>
+                    <div
+                      className={isExpired
+                        ? styles.groupshop_modal_detail_height_descriptionExpired
+                        : styles.groupshop_modal_detail_height_descriptionNormal}
+                    >
+                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: cleanDescription(product?.description) }} /> : ''}
+                    </div>
                     )}
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
