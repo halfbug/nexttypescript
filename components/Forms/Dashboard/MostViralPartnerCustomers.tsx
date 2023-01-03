@@ -93,7 +93,14 @@ const MostViralPartnerCustomers = ({
           <Col xs={12}>
             <div className={styles.customerData__mostViral}>
               {renderItems?.map((part: any, index: number) => (
-                <div className={styles.customerData__mostViral__listing}>
+                <div
+                  role="button"
+                  aria-hidden="true"
+                  onClick={() => {
+                    handleCustomer(part);
+                  }}
+                  className={styles.customerData__mostViral__listing}
+                >
                   <div>
                     <div className={styles.customerData__acc__row__name}>
                       {part.partnerDetails.fname ?? part.partnerDetails.email.substring(0, 15) }
