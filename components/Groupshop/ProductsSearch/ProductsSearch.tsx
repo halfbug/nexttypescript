@@ -170,7 +170,7 @@ const ProductsSearch = ({
     setSelected([]);
     handleClose(e);
     setProductSearch(undefined);
-    Router.push(`/${shop}/deal/${discountCode}`);
+    // Router.push(`/${shop}/deal/${discountCode}`);
   };
   const addProducts = (e: any, prd: IProduct) => {
     e.stopPropagation();
