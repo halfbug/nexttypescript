@@ -53,28 +53,28 @@ export default function AnalyticCutomerDetail({
         <div className={styles.customerData__orderDetail__orderRow__number}>
           Order
           {' '}
-          {(customersData[0].members[0].name).replace('#', '')}
+          {(customersData[0].owner[0].name).replace('#', '')}
         </div>
         <div className={styles.customerData__orderDetail__orderRow__date}>
-          { moment(new Date(customersData[0].members[0].createdAt)).format('MM/DD/YY') }
+          { moment(new Date(customersData[0].owner[0].createdAt)).format('MM/DD/YY') }
         </div>
       </div>
-      <div className={styles.customerData__orderDetail__totalprice}>
+      {/* <div className={styles.customerData__orderDetail__totalprice}>
         {currencyCode}
-        { formatNumber(customersData[0].members[0].price) }
-      </div>
+        { formatNumber(customersData[0].owner[0].price) }
+      </div> */}
       <div className={styles.customerData__orderDetail__border} />
       <div className={styles.customerData__orderDetail__customerRow}>
         <div className={styles.customerData__orderDetail__customerRow__name}>
-          {customersData[0].members[0].customer.firstName}
+          {customersData[0].owner[0].customer.firstName}
           {' '}
-          {customersData[0].members[0].customer.lastName}
+          {customersData[0].owner[0].customer.lastName}
         </div>
       </div>
       <Button
         variant=""
         onClick={() => {
-          handleLineitems(customersData[0].members[0].id);
+          handleLineitems(customersData[0].owner[0].id);
         }}
         className={[styles.customerData__orderDetail__viewProducts, 'text-decoration-underline px-0'].join(' ')}
       >

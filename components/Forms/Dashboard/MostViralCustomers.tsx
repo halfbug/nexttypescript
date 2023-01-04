@@ -99,14 +99,14 @@ const MostViralCustomers = ({
                 <div className={styles.customerData__mostViral__listing}>
                   <div>
                     <div className={styles.customerData__acc__row__count}>
-                      {part.members[0].name}
+                      {part.owner[0].name}
                     </div>
                   </div>
                   <div className="">
                     <div className={styles.customerData__acc__row__name}>
-                      {part.members[0].customer.firstName}
+                      {part.owner[0].customer.firstName}
                       {' '}
-                      {part.members[0].customer.lastName}
+                      {part.owner[0].customer.lastName}
                     </div>
                   </div>
                   <div className="text-nowrap">

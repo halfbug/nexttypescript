@@ -1593,6 +1593,20 @@ query mostViralCustomers($storeId: String!, $startDate: String!, $endDate: Strin
         phone
         ip
       }  
+    }
+    owner{
+      id
+      name
+      createdAt      
+      shop
+      price 
+      customer{
+        firstName
+        lastName
+        email
+        phone
+        ip
+      }
     }     
   }
 }
