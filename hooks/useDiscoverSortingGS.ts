@@ -33,7 +33,7 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
     });
     const finalGS:any = matchingStoreIds.map((prod:any) => showingGS.find(
       (el:any) => el.storeId === prod,
-    )).filter((el:any) => el);
+    )).filter((el:any) => el).filter((gs:any) => gs.products.length);
     return finalGS;
   }
   return showingGS;

@@ -1770,7 +1770,6 @@ const GET_MATCHING_GS = gql`
       installationStep
       shop
       brandName
-      industry
       logoImage
       plan
       currencyCode
