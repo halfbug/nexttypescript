@@ -1356,6 +1356,7 @@ query PartnerGroupshop($code: String!) {
       position
     }
     currencyCode
+    outofstock
     orders{
       product{
         id
