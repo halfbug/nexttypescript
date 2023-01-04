@@ -61,6 +61,7 @@ const ProductsSearch = ({
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
   const [showMsg, setshowMsg] = useState('');
+  const [productsArr, setProductsArr] = useState<IProduct[] | undefined>([]);
   // const [searchValue, setsearchValue] = useState('');
   const ref = useRef(null);
   const Router = useRouter();
@@ -83,9 +84,17 @@ const ProductsSearch = ({
   // ).filter(
   //   (item) => !addedProducts?.some((item2) => item2.productId === item.id),
   // );
-  const refreshProduct = () => uniqueArray((isInfluencerGS ? allProducts?.filter(
+
+  useEffect(() => {
+    if (gsctx && gsctx.dealProducts && gsctx.popularProducts && gsctx.allProducts) {
+      const temp: any = [...gsctx.dealProducts, ...gsctx.popularProducts, ...gsctx.allProducts];
+      setProductsArr(temp);
+    }
+  }, [gsctx]);
+
+  const refreshProduct = () => uniqueArray((isInfluencerGS ? productsArr?.filter(
     (item) => !dealProducts?.some((item2) => item2.productId === item.id),
-  ) : allProducts?.filter(
+  ) : productsArr?.filter(
     (item) => !addedProducts?.some((item2) => item2.productId === item.id),
   ).filter(
     (item) => !gsctx.ownerDeals?.some((item2) => item2.id === item.id),
