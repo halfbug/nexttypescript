@@ -64,7 +64,13 @@ export default function CampaignMetrics({
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
         <h3>Campaign Metrics</h3>
-        <div className="d-inline mx-2">
+        <div className="d-inline mx-2 ps-3 position-relative">
+
+          <img
+            src="https://d1o2v5h7slksjm.cloudfront.net/calender_black.svg"
+            alt="calendar"
+            className="position-absolute my-2 mx-1"
+          />
           <DateRangePicker
             onApply={callbackApply}
             onCancel={callbackCancel}
