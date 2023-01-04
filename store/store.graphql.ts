@@ -821,6 +821,7 @@ query campaigns($storeId: String!) {
       totalGroupshops
       totalRevenue
       totalCashback
+      totalFeeCharges
     }
 
   }

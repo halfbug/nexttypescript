@@ -144,7 +144,7 @@ const CampaignListing = () => {
             </Col>
             <Col className={styles.gradient_text}>{camp?.details.totalGroupshops}</Col>
             <Col className={['ps-3 ', styles.gradient_text].join(' ')}>
-              {camp?.details.totalCashback ? `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(camp?.details.totalCashback)}` : '-'}
+              {camp?.details.totalCashback ? `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(camp?.details.totalCashback + camp?.details.totalFeeCharges)}` : '-'}
             </Col>
             <Col className={[styles.gradient_text, 'ps-3'].join(' ')}>
               {/* <ToggleButton
