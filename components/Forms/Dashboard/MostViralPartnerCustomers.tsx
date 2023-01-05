@@ -114,7 +114,7 @@ const MostViralPartnerCustomers = ({
                       generated
                     </div>
                   </div>
-                  <div className="text-nowrap text-center">
+                  <div className="text-center mx-2">
                     <div className={styles.customerData__acc__row__name}>
                       {currencyCode}
                       {formatNumber(part.refund)}
