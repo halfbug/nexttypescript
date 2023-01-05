@@ -10,6 +10,7 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
+import useAppContext from 'hooks/useAppContext';
 import useDeal from 'hooks/useDeal';
 
 interface AvailablePartnerRewardsBoxProps extends RootProps {
@@ -46,9 +47,17 @@ const AvailablePartnerRewardsBox = ({
   });
 
   const {
+    gsctx: groupshop,
+    dispatch,
+  } = useAppContext();
+
+  console.log('🚀 ~ file: AvailablePartnerRewardsBox.ts ~ line 54 ~ AvailablePartnerRewardsBox ~ groupshop', groupshop);
+  const ownerFname = groupshop.members[0].orderDetail.customer.firstName;
+  const ownerLname = groupshop.members[0].orderDetail.customer.lastName.substr(0, 1);
+  const ownerName = `${ownerFname} ${ownerLname}`;
+  const {
     isExpired,
   } = useDeal();
-
   return (
     <>
       <Modal
@@ -76,7 +85,7 @@ const AvailablePartnerRewardsBox = ({
                 <h2>
                   {name}
                 </h2>
-                {owner ? (
+                {name === ownerName ? (
                   <span>
                     {'👑 '}
                     GROUPSHOP OWNER

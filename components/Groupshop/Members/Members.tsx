@@ -6,6 +6,7 @@ import styles from 'styles/Groupshop.module.scss';
 import CrossICon from 'assets/images/cross.svg';
 import { useMediaQuery } from 'react-responsive';
 import { RootProps } from 'types/store';
+import useAppContext from 'hooks/useAppContext';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import AvailablePartnerRewardsBox from '../RewardBox/AvailablePartnerRewardsBox';
 
@@ -30,6 +31,13 @@ const Members = ({
   const [pendingRewards, setpendingRewards] = useState(0);
   const [isOwner, setIsOwner] = useState(true);
   const { formatNumber } = useUtilityFunction();
+  const {
+    gsctx: groupshop,
+    dispatch,
+  } = useAppContext();
+  const ownerFname = (groupshop?.members[0]?.orderDetail.customer.firstName) ? groupshop?.members[0]?.orderDetail.customer.firstName : '';
+  const ownerLname = (groupshop?.members[0]?.orderDetail?.customer?.lastName) ? groupshop?.members[0]?.orderDetail?.customer?.lastName.substr(0, 1) : '';
+  const ownerName = `${ownerFname} ${ownerLname}`;
 
   const countTotalPrice = (lineItems: any) => {
     let totalPrice = 0;
@@ -74,7 +82,7 @@ const Members = ({
         <>
           <div>
             <Button onClick={(e) => handleClick(member, idx)} variant="light" className={styles.groupshop__top_item}>
-              {idx === 0 && '👑'}
+              {member.fname === ownerName && '👑'}
               {' '}
               {member.fname}
             </Button>
