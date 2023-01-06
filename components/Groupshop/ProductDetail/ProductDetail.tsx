@@ -35,18 +35,20 @@ import ToolTip from 'components/Buttons/ToolTip/ToolTip';
 import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareButton';
 import useCode from 'hooks/useCode';
 import AddDealProduct from 'components/Forms/AddDealProduct';
+import useDetail from 'hooks/useDetail';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
-  show : boolean;
-  handleClose(e:any): any;
+  show: boolean;
+  handleClose(e: any): any;
   // addToCart(e: any): any;
-  product : IProduct | undefined;
+  product: IProduct | undefined;
   isChannel?: boolean;
+  showSearch?: () => any;
 }
 
 const ProductDetail = ({
-  show, pending = false, handleClose, product, isChannel,
+  show, pending = false, handleClose, product, isChannel, showSearch,
 }: ProductDetailProps) => {
   const { addCartProduct } = useCart();
   const { shop, discountCode, ownerCode } = useCode();
@@ -112,10 +114,16 @@ const ProductDetail = ({
   }, [show]);
 
   useEffect(() => {
-    const filteredDealProducts = gsctx.dealProducts?.filter((item) => item.type === 'deal')
-      .map((ele) => ele.productId);
-    if (filteredDealProducts) {
-      setFilterDeal(filteredDealProducts);
+    let arr;
+    if (isChannel) {
+      arr = gsctx.dealProducts?.filter((item) => item.type === 'deal' || item.type === 'owner')
+        .map((ele) => ele.productId);
+    } else {
+      arr = gsctx.dealProducts?.filter((item) => item.type === 'deal')
+        .map((ele) => ele.productId);
+    }
+    if (arr) {
+      setFilterDeal(arr);
     }
   }, [gsctx]);
 
@@ -234,17 +242,17 @@ const ProductDetail = ({
 
   const backToSearch = (e: any) => {
     setShowOverlay(false);
-    closeModal(e);
     if (gsctx?.totalProducts < 101) {
       const cprod = clientDealProducts()?.length || 0;
       if (cprod >= 5) {
         showError(
           'Only 5 products can be added to this Group Shop per person.',
         );
-      } else {
-        router.push(`/${shop}/deal/${discountCode}/open&product_search`);
+      } else if (showSearch) {
+        showSearch();
       }
     } else showError('Groupshop is full you can not add more products to it');
+    closeModal(e);
   };
 
   useEffect(() => {
@@ -638,30 +646,31 @@ const ProductDetail = ({
                   ) : `${product?.title}`}
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
-                    //     <ShowMoreText
-                    // /* Default options */
-                    //       lines={3}
-                    //       more="Show more"
-                    //       less="Show less"
-                    //       className={isExpired
-                    //         ? styles.groupshop_modal_detail_height_descriptionExpired
-                    //         : styles.groupshop_modal_detail_height_descriptionNormal}
-                    //       anchorClass="my-anchor-css-class"
-                    //   // onClick={this.executeOnClick}
-                    //       expanded={false}
-                    //       width={406}
-                    //       truncatedEndingComponent="... "
-                    //     >
-                    //       {product?.description ?
-                    //        <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                    //     </ShowMoreText>
-                    <div
-                      className={isExpired
-                        ? styles.groupshop_modal_detail_height_descriptionExpired
-                        : styles.groupshop_modal_detail_height_descriptionNormal}
-                    >
-                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: cleanDescription(product?.description) }} /> : ''}
-                    </div>
+                      //     <ShowMoreText
+                      // /* Default options */
+                      //       lines={3}
+                      //       more="Show more"
+                      //       less="Show less"
+                      //       className={isExpired
+                      //         ? styles.groupshop_modal_detail_height_descriptionExpired
+                      //         : styles.groupshop_modal_detail_height_descriptionNormal}
+                      //       anchorClass="my-anchor-css-class"
+                      //   // onClick={this.executeOnClick}
+                      //       expanded={false}
+                      //       width={406}
+                      //       truncatedEndingComponent="... "
+                      //     >
+                      //       {product?.description ?
+                      //        <p dangerouslySetInnerHTML=
+                      // {{ __html: product?.description }} /> : ''}
+                      //     </ShowMoreText>
+                      <div
+                        className={isExpired
+                          ? styles.groupshop_modal_detail_height_descriptionExpired
+                          : styles.groupshop_modal_detail_height_descriptionNormal}
+                      >
+                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: cleanDescription(product?.description) }} /> : ''}
+                      </div>
                     )}
 
                     {product?.options?.filter(({ name, values }) => name !== 'Title' && values[0] !== 'Default Title')?.map(({ name, values, id }) => (
@@ -1051,13 +1060,13 @@ const ProductDetail = ({
         )}
 
       </Modal>
-
     </>
   );
 };
 
 ProductDetail.defaultProps = {
   isChannel: false,
+  showSearch: () => {},
 };
 
 export default ProductDetail;

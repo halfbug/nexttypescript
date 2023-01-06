@@ -318,7 +318,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   } = useDetail(allProducts);
 
   console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
-
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
     if (gsctx?.totalProducts < 101) {
@@ -339,6 +338,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   }
   console.log('test commit');
   console.log('popular', refferalDealsProducts);
+
+  const showSearchProds = () => {
+    setshowps(true);
+  };
+
+  const showProduct = (e: Event, prd: any) => {
+    setsProduct(prd);
+  };
+
   return (
     <>
       <Head>
@@ -1103,6 +1111,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={false}
+          showProduct={showProduct}
         />
         <LinkShareMobileView
           show={showQrscan}
@@ -1113,6 +1122,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showDetail}
           handleClose={() => setshowDetail(false)}
           product={sProduct}
+          showSearch={showSearchProds}
         />
         <Cart
           show={showCart}

@@ -391,6 +391,14 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx bestSeller', bestSeller);
   // console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx allProducts', allProducts);
 
+  const showSearchProds = () => {
+    setshowps(true);
+  };
+
+  const showProduct = (e: Event, prd: any) => {
+    setsProduct(prd);
+  };
+
   const getLogoHTML = () => (
     <>
       <div className={styles.groupshop_main_logo}>
@@ -1032,6 +1040,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={!!isChannelOwner}
+          showProduct={showProduct}
           isChannel
         />
         <WhatsInsideBox
@@ -1054,6 +1063,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setshowDetail(false)}
           product={sProduct}
           isChannel
+          showSearch={showSearchProds}
         />
         <Cart
           show={showCart}

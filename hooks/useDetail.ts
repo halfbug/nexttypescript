@@ -17,9 +17,10 @@ const useDetail = (products:any) => {
       setsProduct(prd);
     }
   }, [productCode, products]);
-
   useEffect(() => {
-    if (sProduct) setshowDetail(true);
+    if (sProduct) {
+      setshowDetail(true);
+    }
   }, [sProduct]);
 
   useEffect(() => {

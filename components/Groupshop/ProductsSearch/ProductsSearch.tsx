@@ -27,6 +27,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import useAppContext from 'hooks/useAppContext';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useCode from 'hooks/useCode';
+import useDetail from 'hooks/useDetail';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -37,11 +38,12 @@ interface ProductsSearchProps extends RootProps {
   allowSelectAll?: boolean,
   isCreateGS: boolean;
   isChannel?: boolean;
+  showProduct?: (e: any, prd: any) => any;
 }
 
 const ProductsSearch = ({
   show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData, isCreateGS,
-  isChannel,
+  isChannel, showProduct,
 }: ProductsSearchProps) => {
   // const {
   //   gsctx,
@@ -49,6 +51,7 @@ const ProductsSearch = ({
   // } = useContext(GroupshopContext);
   const { gsctx, dispatch } = useAppContext();
   const { isOwner } = useOwnerOnboarding();
+  const { setsProduct } = useDetail(gsctx.allProducts);
   const {
     shop, discountCode, ownerCode, productSearch, setProductSearch,
   } = useCode();
@@ -179,7 +182,6 @@ const ProductsSearch = ({
     setSelected([]);
     handleClose(e);
     setProductSearch(undefined);
-    // Router.push(`/${shop}/deal/${discountCode}`);
   };
   const addProducts = (e: any, prd: IProduct) => {
     e.stopPropagation();
@@ -243,9 +245,10 @@ const ProductsSearch = ({
   };
 
   const openDetail = (e: any, prd: any) => {
-    const Arr = prd.id.split('/');
-    const prodId = Arr[Arr.length - 1];
-    Router.push(`${window.location.href}/product&${prodId}`);
+    setsProduct(prd);
+    if (showProduct) {
+      showProduct(e, prd);
+    }
     closeModal(e);
   };
 
@@ -600,6 +603,7 @@ ProductsSearch.defaultProps = {
   allowSelectAll: false,
   setData: [],
   isChannel: false,
+  showProduct: '',
 };
 
 export default ProductsSearch;

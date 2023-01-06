@@ -291,6 +291,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       </div>
     </>
   );
+
+  const showSearchProds = () => {
+    setshowps(true);
+  };
+
+  const showProduct = (e: Event, prd: any) => {
+    setsProduct(prd);
+  };
+
   return (
     <>
       <Head>
@@ -824,6 +833,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={!!isInfluencer}
+          showProduct={showProduct}
         />
         <OBWelcomeInfluencer
           show={showob1 && title !== '' && (partnerGroupshop?.isActive ?? true)}
@@ -842,6 +852,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showDetail}
           handleClose={() => setshowDetail(false)}
           product={sProduct}
+          showSearch={showSearchProds}
         />
         <Cart
           show={showCart}
