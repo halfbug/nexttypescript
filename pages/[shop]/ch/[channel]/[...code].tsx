@@ -230,6 +230,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       }
       const pctx: IGroupshop = {
         ...getChannelGroupshopByCode,
+        dealProducts: getChannelGroupshopByCode?.dealProducts ?? gsctx.dealProducts ?? [],
         expiredAt: new Date(getChannelGroupshopByCode?.expiredAt),
         members: getChannelGroupshopByCode.members ?? [],
         memberDetails: arr,
