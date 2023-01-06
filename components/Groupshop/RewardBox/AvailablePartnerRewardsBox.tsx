@@ -52,9 +52,7 @@ const AvailablePartnerRewardsBox = ({
   } = useAppContext();
 
   console.log('🚀 ~ file: AvailablePartnerRewardsBox.ts ~ line 54 ~ AvailablePartnerRewardsBox ~ groupshop', groupshop);
-  const ownerFname = groupshop.members[0].orderDetail.customer.firstName;
-  const ownerLname = groupshop.members[0].orderDetail.customer.lastName.substr(0, 1);
-  const ownerName = `${ownerFname} ${ownerLname}`;
+  const ownerName = '';
   const {
     isExpired,
   } = useDeal();
