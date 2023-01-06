@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-danger */
 import React, {
   useState, useEffect, useContext, useCallback, useRef,
@@ -314,31 +315,31 @@ const ProductDetail = ({
     setShowOverlay(true);
   }, [data]);
 
-  const cleanDescription = useCallback((description) => {
-    if (description) {
-      const re = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
-      const unescaped: any = {
-        '&amp;': '&',
-        '&#38;': '&',
-        '&lt;': '<',
-        '&#60;': '<',
-        '&gt;': '>',
-        '&#62;': '>',
-        '&apos;': "'",
-        '&#39;': "'",
-        '&quot;': '"',
-        '&#34;': '"',
-      };
-      const replaceTags = description.replace(re, (m: any) => unescaped[m]);
-      const filteredStyle = replaceTags.replace(/<style.*?<\/style>/g, '');
-      const filteredImages = filteredStyle.replace(/<img[^>]*>/g, '');
-      const filteredScript = filteredImages.replace(/<script[^>]*>(?:(?!<\/script>)[^])*<\/script>/g, '');
-      const filteredButton = filteredScript.replace(/<button[^>]*>(?:(?!<\/button>)[^])*<\/button>/g, '');
-      const filteredLinks = filteredButton.replace(/<a[^>]*>(?:(?!<\/a>)[^])*<\/a>/g, '');
-      return filteredLinks;
-    }
-    return '';
-  }, []);
+  // const cleanDescription = useCallback((description) => {
+  //   if (description) {
+  //     const re = /&(?:amp|#38|lt|#60|gt|#62|apos|#39|quot|#34);/g;
+  //     const unescaped: any = {
+  //       '&amp;': '&',
+  //       '&#38;': '&',
+  //       '&lt;': '<',
+  //       '&#60;': '<',
+  //       '&gt;': '>',
+  //       '&#62;': '>',
+  //       '&apos;': "'",
+  //       '&#39;': "'",
+  //       '&quot;': '"',
+  //       '&#34;': '"',
+  //     };
+  //     const replaceTags = description.replace(re, (m: any) => unescaped[m]);
+  //     const filteredStyle = replaceTags.replace(/<style.*?<\/style>/g, '');
+  //     const filteredImages = filteredStyle.replace(/<img[^>]*>/g, '');
+  //     const filteredScript = filteredImages.replace(/<script[^>]*>(?:(?!<\/script>)[^])*<\/script>/g, '');
+  //     const filteredButton = filteredScript.replace(/<button[^>]*>(?:(?!<\/button>)[^])*<\/button>/g, '');
+  //     const filteredLinks = filteredButton.replace(/<a[^>]*>(?:(?!<\/a>)[^])*<\/a>/g, '');
+  //     return filteredLinks;
+  //   }
+  //   return '';
+  // }, []);
 
   return (
     <>
@@ -669,7 +670,9 @@ const ProductDetail = ({
                           ? styles.groupshop_modal_detail_height_descriptionExpired
                           : styles.groupshop_modal_detail_height_descriptionNormal}
                       >
-                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: cleanDescription(product?.description) }} /> : ''}
+                        {/* {product?.description ? <p dangerouslySetInnerHTML=
+                          // {{ __html: cleanDescription(product?.description) }} /> : ''} */}
+                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
                       </div>
                     )}
 
