@@ -427,6 +427,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     brandname={brandName}
                     currencySymbol={currencySymbol}
                     pending={pending}
+                    page="partner"
                   />
                   <ShareButton
                     placement="bottom"
@@ -596,6 +597,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 brandname={brandName}
                 currencySymbol={currencySymbol}
                 pending={pending}
+                page="partner"
               />
             </div>
             <Row className="mt-1">

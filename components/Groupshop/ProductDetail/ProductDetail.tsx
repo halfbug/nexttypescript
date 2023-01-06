@@ -848,6 +848,7 @@ const ProductDetail = ({
                                 brandname={brandName}
                                 currencySymbol={currencySymbol}
                                 pending={pending}
+                                page="product-details"
                               />
                               <ShareButton
                                 // disabled={isExpired}

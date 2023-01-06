@@ -17,6 +17,7 @@ interface AvailablePartnerRewardsBoxProps extends RootProps {
   show: boolean;
   reward: any;
   name: string;
+  ownerName:string;
   brandname: any;
   handlesetShow: any;
   fullshareurl:string
@@ -30,7 +31,8 @@ interface AvailablePartnerRewardsBoxProps extends RootProps {
 }
 
 const AvailablePartnerRewardsBox = ({
-  show = false, handlesetShow, handleClose, reward, memberLength, currencySymbol, name, brandname,
+  show = false, handlesetShow, handleClose, reward, memberLength, currencySymbol, name,
+  ownerName, brandname,
   fullshareurl, shareUrl, discount, owner,
 }: AvailablePartnerRewardsBoxProps) => {
   const closeModal = (e: any) => {
@@ -52,7 +54,6 @@ const AvailablePartnerRewardsBox = ({
   } = useAppContext();
 
   console.log('🚀 ~ file: AvailablePartnerRewardsBox.ts ~ line 54 ~ AvailablePartnerRewardsBox ~ groupshop', groupshop);
-  const ownerName = '';
   const {
     isExpired,
   } = useDeal();
@@ -116,7 +117,7 @@ const AvailablePartnerRewardsBox = ({
                   </>
                 ) : (
                   <>
-                    {owner && (
+                    {name === ownerName && (
                     <>
                       <h2>
                         How to Earn?

@@ -19,10 +19,12 @@ interface MembersProps extends RootProps{
   shareUrl:string;
   brandname:any;
   currencySymbol : any;
+  page:string;
 }
 
 const Members = ({
-  names, cashback, discount, fullshareurl, rewards, currencySymbol, shareUrl, brandname, pending,
+  names, cashback, discount, fullshareurl, rewards, currencySymbol, shareUrl,
+  brandname, pending, page,
 }: MembersProps) => {
   const [show, setShow] = useState<any>({});
   const [target, setTarget] = useState(null);
@@ -35,8 +37,15 @@ const Members = ({
     gsctx: groupshop,
     dispatch,
   } = useAppContext();
-  const ownerFname = (groupshop?.members[0]?.orderDetail.customer.firstName) ? groupshop?.members[0]?.orderDetail.customer.firstName : '';
-  const ownerLname = (groupshop?.members[0]?.orderDetail?.customer?.lastName) ? groupshop?.members[0]?.orderDetail?.customer?.lastName.substr(0, 1) : '';
+  let ownerFname = '';
+  let ownerLname = '';
+  if (page === 'partner') {
+    ownerFname = (groupshop?.partnerDetails?.fname) ? groupshop?.partnerDetails?.fname : '';
+    ownerLname = (groupshop?.partnerDetails?.lname) ? groupshop?.partnerDetails?.lname : '';
+  } else {
+    ownerFname = (groupshop?.customerDetail) ? groupshop?.customerDetail.firstName : '';
+    ownerLname = (groupshop?.customerDetail) ? groupshop?.customerDetail?.lastName.substr(0, 1) : '';
+  }
   const ownerName = `${ownerFname} ${ownerLname}`;
 
   const countTotalPrice = (lineItems: any) => {
@@ -126,6 +135,7 @@ const Members = ({
       <AvailablePartnerRewardsBox
         show={showRewardModel}
         name={custName}
+        ownerName={ownerName}
         discount={discount}
         brandname={brandname}
         fullshareurl={fullshareurl}

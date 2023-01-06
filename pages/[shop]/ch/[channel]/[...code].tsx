@@ -582,6 +582,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     rewards={gsctx?.channelRewards}
                     brandname={brandName}
                     currencySymbol={currencySymbol}
+                    page="channel"
                   />
                   <ShareButton
                     placement="bottom"
@@ -751,6 +752,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 rewards={gsctx?.channelRewards}
                 brandname={brandName}
                 currencySymbol={currencySymbol}
+                page="channel"
               />
             </div>
             <Row className="mt-1">
