@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { IProduct } from 'types/store';
 import useAppContext from './useAppContext';
+import useUtilityFunction from './useUtilityFunction';
 
 const useSKU = () => {
   const { gsctx } = useAppContext();
@@ -11,6 +12,7 @@ const useSKU = () => {
   const [hideSection, setHideSection] = useState<boolean>(false);
   const [hideTopPicks, setHideTopPicks] = useState<boolean>(false);
   const [hidePopular, setHidePopular] = useState<boolean>(false);
+  const { uniqueArray } = useUtilityFunction();
 
   const {
     dealProducts,
@@ -33,7 +35,12 @@ const useSKU = () => {
 
   useEffect(() => {
     if (gsctx.store?.allInventoryProducts?.length) {
-      setAllProducts(gsctx.store?.allInventoryProducts);
+      const temp: IProduct[] = [];
+      gsctx.members?.forEach((item) => {
+        item?.products?.map((ele: any) => temp.push(ele));
+      });
+      const arr = uniqueArray([...gsctx.store?.allInventoryProducts, ...temp]);
+      setAllProducts(arr);
     }
     if (gsctx.campaign?.products?.length) {
       setCampaignProducts(gsctx.campaign?.products);
