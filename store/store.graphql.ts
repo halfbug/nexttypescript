@@ -1597,7 +1597,8 @@ query mostViralCustomers($storeId: String!, $startDate: String!, $endDate: Strin
     owner{
       id
       name
-      createdAt      
+      createdAt
+      shopifyCreatedAt      
       shop
       price 
       customer{

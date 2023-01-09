@@ -56,7 +56,7 @@ export default function AnalyticCutomerDetail({
           {(customersData[0].owner[0].name).replace('#', '')}
         </div>
         <div className={styles.customerData__orderDetail__orderRow__date}>
-          { moment(new Date(customersData[0].owner[0].createdAt)).format('MM/DD/YY') }
+          { moment(new Date(customersData[0].owner[0].createdAt ?? customersData[0].owner[0].shopifyCreatedAt)).format('MM/DD/YY') }
         </div>
       </div>
       {/* <div className={styles.customerData__orderDetail__totalprice}>
