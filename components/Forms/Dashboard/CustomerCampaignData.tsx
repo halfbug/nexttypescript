@@ -67,8 +67,8 @@ export default function CustomerCampaignData({
     setViralCustomers(viCustomers);
     viCustomers.forEach((part: any, index: number) => {
       myObjArray.push({
-        orderNumber: part.members[0].name,
-        customerName: `${part.members[0].customer.firstName} ${part.members[0].customer.lastName}`,
+        orderNumber: part.owner[0].name,
+        customerName: `${part.owner[0].customer.firstName} ${part.owner[0].customer.lastName}`,
         revenueGenerated: currencyCode + formatNumber(part.revenue),
         cashBack: currencyCode + formatNumber(part.refund),
         uniqueClicks: part.uniqueClicks,
