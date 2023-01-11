@@ -42,6 +42,9 @@ const Members = ({
   if (page === 'partner') {
     ownerFname = (groupshop?.partnerDetails?.fname) ? groupshop?.partnerDetails?.fname : '';
     ownerLname = (groupshop?.partnerDetails?.lname) ? groupshop?.partnerDetails?.lname : '';
+  } else if (page === 'product-details') {
+    ownerFname = (groupshop?.members[0]?.orderDetail.customer.firstName) ? groupshop?.members[0]?.orderDetail.customer.firstName : '';
+    ownerLname = (groupshop?.members[0]?.orderDetail.customer.lastName) ? groupshop?.members[0]?.orderDetail.customer.lastName.substr(0, 1) : '';
   } else {
     ownerFname = (groupshop?.customerDetail) ? groupshop?.customerDetail.firstName : '';
     ownerLname = (groupshop?.customerDetail) ? groupshop?.customerDetail?.lastName.substr(0, 1) : '';
