@@ -3,6 +3,7 @@ import React, {
   useState, useContext, useRef, useEffect,
 } from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
@@ -38,12 +39,13 @@ interface ProductsSearchProps extends RootProps {
   allowSelectAll?: boolean,
   isCreateGS: boolean;
   isChannel?: boolean;
+  isDrops?: boolean;
   showProduct?: (e: any, prd: any) => any;
 }
 
 const ProductsSearch = ({
   show: showSearch, pending = false, handleClose, setData, allowSelectAll, getData, isCreateGS,
-  isChannel, showProduct,
+  isChannel, isDrops, showProduct,
 }: ProductsSearchProps) => {
   // const {
   //   gsctx,
@@ -278,6 +280,7 @@ const ProductsSearch = ({
           </Modal.Header>
         )}
         <Row className={styles.groupshop_modal_search_body}>
+          {!isDrops && (
           <div className={styles.groupshop_modal_search_body_top}>
             {isCreateGS
               ? (
@@ -320,16 +323,17 @@ const ProductsSearch = ({
               )}
 
           </div>
+          )}
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className={isDrops ? 'px-0' : ''}>
 
             <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
               <SearchIcon />
               <Form.Control
                 size="lg"
-                className={['bg-light pt-2 border-0 ', styles.groupshop_modal_search_body_top_input].join('')}
+                className={['bg-light pt-2 border-0 ', isDrops ? dStyles.drops_modal_search_body_top_input : styles.groupshop_modal_search_body_top_input].join('')}
                 type="text"
-                placeholder="Start your search..."
+                placeholder={isDrops ? 'SEARCH PRODUCTS' : 'Start your search...'}
                 name="searchField"
                 onChange={(e: any) => handleSearch(e)}
                 // value={searchValue}
@@ -347,7 +351,7 @@ const ProductsSearch = ({
             </Form.Group>
           </Form>
 
-          {(otherProducts && otherProducts.length > 0) && (
+          {!isDrops && (otherProducts && otherProducts.length > 0) && (
             <div className="d-flex justify-content-between m-0 flex-nowrap">
               <p className={styles.groupshop_modal_search_body_top_resultFound}>
                 {otherProducts?.length}
@@ -376,6 +380,16 @@ const ProductsSearch = ({
               )}
             </div>
           )}
+
+          {isDrops && (otherProducts && otherProducts.length > 0) && (
+          <div className="d-flex justify-content-between m-0 flex-nowrap">
+            <p className={dStyles.drops_modal_search_body_top_resultFound}>
+              {otherProducts?.length}
+              {' '}
+              results found
+            </p>
+          </div>
+          )}
         </Row>
         <Modal.Body className={styles.groupshop_modal_search_productSection}>
           <Row className={styles.groupshop_search}>
@@ -385,11 +399,12 @@ const ProductsSearch = ({
                   (+prd.price > 0) && (
                     <Col xs={6} sm={6} md={4}>
                       <ProductCard
+                        isDrops={isDrops}
                         onClick={(e) => openDetail(e, prd)}
                         onImageClick={(e: any) => openDetail(e, prd)}
                         isrc={prd.featuredImage}
                         className={styles.groupshop_search_pcard}
-                        imgOverlay={(
+                        imgOverlay={!isDrops && (
                           <>
                             {selected?.includes(prd.id) ? (
                               <>
@@ -485,7 +500,7 @@ const ProductsSearch = ({
             )}
           </Row>
         </Modal.Body>
-        {(otherProducts && otherProducts.length > 0) && (
+        {!isDrops && (otherProducts && otherProducts.length > 0) && (
           <>
             <div ref={ref} className={styles.groupshop_addtocartmodal}>
               {!isOwner && isCreateGS
@@ -603,6 +618,7 @@ ProductsSearch.defaultProps = {
   allowSelectAll: false,
   setData: [],
   isChannel: false,
+  isDrops: false,
   showProduct: '',
 };
 

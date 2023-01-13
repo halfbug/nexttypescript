@@ -53,6 +53,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
 
+  if (pathname.includes('/drops')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <GroupshopContextProvider>
+          <Component {...pageProps} />
+        </GroupshopContextProvider>
+      </ApolloProvider>
+    );
+  }
+
   return (
     <AuthContextProvider>
       <StoreContextProvider>

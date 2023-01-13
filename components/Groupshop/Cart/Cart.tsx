@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
@@ -29,10 +30,11 @@ interface CartProps extends RootProps {
   handleDetail(item:any):void;
   product : IProduct | undefined;
   setShow: any;
+  isDrops?: boolean;
 }
 
 const Cart = ({
-  show, pending = false, handleDetail, handleClose, product, setShow, ...props
+  show, pending = false, handleDetail, handleClose, product, setShow, isDrops, ...props
 }: CartProps) => {
   const {
     gsctx,
@@ -304,6 +306,7 @@ const Cart = ({
                   {suggestedProd.map((item) => (
                     <Col xs={6} className=" py-1 mb-1 px-1 border-2">
                       <ProductCard
+                        isDrops={isDrops}
                         onClick={() => {
                           handleDetail(item);
                         }}
@@ -337,6 +340,7 @@ const Cart = ({
                           </div>
                           )}
                           <Row className="mt-1 d-flex align-items-center">
+                            {!isDrops && (
                             <Button
                               variant="primary"
                               className={styles.groupshop__pcard_cardBody_addBtn}
@@ -356,6 +360,7 @@ const Cart = ({
                             >
                               Add
                             </Button>
+                            )}
                             <div className=" col-7 fw-normal text-nowrap">
                               <span className="text-decoration-line-through  ">
                                 {currencySymbol}
@@ -367,6 +372,13 @@ const Cart = ({
                                 {formatNumber(dPrice(+(item?.price || 0)))}
                               </span>
                             </div>
+                            {isDrops && (
+                            <div className="mt-2">
+                              <Button variant="primary" className={dStyles.drops__pcard_cardBody_addToCartBtn}>
+                                Add to Cart
+                              </Button>
+                            </div>
+                            )}
                           </Row>
                         </div>
                       </ProductCard>
@@ -513,8 +525,8 @@ const Cart = ({
   );
 };
 
-// Cart.defaultProps = {
-//   user: {},
-// };
+Cart.defaultProps = {
+  isDrops: false,
+};
 
 export default Cart;

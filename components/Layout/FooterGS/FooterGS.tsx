@@ -20,10 +20,12 @@ import { useMutation } from '@apollo/client';
 import { CREATE_SIGNUP } from 'store/store.graphql';
 import Link from 'next/link';
 import useAppContext from 'hooks/useAppContext';
+import SocialButtonMobile from 'components/Buttons/SocialButton/SocialButtonMobile';
 
 interface FooterProps {
   LeftComp: React.ReactNode;
   RightComp: React.ReactNode;
+  isDrops?:boolean;
 }
 
 export interface ISignUp {
@@ -32,7 +34,7 @@ export interface ISignUp {
 }
 
 const Footer = ({
-  LeftComp, RightComp,
+  LeftComp, RightComp, isDrops,
 }: FooterProps) => {
   // const { isChannel } = useAppContext();
   const {
@@ -182,36 +184,59 @@ const Footer = ({
           </Row>
           <Row className={styles.groupshop_socialIcon}>
 
-            <section className="d-flex justify-content-center px-2">
-              <div>
-                {' '}
-                <SocialButtonLinks network="Instagram" url={socialLinks?.instagram ?? ''} />
-              </div>
+            {isDrops
+              ? (
+                <section className="d-flex justify-content-center px-2">
+                  <SocialButtonMobile text="" network="Email" url="" />
+                  <SocialButtonMobile text="" network="Instagram" url="" />
+                  <SocialButtonMobile text="" network="Pinterest" url="" />
+                  <SocialButtonMobile text="" network="Twitter" url="" />
+                  <SocialButtonMobile text="" network="Facebook" url="" />
+                </section>
+              )
+              : (
+                <section className="d-flex justify-content-center px-2">
+                  <div>
+                    {' '}
+                    <SocialButtonLinks network="Instagram" url={socialLinks?.instagram ?? ''} />
+                  </div>
 
-              <div>
-                {' '}
-                <SocialButtonLinks network="Facebook" url={socialLinks?.facebook ?? ''} />
-                {' '}
-              </div>
+                  <div>
+                    {' '}
+                    <SocialButtonLinks network="Facebook" url={socialLinks?.facebook ?? ''} />
+                    {' '}
+                  </div>
 
-              <div>
-                {' '}
-                <SocialButtonLinks network="Tiktok" url={socialLinks?.tiktok ?? ''} />
-                {' '}
-              </div>
-              <div>
-                {' '}
-                <SocialButtonLinks network="Twitter" url={socialLinks?.twitter ?? ''} />
-                {' '}
-              </div>
-            </section>
+                  <div>
+                    {' '}
+                    <SocialButtonLinks network="Tiktok" url={socialLinks?.tiktok ?? ''} />
+                    {' '}
+                  </div>
+                  <div>
+                    {' '}
+                    <SocialButtonLinks network="Twitter" url={socialLinks?.twitter ?? ''} />
+                    {' '}
+                  </div>
+                </section>
+              )}
 
           </Row>
           <Row className={['d-flex', styles.groupshop_footer_link].join(' ')}>
             <div className=" text-center ">
-              <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
-                <a target="_blank"><strong>About</strong></a>
-              </Link>
+              {isDrops && (
+                <>
+                  <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
+                    <a target="_blank"><strong>How it works</strong></a>
+                  </Link>
+                </>
+              )}
+              {!isDrops && (
+                <>
+                  <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
+                    <a target="_blank"><strong>About</strong></a>
+                  </Link>
+                </>
+              )}
               <Link href="https://groupshop.zendesk.com/hc/en-us/categories/4414265217427-For-Shoppers">
                 <a target="_blank"><strong>FAQ</strong></a>
               </Link>
@@ -220,6 +245,7 @@ const Footer = ({
         </Col>
         <Col lg={3}>
           <section>
+            {!isDrops && (
             <div className={styles.groupshop_footer_text}>
               {isExpired ? (
                 <>
@@ -312,6 +338,25 @@ const Footer = ({
                     </p>
                   )} */}
             </div>
+            )}
+            {isDrops && (
+            <div className={styles.groupshop_footer_text}>
+              <>
+                <p>
+                  <strong>Want in on the next drops?</strong>
+                </p>
+                <p>
+                  Join the waitlist and we’ll text you when it’s your turn.
+                </p>
+                <div className="mt-3">
+                  <Button variant="light w-75 py-3">
+                    KLAVIYO FORM
+                  </Button>
+                </div>
+
+              </>
+            </div>
+            )}
 
           </section>
         </Col>
@@ -328,8 +373,8 @@ const Footer = ({
 
   );
 };
-// Footer.defaultProps = {
-//   isExpired: false,
-// };
+Footer.defaultProps = {
+  isDrops: false,
+};
 
 export default Footer;

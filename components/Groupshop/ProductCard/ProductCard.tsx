@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import dStyles from 'styles/Drops.module.scss';
 import {
   Button, Card, Col, Row,
 } from 'react-bootstrap';
@@ -11,18 +12,21 @@ type IProductCardProps = {
   isrc: string;
   vsrc?: string;
   type?: 'small' | 'large';
+  isDrops?: boolean;
+  isSpotlight?: boolean;
   onImageClick?: any;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, vsrc, children, type, imgOverlay, pending, onClick, onImageClick, ...rest
+  isrc, vsrc, children, type, imgOverlay, pending, onClick, isDrops, isSpotlight,
+  onImageClick, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
     case 'large':
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
-          <div className={styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
+          <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
             {
             !isrc && <video onClick={onImageClick} src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
             }
@@ -39,12 +43,12 @@ const ProductCard = ({
       );
     case 'small':
       return (
-        <Card {...rest} className={[styles.groupshop__pcard_small, rest.className].join(' ')}>
+        <Card {...rest} className={isDrops ? [dStyles.drops__pcard_small, rest.className].join(' ') : [styles.groupshop__pcard_small, rest.className].join(' ')}>
           <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
           {
-           isrc ? <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image_small} />
+           isrc ? <Card.Img variant="top" src={isrc} className={isDrops ? dStyles.drops__pcard_image_small : styles.groupshop__pcard_image_small} />
              : <video src={vsrc} muted autoPlay loop />
           }
           <Card.Body>
@@ -74,6 +78,8 @@ const ProductCard = ({
 ProductCard.defaultProps = {
   type: 'large',
   vsrc: undefined,
+  isDrops: false,
+  isSpotlight: false,
   onImageClick: () => {},
 };
 

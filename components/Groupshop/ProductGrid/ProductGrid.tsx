@@ -2,6 +2,7 @@
 /* eslint-disable no-lone-blocks */
 import React, { useContext } from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
@@ -40,6 +41,8 @@ type ProductGridProps = {
   id?: string;
   isModalForMobile?: boolean;
   isDiscoveryTool?: boolean;
+  isDrops?: boolean;
+  isSpotLight?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
   isSuggestion?: boolean;
@@ -51,8 +54,8 @@ type ProductGridProps = {
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  isSuggestion, membersForDiscover, isDiscoveryTool, brandurl, discoveryDiscount,
-  urlForActivation, ...props
+  isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl,
+  discoveryDiscount, urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -113,12 +116,14 @@ const ProductGrid = ({
           {children}
         </Col>
       </Row>
-      <Row className={['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')} id="productGrid">
+      <Row className={isDrops ? dStyles.drops__discover__products : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')} id="productGrid">
         {renderItems?.map((prod, index) => (
           <>
             {prod.title !== 'AddProductType' ? (
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
                 <ProductCard
+                  isDrops={isDrops}
+                  isSpotlight={isSpotLight}
                   isrc={prod.featuredImage}
                   vsrc={prod.featuredVideo}
                   // onClick={() => handleDetail(prod)}
@@ -364,49 +369,52 @@ const ProductGrid = ({
             </Col>
           )) : <></>}
       </Row>
+      {!isDrops
+      && (
       <Row>
         <Col>
           {totalPages > 1 && (
-            <Pagination className={styles.groupshop_pagination}>
-              <Pagination.Prev
-                className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
+          <Pagination className={styles.groupshop_pagination}>
+            <Pagination.Prev
+              className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
+              onClick={() => {
+                setCurrentPage(
+                  (currentPage > 1) ? currentPage - 1 : currentPage,
+                );
+                { (id === 'allproducts') && (paginationScroll()); }
+              }}
+            />
+
+            {getPageNumbers().map((n, index) => (
+              <Pagination.Item
+                active={currentPage === n}
                 onClick={() => {
-                  setCurrentPage(
-                    (currentPage > 1) ? currentPage - 1 : currentPage,
-                  );
+                  setCurrentPage(n);
                   { (id === 'allproducts') && (paginationScroll()); }
                 }}
-              />
+                className={currentPage === n
+                  ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
+              >
+                {n}
+              </Pagination.Item>
+            ))}
 
-              {getPageNumbers().map((n, index) => (
-                <Pagination.Item
-                  active={currentPage === n}
-                  onClick={() => {
-                    setCurrentPage(n);
-                    { (id === 'allproducts') && (paginationScroll()); }
-                  }}
-                  className={currentPage === n
-                    ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
-                >
-                  {n}
-                </Pagination.Item>
-              ))}
+            <Pagination.Next
+              className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
+              onClick={() => {
+                setCurrentPage(
+                  (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
+                );
+                { (id === 'allproducts') && (paginationScroll()); }
+              }}
+            />
 
-              <Pagination.Next
-                className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
-                onClick={() => {
-                  setCurrentPage(
-                    (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
-                  );
-                  { (id === 'allproducts') && (paginationScroll()); }
-                }}
-              />
-
-            </Pagination>
+          </Pagination>
 
           )}
         </Col>
       </Row>
+      )}
       {/* <ProductDetail
         show={showDetail}
         handleClose={(e) => setshowDetail(false)}
@@ -438,6 +446,8 @@ ProductGrid.defaultProps = {
   id: 'popularproducts',
   isModalForMobile: false,
   isDiscoveryTool: false,
+  isDrops: false,
+  isSpotLight: false,
   urlForActivation: '',
   skuCount: 0,
   isSuggestion: false,
