@@ -14,12 +14,18 @@ module.exports = {
     API_URL: process.env.API_URL,
     IMAGE_PATH: process.env.IMAGE_PATH,
   },
-  webpack(config) {
+  webpack(config, {
+    buildId, dev, isServer, defaultLoaders, webpack,
+  }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-
+    // eslint-disable-next-line no-param-reassign
+    config.optimization.splitChunks.cacheGroups = { };
+    // eslint-disable-next-line no-param-reassign
+    config.optimization.minimize = true;
+    // return config
     return config;
   },
   // webpack(config) {
