@@ -78,3 +78,21 @@ h4 {
 .social_active{
 	background: #dcd0e8!important;
 }
+
+.carousel {
+	.carousel-indicators {
+		margin-bottom: 0px;
+		button {
+			@extend .rounded-circle;
+			margin-right: 4px;
+			margin-left: 4px;
+			width: 15px;
+			height: 15px;
+			background-color: black;
+			opacity: 1;
+			&[aria-current="false"] {
+				background-color: white;
+			}
+		}
+	}
+}
