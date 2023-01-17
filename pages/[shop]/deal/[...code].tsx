@@ -1047,7 +1047,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           {' '}
                           with
                           {' '}
-                          {brand.customerName?.lastName}
+                          {brand.customerName?.lastName ?? brand.customerName?.firstName}
                           {' '}
                           and get
                           {' '}
