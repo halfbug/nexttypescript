@@ -43,7 +43,7 @@ export default function ViralityMetrics({
               <div className={vstyles.viralityScoreBox}>
                 <div className={vstyles.viralityScoreBox__infoBox}>
                   <div className={vstyles.viralityScoreBox__infoBox__logo}>
-                    <img className="img-responsive" style={{ width: '88px' }} src={part?.productDetails[0]?.featuredImage} alt="product" />
+                    <img className="img-responsive" style={{ width: '88px', height: '88px' }} src={part?.productDetails[0]?.featuredImage} alt="product" />
                   </div>
                   <div className={vstyles.viralityScoreBox__infoBox__detail}>
                     <div className={vstyles.viralityScoreBox__infoBox__detail__txt}>
