@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styles from 'styles/Overview.module.scss';
 import SummaryBox from 'components/Shared/SummaryBox/SummaryBox';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
-import CalendarIcon from 'assets/images/calendar-icon.svg';
+import Calendar from 'assets/images/calenderOverview.png';
 import { StoreContext } from 'store/store.context';
 import { useQuery } from '@apollo/client';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
@@ -67,9 +67,10 @@ export default function CampaignMetrics({
         <div className="d-inline mx-2 ps-3 position-relative">
 
           <img
-            src="https://d1o2v5h7slksjm.cloudfront.net/calender_black.svg"
-            alt="calendar"
-            className="position-absolute my-2 mx-1"
+            src={Calendar.src}
+            alt="icon"
+            height={18}
+            className="position-absolute my-2 mx-2"
           />
           <DateRangePicker
             onApply={callbackApply}
@@ -83,7 +84,7 @@ export default function CampaignMetrics({
               },
             }}
           >
-            <input type="text" className="rounded-3 w-auto border-0 bg-light form-control ps-4 py-2 text-black" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="This week" />
+            <input type="text" className="rounded-3 w-auto border-0 bg-light form-control ps-4 py-2 text-black ms-1" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="This week" />
           </DateRangePicker>
         </div>
       </div>
