@@ -130,7 +130,7 @@ export default function AddDealProduct({
 
           if (isChannel) {
             newProduct = {
-              productId, addedBy: username, customerIP: clientIP, type: isChannelOwner || !!ownerIP ? 'owner' : 'deal',
+              productId, addedBy: username, customerIP: clientIP, type: isChannelOwner || clientIP === ownerIP ? 'owner' : 'deal',
             };
           }
           return preProduct?.type === 'first' ? newProduct : preProduct ?? newProduct;
