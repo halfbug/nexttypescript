@@ -833,6 +833,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-weight: 400;
       line-height: 20px;
       color: $black;
+      overflow-y: auto;
+      height: 300px;
+      @include media-breakpoint-down(sm) {
+        overflow-y: auto;
+        height: 100%;
+      }
+
     }
     &_descriptionNormal {
       font-size: 14px;
@@ -841,6 +848,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       color: $black;
       max-height: 215px;
       overflow: auto;
+      overflow-y: auto;
+      height: 300px;
     }
 
     &_headingExpired {
