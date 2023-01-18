@@ -278,11 +278,11 @@ export default function AddDealProduct({
         </Form.Group>
       )
         : ( */}
-      <Form.Group className={isCreateGS ? 'd-flex justify-content-center' : 'd-flex'} controlId="username">
+      <Form.Group className={isCreateGS ? 'd-flex justify-content-center mx-4' : 'd-flex mx-4'} controlId="username">
         { !isChannelOwner && (
         <div className={styles.groupshop_search_popover_addDeal}>
           <div className="d-flex align-items-center position-relative">
-            <div className="me-2 text-muted position-absolute end-0">
+            <div className="me-4 text-muted position-absolute end-0">
               {values.username.length}
               /10
             </div>
