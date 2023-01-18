@@ -47,10 +47,10 @@ export default function OrderLineItems({
         {customerLineItems?.map((items: any, index: number) => (
           <div className={styles.customerData__cutomerDetail__lists}>
             <div className={styles.customerData__cutomerDetail__acc__row__product}>
-              <img style={{ width: 100 }} src={items.product[0].featuredImage} alt="Product" />
+              <img style={{ width: 100 }} src={(items.product[0]?.featuredImage) ? items.product[0]?.featuredImage : 'https://gsnodeimages.s3.amazonaws.com/dummy-image.png'} alt="Product" />
             </div>
             <div className={styles.customerData__cutomerDetail__acc__row__name}>
-              {items.product[0].title}
+              {(items.product[0]?.title) ? items.product[0]?.title : 'No title'}
             </div>
             <div className={styles.customerData__cutomerDetail__acc__row__price}>
               {currencyCode}
