@@ -241,6 +241,9 @@ const ProductDetail = ({
     // }
   };
 
+  const handleCloseClick = () => {
+    closeModal({});
+  };
   const backToSearch = (e: any) => {
     setShowOverlay(false);
     if (gsctx?.totalProducts < 101) {
@@ -354,22 +357,28 @@ const ProductDetail = ({
         fullscreen="lg-down"
         contentClassName={styles.groupshop_modal_content}
       >
+        <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')}>
+          <LeftArrowIcon />
+          <button
+            onClick={backToSearch}
+            className={styles.groupshop__pcard__headerMobile__txt}
+            type="button"
+          >
+            Back To Search
 
-        <div className="position-relative">
-          <div className="position-absolute mt-2 ms-2">
-            <Button
-              variant="link"
-              onClick={backToSearch}
-              className={[styles.groupshop__pcard__headerMobile__txt, 'text-decoration-none text-center border-0 bg-transparent'].join(' ')}
-              type="button"
-            >
-              <LeftArrowIcon />
-              <span className="ms-2 text-black">back to search</span>
+          </button>
+        </Modal.Header>
+        <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
+          <LeftArrowIcon />
+          <button
+            onClick={handleCloseClick}
+            className={styles.groupshop__pcard__headerMobile__txt}
+            type="button"
+          >
+            Back To All
 
-            </Button>
-          </div>
-          <Modal.Header closeButton className={['bg-white border-0 ', styles.groupshop__pcard__headerCross].join(' ')} />
-        </div>
+          </button>
+        </Modal.Header>
         <Modal.Body className={['bg-white', styles.groupshop__pcard__modalBody].join(' ')}>
           <Row>
             <Col xs={12} md={6}>
