@@ -824,7 +824,7 @@ const ProductDetail = ({
                     className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
                     label="Terms & Conditions"
                     trigger={!isForMobile ? ['focus', 'click'] : ['hover', 'focus', 'click']}
-                    placement={isForMobile ? 'bottom' : 'top'}
+                    placement="auto"
                     popContent={(
                       <p>
                         If you purchased any of these
