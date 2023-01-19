@@ -61,7 +61,7 @@ const ProductDetail = ({
     setShowOverlay(false);
     handleClose(e);
   };
-  console.log(product);
+  // console.log(product);
   const {
     gsctx: { discountCode: { percentage }, totalProducts }, gsctx,
     isGroupshop,
@@ -159,7 +159,7 @@ const ProductDetail = ({
       // console.log(product.price, variantPrice);
     }
   }, [product]);
-  console.log('🚀 ~ file: ProductDetail.tsx ~ line 121 ~ product', product);
+  // console.log('🚀 ~ file: ProductDetail.tsx ~ line 121 ~ product', product);
 
   const getVariant = () => {
     const { productById: dproduct } = data;
@@ -175,13 +175,13 @@ const ProductDetail = ({
   };
 
   // handle variant change disable add to cart for out of stock variant
-  console.log('🚀 ~ file: ProductDetail.tsx:138 ~ useEffect ~ data', data);
+  // console.log('🚀 ~ file: ProductDetail.tsx:138 ~ useEffect ~ data', data);
   const [outofStock, setoutofStock] = useState<boolean>(false);
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
       const { productById } = data;
-      console.log('🚀 ~ file: ProductDetail.tsx:140 ~ useEffect ~ productById', productById);
+      // console.log('🚀 ~ file: ProductDetail.tsx:140 ~ useEffect ~ productById', productById);
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
       if (productById?.outofstock) {
         setoutofStock(true);
@@ -306,7 +306,7 @@ const ProductDetail = ({
   const isForMobile = useMediaQuery({
     query: '(min-width: 476px)',
   });
-  console.log(data?.productById?.images, '===images');
+  // console.log(data?.productById?.images, '===images');
   // console.log('🚀 ~ file: ProductDetail.tsx ~ line 231 ~ isForMobile', isForMobile);
 
   const addToFav = useCallback((e) => {

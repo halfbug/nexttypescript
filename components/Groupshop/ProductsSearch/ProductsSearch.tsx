@@ -57,7 +57,7 @@ const ProductsSearch = ({
   const {
     shop, discountCode, ownerCode, productSearch, setProductSearch,
   } = useCode();
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
+  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
     clientDealProducts, currencySymbol, dPrice, isInfluencer, isInfluencerGS,
   } = useDeal();
@@ -91,8 +91,8 @@ const ProductsSearch = ({
   // );
 
   useEffect(() => {
-    if (gsctx && gsctx.dealProducts && gsctx.popularProducts && gsctx.allProducts) {
-      const temp: any = [...gsctx.dealProducts, ...gsctx.popularProducts, ...gsctx.allProducts];
+    if (gsctx && gsctx.popularProducts && gsctx.allProducts) {
+      const temp: any = [...gsctx.popularProducts, ...gsctx.allProducts];
       setProductsArr(temp);
     }
   }, [gsctx]);
@@ -214,7 +214,7 @@ const ProductsSearch = ({
       setDisableSelection(0);
     }
   }, [selected, showSearch]);
-  console.log('🚀 ~ file: ProductsSearch.tsx ~ line 184 ~ selected', selected);
+  // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 184 ~ selected', selected);
 
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" />);

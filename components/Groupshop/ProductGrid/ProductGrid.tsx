@@ -92,7 +92,7 @@ const ProductGrid = ({
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
   }
-  console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ isModalForMobile', isModalForMobile);
+  // console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ isModalForMobile', isModalForMobile);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 73 ===~ renderItems', renderItems);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ fillerz', fillerz);
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ skucount', skuCount);

@@ -14,10 +14,10 @@ const useBanner = () => {
   const {
     getKeyFromS3URL,
   } = useUtilityFunction();
-  console.log('🚀 ~ file: useBanner.ts ~ line 14 ~ useBanner ~ groupshop', groupshop);
+  // console.log('🚀 ~ file: useBanner.ts ~ line 14 ~ useBanner ~ groupshop', groupshop);
 
   const [bannerImage, setBannerImage] = useState<string>('');
-  console.log('🚀 ~ file: useBanner.ts ~ line 20 ~ useBanner ~ bannerImage', bannerImage);
+  // console.log('🚀 ~ file: useBanner.ts ~ line 20 ~ useBanner ~ bannerImage', bannerImage);
 
   useEffect(() => {
     if (groupshop?.store?.settings) {

@@ -12,7 +12,7 @@ const useTopBanner = () => {
     unLockCB, currencySymbol, isInfluencerGS, cashback,
   } = useDeal();
   const { gsctx, dispatch, isChannel } = useAppContext();
-  console.log('🚀 ~ file: useTopBanner.ts ~ line 15 ~ useTopBanner ~ gsctx', gsctx, cashbackVal);
+  // console.log('🚀 ~ file: useTopBanner.ts ~ line 15 ~ useTopBanner ~ gsctx', gsctx, cashbackVal);
   const {
     members, discountCode: { percentage }, milestones,
   } = gsctx;
