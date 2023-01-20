@@ -7,6 +7,7 @@ import {
   Col, Modal, Row,
 } from 'react-bootstrap';
 import GroupshopIcon from 'assets/images/groupshop-icon.svg';
+import useAppContext from 'hooks/useAppContext';
 
 interface HowShopDropBoxProps extends RootProps {
     show: boolean;
@@ -17,6 +18,7 @@ interface HowShopDropBoxProps extends RootProps {
 const HowShopDropBox = ({
   show = false, handleClose,
 }: HowShopDropBoxProps) => {
+  const { gsctx: { store } } = useAppContext();
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
@@ -97,7 +99,10 @@ const HowShopDropBox = ({
                     <p>
                       You get
                       {' '}
-                      <b>40% off</b>
+                      <b>
+                        {store?.drops?.rewards?.baseline}
+                        % off
+                      </b>
                       {' '}
                       everything to start.
                       <b>Spotlight</b>
@@ -115,7 +120,13 @@ const HowShopDropBox = ({
                       <b> Want more rewards?</b>
                     </p>
                     <p>
-                      Unlock up 65% off & 25% cashback on your order.
+                      Unlock up
+                      {' '}
+                      {store?.drops?.rewards?.maximum}
+                      % off &
+                      {' '}
+                      {store?.drops?.rewards?.maximum! - store?.drops?.rewards?.baseline!}
+                      % cashback on your order.
                       Place your first order to unlock a new tier of discounts.
                       Invite friends to shop after you & get cashback on your order when they shop
                     </p>

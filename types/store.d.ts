@@ -1,3 +1,13 @@
+export interface Drops {
+  status?: string;
+  isVideoEnabled?: boolean;
+  spotlightColletionId?: string;
+  spotlightDiscount?: DiscountCode;
+  latestCollectionId?: string;
+  bestSellerCollectionId?: string;
+  allProductsCollectionId?: string;
+  rewards?: PartnerRewards;
+}
 export interface IStore {
   show?: boolean;
   id?: string;
@@ -24,6 +34,7 @@ export interface IStore {
   allInventoryProducts?: IProduct[];
   discoveryTool?: DiscoveryTools;
   tier?: any;
+  drops?: Drops;
 }
 export interface ICampaign {
   isActive?: boolean;

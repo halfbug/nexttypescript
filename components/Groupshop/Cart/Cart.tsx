@@ -21,6 +21,7 @@ import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
 // import useSaveCart from 'hooks/useSaveCart';
 import useAppContext from 'hooks/useAppContext';
+import useDrops from 'hooks/useDrops';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -34,15 +35,22 @@ interface CartProps extends RootProps {
 }
 
 const Cart = ({
-  show, pending = false, handleDetail, handleClose, product, setShow, isDrops, ...props
+  show, pending = false, handleDetail, handleClose, product, setShow, ...props
 }: CartProps) => {
   const {
     gsctx,
     dispatch,
+    isDrops,
   } = useAppContext();
   const {
-    currencySymbol, dPrice, discount, getOwnerName, isInfluencerGS, brandName,
+    store,
+  } = gsctx;
+  const {
+    currencySymbol, dPrice, disPrice, discount, getOwnerName, isInfluencerGS, brandName,
   } = useDeal();
+  const {
+    spotlightProducts,
+  } = useDrops();
 
   const [currencyName, setCurrencyName] = useState<any>('USD');
 
@@ -66,7 +74,10 @@ const Cart = ({
         currency: prd.currencyCode,
         productBrand: gsctx.store?.brandName,
         originalPrice: +prd.selectedVariant.price,
-        finalPrice: dPrice(+(prd.selectedVariant.price)).toFixed(2),
+        finalPrice: spotlightProducts.includes(prd.id)
+          ? disPrice(+(prd.selectedVariant.price),
+            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+          : dPrice(+(prd.selectedVariant.price)).toFixed(2),
         quantity: prd.selectedVariant.selectedQuantity,
       })), getTotal() ?? 0);
     }
@@ -80,7 +91,10 @@ const Cart = ({
       cartDetails.push({
         id: productId,
         title: item.title,
-        price: dPrice(+(item.selectedVariant.price)).toFixed(2),
+        price: spotlightProducts.includes(item.id)
+          ? disPrice(+(item.selectedVariant.price),
+            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+          : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
       });
@@ -122,7 +136,10 @@ const Cart = ({
       cartDetails.push({
         id: productId,
         title: item.title,
-        price: dPrice(+(item.selectedVariant.price)).toFixed(2),
+        price: spotlightProducts.includes(item.id)
+          ? disPrice(+(item.selectedVariant.price),
+            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+          : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
       });
@@ -144,7 +161,10 @@ const Cart = ({
       currency: prd.currencyCode,
       productBrand: gsctx.store?.brandName,
       originalPrice: +prd.selectedVariant.price,
-      finalPrice: dPrice(+(prd.selectedVariant.price)).toFixed(2),
+      finalPrice: spotlightProducts.includes(prd.id)
+        ? disPrice(+(prd.selectedVariant.price),
+          +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+        : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
     push(getShopifyUrl());
@@ -252,7 +272,10 @@ const Cart = ({
                       {' '}
                       <span>
                         {currencySymbol}
-                        {(dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        {spotlightProducts.includes(prd.id)
+                          ? disPrice(+(prd.selectedVariant.price),
+                            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+                          : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                     </h5>
                   </div>

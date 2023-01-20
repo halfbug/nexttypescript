@@ -9,6 +9,7 @@ import { GroupshopContextProvider } from 'store/groupshop.context';
 import { GroupshopPartnerContextProvider } from 'store/partner-groupshop.context';
 import { GroupshopChannelContextProvider } from 'store/channel-groupshop.context';
 import { AuthContextProvider } from 'store/auth.context';
+import { GroupshopDropsContextProvider } from 'store/drop-groupshop.context';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -39,6 +40,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GroupshopChannelContextProvider>
           <Component {...pageProps} />
         </GroupshopChannelContextProvider>
+      </ApolloProvider>
+    );
+  }
+
+  if (pathname.includes('/drops/')) {
+    return (
+      <ApolloProvider client={apolloClient}>
+        <GroupshopDropsContextProvider>
+          <Component {...pageProps} />
+        </GroupshopDropsContextProvider>
       </ApolloProvider>
     );
   }

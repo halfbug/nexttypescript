@@ -61,7 +61,7 @@ const VideoWidget = () => {
             </div>
 
             <div className={styles.videoWidget__barBox}>
-              {(control.height === '444' && videoRef && videoRef.current && videoRef.current.currentTime)
+              {(control.height === '318' && videoRef && videoRef.current && videoRef.current.currentTime)
                 ? (
                   <div className={styles.videoWidget__barBox__row}>
                     {source.length > 1 ? source.map((ele: any, i: number) => (
@@ -78,7 +78,7 @@ const VideoWidget = () => {
                   </div>
                 ) : ''}
             </div>
-            {!isLoading && control.height === '444' ? (
+            {!isLoading && control.height === '318' ? (
               <div
                 className={styles.videoWidget__playBox}
               >
@@ -91,7 +91,7 @@ const VideoWidget = () => {
               </div>
             ) : ''}
             <div className={styles.videoWidget__barBox__bottom}>
-              {(!isLoading && control.height === '444' && videoRef && videoRef.current
+              {(!isLoading && control.height === '318' && videoRef && videoRef.current
                 && videoRef.current.currentTime) ? (
                   <>
                     <input
@@ -141,7 +141,6 @@ const VideoWidget = () => {
               playsInline
               onLoadStart={() => loadingStart()}
               onLoadedData={() => loadingEnd()}
-              preload="metadata"
               onTouchStart={() => handleClick()}
             />
             {isLoading && (
@@ -157,7 +156,7 @@ const VideoWidget = () => {
                 </div>
               </div>
             )}
-            {!isLoading && control.height !== '444' ? (
+            {!isLoading && control.height !== '318' ? (
               <div
                 className={styles.videoWidget__howToBox}
                 onClick={() => handleClick()}
@@ -188,13 +187,10 @@ const VideoWidget = () => {
             playsInline
             onLoadStart={() => loadingStart()}
             onLoadedData={() => loadingEnd()}
-            preload="metadata"
-            onTouchStart={() => mobileViewClick()}
           />
           {!isLoading ? (
             <div
               className={styles.videoWidget__howToBox}
-              onClick={() => mobileViewClick()}
             >
               <img
                 src={PlayIcon.src}

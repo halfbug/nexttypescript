@@ -17,7 +17,7 @@ export default function useDeal() {
   // } = useContext(GroupshopContext);
   const { filterArray, findInArray2 } = useUtilityFunction();
   const {
-    gsctx, dispatch, isGroupshop, isChannel,
+    gsctx, dispatch, isGroupshop, isChannel, isDrops,
   } = useAppContext();
 
   const [clientIP] = useIP();
@@ -80,7 +80,7 @@ export default function useDeal() {
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
 
-  const discount = gsctx?.discountCode?.percentage;
+  const discount = gsctx?.discountCode?.percentage || '0';
 
   const dPrice = useCallback((price: number) => price - ((+discount / 100) * price), [gsctx]);
 
@@ -108,7 +108,7 @@ export default function useDeal() {
   }, [gsctx.url]);
 
   const getBuyers = useCallback((pid: string) => gsctx.members.filter(
-    (mem) => mem.products?.find((prd) => prd.id === pid),
+    (mem) => mem.products?.find((prd) => prd?.id === pid),
   ), [gsctx.members]);
   const getBuyers2 = useCallback((pid: string) => gsctx?.memberDetails?.filter(
     (mem) => mem.lineItems?.find((prd: any) => prd.product.id === pid),
@@ -202,7 +202,7 @@ export default function useDeal() {
   const displayAddedByFunc = useCallback((productId) => {
     const { members } = gsctx;
     const ownerProd = members[0]?.products;
-    const prod1 = ownerProd?.find((item) => item.id === productId);
+    const prod1 = ownerProd?.find((item) => item?.id === productId);
     let flagVar;
     // console.log({ prod1 });
 
@@ -583,6 +583,10 @@ export default function useDeal() {
 
   const getOwnerName = useCallback(() => {
     if (isChannel) {
+      return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.lastName?.charAt(0) ?? '' : gsctx?.customerDetail?.lastName ?? ''}`);
+    }
+
+    if (isDrops) {
       return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.lastName?.charAt(0) ?? '' : gsctx?.customerDetail?.lastName ?? ''}`);
     }
 

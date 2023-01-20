@@ -79,7 +79,7 @@ const useVideoPlayer = (videoRef: any) => {
         videoRef.current.currentTime = 0;
       }
     } else {
-      if (e.target.currentTime === videoRef.current.duration) {
+      if (e.target.currentTime >= videoRef.current.duration) {
         setVideoNo(source.length === videoNo + 1 ? 0 : videoNo + 1);
         setControl({ ...control, autoPlay: true });
       }
@@ -104,6 +104,9 @@ const useVideoPlayer = (videoRef: any) => {
       });
     } else if (display === 'mobile' && control.height === '207') {
       videoRef.current.currentTime = 0;
+      setTimeout(() => {
+        videoRef.current.play();
+      }, 100);
       setControl({
         ...control,
         height: '318',

@@ -1,29 +1,22 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
+import { GET_DROP_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
-import Counter from 'components/Layout/Counter/Counter';
 import styles from 'styles/Drops.module.scss';
 import {
-  Col, Container, Dropdown, Row, Button as Button2,
+  Col, Container, Row, Button as Button2,
 } from 'react-bootstrap';
-import Brand from 'components/Groupshop/Brand/Brand';
-import Members from 'components/Groupshop/Members/Members';
 import Gmembers from 'components/Groupshop/Members/Gmembers';
 import QRClickIcon from 'assets/images/qr-click.svg';
 import IconButton from 'components/Buttons/IconButton';
-import Icon from 'assets/images/small cone.svg';
-import ArrowSort from 'assets/images/ArrowSort.svg';
-import DownArrow from 'assets/images/DownArrowSmall.svg';
 import {
   Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
-import { GroupshopContext, gsInit } from 'store/groupshop.context';
 import { IGroupshop, MatchingGS, Member } from 'types/groupshop';
 import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
@@ -33,7 +26,6 @@ import Cart from 'components/Groupshop/Cart/Cart';
 import useDeal from 'hooks/useDeal';
 import useCode from 'hooks/useCode';
 import useAlert from 'hooks/useAlert';
-import Button from 'components/Buttons/Button/Button';
 import Footer from 'components/Layout/FooterGS/FooterGS';
 import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
 import useDetail from 'hooks/useDetail';
@@ -41,61 +33,45 @@ import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Head from 'next/head';
-import BigBannerBox from 'components/Groupshop/BigBannerBox/BigBannerBox';
-import SmallBannerBox from 'components/Groupshop/SmallBannerBox/SmallBannerBox';
-import SmallBannerBox2 from 'components/Groupshop/SmallBannerBox2/SmallBannerBox2';
-import TickCircle from 'assets/images/tick-circle.svg';
-import GradientCircle from 'assets/images/gradient-circle.svg';
 import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
 import useGtm from 'hooks/useGtm';
 import useTopBanner from 'hooks/useTopBanner';
-import useTopPicks from 'hooks/useTopPicks';
 import useProducts from 'hooks/useProducts';
 import ShoppingBoxMobile from 'components/Groupshop/ShoppingBoxMobile/ShoppingBoxMobile';
 import RewardBox2 from 'components/Groupshop/RewardBox/RewardBox2';
 import useBanner from 'hooks/useBanner';
-import useLogo from 'hooks/useLogo';
-import usePopular from 'hooks/usePopularProduct';
 import useSaveCart from 'hooks/useSaveCart';
-import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useExpired from 'hooks/useExpired';
-import Link from 'next/link';
 import LinkShareMobileView from 'components/LinkShare/LinkShareMobileView';
-import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
-import useSKU from 'hooks/useSKU';
-import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
 import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
 import useDiscoverSortingGS from 'hooks/useDiscoverSortingGS';
-import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
-import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
-import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
+import { gsdInit } from 'store/drop-groupshop.context';
+import useAppContext from 'hooks/useAppContext';
+import HowShopDropBox from 'components/Groupshop/HowShopDropBox/HowShopDropBox';
+import useDrops from 'hooks/useDrops';
+import Members from 'components/Groupshop/Members/Members';
+import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
+import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
-  const { gsctx, dispatch } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useAppContext();
   const { AlertComponent, showError } = useAlert();
-  const { stepModal } = useOwnerOnboarding();
-  const {
-    SKU, memberProducts, hideSection, hideTopPicks, hidePopular,
-  } = useSKU();
-  const { shop, discountCode, status } = useCode();
+  const { shop, discountCode } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
   const Router = useRouter();
-  const shareEarnBtn = useMediaQuery({
-    query: '(max-width: 768px)',
-  });
 
   const {
     loading,
     error,
-    data: { groupshop } = { groupshop: gsInit },
-  } = useQuery<{ groupshop: IGroupshop }, { code: string | undefined, status: string | undefined }>(
-    GET_GROUPSHOP,
+    data: { DropGroupshop } = { DropGroupshop: gsdInit },
+  } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined}>(
+    GET_DROP_GROUPSHOP,
     {
-      variables: { code: discountCode, status: status ?? '' },
+      variables: { code: discountCode },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },
@@ -103,19 +79,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   // load all products
   useProducts(`${shop}.myshopify.com`);
-
-  const [allProducts, setallProducts] = useState<IProduct[] | undefined>(
-    undefined,
-  );
   const [member, setmember] = useState<Member | undefined>(undefined);
   const [showps, setshowps] = useState<boolean>(false);
-  const [isDrops, setIsDrops] = useState<boolean>(true);
-  const [isSpotlight, setIsSpotlight] = useState<boolean>(true);
   const [showCart, setshowCart] = useState<boolean>(false);
   const [pending, setpending] = useState<boolean>(true);
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
     >(undefined);
-  const [newPopularPrd, setNewPopularPrd] = useState<IProduct[]>();
   const [showRewards, setShowRewards] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
@@ -123,33 +92,42 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { urlForActivation, loaderInvite } = useExpired();
   const [matchingGroupshop, setMatchingGroupshop] = useState<any[]>([]);
 
-  useEffect(() => {
-    if (groupshop.id && pending) {
-      setpending(false);
-      // setallProducts(groupshop?.allProducts);
-      const filteredProducts = groupshop?.allProducts?.filter(
-        (item) => item.outofstock === false || item.outofstock === null,
-      ).sort((a, b) => a.title.localeCompare(b.title));
-      setallProducts(filteredProducts);
-      setmember(groupshop?.members[0]);
-      console.log('=== update gs ...code GS');
-      console.log('new testing console', process.env.IMAGE_PATH);
-      dispatch({ type: 'UPDATE_GROUPSHOP', payload: groupshop });
-    }
-  }, [groupshop, pending]);
+  // NEW HOOKS
+  const [allProductsList, setAllProductsList] = useState<IProduct[] | undefined>([]);
+  const [bestSellerProductsList, setBestSellerProductsList] = useState<IProduct[] | undefined>([]);
+  const [spotLightProductsList, setSpotLightProductsList] = useState<IProduct[] | undefined>([]);
+  const [latestProductsList, setLatestProductsList] = useState<IProduct[] | undefined>([]);
+
+  const [openLearnHow, setLearnHow] = useState<boolean>(false);
+
+  const brandName = 'test';
 
   useEffect(() => {
-    if (gsctx.id && allProducts && gsctx.popularProducts) {
-      const arr = [...allProducts, ...gsctx.popularProducts];
-      const temp = arr.filter((item) => !item.outofstock)
-        .sort((a, b) => a.title.localeCompare(b.title));
-      setallProducts(JSON.parse(JSON.stringify(temp)));
+    if (DropGroupshop.id && pending) {
+      setpending(false);
+      dispatch({ type: 'UPDATE_GROUPSHOP', payload: DropGroupshop });
+    }
+  }, [DropGroupshop, pending]);
+
+  useEffect(() => {
+    if (gsctx.id) {
+      if (gsctx.allProducts) {
+        setAllProductsList(gsctx.allProducts);
+      }
+      if (gsctx.bestSellerProducts) {
+        setBestSellerProductsList(gsctx.bestSellerProducts);
+      }
+      if (gsctx.spotlightProducts) {
+        setSpotLightProductsList(gsctx.spotlightProducts);
+      }
+      if (gsctx.latestProducts) {
+        setLatestProductsList(gsctx.latestProducts);
+      }
     }
   }, [gsctx]);
 
   // banner image and logo load
   const bannerImage = useBanner();
-  const storeLogo = useLogo();
   useSaveCart();
 
   const {
@@ -170,65 +148,39 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     leftOverProducts,
     getOwnerName,
   } = useDeal();
+
+  const {
+    currentDropReward,
+    nextDropReward,
+    showObPopup,
+    canBeUnlockedCB,
+    updateOnboarding,
+  } = useDrops();
+
   const {
     days, hrs, mins, secs,
   } = getDateDifference();
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
-  const {
-    members: [
-      {
-        orderDetail: { customer: owner },
-        products: ownerProducts,
-      },
-    ],
-    members,
-    store: { brandName, logoImage, shop: fullStoreName } = { brandName: '', logoImage: '' },
-    popularProducts,
-    dealProducts,
-    addedProducts,
-    refferalDealsProducts,
-    // allProducts,
-  } = gsctx;
   const facebookPixels = gsctx?.store?.settings?.marketing?.facebookPixels ?? '';
   const googlePixels = gsctx?.store?.settings?.marketing?.googlePixels ?? '';
   const tiktokPixels = gsctx?.store?.settings?.marketing?.tiktokPixels ?? '';
   const snapchatPixels = gsctx?.store?.settings?.marketing?.snapchatPixels ?? '';
 
-  console.log('🚀 ~ file: [...code].tsx ~ line 171 ~ shoppedBy', shoppedBy);
-  const {
-    findInArray,
-    filterArray,
-    getSignedUrlS3,
-    getKeyFromS3URL,
-    uniqueArray,
-    findInArray2,
-  } = useUtilityFunction();
-  const { popularShuffled } = usePopular(popularProducts);
-  const { topPicks } = useTopPicks();
-  useEffect(() => {
-    // setallProducts(Array.from(new Set(
-    //   // [...gsctx?.popularProducts ?? [], ...gsctx?.allProducts ?? []],
-    //   [...gsctx?.allProducts ?? []],
-    // )));
-    // setallProducts(
-    //   [...(allProducts ?? [])]?.sort((a, b) => a.title.localeCompare(b.title)),
-    // );
+  const { uniqueArray } = useUtilityFunction();
 
+  useEffect(() => {
     setbannerDiscount(getDiscounts());
-    // fillAddedPrdInCTX();
-  }, [gsctx, gsctx.dealProducts]);
+  }, [gsctx]);
 
   const [getMatchingGS] = useLazyQuery<MatchingGS>(GET_MATCHING_GS, {
     fetchPolicy: 'network-only',
     onCompleted: async (matchingAllStore: any) => {
-      console.log('matchingAllStore🚀🚀🚀', matchingAllStore);
       if (matchingAllStore?.matchingGS?.length > 0 && matchingStoreIds?.length > 0) {
         const finalMathingGSData = useDiscoverSortingGS(
           matchingAllStore?.matchingGS, matchingStoreIds,
         );
-        console.log('🚀🚀🚀finalMathingGSData', finalMathingGSData);
         setMatchingGroupshop(finalMathingGSData);
       }
     },
@@ -237,50 +189,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   useEffect(() => {
     // show ob products with owner products. dont show ob prds with other customer
     if (gsctx?.ownerDeals && gsctx?.ownerDeals.length) {
-      setshoppedBy(member?.orderId === gsctx?.members[0].orderId
-        ? uniqueArray([...member?.products ?? [], ...gsctx?.ownerDeals ?? []])
-        : uniqueArray([...member?.products ?? []]));
+      // setshoppedBy(member?.orderId === gsctx?.members[0].orderId
+      //   ? uniqueArray([...member?.products ?? [], ...gsctx?.ownerDeals ?? []])
+      //   : uniqueArray([...member?.products ?? []]));
     } else {
       setshoppedBy(uniqueArray(member?.products));
     }
   }, [gsctx?.ownerDeals, gsctx.dealProducts, member]);
-
-  useEffect(() => {
-    // const addedPrds = filterArray(dealProducts ?? [], ownerProducts ?? [], 'productId', 'id');
-    // const addedPrds = dealProducts?.filter((item));
-    // const addedPrdsCtx = filterArray(
-    //   addedProducts ?? [], ownerProducts ?? [], 'productId', 'id',
-    // );
-    // check owner prodcut is added. member[0].product ===sDealPrd then move it into addedProducts
-    // console.log('🚀 ~ file: useDeal.ts ~ line 264 ~ fillAddedPrdInCTX ~ addedPrds', addedPrds);
-    console.log('=== update gs addedPrd ...code GS');
-    dispatch({
-      type: 'UPDATE_GROUPSHOP',
-      payload: {
-        ...gsctx,
-        addedProducts: _.uniq([...gsctx?.refferalDealsProducts ?? [],
-          ...gsctx?.ownerDealsProducts ?? []]),
-      },
-    });
-  }, [gsctx?.refferalDealsProducts, gsctx?.ownerDealsProducts]);
-
-  useEffect(() => {
-    // mixing popular produt with topPicks to complete the count of 4 if popular are less.
-    if (popularProducts?.length) {
-      if (popularProducts.length < 4) {
-        const finalTP = uniqueArray(filterArray(topPicks ?? [], popularProducts ?? [], 'id', 'id'));
-        const uniqueBestSeller = finalTP?.slice(0, 4 - popularProducts.length);
-        console.log('🚀 ~ file: [...code].tsx ~ uniqueBestSeller', uniqueBestSeller);
-        const newPopularArr = Array.from(
-          new Set([...[...uniqueArray(popularProducts) ?? []], ...uniqueBestSeller ?? []]),
-        );
-        setNewPopularPrd([...newPopularArr].filter((prd) => prd.outofstock !== true));
-      } else {
-        setNewPopularPrd([...uniqueArray(popularProducts ?? [])]
-          .filter((prd) => prd.outofstock !== true));
-      }
-    }
-  }, [popularProducts, topPicks]);
 
   useEffect(() => {
     if (gsctx.cart && gsctx?.cart?.length > 0) {
@@ -304,14 +219,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     }
   }, [gsctx?.store?.discoveryTool]);
 
-  console.log('🚀 ~ file: [...code] line 247 ~ leftOverProducts', leftOverProducts()?.length);
-  console.log('🚀 ~ file: [...code] line 244 ~ member', member);
-
-  const { text, cashBackText, cashbackVal } = useTopBanner();
+  const { cashbackVal } = useTopBanner();
   const [value, setvalue] = useState<undefined | string>('...');
   useEffect(() => {
     if (cashbackVal && cashbackVal !== '...') {
-      // const numInt = parseInt(cashbackVal.toString(), 10);
       setvalue((parseInt(cashbackVal, 10)).toString());
     } else {
       setvalue('...');
@@ -320,9 +231,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   const {
     showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
-  } = useDetail(allProducts);
-
-  console.log('🚀 ~ file: [...code].tsx ~ line 65 ~ gsctx', gsctx);
+  } = useDetail(allProductsList);
 
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
@@ -342,8 +251,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     Router.push('/404');
     return <p>groupshop not found</p>;
   }
-  console.log('test commit');
-  console.log('popular', refferalDealsProducts);
+
+  const showSearchProds = () => {
+    setshowps(true);
+  };
+
+  const showProduct = (e: Event, prd: any) => {
+    setsProduct(prd);
+  };
+
   return (
     <>
       <Head>
@@ -495,7 +411,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 ? (
                   <div className="d-flex">
                     <QRClickIcon onClick={() => { setShowQR(true); }} />
-                    <InfoBox mes="" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
+                    <InfoButton handleClick={() => setLearnHow(true)} />
                   </div>
                 )
                 : <></>
@@ -511,18 +427,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             )}
 
           />
-          <VideoWidget />
+          {gsctx?.store?.drops?.isVideoEnabled ? <VideoWidget /> : ''}
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.drops__top].join(' ')}>
               <Col md={3} xs={3}>
-                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
-                  <IconButton
-                    icon={<Search size={24} />}
-                    className={styles.drops__hero_iconSearchBtn}
-                    onClick={handleAddProduct}
-                    disabled={isExpired}
-                  />
-                ) : <></>}
+                <IconButton
+                  icon={<Search size={24} />}
+                  className={styles.drops__hero_iconSearchBtn}
+                  onClick={handleAddProduct}
+                  disabled={isExpired}
+                />
                 {/* <div className={styles.drops_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -657,7 +571,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <Row className={styles.drops__hero_welcome}>
               <Col lg={12}>
                 <h1 className="text-black font-bold">
-                  Invite friends to join to get immediate access to 40% off this drop.
+                  Get
+                  {' '}
+                  {currentDropReward}
+                  % off this drop for a limited time.
                 </h1>
               </Col>
               <Col xs={12} className={styles.drops__counter}>
@@ -683,113 +600,257 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   </p>
                 </div>
               </Col>
+              { !!gsctx.members.length && (
+              <>
+                {canBeUnlockedCB() !== 0 && (
+                <Col lg={12}>
+                  <h5 className="text-black font-bold">
+                    🎉 Plus unlock $
+                    {canBeUnlockedCB()}
+                    {' '}
+                    cashback for
+                  </h5>
+                </Col>
+                )}
+
+                <div className="py-2 d-flex flex-row justify-content-center">
+                  <Members
+                    names={gsctx.members?.map(
+                      (mem: any, index: any) => ({
+                        fname: `${mem.orderDetail.customer.firstName ?? ''} ${
+                          mem.orderDetail.customer.firstName ? mem?.orderDetail.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
+                        }`,
+                        lineItems: mem.lineItems,
+                      }),
+                    )}
+                    cashback={['']}
+                    pending={pending}
+                    discount={discount}
+                    fullshareurl={gsShortURL}
+                    shareUrl={gsURL}
+                    rewards={gsctx?.store?.drops?.rewards}
+                    brandname={brandName}
+                    currencySymbol={currencySymbol}
+                    page="drops"
+                  />
+                </div>
+              </>
+              ) }
             </Row>
           </Container>
         </Hero>
-        <div className="bg-black text-center py-2">
-          <span className="text-center text-white">Want 50% off? Click here to learn how.</span>
-        </div>
+        {
+          !!nextDropReward && (
+          <div className="bg-black text-center py-2">
+            <span
+              role="button"
+              className="text-center text-white"
+              onClick={() => setLearnHow(true)}
+            >
+              Want
+              {' '}
+              {nextDropReward}
+              % off? Click here to learn how.
+            </span>
+          </div>
+          )
+        }
 
-        {!hideSection && SKU.length > 1 ? (
-          <ProductGrid
-            isDrops={isDrops}
-            isSpotLight={isSpotlight}
-            title="Today’s Spotlight"
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            // products={allProducts}
-            products={uniqueArray(allProducts)}
-            maxrows={3}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            showHoverButton
-            id="spotlightdrops"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          />
-        ) : <></>}
-
-        {!hideSection && SKU.length > 1 ? (
-          <ProductGrid
-            isDrops
-            title="Latest Drops"
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            // products={allProducts}
-            products={uniqueArray(allProducts)}
-            maxrows={3}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            showHoverButton
-            id="latestdrops"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          />
-        ) : <></>}
-
-        {!hideSection && SKU.length > 1 ? (
-          <ProductGrid
-            isDrops
-            title="Best Sellers"
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            // products={allProducts}
-            products={uniqueArray(allProducts)}
-            maxrows={3}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            showHoverButton
-            id="bestsellerdrops"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          />
-        ) : <></>}
-
-        {!hideSection && SKU.length > 1 ? (
-          <ProductGrid
-            isDrops
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            // products={allProducts}
-            products={uniqueArray(allProducts)}
-            maxrows={3}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            showHoverButton
-            id="allproductsdrops"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          >
-            <div>
-              <div className={styles.drops_col_dropheadingOuter}>
-                All Products
+        <ProductGrid
+          isDrops
+          isSpotLight
+          title="Today’s Spotlight"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(spotLightProductsList)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="spotlightdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+        >
+          {/* <Row>
+            <Col>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <div className={styles.drops_col_dropheading}>
+                    Today’s Spotlight
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <FaArrowLeft className="me-2" />
+                  <FaArrowRight className="ms-2" />
+                </div>
               </div>
+            </Col>
+            <Col xs={12} className={styles.drops__counter}>
+              <div className="d-flex align-items-center mt-3">
+                <div className="opacity-50 me-2">
+                  Drop ends in
+                </div>
+                <div className={styles.drops__counter_middle}>
+                  <p>
+                    <span>
+                      {hrs}
+                      {' '}
+                      hrs
+                    </span>
+                    :
+                    <span>
+                      {mins}
+                      {' '}
+                      mins
+                    </span>
+                    :
+                    <span>
+                      {secs}
+                      {' '}
+                      secs
+                    </span>
+                  </p>
+                </div> */}
+
+          {/* </div>
+              </Col>
+            </Row> */}
+        </ProductGrid>
+        {/* ) : <></>} */}
+
+        <ProductGrid
+          isDrops
+          title="Latest Drops"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(latestProductsList)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="bestsellerdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+        />
+
+        <ProductGrid
+          isDrops
+          title="Best Sellers"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(bestSellerProductsList)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="bestsellerdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+        >
+          {/* <Row>
+            <Col>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <div className={styles.drops_col_dropheading}>
+                    Latest Drops
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <FaArrowLeft className="me-2" />
+                  <FaArrowRight className="ms-2" />
+                </div>
+              </div>
+            </Col>
+          </Row> */}
+        </ProductGrid>
+
+        {/* <ProductGrid
+          isDrops
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(bestSellerProductsList)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="allproductsdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+        > */}
+        {/* <Row>
+            <Col>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <div className={styles.drops_col_dropheading}>
+                    Best Sellers
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <FaArrowLeft className="me-2" />
+                  <FaArrowRight className="ms-2" />
+                </div>
+              </div>
+            </Col>
+          </Row> */}
+        {/* </ProductGrid> */}
+
+        <ProductGrid
+          isDrops
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(allProductsList)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="allproductsdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+        >
+          {/* <Row>
+            <Col>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <div className={styles.drops_col_dropheading}>
+                    All products
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <FaArrowLeft className="me-2" />
+                  <FaArrowRight className="ms-2" />
+                </div>
+              </div>
+            </Col>
+          </Row> */}
+          <div>
+            <div className={styles.drops_col_dropheadingOuter}>
+              All Products
             </div>
-          </ProductGrid>
-        ) : <></>}
+          </div>
+        </ProductGrid>
 
         <Footer LeftComp={undefined} RightComp={undefined} isDrops />
         <ProductsSearch
           show={showps}
           handleClose={() => setshowps(false)}
           isCreateGS={false}
-          isDrops={isDrops}
+          showProduct={showProduct}
+          isDrops
         />
         <LinkShareMobileView
           show={showQrscan}
@@ -800,6 +861,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showDetail}
           handleClose={() => setshowDetail(false)}
           product={sProduct}
+          showSearch={showSearchProds}
+          isDrops
         />
         <Cart
           show={showCart}
@@ -807,7 +870,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setshowCart(false)}
           product={undefined}
           handleDetail={(prd) => setsProduct(prd)}
-          isDrops={isDrops}
+          isDrops
         />
         <AlertComponent />
         <RewardBox2
@@ -819,15 +882,22 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           brandName={brandName}
           maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
         />
+        <HowShopDropBox
+          show={openLearnHow}
+          handleClose={() => setLearnHow(false)}
+        />
+        <HowShopDropVideoBox
+          show={showObPopup}
+          handleClose={updateOnboarding}
+        />
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
               shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
-              val={value}
-              label={isExpired ? 'Share to unlock' : 'Share & earn'}
+              val=""
+              label={isExpired ? 'Share to unlock' : 'Share with friends'}
               brandName={brandName}
-              maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
             />
           </div>
         )}
@@ -844,8 +914,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
           )
         }
-        {/* STEP MODALs  */}
-        {stepModal()}
       </div>
       {/* <ExpiredLinked
         show
@@ -858,7 +926,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 export default GroupShop;
 
 export const getServerSideProps = async (context: any) => {
-  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
   const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
   const requestOptions = {
     method: 'GET',

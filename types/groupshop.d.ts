@@ -203,6 +203,15 @@ export interface IGroupshop {
 
   ownerDealsProducts?: DealProduct[]; // products of owner from OB popup
 
+  // FOR DROPS GS
+  latestProducts?: Product[];
+
+  spotlightProducts?: Product[];
+
+  bestSellerProducts?: Product[];
+
+  isDrops?: boolean;
+
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;

@@ -3,14 +3,23 @@ import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct } from 'types/groupshop';
 import useAppContext from './useAppContext';
 import useDeal from './useDeal';
+import useDrops from './useDrops';
 
 export default function useCart() {
   const {
     gsctx,
     dispatch,
+    isDrops,
   } = useAppContext();
 
-  const { dPrice } = useDeal();
+  const {
+    store,
+  } = gsctx;
+
+  const { dPrice, disPrice } = useDeal();
+  const {
+    spotlightProducts,
+  } = useDrops();
 
   const addCartProduct = useCallback((product : CartProduct) => {
     const alreadyCartProduct = gsctx.cart?.find(
@@ -64,10 +73,14 @@ export default function useCart() {
   const getTotal = useCallback(() => gsctx.cart?.reduce(
     (total: number,
       {
+        id,
         price: mprice,
         selectedVariant: { selectedQuantity, price },
       }) => {
-      const myTot = total + (dPrice(+(price ?? mprice)) * selectedQuantity);
+      const myTot = total
+      + ((spotlightProducts.includes(id)
+        ? disPrice(+(price ?? mprice), +store?.drops?.spotlightDiscount?.percentage!)
+        : dPrice(+(price ?? mprice))) * selectedQuantity);
       return +myTot;
     },
     0,

@@ -23,6 +23,7 @@ import { useMediaQuery } from 'react-responsive';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useAppContext from 'hooks/useAppContext';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import useDrops from 'hooks/useDrops';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -80,7 +81,7 @@ const ProductGrid = ({
   const {
     gsctx: {
       discountCode: { percentage },
-      dealProducts, addedProducts,
+      dealProducts, addedProducts, store,
     } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop, isChannel,
   } = useAppContext();
   // stage db and check with gs 4 bought prd
@@ -90,6 +91,9 @@ const ProductGrid = ({
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
     disPrice,
   } = useDeal();
+  const {
+    spotlightProducts,
+  } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
     return (<Placeholder as="h1" bg="secondary" className="w-100" {...props} ref={ref} id={id} />);
@@ -231,7 +235,7 @@ const ProductGrid = ({
                       <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
                         <span className={styles.groupshop__pcard_tag_price}>
                           {currencySymbol}
-                          {(+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                          {spotlightProducts.includes(prod.id) ? +(productPriceDiscount(+(prod.price), +((+store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                           {' '}
                           OFF
                         </span>
@@ -337,9 +341,25 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <div className={styles.groupshop_product_desc}>
-                      {isDrops && priceUI(prod)}
-                      <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
-                      {prod.purchaseCount ? (
+                      {/* {isDrops && priceUI(prod)} */}
+                      <h5 className="pt-2 fw-bold">
+                        <span className="text-decoration-line-through fw-light me-1">
+                          {currencySymbol}
+                          {/* {prod.price} */}
+                          {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                        {' '}
+                        <span>
+                          {currencySymbol}
+                          {spotlightProducts.includes(prod.id) && !isSuggestion && disPrice(+(prod.price), +store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')}
+                          {!spotlightProducts.includes(prod.id) && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+                          {!spotlightProducts.includes(prod.id) && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                      </h5>
+                      {/* <h5 className="text-center fw-bold text-truncate">{prod.title}</h5> */}
+                      {/* {isDrops && priceUI(prod)} */}
+                      <h5 className="fw-bold text-truncate">{prod.title}</h5>
+                      {prod.outofstock ? (<p className="text-danger font-weight-normal">Sold out</p>) : prod.purchaseCount && (
                         <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
                           { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
                           { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
@@ -349,7 +369,7 @@ const ProductGrid = ({
 
                           </i>
                         </p>
-                      ) : ''}
+                      )}
                       {!isDrops && priceUI(prod)}
                     </div>
                     {!showHoverButton && (

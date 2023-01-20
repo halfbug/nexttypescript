@@ -7,6 +7,7 @@ import {
   Col, Modal, Row,
 } from 'react-bootstrap';
 import GroupshopIcon from 'assets/images/groupshop-white-icon.svg';
+import useAppContext from 'hooks/useAppContext';
 
 interface HowShopDropVideoBoxProps extends RootProps {
     show: boolean;
@@ -17,9 +18,10 @@ interface HowShopDropVideoBoxProps extends RootProps {
 const HowShopDropVideoBox = ({
   show = false, handleClose,
 }: HowShopDropVideoBoxProps) => {
+  const { gsctx } = useAppContext();
+  const { customerDetail, store } = gsctx;
+
   const closeModal = (e: any) => {
-    // setotherProducts(undefined);
-    // setSelected(undefined);
     handleClose(e);
   };
 
@@ -32,6 +34,7 @@ const HowShopDropVideoBox = ({
         onHide={closeModal}
         size="lg"
         centered
+        backdrop="static"
         dialogClassName={styles.howShopDropVideoBox_modal}
         contentClassName={styles.howShopDropVideoBox_modal__content}
       >
@@ -50,7 +53,9 @@ const HowShopDropVideoBox = ({
             <Col lg={12} className="px-0">
               <div className={styles.howShopDropVideoBox_modal__top}>
                 <h3>
-                  Maddy, you’re off the waitlist.
+                  {customerDetail?.firstName?.charAt(0)?.toUpperCase()!
+                  + customerDetail?.firstName?.slice(1)!}
+                  , you’re off the waitlist.
                 </h3>
                 <div className={styles.howShopDropVideoBox_modal__top__howTxt}>
                   Swipe through to learn how it works.
@@ -136,7 +141,10 @@ const HowShopDropVideoBox = ({
                       <p>
                         You get
                         {' '}
-                        <b>40% off</b>
+                        <b>
+                          {store?.drops?.rewards?.baseline}
+                          % off
+                        </b>
                         {' '}
                         everything to start.
                       </p>
@@ -164,7 +172,13 @@ const HowShopDropVideoBox = ({
                         <b> Want more rewards?</b>
                       </p>
                       <p>
-                        Unlock up 65% off & 25% cashback on your order.
+                        Unlock up
+                        {' '}
+                        {store?.drops?.rewards?.maximum}
+                        % off &
+                        {' '}
+                        {store?.drops?.rewards?.maximum! - store?.drops?.rewards?.baseline!}
+                        % cashback on your order.
                       </p>
                       <div className={styles.howShopDropVideoBox_modal__carousel__item__tierTxt}>
                         Place your first order to unlock a new tier of discounts.

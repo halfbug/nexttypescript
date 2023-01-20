@@ -690,6 +690,163 @@ query Groupshop($code: String!, $status: String = "") {
   }
 }
 `;
+const GET_DROP_GROUPSHOP = gql`
+query DropGroupshop($code: String!) {
+  DropGroupshop(code: $code) {
+    storeId
+    id
+    url
+    expiredUrl
+    shortUrl
+    store {
+      shop
+      drops {
+        status
+        isVideoEnabled
+        spotlightColletionId
+        spotlightDiscount {
+          title
+          percentage
+          priceRuleId
+        }
+        latestCollectionId
+        bestSellerCollectionId
+        allProductsCollectionId
+        rewards {
+          baseline
+          average
+          maximum
+        }
+      }
+    }
+    members{
+      orderId
+      availedDiscount
+      role 
+      orderDetail{
+        customer{
+          firstName
+          lastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      lineItems{
+        quantity
+        price
+        discountedPrice
+      }
+      products{
+        title
+        featuredImage
+        price
+        id
+      }
+    }
+    customerDetail {
+      firstName
+      lastName
+      phone
+      email
+    }
+    discountCode {
+      title
+      percentage
+      priceRuleId
+    }
+    bestSellerProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    spotlightProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    latestProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    allProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    milestones{
+      discount
+      activatedAt
+    }
+    obSettings {
+      step
+      ownerUrl
+    }
+  }
+}
+`;
+
+const UPDATE_DROP_GROUPSHOP = gql`
+mutation updateDropsGroupshop($updateDropsGroupshopInput: UpdateDropsGroupshopInput!) {
+  updateDropsGroupshop(updateDropsGroupshopInput: $updateDropsGroupshopInput) {
+    obSettings {
+      step
+      ownerUrl
+    }
+  }
+}`;
 
 const ADD_DEAL_PRODUCT = gql`
   mutation AddDealProduct($updateGroupshopInput: UpdateGroupshopInput!) {
@@ -2466,5 +2623,6 @@ export {
   GET_MOST_VIRAL_CUSTOMERS_BY_CAMPAIGN, GET_GRAPH_REVENUE_BY_CAMPAIGN, GET_PARTNER_OVERVIEW_METRICS,
   GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP,
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
-  GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE,
+  GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
+  UPDATE_DROP_GROUPSHOP,
 };

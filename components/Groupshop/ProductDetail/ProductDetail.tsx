@@ -37,6 +37,7 @@ import NativeShareButton from 'components/Buttons/NativeShareButton/NativeShareB
 import useCode from 'hooks/useCode';
 import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDetail from 'hooks/useDetail';
+import useDrops from 'hooks/useDrops';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -46,10 +47,11 @@ interface ProductDetailProps extends RootProps {
   product: IProduct | undefined;
   isChannel?: boolean;
   showSearch?: () => any;
+  isDrops?: boolean;
 }
 
 const ProductDetail = ({
-  show, pending = false, handleClose, product, isChannel, showSearch,
+  show, pending = false, handleClose, product, isChannel, showSearch, isDrops,
 }: ProductDetailProps) => {
   const { addCartProduct } = useCart();
   const { shop, discountCode, ownerCode } = useCode();
@@ -63,7 +65,7 @@ const ProductDetail = ({
   };
   // console.log(product);
   const {
-    gsctx: { discountCode: { percentage }, totalProducts }, gsctx,
+    gsctx: { discountCode: { percentage }, totalProducts, store }, gsctx,
     isGroupshop,
   } = useAppContext();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
@@ -88,12 +90,15 @@ const ProductDetail = ({
   };
 
   const {
-    currencySymbol, dPrice, getBuyers, isExpired, discount, addedByName,
+    currencySymbol, dPrice, disPrice, getBuyers, isExpired, discount, addedByName,
     totalCashBack, productShareUrl, displayAddedByFunc, productPriceDiscount,
     getDateDifference, activateURL, formatName, topFive, isInfluencerGS, getBuyers2,
     maxPercent, brandName, socialText, nativeShareText, banner, shortActivateURL,
     clientDealProducts,
   } = useDeal();
+  const {
+    spotlightProducts,
+  } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
@@ -154,7 +159,9 @@ const ProductDetail = ({
       // let obj = {};
       setselOptions(product?.options?.reduce((obj, { name, values }) => (
         { ...obj, [name]: values[0] }), {}));
-      setCashBack(totalCashBack(product.price));
+      if (!isDrops) {
+        setCashBack(totalCashBack(product.price));
+      }
       // console.log('.................');
       // console.log(product.price, variantPrice);
     }
@@ -193,7 +200,9 @@ const ProductDetail = ({
         setoutofStock(true);
       } else setoutofStock(false);
       setvariantPrice(selectedVariant?.price ?? product?.price);
-      setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
+      if (!isDrops) {
+        setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
+      }
     } else {
       setoutofStock(true);
     }
@@ -385,7 +394,7 @@ const ProductDetail = ({
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={styles.groupshop__pcard_tag_priceMobile}>
                   {currencySymbol}
-                  {parseFloat(productPriceDiscount(+(product?.price ?? ''), +percentage))}
+                  {parseFloat(productPriceDiscount(+(product?.price ?? ''), spotlightProducts.includes(product?.id!) ? +store?.drops?.spotlightDiscount?.percentage! : +percentage))}
                   {' '}
                   Off
                 </span>
@@ -535,7 +544,7 @@ const ProductDetail = ({
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
-                    {!dealProduct ? (
+                    {!isDrops && (!dealProduct ? (
                       <Button
                         variant="outline-primary"
                         className={styles.groupshop_right_content_favbtn}
@@ -560,7 +569,7 @@ const ProductDetail = ({
                           <StarFill style={{ color: '#FFD700' }} />
                           <span>Selected</span>
                         </Button>
-                      )}
+                      ))}
 
                     <Overlay
                       show={showOverlay}
@@ -609,8 +618,10 @@ const ProductDetail = ({
                     {' '}
                     <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
-                      {product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
-                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '')}
+                      {spotlightProducts.includes(product?.id!) && (product?.options ? (disPrice(+(variantPrice || 0), +(store?.drops?.spotlightDiscount?.percentage!))).toFixed(2).toString().replace('.00', '')
+                        : (disPrice(+(product?.price || 0), +(store?.drops?.spotlightDiscount?.percentage!))).toFixed(2).toString().replace('.00', ''))}
+                      {!spotlightProducts.includes(product?.id!) && (product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
+                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', ''))}
                     </span>
                     {' '}
                     {cashBack && isGroupshop ? (
@@ -1080,6 +1091,7 @@ const ProductDetail = ({
 ProductDetail.defaultProps = {
   isChannel: false,
   showSearch: () => {},
+  isDrops: false,
 };
 
 export default ProductDetail;

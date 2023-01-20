@@ -95,6 +95,15 @@ const ProductsSearch = ({
       const temp: any = [...gsctx.popularProducts, ...gsctx.allProducts];
       setProductsArr(temp);
     }
+    if (isDrops
+      && gsctx.allProducts
+      && gsctx.bestSellerProducts
+      && gsctx.spotlightProducts
+      && gsctx.latestProducts) {
+      const temp: any = [...gsctx.allProducts,
+        ...gsctx.bestSellerProducts, ...gsctx.spotlightProducts, ...gsctx.latestProducts];
+      setProductsArr(temp);
+    }
   }, [gsctx]);
 
   const refreshProduct = () => uniqueArray((isInfluencerGS ? productsArr?.filter(
