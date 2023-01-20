@@ -359,7 +359,9 @@ const ProductGrid = ({
                       {/* <h5 className="text-center fw-bold text-truncate">{prod.title}</h5> */}
                       {/* {isDrops && priceUI(prod)} */}
                       <h5 className="fw-bold text-truncate">{prod.title}</h5>
-                      {prod.outofstock ? (<p className="text-danger font-weight-normal">Sold out</p>) : prod.purchaseCount && (
+                      {prod.outofstock
+                        ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>)
+                        : prod.purchaseCount && (
                         <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
                           { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
                           { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
@@ -369,7 +371,7 @@ const ProductGrid = ({
 
                           </i>
                         </p>
-                      )}
+                        )}
                       {!isDrops && priceUI(prod)}
                     </div>
                     {!showHoverButton && (

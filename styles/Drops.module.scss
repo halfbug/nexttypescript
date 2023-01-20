@@ -3194,6 +3194,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &_product_desc{
     height: 77px;
+    &_soldout {
+      color: #FF0000 !important;
+      font-weight: 500 !important;
+      line-height: 16px;
+      font-family: 'DM Sans' !important;
+      font-size: 12px;
+      font-style: italic;
+    }
   }
   // &_left_content_wrapper{
   //   &_boughtby {
