@@ -22,6 +22,7 @@ import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useAppContext from 'hooks/useAppContext';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -42,6 +43,7 @@ type ProductGridProps = {
   isModalForMobile?: boolean;
   isDiscoveryTool?: boolean;
   isDrops?: boolean;
+  title?: string;
   isSpotLight?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
@@ -54,7 +56,7 @@ type ProductGridProps = {
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
-  isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl,
+  isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
   discoveryDiscount, urlForActivation, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
@@ -109,14 +111,103 @@ const ProductGrid = ({
     googleButtonCode('product-share');
   };
 
+  const priceUI = (prod: any) => (
+    <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : 'd-flex row-reverse justify-left'].join(' ')}>
+      <span className={isDrops ? 'me-2' : ''}>
+        {currencySymbol}
+        {!isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+      </span>
+      {' '}
+      <span className="text-decoration-line-through fw-light me-1">
+        {currencySymbol}
+        {/* {prod.price} */}
+        {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+      </span>
+    </h5>
+  );
+
+  let position = 0;
+  const horizontalScroll = (params: any) => {
+    const { direction, gridId } = params;
+    const obj = document.getElementById(gridId);
+    const screenWidth = obj?.offsetWidth ?? 400;
+    const maxWidth = obj?.scrollWidth ?? screenWidth;
+    if (direction === 'right' && position < (maxWidth - screenWidth)) {
+      position += (screenWidth);
+    }
+    if (direction === 'left' && position >= screenWidth) {
+      position -= (screenWidth);
+    }
+    if (position > maxWidth) {
+      position = maxWidth - screenWidth;
+    }
+    obj?.scroll({
+      left: (position ?? 0),
+      behavior: 'smooth',
+    });
+  };
   return (
     <Container {...props} ref={ref} id={id}>
-      <Row className={styles.groupshop_row}>
+      <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}
         </Col>
       </Row>
-      <Row className={isDrops ? dStyles.drops__discover__products : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')} id="productGrid">
+
+      {!children && (
+      <Row>
+        <Col>
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <div className={dStyles.drops_col_dropheading}>
+                {title}
+              </div>
+            </div>
+            <div className="d-flex">
+              <FaArrowLeft className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
+              <FaArrowRight className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+            </div>
+          </div>
+        </Col>
+        {isSpotLight && (
+        <Col xs={12} className={dStyles.drops__counter}>
+          <div className="d-flex align-items-center mt-3">
+            <div className="opacity-50 me-2">
+              Drop ends in
+            </div>
+            <div className={dStyles.drops__counter_middle}>
+              <p>
+                <span>
+                  00
+                  {' '}
+                  hrs
+                </span>
+                :
+                <span>
+                  01
+                  {' '}
+                  mins
+                </span>
+                :
+                <span>
+                  01
+                  {' '}
+                  secs
+                </span>
+              </p>
+            </div>
+
+          </div>
+        </Col>
+        )}
+      </Row>
+      )}
+      <Row
+        className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
+          : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
+        id={[id, 'productGrid'].join('_')}
+      >
         {renderItems?.map((prod, index) => (
           <>
             {prod.title !== 'AddProductType' ? (
@@ -246,9 +337,10 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <div className={styles.groupshop_product_desc}>
+                      {isDrops && priceUI(prod)}
                       <h5 className="text-center fw-bold text-truncate">{prod.title}</h5>
                       {prod.purchaseCount ? (
-                        <p className="text-center mb-1 fs-5 fw-bold">
+                        <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
                           { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
                           { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
                           { prod.purchaseCount > 100 ? <>🎉</> : ''}
@@ -258,20 +350,7 @@ const ProductGrid = ({
                           </i>
                         </p>
                       ) : ''}
-
-                      <h5 className="pt-2 text-center fw-bold">
-                        <span>
-                          {currencySymbol}
-                          {!isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                          {isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                        {' '}
-                        <span className="text-decoration-line-through fw-light me-1">
-                          {currencySymbol}
-                          {/* {prod.price} */}
-                          {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                      </h5>
+                      {!isDrops && priceUI(prod)}
                     </div>
                     {!showHoverButton && (
                       <div className={styles.groupshop_addtoCart_wrapper}>
@@ -447,6 +526,7 @@ ProductGrid.defaultProps = {
   isModalForMobile: false,
   isDiscoveryTool: false,
   isDrops: false,
+  title: '',
   isSpotLight: false,
   urlForActivation: '',
   skuCount: 0,

@@ -1212,6 +1212,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     @include media-breakpoint-down(sm) {
       padding-bottom: 1.5rem;
+      padding-top: 1.5rem;
     }
   }
 
@@ -1236,6 +1237,17 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 24px;
       color: $black;
       text-align: start;
+      @include media-breakpoint-down(sm) {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+      }
+    }
+    &_dropheadingOuter {
+      font-weight: 700;
+      font-size: 24px;
+      color: $black;
+      text-align: center;
       @include media-breakpoint-down(sm) {
         font-weight: 500;
         font-size: 20px;
@@ -3242,7 +3254,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       padding-left: 50px;
       padding-right: 50px;
-
+      margin-top: 20px;
       @include media-breakpoint-down(sm) {
         padding-left: unset;
         padding-right: unset;

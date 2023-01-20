@@ -69,7 +69,6 @@ import QRBox from 'components/Groupshop/QRBox/QRBox';
 import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
 import useDiscoverSortingGS from 'hooks/useDiscoverSortingGS';
 import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
 import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
 
@@ -695,6 +694,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <ProductGrid
             isDrops={isDrops}
             isSpotLight={isSpotlight}
+            title="Today’s Spotlight"
             xs={6}
             sm={6}
             md={6}
@@ -706,56 +706,55 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
             showHoverButton
-            id="allproducts"
+            id="spotlightdrops"
             isModalForMobile={isModalForMobile}
             urlForActivation={urlForActivation}
             skuCount={SKU.length}
-          >
-            <Row>
-              <Col>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <div className={styles.drops_col_dropheading}>
-                      Today’s Spotlight
-                    </div>
-                  </div>
-                  <div className="d-flex">
-                    <FaArrowLeft className="me-2" />
-                    <FaArrowRight className="ms-2" />
-                  </div>
-                </div>
-              </Col>
-              <Col xs={12} className={styles.drops__counter}>
-                <div className="d-flex align-items-center mt-3">
-                  <div className="opacity-50 me-2">
-                    Drop ends in
-                  </div>
-                  <div className={styles.drops__counter_middle}>
-                    <p>
-                      <span>
-                        {hrs}
-                        {' '}
-                        hrs
-                      </span>
-                      :
-                      <span>
-                        {mins}
-                        {' '}
-                        mins
-                      </span>
-                      :
-                      <span>
-                        {secs}
-                        {' '}
-                        secs
-                      </span>
-                    </p>
-                  </div>
+          />
+        ) : <></>}
 
-                </div>
-              </Col>
-            </Row>
-          </ProductGrid>
+        {!hideSection && SKU.length > 1 ? (
+          <ProductGrid
+            isDrops
+            title="Latest Drops"
+            xs={6}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+            // products={allProducts}
+            products={uniqueArray(allProducts)}
+            maxrows={3}
+            addProducts={handleAddProduct}
+            handleDetail={(prd) => setsProduct(prd)}
+            showHoverButton
+            id="latestdrops"
+            isModalForMobile={isModalForMobile}
+            urlForActivation={urlForActivation}
+            skuCount={SKU.length}
+          />
+        ) : <></>}
+
+        {!hideSection && SKU.length > 1 ? (
+          <ProductGrid
+            isDrops
+            title="Best Sellers"
+            xs={6}
+            sm={6}
+            md={6}
+            lg={4}
+            xl={3}
+            // products={allProducts}
+            products={uniqueArray(allProducts)}
+            maxrows={3}
+            addProducts={handleAddProduct}
+            handleDetail={(prd) => setsProduct(prd)}
+            showHoverButton
+            id="bestsellerdrops"
+            isModalForMobile={isModalForMobile}
+            urlForActivation={urlForActivation}
+            skuCount={SKU.length}
+          />
         ) : <></>}
 
         {!hideSection && SKU.length > 1 ? (
@@ -772,65 +771,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
             showHoverButton
-            id="allproducts"
+            id="allproductsdrops"
             isModalForMobile={isModalForMobile}
             urlForActivation={urlForActivation}
             skuCount={SKU.length}
           >
-            <Row>
-              <Col>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <div className={styles.drops_col_dropheading}>
-                      Latest Drops
-                    </div>
-                  </div>
-                  <div className="d-flex">
-                    <FaArrowLeft className="me-2" />
-                    <FaArrowRight className="ms-2" />
-                  </div>
-                </div>
-              </Col>
-            </Row>
+            <div>
+              <div className={styles.drops_col_dropheadingOuter}>
+                All Products
+              </div>
+            </div>
           </ProductGrid>
         ) : <></>}
 
-        {!hideSection && SKU.length > 1 ? (
-          <ProductGrid
-            isDrops
-            xs={6}
-            sm={6}
-            md={6}
-            lg={4}
-            xl={3}
-            // products={allProducts}
-            products={uniqueArray(allProducts)}
-            maxrows={3}
-            addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
-            showHoverButton
-            id="allproducts"
-            isModalForMobile={isModalForMobile}
-            urlForActivation={urlForActivation}
-            skuCount={SKU.length}
-          >
-            <Row>
-              <Col>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <div className={styles.drops_col_dropheading}>
-                      Best Sellers
-                    </div>
-                  </div>
-                  <div className="d-flex">
-                    <FaArrowLeft className="me-2" />
-                    <FaArrowRight className="ms-2" />
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </ProductGrid>
-        ) : <></>}
         <Footer LeftComp={undefined} RightComp={undefined} isDrops />
         <ProductsSearch
           show={showps}
