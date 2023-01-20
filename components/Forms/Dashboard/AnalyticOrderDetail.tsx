@@ -7,7 +7,7 @@ import styles from 'styles/Analytics.module.scss';
 export default function AnalyticOrderDetail() {
   return (
     <div className={styles.customerData__orderDetail}>
-      <div className={styles.customerData__orderDetail__orderRow}>
+      <div className={[styles.customerData__orderDetail__orderRow, 'pb-2'].join(' ')}>
         <div className={styles.customerData__orderDetail__orderRow__number}>Order 1620</div>
         <div className={styles.customerData__orderDetail__orderRow__date}>03/10/21</div>
       </div>
