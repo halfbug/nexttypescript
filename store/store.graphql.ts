@@ -700,6 +700,14 @@ query DropGroupshop($code: String!) {
     shortUrl
     store {
       shop
+      settings{
+        general{
+          brandColor
+          imageUrl
+          youtubeUrl
+          media
+        }
+      }
       drops {
         status
         isVideoEnabled
