@@ -354,6 +354,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="og:type" content="website" />
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="og:title" content="Groupshop" />
+        <meta name="og:description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
