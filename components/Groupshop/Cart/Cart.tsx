@@ -322,7 +322,16 @@ const Cart = ({
               {suggestedProd && (
               <>
                 <div className={['pt-3 text-start', styles.groupshop_cart_spend].join(' ')}>
-                  In case you missed the best-sellers...
+                  {isDrops ? (
+                    <p>
+                      Get
+                      {' '}
+                      <b>75% off spotlight products</b>
+                      {' '}
+                      before it’s too late!
+                    </p>
+                  )
+                    : 'In case you missed the best-sellers...'}
                 </div>
                 <Row className="p-3 pt-2">
                   {/* <ProductGrid products={suggestedProd} /> */}
@@ -342,8 +351,13 @@ const Cart = ({
                             className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
                           >
                             {currencySymbol}
-                            {Math.round(+(item.price) - +(dPrice(+(item?.price || 0))
-                              .toFixed(2).toString().replace('.00', '')))}
+                            {!spotlightProducts.includes(item.id)
+                              ? +(item.price) - +(dPrice(+(item?.price || 0))
+                                .toFixed(2).toString().replace('.00', ''))
+                              : +(item.price)
+                              - +(disPrice(+(item?.price || 0),
+                                +store?.drops?.spotlightDiscount?.percentage!)
+                                .toFixed(2).toString().replace('.00', ''))}
                             {/* {(+(item.price) - +(dPrice(+(item?.price || 0))))
                               .toFixed(2).toString().replace('.00', '')} */}
                             {' '}
@@ -392,7 +406,10 @@ const Cart = ({
                               {' '}
                               <span className="fw-bold">
                                 {currencySymbol}
-                                {formatNumber(dPrice(+(item?.price || 0)))}
+                                {spotlightProducts.includes(item.id)
+                                  ? formatNumber(disPrice(+(item?.price || 0),
+                                    +store?.drops?.spotlightDiscount?.percentage!))
+                                  : formatNumber(dPrice(+(item?.price || 0)))}
                               </span>
                             </div>
                             {isDrops && (
