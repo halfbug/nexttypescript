@@ -697,6 +697,7 @@ query DropGroupshop($code: String!) {
     id
     url
     expiredUrl
+    expiredAt
     shortUrl
     store {
       shop
