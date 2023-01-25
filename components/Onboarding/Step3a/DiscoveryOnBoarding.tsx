@@ -106,7 +106,7 @@ const DiscoveryOnBoarding = () => {
                                 onChange={handleChange}
                                 value="Active"
                               >
-                                <Check2Circle className="fs-4 " />
+                                <Check2Circle className="fs-6 me-1 " />
                                 {' '}
                                 Enable
                               </ToggleButton>
@@ -119,7 +119,7 @@ const DiscoveryOnBoarding = () => {
                                 onChange={handleChange}
                                 value="InActive"
                               >
-                                <XCircle className="fs-5 " />
+                                <XCircle className="me-1" size={10} />
                                 {' '}
                                 Disable
                               </ToggleButton>
