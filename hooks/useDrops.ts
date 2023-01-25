@@ -8,7 +8,7 @@ import useCode from './useCode';
 export default function useDrops() {
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
   const { gsctx, isDrops } = useAppContext();
-  const { ownerCode } = useCode();
+  const { ownerCode, shop, discountCode } = useCode();
 
   const {
     milestones, store, members, spotlightProducts: sproducts,
@@ -22,7 +22,8 @@ export default function useDrops() {
   useEffect(() => {
     if (ownerCode && gsctx) {
       const ownerOnboardingStep = gsctx.obSettings?.step;
-      if (ownerOnboardingStep === 0) {
+      if (ownerOnboardingStep === 0
+        && gsctx?.obSettings?.ownerUrl === `/${shop}/drops/${discountCode}/owner&${ownerCode}`) {
         setShowObPopup(true);
       }
     }

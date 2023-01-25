@@ -716,7 +716,6 @@ query DropGroupshop($code: String!, $status: String = "") {
       drops {
         status
         isVideoEnabled
-        spotlightColletionId
         spotlightDiscount {
           title
           percentage
@@ -772,23 +771,6 @@ query DropGroupshop($code: String!, $status: String = "") {
       priceRuleId
     }
     bestSellerProducts {
-      id
-      title
-      featuredImage
-      featuredVideo
-      description
-      purchaseCount
-      price
-      currencyCode
-      outofstock
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    spotlightProducts {
       id
       title
       featuredImage

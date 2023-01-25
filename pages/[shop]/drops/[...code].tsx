@@ -55,6 +55,7 @@ import Members from 'components/Groupshop/Members/Members';
 import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
+import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -100,8 +101,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [latestProductsList, setLatestProductsList] = useState<IProduct[] | undefined>([]);
 
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
-
-  const brandName = 'test';
+  const [dropReward, setDropReward] = useState<boolean>(false);
 
   useEffect(() => {
     if (DropGroupshop.id && pending) {
@@ -141,6 +141,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     milestones,
     getDateDifference,
     socialText,
+    brandName,
     currencySymbol,
     activateURL,
     maxPercent,
@@ -273,6 +274,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-5GCXJRC');`,
+          }}
+        />
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `(function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "f8jx5rl3kw");`,
           }}
         />
         <script
@@ -646,7 +657,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <span
               role="button"
               className="text-center text-white"
-              onClick={() => setLearnHow(true)}
+              onClick={() => setDropReward(true)}
             >
               Want
               {' '}
@@ -657,7 +668,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           )
         }
 
-        <ProductGrid
+        {/* <ProductGrid
           isDrops
           isSpotLight
           title="Today’s Spotlight"
@@ -674,53 +685,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           id="spotlightdrops"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
-        >
-          {/* <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <div className={styles.drops_col_dropheading}>
-                    Today’s Spotlight
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <FaArrowLeft className="me-2" />
-                  <FaArrowRight className="ms-2" />
-                </div>
-              </div>
-            </Col>
-            <Col xs={12} className={styles.drops__counter}>
-              <div className="d-flex align-items-center mt-3">
-                <div className="opacity-50 me-2">
-                  Drop ends in
-                </div>
-                <div className={styles.drops__counter_middle}>
-                  <p>
-                    <span>
-                      {hrs}
-                      {' '}
-                      hrs
-                    </span>
-                    :
-                    <span>
-                      {mins}
-                      {' '}
-                      mins
-                    </span>
-                    :
-                    <span>
-                      {secs}
-                      {' '}
-                      secs
-                    </span>
-                  </p>
-                </div> */}
-
-          {/* </div>
-              </Col>
-            </Row> */}
-        </ProductGrid>
-        {/* ) : <></>} */}
+        /> */}
 
         <ProductGrid
           isDrops
@@ -735,7 +700,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           addProducts={handleAddProduct}
           handleDetail={(prd) => setsProduct(prd)}
           showHoverButton
-          id="bestsellerdrops"
+          id="latestdrops"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
         />
@@ -890,6 +855,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <HowShopDropVideoBox
           show={showObPopup}
           handleClose={updateOnboarding}
+        />
+        <DropsRewardBox
+          show={dropReward}
+          handleClose={() => setDropReward(false)}
         />
         <ExpiredLinked show={isExpired} handleClose={() => {}} />
         {isModalForMobile && (

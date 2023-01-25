@@ -11,16 +11,22 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import useAppContext from 'hooks/useAppContext';
+import useDrops from 'hooks/useDrops';
 
 interface DropsRewardBoxProps extends RootProps {
   show: boolean;
   handleClose(e: any): any;
-
 }
 
 const DropsRewardBox = ({
   show = false, handleClose,
 }: DropsRewardBoxProps) => {
+  const { gsctx } = useAppContext();
+  const {
+    milestones,
+  } = gsctx;
+  const { currentDropReward, nextDropReward } = useDrops();
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
@@ -63,24 +69,40 @@ const DropsRewardBox = ({
                   <GroupshopIcon />
                 </div>
                 <h2>
-                  So you want 50% off?
+                  So you want
+                  {' '}
+                  {nextDropReward}
+                  % off?
                 </h2>
               </div>
               <div className={styles.dropsRewardBox_modal__greyBox}>
                 <div className={styles.dropsRewardBox_modal__greyBox__text}>
-                  Your first purchase is
+                  Your
                   {' '}
-                  <b>40% off.</b>
+                  {milestones.length === 1 ? 'first' : 'next'}
+                  {' '}
+                  purchase is
+                  {' '}
+                  <b>
+                    {currentDropReward}
+                    % off.
+                  </b>
                 </div>
               </div>
               <div className={styles.dropsRewardBox_modal__greyBox}>
                 <div className={styles.dropsRewardBox_modal__greyBox__heading}>
-                  After you shop, you unlock 50% off.
+                  After you shop, you unlock
+                  {' '}
+                  {nextDropReward}
+                  % off.
                 </div>
                 <div className={styles.dropsRewardBox_modal__greyBox__text}>
                   Keep shopping or invite friends to shop your link.
                   {' '}
-                  When a friend shops, you’ll receive 10% cashback on your first purchase.
+                  When a friend shops, you’ll receive
+                  {' '}
+                  {(nextDropReward && currentDropReward) && (+nextDropReward - +currentDropReward)}
+                  % cashback on your first purchase.
                 </div>
               </div>
             </Col>

@@ -322,16 +322,7 @@ const Cart = ({
               {suggestedProd && (
               <>
                 <div className={['pt-3 text-start', styles.groupshop_cart_spend].join(' ')}>
-                  {isDrops ? (
-                    <p>
-                      Get
-                      {' '}
-                      <b>75% off spotlight products</b>
-                      {' '}
-                      before it’s too late!
-                    </p>
-                  )
-                    : 'In case you missed the best-sellers...'}
+                  In case you missed the best-sellers...
                 </div>
                 <Row className="p-3 pt-2">
                   {/* <ProductGrid products={suggestedProd} /> */}
