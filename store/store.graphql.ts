@@ -691,16 +691,20 @@ query Groupshop($code: String!, $status: String = "") {
 }
 `;
 const GET_DROP_GROUPSHOP = gql`
-query DropGroupshop($code: String!) {
-  DropGroupshop(code: $code) {
+query DropGroupshop($code: String!, $status: String = "") {
+  DropGroupshop(code: $code, status: $status) {
     storeId
     id
     url
     expiredUrl
+    expiredShortUrl
     expiredAt
     shortUrl
+    expiredAt
+    revisedCount
     store {
       shop
+      brandName
       settings{
         general{
           brandColor

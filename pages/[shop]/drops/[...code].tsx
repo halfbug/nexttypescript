@@ -54,11 +54,12 @@ import useDrops from 'hooks/useDrops';
 import Members from 'components/Groupshop/Members/Members';
 import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
+import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
   const { AlertComponent, showError } = useAlert();
-  const { shop, discountCode } = useCode();
+  const { shop, discountCode, status } = useCode();
   const isModalForMobile = useMediaQuery({
     query: '(max-width: 475px)',
   });
@@ -68,10 +69,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     loading,
     error,
     data: { DropGroupshop } = { DropGroupshop: gsdInit },
-  } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined}>(
+  } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined, status: string}>(
     GET_DROP_GROUPSHOP,
     {
-      variables: { code: discountCode },
+      variables: { code: discountCode, status: status ?? '' },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
     },
@@ -508,7 +509,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
-                      {hrs}
+                      {hrs + (days * 24)}
                       {' '}
                       hrs
                     </span>
@@ -581,7 +582,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
-                      {hrs}
+                      {hrs + (days * 24)}
                       {' '}
                       hrs
                     </span>
@@ -890,6 +891,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showObPopup}
           handleClose={updateOnboarding}
         />
+        <ExpiredLinked show={isExpired} handleClose={() => {}} />
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile

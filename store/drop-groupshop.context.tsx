@@ -24,7 +24,7 @@ export const gsdInit: IGroupshop = {
   shortUrl: '',
   createdAt: new Date(),
   expiredAt: new Date(new Date().setDate(new Date().getDate() + 1)),
-  expiredShortLink: '',
+  expiredShortUrl: '',
   discountCode: {
     title: '',
     percentage: '',
@@ -62,6 +62,7 @@ export const gsdInit: IGroupshop = {
   isActive: false,
   campaignId: '',
   milestones: [],
+  revisedCount: 0,
 };
 
 export const DropGroupshopContext = React.createContext<GSDContextType>(

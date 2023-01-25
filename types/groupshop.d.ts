@@ -197,6 +197,8 @@ export interface IGroupshop {
 
   expiredShortLink?: string;
 
+  expiredShortUrl?: string;
+
   ownerDeals?: Product[];
 
   refferalDealsProducts?: DealProduct[]; // customer of normal GS
@@ -211,6 +213,8 @@ export interface IGroupshop {
   bestSellerProducts?: Product[];
 
   isDrops?: boolean;
+
+  revisedCount?: number;
 
 }
 export interface InfluencerGroupshop {

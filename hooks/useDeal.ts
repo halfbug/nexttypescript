@@ -95,6 +95,8 @@ export default function useDeal() {
   let maxPercent;
   if (isChannel) {
     maxPercent = gsctx?.channelRewards?.baseline;
+  } else if (isDrops) {
+    maxPercent = `${gsctx.store?.drops?.rewards?.maximum}%`;
   } else {
     maxPercent = isGroupshop ? gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount
       : gsctx?.partnerRewards?.baseline;
@@ -171,7 +173,7 @@ export default function useDeal() {
   },
   [gsctx.members]);
 
-  const isExpired = isGroupshop || isChannel ? !(getDateDifference().time > -1) : false;
+  const isExpired = isGroupshop || isChannel || isDrops ? !(getDateDifference().time > -1) : false;
 
   const totalCashBack = useCallback((price) => {
     const {
@@ -556,8 +558,13 @@ export default function useDeal() {
   const milestones = gsctx?.milestones;
   // const activateURL = `${gsURL}?activated=${Math.floor((Math.random() * 6) + 1).toFixed(2)}-GS`;
   const activateURL = `${gsURL}/status&activated`;
-  const shortActivateURL = isChannel
-    ? gsctx?.expiredShortLink ?? activateURL : gsctx?.exipredShortLink ?? activateURL;
+  let shortActivateURL;
+  if (isDrops) {
+    shortActivateURL = gsctx.expiredShortUrl ?? activateURL;
+  } else {
+    shortActivateURL = isChannel
+      ? gsctx?.expiredShortLink ?? activateURL : gsctx?.exipredShortLink ?? activateURL;
+  }
 
   const banner = gsctx?.store?.settings?.general?.imageUrl ? gsctx?.store?.settings?.general?.imageUrl : `${process.env.IMAGE_PATH}/bg.jpg`;
   // const getExpectedCashBack = `$${gsctx?.expectedCashBack}` ?? '';

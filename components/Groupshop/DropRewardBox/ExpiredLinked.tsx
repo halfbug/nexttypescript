@@ -11,6 +11,8 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import useDrops from 'hooks/useDrops';
+import useAppContext from 'hooks/useAppContext';
 
 interface ExpiredLinkedProps extends RootProps {
   show: boolean;
@@ -33,7 +35,21 @@ const ExpiredLinked = ({
 
   const {
     isExpired,
+    shortActivateURL,
+    activateURL,
+    socialText,
   } = useDeal();
+
+  const {
+    currentDropReward,
+  } = useDrops();
+
+  const {
+    gsctx: {
+      revisedCount,
+      store,
+    },
+  } = useAppContext();
 
   return (
     <>
@@ -62,9 +78,23 @@ const ExpiredLinked = ({
                 <div className={styles.dropsRewardBox_modal__top__icon}>
                   <GroupshopIcon />
                 </div>
-                <h2 className="mx-3">
-                  This drop has expired, but you can still get 40% off.
-                </h2>
+                {
+                  revisedCount === 0 ? (
+                    <h2 className="mx-3">
+                      This drop has expired, but you can still get
+                      {' '}
+                      {currentDropReward}
+                      % off.
+                    </h2>
+                  ) : (
+                    <h2 className="mx-3">
+                      This drop has expired, but you can still get
+                      {' '}
+                      {store?.drops?.rewards?.baseline}
+                      % off the next one.
+                    </h2>
+                  )
+                }
                 <div className="d-flex justify-content-center my-4 align-items-center">
                   <span className="border shadow-sm w-auto h-25 px-3 py-1 rounded-3">0 hrs</span>
                   <span className="mx-2">:</span>
@@ -74,27 +104,43 @@ const ExpiredLinked = ({
                 </div>
 
               </div>
-              <div className={styles.dropsRewardBox_modal__greyBox}>
-                <div className={styles.dropsRewardBox_modal__greyBox__text}>
-                  Invite friends to join to get immediate access to 40% off this drop.
+              {
+                revisedCount === 0 && (
+                <div className={styles.dropsRewardBox_modal__greyBox}>
+                  <div className={styles.dropsRewardBox_modal__greyBox__text}>
+                    Invite friends to join to get immediate access to
+                    {' '}
+                    {currentDropReward}
+                    % off this drop.
+                  </div>
+                  <Row className="justify-content-center">
+                    <Col lg={12}>
+                      <div className={styles.dropsRewardBox_modal__btnSection}>
+                        <Button
+                          variant="dark"
+                          onClick={() => navigator?.share({
+                            title: 'Groupshop',
+                            text: `${socialText} ${shortActivateURL ?? activateURL}`,
+                          })}
+                        >
+                          Share with friends
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
                 </div>
-                <Row className="justify-content-center">
-                  <Col lg={12}>
-                    <div className={styles.dropsRewardBox_modal__btnSection}>
-                      <Button variant="dark" onClick={handleClose}>
-                        Share with friends
-                      </Button>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
+                )
+              }
               <div className={styles.dropsRewardBox_modal__greyBox}>
                 {/* <div className={styles.dropsRewardBox_modal__greyBox__heading}>
                   After you shop, you unlock 50% off.
                 </div> */}
                 <div className={styles.dropsRewardBox_modal__greyBox__text}>
-                  Or, enter your phone number below &  join
-                  the waitlist for our next drop. We’ll text you when it goes live.
+                  {
+                    revisedCount === 0
+                      ? ('Or, enter your phone number below &  join the waitlist for our next drop. We’ll text you when it goes live.')
+                      : ('Enter your phone number below & join the waitlist for our next drop. We’ll text you when it goes live.')
+                  }
                   <Row className="justify-content-center">
                     <Col lg={12}>
                       <div className={styles.ExpiredLiked_modal__btnGrey}>
