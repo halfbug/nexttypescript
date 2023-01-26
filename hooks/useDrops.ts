@@ -1,13 +1,12 @@
 import { useMutation } from '@apollo/client';
-import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
 import useAppContext from './useAppContext';
 import useCode from './useCode';
 
 export default function useDrops() {
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
-  const { gsctx, isDrops } = useAppContext();
+  const { gsctx, dispatch } = useAppContext();
   const { ownerCode, shop, discountCode } = useCode();
 
   const {
@@ -59,7 +58,14 @@ export default function useDrops() {
           },
         },
       },
-    }).then((res) => {
+    }).then(() => {
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          obSettings: { ...gsctx.obSettings, step: 1 },
+        },
+      });
       setShowObPopup(false);
     });
   };
