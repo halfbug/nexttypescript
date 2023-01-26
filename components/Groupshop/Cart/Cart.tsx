@@ -343,11 +343,11 @@ const Cart = ({
                           >
                             {currencySymbol}
                             {!spotlightProducts.includes(item.id)
-                              ? +(item.price) - +(dPrice(+(item?.price || 0))
+                              ? (+(item.price) - +(dPrice(+(item?.price || 0)))
                                 .toFixed(2).toString().replace('.00', ''))
-                              : +(item.price)
+                              : (+(item.price)
                               - +(disPrice(+(item?.price || 0),
-                                +store?.drops?.spotlightDiscount?.percentage!)
+                                +store?.drops?.spotlightDiscount?.percentage!))
                                 .toFixed(2).toString().replace('.00', ''))}
                             {/* {(+(item.price) - +(dPrice(+(item?.price || 0))))
                               .toFixed(2).toString().replace('.00', '')} */}
