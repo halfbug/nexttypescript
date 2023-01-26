@@ -26,13 +26,14 @@ const VideoWidget = () => {
     handleChange,
     display,
     videoNo,
-    mobileViewClick,
     updateTime,
     videoError,
     handleError,
     loadingStart,
     loadingEnd,
     isLoading,
+    handleWaiting,
+    handlePlaying,
   } = useVideoPlayer(videoRef);
 
   return (
@@ -142,6 +143,9 @@ const VideoWidget = () => {
               onLoadStart={() => loadingStart()}
               onLoadedData={() => loadingEnd()}
               onTouchStart={() => handleClick()}
+              onWaiting={() => handleWaiting()}
+              preload="auto"
+              onPlaying={() => handlePlaying()}
             />
             {isLoading && (
               <div style={{
@@ -187,6 +191,9 @@ const VideoWidget = () => {
             playsInline
             onLoadStart={() => loadingStart()}
             onLoadedData={() => loadingEnd()}
+            onWaiting={() => handleWaiting()}
+            preload="auto"
+            onPlaying={() => handlePlaying()}
           />
           {!isLoading ? (
             <div
@@ -305,6 +312,9 @@ const VideoWidget = () => {
               playsInline
               onLoadStart={() => loadingStart()}
               onLoadedData={() => loadingEnd()}
+              onWaiting={() => handleWaiting()}
+              preload="auto"
+              onPlaying={() => handlePlaying()}
             />
             {isLoading && (
               <div

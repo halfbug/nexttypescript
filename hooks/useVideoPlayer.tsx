@@ -139,7 +139,6 @@ const useVideoPlayer = (videoRef: any) => {
         ...control, height: '207', width: '152', mute: true, autoPlay: true,
       });
       videoRef.current.play();
-      setVideoNo(0);
     } else if ((control.height === '444' || control.height === '318') && closeType) {
       setType(2);
       setControl({
@@ -147,6 +146,7 @@ const useVideoPlayer = (videoRef: any) => {
       });
       videoRef.current.play();
     }
+    setVideoNo(0);
   };
 
   const handleLiveClick = () => {
@@ -160,10 +160,6 @@ const useVideoPlayer = (videoRef: any) => {
         ...control, height: '444', width: '250', mute: false, autoPlay: true,
       });
     }
-  };
-
-  const mobileViewClick = () => {
-    setVideoNo(0);
   };
 
   const handleError = () => {
@@ -187,6 +183,16 @@ const useVideoPlayer = (videoRef: any) => {
     setControl({ ...control, autoPlay: true });
   };
 
+  const handleWaiting = () => {
+    if (control.height === '444' || control.height === '318') {
+      setIsLoading(true);
+    }
+  };
+
+  const handlePlaying = () => {
+    setIsLoading(false);
+  };
+
   return {
     control,
     type,
@@ -198,13 +204,14 @@ const useVideoPlayer = (videoRef: any) => {
     handleChange,
     display,
     videoNo,
-    mobileViewClick,
     updateTime,
     videoError,
     handleError,
     loadingStart,
     loadingEnd,
     isLoading,
+    handleWaiting,
+    handlePlaying,
   };
 };
 
