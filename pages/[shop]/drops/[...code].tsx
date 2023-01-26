@@ -414,9 +414,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       </Head>
       <div className={styles.drops}>
         <header>
-          <div className="bg-black text-center py-1">
-            <span className="text-center text-white">Free shipping on orders $75+</span>
-          </div>
           <Header
             LeftComp={
               isModalForMobile
@@ -616,7 +613,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <>
                 {canBeUnlockedCB() !== 0 && (
                 <Col lg={12}>
-                  <h5 className="text-black font-bold">
+                  <h5 className="text-black font-bold mt-4">
                     🎉 Plus unlock $
                     {canBeUnlockedCB()}
                     {' '}
