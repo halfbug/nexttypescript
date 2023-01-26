@@ -755,7 +755,7 @@ const ProductDetail = ({
                       </ShowMoreText>
                     )}
                   </div>
-                  <div className={[styles.groupshop_buttons_wrapper, 'bg-white justify-content-center'].join(' ')}>
+                  <div className={[styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
                     {!isExpired ? (
                       <Button
                         variant="primary"
