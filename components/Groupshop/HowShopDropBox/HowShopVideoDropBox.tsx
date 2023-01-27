@@ -26,7 +26,7 @@ const HowShopDropVideoBox = ({
   };
 
   // temporary link for video
-  const tmpVideoSrc = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  const tmpVideoSrc = 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4';
   return (
     <>
       <Modal
@@ -58,7 +58,7 @@ const HowShopDropVideoBox = ({
               interval={50000}
             >
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video autoPlay muted loop>
+                <video key={1} autoPlay muted loop playsInline preload="auto">
                   <source src={tmpVideoSrc} type="video/mp4" />
                 </video>
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
@@ -79,7 +79,7 @@ const HowShopDropVideoBox = ({
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video autoPlay muted loop>
+                <video key={2} autoPlay muted loop playsInline preload="auto">
                   <source src={tmpVideoSrc} type="video/mp4" />
                 </video>
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
@@ -100,7 +100,7 @@ const HowShopDropVideoBox = ({
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video autoPlay muted loop>
+                <video key={3} autoPlay muted loop playsInline preload="auto">
                   <source src={tmpVideoSrc} type="video/mp4" />
                 </video>
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
@@ -129,7 +129,7 @@ const HowShopDropVideoBox = ({
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video autoPlay muted loop>
+                <video key={4} autoPlay muted loop playsInline preload="auto">
                   <source src={tmpVideoSrc} type="video/mp4" />
                 </video>
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
@@ -160,7 +160,7 @@ const HowShopDropVideoBox = ({
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video autoPlay muted loop>
+                <video key={5} autoPlay muted loop playsInline preload="auto">
                   <source src={tmpVideoSrc} type="video/mp4" />
                 </video>
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
