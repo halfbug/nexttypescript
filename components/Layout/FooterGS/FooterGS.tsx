@@ -356,9 +356,7 @@ const Footer = ({
                   Join the waitlist and we’ll text you when it’s your turn.
                 </p>
                 <div className="mt-3">
-                  <Button variant="light w-75 py-3">
-                    KLAVIYO FORM
-                  </Button>
+                  <iframe title="klaviyo-form" height="320" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form` : '/klaviyo-form'} />
                 </div>
 
               </>

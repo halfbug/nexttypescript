@@ -84,11 +84,7 @@ const GetNotify = ({
               <div>
                 <Row className="justify-content-center">
                   <Col lg={12}>
-                    <div className={styles.ExpiredLiked_modal__btnDarkGrey}>
-                      <Button variant="" onClick={handleClose}>
-                        KLAVIYO FORM
-                      </Button>
-                    </div>
+                    <iframe title="klaviyo-form" height="320" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form` : '/klaviyo-form'} />
                   </Col>
                 </Row>
               </div>
