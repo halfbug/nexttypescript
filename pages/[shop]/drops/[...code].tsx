@@ -807,7 +807,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </div>
         </ProductGrid>
 
-        <Footer LeftComp={undefined} RightComp={undefined} isDrops />
+        <Footer LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
         <ProductsSearch
           show={showps}
           handleClose={() => setshowps(false)}

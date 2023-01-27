@@ -26,6 +26,7 @@ interface FooterProps {
   LeftComp: React.ReactNode;
   RightComp: React.ReactNode;
   isDrops?:boolean;
+  setLearnHowDrops?: any;
 }
 
 export interface ISignUp {
@@ -34,14 +35,14 @@ export interface ISignUp {
 }
 
 const Footer = ({
-  LeftComp, RightComp, isDrops,
+  LeftComp, RightComp, isDrops, setLearnHowDrops,
 }: FooterProps) => {
   // const { isChannel } = useAppContext();
   const {
     getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
-
+  console.log('isDrops', isDrops);
   const [
     addSignUp,
     // eslint-disable-next-line no-unused-vars
@@ -225,9 +226,15 @@ const Footer = ({
             <div className=" text-center ">
               {isDrops && (
                 <>
-                  <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
-                    <a target="_blank"><strong>How it works</strong></a>
-                  </Link>
+                  <a
+                    onClick={() => setLearnHowDrops(true)}
+                    onKeyDown={() => setLearnHowDrops(true)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <strong>How it works</strong>
+
+                  </a>
                 </>
               )}
               {!isDrops && (
@@ -375,6 +382,7 @@ const Footer = ({
 };
 Footer.defaultProps = {
   isDrops: false,
+  setLearnHowDrops: () => true,
 };
 
 export default Footer;

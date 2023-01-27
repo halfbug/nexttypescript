@@ -342,15 +342,11 @@ const Cart = ({
                             className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
                           >
                             {currencySymbol}
-                            {!spotlightProducts.includes(item.id)
-                              ? (+(item.price) - +(dPrice(+(item?.price || 0)))
-                                .toFixed(2).toString().replace('.00', ''))
-                              : (+(item.price)
-                              - +(disPrice(+(item?.price || 0),
-                                +store?.drops?.spotlightDiscount?.percentage!))
-                                .toFixed(2).toString().replace('.00', ''))}
-                            {/* {(+(item.price) - +(dPrice(+(item?.price || 0))))
-                              .toFixed(2).toString().replace('.00', '')} */}
+                            {
+                              Number.isInteger((+(item.price) - +(dPrice(+(item?.price || 0)))))
+                                ? +(item.price) - +(dPrice(+(item?.price || 0)))
+                                : (+(item.price) - +(dPrice(+(item?.price || 0)))).toFixed(2)
+                            }
                             {' '}
                             OFF
                           </Badge>

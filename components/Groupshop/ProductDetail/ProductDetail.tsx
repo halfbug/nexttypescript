@@ -767,17 +767,20 @@ const ProductDetail = ({
                       {isExpired && 'Share to unlock'}
                       {!isExpired && 'Add to Cart'} */}
                         {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
-                        {PDBtnText}
+                        {loading ? <Spinner animation="border" size="sm" /> : <>{PDBtnText}</>}
+
                       </Button>
                     ) : (
                       <ShareButton
-                        label="share to unlock"
+                        // label="share to unlock"
                         shareurl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         className={styles.groupshop_Pd_addtoCart}
                         // onClick={(e) => handleCard(e)}
                         disabled={outofStock}
-                      />
+                      >
+                        {loading ? <Spinner animation="border" size="sm" /> : <>share to unlock</>}
+                      </ShareButton>
                     )}
 
                     {isForMobile === false ? (
