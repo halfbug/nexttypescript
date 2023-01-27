@@ -233,7 +233,11 @@ const ProductGrid = ({
                     <>
 
                       <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
-                        <span className={styles.groupshop__pcard_tag_price}>
+                        <span className={
+                          isDrops ? dStyles.drops__pcard_tag_price
+                            : styles.groupshop__pcard_tag_price
+                        }
+                        >
                           {currencySymbol}
                           {spotlightProducts.includes(prod.id) ? +(productPriceDiscount(+(prod.price), +((+store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                           {' '}
@@ -429,7 +433,12 @@ const ProductGrid = ({
                 isrc="/images/empty.png"
                 imgOverlay={(
                   <>
-                    <span className={styles.groupshop__pcard_tag_price}>
+                    <span
+                      className={
+                        isDrops ? dStyles.drops__pcard_tag_price
+                          : styles.groupshop__pcard_tag_price
+                      }
+                    >
                       {`${percentage}% OFF`}
                     </span>
                     <Button

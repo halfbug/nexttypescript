@@ -942,53 +942,16 @@
         margin: 0;
     }
 
-    &__closebtnlg {
-        @include media-breakpoint-down(sm) {
-            display: none;
-        }
-
-        display: flex;
-        justify-content: flex-end;
-        box-shadow: none !important;
-        border-bottom: none;
-
-        svg {
-            cursor: pointer;
-        }
-    }
-
-    &__closebtnsm {
-        @include media-breakpoint-up(sm) {
-            display: none;
-        }
-
-        display: flex;
-        justify-content: center;
-        border-bottom: none;
-
-        svg {
-            cursor: pointer;
-        }
-    }
-
     &__content {
-        border-radius: 12px;
         background-color: transparent;
-        @include media-breakpoint-down(sm) {
-            border-radius: 12px 12px 0px 0px;
-            position: fixed;
-            max-height: -webkit-fill-available;
-            max-height: -moz-available;
-            overflow: scroll;
-        }
     }
 
     &__body {
-        padding: 0 100px 60px 100px;
-
-        @include media-breakpoint-down(sm) {
-            padding: 0px 20px 20px 20px;
-        }
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     &__top {
@@ -996,6 +959,7 @@
         margin-bottom: 10px;
         background: #F0EEEC;
         border-radius: 20px;
+        width: 100%;
         &__icon {
             text-align: center
         }
@@ -1011,7 +975,7 @@
             color: #000000;
 
             @include media-breakpoint-down(sm) {
-                font-size: 20px;
+                font-size: 18px;
                 line-height: 30px;
             }
         }
@@ -1024,7 +988,7 @@
             color: #000000;
 
             @include media-breakpoint-down(sm) {
-                font-size: 16px;
+                font-size: 14px;
                 line-height: 24px;
             }
         }
@@ -1039,7 +1003,6 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                height: 70vh;
                 text-align: center;
                 padding: 12px 34px;
                 p {
@@ -1056,9 +1019,9 @@
                 video {
                     position: absolute;
                     z-index: 0;
-                    width: 100%;
+                    object-fit: cover;
                     height: 100%;
-                    object-fit: fill;
+                    width: 100%;
                     border-radius: 20px;
                 }
             }
@@ -1068,7 +1031,7 @@
                 flex-direction: column;
                 z-index: 1;
                 margin-top: 16px;
-                min-height: 70vh;
+                height: 580px;
             }
             &__tierTxt {
                 font-family: 'DM Sans';
@@ -1083,6 +1046,7 @@
 
     &__btnSection {
         @extend .text-center, .mt-3;
+        width: 100%;
         button {
             padding: 0px 30px;
             width: -webkit-fill-available;

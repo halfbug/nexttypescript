@@ -79,12 +79,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .p-1;
       border: 1px solid #E9E7E4;
       border-radius: 3px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       color: $black;
       line-height: 13px;
       margin: 0px 3px;
       background-color: white;
+      text-decoration: none;
     }
     p{
       color: $black;
@@ -991,12 +992,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       &_price {
         @extend .drops__pcard_tag;
         top: 10px;
-        font-weight: 700!important;
+        font-weight: 500 !important;
         position: absolute;
         left: 5px;
-        border: 1px solid #000000;
         border-radius: 6px !important;
         color: #000000;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.10312) !important;
         @include media-breakpoint-down(md) {
           font-size: 10px !important;
         }
