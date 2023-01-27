@@ -86,13 +86,19 @@ h4 {
 			@extend .rounded-circle;
 			margin-right: 4px;
 			margin-left: 4px;
-			width: 15px;
-			height: 15px;
+			width: 10px;
+			height: 10px;
 			background-color: black;
 			opacity: 1;
 			&[aria-current="false"] {
 				background-color: white;
 			}
 		}
+	}
+}
+
+.videoCarousel {
+	.carousel-indicators {
+		margin-bottom: 2rem;
 	}
 }

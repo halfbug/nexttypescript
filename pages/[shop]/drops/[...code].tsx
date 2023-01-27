@@ -513,7 +513,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </div>
               </Col>
               <Col xs={6} className={styles.drops__counter}>
-                <h6 className="text-center">Store expires in</h6>
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
@@ -575,7 +574,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
           </Container>
         </header>
-        <Hero bannerImage={bannerImage}>
+        <Hero
+          bannerImage={bannerImage}
+          isDrops
+        >
           <Container className={styles.drops__hero__content}>
             <Row className={styles.drops__hero_welcome}>
               <Col lg={12}>

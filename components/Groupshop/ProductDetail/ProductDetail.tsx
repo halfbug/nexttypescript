@@ -4,6 +4,7 @@ import React, {
   useState, useEffect, useContext, useCallback, useRef,
 } from 'react';
 import styles from 'styles/Groupshop.module.scss';
+import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
@@ -392,7 +393,7 @@ const ProductDetail = ({
           <Row>
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
-                <span className={styles.groupshop__pcard_tag_priceMobile}>
+                <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
                   {currencySymbol}
                   {parseFloat(productPriceDiscount(+(product?.price ?? ''), spotlightProducts.includes(product?.id!) ? +store?.drops?.spotlightDiscount?.percentage! : +percentage))}
                   {' '}

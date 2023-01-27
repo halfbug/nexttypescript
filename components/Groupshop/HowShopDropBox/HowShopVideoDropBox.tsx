@@ -51,6 +51,7 @@ const HowShopDropVideoBox = ({
           </div>
           <Carousel
             className={styles.howShopDropVideoBox_modal__carousel}
+            bsPrefix="videoCarousel carousel"
             controls={false}
           >
             <Carousel.Item
