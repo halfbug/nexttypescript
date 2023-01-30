@@ -441,7 +441,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <Row className={['gx-0', styles.drops__top].join(' ')}>
               <Col md={3} xs={3}>
                 <IconButton
-                  icon={<Search size={24} />}
+                  icon={<Search size={isModalForMobile ? 24 : 16} />}
                   className={styles.drops__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
@@ -552,7 +552,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   className={styles.drops__hero_share_btn}
                 />
                 <IconButton
-                  icon={<Handbag size={24} />}
+                  icon={<Handbag size={isModalForMobile ? 14 : 24} />}
                   className={styles.drops__hero_iconBtn}
                   onClick={() => setshowCart(true)}
                 >
@@ -580,8 +580,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         >
           <Container className={styles.drops__hero__content}>
             <Row className={styles.drops__hero_welcome}>
-              <Col lg={12}>
-                <h1 className="text-black font-bold">
+              <Col lg={12} className="mb-2">
+                <h1 className="text-black fw-bolder">
                   Get
                   {' '}
                   {currentDropReward}
@@ -615,16 +615,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <>
                 {canBeUnlockedCB() !== 0 && (
                 <Col lg={12}>
-                  <h5 className="text-black font-bold mt-4">
-                    🎉 Plus unlock $
-                    {canBeUnlockedCB()}
-                    {' '}
-                    cashback for
+                  <h5 className="text-black fw-light mt-4">
+                    🎉 Plus unlock
+                    <span className="fw-bolder">
+                      {' $'}
+                      {canBeUnlockedCB()}
+                      {' cashback '}
+                    </span>
+                    for
                   </h5>
                 </Col>
                 )}
 
-                <div className="py-2 d-flex flex-row justify-content-center">
+                <div className="pt-2 d-flex flex-row justify-content-center">
                   <Members
                     names={gsctx.members?.map(
                       (mem: any, index: any) => ({

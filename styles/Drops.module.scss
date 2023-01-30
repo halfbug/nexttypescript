@@ -221,7 +221,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__top {
-    @extend .py-3,
+    @extend .py-2,
       .d-flex,
       .justify-content-center,
       .align-items-center,
@@ -642,7 +642,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
     }
     &_welcome {
-      @extend .align-items-start, .text-center, .mb-4, .mt-4;
+      @extend .align-items-start, .text-center;
       // @include media-breakpoint-down(lg) {
       // 	display: none;;
       // }
@@ -1209,12 +1209,12 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
   }
   &_row {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 
     @include media-breakpoint-down(sm) {
-      padding-bottom: 1.5rem;
-      padding-top: 1.5rem;
+      padding-bottom: 1rem;
+      padding-top: 1rem;
     }
   }
 
