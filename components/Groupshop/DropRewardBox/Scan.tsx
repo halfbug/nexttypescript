@@ -62,15 +62,11 @@ const DropsRewardBox = ({
           </Row>
           <Row className={styles.Scan_modal__body_boxWidth}>
             <div className={styles.Scan_modal__transparentBox}>
-              <div className={[styles.Scan_modal__transparentBox_text, ''].join(' ')}>
-                <div className="mb-2">
-                  <span>Scan the QR code to shop on mobile. No app download needed.</span>
-                </div>
-                <QR />
+              <div className={[styles.Scan_modal__transparentBox__text, 'mb-2'].join(' ')}>
+                Scan the QR code to shop on mobile. No app download needed.
+                <QR className="my-2" />
                 <br />
-                <div className="mt-2">
-                  <span>Or enter your number below and we’ll text you the link to this drop.</span>
-                </div>
+                Or enter your number below and we’ll text you the link to this drop.
               </div>
             </div>
 
