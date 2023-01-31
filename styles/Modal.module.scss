@@ -1069,25 +1069,25 @@
         }
     }
 }
-@media (max-width: 576px) {
-    .Scan_modal{
-        display: none;
-    }
- }
+// @media (max-width: 576px) {
+//     .Scan_modal{
+//         display: none;
+//     }
+//  }
 
 .Scan_modal {
     // @extend .d-sm-none;
     width: fit-content;
 
-    @include media-breakpoint-down(sm) {
-    display:none;
-    }
+    // @include media-breakpoint-down(sm) {
+    // display:none;
+    // }
 
 
     &__closebtnlg {
-        @include media-breakpoint-down(sm) {
-            display: none;
-        }
+        // @include media-breakpoint-down(sm) {
+        //     display: none;
+        // }
 
         display: flex;
         justify-content: flex-end;
@@ -1100,9 +1100,9 @@
     }
 
     &__closebtnsm {
-        @include media-breakpoint-up(sm) {
-            display: none;
-        }
+        // @include media-breakpoint-up(sm) {
+        //     display: none;
+        // }
 
         display: flex;
         justify-content: center;

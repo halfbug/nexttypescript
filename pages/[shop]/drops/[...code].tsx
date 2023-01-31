@@ -629,7 +629,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </Col>
                 )}
 
-                <div className="pt-2 d-flex flex-row justify-content-center">
+                <div className="flex-wrap pt-2 d-flex flex-row justify-content-center">
                   <Members
                     names={gsctx.members?.map(
                       (mem: any, index: any) => ({
@@ -894,10 +894,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         show
         handleClose={() => {}}
       /> */}
+      {!isModalForMobile && (
       <Scan
         show
         handleClose={() => {}}
       />
+      )}
     </>
   );
 };

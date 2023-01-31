@@ -5,11 +5,13 @@ import {
   Button,
   Col, Modal, Row,
 } from 'react-bootstrap';
+import Cross from 'assets/images/CrossLg.svg';
 import GroupshopIcon from 'assets/images/gsIconWhite.svg';
-import QR from 'assets/images/QR.svg';
+import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import QR from 'assets/images/QR.svg';
 
 interface DropsRewardBoxProps extends RootProps {
   show: boolean;
@@ -17,7 +19,7 @@ interface DropsRewardBoxProps extends RootProps {
 
 }
 
-const DropsRewardBox = ({
+const DropsScanBox = ({
   show = false, handleClose,
 }: DropsRewardBoxProps) => {
   const closeModal = (e: any) => {
@@ -68,15 +70,15 @@ const DropsRewardBox = ({
                 <br />
                 Or enter your number below and we’ll text you the link to this drop.
               </div>
-            </div>
 
-            <Row className="text-center">
-              <div className={styles.Scan_modal__transparentBox__btnSection}>
-                <Button className={styles.Scan_modal__transparentBox_greybtn} variant="" onClick={handleClose}>
-                  FORM GOES HERE
-                </Button>
-              </div>
-            </Row>
+              <Row className="text-center">
+                <div className={styles.Scan_modal__transparentBox__btnSection}>
+                  <Button variant="light" onClick={handleClose}>
+                    FORM GOES HERE
+                  </Button>
+                </div>
+              </Row>
+            </div>
           </Row>
         </Modal.Body>
       </Modal>
@@ -84,4 +86,4 @@ const DropsRewardBox = ({
   );
 };
 
-export default DropsRewardBox;
+export default DropsScanBox;
