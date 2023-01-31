@@ -58,24 +58,24 @@ const ExpiredLinked = ({
         onHide={closeModal}
         size="lg"
         centered
-        dialogClassName={styles.dropsRewardBox_modal}
-        contentClassName={styles.dropsRewardBox_modal__content}
+        dialogClassName={styles.expiredLinked_modal}
+        contentClassName={styles.expiredLinked_modal__content}
       >
-        <Modal.Header className={styles.dropsRewardBox_modal__closebtnlg}>
+        <Modal.Header className={styles.expiredLinked_modal__closebtnlg}>
           {/* <Row onClick={handleClose}>
             <div><Cross /></div>
           </Row> */}
         </Modal.Header>
-        <Modal.Header className={styles.dropsRewardBox_modal__closebtnsm}>
+        <Modal.Header className={styles.expiredLinked_modal__closebtnsm}>
           {/* <Row onClick={handleClose}>
             <div><ArrowDown /></div>
           </Row> */}
         </Modal.Header>
-        <Modal.Body className={styles.dropsRewardBox_modal__body}>
+        <Modal.Body className={styles.expiredLinked_modal__body}>
           <Row className="mx-0">
             <Col lg={12} className="px-0">
-              <div className={styles.dropsRewardBox_modal__top}>
-                <div className={styles.dropsRewardBox_modal__top__icon}>
+              <div className={styles.expiredLinked_modal__top}>
+                <div className={styles.expiredLinked_modal__top__icon}>
                   <GroupshopIcon />
                 </div>
                 {
@@ -100,14 +100,14 @@ const ExpiredLinked = ({
                   <span className="mx-2">:</span>
                   <span className="border shadow-sm w-auto h-25 px-3 py-1 rounded-3">0 mins</span>
                   <span className="mx-2">:</span>
-                  <span className="border shadow-sm w-auto h-25 px-3 py-1 rounded-3">0 sec</span>
+                  <span className="border shadow-sm w-auto h-25 px-3 py-1 rounded-3">0 secs</span>
                 </div>
 
               </div>
               {
                 revisedCount === 0 && (
-                <div className={styles.dropsRewardBox_modal__greyBox}>
-                  <div className={styles.dropsRewardBox_modal__greyBox__text}>
+                <div className={styles.expiredLinked_modal__greyBox}>
+                  <div className={styles.expiredLinked_modal__greyBox__text}>
                     Invite friends to join to get immediate access to
                     {' '}
                     {currentDropReward}
@@ -115,7 +115,7 @@ const ExpiredLinked = ({
                   </div>
                   <Row className="justify-content-center">
                     <Col lg={12}>
-                      <div className={styles.dropsRewardBox_modal__btnSection}>
+                      <div className={styles.expiredLinked_modal__btnSection}>
                         <Button
                           variant="dark"
                           onClick={() => navigator?.share({
@@ -131,11 +131,11 @@ const ExpiredLinked = ({
                 </div>
                 )
               }
-              <div className={styles.dropsRewardBox_modal__greyBox}>
-                {/* <div className={styles.dropsRewardBox_modal__greyBox__heading}>
+              <div className={styles.expiredLinked_modal__greyBox}>
+                {/* <div className={styles.expiredLinked_modal__greyBox__heading}>
                   After you shop, you unlock 50% off.
                 </div> */}
-                <div className={styles.dropsRewardBox_modal__greyBox__text}>
+                <div className={styles.expiredLinked_modal__greyBox__text}>
                   {
                     revisedCount === 0
                       ? ('Or, enter your phone number below &  join the waitlist for our next drop. We’ll text you when it goes live.')
