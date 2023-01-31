@@ -55,6 +55,8 @@ import Members from 'components/Groupshop/Members/Members';
 import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
+import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
+import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
@@ -892,6 +894,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         show
         handleClose={() => {}}
       /> */}
+      <Scan
+        show
+        handleClose={() => {}}
+      />
     </>
   );
 };
