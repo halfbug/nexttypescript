@@ -80,6 +80,8 @@ export default function useDeal() {
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
 
+  const currencySymbolDiscovery = (currency: any) => getSymbolFromCurrency(currency || 'USD');
+
   const discount = gsctx?.discountCode?.percentage || '0';
 
   const dPrice = useCallback((price: number) => price - ((+discount / 100) * price), [gsctx]);
@@ -672,5 +674,6 @@ export default function useDeal() {
     getDealUserName,
     getBuyersDiscover,
     disPrice,
+    currencySymbolDiscovery,
   };
 }

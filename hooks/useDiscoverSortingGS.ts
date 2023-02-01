@@ -29,6 +29,7 @@ const useDiscoverSortingGS = (matchingGS: any, matchingStoreIds: any) => {
         products: tempProduct,
         url: el?.groupshops?.url,
         members: el?.members,
+        currency: el?.currencyCode,
       });
     });
     const finalGS:any = matchingStoreIds.map((prod:any) => showingGS.find(

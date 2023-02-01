@@ -52,13 +52,14 @@ type ProductGridProps = {
   membersForDiscover?: any[];
   brandurl?: string;
   discoveryDiscount?: string;
+  currency?: string | undefined;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
-  discoveryDiscount, urlForActivation, ...props
+  discoveryDiscount, urlForActivation, currency, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -89,7 +90,7 @@ const ProductGrid = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
-    disPrice,
+    disPrice, currencySymbolDiscovery,
   } = useDeal();
   const {
     spotlightProducts,
@@ -118,13 +119,13 @@ const ProductGrid = ({
   const priceUI = (prod: any) => (
     <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : 'd-flex row-reverse justify-left'].join(' ')}>
       <span className={isDrops ? 'me-2' : ''}>
-        {currencySymbol}
+        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {!isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
         {isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
       {' '}
       <span className="text-decoration-line-through fw-light me-1">
-        {currencySymbol}
+        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {/* {prod.price} */}
         {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
       </span>
@@ -238,7 +239,7 @@ const ProductGrid = ({
                             : styles.groupshop__pcard_tag_price
                         }
                         >
-                          {currencySymbol}
+                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
                           {spotlightProducts.includes(prod.id) ? +(productPriceDiscount(+(prod.price), +((+store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                           {' '}
                           OFF
@@ -348,13 +349,13 @@ const ProductGrid = ({
                       {/* {isDrops && priceUI(prod)} */}
                       <h5 className="pt-2 fw-bold">
                         <span className="text-decoration-line-through fw-light me-1">
-                          {currencySymbol}
+                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
                           {/* {prod.price} */}
                           {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
                         </span>
                         {' '}
                         <span>
-                          {currencySymbol}
+                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
                           {spotlightProducts.includes(prod.id) && !isSuggestion && disPrice(+(prod.price), +store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')}
                           {!spotlightProducts.includes(prod.id) && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
                           {!spotlightProducts.includes(prod.id) && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
@@ -565,6 +566,7 @@ ProductGrid.defaultProps = {
   membersForDiscover: [],
   brandurl: '',
   discoveryDiscount: '',
+  currency: '',
 };
 
 export default ProductGrid;
