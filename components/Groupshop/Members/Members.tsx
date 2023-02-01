@@ -31,25 +31,21 @@ const Members = ({
   const [custName, setCustName] = useState('');
   const [showRewardModel, setshowRewardModel] = useState(false);
   const [pendingRewards, setpendingRewards] = useState(0);
-  const [isOwner, setIsOwner] = useState(true);
+  const [isOwner, setIsOwner] = useState(false);
   const { formatNumber } = useUtilityFunction();
   const {
     gsctx: groupshop,
     dispatch,
   } = useAppContext();
-  let ownerFname = '';
-  let ownerLname = '';
+  let ownerOrderId = '';
+  let ownerEmail = '';
   if (page === 'partner') {
-    ownerFname = (groupshop?.partnerDetails?.fname) ? groupshop?.partnerDetails?.fname : '';
-    ownerLname = (groupshop?.partnerDetails?.lname) ? groupshop?.partnerDetails?.lname : '';
+    ownerEmail = (groupshop?.partnerDetails?.email) ? groupshop?.partnerDetails?.email : '';
   } else if (page === 'product-details' || page === 'drops') {
-    ownerFname = (groupshop?.members[0]?.orderDetail.customer.firstName) ? groupshop?.members[0]?.orderDetail.customer.firstName : '';
-    ownerLname = (groupshop?.members[0]?.orderDetail.customer.lastName) ? groupshop?.members[0]?.orderDetail.customer.lastName.substr(0, 1) : '';
+    ownerOrderId = (groupshop?.members[0]?.orderId) ? groupshop?.members[0]?.orderId : '';
   } else {
-    ownerFname = (groupshop?.customerDetail) ? groupshop?.customerDetail.firstName : '';
-    ownerLname = (groupshop?.customerDetail) ? groupshop?.customerDetail?.lastName.substr(0, 1) : '';
+    ownerEmail = (groupshop?.customerDetail?.email) ? groupshop?.customerDetail?.email : '';
   }
-  const ownerName = `${ownerFname} ${ownerLname}`;
 
   const countTotalPrice = (lineItems: any) => {
     let totalPrice = 0;
@@ -61,6 +57,11 @@ const Members = ({
   };
 
   const handleClick = (member: any, index: any) => {
+    if (member.email === ownerEmail || member.orderId === ownerOrderId) {
+      setIsOwner(true);
+    } else {
+      setIsOwner(false);
+    }
     setCustName(member.fname);
     const orderPrice = countTotalPrice(member.lineItems);
     if (page === 'drops') {
@@ -98,7 +99,7 @@ const Members = ({
         <>
           <div>
             <Button onClick={(e) => handleClick(member, idx)} variant="light" className={styles.groupshop__top_item}>
-              {member.fname === ownerName && '👑'}
+              {(member.email === ownerEmail || member.orderId === ownerOrderId) && '👑'}
               {' '}
               {member.fname}
             </Button>
@@ -142,7 +143,6 @@ const Members = ({
       <AvailablePartnerRewardsBox
         show={showRewardModel}
         name={custName}
-        ownerName={ownerName}
         discount={discount}
         brandname={brandname}
         fullshareurl={fullshareurl}

@@ -655,6 +655,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           mem.orderDetail.customer.firstName ? mem?.orderDetail.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                         }`,
                         lineItems: mem.lineItems,
+                        email: mem.orderDetail.customer.email,
+                        orderId: mem.orderId,
                         availedDiscount: mem.availedDiscount,
                       }),
                     )}

@@ -572,6 +572,8 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
                         }`,
                         lineItems: mem.lineItems,
+                        email: mem.customerInfo.email,
+                        orderId: mem.orderId,
                       }),
                     )}
                     cashback={['']}
@@ -741,6 +743,8 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       mem.customerInfo.firstName ? mem?.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo.lastName
                     }`,
                     lineItems: mem.lineItems,
+                    email: mem.customerInfo.email,
+                    orderId: mem.orderId,
                   }),
                 )}
                 // names={['name']}
