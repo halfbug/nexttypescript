@@ -638,7 +638,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   </h5>
                 </Col>
                 )}
-
+                {
+                  gsctx.members.length > 2 && (
+                    <Col lg={12}>
+                      <h5 className="text-black fw-light mt-4">
+                        🛍 Shopping with friends is better
+                      </h5>
+                    </Col>
+                  )
+                }
                 <div className="flex-wrap pt-2 d-flex flex-row justify-content-center">
                   <Members
                     names={gsctx.members?.map(
@@ -868,7 +876,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setLearnHow(false)}
         />
         <HowShopDropVideoBox
-          show={showObPopup}
+          show={!isExpired && showObPopup}
           handleClose={updateOnboarding}
         />
         <DropsRewardBox
