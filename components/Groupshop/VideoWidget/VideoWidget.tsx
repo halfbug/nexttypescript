@@ -130,6 +130,7 @@ const VideoWidget = () => {
             <video
               key={source[videoNo]}
               ref={videoRef}
+              className="video-mobile"
               style={{ objectFit: 'cover', borderRadius: '15px', display: `${isLoading ? 'none' : 'block'}` }}
               height={control.height}
               width={control.width}
@@ -146,6 +147,7 @@ const VideoWidget = () => {
               onWaiting={() => handleWaiting()}
               preload="auto"
               onPlaying={() => handlePlaying()}
+              controls={false}
             />
             {isLoading && (
               <div style={{
@@ -179,6 +181,7 @@ const VideoWidget = () => {
           <video
             key={source[videoNo]}
             ref={videoRef}
+            className="video-mobile"
             style={{ objectFit: 'cover', borderRadius: '15px' }}
             height={30}
             width={152}
@@ -194,6 +197,7 @@ const VideoWidget = () => {
             onWaiting={() => handleWaiting()}
             preload="auto"
             onPlaying={() => handlePlaying()}
+            controls={false}
           />
           {!isLoading ? (
             <div
@@ -299,6 +303,7 @@ const VideoWidget = () => {
             <video
               key={source[videoNo]}
               ref={videoRef}
+              className="video-mobile"
               style={{ objectFit: 'cover', borderRadius: '15px', display: `${isLoading ? 'none' : 'block'}` }}
               height={control.height}
               width={control.width}
@@ -315,6 +320,7 @@ const VideoWidget = () => {
               onWaiting={() => handleWaiting()}
               preload="auto"
               onPlaying={() => handlePlaying()}
+              controls={false}
             />
             {isLoading && (
               <div

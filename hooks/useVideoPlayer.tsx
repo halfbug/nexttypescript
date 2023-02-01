@@ -104,6 +104,7 @@ const useVideoPlayer = (videoRef: any) => {
       });
     } else if (display === 'mobile' && control.height === '207') {
       videoRef.current.currentTime = 0;
+      videoRef.current.setAttribute('muted', '');
       setTimeout(() => {
         videoRef.current.play();
       }, 100);
