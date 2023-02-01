@@ -47,8 +47,6 @@ const DropsScanBox = ({
         dialogClassName={styles.Scan_modal}
         contentClassName={styles.Scan_modal__content}
       >
-        <Modal.Header className={[styles.Scan_modal__closebtnlg, 'border-0 bg-transparent'].join(' ')} />
-        <Modal.Header className={styles.Scan_modal__closebtnsm} />
         <Modal.Body className={[styles.Scan_modal__body, ''].join(' ')}>
           <Row className="text-center">
             <div className={[styles.Scan_modal__top, 'my-3'].join(' ')}>
@@ -64,9 +62,11 @@ const DropsScanBox = ({
           </Row>
           <Row className={styles.Scan_modal__body_boxWidth}>
             <div className={styles.Scan_modal__transparentBox}>
-              <div className={[styles.Scan_modal__transparentBox__text, 'mb-2'].join(' ')}>
-                Scan the QR code to shop on mobile. No app download needed.
-                <QR className="my-2" />
+              <div className={[styles.Scan_modal__transparentBox__text, ''].join(' ')}>
+                <div className="mb-2">
+                  <span>Scan the QR code to shop on mobile. No app download needed.</span>
+                </div>
+                <QR />
                 <br />
                 Or enter your number below and we’ll text you the link to this drop.
               </div>

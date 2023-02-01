@@ -1140,7 +1140,8 @@
         }
 
         &_boxWidth{
-            @extend .d-flex, .justify-content-center, .p-4, .mt-3, .text-center, .bg-white, .rounded-3;
+            @extend .d-flex, .justify-content-center, .mt-3, .text-center, .bg-white, .rounded-3;
+            padding: 40px;
             max-width: 524px;
             margin: 0 auto;
         }
@@ -1174,7 +1175,7 @@
     }
     &__transparentBox {
         text-align: center;
-        padding: 15px;
+        padding: 15px 0;
         width:329px;
 
         &_greybtn{
