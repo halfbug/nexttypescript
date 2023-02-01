@@ -48,7 +48,7 @@ const HowShopDropVideoBox = ({
           <div className={styles.howShopDropVideoBox_modal__top}>
             <h3>
               {customerDetail?.firstName?.charAt(0)?.toUpperCase()!
-                + customerDetail?.firstName?.slice(1)!}
+                + customerDetail?.firstName?.split(' ')[0]?.slice(1)!}
               , you’re off the waitlist.
             </h3>
             <div className={styles.howShopDropVideoBox_modal__top__howTxt}>
