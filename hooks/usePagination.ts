@@ -20,11 +20,12 @@ type PaginationProps<T> = {
     items: T[],
     siblingCount: number,
     id?: string,
+    showPagination?: boolean,
 //   currentPage: number,
 }
 
 const usePagination = <T extends {}>({
-  maxrows, screens, items, dimensions, siblingCount, id,
+  maxrows, screens, items, dimensions, siblingCount, id, showPagination,
 }:PaginationProps<T>) => {
   // const [ref, dimensions] = useDimensions();
   const [breakPoint, setBreakPoint] = useState<string>('sm');
@@ -83,7 +84,7 @@ const usePagination = <T extends {}>({
       ? (currentPage - 1) * pagesize : currentPage - 1;
     const end = (currentPage > 0)
       ? currentPage * pagesize : pagesize;
-    setRenderItems(items.slice(start, end));
+    setRenderItems(showPagination ? items.slice(start, end) : items);
   };
 
   const range = (start: number, end: number) => Array(end - start + 1)

@@ -728,6 +728,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           id="latestdrops"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
+          showPagination={false}
         />
 
         <ProductGrid
@@ -746,6 +747,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           id="bestsellerdrops"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
+          showPagination={false}
         >
           {/* <Row>
             <Col>
@@ -877,10 +879,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={openLearnHow}
           handleClose={() => setLearnHow(false)}
         />
+        {isModalForMobile && (
         <HowShopDropVideoBox
           show={!isExpired && showObPopup}
           handleClose={updateOnboarding}
         />
+        )}
         <DropsRewardBox
           show={dropReward}
           handleClose={() => setDropReward(false)}
@@ -889,7 +893,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showSignup}
           handleClose={() => setSignup(false)}
         />
-        <ExpiredLinked show={isExpired} handleClose={() => {}} />
+        {isModalForMobile && <ExpiredLinked show={isExpired} handleClose={() => {}} />}
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile

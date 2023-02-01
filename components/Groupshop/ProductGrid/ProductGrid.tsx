@@ -53,13 +53,14 @@ type ProductGridProps = {
   brandurl?: string;
   discoveryDiscount?: string;
   currency?: string | undefined;
+  showPagination?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
-  discoveryDiscount, urlForActivation, currency, ...props
+  discoveryDiscount, urlForActivation, currency, showPagination, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -75,6 +76,7 @@ const ProductGrid = ({
     items: products || [],
     siblingCount: 4,
     id,
+    showPagination,
   });
 
   const fillerz = pageSize === renderItems?.length ? 0 : 1;
@@ -489,7 +491,7 @@ const ProductGrid = ({
             </Col>
           )) : <></>}
       </Row>
-      {!isDrops
+      {showPagination
       && (
       <Row>
         <Col>
@@ -576,6 +578,7 @@ ProductGrid.defaultProps = {
   brandurl: '',
   discoveryDiscount: '',
   currency: '',
+  showPagination: true,
 };
 
 export default ProductGrid;
