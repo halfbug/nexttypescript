@@ -11,6 +11,7 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import useAppContext from 'hooks/useAppContext';
 
 interface GetNotifyProps extends RootProps {
   show: boolean;
@@ -21,6 +22,8 @@ interface GetNotifyProps extends RootProps {
 const GetNotify = ({
   show = false, handleClose,
 }: GetNotifyProps) => {
+  const { gsctx } = useAppContext();
+  const { store } = gsctx;
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
     // setSelected(undefined);
@@ -73,7 +76,10 @@ const GetNotify = ({
               </div>
               <div className={styles.dropsRewardBox_modal__greyBox}>
                 <div className={styles.dropsRewardBox_modal__greyBox__text}>
-                  Up to 75% off premium brands.
+                  Up to
+                  {' '}
+                  {store?.drops?.rewards?.maximum}
+                  % off premium brands.
                 </div>
               </div>
               <div className={styles.dropsRewardBox_modal__greyBox}>

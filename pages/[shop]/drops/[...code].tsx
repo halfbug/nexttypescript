@@ -55,9 +55,10 @@ import Members from 'components/Groupshop/Members/Members';
 import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
+import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
 import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
 import Scan from 'components/Groupshop/DropRewardBox/Scan';
-import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
+// import useCountDown from 'hooks/useCountDown';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -104,6 +105,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
+  const [showSignup, setSignup] = useState<boolean>(false);
 
   useEffect(() => {
     if (DropGroupshop.id && pending) {
@@ -164,6 +166,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const {
     days, hrs, mins, secs,
   } = getDateDifference();
+
+  // const {
+  //   count: {
+  //     days, hours: hrs, minutes: mins, seconds: secs,
+  //   },
+  // } = useCountDown();
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
@@ -409,8 +417,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href={meta.photo} as="image" />
-        <meta property="og:image" content={meta.photo} />
+        <link rel="preload" nonce="" href="images/meta_bg.jpg" as="image" />
+        <meta property="og:image" content="images/meta_bg.jpg" />
+        {/* <link rel="preload" nonce="" href={meta.photo} as="image" />
+        <meta property="og:image" content={meta.photo} /> */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
@@ -432,6 +442,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <Button2
                 variant="primary"
                 className="rounded-pill bg-black"
+                onClick={() => {
+                  setSignup(true);
+                }}
               >
                 Sign up
               </Button2>
@@ -443,7 +456,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <Row className={['gx-0', styles.drops__top].join(' ')}>
               <Col md={3} xs={3}>
                 <IconButton
-                  icon={<Search size={isModalForMobile ? 24 : 16} />}
+                  icon={<Search size={24} />}
                   className={styles.drops__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
@@ -554,7 +567,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   className={styles.drops__hero_share_btn}
                 />
                 <IconButton
-                  icon={<Handbag size={isModalForMobile ? 14 : 24} />}
+                  icon={<Handbag size={24} />}
                   className={styles.drops__hero_iconBtn}
                   onClick={() => setshowCart(true)}
                 >
@@ -582,8 +595,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         >
           <Container className={styles.drops__hero__content}>
             <Row className={styles.drops__hero_welcome}>
-              <Col lg={12} className="mb-2">
-                <h1 className="text-black fw-bolder">
+              <Col lg={12}>
+                <h1 className="text-black font-bold">
                   Get
                   {' '}
                   {currentDropReward}
@@ -617,14 +630,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <>
                 {canBeUnlockedCB() !== 0 && (
                 <Col lg={12}>
-                  <h5 className="text-black fw-light mt-4">
-                    🎉 Plus unlock
-                    <span className="fw-bolder">
-                      {' $'}
-                      {canBeUnlockedCB()}
-                      {' cashback '}
-                    </span>
-                    for
+                  <h5 className="text-black font-bold mt-4">
+                    🎉 Plus unlock $
+                    {canBeUnlockedCB()}
+                    {' '}
+                    cashback for
                   </h5>
                 </Col>
                 )}
@@ -637,6 +647,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                           mem.orderDetail.customer.firstName ? mem?.orderDetail.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
                         }`,
                         lineItems: mem.lineItems,
+                        availedDiscount: mem.availedDiscount,
                       }),
                     )}
                     cashback={['']}
@@ -863,6 +874,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <DropsRewardBox
           show={dropReward}
           handleClose={() => setDropReward(false)}
+        />
+        <GetNotify
+          show={showSignup}
+          handleClose={() => setSignup(false)}
         />
         <ExpiredLinked show={isExpired} handleClose={() => {}} />
         {isModalForMobile && (

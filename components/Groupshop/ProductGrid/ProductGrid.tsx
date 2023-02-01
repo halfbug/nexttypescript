@@ -366,17 +366,26 @@ const ProductGrid = ({
                       <h5 className="fw-bold text-truncate">{prod.title}</h5>
                       {prod.outofstock
                         ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>)
-                        : prod.purchaseCount && (
+                        : ((prod.purchaseCount && !isDrops) && (
                         <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
                           { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
                           { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
                           { prod.purchaseCount > 100 ? <>🎉</> : ''}
                           <i>
                             {`${prod.purchaseCount} people shopped`}
-
                           </i>
                         </p>
-                        )}
+                        ))
+                        || (prod.secondaryCount && isDrops && (
+                        <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
+                          { prod.secondaryCount >= 1 && prod.secondaryCount <= 30 ? <>🔥</> : ''}
+                          { prod.secondaryCount > 30 && prod.secondaryCount <= 100 ? <>⚡️</> : ''}
+                          { prod.secondaryCount > 100 ? <>🎉</> : ''}
+                          <i>
+                            {`${prod.secondaryCount} people shopped`}
+                          </i>
+                        </p>
+                        ))}
                       {!isDrops && priceUI(prod)}
                     </div>
                     {!showHoverButton && (

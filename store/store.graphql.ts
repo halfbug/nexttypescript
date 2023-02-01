@@ -780,6 +780,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       price
       currencyCode
       outofstock
+      secondaryCount
       options {
         id
         name
@@ -794,6 +795,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       featuredVideo
       description
       purchaseCount
+      secondaryCount
       price
       currencyCode
       outofstock
@@ -811,6 +813,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       featuredVideo
       description
       purchaseCount
+      secondaryCount
       price
       currencyCode
       outofstock

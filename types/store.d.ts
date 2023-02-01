@@ -90,20 +90,20 @@ export interface ICampaignForm {
 
 }
 
-export type DiscountCode ={
+export type DiscountCode = {
   title: string;
   percentage: string;
   priceRuleId: string;
 }
 
-export type partnerDetails ={
+export type partnerDetails = {
   fname: string;
   lname: string;
   email: string;
   shopifyCustomerId?: string;
 }
 
-export type PartnerRewards ={
+export type PartnerRewards = {
   baseline: number;
   average: number;
   maximum: number;
@@ -116,7 +116,7 @@ export type ChannelRewards = {
   commission: string;
 }
 
-export type DealProduct ={
+export type DealProduct = {
   productId: string;
   type?: 'deal' | 'abandoned';
   addedBy: string;
@@ -131,13 +131,13 @@ export interface IPartnerTools {
   partnerCommission: any;
 }
 
-export type lCustomers ={
+export type lCustomers = {
   email?: string;
   firstName?: string;
   lastName?: string;
- }
+}
 
-export type listCustomers ={
+export type listCustomers = {
   createDate?: string;
   haveGroupshop?: string;
   id?: string;
@@ -161,18 +161,18 @@ export interface ICollection {
   productsCount: number;
   products: IProduct[]
 }
-export interface ILineItem{
-price: string;
-product : {
-  id: string
-}
+export interface ILineItem {
+  price: string;
+  product: {
+    id: string
+  }
 }
 
-export interface Ioption{
-  id : string;
+export interface Ioption {
+  id: string;
   name: string;
-  position : number;
-  values : string[];
+  position: number;
+  values: string[];
 }
 
 export interface IProduct {
@@ -192,6 +192,7 @@ export interface IProduct {
   selectedOptions?: any;
   image?: any;
   purchaseCount?: number;
+  secondaryCount?: number;
   status?: string;
 }
 
@@ -279,7 +280,7 @@ export interface MatchingBrandName {
   brandName?: string,
 }
 
-export type IUser ={ firstName: string; lastName: string;}
+export type IUser = { firstName: string; lastName: string; }
 
 export type partnerTierInfo = {
   count?: number;
