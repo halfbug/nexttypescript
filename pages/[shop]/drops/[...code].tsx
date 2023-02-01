@@ -161,6 +161,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     showObPopup,
     canBeUnlockedCB,
     updateOnboarding,
+    getChackback,
   } = useDrops();
 
   const {
@@ -628,11 +629,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               { !!gsctx.members.length && (
               <>
-                {canBeUnlockedCB() !== 0 && (
+                {getChackback() !== 0 && (
                 <Col lg={12}>
                   <h5 className="text-black font-bold mt-4">
                     🎉 Plus unlock $
-                    {canBeUnlockedCB()}
+                    {getChackback()}
                     {' '}
                     cashback for
                   </h5>

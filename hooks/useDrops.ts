@@ -86,8 +86,8 @@ export default function useDrops() {
         if (members.length === 2) {
           const temp = (((store?.drops?.rewards?.maximum - store?.drops?.rewards?.average)
             * parseFloat(getTotalFromIndex(0))) / 100)
-          + (((store?.drops?.rewards?.maximum - store?.drops?.rewards?.average)
-          * parseFloat(getTotalFromIndex(1))) / 100);
+            + (((store?.drops?.rewards?.maximum - store?.drops?.rewards?.average)
+              * parseFloat(getTotalFromIndex(1))) / 100);
 
           return Number.isInteger(temp)
             ? temp
@@ -113,6 +113,38 @@ export default function useDrops() {
     }
   }, [sproducts]);
 
+  const getChackback = useCallback(() => {
+    const reward1 = +store?.drops?.rewards?.baseline!;
+    const reward2 = +store?.drops?.rewards?.average!;
+    const reward3 = +store?.drops?.rewards?.maximum!;
+    const cashbackPercantage1 = reward2 - reward1;
+    const cashbackPercantage2 = reward3 - reward2;
+
+    if (members.length === 1) {
+      const totalAmount = getTotalFromIndex(0);
+      const cashback = (totalAmount * cashbackPercantage1) / 100;
+      return cashback;
+    }
+    if (members.length === 2) {
+      // CASHBACK OF FIRST MEMBER
+      const totalAmount1 = getTotalFromIndex(0);
+      const cashback1 = (totalAmount1 * cashbackPercantage1) / 100;
+
+      // CASHBACK OF SECOND MEMBER
+      const totalAmount2 = getTotalFromIndex(1);
+      const cashback2 = (totalAmount2 * cashbackPercantage2) / 100;
+      // CASHBACK OF FIRST MEMBER ON ARRIVING OF THIRD MEMBER
+      const cashback3 = (totalAmount1 * cashbackPercantage2) / 100;
+      // console.log('cashbacks', {
+      //   cashback1, cashback2, cashback3,
+      // });
+      return +(cashback3 + cashback2 + cashback1);
+    }
+    return 0;
+  }, [gsctx, store]);
+
+  console.log('getChackback', getChackback());
+
   return {
     currentDropReward,
     nextDropReward,
@@ -121,5 +153,6 @@ export default function useDrops() {
     setShowObPopup,
     updateOnboarding,
     canBeUnlockedCB,
+    getChackback,
   };
 }
