@@ -66,7 +66,7 @@ const DropsRewardBox = ({
             <Col lg={12} className="px-0">
               <div className={styles.dropsRewardBox_modal__top}>
                 <div className={styles.dropsRewardBox_modal__top__icon}>
-                  <GroupshopIcon />
+                  <GroupshopIcon width="140" height="10" />
                 </div>
                 <h2>
                   So you want
