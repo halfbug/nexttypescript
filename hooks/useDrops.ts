@@ -143,8 +143,6 @@ export default function useDrops() {
     return 0;
   }, [gsctx, store]);
 
-  console.log('getChackback', getChackback());
-
   return {
     currentDropReward,
     nextDropReward,

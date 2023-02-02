@@ -42,7 +42,6 @@ const Footer = ({
     getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
   } = useDeal();
   const { days, hrs, mins } = getDateDifference();
-  console.log('isDrops', isDrops);
   const [
     addSignUp,
     // eslint-disable-next-line no-unused-vars
@@ -188,11 +187,11 @@ const Footer = ({
             {isDrops
               ? (
                 <section className="d-flex justify-content-center px-2">
-                  <SocialButtonMobile text="" network="Email" url="" />
-                  <SocialButtonMobile text="" network="Instagram" url="" />
-                  <SocialButtonMobile text="" network="Pinterest" url="" />
-                  <SocialButtonMobile text="" network="Twitter" url="" />
-                  <SocialButtonMobile text="" network="Facebook" url="" />
+                  <SocialButtonMobile isDrops text="" network="Email" url="info@groupshop.co" />
+                  <SocialButtonMobile isDrops text="" network="Instagram" url="https://www.instagram.com/groupshopit/" />
+                  <SocialButtonMobile isDrops text="" network="Pinterest" url="https://www.pinterest.com/Groupshop/" />
+                  <SocialButtonMobile isDrops text="" network="Twitter" url="https://twitter.com/groupshopit" />
+                  <SocialButtonMobile isDrops text="" network="Facebook" url="https://www.facebook.com/groupshopit/" />
                 </section>
               )
               : (

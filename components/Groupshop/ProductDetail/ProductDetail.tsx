@@ -738,22 +738,31 @@ const ProductDetail = ({
                       </div>
                     ))}
                     {!isForMobile && (
-                      <ShowMoreText
-                        /* Default options */
-                        lines={2}
-                        more="Show more"
-                        less="Show less"
-                        className={isExpired
-                          ? styles.groupshop_modal_detail_height_descriptionExpired
-                          : styles.groupshop_modal_detail_height_descriptionNormal}
-                        anchorClass="my-anchor-css-class"
-                        // onClick={this.executeOnClick}
-                        expanded={false}
-                        width={406}
-                        truncatedEndingComponent="... "
-                      >
-                        {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
-                      </ShowMoreText>
+                    // <ShowMoreText
+                    //   /* Default options */
+                    //   lines={2}
+                    //   more="Show more"
+                    //   less="Show less"
+                    //   className={isExpired
+                    //     ? styles.groupshop_modal_detail_height_descriptionExpired
+                    //     : styles.groupshop_modal_detail_height_descriptionNormal}
+                    //   anchorClass="my-anchor-css-class"
+                    //   // onClick={this.executeOnClick}
+                    //   expanded={false}
+                    //   width={406}
+                    //   truncatedEndingComponent="... "
+                    // >
+                    //   {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                    // </ShowMoreText>
+                    <div
+                      className={isExpired
+                        ? styles.groupshop_modal_detail_height_descriptionExpired
+                        : styles.groupshop_modal_detail_height_descriptionNormal}
+                    >
+                      {/* {product?.description ? <p dangerouslySetInnerHTML=
+                          // {{ __html: cleanDescription(product?.description) }} /> : ''} */}
+                      {product?.description ? <p dangerouslySetInnerHTML={{ __html: product?.description }} /> : ''}
+                    </div>
                     )}
                   </div>
                   <div className={[styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>

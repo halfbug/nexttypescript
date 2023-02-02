@@ -13,19 +13,73 @@ type SocialButtonProps = React.PropsWithChildren<{
   network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
   url: string;
   text?: string;
+  isDrops?: boolean;
 }>;
 
 const SocialButtonMobile = ({
-  url, network, text, children, ...props
-}: SocialButtonProps & CustomPropsType) => (
+  url, network, text, children, isDrops, ...props
+}: SocialButtonProps & CustomPropsType) => {
+  const getDropsRedirection = (type: string) => {
+    if (typeof window !== 'undefined') {
+      switch (type) {
+        case 'Instagram': {
+          return (
+            <Instagram
+              className="fs-3 fw-bold"
+              onClick={() => window.open(url)}
+            />
+          );
+        }
+        case 'Pinterest': {
+          return (
+            <Pinterest
+              className="fs-3 fw-bold"
+              onClick={() => window.open(url)}
+            />
+          );
+        }
+        case 'Twitter': {
+          return (
+            <Twitter
+              className="fs-3 fw-bold"
+              onClick={() => window.open(url)}
+            />
+          );
+        }
+        case 'Facebook': {
+          return (
+            <Facebook
+              className="fs-3 fw-bold"
+              onClick={() => window.open(url)}
+            />
+          );
+        }
+        // case 'Email': {
+        //   return (
+        //     <Chat
+        //       className="fs-3 fw-bold"
+        //       onClick={() => window.open(url)}
+        //     />
+        //   );
+        // }
+        default: return '';
+      }
+    }
+    return false;
+  };
 
-  <Button
-    className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
-    variant="default"
-    style={{ color: 'black', background: '#F0F0F0' }}
-    target="_blank"
-  >
-    {network === 'Instagram'
+  return (
+
+    <Button
+      className={['rounded-circle p-2', styles[`groupshop_${network.toLowerCase()} `]].join(' ')}
+      variant="default"
+      style={{ color: 'black', background: '#F0F0F0' }}
+      target="_blank"
+    >
+      {
+      isDrops && getDropsRedirection(network)
+    }
+      {!isDrops && network === 'Instagram'
       && (
         <Instagram
           className="fs-3 fw-bold"
@@ -36,7 +90,7 @@ const SocialButtonMobile = ({
         />
       )}
 
-    {network === 'Youtube'
+      {!isDrops && network === 'Youtube'
       && (
         <Youtube
           className="fs-3 fw-bold"
@@ -47,7 +101,7 @@ const SocialButtonMobile = ({
         />
       )}
 
-    {network === 'Facebook'
+      {!isDrops && network === 'Facebook'
       && (
         <Facebook
           className="fs-3 fw-bold"
@@ -58,7 +112,7 @@ const SocialButtonMobile = ({
         />
       )}
 
-    {network === 'Pinterest'
+      {!isDrops && network === 'Pinterest'
       && (
       <Pinterest
         className="fs-3 fw-bold"
@@ -69,7 +123,7 @@ const SocialButtonMobile = ({
       />
       )}
 
-    {network === 'Twitter'
+      {!isDrops && network === 'Twitter'
       && (
       <Twitter
         className="fs-3 fw-bold"
@@ -80,7 +134,7 @@ const SocialButtonMobile = ({
       />
       )}
 
-    {network === 'Tiktok'
+      {!isDrops && network === 'Tiktok'
       && (
         <Tiktok
           className="fs-3 fw-bold"
@@ -91,7 +145,7 @@ const SocialButtonMobile = ({
         />
       )}
 
-    {network === 'Email'
+      {network === 'Email'
       && (
       <Chat
         className="fs-3 fw-bold"
@@ -102,11 +156,13 @@ const SocialButtonMobile = ({
       />
       )}
 
-  </Button>
-);
+    </Button>
+  );
+};
 
 SocialButtonMobile.defaultProps = {
   text: '',
+  isDrops: false,
 };
 
 export default SocialButtonMobile;
