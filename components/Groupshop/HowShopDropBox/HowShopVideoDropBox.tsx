@@ -72,8 +72,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="my-auto">
-                    <p>
+                  <div className="mt-5 pt-5">
+                    <p className="mt-5 pt-5">
                       Every week we drop
                       {' '}
                       <b>exclusive discounts</b>
@@ -94,7 +94,7 @@ const HowShopDropVideoBox = ({
                     <GroupshopIcon />
                   </div>
                   <div className="my-auto">
-                    <p>
+                    <p className="mb-5 pb-5">
                       <b>You have 24 hours</b>
                       {' '}
                       to shop this drop. After 24 hours, you’ll have to
@@ -114,7 +114,7 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="my-auto">
+                  <div className="mt-5 pt-5">
                     <p>
                       You get
                       {' '}
@@ -143,8 +143,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="my-auto">
-                    <p className="mb-0">
+                  <div className="mt-5 pt-5">
+                    <p className="mt-2 mb-0">
                       🤑
                       <b> Want more rewards?</b>
                     </p>
@@ -174,8 +174,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="my-auto">
-                    <p className="mb-0">
+                  <div className="mt-5 pt-5">
+                    <p className="mt-5 pt-4 mb-0">
                       ⏳
                       <b>Need more time?</b>
                     </p>

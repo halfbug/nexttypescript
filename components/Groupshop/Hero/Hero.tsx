@@ -15,7 +15,7 @@ const Hero = ({
 }: HeroProps) => (
   <>
     <div className={isDrops ? dStyles.drops__hero : styles.groupshop__hero} style={{ backgroundImage: `url(${bannerImage})` }}>
-      <div className={styles.groupshop__overlay} />
+      <div className={isDrops ? dStyles.drops__overlay : styles.groupshop__overlay} />
       {children}
     </div>
   </>

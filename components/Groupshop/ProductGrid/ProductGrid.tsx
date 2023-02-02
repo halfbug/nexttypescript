@@ -22,8 +22,8 @@ import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockButton';
 import useAppContext from 'hooks/useAppContext';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import useDrops from 'hooks/useDrops';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -172,8 +172,8 @@ const ProductGrid = ({
               </div>
             </div>
             <div className="d-flex">
-              <FaArrowLeft className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
-              <FaArrowRight className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowLeft size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowRight size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
             </div>
           </div>
         </Col>
