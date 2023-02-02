@@ -503,7 +503,7 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage > 1) ? currentPage - 1 : currentPage,
                 );
-                { (id === 'allproducts') && (paginationScroll()); }
+                { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
               }}
             />
 
@@ -512,7 +512,7 @@ const ProductGrid = ({
                 active={currentPage === n}
                 onClick={() => {
                   setCurrentPage(n);
-                  { (id === 'allproducts') && (paginationScroll()); }
+                  { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
                 }}
                 className={currentPage === n
                   ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
@@ -527,7 +527,7 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
                 );
-                { (id === 'allproducts') && (paginationScroll()); }
+                { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
               }}
             />
 
