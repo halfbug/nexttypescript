@@ -924,9 +924,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         show
         handleClose={() => {}}
       /> */}
-      {!isModalForMobile && (
+      {!isModalForMobile && gsShortURL !== '' && (
       <Scan
         show
+        shareurl={gsShortURL ?? gsURL}
         handleClose={() => {}}
       />
       )}

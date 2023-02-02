@@ -11,16 +11,18 @@ import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
+import { useQRCode } from 'next-qrcode';
 import QR from 'assets/images/QR.svg';
 
 interface DropsRewardBoxProps extends RootProps {
   show: boolean;
+  shareurl: string;
   handleClose(e: any): any;
 
 }
 
 const DropsScanBox = ({
-  show = false, handleClose,
+  show = false, shareurl, handleClose,
 }: DropsRewardBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -31,7 +33,7 @@ const DropsScanBox = ({
   const isDesktop = useMediaQuery({
     query: '(min-width: 476px)',
   });
-
+  const { Canvas } = useQRCode();
   const {
     isExpired,
   } = useDeal();
@@ -66,17 +68,27 @@ const DropsScanBox = ({
                 <div className="mb-2">
                   <span>Scan the QR code to shop on mobile. No app download needed.</span>
                 </div>
-                <QR />
+                <Canvas
+                  text={`${shareurl}`}
+                  options={{
+                    type: 'image/jpeg',
+                    quality: 0.3,
+                    level: 'L',
+                    margin: 3,
+                    scale: 4,
+                    width: 105,
+                    color: {
+                      dark: '#000000',
+                      light: '#FFFFFF',
+                    },
+                  }}
+                />
                 <br />
                 Or enter your number below and we’ll text you the link to this drop.
               </div>
 
               <Row className="text-center">
-                <div className={styles.Scan_modal__transparentBox__btnSection}>
-                  <Button variant="light" onClick={handleClose}>
-                    FORM GOES HERE
-                  </Button>
-                </div>
+                <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/S6p9Bn` : '/klaviyo-form/S6p9Bn'} />
               </Row>
             </div>
           </Row>
