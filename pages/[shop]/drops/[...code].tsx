@@ -455,7 +455,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           {gsctx?.store?.drops?.isVideoEnabled ? <VideoWidget /> : ''}
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.drops__top].join(' ')}>
-              <Col md={3} xs={3}>
+              <Col md={3} xs={2}>
                 <IconButton
                   icon={<Search size={24} />}
                   className={styles.drops__hero_iconSearchBtn}
@@ -528,7 +528,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                 </div>
               </Col>
-              <Col xs={6} className={styles.drops__counter}>
+              <Col xs={8} md={6} className={styles.drops__counter}>
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
@@ -553,7 +553,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col
                 md={3}
-                xs={3}
+                xs={2}
                 className={[
                   'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
                   styles.drops__top__left_icons,

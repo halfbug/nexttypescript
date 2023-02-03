@@ -45,45 +45,45 @@ const GetNotify = ({
         onHide={closeModal}
         size="lg"
         centered
-        dialogClassName={styles.dropsRewardBox_modal}
-        contentClassName={styles.dropsRewardBox_modal__content}
+        dialogClassName={styles.dropsNotifyBox_modal}
+        contentClassName={styles.dropsNotifyBox_modal__content}
       >
-        <Modal.Header className={styles.dropsRewardBox_modal__closebtnlg}>
+        <Modal.Header className={styles.dropsNotifyBox_modal__closebtnlg}>
           {/* <Row onClick={handleClose}>
             <div><Cross /></div>
           </Row> */}
         </Modal.Header>
-        <Modal.Header className={styles.dropsRewardBox_modal__closebtnsm}>
+        <Modal.Header className={styles.dropsNotifyBox_modal__closebtnsm}>
           {/* <Row onClick={handleClose}>
             <div><ArrowDown /></div>
           </Row> */}
         </Modal.Header>
-        <Modal.Body className={styles.dropsRewardBox_modal__body}>
+        <Modal.Body className={styles.dropsNotifyBox_modal__body}>
           <Row className="mx-0">
             <Col lg={12} className="px-0">
-              <div className={styles.dropsRewardBox_modal__top}>
-                <div className={styles.dropsRewardBox_modal__top__icon}>
+              <div className={styles.dropsNotifyBox_modal__top}>
+                <div className={styles.dropsNotifyBox_modal__top__icon}>
                   <GroupshopIcon />
                 </div>
                 <h2 className="mx-3">
                   Get notified of future drops
                 </h2>
               </div>
-              <div className={styles.dropsRewardBox_modal__greyBox}>
-                <div className={styles.dropsRewardBox_modal__greyBox__text}>
+              <div className={styles.dropsNotifyBox_modal__greyBox}>
+                <div className={styles.dropsNotifyBox_modal__greyBox__text}>
                   New products drop every week.
                 </div>
               </div>
-              <div className={styles.dropsRewardBox_modal__greyBox}>
-                <div className={styles.dropsRewardBox_modal__greyBox__text}>
+              <div className={styles.dropsNotifyBox_modal__greyBox}>
+                <div className={styles.dropsNotifyBox_modal__greyBox__text}>
                   Up to
                   {' '}
                   {store?.drops?.rewards?.maximum}
                   % off premium brands.
                 </div>
               </div>
-              <div className={styles.dropsRewardBox_modal__greyBox}>
-                <div className={styles.dropsRewardBox_modal__greyBox__text}>
+              <div className={styles.dropsNotifyBox_modal__greyBox}>
+                <div className={styles.dropsNotifyBox_modal__greyBox__text}>
                   Unlock cashback when friends shop with you.
                 </div>
               </div>
