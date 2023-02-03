@@ -231,7 +231,7 @@ const Footer = ({
                     role="button"
                     tabIndex={0}
                   >
-                    <strong>How it works</strong>
+                    <strong>How it Works</strong>
 
                   </a>
                 </>
