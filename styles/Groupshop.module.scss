@@ -957,7 +957,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     &_image {
       &_small {
-        max-height: 165px;
+        height: 165px;
         width: 100%;
         object-fit: cover;
         padding: 6px;

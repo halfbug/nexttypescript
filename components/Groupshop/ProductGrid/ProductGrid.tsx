@@ -119,17 +119,18 @@ const ProductGrid = ({
   };
 
   const priceUI = (prod: any) => (
-    <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : 'd-flex row-reverse justify-left'].join(' ')}>
-      <span className={isDrops ? 'me-2' : ''}>
-        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {!isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
-      </span>
-      {' '}
+    <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
       <span className="text-decoration-line-through fw-light me-1">
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {/* {prod.price} */}
         {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+      </span>
+      {' '}
+      <span className={isDrops ? 'me-2' : ''}>
+        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
+        {spotlightProducts.includes(prod.id) && !isSuggestion && disPrice(+(prod.price), +store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')}
+        {!spotlightProducts.includes(prod.id) && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {!spotlightProducts.includes(prod.id) && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
     </h5>
   );
@@ -348,24 +349,8 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <div className={styles.groupshop_product_desc}>
-                      {/* {isDrops && priceUI(prod)} */}
-                      <h5 className="pt-2 fw-bold">
-                        <span className="text-decoration-line-through fw-light me-1">
-                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                          {/* {prod.price} */}
-                          {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                        {' '}
-                        <span>
-                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                          {spotlightProducts.includes(prod.id) && !isSuggestion && disPrice(+(prod.price), +store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')}
-                          {!spotlightProducts.includes(prod.id) && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-                          {!spotlightProducts.includes(prod.id) && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
-                        </span>
-                      </h5>
-                      {/* <h5 className="text-center fw-bold text-truncate">{prod.title}</h5> */}
-                      {/* {isDrops && priceUI(prod)} */}
-                      <h5 className="fw-bold text-truncate">{prod.title}</h5>
+                      <h5 className={['fw-bold text-truncate', !isDrops ? 'text-center' : ''].join(' ')}>{prod.title}</h5>
+                      {isDrops && priceUI(prod)}
                       {prod.outofstock
                         ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>)
                         : ((prod.purchaseCount && !isDrops) && (
