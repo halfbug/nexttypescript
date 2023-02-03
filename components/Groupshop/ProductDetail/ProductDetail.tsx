@@ -653,17 +653,32 @@ const ProductDetail = ({
                   </h3>
                   {(product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center my-3">
-                      <p className={styles.groupshop_shopped}>
-                        {' '}
-                        {/* <Icon /> */}
-                        {product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
-                        {product?.purchaseCount > 30 && product?.purchaseCount <= 100 ? <>⚡️</> : ''}
-                        {product?.purchaseCount > 100 ? <>🎉</> : ''}
-                        {' '}
-                        {product?.purchaseCount}
-                        {'+ '}
-                        people have shopped this!
-                      </p>
+                      { !isDrops ? (
+                        <p className={styles.groupshop_shopped}>
+                          {' '}
+                          {/* <Icon /> */}
+                          {product?.purchaseCount >= 1 && product?.purchaseCount <= 30 ? <>🔥</> : ''}
+                          {product?.purchaseCount > 30 && product?.purchaseCount <= 100 ? <>⚡️</> : ''}
+                          {product?.purchaseCount > 100 ? <>🎉</> : ''}
+                          {' '}
+                          {product?.purchaseCount}
+                          {'+ '}
+                          people have shopped this!
+                        </p>
+                      )
+                        : (product && product?.secondaryCount) && (
+                          <p className={styles.groupshop_shopped}>
+                            {' '}
+                            {/* <Icon /> */}
+                            {product?.secondaryCount >= 1 && product?.secondaryCount <= 30 ? <>🔥</> : ''}
+                            {product?.secondaryCount > 30 && product?.secondaryCount <= 100 ? <>⚡️</> : ''}
+                            {product?.secondaryCount > 100 ? <>🎉</> : ''}
+                            {' '}
+                            {product?.secondaryCount}
+                            {'+ '}
+                            people have shopped this!
+                          </p>
+                        )}
                     </div>
                   ) : `${product?.title}`}
                   <div className={styles.groupshop_modal_detail_height}>
