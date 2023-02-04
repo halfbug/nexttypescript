@@ -14,7 +14,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 .drops {
   background-color: white !important;
   font-family: "DM Sans" !important;
-
+  @include media-breakpoint-up(sm) {
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+  }
   p {
     @extend .mb-0;
   }

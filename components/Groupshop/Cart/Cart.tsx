@@ -527,19 +527,30 @@ const Cart = ({
                 </div>
               </Row> */}
               <Row className="d-flex justify-content-center">
-                <div
-                  className={['', styles.groupshop_cart_byChecking].join(' ')}
-                >
-                  You agree to receive email updates about your order and rewards.
-                  We don’t sell or share your information. You can unsubscribe at any time.
-                  <br />
-                  <br />
-                  If you purchased any of these items at full price on
-                  {' '}
-                  {brandName}
-                  ,
-                  you cannot return your original order to keep these discounted ones.
-                </div>
+                { !isDrops ? (
+                  <div
+                    className={['', styles.groupshop_cart_byChecking].join(' ')}
+                  >
+                    You agree to receive email updates about your order and rewards.
+                    We don’t sell or share your information. You can unsubscribe at any time.
+                    <br />
+                    <br />
+                    If you purchased any of these items at full price on
+                    {' '}
+                    {brandName}
+                    ,
+                    you cannot return your original order to keep these discounted ones.
+                  </div>
+                )
+                  : (
+                    <div
+                      className={['', styles.groupshop_cart_byChecking].join(' ')}
+                    >
+                      You agree to receive email updates about your order and rewards.
+                      We don’t sell or share your information. You can unsubscribe at any time.
+                      <br />
+                    </div>
+                  )}
               </Row>
             </Container>
           </div>

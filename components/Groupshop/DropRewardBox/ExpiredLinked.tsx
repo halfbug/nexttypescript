@@ -141,9 +141,9 @@ const ExpiredLinked = ({
                       ? ('Or, enter your phone number below &  join the waitlist for our next drop. We’ll text you when it goes live.')
                       : ('Enter your phone number below & join the waitlist for our next drop. We’ll text you when it goes live.')
                   }
-                  <Row className="justify-content-center">
+                  <Row className="justify-content-center mt-3">
                     <Col lg={12}>
-                      <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UnQXg2` : '/klaviyo-form/UnQXg2'} />
+                      <iframe title="klaviyo-form" height="280" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UnQXg2` : '/klaviyo-form/UnQXg2'} />
                     </Col>
                   </Row>
                 </div>

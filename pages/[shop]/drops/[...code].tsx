@@ -642,7 +642,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 {
                   gsctx.members.length > 2 && (
                     <Col lg={12}>
-                      <h5 className="text-black fw-light mt-4">
+                      <h5 className="text-black fw-light mt-4 mb-0">
                         🛍 Shopping with friends is better
                       </h5>
                     </Col>

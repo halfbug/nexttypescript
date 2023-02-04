@@ -48,15 +48,15 @@ const GetNotify = ({
         dialogClassName={styles.dropsNotifyBox_modal}
         contentClassName={styles.dropsNotifyBox_modal__content}
       >
-        <Modal.Header className={styles.dropsNotifyBox_modal__closebtnlg}>
-          {/* <Row onClick={handleClose}>
+        {/* <Modal.Header className={styles.dropsNotifyBox_modal__closebtnlg}>
+          <Row onClick={handleClose}>
             <div><Cross /></div>
-          </Row> */}
-        </Modal.Header>
+          </Row>
+        </Modal.Header> */}
         <Modal.Header className={styles.dropsNotifyBox_modal__closebtnsm}>
-          {/* <Row onClick={handleClose}>
+          <Row onClick={handleClose}>
             <div><ArrowDown /></div>
-          </Row> */}
+          </Row>
         </Modal.Header>
         <Modal.Body className={styles.dropsNotifyBox_modal__body}>
           <Row className="mx-0">
@@ -90,7 +90,7 @@ const GetNotify = ({
               <div>
                 <Row className="justify-content-center">
                   <Col lg={12}>
-                    <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UcJNt5` : '/klaviyo-form/UcJNt5'} />
+                    <iframe title="klaviyo-form" height="199" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UcJNt5` : '/klaviyo-form/UcJNt5'} />
                   </Col>
                 </Row>
               </div>

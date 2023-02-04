@@ -630,6 +630,20 @@
         margin: 0;
     }
 
+    &__closebtnsm {
+        @include media-breakpoint-up(sm) {
+            display: none;
+        }
+
+        display: flex;
+        justify-content: center;
+        border-bottom: none;
+
+        svg {
+            cursor: pointer;
+        }
+    }
+
     &__content {
         border-radius: 12px;
 
@@ -647,7 +661,7 @@
         padding: 0 100px 60px 100px;
 
         @include media-breakpoint-down(sm) {
-            padding: 0px 20px 20px 20px;
+            padding: 20px 20px 0px 20px;
         }
     }
 
@@ -676,7 +690,7 @@
     }
     &__greyBox {
         background-color: $paleGrey;
-        padding: 16px 24px;
+        padding: 10px 24px;
         border-radius: 6px;
         margin-top: 16px;
         &__text {
@@ -1047,6 +1061,7 @@
 
     &__content {
         background-color: transparent;
+        height: 100vh;
     }
 
     &__body {
@@ -1059,6 +1074,7 @@
 
     &__top {
         @extend .p-3;
+        flex-grow: 0;
         margin-bottom: 10px;
         background: #F0EEEC;
         border-radius: 20px;
@@ -1100,8 +1116,10 @@
 
     &__carousel {
         @extend .px-0;
+        display: block;
         &__item {
             border-radius: 20px;
+            height: 100%;
             &__content {
                 display: flex;
                 flex-direction: column;
@@ -1150,6 +1168,7 @@
 
     &__btnSection {
         @extend .text-center, .mt-3;
+        flex-grow: 0;
         width: 100%;
         button {
             padding: 0px 30px;
@@ -1244,6 +1263,8 @@
             padding: 40px;
             max-width: 524px;
             margin: 0 auto;
+            max-height: 520px;
+            overflow: scroll;
         }
     }
 
