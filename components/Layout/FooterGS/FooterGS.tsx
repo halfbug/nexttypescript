@@ -39,8 +39,11 @@ const Footer = ({
 }: FooterProps) => {
   // const { isChannel } = useAppContext();
   const {
-    getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName,
+    getDateDifference, isExpired, socialLinks, isInfluencerGS, getOwnerName, gsctx,
   } = useDeal();
+
+  const { store } = gsctx;
+  const milestone3 = store?.drops?.rewards?.maximum;
   const { days, hrs, mins } = getDateDifference();
   const [
     addSignUp,
@@ -187,7 +190,7 @@ const Footer = ({
             {isDrops
               ? (
                 <section className="d-flex justify-content-center px-2">
-                  <SocialButtonMobile isDrops text="" network="Email" url="info@groupshop.co" />
+                  <SocialButtonMobile isDrops text={`Shop on my Groupshop Drops and get up to ${milestone3}% off `} network="Email" url={gsctx?.shortUrl ? gsctx?.shortUrl : ''} />
                   <SocialButtonMobile isDrops text="" network="Instagram" url="https://www.instagram.com/groupshopit/" />
                   <SocialButtonMobile isDrops text="" network="Pinterest" url="https://www.pinterest.com/Groupshop/" />
                   <SocialButtonMobile isDrops text="" network="Twitter" url="https://twitter.com/groupshopit" />

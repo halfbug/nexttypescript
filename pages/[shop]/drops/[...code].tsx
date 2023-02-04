@@ -418,8 +418,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="description" content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BannerDrops.jpg" as="image" />
-        <meta property="og:image" content="https://s3.amazonaws.com/gsnodeimages/BannerDrops.jpg" />
+        <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BannerDropsFinal.jpg" as="image" />
+        <meta property="og:image" content="https://s3.amazonaws.com/gsnodeimages/BannerDropsFinal.jpg" />
         {/* <link rel="preload" nonce="" href={meta.photo} as="image" />
         <meta property="og:image" content={meta.photo} /> */}
         <meta property="og:image:width" content="1200" />
@@ -903,6 +903,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               val=""
               label={isExpired ? 'Share to unlock' : 'Share with friends'}
               brandName={brandName}
+              isDrops
             />
           </div>
         )}

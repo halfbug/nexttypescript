@@ -859,22 +859,33 @@ const ProductDetail = ({
 
                     </>
                   )}
-                  <ToolTip
-                    className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
-                    label="Terms & Conditions"
-                    trigger={!isForMobile ? ['focus', 'click'] : ['hover', 'focus', 'click']}
-                    placement="auto"
-                    popContent={(
-                      <p>
-                        If you purchased any of these
-                        items at full price on
-                        {' '}
-                        {`${brandName}`}
-                        , you cannot
-                        return your original order to keep these discounted ones.
-                      </p>
+                  {isDrops
+                    ? (
+                      <div
+                        className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
+                      >
+                        All sales are final
+
+                      </div>
+                    ) : (
+                      <ToolTip
+                        className={['py-2 text-decoration-underline', styles1.dashboard_campaign__pop].join(' ')}
+                        label={isDrops ? 'All sales are final' : 'Terms & Conditions'}
+                        trigger={undefined}
+                        placement="auto"
+                        disabled
+                        popContent={(
+                          <p>
+                            If you purchased any of these
+                            items at full price on
+                            {' '}
+                            {`${brandName}`}
+                            , you cannot
+                            return your original order to keep these discounted ones.
+                          </p>
                     )}
-                  />
+                      />
+                    )}
 
                   <div className={styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>

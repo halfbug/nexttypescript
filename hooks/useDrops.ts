@@ -138,7 +138,8 @@ export default function useDrops() {
       // console.log('cashbacks', {
       //   cashback1, cashback2, cashback3,
       // });
-      return +(cashback3 + cashback2 + cashback1);
+      const totalCashback = +(cashback3 + cashback2 + cashback1);
+      return Number.isInteger(totalCashback) ? totalCashback : totalCashback.toFixed(2);
     }
     return 0;
   }, [gsctx, store]);
