@@ -457,7 +457,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <Row className={['gx-0', styles.drops__top].join(' ')}>
               <Col md={3} xs={2}>
                 <IconButton
-                  icon={<Search size={24} />}
+                  icon={<Search size={isModalForMobile ? 24 : 16} />}
                   className={styles.drops__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
@@ -568,7 +568,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   className={styles.drops__hero_share_btn}
                 />
                 <IconButton
-                  icon={<Handbag size={24} />}
+                  icon={<Handbag size={isModalForMobile ? 14 : 24} />}
                   className={styles.drops__hero_iconBtn}
                   onClick={() => setshowCart(true)}
                 >
@@ -596,8 +596,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         >
           <Container className={styles.drops__hero__content}>
             <Row className={styles.drops__hero_welcome}>
-              <Col lg={12}>
-                <h1 className="text-black font-bold">
+              <Col lg={12} className="mb-2">
+                <h1 className="text-black fw-bolder ">
                   Get
                   {' '}
                   {currentDropReward}
@@ -633,9 +633,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <Col lg={12}>
                   <h5 className="text-black font-bold mt-4">
                     🎉 Plus unlock $
-                    {getChackback()}
+                    <span className="fw-bolder">
+                      {getChackback()}
+                      {' '}
+                      cashback
+                    </span>
                     {' '}
-                    cashback for
+                    for
                   </h5>
                 </Col>
                 )}
