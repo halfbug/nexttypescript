@@ -101,6 +101,9 @@ h4 {
 	.carousel-indicators {
 		margin-bottom: 2rem;
 	}
+	.carousel-item.active, .carousel-item-next, .carousel-item-prev {
+		display: flex;
+	}
 }
 
 .video-mobile::-webkit-media-controls-panel {

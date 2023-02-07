@@ -605,7 +605,7 @@
             padding: 0px 30px;
             width: -webkit-fill-available;
             background: #000000;
-            height: 42px;
+            height: 54px;
             font-family: 'DM Sans';
             font-style: normal;
             font-weight: 500;
@@ -1034,7 +1034,7 @@
             padding: 0px 30px;
             width: -webkit-fill-available;
             background: #000000;
-            height: 42px;
+            height: 54px;
             font-family: 'DM Sans';
             font-style: normal;
             font-weight: 500;
@@ -1116,7 +1116,9 @@
 
     &__carousel {
         @extend .px-0;
-        display: block;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 0;
         &__item {
             border-radius: 20px;
             height: 100%;
@@ -1153,7 +1155,7 @@
                 flex-direction: column;
                 z-index: 1;
                 margin-top: 16px;
-                height: 580px;
+                height: 100%;
             }
             &__tierTxt {
                 font-family: 'DM Sans';

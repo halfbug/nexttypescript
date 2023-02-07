@@ -76,7 +76,7 @@ const DropsScanBox = ({
                     level: 'L',
                     margin: 3,
                     scale: 4,
-                    width: 105,
+                    width: 130,
                     color: {
                       dark: '#000000',
                       light: '#FFFFFF',
