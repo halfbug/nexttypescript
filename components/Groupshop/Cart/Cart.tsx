@@ -422,9 +422,17 @@ const Cart = ({
 
             <Container fluid className="py-3 my-2 ">
               <Row className="mx-3">
-                <Col className="text-start mx-2"><h3>SUBTOTAL</h3></Col>
-                <Col className="text-end mx-2">
-                  <h3>
+                <Col className="text-start mx-0 px-0"><h3>SUBTOTAL</h3></Col>
+
+                <Col className="text-end mx-0 px-0">
+
+                  <h3 className={styles.groupshop__total_cartWrapper_price}>
+                    {isDrops ? (
+                      <span className="text-decoration-line-through fw-light me-2">
+                        {currencySymbol}
+                        {getTotalActualCartTotal() && getTotalActualCartTotal()?.toFixed(2).toString().replace('.00', '')}
+                      </span>
+                    ) : <></>}
                     {currencySymbol}
                     {getTotal() && getTotal()?.toFixed(2).toString().replace('.00', '')}
                   </h3>
