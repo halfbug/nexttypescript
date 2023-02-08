@@ -1186,7 +1186,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         z-index: 9;
       }
       &_addToCartBtn {
-        @extend .rounded-pill;
         color: $white;
         background-color: $addtocart;
         font-family: "DM Sans";
@@ -1195,9 +1194,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 16px;
         line-height: 27px;
         letter-spacing: 0.32px;
-        text-transform: uppercase;
+        text-transform: capitalize;
         background-image: none;
-    
+        border: 0.5px solid #202020;
+        border-radius: 24px;
         &:hover {
           background-color: $addtocart;
           background-image: none;
@@ -1206,8 +1206,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           background-color: $white;
           color: $black;
           font-size: 10px;
-          line-height: 14px;
-          width: 90% !important;
+          line-height: 13px;
+          padding: 6px 30px;
         }
       }
     }

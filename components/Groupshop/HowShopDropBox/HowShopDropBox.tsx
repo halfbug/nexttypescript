@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from 'styles/Modal.module.scss';
+import ArrowDown from 'assets/images/arrow-down.svg';
 import { RootProps } from 'types/store';
 import {
   Button,
@@ -41,9 +42,9 @@ const HowShopDropBox = ({
           </Row> */}
         </Modal.Header>
         <Modal.Header className={styles.howShopDropBox_modal__closebtnsm}>
-          {/* <Row onClick={handleClose}>
+          <Row onClick={handleClose}>
             <div><ArrowDown /></div>
-          </Row> */}
+          </Row>
         </Modal.Header>
         <Modal.Body className={styles.howShopDropBox_modal__body}>
           <Row className="mx-0">

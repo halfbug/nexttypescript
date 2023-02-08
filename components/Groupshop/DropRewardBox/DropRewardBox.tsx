@@ -57,9 +57,9 @@ const DropsRewardBox = ({
           </Row> */}
         </Modal.Header>
         <Modal.Header className={styles.dropsRewardBox_modal__closebtnsm}>
-          {/* <Row onClick={handleClose}>
+          <Row onClick={handleClose}>
             <div><ArrowDown /></div>
-          </Row> */}
+          </Row>
         </Modal.Header>
         <Modal.Body className={styles.dropsRewardBox_modal__body}>
           <Row className="mx-0">

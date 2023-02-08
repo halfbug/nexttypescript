@@ -182,7 +182,7 @@ const Cart = ({
               : styles.groupshop_modal_cart_body__scrollable
 }
           >
-            <h3 className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</h3>
+            <div className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</div>
             {/* <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
                   <IconMoney className=" mx-1 " />
@@ -264,7 +264,7 @@ const Cart = ({
                     >
                       {prd.title}
                     </div>
-                    <h5>
+                    <h5 className={styles.groupshop_cartProductPrice}>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
                         {((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
@@ -385,13 +385,13 @@ const Cart = ({
                               Add
                             </Button>
                             )}
-                            <div className=" col-7 fw-normal text-nowrap">
-                              <span className="text-decoration-line-through  ">
+                            <div className={['fw-normal text-nowrap', isDrops ? 'text-start' : ''].join(' ')}>
+                              <span className="text-decoration-line-through">
                                 {currencySymbol}
                                 {formatNumber(item?.price)}
                               </span>
                               {' '}
-                              <span className="fw-bold">
+                              <span className="fw-bold ms-1">
                                 {currencySymbol}
                                 {spotlightProducts.includes(item.id)
                                   ? formatNumber(disPrice(+(item?.price || 0),
