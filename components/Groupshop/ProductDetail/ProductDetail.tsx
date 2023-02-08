@@ -84,6 +84,7 @@ const ProductDetail = ({
   const [target, setTarget] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false);
   const [filterDeal, setFilterDeal] = useState<string[]>([]);
+  const [varientData, setVarientData] = useState(0);
   const router = useRouter();
 
   const handleSelect = (selectedIndex: number, e: any) => {
@@ -188,6 +189,7 @@ const ProductDetail = ({
   useEffect(() => {
     if (data) {
       const selectedVariant = getVariant();
+      setVarientData(selectedVariant?.inventoryQuantity);
       const { productById } = data;
       // console.log('🚀 ~ file: ProductDetail.tsx:140 ~ useEffect ~ productById', productById);
       // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
@@ -782,19 +784,26 @@ const ProductDetail = ({
                   </div>
                   <div className={[styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
                     {!isExpired ? (
-                      <Button
-                        variant="primary"
-                        className={styles.groupshop_Pd_addtoCart}
-                        onClick={() => addToCart()}
-                        disabled={outofStock}
-                      >
-                        {/* {outofStock && 'Out of Stock'}
+                      <>
+                        {isDrops && varientData < 6 && varientData > 0 ? (
+                          <div style={{ color: 'red' }}>
+                            {`Less than ${varientData} left!`}
+                          </div>
+                        ) : ''}
+                        <Button
+                          variant="primary"
+                          className={styles.groupshop_Pd_addtoCart}
+                          onClick={() => addToCart()}
+                          disabled={outofStock}
+                        >
+                          {/* {outofStock && 'Out of Stock'}
                       {isExpired && 'Share to unlock'}
                       {!isExpired && 'Add to Cart'} */}
-                        {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
-                        {loading ? <Spinner animation="border" size="sm" /> : <>{PDBtnText}</>}
+                          {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
+                          {loading ? <Spinner animation="border" size="sm" /> : <>{PDBtnText}</>}
 
-                      </Button>
+                        </Button>
+                      </>
                     ) : (
                       <ShareButton
                         // label="share to unlock"
