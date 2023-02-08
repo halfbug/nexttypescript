@@ -836,7 +836,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Col>
           </Row> */}
           <div>
-            <div className={styles.drops_col_dropheadingOuter}>
+            <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+              <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
               All Products
             </div>
           </div>

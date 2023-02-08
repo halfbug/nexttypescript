@@ -488,7 +488,8 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage > 1) ? currentPage - 1 : currentPage,
                 );
-                { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
+                { (id === 'allproducts') && (paginationScroll()); }
+                { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
               }}
             />
 
@@ -497,7 +498,8 @@ const ProductGrid = ({
                 active={currentPage === n}
                 onClick={() => {
                   setCurrentPage(n);
-                  { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
+                  { (id === 'allproducts') && (paginationScroll()); }
+                  { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
                 }}
                 className={currentPage === n
                   ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
@@ -512,7 +514,8 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
                 );
-                { (id === 'allproducts' || id === 'allproductsdrops') && (paginationScroll()); }
+                { (id === 'allproducts') && (paginationScroll()); }
+                { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
               }}
             />
 
