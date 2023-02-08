@@ -528,7 +528,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                 </div>
               </Col>
-              <Col xs={8} md={6} className={styles.drops__counter}>
+              <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
@@ -604,7 +604,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   % off this drop for a limited time.
                 </h1>
               </Col>
-              <Col xs={12} className={styles.drops__counter}>
+              <Col xs={12} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
                   <p>
                     <span>
@@ -646,7 +646,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 {
                   gsctx.members.length > 2 && (
                     <Col lg={12}>
-                      <h5 className="text-black fw-light mt-4 mb-0">
+                      <h5 className="text-black fw-light mt-3 mb-0">
                         🛍 Shopping with friends is better
                       </h5>
                     </Col>
