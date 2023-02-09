@@ -86,7 +86,7 @@ const AvailablePartnerRewardsBox = ({
                 {owner ? (
                   <span>
                     {'👑 '}
-                    GROUPSHOP OWNER PP
+                    GROUPSHOP OWNER
                   </span>
                 )
                   : <span>GROUPSHOP MEMBER</span>}
