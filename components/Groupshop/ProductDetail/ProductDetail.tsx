@@ -782,11 +782,11 @@ const ProductDetail = ({
                     </div>
                     )}
                   </div>
-                  <div className={[styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
+                  <div className={[isDrops ? dStyles.drops_buttons_wrapper : styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
                     {!isExpired ? (
                       <>
                         {isDrops && varientData < 6 && varientData > 0 ? (
-                          <div style={{ color: 'red' }}>
+                          <div className="text-danger mb-2">
                             {`Less than ${varientData} left!`}
                           </div>
                         ) : ''}
@@ -896,7 +896,7 @@ const ProductDetail = ({
                       />
                     )}
 
-                  <div className={styles.groupshop_modal_content_bottom}>
+                  <div className={isDrops ? dStyles.drops_modal_content_bottom : styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
                       {productCustomers.length > 0
                         && (

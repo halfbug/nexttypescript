@@ -898,7 +898,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_modal_content_bottom {
     @include media-breakpoint-down(sm) {
-      margin-bottom: 70px;
+      margin-bottom: 100px;
     }
     p {
       font-family: "DM Sans" !important;
@@ -1633,8 +1633,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       position: fixed;
       bottom: 0;
       left: 0;
-      display: flex;
-      align-items: center;
+      text-align: center;
       width: 100%;
       border-top: 1px solid #ebebeb;
       padding-top: 0.5rem;
