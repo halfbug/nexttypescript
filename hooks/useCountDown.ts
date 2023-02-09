@@ -14,6 +14,20 @@ const useCountDown = () => {
     seconds: 0,
   });
 
+  const loading = {
+    days: '..',
+    hours: '..',
+    minutes: '..',
+    seconds: '..',
+  };
+
+  const expiredValues = {
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  };
+
   useEffect(() => {
     if (countdownDate) {
       setInterval(() => setNewTime(), 1000);
@@ -58,7 +72,13 @@ const useCountDown = () => {
     }
   };
 
-  return { count };
+  if (gsctx.id && count.seconds > 0) {
+    return { ...count };
+  }
+  if (gsctx.id && isExpired) {
+    return { ...expiredValues };
+  }
+  return { ...loading };
 };
 
 export default useCountDown;

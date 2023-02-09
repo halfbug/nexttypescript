@@ -4,15 +4,13 @@ import dStyles from 'styles/Drops.module.scss';
 
 const CountDownTimer = () => {
   const {
-    count: {
-      days, hours: hrs, minutes: mins, seconds: secs,
-    },
-  } = useCountDown();
+    days, hours: hrs, minutes: mins, seconds: secs,
+  } : any = useCountDown();
   return (
     <div className={dStyles.drops__countdown}>
       <p>
         <span>
-          {hrs + (days * 24)}
+          {Number.isInteger(days) ? hrs + (days * 24) : '..'}
           {' '}
           hrs
         </span>

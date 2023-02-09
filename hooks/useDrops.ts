@@ -120,6 +120,10 @@ export default function useDrops() {
     const cashbackPercantage1 = reward2 - reward1;
     const cashbackPercantage2 = reward3 - reward2;
 
+    if (!gsctx.id) {
+      return '...';
+    }
+
     if (members.length === 1) {
       const totalAmount = getTotalFromIndex(0);
       const cashback = (totalAmount * cashbackPercantage1) / 100;
