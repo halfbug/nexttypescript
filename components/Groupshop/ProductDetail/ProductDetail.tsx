@@ -653,7 +653,7 @@ const ProductDetail = ({
                       </Row>
                     ) : (<></>)}
                   </h3>
-                  {(!isDrops && product && product?.purchaseCount && product?.purchaseCount > 0) ? (
+                  {!isDrops && (product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center my-3">
                       {(
                         <p className={styles.groupshop_shopped}>
