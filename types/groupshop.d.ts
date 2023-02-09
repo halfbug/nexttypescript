@@ -146,7 +146,7 @@ export interface IGroupshop {
 
   createdAt: Date;
 
-  expiredAt: Date;
+  expiredAt: any;
 
   discountCode: DiscountCode;
 

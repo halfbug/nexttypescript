@@ -58,7 +58,7 @@ import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
 import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
 import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
 import Scan from 'components/Groupshop/DropRewardBox/Scan';
-// import useCountDown from 'hooks/useCountDown';
+import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -164,15 +164,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     getChackback,
   } = useDrops();
 
-  const {
-    days, hrs, mins, secs,
-  } = getDateDifference();
-
   // const {
-  //   count: {
-  //     days, hours: hrs, minutes: mins, seconds: secs,
-  //   },
-  // } = useCountDown();
+  //   days, hrs, mins, secs,
+  // } = getDateDifference();
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
@@ -530,7 +524,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
-                  <p>
+                  {/* <p>
                     <span>
                       {hrs + (days * 24)}
                       {' '}
@@ -548,7 +542,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {' '}
                       secs
                     </span>
-                  </p>
+                  </p> */}
+                  <CountDownTimer />
                 </div>
               </Col>
               <Col
@@ -606,7 +601,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col xs={12} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
-                  <p>
+                  {/* <p>
                     <span>
                       {hrs + (days * 24)}
                       {' '}
@@ -624,7 +619,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {' '}
                       secs
                     </span>
-                  </p>
+                  </p> */}
+                  <CountDownTimer />
                 </div>
               </Col>
               { !!gsctx.members.length && (

@@ -23,7 +23,7 @@ export const gsdInit: IGroupshop = {
   url: '',
   shortUrl: '',
   createdAt: new Date(),
-  expiredAt: new Date(new Date().setDate(new Date().getDate() + 1)),
+  expiredAt: null,
   expiredShortUrl: '',
   discountCode: {
     title: '',

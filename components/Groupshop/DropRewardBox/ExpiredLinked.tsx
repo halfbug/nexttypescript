@@ -48,13 +48,14 @@ const ExpiredLinked = ({
     gsctx: {
       revisedCount,
       store,
+      expiredAt,
     },
   } = useAppContext();
 
   return (
     <>
       <Modal
-        show={show}
+        show={show && expiredAt}
         onHide={closeModal}
         size="lg"
         centered
