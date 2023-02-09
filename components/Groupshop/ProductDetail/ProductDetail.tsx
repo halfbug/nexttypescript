@@ -653,9 +653,9 @@ const ProductDetail = ({
                       </Row>
                     ) : (<></>)}
                   </h3>
-                  {(product && product?.purchaseCount && product?.purchaseCount > 0) ? (
+                  {(!isDrops && product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center my-3">
-                      { !isDrops ? (
+                      {(
                         <p className={styles.groupshop_shopped}>
                           {' '}
                           {/* <Icon /> */}
@@ -667,22 +667,24 @@ const ProductDetail = ({
                           {'+ '}
                           people have shopped this!
                         </p>
-                      )
-                        : (product && product?.secondaryCount) && (
-                          <p className={styles.groupshop_shopped}>
-                            {' '}
-                            {/* <Icon /> */}
-                            {product?.secondaryCount >= 1 && product?.secondaryCount <= 30 ? <>🔥</> : ''}
-                            {product?.secondaryCount > 30 && product?.secondaryCount <= 100 ? <>⚡️</> : ''}
-                            {product?.secondaryCount > 100 ? <>🎉</> : ''}
-                            {' '}
-                            {product?.secondaryCount}
-                            {'+ '}
-                            people have shopped this!
-                          </p>
-                        )}
+                      )}
                     </div>
                   ) : `${product?.title}`}
+                  {
+                    isDrops && (product && product?.secondaryCount) && (
+                    <p className={styles.groupshop_shopped}>
+                      {' '}
+                      {/* <Icon /> */}
+                      {product?.secondaryCount >= 1 && product?.secondaryCount <= 30 ? <>🔥</> : ''}
+                      {product?.secondaryCount > 30 && product?.secondaryCount <= 100 ? <>⚡️</> : ''}
+                      {product?.secondaryCount > 100 ? <>🎉</> : ''}
+                      {' '}
+                      {product?.secondaryCount}
+                      {'+ '}
+                      people have shopped this!
+                    </p>
+                    )
+                  }
                   <div className={styles.groupshop_modal_detail_height}>
                     {isForMobile && (
                       //     <ShowMoreText
