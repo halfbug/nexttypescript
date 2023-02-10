@@ -47,8 +47,15 @@ const HowShopDropVideoBox = ({
         <Modal.Body className={styles.howShopDropVideoBox_modal__body}>
           <div className={styles.howShopDropVideoBox_modal__top}>
             <h3>
-              {customerDetail?.firstName?.charAt(0)?.toUpperCase()!
-                + customerDetail?.firstName?.split(' ')[0]?.slice(1)!}
+              { customerDetail?.firstName !== '' && (
+
+              customerDetail?.firstName?.charAt(0)?.toUpperCase()!
+                + customerDetail?.firstName?.split(' ')[0]?.slice(1)!
+              )}
+              { customerDetail?.firstName === '' && (
+                customerDetail?.fullName?.charAt(0)?.toUpperCase()!
+                + customerDetail?.fullName?.split(' ')[0]?.slice(1)!
+              )}
               , you’re off the waitlist.
             </h3>
             <div className={styles.howShopDropVideoBox_modal__top__howTxt}>

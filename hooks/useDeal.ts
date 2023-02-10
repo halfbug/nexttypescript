@@ -596,7 +596,7 @@ export default function useDeal() {
     }
 
     if (isDrops) {
-      return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.lastName?.charAt(0) ?? '' : gsctx?.customerDetail?.lastName ?? ''}`);
+      return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.fullName?.charAt(0) ?? '' : gsctx?.customerDetail?.fullName ?? ''}`);
     }
 
     if (isInfluencerGS) {

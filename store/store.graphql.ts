@@ -760,6 +760,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       }
     }
     customerDetail {
+      fullName
       firstName
       lastName
       phone

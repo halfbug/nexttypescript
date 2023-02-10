@@ -47,6 +47,7 @@ export type Milestone = {
 }
 export class CustomerInfo {
   // 'customer_id': string;
+  fullName?: string;
 
   firstName: string;
 
