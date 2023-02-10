@@ -195,7 +195,7 @@ const Cart = ({
                   unlock free shipping.
                 </strong>
               </Col>
-              <Col sm={12}>
+              <Col className="mt-3" sm={12}>
                 <GradientProgressBar progress={60} className={dStyles.drops_cart_progressBar} />
               </Col>
             </Row>
