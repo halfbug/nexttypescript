@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import useSuggested from 'hooks/useSuggested';
 import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
+import MoneyFly from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
@@ -24,6 +25,7 @@ import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
+import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 interface CartProps extends RootProps {
   show : boolean;
@@ -173,7 +175,7 @@ const Cart = ({
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={['border-start-0', styles.groupshop_modal_cart].join(' ')}>
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header className={isDrops ? dStyles.drops_modal_cart_header : ''} closeButton>
           <Offcanvas.Title>{' '}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className={styles.groupshop_modal_cart_body}>
@@ -183,23 +185,21 @@ const Cart = ({
 }
           >
             <div className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</div>
-            {/* <Row className="d-flex justify-content-center">
-                <Col sm={10} className={[' text-center', styles.groupshop_cart_spend].join(' ')}>
-                  <IconMoney className=" mx-1 " />
-                  Spend $40 to
-                  {' '}
-                  <strong>
-                    unlock
-                    {' '}
-                    {discount}
-                    %
-                    {' '}
-                    off this order
-                  </strong>
-                  {' '}
-                  and $20 cashback for
-                </Col>
-              </Row> */}
+            {isDrops && (
+            <Row className="d-flex justify-content-center">
+              <Col sm={10} className={[' text-center', dStyles.drops_cart_spend].join(' ')}>
+                <MoneyFly className=" mx-1 " />
+                Spend $40 to
+                {' '}
+                <strong>
+                  unlock free shipping.
+                </strong>
+              </Col>
+              <Col sm={12}>
+                <GradientProgressBar progress={60} className={dStyles.drops_cart_progressBar} />
+              </Col>
+            </Row>
+            )}
             {/* <div className="align-items-center">
                 // eslint-disable-next-line max-len
                 <Members names={gsctx?.members.map((mem: any) => `
@@ -312,6 +312,8 @@ const Cart = ({
                         +
                       </Button>
                     </ButtonGroup>
+                  </div>
+                  <div className={isDrops ? 'd-flex justify-content-end' : 'text-start mx-4'}>
                     <Button variant="link" className={['ps-0 d-block ', styles.groupshop_cartProductText].join(' ')} onClick={() => removeProduct(prd.selectedVariant.id)}>Remove</Button>
                   </div>
                 </Col>
