@@ -789,7 +789,7 @@ const ProductDetail = ({
                       <>
                         {isDrops && varientData < 6 && varientData > 0 ? (
                           <div className="text-danger mb-2">
-                            {`Less than ${varientData} left!`}
+                            <i>{`Less than ${varientData} left!`}</i>
                           </div>
                         ) : ''}
                         <Button
