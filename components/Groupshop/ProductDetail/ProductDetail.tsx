@@ -653,7 +653,7 @@ const ProductDetail = ({
                       </Row>
                     ) : (<></>)}
                   </h3>
-                  {!isDrops && (product && product?.purchaseCount && product?.purchaseCount > 0) ? (
+                  {!isDrops && ((product && product?.purchaseCount && product?.purchaseCount > 0) ? (
                     <div className="d-flex align-items-center my-3">
                       {(
                         <p className={styles.groupshop_shopped}>
@@ -669,7 +669,7 @@ const ProductDetail = ({
                         </p>
                       )}
                     </div>
-                  ) : `${product?.title}`}
+                  ) : `${product?.title}`)}
                   {
                     isDrops && (product && product?.secondaryCount) && (
                     <p className={styles.groupshop_shopped}>
@@ -789,7 +789,7 @@ const ProductDetail = ({
                       <>
                         {isDrops && varientData < 6 && varientData > 0 ? (
                           <div className="text-danger mb-2">
-                            <i>{`Less than ${varientData} left!`}</i>
+                            {`Less than ${varientData} left!`}
                           </div>
                         ) : ''}
                         <Button
