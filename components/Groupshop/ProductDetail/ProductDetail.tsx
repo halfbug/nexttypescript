@@ -787,7 +787,7 @@ const ProductDetail = ({
                   <div className={[isDrops ? dStyles.drops_buttons_wrapper : styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
                     {!isExpired ? (
                       <>
-                        {isDrops && varientData < 6 && varientData > 0 ? (
+                        {isDrops && varientData < 51 && varientData > 0 ? (
                           <div className="text-danger mb-2">
                             {`Less than ${varientData} left!`}
                           </div>
