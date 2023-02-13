@@ -28,10 +28,10 @@ import ProductCard from '../ProductCard/ProductCard';
 import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 // import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
 interface CartProps extends RootProps {
-  show : boolean;
+  show: boolean;
   handleClose(): any;
-  handleDetail(item:any):void;
-  product : IProduct | undefined;
+  handleDetail(item: any): void;
+  product: IProduct | undefined;
   setShow: any;
   isDrops?: boolean;
 }
@@ -52,6 +52,7 @@ const Cart = ({
   } = useDeal();
   const {
     spotlightProducts,
+    cartValueProgress,
   } = useDrops();
 
   const [currencyName, setCurrencyName] = useState<any>('USD');
@@ -86,7 +87,7 @@ const Cart = ({
   }, [show]);
 
   useEffect(() => {
-    const cartDetails:any = [];
+    const cartDetails: any = [];
     cartProducts.forEach((item, index) => {
       const productId = item.id.replace('gid://shopify/Product/', '');
       setCurrencyName(item?.currencyCode);
@@ -104,7 +105,7 @@ const Cart = ({
 
     if (cartDetails[0] && show) {
       // @ts-ignore
-    // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       fbq('track', 'AddToCart', {
         contents: cartDetails,
         currency: currencyName,
@@ -131,7 +132,7 @@ const Cart = ({
     // emptyCart();
     setLoading(true);
 
-    const cartDetails:any = [];
+    const cartDetails: any = [];
     cartProducts.forEach((item, index) => {
       const productId = item.id.replace('gid://shopify/Product/', '');
       setCurrencyName(item?.currencyCode);
@@ -182,23 +183,30 @@ const Cart = ({
           <div className={
             isCartEmpty ? styles.groupshop_modal_cart_body__nonescrollable
               : styles.groupshop_modal_cart_body__scrollable
-}
+          }
           >
             <div className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</div>
             {isDrops && (
-            <Row className="d-flex justify-content-center">
-              <Col sm={10} className={[' text-center', dStyles.drops_cart_spend].join(' ')}>
-                <MoneyFly className=" mx-1 " />
-                Spend $40 to
-                {' '}
-                <strong>
-                  unlock free shipping.
-                </strong>
-              </Col>
-              <Col className="mt-3" sm={12}>
-                <GradientProgressBar progress={60} className={dStyles.drops_cart_progressBar} />
-              </Col>
-            </Row>
+              <Row className="d-flex justify-content-center">
+                <Col sm={10} className={[' text-center', dStyles.drops_cart_spend].join(' ')}>
+                  <MoneyFly className=" mx-1 " />
+                  {
+                    getTotal()! >= 50 ? "You've "
+                      : `Spend $
+                ${cartValueProgress(getTotal()).remainedValue}
+                more to `
+                  }
+                  <strong>
+                    {`${getTotal()! >= 50 ? 'unlocked free shipping.' : 'unlock free shipping.'} `}
+                  </strong>
+                </Col>
+                <Col className="mt-3" sm={12}>
+                  <GradientProgressBar
+                    progress={cartValueProgress(getTotal()).percantage}
+                    className={dStyles.drops_cart_progressBar}
+                  />
+                </Col>
+              </Row>
             )}
             {/* <div className="align-items-center">
                 // eslint-disable-next-line max-len
@@ -281,7 +289,7 @@ const Cart = ({
                   </div>
                   <div className="text-start mx-4">
                     <div className={['pt-0', styles.groupshop_cartProductText].join(' ')}>
-                      {prd.selectedVariant?.selectedOptions?.map((op:any) => op.value).join(', ').replace('Default Title', '')}
+                      {prd.selectedVariant?.selectedOptions?.map((op: any) => op.value).join(', ').replace('Default Title', '')}
                     </div>
 
                     <div className={['pt-2 pb-2', styles.groupshop_cartProductText].join(' ')}>Quantity</div>
@@ -305,9 +313,9 @@ const Cart = ({
                         variant="outline-primary"
                         onClick={() => plusQuantity(prd.selectedVariant.id)}
                         disabled={
-                        prd.selectedVariant?.selectedQuantity
-                        >= prd.selectedVariant?.inventoryQuantity!
-}
+                          prd.selectedVariant?.selectedQuantity
+                          >= prd.selectedVariant?.inventoryQuantity!
+                        }
                       >
                         +
                       </Button>
@@ -319,131 +327,203 @@ const Cart = ({
                 </Col>
               </Row>
 
-            )) }
+            ))}
             <Container>
               {suggestedProd && (
-              <>
-                <div className={['pt-3 text-start', styles.groupshop_cart_spend].join(' ')}>
-                  In case you missed the best-sellers...
-                </div>
-                <Row className="p-3 pt-2">
-                  {/* <ProductGrid products={suggestedProd} /> */}
-                  {suggestedProd.map((item) => (
-                    <Col xs={6} className=" py-1 mb-1 px-1 border-2">
-                      <ProductCard
-                        isDrops={isDrops}
-                        onClick={() => {
-                          handleDetail(item);
-                        }}
-                        type="small"
-                        isrc={item.featuredImage}
-                        imgOverlay={(
-                          <Badge
-                            bg="light"
-                            text="dark"
-                            className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
-                          >
-                            {currencySymbol}
-                            {
-                              Number.isInteger((+(item.price) - +(dPrice(+(item?.price || 0)))))
-                                ? +(item.price) - +(dPrice(+(item?.price || 0)))
-                                : (+(item.price) - +(dPrice(+(item?.price || 0)))).toFixed(2)
-                            }
-                            {' '}
-                            OFF
-                          </Badge>
-                          )}
-                      >
-                        <div className={styles.groupshop__pcard_cardBody_PDetail}>
-                          <div className={styles.groupshop__pcard_cardBody_pName}>{item.title}</div>
-                          {!isDrops && item.purchaseCount && (
-                          <div className={styles.groupshop__pcard_cardBody_PDesc}>
-                            {item.purchaseCount}
-                            {' '}
-                            people
-                            {' '}
-                            shopped
-                          </div>
-                          )}
-                          <Row className="mt-1 d-flex align-items-center">
-                            {!isDrops && (
-                            <Button
-                              variant="primary"
-                              className={styles.groupshop__pcard_cardBody_addBtn}
-                              onClick={() => {
-                                handleDetail(item);
-                                checkoutUpsellClick([{
-                                  productId: item.id.split('/')[4],
-                                  productName: item.title,
-                                  promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
-                                  currency: item.currencyCode,
-                                  productBrand: gsctx.store?.brandName,
-                                  originalPrice: +item.price,
-                                  finalPrice: dPrice(+(item.price)).toFixed(2),
-                                  quantity: 1,
-                                }], getTotal() ?? 0);
-                              }}
+                <>
+                  <div className={['pt-3 text-start', styles.groupshop_cart_spend].join(' ')}>
+                    In case you missed the best-sellers...
+                  </div>
+                  <Row className="p-3 pt-2">
+                    {/* <ProductGrid products={suggestedProd} /> */}
+                    {suggestedProd.map((item) => (
+                      <Col xs={6} className=" py-1 mb-1 px-1 border-2">
+                        <ProductCard
+                          isDrops={isDrops}
+                          onClick={() => {
+                            handleDetail(item);
+                          }}
+                          type="small"
+                          isrc={item.featuredImage}
+                          imgOverlay={(
+                            <Badge
+                              bg="light"
+                              text="dark"
+                              className={['shadow-sm', styles.groupshop__pcard_tag_addedbytop].join(' ')}
                             >
-                              Add
-                            </Button>
-                            )}
-                            <div className={['fw-normal text-nowrap', isDrops ? 'text-start' : ''].join(' ')}>
-                              <span className="text-decoration-line-through">
-                                {currencySymbol}
-                                {formatNumber(item?.price)}
-                              </span>
+                              {currencySymbol}
+                              {
+                                Number.isInteger((+(item.price) - +(dPrice(+(item?.price || 0)))))
+                                  ? +(item.price) - +(dPrice(+(item?.price || 0)))
+                                  : (+(item.price) - +(dPrice(+(item?.price || 0)))).toFixed(2)
+                              }
                               {' '}
-                              <span className="fw-bold ms-1">
-                                {currencySymbol}
-                                {spotlightProducts.includes(item.id)
-                                  ? formatNumber(disPrice(+(item?.price || 0),
-                                    +store?.drops?.spotlightDiscount?.percentage!))
-                                  : formatNumber(dPrice(+(item?.price || 0)))}
-                              </span>
+                              OFF
+                            </Badge>
+                          )}
+                        >
+                          <div className={styles.groupshop__pcard_cardBody_PDetail}>
+                            <div className={styles.groupshop__pcard_cardBody_pName}>
+                              {item.title}
                             </div>
-                            {isDrops && (
-                            <div className="mt-2">
-                              <Button variant="primary" className={dStyles.drops__pcard_cardBody_addToCartBtn}>
-                                Add to Cart
-                              </Button>
-                            </div>
+                            {!isDrops && item.purchaseCount && (
+                              <div className={styles.groupshop__pcard_cardBody_PDesc}>
+                                {item.purchaseCount}
+                                {' '}
+                                people
+                                {' '}
+                                shopped
+                              </div>
                             )}
-                          </Row>
-                        </div>
-                      </ProductCard>
-                    </Col>
-                  ))}
-                </Row>
+                            <Row className="mt-1 d-flex align-items-center">
+                              {!isDrops && (
+                                <Button
+                                  variant="primary"
+                                  className={styles.groupshop__pcard_cardBody_addBtn}
+                                  onClick={() => {
+                                    handleDetail(item);
+                                    checkoutUpsellClick([{
+                                      productId: item.id.split('/')[4],
+                                      productName: item.title,
+                                      promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
+                                      currency: item.currencyCode,
+                                      productBrand: gsctx.store?.brandName,
+                                      originalPrice: +item.price,
+                                      finalPrice: dPrice(+(item.price)).toFixed(2),
+                                      quantity: 1,
+                                    }], getTotal() ?? 0);
+                                  }}
+                                >
+                                  Add
+                                </Button>
+                              )}
+                              <div className={['fw-normal text-nowrap', isDrops ? 'text-start' : ''].join(' ')}>
+                                <span className="text-decoration-line-through">
+                                  {currencySymbol}
+                                  {formatNumber(item?.price)}
+                                </span>
+                                {' '}
+                                <span className="fw-bold ms-1">
+                                  {currencySymbol}
+                                  {spotlightProducts.includes(item.id)
+                                    ? formatNumber(disPrice(+(item?.price || 0),
+                                      +store?.drops?.spotlightDiscount?.percentage!))
+                                    : formatNumber(dPrice(+(item?.price || 0)))}
+                                </span>
+                              </div>
+                              {isDrops && (
+                                <div className="mt-2">
+                                  <Button variant="primary" className={dStyles.drops__pcard_cardBody_addToCartBtn}>
+                                    Add to Cart
+                                  </Button>
+                                </div>
+                              )}
+                            </Row>
+                          </div>
+                        </ProductCard>
+                      </Col>
+                    ))}
+                  </Row>
 
-              </>
+                </>
               )}
             </Container>
           </div>
           {!isCartEmpty && (
-          <div className={styles.groupshop__total_cartWrapper}>
+            <div className={styles.groupshop__total_cartWrapper}>
 
-            <Container fluid className="py-3 my-2 ">
-              <Row className="mx-3">
-                <Col className="text-start mx-0 px-0"><h3>SUBTOTAL</h3></Col>
+              <Container fluid className="py-3 my-2 ">
+                <Row className="mx-3">
+                  <Col className="text-start mx-0 px-0"><h3>SUBTOTAL</h3></Col>
 
-                <Col className="text-end mx-0 px-0">
+                  <Col className="text-end mx-0 px-0">
 
-                  <h3 className={styles.groupshop__total_cartWrapper_price}>
-                    {isDrops ? (
-                      <span className="text-decoration-line-through fw-light me-2">
-                        {currencySymbol}
-                        {getTotalActualCartTotal() && getTotalActualCartTotal()?.toFixed(2).toString().replace('.00', '')}
-                      </span>
-                    ) : <></>}
-                    {currencySymbol}
-                    {getTotal() && getTotal()?.toFixed(2).toString().replace('.00', '')}
-                  </h3>
+                    <h3 className={styles.groupshop__total_cartWrapper_price}>
+                      {isDrops ? (
+                        <span className="text-decoration-line-through fw-light me-2">
+                          {currencySymbol}
+                          {getTotalActualCartTotal() && getTotalActualCartTotal()?.toFixed(2).toString().replace('.00', '')}
+                        </span>
+                      ) : <></>}
+                      {currencySymbol}
+                      {getTotal() && getTotal()?.toFixed(2).toString().replace('.00', '')}
+                    </h3>
 
-                </Col>
-              </Row>
-              <Row className="d-flex justify-content-center">
-                {loading
-                  ? (
+                  </Col>
+                </Row>
+                <Row className="d-flex justify-content-center">
+                  {loading
+                    ? (
+                      <div
+                        className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
+                      >
+                        🔒
+                        {' '}
+                        <strong>Secure checkout</strong>
+                        {' '}
+                        powered by
+                        {' '}
+                        <strong>{brandName}</strong>
+                      </div>
+                    )
+                    : (
+                      <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
+                        <Icon className="col-1" />
+                        <div className="col-11">
+                          You’re saving
+                          {' '}
+                          <strong>
+                            {currencySymbol}
+                            {/* {dPrice(getTotalActualCartTotal())} */}
+                            {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
+                          </strong>
+                          {' '}
+                          by shopping with
+                          {' '}
+                          <strong>{getOwnerName()}</strong>
+                          {/* {' '}
+                    And you can keep earning up to
+                    {' '}
+                    { upToPercent }
+                    {' '}
+                    {isInfluencerGS ? 'discount!' : 'cashback!'} */}
+                        </div>
+                      </Col>
+                    )}
+                </Row>
+                <Row>
+                  <Col className=" mt-2">
+                    {loading ? (
+                      <>
+                        <Button
+                          variant="primary"
+                          onClick={handleCheckout}
+                          size="lg"
+                          className={[styles.groupshop_cart_checkout, ''].join(' ')}
+                          disabled
+                        >
+                          We’re preparing your checkout...
+                        </Button>
+                        <Spinner animation="border" className="align-middle" />
+
+                      </>
+
+                    ) : (
+                      <Button
+                        variant="primary"
+                        onClick={handleCheckout}
+                        size="lg"
+                        className={styles.groupshop_cart_checkout}
+                      >
+                        Checkout
+                      </Button>
+
+                    )}
+
+                  </Col>
+                </Row>
+                {!loading && (
+                  <Row>
                     <div
                       className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
                     >
@@ -453,117 +533,47 @@ const Cart = ({
                       {' '}
                       powered by
                       {' '}
-                      <strong>{brandName}</strong>
+                      <strong>
+                        {brandName}
+                      </strong>
                     </div>
-                  )
-                  : (
-                    <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
-                      <Icon className="col-1" />
-                      <div className="col-11">
-                        You’re saving
-                        {' '}
-                        <strong>
-                          {currencySymbol}
-                          {/* {dPrice(getTotalActualCartTotal())} */}
-                          {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
-                        </strong>
-                        {' '}
-                        by shopping with
-                        {' '}
-                        <strong>{getOwnerName()}</strong>
-                        {/* {' '}
-                    And you can keep earning up to
-                    {' '}
-                    { upToPercent }
-                    {' '}
-                    {isInfluencerGS ? 'discount!' : 'cashback!'} */}
-                      </div>
-                    </Col>
-                  )}
-              </Row>
-              <Row>
-                <Col className=" mt-2">
-                  {loading ? (
-                    <>
-                      <Button
-                        variant="primary"
-                        onClick={handleCheckout}
-                        size="lg"
-                        className={[styles.groupshop_cart_checkout, ''].join(' ')}
-                        disabled
-                      >
-                        We’re preparing your checkout...
-                      </Button>
-                      <Spinner animation="border" className="align-middle" />
-
-                    </>
-
-                  ) : (
-                    <Button
-                      variant="primary"
-                      onClick={handleCheckout}
-                      size="lg"
-                      className={styles.groupshop_cart_checkout}
-                    >
-                      Checkout
-                    </Button>
-
-                  )}
-
-                </Col>
-              </Row>
-              {!loading && (
-              <Row>
-                <div
-                  className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
-                >
-                  🔒
-                  {' '}
-                  <strong>Secure checkout</strong>
-                  {' '}
-                  powered by
-                  {' '}
-                  <strong>
-                    {brandName}
-                  </strong>
-                </div>
-              </Row>
-              )}
-              {/* <Row>
+                  </Row>
+                )}
+                {/* <Row>
                 <div
                   className={['text-center', styles.groupshop_cart_totalSave].join(' ')}
                 >
                   Shipping and taxes calculated at checkout.
                 </div>
               </Row> */}
-              <Row className="d-flex justify-content-center">
-                { !isDrops ? (
-                  <div
-                    className={['', styles.groupshop_cart_byChecking].join(' ')}
-                  >
-                    You agree to receive email updates about your order and rewards.
-                    We don’t sell or share your information. You can unsubscribe at any time.
-                    <br />
-                    <br />
-                    If you purchased any of these items at full price on
-                    {' '}
-                    {brandName}
-                    ,
-                    you cannot return your original order to keep these discounted ones.
-                  </div>
-                )
-                  : (
+                <Row className="d-flex justify-content-center">
+                  {!isDrops ? (
                     <div
                       className={['', styles.groupshop_cart_byChecking].join(' ')}
                     >
                       You agree to receive email updates about your order and rewards.
                       We don’t sell or share your information. You can unsubscribe at any time.
                       <br />
+                      <br />
+                      If you purchased any of these items at full price on
+                      {' '}
+                      {brandName}
+                      ,
+                      you cannot return your original order to keep these discounted ones.
                     </div>
-                  )}
-              </Row>
-            </Container>
-          </div>
+                  )
+                    : (
+                      <div
+                        className={['', styles.groupshop_cart_byChecking].join(' ')}
+                      >
+                        You agree to receive email updates about your order and rewards.
+                        We don’t sell or share your information. You can unsubscribe at any time.
+                        <br />
+                      </div>
+                    )}
+                </Row>
+              </Container>
+            </div>
 
           )}
         </Offcanvas.Body>

@@ -148,6 +148,17 @@ export default function useDrops() {
     return 0;
   }, [gsctx, store]);
 
+  const cartValueProgress = (cartValue: any) => {
+    const baseValue = 50;
+    const percantage = (+cartValue * 100) / baseValue;
+    const remainedValue = baseValue - cartValue;
+    const cart = {
+      percantage,
+      remainedValue: remainedValue.toFixed(2),
+    };
+    return cart;
+  };
+
   return {
     currentDropReward,
     nextDropReward,
@@ -157,5 +168,6 @@ export default function useDrops() {
     updateOnboarding,
     canBeUnlockedCB,
     getChackback,
+    cartValueProgress,
   };
 }
