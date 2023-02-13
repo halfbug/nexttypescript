@@ -213,6 +213,12 @@ export interface IGroupshop {
 
   bestSellerProducts?: Product[];
 
+  skincareProducts?: Product[],
+
+  runningOutProducts?: Product[],
+
+  hairProducts?: Product[],
+
   isDrops?: boolean;
 
   revisedCount?: number;

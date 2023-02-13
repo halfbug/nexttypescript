@@ -55,6 +55,9 @@ export const gsdInit: IGroupshop = {
   latestProducts: [],
   bestSellerProducts: [],
   allProducts: [],
+  skincareProducts: [],
+  runningOutProducts: [],
+  hairProducts: [],
   isDrops: true,
   customerDetail: {
     firstName: '', lastName: '', email: '', phone: '',

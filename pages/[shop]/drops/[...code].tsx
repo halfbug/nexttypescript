@@ -103,6 +103,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [spotLightProductsList, setSpotLightProductsList] = useState<IProduct[] | undefined>([]);
   const [latestProductsList, setLatestProductsList] = useState<IProduct[] | undefined>([]);
 
+  // STATIC PRODUCTS
+  const [runningOutProducts, setRunningOutProducts] = useState<IProduct[] | undefined>([]);
+  const [hairProducts, setHairProducts] = useState<IProduct[] | undefined>([]);
+  const [skinProducts, setSkinProducts] = useState<IProduct[] | undefined>([]);
+
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
   const [showSignup, setSignup] = useState<boolean>(false);
@@ -127,6 +132,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       }
       if (gsctx.latestProducts) {
         setLatestProductsList(gsctx.latestProducts);
+      }
+      if (gsctx.hairProducts) {
+        setHairProducts(gsctx.hairProducts);
+      }
+      if (gsctx.runningOutProducts) {
+        setRunningOutProducts(gsctx.runningOutProducts);
+      }
+      if (gsctx.skincareProducts) {
+        setSkinProducts(gsctx.skincareProducts);
       }
     }
   }, [gsctx]);
@@ -767,7 +781,60 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Col>
           </Row> */}
         </ProductGrid>
-
+        <ProductGrid
+          isDrops
+          title="Hair care"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(hairProducts)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="haircaredrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+          showPagination={false}
+        />
+        <ProductGrid
+          isDrops
+          title="Skin care"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(skinProducts)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="skincaredrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+          showPagination={false}
+        />
+        <ProductGrid
+          isDrops
+          title="Running out"
+          xs={6}
+          sm={6}
+          md={6}
+          lg={4}
+          xl={3}
+          products={uniqueArray(runningOutProducts)}
+          maxrows={3}
+          addProducts={handleAddProduct}
+          handleDetail={(prd) => setsProduct(prd)}
+          showHoverButton
+          id="runningoutdrops"
+          isModalForMobile={isModalForMobile}
+          urlForActivation={urlForActivation}
+          showPagination={false}
+        />
         {/* <ProductGrid
           isDrops
           xs={6}

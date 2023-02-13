@@ -807,6 +807,60 @@ query DropGroupshop($code: String!, $status: String = "") {
         position
       }
     }
+    runningOutProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    skincareProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    hairProducts {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
     allProducts {
       id
       title
