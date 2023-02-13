@@ -7,12 +7,7 @@ const useCountDown = () => {
   const { isExpired } = useDeal();
   const { expiredAt } = gsctx;
   const [countdownDate, setCountdownDate] = useState(0);
-  const [count, setCount] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [count, setCount] = useState<any>(undefined);
 
   const loading = {
     days: '..',
@@ -72,7 +67,7 @@ const useCountDown = () => {
     }
   };
 
-  if (gsctx.id && count.seconds > 0) {
+  if (gsctx.id && count) {
     return { ...count };
   }
   if (gsctx.id && isExpired) {
