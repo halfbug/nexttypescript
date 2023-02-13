@@ -68,7 +68,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     query: '(max-width: 475px)',
   });
   const Router = useRouter();
-
   const {
     loading,
     error,
@@ -422,9 +421,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Up to ${maxReward}% off products from the hottest brands for 24hrs only!`} />
+        <meta name="description" content={`Up to ${meta.maxReward}% off products from the hottest brands for 24hrs only!`} />
         <meta name="og:title" content="Groupshop" />
-        <meta name="description" content={`Up to ${maxReward}% off products from the hottest brands for 24hrs only!`} />
+        <meta name="description" content={`Up to ${meta.maxReward}% off products from the hottest brands for 24hrs only!`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BannerDropsFinal.jpg" as="image" />
@@ -1008,7 +1007,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 export default GroupShop;
 
 export const getServerSideProps = async (context: any) => {
-  const url = `${process.env.API_URL}/me?name=${context.params.shop}`;
+  const url = `${process.env.API_URL}/medrops?name=${context.params.shop}`;
   const requestOptions = {
     method: 'GET',
     headers: {
