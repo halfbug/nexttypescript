@@ -450,7 +450,7 @@ const ProductGrid = ({
                   </>
               )}
               >
-                <h5 className="text-center fw-bold text-truncate">Curate your Groupshop</h5>
+                <h5 className="text-center fw-bold text-truncate">{isDrops ? 'Curate your Groupshop' : 'Curate your Microstore'}</h5>
 
                 <p className="text-center  fs-5">
                   <i>

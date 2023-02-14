@@ -15,7 +15,7 @@ export default function useAppContext() {
     const { gsctx, dispatch } = useContext(ChannelGroupshopContext);
 
     return {
-      gsctx, dispatch, isGroupshop, isChannel,
+      gsctx, dispatch, isGroupshop, isChannel, isDrops,
     };
   }
   if (isDrops) {
@@ -28,6 +28,6 @@ export default function useAppContext() {
   const { gsctx, dispatch } = useContext(pathname.includes('/partner-deal/') ? PartnerGroupshopContext : GroupshopContext);
 
   return {
-    gsctx, dispatch, isGroupshop, isChannel,
+    gsctx, dispatch, isGroupshop, isChannel, isDrops,
   };
 }

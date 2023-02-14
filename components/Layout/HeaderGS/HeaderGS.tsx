@@ -13,6 +13,7 @@ import { GroupshopContext } from 'store/groupshop.context';
 import useSteps from 'hooks/useSteps';
 import { useRouter } from 'next/router';
 import useCode from 'hooks/useCode';
+import useDeal from 'hooks/useDeal';
 
 interface HeaderProps {
   LeftComp: React.ReactNode;
@@ -23,6 +24,7 @@ const Header = ({
   LeftComp, RightComp,
 }: HeaderProps) => {
   const { gsctx } = useContext(GroupshopContext);
+  const { isDrops } = useDeal();
   const [step, setStep] = useState<string>('');
   const { stepModal } = useSteps(step);
   const Router = useRouter();
@@ -43,7 +45,9 @@ const Header = ({
       <Container fluid>
         <Row className="w-100 align-items-center gx-0">
           <Col xs={{ span: 4, order: 1 }} md={{ span: 4, order: 1 }}>{LeftComp}</Col>
-          <Col xs={{ span: 4, order: 2 }} md={{ span: 4, order: 2 }} className="text-center"><Navbar.Brand href="#home" className="m-0"><img src="/images/logo.svg" alt="Groupshop" /></Navbar.Brand></Col>
+          <Col xs={{ span: 4, order: 2 }} md={{ span: 4, order: 2 }} className="text-center">
+            <Navbar.Brand href="#home" className="m-0"><img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" width={150} /></Navbar.Brand>
+          </Col>
           <Col
             xs={{ span: 4, order: 3 }}
             md={{ span: 4, order: 3 }}

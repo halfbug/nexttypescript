@@ -99,10 +99,20 @@ const Footer = ({
               {isExpired ? (
                 <>
                   <h6>
-                    <strong>THIS GROUPSHOP HAS EXPIRED </strong>
+                    <strong>
+                      THIS
+                      {' '}
+                      {isDrops ? 'GROUPSHOP' : 'MICROSTORE'}
+                      {' '}
+                      HAS EXPIRED
+                      {' '}
+                    </strong>
                   </h6>
                   <p className={styles1.GSfooter}>
-                    Invite 1 friend to join Groupshop today, and start shopping
+                    Invite 1 friend to join
+                    {' '}
+                    {isDrops ? 'Groupshop' : 'Microstore'}
+                    today, and start shopping
                     with them to get exclusive cashback and discounts.
                   </p>
 
@@ -132,7 +142,7 @@ const Footer = ({
                     <Button className={styles1.Influencer_footer_leftBtn} variant="">
                       <Link href="https://www.groupshop.com/consumers#brands">
                         <a target="_blank" className="text-decoration-none">
-                          Explore all Groupshop brands
+                          Explore all Microstore brands
                           {' '}
                           {'>'}
                         </a>
@@ -183,7 +193,8 @@ const Footer = ({
         <Col lg={4}>
           <Row className={['mt-2 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
             {/* <img src={footerLogo.src} alt="brandLogo" /> */}
-            <img src="/images/logo-thin.svg" alt="Groupshop" className="img-fluid" />
+            <img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" className=" img-fluid" />
+            {/* <img src="/images/logo-thin.svg" alt="Groupshop" className="img-fluid" /> */}
           </Row>
           <Row className={styles.groupshop_socialIcon}>
 
@@ -295,7 +306,7 @@ const Footer = ({
                     <strong>Want your own store?</strong>
                     {' '}
                     Be the first to find out when
-                    you can shop your favorite brands on Groupshop.
+                    you can shop your favorite brands on Microstore.
                   </p>
                   <Form noValidate onSubmit={handleSubmit}>
                     <InputGroup id="borderclr">
@@ -372,7 +383,8 @@ const Footer = ({
         <hr />
         <div className={[styles.groupshop_footer_f2].join(' ')}>
           <p>Powered by</p>
-          <img src={isExpired ? footerLogoExpire.src : footerLogo1.src} alt="Logo" className=" mx-1" width={112} />
+          {/* <img src={isExpired ? footerLogoExpire.src : footerLogo1.src} alt="Logo" className=" mx-1" width={112} /> */}
+          <img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo1.png`} alt="Logo" className=" mx-1" width={112} />
         </div>
       </Row>
       <AlertComponent />

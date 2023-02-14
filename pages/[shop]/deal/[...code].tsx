@@ -671,7 +671,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {owner?.firstName}
                       {' '}
                     </span>
-                    ’s Groupshop
+                    ’s Microstore
                   </h3>
                   <p>The more friends shop, the more discounts and cashback!</p>
                 </Col>
@@ -1000,7 +1000,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col xs={12} className="px-0">
                 <div className={styles.groupshop__discover}>
-                  Discover new brands with Groupshop and get exclusive discounts!
+                  Discover new brands with Microstore and get exclusive discounts!
                 </div>
               </Col>
               {matchingGroupshop?.map((brand) => (

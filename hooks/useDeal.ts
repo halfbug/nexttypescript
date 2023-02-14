@@ -675,5 +675,6 @@ export default function useDeal() {
     getBuyersDiscover,
     disPrice,
     currencySymbolDiscovery,
+    isDrops,
   };
 }

@@ -528,7 +528,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     {gsctx?.partnerDetails?.fname}
                     {' '}
                   </span>
-                  ’s Groupshop
+                  ’s Microstore
                 </h3>
                 <p>
                   Shop with me & get exclusive discounts on my favorite products

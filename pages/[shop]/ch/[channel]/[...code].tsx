@@ -688,7 +688,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {gsctx?.customerDetail?.firstName}
                       {' '}
                     </span>
-                    ’s Groupshop
+                    ’s Microstore
                   </h3>
                   <p>The more friends shop, the more discounts and cashback!</p>
                 </Col>
