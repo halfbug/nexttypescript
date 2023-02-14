@@ -19,14 +19,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     -moz-filter: blur(0px);
     -o-filter: blur(0px);
     -ms-filter: blur(0px);
-    filter: blur(0px);
-    display: none;
-  }
-  &__dummyOverlay{
-    position: absolute;
-    background: rgb(255,255,255, 0.5);
-    width: 100vw;
-    height: 100vh;
+    filter: blur(2px);
+    // display: none;
   }
   p {
     @extend .mb-0;

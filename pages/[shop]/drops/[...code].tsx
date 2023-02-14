@@ -435,14 +435,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      {!isModalForMobile && (
-        <div>
-          <Image src={DropsDummyImage.src} layout="fill" />
-          <div className={styles.drops__dummyOverlay} />
-        </div>
-      )}
       <div className={styles.drops}>
         <header>
+          {!isModalForMobile && (
+          <div>
+            <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
+            <div className={styles.drops__dummyOverlay} />
+          </div>
+          )}
           <Header
             LeftComp={
               isModalForMobile
