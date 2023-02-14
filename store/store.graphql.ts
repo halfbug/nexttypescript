@@ -811,7 +811,6 @@ query DropGroupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -829,7 +828,6 @@ query DropGroupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -847,7 +845,6 @@ query DropGroupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
