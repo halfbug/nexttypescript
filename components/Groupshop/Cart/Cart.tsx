@@ -311,11 +311,13 @@ const Cart = ({
 
                       <Button
                         variant="outline-primary"
-                        onClick={() => plusQuantity(prd.selectedVariant.id)}
-                        disabled={
-                          prd.selectedVariant?.selectedQuantity
+                        onClick={() => {
+                          plusQuantity(prd.selectedVariant.id);
+                        }}
+                        disabled={(isDrops && prd.selectedVariant?.selectedQuantity >= 3)
+                        || (prd.selectedVariant?.selectedQuantity
                           >= prd.selectedVariant?.inventoryQuantity!
-                        }
+                        )}
                       >
                         +
                       </Button>
