@@ -788,7 +788,7 @@ const ProductDetail = ({
                     {!isExpired ? (
                       <>
                         {isDrops && varientData < 51 && varientData > 0 ? (
-                          <div className="text-danger mb-2">
+                          <div className={dStyles.drops_buttons_wrapper_lessTxt}>
                             {`Less than ${varientData} left!`}
                           </div>
                         ) : ''}

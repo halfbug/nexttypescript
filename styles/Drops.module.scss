@@ -15,11 +15,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   background-color: white !important;
   font-family: "DM Sans" !important;
   @include media-breakpoint-up(sm) {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -o-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: blur(0px);
+    display: none;
+  }
+  &__dummyOverlay{
+    position: absolute;
+    background: rgb(255,255,255, 0.5);
+    width: 100vw;
+    height: 100vh;
   }
   p {
     @extend .mb-0;
@@ -1646,6 +1653,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       border-top: 1px solid #ebebeb;
       padding-top: 0.5rem;
       padding-bottom: 1rem;
+      &_lessTxt {
+        margin-bottom: 8px;
+        font-family: 'DM Sans';
+        font-style: italic;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.32px;
+        color: #FF0000;
+      }
     }
   }
 

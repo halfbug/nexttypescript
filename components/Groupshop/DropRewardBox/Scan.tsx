@@ -46,6 +46,7 @@ const DropsScanBox = ({
         // className={styles.Scan_modal}
         size="lg"
         centered
+        backdropClassName="opacity-25"
         dialogClassName={styles.Scan_modal}
         contentClassName={styles.Scan_modal__content}
       >

@@ -11,6 +11,8 @@ import {
 } from 'react-bootstrap';
 import Gmembers from 'components/Groupshop/Members/Gmembers';
 import QRClickIcon from 'assets/images/qr-click.svg';
+import DropsDummyImage from 'assets/images/dropsDummy.png';
+import Image from 'next/image';
 import IconButton from 'components/Buttons/IconButton';
 import {
   Handbag, Plus, Search,
@@ -433,6 +435,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
+      {!isModalForMobile && (
+        <div>
+          <Image src={DropsDummyImage.src} layout="fill" />
+          <div className={styles.drops__dummyOverlay} />
+        </div>
+      )}
       <div className={styles.drops}>
         <header>
           <Header
