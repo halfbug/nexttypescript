@@ -1155,10 +1155,11 @@
                 flex-direction: column;
                 z-index: 1;
                 height: 100%;
-                background-color: rgba(0,0,0,0.09);
-                margin: -16px;
-                padding: 16px;
-                border-radius: 20px;
+                // background-color: rgba(0,0,0,0.09);
+                // margin: -16px;
+                // padding: 16px;
+                // border-radius: 20px;
+                margin-top: 16px;
             }
             &__tierTxt {
                 font-family: 'DM Sans';
