@@ -189,16 +189,16 @@ const Cart = ({
             {isDrops && (
               <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', dStyles.drops_cart_spend].join(' ')}>
-                  <MoneyFly className=" mx-1 " />
+                  {getTotal()! < 50 ? <MoneyFly className=" mx-1 " /> : ''}
                   {
                     getTotal()! >= 50 ? "You've "
-                      : `Spend $
-                ${cartValueProgress(getTotal()).remainedValue}
+                      : `Spend $${cartValueProgress(getTotal()).remainedValue}
                 more to `
                   }
                   <strong>
-                    {`${getTotal()! >= 50 ? 'unlocked free shipping.' : 'unlock free shipping.'} `}
+                    {`${getTotal()! >= 50 ? 'unlocked free shipping' : 'unlock free shipping.'} `}
                   </strong>
+                  {`${getTotal()! >= 50 ? 'on your order!' : ''}`}
                 </Col>
                 <Col className="mt-3" sm={12}>
                   <GradientProgressBar
