@@ -250,13 +250,13 @@ const Footer = ({
                   </a>
                 </>
               )}
-              {!isDrops && (
+              {/* {!isDrops && (
                 <>
                   <Link href="https://groupshop.zendesk.com/hc/en-us/sections/4429435469843-About-us">
                     <a target="_blank"><strong>About</strong></a>
                   </Link>
                 </>
-              )}
+              )} */}
               <Link href="https://groupshop.zendesk.com/hc/en-us/categories/4414265217427-For-Shoppers">
                 <a target="_blank"><strong>FAQ</strong></a>
               </Link>
