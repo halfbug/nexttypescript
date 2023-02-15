@@ -63,6 +63,8 @@ const useVideoPlayer = (videoRef: any) => {
         setDisplay('desktop');
       } else {
         setDisplay('mobile');
+        setType(2);
+        setCloseType(true);
       }
     }
   }, []);
@@ -153,8 +155,18 @@ const useVideoPlayer = (videoRef: any) => {
   const handleLiveClick = () => {
     setType(1);
     if (display === 'mobile') {
+      videoRef.current.currentTime = 0;
+      videoRef.current.setAttribute('muted', '');
+      setTimeout(() => {
+        videoRef.current.play();
+      }, 100);
       setControl({
-        ...control, height: '318', width: '175', mute: false, autoPlay: true,
+        ...control,
+        height: '318',
+        width: '175',
+        mute: false,
+        loop: !(source.length > 1),
+        autoPlay: true,
       });
     } else {
       setControl({
@@ -177,11 +189,18 @@ const useVideoPlayer = (videoRef: any) => {
     setControl({ ...control, autoPlay: false });
   };
 
-  const loadingEnd = () => {
+  const loadingEnd = async () => {
     setIsLoading(false);
     videoRef.current.currentTime = 0;
-    videoRef.current.play();
     setControl({ ...control, autoPlay: true });
+    if (type === 2) {
+      videoRef.current.setAttribute('muted', '');
+      setTimeout(() => {
+        videoRef.current.play();
+      }, 200);
+    } else {
+      await videoRef.current.play();
+    }
   };
 
   const handleWaiting = () => {

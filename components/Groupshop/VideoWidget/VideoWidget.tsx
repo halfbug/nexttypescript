@@ -148,6 +148,9 @@ const VideoWidget = () => {
               preload="auto"
               onPlaying={() => handlePlaying()}
               controls={false}
+              crossOrigin="true"
+              webkit-playsinline=""
+              x5-playsinline=""
             />
             {isLoading && (
               <div style={{
@@ -187,7 +190,7 @@ const VideoWidget = () => {
             width={152}
             src={`${source[videoNo]}#t=0.001`}
             autoPlay={control.autoPlay}
-            muted={control.mute}
+            muted
             loop={control.loop}
             onTimeUpdate={(e) => handleChange(e)}
             onError={() => handleError()}
@@ -198,6 +201,9 @@ const VideoWidget = () => {
             preload="auto"
             onPlaying={() => handlePlaying()}
             controls={false}
+            crossOrigin="true"
+            webkit-playsinline=""
+            x5-playsinline=""
           />
           {!isLoading ? (
             <div
@@ -321,6 +327,9 @@ const VideoWidget = () => {
               preload="auto"
               onPlaying={() => handlePlaying()}
               controls={false}
+              crossOrigin="true"
+              webkit-playsinline=""
+              x5-playsinline=""
             />
             {isLoading && (
               <div
