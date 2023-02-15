@@ -8,7 +8,7 @@ interface IGradientProgress {
 
 const GradientProgressBar = ({ progress, className }: IGradientProgress) => (
   <div
-    style={{ backgroundSize: `${progress}%`, backgroundRepeat: 'no-repeat' }}
+    style={{ backgroundSize: `${progress}%`, backgroundRepeat: 'repeat-y' }}
     className={[styles.gradientProgressbar, className].join(' ')}
   />
 );
