@@ -83,6 +83,7 @@ const ProductDetail = ({
   const [dealProduct, setDealProduct] = useState('');
   const [target, setTarget] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [filterDeal, setFilterDeal] = useState<string[]>([]);
   const [varientData, setVarientData] = useState(0);
   const router = useRouter();
@@ -118,6 +119,7 @@ const ProductDetail = ({
     }, 1000);
   };
   useEffect(() => {
+    checkCartForDrops();
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
 
@@ -355,6 +357,16 @@ const ProductDetail = ({
   //   }
   //   return '';
   // }, []);
+
+  const checkCartForDrops = () => {
+    const { cart } = gsctx;
+    const cartProduct = cart?.find((ele) => ele.id === product?.id);
+    if (cartProduct && cartProduct?.selectedVariant?.selectedQuantity >= 3) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  };
 
   return (
     <>
@@ -795,8 +807,10 @@ const ProductDetail = ({
                         <Button
                           variant="primary"
                           className={styles.groupshop_Pd_addtoCart}
-                          onClick={() => addToCart()}
-                          disabled={outofStock}
+                          onClick={() => {
+                            addToCart();
+                          }}
+                          disabled={(outofStock || disable)}
                         >
                           {/* {outofStock && 'Out of Stock'}
                       {isExpired && 'Share to unlock'}
