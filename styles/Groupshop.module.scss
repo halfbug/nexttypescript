@@ -853,7 +853,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       margin-bottom: 1.5rem;
       margin-left: 4px;
       padding: 0px 0.2rem;
-
+      @include media-breakpoint-down(sm) { 
+        max-height: unset;
+        overflow-y: unset;
+        height: unset;
+      }
     }
 
     &_headingExpired {
