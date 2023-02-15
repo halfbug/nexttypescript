@@ -72,6 +72,7 @@ const HowShopDropVideoBox = ({
             >
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={1} src={tmpVideoSrc[0]} autoPlay muted loop playsInline preload="auto" />
+                <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
@@ -91,6 +92,7 @@ const HowShopDropVideoBox = ({
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={2} src={tmpVideoSrc[1]} autoPlay muted loop playsInline preload="auto" />
+                <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
@@ -110,6 +112,7 @@ const HowShopDropVideoBox = ({
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={3} src={tmpVideoSrc[2]} autoPlay muted loop playsInline preload="auto" />
+                <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
@@ -137,6 +140,7 @@ const HowShopDropVideoBox = ({
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={4} src={tmpVideoSrc[3]} autoPlay muted loop playsInline preload="auto" />
+                <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
@@ -166,6 +170,7 @@ const HowShopDropVideoBox = ({
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={5} src={tmpVideoSrc[4]} autoPlay muted loop playsInline preload="auto" />
+                <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
