@@ -127,7 +127,7 @@ export default function useDrops() {
     if (members.length === 1) {
       const totalAmount = getTotalFromIndex(0);
       const cashback = (totalAmount * cashbackPercantage1) / 100;
-      return cashback;
+      return Number.isInteger(cashback) ? cashback : cashback.toFixed(2);
     }
     if (members.length === 2) {
       // CASHBACK OF FIRST MEMBER
