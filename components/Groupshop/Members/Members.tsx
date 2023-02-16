@@ -35,7 +35,7 @@ const Members = ({
   const { formatNumber } = useUtilityFunction();
   const {
     gsctx: groupshop,
-    dispatch,
+    dispatch, isDrops,
   } = useAppContext();
   let ownerOrderId = '';
   let ownerEmail = '';
@@ -122,7 +122,8 @@ const Members = ({
                     {member.fname}
                   </h4>
                   <p className="mb-2">
-                    {idx === 0 ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
+                    {idx === 0 && isDrops ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
+                    {idx === 0 && !isDrops ? 'MICROSTORE OWNER' : 'MICROSTORE MEMBER'}
                     {' '}
                   </p>
                   {/* <p>

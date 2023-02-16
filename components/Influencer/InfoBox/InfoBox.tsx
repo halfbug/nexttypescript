@@ -14,8 +14,10 @@ import CartCone from 'assets/images/infocele.svg';
 import Envp from 'assets/images/envelop.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import PuprpleHeadMobile from 'assets/images/purple-head-mobile.jpg';
+import PuprpleHeadMobile2 from 'assets/images/purple-head-mobile2.jpg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
+import useDeal from 'hooks/useDeal';
 
 interface mesProps {
   mes: string;
@@ -49,6 +51,8 @@ const InfoBox = ({
     setShow(false);
     setShowRewards(false);
   };
+  const { isDrops } = useDeal();
+
   const handleShow = () => setShow(true);
   return (
     <>
@@ -72,8 +76,10 @@ const InfoBox = ({
           </Row>
         </Modal.Header>
         <div className="styles.groupshop_infoBox_imgBox">
-          {!isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
-          {isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
+          {isDrops && !isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
+          {!isDrops && !isModalForMobile && <img src="/images/purple-head2.png" alt="headtag" className="img-fluid" />}
+          {isDrops && isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
+          {!isDrops && isModalForMobile && <img src={PuprpleHeadMobile2.src} alt="headtag" className="img-fluid" />}
         </div>
         <Modal.Body className="py-2 px-3">
           <div className={styles.groupshop_infoBox}>
@@ -87,7 +93,10 @@ const InfoBox = ({
           </div>
           <div className={styles.groupshop_infoBox}>
             <p>
-              Welcome to Groupshop ‒ where you and your
+              Welcome to
+              {' '}
+              {isDrops ? 'Groupshop' : 'Microstore'}
+              ‒ where you and your
               friends shop
               {' '}
               {name}
@@ -118,7 +127,10 @@ const InfoBox = ({
                   {' '}
                   {brandname}
                   {' '}
-                  on this Groupshop.
+                  on this
+                  {' '}
+                  {isDrops ? 'Groupshop' : 'Microstore'}
+                  .
                 </p>
               </Col>
             </div>
@@ -131,7 +143,11 @@ const InfoBox = ({
                 <p className={styles.groupshop_infoBox__pointers}>
                   <strong>Share</strong>
                   {' '}
-                  this Groupshop with friends to give them access to discounts too.
+                  this
+                  {' '}
+                  {isDrops ? 'Groupshop' : 'Microstore'}
+                  {' '}
+                  with friends to give them access to discounts too.
                 </p>
               </Col>
             </div>
