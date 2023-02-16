@@ -3,11 +3,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
 import useAppContext from './useAppContext';
 import useCode from './useCode';
+import useUtilityFunction from './useUtilityFunction';
 
 export default function useDrops() {
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
   const { gsctx, dispatch } = useAppContext();
   const { ownerCode, shop, discountCode } = useCode();
+  const { formatNumber } = useUtilityFunction();
 
   const {
     milestones, store, members, spotlightProducts: sproducts,
@@ -78,9 +80,7 @@ export default function useDrops() {
           const temp = (((store?.drops?.rewards?.average - store?.drops?.rewards?.baseline)
             * parseFloat(getTotalFromIndex(0))) / 100);
 
-          return Number.isInteger(temp)
-            ? temp
-            : temp.toFixed(2);
+          return formatNumber(temp);
         }
 
         if (members.length === 2) {
@@ -89,9 +89,7 @@ export default function useDrops() {
             + (((store?.drops?.rewards?.maximum - store?.drops?.rewards?.average)
               * parseFloat(getTotalFromIndex(1))) / 100);
 
-          return Number.isInteger(temp)
-            ? temp
-            : temp.toFixed(2);
+          return formatNumber(temp);
         }
 
         return 0;
@@ -127,7 +125,7 @@ export default function useDrops() {
     if (members.length === 1) {
       const totalAmount = getTotalFromIndex(0);
       const cashback = (totalAmount * cashbackPercantage1) / 100;
-      return Number.isInteger(cashback) ? cashback : cashback.toFixed(2);
+      return formatNumber(cashback);
     }
     if (members.length === 2) {
       // CASHBACK OF FIRST MEMBER
@@ -143,7 +141,7 @@ export default function useDrops() {
       //   cashback1, cashback2, cashback3,
       // });
       const totalCashback = +(cashback3 + cashback2 + cashback1);
-      return Number.isInteger(totalCashback) ? totalCashback : totalCashback.toFixed(2);
+      return formatNumber(totalCashback);
     }
     return 0;
   }, [gsctx, store]);
@@ -154,7 +152,7 @@ export default function useDrops() {
     const remainedValue = baseValue - cartValue;
     const cart = {
       percantage,
-      remainedValue: remainedValue.toFixed(2),
+      remainedValue: formatNumber(remainedValue),
     };
     return cart;
   };
