@@ -54,7 +54,7 @@ const AvailablePartnerRewardsBox = ({
 
   console.log('🚀 ~ file: AvailablePartnerRewardsBox.ts ~ line 54 ~ AvailablePartnerRewardsBox ~ groupshop', groupshop);
   const {
-    isExpired,
+    isExpired, isDrops,
   } = useDeal();
   return (
     <>
@@ -86,10 +86,10 @@ const AvailablePartnerRewardsBox = ({
                 {owner ? (
                   <span>
                     {'👑 '}
-                    GROUPSHOP OWNER
+                    {isDrops ? 'GROUPSHOP OWNER' : 'MICROSTORE OWNER'}
                   </span>
                 )
-                  : <span>GROUPSHOP MEMBER</span>}
+                  : <span>{isDrops ? 'GROUPSHOP MEMBER' : 'MICROSTORE MEMBER'}</span>}
               </div>
             </Col>
             {reward > 0 && (

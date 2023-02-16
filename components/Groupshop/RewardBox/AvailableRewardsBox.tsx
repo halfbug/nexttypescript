@@ -46,7 +46,7 @@ const AvailableRewardsBox = ({
   });
 
   const {
-    isExpired,
+    isExpired, isDrops,
   } = useDeal();
 
   return (
@@ -79,10 +79,11 @@ const AvailableRewardsBox = ({
                 {owner ? (
                   <span>
                     {'👑 '}
-                    GROUPSHOP OWNER
+                    {isDrops ? 'GROUPSHOP OWNER' : 'MICROSTORE OWNER'}
+
                   </span>
                 )
-                  : <span>GROUPSHOP MEMBER</span>}
+                  : <span>{isDrops ? 'GROUPSHOP MEMBER' : 'MICROSTORE MEMBER'}</span>}
               </div>
             </Col>
             <Col lg={12}>
