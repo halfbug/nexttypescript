@@ -888,6 +888,18 @@ query DropGroupshop($code: String!, $status: String = "") {
 }
 `;
 
+const CREATE_ONBOARDING_DISCOUNT_CODE = gql`
+mutation createOnBoardingDiscountCode($gid: String!) {
+  createOnBoardingDiscountCode(gid: $gid) {
+    discountCode{
+      title
+      percentage
+      priceRuleId
+    }
+    expiredAt
+  }
+}`;
+
 const UPDATE_DROP_GROUPSHOP = gql`
 mutation updateDropsGroupshop($updateDropsGroupshopInput: UpdateDropsGroupshopInput!) {
   updateDropsGroupshop(updateDropsGroupshopInput: $updateDropsGroupshopInput) {
@@ -2674,5 +2686,5 @@ export {
   GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP,
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
-  UPDATE_DROP_GROUPSHOP,
+  UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE,
 };

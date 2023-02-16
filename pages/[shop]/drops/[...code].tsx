@@ -958,7 +958,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         />
         {isModalForMobile && (
         <HowShopDropVideoBox
-          show={!isExpired && showObPopup}
+          show={showObPopup}
           handleClose={updateOnboarding}
         />
         )}

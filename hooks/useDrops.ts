@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
-import { UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
+import { CREATE_ONBOARDING_DISCOUNT_CODE, UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
 import useAppContext from './useAppContext';
 import useCode from './useCode';
 import useUtilityFunction from './useUtilityFunction';
@@ -15,6 +15,7 @@ export default function useDrops() {
     milestones, store, members, spotlightProducts: sproducts,
   } = gsctx;
   const [updateDropGroupshop] = useMutation(UPDATE_DROP_GROUPSHOP);
+  const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);
 
   const [currentDropReward, setcurrentDropReward] = useState<String>('');
   const [nextDropReward, setnextDropReward] = useState<String | null>('');
@@ -60,15 +61,26 @@ export default function useDrops() {
           },
         },
       },
-    }).then(() => {
-      dispatch({
-        type: 'UPDATE_GROUPSHOP',
-        payload: {
-          ...gsctx,
-          obSettings: { ...gsctx.obSettings, step: 1 },
-        },
-      });
-      setShowObPopup(false);
+    });
+
+    await createOnBoardingDiscountCode({
+      variables: {
+        gid: gsctx.id,
+      },
+    }).then((res) => {
+      if (res?.data?.createOnBoardingDiscountCode) {
+        const { data } = res;
+        dispatch({
+          type: 'UPDATE_GROUPSHOP',
+          payload: {
+            ...gsctx,
+            discountCode: data?.createOnBoardingDiscountCode?.discountCode,
+            expiredAt: data?.createOnBoardingDiscountCode?.expiredAt,
+            obSettings: { ...gsctx.obSettings, step: 1 },
+          },
+        });
+        setShowObPopup(false);
+      }
     });
   };
 

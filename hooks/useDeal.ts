@@ -23,6 +23,7 @@ export default function useDeal() {
   const [clientIP] = useIP();
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
   const [allDiscount, setallDiscount] = useState<(string | undefined)[] | undefined>(undefined);
+  const [isExpired, setisExpired] = useState<boolean>(false);
   const {
     dealProducts,
     members: gmembers,
@@ -173,9 +174,15 @@ export default function useDeal() {
       secs: Math.round((((diff % 86400000) % 3600000) / 60000) / 60000), // seconds
     });
   },
-  [gsctx.members]);
+  [gsctx.members, gsctx.expiredAt]);
 
-  const isExpired = isGroupshop || isChannel || isDrops ? !(getDateDifference().time > -1) : false;
+  useEffect(() => {
+    if (gsctx.expiredAt === null) {
+      setisExpired(false);
+    } else {
+      setisExpired(isGroupshop || isChannel || isDrops ? !(getDateDifference().time > -1) : false);
+    }
+  }, [gsctx.expiredAt]);
 
   const totalCashBack = useCallback((price) => {
     const {
