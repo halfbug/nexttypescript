@@ -3167,8 +3167,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @extend .px-0, .m-1, .py-2, .border-bottom;
     cursor: pointer;
   }
-  &_product_desc{
-    height: 77px;
+  &_product_desc_title{
+    height: 55px;
+    overflow: hidden;
   }
   // &_left_content_wrapper{
   //   &_boughtby {

@@ -349,7 +349,7 @@ const ProductGrid = ({
                 >
                   <div className={styles.groupshop_product_info}>
                     <div className={styles.groupshop_product_desc}>
-                      <h5 className={['fw-bold text-truncate', !isDrops ? 'text-center' : ''].join(' ')}>{prod.title}</h5>
+                      <h5 className={['fw-bold', !isDrops ? 'text-center' : '', styles.groupshop_product_desc_title].join(' ')}>{prod.title}</h5>
                       {isDrops && priceUI(prod)}
                       {prod.outofstock
                         ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>)
