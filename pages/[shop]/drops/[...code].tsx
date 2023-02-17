@@ -12,14 +12,15 @@ import {
 import Gmembers from 'components/Groupshop/Members/Gmembers';
 import QRClickIcon from 'assets/images/qr-click.svg';
 import DropsDummyImage from 'assets/images/dropsDummy.png';
-import Image from 'next/image';
 import IconButton from 'components/Buttons/IconButton';
 import {
   Handbag, Plus, Search,
 } from 'react-bootstrap-icons';
 import Hero from 'components/Groupshop/Hero/Hero';
 import ProductGrid from 'components/Groupshop/ProductGrid/ProductGrid';
-import { IGroupshop, MatchingGS, Member } from 'types/groupshop';
+import {
+  IGroupshop, MatchingGS, Member, sections as DynamicProducts,
+} from 'types/groupshop';
 import { IProduct } from 'types/store';
 import ProductsSearch from 'components/Groupshop/ProductsSearch/ProductsSearch';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -29,7 +30,6 @@ import useDeal from 'hooks/useDeal';
 import useCode from 'hooks/useCode';
 import useAlert from 'hooks/useAlert';
 import Footer from 'components/Layout/FooterGS/FooterGS';
-import InfoBox from 'components/Groupshop/InfoBox/InfoBox';
 import useDetail from 'hooks/useDetail';
 import ProductDetail from 'components/Groupshop/ProductDetail/ProductDetail';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
@@ -100,14 +100,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   // NEW HOOKS
   const [allProductsList, setAllProductsList] = useState<IProduct[] | undefined>([]);
-  const [bestSellerProductsList, setBestSellerProductsList] = useState<IProduct[] | undefined>([]);
-  const [spotLightProductsList, setSpotLightProductsList] = useState<IProduct[] | undefined>([]);
-  const [latestProductsList, setLatestProductsList] = useState<IProduct[] | undefined>([]);
-
-  // STATIC PRODUCTS
-  const [runningOutProducts, setRunningOutProducts] = useState<IProduct[] | undefined>([]);
-  const [hairProducts, setHairProducts] = useState<IProduct[] | undefined>([]);
-  const [skinProducts, setSkinProducts] = useState<IProduct[] | undefined>([]);
+  const [sections, setSections] = useState<DynamicProducts[] | undefined>([]);
 
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
@@ -122,26 +115,16 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   useEffect(() => {
     if (gsctx.id) {
-      if (gsctx.allProducts) {
-        setAllProductsList(gsctx.allProducts);
-      }
-      if (gsctx.bestSellerProducts) {
-        setBestSellerProductsList(gsctx.bestSellerProducts);
-      }
-      if (gsctx.spotlightProducts) {
-        setSpotLightProductsList(gsctx.spotlightProducts);
-      }
-      if (gsctx.latestProducts) {
-        setLatestProductsList(gsctx.latestProducts);
-      }
-      if (gsctx.hairProducts) {
-        setHairProducts(gsctx.hairProducts);
-      }
-      if (gsctx.runningOutProducts) {
-        setRunningOutProducts(gsctx.runningOutProducts);
-      }
-      if (gsctx.skincareProducts) {
-        setSkinProducts(gsctx.skincareProducts);
+      if (gsctx.sections) {
+        setSections(gsctx.sections);
+
+        // const temp: IProduct[] = [];
+        // gsctx.sections.forEach((ele) => {
+        //   ele.products.forEach((prd) => {
+        //     temp.push(prd);
+        //   });
+        // });
+        // setAllProductsList(temp);
       }
     }
   }, [gsctx]);
@@ -157,31 +140,21 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     isExpired,
     discount,
     getDiscounts,
-    milestones,
-    getDateDifference,
     socialText,
     brandName,
     currencySymbol,
     activateURL,
-    maxPercent,
     topFive,
     shortActivateURL,
-    leftOverProducts,
-    getOwnerName,
   } = useDeal();
 
   const {
     currentDropReward,
     nextDropReward,
     showObPopup,
-    canBeUnlockedCB,
     updateOnboarding,
     getChackback,
   } = useDrops();
-
-  // const {
-  //   days, hrs, mins, secs,
-  // } = getDateDifference();
 
   const { googleEventCode, googleButtonCode } = useGtm();
 
@@ -189,7 +162,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const googlePixels = gsctx?.store?.settings?.marketing?.googlePixels ?? '';
   const tiktokPixels = gsctx?.store?.settings?.marketing?.tiktokPixels ?? '';
   const snapchatPixels = gsctx?.store?.settings?.marketing?.snapchatPixels ?? '';
-  const maxReward = gsctx?.store?.drops?.rewards?.maximum;
 
   const { uniqueArray } = useUtilityFunction();
 
@@ -546,25 +518,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
-                  {/* <p>
-                    <span>
-                      {hrs + (days * 24)}
-                      {' '}
-                      hrs
-                    </span>
-                    :
-                    <span>
-                      {mins}
-                      {' '}
-                      mins
-                    </span>
-                    :
-                    <span>
-                      {secs}
-                      {' '}
-                      secs
-                    </span>
-                  </p> */}
                   <CountDownTimer />
                 </div>
               </Col>
@@ -623,25 +576,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col xs={12} className={[styles.drops__counter, 'py-2'].join(' ')}>
                 <div className={styles.drops__counter_middle}>
-                  {/* <p>
-                    <span>
-                      {hrs + (days * 24)}
-                      {' '}
-                      hrs
-                    </span>
-                    :
-                    <span>
-                      {mins}
-                      {' '}
-                      mins
-                    </span>
-                    :
-                    <span>
-                      {secs}
-                      {' '}
-                      secs
-                    </span>
-                  </p> */}
                   <CountDownTimer />
                 </div>
               </Col>
@@ -716,203 +650,39 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           )
         }
 
-        {/* <ProductGrid
-          isDrops
-          isSpotLight
-          title="Today’s Spotlight"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(spotLightProductsList)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="spotlightdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-        /> */}
-
-        <ProductGrid
-          isDrops
-          title="Latest Drops"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(latestProductsList)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="latestdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-          showPagination={false}
-        />
-
-        <ProductGrid
-          isDrops
-          title="Best Sellers"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(bestSellerProductsList)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="bestsellerdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-          showPagination={false}
-        >
-          {/* <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <div className={styles.drops_col_dropheading}>
-                    Latest Drops
+        {
+          sections?.map((ele) => (
+            <>
+              <ProductGrid
+                isDrops
+                title={ele.name !== 'All Products' ? ele.name : ''}
+                xs={6}
+                sm={6}
+                md={6}
+                lg={4}
+                xl={3}
+                products={uniqueArray(ele.products)}
+                maxrows={3}
+                addProducts={handleAddProduct}
+                handleDetail={(prd) => setsProduct(prd)}
+                showHoverButton
+                id={`${ele.name !== 'All Products' ? `drops'${ele.name}` : 'allproductsdrops'}`}
+                isModalForMobile={isModalForMobile}
+                urlForActivation={urlForActivation}
+                showPagination={ele.name === 'All Products'}
+              >
+                {ele.name === 'All Products' && (
+                  <div>
+                    <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                      <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                      {ele.name}
+                    </div>
                   </div>
-                </div>
-                <div className="d-flex">
-                  <FaArrowLeft className="me-2" />
-                  <FaArrowRight className="ms-2" />
-                </div>
-              </div>
-            </Col>
-          </Row> */}
-        </ProductGrid>
-        <ProductGrid
-          isDrops
-          title="Hair care"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(hairProducts)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="haircaredrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-          showPagination={false}
-        />
-        <ProductGrid
-          isDrops
-          title="Skin care"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(skinProducts)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="skincaredrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-          showPagination={false}
-        />
-        <ProductGrid
-          isDrops
-          title="Running out"
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(runningOutProducts)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="runningoutdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-          showPagination={false}
-        />
-        {/* <ProductGrid
-          isDrops
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(bestSellerProductsList)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="allproductsdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-        > */}
-        {/* <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <div className={styles.drops_col_dropheading}>
-                    Best Sellers
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <FaArrowLeft className="me-2" />
-                  <FaArrowRight className="ms-2" />
-                </div>
-              </div>
-            </Col>
-          </Row> */}
-        {/* </ProductGrid> */}
-
-        <ProductGrid
-          isDrops
-          xs={6}
-          sm={6}
-          md={6}
-          lg={4}
-          xl={3}
-          products={uniqueArray(allProductsList)}
-          maxrows={3}
-          addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
-          showHoverButton
-          id="allproductsdrops"
-          isModalForMobile={isModalForMobile}
-          urlForActivation={urlForActivation}
-        >
-          {/* <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <div className={styles.drops_col_dropheading}>
-                    All products
-                  </div>
-                </div>
-                <div className="d-flex">
-                  <FaArrowLeft className="me-2" />
-                  <FaArrowRight className="ms-2" />
-                </div>
-              </div>
-            </Col>
-          </Row> */}
-          <div>
-            <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-              <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-              All Products
-            </div>
-          </div>
-        </ProductGrid>
+                )}
+              </ProductGrid>
+            </>
+          ))
+        }
 
         <Footer LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
         <ProductsSearch
@@ -997,10 +767,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           )
         }
       </div>
-      {/* <ExpiredLinked
-        show
-        handleClose={() => {}}
-      /> */}
       {!isModalForMobile && gsShortURL !== '' && (
       <Scan
         show
@@ -1031,27 +797,3 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 };
-
-const mockDiscoverBrands = [
-  {
-    name: 'Jelice',
-    with: 'Iman',
-    discount: '15',
-  },
-  {
-    name: 'The Renatural',
-    with: 'Lala',
-    discount: '10',
-  },
-  {
-    name: 'Sani',
-    with: 'Iman',
-    discount: '20',
-  },
-  {
-    name: 'Sani',
-    with: 'Jelice',
-    discount: '5',
-  },
-
-];

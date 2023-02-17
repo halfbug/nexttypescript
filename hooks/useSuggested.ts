@@ -16,9 +16,9 @@ const useSuggested = () => {
 
   useEffect(() => {
     const {
-      allProducts, isDrops, bestSellerProducts,
+      allProducts, isDrops, bestSellerProducts, sections,
     } = gsctx;
-    let newProd = isDrops ? (bestSellerProducts ?? []) : (allProducts ?? []);
+    let newProd = isDrops ? (sections?.find((ele) => ele.name === 'Bestsellers')?.products ?? []) : (allProducts ?? []);
     // newProd = newProd.sort(() => Math.random() - 0.5); // shuffle array to have random products
     // if (!isDrops) {
     newProd = newProd

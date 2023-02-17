@@ -96,14 +96,15 @@ const ProductsSearch = ({
       const temp: any = [...gsctx.popularProducts, ...gsctx.allProducts];
       setProductsArr(temp);
     }
-    if (isDrops
-      && gsctx.allProducts
-      && gsctx.bestSellerProducts
-      && gsctx.spotlightProducts
-      && gsctx.latestProducts) {
-      const temp: any = [...gsctx.allProducts,
-        ...gsctx.bestSellerProducts, ...gsctx.spotlightProducts, ...gsctx.latestProducts];
+    if (isDrops && gsctx.sections?.length) {
+      const temp: IProduct[] = [];
+      gsctx.sections.forEach((ele) => {
+        ele.products.forEach((prd) => {
+          temp.push(prd);
+        });
+      });
       setProductsArr(temp);
+      setotherProducts(uniqueArray(temp));
     }
   }, [gsctx]);
 

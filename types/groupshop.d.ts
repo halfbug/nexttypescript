@@ -124,6 +124,12 @@ export type ObSettings = {
   step?: number;
 }
 
+export type sections = {
+  name: string;
+  shopifyId: string;
+  products: Product[];
+}
+
 export interface IGroupshop {
   id: string;
 
@@ -222,6 +228,8 @@ export interface IGroupshop {
   isDrops?: boolean;
 
   revisedCount?: number;
+
+  sections?: sections[];
 
 }
 export interface InfluencerGroupshop {

@@ -714,6 +714,10 @@ query DropGroupshop($code: String!, $status: String = "") {
         }
       }
       drops {
+        collections {
+          name
+          shopifyId
+        }
         status
         isVideoEnabled
         spotlightDiscount {
@@ -771,109 +775,26 @@ query DropGroupshop($code: String!, $status: String = "") {
       percentage
       priceRuleId
     }
-    bestSellerProducts {
-      id
-      title
-      featuredImage
-      featuredVideo
-      description
-      purchaseCount
-      price
-      currencyCode
-      outofstock
-      secondaryCount
-      options {
+    sections {
+      name
+      shopifyId
+      products {
         id
-        name
-        values
-        position
-      }
-    }
-    latestProducts {
-      id
-      title
-      featuredImage
-      featuredVideo
-      description
-      purchaseCount
-      secondaryCount
-      price
-      currencyCode
-      outofstock
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    runningOutProducts {
-      id
-      title
-      featuredImage
-      description
-      purchaseCount
-      price
-      currencyCode
-      outofstock
-      secondaryCount
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    skincareProducts {
-      id
-      title
-      featuredImage
-      description
-      purchaseCount
-      price
-      currencyCode
-      outofstock
-      secondaryCount
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    hairProducts {
-      id
-      title
-      featuredImage
-      description
-      purchaseCount
-      price
-      currencyCode
-      outofstock
-      secondaryCount
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    allProducts {
-      id
-      title
-      featuredImage
-      featuredVideo
-      description
-      purchaseCount
-      secondaryCount
-      price
-      currencyCode
-      outofstock
-      options {
-        id
-        name
-        values
-        position
+        title
+        featuredImage
+        featuredVideo
+        description
+        purchaseCount
+        price
+        currencyCode
+        outofstock
+        secondaryCount
+        options {
+          id
+          name
+          values
+          position
+        }
       }
     }
     milestones{

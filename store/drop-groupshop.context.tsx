@@ -52,12 +52,7 @@ export const gsdInit: IGroupshop = {
   },
   cart: [],
   spotlightProducts: [],
-  latestProducts: [],
-  bestSellerProducts: [],
-  allProducts: [],
-  skincareProducts: [],
-  runningOutProducts: [],
-  hairProducts: [],
+  sections: [],
   isDrops: true,
   customerDetail: {
     firstName: '', lastName: '', email: '', phone: '',
