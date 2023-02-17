@@ -63,7 +63,7 @@ const DropsScanBox = ({
               We’re mobile first.
             </h1>
           </Row>
-          <Row className={styles.Scan_modal__body_boxWidth}>
+          <Row className={[styles.Scan_modal__body_boxWidth, 'scroll-bar'].join(' ')}>
             <div className={styles.Scan_modal__transparentBox}>
               <div className={[styles.Scan_modal__transparentBox__text, ''].join(' ')}>
                 <div className="mb-2">
