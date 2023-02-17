@@ -118,13 +118,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       if (gsctx.sections) {
         setSections(gsctx.sections);
 
-        // const temp: IProduct[] = [];
-        // gsctx.sections.forEach((ele) => {
-        //   ele.products.forEach((prd) => {
-        //     temp.push(prd);
-        //   });
-        // });
-        // setAllProductsList(temp);
+        const temp: IProduct[] = [];
+        gsctx.sections.forEach((ele) => {
+          ele.products.forEach((prd) => {
+            temp.push(prd);
+          });
+        });
+        setAllProductsList(temp);
       }
     }
   }, [gsctx]);
