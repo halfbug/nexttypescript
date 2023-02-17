@@ -784,11 +784,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-family: "DM Sans";
       font-style: normal;
       font-weight: 700 !important;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.32px;
       text-transform: capitalize;
       color: $black;
+      @include media-breakpoint-down(sm) {
+        font-size: 12px;
+        line-height: 15px;
+      }
     }
     &_menu {
       border-radius: 10px;

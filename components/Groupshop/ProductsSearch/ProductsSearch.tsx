@@ -7,7 +7,7 @@ import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
-  Col, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Row,
+  Col, Dropdown, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Row,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import { useRouter } from 'next/router';
@@ -23,6 +23,7 @@ import useGtm from 'hooks/useGtm';
 import SearchIcon from 'assets/images/search-icon.svg';
 import Cross from 'assets/images/CrossLg.svg';
 import CrossGrey from 'assets/images/cross-grey.svg';
+import ArrowSort from 'assets/images/ArrowSort.svg';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import useAppContext from 'hooks/useAppContext';
@@ -391,12 +392,85 @@ const ProductsSearch = ({
           )}
 
           {isDrops && (otherProducts && otherProducts.length > 0) && (
-          <div className="d-flex justify-content-between m-0 flex-nowrap">
-            <p className={dStyles.drops_modal_search_body_top_resultFound}>
+          <div className="d-flex justify-content-between m-0 flex-nowrap align-items-center">
+            <div className={dStyles.drops_modal_search_body_top_resultFound}>
               {otherProducts?.length}
               {' '}
               results found
-            </p>
+            </div>
+            <div className={styles.groupshop_sort}>
+              <Dropdown align="end" drop="down">
+                <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                  <span
+                    className={[
+                      'd-sm-inline text-capitalize',
+                      dStyles.drops_sort_txt,
+                    ].join(' ')}
+                  >
+                    Sort by
+                  </span>
+                  {/* <ChevronDown width={8} /> */}
+                  <ArrowSort />
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className={styles.groupshop_sort_menu}>
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setotherProducts(
+                      [...(otherProducts ?? [])]?.sort(
+                        (a, b) => parseFloat(a.price) - parseFloat(b.price),
+                      ),
+                    )}
+                  >
+                    Price (Low to High)
+                  </Dropdown.Item>
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setotherProducts(
+                      [...(otherProducts ?? [])]?.sort(
+                        (a, b) => parseFloat(b.price) - parseFloat(a.price),
+                      ),
+                    )}
+                  >
+                    Price ( High to Low)
+                  </Dropdown.Item>
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setotherProducts(
+                      [...(otherProducts ?? [])]?.sort(
+                        (a, b) => a.title.localeCompare(b.title),
+                      ),
+                    )}
+                  >
+                    Name (a-z)
+                  </Dropdown.Item>
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => setotherProducts(
+                      [...(otherProducts ?? [])]
+                        ?.sort((a, b) => a.title.localeCompare(b.title))
+                        .reverse(),
+                    )}
+                  >
+                    Name (z-a)
+                  </Dropdown.Item>
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => {
+                      const arr = [...(otherProducts ?? [])]?.sort();
+                      const newArr = arr?.sort((a, b) => b.purchaseCount! - a.purchaseCount!);
+                      setotherProducts(newArr);
+                    }}
+                  >
+                    Best seller
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           </div>
           )}
         </Row>
@@ -413,12 +487,11 @@ const ProductsSearch = ({
                         onImageClick={(e: any) => openDetail(e, prd)}
                         isrc={prd.featuredImage}
                         className={styles.groupshop_search_pcard}
-                        imgOverlay={!isDrops && (
+                        imgOverlay={!isDrops ? (
                           <>
                             {selected?.includes(prd.id) ? (
                               <>
                                 <span className={styles.groupshop__pcard_tag_price}>
-
                                   {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
                                 </span>
                                 <IconButton
@@ -466,7 +539,12 @@ const ProductsSearch = ({
                                 </Button>
                               )}
                           </>
-                        )}
+                        )
+                          : (
+                            <span className={dStyles.drops__pcard_tag_price}>
+                              {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
+                            </span>
+                          )}
                       >
                         <div
                           role="button"
