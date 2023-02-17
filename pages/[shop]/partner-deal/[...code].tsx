@@ -303,7 +303,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   return (
     <>
       <Head>
-        <title>Influencer Groupshop</title>
+        <title>Influencer Microstore</title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -348,6 +348,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           }}
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
+        <link rel="shortcut icon" href="/favicon2.ico" />
         <meta name="application-name" content="Groupshop" />
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />

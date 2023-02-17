@@ -257,9 +257,15 @@ const Footer = ({
                   </Link>
                 </>
               )} */}
-              <Link href="https://groupshop.zendesk.com/hc/en-us/categories/4414265217427-For-Shoppers">
-                <a target="_blank"><strong>FAQ</strong></a>
-              </Link>
+              {isDrops ? (
+                <Link href="https://groupshop.zendesk.com/hc/en-us/categories/4414265217427-For-Shoppers">
+                  <a target="_blank"><strong>FAQ</strong></a>
+                </Link>
+              ) : (
+                <Link href="https://microstore.zendesk.com/hc/en-us">
+                  <a target="_blank"><strong>FAQ</strong></a>
+                </Link>
+              )}
             </div>
           </Row>
         </Col>

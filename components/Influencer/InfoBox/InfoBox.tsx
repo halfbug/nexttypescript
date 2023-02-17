@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import React, {
   useState, useEffect,
@@ -76,8 +77,10 @@ const InfoBox = ({
           </Row>
         </Modal.Header>
         <div className="styles.groupshop_infoBox_imgBox">
-          {isDrops && !isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
-          {!isDrops && !isModalForMobile && <img src="/images/purple-head2.png" alt="headtag" className="img-fluid" />}
+          {/* {isDrops && !isModalForMobile && <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />}
+          {!isDrops && !isModalForMobile && <img src="/images/purple-head2.png" alt="headtag" className="img-fluid" />} */}
+          {isDrops && !isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
+          {!isDrops && !isModalForMobile && <img src={PuprpleHeadMobile2.src} alt="headtag" className="img-fluid" />}
           {isDrops && isModalForMobile && <img src={PuprpleHeadMobile.src} alt="headtag" className="img-fluid" />}
           {!isDrops && isModalForMobile && <img src={PuprpleHeadMobile2.src} alt="headtag" className="img-fluid" />}
         </div>

@@ -350,7 +350,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   return (
     <>
       <Head>
-        <title>Groupshop</title>
+        <title>Microstore</title>
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
@@ -395,7 +395,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           }}
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
-
+        <link rel="shortcut icon" href="/favicon2.ico" />
         {facebookPixels !== '' && (
           <>
             <script
