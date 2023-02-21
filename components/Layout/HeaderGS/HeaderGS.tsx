@@ -44,13 +44,35 @@ const Header = ({
     <Navbar bg="light" className={styles.groupshop}>
       <Container fluid>
         <Row className="w-100 align-items-center gx-0">
-          <Col xs={{ span: 4, order: 1 }} md={{ span: 4, order: 1 }}>{LeftComp}</Col>
-          <Col xs={{ span: 4, order: 2 }} md={{ span: 4, order: 2 }} className="text-center">
+          <Col
+            xs={isDrops
+              ? { span: 3, order: 1 }
+              : { span: 4, order: 1 }}
+            md={isDrops
+              ? { span: 3, order: 1 }
+              : { span: 4, order: 1 }}
+          >
+            {LeftComp}
+
+          </Col>
+          <Col
+            xs={isDrops
+              ? { span: 6, order: 2 }
+              : { span: 4, order: 2 }}
+            md={isDrops
+              ? { span: 6, order: 2 }
+              : { span: 4, order: 2 }}
+            className="text-center"
+          >
             <Navbar.Brand href="#home" className="m-0"><img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" width={150} /></Navbar.Brand>
           </Col>
           <Col
-            xs={{ span: 4, order: 3 }}
-            md={{ span: 4, order: 3 }}
+            xs={isDrops
+              ? { span: 3, order: 3 }
+              : { span: 4, order: 3 }}
+            md={isDrops
+              ? { span: 3, order: 3 }
+              : { span: 4, order: 3 }}
             className={styles.groupshop__last}
           >
             {/* <SettingsIcon className={styles.groupshop__settingsicon} /> */}
