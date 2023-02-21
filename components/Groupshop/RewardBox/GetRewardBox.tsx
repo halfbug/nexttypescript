@@ -77,7 +77,7 @@ const GetRewardBox = ({
   });
 
   const {
-    isExpired,
+    isExpired, isDrops,
   } = useDeal();
 
   const {
@@ -180,7 +180,11 @@ const GetRewardBox = ({
                   Join
                   {' '}
                   {`${store.brandName}`}
-                  ’s Groupshop rewards and get immediate access to
+                  ’s
+                  {' '}
+                  {isDrops ? 'Groupshop' : 'Microstore'}
+                  {' '}
+                  rewards and get immediate access to
                   exclusive discounts and a personalized store with your favorite
                   products to share with friends!
                 </span>
@@ -250,7 +254,9 @@ const GetRewardBox = ({
                   <p className={styles.getRewardBox_modal__form__agree}>
                     By filling this box, you agree to receive recurring
                     personalized marketing text messages from
-                    Groupshop and Jelcie at the cell number entered below.
+                    {isDrops ? 'Groupshop' : 'Microstore'}
+                    {' '}
+                    and Jelcie at the cell number entered below.
                     Msg & data rates may apply.
                   </p>
                 </Col>

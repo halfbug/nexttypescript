@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import styles from 'styles/OnBoardingFlowRegular.module.scss';
 import GroupshopIcon from 'assets/images/groupshop-icon.svg';
+import MicrostoreIcon from 'assets/images/ms-icon.svg';
+import PuprpleHeadMobile2 from 'assets/images/purple-head-mobile2.jpg';
 import { useRouter } from 'next/router';
 import useLogo from 'hooks/useLogo';
 import { GroupshopContext } from 'store/groupshop.context';
@@ -29,7 +31,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
   } = useCode();
 
   const {
-    nativeShareText, gsShortURL, currencySymbol, getOwnerFirstName,
+    nativeShareText, gsShortURL, currencySymbol, getOwnerFirstName, isDrops,
   } = useDeal();
   // console.log('nativeShareText ===', nativeShareText);
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -84,20 +86,24 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
       >
         <Modal.Header className={styles.welcome__modal__closebtnlg} />
         <div className={styles.welcome__modal__imgBox}>
-          <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />
+          {isDrops
+            ? <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />
+            : <img src={PuprpleHeadMobile2.src} alt="headtag" className="img-fluid" />}
         </div>
         <Modal.Body className={styles.welcome__modal__body}>
           {/* <LeEsableIcon className={styles.welcome__modal__body__mainicon} /> */}
           <div className={styles.welcome__modal__icons}>
             <img src={storeLogo} className={styles.welcome__modal__body__mainicon} alt="brand logo" />
             <div className={styles.welcome__modal__body__vertical_seprator} />
-            <GroupshopIcon className={styles.welcome__modal__body__mainicons__icon} />
+            {isDrops
+              ? <GroupshopIcon className={styles.welcome__modal__body__mainicons__icon} />
+              : <MicrostoreIcon className={styles.welcome__modal__body__mainicons__icon} />}
           </div>
           <div className={styles.welcome__modal__body__mainiconarea}>
-            {/* <LeEsableIcon /> */}
+
             <img src={storeLogo} className={styles.welcome__modal__body__mainiconMobile} alt="brand logo" />
             <div className={styles.welcome__modal__body__mainiconarea__vertical_seprator} />
-            <GroupshopIcon className={styles.welcome__modal__body__mainiconarea__icon} />
+            <MicrostoreIcon className={styles.welcome__modal__body__mainiconarea__icon} />
           </div>
           <h2 className={[styles.welcome__modal__body__welcomeTxt, 'd-lg-block d-none'].join(' ')}>
             Welcome
@@ -106,7 +112,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             !
           </h2>
           <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
-            New to Groupshop?
+            New to Microstore?
           </h2>
           {/* <div className={styles.welcome__modal__body__description}>
             The
@@ -163,7 +169,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
           <div className={styles.welcome__modal__body__box3}>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
-              this Groupshop with friends and
+              this Microstore with friends and
               <strong> earn 100% cashback </strong>
               when they shop!
               <p className={[styles.welcome__modal__body__descriptionSmall,
@@ -211,11 +217,11 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
             tabIndex={0}
             className={styles.welcome__modal__body__boxMobile}
             onClick={() => navigator?.share({
-              title: 'Groupshop',
+              title: 'Microstore',
               text: `${nativeShareText} ${gsShortURL}`,
             })}
             onKeyDown={() => navigator?.share({
-              title: 'Groupshop',
+              title: 'Microstore',
               text: `${nativeShareText} ${gsShortURL}`,
             })}
 
@@ -225,7 +231,7 @@ const OnBoardWelcomeRegular = ({ open }: Props) => {
               <div>
                 <strong> Share </strong>
                 {' '}
-                this Groupshop with friends and
+                this Microstore with friends and
                 {' '}
                 <strong> earn 100% cashback  </strong>
                 when they shop.

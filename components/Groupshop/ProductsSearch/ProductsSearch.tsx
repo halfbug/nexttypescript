@@ -306,7 +306,11 @@ const ProductsSearch = ({
                     </h3>
                   ) : (
                     <h3>
-                      Create your Groupshop by adding your favorite products from
+                      Create your
+                      {' '}
+                      {isDrops ? 'Groupshop' : 'Microstore'}
+                      {' '}
+                      by adding your favorite products from
                       {' '}
                       {gsctx?.store?.brandName}
                     </h3>

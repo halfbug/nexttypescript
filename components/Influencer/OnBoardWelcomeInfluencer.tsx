@@ -64,10 +64,10 @@ const OBWelcomeInfluencer = ({
           </div>
           )}
           <h2 className={styles.welcome__modal__body__welcomeTxt}>
-            Welcome to Groupshop!
+            Welcome to Microstore!
           </h2>
           {/* <h2 className={styles.welcome__modal__body__welcomeTxtMobile}>
-            New to Groupshop?
+            New to Microstore?
           </h2> */}
           {/* <div className={styles.welcome__modal__body__description}>
             The
@@ -89,7 +89,7 @@ const OBWelcomeInfluencer = ({
             <span className={styles.welcome__modal__body__iconMobile}><Cart /></span>
             <p className={styles.welcome__modal__body__description}>
               <strong> Share </strong>
-              your Groupshop with friends & followers
+              your Microstore with friends & followers
               to give them access to
               <strong>
                 {' '}
@@ -157,7 +157,7 @@ const OBWelcomeInfluencer = ({
         <Modal.Body className={styles.welcome__modal__body}>
           <div className={[styles.welcome__modal__body__description, 'text-center w-100'].join(' ')}>
 
-            Customize your Groupshop now and share it when you’re done.
+            Customize your Microstore now and share it when you’re done.
           </div>
 
           <div className="d-flex justify-content-center my-4">
@@ -165,14 +165,14 @@ const OBWelcomeInfluencer = ({
               className={[styles.welcome__modal__body__btn].join('')}
               onClick={handleNext}
             >
-              Customize Groupshop
+              Customize Microstore
             </Button>
 
             {/* <Button
               className={styles.welcome__modal__body__btnMobile}
               onClick={handleNext}
             >
-              Customize Groupshop
+              Customize Microstore
             </Button> */}
           </div>
           {/* <div className={styles.welcome__modal__body__btnskip}

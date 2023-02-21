@@ -124,6 +124,7 @@ const InfoBox = ({
                   <strong>discounts</strong>
                   {' '}
                   on this
+                  {' '}
                   {isDrops ? 'Groupshop' : 'Microstore'}
                   .
                 </p>

@@ -41,7 +41,7 @@ const RewardBox2 = ({
   });
 
   const {
-    isExpired,
+    isExpired, isDrops,
   } = useDeal();
 
   return (
@@ -72,7 +72,10 @@ const RewardBox2 = ({
             <Col lg={12}>
               <div className={styles.groupshop_rewardBox2_modal__top}>
                 <h2>
-                  New to Groupshop?
+                  New to
+                  {' '}
+                  {isDrops ? 'Groupshop' : 'Microstore'}
+                  ?
                 </h2>
                 <p>Here are the two ways you can earn rewards:</p>
               </div>
@@ -90,7 +93,10 @@ const RewardBox2 = ({
                       <p>
                         <b>Shop</b>
                         {' '}
-                        exclusive discounts on this Groupshop
+                        exclusive discounts on this
+                        {' '}
+                        {isDrops ? 'Groupshop' : 'Microstore'}
+                        {' '}
                         &
                         get
                         {' '}
@@ -117,7 +123,10 @@ const RewardBox2 = ({
                       <p>
                         <b>Shop</b>
                         {' '}
-                        exclusive discounts on this Groupshop
+                        exclusive discounts on this
+                        {' '}
+                        {isDrops ? 'Groupshop' : 'Microstore'}
+                        {' '}
                         &
                         get
                         {' '}
@@ -140,7 +149,11 @@ const RewardBox2 = ({
                       {' '}
                       <b>Share</b>
                       {' '}
-                      this Groupshop and earn cashback when friends shop after you.
+                      this
+                      {' '}
+                      {isDrops ? 'Groupshop' : 'Microstore'}
+                      {' '}
+                      and earn cashback when friends shop after you.
                     </p>
                   </div>
                 </div>
@@ -149,15 +162,15 @@ const RewardBox2 = ({
                   className={[styles.groupshop_rewardBox2_modal__info2, 'd-inline'].join(' ')}
                   onClick={() => navigator?.share({
                     title: 'Groupshop',
-                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                    text: `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} & get up to ${maxPercent} off ${shareurl}`,
                   })}
                   onKeyUp={() => navigator?.share({
                     title: 'Groupshop',
-                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                    text: `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} & get up to ${maxPercent} off ${shareurl}`,
                   })}
                   onKeyDown={() => navigator?.share({
                     title: 'Groupshop',
-                    text: `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off ${shareurl}`,
+                    text: `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} & get up to ${maxPercent} off ${shareurl}`,
                   })}
                   role="button"
                   tabIndex={0}
@@ -169,7 +182,11 @@ const RewardBox2 = ({
                     <p>
                       <b>Share</b>
                       {' '}
-                      this Groupshop and earn cashback when friends shop after you.
+                      this
+                      {' '}
+                      {isDrops ? 'Groupshop' : 'Microstore'}
+                      {' '}
+                      and earn cashback when friends shop after you.
                     </p>
                   </div>
                 </div>
@@ -201,7 +218,7 @@ const RewardBox2 = ({
                       label={isExpired ? 'Share & Unlock' : 'Share & Earn'}
                       className={styles.groupshop_rewardBox2_modal__greenBtn}
                       shareurl={shareurl}
-                      text={`Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
+                      text={`Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} & get up to ${maxPercent} off`}
                     />
                   )
               }

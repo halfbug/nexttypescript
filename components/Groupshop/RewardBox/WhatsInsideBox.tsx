@@ -35,7 +35,7 @@ const WhatsInsideBox = ({
   });
 
   const {
-    isExpired,
+    isExpired, isDrops,
   } = useDeal();
 
   return (
@@ -75,7 +75,9 @@ const WhatsInsideBox = ({
                   </Link>
                 </div>
                 <h2>
-                  Welcome to your Groupshop
+                  Welcome to your
+                  {' '}
+                  {isDrops ? 'Groupshop' : 'Microstore'}
                   {' '}
                   {owner?.firstName ?? ''}
                   {' '}
@@ -118,7 +120,11 @@ const WhatsInsideBox = ({
             </Col>
             <Col lg={12} className="px-0">
               <div className={styles.whatsInsideBox_modal__note}>
-                Customize your Groupshop now and explore your exclusive discounts when you’re done.
+                Customize your
+                {' '}
+                {isDrops ? 'Groupshop' : 'Microstore'}
+                {' '}
+                now and explore your exclusive discounts when you’re done.
               </div>
             </Col>
           </Row>
