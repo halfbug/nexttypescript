@@ -39,6 +39,7 @@ import useCode from 'hooks/useCode';
 import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDetail from 'hooks/useDetail';
 import useDrops from 'hooks/useDrops';
+import useUtilityFunction from 'hooks/useUtilityFunction';
 import Members from '../Members/Members';
 
 interface ProductDetailProps extends RootProps {
@@ -69,6 +70,9 @@ const ProductDetail = ({
     gsctx: { discountCode: { percentage }, totalProducts, store }, gsctx,
     isGroupshop,
   } = useAppContext();
+  const {
+    formatNumber,
+  } = useUtilityFunction();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
@@ -409,7 +413,7 @@ const ProductDetail = ({
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
                   {currencySymbol}
-                  {parseFloat(productPriceDiscount(+(product?.price ?? ''), spotlightProducts.includes(product?.id!) ? +store?.drops?.spotlightDiscount?.percentage! : +percentage))}
+                  {formatNumber(productPriceDiscount(+(product?.price ?? ''), spotlightProducts.includes(product?.id!) ? +store?.drops?.spotlightDiscount?.percentage! : +percentage))}
                   {' '}
                   Off
                 </span>
