@@ -13,6 +13,7 @@ import { useMediaQuery } from 'react-responsive';
 import useDeal from 'hooks/useDeal';
 import useDrops from 'hooks/useDrops';
 import useAppContext from 'hooks/useAppContext';
+import useCountDown from 'hooks/useCountDown';
 
 interface ExpiredLinkedProps extends RootProps {
   show: boolean;
@@ -32,6 +33,9 @@ const ExpiredLinked = ({
   const isDesktop = useMediaQuery({
     query: '(min-width: 476px)',
   });
+  const {
+    isCountdownOver,
+  } : any = useCountDown();
 
   const {
     isExpired,
@@ -55,7 +59,7 @@ const ExpiredLinked = ({
   return (
     <>
       <Modal
-        show={show && expiredAt}
+        show={(show && expiredAt) || isCountdownOver}
         onHide={closeModal}
         size="lg"
         centered

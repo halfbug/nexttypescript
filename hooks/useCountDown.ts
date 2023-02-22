@@ -8,6 +8,8 @@ const useCountDown = () => {
   const { expiredAt } = gsctx;
   const [countdownDate, setCountdownDate] = useState(0);
   const [count, setCount] = useState<any>(undefined);
+  const [isCountdownOver, setisCountdownOver] = useState<boolean>(false);
+  let pollit: any;
 
   const loading = {
     days: '..',
@@ -25,7 +27,7 @@ const useCountDown = () => {
 
   useEffect(() => {
     if (countdownDate) {
-      setInterval(() => setNewTime(), 1000);
+      pollit = setInterval(() => setNewTime(), 1000);
     }
   }, [countdownDate]);
 
@@ -61,16 +63,26 @@ const useCountDown = () => {
         seconds = +(`0${seconds}`);
       }
 
+      if (days < 1
+        && hours < 1
+        && minutes < 1
+        && seconds <= 0) {
+        clearInterval(pollit);
+        setisCountdownOver(true);
+        return false;
+      }
+
       setCount({
         days, hours, minutes, seconds,
       });
     }
+    return false;
   };
 
   if (gsctx.id && count) {
-    return { ...count };
+    return { ...count, isCountdownOver };
   }
-  if (gsctx.id && isExpired) {
+  if ((gsctx.id && isExpired) || isCountdownOver) {
     return { ...expiredValues };
   }
   return { ...loading };
