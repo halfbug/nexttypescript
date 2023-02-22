@@ -201,11 +201,21 @@ const Footer = ({
             {isDrops
               ? (
                 <section className="d-flex justify-content-center px-2">
-                  <SocialButtonMobile isDrops text={`Shop on my Groupshop Drops and get up to ${milestone3}% off `} network="Email" url={gsctx?.shortUrl ? gsctx?.shortUrl : ''} />
-                  <SocialButtonMobile isDrops text="" network="Instagram" url="https://www.instagram.com/groupshopit/" />
-                  <SocialButtonMobile isDrops text="" network="Pinterest" url="https://www.pinterest.com/Groupshop/" />
-                  <SocialButtonMobile isDrops text="" network="Twitter" url="https://twitter.com/groupshopit" />
-                  <SocialButtonMobile isDrops text="" network="Facebook" url="https://www.facebook.com/groupshopit/" />
+                  <div className="mx-1">
+                    <SocialButtonMobile isDrops text={`Shop on my Groupshop Drops and get up to ${milestone3}% off `} network="Email" url={gsctx?.shortUrl ? gsctx?.shortUrl : ''} />
+                  </div>
+                  <div className="mx-1">
+                    <SocialButtonMobile isDrops text="" network="Instagram" url="https://www.instagram.com/groupshopit/" />
+                  </div>
+                  <div className="mx-1">
+                    <SocialButtonMobile isDrops text="" network="Pinterest" url="https://www.pinterest.com/Groupshop/" />
+                  </div>
+                  <div className="mx-1">
+                    <SocialButtonMobile isDrops text="" network="Twitter" url="https://twitter.com/groupshopit" />
+                  </div>
+                  <div className="mx-1">
+                    <SocialButtonMobile isDrops text="" network="Facebook" url="https://www.facebook.com/groupshopit/" />
+                  </div>
                 </section>
               )
               : (

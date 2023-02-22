@@ -553,16 +553,16 @@ const ProductsSearch = ({
                       >
                         <div
                           role="button"
-                          className="text-center fw-bold text-truncate"
+                          className={[!isDrops ? 'text-center text-truncate' : '', 'fw-bold'].join(' ')}
                           onClick={(e) => openDetail(e, prd)}
                           onKeyDown={(e) => openDetail(e, prd)}
                           tabIndex={0}
                         >
-                          <h4>
+                          <h5 className={styles.groupshop_product_desc_title}>
                             {prd.title}
-                          </h4>
+                          </h5>
                         </div>
-                        <p className="text-center fw-bold fs-5 mb-0">
+                        <p className={[!isDrops ? 'text-center' : '', 'fw-bold fs-5 mb-0'].join(' ')}>
                           <span className="text-decoration-line-through fw-light me-1">
                             {currencySymbol}
 
