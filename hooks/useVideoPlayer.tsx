@@ -190,7 +190,6 @@ const useVideoPlayer = (videoRef: any) => {
   };
 
   const loadingEnd = async () => {
-    setIsLoading(false);
     videoRef.current.currentTime = 0;
     setControl({ ...control, autoPlay: true });
     if (type === 2) {
@@ -198,6 +197,7 @@ const useVideoPlayer = (videoRef: any) => {
       setTimeout(() => {
         videoRef.current.play();
       }, 200);
+      setIsLoading(false);
     } else {
       await videoRef.current.play();
     }
