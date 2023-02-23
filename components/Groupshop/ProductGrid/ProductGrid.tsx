@@ -144,9 +144,21 @@ const ProductGrid = ({
     const maxWidth = obj?.scrollWidth ?? screenWidth;
     if (direction === 'right' && position < (maxWidth - screenWidth)) {
       position += (screenWidth);
+      if ((maxWidth - screenWidth) < position) {
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+      } else {
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+      }
     }
     if (direction === 'left' && position >= screenWidth) {
       position -= (screenWidth);
+      if (position === 0) {
+          document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
+      } else {
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+      }
     }
     if (position > maxWidth) {
       position = maxWidth - screenWidth;
@@ -174,8 +186,8 @@ const ProductGrid = ({
               </div>
             </div>
             <div className="d-flex">
-              <BsArrowLeft size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
-              <BsArrowRight size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowRight id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
             </div>
           </div>
         </Col>
