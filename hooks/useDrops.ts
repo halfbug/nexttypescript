@@ -163,7 +163,7 @@ export default function useDrops() {
     const percantage = (+cartValue * 100) / baseValue;
     const remainedValue = baseValue - cartValue;
     const cart = {
-      percantage,
+      percantage: (percantage >= 100 ? 100 : percantage),
       remainedValue: formatNumber(remainedValue),
     };
     return cart;
