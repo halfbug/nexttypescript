@@ -91,8 +91,8 @@ export default function useCart() {
   const getShopifyUrl = useCallback(() => {
     const cartDetail = cartProducts.map(({ selectedVariant: { id, selectedQuantity } }) => `${id.split('/')[4]}:${selectedQuantity}`).join(',');
     // `id=${id.split('/')[4]}&quantity=${selectedQuantity}`).join('&');
-    console.log(`https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}`);
-    return `https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}`;
+    console.log(`https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`);
+    return `https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`;
   }, [gsctx.cart]);
 
   const getSuggestedProducts = useCallback(() => {
