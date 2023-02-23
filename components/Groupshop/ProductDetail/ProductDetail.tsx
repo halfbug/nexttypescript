@@ -105,6 +105,7 @@ const ProductDetail = ({
   } = useDeal();
   const {
     spotlightProducts,
+    updatePurhaseCount,
   } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
@@ -691,11 +692,11 @@ const ProductDetail = ({
                     <p className={styles.groupshop_shopped}>
                       {' '}
                       {/* <Icon /> */}
-                      {product?.secondaryCount >= 1 && product?.secondaryCount <= 30 ? <>🔥</> : ''}
-                      {product?.secondaryCount > 30 && product?.secondaryCount <= 100 ? <>⚡️</> : ''}
-                      {product?.secondaryCount > 100 ? <>🎉</> : ''}
+                      {updatePurhaseCount(product?.secondaryCount, product?.purchaseCount) >= 1 && updatePurhaseCount(product?.secondaryCount, product?.purchaseCount) <= 30 ? <>🔥</> : ''}
+                      {updatePurhaseCount(product?.secondaryCount, product?.purchaseCount) > 30 && updatePurhaseCount(product?.secondaryCount, product?.purchaseCount) <= 100 ? <>⚡️</> : ''}
+                      {updatePurhaseCount(product?.secondaryCount, product?.purchaseCount) > 100 ? <>🎉</> : ''}
                       {' '}
-                      {product?.secondaryCount}
+                      {updatePurhaseCount(product?.secondaryCount, product?.purchaseCount)}
                       {'+ '}
                       people have shopped this!
                     </p>

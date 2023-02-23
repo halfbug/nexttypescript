@@ -96,6 +96,7 @@ const ProductGrid = ({
   } = useDeal();
   const {
     spotlightProducts,
+    updatePurhaseCount,
   } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -365,11 +366,11 @@ const ProductGrid = ({
                         ))
                         || (prod.secondaryCount && isDrops && (
                         <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
-                          { prod.secondaryCount >= 1 && prod.secondaryCount <= 30 ? <>🔥</> : ''}
-                          { prod.secondaryCount > 30 && prod.secondaryCount <= 100 ? <>⚡️</> : ''}
-                          { prod.secondaryCount > 100 ? <>🎉</> : ''}
+                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) >= 1 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 30 ? <>🔥</> : ''}
+                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 30 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 100 ? <>⚡️</> : ''}
+                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 100 ? <>🎉</> : ''}
                           <i>
-                            {`${prod.secondaryCount} people shopped`}
+                            {`${updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount)} people shopped`}
                           </i>
                         </p>
                         ))}

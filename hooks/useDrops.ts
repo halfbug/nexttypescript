@@ -169,6 +169,10 @@ export default function useDrops() {
     return cart;
   };
 
+  const updatePurhaseCount = useCallback((
+    secondaryCount, purchaseCount,
+  ) => (secondaryCount + purchaseCount), []);
+
   return {
     currentDropReward,
     nextDropReward,
@@ -179,5 +183,6 @@ export default function useDrops() {
     canBeUnlockedCB,
     getChackback,
     cartValueProgress,
+    updatePurhaseCount,
   };
 }
