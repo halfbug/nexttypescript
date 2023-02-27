@@ -4,11 +4,15 @@ import styles from 'styles/LayoutForm.module.scss';
 import {
   Row, Col, Form, Button,
 } from 'react-bootstrap';
-
+import useDeal from 'hooks/useDeal';
 import B1 from 'assets/images/GS-1.png';
+import Myellow from 'assets/images/microstore-yellow.png';
 import B2 from 'assets/images/GS-2.png';
+import Mgray from 'assets/images/microstore-gray.png';
 import B3 from 'assets/images/GS-3.png';
+import Mblack from 'assets/images/microstore-black.png';
 import B4 from 'assets/images/GS-4.png';
+import Mtransparent from 'assets/images/microstore-whitetransparent.png';
 
 import BannerComponent from './BannerComponent';
 import ClassicBanner from './ClassicBanner';
@@ -54,6 +58,7 @@ export default function BannerDesign(
     }
     handleSubmit();
   };
+  const { isDrops } = useDeal();
 
   return (
     <section>
@@ -105,7 +110,9 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B1} />
+                {isDrops
+                  ? <BannerComponent image={B1} />
+                  : <BannerComponent image={Myellow} /> }
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -126,7 +133,9 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B2} />
+                {isDrops
+                  ? <BannerComponent image={B2} />
+                  : <BannerComponent image={Mgray} /> }
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -147,7 +156,9 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className="mx-2">
-                <BannerComponent image={B3} />
+                {isDrops
+                  ? <BannerComponent image={B3} />
+                  : <BannerComponent image={Mblack} /> }
               </div>
             </Form.Check.Label>
           </Form.Check>
@@ -168,7 +179,9 @@ export default function BannerDesign(
             />
             <Form.Check.Label>
               <div className=" mx-2">
-                <BannerComponent image={B4} />
+                {isDrops
+                  ? <BannerComponent image={B4} />
+                  : <BannerComponent image={Mtransparent} /> }
               </div>
             </Form.Check.Label>
           </Form.Check>
