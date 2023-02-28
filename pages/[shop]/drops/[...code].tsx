@@ -638,13 +638,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <div className="bg-black text-center py-2">
             <span
               role="button"
-              className="text-center text-white"
+              className={styles.drops__wantOff}
               onClick={() => setDropReward(true)}
             >
-              Want
+              <b>
+                Want
+                {' '}
+                {nextDropReward}
+                % off?
+              </b>
               {' '}
-              {nextDropReward}
-              % off? Click here to learn how.
+              Click here to learn how.
             </span>
           </div>
           )

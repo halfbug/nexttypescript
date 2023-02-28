@@ -6,7 +6,7 @@ import {
   Col, Modal, Row,
 } from 'react-bootstrap';
 import Cross from 'assets/images/CrossLg.svg';
-import GroupshopIcon from 'assets/images/groupshop-icon.svg';
+import GroupshopIcon from 'assets/images/Logo-small.svg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';

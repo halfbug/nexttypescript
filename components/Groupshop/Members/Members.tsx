@@ -135,7 +135,7 @@ const Members = ({
               </Popover>
             </Overlay>
           </div>
-          {(idx + 1) % 10 === 0 && (
+          {!isDrops && (idx + 1) % 10 === 0 && (
           <div className={styles.groupshop__member_line_break} />
           )}
         </>

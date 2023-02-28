@@ -7,7 +7,7 @@ import {
   Carousel,
   Col, Modal, Row,
 } from 'react-bootstrap';
-import GroupshopIcon from 'assets/images/groupshop-icon.svg';
+import GroupshopIcon from 'assets/images/Logo-small.svg';
 import useAppContext from 'hooks/useAppContext';
 
 interface HowShopDropBoxProps extends RootProps {

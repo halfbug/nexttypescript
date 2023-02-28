@@ -6,7 +6,7 @@ import {
   Col, Modal, Row,
 } from 'react-bootstrap';
 import Cross from 'assets/images/CrossLg.svg';
-import GroupshopIcon from 'assets/images/groupshop-icon.svg';
+import GroupshopIcon from 'assets/images/Logo-small.svg';
 import ArrowDown from 'assets/images/arrow-down.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
@@ -66,7 +66,7 @@ const DropsRewardBox = ({
             <Col lg={12} className="px-0">
               <div className={styles.dropsRewardBox_modal__top}>
                 <div className={styles.dropsRewardBox_modal__top__icon}>
-                  <GroupshopIcon width="140" height="10" />
+                  <GroupshopIcon />
                 </div>
                 <h2>
                   So you want

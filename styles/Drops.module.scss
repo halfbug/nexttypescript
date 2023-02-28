@@ -461,6 +461,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     height: 100%;
   }
 
+  &__wantOff {
+    @extend .text-center, .text-white;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
   &__hero {
     @extend .mw-100,
       .d-flex,
@@ -1175,7 +1183,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &_cardBody {
       @extend .py-1, .my-1;
       &_pName {
-        @extend .text-truncate;
+        @extend .text-start;
+        height: 48px;
+        overflow: hidden;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;

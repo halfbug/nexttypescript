@@ -365,7 +365,10 @@ const Cart = ({
                           )}
                         >
                           <div className={styles.groupshop__pcard_cardBody_PDetail}>
-                            <div className={styles.groupshop__pcard_cardBody_pName}>
+                            <div className={isDrops
+                              ? dStyles.drops__pcard_cardBody_pName
+                              : styles.groupshop__pcard_cardBody_pName}
+                            >
                               {item.title}
                             </div>
                             {!isDrops && item.purchaseCount && (
