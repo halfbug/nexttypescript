@@ -128,6 +128,7 @@ const HowShopDropVideoBox = ({
                       {' '}
                       everything to start.
                     </p>
+                    <br />
                     <p>
                       <b>Spotlight</b>
                       {' '}

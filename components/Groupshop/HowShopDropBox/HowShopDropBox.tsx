@@ -106,6 +106,7 @@ const HowShopDropBox = ({
                       </b>
                       {' '}
                       everything to start.
+                      <br />
                       <b>Spotlight</b>
                       {' '}
                       products have an extra discount and rotate daily.
