@@ -187,7 +187,7 @@ const ProductGrid = ({
             </div>
             <div className="d-flex">
               <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
-              <BsArrowRight id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
             </div>
           </div>
         </Col>
