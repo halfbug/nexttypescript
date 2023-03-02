@@ -64,6 +64,7 @@ const ProductDetail = ({
     setDealProduct('');
     setShowOverlay(false);
     handleClose(e);
+    setVarientData(0);
   };
   // console.log(product);
   const {
@@ -804,7 +805,7 @@ const ProductDetail = ({
                   <div className={[isDrops ? dStyles.drops_buttons_wrapper : styles.groupshop_buttons_wrapper, 'mt-3 bg-white justify-content-center'].join(' ')}>
                     {!isExpired ? (
                       <>
-                        {isDrops && varientData < 51 && varientData > 0 ? (
+                        {!loading && isDrops && varientData < 51 && varientData > 0 ? (
                           <div className={dStyles.drops_buttons_wrapper_lessTxt}>
                             {`Less than ${varientData} left!`}
                           </div>
