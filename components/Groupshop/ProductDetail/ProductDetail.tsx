@@ -933,6 +933,7 @@ const ProductDetail = ({
                                     lineItems: mem.lineItems,
                                     email: mem.orderDetail.customer.email,
                                     orderId: mem.orderId,
+                                    availedDiscount: mem.availedDiscount,
                                   }),
                                 ))}
                                 cashback={['']}

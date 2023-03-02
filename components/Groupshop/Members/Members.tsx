@@ -64,7 +64,7 @@ const Members = ({
     }
     setCustName(member.fname);
     const orderPrice = countTotalPrice(member.lineItems);
-    if (page === 'drops') {
+    if (isDrops) {
       setpendingRewards(((orderPrice * member.availedDiscount) / 100));
     } else {
       setpendingRewards(((orderPrice * (parseInt(rewards.baseline, 10))) / 100));
