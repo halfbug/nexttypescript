@@ -83,7 +83,7 @@ export default function useDeal() {
 
   const currencySymbolDiscovery = (currency: any) => getSymbolFromCurrency(currency || 'USD');
 
-  const discount = gsctx?.discountCode?.percentage || '0';
+  const discount = gsctx?.discountCode?.percentage || '40';
 
   const dPrice = useCallback((price: number) => price - ((+discount / 100) * price), [gsctx]);
 
@@ -228,6 +228,9 @@ export default function useDeal() {
 
   const productPriceDiscount = ((price: number, percent: number) => {
     const discountedPrice = price * (percent / 100);
+    if (isDrops && discountedPrice === 0) {
+      return price * (40 / 100);
+    }
     return discountedPrice.toFixed(2);
   });
 

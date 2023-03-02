@@ -4,7 +4,7 @@ import { RootProps } from 'types/store';
 import {
   Button,
   Carousel,
-  Col, Modal, Row,
+  Col, Modal, Row, Spinner,
 } from 'react-bootstrap';
 import GroupshopIcon from 'assets/images/groupshop-white-icon.svg';
 import useAppContext from 'hooks/useAppContext';
@@ -12,11 +12,12 @@ import useAppContext from 'hooks/useAppContext';
 interface HowShopDropVideoBoxProps extends RootProps {
     show: boolean;
     handleClose(e: any): any;
+    btnDisable: boolean;
 
 }
 
 const HowShopDropVideoBox = ({
-  show = false, handleClose,
+  show = false, handleClose, btnDisable,
 }: HowShopDropVideoBoxProps) => {
   const { gsctx } = useAppContext();
   const { customerDetail, store } = gsctx;
@@ -192,8 +193,12 @@ const HowShopDropVideoBox = ({
             </Carousel.Item>
           </Carousel>
           <div className={styles.howShopDropVideoBox_modal__btnSection}>
-            <Button variant="light" onClick={handleClose}>
-              Drop in and shop
+            <Button
+              variant="light"
+              disabled={btnDisable}
+              onClick={handleClose}
+            >
+              {btnDisable ? <Spinner animation="border" size="sm" /> : 'Drop in and shop'}
             </Button>
           </div>
         </Modal.Body>

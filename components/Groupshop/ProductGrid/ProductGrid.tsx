@@ -85,7 +85,7 @@ const ProductGrid = ({
     gsctx: {
       discountCode: { percentage },
       dealProducts, addedProducts, store,
-    } = { discountCode: { percentage: 0 }, dealProducts: [] }, isGroupshop, isChannel,
+    } = { discountCode: { percentage: 40 }, dealProducts: [] }, isGroupshop, isChannel,
   } = useAppContext();
   // stage db and check with gs 4 bought prd
   const {

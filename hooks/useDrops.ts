@@ -21,6 +21,8 @@ export default function useDrops() {
   const [nextDropReward, setnextDropReward] = useState<String | null>('');
   const [spotlightProducts, setspotlightProducts] = useState<String[]>([]);
 
+  const [btnDisable, setbtnDisable] = useState<boolean>(false);
+
   useEffect(() => {
     if (ownerCode && gsctx) {
       const ownerOnboardingStep = gsctx.obSettings?.step;
@@ -51,6 +53,7 @@ export default function useDrops() {
   }, [store?.drops, milestones]);
 
   const updateOnboarding = async () => {
+    setbtnDisable(true);
     await updateDropGroupshop({
       variables: {
         updateDropsGroupshopInput: {
@@ -61,7 +64,7 @@ export default function useDrops() {
           },
         },
       },
-    });
+    }).catch((err) => setbtnDisable(false));
 
     await createOnBoardingDiscountCode({
       variables: {
@@ -81,7 +84,7 @@ export default function useDrops() {
         });
         setShowObPopup(false);
       }
-    });
+    }).catch((err) => setbtnDisable(false));
   };
 
   const canBeUnlockedCB = useCallback(
@@ -178,6 +181,7 @@ export default function useDrops() {
     nextDropReward,
     showObPopup,
     spotlightProducts,
+    btnDisable,
     setShowObPopup,
     updateOnboarding,
     canBeUnlockedCB,
