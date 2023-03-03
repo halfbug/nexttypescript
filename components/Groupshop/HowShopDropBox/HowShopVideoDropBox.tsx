@@ -84,7 +84,11 @@ const HowShopDropVideoBox = ({
                       {' '}
                       <b>exclusive discounts</b>
                       {' '}
-                      on products that almost never get discounted.
+                      on products that almost
+                      {' '}
+                      <i>never</i>
+                      {' '}
+                      get discounted.
                     </p>
                   </div>
                 </div>
@@ -133,7 +137,10 @@ const HowShopDropVideoBox = ({
                     <p>
                       <b>Spotlight</b>
                       {' '}
-                      products have an extra discount and rotate daily.
+                      products have an extra discount and rotate
+                      {' '}
+                      <i>daily</i>
+                      .
                     </p>
                   </div>
                 </div>
