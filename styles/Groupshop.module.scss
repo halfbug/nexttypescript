@@ -2466,7 +2466,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &_qrBox {
     &__modal {
-      @extend .m-5;
+      @extend .mx-5;
     }
     &__closebtn {
       @extend .p-2;
