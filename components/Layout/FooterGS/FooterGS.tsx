@@ -269,7 +269,7 @@ const Footer = ({
               )} */}
               {isDrops ? (
                 <Link href="https://groupshop.zendesk.com/hc/en-us">
-                  <a target="_blank"><strong>FAQ</strong></a>
+                  <a target="_blank"><strong>Get Help</strong></a>
                 </Link>
               ) : (
                 <Link href="https://microstore.zendesk.com/hc/en-us">
