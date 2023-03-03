@@ -146,6 +146,10 @@ const ProductGrid = ({
       position += (screenWidth);
       if ((maxWidth - screenWidth) < position) {
         document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+      } else if ((maxWidth - screenWidth) === position) {
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
       } else {
         document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
         document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
@@ -155,6 +159,7 @@ const ProductGrid = ({
       position -= (screenWidth);
       if (position === 0) {
           document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
+          document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
       } else {
         document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
         document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
@@ -168,6 +173,21 @@ const ProductGrid = ({
       behavior: 'smooth',
     });
   };
+
+  const handleScroll = (e: any) => {
+    const obj = document.getElementById(e.target.id);
+    if (e.target.scrollLeft + (obj?.offsetWidth ?? 0) === obj?.scrollWidth) {
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+    } else if (e.target.scrollLeft === 0) {
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+    } else {
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+    }
+  };
+
   return (
     <Container {...props} ref={ref} id={id}>
       <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
@@ -228,6 +248,7 @@ const ProductGrid = ({
         className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
           : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
         id={[id, 'productGrid'].join('_')}
+        onScroll={(e) => handleScroll(e)}
       >
         {renderItems?.map((prod, index) => (
           <>
