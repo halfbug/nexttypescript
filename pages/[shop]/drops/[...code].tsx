@@ -74,7 +74,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     loading,
     error,
     data: { DropGroupshop } = { DropGroupshop: gsdInit },
-  } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined, status: string}>(
+  } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined, status: string }>(
     GET_DROP_GROUPSHOP,
     {
       variables: { code: discountCode, status: status ?? '' },
@@ -396,9 +396,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content="The new way to shop top brands" />
+        <meta name="description" content="Your favorite brands at unbeliveable prices" />
         <meta name="og:title" content="Groupshop" />
-        <meta name="description" content="The new way to shop top brands" />
+        <meta name="description" content="Your favorite brands at unbeliveable prices" />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BGDROPSFINAL.jpg" as="image" />
@@ -411,10 +411,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       <div className={styles.drops}>
         <header>
           {!isModalForMobile && (
-          <div>
-            <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
-            <div className={styles.drops__dummyOverlay} />
-          </div>
+            <div>
+              <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
+              <div className={styles.drops__dummyOverlay} />
+            </div>
           )}
           <Header
             LeftComp={
@@ -426,7 +426,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   </div>
                 )
                 : <></>
-                // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+              // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
             }
             RightComp={(
               <Button2
@@ -580,78 +580,77 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   <CountDownTimer />
                 </div>
               </Col>
-              { !!gsctx.members.length && (
-              <>
-                {getChackback() !== 0 && (
-                <Col lg={12}>
-                  <h5 className="text-black font-bold mt-4">
-                    🎉 Plus unlock $
-                    <span className="fw-bolder">
-                      {getChackback()}
-                      {' '}
-                      cashback
-                    </span>
-                    {' '}
-                    for
-                  </h5>
-                </Col>
-                )}
-                {
-                  gsctx.members.length > 2 && (
+              {!!gsctx.members.length && (
+                <>
+                  {getChackback() !== 0 && (
                     <Col lg={12}>
-                      <h5 className="text-black fw-light mt-3 mb-0">
-                        🛍 Shopping with friends is better
+                      <h5 className="text-black font-bold mt-4">
+                        🎉 Plus unlock $
+                        <span className="fw-bolder">
+                          {getChackback()}
+                          {' '}
+                          cashback
+                        </span>
+                        {' '}
+                        for
                       </h5>
                     </Col>
-                  )
-                }
-                <div className="flex-wrap pt-2 d-flex flex-row justify-content-center">
-                  <Members
-                    names={gsctx.members?.map(
-                      (mem: any, index: any) => ({
-                        fname: `${mem.orderDetail.customer.firstName ?? ''} ${
-                          mem.orderDetail.customer.firstName ? mem?.orderDetail.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
-                        }`,
-                        lineItems: mem.lineItems,
-                        email: mem.orderDetail.customer.email,
-                        orderId: mem.orderId,
-                        availedDiscount: mem.availedDiscount,
-                      }),
-                    )}
-                    cashback={['']}
-                    pending={pending}
-                    discount={discount}
-                    fullshareurl={gsShortURL}
-                    shareUrl={gsURL}
-                    rewards={gsctx?.store?.drops?.rewards}
-                    brandname={brandName}
-                    currencySymbol={currencySymbol}
-                    page="drops"
-                  />
-                </div>
-              </>
-              ) }
+                  )}
+                  {
+                    gsctx.members.length > 2 && (
+                      <Col lg={12}>
+                        <h5 className="text-black fw-light mt-3 mb-0">
+                          🛍 Shopping with friends is better
+                        </h5>
+                      </Col>
+                    )
+                  }
+                  <div className="flex-wrap pt-2 d-flex flex-row justify-content-center">
+                    <Members
+                      names={gsctx.members?.map(
+                        (mem: any, index: any) => ({
+                          fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem?.orderDetail.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
+                          }`,
+                          lineItems: mem.lineItems,
+                          email: mem.orderDetail.customer.email,
+                          orderId: mem.orderId,
+                          availedDiscount: mem.availedDiscount,
+                        }),
+                      )}
+                      cashback={['']}
+                      pending={pending}
+                      discount={discount}
+                      fullshareurl={gsShortURL}
+                      shareUrl={gsURL}
+                      rewards={gsctx?.store?.drops?.rewards}
+                      brandname={brandName}
+                      currencySymbol={currencySymbol}
+                      page="drops"
+                    />
+                  </div>
+                </>
+              )}
             </Row>
           </Container>
         </Hero>
         {
           !!nextDropReward && (
-          <div className="bg-black text-center py-2">
-            <span
-              role="button"
-              className={styles.drops__wantOff}
-              onClick={() => setDropReward(true)}
-            >
-              <b>
-                Want
+            <div className="bg-black text-center py-2">
+              <span
+                role="button"
+                className={styles.drops__wantOff}
+                onClick={() => setDropReward(true)}
+              >
+                <b>
+                  Want
+                  {' '}
+                  {nextDropReward}
+                  % off?
+                </b>
                 {' '}
-                {nextDropReward}
-                % off?
-              </b>
-              {' '}
-              Click here to learn how.
-            </span>
-          </div>
+                Click here to learn how.
+              </span>
+            </div>
           )
         }
 
@@ -732,11 +731,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setLearnHow(false)}
         />
         {isModalForMobile && (
-        <HowShopDropVideoBox
-          show={showObPopup}
-          btnDisable={btnDisable}
-          handleClose={updateOnboarding}
-        />
+          <HowShopDropVideoBox
+            show={showObPopup}
+            btnDisable={btnDisable}
+            handleClose={updateOnboarding}
+          />
         )}
         <DropsRewardBox
           show={dropReward}
@@ -746,7 +745,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show={showSignup}
           handleClose={() => setSignup(false)}
         />
-        {isModalForMobile && <ExpiredLinked show={isExpired} handleClose={() => {}} />}
+        {isModalForMobile && <ExpiredLinked show={isExpired} handleClose={() => { }} />}
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
@@ -774,11 +773,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         }
       </div>
       {!isModalForMobile && gsShortURL !== '' && (
-      <Scan
-        show
-        shareurl={gsShortURL ?? gsURL}
-        handleClose={() => {}}
-      />
+        <Scan
+          show
+          shareurl={gsShortURL ?? gsURL}
+          handleClose={() => { }}
+        />
       )}
     </>
   );
