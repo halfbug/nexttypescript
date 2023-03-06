@@ -235,6 +235,7 @@ const ProductDetail = ({
 
       if (isAdded) {
         showSuccess('product has been added');
+        document?.getElementById('scrollToTop')?.scrollIntoView();
       } else {
         showError('product is out of stock');
       }

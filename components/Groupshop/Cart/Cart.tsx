@@ -239,7 +239,7 @@ const Cart = ({
 
               </>
             ) : cartProducts.map((prd) => (
-              <Row className={styles.groupshop_cartImgPointer}>
+              <Row id="scrollToTop" className={styles.groupshop_cartImgPointer}>
                 <Col xs={4}>
                   <Image
                     src={prd.selectedVariant?.image?.src ?? prd.featuredImage}
