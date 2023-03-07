@@ -573,6 +573,7 @@ const ProductsSearch = ({
                             {currencySymbol}
                             {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
                           </span>
+                          {isDrops && prd?.outofstock ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>) : ''}
 
                         </p>
                       </ProductCard>
