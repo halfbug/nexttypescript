@@ -667,7 +667,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 lg={4}
                 xl={3}
                 products={uniqueArray(ele.products)}
-                maxrows={ele.name === 'All Products' ? 6 : 3}
+                maxrows={ele.name === 'All Products' ? 12 : 3}
                 addProducts={handleAddProduct}
                 handleDetail={(prd) => setsProduct(prd)}
                 showHoverButton
