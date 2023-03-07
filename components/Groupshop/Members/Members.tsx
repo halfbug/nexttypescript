@@ -70,7 +70,7 @@ const Members = ({
       setpendingRewards(((orderPrice * (parseInt(rewards.baseline, 10))) / 100));
     }
     setshowRewardModel(true);
-    if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
+    // if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
   };
   const handleClose = (event: any, state: string) => {
     setShow({ [state]: false });
