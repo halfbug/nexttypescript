@@ -7,7 +7,19 @@ export interface Drops {
   bestSellerCollectionId?: string;
   allProductsCollectionId?: string;
   rewards?: PartnerRewards;
+  klaviyo?: Klaviyo;
 }
+
+export type Klaviyo = {
+  publicKey: string;
+  privateKey: string;
+  listId: string;
+  signup1: string;
+  signup2: string;
+  signup3: string;
+  signup4: string;
+}
+
 export interface IStore {
   show?: boolean;
   id?: string;

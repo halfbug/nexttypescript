@@ -17,12 +17,14 @@ import useCountDown from 'hooks/useCountDown';
 
 interface ExpiredLinkedProps extends RootProps {
   show: boolean;
+  formId: string;
+  shopName:string | string[];
   handleClose(e: any): any;
 
 }
 
 const ExpiredLinked = ({
-  show = false, handleClose,
+  show = false, handleClose, formId, shopName,
 }: ExpiredLinkedProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -146,11 +148,13 @@ const ExpiredLinked = ({
                       ? ('Or, enter your phone number below &  join the waitlist for our next drop. We’ll text you when it goes live.')
                       : ('Enter your phone number below & join the waitlist for our next drop. We’ll text you when it goes live.')
                   }
+                  {formId !== '' && shopName !== '' && (
                   <Row className="justify-content-center mt-3">
                     <Col lg={12}>
-                      <iframe title="klaviyo-form" height="280" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UnQXg2` : '/klaviyo-form/UnQXg2'} />
+                      <iframe title="klaviyo-form" height="280" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/${shopName}/klaviyo-form/${formId}` : `/${shopName}/klaviyo-form/${formId}`} />
                     </Col>
                   </Row>
+                  )}
                 </div>
               </div>
             </Col>

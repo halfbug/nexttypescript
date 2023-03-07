@@ -158,7 +158,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   } = useDrops();
 
   const { googleEventCode, googleButtonCode } = useGtm();
-
+  console.log('gsctxgsctx ', gsctx);
   const facebookPixels = gsctx?.store?.settings?.marketing?.facebookPixels ?? '';
   const googlePixels = gsctx?.store?.settings?.marketing?.googlePixels ?? '';
   const tiktokPixels = gsctx?.store?.settings?.marketing?.tiktokPixels ?? '';
@@ -688,7 +688,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           ))
         }
 
-        <Footer LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
+        <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
         <ProductsSearch
           show={showps}
           handleClose={() => setshowps(false)}
@@ -742,10 +742,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setDropReward(false)}
         />
         <GetNotify
+          formId={gsctx.store?.drops?.klaviyo?.signup2 ?? ''}
+          shopName={shop ?? ''}
           show={showSignup}
           handleClose={() => setSignup(false)}
         />
-        {isModalForMobile && <ExpiredLinked show={isExpired} handleClose={() => { }} />}
+        {isModalForMobile && (
+        <ExpiredLinked
+          formId={gsctx.store?.drops?.klaviyo?.signup3 ?? ''}
+          shopName={shop ?? ''}
+          show={isExpired}
+          handleClose={() => { }}
+        />
+        )}
         {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
@@ -777,6 +786,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           show
           shareurl={gsShortURL ?? gsURL}
           handleClose={() => { }}
+          formId={gsctx.store?.drops?.klaviyo?.signup4 ?? ''}
+          shopName={shop ?? ''}
         />
       )}
     </>

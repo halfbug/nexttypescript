@@ -26,6 +26,8 @@ interface FooterProps {
   LeftComp: React.ReactNode;
   RightComp: React.ReactNode;
   isDrops?:boolean;
+  shopName?:string | string[];
+  formId?: string;
   setLearnHowDrops?: any;
 }
 
@@ -35,7 +37,7 @@ export interface ISignUp {
 }
 
 const Footer = ({
-  LeftComp, RightComp, isDrops, setLearnHowDrops,
+  LeftComp, RightComp, isDrops, setLearnHowDrops, formId, shopName,
 }: FooterProps) => {
   // const { isChannel } = useAppContext();
   const {
@@ -384,10 +386,11 @@ const Footer = ({
                 <p>
                   Join the waitlist and we’ll text you when it’s your turn.
                 </p>
+                {formId !== '' && shopName !== '' && (
                 <div className="mt-3">
-                  <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/URwBSH` : '/klaviyo-form/URwBSH'} />
+                  <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/${shopName}/klaviyo-form/${formId}` : `/${shopName}/klaviyo-form/${formId}`} />
                 </div>
-
+                )}
               </>
             </div>
             )}
@@ -410,6 +413,8 @@ const Footer = ({
 };
 Footer.defaultProps = {
   isDrops: false,
+  formId: '',
+  shopName: '',
   setLearnHowDrops: () => true,
 };
 

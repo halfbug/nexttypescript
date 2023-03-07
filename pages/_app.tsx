@@ -77,9 +77,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (pathname.includes('/klaviyo')) {
     return (
       <ApolloProvider client={apolloClient}>
-        <GroupshopContextProvider>
+        <GroupshopDropsContextProvider>
           <Component {...pageProps} />
-        </GroupshopContextProvider>
+        </GroupshopDropsContextProvider>
       </ApolloProvider>
     );
   }

@@ -125,6 +125,22 @@ query store($id: String!) {
   }
 `;
 
+const GET_STORE_KLAVIYO_DETAILS = gql`
+query StoreKlaviyoDetail($shop: String!) {
+  StoreKlaviyoDetail(shop: $shop) {
+    id
+    shop
+    brandName
+    drops{
+      klaviyo{
+        publicKey
+      }          
+    }
+    
+  }
+}
+`;
+
 const TOTAL_PRODUCTS = gql`
 query TotalProducts($shop: String!) {
   TotalProducts(shop: $shop) {
@@ -732,6 +748,12 @@ query DropGroupshop($code: String!, $status: String = "") {
           baseline
           average
           maximum
+        }
+        klaviyo{         
+          signup1
+          signup2
+          signup3
+          signup4
         }
       }
     }
@@ -2607,5 +2629,5 @@ export {
   GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP,
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
-  UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE,
+  UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
 };

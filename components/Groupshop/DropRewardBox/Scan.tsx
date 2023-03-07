@@ -16,13 +16,15 @@ import QR from 'assets/images/QR.svg';
 
 interface DropsRewardBoxProps extends RootProps {
   show: boolean;
+  formId: string;
+  shopName:string | string[];
   shareurl: string;
   handleClose(e: any): any;
 
 }
 
 const DropsScanBox = ({
-  show = false, shareurl, handleClose,
+  show = false, shareurl, handleClose, formId, shopName,
 }: DropsRewardBoxProps) => {
   const closeModal = (e: any) => {
     // setotherProducts(undefined);
@@ -87,10 +89,11 @@ const DropsScanBox = ({
                 <br />
                 Or enter your number below and we’ll text you the link to this drop.
               </div>
-
+              {formId !== '' && shopName !== '' && (
               <Row className="text-center">
-                <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/S6p9Bn` : '/klaviyo-form/S6p9Bn'} />
+                <iframe title="klaviyo-form" height="290" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/${shopName}/klaviyo-form/${formId}` : `/${shopName}/klaviyo-form/${formId}`} />
               </Row>
+              )}
             </div>
           </Row>
         </Modal.Body>

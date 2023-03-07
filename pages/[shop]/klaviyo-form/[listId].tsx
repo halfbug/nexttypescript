@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { Container } from 'react-bootstrap';
+import { useQuery } from '@apollo/client';
 import Router, { useRouter } from 'next/router';
+import { GET_STORE_KLAVIYO_DETAILS } from 'store/store.graphql';
 // import components
 
 const KlaviyoForm: NextPage = () => {
   // eslint-disable-next-line
   const [dealLink, setdealLink] = useState('');
-  const { query: { listId } } = useRouter();
+  const { query: { listId, shop } } = useRouter();
+  const [klaviyopublicKey, setKlaviyoPublicKey] = useState('');
+  const {
+    data: storeData,
+  } = useQuery(GET_STORE_KLAVIYO_DETAILS, {
+    variables: { shop: `${shop}.myshopify.com`, skip: !shop },
+  });
+
+  useEffect(() => {
+    if (storeData?.StoreKlaviyoDetail) {
+      setKlaviyoPublicKey(storeData.StoreKlaviyoDetail.drops.klaviyo?.publicKey);
+    }
+  }, [storeData]);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${klaviyopublicKey}`;
+    script.id = 'klaviyo';
+    document.body.appendChild(script);
+  }, [klaviyopublicKey]);
 
   return (
     <>
@@ -25,7 +46,6 @@ const KlaviyoForm: NextPage = () => {
             )}
           </div>
         </div>
-        <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WqYz9Q" />
       </Container>
     </>
   );

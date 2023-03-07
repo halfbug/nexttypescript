@@ -15,12 +15,14 @@ import useAppContext from 'hooks/useAppContext';
 
 interface GetNotifyProps extends RootProps {
   show: boolean;
+  formId: string;
+  shopName:string | string[];
   handleClose(e: any): any;
 
 }
 
 const GetNotify = ({
-  show = false, handleClose,
+  show = false, handleClose, formId, shopName,
 }: GetNotifyProps) => {
   const { gsctx } = useAppContext();
   const { store } = gsctx;
@@ -87,13 +89,17 @@ const GetNotify = ({
                   Unlock cashback when friends shop with you.
                 </div>
               </div>
-              <div>
-                <Row className="justify-content-center">
-                  <Col lg={12}>
-                    <iframe title="klaviyo-form" height="199" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/klaviyo-form/UcJNt5` : '/klaviyo-form/UcJNt5'} />
-                  </Col>
-                </Row>
-              </div>
+              {formId !== '' && shopName !== '' && (
+                <>
+                  <div>
+                    <Row className="justify-content-center">
+                      <Col lg={12}>
+                        <iframe title="klaviyo-form" height="199" width="100%" src={(typeof window !== 'undefined') ? `${window.location.origin}/${shopName}/klaviyo-form/${formId}` : `/${shopName}/klaviyo-form/${formId}`} />
+                      </Col>
+                    </Row>
+                  </div>
+                </>
+              )}
             </Col>
           </Row>
         </Modal.Body>
