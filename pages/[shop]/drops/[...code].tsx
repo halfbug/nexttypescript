@@ -92,6 +92,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [bannerDiscount, setbannerDiscount] = useState<(string | undefined)[] | undefined
     >(undefined);
   const [showRewards, setShowRewards] = useState<boolean>(false);
+  const [showBanner, setShowBanner] = useState<boolean>(false);
   const [showQR, setShowQR] = useState<boolean>(false);
   const [shoppedBy, setshoppedBy] = useState<IProduct[] | undefined>(undefined);
   const [matchingStoreIds, setMatchingStoreIds] = useState([]);
@@ -115,6 +116,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   useEffect(() => {
     if (gsctx.id) {
+      setShowBanner(true);
       if (gsctx.sections) {
         setSections(gsctx.sections);
 
@@ -158,7 +160,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   } = useDrops();
 
   const { googleEventCode, googleButtonCode } = useGtm();
-  console.log('gsctxgsctx ', gsctx);
   const facebookPixels = gsctx?.store?.settings?.marketing?.facebookPixels ?? '';
   const googlePixels = gsctx?.store?.settings?.marketing?.googlePixels ?? '';
   const tiktokPixels = gsctx?.store?.settings?.marketing?.tiktokPixels ?? '';
@@ -410,7 +411,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       </Head>
       <div className={styles.drops}>
         <header>
-          {!isModalForMobile && (
+          {!isModalForMobile && showBanner && (
             <div>
               <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
               <div className={styles.drops__dummyOverlay} />
