@@ -150,10 +150,10 @@ const Cart = ({
 
     // @ts-ignore
     // eslint-disable-next-line no-undef
-    fbq('track', 'Purchase', {
+    fbq('track', 'InitiateCheckout', {
       contents: cartDetails,
       currency: currencyName,
-      content_type: 'product',
+      // content_type: 'product',
       value: getTotal() ?? 0,
     });
 
