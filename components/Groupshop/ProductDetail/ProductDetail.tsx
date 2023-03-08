@@ -473,6 +473,15 @@ const ProductDetail = ({
 
                     </Carousel.Item>
                   ) : ''}
+                  {(!product?.featuredImage?.length
+                    && !data?.productById?.images.length)
+                    && (
+                    <Carousel.Item
+                      className={[styles.groupshop_modal_detail_featureImage, 'd-flex justify-content-center align-items-center text-center px-5'].join(' ')}
+                    >
+                      Image is not available for this product at the moment
+                    </Carousel.Item>
+                    )}
                   {/* // )} */}
                   {data?.productById?.images?.map((img:any, i:number) => (
                     <Carousel.Item>
