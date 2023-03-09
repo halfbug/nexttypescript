@@ -76,10 +76,11 @@ export default function useCart() {
         id,
         price: mprice,
         selectedVariant: { selectedQuantity, price },
+        compareAtPrice,
       }) => {
       const myTot = total
-      + ((spotlightProducts.includes(id)
-        ? disPrice(+(price ?? mprice), +store?.drops?.spotlightDiscount?.percentage!)
+      + ((compareAtPrice
+        ? (+mprice)
         : dPrice(+(price ?? mprice))) * selectedQuantity);
       return +myTot;
     },
@@ -108,7 +109,8 @@ export default function useCart() {
     if (cart?.length) {
       totalPrice = cart?.reduce(
         (tot, prd) => (
-          tot + (+(prd.selectedVariant.price) * prd.selectedVariant.selectedQuantity)
+          tot + ((prd.compareAtPrice ? (+prd.compareAtPrice)
+            : +(prd.selectedVariant.price)) * prd.selectedVariant.selectedQuantity)
         ), 0,
       );
     }

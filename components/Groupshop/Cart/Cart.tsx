@@ -53,6 +53,7 @@ const Cart = ({
   const {
     spotlightProducts,
     cartValueProgress,
+    VSPrice,
   } = useDrops();
 
   const [currencyName, setCurrencyName] = useState<any>('USD');
@@ -76,10 +77,10 @@ const Cart = ({
         promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
         currency: prd.currencyCode,
         productBrand: gsctx.store?.brandName,
-        originalPrice: +prd.selectedVariant.price,
-        finalPrice: spotlightProducts.includes(prd.id)
-          ? disPrice(+(prd.selectedVariant.price),
-            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+        originalPrice: prd.compareAtPrice
+          ? +prd.compareAtPrice : +prd.selectedVariant.price,
+        finalPrice: prd.compareAtPrice
+          ? (+prd.price).toFixed(2)
           : dPrice(+(prd.selectedVariant.price)).toFixed(2),
         quantity: prd.selectedVariant.selectedQuantity,
       })), getTotal() ?? 0);
@@ -94,9 +95,8 @@ const Cart = ({
       cartDetails.push({
         id: productId,
         title: item.title,
-        price: spotlightProducts.includes(item.id)
-          ? disPrice(+(item.selectedVariant.price),
-            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+        price: item.compareAtPrice
+          ? (+item.price).toFixed(2)
           : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
@@ -139,9 +139,8 @@ const Cart = ({
       cartDetails.push({
         id: productId,
         title: item.title,
-        price: spotlightProducts.includes(item.id)
-          ? disPrice(+(item.selectedVariant.price),
-            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+        price: item.compareAtPrice
+          ? (+item.price).toFixed(2)
           : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
@@ -164,9 +163,8 @@ const Cart = ({
       currency: prd.currencyCode,
       productBrand: gsctx.store?.brandName,
       originalPrice: +prd.selectedVariant.price,
-      finalPrice: spotlightProducts.includes(prd.id)
-        ? disPrice(+(prd.selectedVariant.price),
-          +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+      finalPrice: prd.compareAtPrice
+        ? (+prd.price).toFixed(2)
         : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
@@ -275,14 +273,13 @@ const Cart = ({
                     <h5 className={styles.groupshop_cartProductPrice}>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
-                        {((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        {prd.compareAtPrice ? VSPrice(prd.compareAtPrice) : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                       {' '}
                       <span>
                         {currencySymbol}
-                        {spotlightProducts.includes(prd.id)
-                          ? disPrice(+(prd.selectedVariant.price),
-                            +store?.drops?.spotlightDiscount?.percentage!).toFixed(2)
+                        {prd.compareAtPrice
+                          ? VSPrice(prd.price)
                           : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                     </h5>
@@ -410,10 +407,7 @@ const Cart = ({
                                 {' '}
                                 <span className="fw-bold ms-1">
                                   {currencySymbol}
-                                  {spotlightProducts.includes(item.id)
-                                    ? formatNumber(disPrice(+(item?.price || 0),
-                                      +store?.drops?.spotlightDiscount?.percentage!))
-                                    : formatNumber(dPrice(+(item?.price || 0)))}
+                                  {formatNumber(dPrice(+(item?.price || 0)))}
                                 </span>
                               </div>
                               {isDrops && (

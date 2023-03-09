@@ -206,6 +206,7 @@ export interface IProduct {
   purchaseCount?: number;
   secondaryCount?: number;
   status?: string;
+  compareAtPrice?: string;
 }
 
 export interface IGeneralSettings {

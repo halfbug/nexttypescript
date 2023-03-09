@@ -97,6 +97,9 @@ const ProductGrid = ({
   const {
     spotlightProducts,
     updatePurhaseCount,
+    VSPrice,
+    THE_VAULT_TITLE,
+    SPOTLIGHT_SECTION_TITLE,
   } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -124,14 +127,16 @@ const ProductGrid = ({
       <span className="text-decoration-line-through fw-light me-1">
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {/* {prod.price} */}
-        {(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {prod?.compareAtPrice && VSPrice(prod?.compareAtPrice ?? prod.price)}
       </span>
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {spotlightProducts.includes(prod.id) && !isSuggestion && disPrice(+(prod.price), +store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')}
-        {!spotlightProducts.includes(prod.id) && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {!spotlightProducts.includes(prod.id) && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+        {prod?.compareAtPrice && !isSuggestion
+          && VSPrice(prod.price)}
+        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
     </h5>
   );
@@ -189,7 +194,7 @@ const ProductGrid = ({
   };
 
   return (
-    <Container {...props} ref={ref} id={id}>
+    <Container {...props} ref={ref} id={id} className={title !== THE_VAULT_TITLE && title !== SPOTLIGHT_SECTION_TITLE ? '' : dStyles.drops__vault__section}>
       <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}
@@ -201,15 +206,34 @@ const ProductGrid = ({
         <Col>
           <div className="d-flex justify-content-between align-items-center">
             <div>
-              <div className={dStyles.drops_col_dropheading}>
-                {title}
-              </div>
+              {title !== THE_VAULT_TITLE && title !== SPOTLIGHT_SECTION_TITLE ? (
+                <div className={dStyles.drops_col_dropheading}>
+                  {title}
+                </div>
+              )
+                : (
+                  <>
+                    <div className="d-flex align-items-center">
+                      <div className={dStyles.drops_col_dropheading}>
+                        {title}
+                      </div>
+                      {/* <div className={dStyles.drops_col_dropheading_off}>
+                        30% off
+                      </div> */}
+                    </div>
+                  </>
+                )}
             </div>
             <div className="d-flex">
               <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
               <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
             </div>
           </div>
+          {(title === THE_VAULT_TITLE || title === SPOTLIGHT_SECTION_TITLE) && (
+            <div className={dStyles.drops_col_eligible}>
+              Not eligible for higher discounts or cashback.
+            </div>
+          )}
         </Col>
         {isSpotLight && (
         <Col xs={12} className={dStyles.drops__counter}>
@@ -256,6 +280,7 @@ const ProductGrid = ({
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
                 <ProductCard
                   isDrops={isDrops}
+                  isVault={title === THE_VAULT_TITLE || title === SPOTLIGHT_SECTION_TITLE}
                   isSpotlight={isSpotLight}
                   isrc={prod.featuredImage}
                   vsrc={prod.featuredVideo}
@@ -277,7 +302,7 @@ const ProductGrid = ({
                         }
                         >
                           {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                          {spotlightProducts.includes(prod.id) ? +(productPriceDiscount(+(prod.price), +((+store?.drops?.spotlightDiscount?.percentage!).toFixed(2).toString().replace('.00', '')))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                          {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - +prod.price)) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                           {' '}
                           OFF
                         </span>

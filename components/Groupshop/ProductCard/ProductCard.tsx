@@ -13,19 +13,20 @@ type IProductCardProps = {
   vsrc?: string;
   type?: 'small' | 'large';
   isDrops?: boolean;
+  isVault?: boolean;
   isSpotlight?: boolean;
   onImageClick?: any;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
-  isrc, vsrc, children, type, imgOverlay, pending, onClick, isDrops, isSpotlight,
+  isrc, vsrc, children, type, imgOverlay, pending, onClick, isDrops, isSpotlight, isVault,
   onImageClick, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
     case 'large':
       return (
-        <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
+        <Card {...rest} className={[styles.groupshop__pcard, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ')}>
           <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
             {
             !isrc && <video onClick={onImageClick} src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
@@ -43,7 +44,7 @@ const ProductCard = ({
       );
     case 'small':
       return (
-        <Card {...rest} className={isDrops ? [dStyles.drops__pcard_small, rest.className].join(' ') : [styles.groupshop__pcard_small, rest.className].join(' ')}>
+        <Card {...rest} className={isDrops ? [dStyles.drops__pcard_small, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ') : [styles.groupshop__pcard_small, rest.className].join(' ')}>
           <Card.ImgOverlay onClick={onClick} className={styles.groupshop__pcard_overlay_small}>
             {imgOverlay}
           </Card.ImgOverlay>
@@ -59,7 +60,7 @@ const ProductCard = ({
 
     default:
       return (
-        <Card {...rest} className={[styles.groupshop__pcard, rest.className].join(' ')}>
+        <Card {...rest} className={[styles.groupshop__pcard, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ')}>
           {
            isrc ? <Card.Img variant="top" src={isrc} className={styles.groupshop__pcard_image} />
              : <video src={vsrc} muted autoPlay loop />
@@ -79,6 +80,7 @@ ProductCard.defaultProps = {
   type: 'large',
   vsrc: undefined,
   isDrops: false,
+  isVault: false,
   isSpotlight: false,
   onImageClick: () => {},
 };

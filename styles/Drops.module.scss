@@ -32,6 +32,16 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     width: 100%;
     z-index: 9;
   }
+
+  &__vault {
+    &__section {
+      background-color: #E5E5E5;
+    }
+    &__pcard {
+      background-color: #E5E5E5;
+    }
+  }
+
   &__big_banner_wrapper {
     width: 300px;
     margin: 0 auto;
@@ -1287,6 +1297,31 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 20px;
         line-height: 26px;
       }
+      &_off {
+        @extend .ms-3, .px-2, .py-1;
+        background: #FFFFFF;
+        border: 1px solid #E9E7E4;
+        box-shadow: 0px 0px 4px rgba(131, 131, 131, 0.0730441);
+        border-radius: 5px;
+        
+        @include media-breakpoint-down(sm) {
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 16px;
+          color: #000000;
+        }
+      }
+    }
+    &_eligible {
+      @extend .mt-2;
+      font-family: 'DM Sans';
+      font-style: italic;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      /* identical to box height */
+      letter-spacing: 0.32px;
+      color: #282828;
     }
     &_dropheadingOuter {
       font-weight: 700;

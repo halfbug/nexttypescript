@@ -110,7 +110,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   useEffect(() => {
     if (DropGroupshop.id && pending) {
       setpending(false);
-      dispatch({ type: 'UPDATE_GROUPSHOP', payload: DropGroupshop });
+      const nsections: any = DropGroupshop?.sections?.map((c) => {
+        if (c.name !== THE_VAULT_TITLE && c.name !== SPOTLIGHT_SECTION_TITLE) {
+          return { ...c, products: c.products.map((p) => ({ ...p, compareAtPrice: null })) };
+        }
+        return c;
+      });
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...DropGroupshop,
+          sections: nsections,
+        },
+      });
     }
   }, [DropGroupshop, pending]);
 
@@ -157,6 +169,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     btnDisable,
     updateOnboarding,
     getChackback,
+    THE_VAULT_TITLE,
+    SPOTLIGHT_SECTION_TITLE,
   } = useDrops();
 
   const { googleEventCode, googleButtonCode } = useGtm();

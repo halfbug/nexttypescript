@@ -11,8 +11,11 @@ export default function useDrops() {
   const { ownerCode, shop, discountCode } = useCode();
   const { formatNumber } = useUtilityFunction();
 
+  const THE_VAULT_TITLE = 'The Vault';
+  const SPOTLIGHT_SECTION_TITLE = 'Today’s Spotlight';
+
   const {
-    milestones, store, members, spotlightProducts: sproducts,
+    milestones, store, members, spotlightProducts: sproducts, sections,
   } = gsctx;
   const [updateDropGroupshop] = useMutation(UPDATE_DROP_GROUPSHOP);
   const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);
@@ -119,12 +122,24 @@ export default function useDrops() {
     ?.map((item: any) => +item.price * item.quantity)
     ?.reduce((total: any, curr: any) => total + curr, 0);
 
+  // useEffect(() => {
+  //   if (sproducts) {
+  //     const ids = sproducts?.map((p) => p.id);
+  //     setspotlightProducts(ids);
+  //   }
+  // }, [sproducts]);
+
   useEffect(() => {
-    if (sproducts) {
-      const ids = sproducts?.map((p) => p.id);
-      setspotlightProducts(ids);
+    if (sections) {
+      const temp: any[] = [];
+      const ids = sections
+        .filter((c) => c.name === THE_VAULT_TITLE || c.name === SPOTLIGHT_SECTION_TITLE)
+        ?.map((c) => c.products.map((p) => temp.push(p.id)));
+      setspotlightProducts(temp);
     }
-  }, [sproducts]);
+  }, [sections]);
+
+  const VSPrice = useCallback((price: any) => (+(price)).toFixed(2).toString().replace('.00', ''), [gsctx]);
 
   const getChackback = useCallback(() => {
     const reward1 = +store?.drops?.rewards?.baseline!;
@@ -177,6 +192,8 @@ export default function useDrops() {
   ) => (secondaryCount + purchaseCount), []);
 
   return {
+    THE_VAULT_TITLE,
+    SPOTLIGHT_SECTION_TITLE,
     currentDropReward,
     nextDropReward,
     showObPopup,
@@ -188,5 +205,6 @@ export default function useDrops() {
     getChackback,
     cartValueProgress,
     updatePurhaseCount,
+    VSPrice,
   };
 }

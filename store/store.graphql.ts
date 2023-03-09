@@ -329,6 +329,7 @@ query Products($productQueryInput: ProductQueryInput!) {
     featuredImage
     description                             
     price
+    compareAtPrice
     options{
       id
       name
@@ -808,6 +809,7 @@ query DropGroupshop($code: String!, $status: String = "") {
         description
         purchaseCount
         price
+        compareAtPrice
         currencyCode
         outofstock
         secondaryCount

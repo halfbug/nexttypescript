@@ -107,6 +107,7 @@ const ProductDetail = ({
   const {
     spotlightProducts,
     updatePurhaseCount,
+    VSPrice,
   } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
@@ -416,7 +417,7 @@ const ProductDetail = ({
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
                   {currencySymbol}
-                  {formatNumber(productPriceDiscount(+(product?.price ?? ''), spotlightProducts.includes(product?.id!) ? +store?.drops?.spotlightDiscount?.percentage! : +percentage))}
+                  {product?.compareAtPrice ? VSPrice(+(product?.compareAtPrice) - +product?.price) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))}
                   {' '}
                   Off
                 </span>
@@ -644,14 +645,14 @@ const ProductDetail = ({
                   <h3 className="d-flex align-items-center">
                     <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
                       {currencySymbol}
-                      {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
+                      { product?.compareAtPrice && VSPrice(product?.compareAtPrice)}
+                      {!product?.compareAtPrice && (product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', ''))}
                     </span>
                     {' '}
                     <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
-                      {spotlightProducts.includes(product?.id!) && (product?.options ? (disPrice(+(variantPrice || 0), +(store?.drops?.spotlightDiscount?.percentage!))).toFixed(2).toString().replace('.00', '')
-                        : (disPrice(+(product?.price || 0), +(store?.drops?.spotlightDiscount?.percentage!))).toFixed(2).toString().replace('.00', ''))}
-                      {!spotlightProducts.includes(product?.id!) && (product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
+                      { product?.compareAtPrice && VSPrice(product.price)}
+                      {!product?.compareAtPrice && (product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', ''))}
                     </span>
                     {' '}
