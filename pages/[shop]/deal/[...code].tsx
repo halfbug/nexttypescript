@@ -657,7 +657,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     <span className="text-capitalize text-decoration-none">
                       {owner?.firstName}
                     </span>
-                    ’s Groupshop has expired – but it’s not too late!
+                    ’s Microstore has expired – but it’s not too late!
                   </h3>
                   <p>Invite 1 friend to restart the timer and access the discounts below.</p>
                 </Col>
@@ -670,8 +670,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {' '}
                       {owner?.firstName}
                       {' '}
+                      ’s
+                      {' '}
+                      {brandName}
+                      {' '}
                     </span>
-                    ’s Microstore
+                    Microstore
                   </h3>
                   <p>The more friends shop, the more discounts and cashback!</p>
                 </Col>
