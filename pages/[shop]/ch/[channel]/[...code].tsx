@@ -988,6 +988,17 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   >
                     Name (z-a)
                   </Dropdown.Item>
+                  <div className={styles.groupshop_sort_menu_border} />
+                  <Dropdown.Item
+                    className={styles.groupshop_sort_menu_item}
+                    onClick={() => {
+                      const arr = [...(allProducts ?? [])]?.sort();
+                      const newArr = arr?.sort((a, b) => b.purchaseCount! - a.purchaseCount!);
+                      setallProducts(newArr);
+                    }}
+                  >
+                    Best seller
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
