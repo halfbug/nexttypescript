@@ -993,7 +993,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           </ProductGrid>
         ) : <></>}
         {/* Discover Section */}
-        {matchingGroupshop?.length > 0 ? (
+        {/* {matchingGroupshop?.length > 0 ? (
           <Container>
             <Row>
               <Col xs={12} className="px-0">
@@ -1066,7 +1066,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                         <Button2
                           variant="primary"
                           className={styles.groupshop__shopWith__btn}
-                          onClick={() => window.open(`${window.location.origin}${brand.url}`, '_blank')}
+              onClick={() => window.open(`${window.location.origin}${brand.url}`, '_blank')}
                         >
                           Shop
                         </Button2>
@@ -1077,7 +1077,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               ))}
             </Row>
           </Container>
-        ) : ''}
+        ) : ''} */}
         <Row className="w-100 align-items-center text-center justify-content-center my-4 mx-0">
           <Col className="d-flex justify-content-center flex-column">
             {isExpired ? (
