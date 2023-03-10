@@ -73,7 +73,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     query: '(max-width: 475px)',
   });
   const { query: { ins } } = useRouter();
-  const { SKU } = useSKU();
+  const {
+    SKU, hideTopPicks, hidePopular, hideSection,
+  } = useSKU();
   const {
     loading,
     error,
@@ -691,7 +693,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             personal favorites and recommendations.
           </p>
         </ProductGrid>
-        {SKU.length > 1 && ((addedByRefferal && addedByRefferal.length > 0)
+        {!hidePopular && SKU.length > 4 && ((addedByRefferal && addedByRefferal.length > 0)
         || (gsctx?.memberDetails && gsctx?.memberDetails?.length > 0) ? (
           <ProductGrid
             xs={6}
@@ -710,35 +712,36 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             addProducts={handleAddProduct}
             handleDetail={(prd) => setsProduct(prd)}
             id="popularproducts"
+            skuCount={SKU.length}
           >
             <h2>Popular with the Group</h2>
           </ProductGrid>
           ) : (
-            <ProductGrid
-              xs={6}
-              sm={6}
-              md={6}
-              lg={4}
-              xl={3}
-            // products={bestSeller ?? []}
-              isModalForMobile={isModalForMobile}
-              products={
-              addedProductsByInfluencer
-              && addedProductsByInfluencer.length > 3
-                ? topPicks?.slice(0, 3)
-                : topPicks?.slice(0, 4)
-            }
-              maxrows={1}
-              addProducts={handleAddProduct}
-              handleDetail={(prd) => setsProduct(prd)}
-              id="toppicks"
-            >
-              <h2>Top Picks</h2>
-            </ProductGrid>
+            <>
 
+              {!hideTopPicks && (
+              <ProductGrid
+                xs={6}
+                sm={6}
+                md={6}
+                lg={4}
+                xl={3}
+            // products={bestSeller ?? []}
+                isModalForMobile={isModalForMobile}
+                products={topPicks?.slice(0, 4)}
+                maxrows={1}
+                addProducts={handleAddProduct}
+                handleDetail={(prd) => setsProduct(prd)}
+                id="toppicks"
+                skuCount={SKU.length}
+              >
+                <h2>Top Picks</h2>
+              </ProductGrid>
+              )}
+            </>
           )) }
 
-        {SKU.length > 1 && (
+        {!hideSection && SKU.length > 4 && (
         <ProductGrid
           xs={6}
           sm={6}
@@ -752,6 +755,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleDetail={(prd) => setsProduct(prd)}
           showHoverButton
           id="allproducts"
+          skuCount={SKU.length}
         >
           <div className="position-relative">
             <h2>All Products</h2>

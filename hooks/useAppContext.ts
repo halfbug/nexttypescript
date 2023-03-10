@@ -10,12 +10,20 @@ export default function useAppContext() {
   const isGroupshop = !pathname.includes('/partner-deal/') && !pathname.includes('/ch/');
   const isChannel = pathname.includes('/ch/');
   const isDrops = pathname.includes('/drops/');
+  const isPartner = pathname.includes('/partner-deal/');
 
   if (isChannel) {
     const { gsctx, dispatch } = useContext(ChannelGroupshopContext);
 
     return {
       gsctx, dispatch, isGroupshop, isChannel, isDrops,
+    };
+  }
+  if (isPartner) {
+    const { gsctx, dispatch } = useContext(PartnerGroupshopContext);
+
+    return {
+      gsctx, dispatch, isGroupshop, isChannel, isDrops, isPartner,
     };
   }
   if (isDrops) {
