@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import styles from 'styles/Groupshop.module.scss';
@@ -64,7 +65,8 @@ const Header = ({
               : { span: 4, order: 2 }}
             className="text-center"
           >
-            <Navbar.Brand href="#home" className="m-0"><img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" width={150} /></Navbar.Brand>
+            {/* <Navbar.Brand href="#home" className="m-0"><img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" width={150} /></Navbar.Brand> */}
+            {isDrops && (<Navbar.Brand href="#home" className="m-0"><img src="/images/logo.svg" alt="Groupshop" width={150} /></Navbar.Brand>)}
           </Col>
           <Col
             xs={isDrops

@@ -1111,7 +1111,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               )) || <></>}
           </Col>
         </Row>
-        <Footer LeftComp={undefined} RightComp={undefined} />
+        <Footer LeftComp={undefined} RightComp={undefined} pending={pending} />
         <ProductsSearch
           show={showps}
           handleClose={() => setshowps(false)}

@@ -21,6 +21,8 @@ import { CREATE_SIGNUP } from 'store/store.graphql';
 import Link from 'next/link';
 import useAppContext from 'hooks/useAppContext';
 import SocialButtonMobile from 'components/Buttons/SocialButton/SocialButtonMobile';
+import Brand from 'components/Groupshop/Brand/Brand';
+import useLogo from 'hooks/useLogo';
 
 interface FooterProps {
   LeftComp: React.ReactNode;
@@ -29,6 +31,7 @@ interface FooterProps {
   shopName?:string | string[];
   formId?: string;
   setLearnHowDrops?: any;
+  pending?: boolean;
 }
 
 export interface ISignUp {
@@ -37,7 +40,7 @@ export interface ISignUp {
 }
 
 const Footer = ({
-  LeftComp, RightComp, isDrops, setLearnHowDrops, formId, shopName,
+  LeftComp, RightComp, isDrops, setLearnHowDrops, formId, shopName, pending,
 }: FooterProps) => {
   // const { isChannel } = useAppContext();
   const {
@@ -45,6 +48,7 @@ const Footer = ({
   } = useDeal();
 
   const { store } = gsctx;
+  const storeLogo = useLogo();
   const milestone3 = store?.drops?.rewards?.maximum;
   const { days, hrs, mins } = getDateDifference();
   const [
@@ -193,11 +197,37 @@ const Footer = ({
           </div>
         </Col>
         <Col lg={4}>
-          <Row className={['mt-2 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
+          <div className={['mt-2 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
             {/* <img src={footerLogo.src} alt="brandLogo" /> */}
-            <img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" className=" img-fluid" />
+            {isDrops ? (<img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" className=" img-fluid" />)
+              : (
+                <div className="text-center">
+                  {store?.logoImage === '' || store?.logoImage === undefined ? (
+                    <Link href={`https://${store?.shop}`}>
+                      <Brand
+                        name={
+                      (store?.brandName || '').split(' ').slice(0, 2).join(' ') || ''
+                    }
+                        pending={pending}
+                      />
+                    </Link>
+                  ) : (
+                    <Link href={`https://${store?.shop}`}>
+                      <a target="_blank" style={{ cursor: 'pointer' }}>
+                        <img
+                          src={storeLogo}
+                          alt={`${store?.brandName}`}
+                          className="img-fluid"
+                          width={100}
+                        />
+                      </a>
+                    </Link>
+                  )}
+                </div>
+
+              )}
             {/* <img src="/images/logo-thin.svg" alt="Groupshop" className="img-fluid" /> */}
-          </Row>
+          </div>
           <Row className={styles.groupshop_socialIcon}>
 
             {isDrops
@@ -274,9 +304,10 @@ const Footer = ({
                   <a target="_blank"><strong>Get Help</strong></a>
                 </Link>
               ) : (
-                <Link href="https://microstore.zendesk.com/hc/en-us">
-                  <a target="_blank"><strong>FAQ</strong></a>
-                </Link>
+                <></>
+                // <Link href="https://microstore.zendesk.com/hc/en-us">
+                //   <a target="_blank"><strong>FAQ</strong></a>
+                // </Link>
               )}
             </div>
           </Row>
@@ -285,13 +316,13 @@ const Footer = ({
           <section>
             {!isDrops && (
             <div className={styles.groupshop_footer_text}>
-              {isExpired ? (
+              {/* {isExpired ? (
                 <>
                   <p className={styles1.GSfooter}>
 
                     Stay on top of new offers from
                     {' '}
-                    {/* {owner?.firstName} */}
+
                     {getOwnerName()}
                     .
                     <br />
@@ -348,7 +379,7 @@ const Footer = ({
                   </Form>
 
                 </>
-              )}
+              )} */}
 
               {/* {isInfluencerGS ? (
                 <>
@@ -416,6 +447,7 @@ Footer.defaultProps = {
   formId: '',
   shopName: '',
   setLearnHowDrops: () => true,
+  pending: true,
 };
 
 export default Footer;
