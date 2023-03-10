@@ -818,7 +818,7 @@ const ProductDetail = ({
                       <>
                         {!loading && isDrops && varientData < 51 && varientData > 0 ? (
                           <div className={dStyles.drops_buttons_wrapper_lessTxt}>
-                            {`Less than ${varientData} left!`}
+                            {`${varientData < 10 ? `Only ${varientData} left!` : `Less than ${varientData} left!`}`}
                           </div>
                         ) : ''}
                         <Button
