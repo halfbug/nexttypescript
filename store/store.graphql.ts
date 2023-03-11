@@ -1027,6 +1027,7 @@ const GET_PRODUCT_DETAIL = gql`
         src
       }
       price
+      compareAtPrice
     }
    }
  }

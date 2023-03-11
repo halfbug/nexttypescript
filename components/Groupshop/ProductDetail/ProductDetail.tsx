@@ -75,6 +75,7 @@ const ProductDetail = ({
     formatNumber,
   } = useUtilityFunction();
   const [variantPrice, setvariantPrice] = useState<undefined | string | number>(undefined);
+  const [discountedPrice, setdiscountedPrice] = useState<undefined | string | number>(undefined);
 
   const { AlertComponent, showError, showSuccess } = useAlert();
 
@@ -211,7 +212,10 @@ const ProductDetail = ({
       } else if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
-      setvariantPrice(selectedVariant?.price ?? product?.price);
+      setvariantPrice(isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice ? selectedVariant?.compareAtPrice ?? product?.compareAtPrice : selectedVariant?.price ?? product?.price);
+      if (isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice) {
+        setdiscountedPrice(selectedVariant.price ?? product.price);
+      }
       if (!isDrops) {
         setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
       }
@@ -417,7 +421,7 @@ const ProductDetail = ({
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
                   {currencySymbol}
-                  {product?.compareAtPrice ? VSPrice(+(product?.compareAtPrice) - +product?.price) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))}
+                  {product?.compareAtPrice ? VSPrice(+(variantPrice ?? product?.compareAtPrice) - (+discountedPrice! ?? +product?.price)) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))}
                   {' '}
                   Off
                 </span>
@@ -645,13 +649,12 @@ const ProductDetail = ({
                   <h3 className="d-flex align-items-center">
                     <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
                       {currencySymbol}
-                      { product?.compareAtPrice && VSPrice(product?.compareAtPrice)}
-                      {!product?.compareAtPrice && (product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', ''))}
+                      {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
                     </span>
                     {' '}
                     <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
-                      { product?.compareAtPrice && VSPrice(product.price)}
+                      { product?.compareAtPrice && discountedPrice}
                       {!product?.compareAtPrice && (product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
                         : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', ''))}
                     </span>

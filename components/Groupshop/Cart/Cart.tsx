@@ -78,9 +78,10 @@ const Cart = ({
         currency: prd.currencyCode,
         productBrand: gsctx.store?.brandName,
         originalPrice: prd.compareAtPrice
-          ? +prd.compareAtPrice : +prd.selectedVariant.price,
+          ? +prd?.selectedVariant?.compareAtPrice! ?? +prd.compareAtPrice
+          : +prd.selectedVariant.price,
         finalPrice: prd.compareAtPrice
-          ? (+prd.price).toFixed(2)
+          ? (+prd?.selectedVariant?.compareAtPrice! ?? +prd.price).toFixed(2)
           : dPrice(+(prd.selectedVariant.price)).toFixed(2),
         quantity: prd.selectedVariant.selectedQuantity,
       })), getTotal() ?? 0);
@@ -96,7 +97,7 @@ const Cart = ({
         id: productId,
         title: item.title,
         price: item.compareAtPrice
-          ? (+item.price).toFixed(2)
+          ? (+item.selectedVariant?.price! ?? +item.price).toFixed(2)
           : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
@@ -140,7 +141,7 @@ const Cart = ({
         id: productId,
         title: item.title,
         price: item.compareAtPrice
-          ? (+item.price).toFixed(2)
+          ? (+item.selectedVariant?.price ?? +item.price).toFixed(2)
           : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
         variants: item.selectedVariant.title,
@@ -162,9 +163,11 @@ const Cart = ({
       promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
       currency: prd.currencyCode,
       productBrand: gsctx.store?.brandName,
-      originalPrice: +prd.selectedVariant.price,
+      originalPrice: prd.compareAtPrice
+        ? +prd.selectedVariant?.compareAtPrice! ?? +prd.compareAtPrice
+        : +prd.selectedVariant.price,
       finalPrice: prd.compareAtPrice
-        ? (+prd.price).toFixed(2)
+        ? (+prd.selectedVariant.price ?? +prd.price).toFixed(2)
         : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
@@ -273,13 +276,13 @@ const Cart = ({
                     <h5 className={styles.groupshop_cartProductPrice}>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
-                        {prd.compareAtPrice ? VSPrice(prd.compareAtPrice) : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        {prd.compareAtPrice ? VSPrice(prd.selectedVariant.compareAtPrice ?? prd.compareAtPrice) : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                       {' '}
                       <span>
                         {currencySymbol}
                         {prd.compareAtPrice
-                          ? VSPrice(prd.price)
+                          ? VSPrice(prd.selectedVariant.price ?? prd.price)
                           : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                     </h5>
