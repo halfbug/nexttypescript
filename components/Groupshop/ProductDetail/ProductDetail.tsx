@@ -426,7 +426,7 @@ const ProductDetail = ({
                   Off
                 </span>
                 <Col className="d-flex justify-content-end ms-1">
-                  {displayAddedByFunc(product?.id) && addedbyname && (
+                  {addedbyname && (
                     <span className={styles.groupshop__pcard_tag_addedbyname}>
                       🤩
                       {addedbyname}
