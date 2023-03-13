@@ -106,6 +106,12 @@ const ProductsSearch = ({
       setProductsArr(temp);
       setotherProducts(uniqueArray(temp));
     }
+    if (isChannel && gsctx.allProducts && gsctx.dealProducts) {
+      const temp: any = gsctx.allProducts.filter((ele) => !(gsctx.dealProducts
+        ?.some((item) => item.productId === ele.id)));
+      setProductsArr(temp);
+      setotherProducts(uniqueArray(temp));
+    }
   }, [gsctx]);
 
   const refreshProduct = () => uniqueArray((isInfluencerGS ? productsArr?.filter(
