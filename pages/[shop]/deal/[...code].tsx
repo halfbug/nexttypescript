@@ -670,7 +670,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       {' '}
                       {owner?.firstName}
                       {' '}
-                      ’s
+                      <span className="text-lowercase text-decoration-none">’s</span>
                       {' '}
                       {brandName}
                       {' '}
