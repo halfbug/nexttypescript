@@ -548,8 +548,8 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage > 1) ? currentPage - 1 : currentPage,
                 );
-                { (id === 'allproducts') && (paginationScroll()); }
-                { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
+                { (id === 'allproducts') && (paginationScroll('allproducts')); }
+                { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
               }}
             />
 
@@ -558,8 +558,8 @@ const ProductGrid = ({
                 active={currentPage === n}
                 onClick={() => {
                   setCurrentPage(n);
-                  { (id === 'allproducts') && (paginationScroll()); }
-                  { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
+                  { (id === 'allproducts') && (paginationScroll('allproducts')); }
+                  { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
                 }}
                 className={currentPage === n
                   ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
@@ -574,8 +574,8 @@ const ProductGrid = ({
                 setCurrentPage(
                   (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
                 );
-                { (id === 'allproducts') && (paginationScroll()); }
-                { (id === 'allproductsdrops') && document?.getElementById('scrollDiv')?.scrollIntoView(); }
+                { (id === 'allproducts') && (paginationScroll('allproducts')); }
+                { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
               }}
             />
 
@@ -594,12 +594,13 @@ const ProductGrid = ({
   );
 };
 let app = 0;
-function paginationScroll() {
+function paginationScroll(elementId: any) {
   if (app === 0) {
-    app = (document.getElementById('allproducts')?.offsetHeight) ?? 0;
+    app = (document.getElementById(elementId)?.offsetTop) ?? 0;
   }
+  const subtr = (elementId === 'allproducts') ? -100 : -180;
   window.scroll({
-    top: (app ?? 0) + 400,
+    top: (app ?? 0) + subtr,
     behavior: 'smooth',
   });
 }
