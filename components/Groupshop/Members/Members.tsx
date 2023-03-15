@@ -119,7 +119,7 @@ const Members = ({
                     <CrossICon onClick={(e: any) => handleClose(e, `m-${idx}`)} />
                   </div>
                   <h4>
-                    {member.fname}
+                    <span className="text-capitalize">{member.fname}</span>
                   </h4>
                   <p className="mb-2">
                     {idx === 0 && isDrops ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}

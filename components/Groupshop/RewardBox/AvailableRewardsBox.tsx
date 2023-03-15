@@ -74,7 +74,7 @@ const AvailableRewardsBox = ({
             <Col lg={12}>
               <div className={styles.groupshop_availableRewardsBox_modal__top}>
                 <h2>
-                  {name}
+                  <span className="text-capitalize">{name}</span>
                 </h2>
                 {owner ? (
                   <span>
