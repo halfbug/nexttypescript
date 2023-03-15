@@ -593,16 +593,16 @@ const ProductGrid = ({
     </Container>
   );
 };
-let app = 0;
+
 function paginationScroll(elementId: any) {
-  if (app === 0) {
-    app = (document.getElementById(elementId)?.offsetTop) ?? 0;
-  }
-  const subtr = (elementId === 'allproducts') ? -100 : -180;
-  window.scroll({
-    top: (app ?? 0) + subtr,
-    behavior: 'smooth',
-  });
+  setTimeout(() => {
+    const app = (document.getElementById(elementId)?.offsetTop) ?? 0;
+    const subtr = (elementId === 'allproducts') ? -100 : -180;
+    window.scroll({
+      top: (app ?? 0) + subtr,
+      behavior: 'smooth',
+    });
+  }, 500);
 }
 
 ProductGrid.defaultProps = {
