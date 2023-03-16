@@ -153,7 +153,7 @@ const Cart = ({
     fbq('track', 'InitiateCheckout', {
       contents: cartDetails,
       currency: currencyName,
-      // content_type: 'product',
+      eventref: gsctx?.id,
       value: getTotal() ?? 0,
     });
 
