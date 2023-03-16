@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import dStyles from 'styles/Drops.module.scss';
+import NoImage from 'assets/images/noImage.png';
 import {
   Button, Card, Col, Row,
 } from 'react-bootstrap';
@@ -27,7 +28,7 @@ const ProductCard = ({
     case 'large':
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ')}>
-          <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc})` }}>
+          <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc || NoImage.src})` }}>
             {
             !isrc && <video onClick={onImageClick} src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
             }
