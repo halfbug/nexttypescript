@@ -429,7 +429,8 @@ const ProductsSearch = ({
                     className={styles.groupshop_sort_menu_item}
                     onClick={() => setotherProducts(
                       [...(otherProducts ?? [])]?.sort(
-                        (a, b) => parseFloat(a.price) - parseFloat(b.price),
+                        (a, b) => parseFloat(a.compareAtPrice ?? a.price)
+                        - parseFloat(b.compareAtPrice ?? b.price),
                       ),
                     )}
                   >
@@ -440,7 +441,8 @@ const ProductsSearch = ({
                     className={styles.groupshop_sort_menu_item}
                     onClick={() => setotherProducts(
                       [...(otherProducts ?? [])]?.sort(
-                        (a, b) => parseFloat(b.price) - parseFloat(a.price),
+                        (a, b) => parseFloat(b.compareAtPrice ?? b.price)
+                        - parseFloat(a.compareAtPrice ?? a.price),
                       ),
                     )}
                   >
@@ -503,7 +505,7 @@ const ProductsSearch = ({
                             {selected?.includes(prd.id) ? (
                               <>
                                 <span className={styles.groupshop__pcard_tag_price}>
-                                  {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
+                                  {`${currencySymbol}${(prd.compareAtPrice ? (+prd.compareAtPrice - +prd.price) : (+prd.price - dPrice(+(prd.price)))).toFixed(2).replace('.00', '')} OFF`}
                                 </span>
                                 <IconButton
                                   className={styles.groupshop__pcard_tag_cross}
@@ -553,7 +555,7 @@ const ProductsSearch = ({
                         )
                           : (
                             <span className={dStyles.drops__pcard_tag_price}>
-                              {`${currencySymbol}${(+prd.price - dPrice(+(prd.price))).toFixed(2).replace('.00', '')} OFF`}
+                              {`${currencySymbol}${(prd.compareAtPrice ? (+prd.compareAtPrice - +prd.price) : (+prd.price - dPrice(+(prd.price)))).toFixed(2).replace('.00', '')} OFF`}
                             </span>
                           )}
                       >
@@ -572,12 +574,12 @@ const ProductsSearch = ({
                           <span className="text-decoration-line-through fw-light me-1">
                             {currencySymbol}
 
-                            {(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                            {(prd.compareAtPrice ? +prd.compareAtPrice! : +(prd.price)).toFixed(2).toString().replace('.00', '')}
                           </span>
                           {' '}
                           <span className="fw-bolder">
                             {currencySymbol}
-                            {dPrice(+(prd.price)).toFixed(2).toString().replace('.00', '')}
+                            {(prd.compareAtPrice ? +(prd.price) : dPrice(+(prd.price))).toFixed(2).toString().replace('.00', '')}
                           </span>
                           {isDrops && prd?.outofstock ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>) : ''}
 
