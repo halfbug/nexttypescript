@@ -80,8 +80,8 @@ const AvailablePartnerRewardsBox = ({
           <Row>
             <Col lg={12}>
               <div className={styles.groupshop_availableRewardsBox_modal__top}>
-                <h2>
-                  <span className="text-capitalize">{name}</span>
+                <h2 className="text-capitalize">
+                  {name}
                 </h2>
                 {owner ? (
                   <span>
