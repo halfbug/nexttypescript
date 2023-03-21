@@ -958,6 +958,7 @@ const ProductDetail = ({
                                 brandname={brandName}
                                 currencySymbol={currencySymbol}
                                 pending={pending}
+                                isChannel={isChannel}
                                 page="product-details"
                               />
                               <ShareButton

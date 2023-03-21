@@ -18,13 +18,14 @@ interface MembersProps extends RootProps{
   rewards:any;
   shareUrl:string;
   brandname:any;
+  isChannel?:boolean;
   currencySymbol : any;
   page:string;
 }
 
 const Members = ({
   names, cashback, discount, fullshareurl, rewards, currencySymbol, shareUrl,
-  brandname, pending, page,
+  brandname, pending, page, isChannel,
 }: MembersProps) => {
   const [show, setShow] = useState<any>({});
   const [target, setTarget] = useState(null);
@@ -41,6 +42,8 @@ const Members = ({
   let ownerEmail = '';
   if (page === 'partner') {
     ownerEmail = (groupshop?.partnerDetails?.email) ? groupshop?.partnerDetails?.email : '';
+  } else if (page === 'product-details' || isChannel === true) {
+    ownerEmail = (groupshop?.customerDetail?.email) ? groupshop?.customerDetail?.email : '';
   } else if (page === 'product-details' || page === 'drops') {
     ownerOrderId = (groupshop?.members[0]?.orderId) ? groupshop?.members[0]?.orderId : '';
   } else {
@@ -57,6 +60,8 @@ const Members = ({
   };
 
   const handleClick = (member: any, index: any) => {
+    console.log('handleClick', member.email);
+    console.log('handleClick1', ownerEmail);
     if (member.email === ownerEmail || member.orderId === ownerOrderId) {
       setIsOwner(true);
     } else {
@@ -159,8 +164,8 @@ const Members = ({
   );
 };
 
-// Members.defaultProps = {
-//   user: {},
-// };
+Members.defaultProps = {
+  isChannel: false,
+};
 
 export default Members;

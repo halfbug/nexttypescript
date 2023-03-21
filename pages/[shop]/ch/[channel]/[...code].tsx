@@ -835,7 +835,6 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   {memberDetails?.map((mem: any, index: number) => (
                     <div className={`${index === 0 ? styles.groupshop_dropdownItem_owner : styles.groupshop_dropdownItem}`}>
                       <Dropdown.Item onClick={() => setmember(mem)}>
-                        {index === 0 && '👑 '}
                         {`${
                           mem.customerInfo.firstName
                         } ${
