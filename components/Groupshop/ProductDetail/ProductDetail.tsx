@@ -478,7 +478,7 @@ const ProductDetail = ({
 
                     </Carousel.Item>
                   ) : ''}
-                  {(!product?.featuredImage?.length
+                  {(!loading && !product?.featuredImage?.length
                     && !data?.productById?.images.length)
                     && (
                     <Carousel.Item
