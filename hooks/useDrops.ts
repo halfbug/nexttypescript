@@ -27,14 +27,13 @@ export default function useDrops() {
   const [btnDisable, setbtnDisable] = useState<boolean>(false);
 
   useEffect(() => {
-    if (ownerCode && gsctx) {
+    if (gsctx) {
       const ownerOnboardingStep = gsctx.obSettings?.step;
-      if (ownerOnboardingStep === 0
-        && gsctx?.obSettings?.ownerUrl === `/${shop}/drops/${discountCode}/owner&${ownerCode}`) {
+      if (ownerOnboardingStep === 0) {
         setShowObPopup(true);
       }
     }
-  }, [ownerCode, gsctx]);
+  }, [gsctx]);
 
   useEffect(() => {
     if (milestones.length) {
