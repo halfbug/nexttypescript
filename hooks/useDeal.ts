@@ -627,8 +627,8 @@ export default function useDeal() {
     return formatNameCase(`${gsctx?.members[0].orderDetail.customer.firstName ? gsctx?.members[0].orderDetail.customer.firstName : gsctx?.members[0]?.orderDetail?.customer?.lastName}`);
   }, [gsctx]);
 
-  const socialText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
-  const nativeShareText = `Shop ${brandName} on my Groupshop and get up to ${maxPercent} off`;
+  const socialText = `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} and get up to ${maxPercent} off`;
+  const nativeShareText = `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} and get up to ${maxPercent} off`;
 
   return {
     currencySymbol,

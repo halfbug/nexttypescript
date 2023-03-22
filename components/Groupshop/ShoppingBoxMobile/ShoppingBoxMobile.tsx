@@ -41,7 +41,7 @@ const ShoppingBoxMobile = (
           icon={<Send size={18} />}
           text={isDrops
             ? `Shop on my Groupshop Drops and get up to ${milestone3}% off`
-            : `Shop ${brandName} on my Groupshop & get up to ${maxPercent} off`}
+            : `Shop ${brandName} on my Microstore & get up to ${maxPercent} off`}
         />
       </div>
     </>
