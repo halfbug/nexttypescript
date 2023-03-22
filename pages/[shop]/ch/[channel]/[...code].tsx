@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
@@ -814,8 +815,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <span className={styles.groupshop_firstName}>
               {`${gsctx?.customerDetail?.firstName ?? gsctx?.customerDetail?.lastName}`}
             </span>
-            {/* !pending && gsctx?.members?.length > 1 */}
-            {!pending && gsctx?.members?.length > 1 ? (
+            {/* {!pending && gsctx?.members?.length > 1 ? (
               <Dropdown className="d-inline mx-2" align={{ lg: 'start', sm: 'end' }}>
                 <Dropdown.Toggle
                   disabled={SKU.length < 2}
@@ -849,7 +849,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Dropdown>
             ) : (
               ''
-            )}
+            )} */}
           </h2>
           <p className={styles.groupshop_col_recommendations}>
             Shop from
