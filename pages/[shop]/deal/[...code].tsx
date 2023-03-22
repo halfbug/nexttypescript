@@ -474,12 +474,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
 
-        <meta name="application-name" content="Groupshop" />
+        <meta name="application-name" content="Microstore" />
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
         <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
-        <meta name="og:title" content="Groupshop" />
+        <meta name="og:title" content="Microstore" />
         <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />

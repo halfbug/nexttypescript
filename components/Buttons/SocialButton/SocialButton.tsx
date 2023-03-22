@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 import { CustomPropsType } from 'types/groupshop';
+import useDeal from 'hooks/useDeal';
 
 type SocialButtonProps = React.PropsWithChildren<{
   network: 'Instagram' | 'Facebook' | 'Pinterest' | 'Twitter' | 'Tiktok' | 'Youtube' |'Email';
@@ -19,9 +20,7 @@ const SocialButton = ({
   url, network, text, children, ...props
 }: SocialButtonProps & CustomPropsType) => {
   // console.log(' dsf');
-  React.useEffect(() => {
-    console.log(text, 'text social button');
-  }, [text]);
+  const { isDrops } = useDeal();
 
   return (
     <Button
@@ -35,7 +34,7 @@ const SocialButton = ({
         <Instagram
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
-            title: 'Groupshop',
+            title: `${isDrops ? 'Groupshop' : 'Microstore'}`,
             text: `${text} ${url}`,
           })}
         />
@@ -46,7 +45,7 @@ const SocialButton = ({
         <Youtube
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
-            title: 'Groupshop',
+            title: `${isDrops ? 'Groupshop' : 'Microstore'}`,
             text: `${text} ${url}`,
           })}
         />
@@ -60,7 +59,7 @@ const SocialButton = ({
           // Groupshop page with them. If you also shopped from this page,
           // you’ll earn cashback every time they shop with you."
           quote={`${text} ${url}`}
-          hashtag="#Groupshop"
+          hashtag={`${isDrops ? '#Groupshop' : '#Microstore'}`}
           // description="aiueo"
           className="Demo__some-network__share-button"
         >
@@ -72,7 +71,7 @@ const SocialButton = ({
       && (
         <PinterestShareButton
           media={props.media}
-          title="Groupshop"
+          title={`${isDrops ? 'Groupshop' : 'Microstore'}`}
           // title={`${text}`}
           url={url}
           description={`${text}`}
@@ -87,7 +86,7 @@ const SocialButton = ({
           // title="Groupshop"
           title={`${text}`}
           url={url}
-          hashtags={['groupshop', 'shopwithfriends']}
+          hashtags={isDrops ? ['groupshop', 'shopwithfriends'] : ['microstore', 'shopwithfriends']}
         >
           <Twitter className="fs-3 fw-bold" />
         </TwitterShareButton>
@@ -98,7 +97,7 @@ const SocialButton = ({
         <Tiktok
           className="fs-3 fw-bold"
           onClick={() => navigator?.share({
-            title: 'Groupshop',
+            title: `${isDrops ? 'Groupshop' : 'Microstore'}`,
             text: `${text} ${url}`,
           })}
         />
@@ -107,7 +106,7 @@ const SocialButton = ({
       {network === 'Email'
       && (
         <EmailShareButton
-          subject="Groupshop"
+          subject={`${isDrops ? 'Groupshop' : 'Microstore'}`}
           body={`${text}`}
           url={url}
         >
