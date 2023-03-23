@@ -88,6 +88,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
     variables: { shop },
   });
+  console.log('im in code page');
 
   const [store, setstore] = useState<IStore>({});
   const [Channel, setChannel] = useState({
@@ -480,25 +481,19 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         />
         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
         <link rel="shortcut icon" href="/favicon2.ico" />
-        {/* <meta name="application-name" content="Groupshop" />
+        <meta name="application-name" content="Microstore" />
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta
-          name="description"
-          content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`}
-        />
-        <meta name="og:title" content="Groupshop" />
-        <meta
-          name="description"
-          content={`Shop ${meta.brandName} on my Groupshop and get ${meta.maxReward} off.`}
-        />
+        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
+        <meta name="og:title" content="Microstore" />
+        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href={meta.photo} as="image" />
         <meta property="og:image" content={meta.photo} />
         <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" /> */}
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.groupshop}>
         <header>
@@ -1149,21 +1144,21 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 };
 
 export default ChannelGroupShop;
-// export const getServerSideProps = async (context: any) => {
-//   // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
-//   const url = `${process.env.API_URL}/mepartner?name=${context.params.code}`;
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   };
+export const getServerSideProps = async (context: any) => {
+  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
+  const url = `${process.env.API_URL}/meChannelMeta?code=${context.params.code}`;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-//   const res = await fetch(url, requestOptions);
-//   const resJson = await res.json();
-//   return {
-//     props: {
-//       meta: { ...resJson, photo: `${process.env.IMAGE_PATH}/${resJson.photo ?? '/bg.jpg'}` },
-//     },
-//   };
-// };
+  const res = await fetch(url, requestOptions);
+  const resJson = await res.json();
+  return {
+    props: {
+      meta: { ...resJson, photo: `${process.env.IMAGE_PATH}/${resJson.photo ?? '/bg.jpg'}` },
+    },
+  };
+};
