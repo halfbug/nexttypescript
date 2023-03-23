@@ -61,6 +61,7 @@ import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
 import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
 import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
+import Button from 'components/Buttons/Button/Button';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -460,12 +461,21 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.drops__top].join(' ')}>
               <Col md={3} xs={2}>
-                <IconButton
+                {/* <IconButton
                   icon={<Search size={isModalForMobile ? 24 : 16} />}
                   className={styles.drops__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
-                />
+                /> */}
+                <Button2
+                  variant="primary"
+                  className="rounded-pill bg-light text-dark"
+                  onClick={() => {
+                    window.open('https://groupshop.zendesk.com/hc/en-us');
+                  }}
+                >
+                  Help
+                </Button2>
                 {/* <div className={styles.drops_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -763,12 +773,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           handleClose={() => setSignup(false)}
         />
         {isModalForMobile && (
-        <ExpiredLinked
-          formId={gsctx.store?.drops?.klaviyo?.signup3 ?? ''}
-          shopName={shop ?? ''}
-          show={isExpired}
-          handleClose={() => { }}
-        />
+          <ExpiredLinked
+            formId={gsctx.store?.drops?.klaviyo?.signup3 ?? ''}
+            shopName={shop ?? ''}
+            show={isExpired}
+            handleClose={() => { }}
+          />
         )}
         {isModalForMobile && (
           <div>
