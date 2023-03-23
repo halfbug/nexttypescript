@@ -40,9 +40,11 @@ const Members = ({
   } = useAppContext();
   let ownerOrderId = '';
   let ownerEmail = '';
+  console.log('page page', page);
+  console.log('groupshop ', groupshop);
   if (page === 'partner') {
     ownerEmail = (groupshop?.partnerDetails?.email) ? groupshop?.partnerDetails?.email : '';
-  } else if (page === 'product-details' || isChannel === true) {
+  } else if (page === 'product-details' && isChannel === true) {
     ownerEmail = (groupshop?.customerDetail?.email) ? groupshop?.customerDetail?.email : '';
   } else if (page === 'product-details' || page === 'drops') {
     ownerOrderId = (groupshop?.members[0]?.orderId) ? groupshop?.members[0]?.orderId : '';
