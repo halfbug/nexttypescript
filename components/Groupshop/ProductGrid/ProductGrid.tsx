@@ -215,8 +215,8 @@ const ProductGrid = ({
                   <>
                     <div className="d-flex align-items-center">
                       <div className={dStyles.drops_col_dropheading}>
-                        {title === THE_VAULT_TITLE && 'The Vault: 30% - 50% off'}
-                        {title === SPOTLIGHT_SECTION_TITLE && 'Spotlight - Over 65% Off '}
+                        {title === THE_VAULT_TITLE && 'The Vault: 30% - 50% Off'}
+                        {title === SPOTLIGHT_SECTION_TITLE && 'Spotlight: Over 65% Off '}
                       </div>
                       {/* <div className={dStyles.drops_col_dropheading_off}>
                         30% off
