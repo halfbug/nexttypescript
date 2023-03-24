@@ -485,9 +485,9 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta name="googlebot" content="noindex" />
         <meta name="robots" content="noindex,nofollow" />
         <meta name="og:type" content="website" />
-        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward}% off.`} />
         <meta name="og:title" content="Microstore" />
-        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward} off.`} />
+        <meta name="description" content={`Shop ${meta.brandName} on my Microstore and get ${meta.maxReward}% off.`} />
         <meta name="keywords" content="group, shop, discount, deal" />
         <meta name="og:url" content={gsShortURL ?? gsURL} />
         <link rel="preload" nonce="" href={meta.photo} as="image" />
