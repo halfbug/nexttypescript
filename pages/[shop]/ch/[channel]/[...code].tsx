@@ -1146,7 +1146,8 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
 export default ChannelGroupShop;
 export const getServerSideProps = async (context: any) => {
-  // console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
+  console.log(' [...code].tsx ~ line 725 ~ constgetServerSideProps  context', context.params);
+  const code = typeof context.params.code === 'string' ? context.params.code : context.params.code[0];
   const url = `${process.env.API_URL}/meChannelMeta?code=${context.params.code}`;
   const requestOptions = {
     method: 'GET',
