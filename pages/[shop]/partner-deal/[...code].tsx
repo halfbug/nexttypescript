@@ -864,6 +864,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
         <ProductDetail
           show={showDetail}
+          isPartner
           handleClose={() => setshowDetail(false)}
           product={sProduct}
           showSearch={showSearchProds}

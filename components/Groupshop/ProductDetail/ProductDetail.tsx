@@ -48,12 +48,13 @@ interface ProductDetailProps extends RootProps {
   // addToCart(e: any): any;
   product: IProduct | undefined;
   isChannel?: boolean;
+  isPartner?: boolean;
   showSearch?: () => any;
   isDrops?: boolean;
 }
 
 const ProductDetail = ({
-  show, pending = false, handleClose, product, isChannel, showSearch, isDrops,
+  show, pending = false, handleClose, product, isChannel, isPartner, showSearch, isDrops,
 }: ProductDetailProps) => {
   const { addCartProduct } = useCart();
   const { shop, discountCode, ownerCode } = useCode();
@@ -116,8 +117,14 @@ const ProductDetail = ({
 
     variables: { id: product?.id },
   });
+  let productCustomers;
+  if (isPartner) {
+    productCustomers = getBuyers2(product?.id || '0');
+  } else {
+    productCustomers = getBuyers(product?.id || '0');
+  }
+  console.log('productCustomers', productCustomers);
 
-  const productCustomers = getBuyers(product?.id || '0');
   const { googleProductCode, googleEventCode } = useGtm();
   const inviteForExpiredGS = () => {
     setloaderInvite(true);
@@ -935,43 +942,71 @@ const ProductDetail = ({
                   <div className={isDrops ? dStyles.drops_modal_content_bottom : styles.groupshop_modal_content_bottom}>
                     <Col xs={12} md={12}>
                       {productCustomers.length > 0
-                        && (
-                          <>
+                         && (
+                         <>
 
-                            <div className="d-flex align-items-center justify-content-start flex-wrap">
-                              <Members
-                                names={topFive(productCustomers.map(
-                                  (mem: any, mindex: any) => ({
-                                    fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
-                                    }`,
-                                    lineItems: mem.lineItems,
-                                    email: mem.orderDetail.customer.email,
-                                    orderId: mem.orderId,
-                                    availedDiscount: mem.availedDiscount,
-                                  }),
-                                ))}
-                                cashback={['']}
-                                discount={discount}
-                                shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
-                                fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
-                                rewards={gsctx?.campaign?.salesTarget?.rewards}
-                                brandname={brandName}
-                                currencySymbol={currencySymbol}
-                                pending={pending}
-                                isChannel={isChannel}
-                                page="product-details"
-                              />
-                              <ShareButton
+                           <div className="d-flex align-items-center justify-content-start flex-wrap">
+                             { !isPartner && (
+                             <Members
+                               names={topFive(productCustomers.map(
+                                 (mem: any, mindex: any) => ({
+                                   fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
+                                   }`,
+                                   lineItems: mem.lineItems,
+                                   email: mem.orderDetail.customer.email,
+                                   orderId: mem.orderId,
+                                   availedDiscount: mem.availedDiscount,
+                                 }),
+                               ))}
+                               cashback={['']}
+                               discount={discount}
+                               shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
+                               fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                               rewards={gsctx?.campaign?.salesTarget?.rewards}
+                               brandname={brandName}
+                               currencySymbol={currencySymbol}
+                               pending={pending}
+                               isChannel={isChannel}
+                               page="product-details"
+                             />
+                             ) }
+
+                             { isPartner && (
+                             <Members
+                               names={topFive(productCustomers.map(
+                                 (mem: any, mindex: any) => ({
+                                   fname: `${mem.customerInfo.firstName ?? ''} ${mem.customerInfo.firstName ? mem.customerInfo?.lastName?.charAt(0) || '' : mem.customerInfo?.lastName
+                                   }`,
+                                   lineItems: mem.lineItems,
+                                   email: mem.customerInfo.email,
+                                   orderId: mem.orderId,
+                                   availedDiscount: 0,
+                                 }),
+                               ))}
+                               cashback={['']}
+                               discount={discount}
+                               shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
+                               fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                               rewards={gsctx?.campaign?.salesTarget?.rewards}
+                               brandname={brandName}
+                               currencySymbol={currencySymbol}
+                               pending={pending}
+                               isChannel={isChannel}
+                               page="product-details"
+                             />
+                             ) }
+
+                             <ShareButton
                                 // disabled={isExpired}
-                                placement="auto-end"
-                                shareurl={`${isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}`}
-                                fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
-                                label="Invite more friends"
-                                className={styles.groupshop_InviteBtn}
-                              />
-                            </div>
-                          </>
-                        )}
+                               placement="auto-end"
+                               shareurl={`${isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}`}
+                               fullshareurl={`${isExpired ? activateURL : productShareUrl(product?.id ?? '')}`}
+                               label="Invite more friends"
+                               className={styles.groupshop_InviteBtn}
+                             />
+                           </div>
+                         </>
+                         )}
                     </Col>
                   </div>
                 </div>
@@ -1178,6 +1213,7 @@ const ProductDetail = ({
 
 ProductDetail.defaultProps = {
   isChannel: false,
+  isPartner: false,
   showSearch: () => {},
   isDrops: false,
 };
