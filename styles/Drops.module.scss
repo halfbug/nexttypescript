@@ -263,7 +263,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .justify-content-center,
       .align-items-center,
       .w-100;
-
+      &__help_btn {
+     font-weight: 600!important;
+     font-size: 10px;
+      }
     &_members {
       @extend .d-flex, .justify-content-center, .flex-column;
       .list-group-item {

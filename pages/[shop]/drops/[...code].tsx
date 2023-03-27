@@ -469,12 +469,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 /> */}
                 <Button2
                   variant="primary"
-                  className="rounded-pill bg-light text-dark"
+                  className="border border-dark border-2 py-1 px-3 bg-white  rounded-pill bg-light text-dark"
                   onClick={() => {
                     window.open('https://groupshop.zendesk.com/hc/en-us');
                   }}
                 >
-                  Help
+                  <span className={styles.drops__top__help_btn}>Help</span>
                 </Button2>
                 {/* <div className={styles.drops_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
