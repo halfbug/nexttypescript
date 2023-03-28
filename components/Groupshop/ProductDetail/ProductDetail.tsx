@@ -123,7 +123,6 @@ const ProductDetail = ({
   } else {
     productCustomers = getBuyers(product?.id || '0');
   }
-  console.log('productCustomers', productCustomers);
 
   const { googleProductCode, googleEventCode } = useGtm();
   const inviteForExpiredGS = () => {

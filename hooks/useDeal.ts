@@ -204,8 +204,14 @@ export default function useDeal() {
   [gsctx]);
 
   const addedByName = useCallback((productId) => {
-    const filtered = dealProducts?.filter((ele) => ele.type === 'deal')
-      .find((item) => item.productId === productId);
+    const filtered = dealProducts?.filter((ele) => {
+      if (isChannel) {
+        return ele;
+      } if (ele.type === 'deal') {
+        return ele;
+      }
+      return ele;
+    }).find((item) => item.productId === productId);
 
     return filtered?.addedBy;
   },
