@@ -167,6 +167,11 @@
                 line-height: 18px;
             }
         }
+
+        button:disabled,
+        button[disabled]{
+            padding: 0px 86px;
+        }
     }
 
     &__info {

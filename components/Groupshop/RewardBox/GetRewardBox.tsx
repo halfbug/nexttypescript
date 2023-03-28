@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from 'styles/Modal.module.scss';
 import { IStore, RootProps } from 'types/store';
 import {
   Button,
-  Col, Form, Modal, Row,
+  Col, Form, Modal, Row, Spinner,
 } from 'react-bootstrap';
 import { CREATE_CHANNEL_GROUPSHOP } from 'store/store.graphql';
 import useGtm from 'hooks/useGtm';
@@ -39,6 +39,7 @@ const GetRewardBox = ({
     email: '',
     phone: '',
   });
+  const [btnDisable, setbtnDisable] = useState<boolean>(false);
 
   const [
     createChannelGroupshop,
@@ -92,6 +93,7 @@ const GetRewardBox = ({
       const {
         firstName, lastName, email, phone,
       } = valz;
+      setbtnDisable(true);
 
       // create gs and get code
       try {
@@ -127,6 +129,7 @@ const GetRewardBox = ({
         } else {
           setError1('Something went wrong');
         }
+        setbtnDisable(false);
       }
     },
   });
@@ -274,8 +277,8 @@ const GetRewardBox = ({
           <Row className="justify-content-center">
             <Col lg={12}>
               <div className={styles.getRewardBox_modal__btnSection}>
-                <Button variant="dark" onClick={() => handleSubmit()}>
-                  Get Rewards
+                <Button variant="dark" disabled={btnDisable} onClick={() => handleSubmit()}>
+                  {btnDisable ? <Spinner animation="border" size="sm" /> : 'Get Rewards'}
                 </Button>
               </div>
             </Col>
