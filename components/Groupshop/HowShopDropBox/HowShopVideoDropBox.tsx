@@ -52,9 +52,13 @@ const HowShopDropVideoBox = ({
                 customerDetail?.firstName?.charAt(0)?.toUpperCase()!
                 + customerDetail?.firstName?.split(' ')[0]?.slice(1)!
               )}
-              { (customerDetail?.firstName === null || customerDetail?.firstName === '') && (
+              { ((customerDetail?.firstName === null || customerDetail?.firstName === '') && (customerDetail?.fullName !== null && customerDetail?.fullName !== '')) && (
                   customerDetail?.fullName?.charAt(0)?.toUpperCase()!
                 + customerDetail?.fullName?.split(' ')[0]?.slice(1)!
+
+              )}
+              { ((customerDetail?.firstName === null || customerDetail?.firstName === '') && (customerDetail?.fullName === null || customerDetail?.fullName === '')) && (
+                customerDetail?.phone
               )}
               , you’re off the waitlist.
             </h3>
