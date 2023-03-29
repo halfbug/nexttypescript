@@ -11,6 +11,7 @@ import useAppContext from 'hooks/useAppContext';
 import Cart from 'assets/images/cart.svg';
 import Envp from 'assets/images/envelop.svg';
 import GSLogo from 'assets/images/logosmall.svg';
+import PuprpleHeadMobile2 from 'assets/images/purple-head-mobile2.jpg';
 
 interface OBProps {
   show: boolean;
@@ -46,7 +47,7 @@ const OBWelcomeInfluencer = ({
       >
         <Modal.Header className={styles.welcome__modal__closebtnlg} />
         <div className={styles.welcome__modal__imgBox}>
-          <img src="/images/purple-head.png" alt="headtag" className="img-fluid" />
+          <img src={PuprpleHeadMobile2.src} alt="headtag" className="img-fluid" />
         </div>
         <Modal.Body className={styles.welcome__modal__body}>
           {!isDesktop && (
