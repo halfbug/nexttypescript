@@ -613,7 +613,11 @@ export default function useDeal() {
     }
 
     if (isDrops) {
-      return formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.fullName?.charAt(0) ?? '' : gsctx?.customerDetail?.fullName ?? ''}`);
+      const userName = formatNameCase(`${gsctx?.customerDetail?.firstName ?? ''} ${gsctx?.customerDetail?.firstName ? gsctx?.customerDetail?.fullName?.charAt(0) ?? '' : gsctx?.customerDetail?.fullName ?? ''}`);
+      if (userName && userName !== ' ' && userName !== '') {
+        return userName;
+      }
+      return gsctx?.customerDetail?.phone;
     }
 
     if (isInfluencerGS) {
