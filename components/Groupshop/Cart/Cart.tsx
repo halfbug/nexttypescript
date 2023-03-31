@@ -46,6 +46,7 @@ const Cart = ({
   } = useAppContext();
   const {
     store,
+    members,
   } = gsctx;
   const {
     currencySymbol, dPrice, disPrice, discount, getOwnerName, isInfluencerGS, brandName,
@@ -174,6 +175,59 @@ const Cart = ({
     push(getShopifyUrl());
   };
   const { formatNumber } = useUtilityFunction();
+  const dynamicLine = () => {
+    if (isDrops && getTotal()! < 10 && members.length < 2) {
+      const milestone1 = store?.drops?.rewards?.baseline;
+      const milestone2 = store?.drops?.rewards?.average;
+      const milestone3 = store?.drops?.rewards?.maximum;
+      return (
+        <Row className="mx-2 text-start d-flex">
+          <div className="d-block">
+            🤑 Spend
+            {' '}
+            <strong>
+              {currencySymbol}
+              {(10 - getTotal()!).toFixed(2).toString().replace('.00', '')}
+            </strong>
+            {' '}
+            more to qualify for up to
+            {' '}
+            <strong>
+              {members.length ? (+milestone3! - +milestone2!) : (+milestone3! - +milestone1!)}
+              % cashback
+              {' '}
+            </strong>
+            after check-out.
+          </div>
+        </Row>
+      );
+    }
+    return (
+      <>
+        <Icon className="col-1" />
+        <div className="col-11">
+          You’re saving
+          {' '}
+          <strong>
+            {currencySymbol}
+            {/* {dPrice(getTotalActualCartTotal())} */}
+            {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
+          </strong>
+          {' '}
+          by shopping with
+          {' '}
+          <strong>{getOwnerName()}</strong>
+          {/* {' '}
+And you can keep earning up to
+{' '}
+{ upToPercent }
+{' '}
+{isInfluencerGS ? 'discount!' : 'cashback!'} */}
+        </div>
+      </>
+
+    );
+  };
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={['border-start-0', styles.groupshop_modal_cart].join(' ')}>
@@ -470,26 +524,7 @@ const Cart = ({
                     )
                     : (
                       <Col sm={10} className={['d-flex ', styles.groupshop_cart_totalSave].join(' ')}>
-                        <Icon className="col-1" />
-                        <div className="col-11">
-                          You’re saving
-                          {' '}
-                          <strong>
-                            {currencySymbol}
-                            {/* {dPrice(getTotalActualCartTotal())} */}
-                            {(getCartSaveMoney(+discount)).toFixed(2).toString().replace('.00', '')}
-                          </strong>
-                          {' '}
-                          by shopping with
-                          {' '}
-                          <strong>{getOwnerName()}</strong>
-                          {/* {' '}
-                    And you can keep earning up to
-                    {' '}
-                    { upToPercent }
-                    {' '}
-                    {isInfluencerGS ? 'discount!' : 'cashback!'} */}
-                        </div>
+                        {dynamicLine()}
                       </Col>
                     )}
                 </Row>
