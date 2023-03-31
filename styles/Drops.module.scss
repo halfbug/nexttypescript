@@ -33,6 +33,88 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     z-index: 9;
   }
 
+  &__categoriesTab {
+    @extend .d-flex, .flex-nowrap;
+    margin-top: 40px;
+    margin-bottom: 24px;
+    padding-bottom: 6px;
+    overflow-x: scroll;
+    ::-webkit-scrollbar{
+      display: none;
+    }
+    &__itemWrapper {
+      @extend .d-flex, .flex-column;
+      min-width: fit-content;
+    }
+    &__item {
+      @extend .mx-4;
+      min-width: fit-content;
+
+      font-family: 'DM Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      opacity: 0.5;
+
+      color: #000000;
+      &__selected {
+        border-radius: 20px;
+        font-family: 'DM Sans';
+        font-style: normal;
+        font-weight: 500;
+        opacity: 1;
+        &__border {
+          height: 3px !important;
+          opacity: 1;
+          border-radius: 10px;
+          color: #000000;
+          margin-top:17px;
+          margin-bottom: 0;
+        }
+      }
+      &__notSelected{
+        &__border {
+          margin-top: 20px;
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  }
+
+  &__subCategoriesTab {
+    @extend .d-flex, .flex-nowrap, .ms-2;
+    padding-bottom: 12px;
+    overflow-x: scroll;
+    
+    &__item {
+      @extend .mx-1;
+      min-width: fit-content;
+      padding: 4px 16px;
+
+      font-family: 'DM Sans';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 16px;
+      border-radius: 10px;
+      
+      color: #000000;
+      background: #EAEAEA;
+
+      &__selected {
+        border-bottom: 3px solid #000000;
+        border-radius: 20px;
+
+        color: #FFFFFF;
+        background: #000000;
+        
+      }
+    }
+
+  }
+
   &__vault {
     &__section {
       background-color: #E5E5E5;

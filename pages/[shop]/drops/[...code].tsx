@@ -62,6 +62,7 @@ import GetNotify from 'components/Groupshop/DropRewardBox/GetNotify';
 import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
 import Button from 'components/Buttons/Button/Button';
+import CategoriesTab from 'components/Widgets/CategoriesTab';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -678,7 +679,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </div>
           )
         }
-
+        <CategoriesTab />
         {
           sections?.map((ele) => (
             <>
