@@ -39,7 +39,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     margin-bottom: 24px;
     padding-bottom: 6px;
     overflow-x: scroll;
-    ::-webkit-scrollbar{
+    ::-webkit-scrollbar {
       display: none;
     }
     &__itemWrapper {
@@ -50,7 +50,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .mx-4;
       min-width: fit-content;
 
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
@@ -60,7 +60,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       color: #000000;
       &__selected {
         border-radius: 20px;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: normal;
         font-weight: 500;
         opacity: 1;
@@ -69,59 +69,56 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           opacity: 1;
           border-radius: 10px;
           color: #000000;
-          margin-top:17px;
+          margin-top: 17px;
           margin-bottom: 0;
         }
       }
-      &__notSelected{
+      &__notSelected {
         &__border {
           margin-top: 20px;
           margin-bottom: 0;
         }
       }
     }
-
   }
 
   &__subCategoriesTab {
     @extend .d-flex, .flex-nowrap, .ms-2;
     padding-bottom: 12px;
     overflow-x: scroll;
-    
+
     &__item {
       @extend .mx-1;
       min-width: fit-content;
       padding: 4px 16px;
 
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: normal;
       font-weight: 500;
       font-size: 12px;
       line-height: 16px;
       border-radius: 10px;
-      
+
       color: #000000;
-      background: #EAEAEA;
+      background: #eaeaea;
 
       &__selected {
         border-bottom: 3px solid #000000;
         border-radius: 20px;
 
-        color: #FFFFFF;
+        color: #ffffff;
         background: #000000;
-        
       }
     }
-
   }
 
   &__vault {
     &__section {
-      background-color: #E5E5E5;
+      background-color: #f0eeec;
       margin-top: 1rem;
     }
     &__pcard {
-      background-color: #E5E5E5;
+      background-color: #f0eeec;
     }
   }
 
@@ -151,7 +148,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @extend .d-flex, .justify-content-end;
     span {
       @include media-breakpoint-down(sm) {
-      display: none !important;
+        display: none !important;
       }
     }
   }
@@ -160,7 +157,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @extend .d-flex, .justify-content-center;
     span {
       @extend .p-1;
-      border: 1px solid #E9E7E4;
+      border: 1px solid #e9e7e4;
       border-radius: 3px;
       font-size: 12px;
       font-weight: 500;
@@ -170,7 +167,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       background-color: white;
       text-decoration: none;
     }
-    p{
+    p {
       color: $black;
     }
   }
@@ -196,7 +193,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @extend .d-flex, .justify-content-center;
     span {
       @extend .p-1;
-      border: 1px solid #E9E7E4;
+      border: 1px solid #e9e7e4;
       border-radius: 3px;
       font-size: 12px;
       font-weight: 500;
@@ -206,7 +203,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       background-color: white;
       text-decoration: none;
     }
-    p{
+    p {
       color: $black;
     }
   }
@@ -276,10 +273,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
 
     &__headerRightText {
-      @include media-breakpoint-down(sm) { 
+      @include media-breakpoint-down(sm) {
         display: none !important;
       }
-
     }
   }
 
@@ -345,10 +341,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .justify-content-center,
       .align-items-center,
       .w-100;
-      &__help_btn {
-     font-weight: 600!important;
-     font-size: 10px;
-      }
+    &__help_btn {
+      font-weight: 600 !important;
+      font-size: 10px;
+    }
     &_members {
       @extend .d-flex, .justify-content-center, .flex-column;
       .list-group-item {
@@ -559,17 +555,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &__wantOff {
     @extend .text-center, .text-white;
-    font-family: 'DM Sans';
+    font-family: "DM Sans";
     font-style: normal;
     font-size: 14px;
     line-height: 18px;
   }
 
   &__hero {
-    @extend .mw-100,
-      .d-flex,
-      .justify-content-center,
-      .align-items-center;
+    @extend .mw-100, .d-flex, .justify-content-center, .align-items-center;
     height: 291px;
     background-repeat: none;
     background-position: center;
@@ -590,7 +583,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-weight: $font-weight-normal;
         color: $black;
         line-height: 13px;
-        padding-left: 2px
+        padding-left: 2px;
       }
     }
     &__small_banner_right {
@@ -844,8 +837,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     min-width: 0px !important;
     margin-top: 10px !important;
     max-height: 263px;
-    overflow :auto;
-    z-index :1;
+    overflow: auto;
+    z-index: 1;
   }
 
   &_dropdownItem {
@@ -939,7 +932,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     background-size: cover;
     background-position: 50% 90%;
     border-radius: 20px;
-    border: 1px solid #EFEDEB;
+    border: 1px solid #efedeb;
     &_spotlight {
       height: 192px;
       border-bottom-left-radius: 0;
@@ -989,7 +982,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       margin-bottom: 1.5rem;
       margin-left: 4px;
       padding: 0px 0.2rem;
-
     }
 
     &_headingExpired {
@@ -1077,11 +1069,10 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-weight: $font-weight-normal;
         font-size: 10px;
         color: $black;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: normal;
         font-weight: 500;
-        letter-spacing: 0.5px
-
+        letter-spacing: 0.5px;
       }
     }
     &__modalBody {
@@ -1098,7 +1089,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         object-fit: cover;
         padding: 6px;
         //drops
-        border: 1px solid #EFEDEB;
+        border: 1px solid #efedeb;
         border-radius: 20px;
       }
     }
@@ -1135,7 +1126,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         left: 5px;
         border-radius: 6px !important;
         color: #000000;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.20) !important;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2) !important;
         @include media-breakpoint-down(md) {
           font-size: 10px !important;
         }
@@ -1147,7 +1138,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         position: absolute;
         left: 20px;
         border-radius: 6px !important;
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.20) !important;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2) !important;
         @include media-breakpoint-down(md) {
           font-size: 10px !important;
         }
@@ -1385,11 +1376,11 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       }
       &_off {
         @extend .ms-3, .px-2, .py-1;
-        background: #FFFFFF;
-        border: 1px solid #E9E7E4;
+        background: #ffffff;
+        border: 1px solid #e9e7e4;
         box-shadow: 0px 0px 4px rgba(131, 131, 131, 0.0730441);
         border-radius: 5px;
-        
+
         @include media-breakpoint-down(sm) {
           font-weight: 500;
           font-size: 12px;
@@ -1400,7 +1391,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_eligible {
       @extend .mt-2;
-      font-family: 'DM Sans';
+      font-family: "DM Sans";
       font-style: italic;
       font-weight: 500;
       font-size: 12px;
@@ -1631,7 +1622,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       &_featureImage {
         // width: 100%;
-        // height: 400px; 
+        // height: 400px;
         // object-fit: cover;
         height: 400px;
         background-size: cover;
@@ -1731,26 +1722,26 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_favbtn {
       @extend .drops__pcard_tag, .rounded-pill;
-        display: flex;
-        align-items: center;
-        padding: 6px 10px !important;
-        line-height: 16px;
-        height: 30px;
-        margin: 0 auto !important;
-        text-transform: uppercase;
-        color: #000000;
-        span {
-          width: max-content;
-          font-size: 12px !important;
-          font-weight: 700 !important;
-          @include media-breakpoint-down(sm) {
-            font-size: 10px !important;
-          }
+      display: flex;
+      align-items: center;
+      padding: 6px 10px !important;
+      line-height: 16px;
+      height: 30px;
+      margin: 0 auto !important;
+      text-transform: uppercase;
+      color: #000000;
+      span {
+        width: max-content;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        @include media-breakpoint-down(sm) {
+          font-size: 10px !important;
         }
-        svg {
-          margin-right: 6px;
-          margin-bottom: 2px;
-        }
+      }
+      svg {
+        margin-right: 6px;
+        margin-bottom: 2px;
+      }
     }
     &_price {
       font-size: 18px;
@@ -1784,13 +1775,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       padding-bottom: 1rem;
       &_lessTxt {
         margin-bottom: 8px;
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: italic;
         font-weight: 400;
         font-size: 12px;
         line-height: 16px;
         letter-spacing: 0.32px;
-        color: #FF0000;
+        color: #ff0000;
       }
     }
   }
@@ -1833,7 +1824,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
           left: 50px !important;
         }
         h3:after {
-           margin-left: 5px!important;
+          margin-left: 5px !important;
           right: 50px !important;
         }
       }
@@ -1936,7 +1927,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         .justify-content-center,
         .align-content-center,
         .text-center,
-        .mb-4, .mx-4;
+        .mb-4,
+        .mx-4;
       font-family: Mulish;
       font-style: normal;
       font-weight: normal;
@@ -2000,7 +1992,6 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         svg {
           margin-right: 6px;
           margin-bottom: 2px;
-
         }
 
         // &::before {
@@ -2085,7 +2076,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_submit {
       @extend .mt-2, .px-5;
-      border: 1px solid #FEBCB1 !important;
+      border: 1px solid #febcb1 !important;
     }
     &_text {
       @include media-breakpoint-down(sm) {
@@ -2099,7 +2090,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     &_input2 {
       @extend .mt-3, .border-bottom, .rounded-0, .border-0, .pe-5;
-      border-bottom: 1px solid #FEBCB1 !important;
+      border-bottom: 1px solid #febcb1 !important;
     }
 
     &_link {
@@ -2123,7 +2114,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     &_expire_text {
       h6 {
-        font-family: 'Montserrat';
+        font-family: "Montserrat";
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
@@ -2435,7 +2426,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &_shopped {
     @extend .p-2, .my-0, .shadow-sm, .bg-body, .rounded;
-     width: fit-content;
+    width: fit-content;
   }
 
   &_cartProductText {
@@ -3178,7 +3169,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-align: center;
       color: #282828;
     }
-  }  
+  }
   &_availableRewardsBox_modal {
     width: 400px;
     @include media-breakpoint-down(sm) {
@@ -3251,35 +3242,33 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @extend .text-center, .px-3, .py-1;
       width: fit-content;
       margin: auto;
-      background: #F0F0F0;
+      background: #f0f0f0;
       border-radius: 20px;
       span {
-        font-family: 'Mulish';
+        font-family: "Mulish";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
         line-height: 15px;
       }
       /* identical to box height */
-      
-      
-      color: #000000;      
+
+      color: #000000;
     }
     &__info {
       @extend .text-center;
       h2 {
-        font-family: 'DM Sans';
+        font-family: "DM Sans";
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
         line-height: 18px;
         text-decoration-line: underline;
         margin-top: 20px;
-        
       }
       p {
         @extend .mb-1;
-        font-family: 'DM Sans' !important;
+        font-family: "DM Sans" !important;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -3374,13 +3363,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     @extend .px-0, .m-1, .py-2, .border-bottom;
     cursor: pointer;
   }
-  &_product_desc{
+  &_product_desc {
     height: 77px;
     &_soldout {
-      color: #FF0000 !important;
+      color: #ff0000 !important;
       font-weight: 500 !important;
       line-height: 16px;
-      font-family: 'DM Sans' !important;
+      font-family: "DM Sans" !important;
       font-size: 12px;
       font-style: italic;
     }
@@ -3412,7 +3401,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   // }
   &__ready {
-    font-family: 'Mulish';
+    font-family: "Mulish";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -3422,10 +3411,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     padding: 10px 20px;
     background: rgba(212, 196, 227, 0.5);
     border-radius: 20px;
-    
   }
   &__discover {
-    font-family: 'DM Sans';
+    font-family: "DM Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 21px;
@@ -3434,13 +3422,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     text-align: center;
 
-    @include media-breakpoint-down (md) {
+    @include media-breakpoint-down(md) {
       padding: 0px 30px;
     }
 
     &__products {
-        flex-wrap: nowrap;
-        overflow-x: scroll;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
 
       padding-left: 50px;
       padding-right: 50px;
@@ -3453,7 +3441,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &__shopWith {
     @extend .d-flex, .align-items-center, .justify-content-between;
-    border-bottom: 1px solid #E5E5E5;
+    border-bottom: 1px solid #e5e5e5;
     padding-bottom: 10px;
     &__img {
       position: absolute;
@@ -3464,8 +3452,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         padding: 5px;
         width: 80px;
         border-radius: 50%;
-        border: 1px solid #D9D9D9;
-        @include media-breakpoint-down (md) {
+        border: 1px solid #d9d9d9;
+        @include media-breakpoint-down(md) {
           height: 50px;
           width: 50px;
         }
@@ -3477,23 +3465,22 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       font-size: 18px;
       line-height: 24px;
       margin-left: 100px;
-      @include media-breakpoint-down (md) {
+      @include media-breakpoint-down(md) {
         font-weight: 400;
         font-size: 16px;
         line-height: 20px;
         margin-left: 60px;
         margin-right: 20px;
       }
-
     }
     &__btn {
-      background: #1E1E1E;
+      background: #1e1e1e;
       border-radius: 10px;
       padding: 6px 20px;
       font-size: 18px;
       line-height: 23px;
       letter-spacing: 0.32px;
-      @include media-breakpoint-down (md) {
+      @include media-breakpoint-down(md) {
         font-weight: 400;
         font-size: 16px;
         line-height: 21px;
