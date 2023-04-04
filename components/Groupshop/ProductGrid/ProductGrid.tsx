@@ -24,6 +24,7 @@ import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockB
 import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -45,6 +46,7 @@ type ProductGridProps = {
   isDiscoveryTool?: boolean;
   isDrops?: boolean;
   title?: string;
+  type?: string;
   isSpotLight?: boolean;
   urlForActivation?: string | undefined;
   skuCount?: number | null;
@@ -60,7 +62,7 @@ const ProductGrid = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
-  discoveryDiscount, urlForActivation, currency, showPagination, ...props
+  discoveryDiscount, urlForActivation, currency, showPagination, type, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -95,11 +97,8 @@ const ProductGrid = ({
     disPrice, currencySymbolDiscovery,
   } = useDeal();
   const {
-    spotlightProducts,
     updatePurhaseCount,
     VSPrice,
-    THE_VAULT_TITLE,
-    SPOTLIGHT_SECTION_TITLE,
   } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -194,7 +193,7 @@ const ProductGrid = ({
   };
 
   return (
-    <Container {...props} ref={ref} id={id} className={title !== THE_VAULT_TITLE && title !== SPOTLIGHT_SECTION_TITLE ? '' : dStyles.drops__vault__section}>
+    <Container {...props} ref={ref} id={id} className={type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? '' : dStyles.drops__vault__section}>
       <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
         <Col xs={12} className={styles.groupshop_col}>
           {children}
@@ -206,7 +205,7 @@ const ProductGrid = ({
         <Col>
           <div className="d-flex justify-content-between align-items-center">
             <div>
-              {title !== THE_VAULT_TITLE && title !== SPOTLIGHT_SECTION_TITLE ? (
+              {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
                 <div className={dStyles.drops_col_dropheading}>
                   {title}
                 </div>
@@ -215,8 +214,8 @@ const ProductGrid = ({
                   <>
                     <div className="d-flex align-items-center">
                       <div className={dStyles.drops_col_dropheading}>
-                        {title === THE_VAULT_TITLE && 'The Vault: 30% - 50% Off'}
-                        {title === SPOTLIGHT_SECTION_TITLE && 'Spotlight: Over 60% Off '}
+                        {type === DROPS_VAULT && 'The Vault: 30% - 50% Off'}
+                        {type === DROPS_SPOTLIGHT && 'Spotlight: Over 60% Off '}
                       </div>
                       {/* <div className={dStyles.drops_col_dropheading_off}>
                         30% off
@@ -230,7 +229,7 @@ const ProductGrid = ({
               <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
             </div>
           </div>
-          {(title === THE_VAULT_TITLE || title === SPOTLIGHT_SECTION_TITLE) && (
+          {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
             <div className={dStyles.drops_col_eligible}>
               Not eligible for higher discounts or cashback.
             </div>
@@ -281,7 +280,7 @@ const ProductGrid = ({
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
                 <ProductCard
                   isDrops={isDrops}
-                  isVault={title === THE_VAULT_TITLE || title === SPOTLIGHT_SECTION_TITLE}
+                  isVault={type === DROPS_VAULT || type === DROPS_SPOTLIGHT}
                   isSpotlight={isSpotLight}
                   isrc={prod.featuredImage}
                   vsrc={prod.featuredVideo}
@@ -619,6 +618,7 @@ ProductGrid.defaultProps = {
   isDiscoveryTool: false,
   isDrops: false,
   title: '',
+  type: DROPS_REGULAR,
   isSpotLight: false,
   urlForActivation: '',
   skuCount: 0,

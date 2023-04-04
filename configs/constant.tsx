@@ -14,3 +14,8 @@ export const GS_PLAN2_END_COUNT = 1000;
 export const GS_PLAN3_START_COUNT = 1001;
 export const GS_PLAN3_END_COUNT = 2500;
 export const GS_PLAN4_START_COUNT = 2501;
+
+export const DROPS_VAULT = 'vault';
+export const DROPS_SPOTLIGHT = 'spotlight';
+export const DROPS_REGULAR = 'regular';
+export const DROPS_ALLPRODUCT = 'allproduct';

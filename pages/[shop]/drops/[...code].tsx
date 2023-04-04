@@ -63,6 +63,7 @@ import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
 import Button from 'components/Buttons/Button/Button';
 import CategoriesTab from 'components/Widgets/CategoriesTab';
+import { DROPS_ALLPRODUCT } from 'configs/constant';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -108,6 +109,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
   const [showSignup, setSignup] = useState<boolean>(false);
+
+  const { categories } = gsctx;
 
   useEffect(() => {
     if (DropGroupshop.id && pending) {
@@ -679,29 +682,30 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </div>
           )
         }
-        <CategoriesTab />
+        {categories ? <CategoriesTab categories={categories} /> : <></>}
         {
           sections?.map((ele) => (
             <>
               <ProductGrid
                 isDrops
-                title={ele.name !== 'All Products' ? ele.name : ''}
+                title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                type={ele.type}
                 xs={6}
                 sm={6}
                 md={6}
                 lg={4}
                 xl={3}
                 products={uniqueArray(ele.products)}
-                maxrows={ele.name === 'All Products' ? 12 : 3}
+                maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
                 addProducts={handleAddProduct}
                 handleDetail={(prd) => setsProduct(prd)}
                 showHoverButton
-                id={`${ele.name !== 'All Products' ? `drops'${ele.name}` : 'allproductsdrops'}`}
+                id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
                 isModalForMobile={isModalForMobile}
                 urlForActivation={urlForActivation}
-                showPagination={ele.name === 'All Products'}
+                showPagination={ele.type === DROPS_ALLPRODUCT}
               >
-                {ele.name === 'All Products' && (
+                {ele.type === DROPS_ALLPRODUCT && (
                   <div>
                     <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
                       <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />

@@ -719,6 +719,40 @@ query DropGroupshop($code: String!, $status: String = "") {
     shortUrl
     expiredAt
     revisedCount
+    firstCategory {
+      title
+      categoryId
+      sortOrder
+      collections {
+        shopifyId
+        name
+        type
+        sortOrder
+      }
+    }
+    categories {
+      title
+      categoryId
+      parentId
+      sortOrder
+      collections {
+        shopifyId
+        name
+        type
+        sortOrder
+      }
+      subCategories {
+        title
+        categoryId
+        sortOrder
+        collections {
+          shopifyId
+          name
+          type
+          sortOrder
+        }
+      }
+    }
     store {
       shop
       brandName
@@ -801,6 +835,8 @@ query DropGroupshop($code: String!, $status: String = "") {
     sections {
       name
       shopifyId
+      sortOrder
+      type
       products {
         id
         title
@@ -831,6 +867,46 @@ query DropGroupshop($code: String!, $status: String = "") {
     }
   }
 }
+`;
+
+const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
+  query collectionByCategory($id: String!) {
+    collectionByCategory(categoryId: $id) {
+      title
+      parentId
+      sortOrder
+      collections {
+        shopifyId
+        name
+        type
+      }
+      sections {
+        name
+        shopifyId
+        sortOrder
+        type
+        products {
+          id
+          title
+          featuredImage
+          featuredVideo
+          description
+          purchaseCount
+          price
+          compareAtPrice
+          currencyCode
+          outofstock
+          secondaryCount
+          options {
+            id
+            name
+            values
+            position
+          }
+        }
+      }
+    }
+  }
 `;
 
 const CREATE_ONBOARDING_DISCOUNT_CODE = gql`
@@ -2633,4 +2709,5 @@ export {
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
   UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
+  GET_COLLECTIONS_BY_CATEGORY_ID,
 };

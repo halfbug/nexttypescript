@@ -127,7 +127,31 @@ export type ObSettings = {
 export type sections = {
   name: string;
   shopifyId: string;
+  type: string;
   products: Product[];
+}
+
+export type Collections = {
+  shopifyId: string;
+  name: string;
+  type: string;
+  sortOrder: number;
+}
+
+export type subCategories = {
+  categoryId: string;
+  collections: string;
+  sortOrder: number;
+  title: string;
+}
+
+export type Categories = {
+  categoryId: string;
+  collections: Collections[];
+  parentId: string;
+  sortOrder: number;
+  subCategories: subCategories[];
+  title: string;
 }
 
 export interface IGroupshop {
@@ -230,6 +254,10 @@ export interface IGroupshop {
   revisedCount?: number;
 
   sections?: sections[];
+
+  firstCategory?: subCategories;
+
+  categories?: Categories[];
 
 }
 export interface InfluencerGroupshop {

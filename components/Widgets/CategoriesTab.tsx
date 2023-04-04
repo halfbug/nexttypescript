@@ -1,174 +1,123 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import { useQuery } from '@apollo/client';
+import useAppContext from 'hooks/useAppContext';
+import React, { useEffect, useState } from 'react';
+import { GET_COLLECTIONS_BY_CATEGORY_ID } from 'store/store.graphql';
 import styles from 'styles/Drops.module.scss';
+import { Categories, subCategories } from 'types/groupshop';
 
-export default function CategoriesTab() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedSubCategory, setSelectedSubCategory] = useState('');
+interface PropsType {
+  categories: Categories[];
+}
 
-  const tabCategoriesMockData = [
-    {
-      name: 'All',
-    },
-    {
-      name: 'Beauty',
-      subCategories: [
-        {
-          name: 'Skin',
-        },
-        {
-          name: 'Hair',
-        },
-        {
-          name: 'Nails',
-        },
-        {
-          name: 'Serums',
-        },
-        {
-          name: 'Face',
-        },
-        {
-          name: 'Body',
-        },
-        {
-          name: 'Feet',
-        },
-      ],
+export default function CategoriesTab({ categories = [] }: PropsType) {
+  const [selectedCategory, setSelectedCategory] = useState<any>({});
+  const [selectedSubCategory, setSelectedSubCategory] = useState<any>({});
+  const [id, setId] = useState<string>('');
+  const { gsctx, dispatch } = useAppContext();
 
-    },
-    {
-      name: 'Electronics',
-      subCategories: [
-        {
-          name: 'Headphones',
+  const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
+    variables: { id },
+    notifyOnNetworkStatusChange: true,
+  });
+
+  useEffect(() => {
+    if (gsctx && gsctx.firstCategory) {
+      const { categories: categoryArr, firstCategory } = gsctx;
+      if (categoryArr) {
+        const init = categoryArr.find((ele) => ele.categoryId === firstCategory.categoryId);
+        setSelectedCategory(init);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          sections: data.collectionByCategory.sections,
         },
-        {
-          name: 'Air Conditioners',
-        },
-        {
-          name: 'Laptops',
-        },
-        {
-          name: 'Mobiles',
-        },
-        {
-          name: 'Washing Machines',
-        },
-        {
-          name: 'Study Lamps',
-        },
-      ],
-    },
-    {
-      name: 'Clothes & Fashion',
-      subCategories: [
-        {
-          name: 'Shirts',
-        },
-      ],
-    },
-    {
-      name: 'Health & Wellness',
-      subCategories: [
-        {
-          name: 'Juices',
-        },
-      ],
-    },
-    {
-      name: 'Food & Beverage',
-      subCategories: [
-        {
-          name: 'Coca Cola',
-        },
-      ],
-    },
-    {
-      name: 'Home',
-      subCategories: [
-        {
-          name: 'Door Bell',
-        },
-      ],
-    },
-    {
-      name: 'Entertainment',
-      subCategories: [
-        {
-          name: 'Headphones',
-        },
-      ],
-    },
-    {
-      name: 'Men’s Fashion',
-      subCategories: [
-        {
-          name: 'Tee Shirts',
-        },
-      ],
-    },
-  ];
+      });
+    }
+  }, [data]);
 
   const onCategoryClick = (item: any) => {
     setSelectedCategory(item);
-    if (tabCategoriesMockData && tabCategoriesMockData.length) {
-      const temp = tabCategoriesMockData?.filter((el) => el?.name === item);
-
-      if (temp && temp.length) {
-        const d = temp[0].subCategories;
-        setSelectedSubCategory(d ? d[0].name : '');
-      }
-      console.log(item);
-    }
+    setId(item.categoryId);
   };
+
   const onSubCategoryClick = (subItem: any) => {
     setSelectedSubCategory(subItem);
-    console.log(subItem);
+    setId(subItem.categoryId);
   };
 
   return (
     <>
       <div className={styles.drops__categoriesTab}>
-        {tabCategoriesMockData.map((item) => (
+        {categories?.slice()?.sort((a, b) => a.sortOrder - b.sortOrder)?.map((item: Categories) => (
           <div className={styles.drops__categoriesTab__itemWrapper}>
             <div
+              role="button"
+              tabIndex={0}
+              onKeyDown={() => {
+                if (!loading) {
+                  onCategoryClick(item);
+                }
+              }}
               className={[styles.drops__categoriesTab__item,
-                item.name === selectedCategory
+                item.categoryId === selectedCategory.categoryId
                   ? styles.drops__categoriesTab__item__selected
                   : styles.drops__categoriesTab__item__notSelected].join(' ')}
-              onClick={() => onCategoryClick(item.name)}
+              onClick={() => {
+                if (!loading) {
+                  onCategoryClick(item);
+                }
+              }}
             >
-              {item.name}
+              {item.title}
             </div>
             <hr
-              className={item.name === selectedCategory
+              className={item.title === selectedCategory
                 ? styles.drops__categoriesTab__item__selected__border
                 : styles.drops__categoriesTab__item__notSelected__border}
             />
           </div>
         ))}
       </div>
-      <div className={styles.drops__subCategoriesTab}>
-        {tabCategoriesMockData.map((item) => (
-          item.name === selectedCategory
-            ? (
-              item.subCategories?.map((subItem) => (
-                <div
-                  className={[styles.drops__subCategoriesTab__item,
-                    subItem.name === selectedSubCategory
-                      ? styles.drops__subCategoriesTab__item__selected
-                      : styles.drops__subCategoriesTab__item__notSelected].join(' ')}
-                  onClick={() => onSubCategoryClick(subItem.name)}
-                >
-                  {subItem.name}
-                </div>
-              ))
-            )
-            : <></>
-        ))}
-      </div>
+      {
+        selectedCategory?.subCategories?.length
+          ? (
+            <div className={styles.drops__subCategoriesTab}>
+              {selectedCategory?.subCategories
+                ?.slice().sort((a: any, b: any) => a.sortOrder - b.sortOrder)
+                ?.map((item: subCategories) => (
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={() => {
+                      if (!loading) {
+                        onSubCategoryClick(item);
+                      }
+                    }}
+                    className={[styles.drops__subCategoriesTab__item,
+                      item.categoryId === selectedSubCategory.categoryId
+                        ? styles.drops__subCategoriesTab__item__selected
+                        : styles.drops__subCategoriesTab__item__notSelected].join(' ')}
+                    onClick={() => {
+                      if (!loading) {
+                        onSubCategoryClick(item);
+                      }
+                    }}
+                  >
+                    {item.title}
+                  </div>
+                ))}
+            </div>
+          )
+          : <></>
+      }
+
     </>
   );
 }
