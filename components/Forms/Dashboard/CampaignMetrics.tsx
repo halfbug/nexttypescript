@@ -63,14 +63,14 @@ export default function CampaignMetrics({
   return (
     <div className={styles.metrics}>
       <div className={styles.metrics__header}>
-        <h3>Campaign Metrics</h3>
-        <div className="d-inline mx-2 ps-3 position-relative">
+        <div><h3>Campaign Metrics</h3></div>
+        <div className="d-inline ps-3 position-relative">
 
           <img
             src={Calendar.src}
             alt="icon"
             height={18}
-            className="position-absolute my-2 mx-2"
+            className="position-absolute my-2 ms-2"
           />
           <DateRangePicker
             onApply={callbackApply}
@@ -84,7 +84,7 @@ export default function CampaignMetrics({
               },
             }}
           >
-            <input type="text" className="rounded-3 w-auto border-0 bg-light form-control ps-4 py-2 text-black ms-1" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="This week" />
+            <input type="text" className="w-100 rounded-3 w-auto border-0 bg-light form-control px-4 py-2 text-black ms-1" onChange={(e) => handleChange(e)} defaultValue={defaultDate} placeholder="This week" />
           </DateRangePicker>
         </div>
       </div>

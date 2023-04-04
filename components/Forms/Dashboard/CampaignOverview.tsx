@@ -145,17 +145,23 @@ export default function CampaignOverview({
           )}
 
       </div>
-      <div className={styles.overiew__mainCampaignBox}>
-        <div className={[styles.overiew_justifySpaceBetween, 'd-flex align-items-center'].join(' ')}>
+      <div className={[
+        'p-3 my-3',
+        styles.overiew__partnertoolBox,
+      ].join(' ')}
+      >
+        <div className="d-flex align-items-center">
           { (activePartners?.length && activePartners?.length > 0)
             ? (
               <>
 
-                <div className="col-10 me-auto d-flex align-items-center">
+                <div className="">
                   {' '}
                   <span className={styles.overiew_tag}>
                     Partner Tools
                   </span>
+                </div>
+                <div>
                   <span className={styles.overiew__mainCampaignBox__AddPartnerText}>
                     You have
                     {' '}
@@ -168,9 +174,9 @@ export default function CampaignOverview({
                     partners
                   </span>
                 </div>
-                <div className="col-2 ms-auto">
+                <div className="ms-auto">
 
-                  <Button variant="" className="text-end">
+                  <Button variant="" className="text-end btn">
                     <Link href={`/${shopName}/partnertools`}><strong>Manage Partners</strong></Link>
                     {' '}
                     <IoIosArrowForward className="ms-1" />
@@ -201,25 +207,30 @@ export default function CampaignOverview({
             )}
         </div>
       </div>
-      <div className={[styles.overiew__mainCampaignBox, 'd-flex'].join(' ')}>
-        <div className="d-flex align-items-center">
-          <Col lg={10} className="d-flex justify-content-start align-items-center">
+      <div className={[
+        'p-3 my-3',
+        styles.overiew__partnertoolBox,
+      ].join(' ')}
+      >
+        <div className=" d-flex align-items-center">
+          <div className="">
             {' '}
             <div className={styles.overiew_tag}>
               Re-Activation
             </div>
+          </div>
+          <div>
             <span className={styles.overiew__mainCampaignBox__AddPartnerText}>
               Invite past customers to shop & earn rewards
-
             </span>
-          </Col>
-          <Col lg={2} className="d-flex justify-content-end">
+          </div>
+          <div className="ms-auto">
 
-            <Button variant="" className="align-items-center d-flex">
+            <Button variant="" className="text-end btn">
               {' '}
               <IoIosArrowForward className="ms-1" />
             </Button>
-          </Col>
+          </div>
         </div>
       </div>
     </div>
