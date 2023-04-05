@@ -848,7 +848,7 @@ const ProductDetail = ({
                       </>
                     ) : (
                       <ShareButton
-                        // label="share to unlock"
+                        label="share to unlock"
                         shareurl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
                         fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
                         className={styles.groupshop_Pd_addtoCart}
