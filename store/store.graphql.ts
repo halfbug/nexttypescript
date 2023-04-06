@@ -719,6 +719,25 @@ query DropGroupshop($code: String!, $status: String = "") {
     shortUrl
     expiredAt
     revisedCount
+    cartSuggested {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
     firstCategory {
       title
       categoryId

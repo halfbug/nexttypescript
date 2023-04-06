@@ -9,8 +9,6 @@ import useUtilityFunction from './useUtilityFunction';
 const useSuggested = () => {
   const {
     gsctx,
-    dispatch,
-    isGroupshop,
   } = useAppContext();
 
   const { uniqueArray } = useUtilityFunction();
@@ -19,9 +17,9 @@ const useSuggested = () => {
 
   useEffect(() => {
     const {
-      allProducts, isDrops, bestSellerProducts, sections,
+      allProducts, isDrops, cartSuggested,
     } = gsctx;
-    let newProd = isDrops ? (sections?.find((ele) => ele.name === 'Bestsellers')?.products ?? []) : (uniqueArray(allProducts) ?? []);
+    let newProd = isDrops ? (uniqueArray(cartSuggested) ?? []) : (uniqueArray(allProducts) ?? []);
     // newProd = newProd.sort(() => Math.random() - 0.5); // shuffle array to have random products
     // if (!isDrops) {
     newProd = newProd

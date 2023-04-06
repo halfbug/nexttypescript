@@ -259,6 +259,8 @@ export interface IGroupshop {
 
   categories?: Categories[];
 
+  cartSuggested?: Product[];
+
 }
 export interface InfluencerGroupshop {
   partnerDetails?: partnerDetails | undefined;
