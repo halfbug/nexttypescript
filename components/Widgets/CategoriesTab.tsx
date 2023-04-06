@@ -78,7 +78,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
               {item.title}
             </div>
             <hr
-              className={item.title === selectedCategory
+              className={item.categoryId === selectedCategory.categoryId
                 ? styles.drops__categoriesTab__item__selected__border
                 : styles.drops__categoriesTab__item__notSelected__border}
             />
