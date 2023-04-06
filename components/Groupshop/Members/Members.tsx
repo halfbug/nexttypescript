@@ -128,7 +128,7 @@ const Members = ({
                   <h4>
                     <span className="text-capitalize">{member.fname}</span>
                   </h4>
-                  <p className="mb-2">
+                  <p className="my-2">
                     {idx === 0 && isDrops ? '👑GROUPSHOP OWNER' : 'GROUPSHOP MEMBER'}
                     {idx === 0 && !isDrops ? 'MICROSTORE OWNER' : 'MICROSTORE MEMBER'}
                     {' '}

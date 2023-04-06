@@ -3012,7 +3012,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__top {
       margin-bottom: 10px;
       h2 {
-        @extend .mb-1;
+        @extend .mb-3;
         font-family: "DM Sans";
         font-style: normal;
         font-weight: $font-weight-bolder;
