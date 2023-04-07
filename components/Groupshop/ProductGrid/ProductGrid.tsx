@@ -168,6 +168,8 @@ const ProductGrid = ({
         document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
         document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
       }
+    } else if (direction === 'left' && !!position && position <= screenWidth) {
+      position = 0;
     }
     if (position > maxWidth) {
       position = maxWidth - screenWidth;
@@ -189,6 +191,9 @@ const ProductGrid = ({
     } else {
       document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
       document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+    }
+    if (position !== e.target.scrollLeft) {
+      position = e.target.scrollLeft;
     }
   };
 
