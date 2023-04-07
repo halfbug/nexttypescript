@@ -149,24 +149,24 @@ const ProductGrid = ({
     if (direction === 'right' && position < (maxWidth - screenWidth)) {
       position += (screenWidth);
       if ((maxWidth - screenWidth) < position) {
-        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
-        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
+        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
       } else if ((maxWidth - screenWidth) === position) {
-        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
       } else {
-        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
       }
     }
     if (direction === 'left' && position >= screenWidth) {
       position -= (screenWidth);
       if (position === 0) {
-          document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
-          document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+          document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '0.3');
+          document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
       } else {
-        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
       }
     } else if (direction === 'left' && !!position && position <= screenWidth) {
       position = 0;
@@ -183,14 +183,14 @@ const ProductGrid = ({
   const handleScroll = (e: any) => {
     const obj = document.getElementById(e.target.id);
     if (e.target.scrollLeft + (obj?.offsetWidth ?? 0) === obj?.scrollWidth) {
-      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
-      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
     } else if (e.target.scrollLeft === 0) {
-      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
-      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '0.3');
+      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
     } else {
-      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
-      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
     }
     if (position !== e.target.scrollLeft) {
       position = e.target.scrollLeft;
@@ -229,8 +229,8 @@ const ProductGrid = ({
                 )}
             </div>
             <div className="d-flex">
-              <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
-              <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+              <BsArrowLeft opacity={0.3} id={`leftArrow${title}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [title, 'productGrid'].join('_') }); }} />
+              <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${title}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [title, 'productGrid'].join('_') }); }} />
             </div>
           </div>
           {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
@@ -275,7 +275,7 @@ const ProductGrid = ({
       <Row
         className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
           : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
-        id={[id, 'productGrid'].join('_')}
+        id={[title, 'productGrid'].join('_')}
         onScroll={(e) => handleScroll(e)}
       >
         {renderItems?.map((prod, index) => (
