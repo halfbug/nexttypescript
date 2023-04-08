@@ -684,38 +684,43 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         }
         {categories ? <CategoriesTab categories={categories} /> : <></>}
         {
-          sections?.map((ele) => (
-            <>
-              <ProductGrid
-                isDrops
-                title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
-                type={ele.type}
-                xs={6}
-                sm={6}
-                md={6}
-                lg={4}
-                xl={3}
-                products={uniqueArray(ele.products)}
-                maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
-                addProducts={handleAddProduct}
-                handleDetail={(prd) => setsProduct(prd)}
-                showHoverButton
-                id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
-                isModalForMobile={isModalForMobile}
-                urlForActivation={urlForActivation}
-                showPagination={ele.type === DROPS_ALLPRODUCT}
-              >
-                {ele.type === DROPS_ALLPRODUCT && (
-                  <div>
-                    <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-                      <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-                      {ele.name}
+          sections?.map((ele: any) => {
+            if (ele.products.length) {
+              return (
+                <>
+                  <ProductGrid
+                    isDrops
+                    title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                    type={ele.type}
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={4}
+                    xl={3}
+                    products={uniqueArray(ele.products)}
+                    maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
+                    addProducts={handleAddProduct}
+                    handleDetail={(prd) => setsProduct(prd)}
+                    showHoverButton
+                    id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
+                    isModalForMobile={isModalForMobile}
+                    urlForActivation={urlForActivation}
+                    showPagination={ele.type === DROPS_ALLPRODUCT}
+                  >
+                    {ele.type === DROPS_ALLPRODUCT && (
+                    <div>
+                      <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                        <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                        {ele.name}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </ProductGrid>
-            </>
-          ))
+                    )}
+                  </ProductGrid>
+                </>
+              );
+            }
+            return '';
+          })
         }
 
         <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />

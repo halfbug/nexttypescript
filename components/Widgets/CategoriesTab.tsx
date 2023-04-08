@@ -44,6 +44,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
 
   const onCategoryClick = (item: any) => {
     setSelectedCategory(item);
+    setSelectedSubCategory('');
     setId(item.categoryId);
   };
 
