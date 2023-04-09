@@ -63,7 +63,7 @@ import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
 import Button from 'components/Buttons/Button/Button';
 import CategoriesTab from 'components/Widgets/CategoriesTab';
-import { DROPS_ALLPRODUCT } from 'configs/constant';
+import { DROPS_ALLPRODUCT, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -116,7 +116,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     if (DropGroupshop.id && pending) {
       setpending(false);
       const nsections: any = DropGroupshop?.sections?.map((c) => {
-        if (c.name !== THE_VAULT_TITLE && c.name !== SPOTLIGHT_SECTION_TITLE) {
+        if (c.type !== DROPS_VAULT && c.type !== DROPS_SPOTLIGHT) {
           return { ...c, products: c.products.map((p) => ({ ...p, compareAtPrice: null })) };
         }
         return c;
