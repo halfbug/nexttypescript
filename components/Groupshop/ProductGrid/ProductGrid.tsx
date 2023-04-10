@@ -197,6 +197,17 @@ const ProductGrid = ({
     }
   };
 
+  const paginationScroll = (elementId: any, page: number) => {
+    // setTimeout(() => {
+    const app = document.getElementById(elementId)?.offsetTop ?? 0;
+    window.scroll({
+      top: (app - 111),
+      behavior: 'smooth',
+    });
+    setCurrentPage(page);
+    // }, 500);
+  };
+
   return (
     <Container {...props} ref={ref} id={id} className={type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? '' : dStyles.drops__vault__section}>
       <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
@@ -278,7 +289,7 @@ const ProductGrid = ({
         id={[title, 'productGrid'].join('_')}
         onScroll={(e) => handleScroll(e)}
       >
-        {renderItems?.map((prod, index) => (
+        {renderItems?.map((prod: any) => (
           <>
             {prod.title !== 'AddProductType' ? (
               <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
@@ -548,11 +559,8 @@ const ProductGrid = ({
             <Pagination.Prev
               className={[(currentPage === 1) ? 'd-none' : '', styles.groupshop_pagination_prev].join(' ')}
               onClick={() => {
-                setCurrentPage(
-                  (currentPage > 1) ? currentPage - 1 : currentPage,
-                );
-                { (id === 'allproducts') && (paginationScroll('allproducts')); }
-                { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
+                const val = (currentPage > 1) ? currentPage - 1 : currentPage;
+                paginationScroll(id, val);
               }}
             />
 
@@ -560,9 +568,7 @@ const ProductGrid = ({
               <Pagination.Item
                 active={currentPage === n}
                 onClick={() => {
-                  setCurrentPage(n);
-                  { (id === 'allproducts') && (paginationScroll('allproducts')); }
-                  { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
+                  paginationScroll(id, n);
                 }}
                 className={currentPage === n
                   ? styles.groupshop_pagination_activeItem : styles.groupshop_pagination_item}
@@ -574,11 +580,9 @@ const ProductGrid = ({
             <Pagination.Next
               className={[(currentPage === totalPages) ? 'd-none' : '', styles.groupshop_pagination_next].join(' ')}
               onClick={() => {
-                setCurrentPage(
-                  (currentPage >= 1 && currentPage < totalPages) ? currentPage + 1 : currentPage,
-                );
-                { (id === 'allproducts') && (paginationScroll('allproducts')); }
-                { (id === 'allproductsdrops') && (paginationScroll('allproductsdrops_productGrid')); }
+                const val = (currentPage >= 1
+                && currentPage < totalPages) ? currentPage + 1 : currentPage;
+                paginationScroll(id, val);
               }}
             />
 
@@ -596,17 +600,6 @@ const ProductGrid = ({
     </Container>
   );
 };
-
-function paginationScroll(elementId: any) {
-  setTimeout(() => {
-    const app = (document.getElementById(elementId)?.offsetTop) ?? 0;
-    const subtr = (elementId === 'allproducts') ? -100 : -180;
-    window.scroll({
-      top: (app ?? 0) + subtr,
-      behavior: 'smooth',
-    });
-  }, 500);
-}
 
 ProductGrid.defaultProps = {
   maxrows: 1,
