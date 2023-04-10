@@ -87,7 +87,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   );
 
   // load all products
-  useProducts(`${shop}.myshopify.com`);
+  // useProducts(`${shop}.myshopify.com`);
   const [member, setmember] = useState<Member | undefined>(undefined);
   const [showps, setshowps] = useState<boolean>(false);
   const [showCart, setshowCart] = useState<boolean>(false);
