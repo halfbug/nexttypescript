@@ -41,6 +41,7 @@ import useDetail from 'hooks/useDetail';
 import useDrops from 'hooks/useDrops';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Members from '../Members/Members';
+import Gmembers from '../Members/Gmembers';
 
 interface ProductDetailProps extends RootProps {
   show: boolean;
@@ -946,18 +947,21 @@ const ProductDetail = ({
 
                            <div className="d-flex align-items-center justify-content-start flex-wrap">
                              { !isPartner && (
-                             <Members
+                             <Gmembers
                                names={topFive(productCustomers.map(
-                                 (mem: any, mindex: any) => ({
-                                   fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
+                                 (mem: any) => ({
+                                   name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
                                    }`,
                                    lineItems: mem.lineItems,
-                                   email: mem.orderDetail.customer.email,
-                                   orderId: mem.orderId,
+                                   role: mem.role,
+                                   //  email: mem.orderDetail.customer.email,
+                                   //  orderId: mem.orderId,
+                                   price: mem.orderDetail.price,
                                    availedDiscount: mem.availedDiscount,
+                                   refund: (mem.refund) ? mem.refund : [],
                                  }),
                                ))}
-                               cashback={['']}
+                               memberLength={gsctx?.members.length}
                                discount={discount}
                                shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
                                fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
@@ -965,8 +969,6 @@ const ProductDetail = ({
                                brandname={brandName}
                                currencySymbol={currencySymbol}
                                pending={pending}
-                               isChannel={isChannel}
-                               page="product-details"
                              />
                              ) }
 

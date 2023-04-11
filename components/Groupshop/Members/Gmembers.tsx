@@ -7,6 +7,7 @@ import CrossICon from 'assets/images/cross.svg';
 import { useMediaQuery } from 'react-responsive';
 import { RootProps } from 'types/store';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import useAppContext from 'hooks/useAppContext';
 import AvailableRewardsBox from '../RewardBox/AvailableRewardsBox';
 
 interface GMembersProps extends RootProps{
@@ -29,6 +30,7 @@ const Gmembers = ({
   const [pendingRewards, setpendingRewards] = useState(0);
   const [isOwner, setIsOwner] = useState(true);
   const { formatNumber } = useUtilityFunction();
+  const { isDrops } = useAppContext();
 
   const milestoneCalc = (dis:any) => {
     const availDiscount = parseInt(dis, 10);
@@ -48,22 +50,30 @@ const Gmembers = ({
   const handleClick = (member: any, index: any) => {
     let maxRefund = 0;
     setCustName(member.name);
-    const mileCalc = milestoneCalc(member?.availedDiscount ?? 0);
     const orderPrice = countTotalPrice(member.lineItems);
-    const discountPercentage = (index === 0) ? 90 : mileCalc;
-    // eslint-disable-next-line max-len
-    const refundAmount = (member?.refund) ? member.refund.reduce((a:any, b:any) => a + b.amount, 0) : 0;
-    if ((memberLength <= 9 && index === 0) || (memberLength <= 5)) {
-      maxRefund = ((orderPrice * (discountPercentage)) / 100) - refundAmount;
-    } else if (index === 5) {
-      maxRefund = ((orderPrice * (parseInt(rewards[2].discount, 10))) / 100);
-    } else if (index > 5) {
-      maxRefund = ((orderPrice * (parseInt(rewards[0].discount, 10))) / 100);
+    if (isDrops) {
+      setpendingRewards(((orderPrice * member.availedDiscount) / 100));
     } else {
-      maxRefund = refundAmount;
+      const mileCalc = milestoneCalc(member?.availedDiscount ?? 0);
+      const discountPercentage = (index === 0) ? 90 : mileCalc;
+      // eslint-disable-next-line max-len
+      const refundAmount = (member?.refund) ? member.refund.reduce((a:any, b:any) => a + b.amount, 0) : 0;
+      if ((memberLength <= 9 && index === 0) || (memberLength <= 5)) {
+        maxRefund = ((orderPrice * (discountPercentage)) / 100) - refundAmount;
+      } else if (index === 5) {
+        maxRefund = ((orderPrice * (parseInt(rewards[2].discount, 10))) / 100);
+      } else if (index > 5) {
+        maxRefund = ((orderPrice * (parseInt(rewards[0].discount, 10))) / 100);
+      } else {
+        maxRefund = refundAmount;
+      }
+      setpendingRewards(maxRefund);
     }
-    setpendingRewards(maxRefund);
-    if (index === 0) { setIsOwner(true); } else { setIsOwner(false); }
+    if (member.role === 'owner') {
+      setIsOwner(true);
+    } else {
+      setIsOwner(false);
+    }
     setshowRewardModel(true);
   };
 
@@ -94,7 +104,7 @@ const Gmembers = ({
         <>
           <div>
             <Button onClick={(e) => handleClick(member, idx)} variant="light" className={styles.groupshop__top_item}>
-              {idx === 0 && '👑'}
+              {(member.role === 'owner') && idx === 0 && '👑'}
               {' '}
               {member.name}
             </Button>
