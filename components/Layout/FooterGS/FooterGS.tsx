@@ -197,9 +197,9 @@ const Footer = ({
           </div>
         </Col>
         <Col lg={4}>
-          <div className={['mt-2 mx-2 mb-2', styles.groupshop_footer__logo].join(' ')}>
+          <div className={['mt-2 mx-2 mb-3', styles.groupshop_footer__logo].join(' ')}>
             {/* <img src={footerLogo.src} alt="brandLogo" /> */}
-            {isDrops ? (<img src={isDrops ? '/images/logo.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" className=" img-fluid" />)
+            {isDrops ? (<img src={isDrops ? '/images/logo-thin-2.svg' : `${process.env.IMAGE_PATH}/ms-logo-svg.svg`} alt="Groupshop" className=" img-fluid" />)
               : (
                 <div className="text-center">
                   {store?.logoImage === '' || store?.logoImage === undefined ? (
