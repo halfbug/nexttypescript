@@ -662,27 +662,29 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
           </Container>
         </Hero>
-        {
-          !!nextDropReward && (
-            <div className="bg-black text-center py-2">
-              <span
-                role="button"
-                className={styles.drops__wantOff}
-                onClick={() => setDropReward(true)}
-              >
-                <b>
-                  Want
+        <div className={styles.drops__stickyArea}>
+          {
+            !!nextDropReward && (
+              <div className="bg-black text-center py-2">
+                <span
+                  role="button"
+                  className={styles.drops__wantOff}
+                  onClick={() => setDropReward(true)}
+                >
+                  <b>
+                    Want
+                    {' '}
+                    {nextDropReward}
+                    % off?
+                  </b>
                   {' '}
-                  {nextDropReward}
-                  % off?
-                </b>
-                {' '}
-                Click here to learn how.
-              </span>
-            </div>
-          )
-        }
-        {categories ? <CategoriesTab categories={categories} /> : <></>}
+                  Click here to learn how.
+                </span>
+              </div>
+            )
+          }
+          {categories ? <CategoriesTab categories={categories} /> : <></>}
+        </div>
         {
           sections?.map((ele: any) => {
             if (ele.products.length) {

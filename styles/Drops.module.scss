@@ -33,6 +33,13 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     z-index: 9;
   }
 
+  &__stickyArea{
+    position: sticky;
+    top: 110px;
+    z-index: 9;
+    background: #fff;
+  }
+
   &__categoriesTab {
     @extend .d-flex, .flex-nowrap;
     margin-top: 35px;
@@ -85,7 +92,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &__subCategoriesTab {
     @extend .d-flex, .flex-nowrap, .ms-2;
     padding-bottom: 12px;
-    margin-top: 24px;
+    padding-top: 24px;
     overflow-x: scroll;
 
     &__item {
