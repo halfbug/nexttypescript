@@ -561,7 +561,7 @@ const ProductsSearch = ({
                       >
                         <div
                           role="button"
-                          className={[!isDrops ? 'text-center text-truncate' : '', 'fw-bold'].join(' ')}
+                          className={[!isDrops ? 'text-center' : '', 'fw-bold'].join(' ')}
                           onClick={(e) => openDetail(e, prd)}
                           onKeyDown={(e) => openDetail(e, prd)}
                           tabIndex={0}
