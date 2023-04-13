@@ -357,7 +357,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':        
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -510,17 +510,22 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               />
             ) : (
               <div className="d-flex align-items-center">
-                <div className={styles.groupshop_customizebutton}>
+                {/* <div className={styles.groupshop_customizebutton}>
                   <Customize />
                   <span className="ms-1 me-3">Customize</span>
-                </div>
+                </div> */}
                 <InfoBox mes="How does this work?" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
               </div>
             )}
 
           />
           <VideoWidget />
-          <Container fluid className="border-top border-bottom bg-white">
+          {!isModalForMobile
+          && (
+          <Container
+            fluid
+            className={styles.groupshop_web_header}
+          >
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
               <Col md={3} xs={3} className={styles.groupshop__top_members}>
                 <h5 className="text-start ps-2 mb-0">
@@ -549,9 +554,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     pending={pending}
                   />
                   {gsctx?.members.length > 5 && (
-                    <span className="pe-2">
-                      {`+${gsctx?.members.length - 5} more`}
-                    </span>
+                  <span className="pe-1 text-nowrap">
+                    {`+${gsctx?.members.length - 5} more`}
+                  </span>
                   )}
                   <ShareButton
                     placement="bottom"
@@ -656,6 +661,79 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
             </Row>
           </Container>
+          )}
+          {/* mobile first header */}
+          {isModalForMobile
+          && (
+          <Container
+            fluid
+            className="d-flex align-items-center d-xs-block d-sm-block d-md-none d-lg-none d-xl-none border-top
+            border-bottom bg-white"
+          >
+            <Row className={['gx-0 d-flex justify-content-between',
+              styles.groupshop__top].join(' ')}
+            >
+              <Col
+                className={[
+                  'text-start m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-start align-items-baseline',
+                  styles.groupshop__top__search_icons,
+                ].join(' ')}
+              >
+                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
+                  <IconButton
+                    icon={<Search size={24} />}
+                    className={styles.groupshop__hero_smSearchBtn}
+                    onClick={handleAddProduct}
+                    disabled={isExpired}
+                  />
+                ) : <></>}
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <div className={styles.groupshop_main_logo}>
+                  {logoImage === '' || logoImage === undefined ? (
+                    <Link href={`https://${fullStoreName}`}>
+                      <Brand
+                        name={
+                          (brandName || '').split(' ').slice(0, 2).join(' ') || ''
+                        }
+                        pending={pending}
+                      />
+                    </Link>
+                  ) : (
+                    <Link href={`https://${fullStoreName}`}>
+                      <a target="_blank" style={{ cursor: 'pointer' }}>
+                        <img
+                          src={storeLogo}
+                          alt={`${brandName}`}
+                          // alt="d"
+                          className="img-fluid"
+                        />
+                      </a>
+                    </Link>
+                  )}
+                </div>
+              </Col>
+              <Col
+                className={[
+                  'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                  styles.groupshop__top__search_icons,
+                ].join(' ')}
+              >
+                <IconButton
+                  icon={<Handbag size={24} />}
+                  className={styles.groupshop__hero_bagBtn}
+                  onClick={() => setshowCart(true)}
+                >
+                  <span className={styles.groupshop__hero__cart_count}>
+                    {gsctx?.cart && gsctx?.cart?.length > 0
+                      ? `(${gsctx?.cart?.length})`
+                      : ''}
+                  </span>
+                </IconButton>
+              </Col>
+            </Row>
+          </Container>
+          )}
         </header>
         <Hero bannerImage={bannerImage}>
           <Container className={styles.groupshop__hero__content}>

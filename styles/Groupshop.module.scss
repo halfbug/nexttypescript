@@ -41,8 +41,8 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
       @include media-breakpoint-down(sm) {
         padding: 0;
-        max-height: 40px;
-        max-width: 92px;
+        max-height: auto;
+        max-width: 150px;
       }
     }
   }
@@ -57,6 +57,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__counter {
+    @extend .d-none;
     h6 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -277,6 +278,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         }
       }
     }
+    &__search_icons {
+      @include media-breakpoint-down(sm) {
+        button {
+          margin-right: 0px !important;
+          padding-right: 0px !important;
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
 
     &_item {
       @extend .m-1, .p-1, .rounded, .border, .text-capitalize;
@@ -286,6 +299,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       cursor: pointer !important;
       min-width: auto !important;
       background: $white;
+      white-space: nowrap;
       &:hover {
         @extend .shadow-sm;
       }
@@ -511,8 +525,23 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       box-shadow: none !important;
       margin-right: 1rem;
       margin-left: 1rem;
+      text-align: start;
       @include media-breakpoint-down(sm) {
         margin: 0;
+        display: none;
+
+      }
+    }
+    &_bagBtn,
+    &_smSearchBtn {
+      box-shadow: none !important;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      text-align: start;
+      @include media-breakpoint-down(sm) {
+        margin: 0;
+        text-align: start;
+
       }
     }
     &_small_banner_box {
@@ -1956,6 +1985,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @include media-breakpoint-down(md) {
         display: none;
       }
+
       @extend .my-3;
       width: 260px;
       justify-content: center;
@@ -3302,6 +3332,17 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         line-height: 21px;
         padding: 6px 10px;
       }
+    }
+  }
+  &_web_header {
+
+    @extend .d-flex, .align-items-center, .d-block, .border-top, .border-bottom, .bg-white;
+
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+    @include media-breakpoint-down(xs) {
+      display: none;
     }
   }
 }
