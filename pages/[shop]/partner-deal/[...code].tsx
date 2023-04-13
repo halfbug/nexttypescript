@@ -637,7 +637,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           products={uniqueArray(_.uniq(addedProductsByInfluencer))}
           maxrows={1}
           addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
+          handleDetail={(prd: any) => setsProduct(prd)}
           id="curatedby"
           isModalForMobile={isModalForMobile}
           skuCount={SKU.length}
@@ -712,7 +712,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             }
             maxrows={1}
             addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
+            handleDetail={(prd: any) => setsProduct(prd)}
             id="popularproducts"
             skuCount={SKU.length}
           >
@@ -733,7 +733,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 products={topPicks?.slice(0, 4)}
                 maxrows={1}
                 addProducts={handleAddProduct}
-                handleDetail={(prd) => setsProduct(prd)}
+                handleDetail={(prd: any) => setsProduct(prd)}
                 id="toppicks"
                 skuCount={SKU.length}
               >
@@ -754,7 +754,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           products={uniqueArray(allProducts ?? [])}
           maxrows={3}
           addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
+          handleDetail={(prd: any) => setsProduct(prd)}
           showHoverButton
           id="allproducts"
           skuCount={SKU.length}

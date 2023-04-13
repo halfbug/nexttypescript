@@ -800,7 +800,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           products={uniqueArray(_.uniq(addedProductsByOwner))}
           maxrows={1}
           addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
+          handleDetail={(prd: any) => setsProduct(prd)}
           id="curatedby"
           isModalForMobile={isModalForMobile}
           skuCount={SKU.length}
@@ -873,7 +873,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             }
             maxrows={1}
             addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
+            handleDetail={(prd: any) => setsProduct(prd)}
             id="popularproducts"
           >
             <h2>Popular with the Group</h2>
@@ -895,7 +895,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             }
               maxrows={1}
               addProducts={handleAddProduct}
-              handleDetail={(prd) => setsProduct(prd)}
+              handleDetail={(prd: any) => setsProduct(prd)}
               id="toppicks"
             >
               <h2>Top Picks</h2>
@@ -914,7 +914,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           products={uniqueArray(allProducts ?? [])}
           maxrows={3}
           addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
+          handleDetail={(prd: any) => setsProduct(prd)}
           showHoverButton
           urlForActivation={shortActivateURL ?? urlForActivation}
           id="allproducts"

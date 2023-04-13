@@ -867,7 +867,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             ? uniqueArray(memberProducts) : shoppedBy}
           maxrows={1}
           addProducts={handleAddProduct}
-          handleDetail={(prd) => setsProduct(prd)}
+          handleDetail={(prd: any) => setsProduct(prd)}
           id="shoppedby"
           isModalForMobile={isModalForMobile}
           urlForActivation={urlForActivation}
@@ -943,7 +943,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               }
               maxrows={1}
               addProducts={handleAddProduct}
-              handleDetail={(prd) => setsProduct(prd)}
+              handleDetail={(prd: any) => setsProduct(prd)}
               id="popularproducts"
               isModalForMobile={isModalForMobile}
               urlForActivation={urlForActivation}
@@ -968,7 +968,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   }
                   maxrows={1}
                   addProducts={handleAddProduct}
-                  handleDetail={(prd) => setsProduct(prd)}
+                  handleDetail={(prd: any) => setsProduct(prd)}
                   id="toppicks"
                   isModalForMobile={isModalForMobile}
                   urlForActivation={urlForActivation}
@@ -991,7 +991,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             products={uniqueArray(allProducts)}
             maxrows={3}
             addProducts={handleAddProduct}
-            handleDetail={(prd) => setsProduct(prd)}
+            handleDetail={(prd: any) => setsProduct(prd)}
             showHoverButton
             id="allproducts"
             isModalForMobile={isModalForMobile}
@@ -1109,7 +1109,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       }
                       maxrows={2}
                       addProducts={handleAddProduct}
-                      handleDetail={(prd) => setsProduct(prd)}
+                      handleDetail={(prd: any) => setsProduct(prd)}
                       id="discoverproducts1"
                       isModalForMobile={isModalForMobile}
                       urlForActivation={urlForActivation}

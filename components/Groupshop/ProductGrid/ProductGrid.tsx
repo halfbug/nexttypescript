@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-lone-blocks */
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -58,7 +58,19 @@ type ProductGridProps = {
   showPagination?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
-const ProductGrid = ({
+function ProductGrid(props: any) {
+  const memoizedComponent = useMemo(
+    () => <ProductGridInitial {...props} />, [JSON.stringify(props)],
+  );
+
+  return (
+    <div>
+      {memoizedComponent}
+    </div>
+  );
+}
+
+const ProductGridInitial = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
@@ -602,7 +614,7 @@ const ProductGrid = ({
   );
 };
 
-ProductGrid.defaultProps = {
+ProductGridInitial.defaultProps = {
   maxrows: 1,
   xs: 12,
   sm: 12,

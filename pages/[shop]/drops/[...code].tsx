@@ -703,7 +703,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     products={uniqueArray(ele.products)}
                     maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
                     addProducts={handleAddProduct}
-                    handleDetail={(prd) => setsProduct(prd)}
+                    handleDetail={(prd: any) => setsProduct(prd)}
                     showHoverButton
                     id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
                     isModalForMobile={isModalForMobile}
