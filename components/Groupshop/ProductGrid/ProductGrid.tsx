@@ -198,14 +198,15 @@ const ProductGrid = ({
   };
 
   const paginationScroll = (elementId: any, page: number) => {
-    // setTimeout(() => {
-    const app = document.getElementById(elementId)?.offsetTop ?? 0;
-    window.scroll({
-      top: (app - 111),
-      behavior: 'smooth',
-    });
     setCurrentPage(page);
-    // }, 500);
+    setTimeout(() => {
+      const app = document.getElementById(elementId)?.offsetTop ?? 0;
+      const size = isDrops ? (app - 270) : (app - 100);
+      window.scroll({
+        top: size,
+        behavior: 'smooth',
+      });
+    }, 500);
   };
 
   return (
