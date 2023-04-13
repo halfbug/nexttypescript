@@ -685,7 +685,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           }
           {categories ? <CategoriesTab categories={categories} /> : <></>}
         </div>
-        {
+        <div id="dropsProductSections">
+          {
           sections?.map((ele: any) => {
             if (ele.products.length) {
               return (
@@ -724,6 +725,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             return '';
           })
         }
+        </div>
 
         <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
         <ProductsSearch

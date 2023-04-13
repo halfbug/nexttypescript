@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import useAppContext from 'hooks/useAppContext';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { GET_COLLECTIONS_BY_CATEGORY_ID } from 'store/store.graphql';
 import styles from 'styles/Drops.module.scss';
 import { Categories, subCategories } from 'types/groupshop';
@@ -46,12 +46,24 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
     setSelectedCategory(item);
     setSelectedSubCategory('');
     setId(item.categoryId);
+    scrollToTop();
   };
 
   const onSubCategoryClick = (subItem: any) => {
     setSelectedSubCategory(subItem);
     setId(subItem.categoryId);
+    scrollToTop();
   };
+
+  const scrollToTop = useCallback(() => {
+    setTimeout(() => {
+      const ele = document.getElementById('dropsProductSections')?.offsetTop ?? 0;
+      window.scroll({
+        top: (ele - 270),
+        behavior: 'smooth',
+      });
+    }, 700);
+  }, [selectedCategory]);
 
   return (
     <>
