@@ -69,7 +69,7 @@ export default function CampaignMetrics({
           <img
             src={Calendar.src}
             alt="icon"
-            height={18}
+            height={16}
             className="position-absolute my-2 ms-2"
           />
           <DateRangePicker

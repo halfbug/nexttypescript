@@ -17,6 +17,7 @@ import QRClickIcon from 'assets/images/qr-click.svg';
 import IconButton from 'components/Buttons/IconButton';
 import Icon from 'assets/images/small cone.svg';
 import ArrowSort from 'assets/images/ArrowSort.svg';
+import Customize from 'assets/images/customize.svg';
 import DownArrow from 'assets/images/DownArrowSmall.svg';
 import {
   Handbag, Plus, Search,
@@ -68,6 +69,8 @@ import ExpiredBox from 'components/Groupshop/ExpiredBox/ExpiredBox';
 import QRBox from 'components/Groupshop/QRBox/QRBox';
 import VideoWidget from 'components/Groupshop/VideoWidget/VideoWidget';
 import useDiscoverSortingGS from 'hooks/useDiscoverSortingGS';
+import { AiOutlineSetting } from 'react-icons/ai';
+// icon:settings-outline | Ionicons https://ionicons.com/ | Ionic Framework
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useContext(GroupshopContext);
@@ -506,43 +509,24 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               // maxPercent={maxPercent}
               />
             ) : (
-              <InfoBox mes="How does this work?" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
+              <div className="d-flex align-items-center">
+                <div className={styles.groupshop_customizebutton}>
+                  <Customize />
+                  <span className="ms-1 me-3">Customize</span>
+                </div>
+                <InfoBox mes="How does this work?" brandname={brandName} fullshareurl={gsURL} shareUrl={gsShortURL ?? gsURL} />
+              </div>
             )}
 
           />
           <VideoWidget />
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-              <Col md={3} xs={3}>
-                <div className={styles.groupshop_main_logo}>
-                  {logoImage === '' || logoImage === undefined ? (
-                    <Link href={`https://${fullStoreName}`}>
-                      <Brand
-                        name={
-                          (brandName || '').split(' ').slice(0, 2).join(' ') || ''
-                        }
-                        pending={pending}
-                      />
-                    </Link>
-                  ) : (
-                    <Link href={`https://${fullStoreName}`}>
-                      <a target="_blank" style={{ cursor: 'pointer' }}>
-                        <img
-                          src={storeLogo}
-                          alt={`${brandName}`}
-                          // alt="d"
-                          className="img-fluid"
-                        />
-                      </a>
-                    </Link>
-                  )}
-                </div>
-              </Col>
-              <Col md={6} className={styles.groupshop__top_members}>
-                <h5 className="text-center">
-                  Shop or invite your friends to shop to get started!
+              <Col md={3} xs={3} className={styles.groupshop__top_members}>
+                <h5 className="text-start ps-2 mb-0">
+                  SHOPPING WITH
                 </h5>
-                <div className="d-flex flex-row justify-content-center align-items-center">
+                <div className="d-flex flex-row justify-content-start align-items-center">
                   <Gmembers
                     names={topFive(gsctx?.members.map(
                       (mem: any) => ({
@@ -578,6 +562,31 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     icon={<Plus size={18} className="me-0 pe-0" />}
                     onClick={() => googleEventCode('invite-share-modal')}
                   />
+                </div>
+              </Col>
+              <Col md={6} className="d-flex justify-content-center">
+                <div className={styles.groupshop_main_logo}>
+                  {logoImage === '' || logoImage === undefined ? (
+                    <Link href={`https://${fullStoreName}`}>
+                      <Brand
+                        name={
+                          (brandName || '').split(' ').slice(0, 2).join(' ') || ''
+                        }
+                        pending={pending}
+                      />
+                    </Link>
+                  ) : (
+                    <Link href={`https://${fullStoreName}`}>
+                      <a target="_blank" style={{ cursor: 'pointer' }}>
+                        <img
+                          src={storeLogo}
+                          alt={`${brandName}`}
+                          // alt="d"
+                          className="img-fluid"
+                        />
+                      </a>
+                    </Link>
+                  )}
                 </div>
               </Col>
               <Col xs={6} className={styles.groupshop__counter}>
