@@ -946,7 +946,7 @@ const ProductDetail = ({
                          <>
 
                            <div className="d-flex align-items-center justify-content-start flex-wrap">
-                             { !isPartner && (
+                             { (!isPartner && !isDrops) && (
                              <Gmembers
                                names={topFive(productCustomers.map(
                                  (mem: any) => ({
@@ -982,6 +982,31 @@ const ProductDetail = ({
                                    email: mem.customerInfo.email,
                                    orderId: mem.orderId,
                                    availedDiscount: 0,
+                                 }),
+                               ))}
+                               cashback={['']}
+                               discount={discount}
+                               shareUrl={isExpired ? shortActivateURL ?? activateURL : productShareUrl(product?.id ?? '')}
+                               fullshareurl={isExpired ? activateURL : productShareUrl(product?.id ?? '')}
+                               rewards={gsctx?.campaign?.salesTarget?.rewards}
+                               brandname={brandName}
+                               currencySymbol={currencySymbol}
+                               pending={pending}
+                               isChannel={isChannel}
+                               page="product-details"
+                             />
+                             ) }
+
+                             { isDrops && (
+                             <Members
+                               names={topFive(productCustomers.map(
+                                 (mem: any, mindex: any) => ({
+                                   fname: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail?.customer?.lastName
+                                   }`,
+                                   lineItems: mem.lineItems,
+                                   email: mem.orderDetail.customer.email,
+                                   orderId: mem.orderId,
+                                   availedDiscount: mem.availedDiscount,
                                  }),
                                ))}
                                cashback={['']}
