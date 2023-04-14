@@ -59,8 +59,20 @@ type ProductGridProps = {
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 function ProductGrid(props: any) {
+  const {
+    products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
+    xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false,
+    id, skuCount = null, isSuggestion, membersForDiscover, isDiscoveryTool, isDrops,
+    isSpotLight, brandurl, title, discoveryDiscount, urlForActivation, currency, showPagination,
+    type,
+  } = props;
   const memoizedComponent = useMemo(
-    () => <ProductGridInitial {...props} />, [JSON.stringify(props)],
+    () => <ProductGridInitial {...props} />, [
+      products, pending, children, maxrows, addProducts, handleDetail, isModalForMobile,
+      xs, sm, md, lg, xl, xxl, showHoverButton, id, skuCount, isSuggestion, membersForDiscover,
+      isDiscoveryTool, isDrops, isSpotLight, brandurl, title, discoveryDiscount, urlForActivation,
+      currency, showPagination, type,
+    ],
   );
 
   return (
