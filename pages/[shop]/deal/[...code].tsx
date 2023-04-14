@@ -526,8 +526,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             fluid
             className={styles.groupshop_web_header}
           >
-            <Row className={['gx-0', styles.groupshop__top].join(' ')}>
-              <Col md={3} xs={3} className={styles.groupshop__top_members}>
+            <Row className={['gx-0 d-sm-flex d-xs-flex', styles.groupshop__top].join(' ')}>
+              <Col md={3} className={styles.groupshop__top_members}>
                 <h5 className="text-start ps-2 mb-0">
                   SHOPPING WITH
                 </h5>
@@ -569,7 +569,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                 </div>
               </Col>
-              <Col md={6} className="d-flex justify-content-center">
+              <Col md={6} sm={6} className="d-flex justify-content-center">
                 <div className={styles.groupshop_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -594,7 +594,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   )}
                 </div>
               </Col>
-              <Col xs={6} className={styles.groupshop__counter}>
+              <Col xs={3} className={styles.groupshop__counter}>
                 <h6 className="text-center">Store expires in</h6>
                 <div className={styles.groupshop__counter_middle}>
                   <p>
@@ -617,6 +617,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
               <Col
                 md={3}
+                sm={3}
                 xs={3}
                 className={[
                   'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
@@ -670,13 +671,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             className="d-flex align-items-center d-xs-block d-sm-block d-md-none d-lg-none d-xl-none border-top
             border-bottom bg-white"
           >
-            <Row className={['gx-0 d-flex justify-content-between',
+            <Row className={['gx-0 d-flex justify-content-between align-items-center',
               styles.groupshop__top].join(' ')}
             >
               <Col
+                sm={3}
                 className={[
                   'text-start m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-start align-items-baseline',
-                  styles.groupshop__top__search_icons,
+                  styles.groupshop__top__left_icons,
                 ].join(' ')}
               >
                 {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
@@ -688,7 +690,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                 ) : <></>}
               </Col>
-              <Col className="d-flex justify-content-center">
+              <Col sm={6} className="d-flex justify-content-center">
                 <div className={styles.groupshop_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -714,14 +716,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </div>
               </Col>
               <Col
+                sm={3}
                 className={[
                   'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
-                  styles.groupshop__top__search_icons,
+                  styles.groupshop__top__left_icons,
                 ].join(' ')}
               >
                 <IconButton
                   icon={<Handbag size={24} />}
-                  className={styles.groupshop__hero_bagBtn}
+                  className={styles.groupshop__hero_iconBtn}
                   onClick={() => setshowCart(true)}
                 >
                   <span className={styles.groupshop__hero__cart_count}>

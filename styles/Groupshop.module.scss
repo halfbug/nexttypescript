@@ -65,9 +65,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     }
     @extend .text-center;
     @extend .my-1;
-    @include media-breakpoint-up(sm) {
-      display: none !important;
-    }
+    // @include media-breakpoint-up(sm) {
+    //   display: none !important;
+    // }
   }
 
   &_counter_dots {
@@ -252,9 +252,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       .list-group-item {
         @extend .m-1, .p-1, .rounded;
       }
-      @include media-breakpoint-down(sm) {
-        display: none !important;
-      }
+      // @include media-breakpoint-down(sm) {
+      //   display: none !important;
+      // }
       h5 {
         font-size: 12px;
         font-weight: 500;
@@ -528,7 +528,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       text-align: start;
       @include media-breakpoint-down(sm) {
         margin: 0;
-        display: none;
+
 
       }
     }
@@ -541,7 +541,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @include media-breakpoint-down(sm) {
         margin: 0;
         text-align: start;
-
+        display: block;
       }
     }
     &_small_banner_box {
@@ -3338,9 +3338,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
     @extend .d-flex, .align-items-center, .d-block, .border-top, .border-bottom, .bg-white;
 
-    @include media-breakpoint-down(sm) {
-      display: none;
-    }
+    // @include media-breakpoint-down(sm) {
+    //   display: none;
+    // }
     @include media-breakpoint-down(xs) {
       display: none;
     }
