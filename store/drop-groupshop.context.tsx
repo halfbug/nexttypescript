@@ -61,6 +61,7 @@ export const gsdInit: IGroupshop = {
   campaignId: '',
   milestones: [],
   revisedCount: 0,
+  loading: false,
 };
 
 export const DropGroupshopContext = React.createContext<GSDContextType>(

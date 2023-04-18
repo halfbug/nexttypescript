@@ -2,20 +2,18 @@ import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
 import { CREATE_ONBOARDING_DISCOUNT_CODE, UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
 import useAppContext from './useAppContext';
-import useCode from './useCode';
 import useUtilityFunction from './useUtilityFunction';
 
 export default function useDrops() {
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
   const { gsctx, dispatch } = useAppContext();
-  const { ownerCode, shop, discountCode } = useCode();
   const { formatNumber } = useUtilityFunction();
 
   const THE_VAULT_TITLE = 'The Vault';
   const SPOTLIGHT_SECTION_TITLE = 'Today’s Spotlight';
 
   const {
-    milestones, store, members, spotlightProducts: sproducts, sections,
+    milestones, store, members, sections,
   } = gsctx;
   const [updateDropGroupshop] = useMutation(UPDATE_DROP_GROUPSHOP);
   const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);

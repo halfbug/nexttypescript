@@ -11315,6 +11315,7 @@ fsevents@^1.2.7:
     react-datepicker: ^4.8.0
     react-dom: 17.0.2
     react-icons: ^4.3.1
+    react-loading-skeleton: ^3.2.0
     react-marquee-slider: ^1.1.5
     react-responsive: ^9.0.0-beta.6
     react-share: ^4.4.1
@@ -16668,6 +16669,15 @@ fsevents@^1.2.7:
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
+  languageName: node
+  linkType: hard
+
+"react-loading-skeleton@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-loading-skeleton@npm:3.2.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 0da0d6747191696aee37aa202bb09af72316f7ddb6b5e7c7d82beaa7f06a6e931814f0f0d8e4536524985cb9c26f15ec95420e0463d8e9a3698dfdade20eb4ee
   languageName: node
   linkType: hard
 

@@ -25,6 +25,8 @@ import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -56,6 +58,7 @@ type ProductGridProps = {
   discoveryDiscount?: string;
   currency?: string | undefined;
   showPagination?: boolean;
+  loading?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 function ProductGrid(props: any) {
@@ -86,7 +89,7 @@ const ProductGridInitial = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
-  discoveryDiscount, urlForActivation, currency, showPagination, type, ...props
+  discoveryDiscount, urlForActivation, currency, showPagination, type, loading, ...props
 }: ProductGridProps) => {
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
@@ -109,7 +112,7 @@ const ProductGridInitial = ({
 
   const {
     gsctx: {
-      discountCode: { percentage },
+      discountCode: { percentage }, loading: load,
       dealProducts, addedProducts, store,
     } = { discountCode: { percentage: 40 }, dealProducts: [] }, isGroupshop, isChannel,
   } = useAppContext();
@@ -234,176 +237,200 @@ const ProductGridInitial = ({
   };
 
   return (
-    <Container {...props} ref={ref} id={id} className={type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? '' : dStyles.drops__vault__section}>
-      <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
-        <Col xs={12} className={styles.groupshop_col}>
-          {children}
-        </Col>
-      </Row>
+    <SkeletonTheme
+      baseColor="#e9ecef"
+      highlightColor="#dee2e6"
+      borderRadius="4px"
+      duration={4}
+    >
+      <Container {...props} ref={ref} id={id} className={type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? '' : dStyles.drops__vault__section}>
+        <Row className={isDrops ? dStyles.drops_row : styles.groupshop_row}>
+          <Col xs={12} className={styles.groupshop_col}>
+            {children}
+          </Col>
+        </Row>
 
-      {!children && (
-      <Row>
-        <Col>
-          <div className="d-flex justify-content-between align-items-center">
-            <div>
-              {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
-                <div className={dStyles.drops_col_dropheading}>
-                  {title}
-                </div>
-              )
-                : (
-                  <>
-                    <div className="d-flex align-items-center">
-                      <div className={dStyles.drops_col_dropheading}>
-                        {title}
-                      </div>
-                      {/* <div className={dStyles.drops_col_dropheading_off}>
+        {!children && (
+          <Row>
+            <Col>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
+
+                    <div className={dStyles.drops_col_dropheading}>
+                      {loading ? <Skeleton width="186.5px" /> : title}
+                    </div>
+
+                  )
+                    : (
+                      <>
+                        <div className="d-flex align-items-center">
+                          <div className={dStyles.drops_col_dropheading}>
+                            {loading ? <Skeleton width="186.5px" /> : title}
+                          </div>
+                          {/* <div className={dStyles.drops_col_dropheading_off}>
                         30% off
                       </div> */}
-                    </div>
-                  </>
-                )}
-            </div>
-            <div className="d-flex">
-              <BsArrowLeft opacity={0.3} id={`leftArrow${title}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [title, 'productGrid'].join('_') }); }} />
-              <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${title}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [title, 'productGrid'].join('_') }); }} />
-            </div>
-          </div>
-          {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
-            <div className={dStyles.drops_col_eligible}>
-              Not eligible for higher discounts or cashback.
-            </div>
-          )}
-        </Col>
-        {isSpotLight && (
-        <Col xs={12} className={dStyles.drops__counter}>
-          <div className="d-flex align-items-center mt-3">
-            <div className="opacity-50 me-2">
-              Drop ends in
-            </div>
-            <div className={dStyles.drops__counter_middle}>
-              <p>
-                <span>
-                  00
-                  {' '}
-                  hrs
-                </span>
-                :
-                <span>
-                  01
-                  {' '}
-                  mins
-                </span>
-                :
-                <span>
-                  01
-                  {' '}
-                  secs
-                </span>
-              </p>
-            </div>
+                        </div>
+                      </>
+                    )}
+                </div>
+                <div className="d-flex">
+                  <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
+                  <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+                </div>
+              </div>
+              {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
+                <div className={dStyles.drops_col_eligible}>
+                  Not eligible for higher discounts or cashback.
+                </div>
+              )}
+            </Col>
+            {isSpotLight && (
+              <Col xs={12} className={dStyles.drops__counter}>
+                <div className="d-flex align-items-center mt-3">
+                  <div className="opacity-50 me-2">
+                    Drop ends in
+                  </div>
+                  <div className={dStyles.drops__counter_middle}>
+                    <p>
+                      <span>
+                        00
+                        {' '}
+                        hrs
+                      </span>
+                      :
+                      <span>
+                        01
+                        {' '}
+                        mins
+                      </span>
+                      :
+                      <span>
+                        01
+                        {' '}
+                        secs
+                      </span>
+                    </p>
+                  </div>
 
-          </div>
-        </Col>
+                </div>
+              </Col>
+            )}
+          </Row>
         )}
-      </Row>
-      )}
-      <Row
-        className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
-          : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
-        id={[title, 'productGrid'].join('_')}
-        onScroll={(e) => handleScroll(e)}
-      >
-        {renderItems?.map((prod: any) => (
-          <>
-            {prod.title !== 'AddProductType' ? (
-              <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
-                <ProductCard
-                  isDrops={isDrops}
-                  isVault={type === DROPS_VAULT || type === DROPS_SPOTLIGHT}
-                  isSpotlight={isSpotLight}
-                  isrc={prod.featuredImage}
-                  vsrc={prod.featuredVideo}
-                  // onClick={() => handleDetail(prod)}
-                  onClick={() => {
-                    if (isSuggestion) {
-                      const Arr = prod.id.split('/');
-                      const prodId = Arr[Arr.length - 1];
-                      window.open(`${window.location.origin}${brandurl}/product&${prodId}`, '_blank');
-                    }
-                  }}
-                  imgOverlay={(
-                    <>
+        <Row
+          className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
+            : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
+          id={[id, 'productGrid'].join('_')}
+          onScroll={(e) => handleScroll(e)}
+        >
+          {renderItems?.map((prod, index) => (
+            <>
+              {prod.title !== 'AddProductType' ? (
+                <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
+                  <ProductCard
+                    isDrops={isDrops}
+                    isVault={type === DROPS_VAULT || type === DROPS_SPOTLIGHT}
+                    isSpotlight={isSpotLight}
+                    isrc={prod.featuredImage}
+                    vsrc={prod.featuredVideo}
+                    loading={loading}
+                        // onClick={() => handleDetail(prod)}
+                    onClick={() => {
+                      if (isSuggestion) {
+                        const Arr = prod.id.split('/');
+                        const prodId = Arr[Arr.length - 1];
+                        window.open(`${window.location.origin}${brandurl}/product&${prodId}`, '_blank');
+                      }
+                    }}
+                    imgOverlay={(
+                      <>
 
-                      <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
-                        <span className={
-                          isDrops ? dStyles.drops__pcard_tag_price
-                            : styles.groupshop__pcard_tag_price
-                        }
-                        >
-                          {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                          {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - +prod.price)) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
-                          {' '}
-                          OFF
-                        </span>
+                        <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
+                          <span className={
+                                isDrops ? dStyles.drops__pcard_tag_price
+                                  : styles.groupshop__pcard_tag_price
+                              }
+                          >
+                            {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
+                            {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - +prod.price)) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                            {' '}
+                            OFF
+                          </span>
 
-                        <div className={styles.groupshop__pcard_tag_boughtby}>
-                          {!isSuggestion && topFive(getBuyers(prod.id)?.map(
-                            (member: Member) => (
-                              <span className={styles.groupshop__pcard_tag_buyer}>
-                                {nameOnProductGrid(member.orderDetail.customer)}
-                              </span>
-                            ),
-                          ))}
-                          {isSuggestion && topFive(getBuyersDiscover(prod.id, membersForDiscover)
-                            ?.map(
+                          <div className={styles.groupshop__pcard_tag_boughtby}>
+                            {!isSuggestion && topFive(getBuyers(prod.id)?.map(
                               (member: Member) => (
                                 <span className={styles.groupshop__pcard_tag_buyer}>
                                   {nameOnProductGrid(member.orderDetail.customer)}
                                 </span>
                               ),
                             ))}
-                          {(!isSuggestion && isInfluencerGS && !isChannel)
-                          && topFive(getBuyers2(prod.id)
-                            ?.map((member: Member) => (
-                              <span className={styles.groupshop__pcard_tag_buyer}>
-                                {formatName(member.customerInfo)}
-                              </span>
-                            )))}
+                            {isSuggestion
+                                  && topFive(getBuyersDiscover(prod.id, membersForDiscover)
+                                    ?.map(
+                                      (member: Member) => (
+                                        <span className={styles.groupshop__pcard_tag_buyer}>
+                                          {nameOnProductGrid(member.orderDetail.customer)}
+                                        </span>
+                                      ),
+                                    ))}
+                            {(!isSuggestion && isInfluencerGS && !isChannel)
+                                  && topFive(getBuyers2(prod.id)
+                                    ?.map((member: Member) => (
+                                      <span className={styles.groupshop__pcard_tag_buyer}>
+                                        {formatName(member.customerInfo)}
+                                      </span>
+                                    )))}
 
-                          {!isSuggestion && getBuyers(prod.id).length > 0 && (
-                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                          {(!isSuggestion && isInfluencerGS) && getBuyers2(prod.id).length > 0 && (
-                            <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                          {isSuggestion && getBuyersDiscover(prod.id, membersForDiscover).length > 0
-                          && (
-                          <span className={styles.groupshop__pcard_tag_buyer}>Bought By </span>)}
-                        </div>
-                        {[...addedProducts ?? [],
-                          ...addedByInfluencer ?? [],
-                          ...addedByRefferal ?? []]?.filter(
-                          ({ productId }) => productId === prod.id,
-                        ).map((
-                          { addedBy, productId },
-                        ) => {
-                          const show = displayAddedByFunc(productId);
-                          let htmldata = true ? (
-                            <span
-                              className={styles.groupshop__pcard_tag_addedby}
-                              key={`${productId}_${Math.random()}`}
-                            >
-                              🤩
-                              {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
+                            {!isSuggestion && getBuyers(prod.id).length > 0 && (
+                            <span className={styles.groupshop__pcard_tag_buyer}>
+                              Bought By
                               {' '}
-                              {`${addedBy.length > 7 ? addedBy.slice(0, 7) : addedBy}'s favs`}
                             </span>
-                          ) : '';
-                          htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
-                          htmldata = (isInfluencerGS || isChannel) && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
-                          return htmldata;
-                        })}
-                      </button>
-                      {!isSuggestion && showHoverButton && (
+                            )}
+                            {(!isSuggestion && isInfluencerGS)
+                                  && getBuyers2(prod.id).length > 0 && (
+                                    <span className={styles.groupshop__pcard_tag_buyer}>
+                                      Bought By
+                                      {' '}
+                                    </span>
+                            )}
+                            {isSuggestion
+                                  && getBuyersDiscover(prod.id, membersForDiscover).length > 0
+                                  && (
+                                    <span className={styles.groupshop__pcard_tag_buyer}>
+                                      Bought By
+                                      {' '}
+                                    </span>
+                                  )}
+                          </div>
+                          {[...addedProducts ?? [],
+                            ...addedByInfluencer ?? [],
+                            ...addedByRefferal ?? []]?.filter(
+                            ({ productId }) => productId === prod.id,
+                          ).map((
+                            { addedBy, productId },
+                          ) => {
+                            const show = displayAddedByFunc(productId);
+                            let htmldata = true ? (
+                              <span
+                                className={styles.groupshop__pcard_tag_addedby}
+                                key={`${productId}_${Math.random()}`}
+                              >
+                                🤩
+                                {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
+                                {' '}
+                                {`${addedBy.length > 7 ? addedBy.slice(0, 7) : addedBy}'s favs`}
+                              </span>
+                            ) : '';
+                            htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                            htmldata = (isInfluencerGS || isChannel) && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
+                            return htmldata;
+                          })}
+                        </button>
+                        {!isSuggestion && showHoverButton && (
                         <Row className={styles.groupshop__pcard_tag_addToCart}>
                           <Col lg={10} className="p-0">
                             {isExpired ? (
@@ -442,39 +469,45 @@ const ProductGridInitial = ({
                             </Col>
                           ) : ''}
                         </Row>
-                      )}
-                    </>
-                  )}
-                >
-                  <div className={styles.groupshop_product_info}>
-                    <div className={styles.groupshop_product_desc}>
-                      <h5 className={['fw-bold', !isDrops ? 'text-center' : '', styles.groupshop_product_desc_title].join(' ')}>{prod.title}</h5>
-                      {isDrops && priceUI(prod)}
-                      {prod.outofstock
-                        ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>)
-                        : ((prod.purchaseCount && !isDrops) && (
-                        <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
-                          { prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
-                          { prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
-                          { prod.purchaseCount > 100 ? <>🎉</> : ''}
-                          <i>
-                            {`${prod.purchaseCount} people shopped`}
-                          </i>
-                        </p>
-                        ))
-                        || (prod.secondaryCount && isDrops && (
-                        <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
-                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) >= 1 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 30 ? <>🔥</> : ''}
-                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 30 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 100 ? <>⚡️</> : ''}
-                          { updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 100 ? <>🎉</> : ''}
-                          <i>
-                            {`${updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount)} people shopped`}
-                          </i>
-                        </p>
-                        ))}
-                      {!isDrops && priceUI(prod)}
-                    </div>
-                    {!showHoverButton && (
+                        )}
+                      </>
+                        )}
+                  >
+                    <div className={styles.groupshop_product_info}>
+                      <div className={styles.groupshop_product_desc}>
+                        {loading
+                          ? <Skeleton width="186.5px" height="55px" />
+                          : <h5 className={['fw-bold', !isDrops ? 'text-center' : '', styles.groupshop_product_desc_title].join(' ')}>{prod.title}</h5>}
+                        {isDrops && (loading
+                          ? <Skeleton width="186.5px" />
+                          : priceUI(prod))}
+                        {prod.outofstock
+                          ? <p className={dStyles.drops_product_desc_soldout}>{loading ? <Skeleton width="186.5px" /> : 'Sold out'}</p>
+                          : ((prod.purchaseCount && !isDrops) && (
+                          <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
+                            {prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
+                            {prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
+                            {prod.purchaseCount > 100 ? <>🎉</> : ''}
+                            <i>
+                              {`${prod.purchaseCount} people shopped`}
+                            </i>
+                          </p>
+                          ))
+                              || (prod.secondaryCount && isDrops && (
+                                !loading ? (
+                                  <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
+                                    {updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) >= 1 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 30 ? <>🔥</> : ''}
+                                    {updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 30 && updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) <= 100 ? <>⚡️</> : ''}
+                                    {updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount) > 100 ? <>🎉</> : ''}
+                                    <i>
+                                      {`${updatePurhaseCount(prod?.secondaryCount, prod?.purchaseCount)} people shopped`}
+                                    </i>
+                                  </p>
+                                ) : <Skeleton width="186.5px" />
+                              ))}
+                        {!isDrops && priceUI(prod)}
+                      </div>
+                      {!showHoverButton && (
                       <div className={styles.groupshop_addtoCart_wrapper}>
                         {isExpired ? (
                           <ShareUnlockButton
@@ -482,7 +515,6 @@ const ProductGridInitial = ({
                             shareurl={shortActivateURL ?? urlForActivation ?? productShareUrl(prod?.id ?? '')}
                             className={styles.groupshop_unlockToShare}
                             onClick={(e) => handleCard(e)}
-                          // () => { setsProduct(prod); setshowDetail(true); }}
                           />
 
                         ) : (
@@ -491,7 +523,7 @@ const ProductGridInitial = ({
                               variant="primary"
                               className={styles.groupshop_addtoCart}
                               onClick={() => handleDetail(prod)}
-                              // () => { setsProduct(prod); setshowDetail(true); }}
+                                    // () => { setsProduct(prod); setshowDetail(true); }}
                               disabled={isExpired || prod.outofstock}
                             >
                               {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
@@ -510,59 +542,59 @@ const ProductGridInitial = ({
                           </>
                         )}
                       </div>
-                    )}
-                  </div>
-                </ProductCard>
-              </Col>
-            ) : (
-              <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
-                <AddProduct xs={xs} md={md} lg={lg} xl={xl} key={`addP${prod.id}`} percentage={percentage} isExpired={isExpired} addProducts={() => addProducts(true)} />
-              </Col>
-            )}
-          </>
-        ))}
-
-        {(!isSuggestion && skuCount! > 1 && leftOverProducts()?.length > 0)
-          ? [...new Array(fillerz)]?.map((n) => (
-            <Col xs={xs} md={6} lg={4} xl={3} key={n}>
-              <ProductCard
-                isrc="/images/empty.png"
-                imgOverlay={(
-                  <>
-                    <span
-                      className={
-                        isDrops ? dStyles.drops__pcard_tag_price
-                          : styles.groupshop__pcard_tag_price
-                      }
-                    >
-                      {`${percentage}% OFF`}
-                    </span>
-                    <Button
-                      variant="outline-primary"
-                      className={styles.groupshop__pcard_tag_product}
-                      onClick={() => addProducts(true)}
-                      disabled={isExpired}
-                    >
-                      ADD A PRODUCT
-
-                    </Button>
-                  </>
+                      )}
+                    </div>
+                  </ProductCard>
+                </Col>
+              ) : (
+                <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
+                  <AddProduct xs={xs} md={md} lg={lg} xl={xl} key={`addP${prod.id}`} percentage={percentage} isExpired={isExpired} addProducts={() => addProducts(true)} />
+                </Col>
               )}
-              >
-                <h5 className="text-center fw-bold text-truncate">{isDrops ? 'Curate your Groupshop' : 'Curate your Microstore'}</h5>
+            </>
+          ))}
 
-                <p className="text-center  fs-5">
-                  <i>
-                    Add your favorite products for you
-                    {' '}
-                    &
-                    {' '}
-                    your friends to shop
+          {(!isSuggestion && skuCount! > 1 && leftOverProducts()?.length > 0)
+            ? [...new Array(fillerz)]?.map((n) => (
+              <Col xs={xs} md={6} lg={4} xl={3} key={n}>
+                <ProductCard
+                  isrc="/images/empty.png"
+                  imgOverlay={(
+                    <>
+                      <span
+                        className={
+                          isDrops ? dStyles.drops__pcard_tag_price
+                            : styles.groupshop__pcard_tag_price
+                        }
+                      >
+                        {`${percentage}% OFF`}
+                      </span>
+                      <Button
+                        variant="outline-primary"
+                        className={styles.groupshop__pcard_tag_product}
+                        onClick={() => addProducts(true)}
+                        disabled={isExpired}
+                      >
+                        ADD A PRODUCT
 
-                  </i>
-                </p>
-                <br />
-                {/* <div className={styles.groupshop_addtoCart_wrapper}>
+                      </Button>
+                    </>
+                  )}
+                >
+                  <h5 className="text-center fw-bold text-truncate">{isDrops ? 'Curate your Groupshop' : 'Curate your Microstore'}</h5>
+
+                  <p className="text-center  fs-5">
+                    <i>
+                      Add your favorite products for you
+                      {' '}
+                      &
+                      {' '}
+                      your friends to shop
+
+                    </i>
+                  </p>
+                  <br />
+                  {/* <div className={styles.groupshop_addtoCart_wrapper}>
                 <Button variant="primary" disabled className={styles.groupshop_addtoCart}>
                 Add to Cart
                 </Button>
@@ -571,11 +603,11 @@ const ProductGridInitial = ({
                   <Send size={16} />
                 </Button>
               </div> */}
-              </ProductCard>
-            </Col>
-          )) : <></>}
-      </Row>
-      {showPagination
+                </ProductCard>
+              </Col>
+            )) : <></>}
+        </Row>
+        {showPagination
       && (
       <Row>
         <Col>
@@ -617,12 +649,13 @@ const ProductGridInitial = ({
         </Col>
       </Row>
       )}
-      {/* <ProductDetail
+        {/* <ProductDetail
         show={showDetail}
         handleClose={(e) => setshowDetail(false)}
         product={sProduct}
       /> */}
-    </Container>
+      </Container>
+    </SkeletonTheme>
   );
 };
 
@@ -650,6 +683,7 @@ ProductGridInitial.defaultProps = {
   discoveryDiscount: '',
   currency: '',
   showPagination: true,
+  loading: true,
 };
 
 export default ProductGrid;

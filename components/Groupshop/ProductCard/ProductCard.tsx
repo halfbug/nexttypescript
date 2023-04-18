@@ -6,6 +6,7 @@ import NoImage from 'assets/images/noImage.png';
 import {
   Button, Card, Col, Row,
 } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { RootProps } from 'types/store';
 
 type IProductCardProps = {
@@ -16,29 +17,36 @@ type IProductCardProps = {
   isDrops?: boolean;
   isVault?: boolean;
   isSpotlight?: boolean;
+  loading?: boolean;
   onImageClick?: any;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 const ProductCard = ({
   isrc, vsrc, children, type, imgOverlay, pending, onClick, isDrops, isSpotlight, isVault,
-  onImageClick, ...rest
+  onImageClick, loading, ...rest
 }: IProductCardProps) => {
   // console.log('sas');
   switch (type) {
     case 'large':
       return (
         <Card {...rest} className={[styles.groupshop__pcard, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ')}>
-          <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc || NoImage.src})` }}>
-            {
+          {
+            loading
+              ? <Skeleton width="186.5px" height="190.5px" />
+              : (
+                <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc || NoImage.src})` }}>
+                  {
             !isrc && <video onClick={onImageClick} src={vsrc} muted autoPlay loop style={{ width: '306px' }} />
             }
-            <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
-              {imgOverlay}
-            </Card.ImgOverlay>
-            {/* <Card.Img variant="top" src={isrc} className=
+                  <Card.ImgOverlay onClick={onClick} className={[' p-0', styles.groupshop__pcard_overlay].join(' ')}>
+                    {imgOverlay}
+                  </Card.ImgOverlay>
+                  {/* <Card.Img variant="top" src={isrc} className=
             {[' img-fluid', styles.groupshop__pcard_image].join(' ')} /> */}
-          </div>
-          <Card.Body className="px-2">
+                </div>
+              )
+          }
+          <Card.Body className={loading ? 'px-0' : 'px-2'}>
             {children}
           </Card.Body>
         </Card>
@@ -83,6 +91,7 @@ ProductCard.defaultProps = {
   isDrops: false,
   isVault: false,
   isSpotlight: false,
+  loading: true,
   onImageClick: () => {},
 };
 

@@ -174,8 +174,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     btnDisable,
     updateOnboarding,
     getChackback,
-    THE_VAULT_TITLE,
-    SPOTLIGHT_SECTION_TITLE,
   } = useDrops();
 
   const { googleEventCode, googleButtonCode } = useGtm();
@@ -709,6 +707,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     isModalForMobile={isModalForMobile}
                     urlForActivation={urlForActivation}
                     showPagination={ele.type === DROPS_ALLPRODUCT}
+                    loading={gsctx.loading}
                   >
                     {ele.type === DROPS_ALLPRODUCT && (
                     <div>

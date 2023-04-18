@@ -21,6 +21,16 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   });
 
   useEffect(() => {
+    dispatch({
+      type: 'UPDATE_GROUPSHOP',
+      payload: {
+        ...gsctx,
+        loading,
+      },
+    });
+  }, [loading]);
+
+  useEffect(() => {
     if (gsctx && gsctx.firstCategory) {
       const { categories: categoryArr, firstCategory } = gsctx;
       if (categoryArr) {
@@ -36,6 +46,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...gsctx,
+          loading,
           sections: data.collectionByCategory.sections,
         },
       });
