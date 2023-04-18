@@ -683,7 +683,7 @@ ProductGridInitial.defaultProps = {
   discoveryDiscount: '',
   currency: '',
   showPagination: true,
-  loading: true,
+  loading: false,
 };
 
 export default ProductGrid;

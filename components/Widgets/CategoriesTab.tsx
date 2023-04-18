@@ -18,6 +18,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
+    skip: !id,
   });
 
   useEffect(() => {
