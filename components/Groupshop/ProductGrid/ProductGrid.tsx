@@ -137,9 +137,9 @@ const ProductGridInitial = ({
   // console.log('🚀 ~ file: ProductGrid.tsx ~ line 71 ===~ skucount', skuCount);
   // console.log('🚀 ~ file: ProductGrid.tsx === leftOverProducts', leftOverProducts()?.length);
 
-  if (products === undefined || products?.length < 1) {
+  if ((products === undefined || products?.length < 1) && !loading) {
     // return (<Placeholder as="h1" bg="secondary" className="w-100" />);
-    return (<div {...props} ref={ref} id={id}>&nbsp;</div>);
+    return (<></>);
   }
   // console.log({ renderItems });
   const { googleButtonCode } = useGtm();
@@ -325,7 +325,7 @@ const ProductGridInitial = ({
           id={[id, 'productGrid'].join('_')}
           onScroll={(e) => handleScroll(e)}
         >
-          {renderItems?.map((prod, index) => (
+          {!loading ? renderItems?.map((prod, index) => (
             <>
               {prod.title !== 'AddProductType' ? (
                 <Col xs={xs} md={md} lg={lg} xl={xl} key={prod.id}>
@@ -552,6 +552,24 @@ const ProductGridInitial = ({
                 </Col>
               )}
             </>
+          )) : new Array(3).fill(null).map(() => (
+            <Col xs={xs} md={md} lg={lg} xl={xl}>
+              <ProductCard
+                isDrops={isDrops}
+                loading
+                isVault={type === DROPS_VAULT || type === DROPS_SPOTLIGHT}
+              >
+                {/* <div className={styles.groupshop_product_info}>
+                  <div className={styles.groupshop_product_desc}> */}
+                <Skeleton width="186.5px" />
+                <Skeleton width="186.5px" />
+                <p className={dStyles.drops_product_desc_soldout}>
+                  <Skeleton width="186.5px" />
+                </p>
+                {/* </div>
+                </div> */}
+              </ProductCard>
+            </Col>
           ))}
 
           {(!isSuggestion && skuCount! > 1 && leftOverProducts()?.length > 0)

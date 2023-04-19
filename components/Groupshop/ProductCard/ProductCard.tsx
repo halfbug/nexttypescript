@@ -10,8 +10,8 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { RootProps } from 'types/store';
 
 type IProductCardProps = {
-  imgOverlay : React.ReactNode;
-  isrc: string;
+  imgOverlay?: React.ReactNode;
+  isrc?: string;
   vsrc?: string;
   type?: 'small' | 'large';
   isDrops?: boolean;
@@ -91,8 +91,10 @@ ProductCard.defaultProps = {
   isDrops: false,
   isVault: false,
   isSpotlight: false,
-  loading: true,
+  loading: false,
   onImageClick: () => {},
+  imgOverlay: <></>,
+  isrc: '',
 };
 
 export default ProductCard;

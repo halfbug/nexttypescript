@@ -63,7 +63,9 @@ import Scan from 'components/Groupshop/DropRewardBox/Scan';
 import CountDownTimer from 'components/Groupshop/CountDownTimer/CountDownTimer';
 import Button from 'components/Buttons/Button/Button';
 import CategoriesTab from 'components/Widgets/CategoriesTab';
-import { DROPS_ALLPRODUCT, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
+import {
+  DROPS_ALLPRODUCT, DROPS_SPOTLIGHT, DROPS_VAULT,
+} from 'configs/constant';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -104,7 +106,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   // NEW HOOKS
   const [allProductsList, setAllProductsList] = useState<IProduct[] | undefined>([]);
-  const [sections, setSections] = useState<DynamicProducts[] | undefined>([]);
+  const [sections, setSections] = useState<DynamicProducts[]>([]);
 
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
@@ -685,45 +687,55 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         </div>
         <div id="dropsProductSections">
           {
-          sections?.map((ele: any) => {
-            if (ele.products.length) {
-              return (
-                <>
-                  <ProductGrid
-                    isDrops
-                    title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
-                    type={ele.type}
-                    xs={6}
-                    sm={6}
-                    md={6}
-                    lg={4}
-                    xl={3}
-                    products={uniqueArray(ele.products)}
-                    maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
-                    addProducts={handleAddProduct}
-                    handleDetail={(prd: any) => setsProduct(prd)}
-                    showHoverButton
-                    id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
-                    isModalForMobile={isModalForMobile}
-                    urlForActivation={urlForActivation}
-                    showPagination={ele.type === DROPS_ALLPRODUCT}
-                    loading={gsctx.loading}
-                  >
-                    {ele.type === DROPS_ALLPRODUCT && (
-                    <div>
-                      <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-                        <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-                        {ele.name}
-                      </div>
+          !loading
+            ? sections?.map((ele: any) => (
+              <>
+                <ProductGrid
+                  isDrops
+                  title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                  type={ele.type}
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  products={loading ? ele.products : uniqueArray(ele.products)}
+                  maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
+                  addProducts={handleAddProduct}
+                  handleDetail={(prd: any) => setsProduct(prd)}
+                  showHoverButton
+                  id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
+                  isModalForMobile={isModalForMobile}
+                  urlForActivation={urlForActivation}
+                  showPagination={ele.type === DROPS_ALLPRODUCT}
+                  loading={gsctx.loading || loading}
+                >
+                  {ele.type === DROPS_ALLPRODUCT && (
+                  <div>
+                    <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                      <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                      {ele.name}
                     </div>
-                    )}
-                  </ProductGrid>
-                </>
-              );
-            }
-            return '';
-          })
-        }
+                  </div>
+                  )}
+                </ProductGrid>
+              </>
+            ))
+            : (
+              new Array(3).fill(null).map(() => (
+                <ProductGrid
+                  xs={6}
+                  sm={6}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  isDrops
+                  maxrows={3}
+                  loading={gsctx.loading || loading}
+                />
+              ))
+            )
+}
         </div>
 
         <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
