@@ -62,8 +62,13 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   };
 
   const onSubCategoryClick = (subItem: any) => {
-    setSelectedSubCategory(subItem);
-    setId(subItem.categoryId);
+    if (id !== subItem.categoryId) {
+      setSelectedSubCategory(subItem);
+      setId(subItem.categoryId);
+    } else {
+      setSelectedSubCategory('');
+      setId(selectedCategory.categoryId);
+    }
     scrollToTop();
   };
 
