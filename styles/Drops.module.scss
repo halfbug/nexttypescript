@@ -42,7 +42,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
 
   &__categoriesTab {
     @extend .d-flex, .flex-nowrap;
-    margin-top: 35px;
+    padding-top: 20px;
     // margin-bottom: 24px;
     padding-bottom: 6px;
     overflow-x: scroll;
@@ -90,13 +90,15 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__subCategoriesTab {
-    @extend .d-flex, .flex-nowrap, .ms-2;
+    @extend .d-flex, .flex-nowrap, .ps-2;
     padding-bottom: 12px;
-    padding-top: 18px;
+    padding-top: 6px;
     overflow-x: scroll;
 
+    border-bottom: 1px solid #efefef;
+
     &__item {
-      @extend .mx-1;
+      @extend .mx-2;
       min-width: fit-content;
       padding: 4px 16px;
 
