@@ -688,39 +688,42 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <div id="dropsProductSections">
           {
           !loading
-            ? sections?.map((ele: any) => (
-              <>
-                <ProductGrid
-                  isDrops
-                  title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
-                  type={ele.type}
-                  xs={6}
-                  sm={6}
-                  md={6}
-                  lg={4}
-                  xl={3}
-                  products={loading ? ele.products : uniqueArray(ele.products)}
-                  maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
-                  addProducts={handleAddProduct}
-                  handleDetail={(prd: any) => setsProduct(prd)}
-                  showHoverButton
-                  id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
-                  isModalForMobile={isModalForMobile}
-                  urlForActivation={urlForActivation}
-                  showPagination={ele.type === DROPS_ALLPRODUCT}
-                  loading={gsctx.loading || loading}
-                >
-                  {ele.type === DROPS_ALLPRODUCT && (
-                  <div>
-                    <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-                      <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-                      {ele.name}
+            ? sections?.map((ele: any) => {
+              if (ele.products.length) {
+                <>
+                  <ProductGrid
+                    isDrops
+                    title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                    type={ele.type}
+                    xs={6}
+                    sm={6}
+                    md={6}
+                    lg={4}
+                    xl={3}
+                    products={loading ? ele.products : uniqueArray(ele.products)}
+                    maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
+                    addProducts={handleAddProduct}
+                    handleDetail={(prd: any) => setsProduct(prd)}
+                    showHoverButton
+                    id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
+                    isModalForMobile={isModalForMobile}
+                    urlForActivation={urlForActivation}
+                    showPagination={ele.type === DROPS_ALLPRODUCT}
+                    loading={gsctx.loading || loading}
+                  >
+                    {ele.type === DROPS_ALLPRODUCT && (
+                    <div>
+                      <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                        <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                        {ele.name}
+                      </div>
                     </div>
-                  </div>
-                  )}
-                </ProductGrid>
-              </>
-            ))
+                    )}
+                  </ProductGrid>
+                </>;
+              }
+              return '';
+            })
             : (
               new Array(3).fill(null).map(() => (
                 <ProductGrid

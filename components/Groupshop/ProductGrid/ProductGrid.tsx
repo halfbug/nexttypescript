@@ -139,7 +139,7 @@ const ProductGridInitial = ({
 
   if ((products === undefined || products?.length < 1) && !loading) {
     // return (<Placeholder as="h1" bg="secondary" className="w-100" />);
-    return (<></>);
+    return (<div ref={ref} id={id} />);
   }
   // console.log({ renderItems });
   const { googleButtonCode } = useGtm();
