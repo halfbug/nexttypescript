@@ -429,6 +429,31 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.drops}>
+        <Header
+          LeftComp={
+            isModalForMobile
+              ? (
+                <div className="d-flex">
+                  <QRClickIcon onClick={() => { setShowQR(true); }} />
+                  <InfoButton handleClick={() => setLearnHow(true)} />
+                </div>
+              )
+              : <></>
+            // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
+          }
+          RightComp={(
+            <Button2
+              variant="primary"
+              className="rounded-pill bg-black"
+              onClick={() => {
+                setSignup(true);
+              }}
+            >
+              Sign up
+            </Button2>
+          )}
+
+        />
         <header>
           {!isModalForMobile && showBanner && (
             <div>
@@ -436,31 +461,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               <div className={styles.drops__dummyOverlay} />
             </div>
           )}
-          <Header
-            LeftComp={
-              isModalForMobile
-                ? (
-                  <div className="d-flex">
-                    <QRClickIcon onClick={() => { setShowQR(true); }} />
-                    <InfoButton handleClick={() => setLearnHow(true)} />
-                  </div>
-                )
-                : <></>
-              // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
-            }
-            RightComp={(
-              <Button2
-                variant="primary"
-                className="rounded-pill bg-black"
-                onClick={() => {
-                  setSignup(true);
-                }}
-              >
-                Sign up
-              </Button2>
-            )}
-
-          />
           {gsctx?.store?.drops?.isVideoEnabled ? <VideoWidget /> : ''}
           <Container fluid className="border-top border-bottom bg-white">
             <Row className={['gx-0', styles.drops__top].join(' ')}>
