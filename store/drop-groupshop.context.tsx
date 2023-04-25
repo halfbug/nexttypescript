@@ -47,6 +47,11 @@ export const gsdInit: IGroupshop = {
         average: 0,
         maximum: 0,
       },
+      cartRewards: [{
+        id: '',
+        rewardTitle: '',
+        rewardValue: '',
+      }],
       spotlightDiscount: { percentage: '', priceRuleId: '', title: '' },
     },
   },

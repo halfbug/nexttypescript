@@ -7,6 +7,7 @@ export interface Drops {
   bestSellerCollectionId?: string;
   allProductsCollectionId?: string;
   rewards?: PartnerRewards;
+  cartRewards: CartRewards[];
   klaviyo?: Klaviyo;
 }
 
@@ -18,6 +19,12 @@ export type Klaviyo = {
   signup2: string;
   signup3: string;
   signup4: string;
+}
+
+export type CartRewards = {
+  id: string;
+  rewardTitle: string;
+  rewardValue: string;
 }
 
 export interface IStore {

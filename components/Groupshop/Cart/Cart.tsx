@@ -53,6 +53,7 @@ const Cart = ({
   } = useDeal();
   const {
     spotlightProducts,
+    totalRewardsValue,
     cartValueProgress,
     VSPrice,
   } = useDrops();
@@ -121,12 +122,43 @@ const Cart = ({
   // const { setsProduct } = useDetail(suggestedProd);
   const [upToPercent, setupToPercent] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [rewardTitle, setRewardTitle] = React.useState({
+    sum: 0,
+    rewardTitle: '',
+  });
   const { campaign } = gsctx;
   useEffect(() => {
     const rew = { ...campaign?.salesTarget?.rewards };
     const perc = isInfluencerGS ? gsctx?.partnerRewards?.baseline.toString() : rew[2]?.discount;
     setupToPercent(perc);
   }, [gsctx.campaign]);
+
+  useEffect(() => {
+    if (gsctx.id && store?.drops?.cartRewards.length) {
+      const arr = store?.drops?.cartRewards;
+      const cartRewards: any = arr.slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
+      setRewardTitle({
+        rewardTitle: cartRewards[0].rewardTitle,
+        sum: cartRewards[0].rewardValue,
+      });
+    }
+  }, [gsctx]);
+
+  useEffect(() => {
+    const totalCart: any = getTotal();
+    const temp: any = store?.drops?.cartRewards
+      .slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
+    const numArray = temp.map((ele: any, index: number) => {
+      const arr = [...temp];
+      const newArr = arr.splice(0, (index + 1));
+      return {
+        sum: newArr.reduce((curr, next) => curr + (+next.rewardValue), 0),
+        rewardTitle: ele.rewardTitle,
+      };
+    });
+    const obj = numArray?.find((ele: any) => ele.sum > totalCart);
+    setRewardTitle({ ...obj, sum: (obj?.sum - totalCart) });
+  }, [getTotal()]);
 
   const { push } = useRouter();
   // const { emptyCart } = useSaveCart();
@@ -228,6 +260,21 @@ And you can keep earning up to
 
     );
   };
+
+  const rewardbarHeadline = () => (
+    <>
+      {getTotal()! < totalRewardsValue().totalRewardValue ? <MoneyFly className=" mx-1 " /> : ''}
+      {
+                    getTotal()! >= totalRewardsValue().totalRewardValue ? "You've "
+                      : `Spend $${formatNumber(rewardTitle?.sum)}
+                more to `
+                  }
+      <strong>
+        {`${getTotal()! >= totalRewardsValue().totalRewardValue ? 'unlocked all rewards' : `unlock ${rewardTitle?.rewardTitle}.`} `}
+      </strong>
+      {`${getTotal()! >= totalRewardsValue().totalRewardValue ? 'on your order!' : ''}`}
+    </>
+  );
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} placement="end" {...props} className={['border-start-0', styles.groupshop_modal_cart].join(' ')}>
@@ -241,28 +288,21 @@ And you can keep earning up to
           }
           >
             <div className={['m-0', styles.groupshop_modal_cart_heading].join(' ')}>Cart</div>
-            {isDrops && (
+            {isDrops && store?.drops?.cartRewards?.length ? (
               <Row className="d-flex justify-content-center">
                 <Col sm={10} className={[' text-center', dStyles.drops_cart_spend].join(' ')}>
-                  {getTotal()! < 50 ? <MoneyFly className=" mx-1 " /> : ''}
-                  {
-                    getTotal()! >= 50 ? "You've "
-                      : `Spend $${cartValueProgress(getTotal()).remainedValue}
-                more to `
-                  }
-                  <strong>
-                    {`${getTotal()! >= 50 ? 'unlocked free shipping' : 'unlock free shipping.'} `}
-                  </strong>
-                  {`${getTotal()! >= 50 ? 'on your order!' : ''}`}
+                  {rewardbarHeadline()}
                 </Col>
                 <Col className="mt-3" sm={12}>
                   <GradientProgressBar
                     progress={cartValueProgress(getTotal()).percantage}
+                    cartValue={getTotal() ?? 0}
                     className={dStyles.drops_cart_progressBar}
+                    rewards={store?.drops?.cartRewards}
                   />
                 </Col>
               </Row>
-            )}
+            ) : <></>}
             {/* <div className="align-items-center">
                 // eslint-disable-next-line max-len
                 <Members names={gsctx?.members.map((mem: any) => `

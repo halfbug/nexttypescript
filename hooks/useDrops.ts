@@ -174,7 +174,10 @@ export default function useDrops() {
   }, [gsctx, store]);
 
   const cartValueProgress = (cartValue: any) => {
-    const baseValue = 50;
+    // const baseValue = 50;
+    const baseValue = store?.drops?.cartRewards
+      ?.map((ele) => parseInt(ele.rewardValue, 10))
+      .reduce((curr, next) => curr + next, 0) ?? 0;
     const percantage = (+cartValue * 100) / baseValue;
     const remainedValue = baseValue - cartValue;
     const cart = {
@@ -182,6 +185,17 @@ export default function useDrops() {
       remainedValue: formatNumber(remainedValue),
     };
     return cart;
+  };
+
+  const totalRewardsValue = () => {
+    const totalRewardValue = store?.drops?.cartRewards
+      ?.map((ele) => parseInt(ele.rewardValue, 10))
+      .reduce((curr, next) => curr + next, 0) ?? 0;
+    const totalRewards = store?.drops?.cartRewards.length;
+    return {
+      totalRewardValue,
+      totalRewards,
+    };
   };
 
   const updatePurhaseCount = useCallback((
@@ -203,5 +217,6 @@ export default function useDrops() {
     cartValueProgress,
     updatePurhaseCount,
     VSPrice,
+    totalRewardsValue,
   };
 }

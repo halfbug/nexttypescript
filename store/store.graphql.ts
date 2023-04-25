@@ -803,6 +803,11 @@ query DropGroupshop($code: String!, $status: String = "") {
           average
           maximum
         }
+        cartRewards {
+          id
+          rewardValue
+          rewardTitle
+        }
         klaviyo{         
           signup1
           signup2
