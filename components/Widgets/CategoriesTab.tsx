@@ -74,9 +74,11 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
 
   const scrollToTop = useCallback(() => {
     setTimeout(() => {
-      const ele = document.getElementById('dropsProductSections')?.offsetTop ?? 0;
+      const elHeaderSection = document.getElementById('dropsStickyHeaderSection')?.offsetHeight ?? 0;
+      const elStickySection = document.getElementById('dropsStickyAreaSection')?.offsetHeight ?? 0;
+      const elProductsSection = document.getElementById('dropsProductSections')?.offsetTop ?? 0;
       window.scroll({
-        top: (ele - 270),
+        top: (elProductsSection - elHeaderSection - elStickySection),
         behavior: 'smooth',
       });
     }, 700);

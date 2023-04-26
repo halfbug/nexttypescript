@@ -454,7 +454,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           )}
 
         />
-        <header>
+        <header id="dropsStickyHeaderSection">
           {!isModalForMobile && showBanner && (
             <div>
               <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
@@ -662,7 +662,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             </Row>
           </Container>
         </Hero>
-        <div className={styles.drops__stickyArea}>
+        <div className={styles.drops__stickyArea} id="dropsStickyAreaSection">
           {
             !!nextDropReward && (
               <div className="bg-black text-center py-2">
