@@ -134,7 +134,7 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   useEffect(() => {
-    if (gsctx.id && store?.drops?.cartRewards.length) {
+    if (gsctx.id && store?.drops?.cartRewards.length && isDrops) {
       const arr = store?.drops?.cartRewards;
       const cartRewards: any = arr.slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
       setRewardTitle({
@@ -145,19 +145,21 @@ const Cart = ({
   }, [gsctx]);
 
   useEffect(() => {
-    const totalCart: any = getTotal();
-    const temp: any = store?.drops?.cartRewards
-      .slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
-    const numArray = temp.map((ele: any, index: number) => {
-      const arr = [...temp];
-      const newArr = arr.splice(0, (index + 1));
-      return {
-        sum: newArr.reduce((curr, next) => curr + (+next.rewardValue), 0),
-        rewardTitle: ele.rewardTitle,
-      };
-    });
-    const obj = numArray?.find((ele: any) => ele.sum > totalCart);
-    setRewardTitle({ ...obj, sum: (obj?.sum - totalCart) });
+    if (store?.drops?.cartRewards.length && isDrops) {
+      const totalCart: any = getTotal();
+      const temp: any = store?.drops?.cartRewards
+        ?.slice()?.sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
+      const numArray = temp?.map((ele: any, index: number) => {
+        const arr = [...temp];
+        const newArr = arr?.splice(0, (index + 1));
+        return {
+          sum: newArr?.reduce((curr, next) => curr + (+next.rewardValue), 0),
+          rewardTitle: ele.rewardTitle,
+        };
+      });
+      const obj = numArray?.find((ele: any) => ele.sum > totalCart);
+      setRewardTitle({ ...obj, sum: (obj?.sum - totalCart) });
+    }
   }, [getTotal()]);
 
   const { push } = useRouter();
