@@ -70,6 +70,18 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     // }
   }
 
+  &__counterMobile {
+    @extend .text-center, .my-1;
+    h6 {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 11px;
+    }
+    // @include media-breakpoint-up(sm) {
+    //   display: none !important;
+    // }
+  }
+
   &_counter_dots {
     font-size: 18px;
   }
@@ -3341,8 +3353,14 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     // @include media-breakpoint-down(sm) {
     //   display: none;
     // }
-    @include media-breakpoint-down(xs) {
-      display: none;
+    @include media-breakpoint-down(sm) {
+      display: none !important;
+    }
+  }
+  &_mobile_header {
+    @extend .align-items-center, .d-block, .border-top, .border-bottom, .bg-white;
+    @include media-breakpoint-up(sm) {
+      display: none !important;
     }
   }
 }

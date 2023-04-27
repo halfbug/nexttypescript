@@ -520,8 +520,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
           />
           <VideoWidget />
-          {!isModalForMobile
-          && (
           <Container
             fluid
             className={styles.groupshop_web_header}
@@ -662,35 +660,14 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </Col>
             </Row>
           </Container>
-          )}
           {/* mobile first header */}
-          {isModalForMobile
-          && (
+
           <Container
             fluid
-            className="d-flex align-items-center d-xs-block d-sm-block d-md-none d-lg-none d-xl-none border-top
-            border-bottom bg-white"
+            className={styles.groupshop_mobile_header}
           >
-            <Row className={['gx-0 d-flex justify-content-between align-items-center',
-              styles.groupshop__top].join(' ')}
-            >
-              <Col
-                sm={3}
-                className={[
-                  'text-start m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-start align-items-baseline',
-                  styles.groupshop__top__left_icons,
-                ].join(' ')}
-              >
-                {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
-                  <IconButton
-                    icon={<Search size={24} />}
-                    className={styles.groupshop__hero_smSearchBtn}
-                    onClick={handleAddProduct}
-                    disabled={isExpired}
-                  />
-                ) : <></>}
-              </Col>
-              <Col sm={6} className="d-flex justify-content-center">
+            <Row className="gx-0 py-2 align-items-center">
+              <Col xs={3} className="d-flex align-items-center justify-content-center">
                 <div className={styles.groupshop_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -716,27 +693,64 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 </div>
               </Col>
               <Col
-                sm={3}
-                className={[
-                  'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
-                  styles.groupshop__top__left_icons,
-                ].join(' ')}
+                xs={6}
+                className={styles.groupshop__counterMobile}
               >
-                <IconButton
-                  icon={<Handbag size={24} />}
-                  className={styles.groupshop__hero_iconBtn}
-                  onClick={() => setshowCart(true)}
+                <h6 className="text-center">Store expires in</h6>
+                <div className={styles.groupshop__counter_middle}>
+                  <p>
+                    <span>
+                      {days}
+                      D
+                    </span>
+                    :
+                    <span>
+                      {hrs}
+                      H
+                    </span>
+                    :
+                    <span>
+                      {mins}
+                      M
+                    </span>
+                  </p>
+                </div>
+              </Col>
+              <Col
+                xs={3}
+                className="d-flex align-items-center justify-content-end"
+              >
+                <div>
+                  {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
+                    <IconButton
+                      icon={<Search size={20} />}
+                      className={styles.groupshop__hero_smSearchBtn}
+                      onClick={handleAddProduct}
+                      disabled={isExpired}
+                    />
+                  ) : <></>}
+                </div>
+                <div
+                  className={[
+                    'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                    styles.groupshop__top__left_icons,
+                  ].join(' ')}
                 >
-                  <span className={styles.groupshop__hero__cart_count}>
-                    {gsctx?.cart && gsctx?.cart?.length > 0
-                      ? `(${gsctx?.cart?.length})`
-                      : ''}
-                  </span>
-                </IconButton>
+                  <IconButton
+                    icon={<Handbag size={24} />}
+                    className={styles.groupshop__hero_iconBtn}
+                    onClick={() => setshowCart(true)}
+                  >
+                    <span className={styles.groupshop__hero__cart_count}>
+                      {gsctx?.cart && gsctx?.cart?.length > 0
+                        ? `(${gsctx?.cart?.length})`
+                        : ''}
+                    </span>
+                  </IconButton>
+                </div>
               </Col>
             </Row>
           </Container>
-          )}
         </header>
         <Hero bannerImage={bannerImage}>
           <Container className={styles.groupshop__hero__content}>
