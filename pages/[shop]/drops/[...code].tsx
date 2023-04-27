@@ -688,7 +688,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         <div id="dropsProductSections">
           {
           !loading
-            ? sections?.map((ele: any) => {
+            ? sections?.map((ele: any, index:number) => {
               if (ele.products.length) {
                 return (
                   <>
@@ -706,7 +706,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       addProducts={handleAddProduct}
                       handleDetail={(prd: any) => setsProduct(prd)}
                       showHoverButton
-                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}` : 'allproductsdrops'}`}
+                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}${index}` : `${index}allproductsdrops`}`}
                       isModalForMobile={isModalForMobile}
                       urlForActivation={urlForActivation}
                       showPagination={ele.type === DROPS_ALLPRODUCT}

@@ -176,24 +176,24 @@ const ProductGridInitial = ({
     if (direction === 'right' && position < (maxWidth - screenWidth)) {
       position += (screenWidth);
       if ((maxWidth - screenWidth) < position) {
-        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
-        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
       } else if ((maxWidth - screenWidth) === position) {
-        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
       } else {
-        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
       }
     }
     if (direction === 'left' && position >= screenWidth) {
       position -= (screenWidth);
       if (position === 0) {
-          document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '0.3');
-          document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
+          document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
+          document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
       } else {
-        document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
-        document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
+        document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+        document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
       }
     } else if (direction === 'left' && !!position && position <= screenWidth) {
       position = 0;
@@ -210,14 +210,14 @@ const ProductGridInitial = ({
   const handleScroll = (e: any) => {
     const obj = document.getElementById(e.target.id);
     if (e.target.scrollLeft + (obj?.offsetWidth ?? 0) === obj?.scrollWidth) {
-      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
-      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '0.3');
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '0.3');
     } else if (e.target.scrollLeft === 0) {
-      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '0.3');
-      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '0.3');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
     } else {
-      document.getElementById(`leftArrow${title}`)!.setAttribute('opacity', '1');
-      document.getElementById(`rightArrow${title}`)!.setAttribute('opacity', '1');
+      document.getElementById(`leftArrow${id}`)!.setAttribute('opacity', '1');
+      document.getElementById(`rightArrow${id}`)!.setAttribute('opacity', '1');
     }
     if (position !== e.target.scrollLeft) {
       position = e.target.scrollLeft;
