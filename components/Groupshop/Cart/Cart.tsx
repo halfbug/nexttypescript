@@ -134,7 +134,7 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   useEffect(() => {
-    if (gsctx.id && store?.drops?.cartRewards.length && isDrops) {
+    if (gsctx.id && store?.drops?.cartRewards?.length && isDrops) {
       const arr = store?.drops?.cartRewards;
       const cartRewards: any = arr.slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
       setRewardTitle({
@@ -145,7 +145,7 @@ const Cart = ({
   }, [gsctx]);
 
   useEffect(() => {
-    if (store?.drops?.cartRewards.length && isDrops) {
+    if (store?.drops?.cartRewards?.length && isDrops) {
       const totalCart: any = getTotal();
       const temp: any = store?.drops?.cartRewards
         ?.slice()?.sort((a, b) => (+a.rewardValue) - (+b.rewardValue));

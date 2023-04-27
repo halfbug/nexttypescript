@@ -191,7 +191,7 @@ export default function useDrops() {
     const totalRewardValue = store?.drops?.cartRewards
       ?.map((ele) => parseInt(ele.rewardValue, 10))
       .reduce((curr, next) => curr + next, 0) ?? 0;
-    const totalRewards = store?.drops?.cartRewards.length;
+    const totalRewards = store?.drops?.cartRewards?.length;
     return {
       totalRewardValue,
       totalRewards,
