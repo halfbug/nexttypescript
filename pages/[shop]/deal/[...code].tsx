@@ -667,7 +667,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             className={styles.groupshop_mobile_header}
           >
             <Row className="gx-0 py-2 align-items-center">
-              <Col xs={3} className="d-flex align-items-center justify-content-center">
+              <Col xs={3} className="d-flex align-items-center">
                 <div className={styles.groupshop_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
@@ -724,7 +724,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   {SKU.length > 1 && leftOverProducts()?.length > 0 ? (
                     <IconButton
                       icon={<Search size={20} />}
-                      className={styles.groupshop__hero_smSearchBtn}
+                      className={[styles.groupshop__hero_smSearchBtn, 'px-0'].join(' ')}
                       onClick={handleAddProduct}
                       disabled={isExpired}
                     />

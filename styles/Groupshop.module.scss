@@ -42,7 +42,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       @include media-breakpoint-down(sm) {
         padding: 0;
         max-height: auto;
-        max-width: 150px;
+        max-width: 100%;
       }
     }
   }
@@ -71,7 +71,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
 
   &__counterMobile {
-    @extend .text-center, .my-1;
+    @extend .text-center, .mb-1;
     h6 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
