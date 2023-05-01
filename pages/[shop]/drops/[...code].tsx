@@ -174,6 +174,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     nextDropReward,
     showObPopup,
     btnDisable,
+    spinner,
     updateOnboarding,
     getChackback,
   } = useDrops();
@@ -789,6 +790,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           <HowShopDropVideoBox
             show={showObPopup}
             btnDisable={btnDisable}
+            spinner={spinner}
             handleClose={updateOnboarding}
           />
         )}

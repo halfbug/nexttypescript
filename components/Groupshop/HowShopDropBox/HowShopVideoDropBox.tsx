@@ -13,11 +13,11 @@ interface HowShopDropVideoBoxProps extends RootProps {
     show: boolean;
     handleClose(e: any): any;
     btnDisable: boolean;
-
+    spinner: boolean;
 }
 
 const HowShopDropVideoBox = ({
-  show = false, handleClose, btnDisable,
+  show = false, handleClose, btnDisable, spinner,
 }: HowShopDropVideoBoxProps) => {
   const { gsctx } = useAppContext();
   const { customerDetail, store } = gsctx;
@@ -209,7 +209,7 @@ const HowShopDropVideoBox = ({
               disabled={btnDisable}
               onClick={handleClose}
             >
-              {btnDisable ? <Spinner animation="border" size="sm" /> : 'Drop in and shop'}
+              {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Drop in and shop'}
             </Button>
           </div>
         </Modal.Body>

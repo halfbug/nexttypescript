@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
 import { CREATE_ONBOARDING_DISCOUNT_CODE, UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
+import { DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 import useAppContext from './useAppContext';
 import useUtilityFunction from './useUtilityFunction';
 
@@ -8,9 +9,6 @@ export default function useDrops() {
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
   const { gsctx, dispatch } = useAppContext();
   const { formatNumber } = useUtilityFunction();
-
-  const THE_VAULT_TITLE = 'The Vault';
-  const SPOTLIGHT_SECTION_TITLE = 'Today’s Spotlight';
 
   const {
     milestones, store, members, sections,
@@ -23,6 +21,7 @@ export default function useDrops() {
   const [spotlightProducts, setspotlightProducts] = useState<String[]>([]);
 
   const [btnDisable, setbtnDisable] = useState<boolean>(false);
+  const [spinner, setspinner] = useState<boolean>(false);
 
   useEffect(() => {
     if (gsctx) {
@@ -54,6 +53,7 @@ export default function useDrops() {
 
   const updateOnboarding = async () => {
     setbtnDisable(true);
+    setspinner(true);
     await updateDropGroupshop({
       variables: {
         updateDropsGroupshopInput: {
@@ -128,11 +128,21 @@ export default function useDrops() {
 
   useEffect(() => {
     if (sections) {
+      // collecting vault and spotlight products
       const temp: any[] = [];
       const ids = sections
-        .filter((c) => c.name === THE_VAULT_TITLE || c.name === SPOTLIGHT_SECTION_TITLE)
+        .filter((c) => c.type === DROPS_VAULT || c.type === DROPS_SPOTLIGHT)
         ?.map((c) => c.products.map((p) => temp.push(p.id)));
       setspotlightProducts(temp);
+
+      // disable onboarding button logic
+      const nsections = sections.filter((c) => c.type !== DROPS_VAULT
+        && c.type !== DROPS_SPOTLIGHT);
+      if (nsections.length) {
+        setbtnDisable(false);
+      } else {
+        setbtnDisable(true);
+      }
     }
   }, [sections]);
 
@@ -203,13 +213,12 @@ export default function useDrops() {
   ) => (secondaryCount + purchaseCount), []);
 
   return {
-    THE_VAULT_TITLE,
-    SPOTLIGHT_SECTION_TITLE,
     currentDropReward,
     nextDropReward,
     showObPopup,
     spotlightProducts,
     btnDisable,
+    spinner,
     setShowObPopup,
     updateOnboarding,
     canBeUnlockedCB,
