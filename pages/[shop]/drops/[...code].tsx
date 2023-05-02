@@ -711,7 +711,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}${index}` : 'allproductsdrops'}`}
                       isModalForMobile={isModalForMobile}
                       urlForActivation={urlForActivation}
-                      showPagination={ele.type === DROPS_ALLPRODUCT}
+                      showPagination={false}
                       loading={gsctx.loading || loading}
                     >
                       {ele.type === DROPS_ALLPRODUCT && (
