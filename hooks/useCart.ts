@@ -79,7 +79,7 @@ export default function useCart() {
         compareAtPrice,
       }) => {
       const myTot = total
-      + ((compareAtPrice
+      + ((compareAtPrice && spotlightProducts.includes(id)
         ? (+(price ?? mprice))
         : dPrice(+(price ?? mprice))) * selectedQuantity);
       return +myTot;

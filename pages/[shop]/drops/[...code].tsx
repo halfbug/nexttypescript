@@ -118,12 +118,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   useEffect(() => {
     if (DropGroupshop.id && pending) {
       setpending(false);
-      const nsections: any = DropGroupshop?.sections?.map((c) => {
-        if (c.type !== DROPS_VAULT && c.type !== DROPS_SPOTLIGHT) {
-          return { ...c, products: c.products.map((p) => ({ ...p, compareAtPrice: null })) };
-        }
-        return c;
-      });
+      const nsections: any = DropGroupshop?.sections?.map((c) => c);
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {

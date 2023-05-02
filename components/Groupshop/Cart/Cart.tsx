@@ -82,7 +82,7 @@ const Cart = ({
         originalPrice: prd.compareAtPrice
           ? +prd?.selectedVariant?.compareAtPrice! ?? +prd.compareAtPrice
           : +prd.selectedVariant.price,
-        finalPrice: prd.compareAtPrice
+        finalPrice: prd.compareAtPrice && spotlightProducts.includes(prd.id)
           ? (+prd?.selectedVariant?.compareAtPrice! ?? +prd.price).toFixed(2)
           : dPrice(+(prd.selectedVariant.price)).toFixed(2),
         quantity: prd.selectedVariant.selectedQuantity,
@@ -98,7 +98,7 @@ const Cart = ({
       cartDetails.push({
         id: productId,
         title: item.title,
-        price: item.compareAtPrice
+        price: item.compareAtPrice && spotlightProducts.includes(item.id)
           ? (+item.selectedVariant?.price! ?? +item.price).toFixed(2)
           : dPrice(+(item.selectedVariant.price)).toFixed(2),
         qty: item.selectedVariant.selectedQuantity,
@@ -201,7 +201,7 @@ const Cart = ({
       originalPrice: prd.compareAtPrice
         ? +prd.selectedVariant?.compareAtPrice! ?? +prd.compareAtPrice
         : +prd.selectedVariant.price,
-      finalPrice: prd.compareAtPrice
+      finalPrice: prd.compareAtPrice && spotlightProducts.includes(prd.id)
         ? (+prd.selectedVariant.price ?? +prd.price).toFixed(2)
         : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
@@ -377,7 +377,7 @@ And you can keep earning up to
                       {' '}
                       <span>
                         {currencySymbol}
-                        {prd.compareAtPrice
+                        {prd.compareAtPrice && spotlightProducts.includes(prd.id)
                           ? VSPrice(prd.selectedVariant.price ?? prd.price)
                           : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
@@ -451,9 +451,12 @@ And you can keep earning up to
                             >
                               {currencySymbol}
                               {
-                                Number.isInteger((+(item.price) - +(dPrice(+(item?.price || 0)))))
-                                  ? +(item.price) - +(dPrice(+(item?.price || 0)))
-                                  : (+(item.price) - +(dPrice(+(item?.price || 0)))).toFixed(2)
+                                Number.isInteger((+(item.compareAtPrice ?? item.price)
+                                - +(dPrice(+(item?.price || 0)))))
+                                  ? +(item.compareAtPrice ?? item.price)
+                                  - +(dPrice(+(item?.price || 0)))
+                                  : (+(item.compareAtPrice ?? item.price)
+                                  - +(dPrice(+(item?.price || 0)))).toFixed(2)
                               }
                               {' '}
                               OFF
@@ -489,7 +492,7 @@ And you can keep earning up to
                                       promotionTag: `milestone ${gsctx?.milestones.length} - ${gsctx?.discountCode?.percentage}`,
                                       currency: item.currencyCode,
                                       productBrand: gsctx.store?.brandName,
-                                      originalPrice: +item.price,
+                                      originalPrice: +item.compareAtPrice! ?? +item.price,
                                       finalPrice: dPrice(+(item.price)).toFixed(2),
                                       quantity: 1,
                                     }], getTotal() ?? 0);
@@ -501,7 +504,8 @@ And you can keep earning up to
                               <div className={['fw-normal text-nowrap', isDrops ? 'text-start' : ''].join(' ')}>
                                 <span className="text-decoration-line-through">
                                   {currencySymbol}
-                                  {formatNumber(item?.price)}
+                                  {formatNumber(item?.compareAtPrice
+                                    ? item.compareAtPrice : item?.price)}
                                 </span>
                                 {' '}
                                 <span className="fw-bold ms-1">

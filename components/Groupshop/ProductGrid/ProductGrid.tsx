@@ -124,6 +124,7 @@ const ProductGridInitial = ({
     disPrice, currencySymbolDiscovery,
   } = useDeal();
   const {
+    spotlightProducts,
     updatePurhaseCount,
     VSPrice,
   } = useDrops();
@@ -159,8 +160,10 @@ const ProductGridInitial = ({
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice && !isSuggestion
+        {prod?.compareAtPrice && spotlightProducts.includes(prod.id) && !isSuggestion
           && VSPrice(prod.price)}
+        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
+          && VSPrice(dPrice(prod.price))}
         {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
         {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
@@ -354,7 +357,7 @@ const ProductGridInitial = ({
                               }
                           >
                             {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                            {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - +prod.price)) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                            {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                             {' '}
                             OFF
                           </span>
