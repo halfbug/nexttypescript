@@ -38,7 +38,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'warn',
     'import/extensions': 'off',
     'react/no-unescaped-entities': 'warn',
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off',
   },
   settings: {
     'import/resolver': {

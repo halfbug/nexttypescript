@@ -44,6 +44,7 @@ const Cart = ({
     dispatch,
     isDrops,
   } = useAppContext();
+
   const {
     store,
     members,
@@ -51,9 +52,10 @@ const Cart = ({
   const {
     currencySymbol, dPrice, disPrice, discount, getOwnerName, isInfluencerGS, brandName,
   } = useDeal();
+
   const {
+    rewardArr,
     spotlightProducts,
-    totalRewardsValue,
     cartValueProgress,
     VSPrice,
   } = useDrops();
@@ -66,9 +68,12 @@ const Cart = ({
     getCartSaveMoney, getTotalActualCartTotal,
   } = useCart();
 
+  const { formatNumber } = useUtilityFunction();
+
   const {
     googleEventCode, checkoutCartView, checkoutButtonClick, checkoutUpsellClick,
   } = useGtm();
+
   useEffect(() => {
     if (show) {
       googleEventCode('cart-modal');
@@ -126,7 +131,10 @@ const Cart = ({
     sum: 0,
     rewardTitle: '',
   });
+  const [rewardTotal, setRewardTotal] = useState(0);
+
   const { campaign } = gsctx;
+
   useEffect(() => {
     const rew = { ...campaign?.salesTarget?.rewards };
     const perc = isInfluencerGS ? gsctx?.partnerRewards?.baseline.toString() : rew[2]?.discount;
@@ -134,31 +142,23 @@ const Cart = ({
   }, [gsctx.campaign]);
 
   useEffect(() => {
-    if (gsctx.id && store?.drops?.cartRewards?.length && isDrops) {
-      const arr = store?.drops?.cartRewards;
-      const cartRewards: any = arr.slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
+    if (rewardArr && rewardArr.length && isDrops) {
+      const total = +rewardArr[rewardArr.length - 1].rewardValue;
+      setRewardTotal(total);
       setRewardTitle({
-        rewardTitle: cartRewards[0].rewardTitle,
-        sum: cartRewards[0].rewardValue,
+        rewardTitle: rewardArr[0].rewardTitle,
+        sum: +rewardArr[0].rewardValue,
       });
     }
-  }, [gsctx]);
+  }, [rewardArr]);
 
   useEffect(() => {
-    if (store?.drops?.cartRewards?.length && isDrops) {
+    if (rewardArr && rewardArr.length && isDrops) {
       const totalCart: any = getTotal();
-      const temp: any = store?.drops?.cartRewards
-        ?.slice()?.sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
-      const numArray = temp?.map((ele: any, index: number) => {
-        const arr = [...temp];
-        const newArr = arr?.splice(0, (index + 1));
-        return {
-          sum: newArr?.reduce((curr, next) => curr + (+next.rewardValue), 0),
-          rewardTitle: ele.rewardTitle,
-        };
-      });
-      const obj = numArray?.find((ele: any) => ele.sum > totalCart);
-      setRewardTitle({ ...obj, sum: (obj?.sum - totalCart) });
+      const obj = rewardArr?.find((ele: any) => +ele.rewardValue > totalCart);
+      if (obj) {
+        setRewardTitle({ rewardTitle: obj?.rewardTitle, sum: (+obj?.rewardValue - totalCart) });
+      }
     }
   }, [getTotal()]);
 
@@ -208,7 +208,7 @@ const Cart = ({
     })), getTotal() ?? 0);
     push(getShopifyUrl());
   };
-  const { formatNumber } = useUtilityFunction();
+
   const dynamicLine = () => {
     if (isDrops && getTotal()! < 10 && members.length < 2) {
       const milestone1 = store?.drops?.rewards?.baseline;
@@ -265,16 +265,16 @@ And you can keep earning up to
 
   const rewardbarHeadline = () => (
     <>
-      {getTotal()! < totalRewardsValue().totalRewardValue ? <MoneyFly className=" mx-1 " /> : ''}
+      {getTotal()! < rewardTotal ? <MoneyFly className=" mx-1 " /> : ''}
       {
-                    getTotal()! >= totalRewardsValue().totalRewardValue ? "You've "
+                    getTotal()! >= rewardTotal ? "You've "
                       : `Spend $${formatNumber(rewardTitle?.sum)}
                 more to `
                   }
       <strong>
-        {`${getTotal()! >= totalRewardsValue().totalRewardValue ? 'unlocked all rewards' : `unlock ${rewardTitle?.rewardTitle}.`} `}
+        {`${getTotal()! >= rewardTotal ? 'unlocked all rewards' : `unlock ${rewardTitle?.rewardTitle}.`} `}
       </strong>
-      {`${getTotal()! >= totalRewardsValue().totalRewardValue ? 'on your order!' : ''}`}
+      {`${getTotal()! >= rewardTotal ? 'on your order!' : ''}`}
     </>
   );
   return (
@@ -300,7 +300,6 @@ And you can keep earning up to
                     progress={cartValueProgress(getTotal()).percantage}
                     cartValue={getTotal() ?? 0}
                     className={dStyles.drops_cart_progressBar}
-                    rewards={store?.drops?.cartRewards}
                   />
                 </Col>
               </Row>

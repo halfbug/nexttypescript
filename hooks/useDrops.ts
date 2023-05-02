@@ -2,11 +2,15 @@ import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
 import { CREATE_ONBOARDING_DISCOUNT_CODE, UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
 import { DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
+import { CartRewards } from 'types/store';
 import useAppContext from './useAppContext';
 import useUtilityFunction from './useUtilityFunction';
 
 export default function useDrops() {
+  // Check
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
+  const [rewardArr, setRewardArr] = useState<CartRewards[]>([]);
+
   const { gsctx, dispatch } = useAppContext();
   const { formatNumber } = useUtilityFunction();
 
@@ -31,6 +35,14 @@ export default function useDrops() {
       }
     }
   }, [gsctx]);
+
+  useEffect(() => {
+    if (gsctx.id && store?.drops?.cartRewards && store?.drops?.cartRewards?.length) {
+      const arr = store?.drops?.cartRewards;
+      const cartRewards = arr.slice().sort((a, b) => (+a.rewardValue) - (+b.rewardValue));
+      setRewardArr(cartRewards);
+    }
+  }, [store]);
 
   useEffect(() => {
     if (milestones.length) {
@@ -219,6 +231,7 @@ export default function useDrops() {
     spotlightProducts,
     btnDisable,
     spinner,
+    rewardArr,
     setShowObPopup,
     updateOnboarding,
     canBeUnlockedCB,
