@@ -562,7 +562,7 @@ const ChannelGroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 <h5 className="text-center">
                   SHOPPING WITH
                 </h5>
-                <div className="d-flex flex-row justify-content-center align-items-center">
+                <div className="d-flex flex-row justify-content-start align-items-center">
                   <Members
                     names={partnerMembers?.map(
                       (mem: any, index: any) => ({
