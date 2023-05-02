@@ -66,6 +66,7 @@ import CategoriesTab from 'components/Widgets/CategoriesTab';
 import {
   DROPS_ALLPRODUCT, DROPS_SPOTLIGHT, DROPS_VAULT,
 } from 'configs/constant';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -279,42 +280,48 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   return (
     <>
-      <Head>
-        <title>Groupshop</title>
-        <script
+      <SkeletonTheme
+        baseColor="#e9ecef"
+        highlightColor="#dee2e6"
+        borderRadius="4px"
+        duration={4}
+      >
+        <Head>
+          <title>Groupshop</title>
+          <script
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-5GCXJRC');`,
-          }}
-        />
-        <script
+            }}
+          />
+          <script
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `(function(c,l,a,r,i,t,y){
+            dangerouslySetInnerHTML={{
+              __html: `(function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "f8jx5rl3kw");`,
-          }}
-        />
-        <script
+            }}
+          />
+          <script
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `(function(c,l,a,r,i,t,y){
+            dangerouslySetInnerHTML={{
+              __html: `(function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
               t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
               y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "bj0ox02vse");`,
-          }}
-        />
-        <script
+            }}
+          />
+          <script
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `!function(f,b,e,v,n,t,s)
+            dangerouslySetInnerHTML={{
+              __html: `!function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -324,19 +331,19 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '3371804206430685');
             fbq('track', 'PageView');`,
-          }}
-        />
-        <noscript
+            }}
+          />
+          <noscript
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `<img height="1" width="1" style="display:none"
+            dangerouslySetInnerHTML={{
+              __html: `<img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=3371804206430685&ev=PageView&noscript=1"
             />`,
-          }}
-        />
-        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
+            }}
+          />
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
 
-        {facebookPixels !== '' && (
+          {facebookPixels !== '' && (
           <>
             <script
               // eslint-disable-next-line react/no-danger
@@ -362,9 +369,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               }}
             />
           </>
-        )}
+          )}
 
-        {googlePixels !== '' && (
+          {googlePixels !== '' && (
           <>
 
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${googlePixels}`} />
@@ -378,9 +385,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               }}
             />
           </>
-        )}
+          )}
 
-        {tiktokPixels !== '' && (
+          {tiktokPixels !== '' && (
           <>
             <script
               // eslint-disable-next-line react/no-danger
@@ -393,9 +400,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               }}
             />
           </>
-        )}
+          )}
 
-        {snapchatPixels !== '' && (
+          {snapchatPixels !== '' && (
           <>
             <script
               // eslint-disable-next-line react/no-danger
@@ -409,29 +416,29 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
           </>
 
-        )}
+          )}
 
-        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MCBM97Z" />
 
-        <meta name="application-name" content="Groupshop" />
-        <meta name="googlebot" content="noindex" />
-        <meta name="robots" content="noindex,nofollow" />
-        <meta name="og:type" content="website" />
-        <meta name="description" content="Your favorite brands at unbeliveable prices" />
-        <meta name="og:title" content="Groupshop" />
-        <meta name="description" content="Your favorite brands at unbeliveable prices" />
-        <meta name="keywords" content="group, shop, discount, deal" />
-        <meta name="og:url" content={gsShortURL ?? gsURL} />
-        <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BGDROPSFINAL.jpg" as="image" />
-        <meta property="og:image" content="https://s3.amazonaws.com/gsnodeimages/BGDROPSFINAL.jpg" />
-        {/* <link rel="preload" nonce="" href={meta.photo} as="image" />
+          <meta name="application-name" content="Groupshop" />
+          <meta name="googlebot" content="noindex" />
+          <meta name="robots" content="noindex,nofollow" />
+          <meta name="og:type" content="website" />
+          <meta name="description" content="Your favorite brands at unbeliveable prices" />
+          <meta name="og:title" content="Groupshop" />
+          <meta name="description" content="Your favorite brands at unbeliveable prices" />
+          <meta name="keywords" content="group, shop, discount, deal" />
+          <meta name="og:url" content={gsShortURL ?? gsURL} />
+          <link rel="preload" nonce="" href="https://s3.amazonaws.com/gsnodeimages/BGDROPSFINAL.jpg" as="image" />
+          <meta property="og:image" content="https://s3.amazonaws.com/gsnodeimages/BGDROPSFINAL.jpg" />
+          {/* <link rel="preload" nonce="" href={meta.photo} as="image" />
         <meta property="og:image" content={meta.photo} /> */}
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-      </Head>
-      <div className={styles.drops}>
-        <Header
-          LeftComp={
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </Head>
+        <div className={styles.drops}>
+          <Header
+            LeftComp={
             isModalForMobile
               ? (
                 <div className="d-flex">
@@ -442,46 +449,45 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               : <></>
             // <Counter expireDate={gsctx?.expiredAt} pending={pending} />
           }
-          RightComp={(
-            <Button2
-              variant="primary"
-              className="rounded-pill bg-black"
-              onClick={() => {
-                setSignup(true);
-              }}
-            >
-              Sign up
-            </Button2>
+            RightComp={(
+              <Button2
+                variant="primary"
+                className="rounded-pill bg-black"
+                onClick={() => {
+                  setSignup(true);
+                }}
+              >
+                Sign up
+              </Button2>
           )}
-
-        />
-        <header id="dropsStickyHeaderSection">
-          {!isModalForMobile && showBanner && (
+          />
+          <header id="dropsStickyHeaderSection">
+            {!isModalForMobile && showBanner && (
             <div>
               <img src={DropsDummyImage.src} alt="img" height="100%" width="100%" />
               <div className={styles.drops__dummyOverlay} />
             </div>
-          )}
-          {gsctx?.store?.drops?.isVideoEnabled ? <VideoWidget /> : ''}
-          <Container fluid className="border-top border-bottom bg-white">
-            <Row className={['gx-0', styles.drops__top].join(' ')}>
-              <Col md={3} xs={2}>
-                {/* <IconButton
+            )}
+            {gsctx?.store?.drops?.isVideoEnabled ? <VideoWidget /> : ''}
+            <Container fluid className="border-top border-bottom bg-white">
+              <Row className={['gx-0', styles.drops__top].join(' ')}>
+                <Col md={3} xs={2}>
+                  {/* <IconButton
                   icon={<Search size={isModalForMobile ? 24 : 16} />}
                   className={styles.drops__hero_iconSearchBtn}
                   onClick={handleAddProduct}
                   disabled={isExpired}
                 /> */}
-                <Button2
-                  variant="primary"
-                  className="border border-dark border-2 py-1 px-3 bg-white  rounded-pill bg-light text-dark"
-                  onClick={() => {
-                    window.open('https://groupshop.zendesk.com/hc/en-us');
-                  }}
-                >
-                  <span className={styles.drops__top__help_btn}>Help</span>
-                </Button2>
-                {/* <div className={styles.drops_main_logo}>
+                  <Button2
+                    variant="primary"
+                    className="border border-dark border-2 py-1 px-3 bg-white  rounded-pill bg-light text-dark"
+                    onClick={() => {
+                      window.open('https://groupshop.zendesk.com/hc/en-us');
+                    }}
+                  >
+                    <span className={styles.drops__top__help_btn}>Help</span>
+                  </Button2>
+                  {/* <div className={styles.drops_main_logo}>
                   {logoImage === '' || logoImage === undefined ? (
                     <Link href={`https://${fullStoreName}`}>
                       <Brand
@@ -504,82 +510,82 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     </Link>
                   )}
                 </div> */}
-              </Col>
-              <Col md={6} className={styles.drops__top_members}>
-                <h5 className="text-center">
-                  Shop or invite your friends to shop to get started!
-                </h5>
-                <div className="d-flex flex-row justify-content-center align-items-center">
-                  <Gmembers
-                    names={topFive(gsctx?.members.map(
-                      (mem: any) => ({
-                        name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
-                        }`,
-                        availedDiscount: mem.availedDiscount,
-                        role: mem.role,
-                        lineItems: mem.lineItems,
-                        price: mem.orderDetail.price,
-                        refund: (mem.refund) ? mem.refund : [],
-                      }),
-                    ))}
-                    memberLength={gsctx?.members.length}
-                    brandname={brandName}
-                    fullshareurl={gsURL}
-                    shareUrl={gsShortURL ?? gsURL}
-                    rewards={gsctx?.campaign?.salesTarget?.rewards}
-                    discount={gsctx?.discountCode.percentage}
-                    currencySymbol={currencySymbol}
-                    pending={pending}
-                  />
-                  {gsctx?.members.length > 5 && (
+                </Col>
+                <Col md={6} className={styles.drops__top_members}>
+                  <h5 className="text-center">
+                    Shop or invite your friends to shop to get started!
+                  </h5>
+                  <div className="d-flex flex-row justify-content-center align-items-center">
+                    <Gmembers
+                      names={topFive(gsctx?.members.map(
+                        (mem: any) => ({
+                          name: `${mem.orderDetail.customer.firstName ?? ''} ${mem.orderDetail.customer.firstName ? mem.orderDetail?.customer?.lastName?.charAt(0) || '' : mem.orderDetail.customer.lastName
+                          }`,
+                          availedDiscount: mem.availedDiscount,
+                          role: mem.role,
+                          lineItems: mem.lineItems,
+                          price: mem.orderDetail.price,
+                          refund: (mem.refund) ? mem.refund : [],
+                        }),
+                      ))}
+                      memberLength={gsctx?.members.length}
+                      brandname={brandName}
+                      fullshareurl={gsURL}
+                      shareUrl={gsShortURL ?? gsURL}
+                      rewards={gsctx?.campaign?.salesTarget?.rewards}
+                      discount={gsctx?.discountCode.percentage}
+                      currencySymbol={currencySymbol}
+                      pending={pending}
+                    />
+                    {gsctx?.members.length > 5 && (
                     <span className="pe-2">
                       {`+${gsctx?.members.length - 5} more`}
                     </span>
-                  )}
+                    )}
+                    <ShareButton
+                      placement="bottom"
+                      shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+                      fullshareurl={isExpired ? activateURL : gsURL}
+                      label="Invite"
+                      className={styles.drops__top_invite}
+                      icon={<Plus size={18} className="me-0 pe-0" />}
+                      onClick={() => googleEventCode('invite-share-modal')}
+                    />
+                  </div>
+                </Col>
+                <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
+                  <div className={styles.drops__counter_middle}>
+                    <CountDownTimer />
+                  </div>
+                </Col>
+                <Col
+                  md={3}
+                  xs={2}
+                  className={[
+                    'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                    styles.drops__top__left_icons,
+                  ].join(' ')}
+                >
                   <ShareButton
                     placement="bottom"
                     shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-                    fullshareurl={isExpired ? activateURL : gsURL}
-                    label="Invite"
-                    className={styles.drops__top_invite}
-                    icon={<Plus size={18} className="me-0 pe-0" />}
-                    onClick={() => googleEventCode('invite-share-modal')}
+                    fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? ''}
+                    label={(gsctx.members.length > 5 && 'Invite a Friend') || (isExpired ? 'SHARE TO UNLOCK' : `Share & Earn ${currencySymbol}${value}`)}
+                    onClick={() => googleEventCode('earn-cashback-modal')}
+                    className={styles.drops__hero_share_btn}
                   />
-                </div>
-              </Col>
-              <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
-                <div className={styles.drops__counter_middle}>
-                  <CountDownTimer />
-                </div>
-              </Col>
-              <Col
-                md={3}
-                xs={2}
-                className={[
-                  'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
-                  styles.drops__top__left_icons,
-                ].join(' ')}
-              >
-                <ShareButton
-                  placement="bottom"
-                  shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-                  fullshareurl={isExpired ? activateURL ?? '' : gsURL ?? ''}
-                  label={(gsctx.members.length > 5 && 'Invite a Friend') || (isExpired ? 'SHARE TO UNLOCK' : `Share & Earn ${currencySymbol}${value}`)}
-                  onClick={() => googleEventCode('earn-cashback-modal')}
-                  className={styles.drops__hero_share_btn}
-                />
-                <IconButton
-                  icon={<Handbag size={isModalForMobile ? 14 : 24} />}
-                  className={styles.drops__hero_iconBtn}
-                  onClick={() => setshowCart(true)}
-                >
-                  <span className={styles.drops__hero__cart_count}>
-                    {gsctx?.cart && gsctx?.cart?.length > 0
-                      ? `(${gsctx?.cart?.length})`
-                      : ''}
-                  </span>
-                </IconButton>
-                {/* <p
+                  <IconButton
+                    icon={<Handbag size={isModalForMobile ? 14 : 24} />}
+                    className={styles.drops__hero_iconBtn}
+                    onClick={() => setshowCart(true)}
+                  >
+                    <span className={styles.drops__hero__cart_count}>
+                      {gsctx?.cart && gsctx?.cart?.length > 0
+                        ? `(${gsctx?.cart?.length})`
+                        : ''}
+                    </span>
+                  </IconButton>
+                  {/* <p
                   className={[
                     'd-flex align-items-center',
                     styles.drops__hero__cart_count,
@@ -587,30 +593,30 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 >
                   (2)
                 </p> */}
-              </Col>
-            </Row>
-          </Container>
-        </header>
-        <Hero
-          bannerImage={bannerImage}
-          isDrops
-        >
-          <Container className={styles.drops__hero__content}>
-            <Row className={styles.drops__hero_welcome}>
-              <Col lg={12} className="mb-2">
-                <h1 className="text-black fw-bolder ">
-                  Get
-                  {' '}
-                  {currentDropReward}
-                  % off this drop for a limited time.
-                </h1>
-              </Col>
-              <Col xs={12} className={[styles.drops__counter, 'py-2'].join(' ')}>
-                <div className={styles.drops__counter_middle}>
-                  <CountDownTimer />
-                </div>
-              </Col>
-              {!!gsctx.members.length && (
+                </Col>
+              </Row>
+            </Container>
+          </header>
+          <Hero
+            bannerImage={bannerImage}
+            isDrops
+          >
+            <Container className={styles.drops__hero__content}>
+              <Row className={styles.drops__hero_welcome}>
+                <Col lg={12} className="mb-2">
+                  <h1 className="text-black fw-bolder ">
+                    Get
+                    {' '}
+                    {currentDropReward}
+                    % off this drop for a limited time.
+                  </h1>
+                </Col>
+                <Col xs={12} className={[styles.drops__counter, 'py-2'].join(' ')}>
+                  <div className={styles.drops__counter_middle}>
+                    <CountDownTimer />
+                  </div>
+                </Col>
+                {!!gsctx.members.length && (
                 <>
                   {getChackback() !== 0 && (
                     <Col lg={12}>
@@ -659,12 +665,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     />
                   </div>
                 </>
-              )}
-            </Row>
-          </Container>
-        </Hero>
-        <div className={styles.drops__stickyArea} id="dropsStickyAreaSection">
-          {
+                )}
+              </Row>
+            </Container>
+          </Hero>
+          <div className={styles.drops__stickyArea} id="dropsStickyAreaSection">
+            {
             !!nextDropReward && (
               <div className="bg-black text-center py-2">
                 <span
@@ -684,10 +690,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </div>
             )
           }
-          {categories ? <CategoriesTab categories={categories} /> : <></>}
-        </div>
-        <div id="dropsProductSections">
-          {
+            {categories ? <CategoriesTab categories={categories} /> : <></>}
+          </div>
+          <div id="dropsProductSections">
+            {
           !loading
             ? sections?.map((ele: any, index:number) => {
               if (ele.products.length) {
@@ -715,10 +721,15 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     >
                       {ele.type === DROPS_ALLPRODUCT && (
                       <div>
-                        <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-                          <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-                          {ele.name}
-                        </div>
+                        {
+                          (gsctx.loading || loading) ? <Skeleton width="186.5px" height="26px" />
+                            : (
+                              <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                                <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                                {ele.name}
+                              </div>
+                            )
+                        }
                       </div>
                       )}
                     </ProductGrid>
@@ -742,77 +753,77 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               ))
             )
 }
-        </div>
+          </div>
 
-        <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
-        <ProductsSearch
-          show={showps}
-          handleClose={() => setshowps(false)}
-          isCreateGS={false}
-          showProduct={showProduct}
-          isDrops
-        />
-        <LinkShareMobileView
-          show={showQrscan}
-          handleClose={() => setshowQrscan(false)}
-          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-        />
-        <ProductDetail
-          show={showDetail}
-          handleClose={() => setshowDetail(false)}
-          product={sProduct}
-          showSearch={showSearchProds}
-          isDrops
-        />
-        <Cart
-          show={showCart}
-          setShow={setshowCart}
-          handleClose={() => setshowCart(false)}
-          product={undefined}
-          handleDetail={(prd) => setsProduct(prd)}
-          isDrops
-        />
-        <AlertComponent />
-        <RewardBox2
-          show={showRewards}
-          discount={discount}
-          shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
-          fullshareurl={isExpired ? activateURL : gsURL}
-          handleClose={() => setShowRewards(false)}
-          brandName={brandName}
-          maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
-        />
-        <HowShopDropBox
-          show={openLearnHow}
-          handleClose={() => setLearnHow(false)}
-        />
-        {isModalForMobile && (
+          <Footer shopName={shop ?? ''} formId={gsctx.store?.drops?.klaviyo?.signup1 ?? ''} LeftComp={undefined} RightComp={undefined} isDrops setLearnHowDrops={setLearnHow} />
+          <ProductsSearch
+            show={showps}
+            handleClose={() => setshowps(false)}
+            isCreateGS={false}
+            showProduct={showProduct}
+            isDrops
+          />
+          <LinkShareMobileView
+            show={showQrscan}
+            handleClose={() => setshowQrscan(false)}
+            shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+          />
+          <ProductDetail
+            show={showDetail}
+            handleClose={() => setshowDetail(false)}
+            product={sProduct}
+            showSearch={showSearchProds}
+            isDrops
+          />
+          <Cart
+            show={showCart}
+            setShow={setshowCart}
+            handleClose={() => setshowCart(false)}
+            product={undefined}
+            handleDetail={(prd) => setsProduct(prd)}
+            isDrops
+          />
+          <AlertComponent />
+          <RewardBox2
+            show={showRewards}
+            discount={discount}
+            shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
+            fullshareurl={isExpired ? activateURL : gsURL}
+            handleClose={() => setShowRewards(false)}
+            brandName={brandName}
+            maxPercent={gsctx?.campaign?.salesTarget?.rewards?.[2]?.discount ?? ''}
+          />
+          <HowShopDropBox
+            show={openLearnHow}
+            handleClose={() => setLearnHow(false)}
+          />
+          {isModalForMobile && (
           <HowShopDropVideoBox
             show={showObPopup}
             btnDisable={btnDisable}
             spinner={spinner}
             handleClose={updateOnboarding}
           />
-        )}
-        <DropsRewardBox
-          show={dropReward}
-          handleClose={() => setDropReward(false)}
-        />
-        <GetNotify
-          formId={gsctx.store?.drops?.klaviyo?.signup2 ?? ''}
-          shopName={shop ?? ''}
-          show={showSignup}
-          handleClose={() => setSignup(false)}
-        />
-        {isModalForMobile && (
+          )}
+          <DropsRewardBox
+            show={dropReward}
+            handleClose={() => setDropReward(false)}
+          />
+          <GetNotify
+            formId={gsctx.store?.drops?.klaviyo?.signup2 ?? ''}
+            shopName={shop ?? ''}
+            show={showSignup}
+            handleClose={() => setSignup(false)}
+          />
+          {isModalForMobile && (
           <ExpiredLinked
             formId={gsctx.store?.drops?.klaviyo?.signup3 ?? ''}
             shopName={shop ?? ''}
             show={isExpired}
             handleClose={() => { }}
           />
-        )}
-        {isModalForMobile && (
+          )}
+          {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
               shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
@@ -823,8 +834,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               isDrops
             />
           </div>
-        )}
-        {
+          )}
+          {
           isModalForMobile
           && (
             <QRBox
@@ -837,8 +848,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
           )
         }
-      </div>
-      {!isModalForMobile && gsShortURL !== '' && (
+        </div>
+        {!isModalForMobile && gsShortURL !== '' && (
         <Scan
           show
           shareurl={gsShortURL ?? gsURL}
@@ -846,7 +857,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           formId={gsctx.store?.drops?.klaviyo?.signup4 ?? ''}
           shopName={shop ?? ''}
         />
-      )}
+        )}
+      </SkeletonTheme>
     </>
   );
 };
