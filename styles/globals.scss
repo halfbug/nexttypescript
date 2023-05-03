@@ -104,6 +104,9 @@ h4 {
 	.carousel-item.active, .carousel-item-next, .carousel-item-prev {
 		display: flex;
 	}
+	.carousel-inner {
+		height: 100%;
+	}
 }
 
 .video-mobile::-webkit-media-controls-panel {
