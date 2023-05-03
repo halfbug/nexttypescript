@@ -221,7 +221,7 @@ const ProductDetail = ({
       } else setoutofStock(false);
       setvariantPrice(isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice ? selectedVariant?.compareAtPrice ?? product?.compareAtPrice : selectedVariant?.price ?? product?.price);
       if (isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice) {
-        setdiscountedPrice(!spotlightProducts.includes(product.id) ? dPrice(selectedVariant.price ?? product.price) : selectedVariant.price ?? product.price);
+        setdiscountedPrice(!spotlightProducts.includes(product.id) ? formatNumber(dPrice(selectedVariant.price ?? product.price)) : formatNumber(selectedVariant.price ?? product.price));
       }
       if (!isDrops) {
         setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
