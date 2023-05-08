@@ -31,6 +31,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   }
   &__member_line_break {
     width: 100%;
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
   }
   &_main_logo {
     img {
