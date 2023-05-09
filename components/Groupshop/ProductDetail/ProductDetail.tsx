@@ -427,10 +427,7 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
-                  {currencySymbol}
-                  {product?.compareAtPrice ? VSPrice(+(variantPrice ?? product?.compareAtPrice) - (+discountedPrice! ?? +product?.price)) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))}
-                  {' '}
-                  Off
+                  {loading ? '...' : `${currencySymbol} ${product?.compareAtPrice ? formatNumber(+(variantPrice ?? product?.compareAtPrice) - +(discountedPrice ?? product?.price)) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))} Off`}
                 </span>
                 <Col className="d-flex justify-content-end ms-1">
                   {addedbyname && (
