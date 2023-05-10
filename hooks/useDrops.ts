@@ -158,8 +158,6 @@ export default function useDrops() {
     }
   }, [sections]);
 
-  const VSPrice = useCallback((price: any) => (+(price)).toFixed(2).toString().replace('.00', ''), [gsctx]);
-
   const getChackback = useCallback(() => {
     const reward1 = +store?.drops?.rewards?.baseline!;
     const reward2 = +store?.drops?.rewards?.average!;
@@ -238,7 +236,6 @@ export default function useDrops() {
     getChackback,
     cartValueProgress,
     updatePurhaseCount,
-    VSPrice,
     totalRewardsValue,
   };
 }

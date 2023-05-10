@@ -109,8 +109,8 @@ export default function useCart() {
     if (cart?.length) {
       totalPrice = cart?.reduce(
         (tot, prd) => (
-          tot + ((prd.compareAtPrice
-            ? (+(prd.selectedVariant?.compareAtPrice ?? prd.compareAtPrice))
+          tot + ((prd.compareAtPrice || prd.selectedVariant?.compareAtPrice
+            ? (+(prd.selectedVariant?.compareAtPrice ?? prd.compareAtPrice)!)
             : +(prd.selectedVariant.price)) * prd.selectedVariant.selectedQuantity)
         ), 0,
       );

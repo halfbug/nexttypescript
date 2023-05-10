@@ -110,7 +110,6 @@ const ProductDetail = ({
   const {
     spotlightProducts,
     updatePurhaseCount,
-    VSPrice,
   } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
@@ -219,9 +218,13 @@ const ProductDetail = ({
       } else if (selectedVariant?.inventoryQuantity < 1) {
         setoutofStock(true);
       } else setoutofStock(false);
-      setvariantPrice(isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice ? selectedVariant?.compareAtPrice ?? product?.compareAtPrice : selectedVariant?.price ?? product?.price);
-      if (isDrops && product?.compareAtPrice && selectedVariant?.compareAtPrice) {
-        setdiscountedPrice(!spotlightProducts.includes(product.id) ? formatNumber(dPrice(selectedVariant.price ?? product.price)) : formatNumber(selectedVariant.price ?? product.price));
+      const VPrice = isDrops && selectedVariant?.compareAtPrice ? selectedVariant?.compareAtPrice ?? product?.compareAtPrice : selectedVariant?.price ?? product?.price;
+      setvariantPrice(VPrice);
+      if (isDrops && selectedVariant?.compareAtPrice) {
+        setdiscountedPrice(!spotlightProducts.includes(product?.id!) ? formatNumber(dPrice(selectedVariant.price ?? product?.price!)) : formatNumber(selectedVariant.price ?? product?.price!));
+      } else {
+        setdiscountedPrice((product?.options ? (dPrice(+(VPrice || 0))).toFixed(2).toString().replace('.00', '')
+          : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '')));
       }
       if (!isDrops) {
         setCashBack(totalCashBack(selectedVariant?.price ?? product?.price));
@@ -427,7 +430,7 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div className={styles.groupshop_left_content_wrapper}>
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
-                  {loading ? '...' : `${currencySymbol} ${product?.compareAtPrice ? formatNumber(+(variantPrice ?? product?.compareAtPrice) - +(discountedPrice ?? product?.price)) : formatNumber(productPriceDiscount(+(product?.price ?? ''), +percentage))} Off`}
+                  {loading ? '...' : `${currencySymbol} ${formatNumber(+variantPrice! - +discountedPrice!)} Off`}
                 </span>
                 <Col className="d-flex justify-content-end ms-1">
                   {addedbyname && (
@@ -658,9 +661,7 @@ const ProductDetail = ({
                     {' '}
                     <span className={styles.groupshop_right_content_price}>
                       {currencySymbol}
-                      { product?.compareAtPrice && discountedPrice}
-                      {!product?.compareAtPrice && (product?.options ? (dPrice(+(variantPrice || 0))).toFixed(2).toString().replace('.00', '')
-                        : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', ''))}
+                      {discountedPrice}
                     </span>
                     {' '}
                     {cashBack && isGroupshop ? (

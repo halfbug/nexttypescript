@@ -126,7 +126,6 @@ const ProductGridInitial = ({
   const {
     spotlightProducts,
     updatePurhaseCount,
-    VSPrice,
   } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -149,21 +148,23 @@ const ProductGridInitial = ({
     googleButtonCode('product-share');
   };
 
+  const { formatNumber } = useUtilityFunction();
+
   const priceUI = (prod: any) => (
     <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
       <span className="text-decoration-line-through fw-light me-1">
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {/* {prod.price} */}
         {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {prod?.compareAtPrice && VSPrice(prod?.compareAtPrice ?? prod.price)}
+        {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
       </span>
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
         {prod?.compareAtPrice && spotlightProducts.includes(prod.id) && !isSuggestion
-          && VSPrice(prod.price)}
+          && formatNumber(prod.price)}
         {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
-          && VSPrice(dPrice(prod.price))}
+          && formatNumber(dPrice(prod.price))}
         {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
         {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
@@ -357,7 +358,7 @@ const ProductGridInitial = ({
                               }
                           >
                             {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                            {prod.compareAtPrice ? VSPrice((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                            {prod.compareAtPrice ? formatNumber((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                             {' '}
                             OFF
                           </span>

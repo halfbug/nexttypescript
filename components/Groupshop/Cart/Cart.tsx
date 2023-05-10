@@ -57,7 +57,6 @@ const Cart = ({
     rewardArr,
     spotlightProducts,
     cartValueProgress,
-    VSPrice,
   } = useDrops();
 
   const [currencyName, setCurrencyName] = useState<any>('USD');
@@ -371,13 +370,13 @@ And you can keep earning up to
                     <h5 className={styles.groupshop_cartProductPrice}>
                       <span className="text-decoration-line-through fw-light">
                         {currencySymbol}
-                        {prd.compareAtPrice ? VSPrice(prd.selectedVariant.compareAtPrice ?? prd.compareAtPrice) : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        {prd.compareAtPrice || prd.selectedVariant.compareAtPrice ? formatNumber(prd.selectedVariant.compareAtPrice ?? prd.compareAtPrice ?? '') : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                       {' '}
                       <span>
                         {currencySymbol}
                         {prd.compareAtPrice && spotlightProducts.includes(prd.id)
-                          ? VSPrice(prd.selectedVariant.price ?? prd.price)
+                          ? formatNumber(prd.selectedVariant.price ?? prd.price)
                           : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
                     </h5>
