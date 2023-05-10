@@ -91,6 +91,7 @@ const ProductGridInitial = ({
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
   discoveryDiscount, urlForActivation, currency, showPagination, type, loading, ...props
 }: ProductGridProps) => {
+  const { formatNumber } = useUtilityFunction();
   const [ref, dimensions] = useDimensions();
   // const router = useRouter();
   const {
@@ -147,8 +148,6 @@ const ProductGridInitial = ({
     e.stopPropagation();
     googleButtonCode('product-share');
   };
-
-  const { formatNumber } = useUtilityFunction();
 
   const priceUI = (prod: any) => (
     <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
