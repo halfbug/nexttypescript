@@ -82,8 +82,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="mt-5 pt-5">
-                    <p className="mt-5 pt-5">
+                  <div className="pt-5">
+                    <p>
                       Every week we drop
                       {' '}
                       <b>exclusive discounts</b>
@@ -126,7 +126,7 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="mt-5 pt-5">
+                  <div className="pt-5">
                     <p>
                       You get
                       {' '}
@@ -158,8 +158,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="mt-5 pt-5">
-                    <p className="mt-2 mb-0">
+                  <div className="pt-5">
+                    <p>
                       🤑
                       <b> Want more rewards?</b>
                     </p>
@@ -188,8 +188,8 @@ const HowShopDropVideoBox = ({
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
                     <GroupshopIcon />
                   </div>
-                  <div className="mt-5 pt-5">
-                    <p className="mt-5 pt-4 mb-0">
+                  <div className="pt-5">
+                    <p>
                       ⏳
                       <b>Need more time?</b>
                     </p>
