@@ -211,7 +211,7 @@ const HowShopDropVideoBox = ({
               disabled={btnDisable}
               onClick={handleClose}
             >
-              {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Drop in and shop'}
+              {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Get Started'}
             </Button>
           </div>
         </div>
