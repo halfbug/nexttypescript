@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import styles from 'styles/Modal.module.scss';
 import { RootProps } from 'types/store';
@@ -8,6 +10,9 @@ import {
 } from 'react-bootstrap';
 import GroupshopIcon from 'assets/images/groupshop-white-icon.svg';
 import useAppContext from 'hooks/useAppContext';
+import SliderImage1 from 'assets/images/slider-1.png';
+import SliderImage2 from 'assets/images/slider-2.png';
+import SliderImage3 from 'assets/images/slider-3.png';
 
 interface HowShopDropVideoBoxProps extends RootProps {
     show: boolean;
@@ -45,7 +50,7 @@ const HowShopDropVideoBox = ({
         dialogClassName={styles.howShopDropVideoBox_modal}
         contentClassName={styles.howShopDropVideoBox_modal__content}
       >
-        <Modal.Body className={styles.howShopDropVideoBox_modal__body}>
+        <div className={styles.howShopDropVideoBox_modal__body}>
           <div className={styles.howShopDropVideoBox_modal__top}>
             <h3>
               { (customerDetail?.firstName !== '' && customerDetail?.firstName !== null) && (
@@ -73,10 +78,10 @@ const HowShopDropVideoBox = ({
           >
             <Carousel.Item
               className={styles.howShopDropVideoBox_modal__carousel__item}
-              interval={50000}
+              interval={500000}
             >
-              <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video key={1} src={tmpVideoSrc[0]} autoPlay muted loop playsInline preload="auto" />
+              <img src={SliderImage1.src} alt="slider-img" className="img-fluid" />
+                {/* <video key={1} src={tmpVideoSrc[0]} autoPlay muted loop playsInline preload="auto" />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
@@ -95,12 +100,11 @@ const HowShopDropVideoBox = ({
                       get discounted.
                     </p>
                   </div>
-                </div>
-              </div>
+                </div> */}
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
-              <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video key={2} src={tmpVideoSrc[1]} autoPlay muted loop playsInline preload="auto" />
+              <img src={SliderImage2.src} alt="slider-img" className="img-fluid" />
+                {/* <video key={2} src={tmpVideoSrc[1]} autoPlay muted loop playsInline preload="auto" />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
@@ -115,12 +119,11 @@ const HowShopDropVideoBox = ({
                       rejoin the waitlist.
                     </p>
                   </div>
-                </div>
-              </div>
+                </div> */}
             </Carousel.Item>
             <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
-              <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
-                <video key={3} src={tmpVideoSrc[2]} autoPlay muted loop playsInline preload="auto" />
+              <img src={SliderImage3.src} alt="slider-img" className="img-fluid" />
+                {/* <video key={3} src={tmpVideoSrc[2]} autoPlay muted loop playsInline preload="auto" />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__caption}>
                   <div className={styles.howShopDropVideoBox_modal__top__icon}>
@@ -147,10 +150,9 @@ const HowShopDropVideoBox = ({
                       .
                     </p>
                   </div>
-                </div>
-              </div>
+                </div>  */}
             </Carousel.Item>
-            <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
+            {/* <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={4} src={tmpVideoSrc[3]} autoPlay muted loop playsInline preload="auto" />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
@@ -179,8 +181,8 @@ const HowShopDropVideoBox = ({
                   </div>
                 </div>
               </div>
-            </Carousel.Item>
-            <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
+            </Carousel.Item> */}
+            {/* <Carousel.Item className={styles.howShopDropVideoBox_modal__carousel__item}>
               <div className={styles.howShopDropVideoBox_modal__carousel__item__content}>
                 <video key={5} src={tmpVideoSrc[4]} autoPlay muted loop playsInline preload="auto" />
                 <div className={styles.howShopDropVideoBox_modal__carousel__item__videoOverlay} />
@@ -201,7 +203,7 @@ const HowShopDropVideoBox = ({
                   </div>
                 </div>
               </div>
-            </Carousel.Item>
+            </Carousel.Item> */}
           </Carousel>
           <div className={styles.howShopDropVideoBox_modal__btnSection}>
             <Button
@@ -212,7 +214,7 @@ const HowShopDropVideoBox = ({
               {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Drop in and shop'}
             </Button>
           </div>
-        </Modal.Body>
+        </div>
       </Modal>
     </>
   );
