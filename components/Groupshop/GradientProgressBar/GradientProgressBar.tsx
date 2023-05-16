@@ -12,7 +12,7 @@ const GradientProgressBar = ({
   progress, className,
   cartValue = 0,
 }: IGradientProgressProps) => {
-  const { totalRewardsValue, rewardArr: rewardArray } = useDrops();
+  const { rewardArr: rewardArray } = useDrops();
   const [fill, setFill] = useState<number>(0);
 
   useEffect(() => {
@@ -24,19 +24,14 @@ const GradientProgressBar = ({
         value: newArr.reduce((curr, next) => curr + (+next.rewardValue), 0),
         realValue: +ele.rewardValue,
         no: index + 1,
+        percent: (100 / rewardArray.length) * (index + 1),
         rval: index === 0 ? +rewardArray[0].rewardValue : diff,
       };
     });
-    const nearestSmall = numArray.reduce((acc: any, curr: any) => {
-      if (curr.realValue <= cartValue && curr.realValue >= acc.realValue) {
-        return curr;
-      }
-      return acc;
-    }, { realValue: 0 });
-
-    const a = Number.isNaN((100 * nearestSmall.no) / totalRewardsValue().totalRewards!)
-      ? 0 : (100 * nearestSmall.no) / totalRewardsValue().totalRewards!;
-    setFill(a);
+    const currentRunningReward = numArray.find((ele) => ele.realValue >= cartValue)
+    ?? numArray[numArray.length - 1];
+    const t = (cartValue * currentRunningReward?.percent) / currentRunningReward?.realValue;
+    setFill(t >= 100 ? 100 : t);
   }, [rewardArray, cartValue]);
 
   const gradientBar = () => (
