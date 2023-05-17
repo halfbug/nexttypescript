@@ -78,7 +78,7 @@ const HowShopDropVideoBox = ({
           >
             <Carousel.Item
               className={styles.howShopDropVideoBox_modal__carousel__item}
-              interval={500000}
+              interval={5000}
             >
               <img src={SliderImage1.src} alt="slider-img" className="img-fluid" />
                 {/* <video key={1} src={tmpVideoSrc[0]} autoPlay muted loop playsInline preload="auto" />
