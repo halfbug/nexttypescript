@@ -94,6 +94,7 @@ const ProductDetail = ({
   const [disable, setDisable] = useState(false);
   const [filterDeal, setFilterDeal] = useState<string[]>([]);
   const [varientData, setVarientData] = useState(0);
+  const [manualOptionSelect, setManualOption] = useState<boolean>(false);
   const router = useRouter();
 
   const handleSelect = (selectedIndex: number, e: any) => {
@@ -323,9 +324,11 @@ const ProductDetail = ({
         //   selectedV = dproduct.variants.find((vrt: any) => vrt.inventoryQuantity > 0);
         // }
 
+        if (!manualOptionSelect) {
         // 3. set selected options to in stock variant
-        setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
-          { ...obj, [name]: value }), {}));
+          setselOptions(svrnt?.[0]?.selectedOptions.reduce((obj: any, { name, value }: any) => (
+            { ...obj, [name]: value }), {}));
+        }
       }
     }
   }, [index]);
@@ -635,7 +638,7 @@ const ProductDetail = ({
                               selectedProducts={[dealProduct]}
                               handleClose={(e) => {
                                 closeModal(e);
-                                if (true) {
+                                if (totalProducts) {
                                   if ((totalProducts + 1) < 101) {
                                     showSuccess('Product(s) has been added successfully.');
                                   } else {
@@ -765,6 +768,7 @@ const ProductDetail = ({
                           aria-label="option"
                           className="w-50 text-capitalize"
                           onChange={({ target: { value } }: any) => {
+                            setManualOption(true);
                             setselOptions({ ...selOptions, [name]: value });
                           }}
                           value={selOptions?.[name]}
