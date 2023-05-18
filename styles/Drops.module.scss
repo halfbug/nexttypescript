@@ -3292,7 +3292,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     z-index: 999;
 
     button {
-      background: #ded5e7 !important;
+      background: #E5FF00 !important;
       border: 1px solid #000000;
       border-radius: 3px;
       font-family: "DM Sans";
@@ -3496,6 +3496,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         padding: 6px 10px;
       }
     }
+  }
+  &_sharebtn{
+    color: #E5FF00;
   }
 }
 .offcanvas-end {

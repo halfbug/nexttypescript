@@ -821,10 +821,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           {isModalForMobile && (
           <div>
             <ShoppingBoxMobile
+              // className={styles.drops_sharebtn}
               shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
               val=""
-              label={isExpired ? 'Share to unlock' : 'Share with friends'}
+              label={isExpired ? 'Share to unlock' : 'Share & Earn $10'}
               brandName={brandName}
               isDrops
             />
