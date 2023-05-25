@@ -477,10 +477,22 @@ const ProductGridInitial = ({
                         )}
                   >
                     <div className={styles.groupshop_product_info}>
-                      <div className={styles.groupshop_product_desc}>
+                      <div
+                        role="button"
+                        tabIndex={-1}
+                        onKeyDown={() => { !isSuggestion ? handleDetail(prod) : ''; }}
+                        onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }}
+                        className={styles.groupshop_product_desc}
+                      >
                         {loading
                           ? <Skeleton width="186.5px" height="55px" />
-                          : <h5 className={['fw-bold', !isDrops ? 'text-center' : '', styles.groupshop_product_desc_title].join(' ')}>{prod.title}</h5>}
+                          : (
+                            <h5
+                              className={['fw-bold', !isDrops ? 'text-center' : '', styles.groupshop_product_desc_title].join(' ')}
+                            >
+                              {prod.title}
+                            </h5>
+                          )}
                         {isDrops && (loading
                           ? <Skeleton width="186.5px" />
                           : priceUI(prod))}
