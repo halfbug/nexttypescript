@@ -845,7 +845,28 @@ const ProductDetail = ({
                       {isExpired && 'Share to unlock'}
                       {!isExpired && 'Add to Cart'} */}
                           {/* {outofStock ? 'Out of Stock' : 'Add to Cart'} */}
-                          {loading ? <Spinner animation="border" size="sm" /> : <>{PDBtnText}</>}
+                          {loading ? <Spinner animation="border" size="sm" /> : (
+                            <>
+                              {PDBtnText}
+                              {isDrops && (
+                                <>
+                                  {' '}
+                                  -
+                                  {' '}
+                                  <span className={styles.groupshop_addtoCart_price}>
+                                    {currencySymbol}
+                                    {discountedPrice}
+                                  </span>
+                                  {' '}
+                                  <span className={['text-decoration-line-through', styles.groupshop_addtoCart_price].join(' ')}>
+                                    {currencySymbol}
+                                    {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
+                                  </span>
+                                </>
+                              )}
+
+                            </>
+                          )}
 
                         </Button>
                       </>
