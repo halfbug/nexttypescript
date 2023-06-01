@@ -134,7 +134,6 @@ const ProductDetail = ({
     }, 1000);
   };
   useEffect(() => {
-    checkCartForDrops();
     if (show) { getProduct(); setIndex(0); }
   }, [show]);
 
@@ -208,8 +207,18 @@ const ProductDetail = ({
       const selectedVariant = getVariant();
       setVarientData(selectedVariant?.inventoryQuantity);
       const { productById } = data;
-      // console.log('🚀 ~ file: ProductDetail.tsx:140 ~ useEffect ~ productById', productById);
-      // console.log('🚀ProductDetail 115 ~ selectedVariant', selectedVariant);
+      const { cart } = gsctx;
+
+      if (cart) {
+        const prods = cart.filter((ele) => ele.id === productById.id);
+        const prodVrnt = prods.find((ele) => ele.selectedVariant.id === selectedVariant.id);
+        if (prodVrnt && prodVrnt.selectedVariant.selectedQuantity >= 3) {
+          setDisable(true);
+        } else {
+          setDisable(false);
+        }
+      }
+
       if (productById?.outofstock) {
         setoutofStock(true);
       } else if (selectedVariant?.inventoryPolicy === 'continue') {
@@ -382,16 +391,6 @@ const ProductDetail = ({
   //   }
   //   return '';
   // }, []);
-
-  const checkCartForDrops = () => {
-    const { cart } = gsctx;
-    const cartProduct = cart?.find((ele) => ele.id === product?.id);
-    if (cartProduct && cartProduct?.selectedVariant?.selectedQuantity >= 3) {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-  };
 
   return (
     <>
