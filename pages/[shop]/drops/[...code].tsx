@@ -467,12 +467,6 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             <Container fluid className="border-top border-bottom bg-white">
               <Row className={['gx-0', styles.drops__top].join(' ')}>
                 <Col md={3} xs={2}>
-                  {/* <IconButton
-                  icon={<Search size={isModalForMobile ? 24 : 16} />}
-                  className={styles.drops__hero_iconSearchBtn}
-                  onClick={handleAddProduct}
-                  disabled={isExpired}
-                /> */}
                   <Button2
                     variant="primary"
                     className="border border-dark border-2 py-1 px-3 bg-white  rounded-pill bg-light text-dark"
@@ -568,6 +562,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     label={(gsctx.members.length > 5 && 'Invite a Friend') || (isExpired ? 'SHARE TO UNLOCK' : `Share & Earn ${currencySymbol}${value}`)}
                     onClick={() => googleEventCode('earn-cashback-modal')}
                     className={styles.drops__hero_share_btn}
+                  />
+                  <IconButton
+                    icon={<Search size={isModalForMobile ? 24 : 16} />}
+                    className={styles.drops__hero_iconSearchBtn}
+                    onClick={handleAddProduct}
+                    disabled={isExpired}
                   />
                   <IconButton
                     icon={<Handbag size={isModalForMobile ? 14 : 24} />}

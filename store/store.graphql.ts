@@ -2705,6 +2705,22 @@ query getRecentSignup($storeId: String!) {
 }
 `;
 
+const GET_DROP_PRODUCT_SEARCH = gql`
+query searchProducts($searchTerm: String!, $shop: String!) {
+  searchProducts(searchTerm: $searchTerm, shop: $shop) {
+    products        
+  }
+}
+`;
+
+const GET_PRODUCTS_BY_COLLECTION_IDS = gql`
+query getProductsByCollectionIds($shop: String!, $collections: [String!]!) {
+  getProductsByCollectionIds(shop: $shop, collections: $collections) {
+    id        
+  }
+}
+`;
+
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -2733,5 +2749,5 @@ export {
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
   UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
-  GET_COLLECTIONS_BY_CATEGORY_ID,
+  GET_COLLECTIONS_BY_CATEGORY_ID, GET_DROP_PRODUCT_SEARCH, GET_PRODUCTS_BY_COLLECTION_IDS,
 };

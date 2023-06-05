@@ -12,7 +12,7 @@ import {
 import { GroupshopContext } from 'store/groupshop.context';
 import { useRouter } from 'next/router';
 import useDebounce from 'hooks/useDebounce';
-
+import { useLazyQuery, useQuery } from '@apollo/client';
 import { useMediaQuery } from 'react-responsive';
 import { X, StarFill, Star } from 'react-bootstrap-icons';
 import IconButton from 'components/Buttons/IconButton';
@@ -30,6 +30,7 @@ import useAppContext from 'hooks/useAppContext';
 import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useCode from 'hooks/useCode';
 import useDetail from 'hooks/useDetail';
+import { GET_DROP_PRODUCT_SEARCH } from 'store/store.graphql';
 import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductsSearchProps extends RootProps {
@@ -84,6 +85,14 @@ const ProductsSearch = ({
     store: { products } = { store: { products: [] } },
     popularProducts, addedProducts, dealProducts, totalProducts,
   } = gsctx;
+
+  const [getSearchResult, { data: lineItems }] = useLazyQuery(GET_DROP_PRODUCT_SEARCH, {
+    fetchPolicy: 'network-only',
+    onCompleted: async (searchResult: any) => {
+      const filterProducts:any = [];
+      searchDropsPrd(searchResult.searchProducts[0].products);
+    },
+  });
 
   // const refreshProduct = () => products?.filter(
   //   (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
@@ -180,7 +189,6 @@ const ProductsSearch = ({
       newFilteredSearchArray = arr?.filter(
         (p: IProduct) => p.title.toLocaleLowerCase().includes(name.toLocaleLowerCase()),
       );
-
       setotherProducts(newFilteredSearchArray);
     }
     if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
@@ -189,8 +197,40 @@ const ProductsSearch = ({
       setshowMsg(`No matches found for "${name}"`);
     }
   };
+
+  const searchDropsPrd = (filteredproducts: any) => {
+    const newFilteredSearchArray:any = [];
+    if (otherProducts && filteredproducts) {
+      filteredproducts.forEach((pid:string) => {
+        const newFiltered = otherProducts?.filter(
+          (p: IProduct) => p.id.includes(pid),
+        );
+        if (newFiltered.length > 0) {
+          newFilteredSearchArray.push(newFiltered[0]);
+        }
+      });
+      setotherProducts(newFilteredSearchArray);
+    }
+    if ((!otherProducts || otherProducts?.length < 1) && filteredproducts) {
+      const arr = refreshProduct();
+      filteredproducts.forEach((pid:string) => {
+        const newFiltered = arr?.filter(
+          (p: IProduct) => p.id.includes(pid),
+        );
+        if (newFiltered.length > 0) {
+          newFilteredSearchArray.push(newFiltered[0]);
+        }
+      });
+      setotherProducts(newFilteredSearchArray);
+    }
+    if (newFilteredSearchArray && newFilteredSearchArray.length > 0) {
+      setshowMsg('');
+    } else {
+      setshowMsg('No matches found!');
+    }
+  };
   const debouncedSearch = useDebounce(
-    (nextValue: string) => searchPrd(nextValue), 1000, otherProducts || [],
+    (nextValue: string) => (isDrops ? getSearchResult({ variables: { searchTerm: nextValue, shop: `${shop}.myshopify.com` } }) : searchPrd(nextValue)), 1000, otherProducts || [],
   );
   const { AlertComponent, showSuccess, showError } = useAlert();
   const handleSubmit = (e: any) => { e.preventDefault(); };
@@ -209,12 +249,8 @@ const ProductsSearch = ({
   };
   const handleSearch = (event: any) => {
     const { value: searchText } = event.target;
-    const code = event.keyCode || event.key;
-    if (code !== 37 || code !== 38 || code !== 39 || code !== 40 || code !== 13) {
-      debouncedSearch(searchText);
-    }
-
-    if (searchText === '') { setotherProducts(undefined); }
+    // eslint-disable-next-line no-unused-expressions
+    (searchText === '') ? setotherProducts(undefined) : debouncedSearch(searchText);
   };
   // const selectedCountState = (selected?.length ?? 0 + clientDProducts?.length) || 0;
   useEffect(() => {
