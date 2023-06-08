@@ -156,6 +156,7 @@ const ProductsSearch = ({
   }, [products, addedProducts]);
 
   const [selected, setSelected] = useState<string[] | undefined>([]);
+  const [searchKeyword, setSearchKeyword] = useState<string | undefined>(undefined);
   const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
   const [selectedCountState, setselectedCountState] = useState<number>(0);
   // if > 5 disable selection of product in popup
@@ -200,7 +201,7 @@ const ProductsSearch = ({
 
   const searchDropsPrd = (filteredproducts: any) => {
     const newFilteredSearchArray:any = [];
-    if (otherProducts && filteredproducts) {
+    if (otherProducts && filteredproducts && searchKeyword !== '') {
       filteredproducts.forEach((pid:string) => {
         const newFiltered = otherProducts?.filter(
           (p: IProduct) => p.id.includes(pid),
@@ -248,10 +249,20 @@ const ProductsSearch = ({
     setSelectedProducts([...selectedProducts, prd]);
   };
   const handleSearch = (event: any) => {
-    const { value: searchText } = event.target;
+    // const { value: searchText } = event.target;
+    // eslint-disable-next-line max-len
+    if (event.keyCode !== 37 || event.keyCode !== 38 || event.keyCode !== 39 || event.keyCode !== 40 || event.keyCode !== 13) {
     // eslint-disable-next-line no-unused-expressions
-    (searchText === '') ? setotherProducts(undefined) : debouncedSearch(searchText);
+      (searchKeyword === '' || searchKeyword === undefined) ? setotherProducts(undefined) : debouncedSearch(searchKeyword);
+    }
   };
+
+  useEffect(() => {
+    if (searchKeyword === '') {
+      setotherProducts(undefined);
+    }
+  }, [searchKeyword]);
+
   // const selectedCountState = (selected?.length ?? 0 + clientDProducts?.length) || 0;
   useEffect(() => {
     if (selected && selected?.length) {
@@ -392,7 +403,8 @@ const ProductsSearch = ({
                 type="text"
                 placeholder={isDrops ? 'SEARCH PRODUCTS' : 'Start your search...'}
                 name="searchField"
-                onChange={(e: any) => handleSearch(e)}
+                onChange={(e: any) => setSearchKeyword(e.target.value)}
+                onKeyDown={handleSearch}
                 // value={searchValue}
               />
               {isModalForMobile && (
