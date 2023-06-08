@@ -550,6 +550,7 @@ const ProductGridInitial = ({
                               return htmldata;
                             })}
                           </button>
+                          {isDrops && (
                           <Button
                             variant=""
                             className={['text-center mx-2 p-1 bg-white shadow-sm border-1 rounded-3',
@@ -566,6 +567,7 @@ const ProductGridInitial = ({
                           >
                             <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? '#FFE012' : 'lightgrey'} size={20} />
                           </Button>
+                          )}
                         </div>
                         {!isSuggestion && showHoverButton && (
                         <Row className={styles.groupshop__pcard_tag_addToCart}>
