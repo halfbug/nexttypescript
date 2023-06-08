@@ -257,11 +257,15 @@ export interface IGroupshop {
 
   firstCategory?: subCategories;
 
+  selectedCategory?: string;
+
   categories?: Categories[];
 
   cartSuggested?: Product[];
 
   loading?: boolean;
+
+  favorite?: Product[];
 
 }
 export interface InfluencerGroupshop {

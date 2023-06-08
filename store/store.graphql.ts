@@ -851,6 +851,25 @@ query DropGroupshop($code: String!, $status: String = "") {
       phone
       email
     }
+    favorite {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
     discountCode {
       title
       percentage
@@ -888,6 +907,58 @@ query DropGroupshop($code: String!, $status: String = "") {
     obSettings {
       step
       ownerUrl
+    }
+  }
+}
+`;
+
+const ADD_FAVORITE_PRODUCT = gql`
+mutation addFavoriteProduct($dropsId: String!, $productId: String!) {
+  addFavoriteProduct(dropsId: $dropsId, productId: $productId) {
+    favorite {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+  }
+}
+`;
+
+const REMOVE_FAVORITE_PRODUCT = gql`
+mutation removeFavoriteProduct($dropsId: String!, $productId: String!) {
+  removeFavoriteProduct(dropsId: $dropsId, productId: $productId) {
+    favorite {
+      id
+      title
+      featuredImage
+      featuredVideo
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
     }
   }
 }
@@ -2750,4 +2821,5 @@ export {
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
   UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
   GET_COLLECTIONS_BY_CATEGORY_ID, GET_DROP_PRODUCT_SEARCH, GET_PRODUCTS_BY_COLLECTION_IDS,
+  REMOVE_FAVORITE_PRODUCT, ADD_FAVORITE_PRODUCT,
 };

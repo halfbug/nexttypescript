@@ -56,6 +56,8 @@ export const gsdInit: IGroupshop = {
     },
   },
   cart: [],
+  favorite: [],
+  selectedCategory: '',
   spotlightProducts: [],
   sections: [],
   isDrops: true,

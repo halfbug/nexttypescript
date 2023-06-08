@@ -55,6 +55,13 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   }, [data]);
 
   const onCategoryClick = (item: any) => {
+    dispatch({
+      type: 'UPDATE_GROUPSHOP',
+      payload: {
+        ...gsctx,
+        selectedCategory: item.categoryId,
+      },
+    });
     setSelectedCategory(item);
     setSelectedSubCategory('');
     setId(item.categoryId);

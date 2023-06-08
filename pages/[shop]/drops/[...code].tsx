@@ -124,6 +124,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         payload: {
           ...DropGroupshop,
           sections: nsections,
+          selectedCategory: DropGroupshop.firstCategory?.categoryId,
         },
       });
     }
@@ -688,6 +689,30 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             {categories ? <CategoriesTab categories={categories} /> : <></>}
           </div>
           <div id="dropsProductSections">
+            {gsctx?.firstCategory?.categoryId === gsctx?.selectedCategory
+            && (
+            <ProductGrid
+              isDrops
+              title="Your Favs"
+              type="favorite"
+              xs={6}
+              sm={6}
+              md={6}
+              lg={4}
+              xl={3}
+              products={uniqueArray(gsctx?.favorite)}
+              maxrows={3}
+              addProducts={handleAddProduct}
+              handleDetail={(prd: any) => setsProduct(prd)}
+              showHoverButton
+              id="drops_favorite_products"
+              isModalForMobile={isModalForMobile}
+              urlForActivation={urlForActivation}
+              showPagination={false}
+              loading={gsctx.loading || loading}
+            />
+            )}
+
             {
           !loading
             ? sections?.map((ele: any, index:number) => {

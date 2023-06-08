@@ -111,11 +111,13 @@ const ProductDetail = ({
   const {
     spotlightProducts,
     updatePurhaseCount,
+    addProductToFavorite,
+    removeFavoriteProduct,
+    favoriteProducts,
   } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
   const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
-
     variables: { id: product?.id },
   });
   let productCustomers;
@@ -589,11 +591,17 @@ const ProductDetail = ({
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
-                    {!isDrops && (!dealProduct ? (
+                    {(!dealProduct && !favoriteProducts.includes(product!?.id)) ? (
                       <Button
                         variant="outline-primary"
                         className={styles.groupshop_right_content_favbtn}
-                        onClick={(e) => addToFav(e)}
+                        onClick={(e) => {
+                          if (!isDrops) {
+                            addToFav(e);
+                          } else {
+                            addProductToFavorite(gsctx.id, product!?.id);
+                          }
+                        }}
                       >
                         <Star />
                         <span>ADD TO FAVS</span>
@@ -604,9 +612,11 @@ const ProductDetail = ({
                           variant="outline-primary"
                           className={styles.groupshop_right_content_favbtn}
                           onClick={() => {
-                            if (!filterDeal.includes(dealProduct)) {
+                            if (!filterDeal.includes(dealProduct) && !isDrops) {
                               setShowOverlay(false);
                               setDealProduct('');
+                            } else {
+                              removeFavoriteProduct(gsctx.id, product!.id);
                             }
                           }}
                           disabled={!!filterDeal.find((ele) => ele === dealProduct)}
@@ -614,7 +624,7 @@ const ProductDetail = ({
                           <StarFill style={{ color: '#FFD700' }} />
                           <span>Selected</span>
                         </Button>
-                      ))}
+                      )}
 
                     <Overlay
                       show={showOverlay}

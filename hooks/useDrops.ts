@@ -1,6 +1,11 @@
 import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
-import { CREATE_ONBOARDING_DISCOUNT_CODE, UPDATE_DROP_GROUPSHOP } from 'store/store.graphql';
+import {
+  CREATE_ONBOARDING_DISCOUNT_CODE,
+  UPDATE_DROP_GROUPSHOP,
+  ADD_FAVORITE_PRODUCT,
+  REMOVE_FAVORITE_PRODUCT,
+} from 'store/store.graphql';
 import { DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 import { CartRewards } from 'types/store';
 import useAppContext from './useAppContext';
@@ -10,6 +15,7 @@ export default function useDrops() {
   // Check
   const [showObPopup, setShowObPopup] = useState<boolean>(false);
   const [rewardArr, setRewardArr] = useState<CartRewards[]>([]);
+  const [favoriteProducts, setFavoriteProducts] = useState<string[]>([]);
 
   const { gsctx, dispatch } = useAppContext();
   const { formatNumber } = useUtilityFunction();
@@ -19,6 +25,8 @@ export default function useDrops() {
   } = gsctx;
   const [updateDropGroupshop] = useMutation(UPDATE_DROP_GROUPSHOP);
   const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);
+  const [addProductToFav] = useMutation(ADD_FAVORITE_PRODUCT);
+  const [removeProductToFav] = useMutation(REMOVE_FAVORITE_PRODUCT);
 
   const [currentDropReward, setcurrentDropReward] = useState<String>('');
   const [nextDropReward, setnextDropReward] = useState<String | null>('');
@@ -33,6 +41,8 @@ export default function useDrops() {
       if (ownerOnboardingStep === 0) {
         setShowObPopup(true);
       }
+      const prods: string[] = gsctx.favorite?.map((ele) => ele.id) ?? [];
+      setFavoriteProducts(prods);
     }
   }, [gsctx]);
 
@@ -222,6 +232,43 @@ export default function useDrops() {
     secondaryCount, purchaseCount,
   ) => (secondaryCount + purchaseCount), []);
 
+  const addProductToFavorite = (dropsId: string, productId: string) => {
+    setFavoriteProducts([...favoriteProducts, productId]);
+    addProductToFav({
+      variables: {
+        dropsId,
+        productId,
+      },
+    }).then((res) => {
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          favorite: res.data?.addFavoriteProduct?.favorite,
+        },
+      });
+    });
+  };
+
+  const removeFavoriteProduct = (dropsId: string, productId: string) => {
+    const temp = favoriteProducts.filter((ele) => ele !== productId);
+    setFavoriteProducts(temp);
+    removeProductToFav({
+      variables: {
+        dropsId,
+        productId,
+      },
+    }).then((res) => {
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          favorite: res.data?.removeFavoriteProduct?.favorite,
+        },
+      });
+    });
+  };
+
   return {
     currentDropReward,
     nextDropReward,
@@ -230,6 +277,7 @@ export default function useDrops() {
     btnDisable,
     spinner,
     rewardArr,
+    favoriteProducts,
     setShowObPopup,
     updateOnboarding,
     canBeUnlockedCB,
@@ -237,5 +285,7 @@ export default function useDrops() {
     cartValueProgress,
     updatePurhaseCount,
     totalRewardsValue,
+    addProductToFavorite,
+    removeFavoriteProduct,
   };
 }

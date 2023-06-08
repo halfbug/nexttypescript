@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-lone-blocks */
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -27,6 +27,7 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -114,7 +115,7 @@ const ProductGridInitial = ({
   const {
     gsctx: {
       discountCode: { percentage }, loading: load,
-      dealProducts, addedProducts, store,
+      dealProducts, addedProducts, store, id: dropsId,
     } = { discountCode: { percentage: 40 }, dealProducts: [] }, isGroupshop, isChannel,
   } = useAppContext();
   // stage db and check with gs 4 bought prd
@@ -122,11 +123,14 @@ const ProductGridInitial = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
-    disPrice, currencySymbolDiscovery,
+    disPrice, currencySymbolDiscovery, gsURL,
   } = useDeal();
   const {
     spotlightProducts,
+    favoriteProducts,
     updatePurhaseCount,
+    addProductToFavorite,
+    removeFavoriteProduct,
   } = useDrops();
   // console.log('🚀ProductGrid.tsx ~ line 93 ~ leftOverProducts', leftOverProducts()?.length);
   if (pending) {
@@ -254,42 +258,154 @@ const ProductGridInitial = ({
         </Row>
 
         {!children && (
-          <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
+          <>
+            <Row>
+              {/* <Col>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
 
                     <div className={dStyles.drops_col_dropheading}>
-                      {loading ? <Skeleton width="186.5px" /> : title}
+                      Your Favs
+                      <Button variant="" className="mx-2 p-1 bg-white shadow-sm border-1 rounded-3">
+                        <AiOutlineStar size={20} />
+                      </Button>
+                      <Button variant="" className={dStyles.drops_friendsBtn}>
+                        Share With Friends
+                      </Button>
                     </div>
 
-                  )
-                    : (
-                      <>
-                        <div className="d-flex align-items-center">
-                          <div className={dStyles.drops_col_dropheading}>
-                            {loading ? <Skeleton width="186.5px" /> : title}
+                    )
+                      : (
+                        <>
+                          <div className="d-flex align-items-center">
+                            <div className={dStyles.drops_col_dropheading}>
+                              {loading ? <Skeleton width="186.5px" /> : title}
+                            </div>
+
                           </div>
-                          {/* <div className={dStyles.drops_col_dropheading_off}>
+                        </>
+                      )}
+                  </div>
+                  <div className="d-flex">
+                    <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24}
+                    className="me-2"
+                    onClick={() =>
+                    {
+                      horizontalScroll(
+                        { direction: 'left', gridId: [id, 'productGrid'].join('_') }
+                        );
+                      }}
+                       />
+                    <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3}
+                    id={`rightArrow${id}`} size={24} className="ms-2"
+                    onClick={() =>
+                    {
+                      horizontalScroll(
+                        { direction: 'right', gridId: [id, 'productGrid'].join('_') }
+                        );
+                      }} />
+                  </div>
+                </div>
+                {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
+                  <div className={dStyles.drops_col_eligible}>
+                    Not eligible for higher discounts or cashback.
+                  </div>
+                )}
+              </Col> */}
+              {isSpotLight && (
+                <Col xs={12} className={dStyles.drops__counter}>
+                  <div className="d-flex align-items-center mt-3">
+                    <div className="opacity-50 me-2">
+                      Drop ends in
+                    </div>
+                    <div className={dStyles.drops__counter_middle}>
+                      <p>
+                        <span>
+                          00
+                          {' '}
+                          hrs
+                        </span>
+                        :
+                        <span>
+                          01
+                          {' '}
+                          mins
+                        </span>
+                        :
+                        <span>
+                          01
+                          {' '}
+                          secs
+                        </span>
+                      </p>
+                    </div>
+
+                  </div>
+                </Col>
+              )}
+            </Row>
+            <Row>
+              <Col>
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
+
+                      <div className={dStyles.drops_col_dropheading}>
+                        {loading ? <Skeleton width="186.5px" /> : title}
+                        {type === 'favorite' && (
+                        <>
+                          {!loading
+                            ? (
+                              <Button variant="" className="mx-2 p-1 bg-white shadow-sm border-1 rounded-3 subtle">
+                                <AiOutlineStar size={20} />
+                              </Button>
+                            )
+                            : <></>}
+                          {!loading
+                            ? (
+                              <Button
+                                variant=""
+                                className={dStyles.drops_friendsBtn}
+                                onClick={() => navigator?.share({
+                                  title: `${isDrops ? 'Groupshop' : 'Microstore'}`,
+                                  text: `Share With Friends ${gsURL}`,
+                                })}
+                              >
+                                Share With Friends
+                              </Button>
+                            )
+                            : <></>}
+                        </>
+                        )}
+                      </div>
+
+                    )
+                      : (
+                        <>
+                          <div className="d-flex align-items-center">
+                            <div className={dStyles.drops_col_dropheading}>
+                              {loading ? <Skeleton width="186.5px" /> : title}
+                            </div>
+                            {/* <div className={dStyles.drops_col_dropheading_off}>
                         30% off
                       </div> */}
-                        </div>
-                      </>
-                    )}
+                          </div>
+                        </>
+                      )}
+                  </div>
+                  <div className="d-flex">
+                    <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
+                    <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
+                  </div>
                 </div>
-                <div className="d-flex">
-                  <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24} className="me-2" onClick={() => { horizontalScroll({ direction: 'left', gridId: [id, 'productGrid'].join('_') }); }} />
-                  <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3} id={`rightArrow${id}`} size={24} className="ms-2" onClick={() => { horizontalScroll({ direction: 'right', gridId: [id, 'productGrid'].join('_') }); }} />
-                </div>
-              </div>
-              {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
+                {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
                 <div className={dStyles.drops_col_eligible}>
                   Not eligible for higher discounts or cashback.
                 </div>
-              )}
-            </Col>
-            {isSpotLight && (
+                )}
+              </Col>
+              {isSpotLight && (
               <Col xs={12} className={dStyles.drops__counter}>
                 <div className="d-flex align-items-center mt-3">
                   <div className="opacity-50 me-2">
@@ -319,8 +435,9 @@ const ProductGridInitial = ({
 
                 </div>
               </Col>
-            )}
-          </Row>
+              )}
+            </Row>
+          </>
         )}
         <Row
           className={isDrops ? ([dStyles.drops__discover__products, id === 'allproductsdrops' ? 'flex-wrap' : ''].join(' '))
@@ -349,28 +466,28 @@ const ProductGridInitial = ({
                     }}
                     imgOverlay={(
                       <>
-
-                        <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
-                          <span className={
+                        <div className="flex justify-between">
+                          <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
+                            <span className={
                                 isDrops ? dStyles.drops__pcard_tag_price
                                   : styles.groupshop__pcard_tag_price
                               }
-                          >
-                            {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                            {prod.compareAtPrice ? formatNumber((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
-                            {' '}
-                            OFF
-                          </span>
+                            >
+                              {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
+                              {prod.compareAtPrice ? formatNumber((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                              {' '}
+                              OFF
+                            </span>
 
-                          <div className={styles.groupshop__pcard_tag_boughtby}>
-                            {!isSuggestion && topFive(getBuyers(prod.id)?.map(
-                              (member: Member) => (
-                                <span className={styles.groupshop__pcard_tag_buyer}>
-                                  {nameOnProductGrid(member.orderDetail.customer)}
-                                </span>
-                              ),
-                            ))}
-                            {isSuggestion
+                            <div className={styles.groupshop__pcard_tag_boughtby}>
+                              {!isSuggestion && topFive(getBuyers(prod.id)?.map(
+                                (member: Member) => (
+                                  <span className={styles.groupshop__pcard_tag_buyer}>
+                                    {nameOnProductGrid(member.orderDetail.customer)}
+                                  </span>
+                                ),
+                              ))}
+                              {isSuggestion
                                   && topFive(getBuyersDiscover(prod.id, membersForDiscover)
                                     ?.map(
                                       (member: Member) => (
@@ -379,7 +496,7 @@ const ProductGridInitial = ({
                                         </span>
                                       ),
                                     ))}
-                            {(!isSuggestion && isInfluencerGS && !isChannel)
+                              {(!isSuggestion && isInfluencerGS && !isChannel)
                                   && topFive(getBuyers2(prod.id)
                                     ?.map((member: Member) => (
                                       <span className={styles.groupshop__pcard_tag_buyer}>
@@ -387,20 +504,20 @@ const ProductGridInitial = ({
                                       </span>
                                     )))}
 
-                            {!isSuggestion && getBuyers(prod.id).length > 0 && (
-                            <span className={styles.groupshop__pcard_tag_buyer}>
-                              Bought By
-                              {' '}
-                            </span>
-                            )}
-                            {(!isSuggestion && isInfluencerGS)
+                              {!isSuggestion && getBuyers(prod.id).length > 0 && (
+                              <span className={styles.groupshop__pcard_tag_buyer}>
+                                Bought By
+                                {' '}
+                              </span>
+                              )}
+                              {(!isSuggestion && isInfluencerGS)
                                   && getBuyers2(prod.id).length > 0 && (
                                     <span className={styles.groupshop__pcard_tag_buyer}>
                                       Bought By
                                       {' '}
                                     </span>
-                            )}
-                            {isSuggestion
+                              )}
+                              {isSuggestion
                                   && getBuyersDiscover(prod.id, membersForDiscover).length > 0
                                   && (
                                     <span className={styles.groupshop__pcard_tag_buyer}>
@@ -408,31 +525,48 @@ const ProductGridInitial = ({
                                       {' '}
                                     </span>
                                   )}
-                          </div>
-                          {[...addedProducts ?? [],
-                            ...addedByInfluencer ?? [],
-                            ...addedByRefferal ?? []]?.filter(
-                            ({ productId }) => productId === prod.id,
-                          ).map((
-                            { addedBy, productId },
-                          ) => {
-                            const show = displayAddedByFunc(productId);
-                            let htmldata = true ? (
-                              <span
-                                className={styles.groupshop__pcard_tag_addedby}
-                                key={`${productId}_${Math.random()}`}
-                              >
-                                🤩
-                                {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
-                                {' '}
-                                {`${addedBy.length > 7 ? addedBy.slice(0, 7) : addedBy}'s favs`}
-                              </span>
-                            ) : '';
-                            htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
-                            htmldata = (isInfluencerGS || isChannel) && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
-                            return htmldata;
-                          })}
-                        </button>
+                            </div>
+                            {[...addedProducts ?? [],
+                              ...addedByInfluencer ?? [],
+                              ...addedByRefferal ?? []]?.filter(
+                              ({ productId }) => productId === prod.id,
+                            ).map((
+                              { addedBy, productId },
+                            ) => {
+                              const show = displayAddedByFunc(productId);
+                              let htmldata = true ? (
+                                <span
+                                  className={styles.groupshop__pcard_tag_addedby}
+                                  key={`${productId}_${Math.random()}`}
+                                >
+                                  🤩
+                                  {/* <EmojiHeartEyesFill color="yellow" size={16} /> */}
+                                  {' '}
+                                  {`${addedBy.length > 7 ? addedBy.slice(0, 7) : addedBy}'s favs`}
+                                </span>
+                              ) : '';
+                              htmldata = isGroupshop && isModalForMobile && getBuyers(prod.id).length > 0 ? '' : htmldata;
+                              htmldata = (isInfluencerGS || isChannel) && isModalForMobile && getBuyers2(prod.id).length > 0 ? '' : htmldata;
+                              return htmldata;
+                            })}
+                          </button>
+                          <Button
+                            variant=""
+                            className={['text-end mx-2 p-1 bg-white shadow-sm border-1 rounded-3',
+                              dStyles.drops_starBtn].join(' ')}
+                            onClick={() => {
+                              if (dropsId) {
+                                if (favoriteProducts.includes(prod.id)) {
+                                  removeFavoriteProduct(dropsId, prod.id);
+                                } else {
+                                  addProductToFavorite(dropsId, prod.id);
+                                }
+                              }
+                            }}
+                          >
+                            <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? 'yellow' : 'lightgrey'} size={20} />
+                          </Button>
+                        </div>
                         {!isSuggestion && showHoverButton && (
                         <Row className={styles.groupshop__pcard_tag_addToCart}>
                           <Col lg={10} className="p-0">
