@@ -552,7 +552,7 @@ const ProductGridInitial = ({
                           </button>
                           <Button
                             variant=""
-                            className={['text-end mx-2 p-1 bg-white shadow-sm border-1 rounded-3',
+                            className={['text-center mx-2 p-1 bg-white shadow-sm border-1 rounded-3',
                               dStyles.drops_starBtn].join(' ')}
                             onClick={() => {
                               if (dropsId) {
@@ -564,7 +564,7 @@ const ProductGridInitial = ({
                               }
                             }}
                           >
-                            <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? 'yellow' : 'lightgrey'} size={20} />
+                            <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? '#FFE012' : 'lightgrey'} size={20} />
                           </Button>
                         </div>
                         {!isSuggestion && showHoverButton && (

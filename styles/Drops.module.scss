@@ -376,7 +376,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__left_icons {
       @include media-breakpoint-down(sm) {
         button {
-          margin-right: 0px !important;
+          margin-right: 0px;
           padding-right: 0px !important;
           svg {
             width: 20px;
@@ -3507,7 +3507,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &_starBtn{
   position:absolute;
   z-index: 7 !important;
-  margin-top: 12px;
+  margin-top: 9px;
   margin-left: 115px !important;
   }
   &_sharebtn{
