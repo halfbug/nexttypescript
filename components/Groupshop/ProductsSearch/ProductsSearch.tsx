@@ -260,6 +260,8 @@ const ProductsSearch = ({
   useEffect(() => {
     if (searchKeyword === '') {
       setotherProducts(undefined);
+    } else {
+      debouncedSearch(searchKeyword);
     }
   }, [searchKeyword]);
 
@@ -403,8 +405,9 @@ const ProductsSearch = ({
                 type="text"
                 placeholder={isDrops ? 'SEARCH PRODUCTS' : 'Start your search...'}
                 name="searchField"
-                onChange={(e: any) => setSearchKeyword(e.target.value)}
-                onKeyDown={handleSearch}
+                // eslint-disable-next-line max-len
+                onChange={(e: any) => { setSearchKeyword(e.target.value); }}
+                onKeyPress={handleSearch}
                 // value={searchValue}
               />
               {isModalForMobile && (
