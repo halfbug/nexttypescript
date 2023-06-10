@@ -591,8 +591,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         font-size: 12px;
         font-weight: $font-weight-normal;
         color: $black;
+        position: absolute;
         line-height: 13px;
-        padding-left: 2px;
+        padding-left: 1px;
       }
     }
     &__small_banner_right {

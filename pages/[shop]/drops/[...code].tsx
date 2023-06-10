@@ -548,7 +548,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     />
                   </div>
                 </Col>
-                <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
+                <Col xs={7} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
                   <div className={styles.drops__counter_middle}>
                     <CountDownTimer />
                   </div>
@@ -557,7 +557,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   md={3}
                   xs={2}
                   className={[
-                    'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-baseline',
+                    'text-center text-lg-end m-md-0 p-md-0 m-xl-auto p-xl-auto d-flex justify-content-end align-items-center',
                     styles.drops__top__left_icons,
                   ].join(' ')}
                 >
@@ -577,10 +577,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                   <IconButton
                     icon={<Handbag size={isModalForMobile ? 14 : 24} />}
-                    className={styles.drops__hero_iconBtn}
+                    className={[styles.drops__hero_iconBtn, 'position-relative'].join(' ')}
                     onClick={() => setshowCart(true)}
                   >
-                    <span className={styles.drops__hero__cart_count}>
+                    <span className={[styles.drops__hero__cart_count, ' '].join(' ')}>
                       {gsctx?.cart && gsctx?.cart?.length > 0
                         ? `(${gsctx?.cart?.length})`
                         : ''}
