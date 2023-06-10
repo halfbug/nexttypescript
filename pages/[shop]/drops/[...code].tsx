@@ -284,6 +284,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       >
         <Head>
           <title>Groupshop</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+          />
+
           <script
           // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
