@@ -553,7 +553,7 @@ const ProductGridInitial = ({
                           {isDrops && (
                           <Button
                             variant=""
-                            className={['text-center mx-2 p-1 bg-white shadow-sm border-1 rounded-3',
+                            className={['text-center p-1 bg-white shadow-sm border-1 rounded-3',
                               dStyles.drops_starBtn].join(' ')}
                             onClick={() => {
                               if (dropsId) {

@@ -3508,8 +3508,9 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
   &_starBtn{
   position:absolute;
   z-index: 7 !important;
-  margin-top: 18px;
-  margin-left: 100px !important;
+  margin-top: 12px;
+  right: 9px;
+  // margin-left: 100px !important;
   }
   &_sharebtn{
     color: #E5FF00;
