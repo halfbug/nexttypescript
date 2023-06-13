@@ -32,7 +32,7 @@ const ProductCard = ({
         <Card {...rest} className={[styles.groupshop__pcard, rest.className, isVault ? dStyles.drops__vault__pcard : ''].join(' ')}>
           {
             loading
-              ? <Skeleton width="186.5px" height="190.5px" />
+              ? <Skeleton width="100%" height="190.5px" />
               : (
                 <div className={isDrops ? [dStyles.drops__pcard_image_wrapper, isSpotlight ? dStyles.drops__pcard_image_wrapper_spotlight : ''].join(' ') : styles.groupshop__pcard_image_wrapper} style={{ backgroundImage: `url(${isrc || NoImage.src})` }}>
                   {

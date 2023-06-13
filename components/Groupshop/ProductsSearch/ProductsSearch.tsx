@@ -31,7 +31,10 @@ import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useCode from 'hooks/useCode';
 import useDetail from 'hooks/useDetail';
 import { GET_DROP_PRODUCT_SEARCH } from 'store/store.graphql';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import ProductCard from '../ProductCard/ProductCard';
+import 'react-loading-skeleton/dist/skeleton.css';
+import ProductGrid from '../ProductGrid/ProductGrid';
 
 interface ProductsSearchProps extends RootProps {
   show: boolean;
@@ -67,6 +70,7 @@ const ProductsSearch = ({
 
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const [isloader, setIsloader] = useState(false);
   const [showMsg, setshowMsg] = useState('');
   const [productsArr, setProductsArr] = useState<IProduct[] | undefined>([]);
   // const [searchValue, setsearchValue] = useState('');
@@ -200,6 +204,7 @@ const ProductsSearch = ({
   };
 
   const searchDropsPrd = (filteredproducts: any) => {
+    setIsloader(false);
     const newFilteredSearchArray:any = [];
     if (otherProducts && filteredproducts && searchKeyword !== '') {
       filteredproducts.forEach((pid:string) => {
@@ -249,6 +254,7 @@ const ProductsSearch = ({
     setSelectedProducts([...selectedProducts, prd]);
   };
   const handleSearch = (event: any) => {
+    setIsloader(true);
     // const { value: searchText } = event.target;
     // eslint-disable-next-line max-len
     if (event.keyCode !== 37 || event.keyCode !== 38 || event.keyCode !== 39 || event.keyCode !== 40 || event.keyCode !== 13) {
@@ -540,7 +546,7 @@ const ProductsSearch = ({
         </Row>
         <Modal.Body className={styles.groupshop_modal_search_productSection}>
           <Row className={styles.groupshop_search}>
-            {otherProducts ? (
+            {otherProducts && !isloader ? (
               otherProducts.map(
                 (prd) => (
                   (+prd.price > 0) && (
@@ -641,9 +647,16 @@ const ProductsSearch = ({
                 ),
               )
             ) : (
-              <div className={styles.groupshop_modal_empty}>
-                <p>SEARCH TO FIND YOUR FAVORITE PRODUCTS</p>
-              </div>
+              new Array(6).fill(null).map(() => (
+                <Col xs={6} sm={6} md={4}>
+                  <ProductCard
+                    isDrops={isDrops}
+                    loading={isloader}
+                  >
+                    <Skeleton width="100%" />
+                  </ProductCard>
+                </Col>
+              ))
             )}
             {!(otherProducts && otherProducts.length > 0) && (
               <div className={styles.groupshop_modal_empty}>
