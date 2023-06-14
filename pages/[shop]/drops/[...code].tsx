@@ -256,6 +256,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
           'Only 5 products can be added to this Group Shop per person.',
         );
       } else {
+        setpending(true);
         setshowps(true);
       }
     } else showError('Groupshop is full you can not add more products to it');
