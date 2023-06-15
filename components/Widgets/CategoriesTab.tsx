@@ -12,14 +12,45 @@ interface PropsType {
 export default function CategoriesTab({ categories = [] }: PropsType) {
   const [selectedCategory, setSelectedCategory] = useState<any>({});
   const [selectedSubCategory, setSelectedSubCategory] = useState<any>({});
+  const [categoryArray, setCategoryArray] = useState<any>([]);
   const [id, setId] = useState<string>('');
   const { gsctx, dispatch } = useAppContext();
+
+  const { favorite } = gsctx;
 
   const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
     skip: !id,
   });
+
+  useEffect(() => {
+    if (categories) {
+      const temp = categories?.slice()?.sort((a, b) => a.sortOrder - b.sortOrder) ?? [];
+      const body = {
+        categoryId: 'favproducts',
+        collections: [],
+        parentId: null,
+        sortOrder: 0,
+        subCategories: [],
+        title: 'Your Favs',
+      };
+      if (favorite?.length) {
+        setCategoryArray([body, ...temp]);
+      } else {
+        dispatch({
+          type: 'UPDATE_GROUPSHOP',
+          payload: {
+            ...gsctx,
+            selectedCategory: '',
+          },
+        });
+        setInitialCategory();
+        setCategoryArray(temp);
+        setId(gsctx.firstCategory?.categoryId ?? '');
+      }
+    }
+  }, [categories, favorite]);
 
   useEffect(() => {
     dispatch({
@@ -32,6 +63,10 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   }, [loading]);
 
   useEffect(() => {
+    setInitialCategory();
+  }, []);
+
+  const setInitialCategory = () => {
     if (gsctx && gsctx.firstCategory) {
       const { categories: categoryArr, firstCategory } = gsctx;
       if (categoryArr) {
@@ -39,7 +74,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
         setSelectedCategory(init);
       }
     }
-  }, []);
+  };
 
   useEffect(() => {
     if (data) {
@@ -94,7 +129,7 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
   return (
     <>
       <div className={styles.drops__categoriesTab}>
-        {categories?.slice()?.sort((a, b) => a.sortOrder - b.sortOrder)?.map((item: Categories) => (
+        {categoryArray?.map((item: Categories) => (
           <div className={styles.drops__categoriesTab__itemWrapper}>
             <div
               role="button"
