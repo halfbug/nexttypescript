@@ -573,7 +573,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   <IconButton
                     icon={<Search size={isModalForMobile ? 24 : 16} />}
                     className={[styles.drops__hero_iconSearchBtn, 'mx-3'].join(' ')}
-                    onClick={handleAddProduct}
+                    onClick={showSearchProds}
                     disabled={isExpired}
                   />
                   <IconButton
