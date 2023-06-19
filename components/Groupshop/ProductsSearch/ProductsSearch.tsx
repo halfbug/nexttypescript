@@ -266,7 +266,7 @@ const ProductsSearch = ({
   useEffect(() => {
     if (searchKeyword === '') {
       setotherProducts(undefined);
-    } else {
+    } else if (searchKeyword !== undefined) {
       debouncedSearch(searchKeyword);
     }
   }, [searchKeyword]);
