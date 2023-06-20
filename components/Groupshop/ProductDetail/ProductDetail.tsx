@@ -436,6 +436,41 @@ const ProductDetail = ({
                 <span className={isDrops ? dStyles.drops__pcard_tag_priceMobile : styles.groupshop__pcard_tag_priceMobile}>
                   {loading ? '...' : `${currencySymbol} ${formatNumber(+variantPrice! - +discountedPrice!)} Off`}
                 </span>
+                {(!dealProduct && !favoriteProducts.includes(product!?.id)) ? (
+                  <Button
+                    variant="outline-primary"
+                    className={styles.groupshop_right_content_favbtn}
+                    onClick={(e) => {
+                      if (!isDrops) {
+                        addToFav(e);
+                      } else {
+                        addProductToFavorite(gsctx.id, product!?.id);
+                      }
+                    }}
+                  >
+                    <Star />
+                    <span>ADD TO FAVS</span>
+                  </Button>
+                )
+                  : (
+                    <Button
+                      variant="outline-primary"
+                      className={styles.groupshop_right_content_favbtn}
+                      onClick={() => {
+                        if (!filterDeal.includes(dealProduct) && !isDrops) {
+                          setShowOverlay(false);
+                          setDealProduct('');
+                        } else {
+                          removeFavoriteProduct(gsctx.id, product!.id);
+                        }
+                      }}
+                      disabled={!!filterDeal.find((ele) => ele === dealProduct)}
+                    >
+                      <StarFill style={{ color: '#FFD700' }} />
+                      <span>Selected</span>
+                    </Button>
+                  )}
+
                 <Col className="d-flex justify-content-end ms-1">
                   {addedbyname && (
                     <span className={styles.groupshop__pcard_tag_addedbyname}>
@@ -591,40 +626,6 @@ const ProductDetail = ({
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
-                    {(!dealProduct && !favoriteProducts.includes(product!?.id)) ? (
-                      <Button
-                        variant="outline-primary"
-                        className={styles.groupshop_right_content_favbtn}
-                        onClick={(e) => {
-                          if (!isDrops) {
-                            addToFav(e);
-                          } else {
-                            addProductToFavorite(gsctx.id, product!?.id);
-                          }
-                        }}
-                      >
-                        <Star />
-                        <span>ADD TO FAVS</span>
-                      </Button>
-                    )
-                      : (
-                        <Button
-                          variant="outline-primary"
-                          className={styles.groupshop_right_content_favbtn}
-                          onClick={() => {
-                            if (!filterDeal.includes(dealProduct) && !isDrops) {
-                              setShowOverlay(false);
-                              setDealProduct('');
-                            } else {
-                              removeFavoriteProduct(gsctx.id, product!.id);
-                            }
-                          }}
-                          disabled={!!filterDeal.find((ele) => ele === dealProduct)}
-                        >
-                          <StarFill style={{ color: '#FFD700' }} />
-                          <span>Selected</span>
-                        </Button>
-                      )}
 
                     <Overlay
                       show={showOverlay}
