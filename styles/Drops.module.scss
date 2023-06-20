@@ -376,7 +376,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
     &__left_icons {
       @include media-breakpoint-down(sm) {
         button {
-          margin-right: 0px;
+          margin-right: 18px;
           padding-right: 0px !important;
           svg {
             width: 20px;
@@ -594,6 +594,7 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
         position: absolute;
         line-height: 13px;
         padding-left: 1px;
+        top:6px;
       }
     }
     &__small_banner_right {

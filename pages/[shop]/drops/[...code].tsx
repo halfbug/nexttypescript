@@ -549,7 +549,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     />
                   </div>
                 </Col>
-                <Col xs={7} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
+                <Col xs={8} md={6} className={[styles.drops__counter, 'py-2'].join(' ')}>
                   <div className={styles.drops__counter_middle}>
                     <CountDownTimer />
                   </div>
@@ -572,7 +572,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   />
                   <IconButton
                     icon={<Search size={isModalForMobile ? 24 : 16} />}
-                    className={[styles.drops__hero_iconSearchBtn, 'mx-3'].join(' ')}
+                    className={[styles.drops__hero_iconSearchBtn, 'me-3'].join(' ')}
                     onClick={showSearchProds}
                     disabled={isExpired}
                   />
