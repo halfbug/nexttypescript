@@ -6,10 +6,11 @@ import styles from 'styles/Drops.module.scss';
 import { Categories, subCategories } from 'types/groupshop';
 
 interface PropsType {
+  searchRefresh: any;
   categories: Categories[];
 }
 
-export default function CategoriesTab({ categories = [] }: PropsType) {
+export default function CategoriesTab({ categories = [], searchRefresh }: PropsType) {
   const [selectedCategory, setSelectedCategory] = useState<any>({});
   const [selectedSubCategory, setSelectedSubCategory] = useState<any>({});
   const [categoryArray, setCategoryArray] = useState<any>([]);
@@ -88,6 +89,16 @@ export default function CategoriesTab({ categories = [] }: PropsType) {
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    if (searchRefresh) {
+      if (gsctx?.firstCategory) {
+        setId(gsctx.firstCategory.categoryId);
+      }
+    } else if (gsctx?.selectedCategory) {
+      setId(gsctx.selectedCategory);
+    }
+  }, [searchRefresh]);
 
   const onCategoryClick = (item: any) => {
     dispatch({

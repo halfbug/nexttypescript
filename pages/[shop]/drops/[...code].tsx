@@ -692,7 +692,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               </div>
             )
           }
-            {categories ? <CategoriesTab categories={categories} /> : <></>}
+            {categories ? (
+              <CategoriesTab
+                searchRefresh={showps}
+                categories={categories}
+              />
+            ) : <></>}
           </div>
           <div id="dropsProductSections">
             {gsctx?.selectedCategory === 'favproducts'
