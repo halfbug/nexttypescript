@@ -19,8 +19,13 @@ export default function useDeal() {
   const {
     gsctx, dispatch, isGroupshop, isChannel, isDrops,
   } = useAppContext();
+  let clientIP1 = '';
 
-  const [clientIP] = useIP();
+  if (!isDrops) {
+    const [clientIP] = useIP();
+    clientIP1 = clientIP;
+  }
+
   const [displayAddedBy, setdisplayAddedBy] = useState<boolean>(true);
   const [allDiscount, setallDiscount] = useState<(string | undefined)[] | undefined>(undefined);
   const [isExpired, setisExpired] = useState<boolean>(false);
@@ -64,19 +69,19 @@ export default function useDeal() {
       // const addedPrds = filterArray(gsctx?.dealProducts ?? [], gmembers[0]?.products ?? [], 'productId', 'id');
       const addedPrds = isChannel ? gsctx?.dealProducts?.filter((item) => item.type === 'deal' || item.type === 'owner') ?? [] : gsctx?.dealProducts?.filter((item) => item.type === 'deal') ?? [];
       return ([...addedPrds.filter(
-        ({ customerIP }: { customerIP: string }) => customerIP === clientIP,
+        ({ customerIP }: { customerIP: string }) => customerIP === clientIP1,
       )?.map(
         ({ productId }: DealProduct) => productId,
       ) ?? []]);
-    }, [gsctx.dealProducts, clientIP],
+    }, [gsctx.dealProducts, clientIP1],
   );
   // check influencer customer
   const checkCustomerDealProducts = useCallback(
     (): string[] | undefined => ([...addedByRefferal?.filter(
-      ({ customerIP }: { customerIP: string }) => customerIP === clientIP,
+      ({ customerIP }: { customerIP: string }) => customerIP === clientIP1,
     )?.map(
       ({ productId }: DealProduct) => productId,
-    ) ?? []]), [clientIP, gsctx.dealProducts],
+    ) ?? []]), [clientIP1, gsctx.dealProducts],
   );
 
   const currencySymbol = getSymbolFromCurrency(gsctx?.store?.currencyCode || 'USD');
