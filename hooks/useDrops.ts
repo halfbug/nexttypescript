@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/client';
 import { useCallback, useEffect, useState } from 'react';
 import {
   CREATE_ONBOARDING_DISCOUNT_CODE,
-  UPDATE_DROP_GROUPSHOP,
   ADD_FAVORITE_PRODUCT,
   REMOVE_FAVORITE_PRODUCT,
 } from 'store/store.graphql';
@@ -23,7 +22,6 @@ export default function useDrops() {
   const {
     milestones, store, members, sections,
   } = gsctx;
-  const [updateDropGroupshop] = useMutation(UPDATE_DROP_GROUPSHOP);
   const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);
   const [addProductToFav] = useMutation(ADD_FAVORITE_PRODUCT);
   const [removeProductToFav] = useMutation(REMOVE_FAVORITE_PRODUCT);
@@ -76,17 +74,6 @@ export default function useDrops() {
   const updateOnboarding = async () => {
     setbtnDisable(true);
     setspinner(true);
-    await updateDropGroupshop({
-      variables: {
-        updateDropsGroupshopInput: {
-          id: gsctx.id,
-          obSettings: {
-            ...gsctx.obSettings,
-            step: 1,
-          },
-        },
-      },
-    }).catch((err) => setbtnDisable(false));
 
     await createOnBoardingDiscountCode({
       variables: {

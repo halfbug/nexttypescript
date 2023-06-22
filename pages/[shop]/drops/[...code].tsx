@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_DROP_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
+import { GET_DROPS_SECTIONS, GET_DROP_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import styles from 'styles/Drops.module.scss';
 import {
@@ -77,8 +77,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   });
   const Router = useRouter();
   const {
-    loading,
-    error,
+    loading: DropsLoading,
+    error: DropsError,
     data: { DropGroupshop } = { DropGroupshop: gsdInit },
   } = useQuery<{ DropGroupshop: IGroupshop }, { code: string | undefined, status: string }>(
     GET_DROP_GROUPSHOP,
@@ -86,6 +86,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       variables: { code: discountCode, status: status ?? '' },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
+    },
+  );
+
+  const {
+    loading,
+    error,
+    data: DropGroupshopSections,
+  } = useQuery(
+    GET_DROPS_SECTIONS,
+    {
+      notifyOnNetworkStatusChange: true,
     },
   );
 
@@ -116,19 +127,18 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { categories } = gsctx;
 
   useEffect(() => {
-    if (DropGroupshop.id && pending) {
+    if (DropGroupshop.id && pending && DropGroupshopSections) {
       setpending(false);
-      const nsections: any = DropGroupshop?.sections?.map((c) => c);
+      const temp = { ...DropGroupshopSections.DropGroupshopSections, ...DropGroupshop };
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {
-          ...DropGroupshop,
-          sections: nsections,
-          selectedCategory: DropGroupshop.firstCategory?.categoryId,
+          ...temp,
+          selectedCategory: DropGroupshopSections.firstCategory?.categoryId,
         },
       });
     }
-  }, [DropGroupshop, pending]);
+  }, [DropGroupshop, pending, DropGroupshopSections]);
 
   useEffect(() => {
     if (gsctx.id) {
@@ -720,7 +730,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               isModalForMobile={isModalForMobile}
               urlForActivation={urlForActivation}
               showPagination={false}
-              loading={gsctx.loading || loading}
+              loading={gsctx.loading || loading || DropsLoading}
             />
             )}
 
@@ -748,7 +758,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                         isModalForMobile={isModalForMobile}
                         urlForActivation={urlForActivation}
                         showPagination={false}
-                        loading={gsctx.loading || loading}
+                        loading={gsctx.loading || loading || DropsLoading}
                       >
                         {ele.type === DROPS_ALLPRODUCT && (
                         <div>
@@ -779,7 +789,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     xl={3}
                     isDrops
                     maxrows={3}
-                    loading={gsctx.loading || loading}
+                    loading={gsctx.loading || loading || DropsLoading}
                   />
                 ))
               )}

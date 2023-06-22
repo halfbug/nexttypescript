@@ -455,7 +455,6 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -482,7 +481,6 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -558,7 +556,6 @@ query Groupshop($code: String!, $status: String = "") {
         id
         title
         featuredImage
-        featuredVideo
         description
         price
         outofstock
@@ -617,7 +614,6 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
-    featuredVideo
     description
     purchaseCount
     price
@@ -641,7 +637,6 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
-    featuredVideo
     description
     price
     currencyCode
@@ -707,6 +702,208 @@ query Groupshop($code: String!, $status: String = "") {
   }
 }
 `;
+// const GET_DROP_GROUPSHOP = gql`
+// query DropGroupshop($code: String!, $status: String = "") {
+//   DropGroupshop(code: $code, status: $status) {
+//     storeId
+//     id
+//     url
+//     expiredUrl
+//     expiredShortUrl
+//     expiredAt
+//     shortUrl
+//     expiredAt
+//     revisedCount
+//     cartSuggested {
+//       id
+//       title
+//       featuredImage
+//       description
+//       purchaseCount
+//       price
+//       compareAtPrice
+//       currencyCode
+//       outofstock
+//       secondaryCount
+//       options {
+//         id
+//         name
+//         values
+//         position
+//       }
+//     }
+//     firstCategory {
+//       title
+//       categoryId
+//       sortOrder
+//       collections {
+//         shopifyId
+//         name
+//         type
+//         sortOrder
+//       }
+//     }
+//     categories {
+//       title
+//       categoryId
+//       parentId
+//       sortOrder
+//       collections {
+//         shopifyId
+//         name
+//         type
+//         sortOrder
+//       }
+//       subCategories {
+//         title
+//         categoryId
+//         sortOrder
+//         collections {
+//           shopifyId
+//           name
+//           type
+//           sortOrder
+//         }
+//       }
+//     }
+//     store {
+//       shop
+//       brandName
+//       settings{
+//         general{
+//           brandColor
+//           imageUrl
+//           youtubeUrl
+//           media
+//         }
+//       }
+//       drops {
+//         collections {
+//           name
+//           shopifyId
+//         }
+//         status
+//         isVideoEnabled
+//         spotlightDiscount {
+//           title
+//           percentage
+//           priceRuleId
+//         }
+//         latestCollectionId
+//         bestSellerCollectionId
+//         allProductsCollectionId
+//         rewards {
+//           baseline
+//           average
+//           maximum
+//         }
+//         cartRewards {
+//           id
+//           rewardValue
+//           rewardTitle
+//         }
+//         klaviyo{
+//           signup1
+//           signup2
+//           signup3
+//           signup4
+//         }
+//       }
+//     }
+//     members{
+//       orderId
+//       availedDiscount
+//       role
+//       orderDetail{
+//         customer{
+//           firstName
+//           lastName
+//           email
+//           phone
+//           ip
+//         }
+//         id
+//         currencyCode
+//         price
+//       }
+//       lineItems{
+//         quantity
+//         price
+//         discountedPrice
+//       }
+//       products{
+//         title
+//         featuredImage
+//         price
+//         id
+//       }
+//     }
+//     customerDetail {
+//       fullName
+//       firstName
+//       lastName
+//       phone
+//       email
+//     }
+//     favorite {
+//       id
+//       title
+//       featuredImage
+//       description
+//       purchaseCount
+//       price
+//       compareAtPrice
+//       currencyCode
+//       outofstock
+//       secondaryCount
+//       options {
+//         id
+//         name
+//         values
+//         position
+//       }
+//     }
+//     discountCode {
+//       title
+//       percentage
+//       priceRuleId
+//     }
+//     sections {
+//       name
+//       shopifyId
+//       sortOrder
+//       type
+//       products {
+//         id
+//         title
+//         featuredImage
+//         description
+//         purchaseCount
+//         price
+//         compareAtPrice
+//         currencyCode
+//         outofstock
+//         secondaryCount
+//         options {
+//           id
+//           name
+//           values
+//           position
+//         }
+//       }
+//     }
+//     milestones{
+//       discount
+//       activatedAt
+//     }
+//     obSettings {
+//       step
+//       ownerUrl
+//     }
+//   }
+// }
+// `;
+
 const GET_DROP_GROUPSHOP = gql`
 query DropGroupshop($code: String!, $status: String = "") {
   DropGroupshop(code: $code, status: $status) {
@@ -719,11 +916,83 @@ query DropGroupshop($code: String!, $status: String = "") {
     shortUrl
     expiredAt
     revisedCount
+    favorite {
+      id
+      title
+      featuredImage
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    members{
+      orderId
+      availedDiscount
+      role 
+      orderDetail{
+        customer{
+          firstName
+          lastName
+          email
+          phone
+          ip
+        }
+        id
+        currencyCode
+        price
+      }
+      lineItems{
+        quantity
+        price
+        discountedPrice
+      }
+      products{
+        title
+        featuredImage
+        price
+        id
+      }
+    }
+    customerDetail {
+      fullName
+      firstName
+      lastName
+      phone
+      email
+    }
+    discountCode {
+      title
+      percentage
+      priceRuleId
+    }
+    milestones{
+      discount
+      activatedAt
+    }
+    obSettings {
+      step
+      ownerUrl
+    }
+  }
+}
+`;
+
+const GET_DROPS_SECTIONS = gql`
+query DropGroupshopSections {
+  DropGroupshopSections {
     cartSuggested {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -772,6 +1041,62 @@ query DropGroupshop($code: String!, $status: String = "") {
         }
       }
     }
+    drops {
+      collections {
+        name
+        shopifyId
+      }
+      status
+      isVideoEnabled
+      spotlightDiscount {
+        title
+        percentage
+        priceRuleId
+      }
+      latestCollectionId
+      bestSellerCollectionId
+      allProductsCollectionId
+      rewards {
+        baseline
+        average
+        maximum
+      }
+      cartRewards {
+        id
+        rewardValue
+        rewardTitle
+      }
+      klaviyo {
+        signup1
+        signup2
+        signup3
+        signup4
+      }
+    }
+    sections {
+      name
+      shopifyId
+      sortOrder
+      type
+      products {
+        id
+        title
+        featuredImage
+        description
+        purchaseCount
+        price
+        compareAtPrice
+        currencyCode
+        outofstock
+        secondaryCount
+        options {
+          id
+          name
+          values
+          position
+        }
+      }
+    }
     store {
       shop
       brandName
@@ -808,7 +1133,7 @@ query DropGroupshop($code: String!, $status: String = "") {
           rewardValue
           rewardTitle
         }
-        klaviyo{         
+        klaviyo{
           signup1
           signup2
           signup3
@@ -816,101 +1141,8 @@ query DropGroupshop($code: String!, $status: String = "") {
         }
       }
     }
-    members{
-      orderId
-      availedDiscount
-      role 
-      orderDetail{
-        customer{
-          firstName
-          lastName
-          email
-          phone
-          ip
-        }
-        id
-        currencyCode
-        price
-      }
-      lineItems{
-        quantity
-        price
-        discountedPrice
-      }
-      products{
-        title
-        featuredImage
-        price
-        id
-      }
-    }
-    customerDetail {
-      fullName
-      firstName
-      lastName
-      phone
-      email
-    }
-    favorite {
-      id
-      title
-      featuredImage
-      featuredVideo
-      description
-      purchaseCount
-      price
-      compareAtPrice
-      currencyCode
-      outofstock
-      secondaryCount
-      options {
-        id
-        name
-        values
-        position
-      }
-    }
-    discountCode {
-      title
-      percentage
-      priceRuleId
-    }
-    sections {
-      name
-      shopifyId
-      sortOrder
-      type
-      products {
-        id
-        title
-        featuredImage
-        featuredVideo
-        description
-        purchaseCount
-        price
-        compareAtPrice
-        currencyCode
-        outofstock
-        secondaryCount
-        options {
-          id
-          name
-          values
-          position
-        }
-      }
-    }
-    milestones{
-      discount
-      activatedAt
-    }
-    obSettings {
-      step
-      ownerUrl
-    }
   }
-}
-`;
+}`;
 
 const ADD_FAVORITE_PRODUCT = gql`
 mutation addFavoriteProduct($dropsId: String!, $productId: String!) {
@@ -919,7 +1151,6 @@ mutation addFavoriteProduct($dropsId: String!, $productId: String!) {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -945,7 +1176,6 @@ mutation removeFavoriteProduct($dropsId: String!, $productId: String!) {
       id
       title
       featuredImage
-      featuredVideo
       description
       purchaseCount
       price
@@ -984,7 +1214,6 @@ const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
           id
           title
           featuredImage
-          featuredVideo
           description
           purchaseCount
           price
@@ -1013,16 +1242,6 @@ mutation createOnBoardingDiscountCode($gid: String!) {
       priceRuleId
     }
     expiredAt
-  }
-}`;
-
-const UPDATE_DROP_GROUPSHOP = gql`
-mutation updateDropsGroupshop($updateDropsGroupshopInput: UpdateDropsGroupshopInput!) {
-  updateDropsGroupshop(updateDropsGroupshopInput: $updateDropsGroupshopInput) {
-    obSettings {
-      step
-      ownerUrl
-    }
   }
 }`;
 
@@ -1171,10 +1390,6 @@ const GET_PRODUCT_DETAIL = gql`
     purchaseCount
     outofstock
     images{
-      id
-      src
-    }
-    videos{
       id
       src
     }
@@ -2236,7 +2451,6 @@ const GET_MATCHING_GS = gql`
         id
         title
         featuredImage
-        featuredVideo
         description
         price
         outofstock
@@ -2360,7 +2574,6 @@ const GET_MATCHING_GS = gql`
           id
           title
           featuredImage
-          featuredVideo
           description
           price
           outofstock
@@ -2819,7 +3032,7 @@ export {
   GET_PARTNER_UNIQUE_CLICKS_BY_ID, GET_ACTIVE_CHANNEL_GROUPSHOP_BY_SHOP,
   GET_PARTNER_MOST_VIRAL_PRODUCTS, GET_ACTIVE_PARTNERS, GET_PARTNER_MOST_VIRAL_CUSTOMERS,
   GET_GRAPH_PARTNER_REVENUE, GET_GRAPH__PARTNER_REVENUE_BY_DATE, GET_DROP_GROUPSHOP,
-  UPDATE_DROP_GROUPSHOP, CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
+  CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
   GET_COLLECTIONS_BY_CATEGORY_ID, GET_DROP_PRODUCT_SEARCH, GET_PRODUCTS_BY_COLLECTION_IDS,
-  REMOVE_FAVORITE_PRODUCT, ADD_FAVORITE_PRODUCT,
+  REMOVE_FAVORITE_PRODUCT, ADD_FAVORITE_PRODUCT, GET_DROPS_SECTIONS,
 };

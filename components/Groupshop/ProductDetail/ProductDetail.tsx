@@ -585,7 +585,7 @@ const ProductDetail = ({
                               </button>
                             </>
                           ))}
-                          {
+                          {/* {
                             data.productById?.videos.map((ele: any, i: number) => (
                               <>
 
@@ -611,7 +611,7 @@ const ProductDetail = ({
                                 </button>
                               </>
                             ))
-                          }
+                          } */}
                         </div>
                       </Scrollable>
                     </Row>
