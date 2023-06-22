@@ -12,24 +12,13 @@ const KlaviyoForm: NextPage = () => {
   const [dealLink, setdealLink] = useState('');
   const { query: { listId, shop } } = useRouter();
   const [klaviyopublicKey, setKlaviyoPublicKey] = useState('');
-  const {
-    data: storeData,
-  } = useQuery(GET_STORE_KLAVIYO_DETAILS, {
-    variables: { shop: `${shop}.myshopify.com`, skip: !shop },
-  });
-
-  useEffect(() => {
-    if (storeData?.StoreKlaviyoDetail) {
-      setKlaviyoPublicKey(storeData.StoreKlaviyoDetail.drops.klaviyo?.publicKey);
-    }
-  }, [storeData]);
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${klaviyopublicKey}`;
+    script.src = `https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${process.env.KLAVIYO_PUBLIC_KEY}`;
     script.id = 'klaviyo';
     document.body.appendChild(script);
-  }, [klaviyopublicKey]);
+  });
 
   return (
     <>

@@ -13,6 +13,7 @@ module.exports = {
     BE_URL: process.env.BE_URL,
     API_URL: process.env.API_URL,
     IMAGE_PATH: process.env.IMAGE_PATH,
+    KLAVIYO_PUBLIC_KEY: process.env.KLAVIYO_PUBLIC_KEY,
   },
   webpack(config, {
     buildId, dev, isServer, defaultLoaders, webpack,
