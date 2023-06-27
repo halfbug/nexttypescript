@@ -419,7 +419,7 @@ const ProductDetail = ({
           </button>
         </Modal.Header>
         <Modal.Header className={['bg-white border-0 ', styles.groupshop__pcard__headerMobile].join(' ')}>
-          <LeftArrowIcon />
+          <LeftArrowIcon onClick={handleCloseClick} />
           <button
             onClick={handleCloseClick}
             className={styles.groupshop__pcard__headerMobile__txt}
