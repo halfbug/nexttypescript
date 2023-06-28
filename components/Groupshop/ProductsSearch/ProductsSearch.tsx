@@ -7,7 +7,7 @@ import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
 import {
   Button,
-  Col, Dropdown, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Row,
+  Col, Dropdown, Form, InputGroup, Modal, Overlay, Placeholder, Popover, Spinner, Row,
 } from 'react-bootstrap';
 import { GroupshopContext } from 'store/groupshop.context';
 import { useRouter } from 'next/router';
@@ -90,7 +90,7 @@ const ProductsSearch = ({
     popularProducts, addedProducts, dealProducts, totalProducts,
   } = gsctx;
 
-  const [getSearchResult, { data: lineItems }] = useLazyQuery(GET_DROP_PRODUCT_SEARCH, {
+  const [getSearchResult, { data: lineItems, loading }] = useLazyQuery(GET_DROP_PRODUCT_SEARCH, {
     fetchPolicy: 'network-only',
     onCompleted: async (searchResult: any) => {
       const filterProducts:any = [];
@@ -256,6 +256,9 @@ const ProductsSearch = ({
   const handleSearch = (event: any) => {
     setIsloader(true);
     // const { value: searchText } = event.target;
+    if (event.charCode === 13) {
+      setotherProducts(undefined);
+    }
     // eslint-disable-next-line max-len
     if (event.keyCode !== 37 || event.keyCode !== 38 || event.keyCode !== 39 || event.keyCode !== 40 || event.keyCode !== 13) {
     // eslint-disable-next-line no-unused-expressions
@@ -402,9 +405,8 @@ const ProductsSearch = ({
           )}
 
           <Form onSubmit={handleSubmit} className={isDrops ? 'px-0' : ''}>
-
             <Form.Group className={['mb-3 d-flex align-items-center bg-light px-3 ', styles.groupshop_modal_search_body_top_inputArea].join(' ')} controlId="searchField">
-              <SearchIcon />
+              { loading ? (<Spinner style={{ maxHeight: '1rem', maxWidth: '1rem' }} animation="border" variant="primary" />) : (<SearchIcon />)}
               <Form.Control
                 size="lg"
                 className={['bg-light pt-2 border-0 ', isDrops ? dStyles.drops_modal_search_body_top_input : styles.groupshop_modal_search_body_top_input].join('')}
@@ -413,6 +415,7 @@ const ProductsSearch = ({
                 name="searchField"
                 // eslint-disable-next-line max-len
                 onChange={(e: any) => { setSearchKeyword(e.target.value); }}
+                disabled={!!loading}
                 onKeyPress={handleSearch}
                 // value={searchValue}
               />
@@ -462,9 +465,11 @@ const ProductsSearch = ({
           {isDrops && (otherProducts && otherProducts.length > 0) && (
           <div className="d-flex justify-content-between m-0 flex-nowrap align-items-center">
             <div className={dStyles.drops_modal_search_body_top_resultFound}>
-              {otherProducts?.length}
-              {' '}
-              results found
+              {!isloader && (`
+                ${otherProducts?.length}
+                ${' '}
+                results found`
+              )}
             </div>
             <div className={styles.groupshop_sort}>
               <Dropdown align="end" drop="down">
