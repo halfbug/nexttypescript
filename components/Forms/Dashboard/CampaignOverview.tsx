@@ -63,11 +63,11 @@ export default function CampaignOverview({
       <div className={styles.overiew__header}>
         <h3>Groupshop Tools</h3>
       </div>
-      <div className={styles.overiew_tag}>
+      {/* <div className={styles.overiew_tag}>
         Post-Purchase
-      </div>
+      </div> */}
       {/* Active Campaigns */}
-      <div className={[styles.overiew__mainCampaignBox, 'd-flex'].join(' ')}>
+      {/* <div className={[styles.overiew__mainCampaignBox, 'd-flex'].join(' ')}>
         { (activeCampaign?.length && activeCampaign?.length > 0)
           ? (
             <>
@@ -144,7 +144,7 @@ export default function CampaignOverview({
             </>
           )}
 
-      </div>
+      </div> */}
       <div className={[
         'p-3 my-3',
         styles.overiew__partnertoolBox,

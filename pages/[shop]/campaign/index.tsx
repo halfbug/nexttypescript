@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable quotes */
 import React, { useState, useEffect, useContext } from 'react';
 import ToggleButton from 'components/Buttons/ToggleButton/ToggleButton';
@@ -133,7 +134,7 @@ const CampaignListing = () => {
           <Col className="text-muted fs-6 "> </Col>
         </Row>
 
-        {campaignList.map((camp: any, index: number) => (
+        {/* {campaignList.map((camp: any, index: number) => (
           <Row className={styles.gradient} key={camp.id}>
             <Col title={camp.name} className={['pe-5 ', styles.gradient_text].join(' ')}>
               {(camp.name.length > 10) ? `${camp.name.slice(0, 10)}...` : camp.name}
@@ -147,8 +148,10 @@ const CampaignListing = () => {
               {camp?.details.totalCashback ? `${storeCurrencySymbol(store?.currencyCode ?? 'USD')}${formatNumber(camp?.details.totalCashback + camp?.details.totalFeeCharges)}` : '-'}
             </Col>
             <Col className={[styles.gradient_text, 'ps-3'].join(' ')}>
-              {/* <ToggleButton
-              handleToggle={() => handleToggle(camp.id)} isActive={camp.isActive} /> */}
+            //   <ToggleButton
+            //     handleToggle={() => handleToggle(camp.id)}
+            //     isActive={camp.isActive}
+            //   />
               <Form.Check
                 checked={camp.isActive}
                 type="switch"
@@ -169,12 +172,12 @@ const CampaignListing = () => {
             <Col className="pe-1 "><WhiteButton className={styles.container_Analytics}><Link href={`/${shopName}/analytics/${camp.id}`}><span className="text-decoration-none">View Analytics</span></Link></WhiteButton></Col>
             <Col className="px-0 mx-0 "><WhiteButton className={styles.container_edit} onClick={() => handleClick(camp.id)}>Edit</WhiteButton></Col>
           </Row>
-        ))}
-        <Row>
+        ))} */}
+        {/* <Row>
           <Col className={styles.bottom_row}>
             <Link href={`/${shopName}/campaign/new`}>+ Create New Campaign</Link>
           </Col>
-        </Row>
+        </Row> */}
         <HintBox
           show={showHint}
           handleClose={() => { setShowHint(false); }}

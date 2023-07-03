@@ -55,7 +55,7 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              <li>
+              {/* <li>
                 <Link
                 // href={`/${shopName}/campaign`}
                   href={{
@@ -70,7 +70,7 @@ const Sidebar = () => {
                     </span>
                   </a>
                 </Link>
-              </li>
+              </li> */}
 
               <li>
                 <Link
