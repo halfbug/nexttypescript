@@ -89,11 +89,12 @@ export default function useCart() {
 
   const isCartEmpty = gsctx?.cart?.length === 0;
 
-  const getShopifyUrl = useCallback(() => {
+  const getShopifyUrl = useCallback((productById, quantity) => {
     const cartDetail = cartProducts.map(({ selectedVariant: { id, selectedQuantity } }) => `${id.split('/')[4]}:${selectedQuantity}`).join(',');
     // `id=${id.split('/')[4]}&quantity=${selectedQuantity}`).join('&');
-    console.log(`https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`);
-    return `https://${gsctx?.store?.shop}/cart/${cartDetail}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`;
+    const platformProduct = productById?.variants?.[0]?.id && quantity ? `,${productById?.variants[0]?.id.split('/')[4]}:${quantity}` : '';
+    console.log(`https://${gsctx?.store?.shop}/cart/${cartDetail}${platformProduct}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`);
+    return `https://${gsctx?.store?.shop}/cart/${cartDetail}${platformProduct}?discount=${gsctx.discountCode.title}&attributes[referrer_id]=${gsctx.id}`;
   }, [gsctx.cart]);
 
   const getSuggestedProducts = useCallback(() => {

@@ -23,6 +23,8 @@ import Image from 'react-bootstrap/Image';
 // import useSaveCart from 'hooks/useSaveCart';
 import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { GET_PRODUCT_DETAIL, GET_UNIQUE_LOCATIONS_BY_VARIANTS } from 'store/store.graphql';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -34,6 +36,18 @@ interface CartProps extends RootProps {
   product: IProduct | undefined;
   setShow: any;
   isDrops?: boolean;
+}
+
+interface ILocationData {
+  getLocations: {
+    locations: string[];
+  }
+}
+
+interface IProductTotal {
+  product: IProduct,
+  total: number,
+  locationID: string,
 }
 
 const Cart = ({
@@ -60,6 +74,11 @@ const Cart = ({
   } = useDrops();
 
   const [currencyName, setCurrencyName] = useState<any>('USD');
+  const [platformFee, setPlatformFee] = useState<any>(0);
+  const [platformProductQuantity, setplatformProductQuantity] = useState<number>(0);
+  const [platformProductPrice, setplatformProductPrice] = useState<any>(0);
+  const [locations, setlocations] = useState<string[]>([]);
+  const [isChangeInQuantity, setisChangeInQuantity] = useState<boolean>(false);
 
   const {
     cartProducts, removeProduct, plusQuantity, minusQuantity, getTotal,
@@ -67,11 +86,88 @@ const Cart = ({
     getCartSaveMoney, getTotalActualCartTotal,
   } = useCart();
 
-  const { formatNumber } = useUtilityFunction();
+  const { formatNumber, groupBy } = useUtilityFunction();
 
   const {
     googleEventCode, checkoutCartView, checkoutButtonClick, checkoutUpsellClick,
   } = useGtm();
+
+  const { data: { productById } = { } } = useQuery(GET_PRODUCT_DETAIL, {
+    variables: { id: process.env.PLATFORM_FEE_ID },
+  });
+
+  const [getLocations, { data, loading: getLocationsLoading }] = useLazyQuery<ILocationData>(
+    GET_UNIQUE_LOCATIONS_BY_VARIANTS, {
+      fetchPolicy: 'network-only',
+      onError() {
+        console.error('Error in fetching locations');
+      },
+    },
+  );
+
+  useEffect(() => {
+    if (isDrops && cartProducts.length > 1) {
+      if (locations.length && isChangeInQuantity) {
+        updatePlatformFee(locations);
+      } else {
+        getLocations({
+          variables: {
+            getLocationsInput: {
+              shop: store?.shop,
+              variantIds: cartProducts.map((cp) => cp.selectedVariant.id),
+            },
+          },
+        });
+      }
+    } else {
+      setPlatformFee(0);
+    }
+    setisChangeInQuantity(false);
+  }, [cartProducts]);
+
+  const updatePlatformFee = (l: string[]) => {
+    const productTotal: IProductTotal[] = [];
+    cartProducts?.forEach((cp, index) => {
+      const effectivePrice = (cp.compareAtPrice && spotlightProducts.includes(cp.id)
+        ? cp.selectedVariant.price ?? cp.price
+        : dPrice(+(cp.selectedVariant.price ?? cp.price)));
+      productTotal.push({
+        total: +effectivePrice * cp.selectedVariant.selectedQuantity,
+        product: cp,
+        locationID: l[index],
+      });
+    });
+    const result: IProductTotal[][] = groupBy(productTotal, 'locationID');
+    let count = 0;
+    Object.values(result).forEach((v: IProductTotal[]) => {
+      if (+(v.reduce((acc: any, current: IProductTotal) => acc + current.total, 0)) < 75) {
+        count += 1;
+      }
+    });
+    setplatformProductQuantity(count);
+    setPlatformFee(platformProductPrice * count);
+  };
+
+  useEffect(() => {
+    if (data?.getLocations?.locations?.length) {
+      const uniqueLocations = data?.getLocations?.locations
+        .filter((value, index, array) => array.indexOf(value) === index);
+      if (uniqueLocations.length > 1) {
+        setlocations(data?.getLocations?.locations);
+        updatePlatformFee(data?.getLocations?.locations);
+      } else {
+        // when location will be only 1.
+        setplatformProductQuantity(0);
+        setPlatformFee(0);
+      }
+    }
+  }, [JSON.stringify(data)]);
+
+  useEffect(() => {
+    if (productById?.variants[0]?.price) {
+      setplatformProductPrice(+productById?.variants[0]?.price);
+    }
+  }, [productById]);
 
   useEffect(() => {
     if (show) {
@@ -205,7 +301,7 @@ const Cart = ({
         : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
-    push(getShopifyUrl());
+    push(getShopifyUrl(platformFee ? productById : '', platformFee ? platformProductQuantity : ''));
   };
 
   const dynamicLine = () => {
@@ -393,7 +489,10 @@ And you can keep earning up to
                     >
                       <Button
                         variant="outline-primary"
-                        onClick={() => minusQuantity(prd.selectedVariant.id)}
+                        onClick={() => {
+                          minusQuantity(prd.selectedVariant.id);
+                          setisChangeInQuantity(true);
+                        }}
                         disabled={prd.selectedVariant.selectedQuantity < 2}
                       >
                         -
@@ -406,6 +505,7 @@ And you can keep earning up to
                       <Button
                         variant="outline-primary"
                         onClick={() => {
+                          setisChangeInQuantity(true);
                           plusQuantity(prd.selectedVariant.id);
                         }}
                         disabled={(isDrops && prd.selectedVariant?.selectedQuantity >= 3)
@@ -533,6 +633,20 @@ And you can keep earning up to
             <div className={styles.groupshop__total_cartWrapper}>
 
               <Container fluid className="py-3 my-2 ">
+                {platformFee !== 0 && (
+                <Row className="mx-3">
+                  <Col className="text-start mx-0 px-0"><h5 className="mb-2">Platform Fee*</h5></Col>
+
+                  <Col className="text-end mx-0 px-0">
+
+                    <h5 className="mb-2">
+                      {currencySymbol}
+                      {platformFee}
+                    </h5>
+
+                  </Col>
+                </Row>
+                )}
                 <Row className="mx-3">
                   <Col className="text-start mx-0 px-0"><h3>SUBTOTAL</h3></Col>
 
@@ -595,8 +709,9 @@ And you can keep earning up to
                         onClick={handleCheckout}
                         size="lg"
                         className={styles.groupshop_cart_checkout}
+                        disabled={getLocationsLoading}
                       >
-                        Checkout
+                        {getLocationsLoading ? 'Counting platform fee' : 'Checkout'}
                       </Button>
 
                     )}

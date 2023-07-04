@@ -271,6 +271,12 @@ export default function useUtilityFunction() {
     return newNum;
   });
 
+  const groupBy = (xs: any, key: any) => xs.reduce((rv: any, x: any) => {
+    // eslint-disable-next-line no-param-reassign
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+
   return {
     cleanTypename,
     multiple5,
@@ -293,5 +299,6 @@ export default function useUtilityFunction() {
     getMonthsBetween,
     getYearsBetween,
     graphFormatNumber,
+    groupBy,
   };
 }
