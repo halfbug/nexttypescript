@@ -19,6 +19,7 @@ import IconButton from 'components/Buttons/IconButton';
 import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDeal from 'hooks/useDeal';
 import useAlert from 'hooks/useAlert';
+import useDrops from 'hooks/useDrops';
 import useGtm from 'hooks/useGtm';
 import SearchIcon from 'assets/images/search-icon.svg';
 import Cross from 'assets/images/CrossLg.svg';
@@ -64,8 +65,11 @@ const ProductsSearch = ({
   } = useCode();
   // console.log('🚀 ~ file: ProductsSearch.tsx ~ line 42 ~ gsctx', gsctx);
   const {
-    clientDealProducts, currencySymbol, dPrice, isInfluencer, isInfluencerGS,
+    clientDealProducts, currencySymbol, currencySymbolDiscovery,
+    dPrice, disPrice, isInfluencer, isInfluencerGS,
   } = useDeal();
+
+  const { spotlightProducts } = useDrops();
   const { formatNumber } = useUtilityFunction();
 
   const [show, setShow] = useState(false);
@@ -328,6 +332,30 @@ const ProductsSearch = ({
     }
     closeModal(e);
   };
+  const isSuggestion = false;
+  const discoveryDiscount = '';
+
+  const priceUI = (prod: any) => (
+    <p className={[!isDrops ? 'text-center' : '', 'fw-bold fs-5 mb-0'].join(' ')}>
+      <span className="text-decoration-line-through fw-light me-1">
+        {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
+        {/* {prod.price} */}
+        {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
+      </span>
+      {' '}
+      <span className={isDrops ? 'me-2' : ''}>
+        {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
+        {prod?.compareAtPrice && spotlightProducts.includes(prod.id) && !isSuggestion
+          && formatNumber(prod.price)}
+        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
+          && formatNumber(dPrice(prod.price))}
+        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+      </span>
+    </p>
+
+  );
 
   return (
     <>
@@ -632,20 +660,7 @@ const ProductsSearch = ({
                             {prd.title}
                           </h5>
                         </div>
-                        <p className={[!isDrops ? 'text-center' : '', 'fw-bold fs-5 mb-0'].join(' ')}>
-                          <span className="text-decoration-line-through fw-light me-1">
-                            {currencySymbol}
-
-                            {(prd.compareAtPrice ? +prd.compareAtPrice! : +(prd.price)).toFixed(2).toString().replace('.00', '')}
-                          </span>
-                          {' '}
-                          <span className="fw-bolder">
-                            {currencySymbol}
-                            {(prd.compareAtPrice ? +(prd.price) : dPrice(+(prd.price))).toFixed(2).toString().replace('.00', '')}
-                          </span>
-                          {isDrops && prd?.outofstock ? (<p className={dStyles.drops_product_desc_soldout}>Sold out</p>) : ''}
-
-                        </p>
+                        {priceUI(prd)}
                       </ProductCard>
                     </Col>
                   )
