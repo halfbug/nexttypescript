@@ -39,16 +39,16 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
       if (favorite?.length) {
         setCategoryArray([body, ...temp]);
       } else {
-        dispatch({
-          type: 'UPDATE_GROUPSHOP',
-          payload: {
-            ...gsctx,
-            selectedCategory: '',
-          },
-        });
+        // dispatch({
+        //   type: 'UPDATE_GROUPSHOP',
+        //   payload: {
+        //     ...gsctx,
+        //     selectedCategory: '',
+        //   },
+        // });
         setInitialCategory();
         setCategoryArray(temp);
-        setId(gsctx.firstCategory?.categoryId ?? '');
+        // setId(gsctx.firstCategory?.categoryId ?? '');
       }
     }
   }, [categories, favorite]);
@@ -141,7 +141,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
     <>
       <div className={styles.drops__categoriesTab}>
         {categoryArray?.map((item: Categories) => (
-          <div className={styles.drops__categoriesTab__itemWrapper}>
+          <div className={styles.drops__categoriesTab__itemWrapper} key={item.categoryId}>
             <div
               role="button"
               tabIndex={0}
@@ -178,6 +178,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
                 ?.slice().sort((a: any, b: any) => a.sortOrder - b.sortOrder)
                 ?.map((item: subCategories) => (
                   <div
+                    key={item.categoryId}
                     role="button"
                     tabIndex={0}
                     onKeyDown={() => {

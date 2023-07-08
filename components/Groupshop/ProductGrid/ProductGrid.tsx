@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-lone-blocks */
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, {
+  useContext, useEffect, useMemo, useRef,
+} from 'react';
 import styles from 'styles/Groupshop.module.scss';
 import dStyles from 'styles/Drops.module.scss';
 import { IProduct, RootProps } from 'types/store';
@@ -28,6 +30,10 @@ import { DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai';
+import useLoadMoreOnScroll from 'hooks/useLoadMoreOnScroll';
+import useLoadMoreOnVisible from 'hooks/useLoadMoreOnVisible';
+import { PRODUCT_PAGE } from 'store/store.graphql';
+import { useLazyQuery, useQuery } from '@apollo/client';
 import AddProduct from '../AddProduct/AddProduct';
 // import Link from 'next/link';
 // import Router, { useRouter } from 'next/router';
@@ -60,19 +66,20 @@ type ProductGridProps = {
   currency?: string | undefined;
   showPagination?: boolean;
   loading?: boolean;
+  sectionID?: string | undefined;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 function ProductGrid(props: any) {
   const {
     products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
-    xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false,
+    sectionID, xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false,
     id, skuCount = null, isSuggestion, membersForDiscover, isDiscoveryTool, isDrops,
     isSpotLight, brandurl, title, discoveryDiscount, urlForActivation, currency, showPagination,
     type,
   } = props;
   const memoizedComponent = useMemo(
     () => <ProductGridInitial {...props} />, [
-      products, pending, children, maxrows, addProducts, handleDetail, isModalForMobile,
+      products, pending, children, maxrows, addProducts, handleDetail, isModalForMobile, sectionID,
       xs, sm, md, lg, xl, xxl, showHoverButton, id, skuCount, isSuggestion, membersForDiscover,
       isDiscoveryTool, isDrops, isSpotLight, brandurl, title, discoveryDiscount, urlForActivation,
       currency, showPagination, type,
@@ -87,13 +94,72 @@ function ProductGrid(props: any) {
 }
 
 const ProductGridInitial = ({
-  products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile,
+  products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile, sectionID,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
   discoveryDiscount, urlForActivation, currency, showPagination, type, loading, ...props
 }: ProductGridProps) => {
   const { formatNumber } = useUtilityFunction();
+  const {
+    gsctx,
+    dispatch,
+    isGroupshop, isChannel,
+  } = useAppContext();
+  const {
+    discountCode: { percentage }, loading: load, sections,
+    dealProducts, addedProducts, store, id: dropsId,
+  } = gsctx;
+  const productRef = useRef<HTMLDivElement| null>(null);
   const [ref, dimensions] = useDimensions();
+  const [isTimetoLoadS, setIsTimetoLoadS] = useLoadMoreOnScroll(productRef, 'vertical');
+  console.log('🚀 ~ file: ProductGrid.tsx:103 ~ isTimetoLoadS:', isTimetoLoadS);
+  const [isTimetoLoadV, setIsTimetoLoadV] = useLoadMoreOnVisible(productRef, 'allproductsdrops_productGrid');
+  const csection:any = sections?.find(({ shopifyId }) => shopifyId === sectionID)
+  ?? { products: [] };
+  const [getMoreProducts,
+    { data: getPaginatedProducts, loading: moreProdLoading }] = useLazyQuery(PRODUCT_PAGE, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'network-only',
+    onError() { console.log('Error in getPaginatedProducts!'); },
+    onCompleted: async (sectionPrd: { getPaginatedProducts : {
+      result : IProduct[], pageInfo: any}}) => {
+      console.log(sectionPrd?.getPaginatedProducts);
+      if (csection.type === 'regular') { setIsTimetoLoadS(false); } else if (csection.type === 'allproduct') { setIsTimetoLoadV(false); }
+      dispatch({
+        type: 'UPDATE_PRODUCTS',
+        payload: {
+          ...gsctx,
+          sections: [...sections!.map((sec) => {
+            if (sec.shopifyId === sectionID) {
+              return (
+                {
+                  ...sec,
+                  products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
+                  ],
+                  pageInfo: sectionPrd!.getPaginatedProducts.pageInfo,
+                });
+            }
+            return sec;
+          })],
+        },
+      });
+    },
+  });
+
+  useEffect(() => {
+    if ((isTimetoLoadS || isTimetoLoadV)
+    && (!csection.pageInfo || csection?.pageInfo?.totalRecords > csection.products.length)) {
+      getMoreProducts({
+        variables: {
+          productArgs: {
+            pagination: { skip: csection.products?.length, take: 10 },
+            collection_id: sectionID,
+          },
+        },
+      });
+    }
+  }, [isTimetoLoadS, isTimetoLoadV]);
+
   // const router = useRouter();
   const {
     screens, breakPoint, pageSize,
@@ -112,12 +178,6 @@ const ProductGridInitial = ({
 
   const fillerz = pageSize === renderItems?.length ? 0 : 1;
 
-  const {
-    gsctx: {
-      discountCode: { percentage }, loading: load,
-      dealProducts, addedProducts, store, id: dropsId,
-    } = { discountCode: { percentage: 40 }, dealProducts: [] }, isGroupshop, isChannel,
-  } = useAppContext();
   // stage db and check with gs 4 bought prd
   const {
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
@@ -260,59 +320,7 @@ const ProductGridInitial = ({
         {!children && (
           <>
             <Row>
-              {/* <Col>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    {type !== DROPS_VAULT && type !== DROPS_SPOTLIGHT ? (
 
-                    <div className={dStyles.drops_col_dropheading}>
-                      Your Favs
-                      <Button variant="" className="mx-2 p-1 bg-white shadow-sm border-1 rounded-3">
-                        <AiOutlineStar size={20} />
-                      </Button>
-                      <Button variant="" className={dStyles.drops_friendsBtn}>
-                        Share With Friends
-                      </Button>
-                    </div>
-
-                    )
-                      : (
-                        <>
-                          <div className="d-flex align-items-center">
-                            <div className={dStyles.drops_col_dropheading}>
-                              {loading ? <Skeleton width="186.5px" /> : title}
-                            </div>
-
-                          </div>
-                        </>
-                      )}
-                  </div>
-                  <div className="d-flex">
-                    <BsArrowLeft opacity={0.3} id={`leftArrow${id}`} size={24}
-                    className="me-2"
-                    onClick={() =>
-                    {
-                      horizontalScroll(
-                        { direction: 'left', gridId: [id, 'productGrid'].join('_') }
-                        );
-                      }}
-                       />
-                    <BsArrowRight opacity={renderItems!?.length > 2 ? 1 : 0.3}
-                    id={`rightArrow${id}`} size={24} className="ms-2"
-                    onClick={() =>
-                    {
-                      horizontalScroll(
-                        { direction: 'right', gridId: [id, 'productGrid'].join('_') }
-                        );
-                      }} />
-                  </div>
-                </div>
-                {(type === DROPS_VAULT || type === DROPS_SPOTLIGHT) && (
-                  <div className={dStyles.drops_col_eligible}>
-                    Not eligible for higher discounts or cashback.
-                  </div>
-                )}
-              </Col> */}
               {isSpotLight && (
                 <Col xs={12} className={dStyles.drops__counter}>
                   <div className="d-flex align-items-center mt-3">
@@ -446,6 +454,7 @@ const ProductGridInitial = ({
             : ['justify-content-sm-start justify-content-md-start', !isDiscoveryTool ? 'justify-content-lg-center' : ([styles.groupshop__discover__products, 'justify-content-lg-between'].join(' '))].join(' ')}
           id={[id, 'productGrid'].join('_')}
           onScroll={(e) => handleScroll(e)}
+          ref={productRef}
         >
           {!loading ? renderItems?.map((prod, index) => (
             <>
@@ -725,6 +734,26 @@ const ProductGridInitial = ({
             </Col>
           ))}
 
+          {moreProdLoading ? new Array(4).fill(null).map(() => (
+            <Col xs={xs} md={md} lg={lg} xl={xl}>
+              <ProductCard
+                isDrops={isDrops}
+                loading
+                isVault={type === DROPS_VAULT || type === DROPS_SPOTLIGHT}
+              >
+                {/* <div className={styles.groupshop_product_info}>
+                  <div className={styles.groupshop_product_desc}> */}
+                <Skeleton width="107.5px" />
+                <Skeleton width="107.5px" />
+                <p className={dStyles.drops_product_desc_soldout}>
+                  <Skeleton width="90px" />
+                </p>
+                {/* </div>
+                </div> */}
+              </ProductCard>
+            </Col>
+          )) : ''}
+
           {(!isSuggestion && skuCount! > 1 && leftOverProducts()?.length > 0)
             ? [...new Array(fillerz)]?.map((n) => (
               <Col xs={xs} md={6} lg={4} xl={3} key={n}>
@@ -855,6 +884,7 @@ ProductGridInitial.defaultProps = {
   currency: '',
   showPagination: true,
   loading: false,
+  sectionID: '',
 };
 
 export default ProductGrid;

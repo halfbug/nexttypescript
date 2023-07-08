@@ -3013,6 +3013,39 @@ query getLocations($getLocationsInput: GetLocationsInput!){
 }
 `;
 
+const PRODUCT_PAGE = gql`
+query getPaginatedProducts($productArgs:ProductsPaginatedArgs! ){
+  getPaginatedProducts(productArgs:$productArgs){
+     result{
+       
+      id
+      title
+      featuredImage
+      description
+      purchaseCount
+      price
+      compareAtPrice
+      currencyCode
+      outofstock
+      secondaryCount
+      options {
+        id
+        name
+        values
+        position
+      }
+    }
+    pageInfo{
+      lastPage
+      currentPage
+      hasNextPage
+      hasPreviousPage
+      totalRecords
+    }
+    
+  }
+}
+`;
 export {
   GET_STORE, UPDATE_STORE, TOTAL_PRODUCTS,
   GET_COLLECTIONS, CREATE_CAMPAIGN, GET_PRODUCTS,
@@ -3043,5 +3076,5 @@ export {
   CREATE_ONBOARDING_DISCOUNT_CODE, GET_STORE_KLAVIYO_DETAILS,
   GET_COLLECTIONS_BY_CATEGORY_ID, GET_DROP_PRODUCT_SEARCH, GET_PRODUCTS_BY_COLLECTION_IDS,
   REMOVE_FAVORITE_PRODUCT, ADD_FAVORITE_PRODUCT, GET_DROPS_SECTIONS,
-  GET_UNIQUE_LOCATIONS_BY_VARIANTS,
+  GET_UNIQUE_LOCATIONS_BY_VARIANTS, PRODUCT_PAGE,
 };

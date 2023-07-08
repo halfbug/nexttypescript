@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_DROPS_SECTIONS, GET_DROP_GROUPSHOP, GET_MATCHING_GS } from 'store/store.graphql';
+import {
+  GET_DROPS_SECTIONS, GET_DROP_GROUPSHOP, GET_MATCHING_GS, PRODUCT_PAGE,
+} from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import styles from 'styles/Drops.module.scss';
 import {
@@ -731,6 +733,8 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               urlForActivation={urlForActivation}
               showPagination={false}
               loading={gsctx.loading || loading || DropsLoading}
+              // laodMore={getMoreProducts}
+              // loadMoreStatus={loading: prodLoading}
             />
             )}
 
@@ -739,28 +743,31 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               ? sections?.map((ele: any, index:number) => {
                 if (ele.products.length) {
                   return (
-                    <>
-                      <ProductGrid
-                        isDrops
-                        title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
-                        type={ele.type}
-                        xs={6}
-                        sm={6}
-                        md={6}
-                        lg={4}
-                        xl={3}
-                        products={uniqueArray(ele.products)}
-                        maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
-                        addProducts={handleAddProduct}
-                        handleDetail={(prd: any) => setsProduct(prd)}
-                        showHoverButton
-                        id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}${index}` : 'allproductsdrops'}`}
-                        isModalForMobile={isModalForMobile}
-                        urlForActivation={urlForActivation}
-                        showPagination={false}
-                        loading={gsctx.loading || loading || DropsLoading}
-                      >
-                        {ele.type === DROPS_ALLPRODUCT && (
+
+                    <ProductGrid
+                      key={ele.shopifyId}
+                      sectionID={ele.shopifyId}
+                      isDrops
+                      title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                      type={ele.type}
+                      xs={6}
+                      sm={6}
+                      md={6}
+                      lg={4}
+                      xl={3}
+                      products={uniqueArray(ele.products)}
+                      maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
+                      addProducts={handleAddProduct}
+                      handleDetail={(prd: any) => setsProduct(prd)}
+                      showHoverButton
+                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}${index}` : 'allproductsdrops'}`}
+                      isModalForMobile={isModalForMobile}
+                      urlForActivation={urlForActivation}
+                      showPagination={false}
+                      loading={gsctx.loading || loading || DropsLoading}
+
+                    >
+                      {ele.type === DROPS_ALLPRODUCT && (
                         <div>
                           {
                           (gsctx.loading || loading) ? <Skeleton width="186.5px" height="26px" />
@@ -772,9 +779,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                             )
                         }
                         </div>
-                        )}
-                      </ProductGrid>
-                    </>
+                      )}
+                    </ProductGrid>
+
                   );
                 }
                 return '';

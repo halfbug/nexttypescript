@@ -94,6 +94,7 @@ const Cart = ({
 
   const { data: { productById } = { } } = useQuery(GET_PRODUCT_DETAIL, {
     variables: { id: process.env.PLATFORM_FEE_ID },
+    skip: !process.env.PLATFORM_FEE_ID,
   });
 
   const [getLocations, { data, loading: getLocationsLoading }] = useLazyQuery<ILocationData>(

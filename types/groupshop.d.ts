@@ -129,6 +129,7 @@ export type sections = {
   shopifyId: string;
   type: string;
   products: Product[];
+  pageInfo: any;
 }
 
 export type Collections = {

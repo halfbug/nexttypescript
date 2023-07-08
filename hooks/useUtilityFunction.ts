@@ -173,7 +173,7 @@ export default function useUtilityFunction() {
       }
       return unique;
     }, []);
-    console.log({ result });
+    // console.log({ result });
     return result;
   });
 
