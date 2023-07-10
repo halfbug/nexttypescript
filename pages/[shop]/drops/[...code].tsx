@@ -765,7 +765,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       urlForActivation={urlForActivation}
                       showPagination={false}
                       loading={gsctx.loading || loading || DropsLoading}
-
+                      loadmore
                     >
                       {ele.type === DROPS_ALLPRODUCT && (
                         <div>
