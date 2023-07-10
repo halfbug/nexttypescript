@@ -67,6 +67,7 @@ type ProductGridProps = {
   showPagination?: boolean;
   loading?: boolean;
   sectionID?: string | undefined;
+  loadmore?: boolean;
 } & React.ComponentPropsWithoutRef<'div'> & RootProps
 
 function ProductGrid(props: any) {
@@ -75,14 +76,14 @@ function ProductGrid(props: any) {
     sectionID, xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false,
     id, skuCount = null, isSuggestion, membersForDiscover, isDiscoveryTool, isDrops,
     isSpotLight, brandurl, title, discoveryDiscount, urlForActivation, currency, showPagination,
-    type,
+    type, loadmore,
   } = props;
   const memoizedComponent = useMemo(
     () => <ProductGridInitial {...props} />, [
       products, pending, children, maxrows, addProducts, handleDetail, isModalForMobile, sectionID,
       xs, sm, md, lg, xl, xxl, showHoverButton, id, skuCount, isSuggestion, membersForDiscover,
       isDiscoveryTool, isDrops, isSpotLight, brandurl, title, discoveryDiscount, urlForActivation,
-      currency, showPagination, type,
+      currency, showPagination, type, loadmore,
     ],
   );
 
@@ -97,7 +98,8 @@ const ProductGridInitial = ({
   products, pending, children, maxrows = 0, addProducts, handleDetail, isModalForMobile, sectionID,
   xs = 12, sm = 12, md = 6, lg = 4, xl = 3, xxl = 3, showHoverButton = false, id, skuCount = null,
   isSuggestion, membersForDiscover, isDiscoveryTool, isDrops, isSpotLight, brandurl, title,
-  discoveryDiscount, urlForActivation, currency, showPagination, type, loading, ...props
+  discoveryDiscount, urlForActivation, currency, showPagination, type,
+  loading, loadmore = false, ...props
 }: ProductGridProps) => {
   const { formatNumber } = useUtilityFunction();
   const {
@@ -124,7 +126,7 @@ const ProductGridInitial = ({
     onCompleted: async (sectionPrd: { getPaginatedProducts : {
       result : IProduct[], pageInfo: any}}) => {
       console.log(sectionPrd?.getPaginatedProducts);
-      if (csection.type === 'regular') { setIsTimetoLoadS(false); } else if (csection.type === 'allproduct') { setIsTimetoLoadV(false); }
+      (['vault', 'regular', 'spotlight'].includes(csection.type)) ? setIsTimetoLoadS(false) : setIsTimetoLoadV(false);
       dispatch({
         type: 'UPDATE_PRODUCTS',
         payload: {
@@ -147,7 +149,7 @@ const ProductGridInitial = ({
   });
 
   useEffect(() => {
-    if ((isTimetoLoadS || isTimetoLoadV)
+    if (loadmore && (isTimetoLoadS || isTimetoLoadV)
     && (!csection.pageInfo || csection?.pageInfo?.totalRecords > csection.products.length)) {
       getMoreProducts({
         variables: {
@@ -885,6 +887,7 @@ ProductGridInitial.defaultProps = {
   showPagination: true,
   loading: false,
   sectionID: '',
+  loadmore: false,
 };
 
 export default ProductGrid;
