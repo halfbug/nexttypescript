@@ -11,7 +11,7 @@ import {
   Carousel,
   Col, Form, Modal, Overlay, Popover, Row, Spinner,
 } from 'react-bootstrap';
-import { useLazyQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_PRODUCT_DETAIL } from 'store/store.graphql';
 import useCart from 'hooks/useCart';
 import ShowMoreText from 'react-show-more-text';
@@ -45,7 +45,7 @@ import Gmembers from '../Members/Gmembers';
 
 interface ProductDetailProps extends RootProps {
   show: boolean;
-  handleClose(e: any): any;
+  handleClose(): any;
   // addToCart(e: any): any;
   product: IProduct | undefined;
   isChannel?: boolean;
@@ -60,12 +60,12 @@ const ProductDetail = ({
   const { addCartProduct } = useCart();
   const { shop, discountCode, ownerCode } = useCode();
   const ref = useRef(null);
-  const closeModal = (e: any) => {
+  const closeModal = () => {
     // setotherProducts(undefined);
     // setSelected(undefined);
     setDealProduct('');
     setShowOverlay(false);
-    handleClose(e);
+    handleClose();
     setVarientData(0);
   };
   // console.log(product);
@@ -117,8 +117,9 @@ const ProductDetail = ({
   } = useDrops();
   const { days, hrs, mins } = getDateDifference();
 
-  const [getProduct, { loading, error, data }] = useLazyQuery(GET_PRODUCT_DETAIL, {
+  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
     variables: { id: product?.id },
+    skip: !product?.id,
   });
   let productCustomers;
   if (isPartner) {
@@ -136,7 +137,10 @@ const ProductDetail = ({
     }, 1000);
   };
   useEffect(() => {
-    if (show) { getProduct(); setIndex(0); }
+    if (show) {
+      // getProduct();
+      setIndex(0);
+    }
   }, [show]);
 
   useEffect(() => {
@@ -267,7 +271,7 @@ const ProductDetail = ({
         showError('product is out of stock');
       }
     }
-    closeModal({});
+    closeModal();
   };
 
   const displayImage = () => {
@@ -290,7 +294,7 @@ const ProductDetail = ({
   };
 
   const handleCloseClick = () => {
-    closeModal({});
+    closeModal();
   };
   const backToSearch = (e: any) => {
     setShowOverlay(false);
@@ -304,7 +308,7 @@ const ProductDetail = ({
         showSearch();
       }
     } else showError('Groupshop is full you can not add more products to it');
-    closeModal(e);
+    closeModal();
   };
 
   useEffect(() => {
@@ -647,7 +651,7 @@ const ProductDetail = ({
                             <AddDealProduct
                               selectedProducts={[dealProduct]}
                               handleClose={(e) => {
-                                closeModal(e);
+                                closeModal();
                                 if (totalProducts) {
                                   if ((totalProducts + 1) < 101) {
                                     showSuccess('Product(s) has been added successfully.');
