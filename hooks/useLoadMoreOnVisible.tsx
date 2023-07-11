@@ -7,11 +7,10 @@ const useLoadMoreOnVisible = (tragetReff:any, refid: string):[boolean, (v:boolea
   const [isTimetoLoad, setIsTimetoLoad] = useState<boolean>(false);
 
   const isInViewport = () => {
-    const divDimentions = tragetReff.current.getBoundingClientRect().toJSON();
-    if (tragetReff.current.id === refid) {
-      console.log('🚀 ~ file: useLoadMoreOnScroll.tsx:39 ~ isInViewport ~ tragetReff.current.id:', tragetReff.current.id);
-      console.log('🚀 ~ file: useLoadMoreOnScroll.tsx:38 ~ isInViewport ~ divDimentions:', divDimentions);
-      console.log('window.innerHeight || document.documentElement.clientHeight + divDimentions.height:', (window.innerHeight || document.documentElement.clientHeight) + divDimentions.height);
+    const divDimentions = tragetReff?.current?.getBoundingClientRect().toJSON();
+    if (tragetReff?.current?.id === refid) {
+      // console.log(':39 tragetReff?.current?.id:', tragetReff?.current?.id);
+      // console.log('useLoadMoreOnScroll.tsx:38 divDimentions:', divDimentions);
       return (
         Math.abs(divDimentions.top) <= divDimentions.height - 180
       // && divDimentions.bottom >= 0
@@ -26,34 +25,21 @@ const useLoadMoreOnVisible = (tragetReff:any, refid: string):[boolean, (v:boolea
   };
 
   useEffect(() => {
-    const prevScrollPos = window.scrollY;
-
     const handleScroll = () => {
-      const messageText = isInViewport()
-        ? 'The box is visible in the viewport'
-        : 'not found yet';
-      // const currentScrollPos = window.scrollY;
-      console.log('🚀 ~ file: useLoadMoreOnScroll.tsx:52 ~ handleScroll ~ messageText:', messageText);
-      const currentbounding = tragetReff.current.getBoundingClientRect().toJSON();
-      const threequaterlength = ((tragetReff?.current?.scrollHeight / 4) * 3);
-      const scrolledSoFar = currentbounding.Height + tragetReff?.current?.scrollLeft;
-      if (isInViewport() && !isTimetoLoad) { setIsTimetoLoad(true); }
+      // const messageText = isInViewport()
+      //   ? 'The box is visible in the viewport'
+      //   : 'not found yet';
 
-      // const headerElement = headerRef.current;
-      // if (!headerElement) {
-      //   return;
-      // }
-      // if (prevScrollPos > currentScrollPos) {
-      //   headerElement.style.transform = 'translateY(0)';
-      // } else {
-      //   headerElement.style.transform = 'translateY(-200px)';
-      // }
-      // prevScrollPos = currentScrollPos;
+      // console.log('useLoadMoreOnScroll.tsx:52 ~ handleScroll ~ messageText:', messageText);
+      // const currentbounding = tragetReff?.current?.getBoundingClientRect().toJSON();
+      // const threequaterlength = ((tragetReff?.current?.scrollHeight / 4) * 3);
+      // const scrolledSoFar = currentbounding?.Height + tragetReff?.current?.scrollLeft;
+      if (isInViewport() && !isTimetoLoad) { setIsTimetoLoad(true); }
     };
-    window.addEventListener('scroll', handleScroll);
+    window?.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window?.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

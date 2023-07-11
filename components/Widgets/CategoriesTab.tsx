@@ -22,7 +22,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
-    skip: !id,
+    skip: !id || id === 'favproducts',
   });
 
   useEffect(() => {
@@ -39,16 +39,8 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
       if (favorite?.length) {
         setCategoryArray([body, ...temp]);
       } else {
-        // dispatch({
-        //   type: 'UPDATE_GROUPSHOP',
-        //   payload: {
-        //     ...gsctx,
-        //     selectedCategory: '',
-        //   },
-        // });
         setInitialCategory();
         setCategoryArray(temp);
-        // setId(gsctx.firstCategory?.categoryId ?? '');
       }
     }
   }, [categories, favorite]);

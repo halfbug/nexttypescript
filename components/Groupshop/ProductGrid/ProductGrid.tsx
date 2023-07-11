@@ -114,7 +114,7 @@ const ProductGridInitial = ({
   const productRef = useRef<HTMLDivElement| null>(null);
   const [ref, dimensions] = useDimensions();
   const [isTimetoLoadS, setIsTimetoLoadS] = useLoadMoreOnScroll(productRef, 'vertical');
-  console.log('🚀 ~ file: ProductGrid.tsx:103 ~ isTimetoLoadS:', isTimetoLoadS);
+  // console.log('🚀 ~ file: ProductGrid.tsx:103 ~ isTimetoLoadS:', isTimetoLoadS);
   const [isTimetoLoadV, setIsTimetoLoadV] = useLoadMoreOnVisible(productRef, 'allproductsdrops_productGrid');
   const csection:any = sections?.find(({ shopifyId }) => shopifyId === sectionID)
   ?? { products: [] };
@@ -125,7 +125,7 @@ const ProductGridInitial = ({
     onError() { console.log('Error in getPaginatedProducts!'); },
     onCompleted: async (sectionPrd: { getPaginatedProducts : {
       result : IProduct[], pageInfo: any}}) => {
-      console.log(sectionPrd?.getPaginatedProducts);
+      // console.log(sectionPrd?.getPaginatedProducts);
       (['vault', 'regular', 'spotlight'].includes(csection.type)) ? setIsTimetoLoadS(false) : setIsTimetoLoadV(false);
       dispatch({
         type: 'UPDATE_PRODUCTS',
