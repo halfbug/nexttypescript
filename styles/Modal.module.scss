@@ -999,6 +999,7 @@
                 line-height: 24px;
             }
         }
+
     }
 
     &__carousel {
@@ -1203,6 +1204,31 @@
             // }
         }
     }
+
+    &__btnSection2 {
+        @extend .text-center, .m-3;
+        button {
+            padding: 12px 30px;
+            width: -webkit-fill-available;
+            height: 46.8px;
+            font-family: 'DM Sans';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            border: 1px solid #000000;
+            line-height: 23px;
+            border-radius: 20px;
+            &:hover{
+                border: 1px solid #000000;
+
+            }
+
+            // @include media-breakpoint-down(sm) {
+            //     font-size: 14px;
+            //     line-height: 18px;
+            // }
+        }
+    }
 }
 // @media (max-width: 576px) {
 //     .Scan_modal{
@@ -1335,15 +1361,7 @@
             color: $black;
             text-align: center;
         }
-        &__heading {
-            font-family: 'DM Sans';
-            font-style: normal;
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 21px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
+
     }
 
     &__btnSection {
@@ -1400,4 +1418,74 @@
 
     //     }
     // }
+}
+
+.howShopDropVideoBox_modal__heading	{
+    @extend .text-capitalize, .text-center, .mt-3;
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.howShopDropVideoBox_modal__heading2	{
+    @extend .text-capitalize, .text-center;
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+    background: #ffffff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-left: 1px solid #000000;
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+    &__howTxt2 {
+        @extend .mt-3;
+        color: #000;
+        text-align: center;
+        font-size: 10px;
+        font-family: DM Sans;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+        text-transform: uppercase;
+        // border-bottom: 1px solid #000;
+        padding-bottom: 3px;
+
+        @include media-breakpoint-down(sm) {
+            font-size: 10px;
+        }
+    }
+}
+
+.modalBg{
+	background-image: url("../assets/images/modalbg.png");
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid #000;
+    background-size: cover;
+    background-position: bottom;
+    .badge{
+        color: #000000 !important;
+    text-align: center;
+    font-size: 14px !important;
+    font-family: DM Sans !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    background-color: #fff;
+    &:active,
+    &:focus,
+    &:hover{
+        background-color: #000000 !important;
+        color:#fff !important;
+    }
+    }
 }

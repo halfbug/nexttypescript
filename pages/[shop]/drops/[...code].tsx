@@ -57,6 +57,7 @@ import HowShopDropBox from 'components/Groupshop/HowShopDropBox/HowShopDropBox';
 import useDrops from 'hooks/useDrops';
 import Members from 'components/Groupshop/Members/Members';
 import HowShopDropVideoBox from 'components/Groupshop/HowShopDropBox/HowShopVideoDropBox';
+import DropVideoBox from 'components/Groupshop/Categories/VideoDropBox';
 import InfoButton from 'components/Buttons/InfoButton/InfoButton';
 import ExpiredLinked from 'components/Groupshop/DropRewardBox/ExpiredLinked';
 import DropsRewardBox from 'components/Groupshop/DropRewardBox/DropRewardBox';
@@ -845,7 +846,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             handleClose={() => setLearnHow(false)}
           />
           {isModalForMobile && (
-          <HowShopDropVideoBox
+          <DropVideoBox
             show={showObPopup}
             btnDisable={btnDisable}
             spinner={spinner}
