@@ -242,6 +242,11 @@ const ProductGridInitial = ({
     const obj = document.getElementById(gridId);
     const screenWidth = obj?.offsetWidth ?? 400;
     const maxWidth = obj?.scrollWidth ?? screenWidth;
+    // console.log('left : --->', obj?.scrollLeft);
+    // console.log('position:', position);
+    // console.log('maxWidth:', maxWidth);
+    // console.log('screenWidth:', screenWidth);
+    position = obj?.scrollLeft ?? 0;
     if (direction === 'right' && position < (maxWidth - screenWidth)) {
       position += (screenWidth);
       if ((maxWidth - screenWidth) < position) {
@@ -267,9 +272,7 @@ const ProductGridInitial = ({
     } else if (direction === 'left' && !!position && position <= screenWidth) {
       position = 0;
     }
-    if (position > maxWidth) {
-      position = maxWidth - screenWidth;
-    }
+
     obj?.scroll({
       left: (position ?? 0),
       behavior: 'smooth',
