@@ -174,7 +174,7 @@ const ProductDetail = ({
 
       googleProductCode({
         productName: product.title,
-        productId: product.id.split('/')[4],
+        productId: product?.id.split('/')[4],
         originalPrice: (+product.price) as number,
         finalPrice: (+dPrice(+(product.price)).toFixed(2)) as number,
 
@@ -216,8 +216,8 @@ const ProductDetail = ({
       const { cart } = gsctx;
 
       if (cart) {
-        const prods = cart.filter((ele) => ele.id === productById.id);
-        const prodVrnt = prods.find((ele) => ele.selectedVariant.id === selectedVariant.id);
+        const prods = cart.filter((ele) => ele?.id === productById?.id);
+        const prodVrnt = prods.find((ele) => ele.selectedVariant?.id === selectedVariant?.id);
         if (prodVrnt && prodVrnt.selectedVariant.selectedQuantity >= 3) {
           setDisable(true);
         } else {
@@ -465,7 +465,7 @@ const ProductDetail = ({
                           setShowOverlay(false);
                           setDealProduct('');
                         } else {
-                          removeFavoriteProduct(gsctx.id, product!.id);
+                          removeFavoriteProduct(gsctx?.id, product!?.id);
                         }
                       }}
                       disabled={!!filterDeal.find((ele) => ele === dealProduct)}
@@ -578,7 +578,7 @@ const ProductDetail = ({
                                 className={i === index
                                   ? styles.groupshop_modal_detail_button_selected
                                   : styles.groupshop_modal_detail_button}
-                                key={img.id}
+                                key={img?.id}
                               >
 
                                 <img
