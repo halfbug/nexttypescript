@@ -24,7 +24,7 @@ import Image from 'react-bootstrap/Image';
 import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { useLazyQuery, useQuery } from '@apollo/client';
-import { GET_PRODUCT_DETAIL, GET_UNIQUE_LOCATIONS_BY_VARIANTS } from 'store/store.graphql';
+import { GET_PLATFORM_FEE_DETAIL, GET_UNIQUE_LOCATIONS_BY_VARIANTS } from 'store/store.graphql';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -92,10 +92,7 @@ const Cart = ({
     googleEventCode, checkoutCartView, checkoutButtonClick, checkoutUpsellClick,
   } = useGtm();
 
-  const { data: { productById } = { } } = useQuery(GET_PRODUCT_DETAIL, {
-    variables: { id: process.env.PLATFORM_FEE_ID },
-    skip: !process.env.PLATFORM_FEE_ID,
-  });
+  const { data: { PlatformFeeById } = { } } = useQuery(GET_PLATFORM_FEE_DETAIL);
 
   const [getLocations, { data, loading: getLocationsLoading }] = useLazyQuery<ILocationData>(
     GET_UNIQUE_LOCATIONS_BY_VARIANTS, {
@@ -165,10 +162,10 @@ const Cart = ({
   }, [JSON.stringify(data)]);
 
   useEffect(() => {
-    if (productById?.variants[0]?.price) {
-      setplatformProductPrice(+productById?.variants[0]?.price);
+    if (PlatformFeeById?.variants[0]?.price) {
+      setplatformProductPrice(+PlatformFeeById?.variants[0]?.price);
     }
-  }, [productById]);
+  }, [PlatformFeeById]);
 
   useEffect(() => {
     if (show) {
@@ -302,7 +299,7 @@ const Cart = ({
         : dPrice(+(prd.selectedVariant.price)).toFixed(2),
       quantity: prd.selectedVariant.selectedQuantity,
     })), getTotal() ?? 0);
-    push(getShopifyUrl(platformFee ? productById : '', platformFee ? platformProductQuantity : ''));
+    push(getShopifyUrl(platformFee ? PlatformFeeById : '', platformFee ? platformProductQuantity : ''));
   };
 
   const dynamicLine = () => {
