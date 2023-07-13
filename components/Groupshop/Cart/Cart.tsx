@@ -141,9 +141,9 @@ const Cart = ({
     const result: IProductTotal[][] = groupBy(productTotal, 'locationID');
     let count = 0;
     Object.values(result).forEach((v: IProductTotal[]) => {
-      if (+(v.reduce((acc: any, current: IProductTotal) => acc + current.total, 0)) < 75) {
-        count += 1;
-      }
+      // if (+(v.reduce((acc: any, current: IProductTotal) => acc + current.total, 0)) < 75) {
+      count += 1;
+      // }
     });
     setplatformProductQuantity(count);
     setPlatformFee(platformProductPrice * count);
