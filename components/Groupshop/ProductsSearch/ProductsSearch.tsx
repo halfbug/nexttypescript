@@ -493,7 +493,7 @@ const ProductsSearch = ({
           {isDrops && (otherProducts && otherProducts.length > 0) && (
           <div className="d-flex justify-content-between m-0 flex-nowrap align-items-center">
             <div className={dStyles.drops_modal_search_body_top_resultFound}>
-              {!isloader && (`
+              {lineItems && !isloader && (`
                 ${otherProducts?.length}
                 ${' '}
                 results found`
