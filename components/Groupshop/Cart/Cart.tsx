@@ -64,7 +64,8 @@ const Cart = ({
     members,
   } = gsctx;
   const {
-    currencySymbol, dPrice, disPrice, discount, getOwnerName, isInfluencerGS, brandName,
+    currencySymbol, dPrice, formattedCB, disPrice, discount, getOwnerName,
+    isInfluencerGS, brandName,
   } = useDeal();
 
   const {
@@ -547,13 +548,12 @@ And you can keep earning up to
                             >
                               {currencySymbol}
                               {
-                                Number.isInteger((+(item.compareAtPrice ?? item.price)
-                                - +(dPrice(+(item?.price || 0)))))
-                                  ? +(item.compareAtPrice ?? item.price)
-                                  - +(dPrice(+(item?.price || 0)))
-                                  : (+(item.compareAtPrice ?? item.price)
-                                  - +(dPrice(+(item?.price || 0)))).toFixed(2)
-                              }
+                                  item.compareAtPrice && spotlightProducts.includes(item.id)
+                                    ? (formattedCB(+(item.compareAtPrice)
+                                    - +(item?.price)))
+                                    : (+(item.compareAtPrice ?? item.price)
+                                    - +(dPrice(+(item?.price || 0)))).toFixed(2)
+                                  }
                               {' '}
                               OFF
                             </Badge>

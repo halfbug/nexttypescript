@@ -569,6 +569,8 @@ export default function useDeal() {
     return formattedCB;
   }, [gsctx]);
 
+  const formattedCB = (cb: any) => +(cb.toFixed(2).toString().replace('.00', ''));
+
   const nextDiscountCalculator = ((disc: string) => {
     const rew = gsctx.campaign?.salesTarget?.rewards!;
     const nextIndex = gsctx.campaign?.salesTarget?.rewards?.findIndex(
@@ -692,6 +694,7 @@ export default function useDeal() {
     nativeShareText,
     leftOverProducts,
     cashback,
+    formattedCB,
     addedByInfluencer,
     getOwnerFirstName,
     nameOnProductGrid,
