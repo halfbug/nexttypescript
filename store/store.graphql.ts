@@ -1198,6 +1198,7 @@ const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
   query collectionByCategory($id: String!) {
     collectionByCategory(categoryId: $id) {
       title
+      categoryId
       parentId
       sortOrder
       collections {

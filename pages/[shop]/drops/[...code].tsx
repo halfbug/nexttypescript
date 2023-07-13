@@ -133,11 +133,24 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
     if (DropGroupshop.id && pending && DropGroupshopSections) {
       setpending(false);
       const temp = { ...DropGroupshopSections.DropGroupshopSections, ...DropGroupshop };
+      // const allproducts = temp?.sections.filter((item: any) => item.name === 'All Products');
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...temp,
           selectedCategory: DropGroupshopSections.firstCategory?.categoryId,
+          categories: [...DropGroupshopSections.DropGroupshopSections.categories!.map(
+            (cat: any) => {
+              if (cat.categoryId === temp.firstCategory.categoryId) {
+                return (
+                  {
+                    ...cat,
+                    sections: temp.sections,
+                  });
+              }
+              return cat;
+            },
+          )],
         },
       });
     }
@@ -734,6 +747,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               urlForActivation={urlForActivation}
               showPagination={false}
               loading={gsctx.loading || loading || DropsLoading}
+              loadmore
               // laodMore={getMoreProducts}
               // loadMoreStatus={loading: prodLoading}
             />
@@ -766,7 +780,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       urlForActivation={urlForActivation}
                       showPagination={false}
                       loading={gsctx.loading || loading || DropsLoading}
-                      loadmore
+
                     >
                       {ele.type === DROPS_ALLPRODUCT && (
                         <div>

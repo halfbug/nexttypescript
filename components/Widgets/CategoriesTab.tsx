@@ -14,6 +14,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   const [selectedCategory, setSelectedCategory] = useState<any>({});
   const [selectedSubCategory, setSelectedSubCategory] = useState<any>({});
   const [categoryArray, setCategoryArray] = useState<any>([]);
+  const [dataLoad, setdDataLoad] = useState<boolean>(true);
   const [id, setId] = useState<string>('');
   const { gsctx, dispatch } = useAppContext();
 
@@ -22,7 +23,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
-    skip: !id || id === 'favproducts',
+    skip: !id || id === 'favproducts' || !dataLoad,
   });
 
   useEffect(() => {
@@ -77,6 +78,18 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
           ...gsctx,
           loading,
           sections: data.collectionByCategory.sections,
+          categories: [...gsctx.categories!.map(
+            (cat: any) => {
+              if (cat.categoryId === data.collectionByCategory.categoryId) {
+                return (
+                  {
+                    ...cat,
+                    sections: data.collectionByCategory.sections,
+                  });
+              }
+              return cat;
+            },
+          )],
         },
       });
     }
@@ -93,13 +106,29 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   }, [searchRefresh]);
 
   const onCategoryClick = (item: any) => {
-    dispatch({
-      type: 'UPDATE_GROUPSHOP',
-      payload: {
-        ...gsctx,
-        selectedCategory: item.categoryId,
-      },
-    });
+    const dataExist = (gsctx?.categories) ? gsctx?.categories.find(
+      (ele) => ele.categoryId === item.categoryId,
+    ) : '';
+    if (dataExist && dataExist?.sections) {
+      setdDataLoad(false);
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          selectedCategory: item.categoryId,
+          sections: dataExist.sections,
+        },
+      });
+    } else {
+      setdDataLoad(true);
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          selectedCategory: item.categoryId,
+        },
+      });
+    }
     setSelectedCategory(item);
     setSelectedSubCategory('');
     setId(item.categoryId);
@@ -107,6 +136,26 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   };
 
   const onSubCategoryClick = (subItem: any) => {
+    const parentCategoryId = selectedCategory.categoryId;
+    const findIndex = (gsctx?.categories)
+      ? gsctx?.categories.findIndex((obj) => obj.categoryId === parentCategoryId) : 0;
+    const dataExit = (gsctx?.categories?.[findIndex].subCategories)
+      ? gsctx?.categories?.[findIndex].subCategories.find(
+        (ele) => ele.categoryId === subItem.categoryId,
+      ) : '';
+    if (dataExit && dataExit?.sections) {
+      setdDataLoad(false);
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          selectedCategory: subItem.categoryId,
+          sections: dataExit.sections,
+        },
+      });
+    } else {
+      setdDataLoad(true);
+    }
     if (id !== subItem.categoryId) {
       setSelectedSubCategory(subItem);
       setId(subItem.categoryId);

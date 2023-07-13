@@ -1,5 +1,6 @@
 import {
-  IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards, ChannelRewards,
+  IProduct as Product, IStore as Store, ICampaign as Campaign, PartnerRewards,
+  ChannelRewards, IProduct,
 } from './store';
 
 export type DealProduct = {
@@ -144,6 +145,7 @@ export type subCategories = {
   collections: string;
   sortOrder: number;
   title: string;
+  sections?: sections[] | undefined;
 }
 
 export type Categories = {
@@ -153,6 +155,7 @@ export type Categories = {
   sortOrder: number;
   subCategories: subCategories[];
   title: string;
+  sections?: sections[] | undefined;
 }
 
 export interface IGroupshop {
