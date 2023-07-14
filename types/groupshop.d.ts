@@ -126,6 +126,7 @@ export type ObSettings = {
 }
 
 export type sections = {
+  id?: string;
   name: string;
   shopifyId: string;
   type: string;

@@ -69,6 +69,7 @@ import CategoriesTab from 'components/Widgets/CategoriesTab';
 import {
   DROPS_ALLPRODUCT, DROPS_SPOTLIGHT, DROPS_VAULT,
 } from 'configs/constant';
+import { v4 as uuid } from 'uuid';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
@@ -145,7 +146,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 return (
                   {
                     ...cat,
-                    sections: temp.sections,
+                    sections: temp.sections.map((s:any) => ({ ...s, id: uuid() })),
                   });
               }
               return cat;
@@ -758,7 +759,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                   return (
 
                     <ProductGrid
-                      key={ele.shopifyId}
+                      key={ele.id}
                       sectionID={ele.shopifyId}
                       isDrops
                       title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
@@ -773,7 +774,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       addProducts={handleAddProduct}
                       handleDetail={(prd: any) => setsProduct(prd)}
                       showHoverButton
-                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops'${ele.type}${index}` : 'allproductsdrops'}`}
+                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops${ele.type}${index}` : 'allproductsdrops'}`}
                       isModalForMobile={isModalForMobile}
                       urlForActivation={urlForActivation}
                       showPagination={false}
