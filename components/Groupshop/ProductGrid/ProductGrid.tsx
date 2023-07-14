@@ -521,10 +521,10 @@ const ProductGridInitial = ({
                                     )))}
 
                               {!isSuggestion && getBuyers(prod.id).length > 0 && (
-                              <span className={styles.groupshop__pcard_tag_buyer}>
-                                Bought By
-                                {' '}
-                              </span>
+                                <span className={styles.groupshop__pcard_tag_buyer}>
+                                  Bought By
+                                  {' '}
+                                </span>
                               )}
                               {(!isSuggestion && isInfluencerGS)
                                   && getBuyers2(prod.id).length > 0 && (
@@ -567,63 +567,63 @@ const ProductGridInitial = ({
                             })}
                           </button>
                           {isDrops && (
-                          <Button
-                            variant=""
-                            className={['text-center p-1 bg-white shadow-sm border-1 rounded-3',
-                              dStyles.drops_starBtn].join(' ')}
-                            onClick={() => {
-                              if (dropsId) {
-                                if (favoriteProducts.includes(prod.id)) {
-                                  removeFavoriteProduct(dropsId, prod.id);
-                                } else {
-                                  addProductToFavorite(dropsId, prod.id);
+                            <Button
+                              variant=""
+                              className={['text-center p-1 bg-white shadow-sm border-1 rounded-3',
+                                dStyles.drops_starBtn].join(' ')}
+                              onClick={() => {
+                                if (dropsId) {
+                                  if (favoriteProducts.includes(prod.id)) {
+                                    removeFavoriteProduct(dropsId, prod.id);
+                                  } else {
+                                    addProductToFavorite(dropsId, prod.id);
+                                  }
                                 }
-                              }
-                            }}
-                          >
-                            <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? '#FFE012' : 'lightgrey'} size={20} />
-                          </Button>
+                              }}
+                            >
+                              <AiTwotoneStar fill={favoriteProducts.includes(prod.id) ? '#FFE012' : 'lightgrey'} size={20} />
+                            </Button>
                           )}
                         </div>
                         {!isSuggestion && showHoverButton && (
-                        <Row className={styles.groupshop__pcard_tag_addToCart}>
-                          <Col lg={10} className="p-0">
-                            {isExpired ? (
-                              <ShareUnlockButton
-                                label="share to unlock"
-                                shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
-                                className={styles.groupshop_unlockToShare}
-                                onClick={(e) => handleCard(e)}
-                              />
+                          <Row className={styles.groupshop__pcard_tag_addToCart}>
+                            <Col lg={10} className="p-0">
+                              {isExpired ? (
+                                <ShareUnlockButton
+                                  label="share to unlock"
+                                  shareurl={urlForActivation ?? productShareUrl(prod?.id ?? '')}
+                                  className={styles.groupshop_unlockToShare}
+                                  onClick={(e) => handleCard(e)}
+                                />
 
-                            ) : (
-                              <Button
-                                variant="primary"
-                                className={styles.groupshop__pcard_tag_addToCart_btn}
-                                onClick={() => handleDetail(prod)}
-                                disabled={isExpired || prod.outofstock}
-                              >
-                                {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
+                              ) : (
+                                <Button
+                                  variant="primary"
+                                  className={styles.groupshop__pcard_tag_addToCart_btn}
+                                  onClick={() => handleDetail(prod)}
+                                  disabled={isExpired || prod.outofstock}
+                                >
+                                  {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
 
-                              </Button>
+                                </Button>
 
-                            )}
+                              )}
 
-                          </Col>
-                          {!isExpired ? (
-                            <Col lg={2} className="ps-1">
-                              <ShareButton
-                                disabled={isExpired}
-                                placement="auto"
-                                shareurl={productShareUrl(prod?.id ?? '')}
-                                fullshareurl={productShareUrl(prod?.id ?? '')}
-                                className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')}
-                                popoverClassName={styles.groupshop__earn__popover}
-                                onClick={(e) => handleCard(e)}
-                              />
                             </Col>
-                          ) : ''}
-                        </Row>
+                            {!isExpired ? (
+                              <Col lg={2} className="ps-1">
+                                <ShareButton
+                                  disabled={isExpired}
+                                  placement="auto"
+                                  shareurl={productShareUrl(prod?.id ?? '')}
+                                  fullshareurl={productShareUrl(prod?.id ?? '')}
+                                  className={['px-2 rounded-pill bg-white', styles.groupshop__onHoverCart].join(' ')}
+                                  popoverClassName={styles.groupshop__earn__popover}
+                                  onClick={(e) => handleCard(e)}
+                                />
+                              </Col>
+                            ) : ''}
+                          </Row>
                         )}
                       </>
                         )}
@@ -651,14 +651,14 @@ const ProductGridInitial = ({
                         {prod.outofstock
                           ? <p className={dStyles.drops_product_desc_soldout}>{loading ? <Skeleton width="186.5px" /> : 'Sold out'}</p>
                           : ((prod.purchaseCount && !isDrops) && (
-                          <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
-                            {prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
-                            {prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
-                            {prod.purchaseCount > 100 ? <>🎉</> : ''}
-                            <i>
-                              {`${prod.purchaseCount} people shopped`}
-                            </i>
-                          </p>
+                            <p className={['mb-1 fs-5 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
+                              {prod.purchaseCount >= 1 && prod.purchaseCount <= 30 ? <>🔥</> : ''}
+                              {prod.purchaseCount > 30 && prod.purchaseCount <= 100 ? <>⚡️</> : ''}
+                              {prod.purchaseCount > 100 ? <>🎉</> : ''}
+                              <i>
+                                {`${prod.purchaseCount} people shopped`}
+                              </i>
+                            </p>
                           ))
                               || (prod.secondaryCount && isDrops && (
                                 !loading ? (
@@ -675,40 +675,40 @@ const ProductGridInitial = ({
                         {!isDrops && priceUI(prod)}
                       </div>
                       {!showHoverButton && (
-                      <div className={styles.groupshop_addtoCart_wrapper}>
-                        {isExpired ? (
-                          <ShareUnlockButton
-                            label="share to unlock"
-                            shareurl={shortActivateURL ?? urlForActivation ?? productShareUrl(prod?.id ?? '')}
-                            className={styles.groupshop_unlockToShare}
-                            onClick={(e) => handleCard(e)}
-                          />
-
-                        ) : (
-                          <>
-                            <Button
-                              variant="primary"
-                              className={styles.groupshop_addtoCart}
-                              onClick={() => handleDetail(prod)}
-                                    // () => { setsProduct(prod); setshowDetail(true); }}
-                              disabled={isExpired || prod.outofstock}
-                            >
-                              {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
-
-                            </Button>
-                            <ShareButton
-                              disabled={isExpired}
-                              placement="auto"
-                              shareurl={productShareUrl(prod?.id ?? '')}
-                              fullshareurl={productShareUrl(prod?.id ?? '')}
-                              className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')}
-                              popoverClassName={styles.groupshop__earn__popover}
-                              onClick={() => googleButtonCode('product-share')}
+                        <div className={styles.groupshop_addtoCart_wrapper}>
+                          {isExpired ? (
+                            <ShareUnlockButton
+                              label="share to unlock"
+                              shareurl={shortActivateURL ?? urlForActivation ?? productShareUrl(prod?.id ?? '')}
+                              className={styles.groupshop_unlockToShare}
+                              onClick={(e) => handleCard(e)}
                             />
 
-                          </>
-                        )}
-                      </div>
+                          ) : (
+                            <>
+                              <Button
+                                variant="primary"
+                                className={styles.groupshop_addtoCart}
+                                onClick={() => handleDetail(prod)}
+                                    // () => { setsProduct(prod); setshowDetail(true); }}
+                                disabled={isExpired || prod.outofstock}
+                              >
+                                {!prod.outofstock ? 'Add to Cart' : 'Out of stock'}
+
+                              </Button>
+                              <ShareButton
+                                disabled={isExpired}
+                                placement="auto"
+                                shareurl={productShareUrl(prod?.id ?? '')}
+                                fullshareurl={productShareUrl(prod?.id ?? '')}
+                                className={['mx-1 rounded-pill', styles.groupshop__earn].join(' ')}
+                                popoverClassName={styles.groupshop__earn__popover}
+                                onClick={() => googleButtonCode('product-share')}
+                              />
+
+                            </>
+                          )}
+                        </div>
                       )}
                     </div>
                   </ProductCard>

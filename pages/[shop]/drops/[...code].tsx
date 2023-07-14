@@ -763,9 +763,9 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       isDrops
                       title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
                       type={ele.type}
-                      xs={6}
+                      xs={ele.type === 'allproduct' ? 6 : 5}
                       sm={6}
-                      md={6}
+                      md={ele.type === 'allproduct' ? 6 : 5}
                       lg={4}
                       xl={3}
                       products={uniqueArray(ele.products)}
