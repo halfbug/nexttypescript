@@ -57,6 +57,7 @@ const ProductsSearch = ({
   //   gsctx,
   //   dispatch,
   // } = useContext(GroupshopContext);
+  const [isSearchData, setisSearchData] = useState(false);
   const { gsctx, dispatch } = useAppContext();
   const { isOwner } = useOwnerOnboarding();
   const { setsProduct } = useDetail(gsctx.allProducts);
@@ -82,7 +83,9 @@ const ProductsSearch = ({
   const Router = useRouter();
   const { googleEventCode } = useGtm();
   useEffect(() => {
-    if (showSearch) { googleEventCode('product-search-modal'); }
+    if (showSearch) { googleEventCode('product-search-modal'); } else if (isSearchData && !showSearch) {
+      setisSearchData(false);
+    }
   }, [showSearch]);
 
   const [otherProducts, setotherProducts] = useState<IProduct[] | undefined>(undefined);
@@ -94,13 +97,19 @@ const ProductsSearch = ({
     popularProducts, addedProducts, dealProducts, totalProducts,
   } = gsctx;
 
-  const [getSearchResult, { data: lineItems, loading }] = useLazyQuery(GET_DROP_PRODUCT_SEARCH, {
+  const [getSearchResult,
+    { data, loading } = { data: undefined, loading: false },
+  ] = useLazyQuery(GET_DROP_PRODUCT_SEARCH, {
     fetchPolicy: 'network-only',
     onCompleted: async (searchResult: any) => {
       const filterProducts:any = [];
       searchDropsPrd(searchResult.searchProducts[0].products);
     },
   });
+
+  useEffect(() => {
+    if (data && !isSearchData) { setisSearchData(true); }
+  }, [data]);
 
   // const refreshProduct = () => products?.filter(
   //   (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
@@ -493,7 +502,7 @@ const ProductsSearch = ({
           {isDrops && (otherProducts && otherProducts.length > 0) && (
           <div className="d-flex justify-content-between m-0 flex-nowrap align-items-center">
             <div className={dStyles.drops_modal_search_body_top_resultFound}>
-              {lineItems && !isloader && (`
+              {isSearchData && !isloader && (`
                 ${otherProducts?.length}
                 ${' '}
                 results found`
