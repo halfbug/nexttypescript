@@ -40,7 +40,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
       if (favorite?.length) {
         setCategoryArray([body, ...temp]);
       } else {
-        setInitialCategory();
+        // setInitialCategory();
         setCategoryArray(temp);
       }
     }
