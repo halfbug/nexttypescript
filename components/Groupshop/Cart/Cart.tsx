@@ -344,7 +344,7 @@ const Cart = ({
           {' '}
           by shopping with
           {' '}
-          <strong>{getOwnerName()}</strong>
+          <strong>Groupshop</strong>
           {/* {' '}
 And you can keep earning up to
 {' '}
