@@ -375,7 +375,7 @@ const ProductGridInitial = ({
                               </Button>
                             )
                             : <></>}
-                          {!loading
+                          {/* {!loading
                             ? (
                               <Button
                                 variant=""
@@ -388,7 +388,7 @@ const ProductGridInitial = ({
                                 Share With Friends
                               </Button>
                             )
-                            : <></>}
+                            : <></>} */}
                         </>
                         )}
                       </div>
