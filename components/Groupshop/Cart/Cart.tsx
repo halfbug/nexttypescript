@@ -25,6 +25,7 @@ import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { GET_PLATFORM_FEE_DETAIL, GET_UNIQUE_LOCATIONS_BY_VARIANTS } from 'store/store.graphql';
+import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -633,7 +634,15 @@ And you can keep earning up to
               <Container fluid className="py-3 my-2 ">
                 {platformFee !== 0 && (
                 <Row className="mx-3">
-                  <Col className="text-start mx-0 px-0"><h5 className="mb-2">Platform Fee*</h5></Col>
+                  <Col className="text-start mx-0 px-0">
+                    <PopoverButton
+                      variant=""
+                      placement="top"
+                      className="btn btn-link p-0 mb-2"
+                      label="Platform Fee*"
+                      popContent="This fee helps us operate and improve our platform, delivering a seamless app experience"
+                    />
+                  </Col>
 
                   <Col className="text-end mx-0 px-0">
 

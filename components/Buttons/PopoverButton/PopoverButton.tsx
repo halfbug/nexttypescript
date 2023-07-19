@@ -10,6 +10,7 @@ export type PopoverButtonProps ={
   popContent?: React.ReactNode | undefined;
   placement?: 'auto-start' | 'auto' | 'auto-end' | 'top-start' | 'top' | 'top-end' | 'right-start' | 'right' | 'right-end' | 'bottom-end' | 'bottom' | 'bottom-start' | 'left-end' | 'left' | 'left-start';
   className?: string;
+  variant?: string;
   // displayIcon?: boolean;
   icon?: React.ReactNode | undefined;
   label?: string | undefined;
@@ -19,7 +20,7 @@ export type PopoverButtonProps ={
 const Popcomp = (content: React.ReactNode, className?: string) => (
   <Popover id="popover-basic" className={className}>
     <Popover.Body>
-      <MyIcon className={styles.groupshop_popupArrow} />
+      {/* <MyIcon className={styles.groupshop_popupArrow} /> */}
       {content}
       {/* <CopyToClipboacrd value={copyValue} /> */}
     </Popover.Body>
@@ -27,7 +28,7 @@ const Popcomp = (content: React.ReactNode, className?: string) => (
 );
 
 const PopoverButton = ({
-  label, popContent, className, popoverClassName, icon, placement, disabled, onClick,
+  label, popContent, className, popoverClassName, icon, placement, disabled, onClick, variant,
 }: PopoverButtonProps) => (
   <OverlayTrigger
     trigger="click"
@@ -36,7 +37,7 @@ const PopoverButton = ({
     placement={placement ?? 'bottom'}
     overlay={Popcomp(popContent, popoverClassName)}
   >
-    <Button variant="outline-primary" disabled={disabled} className={className} onClick={onClick}>
+    <Button variant={variant} disabled={disabled} className={className} onClick={onClick}>
       {' '}
       {icon ?? ''}
       {' '}
@@ -54,6 +55,7 @@ PopoverButton.defaultProps = {
   popContent: undefined,
   label: '',
   popoverClassName: undefined,
+  variant: 'outline-primary',
 };
 
 export default PopoverButton;
