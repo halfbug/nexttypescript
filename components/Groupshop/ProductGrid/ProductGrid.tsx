@@ -147,6 +147,7 @@ const ProductGridInitial = ({
       });
     },
   });
+  console.log('products...', type, products);
 
   useEffect(() => {
     if (loadmore && (isTimetoLoadS || isTimetoLoadV)

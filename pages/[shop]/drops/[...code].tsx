@@ -768,7 +768,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       md={ele.type === 'allproduct' ? 6 : 5}
                       lg={4}
                       xl={3}
-                      products={uniqueArray(ele.products)}
+                      products={ele.type === 'spotlight' ? ele.products : uniqueArray(ele.products)}
                       maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
                       addProducts={handleAddProduct}
                       handleDetail={(prd: any) => setsProduct(prd)}
