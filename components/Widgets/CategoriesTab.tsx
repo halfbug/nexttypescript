@@ -20,7 +20,7 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
 
   const { favorite, firstCategory: initCategory } = gsctx;
 
-  const { loading, data, refetch } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
+  const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
     skip: !id || id === 'favproducts' || !dataLoad,
@@ -48,9 +48,15 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
 
   useEffect(() => {
     if (!favorite?.length && initCategory?.categoryId) {
+      dispatch({
+        type: 'UPDATE_GROUPSHOP',
+        payload: {
+          ...gsctx,
+          selectedCategory: initCategory?.categoryId,
+        },
+      });
       setSelectedCategory(initCategory);
       setId(initCategory?.categoryId);
-      refetch();
     }
   }, [favorite]);
 
