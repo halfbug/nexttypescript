@@ -752,8 +752,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
             )}
 
-            { gsctx?.selectedCategory !== 'favproducts'
-          && !loading
+            {!loading
               ? sections?.map((ele: any, index:number) => {
                 if (ele.products.length) {
                   return (

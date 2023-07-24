@@ -18,9 +18,9 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   const [id, setId] = useState<string>('');
   const { gsctx, dispatch } = useAppContext();
 
-  const { favorite } = gsctx;
+  const { favorite, firstCategory: initCategory } = gsctx;
 
-  const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
+  const { loading, data, refetch } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
     skip: !id || id === 'favproducts' || !dataLoad,
@@ -45,6 +45,14 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
       }
     }
   }, [categories, favorite]);
+
+  useEffect(() => {
+    if (!favorite?.length && initCategory?.categoryId) {
+      setSelectedCategory(initCategory);
+      setId(initCategory?.categoryId);
+      refetch();
+    }
+  }, [favorite]);
 
   useEffect(() => {
     dispatch({
