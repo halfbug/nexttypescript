@@ -152,13 +152,15 @@ const Members = ({
         }
         return '';
       })}
-      <Button variant="light" className={styles.groupshop__top_item}>
-        <strong>
-          +
-          {names.length - 10}
-          {(names.length - 10) > 1 ? ' Others' : ' Other'}
-        </strong>
-      </Button>
+      {names.length > 10 ? (
+        <Button variant="light" className={styles.groupshop__top_item}>
+          <strong>
+            +
+            {names.length - 10}
+            {(names.length - 10) > 1 ? ' Others' : ' Other'}
+          </strong>
+        </Button>
+      ) : <></>}
 
       <AvailablePartnerRewardsBox
         show={showRewardModel}
