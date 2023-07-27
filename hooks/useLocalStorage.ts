@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 export default function useLocalStorage(storage: string) {
   const setStorage = useCallback((values) => {
-    if (values) localStorage.setItem(storage, JSON.stringify(values));
+    if (values?.length > 0) localStorage.setItem(storage, JSON.stringify(values));
   }, [storage]);
 
   const getStorage = useCallback(() => {

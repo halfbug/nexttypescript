@@ -6,13 +6,11 @@ import { GroupshopContext } from 'store/groupshop.context';
 // import useCart from './useCart';
 import useCode from './useCode';
 import useLocalStorage from './useLocalStorage';
+import useAppContext from './useAppContext';
 // import useUtilityFunction from './useUtilityFunction';
 
 const useSaveCart = () => {
-  const {
-    gsctx,
-    dispatch,
-  } = useContext(GroupshopContext);
+  const { gsctx, dispatch } = useAppContext();
   const { discountCode } = useCode();
   //   const { loadPreSelectedCart } = useCart();
   const varName = discountCode ?? 'GS-00234';
