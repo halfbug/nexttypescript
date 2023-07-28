@@ -20,7 +20,7 @@ import MoneyFly from 'assets/images/money-fly.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
-import useSaveCart from 'hooks/useSaveCart';
+// import useSaveCart from 'hooks/useSaveCart';
 import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { useLazyQuery, useQuery } from '@apollo/client';
@@ -258,9 +258,9 @@ const Cart = ({
   }, [getTotal()]);
 
   const { push } = useRouter();
-  const { emptyCart } = useSaveCart();
+  // const { emptyCart } = useSaveCart();
   const handleCheckout = () => {
-    emptyCart();
+    // emptyCart();
     setLoading(true);
 
     const cartDetails: any = [];
