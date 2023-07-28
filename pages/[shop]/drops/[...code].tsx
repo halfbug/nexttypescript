@@ -71,6 +71,8 @@ import {
 } from 'configs/constant';
 import { v4 as uuid } from 'uuid';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import ViewAllProducts from 'components/Groupshop/ViewAllProducts/ViewAllProducts';
+import useViewAll from 'hooks/useViewAll';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -146,7 +148,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                 return (
                   {
                     ...cat,
-                    sections: temp.sections.map((s:any) => ({ ...s, id: uuid() })),
+                    sections: temp.sections.map((s: any) => ({ ...s, id: uuid() })),
                   });
               }
               return cat;
@@ -273,6 +275,10 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const {
     showDetail, setshowDetail, sProduct, setsProduct, showQrscan, setshowQrscan,
   } = useDetail(allProductsList);
+
+  const {
+    showViewAll, setshowViewAll, vProduct, section, setvProduct,
+  } = useViewAll();
 
   const handleAddProduct = () => {
     googleButtonCode('addproduct-button');
@@ -773,6 +779,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                       maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
                       addProducts={handleAddProduct}
                       handleDetail={(prd: any) => setsProduct(prd)}
+                      handleViewAll={(prd: any) => setvProduct(prd)}
                       showHoverButton
                       id={`${ele.type !== DROPS_ALLPRODUCT ? `drops${ele.type}${index}` : 'allproductsdrops'}`}
                       isModalForMobile={isModalForMobile}
@@ -835,6 +842,11 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             product={sProduct}
             showSearch={showSearchProds}
             isDrops
+          />
+          <ViewAllProducts
+            show={showViewAll}
+            handleClose={() => setshowViewAll(false)}
+            section={section}
           />
           <Cart
             show={showCart}
