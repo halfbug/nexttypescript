@@ -15,6 +15,7 @@ const useSaveCart = () => {
   //   const { loadPreSelectedCart } = useCart();
   const varName = discountCode ?? 'GS-00234';
   const [loading, setloading] = useState<Boolean>(true);
+  const [initialLoading, setInitialLoading] = useState<Boolean>(false);
 
   const {
     setStorage, existStorage, removeStorage, getStorage,
@@ -22,10 +23,9 @@ const useSaveCart = () => {
   const { cart, id } = gsctx;
 
   useEffect(() => {
-    if (cart) { setStorage(cart); }
-
+    if (cart && initialLoading === true) { setStorage(cart); }
     // console.log('🚀 ~ file: useSaveCart.ts ~ line 29 ~ useEffect ~ cart?.length', cart?.length);
-  }, [cart, discountCode]);
+  }, [cart, discountCode, initialLoading]);
 
   useEffect(() => {
     if (id) {
@@ -34,6 +34,7 @@ const useSaveCart = () => {
       }
       if (existStorage()
        && cart && cart[0]?.id === getStorage()[0]?.id && loading) { setloading(false); }
+      setInitialLoading(true);
     }
   }, [gsctx]);
 
