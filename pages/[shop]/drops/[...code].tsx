@@ -603,12 +603,12 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
                     onClick={() => googleEventCode('earn-cashback-modal')}
                     className={styles.drops__hero_share_btn}
                   />
-                  {/* <IconButton
+                  <IconButton
                     icon={<Search size={isModalForMobile ? 24 : 16} />}
                     className={[styles.drops__hero_iconSearchBtn, 'me-3'].join(' ')}
                     onClick={showSearchProds}
                     disabled={isExpired}
-                  /> */}
+                  />
                   <IconButton
                     icon={<Handbag size={isModalForMobile ? 14 : 24} />}
                     className={[styles.drops__hero_iconBtn, 'position-relative'].join(' ')}

@@ -3005,7 +3005,21 @@ query getRecentSignup($storeId: String!) {
 const GET_DROP_PRODUCT_SEARCH = gql`
 query searchProducts($searchTerm: String!, $shop: String!) {
   searchProducts(searchTerm: $searchTerm, shop: $shop) {
-    products        
+    id
+    title
+    outofstock
+    compareAtPrice
+    currencyCode
+    featuredImage
+    price
+    purchaseCount
+    secondaryCount
+    options {
+      id
+      name
+      values
+      position
+    }        
   }
 }
 `;

@@ -103,7 +103,8 @@ const ProductsSearch = ({
     fetchPolicy: 'network-only',
     onCompleted: async (searchResult: any) => {
       const filterProducts:any = [];
-      searchDropsPrd(searchResult.searchProducts[0].products);
+      setIsloader(false);
+      setotherProducts(searchResult?.searchProducts);
     },
   });
 
@@ -228,6 +229,7 @@ const ProductsSearch = ({
           newFilteredSearchArray.push(newFiltered[0]);
         }
       });
+      console.log('newFilteredSearchArray', newFilteredSearchArray);
       setotherProducts(newFilteredSearchArray);
     }
     if ((!otherProducts || otherProducts?.length < 1) && filteredproducts) {
