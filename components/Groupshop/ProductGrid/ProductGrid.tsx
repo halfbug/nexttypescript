@@ -148,7 +148,6 @@ const ProductGridInitial = ({
       });
     },
   });
-  console.log('products...', type, products);
 
   useEffect(() => {
     if (loadmore && (isTimetoLoadS || isTimetoLoadV || isTimetoLoadA)
@@ -164,7 +163,6 @@ const ProductGridInitial = ({
     }
   }, [isTimetoLoadS, isTimetoLoadV, isTimetoLoadA]);
 
-  // const router = useRouter();
   const {
     screens, breakPoint, pageSize,
     totalPages, renderItems, currentPage, setCurrentPage, getPageNumbers,
@@ -310,10 +308,12 @@ const ProductGridInitial = ({
     }, 500);
   };
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => handleViewAll && handleViewAll(sectionID);
+  // const handleClose = () => setShow(false);
+  const handleShow = () => {
+    if (handleViewAll) {
+      handleViewAll(sectionID);
+    }
+  };
 
   return (
     <SkeletonTheme
