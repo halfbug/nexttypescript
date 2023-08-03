@@ -999,6 +999,7 @@ query DropGroupshopSections {
       compareAtPrice
       currencyCode
       outofstock
+      vendor
       secondaryCount
       options {
         id
@@ -1089,6 +1090,7 @@ query DropGroupshopSections {
         currencyCode
         outofstock
         secondaryCount
+        vendor
         options {
           id
           name
@@ -1157,6 +1159,7 @@ mutation addFavoriteProduct($dropsId: String!, $productId: String!) {
       compareAtPrice
       currencyCode
       outofstock
+      vendor
       secondaryCount
       options {
         id
@@ -1179,6 +1182,7 @@ mutation removeFavoriteProduct($dropsId: String!, $productId: String!) {
       description
       purchaseCount
       price
+      vendor
       compareAtPrice
       currencyCode
       outofstock
@@ -1222,6 +1226,7 @@ const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
           currencyCode
           outofstock
           secondaryCount
+          vendor
           options {
             id
             name

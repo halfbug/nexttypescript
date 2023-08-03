@@ -26,6 +26,7 @@ import useDrops from 'hooks/useDrops';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { GET_PLATFORM_FEE_DETAIL, GET_UNIQUE_LOCATIONS_BY_VARIANTS } from 'store/store.graphql';
 import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
+import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
 import Members from '../Members/Members';
 import ProductCard from '../ProductCard/ProductCard';
 import GradientProgressBar from '../GradientProgressBar/GradientProgressBar';
@@ -607,7 +608,13 @@ And you can keep earning up to
                                 {' '}
                                 <span className="fw-bold ms-1">
                                   {currencySymbol}
-                                  {formatNumber(dPrice(+(item?.price || 0)))}
+                                  {
+                                    item.vendor
+                                !== (DROPS_PRODUCT_VENDOR_VAULT || DROPS_PRODUCT_VENDOR_SPOTLIGHT)
+                                      ? formatNumber(dPrice(+(item?.price || 0)))
+                                      : formatNumber(item.price)
+                                  }
+                                  {}
                                 </span>
                               </div>
                               {isDrops && (

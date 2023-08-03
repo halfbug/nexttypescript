@@ -210,6 +210,7 @@ export interface IProduct {
   inventoryQuantity?: number;
   selectedOptions?: any;
   image?: any;
+  vendor?: string;
   purchaseCount?: number;
   secondaryCount?: number;
   status?: string;

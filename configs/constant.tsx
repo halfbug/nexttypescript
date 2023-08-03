@@ -19,3 +19,8 @@ export const DROPS_VAULT = 'vault';
 export const DROPS_SPOTLIGHT = 'spotlight';
 export const DROPS_REGULAR = 'regular';
 export const DROPS_ALLPRODUCT = 'allproduct';
+
+export const DROPS_PRODUCT_VENDOR_VAULT = 'GroupshopVault';
+export const DROPS_PRODUCT_VENDOR_SPOTLIGHT = 'GroupshopSpotlight';
+export const DROPS_PRODUCT_VENDOR_REGULAR = 'GroupshopDrops';
+export const DROPS_PRODUCT_VENDOR_PLATFORM_FEES = 'PlatformFees';
