@@ -8,9 +8,9 @@ import ProductDetail from '../ProductDetail/ProductDetail';
 import ProductGrid from '../ProductGrid/ProductGrid';
 
 interface ViewAllProductProps extends RootProps {
-    show: boolean;
-    handleClose(): any;
-    section: any;
+  show: boolean;
+  handleClose(): any;
+  section: any;
 }
 
 const ViewAllProducts = ({
@@ -40,7 +40,18 @@ const ViewAllProducts = ({
     <>
       <Offcanvas show={show} onHide={handleClose} placement="bottom">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>{section.name}</Offcanvas.Title>
+          <Offcanvas.Title style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            fontSize: '18px',
+            fontWeight: 'bold',
+          }}
+          >
+            {section.name}
+
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body ref={viewAllProductRef} id="viewallscroll">
           <ProductGrid
