@@ -105,12 +105,13 @@ const ProductsSearch = ({
       const filterProducts:any = [];
       setIsloader(false);
       setotherProducts(searchResult?.searchProducts);
+      if (searchResult?.searchProducts && searchResult?.searchProducts.length > 0) {
+        setshowMsg('');
+      } else {
+        setshowMsg('No matches found!');
+      }
     },
   });
-
-  useEffect(() => {
-    if (data && !isSearchData) { setisSearchData(true); }
-  }, [data]);
 
   // const refreshProduct = () => products?.filter(
   //   (item: { id: string; }) => !popularProducts?.some((item2) => item2.id === item.id),
@@ -284,8 +285,10 @@ const ProductsSearch = ({
   useEffect(() => {
     if (searchKeyword === '') {
       setotherProducts(undefined);
+      setisSearchData(false);
     } else if (searchKeyword !== undefined) {
       debouncedSearch(searchKeyword);
+      setisSearchData(true);
     }
   }, [searchKeyword]);
 
