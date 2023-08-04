@@ -903,7 +903,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               shareurl={isExpired ? shortActivateURL ?? activateURL ?? '' : gsShortURL ?? gsURL}
               // onClick={() => setShowRewards(true)}
               val=""
-              label={isExpired ? 'Share to unlock' : 'Share & Earn $10'}
+              label={isExpired ? 'Share to unlock' : 'Share & Earn'}
               brandName={brandName}
               isDrops
             />
