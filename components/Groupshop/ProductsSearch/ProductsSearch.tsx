@@ -190,6 +190,7 @@ const ProductsSearch = ({
   // }, [selected, clientDProducts]);
 
   useEffect(() => {
+    console.log('🚀 ~ file: ProductsSearch.tsx:194 ~ useEffect ~ setData:', setData);
     if (setData) {
       setSelected(setData?.selectProducts ?? []);
       setSelectedProducts(setData?.productArray ?? []);
@@ -659,7 +660,7 @@ const ProductsSearch = ({
                         )
                           : (
                             <span className={dStyles.drops__pcard_tag_price}>
-                              {`${currencySymbol}${(prd.compareAtPrice ? (+prd.compareAtPrice - +prd.price) : (+prd.price - dPrice(+(prd.price)))).toFixed(2).replace('.00', '')} OFF`}
+                              {`${currencySymbol}${(prd.compareAtPrice ? (+prd.compareAtPrice - dPrice(+(prd.price))) : (+prd.price - dPrice(+(prd.price)))).toFixed(2).replace('.00', '')} OFF`}
                             </span>
                           )}
                       >
