@@ -603,7 +603,7 @@ const ProductsSearch = ({
                         isDrops={isDrops}
                         onClick={(e) => openDetail(e, prd)}
                         onImageClick={(e: any) => openDetail(e, prd)}
-                        isrc={prd.featuredImage}
+                        isrc={prd?.featuredImage}
                         className={styles.groupshop_search_pcard}
                         imgOverlay={!isDrops ? (
                           <>

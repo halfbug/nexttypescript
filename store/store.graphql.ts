@@ -3012,6 +3012,7 @@ query searchProducts($searchTerm: String!, $shop: String!) {
   searchProducts(searchTerm: $searchTerm, shop: $shop) {
     id
     title
+    description
     outofstock
     compareAtPrice
     currencyCode
