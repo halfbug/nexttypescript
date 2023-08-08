@@ -32,6 +32,7 @@ import useOwnerOnboarding from 'hooks/useOwnerOnboarding';
 import useCode from 'hooks/useCode';
 import useDetail from 'hooks/useDetail';
 import { GET_DROP_PRODUCT_SEARCH } from 'store/store.graphql';
+import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import ProductCard from '../ProductCard/ProductCard';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -350,27 +351,47 @@ const ProductsSearch = ({
   const isSuggestion = false;
   const discoveryDiscount = '';
 
-  const priceUI = (prod: any) => (
-    <p className={[!isDrops ? 'text-center' : '', 'fw-bold fs-5 mb-0'].join(' ')}>
-      <span className="text-decoration-line-through fw-light me-1">
-        {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
-        {/* {prod.price} */}
-        {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
-      </span>
-      {' '}
-      <span className={isDrops ? 'me-2' : ''}>
-        {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
-        {prod?.compareAtPrice && spotlightProducts.includes(prod.id) && !isSuggestion
-          && formatNumber(prod.price)}
-        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
-          && formatNumber(dPrice(prod.price))}
-        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
-      </span>
-    </p>
+  const priceUI = (prod: any) => {
+    const vendors = [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT];
+    return (
+      <p className={[!isDrops ? 'text-center' : '', 'fw-bold fs-5 mb-0'].join(' ')}>
+        <span className="text-decoration-line-through fw-light me-1">
+          {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
+          {/* {prod.price} */}
+          {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
+          {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
+        </span>
+        {' '}
+        <span className={isDrops ? 'me-2' : ''}>
+          {isSuggestion ? currencySymbolDiscovery(currencySymbol) : currencySymbol}
 
-  );
+          {prod?.compareAtPrice
+          && (vendors.includes(prod.vendor)
+          || spotlightProducts.includes(prod.id))
+          && !isSuggestion
+          && formatNumber(prod.price)}
+
+          {prod?.compareAtPrice
+          && (!vendors.includes(prod.vendor)
+          && !spotlightProducts.includes(prod.id))
+          && !isSuggestion
+          && formatNumber(dPrice(prod.price))}
+
+          {!prod?.compareAtPrice
+          && !vendors.includes(prod.vendor)
+          && !isSuggestion
+          && formatNumber(dPrice(+(prod.price)))}
+
+          {!prod?.compareAtPrice
+          && !vendors.includes(prod.vendor)
+          && isSuggestion
+          && formatNumber(disPrice(+(prod.price), +discoveryDiscount!))}
+
+        </span>
+      </p>
+
+    );
+  };
 
   return (
     <>
@@ -660,7 +681,13 @@ const ProductsSearch = ({
                         )
                           : (
                             <span className={dStyles.drops__pcard_tag_price}>
-                              {`${currencySymbol}${(prd.compareAtPrice ? (+prd.compareAtPrice - dPrice(+(prd.price))) : (+prd.price - dPrice(+(prd.price)))).toFixed(2).replace('.00', '')} OFF`}
+                              {`${currencySymbol}
+                              ${(prd.compareAtPrice ? (+prd.compareAtPrice
+                              - ([DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT]
+                                .includes(prd.vendor!)
+                                ? +(prd.price)
+                                : dPrice(+(prd.price))))
+                                : formatNumber((+prd.price - dPrice(+(prd.price)))))} OFF`}
                             </span>
                           )}
                       >

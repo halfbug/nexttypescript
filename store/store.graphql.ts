@@ -3018,6 +3018,7 @@ query searchProducts($searchTerm: String!, $shop: String!) {
     currencyCode
     featuredImage
     price
+    vendor
     purchaseCount
     secondaryCount
     options {
