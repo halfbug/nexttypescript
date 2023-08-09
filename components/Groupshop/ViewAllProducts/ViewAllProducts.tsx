@@ -47,6 +47,7 @@ const ViewAllProducts = ({
             width: '100%',
             fontSize: '18px',
             fontWeight: 'bold',
+            textAlign: 'center',
           }}
           >
             {section.name}
