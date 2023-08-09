@@ -7,24 +7,28 @@ import useAppContext from './useAppContext';
 
 const useViewAll = () => {
   const { gsctx } = useAppContext();
-  const { sections } = gsctx;
+  const { sections, forYouSections, selectedCategory } = gsctx;
   const { qrscan, backHome } = useCode();
   const [showViewAll, setshowViewAll] = useState<boolean>(false);
   const [showQrscan, setshowQrscan] = useState<boolean>(false);
-  const [vProduct, setvProduct] = useState<IProduct | undefined>(undefined);
+  const [vProduct, setvProduct] = useState<string>('');
   const [section, setSection] = useState<IProduct[] | undefined>([]);
 
   useEffect(() => {
-    if (vProduct && sections) {
+    if (vProduct && (sections || forYouSections)) {
       setshowViewAll(true);
-      const prd: any = sections.find((p:any) => p.shopifyId === vProduct);
+      const prd: any = (
+        selectedCategory === 'forYou'
+          ? [...forYouSections?.map((forYou: { sections: any }) => forYou.sections) ?? []]
+          : sections
+      )?.flat().find((p:any) => p.shopifyId === vProduct);
       setSection(prd);
     }
-  }, [vProduct, sections]);
+  }, [vProduct, sections, forYouSections]);
 
   useEffect(() => {
     if (!showViewAll) {
-      setvProduct(undefined);
+      setvProduct('');
       backHome();
     }
   }, [showViewAll]);

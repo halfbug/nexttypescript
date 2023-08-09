@@ -109,7 +109,7 @@ const ProductGridInitial = ({
   } = useAppContext();
   const {
     discountCode: { percentage }, loading: load, sections,
-    dealProducts, addedProducts, store, id: dropsId,
+    dealProducts, addedProducts, store, id: dropsId, forYouSections, selectedCategory,
   } = gsctx;
   const productRef = useRef<HTMLDivElement| null>(null);
   const [ref, dimensions] = useDimensions();
@@ -117,8 +117,13 @@ const ProductGridInitial = ({
   // console.log('🚀 ~ file: ProductGrid.tsx:103 ~ isTimetoLoadS:', isTimetoLoadS);
   const [isTimetoLoadV, setIsTimetoLoadV] = useLoadMoreOnVisible(productRef, 'allproductsdrops_productGrid');
   const [isTimetoLoadA, setIsTimetoLoadA] = useLoadMoreOnViewAllScroll(productRef, 'viewAllproductsdrops_productGrid');
-  const csection:any = sections?.find(({ shopifyId }) => shopifyId === sectionID)
-  ?? { products: [] };
+
+  const csection: any = (
+    selectedCategory === 'forYou'
+      ? [...forYouSections?.map((forYou: { sections: any }) => forYou.sections) ?? []]
+      : sections
+  )?.flat()?.find(({ shopifyId }: any) => shopifyId === sectionID)
+    ?? { products: [] };
   const [getMoreProducts,
     { data: getPaginatedProducts, loading: moreProdLoading }] = useLazyQuery(PRODUCT_PAGE, {
     notifyOnNetworkStatusChange: true,
@@ -127,25 +132,49 @@ const ProductGridInitial = ({
     onCompleted: async (sectionPrd: { getPaginatedProducts : {
       result : IProduct[], pageInfo: any}}) => {
       // console.log(sectionPrd?.getPaginatedProducts);
-      (['vault', 'regular', 'spotlight'].includes(csection.type)) ? setIsTimetoLoadS(false) : setIsTimetoLoadV(false); setIsTimetoLoadA(false);
-      dispatch({
-        type: 'UPDATE_PRODUCTS',
-        payload: {
-          ...gsctx,
-          sections: [...sections!.map((sec) => {
-            if (sec.shopifyId === sectionID) {
-              return (
-                {
-                  ...sec,
-                  products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
-                  ],
-                  pageInfo: sectionPrd!.getPaginatedProducts.pageInfo,
-                });
-            }
-            return sec;
-          })],
-        },
-      });
+      (csection.type === 'regular') ? setIsTimetoLoadS(false) : setIsTimetoLoadS(false); setIsTimetoLoadV(false); setIsTimetoLoadA(false);
+      if (gsctx.selectedCategory === 'forYou') {
+        dispatch({
+          type: 'UPDATE_PRODUCTS',
+          payload: {
+            ...gsctx,
+            forYouSections: [...gsctx.forYouSections!.map((sec) => ({
+              ...sec,
+              sections: sec.sections.map((forYouSec) => {
+                if (forYouSec.shopifyId === sectionID) {
+                  return (
+                    {
+                      ...forYouSec,
+                      products: [...forYouSec.products, ...sectionPrd!.getPaginatedProducts.result,
+                      ],
+                      pageInfo: sectionPrd!.getPaginatedProducts.pageInfo,
+                    });
+                }
+                return forYouSec;
+              }),
+            }))],
+          },
+        });
+      } else {
+        dispatch({
+          type: 'UPDATE_PRODUCTS',
+          payload: {
+            ...gsctx,
+            sections: [...sections!.map((sec) => {
+              if (sec.shopifyId === sectionID) {
+                return (
+                  {
+                    ...sec,
+                    products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
+                    ],
+                    pageInfo: sectionPrd!.getPaginatedProducts.pageInfo,
+                  });
+              }
+              return sec;
+            })],
+          },
+        });
+      }
     },
   });
 

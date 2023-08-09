@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-indent */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/Modal.module.scss';
 import { RootProps } from 'types/store';
 import {
@@ -15,6 +15,7 @@ import useAppContext from 'hooks/useAppContext';
 import SliderImage1 from 'assets/images/slider-1.png';
 import SliderImage2 from 'assets/images/slider-2.png';
 import SliderImage3 from 'assets/images/slider-3.png';
+import { subCategories as subCategoriesTypes } from 'types/groupshop';
 
 interface HowShopDropVideoBoxProps extends RootProps {
     show: boolean;
@@ -29,10 +30,24 @@ const DropVideoBox = ({
   const { gsctx } = useAppContext();
   const { customerDetail, store } = gsctx;
 
+  const [subCategories, setSubCategories] = useState<subCategoriesTypes[] | undefined>([]);
+  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>([]);
+  const { categories } = gsctx;
+
+  useEffect(() => {
+    const temp: subCategoriesTypes[] | undefined = categories?.map((category) => category.subCategories).flat();
+    setSubCategories(temp);
+  }, [categories]);
+
   const closeModal = (e: any) => {
     handleClose(e);
   };
 
+  const selectionSubCategories = (id:string) => {
+    setSelectedSubCategories((prevSelectedValues) => (prevSelectedValues.includes(id)
+      ? prevSelectedValues.filter((v) => v !== id)
+      : [...prevSelectedValues, id]));
+  };
   // temporary link for video
   const tmpVideoSrc = [
     'https://s3.amazonaws.com/gsvid/pickinguppresents2a0.mp4',
@@ -45,7 +60,7 @@ const DropVideoBox = ({
     <>
       <Modal
         show={show}
-        onHide={closeModal}
+        onHide={() => closeModal([])}
         size="lg"
         centered
         backdrop="static"
@@ -93,63 +108,16 @@ const DropVideoBox = ({
 
 <div className="px-3 py-4 text-center justify-center">
 <Stack direction="horizontal" gap={3} className="flex flex-wrap mt-8 mb-3 text-center flex justify-content-center">
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Creams & Serums
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Eye Makeup
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Face Cleansers
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Foundation
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Nails
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Shampoo
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Lipstick
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Bath & Body
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Fitness
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Perfume
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Clean Beauty
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Cologne
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Anti-Ageing
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Curly Hair
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Conditioner
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Home
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Mists & Toners
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Makeup Tools
-      </Badge>
-      <Badge pill bg="light" text="dark" className={styles.badge}>
-      Hair Treatments
-      </Badge>
+  {
+    subCategories?.length
+      ? subCategories.map((subCategory) => (
+<Badge pill bg="light" text="dark" className={selectedSubCategories.includes(subCategory.categoryId) ? styles.badgeActive : styles.badge} onClick={() => selectionSubCategories(subCategory.categoryId)}>
+    {subCategory.title}
+</Badge>
+      ))
+      : <></>
+  }
+
 </Stack>
 
 </div>
@@ -157,7 +125,7 @@ const DropVideoBox = ({
             <Button
               variant="light"
               disabled={btnDisable}
-              onClick={handleClose}
+              onClick={() => handleClose(selectedSubCategories)}
             >
               {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Get Started'}
             </Button>
@@ -168,7 +136,7 @@ const DropVideoBox = ({
             className="text-center text-white justify-center flex w-100 fs-3"
             variant=""
             disabled={btnDisable}
-            onClick={handleClose}
+            onClick={() => handleClose([])}
           >
               {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Skip & Shop'}
           </Button>

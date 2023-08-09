@@ -1481,11 +1481,26 @@
     font-style: normal;
     font-weight: 400 !important;
     background-color: #fff;
-    &:active,
-    &:focus,
-    &:hover{
-        background-color: #000000 !important;
-        color:#fff !important;
+    // &:active,
+    // &:focus,
+    // &:hover{
+    //     background-color: #000000 !important;
+    //     color:#fff !important;
+    // }
     }
+    .badgeActive {
+        color: #fff !important;
+    text-align: center;
+    font-size: 14px !important;
+    font-family: DM Sans !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    background-color: #000000 !important;
+    // &:active,
+    // &:focus,
+    // &:hover{
+    //     background-color: #000000 !important;
+    //     color:#fff !important;
+    // }
     }
 }

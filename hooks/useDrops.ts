@@ -71,13 +71,14 @@ export default function useDrops() {
     }
   }, [store?.drops, milestones]);
 
-  const updateOnboarding = async () => {
+  const updateOnboarding = async (selectedSubCategories: any) => {
     setbtnDisable(true);
     setspinner(true);
 
     await createOnBoardingDiscountCode({
       variables: {
         gid: gsctx.id,
+        selectedSubCategories: selectedSubCategories.length ? selectedSubCategories : null,
       },
     }).then((res) => {
       if (res?.data?.createOnBoardingDiscountCode) {
@@ -89,6 +90,7 @@ export default function useDrops() {
             discountCode: data?.createOnBoardingDiscountCode?.discountCode,
             expiredAt: data?.createOnBoardingDiscountCode?.expiredAt,
             obSettings: { ...gsctx.obSettings, step: 1 },
+            forYouSections: data.createOnBoardingDiscountCode?.forYouSections,
           },
         });
         setShowObPopup(false);

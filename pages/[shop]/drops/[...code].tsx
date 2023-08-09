@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import {
-  GET_DROPS_SECTIONS, GET_DROP_GROUPSHOP, GET_MATCHING_GS, PRODUCT_PAGE,
+  GET_DROPS_SECTIONS, GET_DROP_GROUPSHOP,
+  GET_DROP_GROUPSHOP_FORYOU_SECTIONS, GET_MATCHING_GS, PRODUCT_PAGE,
 } from 'store/store.graphql';
 import Header from 'components/Layout/HeaderGS/HeaderGS';
 import styles from 'styles/Drops.module.scss';
@@ -73,6 +74,7 @@ import { v4 as uuid } from 'uuid';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import ViewAllProducts from 'components/Groupshop/ViewAllProducts/ViewAllProducts';
 import useViewAll from 'hooks/useViewAll';
+import useMergedVaultAndSpotlights from 'hooks/useMergedVaultAndSpotlights';
 
 const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   const { gsctx, dispatch } = useAppContext();
@@ -92,6 +94,17 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
       variables: { code: discountCode, status: status ?? '' },
       notifyOnNetworkStatusChange: true,
       skip: !discountCode,
+    },
+  );
+
+  const {
+    data: DropGroupshopForYouSection,
+  } = useQuery(
+    GET_DROP_GROUPSHOP_FORYOU_SECTIONS,
+    {
+      variables: { id: DropGroupshop.id },
+      notifyOnNetworkStatusChange: true,
+      skip: !DropGroupshop.id,
     },
   );
 
@@ -125,6 +138,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
   // NEW HOOKS
   const [allProductsList, setAllProductsList] = useState<IProduct[] | undefined>([]);
   const [sections, setSections] = useState<DynamicProducts[]>([]);
+  const [forYousection, setForYousection] = useState<DynamicProducts[]>([]);
 
   const [openLearnHow, setLearnHow] = useState<boolean>(false);
   const [dropReward, setDropReward] = useState<boolean>(false);
@@ -132,16 +146,24 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
   const { categories } = gsctx;
 
+  const {
+    mergedVaultAndSpotlights,
+  } = useMergedVaultAndSpotlights();
+
   useEffect(() => {
-    if (DropGroupshop.id && pending && DropGroupshopSections) {
+    if (DropGroupshop.id && pending && DropGroupshopSections && DropGroupshopForYouSection) {
       setpending(false);
-      const temp = { ...DropGroupshopSections.DropGroupshopSections, ...DropGroupshop };
+      const temp = {
+        ...DropGroupshopSections.DropGroupshopSections,
+        ...DropGroupshop,
+      };
       // const allproducts = temp?.sections.filter((item: any) => item.name === 'All Products');
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...temp,
-          selectedCategory: DropGroupshopSections.firstCategory?.categoryId,
+          selectedCategory: DropGroupshopForYouSection.DropGroupshopForYouSection.forYouSections?.length ? 'forYou' : DropGroupshopSections.firstCategory?.categoryId,
+          forYouSections: DropGroupshopForYouSection.DropGroupshopForYouSection.forYouSections,
           categories: [...DropGroupshopSections.DropGroupshopSections.categories!.map(
             (cat: any) => {
               if (cat.categoryId === temp.firstCategory.categoryId) {
@@ -157,13 +179,27 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
         },
       });
     }
-  }, [DropGroupshop, pending, DropGroupshopSections]);
+  }, [DropGroupshop, pending, DropGroupshopSections, DropGroupshopForYouSection]);
 
   useEffect(() => {
     if (gsctx.id) {
       setShowBanner(true);
+      if (gsctx.forYouSections && gsctx.forYouSections.length) {
+        let newtemp: any[] = [];
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < gsctx.forYouSections.length; i++) {
+          const forYouelement = gsctx.forYouSections[i];
+          if (forYouelement.sections.length) {
+            newtemp = [
+              ...newtemp, ...mergedVaultAndSpotlights(forYouelement, true)];
+          }
+        }
+        setForYousection(newtemp);
+      }
       if (gsctx.sections) {
-        setSections(gsctx.sections);
+        // Assuming your data is an array of elements
+        const data = mergedVaultAndSpotlights(gsctx.sections, false);
+        setSections(data);
 
         const temp: IProduct[] = [];
         gsctx.sections.forEach((ele) => {
@@ -758,50 +794,58 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             />
             )}
 
-            { gsctx?.selectedCategory !== 'favproducts'
-          && !loading
-              ? sections?.map((ele: any, index:number) => {
-                if (ele.products.length) {
+            {gsctx?.selectedCategory !== 'favproducts'
+              && !loading
+              ? (gsctx?.selectedCategory === 'forYou' ? forYousection : sections)?.map((ele: any, index: number) => {
+                if (ele.products?.length) {
                   return (
+                    <>
+                      {
+                        (ele.type !== DROPS_VAULT && ele.type !== DROPS_SPOTLIGHT)
 
-                    <ProductGrid
-                      key={ele.id}
-                      sectionID={ele.shopifyId}
-                      isDrops
-                      title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
-                      type={ele.type}
-                      xs={ele.type === 'allproduct' ? 6 : 5}
-                      sm={6}
-                      md={ele.type === 'allproduct' ? 6 : 5}
-                      lg={4}
-                      xl={3}
-                      products={ele.products}
-                      maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
-                      addProducts={handleAddProduct}
-                      handleDetail={(prd: any) => setsProduct(prd)}
-                      handleViewAll={(prd: any) => setvProduct(prd)}
-                      showHoverButton
-                      id={`${ele.type !== DROPS_ALLPRODUCT ? `drops${ele.type}${index}` : 'allproductsdrops'}`}
-                      isModalForMobile={isModalForMobile}
-                      urlForActivation={urlForActivation}
-                      showPagination={false}
-                      loading={gsctx.loading || loading || DropsLoading}
-                      loadmore
-                    >
-                      {ele.type === DROPS_ALLPRODUCT && (
-                        <div>
-                          {
-                          (gsctx.loading || loading) ? <Skeleton width="186.5px" height="26px" />
-                            : (
-                              <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
-                                <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
-                                {ele.name}
-                              </div>
-                            )
-                        }
-                        </div>
-                      )}
-                    </ProductGrid>
+                          ? (
+                            <ProductGrid
+                              key={ele.id}
+                              sectionID={ele.shopifyId}
+                              isDrops
+                              title={ele.type !== DROPS_ALLPRODUCT ? ele.name : ''}
+                              type={ele.type}
+                              xs={ele.type === 'allproduct' ? 6 : 5}
+                              sm={6}
+                              md={ele.type === 'allproduct' ? 6 : 5}
+                              lg={4}
+                              xl={3}
+                              products={ele.products}
+                              maxrows={ele.type === DROPS_ALLPRODUCT ? 12 : 3}
+                              addProducts={handleAddProduct}
+                              handleDetail={(prd: any) => setsProduct(prd)}
+                              handleViewAll={(prd: any) => setvProduct(gsctx.selectedCategory === 'forYou' ? ele.id : prd)}
+                              showHoverButton
+                              id={`${ele.type !== DROPS_ALLPRODUCT ? `drops${ele.type}${index}` : 'allproductsdrops'}`}
+                              isModalForMobile={isModalForMobile}
+                              urlForActivation={urlForActivation}
+                              showPagination={false}
+                              loading={gsctx.loading || loading || DropsLoading}
+                              loadmore
+                            >
+                              {ele.type === DROPS_ALLPRODUCT && (
+                                <div>
+                                  {
+                                    (gsctx.loading || loading) ? <Skeleton width="186.5px" height="26px" />
+                                      : (
+                                        <div className={styles.drops_col_dropheadingOuter} style={{ position: 'relative' }}>
+                                          <div id="scrollDiv" style={{ position: 'absolute', top: '-130px' }} />
+                                          {ele.name}
+                                        </div>
+                                      )
+                                  }
+                                </div>
+                              )}
+                            </ProductGrid>
+                          )
+                          : <></>
+                      }
+                    </>
 
                   );
                 }
@@ -843,11 +887,13 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
             showSearch={showSearchProds}
             isDrops
           />
-          <ViewAllProducts
-            show={showViewAll}
-            handleClose={() => setshowViewAll(false)}
-            section={section}
-          />
+          {showViewAll && (
+            <ViewAllProducts
+              show={showViewAll}
+              handleClose={() => setshowViewAll(false)}
+              section={gsctx.selectedCategory === 'forYou' ? forYousection.find((forYou) => forYou.id === vProduct) : section}
+            />
+          )}
           <Cart
             show={showCart}
             setShow={setshowCart}

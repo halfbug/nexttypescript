@@ -57,6 +57,7 @@ export const gsdInit: IGroupshop = {
   },
   cart: [],
   favorite: [],
+  forYouSections: [],
   selectedCategory: '',
   spotlightProducts: [],
   sections: [],

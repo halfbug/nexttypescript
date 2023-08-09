@@ -986,6 +986,39 @@ query DropGroupshop($code: String!, $status: String = "") {
 }
 `;
 
+const GET_DROP_GROUPSHOP_FORYOU_SECTIONS = gql`
+query DropGroupshopForYouSection($id: String!) {
+  DropGroupshopForYouSection(id: $id) {
+    forYouSections{
+      name
+      sections {
+        name
+        shopifyId
+        type
+        products {
+          id
+          title
+          featuredImage
+          description
+          purchaseCount
+          price
+          compareAtPrice
+          currencyCode
+          outofstock
+          secondaryCount
+          options {
+            id
+            name
+            values
+            position
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
 const GET_DROPS_SECTIONS = gql`
 query DropGroupshopSections {
   DropGroupshopSections {
@@ -1240,14 +1273,40 @@ const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
 `;
 
 const CREATE_ONBOARDING_DISCOUNT_CODE = gql`
-mutation createOnBoardingDiscountCode($gid: String!) {
-  createOnBoardingDiscountCode(gid: $gid) {
+mutation createOnBoardingDiscountCode($gid: String!,$selectedSubCategories:[String!]) {
+  createOnBoardingDiscountCode(gid: $gid,selectedSubCategories:$selectedSubCategories) {
     discountCode{
       title
       percentage
       priceRuleId
     }
     expiredAt
+    forYouSections{
+      name
+      sections {
+        name
+        shopifyId
+        type
+        products {
+          id
+          title
+          featuredImage
+          description
+          purchaseCount
+          price
+          compareAtPrice
+          currencyCode
+          outofstock
+          secondaryCount
+          options {
+            id
+            name
+            values
+            position
+          }
+        }
+      }
+    }
   }
 }`;
 
@@ -3111,4 +3170,5 @@ export {
   GET_COLLECTIONS_BY_CATEGORY_ID, GET_DROP_PRODUCT_SEARCH, GET_PRODUCTS_BY_COLLECTION_IDS,
   REMOVE_FAVORITE_PRODUCT, ADD_FAVORITE_PRODUCT, GET_DROPS_SECTIONS,
   GET_UNIQUE_LOCATIONS_BY_VARIANTS, PRODUCT_PAGE, GET_PLATFORM_FEE_DETAIL,
+  GET_DROP_GROUPSHOP_FORYOU_SECTIONS,
 };

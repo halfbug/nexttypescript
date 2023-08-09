@@ -134,6 +134,11 @@ export type sections = {
   pageInfo: any;
 }
 
+export type forYouSections = {
+  name: string;
+  sections: sections[];
+}
+
 export type Collections = {
   shopifyId: string;
   name: string;
@@ -271,6 +276,8 @@ export interface IGroupshop {
   loading?: boolean;
 
   favorite?: Product[];
+
+  forYouSections?: forYouSections[];
 
 }
 export interface InfluencerGroupshop {

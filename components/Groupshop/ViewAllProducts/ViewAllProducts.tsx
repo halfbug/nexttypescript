@@ -50,14 +50,14 @@ const ViewAllProducts = ({
             textAlign: 'center',
           }}
           >
-            {section.name}
+            {section?.name}
 
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body ref={viewAllProductRef} id="viewallscroll">
           <ProductGrid
-            key={section.shopifyId}
-            sectionID={section.shopifyId}
+            key={section?.shopifyId}
+            sectionID={section?.shopifyId}
             isDrops
             title=""
             type="allproduct"
@@ -66,7 +66,7 @@ const ViewAllProducts = ({
             md={6}
             lg={4}
             xl={3}
-            products={uniqueArray(section.products)}
+            products={uniqueArray(section?.products)}
             maxrows={12}
             handleDetail={(prd: any) => setsProduct(prd)}
             showHoverButton

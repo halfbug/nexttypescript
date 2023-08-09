@@ -18,18 +18,18 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   const [id, setId] = useState<string>('');
   const { gsctx, dispatch } = useAppContext();
 
-  const { favorite, firstCategory: initCategory } = gsctx;
+  const { favorite, firstCategory: initCategory, forYouSections } = gsctx;
 
   const { loading, data } = useQuery(GET_COLLECTIONS_BY_CATEGORY_ID, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
-    skip: !id || id === 'favproducts' || !dataLoad,
+    skip: !id || id === 'favproducts' || id === 'forYou' || !dataLoad,
   });
 
   useEffect(() => {
     if (categories) {
       const temp = categories?.slice()?.sort((a, b) => a.sortOrder - b.sortOrder) ?? [];
-      const body = {
+      const body: any = {
         categoryId: 'favproducts',
         collections: [],
         parentId: null,
@@ -37,28 +37,46 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
         subCategories: [],
         title: 'Your Favs',
       };
+
+      const forYou: any = {
+        categoryId: 'forYou',
+        collections: [],
+        parentId: null,
+        sortOrder: 0,
+        subCategories: [],
+        title: 'For You',
+      };
       if (favorite?.length) {
-        setCategoryArray([body, ...temp]);
-      } else {
-        // setInitialCategory();
-        setCategoryArray(temp);
+        temp.unshift(body);
       }
+      if (forYouSections?.length) {
+        temp.unshift(forYou);
+      }
+      // setInitialCategory();
+      setCategoryArray(temp);
     }
-  }, [categories, favorite]);
+  }, [categories, favorite, forYouSections]);
 
   useEffect(() => {
-    if (!favorite?.length && initCategory?.categoryId) {
+    if ((!favorite?.length || !forYouSections?.length) && initCategory?.categoryId) {
       dispatch({
         type: 'UPDATE_GROUPSHOP',
         payload: {
           ...gsctx,
-          selectedCategory: initCategory?.categoryId,
+          selectedCategory: gsctx.forYouSections?.length ? 'forYou' : initCategory?.categoryId,
         },
       });
-      setSelectedCategory(initCategory);
-      setId(initCategory?.categoryId);
+      setSelectedCategory(gsctx.forYouSections?.length ? {
+        categoryId: 'forYou',
+        collections: [],
+        parentId: null,
+        sortOrder: 0,
+        subCategories: [],
+        title: 'For You',
+      } : initCategory);
+      setId(gsctx.forYouSections?.length ? 'forYou' : initCategory?.categoryId);
     }
-  }, [favorite]);
+  }, [favorite, forYouSections]);
 
   useEffect(() => {
     dispatch({
@@ -75,7 +93,16 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   }, []);
 
   const setInitialCategory = () => {
-    if (gsctx && gsctx.firstCategory) {
+    if (gsctx.forYouSections?.length) {
+      setSelectedCategory({
+        categoryId: 'forYou',
+        collections: [],
+        parentId: null,
+        sortOrder: 0,
+        subCategories: [],
+        title: 'For You',
+      });
+    } else if (gsctx && gsctx.firstCategory) {
       const { categories: categoryArr, firstCategory } = gsctx;
       if (categoryArr) {
         const init = categoryArr.find((ele) => ele.categoryId === firstCategory.categoryId);
