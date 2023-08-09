@@ -546,7 +546,9 @@ And you can keep earning up to
                             >
                               {currencySymbol}
                               {
-                                  item.compareAtPrice && spotlightProducts.includes(item.id)
+                                  item.compareAtPrice && (spotlightProducts.includes(item.id)
+                                  || [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
+                                    .includes(item.vendor!))
                                     ? (formattedCB(+(item.compareAtPrice)
                                     - +(item?.price)))
                                     : (+(item.compareAtPrice ?? item.price)
