@@ -107,7 +107,7 @@ const Cart = ({
   );
 
   useEffect(() => {
-    if (isDrops && cartProducts.length > 1) {
+    if (isDrops && cartProducts.length) {
       if (locations.length && isChangeInQuantity) {
         updatePlatformFee(locations);
       } else {
@@ -120,8 +120,6 @@ const Cart = ({
           },
         });
       }
-    } else {
-      setPlatformFee(0);
     }
     setisChangeInQuantity(false);
   }, [cartProducts]);
@@ -153,13 +151,9 @@ const Cart = ({
     if (data?.getLocations?.locations?.length) {
       const uniqueLocations = data?.getLocations?.locations
         .filter((value, index, array) => array.indexOf(value) === index);
-      if (uniqueLocations.length > 1) {
+      if (uniqueLocations.length) {
         setlocations(data?.getLocations?.locations);
         updatePlatformFee(data?.getLocations?.locations);
-      } else {
-        // when location will be only 1.
-        setplatformProductQuantity(0);
-        setPlatformFee(0);
       }
     }
   }, [JSON.stringify(data)]);
