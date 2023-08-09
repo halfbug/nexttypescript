@@ -169,22 +169,27 @@ export default function useDrops() {
     if (members.length === 1) {
       const totalAmount = getTotalFromIndex(0);
       const cashback = (totalAmount * cashbackPercantage1) / 100;
-      return formatNumber(cashback);
+      const discoutn = (totalAmount * (reward1 / 100));
+      return formatNumber(cashback + discoutn);
     }
     if (members.length === 2) {
       // CASHBACK OF FIRST MEMBER
       const totalAmount1 = getTotalFromIndex(0);
+      const discoutn1 = (totalAmount1 * (reward1 / 100));
       const cashback1 = (totalAmount1 * cashbackPercantage1) / 100;
 
       // CASHBACK OF SECOND MEMBER
       const totalAmount2 = getTotalFromIndex(1);
       const cashback2 = (totalAmount2 * cashbackPercantage2) / 100;
+      const discoutn2 = (totalAmount2 * (reward2 / 100));
+
       // CASHBACK OF FIRST MEMBER ON ARRIVING OF THIRD MEMBER
       const cashback3 = (totalAmount1 * cashbackPercantage2) / 100;
       // console.log('cashbacks', {
       //   cashback1, cashback2, cashback3,
       // });
-      const totalCashback = +(cashback3 + cashback2 + cashback1);
+      console.log('🚀 ~ file: useDrops.ts:173 ~ getChackback ~ discoutn:', cashback2);
+      const totalCashback = +(cashback3 + cashback2 + cashback1 + discoutn1 + discoutn2);
       return formatNumber(totalCashback);
     }
     return 0;
