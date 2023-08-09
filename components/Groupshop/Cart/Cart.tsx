@@ -472,7 +472,9 @@ And you can keep earning up to
                       {' '}
                       <span>
                         {currencySymbol}
-                        {prd.compareAtPrice && spotlightProducts.includes(prd.id)
+                        {(prd.compareAtPrice && spotlightProducts.includes(prd.id))
+                        || prd.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
+                        || prd.vendor === DROPS_PRODUCT_VENDOR_VAULT
                           ? formatNumber(prd.selectedVariant.price ?? prd.price)
                           : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
                       </span>
@@ -609,12 +611,11 @@ And you can keep earning up to
                                 <span className="fw-bold ms-1">
                                   {currencySymbol}
                                   {
-                                    item.vendor
-                                !== (DROPS_PRODUCT_VENDOR_VAULT || DROPS_PRODUCT_VENDOR_SPOTLIGHT)
+                                    (item.vendor !== DROPS_PRODUCT_VENDOR_VAULT)
+                                    && (item.vendor !== DROPS_PRODUCT_VENDOR_SPOTLIGHT)
                                       ? formatNumber(dPrice(+(item?.price || 0)))
                                       : formatNumber(item.price)
                                   }
-                                  {}
                                 </span>
                               </div>
                               {isDrops && (

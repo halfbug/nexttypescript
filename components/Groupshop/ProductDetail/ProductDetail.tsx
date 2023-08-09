@@ -40,6 +40,7 @@ import AddDealProduct from 'components/Forms/AddDealProduct';
 import useDetail from 'hooks/useDetail';
 import useDrops from 'hooks/useDrops';
 import useUtilityFunction from 'hooks/useUtilityFunction';
+import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
 import Members from '../Members/Members';
 import Gmembers from '../Members/Gmembers';
 
@@ -237,7 +238,9 @@ const ProductDetail = ({
       const VPrice = isDrops && selectedVariant?.compareAtPrice ? selectedVariant?.compareAtPrice ?? product?.compareAtPrice : selectedVariant?.price ?? product?.price;
       setvariantPrice(VPrice);
       if (isDrops && selectedVariant?.compareAtPrice) {
-        setdiscountedPrice(!spotlightProducts.includes(product?.id!) ? formatNumber(dPrice(selectedVariant.price ?? product?.price!)) : formatNumber(selectedVariant.price ?? product?.price!));
+        setdiscountedPrice(!spotlightProducts.includes(product?.id!) && ![DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(product?.vendor!)
+          ? formatNumber(dPrice(selectedVariant.price ?? product?.price!))
+          : formatNumber(selectedVariant.price ?? product?.price!));
       } else {
         setdiscountedPrice((product?.options ? (dPrice(+(VPrice || 0))).toFixed(2).toString().replace('.00', '')
           : (dPrice(+(product?.price || 0))).toFixed(2).toString().replace('.00', '')));

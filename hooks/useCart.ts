@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { GroupshopContext } from 'store/groupshop.context';
 import { CartProduct } from 'types/groupshop';
+import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
 import useAppContext from './useAppContext';
 import useDeal from './useDeal';
 import useDrops from './useDrops';
@@ -77,9 +78,12 @@ export default function useCart() {
         price: mprice,
         selectedVariant: { selectedQuantity, price },
         compareAtPrice,
+        vendor,
       }) => {
       const myTot = total
-      + ((compareAtPrice && spotlightProducts.includes(id)
+      + (((compareAtPrice && spotlightProducts.includes(id))
+      || vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
+      || vendor === DROPS_PRODUCT_VENDOR_VAULT
         ? (+(price ?? mprice))
         : dPrice(+(price ?? mprice))) * selectedQuantity);
       return +myTot;
