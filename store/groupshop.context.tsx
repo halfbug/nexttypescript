@@ -31,6 +31,7 @@ export const gsInit: IGroupshop = {
     products: [],
     logoImage: '',
     settings: {
+      dropBanner: '',
       marketing: {
         facebookPixels: '',
         tiktokPixels: '',

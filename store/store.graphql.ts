@@ -582,6 +582,7 @@ query Groupshop($code: String!, $status: String = "") {
       logoImage
       currencyCode
       settings{
+        dropBanner
         general{
           brandColor
           imageUrl
@@ -1137,6 +1138,7 @@ query DropGroupshopSections {
       shop
       brandName
       settings{
+        dropBanner
         general{
           brandColor
           imageUrl
@@ -1958,6 +1960,7 @@ query PartnerGroupshop($code: String!) {
       logoImage
       currencyCode
       settings{
+        dropBanner
         general{
           brandColor
           imageUrl
@@ -2931,6 +2934,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
       logoImage
       currencyCode
       settings{
+        dropBanner
         general{
           brandColor
           imageUrl

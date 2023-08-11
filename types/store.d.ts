@@ -244,6 +244,7 @@ export interface IMarketingSettings {
   snapchatPixels?: string;
 }
 export interface ISettings {
+  dropBanner?: string;
   general?: IGeneralSettings;
   layout?: ILayoutSettings;
   marketing?: IMarketingSettings;

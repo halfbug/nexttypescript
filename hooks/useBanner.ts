@@ -21,14 +21,15 @@ const useBanner = () => {
 
   useEffect(() => {
     if (groupshop?.store?.settings) {
-      if (groupshop?.store?.settings?.general?.imageUrl !== '' && groupshop?.store?.settings?.general?.imageUrl) {
-        const s3path = getKeyFromS3URL(groupshop?.store?.settings?.general?.imageUrl);
-        const banner = `${process.env.IMAGE_PATH}/${s3path}`;
-        setBannerImage(banner);
+      console.log('groupshopgroupshopgroupshop', groupshop);
+      if (groupshop?.store?.settings?.dropBanner !== '' && groupshop?.store?.settings?.dropBanner) {
+        // const s3path = getKeyFromS3URL(groupshop?.store?.settings?.dropBanner);
+        // const banner = `${process.env.IMAGE_PATH}/${s3path}`;
+        setBannerImage(groupshop?.store?.settings?.dropBanner);
+      } else {
+        // setBannerImage(`${process.env.IMAGE_PATH}/${'bg.jpg'}`);
+        setBannerImage('https://s3.amazonaws.com/gsnodeimages/native-root-stage_a43a85d6229c.jpg');
       }
-      // else {
-      //   setBannerImage(`${process.env.IMAGE_PATH}/${'bg.jpg'}`);
-      // }
     }
   });
   return bannerImage;
