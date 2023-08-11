@@ -1080,8 +1080,10 @@
         flex-grow: 0;
         margin-bottom: 10px;
         background: #F0EEEC;
-        border-radius: 20px;
-        width: 100%;
+        margin-bottom: 10px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
         &__icon {
             text-align: center
         }
