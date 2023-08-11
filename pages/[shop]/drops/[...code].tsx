@@ -796,7 +796,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
 
             {gsctx?.selectedCategory !== 'favproducts'
               && !loading
-              ? (gsctx?.selectedCategory === 'forYou' ? forYousection : sections)?.map((ele: any, index: number) => {
+              ? (gsctx?.selectedCategory === 'forYou' ? forYousection.sort((a, b) => a.name.localeCompare(b.name)) : sections)?.map((ele: any, index: number) => {
                 if (ele.products?.length) {
                   return (
                     <>
