@@ -7,7 +7,8 @@ export default function useMergedVaultAndSpotlights() {
 
   const findShopifyId = (data: any, Index: number) => {
     if (Index !== -1) {
-      return data[Index]?.shopifyId;
+      const shopifyId = data[Index]?.shopifyId;
+      return shopifyId;
     }
     return '';
   };
@@ -22,12 +23,13 @@ export default function useMergedVaultAndSpotlights() {
     sectionName?: string,
   ) => {
     const shopifyId = findShopifyId(data, replaceElementIndex);
+    const products = data?.filter((item: { shopifyId: string; }) => (isForYou
+      ? completedFY : completed).includes(item.shopifyId))
+      .map((item: { products: any; }) => item.products)?.flat();
     return {
-      products: (shopifyId && (isForYou
-        ? completedFY : completed).includes(shopifyId))
-        ? [...data[replaceElementIndex]?.products,
-          ...data[allProductElementIndex]?.products]
-        : data[replaceElementIndex]?.products,
+      products: shopifyId ? [...products,
+        ...data[allProductElementIndex]?.products]
+        : products,
       name: isForYou ? sectionName : 'All products',
       shopifyId: CshopifyID,
       type: isForYou ? 'forYou' : DROPS_ALLPRODUCT,
@@ -82,12 +84,22 @@ export default function useMergedVaultAndSpotlights() {
         const vaultShopifyId = findShopifyId(data, vaultElementIndex);
         const spotlightShopifyId = findShopifyId(data, spotlightElementIndex);
         const allProductShopifyId = findShopifyId(data, allProductElementIndex);
+        data.map((item: any) => {
+          if ((item?.pageInfo
+            && !item?.pageInfo?.hasNextPage
+            && item.products?.length <= 10) || item.products?.length < 10) {
+            (isForYou ? completedFY : completed).push(item.shopifyId);
+          }
+          return item;
+        });
 
         // find current section by shopifyId from data
         const csection = data.find((section: { shopifyId: any; }) => section.shopifyId === vaultShopifyId || (spotlightShopifyId || (allProductShopifyId || '')));
         if (csection?.pageInfo
             && !csection?.pageInfo?.hasNextPage) {
-          (isForYou ? completedFY : completed).push(csection.shopifyId);
+          if (!(isForYou ? completedFY : completed).includes(csection.shopifyId)) {
+            (isForYou ? completedFY : completed).push(csection.shopifyId);
+          }
         }
 
         // find current shopifyId from data by Completed section in pagination
