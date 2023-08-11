@@ -682,11 +682,11 @@ const ProductsSearch = ({
                           : (
                             <span className={dStyles.drops__pcard_tag_price}>
                               {`${currencySymbol}
-                              ${(prd.compareAtPrice ? (+prd.compareAtPrice
+                              ${(prd.compareAtPrice ? formatNumber((+prd.compareAtPrice
                               - ([DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT]
                                 .includes(prd.vendor!)
                                 ? +(prd.price)
-                                : dPrice(+(prd.price))))
+                                : dPrice(+(prd.price)))))
                                 : formatNumber((+prd.price - dPrice(+(prd.price)))))} OFF`}
                             </span>
                           )}
