@@ -1006,6 +1006,7 @@ query DropGroupshopForYouSection($id: String!) {
           currencyCode
           outofstock
           secondaryCount
+          vendor
           options {
             id
             name

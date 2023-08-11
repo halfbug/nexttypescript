@@ -23,7 +23,10 @@ import ShareUnlockButton from 'components/Buttons/ShareUnlockButton/ShareUnlockB
 import useAppContext from 'hooks/useAppContext';
 import useDrops from 'hooks/useDrops';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-import { DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT } from 'configs/constant';
+import {
+  DROPS_PRODUCT_VENDOR_SPOTLIGHT,
+  DROPS_PRODUCT_VENDOR_VAULT, DROPS_REGULAR, DROPS_SPOTLIGHT, DROPS_VAULT,
+} from 'configs/constant';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { AiTwotoneStar, AiOutlineStar } from 'react-icons/ai';
@@ -255,7 +258,9 @@ const ProductGridInitial = ({
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice && spotlightProducts.includes(prod.id) && !isSuggestion
+        {prod?.compareAtPrice && spotlightProducts.includes(prod.id)
+        && [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!)
+        && !isSuggestion
           && formatNumber(prod.price)}
         {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
           && formatNumber(dPrice(prod.price))}

@@ -20,7 +20,7 @@ export default function useDrops() {
   const { formatNumber } = useUtilityFunction();
 
   const {
-    milestones, store, members, sections,
+    milestones, store, members, sections, forYouSections, selectedCategory,
   } = gsctx;
   const [createOnBoardingDiscountCode] = useMutation(CREATE_ONBOARDING_DISCOUNT_CODE);
   const [addProductToFav] = useMutation(ADD_FAVORITE_PRODUCT);
@@ -141,9 +141,13 @@ export default function useDrops() {
     if (sections) {
       // collecting vault and spotlight products
       const temp: any[] = [];
-      const ids = sections
+      const ids = (
+        selectedCategory === 'forYou'
+          ? [...forYouSections?.map((forYou: { sections: any }) => forYou.sections) ?? []]
+          : sections
+      )?.flat()
         .filter((c) => c.type === DROPS_VAULT || c.type === DROPS_SPOTLIGHT)
-        ?.map((c) => c.products.map((p) => temp.push(p.id)));
+        ?.map((c) => c.products.map((p:any) => temp.push(p.id)));
       setspotlightProducts(temp);
 
       // disable onboarding button logic
@@ -155,7 +159,7 @@ export default function useDrops() {
         setbtnDisable(true);
       }
     }
-  }, [sections]);
+  }, [sections, forYouSections, selectedCategory]);
 
   const getChackback = useCallback(() => {
     const reward1 = +store?.drops?.rewards?.baseline!;
