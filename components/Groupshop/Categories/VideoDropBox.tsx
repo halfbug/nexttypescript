@@ -138,7 +138,7 @@ const DropVideoBox = ({
             disabled={btnDisable}
             onClick={() => handleClose([])}
           >
-              {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : 'Skip & Shop'}
+              {btnDisable && spinner ? <Spinner animation="border" size="sm" /> : <u>Skip & Shop</u>}
           </Button>
         </div>
 
