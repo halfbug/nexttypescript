@@ -98,7 +98,7 @@ const DropVideoBox = ({
               <br />
               CATEGORIES YOU
               {' '}
-              <strong>lOVE</strong>
+              <strong><i>lOVE</i></strong>
               ...
               <div className={['pb-4, text-capitalize, text-center', styles.howShopDropVideoBox_modal__heading2__howTxt2].join(' ')}>
                   DON'T WORRY, YOU CAN STILL ACCESS THE REST
@@ -106,7 +106,7 @@ const DropVideoBox = ({
           </div>
           <div className={['bg-white, pb-10, px-10', styles.modalBg].join(' ')}>
 
-<div className="px-3 py-4 text-center justify-center">
+<div className={['px-3 py-4 text-center justify-center', styles.howShopDropVideoBox_modal__categoriesWrapper].join(' ')}>
 <Stack direction="horizontal" gap={3} className="flex flex-wrap mt-8 mb-3 text-center flex justify-content-center">
   {
     subCategories?.length

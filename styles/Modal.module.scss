@@ -1466,6 +1466,11 @@
     }
 }
 
+.howShopDropVideoBox_modal__categoriesWrapper {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
 .modalBg{
 	background-image: url("../assets/images/modalbg.png");
     border-bottom-left-radius: 20px;
