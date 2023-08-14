@@ -1301,6 +1301,7 @@ mutation createOnBoardingDiscountCode($gid: String!,$selectedSubCategories:[Stri
           currencyCode
           outofstock
           secondaryCount
+          vendor
           options {
             id
             name
