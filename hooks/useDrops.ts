@@ -78,7 +78,7 @@ export default function useDrops() {
     await createOnBoardingDiscountCode({
       variables: {
         gid: gsctx.id,
-        selectedSubCategories: selectedSubCategories.length ? selectedSubCategories : null,
+        selectedSubCategories: selectedSubCategories.length ? selectedSubCategories : [],
       },
     }).then((res) => {
       if (res?.data?.createOnBoardingDiscountCode) {

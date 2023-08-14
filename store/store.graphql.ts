@@ -992,6 +992,7 @@ query DropGroupshopForYouSection($id: String!) {
   DropGroupshopForYouSection(id: $id) {
     forYouSections{
       name
+      id
       sections {
         name
         shopifyId
@@ -1286,6 +1287,7 @@ mutation createOnBoardingDiscountCode($gid: String!,$selectedSubCategories:[Stri
     expiredAt
     forYouSections{
       name
+      id
       sections {
         name
         shopifyId

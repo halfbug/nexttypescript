@@ -15,16 +15,12 @@ const useViewAll = () => {
   const [section, setSection] = useState<IProduct[] | undefined>([]);
 
   useEffect(() => {
-    if (vProduct && (sections || forYouSections)) {
+    if (vProduct && sections) {
       setshowViewAll(true);
-      const prd: any = (
-        selectedCategory === 'forYou'
-          ? [...forYouSections?.map((forYou: { sections: any }) => forYou.sections) ?? []]
-          : sections
-      )?.flat().find((p:any) => p.shopifyId === vProduct);
+      const prd: any = sections?.find((p:any) => p.shopifyId === vProduct);
       setSection(prd);
     }
-  }, [vProduct, sections, forYouSections]);
+  }, [vProduct, sections]);
 
   useEffect(() => {
     if (!showViewAll) {

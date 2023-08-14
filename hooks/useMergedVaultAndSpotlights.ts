@@ -112,26 +112,21 @@ export default function useMergedVaultAndSpotlights() {
         // Update the "All Products" element based on the found element's index
         const indexesToCheck = [vaultElementIndex, spotlightElementIndex, allProductElementIndex];
         const chosenElementIndex = indexesToCheck.find((index) => index !== -1);
-        const indexValueMap = {
-          '-1': 3,
-          [vaultElementIndex]: 1,
-          [spotlightElementIndex]: 2,
-        };
-        const chosenValue = indexValueMap[chosenElementIndex];
         data[allProductElementIndex] = setAllProducts(
           data,
           allProductElementIndex,
           chosenElementIndex,
           isForYou,
           CshopifyID,
-          chosenValue,
+          dataForMearge?.id,
           dataForMearge?.name,
         );
         data.splice(chosenElementIndex, 1);
       } else {
         data[allProductElementIndex] = setAllProducts(
           data, allProductElementIndex,
-          allProductElementIndex, isForYou, data[allProductElementIndex].shopifyId, 4,
+          allProductElementIndex, isForYou, data[allProductElementIndex].shopifyId,
+          dataForMearge?.id,
           dataForMearge?.name,
         );
       }
