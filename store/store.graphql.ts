@@ -159,6 +159,7 @@ query Collections($shop: String!) {
       id
       title
       featuredImage
+      vendor
       price
       currencyCode
     }
@@ -327,6 +328,7 @@ query Products($productQueryInput: ProductQueryInput!) {
     createdAtShopify
     purchaseCount
     featuredImage
+    vendor
     description                             
     price
     compareAtPrice
@@ -455,6 +457,7 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
+      vendor
       description
       purchaseCount
       price
@@ -481,6 +484,7 @@ query Groupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
+      vendor
       description
       purchaseCount
       price
@@ -556,6 +560,7 @@ query Groupshop($code: String!, $status: String = "") {
         id
         title
         featuredImage
+        vendor
         description
         price
         outofstock
@@ -615,6 +620,7 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
+    vendor
     description
     purchaseCount
     price
@@ -638,6 +644,7 @@ query Groupshop($code: String!, $status: String = "") {
     id
     title
     featuredImage
+    vendor
     description
     price
     currencyCode
@@ -719,6 +726,7 @@ query Groupshop($code: String!, $status: String = "") {
 //       id
 //       title
 //       featuredImage
+//       vendor
 //       description
 //       purchaseCount
 //       price
@@ -835,6 +843,7 @@ query Groupshop($code: String!, $status: String = "") {
 //       products{
 //         title
 //         featuredImage
+//         vendor
 //         price
 //         id
 //       }
@@ -850,6 +859,7 @@ query Groupshop($code: String!, $status: String = "") {
 //       id
 //       title
 //       featuredImage
+//       vendor
 //       description
 //       purchaseCount
 //       price
@@ -878,6 +888,7 @@ query Groupshop($code: String!, $status: String = "") {
 //         id
 //         title
 //         featuredImage
+//         vendor
 //         description
 //         purchaseCount
 //         price
@@ -921,6 +932,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       id
       title
       featuredImage
+      vendor
       description
       purchaseCount
       price
@@ -959,6 +971,7 @@ query DropGroupshop($code: String!, $status: String = "") {
       products{
         title
         featuredImage
+        vendor
         price
         id
       }
@@ -1029,6 +1042,7 @@ query DropGroupshopSections {
       id
       title
       featuredImage
+      vendor
       description
       purchaseCount
       price
@@ -1355,6 +1369,7 @@ const ADD_DEAL_PRODUCT = gql`
       products{
         title
         featuredImage
+        vendor
         price
         lineItems{
           product{
@@ -1369,6 +1384,7 @@ const ADD_DEAL_PRODUCT = gql`
     }
   popularProducts{
     featuredImage
+    vendor
     id
     title
     price
@@ -1382,6 +1398,7 @@ const ADD_DEAL_PRODUCT = gql`
   }
   allProducts{
     featuredImage
+    vendor
     id
     title
     price
@@ -1849,11 +1866,13 @@ query PartnerGroupshop($code: String!) {
         title
         price
         featuredImage
+        vendor
       }
     }
     influencerProducts{
       id
       featuredImage
+      vendor
       purchaseCount
       title
       description
@@ -1870,6 +1889,7 @@ query PartnerGroupshop($code: String!) {
     refferalProducts{
       id
       featuredImage
+      vendor
       title
       description
       purchaseCount
@@ -1897,6 +1917,7 @@ query PartnerGroupshop($code: String!) {
 
     bestSeller{
       featuredImage
+      vendor
       id
       title
       description
@@ -1981,6 +2002,7 @@ query PartnerGroupshop($code: String!) {
   popularProducts{
     id
     featuredImage
+    vendor
     title
     description
     purchaseCount
@@ -2003,6 +2025,7 @@ query PartnerGroupshop($code: String!) {
   }
   allProducts{
     featuredImage
+    vendor
     id
     title
     description
@@ -2198,6 +2221,7 @@ query mostCampaignViralProducts($campaignId: String!) {
     productDetails{
       title
       featuredImage
+      vendor
     }  
   }
 }
@@ -2346,6 +2370,7 @@ query orderLineItems($parentId: String!) {
     product{
       title
       featuredImage
+      vendor
     }     
   }
 }
@@ -2535,6 +2560,7 @@ const GET_MATCHING_GS = gql`
         id
         title
         featuredImage
+        vendor
         description
         price
         outofstock
@@ -2584,6 +2610,7 @@ const GET_MATCHING_GS = gql`
         id
         title
         featuredImage
+        vendor
         description
         purchaseCount
         price
@@ -2613,6 +2640,7 @@ const GET_MATCHING_GS = gql`
         id
         title
         featuredImage
+        vendor
         description
         purchaseCount
         price
@@ -2658,6 +2686,7 @@ const GET_MATCHING_GS = gql`
           id
           title
           featuredImage
+          vendor
           description
           price
           outofstock
@@ -2730,6 +2759,7 @@ query activeCampaignWithProducts($shop: String!){
       createdAtShopify
       purchaseCount
       featuredImage
+      vendor
       description                             
       price
       options{
@@ -2822,6 +2852,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
     ownerProducts{
       id
       featuredImage
+      vendor
       purchaseCount
       title
       description
@@ -2837,6 +2868,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
     refferalProducts{
       id
       featuredImage
+      vendor
       title
       description
       purchaseCount
@@ -2866,6 +2898,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
         title
         price
         featuredImage
+        vendor
       }
       orderDetail{
         customer{
@@ -2890,6 +2923,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
 
     bestSeller{
       featuredImage
+      vendor
       id
       title
       description
@@ -2955,6 +2989,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
   popularProducts{
     id
     featuredImage
+    vendor
     title
     description
     purchaseCount
@@ -2977,6 +3012,7 @@ query getChannelGroupshopByCode($code: String!, $status: String = "") {
 
   allProducts{
     featuredImage
+    vendor
     id
     title
     description
@@ -3122,6 +3158,7 @@ query getPaginatedProducts($productArgs:ProductsPaginatedArgs! ){
       id
       title
       featuredImage
+      vendor
       description
       purchaseCount
       price
