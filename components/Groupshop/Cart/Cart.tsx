@@ -17,6 +17,7 @@ import useSuggested from 'hooks/useSuggested';
 import useDetail from 'hooks/useDetail';
 import Icon from 'assets/images/small-cone.svg';
 import MoneyFly from 'assets/images/money-fly.svg';
+import InfoIcon from 'assets/images/info.svg';
 import useGtm from 'hooks/useGtm';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import Image from 'react-bootstrap/Image';
@@ -458,21 +459,55 @@ And you can keep earning up to
                     >
                       {prd.title}
                     </div>
-                    <h5 className={styles.groupshop_cartProductPrice}>
-                      <span className="text-decoration-line-through fw-light">
-                        {currencySymbol}
-                        {prd.compareAtPrice || prd.selectedVariant.compareAtPrice ? formatNumber(prd.selectedVariant.compareAtPrice ?? prd.compareAtPrice ?? '') : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
-                      </span>
-                      {' '}
-                      <span>
-                        {currencySymbol}
-                        {(prd.compareAtPrice && spotlightProducts.includes(prd.id))
+                    <div>
+                      <h5 className={styles.groupshop_cartProductPrice}>
+                        <span className="text-decoration-line-through fw-light">
+                          {currencySymbol}
+                          {prd.compareAtPrice || prd.selectedVariant.compareAtPrice ? formatNumber(prd.selectedVariant.compareAtPrice ?? prd.compareAtPrice ?? '') : ((+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                        {' '}
+                        <span>
+                          {currencySymbol}
+                          {(prd.compareAtPrice && spotlightProducts.includes(prd.id))
                         || prd.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
                         || prd.vendor === DROPS_PRODUCT_VENDOR_VAULT
-                          ? formatNumber(prd.selectedVariant.price ?? prd.price)
-                          : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
-                      </span>
-                    </h5>
+                            ? formatNumber(prd.selectedVariant.price ?? prd.price)
+                            : (dPrice(+(prd.selectedVariant.price ?? prd.price))).toFixed(2).toString().replace('.00', '')}
+                        </span>
+                      </h5>
+                      { [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
+                        .includes(prd?.vendor!) ? (
+                          <span
+                            className={['rounded-pill border-0', styles.groupshop_right_content_chip,
+                              prd?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? styles.groupshop_right_content_chip_vaultbtn : '',
+                              prd?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT ? styles.groupshop_right_content_chip_spotlighttbtn : '',
+                            ].filter((classes) => classes).join(' ')}
+                          >
+                            {prd?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
+                              ? (
+                                <PopoverButton
+                                  variant=""
+                                  placement="bottom"
+                                  className="btn btn-link p-0 mb-2"
+                                  label="Spotlight"
+                                  popContent="Not eligible for higher discounts or cashback"
+                                  icon={<InfoIcon className="ms-2" />}
+                                />
+                              )
+                              : ''}
+                            {prd?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? (
+                              <PopoverButton
+                                variant=""
+                                placement="bottom"
+                                className="btn btn-link p-0 mb-2"
+                                label="Vault"
+                                popContent="Not eligible for higher discounts or cashback"
+                                icon={<InfoIcon className="ms-2" />}
+                              />
+                            ) : ''}
+                          </span>
+                        ) : <></>}
+                    </div>
                   </div>
                   <div className="text-start mx-4">
                     <div className={['pt-0', styles.groupshop_cartProductText].join(' ')}>

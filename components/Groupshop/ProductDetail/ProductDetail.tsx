@@ -23,11 +23,12 @@ import GradiantButton from 'components/Buttons/Button/Button';
 import ShareButton from 'components/Buttons/ShareButton/ShareButton';
 import LeftArrowIcon from 'assets/images/left-arrow.svg';
 import Icon from 'assets/images/cart-cone.svg';
+import InfoIcon from 'assets/images/info.svg';
 import useGtm from 'hooks/useGtm';
 import { useMediaQuery } from 'react-responsive';
 import { GroupshopContext } from 'store/groupshop.context';
 import {
-  Send, EmojiHeartEyesFill, Star, StarFill,
+  Send, EmojiHeartEyesFill, Star, StarFill, ExclamationCircle,
 } from 'react-bootstrap-icons';
 import { InvariantError } from '@apollo/client/utilities/globals';
 import { useRouter } from 'next/router';
@@ -41,6 +42,7 @@ import useDetail from 'hooks/useDetail';
 import useDrops from 'hooks/useDrops';
 import useUtilityFunction from 'hooks/useUtilityFunction';
 import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
+import PopoverButton from 'components/Buttons/PopoverButton/PopoverButton';
 import Members from '../Members/Members';
 import Gmembers from '../Members/Gmembers';
 
@@ -447,7 +449,7 @@ const ProductDetail = ({
                   <Button
                     variant="outline-primary"
                     className={styles.groupshop_right_content_favbtn}
-                    onClick={(e) => {
+                    onClick={(e:any) => {
                       if (!isDrops) {
                         addToFav(e);
                       } else {
@@ -629,10 +631,44 @@ const ProductDetail = ({
             <Col xs={12} md={6}>
               <div ref={ref} className={styles.groupshop_right_content_wrapper}>
                 <div className={styles.groupshop_right_content}>
-                  <div className="d-flex">
+                  <div className="d-flex justify-content-between">
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
+                    <div>
+                      { [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
+                        .includes(product?.vendor!) ? (
+                          <span
+                            className={['rounded-pill border-0', styles.groupshop_right_content_chip,
+                              product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? styles.groupshop_right_content_chip_vaultbtn : '',
+                              product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT ? styles.groupshop_right_content_chip_spotlighttbtn : '',
+                            ].filter((classes) => classes).join(' ')}
+                          >
+                            {product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
+                              ? (
+                                <PopoverButton
+                                  variant=""
+                                  placement="bottom"
+                                  className="btn btn-link p-0 mb-2"
+                                  label="Spotlight"
+                                  popContent="Not eligible for higher discounts or cashback"
+                                  icon={<InfoIcon className="ms-2" />}
+                                />
+                              )
+                              : ''}
+                            {product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? (
+                              <PopoverButton
+                                variant=""
+                                placement="bottom"
+                                className="btn btn-link p-0 mb-2"
+                                label="Vault"
+                                popContent="Not eligible for higher discounts or cashback"
+                                icon={<InfoIcon className="ms-2" />}
+                              />
+                            ) : ''}
+                          </span>
+                        ) : <></>}
+                    </div>
 
                     <Overlay
                       show={showOverlay}

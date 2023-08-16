@@ -1597,6 +1597,30 @@ $font-family-sans-serif: "DM Sans", Fahkwang, system-ui, -apple-system,
       letter-spacing: 0.48px;
       font-family: "DM Sans" !important;
     }
+    &_chip{
+      padding: 3px 9px;
+      display: flex;
+      button{
+        color: $black;
+        font-weight: 600;
+        font-family: "DM Sans" !important;
+        text-decoration: none;
+        align-items: center;
+        display: flex;
+        margin-left: 0;
+        margin-bottom: 0 !important;
+        flex-direction: row-reverse;
+        span{
+          margin-left: 0 !important;
+        }
+      }
+      &_vaultbtn {
+        background-color: $yellow;
+      }
+      &_spotlighttbtn{
+        background-color: #EAF1BF;
+      }  
+    }
     &_favbtn {
       @extend .groupshop__pcard_tag, .rounded-pill;
       display: flex;
