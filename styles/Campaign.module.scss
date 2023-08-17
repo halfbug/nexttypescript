@@ -32,6 +32,14 @@
             color: none;
         }
     }
+    &__salepop{
+        position: absolute;
+        top: -27px;
+        left: 22px;
+        width: 100%;
+        text-align: start;
+        z-index: 9;
+    }
     &__tooltip {
         background: #ffffff !important;
         border: 1px solid #a7c737 !important;
