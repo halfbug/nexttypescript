@@ -635,40 +635,6 @@ const ProductDetail = ({
                     <p className={styles.groupshop_right_content_title}>
                       {product?.title}
                     </p>
-                    <div>
-                      { [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
-                        .includes(product?.vendor!) ? (
-                          <span
-                            className={['rounded-pill border-0', styles.groupshop_right_content_chip,
-                              product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? styles.groupshop_right_content_chip_vaultbtn : '',
-                              product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT ? styles.groupshop_right_content_chip_spotlighttbtn : '',
-                            ].filter((classes) => classes).join(' ')}
-                          >
-                            {product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
-                              ? (
-                                <PopoverButton
-                                  variant=""
-                                  placement="bottom"
-                                  className="btn btn-link p-0 mb-2"
-                                  label="Spotlight"
-                                  popContent="Not eligible for higher discounts or cashback"
-                                  icon={<InfoIcon className="ms-2" />}
-                                />
-                              )
-                              : ''}
-                            {product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? (
-                              <PopoverButton
-                                variant=""
-                                placement="bottom"
-                                className="btn btn-link p-0 mb-2"
-                                label="Vault"
-                                popContent="Not eligible for higher discounts or cashback"
-                                icon={<InfoIcon className="ms-2" />}
-                              />
-                            ) : ''}
-                          </span>
-                        ) : <></>}
-                    </div>
 
                     <Overlay
                       show={showOverlay}
@@ -709,16 +675,52 @@ const ProductDetail = ({
                     </Overlay>
 
                   </div>
-                  <h3 className="d-flex align-items-center">
-                    <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
-                      {currencySymbol}
-                      {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
-                    </span>
-                    {' '}
-                    <span className={styles.groupshop_right_content_price}>
-                      {currencySymbol}
-                      {discountedPrice}
-                    </span>
+                  <h3 className="d-flex align-items-center justify-content-between">
+                    <div>
+                      <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
+                        {currencySymbol}
+                        {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
+                      </span>
+                      {' '}
+                      <span className={styles.groupshop_right_content_price}>
+                        {currencySymbol}
+                        {discountedPrice}
+                      </span>
+                    </div>
+                    <div>
+                      { [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
+                        .includes(product?.vendor!) ? (
+                          <span
+                            className={['rounded-pill border-0', styles.groupshop_right_content_chip,
+                              product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? styles.groupshop_right_content_chip_vaultbtn : '',
+                              product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT ? styles.groupshop_right_content_chip_spotlighttbtn : '',
+                            ].filter((classes) => classes).join(' ')}
+                          >
+                            {product?.vendor === DROPS_PRODUCT_VENDOR_SPOTLIGHT
+                              ? (
+                                <PopoverButton
+                                  variant=""
+                                  placement="bottom"
+                                  className="btn btn-link p-0 mb-2"
+                                  label="Spotlight"
+                                  popContent="Not eligible for higher discounts or cashback"
+                                  icon={<InfoIcon className="ms-2" />}
+                                />
+                              )
+                              : ''}
+                            {product?.vendor === DROPS_PRODUCT_VENDOR_VAULT ? (
+                              <PopoverButton
+                                variant=""
+                                placement="bottom"
+                                className="btn btn-link p-0 mb-2"
+                                label="Vault"
+                                popContent="Not eligible for higher discounts or cashback"
+                                icon={<InfoIcon className="ms-2" />}
+                              />
+                            ) : ''}
+                          </span>
+                        ) : <></>}
+                    </div>
                     {' '}
                     {cashBack && isGroupshop ? (
                       <Row className={styles.groupshop_cashback}>
