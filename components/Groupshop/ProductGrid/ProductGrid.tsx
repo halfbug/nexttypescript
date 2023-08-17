@@ -258,8 +258,8 @@ const ProductGridInitial = ({
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice && spotlightProducts.includes(prod.id)
-        && [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!)
+        {prod?.compareAtPrice && (spotlightProducts.includes(prod.id)
+        || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!))
         && !isSuggestion
           && formatNumber(prod.price)}
         {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
