@@ -675,18 +675,16 @@ const ProductDetail = ({
                     </Overlay>
 
                   </div>
-                  <h3 className="d-flex align-items-center justify-content-between">
-                    <div>
-                      <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
-                        {currencySymbol}
-                        {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
-                      </span>
-                      {' '}
-                      <span className={styles.groupshop_right_content_price}>
-                        {currencySymbol}
-                        {discountedPrice}
-                      </span>
-                    </div>
+                  <h3 className="d-flex align-items-center">
+                    <span className={['text-decoration-line-through fw-light', styles.groupshop_right_content_price].join(' ')}>
+                      {currencySymbol}
+                      {product?.options ? (+(variantPrice || 0)).toFixed(2).toString().replace('.00', '') : (+(product?.price || 0)).toFixed(2).toString().replace('.00', '')}
+                    </span>
+                    {' '}
+                    <span className={styles.groupshop_right_content_price}>
+                      {currencySymbol}
+                      {discountedPrice}
+                    </span>
                     <div>
                       { [DROPS_PRODUCT_VENDOR_VAULT, DROPS_PRODUCT_VENDOR_SPOTLIGHT]
                         .includes(product?.vendor!) ? (
