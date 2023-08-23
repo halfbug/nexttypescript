@@ -33,12 +33,10 @@
         }
     }
     &__salepop{
-        position: absolute;
-        top: -27px;
-        left: 22px;
-        width: 100%;
-        text-align: start;
-        z-index: 9;
+        min-height: 131px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
     }
     &__tooltip {
         background: #ffffff !important;
