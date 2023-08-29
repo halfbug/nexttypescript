@@ -6,19 +6,24 @@ import { CartProduct, DealProduct } from 'types/groupshop';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import _ from 'lodash';
 import { IProduct } from 'types/store';
+import { DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT } from 'configs/constant';
 import useIP from './useIP';
 import useUtilityFunction from './useUtilityFunction';
 import useAppContext from './useAppContext';
+import useDrops from './useDrops';
 
 export default function useDeal() {
   // const {
   //   gsctx,
   //   dispatch,
   // } = useContext(GroupshopContext);
-  const { filterArray, findInArray2 } = useUtilityFunction();
+  const { formatNumber } = useUtilityFunction();
   const {
     gsctx, dispatch, isGroupshop, isChannel, isDrops,
   } = useAppContext();
+
+  const { spotlightProducts } = useDrops();
+
   let clientIP1 = '';
 
   if (!isDrops) {
@@ -647,6 +652,28 @@ export default function useDeal() {
   const socialText = `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} and get up to ${maxPercent} off`;
   const nativeShareText = `Shop ${brandName} on my ${isDrops ? 'Groupshop' : 'Microstore'} and get up to ${maxPercent} off`;
 
+  const productPrice = (prod: any) => {
+    const noDiscount: boolean = spotlightProducts.includes(prod.id)
+    || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!);
+
+    const compareAtPrice: number = +prod?.compareAtPrice;
+
+    if (compareAtPrice) {
+      if (noDiscount) {
+        return formatNumber(prod.price);
+      }
+      return formatNumber(dPrice(prod.price));
+    }
+
+    if (!compareAtPrice) {
+      if (noDiscount) {
+        return formatNumber(prod.price);
+      }
+      return formatNumber(dPrice(prod.price));
+    }
+    return 0;
+  };
+
   return {
     currencySymbol,
     discount,
@@ -705,5 +732,6 @@ export default function useDeal() {
     disPrice,
     currencySymbolDiscovery,
     isDrops,
+    productPrice,
   };
 }

@@ -217,7 +217,7 @@ const ProductGridInitial = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
-    disPrice, currencySymbolDiscovery, gsURL,
+    disPrice, currencySymbolDiscovery, gsURL, productPrice,
   } = useDeal();
   const {
     spotlightProducts,
@@ -251,21 +251,12 @@ const ProductGridInitial = ({
     <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
       <span className="text-decoration-line-through fw-light me-1">
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {/* {prod.price} */}
-        {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
+        {prod?.compareAtPrice ? formatNumber(prod?.compareAtPrice) : formatNumber(+(prod.price))}
       </span>
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
-        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice && (spotlightProducts.includes(prod.id)
-        || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!))
-        && !isSuggestion
-          && formatNumber(prod.price)}
-        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
-          && formatNumber(dPrice(prod.price))}
-        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+        {currencySymbol}
+        {productPrice(prod)}
       </span>
     </h5>
   );
@@ -562,7 +553,17 @@ const ProductGridInitial = ({
                               }
                             >
                               {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                              {prod.compareAtPrice ? formatNumber((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
+                              {prod.compareAtPrice
+                                ? formatNumber(
+                                  (+prod.compareAtPrice - ((spotlightProducts.includes(prod.id)
+                                  || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT]
+                                    .includes(prod.vendor!))
+                                    ? +prod.price
+                                    : dPrice(+prod.price))),
+                                )
+                                : formatNumber((+(productPriceDiscount(+(prod.price), isSuggestion
+                                  ? +discoveryDiscount!
+                                  : +percentage))))}
                               {' '}
                               OFF
                             </span>
