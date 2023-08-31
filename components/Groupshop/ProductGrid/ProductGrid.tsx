@@ -127,6 +127,8 @@ const ProductGridInitial = ({
       : sections
   )?.flat()?.find(({ shopifyId }: any) => shopifyId === sectionID)
     ?? { products: [] };
+  let mergeIds: any = csection?.mergedIds?.length ? csection?.mergedIds : [];
+  const activeSectionID = sectionID;
   const [getMoreProducts,
     { data: getPaginatedProducts, loading: moreProdLoading }] = useLazyQuery(PRODUCT_PAGE, {
     notifyOnNetworkStatusChange: true,
@@ -164,13 +166,28 @@ const ProductGridInitial = ({
           payload: {
             ...gsctx,
             sections: [...sections!.map((sec) => {
+              let change = false;
+              if (sec?.pageInfo?.totalRecords === sec?.products?.length
+                && !sectionPrd!.getPaginatedProducts.pageInfo?.hasNextPage) {
+                const { mergedIds } = sec;
+                mergeIds = [...mergedIds]; // Create a shallow copy
+                mergeIds.shift();
+                change = true;
+              }
               if (sec.shopifyId === sectionID) {
                 return (
                   {
                     ...sec,
+                    mergedIds: mergeIds,
                     products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
                     ],
-                    pageInfo: sectionPrd!.getPaginatedProducts.pageInfo,
+                    pageInfo: (sec.pageInfo ? {
+                      ...sec.pageInfo,
+                      totalRecords: (change)
+                        ? (sec?.pageInfo?.totalRecords
+                          + sectionPrd!.getPaginatedProducts.result?.length)
+                        : sectionPrd!.getPaginatedProducts.pageInfo?.totalRecords,
+                    } : sectionPrd!.getPaginatedProducts.pageInfo),
                   });
               }
               return sec;
@@ -183,12 +200,25 @@ const ProductGridInitial = ({
 
   useEffect(() => {
     if (loadmore && (isTimetoLoadS || isTimetoLoadV || isTimetoLoadA)
-    && (!csection.pageInfo || csection?.pageInfo?.totalRecords > csection.products.length)) {
+    && (!csection.pageInfo
+    || mergeIds?.length || csection?.pageInfo?.totalRecords > csection.products.length)) {
+      let Skip;
+
+      if (mergeIds?.length) {
+        Skip = mergeIds.includes(csection.shopifyId)
+          ? csection.products?.length
+          : csection.products?.length - csection?.pageInfo?.totalRecords;
+      } else {
+        Skip = csection.products?.length;
+      }
       getMoreProducts({
         variables: {
           productArgs: {
-            pagination: { skip: csection.products?.length, take: 10 },
-            collection_id: sectionID,
+            pagination: {
+              skip: Skip ?? 0,
+              take: 10,
+            },
+            collection_id: mergeIds?.length ? mergeIds[0] : activeSectionID,
           },
         },
       });
@@ -217,7 +247,7 @@ const ProductGridInitial = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
-    disPrice, currencySymbolDiscovery, gsURL, productPrice,
+    disPrice, currencySymbolDiscovery, gsURL,
   } = useDeal();
   const {
     spotlightProducts,
@@ -251,12 +281,21 @@ const ProductGridInitial = ({
     <h5 className={['pt-2 fw-bold', !isDrops ? 'text-center' : ''].join(' ')}>
       <span className="text-decoration-line-through fw-light me-1">
         {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice ? formatNumber(prod?.compareAtPrice) : formatNumber(+(prod.price))}
+        {/* {prod.price} */}
+        {!prod?.compareAtPrice && (+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {prod?.compareAtPrice && formatNumber(prod?.compareAtPrice ?? prod.price)}
       </span>
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
-        {currencySymbol}
-        {productPrice(prod)}
+        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
+        {prod?.compareAtPrice && (spotlightProducts.includes(prod.id)
+        || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!))
+        && !isSuggestion
+          && formatNumber(prod.price)}
+        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
+          && formatNumber(dPrice(prod.price))}
+        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
+        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
       </span>
     </h5>
   );
@@ -553,17 +592,7 @@ const ProductGridInitial = ({
                               }
                             >
                               {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-                              {prod.compareAtPrice
-                                ? formatNumber(
-                                  (+prod.compareAtPrice - ((spotlightProducts.includes(prod.id)
-                                  || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT]
-                                    .includes(prod.vendor!))
-                                    ? +prod.price
-                                    : dPrice(+prod.price))),
-                                )
-                                : formatNumber((+(productPriceDiscount(+(prod.price), isSuggestion
-                                  ? +discoveryDiscount!
-                                  : +percentage))))}
+                              {prod.compareAtPrice ? formatNumber((+prod.compareAtPrice - (spotlightProducts.includes(prod.id) ? +prod.price : dPrice(+prod.price)))) : (+(productPriceDiscount(+(prod.price), isSuggestion ? +discoveryDiscount! : +percentage))).toFixed(2).toString().replace('.00', '')}
                               {' '}
                               OFF
                             </span>

@@ -77,11 +77,12 @@ export default function useMergedVaultAndSpotlights() {
 
     if (allProductElementIndex !== -1) {
       // Find the indices of spotlight and vault elements
-      const spotlightElementIndex = data.findIndex(
-        (element: { type: string; }) => element.type === DROPS_SPOTLIGHT,
-      );
+
       const vaultElementIndex = data.findIndex(
         (element: { type: string; }) => element.type === DROPS_VAULT,
+      );
+      const spotlightElementIndex = data.findIndex(
+        (element: { type: string; }) => element.type === DROPS_SPOTLIGHT,
       );
 
       if (spotlightElementIndex !== -1 || vaultElementIndex !== -1) {

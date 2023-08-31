@@ -1129,6 +1129,7 @@ query DropGroupshopSections {
       shopifyId
       sortOrder
       type
+      mergedIds
       products {
         id
         title

@@ -131,6 +131,7 @@ export type sections = {
   shopifyId: string;
   type: string;
   products: Product[];
+  mergedIds: string[];
   pageInfo: any;
 }
 
