@@ -181,7 +181,7 @@ const ProductGridInitial = ({
                     mergedIds: mergeIds,
                     products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
                     ],
-                    pageInfo: (sec.pageInfo ? {
+                    pageInfo: ((mergeIds?.length && sec.pageInfo) ? {
                       ...sec.pageInfo,
                       totalRecords: (change)
                         ? (sec?.pageInfo?.totalRecords
