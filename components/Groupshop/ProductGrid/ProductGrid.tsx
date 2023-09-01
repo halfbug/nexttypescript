@@ -247,7 +247,7 @@ const ProductGridInitial = ({
     currencySymbol, dPrice, getBuyers, formatName, topFive, getBuyers2, isInfluencerGS,
     isExpired, productShareUrl, displayAddedByFunc, productPriceDiscount, shortActivateURL,
     leftOverProducts, addedByInfluencer, addedByRefferal, nameOnProductGrid, getBuyersDiscover,
-    disPrice, currencySymbolDiscovery, gsURL,
+    disPrice, currencySymbolDiscovery, gsURL, productPrice,
   } = useDeal();
   const {
     spotlightProducts,
@@ -287,15 +287,8 @@ const ProductGridInitial = ({
       </span>
       {' '}
       <span className={isDrops ? 'me-2' : ''}>
-        {isSuggestion ? currencySymbolDiscovery(currency) : currencySymbol}
-        {prod?.compareAtPrice && (spotlightProducts.includes(prod.id)
-        || [DROPS_PRODUCT_VENDOR_SPOTLIGHT, DROPS_PRODUCT_VENDOR_VAULT].includes(prod?.vendor!))
-        && !isSuggestion
-          && formatNumber(prod.price)}
-        {prod?.compareAtPrice && !spotlightProducts.includes(prod.id) && !isSuggestion
-          && formatNumber(dPrice(prod.price))}
-        {!prod?.compareAtPrice && !isSuggestion && dPrice(+(prod.price)).toFixed(2).toString().replace('.00', '')}
-        {!prod?.compareAtPrice && isSuggestion && disPrice(+(prod.price), +discoveryDiscount!).toFixed(2).toString().replace('.00', '')}
+        {currencySymbol}
+        {productPrice(prod)}
       </span>
     </h5>
   );
