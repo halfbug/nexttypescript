@@ -176,6 +176,7 @@ const GroupShop: NextPage<{ meta: any }> = ({ meta }: { meta: any }) => {
               return cat;
             },
           )],
+          sections: DropGroupshopSections.DropGroupshopSections.sections,
         },
       });
     }

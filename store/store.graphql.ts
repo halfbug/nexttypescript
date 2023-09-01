@@ -1267,6 +1267,7 @@ const GET_COLLECTIONS_BY_CATEGORY_ID = gql`
         shopifyId
         sortOrder
         type
+        mergedIds
         products {
           id
           title
