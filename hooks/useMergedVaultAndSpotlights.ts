@@ -23,8 +23,10 @@ export default function useMergedVaultAndSpotlights() {
       id: number,
       sectionName?: string,
     ) => {
-      let products = data?.filter((item: { shopifyId: string; }) => (ForYou
-        ? completedFY : completed).includes(item.shopifyId))
+      let products = data?.filter((el:any) => (
+        el.type === DROPS_VAULT || el.type === DROPS_SPOTLIGHT || el.type === DROPS_ALLPRODUCT))
+        ?.filter((item: { shopifyId: string; }) => (ForYou
+          ? completedFY : completed).includes(item.shopifyId))
         .map((item: { products: any; }) => item.products)?.flat();
       if (!(isForYou
         ? completedFY : completed).includes(data[replaceElementIndex].shopifyId)) {
@@ -91,6 +93,8 @@ export default function useMergedVaultAndSpotlights() {
         const spotlightShopifyId = findShopifyId(data, spotlightElementIndex);
         const allProductShopifyId = findShopifyId(data, allProductElementIndex);
         const shopifyIds = [vaultShopifyId, spotlightShopifyId];
+        console.log('🚀 ~~~~~ file: useMergedVaultAndSpotlights.ts:94 ~ mergedVaultAndSpotlights ~ shopifyIds:', shopifyIds);
+        console.log('🚀 ~~~~~ file: useMergedVaultAndSpotlights.ts:104 ~ data.forEach ~ data:', data);
 
         data.forEach((section:any) => {
           if ((section?.pageInfo
@@ -109,6 +113,7 @@ export default function useMergedVaultAndSpotlights() {
             (isForYou ? completedFY : completed).push(csection.shopifyId);
           }
         }
+        console.log('🚀 ~~~~~ file: useMergedVaultAndSpotlights.ts:104 ~ data.forEach ~ data:', completed);
 
         // find current shopifyId from data by Completed section in pagination
         // if has in completed section then update current shopifyId with new shopify
