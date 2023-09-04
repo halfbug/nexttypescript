@@ -207,7 +207,7 @@ const ProductGridInitial = ({
       if (mergeIds?.length) {
         Skip = mergeIds.includes(csection.shopifyId)
           ? csection.products?.length
-          : csection.products?.length - csection?.pageInfo?.totalRecords;
+          : csection?.pageInfo?.totalRecords - (csection?.pageInfo?.totalRecords % 10);
       } else {
         Skip = csection.products?.length;
       }
