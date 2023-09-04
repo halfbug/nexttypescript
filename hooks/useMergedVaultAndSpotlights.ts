@@ -37,7 +37,7 @@ export default function useMergedVaultAndSpotlights() {
       }
       return {
         products,
-        name: isForYou ? sectionName : 'All products',
+        name: isForYou ? sectionName : data[allProductElementIndex].name ?? 'All products',
         shopifyId: CshopifyID,
         type: isForYou ? 'forYou' : DROPS_ALLPRODUCT,
         pageInfo: null,
