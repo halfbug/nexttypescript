@@ -147,6 +147,9 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   }, [searchRefresh]);
 
   const onCategoryClick = (item: any) => {
+    if (item.categoryId === gsctx.selectedCategory) {
+      return;
+    }
     const dataExist = (gsctx?.categories) ? gsctx?.categories.find(
       (ele) => ele.categoryId === item.categoryId,
     ) : '';
@@ -177,6 +180,9 @@ export default function CategoriesTab({ categories = [], searchRefresh }: PropsT
   };
 
   const onSubCategoryClick = (subItem: any) => {
+    if (subItem.categoryId === gsctx.selectedCategory) {
+      return;
+    }
     const parentCategoryId = selectedCategory.categoryId;
     const findIndex = (gsctx?.categories)
       ? gsctx?.categories.findIndex((obj) => obj.categoryId === parentCategoryId) : 0;
