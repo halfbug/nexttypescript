@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable no-lone-blocks */
 import React, {
   useEffect, useMemo, useRef, useState,
 } from 'react';
@@ -127,7 +126,7 @@ const ProductGridInitial = ({
       : sections
   )?.flat()?.find(({ shopifyId }: any) => shopifyId === sectionID)
     ?? { products: [] };
-  let mergeIds: any = csection?.mergedIds?.length ? csection?.mergedIds : [];
+  const mergeIds: any = csection?.mergedIds?.length ? csection?.mergedIds : [];
   const activeSectionID = sectionID;
   const [getMoreProducts,
     { data: getPaginatedProducts, loading: moreProdLoading }] = useLazyQuery(PRODUCT_PAGE, {
@@ -137,7 +136,9 @@ const ProductGridInitial = ({
     onCompleted: async (sectionPrd: { getPaginatedProducts : {
       result : IProduct[], pageInfo: any}}) => {
       // console.log(sectionPrd?.getPaginatedProducts);
-      (csection.type === 'regular') ? setIsTimetoLoadS(false) : setIsTimetoLoadS(false); setIsTimetoLoadV(false); setIsTimetoLoadA(false);
+      if (csection.type === 'regular') setIsTimetoLoadS(false); else setIsTimetoLoadS(false);
+      setIsTimetoLoadV(false); setIsTimetoLoadA(false);
+      const { getPaginatedProducts: { pageInfo } } = sectionPrd;
       if (gsctx.selectedCategory === 'forYou') {
         dispatch({
           type: 'UPDATE_PRODUCTS',
@@ -166,28 +167,48 @@ const ProductGridInitial = ({
           payload: {
             ...gsctx,
             sections: [...sections!.map((sec) => {
-              let change = false;
-              if (sec.mergedIds.length) {
+              console.log('🚀 ~ file: ProductGrid.tsx:170 ~ sections:[...sections!.map ~ sec:', sec);
+              if (sec.shopifyId === sectionID) {
                 const { mergedIds } = sec;
-                mergeIds = [...mergedIds]; // Create a shallow copy
-                if (!sectionPrd!.getPaginatedProducts.pageInfo?.hasNextPage) {
-                  mergeIds.shift();
-                  change = true;
-                }
+                const newMerge = [...mergedIds];
+                const isTimeToSwitch = mergedIds.length > 0 && !pageInfo?.hasNextPage;
+                if (isTimeToSwitch) { newMerge.shift(); }
                 return (
                   {
                     ...sec,
-                    mergedIds: mergeIds,
+                    mergedIds: newMerge,
                     products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
                     ],
                     pageInfo: {
-                      ...sec.pageInfo,
-                      totalRecords: (change) ? 0
-                        : sectionPrd!.getPaginatedProducts.pageInfo?.totalRecords,
+                      ...sectionPrd!.getPaginatedProducts.pageInfo,
+                      totalRecords: isTimeToSwitch ? 0
+                        : sectionPrd!.getPaginatedProducts.pageInfo.totalRecords,
                     },
                   });
               }
               return sec;
+              // let change = false;
+              // if (sec.mergedIds.length) {
+              //   const { mergedIds } = sec;
+              //   mergeIds = [...mergedIds]; // Create a shallow copy
+              //   if (!sectionPrd!.getPaginatedProducts.pageInfo?.hasNextPage) {
+              //     mergeIds.shift();
+              //     change = true;
+              //   }
+              //   return (
+              //     {
+              //       ...sec,
+              //       mergedIds: mergeIds,
+              //       products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
+              //       ],
+              //       pageInfo: {
+              //         ...sec.pageInfo,
+              //         totalRecords: (change) ? 0
+              //           : sectionPrd!.getPaginatedProducts.pageInfo?.totalRecords,
+              //       },
+              //     });
+              // }
+              // return sec;
             })],
           },
         });
@@ -572,7 +593,7 @@ const ProductGridInitial = ({
                     imgOverlay={(
                       <>
                         <div className="flex justify-between">
-                          <button onClick={() => { !isSuggestion ? handleDetail(prod) : ''; }} type="button" className={styles.groupshop_btnBgClr}>
+                          <button onClick={() => { !isSuggestion && handleDetail(prod); }} type="button" className={styles.groupshop_btnBgClr}>
                             <span className={
                                 isDrops ? dStyles.drops__pcard_tag_price
                                   : styles.groupshop__pcard_tag_price
