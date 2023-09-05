@@ -167,27 +167,24 @@ const ProductGridInitial = ({
             ...gsctx,
             sections: [...sections!.map((sec) => {
               let change = false;
-              if (sec?.pageInfo?.totalRecords === sec?.products?.length
-                && !sectionPrd!.getPaginatedProducts.pageInfo?.hasNextPage) {
+              if (sec.mergedIds.length) {
                 const { mergedIds } = sec;
                 mergeIds = [...mergedIds]; // Create a shallow copy
-                mergeIds.shift();
-                change = true;
-              }
-              if (sec.shopifyId === sectionID) {
+                if (!sectionPrd!.getPaginatedProducts.pageInfo?.hasNextPage) {
+                  mergeIds.shift();
+                  change = true;
+                }
                 return (
                   {
                     ...sec,
                     mergedIds: mergeIds,
                     products: [...sec.products, ...sectionPrd!.getPaginatedProducts.result,
                     ],
-                    pageInfo: ((mergeIds?.length && sec.pageInfo) ? {
+                    pageInfo: {
                       ...sec.pageInfo,
-                      totalRecords: (change)
-                        ? (sec?.pageInfo?.totalRecords
-                          + sectionPrd!.getPaginatedProducts.result?.length)
+                      totalRecords: (change) ? 0
                         : sectionPrd!.getPaginatedProducts.pageInfo?.totalRecords,
-                    } : sectionPrd!.getPaginatedProducts.pageInfo),
+                    },
                   });
               }
               return sec;
@@ -202,15 +199,12 @@ const ProductGridInitial = ({
     if (loadmore && (isTimetoLoadS || isTimetoLoadV || isTimetoLoadA)
     && (!csection.pageInfo
     || mergeIds?.length || csection?.pageInfo?.totalRecords > csection.products.length)) {
-      let Skip;
+      let Skip = 0;
 
-      if (mergeIds?.length) {
-        Skip = mergeIds.includes(csection.shopifyId)
-          ? csection.products?.length
-          : csection?.pageInfo?.totalRecords - (csection?.pageInfo?.totalRecords % 10);
-      } else {
-        Skip = csection.products?.length;
-      }
+      Skip = mergeIds?.length && !mergeIds.includes(csection.shopifyId)
+        ? csection?.pageInfo?.totalRecords - (csection?.pageInfo?.totalRecords % 10)
+        : csection.products?.length;
+
       getMoreProducts({
         variables: {
           productArgs: {
